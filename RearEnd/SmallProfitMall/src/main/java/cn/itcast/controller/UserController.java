@@ -29,6 +29,7 @@ public class UserController {
         List<User> list = accountService.findAll();
         System.out.println(list);
         model.addAttribute("list",list);
+        System.out.println("saldjaskl");
         return "list";
     }
     /**
