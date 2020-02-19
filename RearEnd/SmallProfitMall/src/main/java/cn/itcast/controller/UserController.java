@@ -31,6 +31,7 @@ public class UserController {
         model.addAttribute("list",list);
         System.out.println("测试提交");
         System.out.println("测试提交");
+        System.out.println("测试提交3");
         return "list";
     }
     /**
