@@ -30,6 +30,7 @@ public class UserController {
         System.out.println(list);
         model.addAttribute("list",list);
         System.out.println("saldjaskl");
+        System.out.println("测试提交");
         return "list";
     }
     /**
