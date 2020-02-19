@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>cn.itcast</groupId>
-  <artifactId>ssm</artifactId>
+  <artifactId>SmallProfitMall</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>ssm Maven Webapp</name>
+  <name>SmallProfitMall</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
