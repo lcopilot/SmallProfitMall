@@ -29,7 +29,6 @@ public class UserController {
     private UserService accountService;
 
     @RequestMapping("/findAll")
-    @ResponseBody
     public QueryResponseResult findAll(){
         System.out.println("表现层：查询所有账户...");
         // 调用service的方法
