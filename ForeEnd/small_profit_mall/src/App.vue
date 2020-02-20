@@ -1,10 +1,7 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <!-- 解决vue相同路由跳转强制刷新该路由组件 二次搜索-->
+    <router-view :key="$route.fullPath"/>
   </div>
 </template>
 
