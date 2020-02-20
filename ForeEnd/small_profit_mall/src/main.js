@@ -6,6 +6,13 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import SvgIcon from './components/SvgIcon.vue'
+import './assets/iconfont/iconfont.js'
+import './assets/iconfont/icon.css'
+import './assets/reset.scss'
+
+//全局注册icon-svg
+Vue.component('SvgIcon', SvgIcon)
 
 Vue.use(VueAxios,axios);
 
