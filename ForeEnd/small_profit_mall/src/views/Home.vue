@@ -2,7 +2,7 @@
   <div class="home">
     <el-row :gutter="20">
       <el-col :span="16">
-        <div >多喝水很多事</div>
+        <div ><img src="../assets/images/login-png.png"></div>
       </el-col>
       <el-col :span="8">
         <div>水电费递四方速递</div>
