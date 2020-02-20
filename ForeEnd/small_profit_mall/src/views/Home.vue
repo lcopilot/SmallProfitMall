@@ -2,10 +2,11 @@
   <div class="home">
     <el-row :gutter="20">
       <el-col :span="16">
-        <div class="grid-content bg-purple"></div>
+        <div >多喝水很多事</div>
       </el-col>
       <el-col :span="8">
-        <div class="grid-content bg-purple"></div>
+        <div>水电费递四方速递</div>
+        <el-button type="primary">主要按钮</el-button>
       </el-col>
     </el-row>
 
