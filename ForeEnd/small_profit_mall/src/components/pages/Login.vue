@@ -110,6 +110,7 @@
                         this.$message({
                           message: "登录成功",
                           type: "success"
+
                         });
                         sessionStorage.setItem("username", this.username);
                         sessionStorage.setItem("uId", res.data.queryResult.list[0].uid);
