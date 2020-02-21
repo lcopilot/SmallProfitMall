@@ -17,9 +17,9 @@
                     <router-link to="/">SmallProfit</router-link>
                   </h1>
                 </el-form-item>
-                <el-form-item prop="account">
+                <el-form-item prop="name">
                   <svg-icon name="login" class="icon"></svg-icon>
-                  <el-input placeholder="请输入手机号或用户名" v-model="loginForm.account" clearable
+                  <el-input placeholder="请输入手机号或用户名" v-model="loginForm.name" clearable
                             class="username"></el-input>
                 </el-form-item>
                 <el-form-item prop="password">
@@ -35,7 +35,7 @@
                 <el-form-item prop="verificationCode">
                   <svg-icon name="verification_code" class="icon"></svg-icon>
                   <el-input placeholder="请输入验证码(区分大小写)" v-model="loginForm.verificationCode"
-                            clearable
+                            clearable  @keyup.enter.native="login('loginForm')"
                             class="username" style="width: 250px;"></el-input>
                   <span class="span" @click="createCode" v-model="checkCode">{{checkCode}}</span>
                 </el-form-item>
@@ -68,12 +68,12 @@
         Code: "",
         checkCode: "",
         loginForm: {
-          account: '',
+          name: '',
           password: '',
           verificationCode: '',
         },
         rules: {
-          account: [
+          name: [
             {required: true, message: '请输入用户名或手机号', trigger: 'blur'},
             {min: 1, max: 15, message: '请输入正确的手机号或用户名', trigger: 'blur'},
           ],
@@ -101,7 +101,7 @@
                   {
                     this.axios
                     .post("/api/user/accountLogin",{
-                      account: this.loginForm.account,
+                      name: this.loginForm.name,
                       password: this.loginForm.password
                     })
                     .then(res => {
@@ -110,7 +110,6 @@
                         this.$message({
                           message: "登录成功",
                           type: "success"
-
                         });
                         sessionStorage.setItem("username", this.username);
                         sessionStorage.setItem("uId", res.data.queryResult.list[0].uid);
