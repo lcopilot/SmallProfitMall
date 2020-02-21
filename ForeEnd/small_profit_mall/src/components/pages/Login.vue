@@ -17,9 +17,9 @@
                     <router-link to="/">SmallProfit</router-link>
                   </h1>
                 </el-form-item>
-                <el-form-item prop="username">
+                <el-form-item prop="account">
                   <svg-icon name="login" class="icon"></svg-icon>
-                  <el-input placeholder="请输入手机号或用户名" v-model="loginForm.username" clearable
+                  <el-input placeholder="请输入手机号或用户名" v-model="loginForm.account" clearable
                             class="username"></el-input>
                 </el-form-item>
                 <el-form-item prop="password">
@@ -68,12 +68,12 @@
         Code: "",
         checkCode: "",
         loginForm: {
-          username: '',
+          account: '',
           password: '',
           verificationCode: '',
         },
         rules: {
-          username: [
+          account: [
             {required: true, message: '请输入用户名或手机号', trigger: 'blur'},
             {min: 1, max: 15, message: '请输入正确的手机号或用户名', trigger: 'blur'},
           ],
@@ -92,7 +92,7 @@
       login(formName) {
         this.$refs[formName].validate((valid) => {
               if (valid) {
-                if (this.verificationCode != this.checkCode) {
+                if (this.loginForm.verificationCode != this.checkCode) {
                   this.$message({
                     message: "验证码错误",
                     type: "warning"
@@ -100,9 +100,9 @@
                 } else {
                   {
                     this.axios
-                    .post("/api/user/login", {
-                      userName: this.username,
-                      password: this.$md5(this.password)
+                    .post("/api/user/accountLogin",{
+                      account: this.loginForm.account,
+                      password: this.loginForm.password
                     })
                     .then(res => {
                       if (res.data.success) {
@@ -115,7 +115,7 @@
                         sessionStorage.setItem("uId", res.data.queryResult.list[0].uid);
                         sessionStorage.setItem("token", res.data.queryResult.list[0].token);
                         this.$router.push({
-                          path: "/admin/newEssay" //跳转的路径
+                          path: "/Home" //跳转的路径
                         });
                       } else {
                         this.$message.error(res.data.msg);
