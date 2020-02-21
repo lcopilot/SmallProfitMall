@@ -17,12 +17,12 @@
       expression="org.springframework.stereotype.Controller"/>
   </context:component-scan>
 
-  <!--配置的视图解析器对象-->
-  <bean id="internalResourceViewResolver"
-    class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="prefix" value="/WEB-INF/pages/"/>
-    <property name="suffix" value=".jsp"/>
-  </bean>
+<!--  &lt;!&ndash;配置的视图解析器对象&ndash;&gt;-->
+<!--  <bean id="internalResourceViewResolver"-->
+<!--    class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+<!--    <property name="prefix" value="/WEB-INF/pages/"/>-->
+<!--    <property name="suffix" value=".jsp"/>-->
+<!--  </bean>-->
   <!--josn格式支持-->
   <bean id="jsonConverter"
     class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">

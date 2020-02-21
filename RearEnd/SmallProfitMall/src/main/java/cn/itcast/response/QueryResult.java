@@ -19,4 +19,5 @@ public class QueryResult<T> {
     private long total;
 
 
+
 }
