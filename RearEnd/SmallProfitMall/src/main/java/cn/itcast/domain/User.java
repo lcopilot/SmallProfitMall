@@ -11,6 +11,7 @@ public class User implements Serializable {
     private String phone;
     private String mail;
     private String Image;
+    private String token;
 
     public Integer getId() {
         return id;
@@ -76,6 +77,14 @@ public class User implements Serializable {
         Image = image;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -87,6 +96,7 @@ public class User implements Serializable {
                 ", phone='" + phone + '\'' +
                 ", mail='" + mail + '\'' +
                 ", Image='" + Image + '\'' +
+                ", token='" + token + '\'' +
                 '}';
     }
 }
