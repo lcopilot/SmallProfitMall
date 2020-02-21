@@ -5,7 +5,7 @@
     </el-header>
     <el-row :gutter="6">
       <el-col :span="16">
-        <div><img src="../assets/images/login-png.png"></div>
+        <div><img src="../../assets/images/login-png.png"></div>
       </el-col>
       <el-col :span="18">
         <svg-icon name="商城"></svg-icon>

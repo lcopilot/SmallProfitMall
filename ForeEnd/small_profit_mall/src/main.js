@@ -10,15 +10,14 @@ import SvgIcon from './components/SvgIcon.vue'
 import './assets/iconfont/iconfont.js'
 import './assets/iconfont/icon.css'
 import './assets/reset.scss'
+import './router/guard'
 
-//全局注册icon-svg
+//全局注册组件
 Vue.component('SvgIcon', SvgIcon)
-
 Vue.use(VueAxios,axios);
-
 Vue.use(ElementUI)//全局使用ElementUI
-
 Vue.config.productionTip = false
+
 
 new Vue({
   router,
