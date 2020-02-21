@@ -10,7 +10,7 @@
         </el-col>
         <el-col :span="12">
           <div class="login">
-            <el-card class="box-card" shadow="hover">
+            <el-card shadow="hover">
               <el-form :model="loginForm" :rules="rules" ref="loginForm">
                 <el-form-item>
                   <h1 class="header-title">
@@ -34,10 +34,10 @@
                 </el-form-item>
                 <el-form-item prop="verificationCode">
                   <svg-icon name="verification_code" class="icon"></svg-icon>
-                  <el-input placeholder="请输入验证码(区分大小写)" v-model="loginForm.verificationCode" clearable
+                  <el-input placeholder="请输入验证码(区分大小写)" v-model="loginForm.verificationCode"
+                            clearable
                             class="username" style="width: 250px;"></el-input>
                   <span class="span" @click="createCode" v-model="checkCode">{{checkCode}}</span>
-
                 </el-form-item>
                 <el-form-item>
                   <el-button class="login-btn" @click="login('loginForm')">登录</el-button>
@@ -70,7 +70,7 @@
         loginForm: {
           username: '',
           password: '',
-          verificationCode:'',
+          verificationCode: '',
         },
         rules: {
           username: [
