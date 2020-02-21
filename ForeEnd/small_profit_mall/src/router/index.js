@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from "../views/Login";
+import Home from '../components/pages/Home.vue'
+import Login from "../components/pages/Login";
 
 Vue.use(VueRouter)
 
@@ -9,13 +9,19 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import('@/components/pages/Home'), //路由懒加载
   },
   {
     path:'/login',
     name:"Login",
-    component:Login
-  }
+    component: () => import('@/components/pages/Login')
+  },
+  {
+    path:'/register',
+    name:"Register",
+    component: () => import('@/components/pages/Register')
+  },
+
 ]
 
 const router = new VueRouter({
