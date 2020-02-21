@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="register">
     <el-header height="70px">
       <Header></Header>
     </el-header>
@@ -67,7 +67,6 @@
 </template>
 
 <script>
-  // @ is an alias to /src
   import Header from "./Header.vue";
   import Footer from "./Footer.vue";
 
@@ -141,7 +140,6 @@
             })
             .then(res => {
               if (res.data.success) {
-                // this.list=res.data.queryResult.list;
                 this.$message({
                   message: "登录成功",
                   type: "success"
@@ -221,7 +219,10 @@
     background-color: #42b983;
     width: 300px;
   }
-
+  .login-btn:hover {
+    background: #ECF5FF;
+    color: #409EFF;
+  }
   .span {
     color: #409EFF;
     display: inline-block;
@@ -230,5 +231,8 @@
 
   a {
     color: #42b983;
+  }
+  a:hover {
+    color: #409EFF;
   }
 </style>
