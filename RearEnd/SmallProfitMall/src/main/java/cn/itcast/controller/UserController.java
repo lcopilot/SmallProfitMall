@@ -51,11 +51,11 @@ public class UserController {
      * @return
      */
     @RequestMapping("/accountLogin")
-    public QueryResponseResult accountLogin(@RequestBody String account, String password, String token){
+    public QueryResponseResult accountLogin(@RequestBody String account, String password){
         System.out.println("通过账号密码登录方法登录");
         User name = userService.findByName(account); //根据用户名查询
         User phone = userService.findByPhone(account); //根据手机号查询
-        if(account!=null && password!=null && token!=null){ //判断用户输入是否完整
+        if(account!=null && password!=null){ //判断用户输入是否完整
             if (name == null && phone == null) {  //判断用户是否存在
                 return new QueryResponseResult(CommonCode.FAIL, null); //用户不存在
             }
@@ -101,8 +101,5 @@ public class UserController {
         System.out.println(user.getName());
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
-
-
-
 
 }
