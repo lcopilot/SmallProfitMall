@@ -26,7 +26,7 @@
 
     },
     created() {
-      this.getName();
+
     }
   };
 </script>

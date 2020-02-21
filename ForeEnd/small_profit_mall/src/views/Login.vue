@@ -34,8 +34,10 @@
                 </tr>
                 <tr>
                   <svg-icon name="verification_code" class="icon"></svg-icon>
-                  <el-input placeholder="请输入验证码" v-model="verificationCode" clearable
-                            class="username"></el-input>
+                  <el-input placeholder="请输入验证码(区分大小写)" v-model="verificationCode" clearable
+                            class="username" style="width: 250px;margin-right: 5px"></el-input>
+                  <span style="color: #409EFF;width: 50px" @click="createCode" v-model="checkCode">{{checkCode}}</span>
+
                 </tr>
                 <tr>
                   <el-button class="login-btn" @click="login">登录</el-button>
@@ -66,6 +68,7 @@
         username: "",
         password: "",
         verificationCode:"",
+        checkCode:""
       };
     },
     methods: {
@@ -83,6 +86,11 @@
         } else if (this.verificationCode == "") {
           this.$message({
             message: "验证码不能为空",
+            type: "warning"
+          });
+        } else if (this.verificationCode != this.checkCode) {
+          this.$message({
+            message: "验证码错误",
             type: "warning"
           });
         } else {
@@ -114,7 +122,23 @@
           });
         }
       },
-    }
+      createCode() {
+        let code = "";
+        const codeLength = 4; //验证码的长度
+        const random = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+            'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'); //随机数
+        for(let i = 0; i < codeLength; i++) { //循环操作
+          let index = Math.floor(Math.random() * 36); //取得随机数的索引（0~35）
+          code+= random[index]; //根据索引取得随机数加到code上
+        }
+        this.checkCode = code; //把code值赋给验证码
+      }
+    },
+    mounted () {
+      this.createCode();
+      console.log(this.checkCode)
+    },
+
   };
 </script>
 
