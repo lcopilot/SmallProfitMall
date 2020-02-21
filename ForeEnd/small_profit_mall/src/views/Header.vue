@@ -6,7 +6,7 @@
       </h1>
       <nav class="header-nav">
         <ul style="margin-left: 3rem">
-          <li>
+          <li v-if="this.$route.path!='/login'">
             <router-link to="/login">登录</router-link>
           </li>
         </ul>
@@ -26,7 +26,6 @@
 
     },
     created() {
-
     }
   };
 </script>
