@@ -45,7 +45,7 @@
                 <el-form-item prop="verificationCode">
                   <svg-icon name="verification_code" class="icon"></svg-icon>
                   <el-input placeholder="请输入手机验证码" v-model="registerForm.verificationCode" clearable
-                            class="username" style="width: 210px;margin-right: 5px"></el-input>
+                            class="username" style="width: 210px;margin-right: 5px" @keyup.enter.native="register('registerForm')"></el-input>
                   <span v-show="show" @click="getCode" class="span">获取验证码</span>
                   <span v-show="!show" class="span">重新发送({{count}})</span>
                 </el-form-item>
