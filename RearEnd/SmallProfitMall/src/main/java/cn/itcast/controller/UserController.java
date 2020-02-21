@@ -6,20 +6,15 @@ import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.service.UserService;
-import cn.itcast.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.web.bind.annotation.ResponseBody;
-import sun.rmi.runtime.Log;
 
 /**
  * 帐户web
@@ -51,16 +46,17 @@ public class UserController {
      * @return
      */
     @RequestMapping("/accountLogin")
-    public QueryResponseResult accountLogin(@RequestBody String account, String password){
+    public QueryResponseResult accountLogin(@RequestBody User user){
         System.out.println("通过账号密码登录方法登录");
-        User name = userService.findByName(account); //根据用户名查询
-        User phone = userService.findByPhone(account); //根据手机号查询
-        if(account!=null && password!=null){ //判断用户输入是否完整
+
+        User name = userService.findByName(user.getName()); //根据用户名查询
+        User phone = userService.findByPhone(user.getName()); //根据手机号查询
+        if(user !=null && user.getPassword()!=null){ //判断用户输入是否完整
             if (name == null && phone == null) {  //判断用户是否存在
                 return new QueryResponseResult(CommonCode.FAIL, null); //用户不存在
             }
-                if(account.length()!=11){  //判断用户是使用用户名登录
-                    if(name.getPassword().equals(password)){
+                if(user.getName().length()!=11){  //判断用户是使用用户名登录
+                    if(name.getPassword().equals(user.getPassword())){
                         Login login = new Login();
                         login.setName(name.getName());
                         login.setUid(name.getUid());
@@ -72,8 +68,8 @@ public class UserController {
                     }else {
                         return new QueryResponseResult(CommonCode.FAIL,null);//密码不正确
                     }
-                }else if (account.length()==11){ //判断用户是使用手机号码登录
-                    if(phone.getPassword().equals(password)){
+                }else if (user.getPassword().length()==11){ //判断用户是使用手机号码登录
+                    if(phone.getPassword().equals(user.getPassword())){
                         Login login = new Login();
                         login.setName(phone.getName());
                         login.setUid(phone.getUid());
