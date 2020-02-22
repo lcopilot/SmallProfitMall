@@ -47,7 +47,7 @@ public class UserController {
      */
     @RequestMapping("/accountLogin")
     public QueryResponseResult accountLogin(@RequestBody User user){
-        System.out.println("通过账号密码登录方法登录");
+        System.out.println("通过账号密码登录方法登录--");
         User name = userService.findByName(user.getName()); //根据用户名查询
         User phone = userService.findByPhone(user.getName()); //根据手机号查询
         if(user !=null && user.getPassword()!=null){ //判断用户输入是否完整
