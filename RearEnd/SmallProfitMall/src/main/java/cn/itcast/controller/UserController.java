@@ -7,8 +7,10 @@ import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.service.UserService;
+import cn.itcast.util.GetFourRandom;
 import cn.itcast.util.SmsUtils;
 import com.aliyuncs.exceptions.ClientException;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -37,6 +39,8 @@ public class UserController {
     @Autowired
     private Login login;
 
+    @Autowired
+    private GetFourRandom getFourRandom;
     /**
      * 查询所有方法
      * @return
@@ -103,16 +107,20 @@ public class UserController {
      */
     @RequestMapping("/registerVerify")
     public QueryResponseResult registerVerify(@RequestBody Register register , HttpSession session) throws ClientException {
-        System.out.println("执行，手机号："+register.getPhone()+"验证码："+register.getVerify());
-
         if (register.getPhone().length()==11){      //判断手机号是否正确
             User phone = userService.findByPhone(register.getPhone()); //根据手机号查询
             if (phone==null){       //手机尚未注册
-               // request.getSession().setAttribute("Verify", register.getVerify());//将验证码存入session
-                session.setAttribute("Verify",register.getVerify());//设置session
+                String FR = getFourRandom.getFourRandom();
+                System.out.println("验证码为"+FR);
+                session.setAttribute("Verify",FR);//设置验证码session
+                session.setAttribute("phone",register.getPhone());//设置手机号session
                 removeAttrbute(session,"Verify");//存入session
-                sm.sendRegistSms(register.getPhone(),register.getVerify());
-                return new QueryResponseResult(CommonCode.SUCCESS,null);
+                boolean flag= sm.sendRegistSms(register.getPhone(),FR);
+                if(flag){
+                    return new QueryResponseResult(CommonCode.SUCCESS,null);
+                }else {
+                    return new QueryResponseResult(CommonCode.SERVER_ERROR,null);
+                }
             }else {
                 return new QueryResponseResult(CommonCode.FALL_USER_REGISTER,null);
             }
@@ -127,8 +135,8 @@ public class UserController {
     @RequestMapping("/register")
     public QueryResponseResult register(@RequestBody User user,HttpSession session) {
         String Verify =(String) session.getAttribute("Verify");
-        System.out.println(Verify);
-        if(user.getVerify().equals(Verify)){
+        String phone =(String) session.getAttribute("phone");
+        if(user.getVerify().equals(Verify)&&user.getPhone().equals(phone)){
             userService.saveAccount(user);  //存入对象
             return new QueryResponseResult(CommonCode.SUCCESS,null);//注册成功
         }else{
