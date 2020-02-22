@@ -30,7 +30,7 @@ public interface UserDao {
 
 
     // 保存帐户信息
-    @Insert("INSERT INTO user (uid, name,password,sex,phone,mail,image,token) VALUES (#{uid},#{name},#{password},#{sex},#{phone},#{mail},#{image},#{token})")
+    @Insert("INSERT INTO user (uid,name,password,sex,phone,mail,image,token) VALUES (#{uid},#{name},#{password},#{sex},#{phone},#{mail},#{image},#{token})")
     public void saveAccount(User user);
 
 }

@@ -102,7 +102,7 @@ public class UserController {
      * @throws ClientException
      */
     @RequestMapping("/registerVerify")
-    public QueryResponseResult registerVerify(@RequestBody Register register, HttpSession session) throws ClientException {
+    public QueryResponseResult registerVerify(@RequestBody Register register , HttpSession session) throws ClientException {
         System.out.println("执行，手机号："+register.getPhone()+"验证码："+register.getVerify());
 
         if (register.getPhone().length()==11){      //判断手机号是否正确
