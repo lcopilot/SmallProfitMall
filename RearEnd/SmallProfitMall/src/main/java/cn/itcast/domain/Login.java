@@ -1,5 +1,8 @@
 package cn.itcast.domain;
 
+import org.springframework.stereotype.Controller;
+
+@Controller("login")
 public class Login {
     private String name;
     private String token;
