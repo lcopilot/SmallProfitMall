@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserService {
         user.setImage("http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938");
         user.setSex("男");
         UserDao.saveAccount(user);
+        System.out.println(user);
     }
 
 
