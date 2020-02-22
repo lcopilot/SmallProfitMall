@@ -19,33 +19,22 @@
                 </el-form-item>
                 <el-form-item prop="phone">
                   <svg-icon name="login" class="icon"></svg-icon>
-                  <el-input placeholder="请输入手机号" v-model="registerForm.phone" clearable
-                            class="username"></el-input>
+                  <el-input placeholder="请输入手机号" v-model="registerForm.phone" clearable class="username"></el-input>
                 </el-form-item>
                 <el-form-item prop="password">
                   <svg-icon name="password" class="icon"></svg-icon>
-                  <el-input
-                      placeholder="请输入密码"
-                      v-model="registerForm.password"
-                      show-password
-                      class="username"
-                      autocomplete="off"
-                      @keyup.enter.native="login"></el-input>
+                  <el-input placeholder="请输入密码" v-model="registerForm.password" show-password class="username"
+                    autocomplete="off" @keyup.enter.native="login"></el-input>
                 </el-form-item>
                 <el-form-item prop="checkPass">
                   <svg-icon name="password" class="icon"></svg-icon>
-                  <el-input
-                      placeholder="请再次输入密码"
-                      v-model="registerForm.checkPass"
-                      show-password
-                      class="username"
-                      autocomplete="off"
-                      @keyup.enter.native="login"></el-input>
+                  <el-input placeholder="请再次输入密码" v-model="registerForm.checkPass" show-password class="username"
+                    autocomplete="off" @keyup.enter.native="login"></el-input>
                 </el-form-item>
                 <el-form-item prop="verificationCode">
                   <svg-icon name="verification_code" class="icon"></svg-icon>
-                  <el-input placeholder="请输入手机验证码" v-model="registerForm.verificationCode" clearable
-                            class="username" style="width: 210px;margin-right: 5px" @keyup.enter.native="register('registerForm')"></el-input>
+                  <el-input placeholder="请输入手机验证码" v-model="registerForm.verificationCode" clearable class="username"
+                    style="width: 210px;margin-right: 5px" @keyup.enter.native="register('registerForm')"></el-input>
                   <span v-show="show" @click="getCode" class="span">获取验证码</span>
                   <span v-show="!show" class="span">重新发送({{count}})</span>
                 </el-form-item>
@@ -71,7 +60,7 @@
   import Footer from "./Footer.vue";
 
   export default {
-    components: {Header, Footer},
+    components: { Header, Footer },
     data() {
       let checkPhone = (rule, value, callback) => {
         const phoneReg = /^1[3|4|5|6|7|8][0-9]{9}$/
@@ -79,14 +68,13 @@
           return callback(new Error('电话号码不能为空'))
         }
         setTimeout(() => {
-
           if (!Number.isInteger(+value)) {
             callback(new Error('请输入数字值'))
           } else {
             if (phoneReg.test(value)) {
               callback()
             } else {
-              callback(new Error('电话号码格式不正确'))
+              callback(new Error('手机号码格式不正确'))
             }
           }
         }, 100)
@@ -113,18 +101,18 @@
         },
         rules: {
           phone: [
-            {required: true, validator: checkPhone, trigger: 'blur'}
+            { required: true, validator: checkPhone, trigger: 'blur' }
           ],
           password: [
-            {required: true, message: '请输入密码', trigger: 'blur'},
-            {min: 6, max: 18, message: '长度在 6到 18个字符', trigger: 'blur'},
+            { required: true, message: '请输入密码', trigger: 'blur' },
+            { min: 6, max: 18, message: '长度在 6到 18个字符', trigger: 'blur' },
           ],
           checkPass: [
-            {validator: validatePass2, trigger: 'blur'}
+            { validator: validatePass2, trigger: 'blur' }
           ],
           verificationCode: [
-            {required: true, message: '请输入手机验证码', trigger: 'blur'},
-            {min: 4, max: 4, message: '手机验证码格式错误', trigger: 'blur'}
+            { required: true, message: '请输入手机验证码', trigger: 'blur' },
+            { min: 4, max: 4, message: '手机验证码格式错误', trigger: 'blur' }
           ]
         }
       };
@@ -134,47 +122,61 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.axios
-            .post("/api/user/login", {
-              userName: this.username,
-              password: this.$md5(this.password)
-            })
-            .then(res => {
-              if (res.data.success) {
-                this.$message({
-                  message: "登录成功",
-                  type: "success"
-                });
-                sessionStorage.setItem("username", this.username);
-                sessionStorage.setItem("uId", res.data.queryResult.list[0].uid);
-                sessionStorage.setItem("token", res.data.queryResult.list[0].token);
-                this.$router.push({
-                  path: "/admin/newEssay" //跳转的路径
-                });
-              } else {
-                this.$message.error(res.data.msg);
-              }
-            })
-            .catch(error => {
-              this.$message.error("服务器错误");
-              console.log(error);
-            });
+              .post("/api/user/register", this.registerForm)
+              .then(res => {
+                if (res.data.success) {
+                  this.$message({
+                    message: "注册成功",
+                    type: "success"
+                  });
+                  this.$router.push({
+                    path: "/login" //跳转的路径
+                  });
+                } else {
+                  this.$message.error("注册失败");
+                }
+              })
+              .catch(error => {
+                this.$message.error("服务器错误");
+                console.log(error);
+              });
           }
         });
       },
       getCode() {
-        const TIME_COUNT = 60;
-        if (!this.timer) {
-          this.count = TIME_COUNT;
-          this.show = false;
-          this.timer = setInterval(() => {
-            if (this.count > 0 && this.count <= TIME_COUNT) {
-              this.count--;
-            } else {
-              this.show = true;
-              clearInterval(this.timer);
-              this.timer = null;
-            }
-          }, 1000)
+        if ((/^1[34578]\d{9}$/.test(this.registerForm.phone))) {
+          this.axios
+            .post("/api/user/registerVerify", {
+              phone: this.registerForm.phone,
+            }).then(res => {
+              if (res.data.success) {
+                this.$message({
+                  message: "短信发送成功",
+                  type: "success"
+                });
+              } else {
+                this.$message.error("手机号已经被注册或手机号不存在");
+              }
+            })
+          const TIME_COUNT = 60;
+          if (!this.timer) {
+            this.count = TIME_COUNT;
+            this.show = false;
+            this.timer = setInterval(() => {
+              if (this.count > 0 && this.count <= TIME_COUNT) {
+                this.count--;
+              } else {
+                this.show = true;
+                clearInterval(this.timer);
+                this.timer = null;
+              }
+            }, 1000)
+          }
+        } else {
+          this.$message({
+            message: "请输入正确的手机号",
+            type: "error"
+          });
         }
       }
     },
@@ -219,10 +221,12 @@
     background-color: #42b983;
     width: 300px;
   }
+
   .login-btn:hover {
     background: #ECF5FF;
     color: #409EFF;
   }
+
   .span {
     color: #409EFF;
     display: inline-block;
@@ -232,6 +236,7 @@
   a {
     color: #42b983;
   }
+
   a:hover {
     color: #409EFF;
   }
