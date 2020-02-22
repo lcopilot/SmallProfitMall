@@ -1,7 +1,7 @@
 <template>
   <div class="register">
     <el-header height="70px">
-      <Header></Header>
+      <Header/>
     </el-header>
     <el-main>
       <el-row type="flex" justify="" center>
@@ -18,22 +18,22 @@
                   </h1>
                 </el-form-item>
                 <el-form-item prop="phone">
-                  <svg-icon name="login" class="icon"></svg-icon>
+                  <svg-icon name="login" class="icon"/>
                   <el-input placeholder="请输入手机号" v-model="registerForm.phone" clearable
-                            class="username"></el-input>
+                            class="username"/>
                 </el-form-item>
                 <el-form-item prop="password">
-                  <svg-icon name="password" class="icon"></svg-icon>
+                  <svg-icon name="password" class="icon"/>
                   <el-input placeholder="请输入您要修改的密码" v-model="registerForm.password" show-password
                             class="username"
-                            autocomplete="off" @keyup.enter.native="login"></el-input>
+                            autocomplete="off" @keyup.enter.native="login"/>
                 </el-form-item>
                 <el-form-item prop="verify">
-                  <svg-icon name="verification_code" class="icon"></svg-icon>
+                  <svg-icon name="verification_code" class="icon"/>
                   <el-input placeholder="请输入手机验证码" v-model="registerForm.verify" clearable
                             class="username"
                             style="width: 210px;margin-right: 5px"
-                            @keyup.enter.native="register('registerForm')"></el-input>
+                            @keyup.enter.native="register('registerForm')"/>
                   <span v-show="show" @click="getCode" class="span">获取验证码</span>
                   <span v-show="!show" class="span">重新发送({{count}})</span>
                 </el-form-item>
@@ -49,7 +49,7 @@
       </el-row>
     </el-main>
     <el-footer>
-      <Footer></Footer>
+      <Footer/>
     </el-footer>
   </div>
 </template>
