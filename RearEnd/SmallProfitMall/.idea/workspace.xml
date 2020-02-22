@@ -8,7 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8e4fd436-13b5-4958-878e-99f1b9598d85" name="Default Changelist" comment="登录接口">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/itcast/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/itcast/controller/UserController.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -109,7 +108,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 8.5.31" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.31" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/SmallProfitMall/" />
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:3167/SmallProfitMall/" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="SmallProfitMall:war exploded">
@@ -120,6 +119,7 @@
       </deployment>
       <server-settings>
         <option name="BASE_DIRECTORY_NAME" value="Unnamed_SmallProfitMall_3" />
+        <option name="HTTP_PORT" value="3167" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -228,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582289764098</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="登录接口4">
+      <created>1582338098801</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1582338098801</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,7 +259,8 @@
     <MESSAGE value="测试提交" />
     <MESSAGE value="登录接口" />
     <MESSAGE value="登录接口2" />
-    <option name="LAST_COMMIT_MESSAGE" value="登录接口2" />
+    <MESSAGE value="登录接口4" />
+    <option name="LAST_COMMIT_MESSAGE" value="登录接口4" />
   </component>
   <component name="WindowStateProjectService">
     <state x="449" y="38" key="#Tomcat_8.5.31" timestamp="1582092821400">
