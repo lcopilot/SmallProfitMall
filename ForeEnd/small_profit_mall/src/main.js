@@ -12,6 +12,8 @@ import './assets/iconfont/icon.css'
 import './assets/reset.scss'
 import './router/guard'
 
+
+
 //全局注册组件
 Vue.component('SvgIcon', SvgIcon)
 Vue.use(VueAxios,axios);
