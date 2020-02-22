@@ -32,9 +32,12 @@
                       autocomplete="off"
                       @keyup.enter.native="login"></el-input>
                 </el-form-item>
-                <el-form-item  >
-                  <svg-icon name="verification_code" class="icon" style="float: left;margin-left:30px "></svg-icon>
-                  <Verify style="float: left" @success="alert('success')" @error="alert('error')" :type="3" :show-button='false' :bar-size="{width:'300px',height:'40px'}" ></Verify>
+                <el-form-item>
+                  <svg-icon name="verification_code" class="icon"
+                            style="float: left;margin-left:30px "></svg-icon>
+                  <Verify style="float: left" @success="alert('success')" @error="alert('error')"
+                          :type="3" :show-button='false'
+                          :bar-size="{width:'300px',height:'40px'}"></Verify>
                 </el-form-item>
                 <el-form-item>
                   <el-button class="login-btn" @click="login('loginForm')">登录</el-button>
@@ -60,10 +63,10 @@
   import Verify from 'vue2-verify';
 
   export default {
-    components: {Header, Footer,Verify},
+    components: {Header, Footer, Verify},
     data() {
       return {
-        checkCode:false,
+        checkCode: false,
         loginForm: {
           name: '',
           password: '',
@@ -93,7 +96,7 @@
                 } else {
                   {
                     this.axios
-                    .post("/api/user/accountLogin",{
+                    .post("/api/user/accountLogin", {
                       name: this.loginForm.name,
                       password: this.loginForm.password
                     })
@@ -104,7 +107,7 @@
                           message: "登录成功",
                           type: "success"
                         });
-                        sessionStorage.setItem("username", this.username);
+                        sessionStorage.setItem("username", res.data.queryResult.list[0].name);
                         sessionStorage.setItem("uId", res.data.queryResult.list[0].uid);
                         sessionStorage.setItem("token", res.data.queryResult.list[0].token);
                         this.$router.push({
@@ -138,10 +141,10 @@
       },
       alert(code) {
         console.log(code)
-        if (code=='success'){
-          this.checkCode=true;
-        }else {
-          this.checkCode=false;
+        if (code == 'success') {
+          this.checkCode = true;
+        } else {
+          this.checkCode = false;
         }
       }
     },
@@ -191,11 +194,6 @@
     width: 300px;
   }
 
-  .span {
-    color: #409EFF;
-    display: inline-block;
-    width: 50px
-  }
 
   a {
     color: #42b983;
