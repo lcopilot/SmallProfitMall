@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <el-header height="70px">
-      <Header></Header>
+      <Header/>
     </el-header>
     <el-main>
       <el-row type="flex" justify="" center>
@@ -18,26 +18,26 @@
                   </h1>
                 </el-form-item>
                 <el-form-item prop="name">
-                  <svg-icon name="login" class="icon"></svg-icon>
+                  <svg-icon name="login" class="icon"/>
                   <el-input placeholder="请输入手机号或用户名" v-model="loginForm.name" clearable
-                            class="username"></el-input>
+                            class="username"/>
                 </el-form-item>
                 <el-form-item prop="password">
-                  <svg-icon name="password" class="icon"></svg-icon>
+                  <svg-icon name="password" class="icon"/>
                   <el-input
                       placeholder="请输入密码"
                       v-model="loginForm.password"
                       show-password
                       class="username"
                       autocomplete="off"
-                      @keyup.enter.native="login"></el-input>
+                      @keyup.enter.native="login"/>
                 </el-form-item>
                 <el-form-item>
                   <svg-icon name="verification_code" class="icon"
-                            style="float: left;margin-left:30px "></svg-icon>
+                            style="float: left;margin-left:30px "/>
                   <Verify style="float: left" @success="alert('success')" @error="alert('error')"
                           :type="3" :show-button='false'
-                          :bar-size="{width:'300px',height:'40px'}"></Verify>
+                          :bar-size="{width:'300px',height:'40px'}"/>
                 </el-form-item>
                 <el-form-item>
                   <el-button class="login-btn" @click="login('loginForm')">登录</el-button>
@@ -51,7 +51,7 @@
       </el-row>
     </el-main>
     <el-footer>
-      <Footer></Footer>
+      <Footer/>
     </el-footer>
   </div>
 </template>
