@@ -48,7 +48,6 @@ public class UserController {
     @RequestMapping("/accountLogin")
     public QueryResponseResult accountLogin(@RequestBody User user){
         System.out.println("通过账号密码登录方法登录");
-
         User name = userService.findByName(user.getName()); //根据用户名查询
         User phone = userService.findByPhone(user.getName()); //根据手机号查询
         if(user !=null && user.getPassword()!=null){ //判断用户输入是否完整
@@ -68,7 +67,7 @@ public class UserController {
                     }else {
                         return new QueryResponseResult(CommonCode.FAIL,null);//密码不正确
                     }
-                }else if (user.getPassword().length()==11){ //判断用户是使用手机号码登录
+                }else if (user.getName().length()==11){ //判断用户是使用手机号码登录
                     if(phone.getPassword().equals(user.getPassword())){
                         Login login = new Login();
                         login.setName(phone.getName());
@@ -97,5 +96,7 @@ public class UserController {
         System.out.println(user.getName());
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
+
+
 
 }
