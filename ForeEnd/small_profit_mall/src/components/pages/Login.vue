@@ -32,12 +32,9 @@
                       autocomplete="off"
                       @keyup.enter.native="login"></el-input>
                 </el-form-item>
-                <el-form-item prop="verificationCode">
-                  <svg-icon name="verification_code" class="icon"></svg-icon>
-                  <el-input placeholder="请输入验证码(区分大小写)" v-model="loginForm.verificationCode"
-                            clearable  @keyup.enter.native="login('loginForm')"
-                            class="username" style="width: 250px;"></el-input>
-                  <span class="span" @click="createCode" v-model="checkCode">{{checkCode}}</span>
+                <el-form-item  >
+                  <svg-icon name="verification_code" class="icon" style="float: left;margin-left:30px "></svg-icon>
+                  <Verify style="float: left" @success="alert('success')" @error="alert('error')" :type="3" :show-button='false' :bar-size="{width:'300px',height:'40px'}" ></Verify>
                 </el-form-item>
                 <el-form-item>
                   <el-button class="login-btn" @click="login('loginForm')">登录</el-button>
@@ -60,13 +57,13 @@
   // @ is an alias to /src
   import Header from "./Header.vue";
   import Footer from "./Footer.vue";
+  import Verify from 'vue2-verify';
 
   export default {
-    components: {Header, Footer},
+    components: {Header, Footer,Verify},
     data() {
       return {
-        Code: "",
-        checkCode: "",
+        checkCode:false,
         loginForm: {
           name: '',
           password: '',
@@ -81,10 +78,6 @@
             {required: true, message: '请输入密码', trigger: 'blur'},
             {min: 6, max: 18, message: '请输入正确的密码格式', trigger: 'blur'},
           ],
-          verificationCode: [
-            {required: true, message: '请输入验证码', trigger: 'blur'},
-            {min: 4, max: 4, message: '验证码格式错误', trigger: 'blur'}
-          ]
         }
       };
     },
@@ -92,9 +85,9 @@
       login(formName) {
         this.$refs[formName].validate((valid) => {
               if (valid) {
-                if (this.loginForm.verificationCode != this.checkCode) {
+                if (!this.checkCode) {
                   this.$message({
-                    message: "验证码错误",
+                    message: "请完成验证",
                     type: "warning"
                   });
                 } else {
@@ -118,7 +111,7 @@
                           path: "/Home" //跳转的路径
                         });
                       } else {
-                        this.$message.error(res.data.msg);
+                        this.$message.error("账户或密码错误!");
                       }
                     })
                     .catch(error => {
@@ -142,10 +135,19 @@
           code += random[index]; //根据索引取得随机数加到code上
         }
         this.checkCode = code; //把code值赋给验证码
+      },
+      alert(code) {
+        console.log(code)
+        if (code=='success'){
+          this.checkCode=true;
+        }else {
+          this.checkCode=false;
+        }
       }
     },
     mounted() {
       this.createCode();
+
     },
 
   };

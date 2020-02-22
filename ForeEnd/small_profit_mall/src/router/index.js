@@ -17,6 +17,11 @@ const routes = [
     component: () => import('@/components/pages/Home'), //路由懒加载
   },
   {
+    path: '/test',
+    name: 'test',
+    component: () => import('@/components/pages/test'), //路由懒加载
+  },
+  {
     path:'/login',
     name:"Login",
     component: () => import('@/components/pages/Login')
