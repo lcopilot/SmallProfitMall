@@ -111,7 +111,7 @@ public class UserController {
             User phone = userService.findByPhone(register.getPhone()); //根据手机号查询
             if (phone==null){       //手机尚未注册
                 String FR = getFourRandom.getFourRandom();
-                System.out.println("验证码为"+FR);
+                System.out.println("验证码为 "+FR);
                 session.setAttribute("Verify",FR);//设置验证码session
                 session.setAttribute("phone",register.getPhone());//设置手机号session
                 removeAttrbute(session,"Verify");//存入session
