@@ -44,7 +44,7 @@
                 </el-form-item>
               </el-form>
               <router-link to="/register" style="margin: 7% 52% 0 0">没有账号,去注册</router-link>
-              <router-link to="/">忘记密码</router-link>
+              <router-link to="/forgetPassword">忘记密码</router-link>
             </el-card>
           </div>
         </el-col>

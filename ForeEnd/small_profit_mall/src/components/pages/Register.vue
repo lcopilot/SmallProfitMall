@@ -31,9 +31,9 @@
                   <el-input placeholder="请再次输入密码" v-model="registerForm.checkPass" show-password class="username"
                     autocomplete="off" @keyup.enter.native="login"></el-input>
                 </el-form-item>
-                <el-form-item prop="verificationCode">
+                <el-form-item prop="verify">
                   <svg-icon name="verification_code" class="icon"></svg-icon>
-                  <el-input placeholder="请输入手机验证码" v-model="registerForm.verificationCode" clearable class="username"
+                  <el-input placeholder="请输入手机验证码" v-model="registerForm.verify" clearable class="username"
                     style="width: 210px;margin-right: 5px" @keyup.enter.native="register('registerForm')"></el-input>
                   <span v-show="show" @click="getCode" class="span">获取验证码</span>
                   <span v-show="!show" class="span">重新发送({{count}})</span>
@@ -43,7 +43,7 @@
                 </el-form-item>
               </el-form>
               <router-link to="/login" style="margin: 7% 52% 0 0">已有账号,去登录</router-link>
-              <router-link to="/">忘记密码</router-link>
+              <router-link to="/forgetPassword">忘记密码</router-link>
             </el-card>
           </div>
         </el-col>
@@ -97,7 +97,7 @@
           phone: '',
           password: '',
           checkPass: '',
-          verificationCode: ''
+          verify: ''
         },
         rules: {
           phone: [
@@ -108,9 +108,9 @@
             { min: 6, max: 18, message: '长度在 6到 18个字符', trigger: 'blur' },
           ],
           checkPass: [
-            { validator: validatePass2, trigger: 'blur' }
+            { validator: validatePass2, trigger: 'blur'}
           ],
-          verificationCode: [
+          verify: [
             { required: true, message: '请输入手机验证码', trigger: 'blur' },
             { min: 4, max: 4, message: '手机验证码格式错误', trigger: 'blur' }
           ]
@@ -155,7 +155,12 @@
                   type: "success"
                 });
               } else {
-                this.$message.error("手机号已经被注册或手机号不存在");
+                if(this.data.code==99999){
+                  this.$message.error(this.data.message);
+                }else{
+                  this.$message.error("手机号已经被注册或手机号不存在");
+                }
+               
               }
             })
           const TIME_COUNT = 60;
