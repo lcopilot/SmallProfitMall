@@ -1,6 +1,7 @@
 package cn.itcast.response;
 
 import lombok.ToString;
+import org.springframework.stereotype.Controller;
 
 /**
  * @Author: mrt.

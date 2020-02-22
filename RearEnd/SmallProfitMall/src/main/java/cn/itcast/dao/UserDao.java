@@ -1,6 +1,7 @@
 package cn.itcast.dao;
 
 import cn.itcast.domain.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -29,6 +30,7 @@ public interface UserDao {
 
 
     // 保存帐户信息
+    @Insert("INSERT INTO user (uid, name,password,sex,phone,mail,image,token) VALUES (#{uid},#{name},#{password},#{sex},#{phone},#{mail},#{image},#{token})")
     public void saveAccount(User user);
 
 }

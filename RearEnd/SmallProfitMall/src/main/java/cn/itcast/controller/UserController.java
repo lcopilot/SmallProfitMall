@@ -1,20 +1,24 @@
 package cn.itcast.controller;
 
 import cn.itcast.domain.Login;
+import cn.itcast.domain.Register;
 import cn.itcast.domain.User;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.service.UserService;
+import cn.itcast.util.SmsUtils;
+import com.aliyuncs.exceptions.ClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.List;
-import org.springframework.web.bind.annotation.ResponseBody;
+import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * 帐户web
@@ -26,6 +30,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private SmsUtils sm;
+
+    @Autowired
+    private Login login;
 
     /**
      * 查询所有方法
@@ -56,7 +66,6 @@ public class UserController {
             }
                 if(user.getName().length()!=11){  //判断用户是使用用户名登录
                     if(name.getPassword().equals(user.getPassword())){
-                        Login login = new Login();
                         login.setName(name.getName());
                         login.setUid(name.getUid());
                         login.setToken(name.getToken());
@@ -69,7 +78,6 @@ public class UserController {
                     }
                 }else if (user.getName().length()==11){ //判断用户是使用手机号码登录
                     if(phone.getPassword().equals(user.getPassword())){
-                        Login login = new Login();
                         login.setName(phone.getName());
                         login.setUid(phone.getUid());
                         login.setToken(phone.getToken());
@@ -86,16 +94,63 @@ public class UserController {
         }
         return null;
     }
+
     /**
-     * 保存
+     * 注册手机验证接口
+     * @param register
+     * @return
+     * @throws ClientException
+     */
+    @RequestMapping("/registerVerify")
+    public QueryResponseResult registerVerify(@RequestBody Register register, HttpSession session) throws ClientException {
+        System.out.println("执行，手机号："+register.getPhone()+"验证码："+register.getVerify());
+
+        if (register.getPhone().length()==11){      //判断手机号是否正确
+            User phone = userService.findByPhone(register.getPhone()); //根据手机号查询
+            if (phone==null){       //手机尚未注册
+               // request.getSession().setAttribute("Verify", register.getVerify());//将验证码存入session
+                session.setAttribute("Verify",register.getVerify());//设置session
+                removeAttrbute(session,"Verify");//存入session
+                sm.sendRegistSms(register.getPhone(),register.getVerify());
+                return new QueryResponseResult(CommonCode.SUCCESS,null);
+            }else {
+                return new QueryResponseResult(CommonCode.FALL_USER_REGISTER,null);
+            }
+        }else{
+            return new QueryResponseResult(CommonCode.INVALID_PARAM,null);
+        }
+    }
+    /**
+     * 注册
      * @return
      */
-    @RequestMapping("/save")
-    public QueryResponseResult save(User user) {
-        userService.saveAccount(user);
-        System.out.println(user.getName());
-        return new QueryResponseResult(CommonCode.SUCCESS,null);
+    @RequestMapping("/register")
+    public QueryResponseResult register(@RequestBody User user,HttpSession session) {
+        String Verify =(String) session.getAttribute("Verify");
+        System.out.println(Verify);
+        if(user.getVerify().equals(Verify)){
+            userService.saveAccount(user);  //存入对象
+            return new QueryResponseResult(CommonCode.SUCCESS,null);//注册成功
+        }else{
+            return new QueryResponseResult(CommonCode.FAIL,null);//注册失败
+        }
     }
+
+    //删除session
+    public void removeAttrbute(HttpSession session, String codeName) {
+        System.out.println("开始倒计时五分钟");
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            public void run() {
+                // 删除session中存的验证码
+                session.removeAttribute(codeName);
+                System.out.println("删除成功");
+            }
+            //设置时间为五分钟
+        }, 10*1000*3000);
+    }
+
+
 
 
 

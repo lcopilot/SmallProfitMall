@@ -1,7 +1,9 @@
 package cn.itcast.domain;
 
-import java.io.Serializable;
+import org.springframework.stereotype.Controller;
 
+import java.io.Serializable;
+@Controller("user")
 public class User implements Serializable {
     private Integer id;
     private String uid;
@@ -12,6 +14,7 @@ public class User implements Serializable {
     private String mail;
     private String Image;
     private String token;
+    private String verify;
 
     public Integer getId() {
         return id;
@@ -85,6 +88,14 @@ public class User implements Serializable {
         this.token = token;
     }
 
+    public String getVerify() {
+        return verify;
+    }
+
+    public void setVerify(String verify) {
+        this.verify = verify;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -97,6 +108,7 @@ public class User implements Serializable {
                 ", mail='" + mail + '\'' +
                 ", Image='" + Image + '\'' +
                 ", token='" + token + '\'' +
+                ", verify='" + verify + '\'' +
                 '}';
     }
 }
