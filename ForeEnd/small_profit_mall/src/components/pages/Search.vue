@@ -47,26 +47,41 @@
           <el-image src="http://img.fhxasdsada.xyz/qrcode.png"/>
           <el-image slot="reference" :lazy="true"  style="width: 50px; height: 50px" src="http://img.fhxasdsada.xyz/qrcode.png"/>
         </el-popover>
+
       </el-col>
     </el-row>
   </el-main>
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   export default {
     name: "Search",
     data() {
       return {
-        CartSum:50,
         searchContent: '',
       }
     },
+    computed:{
+      //vuex
+      CartSum(){
+        return this.$store.state.CartSum;
+      },
+    },
     methods:{
+      //进入购物车页面
       EnterCart(){
         this.$router.push({
           path: "/login" //跳转的路径
         });
-      }
+      },
+      ...mapActions([
+        "modifyCartSum",
+        "getCartSum"
+      ])
+    },
+    created() {
+      this.getCartSum(40);
     }
   }
 </script>

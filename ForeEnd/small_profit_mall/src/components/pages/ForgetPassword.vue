@@ -141,7 +141,7 @@
                 type: "success"
               });
             } else {
-              if (this.data.code == 99999) {
+              if (res.data.code == 99999) {
                 this.$message.error(this.data.message);
               } else {
                 this.$message.error("手机号已经被注册或手机号不存在");
