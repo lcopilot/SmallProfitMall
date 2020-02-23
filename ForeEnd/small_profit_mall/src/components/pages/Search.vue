@@ -13,7 +13,7 @@
         <el-button plain icon="el-icon-search" type="success" round>搜索</el-button>
       </el-col>
       <el-col :span="3">
-        <el-badge :value="80" :max="99" class="item">
+        <el-badge :value="CartSum" :max="99" class="item">
           <el-popover
               placement="bottom"
               width="440"
@@ -27,7 +27,7 @@
               <el-table-column width="60" ></el-table-column>
               <el-table-column width="50" ><el-button type="text" size="small" @click="del()">删除</el-button></el-table-column>
             </el-table>
-            <el-button slot="reference" type="danger">
+            <el-button slot="reference" type="danger" @click="EnterCart">
               <svg-icon name="shoppingCart" class="cart"/>
               我的购物车
             </el-button>
@@ -57,7 +57,15 @@
     name: "Search",
     data() {
       return {
+        CartSum:50,
         searchContent: '',
+      }
+    },
+    methods:{
+      EnterCart(){
+        this.$router.push({
+          path: "/login" //跳转的路径
+        });
       }
     }
   }

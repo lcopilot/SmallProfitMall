@@ -37,6 +37,10 @@ const routes = [
     path:'/register',
     name:"Register",
     component: () => import('@/components/pages/Register')
+  },{
+    path:'/notFound',
+    name:"NotFound",
+    component: () => import('@/components/pages/NotFound')
   },
 
 ]

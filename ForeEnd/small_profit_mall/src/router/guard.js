@@ -24,7 +24,9 @@ import router from "./index";
 // })
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
+  if (to.matched.length === 0) {  //如果未匹配到路由跳转不存在
+    from.name ? next({ name:from.name }) : next('/notFound');   //如果上级也未匹配到路由则跳转未找到页面，如果上级能匹配到则转上级路由
+  } else if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
     if (sessionStorage.getItem("token")) {
       next();
     } else {
@@ -33,8 +35,7 @@ router.beforeEach((to, from, next) => {
         query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
       })
     }
-  }
-  else {
+  } else {
     next();
   }
 })
