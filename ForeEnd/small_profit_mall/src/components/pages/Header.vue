@@ -2,7 +2,7 @@
   <div class="header-wraper">
     <header class="blog-header">
       <h1 class="header-title">
-        <router-link to="/">SmallProfit</router-link>
+        <router-link to="/"><img src="../../assets/images/logo.png" class="logo"></router-link>
       </h1>
       <nav class="header-nav">
         <ul style="margin-right: -15rem">
@@ -107,5 +107,9 @@
   .icon {
     width: 16px;
     height: 16px;
+  }
+  .logo{
+    width:135px;
+    height:45px ;
   }
 </style>

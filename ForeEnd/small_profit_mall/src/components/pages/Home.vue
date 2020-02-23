@@ -8,13 +8,7 @@
         <div><img src="../../assets/images/login-png.png"></div>
       </el-col>
       <el-col :span="18">
-        <svg-icon name="商城"></svg-icon>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icondenglu"></use>
-        </svg>
-        <svg class="icon" aria-hidden="true" style="font-size:45px">
-          <use xlink:href="#iconzhinengchanpin"></use>
-        </svg>
+
       </el-col>
     </el-row>
     <el-footer>
