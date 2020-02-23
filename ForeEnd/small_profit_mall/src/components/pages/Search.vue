@@ -1,21 +1,43 @@
 <template>
   <el-main>
-    <el-row type="flex" class="row-bg" justify="center" gutter="20">
-      <el-col :span="4">
+    <el-row type="flex" class="row-bg" justify="center" :gutter="20">
+      <el-col :span="3">
         <router-link to="/">
           <img src="../../assets/images/logo.png" class="logo">
         </router-link>
       </el-col>
-      <el-col :span="8">
-        <el-input v-model="searchContent" style="width: 85%" clearable placeholder="请输入内容"
-                  prefix-icon="el-icon-search"></el-input>
-        <el-button>搜索</el-button>
+      <el-col :span="10">
+        <el-input v-model="searchContent" style="width:75%;margin-right:2% " clearable
+                  placeholder="请输入内容"
+                  prefix-icon="el-icon-search"/>
+        <el-button plain icon="el-icon-search" type="success" round>搜索</el-button>
       </el-col>
-      <el-col :span="4">
-sdfs
+      <el-col :span="3">
+        <el-badge :value="200" :max="99" class="item">
+          <el-popover
+              placement="bottom"
+              width="440"
+              trigger="hover"
+              transition="el-zoom-in-top"
+              :open-delay="200"
+              >
+            <el-table empty-text="购物车中还没有商品,赶紧选购吧!" :show-header="false">
+              <el-table-column width="100" ></el-table-column>
+              <el-table-column width="200" ></el-table-column>
+              <el-table-column width="60" ></el-table-column>
+              <el-table-column width="50" ><el-button type="text" size="small" @click="del()">删除</el-button></el-table-column>
+            </el-table>
+            <el-button slot="reference" type="danger">
+              <svg-icon name="shoppingCart" class="cart"/>
+              我的购物车
+            </el-button>
+          </el-popover>
+        </el-badge>
+
       </el-col>
       <el-col :span="2">
-fds
+        小程序二维码
+        <el-image src=""/>
       </el-col>
     </el-row>
   </el-main>
@@ -24,17 +46,26 @@ fds
 <script>
   export default {
     name: "Search",
-    data(){
-      return{
-        searchContent:'',
+    data() {
+      return {
+        searchContent: '',
       }
     }
   }
 </script>
 
 <style scoped>
-  .logo{
-    width:150px;
-    height:50px ;
+  .logo {
+    width: 150px;
+    height: 50px;
+  }
+
+  .cart {
+    width: 15px;
+    height: 15px
+  }
+
+  .item {
+    margin-right: 30px;
   }
 </style>

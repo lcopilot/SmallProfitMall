@@ -38,7 +38,7 @@
                   <span v-show="!show" class="span">重新发送({{count}})</span>
                 </el-form-item>
                 <el-form-item>
-                  <el-button class="login-btn" @click="register('registerForm')">重置密码</el-button>
+                  <el-button class="login-btn" @click="resetPassword('registerForm')">重置密码</el-button>
                 </el-form-item>
               </el-form>
               <router-link to="/login" style="margin: 7% 52% 0 0">已有账号,去登录</router-link>
@@ -104,22 +104,22 @@
       };
     },
     methods: {
-      register(formName) {
+      resetPassword(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.axios
-            .post("/api/user/register", this.registerForm)
+            .post("/api/user/updatePasswordPhone", this.registerForm)
             .then(res => {
               if (res.data.success) {
                 this.$message({
-                  message: "注册成功",
+                  message: "重置密码成功",
                   type: "success"
                 });
                 this.$router.push({
                   path: "/login" //跳转的路径
                 });
               } else {
-                this.$message.error("注册失败");
+                this.$message.error("重置密码失败");
               }
             })
             .catch(error => {
@@ -132,7 +132,7 @@
       getCode() {
         if ((/^1[34578]\d{9}$/.test(this.registerForm.phone))) {
           this.axios
-          .post("/api/user/registerVerify", {
+          .post("/api/user/SmVerify", {
             phone: this.registerForm.phone,
           }).then(res => {
             if (res.data.success) {
@@ -146,7 +146,6 @@
               } else {
                 this.$message.error("手机号已经被注册或手机号不存在");
               }
-
             }
           })
           const TIME_COUNT = 60;
