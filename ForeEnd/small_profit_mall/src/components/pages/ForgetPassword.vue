@@ -93,7 +93,7 @@
             {required: true, validator: checkPhone, trigger: 'blur'}
           ],
           password: [
-            {required: true, message: '请输入密码', trigger: 'blur'},
+            {required: true, message: '请输入要修改的密码', trigger: 'blur'},
             {min: 6, max: 18, message: '长度在 6到 18个字符', trigger: 'blur'},
           ],
           verify: [
