@@ -1,6 +1,7 @@
 package cn.itcast.controller;
 
 import cn.itcast.domain.Login;
+import cn.itcast.domain.Password;
 import cn.itcast.domain.Register;
 import cn.itcast.domain.User;
 import cn.itcast.response.CommonCode;
@@ -114,9 +115,9 @@ public class UserController {
                 System.out.println("验证码为 "+FR);
                 session.setAttribute("Verify",FR);//设置验证码session
                 session.setAttribute("phone",register.getPhone());//设置手机号session
-                removeAttrbute(session,"Verify");//存入session
                 boolean flag= sm.sendRegistSms(register.getPhone(),FR);
                 if(flag){
+                    removeAttrbute(session,"Verify");//存入session
                     return new QueryResponseResult(CommonCode.SUCCESS,null);
                 }else {
                     return new QueryResponseResult(CommonCode.SERVER_ERROR,null);
@@ -144,6 +145,82 @@ public class UserController {
         }
     }
 
+    /**
+     * 短信验证接口(修改登录密码，支付密码）
+     * @param user
+     * @param session
+     * @return
+     * @throws ClientException
+     */
+    @RequestMapping("/SmVerify")
+    public  QueryResponseResult SmVerify(@RequestBody User user , HttpSession session) throws ClientException {
+        User user1 =userService.findByPhone(user.getPhone());
+        if (user1!=null){
+            String FR = getFourRandom.getFourRandom();
+            System.out.println("修改验证码为 "+FR);
+            boolean flag = sm.sendRegistSms(user1.getPhone(),FR);
+            if(flag){
+                session.setAttribute("passwordVerify",FR);//存入验证码session
+                session.setAttribute("upPasswordPhone",user.getPhone());//手机号存入session
+                return new QueryResponseResult(CommonCode.SUCCESS,null);
+            }else {
+                return new QueryResponseResult(CommonCode.SERVER_ERROR,null);
+            }
+        }else {
+            return new QueryResponseResult(CommonCode.FAIL,null);
+        }
+    }
+
+    /**
+     * 根据手机号码修改接口
+     * @param user
+     * @param session
+     * @return
+     */
+    @RequestMapping("/updatePasswordPhone")
+    public QueryResponseResult updatePasswordPhone(@RequestBody User user,HttpSession session){
+        String passwordVerify =(String) session.getAttribute("passwordVerify");
+        String phone =(String) session.getAttribute("upPasswordPhone");
+        String password = user.getPassword();
+        System.out.println(passwordVerify);
+        System.out.println(phone);
+        if(user.getPhone().equals(phone)){
+            if (user.getVerify().equals(passwordVerify)){
+                System.out.println(password);
+                System.out.println();
+                userService.updatePasswordPhone(phone,password);
+                System.out.println("执行完成");
+                return new QueryResponseResult(CommonCode.SUCCESS,null);
+            }else {
+                return new QueryResponseResult(CommonCode.FAIL,null);
+            }
+        }else {
+            return new QueryResponseResult(CommonCode.INVALID_PARAM,null);
+        }
+    }
+
+    /**
+     * 根据旧密码修改密码
+     * @param
+     * @return
+     */
+    @RequestMapping("/updatePasswordUid")
+    public QueryResponseResult updatePasswordUid(@RequestBody Password password){
+        User user = userService.findByUid(password.getUid());
+        String SqlPassword = user.getPassword();//数据库密码
+        String ExpiredPassword =password.getExpiredPassword();//旧密码
+        String LatestPassword = password.getLatestPassword();//新密码
+        if(SqlPassword.equals(ExpiredPassword)){
+            userService.updatePasswordUid(password.getUid(),LatestPassword);
+            return new QueryResponseResult(CommonCode.SUCCESS,null);
+        }else{
+            return new QueryResponseResult(CommonCode.FAIL,null);
+        }
+    }
+
+
+
+
     //删除session
     public void removeAttrbute(HttpSession session, String codeName) {
         System.out.println("开始倒计时五分钟");
@@ -157,8 +234,6 @@ public class UserController {
             //设置时间为五分钟
         }, 10*1000*3000);
     }
-
-
 
 
 

@@ -2,6 +2,7 @@ package cn.itcast.dao;
 
 import cn.itcast.domain.User;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -15,22 +16,26 @@ public interface UserDao {
 
 
     // 查询所有账户
-    @Select(" select * from user")
     public List<User> findAll();
 
 
     //.根据用户名查询用户信息
-    @Select(" select * from user where name = #{name}")
     public User findByName(String name);
 
 
     //.根据用户手机查询用户信息
-    @Select("select * from user where  phone = #{phone}")
     public User findByPhone(String phone);
+
+    //.根据uid查询用户信息
+    public User findByUid(String uid);
 
 
     // 保存帐户信息
-    @Insert("INSERT INTO user (uid,name,password,sex,phone,mail,image,token) VALUES (#{uid},#{name},#{password},#{sex},#{phone},#{mail},#{image},#{token})")
     public void saveAccount(User user);
 
+    //根据手机号码修改密码
+    public void updatePasswordPhone(@Param("phone") String phone, @Param("password") String password);
+
+    //根据uid修改密码
+    public void updatePasswordUid(@Param("uid") String uid,@Param("password") String password);
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.UserDao">
+    <!-- 查询所有 -->
+    <select id="findAll" resultType="cn.itcast.domain.User">
+        select * from user;
+    </select>
+
+    <!-- 根据用户名查询用户信息 -->
+    <select id="findByName" resultType="cn.itcast.domain.User">
+         select * from user where name = #{name}
+    </select>
+
+    <!-- 根据用户手机号码查询用户 -->
+    <select id="findByPhone" resultType="cn.itcast.domain.User">
+         select * from user where  phone = #{phone}
+    </select>
+
+    <!-- 根据用户手机号码查询用户 -->
+    <select id="findByUid" resultType="cn.itcast.domain.User">
+         select * from user where  Uid = #{Uid}
+    </select>
+
+
+    <!--注册用户 -->
+    <insert id="saveAccount" parameterType="cn.itcast.domain.User">
+         INSERT INTO user (uid,name,password,sex,phone,mail,image,token) VALUES (#{uid},#{name},#{password},#{sex},#{phone},#{mail},#{image},#{token})
+    </insert>
+
+    <!-- 根据用户手机号码修改手机密码-->
+    <update id="updatePasswordPhone" parameterType="java.lang.String">
+        UPDATE user SET password = #{password} WHERE phone = #{phone}
+    </update>
+
+    <!--根据uid修改密码-->
+    <update id="updatePasswordUid" parameterType="java.lang.String">
+        UPDATE user SET password = #{password} WHERE uid = #{uid}
+    </update>
+
+
+</mapper>
