@@ -3,6 +3,7 @@ package cn.itcast.service.impl;
 import cn.itcast.dao.UserDao;
 import cn.itcast.domain.User;
 import cn.itcast.service.UserService;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,12 @@ public class UserServiceImpl implements UserService {
         return UserDao.findByPhone(phone);
     }
 
+    //.根据uid查询用户信息
+    @Override
+    public User findByUid(String uid) {
+        return UserDao.findByUid(uid);
+    }
+
     //保存用户
     public void saveAccount(User user) {
         System.out.println("业务层：注册用户...");
@@ -48,6 +55,16 @@ public class UserServiceImpl implements UserService {
         System.out.println(user);
     }
 
+    //根据手机号码修改密码
+    @Override
+    public void updatePasswordPhone(String phone,String password) {
+        UserDao.updatePasswordPhone(phone,password);
+    }
 
+    //根据uid修改密码
+    @Override
+    public void updatePasswordUid(String uid,String password) {
+        UserDao.updatePasswordUid(uid,password);
+    }
 
 }
