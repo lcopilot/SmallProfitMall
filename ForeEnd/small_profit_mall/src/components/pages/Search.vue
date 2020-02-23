@@ -13,7 +13,7 @@
         <el-button plain icon="el-icon-search" type="success" round>搜索</el-button>
       </el-col>
       <el-col :span="3">
-        <el-badge :value="200" :max="99" class="item">
+        <el-badge :value="80" :max="99" class="item">
           <el-popover
               placement="bottom"
               width="440"
@@ -36,8 +36,17 @@
 
       </el-col>
       <el-col :span="2">
-        小程序二维码
-        <el-image src=""/>
+        <el-popover
+            placement="bottom"
+            width="150"
+            trigger="hover"
+            transition="el-zoom-in-top"
+            :open-delay="150"
+        >
+          打开微信扫一扫
+          <el-image src="http://img.fhxasdsada.xyz/qrcode.png"/>
+          <el-image slot="reference" :lazy="true"  style="width: 50px; height: 50px" src="http://img.fhxasdsada.xyz/qrcode.png"/>
+        </el-popover>
       </el-col>
     </el-row>
   </el-main>
