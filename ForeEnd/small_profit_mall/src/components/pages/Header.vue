@@ -30,7 +30,7 @@
                   <router-link to="/">个人中心</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <router-link @click.native="exit" to="/login">
+                  <router-link @click.native="exit" to="/">
                     <svg-icon name="exit" class="icon"></svg-icon> 退出
                   </router-link>
                 </el-dropdown-item>
