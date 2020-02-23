@@ -4,6 +4,7 @@ public class Register {
     private String verify;
     private String phone;
 
+
     public String getVerify() {
         return verify;
     }
