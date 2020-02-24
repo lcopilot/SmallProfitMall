@@ -6,43 +6,48 @@
       </h1>
       <nav class="header-nav">
         <ul style="margin-right: -15rem">
-          <li v-if="this.$route.path!='/login' && this.username==null">
-            <router-link to="/login">您好,请登录</router-link>
-          </li>
-          <li v-if="this.username!=null">
-            <el-dropdown trigger="click">
+          <div v-if="!LoginStatus">
+            <li v-if="(this.$route.path!='/login' && this.username==null) || !LoginStatus">
+              <router-link to="/login">您好,请登录</router-link>
+            </li>
+          </div>
+          <div v-if="LoginStatus">
+            <li v-if="this.username!=null">
+              <el-dropdown trigger="click">
               <span class="el-dropdown-link">
                 <img :src="avatar" style="width: 35px; border-radius: 10%;margin-top: 6%">
                         您好,{{username}}
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>
-                  <router-link to="/">个人中心</router-link>
-                </el-dropdown-item>
-                <el-dropdown-item divided>
-                  <router-link to="/">个人中心</router-link>
-                </el-dropdown-item>
-                <el-dropdown-item>
-                  <router-link to="/">个人中心</router-link>
-                </el-dropdown-item>
-                <el-dropdown-item>
-                  <router-link to="/">个人中心</router-link>
-                </el-dropdown-item>
-                <el-dropdown-item>
-                  <router-link @click.native="exit" to="/">
-                    <svg-icon name="exit" class="icon"></svg-icon> 退出
-                  </router-link>
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </li>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>
+                    <router-link to="/">个人中心</router-link>
+                  </el-dropdown-item>
+                  <el-dropdown-item divided>
+                    <router-link to="/">个人中心</router-link>
+                  </el-dropdown-item>
+                  <el-dropdown-item>
+                    <router-link to="/">个人中心</router-link>
+                  </el-dropdown-item>
+                  <el-dropdown-item>
+                    <router-link to="/">个人中心</router-link>
+                  </el-dropdown-item>
+                  <el-dropdown-item>
+                    <router-link @click.native="exit" to="/">
+                      <svg-icon name="exit" class="icon"></svg-icon> 退出
+                    </router-link>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </li>
+          </div>
         </ul>
       </nav>
     </header>
   </div>
 </template>
 <script>
+  import {mapActions} from "vuex";
   export default {
     name: "Header",
     data() {
@@ -52,10 +57,19 @@
       };
     },
     methods: {
+      ...mapActions([
+        "modifyLoginStatus"
+      ]),
       exit() {
         sessionStorage.clear();
-        this.$router.go(0);
+        this.modifyLoginStatus();
       }
+    },
+    computed:{
+      //vuex
+      LoginStatus(){
+        return this.$store.state.LoginStatus;
+      },
     },
     created() {
       this.username = sessionStorage.getItem("username");
