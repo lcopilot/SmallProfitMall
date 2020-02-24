@@ -8,17 +8,19 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    redirect: {   //重定向
+      name: 'Home'
+    },
+  },
+  {
+    path: '/home',
     name: 'Home',
+    // meta: {
+    //   requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+    // },
     component: () => import('@/components/pages/Home'), //路由懒加载
   },
   {
-    path: '/Home',
-    name: 'Home',
-    meta: {
-      requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
-    },
-    component: () => import('@/components/pages/Home'), //路由懒加载
-  },{
     path: '/forgetPassword',
     name: 'ForgetPassword',
     component: () => import('@/components/pages/ForgetPassword'), //路由懒加载
@@ -37,11 +39,17 @@ const routes = [
     path:'/register',
     name:"Register",
     component: () => import('@/components/pages/Register')
-  },{
-    path:'/notFound',
-    name:"NotFound",
-    component: () => import('@/components/pages/NotFound')
   },
+    //捕获404
+  {
+    path: "/404",
+    name: "NotFound",
+    component: resolve => require(['@/components/pages/NotFound'], resolve)
+  },
+  {
+    path: "*",
+    redirect: "/404"
+  }
 
 ]
 

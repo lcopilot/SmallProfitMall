@@ -11,6 +11,7 @@
                   placeholder="请输入内容"
                   prefix-icon="el-icon-search"/>
         <el-button plain icon="el-icon-search" type="success" round>搜索</el-button>
+
       </el-col>
       <el-col :span="3">
         <el-badge :value="CartSum" :max="99" class="item">
@@ -31,6 +32,7 @@
               <svg-icon name="shoppingCart" class="cart"/>
               我的购物车
             </el-button>
+
           </el-popover>
         </el-badge>
 

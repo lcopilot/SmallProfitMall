@@ -6,7 +6,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     CartSum: 0,
-    LoginStatus:false,
   },
   mutations: {
     getCartSum(state, sum) {
@@ -15,9 +14,7 @@ export default new Vuex.Store({
     modifyCartSum(state, sum) {
       state.CartSum += sum
     },
-    modifyLoginStatus(state){
-      state.LoginStatus=!state.LoginStatus;
-    }
+
   },
   actions: {
     //获取购物车的数量
@@ -27,9 +24,6 @@ export default new Vuex.Store({
     //修改购物车的数量
     modifyCartSum: (context, sum) => {
       context.commit('modifyCartSum', sum);
-    },
-    modifyLoginStatus: (context) => {
-      context.commit('modifyLoginStatus');
     },
 
   },

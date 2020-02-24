@@ -1,7 +1,7 @@
 import router from "./index";
 
 //声明白名单
-const whiteRouter = ['/login','/register','/forgetPassword'];
+const whiteRouter = ['/login', '/register', '/forgetPassword'];
 
 //路由守卫
 // router.beforeEach((to, from, next) => {
@@ -24,10 +24,7 @@ const whiteRouter = ['/login','/register','/forgetPassword'];
 // })
 
 router.beforeEach((to, from, next) => {
-  console.log(to)
-  if (to.matched.length === 0) {  //如果未匹配到路由跳转不存在
-    from.name ? next({name: from.name}) : next('/notFound');   //如果上级也未匹配到路由则跳转未找到页面，如果上级能匹配到则转上级路由
-  } else if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
+  if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
     if (sessionStorage.getItem("token")) {
       next();
     } else {
@@ -37,14 +34,14 @@ router.beforeEach((to, from, next) => {
       })
     }
   } else {
-    if (sessionStorage.getItem("token")){
-      if (  whiteRouter.indexOf(to.path) == -1){
+    if (sessionStorage.getItem("token")) {
+      if (whiteRouter.indexOf(to.path) == -1) {
         next();
-      }else {
+      } else {
         next('/')
       }
 
-    }else {
+    } else {
       next()
     }
 
