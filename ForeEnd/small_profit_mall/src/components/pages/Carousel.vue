@@ -166,31 +166,31 @@
                 </el-popover>
               </li>
             </ul>
-
-
-
         </el-col>
         <el-col :span="10">
-            <el-carousel height="370px">
-              <el-carousel-item v-for="item in 4" :key="item">
-                <el-image src="http://img.fhxasdsada.xyz/56a05078N6add136b.jpg"></el-image>
+            <el-carousel height="370px" interval="4000">
+              <el-carousel-item v-for="rotationChart in rotationCharts" :key="rotationChart.rid">
+                <el-image :src="rotationChart.rotationChartOne"/>
               </el-carousel-item>
             </el-carousel>
         </el-col>
         <el-col :span="3">
-          <el-carousel height="370px" indicator-position="none">
-            <el-carousel-item v-for="item in 4" :key="item">
+          <el-carousel height="370px" indicator-position="none" interval="4000">
+            <el-carousel-item v-for="rotationChart in rotationCharts" :key="rotationChart.rid">
               <div>
                 <a>
-                  <el-image fit="scale-down" @click="goto(1)" src="http://img.fhxasdsada.xyz/56cdc97aN3e1b0fe9.jpg"/>
+                  <el-image fit="scale-down" @click="goto(1)" :src="rotationChart.rotationChartTwo_1"/>
                 </a>
-
               </div>
               <div>
-                <el-image fit="scale-down" src="http://img.fhxasdsada.xyz/56cdc97aN3e1b0fe9.jpg"/>
+                <a>
+                  <el-image fit="scale-down" @click="goto(1)" :src="rotationChart.rotationChartTwo_2"/>
+                </a>
               </div>
               <div>
-                <el-image fit="scale-down" src="http://img.fhxasdsada.xyz/56cdc97aN3e1b0fe9.jpg"/>
+                <a>
+                  <el-image fit="scale-down" @click="goto(1)" :src="rotationChart.rotationChartTwo_3"/>
+                </a>
               </div>
             </el-carousel-item>
           </el-carousel>
@@ -215,7 +215,7 @@
     },
     data(){
       return{
-
+        rotationCharts:[],
       }
     },
     methods:{
@@ -227,6 +227,17 @@
           }
         });
       },
+      getRotationChart(){
+        this.axios.get("/api/homepageController/findRotationChart")
+        .then(res=>{
+          if (res.data.success){
+            this.rotationCharts=res.data.queryResult.list;
+          }
+        })
+      }
+    },
+    created() {
+      this.getRotationChart();
     }
   }
 </script>
