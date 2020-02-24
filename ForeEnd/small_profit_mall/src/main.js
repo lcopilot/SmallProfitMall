@@ -11,7 +11,8 @@ import './assets/iconfont/iconfont.js'
 import './assets/iconfont/icon.css'
 import './assets/reset.scss'
 import './router/guard'
-
+//提升事件响应
+import 'default-passive-events'
 
 
 //全局注册组件

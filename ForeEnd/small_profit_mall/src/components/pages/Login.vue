@@ -61,7 +61,6 @@
   import Header from "./Header.vue";
   import Footer from "./Footer.vue";
   import Verify from 'vue2-verify';
-  import {mapActions} from "vuex";
 
   export default {
     components: {Header, Footer, Verify},
@@ -111,7 +110,6 @@
                         sessionStorage.setItem("username", res.data.queryResult.list[0].name);
                         sessionStorage.setItem("uId", res.data.queryResult.list[0].uid);
                         sessionStorage.setItem("token", res.data.queryResult.list[0].token);
-                        this.modifyLoginStatus();
                         this.$router.push({
                           path: "/Home" //跳转的路径
                         });
@@ -136,9 +134,7 @@
           this.checkCode = false;
         }
       },
-      ...mapActions([
-        "modifyLoginStatus",
-      ])
+
     },
     mounted() {
 
