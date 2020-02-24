@@ -15,15 +15,16 @@
 
         </el-col>
         <el-col :span="3">
-          <el-badge :value="CartSum" :max="99" class="item">
+          <el-badge :value="CartSum" :max="99" class="item" >
             <el-popover
                 placement="bottom"
                 width="440"
                 trigger="hover"
                 transition="el-zoom-in-top"
                 :open-delay="200"
+                @show="getCartPreview()"
             >
-              <el-table empty-text="购物车中还没有商品,赶紧选购吧!" :show-header="false">
+              <el-table empty-text="购物车中还没有商品,赶紧选购吧!" :show-header="false" >
                 <el-table-column width="100"></el-table-column>
                 <el-table-column width="200"></el-table-column>
                 <el-table-column width="60"></el-table-column>
@@ -57,33 +58,6 @@
         </el-col>
       </el-row>
     </el-header>
-    <el-footer>
-      <el-row type="flex" justify="space-around">
-        <el-col :span="12">
-          <div style="margin: 10px 0 -18px 0">
-            <a>
-              <span class="span">秒杀</span>
-            </a>
-            <a>
-              <span class="span">导航商品栏</span>
-            </a><a>
-            <span class="span">导航商品栏</span>
-          </a><a>
-            <span class="span">导航商品栏</span>
-          </a><a>
-            <span class="span">导航商品栏</span>
-          </a><a>
-            <span class="span">导航商品栏</span>
-          </a><a>
-            <span class="span">导航商品栏</span>
-          </a>
-
-          </div>
-
-        </el-col>
-      </el-row>
-      <el-divider/>
-    </el-footer>
   </el-container>
 </template>
 
@@ -113,11 +87,16 @@
       ...mapActions([
         "modifyCartSum",
         "getCartSum"
-      ])
+      ]),
+      //获取购物车的预览内容
+      getCartPreview(){
+        console.log("sdfsd")
+      }
     },
     created() {
       this.getCartSum(40);
     }
+
   }
 </script>
 
@@ -136,13 +115,4 @@
     margin-right: 30px;
   }
 
-  .span {
-    margin-right: 20px;
-    font-size: 16px;
-    font-weight: bold;
-
-  }
-  a:hover {
-    color: #e1251b;
-  }
 </style>
