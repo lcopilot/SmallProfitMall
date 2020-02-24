@@ -1,7 +1,7 @@
 package cn.itcast.domain;
 
 import org.springframework.stereotype.Controller;
-
+//登录
 @Controller("login")
 public class Login {
     private String name;
