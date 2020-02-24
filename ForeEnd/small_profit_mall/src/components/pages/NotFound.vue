@@ -1,5 +1,4 @@
 <template>
-
   <div class="container">
     <img class="bg" src="http://img.fhxasdsada.xyz/404.png"/>
     <div class="btn">
@@ -8,10 +7,8 @@
       <div style="clear:both;"></div>
     </div>
   </div>
-
 </template>
 <style scoped>
-
 
   * {
     padding: 0;

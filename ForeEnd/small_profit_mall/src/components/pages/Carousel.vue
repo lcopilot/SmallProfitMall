@@ -2,6 +2,31 @@
   <el-container>
     <el-header height="100px">
       <Search/>
+      <el-row type="flex" justify="space-around">
+        <el-col :span="12">
+          <div style="margin: 10px 0 -18px 0">
+            <a>
+              <span class="span">秒杀</span>
+            </a>
+            <a>
+              <span class="span">导航商品栏</span>
+            </a><a>
+            <span class="span">导航商品栏</span>
+          </a><a>
+            <span class="span">导航商品栏</span>
+          </a><a>
+            <span class="span">导航商品栏</span>
+          </a><a>
+            <span class="span">导航商品栏</span>
+          </a><a>
+            <span class="span">导航商品栏</span>
+          </a>
+
+          </div>
+
+        </el-col>
+      </el-row>
+      <el-divider/>
     </el-header>
     <el-main>
       <el-row type="flex" class="row-bg" justify="center" :gutter="20">
@@ -67,126 +92,135 @@
                     <router-link to="/login">电器 /</router-link>
                   </el-button>
                 </el-popover>
-              </li><li>
-              <el-popover
-                  placement="right"
-                  width="400"
-                  trigger="click">
-                <el-table>
-                  <el-table-column width="150" property="date" label="日期"></el-table-column>
-                  <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                  <el-table-column width="300" property="address" label="地址"></el-table-column>
-                </el-table>
-                <el-button type="text" size="small" @click="del()" slot="reference">
-                  <router-link to="/login">电器 /</router-link>
-                </el-button>
-              </el-popover>
-            </li><li>
-              <el-popover
-                  placement="right"
-                  width="400"
-                  trigger="click">
-                <el-table>
-                  <el-table-column width="150" property="date" label="日期"></el-table-column>
-                  <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                  <el-table-column width="300" property="address" label="地址"></el-table-column>
-                </el-table>
-                <el-button type="text" size="small" @click="del()" slot="reference">
-                  <router-link to="/login">电器 /</router-link>
-                </el-button>
-              </el-popover>
-            </li><li>
-              <el-popover
-                  placement="right"
-                  width="400"
-                  trigger="click">
-                <el-table>
-                  <el-table-column width="150" property="date" label="日期"></el-table-column>
-                  <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                  <el-table-column width="300" property="address" label="地址"></el-table-column>
-                </el-table>
-                <el-button type="text" size="small" @click="del()" slot="reference">
-                  <router-link to="/login">电器 /</router-link>
-                </el-button>
-              </el-popover>
-            </li><li>
-              <el-popover
-                  placement="right"
-                  width="400"
-                  trigger="click">
-                <el-table>
-                  <el-table-column width="150" property="date" label="日期"></el-table-column>
-                  <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                  <el-table-column width="300" property="address" label="地址"></el-table-column>
-                </el-table>
-                <el-button type="text" size="small" @click="del()" slot="reference">
-                  <router-link to="/login">电器 /</router-link>
-                </el-button>
-              </el-popover>
-            </li><li>
-              <el-popover
-                  placement="right"
-                  width="400"
-                  trigger="click">
-                <el-table>
-                  <el-table-column width="150" property="date" label="日期"></el-table-column>
-                  <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                  <el-table-column width="300" property="address" label="地址"></el-table-column>
-                </el-table>
-                <el-button type="text" size="small" @click="del()" slot="reference">
-                  <router-link to="/login">电器 /</router-link>
-                </el-button>
-              </el-popover>
-            </li><li>
-              <el-popover
-                  placement="right"
-                  width="400"
-                  trigger="click">
-                <el-table>
-                  <el-table-column width="150" property="date" label="日期"></el-table-column>
-                  <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                  <el-table-column width="300" property="address" label="地址"></el-table-column>
-                </el-table>
-                <el-button type="text" size="small" @click="del()" slot="reference">
-                  <router-link to="/login">电器 /</router-link>
-                </el-button>
-              </el-popover>
+              </li>
+              <li>
+                <el-popover
+                    placement="right"
+                    width="400"
+                    trigger="click">
+                  <el-table>
+                    <el-table-column width="150" property="date" label="日期"></el-table-column>
+                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
+                    <el-table-column width="300" property="address" label="地址"></el-table-column>
+                  </el-table>
+                  <el-button type="text" size="small" @click="del()" slot="reference">
+                    <router-link to="/login">电器 /</router-link>
+                  </el-button>
+                </el-popover>
+              </li>
+              <li>
+                <el-popover
+                    placement="right"
+                    width="400"
+                    trigger="click">
+                  <el-table>
+                    <el-table-column width="150" property="date" label="日期"></el-table-column>
+                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
+                    <el-table-column width="300" property="address" label="地址"></el-table-column>
+                  </el-table>
+                  <el-button type="text" size="small" @click="del()" slot="reference">
+                    <router-link to="/login">电器 /</router-link>
+                  </el-button>
+                </el-popover>
+              </li>
+              <li>
+                <el-popover
+                    placement="right"
+                    width="400"
+                    trigger="click">
+                  <el-table>
+                    <el-table-column width="150" property="date" label="日期"></el-table-column>
+                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
+                    <el-table-column width="300" property="address" label="地址"></el-table-column>
+                  </el-table>
+                  <el-button type="text" size="small" @click="del()" slot="reference">
+                    <router-link to="/login">电器 /</router-link>
+                  </el-button>
+                </el-popover>
+              </li>
+              <li>
+                <el-popover
+                    placement="right"
+                    width="400"
+                    trigger="click">
+                  <el-table>
+                    <el-table-column width="150" property="date" label="日期"></el-table-column>
+                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
+                    <el-table-column width="300" property="address" label="地址"></el-table-column>
+                  </el-table>
+                  <el-button type="text" size="small" @click="del()" slot="reference">
+                    <router-link to="/login">电器 /</router-link>
+                  </el-button>
+                </el-popover>
+              </li>
+              <li>
+                <el-popover
+                    placement="right"
+                    width="400"
+                    trigger="click">
+                  <el-table>
+                    <el-table-column width="150" property="date" label="日期"></el-table-column>
+                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
+                    <el-table-column width="300" property="address" label="地址"></el-table-column>
+                  </el-table>
+                  <el-button type="text" size="small" @click="del()" slot="reference">
+                    <router-link to="/login">电器 /</router-link>
+                  </el-button>
+                </el-popover>
+              </li>
+              <li>
+                <el-popover
+                    placement="right"
+                    width="400"
+                    trigger="click">
+                  <el-table>
+                    <el-table-column width="150" property="date" label="日期"></el-table-column>
+                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
+                    <el-table-column width="300" property="address" label="地址"></el-table-column>
+                  </el-table>
+                  <el-button type="text" size="small" @click="del()" slot="reference">
+                    <router-link to="/login">电器 /</router-link>
+                  </el-button>
+                </el-popover>
               </li>
             </ul>
           </el-card>
         </el-col>
         <el-col :span="10">
-            <el-carousel height="370px">
-              <el-carousel-item v-for="rotationChart in rotationCharts" :key="rotationChart.rid">
-                <a>
-                  <el-image @click="goto(1)" :src="rotationChart.rotationChartOne"/>
-                </a>
-              </el-carousel-item>
-            </el-carousel>
+          <el-carousel height="370px">
+            <el-carousel-item v-for="rotationChart in rotationCharts" :key="rotationChart.rid">
+              <a>
+                <el-image @click="goto(1)" :src="rotationChart.rotationChartOne"/>
+              </a>
+            </el-carousel-item>
+          </el-carousel>
         </el-col>
         <el-col :span="3">
           <el-carousel height="370px" indicator-position="none" :interval="6000">
             <el-carousel-item v-for="rotationChart in rotationCharts" :key="rotationChart.rid">
               <div>
                 <a>
-                  <el-image fit="scale-down" @click="goto(1)" :src="rotationChart.rotationChartTwo_1"/>
+                  <el-image fit="scale-down" @click="goto(1)"
+                            :src="rotationChart.rotationChartTwo_1"/>
                 </a>
               </div>
               <div>
                 <a>
-                  <el-image fit="scale-down" @click="goto(1)" :src="rotationChart.rotationChartTwo_2"/>
+                  <el-image fit="scale-down" @click="goto(1)"
+                            :src="rotationChart.rotationChartTwo_2"/>
                 </a>
               </div>
               <div>
                 <a>
-                  <el-image fit="scale-down" @click="goto(1)" :src="rotationChart.rotationChartTwo_3"/>
+                  <el-image fit="scale-down" @click="goto(1)"
+                            :src="rotationChart.rotationChartTwo_3"/>
                 </a>
               </div>
             </el-carousel-item>
           </el-carousel>
         </el-col>
         <el-col :span="3">
-          <el-card class="box-card"  style="height: 370px">
+          <el-card class="box-card" style="height: 370px">
             <div slot="header" class="clearfix">
               <span>卡片名称</span>
             </div>
@@ -208,12 +242,12 @@
     components: {
       Search
     },
-    data(){
-      return{
-        rotationCharts:[],
+    data() {
+      return {
+        rotationCharts: [],
       }
     },
-    methods:{
+    methods: {
       goto(articleId) {
         this.$router.push({
           name: "Login",
@@ -222,11 +256,11 @@
           }
         });
       },
-      getRotationChart(){
+      getRotationChart() {
         this.axios.get("/api/homepageController/findRotationChart")
-        .then(res=>{
-          if (res.data.success){
-            this.rotationCharts=res.data.queryResult.list;
+        .then(res => {
+          if (res.data.success) {
+            this.rotationCharts = res.data.queryResult.list;
           }
         })
       }
@@ -238,5 +272,14 @@
 </script>
 
 <style scoped>
+  .span {
+    margin-right: 20px;
+    font-size: 16px;
+    font-weight: bold;
 
+  }
+
+  a:hover {
+    color: #e1251b;
+  }
 </style>
