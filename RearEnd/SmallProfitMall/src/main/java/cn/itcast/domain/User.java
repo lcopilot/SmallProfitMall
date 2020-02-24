@@ -1,5 +1,5 @@
 package cn.itcast.domain;
-
+//用户实体类
 import org.springframework.stereotype.Controller;
 
 import java.io.Serializable;
