@@ -1,5 +1,5 @@
 package cn.itcast.domain;
-
+//注册实体
 public class Register {
     private String verify;
     private String phone;

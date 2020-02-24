@@ -1,7 +1,7 @@
 package cn.itcast.domain;
 
 import org.apache.ibatis.annotations.Select;
-
+//修改密码
 public class Password {
     private String uid;
     private String expiredPassword;
