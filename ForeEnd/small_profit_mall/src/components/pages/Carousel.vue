@@ -5,25 +5,13 @@
       <el-row type="flex" justify="space-around">
         <el-col :span="12">
           <div style="margin: 10px 0 -18px 0">
-            <a>
-              <span class="span">秒杀</span>
-            </a>
-            <a>
-              <span class="span">导航商品栏</span>
-            </a><a>
-            <span class="span">导航商品栏</span>
-          </a><a>
-            <span class="span">导航商品栏</span>
-          </a><a>
-            <span class="span">导航商品栏</span>
-          </a><a>
-            <span class="span">导航商品栏</span>
-          </a><a>
-            <span class="span">导航商品栏</span>
-          </a>
-
+            <router-link to="/" class="navigation_span">商品页面导航</router-link>
+            <router-link to="/" class="navigation_span">商品页面导航</router-link>
+            <router-link to="/" class="navigation_span">商品页面导航</router-link>
+            <router-link to="/" class="navigation_span">商品页面导航</router-link>
+            <router-link to="/" class="navigation_span">商品页面导航</router-link>
+            <router-link to="/" class="navigation_span">商品页面导航</router-link>
           </div>
-
         </el-col>
       </el-row>
       <el-divider/>
@@ -196,7 +184,7 @@
           </el-carousel>
         </el-col>
         <el-col :span="3">
-          <el-carousel height="370px" indicator-position="none" :interval="6000">
+          <el-carousel height="370px" indicator-position="none" :interval="6500">
             <el-carousel-item v-for="rotationChart in rotationCharts" :key="rotationChart.rid">
               <div>
                 <a>
@@ -272,7 +260,7 @@
 </script>
 
 <style scoped>
-  .span {
+  .navigation_span {
     margin-right: 20px;
     font-size: 16px;
     font-weight: bold;
