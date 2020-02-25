@@ -263,7 +263,7 @@
   .navigation_span {
     margin-right: 20px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
 
   }
 
