@@ -22,7 +22,6 @@ Vue.use(ElementUI)//全局使用ElementUI
 Vue.config.productionTip = false
 
 
-
 new Vue({
   router,
   store,
