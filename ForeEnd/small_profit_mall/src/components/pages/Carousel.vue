@@ -209,11 +209,66 @@
         </el-col>
         <el-col :span="3">
           <el-card class="box-card" style="height: 370px">
-            <div slot="header" class="clearfix">
-              <span>卡片名称</span>
+            <div slot="header" style="height: 50px">
+              <div class="user_avatar_div">
+                <img :src="avatar" style="width: 45px; border-radius: 50%;">
+              </div>
+              <div class="username_div">
+                <span v-if="username!=null" class="username_span">
+                  <router-link to="/" :title="username">Hi,{{username}}</router-link>
+                </span>
+                <span v-if="username==null" class="username_span">
+                  <router-link to="/login">Hi~欢迎逛微利</router-link>
+                </span>
+                <span v-if="username!=null">
+                  <router-link to="/" title="微利值1564">
+                    <svg-icon name="integral" class="icon" style="margin-left: 6px"/>
+                  </router-link>
+                  <router-link to="/" title="钻石会员">
+                    <svg-icon name="member" class="icon"/>
+                  </router-link>
+                  <router-link to="/login" @click.native="exit">退出</router-link>
+                </span>
+                <span v-if="username==null">
+                  <svg-icon name=""></svg-icon>
+                  <router-link to="/login">登录 |</router-link>
+                  <router-link to="/register" style="margin-left: 5px">注册</router-link>
+                </span>
+              </div>
             </div>
-            <div v-for="o in 4" :key="o" class="text item">
-              {{'列表内容 ' + o }}
+            <div style="height: 80px;">
+              快报区域 预留 height=80
+            </div>
+            <div style="height: 160px;">
+              <div style="float: left;margin-left: 3px">
+                <svg-icon name="member" style="width: 32px;height: 32px"></svg-icon>
+                <div style="font-size: 12px">物流</div>
+              </div>
+              <div style="float: left;margin-left: 3px">
+                <svg-icon name="member" style="width: 32px;height: 32px"></svg-icon>
+                <div style="font-size: 12px">物流</div>
+              </div>
+              <div style="float: left;margin-left: 3px">
+                <svg-icon name="member" style="width: 32px;height: 32px"></svg-icon>
+                <div style="font-size: 12px">物流</div>
+              </div>
+              <div style="float: left;margin-left: 3px">
+                <svg-icon name="member" style="width: 32px;height: 32px"></svg-icon>
+                <div style="font-size: 12px">物流</div>
+              </div>
+              <div style="float: left;margin-left: 3px">
+                <svg-icon name="member" style="width: 32px;height: 32px"></svg-icon>
+                <div style="font-size: 12px">物流</div>
+              </div>
+              <div style="float: left;margin-left: 3px">
+                <svg-icon name="member" style="width: 32px;height: 32px"></svg-icon>
+                <div style="font-size: 12px">物流</div>
+              </div>
+              <div style="float: left;margin-left: 3px">
+                <svg-icon name="member" style="width: 32px;height: 32px"></svg-icon>
+                <div style="font-size: 12px">物流</div>
+              </div>
+
             </div>
           </el-card>
         </el-col>
@@ -233,6 +288,8 @@
     data() {
       return {
         rotationCharts: [],
+        username: null,
+        avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938'
       }
     },
     methods: {
@@ -251,10 +308,16 @@
             this.rotationCharts = res.data.queryResult.list;
           }
         })
+      },
+      exit() {
+        sessionStorage.clear();
+        this.$router.push("/login");
       }
     },
     created() {
       this.getRotationChart();
+      this.username = sessionStorage.getItem("username");
+
     }
   }
 </script>
@@ -265,6 +328,35 @@
     font-size: 16px;
     font-weight: 600;
 
+  }
+
+  .username_span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 90px;
+    display: block;
+  }
+
+  .username_div {
+    font-size: 12px;
+    float: left;
+    width: 80px;
+    height: 20px
+  }
+
+  .user_avatar_div {
+    float: left;
+    height: 45px;
+    width: 45px;
+    margin-left: -10px;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
   }
 
   a:hover {
