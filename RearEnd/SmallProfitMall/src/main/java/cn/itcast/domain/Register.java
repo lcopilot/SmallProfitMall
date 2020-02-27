@@ -1,6 +1,9 @@
 package cn.itcast.domain;
+
+import java.io.Serializable;
+
 //注册实体
-public class Register {
+public class Register implements Serializable {
     private String verify;
     private String phone;
 
