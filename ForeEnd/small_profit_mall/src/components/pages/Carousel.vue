@@ -5,7 +5,10 @@
       <el-row type="flex" justify="space-around">
         <el-col :span="12">
           <div style="margin: 10px 0 -18px 0">
-            <router-link to="/" class="navigation_span" v-for="o in 6" :key="o">页面导航{{o}}</router-link>
+            <router-link :to="PagePilot.goodsId_1_c" class="navigation_span"
+                         v-for="PagePilot in PagePilotList" :key="PagePilot.cid">
+              {{PagePilot.goodsName_1_c}}
+            </router-link>
           </div>
         </el-col>
       </el-row>
@@ -14,24 +17,33 @@
     <el-main>
       <el-row type="flex" class="row-bg" justify="center" :gutter="20">
         <el-col :span="4">
-          <el-card class="box-card" style="height: 370px">
+          <el-card style="height: 370px;">
             <ul>
-              <li v-for="o in 10" :key="o">
+              <li v-for="Categories in CategoriesList" :key="Categories.nid">
                 <el-popover
                     placement="right"
                     width="400"
-                    trigger="hover">
+                    trigger="hover"
+                >
                   <el-table>
                     <el-table-column width="150" property="date" label="日期"></el-table-column>
                     <el-table-column width="100" property="name" label="姓名"></el-table-column>
                     <el-table-column width="300" property="address" label="地址"></el-table-column>
                   </el-table>
-                  <el-button type="text" size="small" @click="del()" slot="reference">
-                    <router-link to="/login">电器{{o}} /</router-link>
+                  <el-button type="text" size="small" style="font-size: 14px" @click="del()"
+                             slot="reference">
+                    <router-link :to="Categories.goodsId_1" v-if="Categories.goodsName_1!=null">
+                      {{Categories.goodsName_1}} /
+                    </router-link>
+                    <router-link :to="Categories.goodsId_2" v-if="Categories.goodsName_2!=null">
+                      {{Categories.goodsName_2}} /
+                    </router-link>
+                    <router-link :to="Categories.goodsId_3" v-if="Categories.goodsName_3!=null">
+                      {{Categories.goodsName_3}} /
+                    </router-link>
                   </el-button>
                 </el-popover>
               </li>
-
             </ul>
           </el-card>
         </el-col>
@@ -100,11 +112,13 @@
               快报区域 预留 height=80
             </div>
             <div style="height: 160px;">
-              <div style="float: left;margin-left: 3px" v-for="o in 9" :key="o">
-                <el-image src="http://img.fhxasdsada.xyz/%E7%89%A9%E6%B5%81.png" style="width: 32px;height: 32px"></el-image>
-                <div style="font-size: 12px">物流{{o}}</div>
+              <div class="CommonFunction"
+                   v-for="CommonFunctions in CommonFunctionsList" :key="CommonFunctions.id">
+                <router-link :to="CommonFunctions.iconSite">
+                  <el-image :src="CommonFunctions.icon" class="CommonFunction_1"></el-image>
+                  <div style="font-size: 12px">{{CommonFunctions.iconName}}</div>
+                </router-link>
               </div>
-
             </div>
           </el-card>
         </el-col>
@@ -125,7 +139,10 @@
       return {
         rotationCharts: [],
         username: null,
-        avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938'
+        avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
+        CategoriesList: [],
+        PagePilotList: [],
+        CommonFunctionsList: [],
       }
     },
     methods: {
@@ -148,12 +165,35 @@
       exit() {
         sessionStorage.clear();
         this.$router.push("/login");
+      },
+      getCategoriesList() {
+        this.axios.get("api/homepageController/findNavigation1").then(res => {
+          if (res.data.success) {
+            this.CategoriesList = res.data.queryResult.list[0];
+          }
+        })
+      },
+      getPagePilot() {
+        this.axios.get("api/homepageController/findNavigation2").then(res => {
+          if (res.data.success) {
+            this.PagePilotList = res.data.queryResult.list[0];
+          }
+        })
+      },
+      getCommonFunctionsList() {
+        this.axios.get("api/homepageController/icon").then(res => {
+          if (res.data.success) {
+            this.CommonFunctionsList = res.data.queryResult.list[0];
+          }
+        })
       }
     },
     created() {
       this.getRotationChart();
+      this.getCategoriesList();
+      this.getPagePilot();
+      this.getCommonFunctionsList();
       this.username = sessionStorage.getItem("username");
-
     }
   }
 </script>
@@ -193,6 +233,16 @@
     width: 20px;
     height: 20px;
     margin-right: 5px;
+  }
+
+  .CommonFunction {
+    float: left;
+    margin-left: 3px
+  }
+
+  .CommonFunction_1 {
+    width: 32px;
+    height: 32px
   }
 
   a:hover {
