@@ -33,7 +33,7 @@
                   <router-link to="/">个人中心</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <router-link @click.native="exit" to="/">
+                  <router-link @click.native="exit" to="/login">
                     <svg-icon name="exit" class="icon"></svg-icon>
                     退出
                   </router-link>
@@ -64,7 +64,7 @@
       ]),
       exit() {
         sessionStorage.clear();
-        window.location.reload()
+        this.$router.push("/login");
       }
     },
     created() {
