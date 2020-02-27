@@ -1,9 +1,6 @@
 package cn.itcast.controller;
 
-import cn.itcast.domain.Login;
-import cn.itcast.domain.Password;
-import cn.itcast.domain.Register;
-import cn.itcast.domain.User;
+import cn.itcast.domain.*;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
@@ -11,16 +8,11 @@ import cn.itcast.service.UserService;
 import cn.itcast.util.GetFourRandom;
 import cn.itcast.util.SmsUtils;
 import com.aliyuncs.exceptions.ClientException;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.*;
-
 import java.util.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -42,6 +34,7 @@ public class UserController {
 
     @Autowired
     private GetFourRandom getFourRandom;
+
     /**
      * 查询所有方法
      * @return
@@ -54,6 +47,22 @@ public class UserController {
         result.setList(list);
         return new QueryResponseResult(CommonCode.SUCCESS,result);
     }
+//    @RequestMapping("/a")
+//    public QueryResponseResult a(){
+//        // 调用service的方法
+//        List<User> list = userService.findAll();
+//        SerializeUtil serializeUtil = new SerializeUtil();
+//        JedisClientSingle jedisClientSingle = new JedisClientSingle();
+//        serializeUtil.serializeList(list);
+//        System.out.println(list.get(1));
+//       // List<User> list111 = (List<User>) jedisClientSingle.getList("zzz");
+//       // System.out.println(list111.get(1));
+//        jedisClientSingle.setList("yyy", list);
+//        QueryResult<User> result = new QueryResult<>();
+//        result.setList(list);
+//        return  new QueryResponseResult(CommonCode.SUCCESS,result);
+//    }
+
 
     /**
      * 用户通过账号，密码登录方法

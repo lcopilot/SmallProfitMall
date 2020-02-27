@@ -8,4 +8,11 @@
         SELECT * from RotationChart
     </select>
 
+    <select id="findNavigation" resultType="cn.itcast.domain.Navigation">
+        SELECT * from navigation
+    </select>
+
+    <select id="findNavigation2" resultType="cn.itcast.domain.Navigation_2">
+        SELECT * from navigation_2
+    </select>
 </mapper>
