@@ -1,6 +1,8 @@
 package cn.itcast.domain;
 
-public class Navigation {
+import java.io.Serializable;
+
+public class Navigation implements Serializable {
     private int nid;
     private String goodsName_1;
     private String goodsId_1;
