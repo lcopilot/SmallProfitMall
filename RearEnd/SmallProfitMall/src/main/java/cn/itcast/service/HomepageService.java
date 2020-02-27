@@ -1,5 +1,6 @@
 package cn.itcast.service;
 
+import cn.itcast.domain.Icon;
 import cn.itcast.domain.Navigation;
 import cn.itcast.domain.Navigation_2;
 import cn.itcast.domain.RotationChart;
@@ -15,4 +16,9 @@ public interface HomepageService {
 
     //商品分类导航栏2
     public List<Navigation_2> findNavigation2();
+
+
+    //查询图标
+    public List<Icon> findIcon();
+
 }

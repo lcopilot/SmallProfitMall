@@ -47,22 +47,6 @@ public class UserController {
         result.setList(list);
         return new QueryResponseResult(CommonCode.SUCCESS,result);
     }
-//    @RequestMapping("/a")
-//    public QueryResponseResult a(){
-//        // 调用service的方法
-//        List<User> list = userService.findAll();
-//        SerializeUtil serializeUtil = new SerializeUtil();
-//        JedisClientSingle jedisClientSingle = new JedisClientSingle();
-//        serializeUtil.serializeList(list);
-//        System.out.println(list.get(1));
-//       // List<User> list111 = (List<User>) jedisClientSingle.getList("zzz");
-//       // System.out.println(list111.get(1));
-//        jedisClientSingle.setList("yyy", list);
-//        QueryResult<User> result = new QueryResult<>();
-//        result.setList(list);
-//        return  new QueryResponseResult(CommonCode.SUCCESS,result);
-//    }
-
 
     /**
      * 用户通过账号，密码登录方法
