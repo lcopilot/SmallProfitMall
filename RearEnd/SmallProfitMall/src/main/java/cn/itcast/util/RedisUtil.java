@@ -13,7 +13,7 @@ import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.util.CollectionUtils;
 
-public class RedisService {
+public class RedisUtil {
 
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -28,7 +28,7 @@ public class RedisService {
 
 	private  RedisTemplate<String, Object> redisTemplate;
 
-	public RedisService(RedisTemplate<String, Object> redisTemplate) {
+	public RedisUtil(RedisTemplate<String, Object> redisTemplate) {
 		this.redisTemplate = redisTemplate;
 	}
 
@@ -75,6 +75,8 @@ public class RedisService {
 			return false;
 		}
 	}
+
+
 
 	/**
 	 * 删除缓存
@@ -428,7 +430,7 @@ public class RedisService {
 	 * @param end   结束 0 到 -1代表所有值
 	 * @return
 	 */
-	public List<Object> lGet(String key, long start, long end) {
+	public List<?> lGet(String key, long start, long end) {
 		try {
 			return redisTemplate.opsForList().range(key, start, end);
 		} catch (Exception e) {
