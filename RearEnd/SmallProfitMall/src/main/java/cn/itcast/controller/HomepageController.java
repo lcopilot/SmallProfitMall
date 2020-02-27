@@ -7,6 +7,8 @@ import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.service.HomepageService;
+import cn.itcast.util.RedisService;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,9 @@ public class HomepageController {
 
     @Autowired
     HomepageService homepageService;
+
+    @Autowired
+    RedisService redisService;
 
     /**
      * 轮播图
@@ -49,6 +54,20 @@ public class HomepageController {
     //商品分类导航栏2
     @RequestMapping("/findNavigation2")
     public QueryResponseResult findNavigation2(){
+        // 调用service的方法
+        List<Navigation_2> list = homepageService.findNavigation2();
+        QueryResult<Navigation_2> result = new QueryResult<>();
+        result.setList(list);
+        return  new QueryResponseResult(CommonCode.SUCCESS,result);
+    }
+    //商品分类导航栏2
+    @RequestMapping("/a")
+    public QueryResponseResult fff(){
+        ArrayList<Object> list1 = new ArrayList<>();
+        list1.add("sdfsdfgsdfasdf");
+        redisService.lSet("fsdfsd",list1);
+        List<Object> fsdfsd = redisService.lGet("fsdfsd", 0, -1);
+        System.out.println(fsdfsd);
         // 调用service的方法
         List<Navigation_2> list = homepageService.findNavigation2();
         QueryResult<Navigation_2> result = new QueryResult<>();
