@@ -5,12 +5,7 @@
       <el-row type="flex" justify="space-around">
         <el-col :span="12">
           <div style="margin: 10px 0 -18px 0">
-            <router-link to="/" class="navigation_span">商品页面导航</router-link>
-            <router-link to="/" class="navigation_span">商品页面导航</router-link>
-            <router-link to="/" class="navigation_span">商品页面导航</router-link>
-            <router-link to="/" class="navigation_span">商品页面导航</router-link>
-            <router-link to="/" class="navigation_span">商品页面导航</router-link>
-            <router-link to="/" class="navigation_span">商品页面导航</router-link>
+            <router-link to="/" class="navigation_span" v-for="o in 6" :key="o">页面导航{{o}}</router-link>
           </div>
         </el-col>
       </el-row>
@@ -21,7 +16,7 @@
         <el-col :span="4">
           <el-card class="box-card" style="height: 370px">
             <ul>
-              <li>
+              <li v-for="o in 10" :key="o">
                 <el-popover
                     placement="right"
                     width="400"
@@ -32,145 +27,11 @@
                     <el-table-column width="300" property="address" label="地址"></el-table-column>
                   </el-table>
                   <el-button type="text" size="small" @click="del()" slot="reference">
-                    <router-link to="/login">电器 /</router-link>
+                    <router-link to="/login">电器{{o}} /</router-link>
                   </el-button>
                 </el-popover>
               </li>
-              <li>
-                <el-popover
-                    placement="right"
-                    width="400"
-                    trigger="click">
-                  <el-table>
-                    <el-table-column width="150" property="date" label="日期"></el-table-column>
-                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                    <el-table-column width="300" property="address" label="地址"></el-table-column>
-                  </el-table>
-                  <el-button type="text" size="small" @click="del()" slot="reference">
-                    <router-link to="/login">电器 /</router-link>
-                  </el-button>
-                </el-popover>
-              </li>
-              <li>
-                <el-popover
-                    placement="right"
-                    width="400"
-                    trigger="click">
-                  <el-table>
-                    <el-table-column width="150" property="date" label="日期"></el-table-column>
-                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                    <el-table-column width="300" property="address" label="地址"></el-table-column>
-                  </el-table>
-                  <el-button type="text" size="small" @click="del()" slot="reference">
-                    <router-link to="/login">电器 /</router-link>
-                  </el-button>
-                </el-popover>
-              </li>
-              <li>
-                <el-popover
-                    placement="right"
-                    width="400"
-                    trigger="click">
-                  <el-table>
-                    <el-table-column width="150" property="date" label="日期"></el-table-column>
-                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                    <el-table-column width="300" property="address" label="地址"></el-table-column>
-                  </el-table>
-                  <el-button type="text" size="small" @click="del()" slot="reference">
-                    <router-link to="/login">电器 /</router-link>
-                  </el-button>
-                </el-popover>
-              </li>
-              <li>
-                <el-popover
-                    placement="right"
-                    width="400"
-                    trigger="click">
-                  <el-table>
-                    <el-table-column width="150" property="date" label="日期"></el-table-column>
-                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                    <el-table-column width="300" property="address" label="地址"></el-table-column>
-                  </el-table>
-                  <el-button type="text" size="small" @click="del()" slot="reference">
-                    <router-link to="/login">电器 /</router-link>
-                  </el-button>
-                </el-popover>
-              </li>
-              <li>
-                <el-popover
-                    placement="right"
-                    width="400"
-                    trigger="click">
-                  <el-table>
-                    <el-table-column width="150" property="date" label="日期"></el-table-column>
-                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                    <el-table-column width="300" property="address" label="地址"></el-table-column>
-                  </el-table>
-                  <el-button type="text" size="small" @click="del()" slot="reference">
-                    <router-link to="/login">电器 /</router-link>
-                  </el-button>
-                </el-popover>
-              </li>
-              <li>
-                <el-popover
-                    placement="right"
-                    width="400"
-                    trigger="click">
-                  <el-table>
-                    <el-table-column width="150" property="date" label="日期"></el-table-column>
-                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                    <el-table-column width="300" property="address" label="地址"></el-table-column>
-                  </el-table>
-                  <el-button type="text" size="small" @click="del()" slot="reference">
-                    <router-link to="/login">电器 /</router-link>
-                  </el-button>
-                </el-popover>
-              </li>
-              <li>
-                <el-popover
-                    placement="right"
-                    width="400"
-                    trigger="click">
-                  <el-table>
-                    <el-table-column width="150" property="date" label="日期"></el-table-column>
-                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                    <el-table-column width="300" property="address" label="地址"></el-table-column>
-                  </el-table>
-                  <el-button type="text" size="small" @click="del()" slot="reference">
-                    <router-link to="/login">电器 /</router-link>
-                  </el-button>
-                </el-popover>
-              </li>
-              <li>
-                <el-popover
-                    placement="right"
-                    width="400"
-                    trigger="click">
-                  <el-table>
-                    <el-table-column width="150" property="date" label="日期"></el-table-column>
-                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                    <el-table-column width="300" property="address" label="地址"></el-table-column>
-                  </el-table>
-                  <el-button type="text" size="small" @click="del()" slot="reference">
-                    <router-link to="/login">电器 /</router-link>
-                  </el-button>
-                </el-popover>
-              </li>
-              <li>
-                <el-popover
-                    placement="right"
-                    width="400"
-                    trigger="click">
-                  <el-table>
-                    <el-table-column width="150" property="date" label="日期"></el-table-column>
-                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                    <el-table-column width="300" property="address" label="地址"></el-table-column>
-                  </el-table>
-                  <el-button type="text" size="small" @click="del()" slot="reference">
-                    <router-link to="/login">电器 /</router-link>
-                  </el-button>
-                </el-popover>
-              </li>
+
             </ul>
           </el-card>
         </el-col>
@@ -230,7 +91,6 @@
                   <router-link to="/login" @click.native="exit">退出</router-link>
                 </span>
                 <span v-if="username==null">
-                  <svg-icon name=""></svg-icon>
                   <router-link to="/login">登录 |</router-link>
                   <router-link to="/register" style="margin-left: 5px">注册</router-link>
                 </span>
@@ -240,33 +100,9 @@
               快报区域 预留 height=80
             </div>
             <div style="height: 160px;">
-              <div style="float: left;margin-left: 3px">
-                <svg-icon name="member" style="width: 32px;height: 32px"></svg-icon>
-                <div style="font-size: 12px">物流</div>
-              </div>
-              <div style="float: left;margin-left: 3px">
-                <svg-icon name="member" style="width: 32px;height: 32px"></svg-icon>
-                <div style="font-size: 12px">物流</div>
-              </div>
-              <div style="float: left;margin-left: 3px">
-                <svg-icon name="member" style="width: 32px;height: 32px"></svg-icon>
-                <div style="font-size: 12px">物流</div>
-              </div>
-              <div style="float: left;margin-left: 3px">
-                <svg-icon name="member" style="width: 32px;height: 32px"></svg-icon>
-                <div style="font-size: 12px">物流</div>
-              </div>
-              <div style="float: left;margin-left: 3px">
-                <svg-icon name="member" style="width: 32px;height: 32px"></svg-icon>
-                <div style="font-size: 12px">物流</div>
-              </div>
-              <div style="float: left;margin-left: 3px">
-                <svg-icon name="member" style="width: 32px;height: 32px"></svg-icon>
-                <div style="font-size: 12px">物流</div>
-              </div>
-              <div style="float: left;margin-left: 3px">
-                <svg-icon name="member" style="width: 32px;height: 32px"></svg-icon>
-                <div style="font-size: 12px">物流</div>
+              <div style="float: left;margin-left: 3px" v-for="o in 9" :key="o">
+                <el-image src="http://img.fhxasdsada.xyz/%E7%89%A9%E6%B5%81.png" style="width: 32px;height: 32px"></el-image>
+                <div style="font-size: 12px">物流{{o}}</div>
               </div>
 
             </div>

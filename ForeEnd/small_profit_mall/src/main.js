@@ -6,11 +6,12 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import SvgIcon from './components/SvgIcon.vue'
+import SvgIcon from './components/SvgIcon'
 import './assets/iconfont/iconfont.js'
 import './assets/iconfont/icon.css'
 import './assets/reset.scss'
 import './router/guard'
+import 'vue2-animate/dist/vue2-animate.min.css'
 //提升事件响应
 import 'default-passive-events'
 
