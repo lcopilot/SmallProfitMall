@@ -32,48 +32,59 @@
                                height="260px">
                     <el-carousel-item v-for="item in 4" :key="item">
                       <div class="Spike_div">
-                        <router-link to="/" title="联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银">
+                        <router-link to="/"
+                                     title="联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银">
                           <div class="Spike_Product_img">
                             <el-image src="http://img.fhxasdsada.xyz/8e4b9d53e41b72a4.jpg"
                                       fit="fill"/>
                           </div>
-                          <div class="spike_product_name">联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银
+                          <div class="spike_product_name">联想ThinkPad 翼480（1ACD）英特尔酷睿i7
+                            14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银
                           </div>
                           <div style="margin-top: 10px">
                             <span class="spike_price">￥59.00</span><span class="spike_before_price">￥70.00</span>
                           </div>
                         </router-link>
-                      </div><div class="Spike_div">
-                        <router-link to="/" title="联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银">
+                      </div>
+                      <div class="Spike_div">
+                        <router-link to="/"
+                                     title="联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银">
                           <div class="Spike_Product_img">
                             <el-image src="http://img.fhxasdsada.xyz/8e4b9d53e41b72a4.jpg"
                                       fit="fill"/>
                           </div>
-                          <div class="spike_product_name">联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银
+                          <div class="spike_product_name">联想ThinkPad 翼480（1ACD）英特尔酷睿i7
+                            14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银
                           </div>
                           <div style="margin-top: 10px">
                             <span class="spike_price">￥59.00</span><span class="spike_before_price">￥70.00</span>
                           </div>
                         </router-link>
-                      </div><div class="Spike_div">
-                        <router-link to="/" title="联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银">
+                      </div>
+                      <div class="Spike_div">
+                        <router-link to="/"
+                                     title="联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银">
                           <div class="Spike_Product_img">
                             <el-image src="http://img.fhxasdsada.xyz/8e4b9d53e41b72a4.jpg"
                                       fit="fill"/>
                           </div>
-                          <div class="spike_product_name">联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银
+                          <div class="spike_product_name">联想ThinkPad 翼480（1ACD）英特尔酷睿i7
+                            14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银
                           </div>
                           <div style="margin-top: 10px">
                             <span class="spike_price">￥59.00</span><span class="spike_before_price">￥70.00</span>
                           </div>
                         </router-link>
-                      </div><div class="Spike_div">
-                        <router-link to="/" title="联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银">
+                      </div>
+                      <div class="Spike_div">
+                        <router-link to="/"
+                                     title="联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银">
                           <div class="Spike_Product_img">
                             <el-image src="http://img.fhxasdsada.xyz/8e4b9d53e41b72a4.jpg"
                                       fit="fill"/>
                           </div>
-                          <div class="spike_product_name">联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银
+                          <div class="spike_product_name">联想ThinkPad 翼480（1ACD）英特尔酷睿i7
+                            14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银
                           </div>
                           <div style="margin-top: 10px">
                             <span class="spike_price">￥59.00</span><span class="spike_before_price">￥70.00</span>
@@ -108,6 +119,12 @@
           <el-col :span="19" :push="2">
             <div style="width: 1198px">
               <el-card class="box-card">
+                <div class="low_price_div">
+                  <router-link to="/" class="low_price_name">
+                    品质好物·天天低价
+                  </router-link>
+                  <router-link to="/" style="float: right;line-height: 3.1">美好生活抢先到 ></router-link>
+                </div>
                 <div v-for="o in 4" :key="o" class="text item">
                   低价推荐区
                   {{'列表内容 ' + o }}
@@ -262,7 +279,25 @@
     width: 100px;
     height: 100px
   }
+
+  .low_price_div {
+    width: 1156px;
+    height: 40px;
+    margin-bottom: 10px
+  }
+
+  .low_price_name {
+    float: left;
+    font-size: 25px;
+    font-weight: 500;
+  }
+
+  .low_price_name:hover {
+    color: #24292e;
+  }
+
   a:hover {
     color: #e1251b;
   }
+
 </style>
