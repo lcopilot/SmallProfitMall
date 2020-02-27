@@ -62,7 +62,7 @@ public class HomepageController {
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
 
-    //商品分类导航栏2
+    //主页右侧图标
     @RequestMapping("/icon")
     public QueryResponseResult findIcon(){
         // 调用service的方法
