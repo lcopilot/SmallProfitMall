@@ -1,6 +1,7 @@
 package cn.itcast.service.impl;
 
 import cn.itcast.dao.HomepageDao;
+import cn.itcast.domain.Icon;
 import cn.itcast.domain.Navigation;
 import cn.itcast.domain.Navigation_2;
 import cn.itcast.domain.RotationChart;
@@ -61,6 +62,21 @@ public class HomepageServiceImpl implements HomepageService {
         }
 
     }
-
+    //查询图标
+    @Override
+    public List<Icon> findIcon() {
+        List<Icon> redisIcon = (List<Icon>) redisUtil.lGet("Icon", 0, -1);
+        System.out.println(redisIcon);
+        if (redisIcon.size() == 0) {
+            System.out.println("数据库中取");
+            List<Icon> Icon = homepageDao.findIcon();
+            redisUtil.lSet("Icon", Icon);  //存入缓存
+            return Icon;
+        } else {
+            System.out.println("缓存中取");
+            //取缓存
+            return redisIcon;
+        }
+    }
 }
 

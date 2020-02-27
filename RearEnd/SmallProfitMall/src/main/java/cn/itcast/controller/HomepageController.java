@@ -1,5 +1,6 @@
 package cn.itcast.controller;
 
+import cn.itcast.domain.Icon;
 import cn.itcast.domain.Navigation;
 import cn.itcast.domain.Navigation_2;
 import cn.itcast.domain.RotationChart;
@@ -61,4 +62,13 @@ public class HomepageController {
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
 
+    //商品分类导航栏2
+    @RequestMapping("/icon")
+    public QueryResponseResult findIcon(){
+        // 调用service的方法
+        List<Icon> list = homepageService.findIcon();
+        QueryResult<Icon> result = new QueryResult<>();
+        result.setList(list);
+        return  new QueryResponseResult(CommonCode.SUCCESS,result);
+    }
 }
