@@ -6,6 +6,15 @@ public class Icon implements Serializable {
     private int id;
     private String icon;
     private String iconSite;
+    private String iconSize;
+
+    public String getIconSize() {
+        return iconSize;
+    }
+
+    public void setIconSize(String iconSize) {
+        this.iconSize = iconSize;
+    }
 
     public int getId() {
         return id;
