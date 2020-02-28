@@ -16,7 +16,7 @@
               <div style="position: relative;">
                 <router-link to="/"
                              title="联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银">
-                  <el-image fit="fit" src="http://img.fhxasdsada.xyz/0e741b5c4358dbea.jpg" :lazy="true" />
+                  <el-image  fit="fit" src="http://img.fhxasdsada.xyz/0e741b5c4358dbea.jpg" :lazy="true" />
                   <div class="recommended_products_name">
                     联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银
                     <div>
@@ -100,7 +100,10 @@
     width: 231px;
     height: 310px;
     margin-right: 10px;
-    display: inline-block
+    display: inline-block;
+  }
+  .recommended_products_card:hover{
+    transform: scale(1.06);
   }
 
   .recommended_products_favorite {

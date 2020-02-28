@@ -2,17 +2,6 @@
   <el-container>
     <el-header height="100px">
       <Search/>
-      <el-row type="flex" justify="space-around">
-        <el-col :span="12">
-          <div style="margin: 10px 0 -18px 0">
-            <router-link :to="PagePilot.goodsId_1_c" class="navigation_span"
-                         v-for="PagePilot in PagePilotList" :key="PagePilot.cid">
-              {{PagePilot.goodsName_1_c}}
-            </router-link>
-          </div>
-        </el-col>
-      </el-row>
-      <el-divider/>
     </el-header>
     <el-main>
       <el-row type="flex" class="row-bg" justify="center" :gutter="20">
@@ -141,7 +130,6 @@
         username: null,
         avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
         CategoriesList: [],
-        PagePilotList: [],
         CommonFunctionsList: [],
       }
     },
@@ -173,13 +161,6 @@
           }
         })
       },
-      getPagePilot() {
-        this.axios.get("api/homepageController/findNavigation2").then(res => {
-          if (res.data.success) {
-            this.PagePilotList = res.data.queryResult.list[0];
-          }
-        })
-      },
       getCommonFunctionsList() {
         this.axios.get("api/homepageController/icon").then(res => {
           if (res.data.success) {
@@ -199,12 +180,7 @@
 </script>
 
 <style scoped>
-  .navigation_span {
-    margin-right: 20px;
-    font-size: 16px;
-    font-weight: 600;
 
-  }
 
   .username_span {
     overflow: hidden;
