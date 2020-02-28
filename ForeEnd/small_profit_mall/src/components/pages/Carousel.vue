@@ -2,17 +2,6 @@
   <el-container>
     <el-header height="100px">
       <Search/>
-      <el-row type="flex" justify="space-around">
-        <el-col :span="12">
-          <div style="margin: 10px 0 -18px 0">
-            <router-link :to="PagePilot.goodsId_1_c" class="navigation_span"
-                         v-for="PagePilot in PagePilotList" :key="PagePilot.cid">
-              {{PagePilot.goodsName_1_c}}
-            </router-link>
-          </div>
-        </el-col>
-      </el-row>
-      <el-divider/>
     </el-header>
     <el-main>
       <el-row type="flex" class="row-bg" justify="center" :gutter="20">
@@ -22,24 +11,24 @@
               <li v-for="Categories in CategoriesList" :key="Categories.nid">
                 <el-popover
                     placement="right"
-                    width="400"
+                    width="840"
                     trigger="hover"
                 >
-                  <el-table>
+                  <el-table :show-header="false">
                     <el-table-column width="150" property="date" label="日期"></el-table-column>
                     <el-table-column width="100" property="name" label="姓名"></el-table-column>
                     <el-table-column width="300" property="address" label="地址"></el-table-column>
                   </el-table>
                   <el-button type="text" size="small" style="font-size: 14px" @click="del()"
                              slot="reference">
-                    <router-link :to="Categories.goodsId_1" v-if="Categories.goodsName_1!=null">
-                      {{Categories.goodsName_1}} /
+                    <router-link to="/" v-if="Categories.goodsName_1!=null">
+                      {{Categories.goodsName_1}} <span v-if="Categories.goodsName_2!=null" style="margin-right: 5px">/</span>
                     </router-link>
-                    <router-link :to="Categories.goodsId_2" v-if="Categories.goodsName_2!=null">
-                      {{Categories.goodsName_2}} /
+                    <router-link to="/" v-if="Categories.goodsName_2!=null">
+                      {{Categories.goodsName_2}} <span v-if="Categories.goodsName_3!=null" style="margin-right: 5px">/</span>
                     </router-link>
-                    <router-link :to="Categories.goodsId_3" v-if="Categories.goodsName_3!=null">
-                      {{Categories.goodsName_3}} /
+                    <router-link to="/" v-if="Categories.goodsName_3!=null">
+                      {{Categories.goodsName_3}}
                     </router-link>
                   </el-button>
                 </el-popover>
@@ -141,7 +130,6 @@
         username: null,
         avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
         CategoriesList: [],
-        PagePilotList: [],
         CommonFunctionsList: [],
       }
     },
@@ -173,13 +161,6 @@
           }
         })
       },
-      getPagePilot() {
-        this.axios.get("api/homepageController/findNavigation2").then(res => {
-          if (res.data.success) {
-            this.PagePilotList = res.data.queryResult.list[0];
-          }
-        })
-      },
       getCommonFunctionsList() {
         this.axios.get("api/homepageController/icon").then(res => {
           if (res.data.success) {
@@ -199,12 +180,7 @@
 </script>
 
 <style scoped>
-  .navigation_span {
-    margin-right: 20px;
-    font-size: 16px;
-    font-weight: 600;
 
-  }
 
   .username_span {
     overflow: hidden;

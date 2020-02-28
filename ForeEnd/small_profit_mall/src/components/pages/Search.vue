@@ -16,7 +16,7 @@
               @select="handleSelect"
               prefix-icon="el-icon-search"
           />
-          <el-button plain icon="el-icon-search" type="success" round>搜索</el-button>
+          <el-button plain icon="el-icon-search" type="danger" round>搜索</el-button>
 
         </el-col>
         <el-col :span="3">
@@ -62,6 +62,17 @@
 
         </el-col>
       </el-row>
+      <el-row type="flex" justify="space-around">
+        <el-col :span="12">
+          <div style="margin: 10px 0 -18px 0">
+            <router-link :to="PagePilot.goodsId_1_c" class="navigation_span"
+                         v-for="PagePilot in PagePilotList" :key="PagePilot.cid">
+              {{PagePilot.goodsName_1_c}}
+            </router-link>
+          </div>
+        </el-col>
+      </el-row>
+      <el-divider/>
     </el-header>
   </el-container>
 </template>
@@ -76,7 +87,8 @@
         searchContent: '',
         restaurants: [],
         state1: '',
-        state2: ''
+        state2: '',
+        PagePilotList: [],
       }
     },
     computed: {
@@ -99,6 +111,13 @@
       //获取购物车的预览内容
       getCartPreview(){
         console.log("sdfsd")
+      },
+      getPagePilot() {
+        this.axios.get("api/homepageController/findNavigation2").then(res => {
+          if (res.data.success) {
+            this.PagePilotList = res.data.queryResult.list[0];
+          }
+        })
       },
       querySearch(queryString, data) {
         let restaurants = this.restaurants;
@@ -169,6 +188,7 @@
     },
     created() {
       this.getCartSum(40);
+      this.getPagePilot();
     },
     mounted() {
       this.restaurants = this.loadAll();
@@ -182,7 +202,12 @@
     width: 150px;
     height: 50px;
   }
+  .navigation_span {
+    margin-right: 20px;
+    font-size: 16px;
+    font-weight: 600;
 
+  }
   .cart {
     width: 15px;
     height: 15px

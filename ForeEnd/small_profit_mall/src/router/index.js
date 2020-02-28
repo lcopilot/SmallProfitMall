@@ -13,6 +13,12 @@ const routes = [
     },
   },
   {
+    path: '/index',
+    redirect: {   //重定向
+      name: 'Home'
+    },
+  },
+  {
     path: '/home',
     name: 'Home',
     // meta: {
