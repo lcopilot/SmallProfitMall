@@ -1,18 +1,16 @@
 package cn.itcast.service.impl;
 
 import cn.itcast.dao.HomepageDao;
-import cn.itcast.domain.Icon;
-import cn.itcast.domain.Navigation;
-import cn.itcast.domain.Navigation_2;
-import cn.itcast.domain.RotationChart;
+import cn.itcast.domain.*;
 import cn.itcast.service.HomepageService;
 import cn.itcast.util.RedisUtil;
+import com.sun.org.apache.xpath.internal.objects.XNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.Set;
+
 
 @Service("homepageService")
 public class HomepageServiceImpl implements HomepageService {
@@ -23,6 +21,7 @@ public class HomepageServiceImpl implements HomepageService {
     @Autowired
     RedisUtil redisUtil;
 
+    Classification classification = new Classification();
 
     //轮播图
     @Override
@@ -40,16 +39,38 @@ public class HomepageServiceImpl implements HomepageService {
             redisUtil.lSet("Navigation_1",Navigation_1);
             return Navigation_1;
         }else {
-            System.out.println("数据库中取");
+            System.out.println("缓存中获取");
             return redis;
         }
     }
 
+    //查询所有分类
+    @Override
+    public List<NavigationClassify> findClassification() {
+        List<NavigationClassify> redis = (List<NavigationClassify>) redisUtil.lGet("findClassification",0,-1);
+        if(redis.size() == 0){
+            System.out.println("数据库中取");
+            List<NavigationClassify> findClassification = homepageDao.findClassification();
+            redisUtil.lSet("findClassification",findClassification);
+            return findClassification;
+        }else {
+            System.out.println("缓存中获取");
+            return redis;
+        }
 
+    }
+
+    //详细分类
+    public Classification navigationInDetail(){
+        classification.setNavigationClassify(findClassification());
+        classification.setNavigations(findNavigation());
+        return classification;
+    }
+
+    //查询搜索栏下导航栏
     @Override
     public List<Navigation_2> findNavigation2() {
         List<Navigation_2> redis = (List<Navigation_2>) redisUtil.lGet("Navigation_2", 0, -1);
-        System.out.println(redis);
         if (redis.size() == 0) {
             System.out.println("数据库中取");
             List<Navigation_2> Navigation_2 = homepageDao.findNavigation2();
@@ -78,5 +99,11 @@ public class HomepageServiceImpl implements HomepageService {
             return redisIcon;
         }
     }
+
+    //根基id查询商品分类详细
+    public List<NavigationClassify> findById(int id) {
+        return homepageDao.findById(id);
+    }
+
 }
 

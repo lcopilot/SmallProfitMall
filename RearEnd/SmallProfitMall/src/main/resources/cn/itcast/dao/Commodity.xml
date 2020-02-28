@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.ProductDao">
+
+    <select id="findSeckill" resultType="cn.itcast.domain.Seckill">
+        SELECT * from Seckill
+    </select>
+
+    <select id="findProductLowPrice" resultType="cn.itcast.domain.ProductLowPrice">
+        SELECT * from ProductLowPrice
+    </select>
+
+    <select id="findAd" resultType="cn.itcast.domain.Ad">
+        SELECT * from ad
+    </select>
+
+</mapper>
