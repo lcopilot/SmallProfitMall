@@ -1,9 +1,6 @@
 package cn.itcast.service;
 
-import cn.itcast.domain.Icon;
-import cn.itcast.domain.Navigation;
-import cn.itcast.domain.Navigation_2;
-import cn.itcast.domain.RotationChart;
+import cn.itcast.domain.*;
 
 import java.util.List;
 
@@ -21,4 +18,9 @@ public interface HomepageService {
     //查询图标
     public List<Icon> findIcon();
 
+    public List<NavigationClassify> findById(int id);
+
+    public Classification navigationInDetail();
+
+    public List<NavigationClassify> findClassification();
 }

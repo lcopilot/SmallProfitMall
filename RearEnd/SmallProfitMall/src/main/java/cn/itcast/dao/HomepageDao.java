@@ -1,12 +1,10 @@
 package cn.itcast.dao;
 
-import cn.itcast.domain.Icon;
-import cn.itcast.domain.Navigation;
-import cn.itcast.domain.Navigation_2;
-import cn.itcast.domain.RotationChart;
+import cn.itcast.domain.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface HomepageDao {
     //查询轮播图图片
     public List<RotationChart> findRotationChart();
@@ -19,4 +17,9 @@ public interface HomepageDao {
 
     //查询图标
     public List<Icon> findIcon();
+
+    //根据id查询详细分类
+    public List<NavigationClassify> findById(int nid);
+
+    public List<NavigationClassify> findClassification();
 }

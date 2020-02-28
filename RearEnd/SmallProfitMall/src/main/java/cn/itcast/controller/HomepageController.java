@@ -1,9 +1,6 @@
 package cn.itcast.controller;
 
-import cn.itcast.domain.Icon;
-import cn.itcast.domain.Navigation;
-import cn.itcast.domain.Navigation_2;
-import cn.itcast.domain.RotationChart;
+import cn.itcast.domain.*;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
@@ -15,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -71,4 +69,16 @@ public class HomepageController {
         result.setList(list);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
+
+
+    //商品导航栏详细
+    @RequestMapping("/navigationInDetail")
+    public QueryResponseResult cs(){
+        Classification classification = homepageService.navigationInDetail();
+        List<Classification> logins= Arrays.asList(classification);
+        QueryResult<Classification> result = new QueryResult<>();
+        result.setList(logins);
+        return new QueryResponseResult(CommonCode.SUCCESS,result);
+    }
+
 }

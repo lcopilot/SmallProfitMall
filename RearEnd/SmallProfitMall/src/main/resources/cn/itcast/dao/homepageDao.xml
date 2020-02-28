@@ -19,4 +19,11 @@
     <select id="findIcon" resultType="cn.itcast.domain.Icon">
         SELECT * from homepageIcon
     </select>
+
+    <select id="findById" resultType="cn.itcast.domain.NavigationClassify">
+        select * from classification where nid = #{nid}
+    </select>
+    <select id="findClassification" resultType="cn.itcast.domain.NavigationClassify">
+        select * from classification
+    </select>
 </mapper>
