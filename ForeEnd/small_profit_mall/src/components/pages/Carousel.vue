@@ -33,13 +33,13 @@
                   <el-button type="text" size="small" style="font-size: 14px" @click="del()"
                              slot="reference">
                     <router-link :to="Categories.goodsId_1" v-if="Categories.goodsName_1!=null">
-                      {{Categories.goodsName_1}} /
+                      {{Categories.goodsName_1}} <span v-if="Categories.goodsName_2!=null" style="margin-right: 5px">/</span>
                     </router-link>
                     <router-link :to="Categories.goodsId_2" v-if="Categories.goodsName_2!=null">
-                      {{Categories.goodsName_2}} /
+                      {{Categories.goodsName_2}} <span v-if="Categories.goodsName_3!=null" style="margin-right: 5px">/</span>
                     </router-link>
                     <router-link :to="Categories.goodsId_3" v-if="Categories.goodsName_3!=null">
-                      {{Categories.goodsName_3}} /
+                      {{Categories.goodsName_3}}
                     </router-link>
                   </el-button>
                 </el-popover>

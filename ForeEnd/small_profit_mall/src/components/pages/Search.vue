@@ -16,7 +16,7 @@
               @select="handleSelect"
               prefix-icon="el-icon-search"
           />
-          <el-button plain icon="el-icon-search" type="success" round>搜索</el-button>
+          <el-button plain icon="el-icon-search" type="danger" round>搜索</el-button>
 
         </el-col>
         <el-col :span="3">
