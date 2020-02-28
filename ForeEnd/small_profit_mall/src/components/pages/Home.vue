@@ -32,6 +32,7 @@
                                height="260px">
                     <el-carousel-item v-for="item in 4" :key="item">
                       <div class="Spike_div" v-for="o in 4" :key="o">
+
                         <router-link to="/"
                                      title="联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银">
                           <div class="Spike_Product_img">

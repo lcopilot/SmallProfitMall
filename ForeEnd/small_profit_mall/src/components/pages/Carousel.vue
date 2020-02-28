@@ -22,23 +22,23 @@
               <li v-for="Categories in CategoriesList" :key="Categories.nid">
                 <el-popover
                     placement="right"
-                    width="400"
+                    width="840"
                     trigger="hover"
                 >
-                  <el-table>
+                  <el-table :show-header="false">
                     <el-table-column width="150" property="date" label="日期"></el-table-column>
                     <el-table-column width="100" property="name" label="姓名"></el-table-column>
                     <el-table-column width="300" property="address" label="地址"></el-table-column>
                   </el-table>
                   <el-button type="text" size="small" style="font-size: 14px" @click="del()"
                              slot="reference">
-                    <router-link :to="Categories.goodsId_1" v-if="Categories.goodsName_1!=null">
+                    <router-link to="/" v-if="Categories.goodsName_1!=null">
                       {{Categories.goodsName_1}} <span v-if="Categories.goodsName_2!=null" style="margin-right: 5px">/</span>
                     </router-link>
-                    <router-link :to="Categories.goodsId_2" v-if="Categories.goodsName_2!=null">
+                    <router-link to="/" v-if="Categories.goodsName_2!=null">
                       {{Categories.goodsName_2}} <span v-if="Categories.goodsName_3!=null" style="margin-right: 5px">/</span>
                     </router-link>
-                    <router-link :to="Categories.goodsId_3" v-if="Categories.goodsName_3!=null">
+                    <router-link to="/" v-if="Categories.goodsName_3!=null">
                       {{Categories.goodsName_3}}
                     </router-link>
                   </el-button>

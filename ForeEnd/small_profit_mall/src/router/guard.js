@@ -35,10 +35,11 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     if (sessionStorage.getItem("token")) {
-      if (whiteRouter.indexOf(to.path) == -1) {
+      if (whiteRouter.indexOf(to.path) == -1) {   //如果已经登录直接跳转到首页
         next();
       } else {
-        next('/')
+        next('/');
+
       }
 
     } else {
