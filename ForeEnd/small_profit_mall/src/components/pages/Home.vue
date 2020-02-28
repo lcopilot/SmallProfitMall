@@ -30,7 +30,7 @@
                 <div style="float: left;width: 808px;margin-top:-20px ">
                   <el-carousel :interval="10000" indicator-position="none" arrow="hover"
                                height="260px">
-                    <el-carousel-item v-for="item in 4" :key="item" >
+                    <el-carousel-item v-for="item in 4" :key="item">
                       <div class="Spike_div" v-for="o in 4" :key="o">
                         <router-link to="/"
                                      title="联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银">
@@ -49,16 +49,14 @@
                     </el-carousel-item>
                   </el-carousel>
                 </div>
-
-                <div style="margin: -20px -10px 0 0; float: right;width: 155px">
+                <div class="spike_product_ad">
                   <el-carousel :interval="4000" arrow="hover" height="260px"
                                indicator-position="none">
                     <el-carousel-item v-for="item in 4" :key="item">
-                      <a>
+                      <router-link to="/">
                         <el-image src="http://img.fhxasdsada.xyz/8e4b9d53e41b72a4.jpg"
                                   fit="scale-down"/>
-                      </a>
-
+                      </router-link>
                     </el-carousel-item>
                   </el-carousel>
                 </div>
@@ -78,14 +76,21 @@
                   <router-link to="/" class="low_price_name1">品质好物·天天低价</router-link>
                   <router-link to="/" class="low_price_name2">美好生活抢先到 ></router-link>
                 </div>
-                <div v-for="(lowPriceProducts,index) in lowPriceProductList.slice(firstItem,lastItem)" :key="index">
-                  <div v-for="(lowPriceProduct,index) in lowPriceProducts" :key="index" style="float: left;width: 182px;height: 250px;margin-left: 10px">
-                    <transition name="el-zoom-in-center">
-                      <div v-show="show2">
-                        <el-image :src="lowPriceProduct.img" fit="fill"></el-image>
-                        低价推荐区{{lowPriceProduct.a}}
-                      </div>
-                    </transition>
+                <div
+                    v-for="(lowPriceProducts,index) in lowPriceProductList.slice(firstItem,lastItem)"
+                    :key="index">
+                  <div v-for="(lowPriceProduct,index) in lowPriceProducts" :key="index"
+                       style="float: left;width: 182px;height: 250px;margin-left: 10px">
+                    <router-link to="/">
+                      <transition name="el-zoom-in-center">
+                        <div v-show="display" class="low_price_product">
+                          <el-image :src="lowPriceProduct.img" fit="fill"></el-image>
+                          <svg-icon name="lowPrice" class="low_Price_icon"/>
+                          <!-- 价格不能超过6位 -->
+                          <div class="low_price">￥{{lowPriceProduct.a}}</div>
+                        </div>
+                      </transition>
+                    </router-link>
                   </div>
                 </div>
 
@@ -94,6 +99,7 @@
           </el-col>
         </el-row>
       </el-main>
+      <ProductsFeatured/>
     </el-main>
 
     <el-footer>
@@ -107,69 +113,66 @@
   import Header from "./Header.vue";
   import Footer from "./Footer.vue";
   import Carousel from "./Carousel";
-  import CountDown from '../UtilsComponent/vue2-countdown'
+  import CountDown from '../UtilsComponent/vue2-countdown';
+  import ProductsFeatured from './ProductsFeatured';
 
   export default {
     name: 'Home',
-    components: {Header, Footer, Carousel, CountDown},
+    components: {ProductsFeatured, Header, Footer, Carousel, CountDown},
     data() {
       return {
-        show2: true,
+        display: true,
         startTime: new Date().getTime(), //开始时间
         endTime: new Date('2020/2/26 21:00:00').getTime(), //结束时间
-        firstItem:0,
-        lastItem:1,
-        timer:0,
-        lowPriceProductList:[
-            [
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
+        firstItem: 0,
+        lastItem: 1,
+        timer: 0,
+        lowPriceProductList: [
+          [
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
 
+          ],
+          [
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 2},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
 
-            ],
-            [
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':2},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
+          ],
+          [
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 3},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
 
+          ],
+          [
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 4},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
 
-            ],
-            [
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':3},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
+          ],
+          [
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 5},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
+            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
 
-            ],
-            [
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':4},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-
-            ],
-            [
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':5},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-                {'img':'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg','a':1},
-
-
-            ],
-
+          ],
 
         ],
       }
@@ -184,25 +187,25 @@
           return
         }
       },
-      lowPriceProductSwitch(){
-          this.timer=setInterval(() => {
-              this.lowPriceProductSwitch_1();
-              this.lowPriceProductSwitch_2();
-          },3000);
+      lowPriceProductSwitch() {
+        this.timer = setInterval(() => {
+          this.lowPriceProductSwitch_1();
+          this.lowPriceProductSwitch_2();
+        }, 3000);
       },
-      lowPriceProductSwitch_1(){
-        this.show2=false;
+      lowPriceProductSwitch_1() {
+        this.display = false;
       },
-      lowPriceProductSwitch_2(){
+      lowPriceProductSwitch_2() {
         setTimeout(() => {
           clearInterval(this.timer);
-          this.firstItem+=1;
-          this.lastItem+=1;
-          if (this.lowPriceProductList.length<this.lastItem){
-            this.firstItem=0;
-            this.lastItem=1;
+          this.firstItem += 1;
+          this.lastItem += 1;
+          if (this.lowPriceProductList.length < this.lastItem) {
+            this.firstItem = 0;
+            this.lastItem = 1;
           }
-          this.show2=true;
+          this.display = true;
           this.lowPriceProductSwitch();
         }, 300);
       },
@@ -269,6 +272,10 @@
     position: relative;
   }
 
+  .Spike_Product_img:hover {
+    transform: scale(1.05);
+  }
+
   .Spike_Product_img {
     width: 170px;
     height: 170px;
@@ -314,6 +321,12 @@
     display: block;
   }
 
+  .spike_product_ad {
+    margin: -20px -10px 0 0;
+    float: right;
+    width: 155px
+  }
+
   .icon {
     color: white;
     margin-top: -10px;
@@ -345,6 +358,23 @@
 
   .low_price_name1:hover {
     color: #24292e;
+  }
+
+  .low_price_product:hover {
+    transform: scale(1.1);
+  }
+
+  .low_Price_icon {
+    width: 80px;
+    height: 28px;
+    float: left;
+    margin-left: 10px
+  }
+
+  .low_price {
+    float: left;
+    font-size: 18px;
+    margin-left: 5px
   }
 
   a:hover {
