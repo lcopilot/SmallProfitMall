@@ -12,7 +12,6 @@ public class Seckill implements Serializable {
     private String productPicture;      //商品图片
     private String productSite;        //商品链接
     private String productIntroduce;     //商品介绍
-    private Date  time;     //时间
 
     public int getId() {
         return id;
@@ -70,11 +69,4 @@ public class Seckill implements Serializable {
         this.productIntroduce = productIntroduce;
     }
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
 }
