@@ -9,7 +9,7 @@ public interface ProductService {
     public SeckillResult findSeckill();
 
     //查询低价商品
-    public List<ProductLowPrice> findProductLowPrice();
+    public ProductLowPriceResult findProductLowPrice();
 
     public List<Ad> findAd();
 }
