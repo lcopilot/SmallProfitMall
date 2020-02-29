@@ -1,7 +1,7 @@
 package cn.itcast.domain;
 
 import java.io.Serializable;
-
+//右侧图标
 public class Icon implements Serializable {
     private int id;
     private String icon;

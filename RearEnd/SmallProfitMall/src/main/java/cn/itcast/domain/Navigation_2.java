@@ -1,7 +1,7 @@
 package cn.itcast.domain;
 
 import java.io.Serializable;
-
+//主页导航
 public class Navigation_2 implements Serializable {
     private int cid;
     private String goodsName_1_c;
