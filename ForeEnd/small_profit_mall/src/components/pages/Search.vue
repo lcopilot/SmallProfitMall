@@ -216,5 +216,7 @@
   .item {
     margin-right: 30px;
   }
-
+  a:hover {
+    color: #e1251b;
+  }
 </style>
