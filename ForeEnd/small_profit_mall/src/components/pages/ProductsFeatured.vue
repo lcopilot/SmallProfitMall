@@ -102,7 +102,7 @@
     margin-right: 10px;
     display: inline-block;
   }
-  .recommended_products_card:hover{
+  .recommended_products_card:hover {
     transform: scale(1.06);
   }
 

@@ -103,7 +103,6 @@
       },
     },
     mounted() {
-      console.log(this)
       this.gogogo();
     },
     methods: {
