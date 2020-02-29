@@ -30,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
     //秒杀
     @Override
     public SeckillResult findSeckill() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/HH mm:ss");//格式化输出日期
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//格式化输出日期
         ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findSeckill(1,4)),new ArrayList(ProducDao.findSeckill(2,4)),new ArrayList(ProducDao.findSeckill(3,4)),new ArrayList(ProducDao.findSeckill(4,4))};
         System.out.println(arrayLists1);
         seckillResult.setSeckillProduct(arrayLists1);
