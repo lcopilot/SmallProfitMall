@@ -1,7 +1,7 @@
 package cn.itcast.domain;
 
 import java.util.List;
-
+//分类集合返回
 public class Classification {
     private List<Navigation> navigations;
     private List<NavigationClassify> navigationClassify;
