@@ -14,7 +14,7 @@ public interface ProductDao {
     public List<Seckill> findSeckill (@Param("StartingValue")int StartingValue ,@Param("Quantity") int Quantity);
 
     //查询低价商品
-    public List<ProductLowPrice> findProductLowPrice();
+    public List<ProductLowPrice> findProductLowPrice(@Param("StartingValue")int StartingValue ,@Param("Quantity") int Quantity);
 
     //广告
     public List<Ad> findAd();

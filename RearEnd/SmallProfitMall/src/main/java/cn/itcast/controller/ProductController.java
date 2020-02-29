@@ -21,6 +21,8 @@ public class ProductController {
     @Autowired
     ProductService commodityService;
 
+    @Autowired
+    ProductLowPriceResult productLowPriceResult;
     /**
      * 秒杀商品
      * @return
@@ -29,7 +31,6 @@ public class ProductController {
     public QueryResponseResult findSeckill() {
         // 调用service的方法
         SeckillResult seckillResult = commodityService.findSeckill();
-        System.out.println(seckillResult.getCurrentTime()+""+seckillResult.getSpikeTime());
         List<SeckillResult> logins= Arrays.asList(seckillResult);
         QueryResult<SeckillResult> result = new QueryResult<>();
         result.setList(logins);
@@ -43,9 +44,10 @@ public class ProductController {
     @RequestMapping("/findProductLowPrice")
     public QueryResponseResult ProductLowPrice() {
         // 调用service的方法
-        List<ProductLowPrice> list = commodityService.findProductLowPrice();
-        QueryResult<ProductLowPrice> result = new QueryResult<>();
-        result.setList(list);
+        ProductLowPriceResult productLowPriceResult = commodityService.findProductLowPrice();
+        List<ProductLowPriceResult> logins= Arrays.asList(productLowPriceResult);
+        QueryResult<ProductLowPriceResult> result = new QueryResult<>();
+        result.setList(logins);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
 

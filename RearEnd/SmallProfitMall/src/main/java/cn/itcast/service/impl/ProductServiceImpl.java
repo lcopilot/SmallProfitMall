@@ -27,11 +27,12 @@ public class ProductServiceImpl implements ProductService {
 
     TimeUtil timeUtil = new TimeUtil();
 
+    ProductLowPriceResult productLowPriceResult = new ProductLowPriceResult();
     //秒杀
     @Override
     public SeckillResult findSeckill() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//格式化输出日期
-        ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findSeckill(1,4)),new ArrayList(ProducDao.findSeckill(2,4)),new ArrayList(ProducDao.findSeckill(3,4)),new ArrayList(ProducDao.findSeckill(4,4))};
+        ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findSeckill(0,4)),new ArrayList(ProducDao.findSeckill(4,4)),new ArrayList(ProducDao.findSeckill(8,4)),new ArrayList(ProducDao.findSeckill(12,4))};
         System.out.println(arrayLists1);
         seckillResult.setSeckillProduct(arrayLists1);
         Date date=new Date();//获取当前时间
@@ -45,19 +46,13 @@ public class ProductServiceImpl implements ProductService {
 
      //查询低价商品
     @Override
-    public List<ProductLowPrice> findProductLowPrice() {
-        List<ProductLowPrice> redis = (List<ProductLowPrice>) redisUtil.lGet("ProductLowPrice", 0, -1);
-        System.out.println(redis);
-        if (redis.size() == 0) {
-            System.out.println("数据库中取");
-            List<ProductLowPrice> ProductLowPrice = ProducDao.findProductLowPrice();
-            redisUtil.lSet("ProductLowPrice", ProductLowPrice);  //存入缓存
-            return ProductLowPrice;
-        } else {
-            System.out.println("缓存中取");
-            //取缓存
-            return redis;
-        }
+    public ProductLowPriceResult findProductLowPrice() {
+        ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findProductLowPrice(0, 6)),
+                new ArrayList(ProducDao.findProductLowPrice(6, 6)),
+                new ArrayList(ProducDao.findProductLowPrice(12, 6)),
+        };
+        productLowPriceResult.setProductLowPrice(arrayLists1);
+        return productLowPriceResult;
     }
 
     //查询广告
