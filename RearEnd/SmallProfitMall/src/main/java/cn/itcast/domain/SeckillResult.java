@@ -4,7 +4,6 @@ import jdk.nashorn.internal.runtime.ListAdapter;
 import org.springframework.stereotype.Controller;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 @Controller("seckillResult")
