@@ -4,28 +4,87 @@
       <search/>
     </el-header>
     <el-main>
-      <el-row type="flex"  justify="center" :gutter="20">
+      <el-row type="flex" justify="center" :gutter="20">
         <el-col :span="4">
           <el-card style="height: 370px;">
             <ul>
+              <!-- 商品分类-->
               <li v-for="Categories in CategoriesList" :key="Categories.nid">
                 <el-popover
                     placement="right"
                     width="840"
                     trigger="hover"
-                >
-                  <el-table :show-header="false">
-                    <el-table-column width="150" property="date" label="日期"></el-table-column>
-                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                    <el-table-column width="300" property="address" label="地址"></el-table-column>
+                    @mouseenter.native="enter(Categories.nid)">
+                  <el-table :data="CategoryDetailsList" style="width: 100%;font-size: 11px;"
+                            :show-header="false" @mouseenter.native="enter_table(Categories.nid)">
+                    <el-table-column prop="classificationHeader" width="90">
+                    </el-table-column>
+                    <el-table-column width="90">
+                      <template slot-scope="Category">
+                        <router-link v-if="Category.row.classifySite_1" :to="Category.row.classifySite_1">
+                          {{Category.row.classifyName_1}}
+                        </router-link>
+                      </template>
+                    </el-table-column>
+                    <el-table-column width="90">
+                      <template slot-scope="Category">
+                        <router-link v-if="Category.row.classifySite_2" :to="Category.row.classifySite_2">
+                          {{Category.row.classifyName_2}}
+                        </router-link>
+                      </template>
+                    </el-table-column>
+                    <el-table-column width="90">
+                      <template slot-scope="Category">
+                        <router-link v-if="Category.row.classifySite_3" :to="Category.row.classifySite_3">
+                          {{Category.row.classifyName_3}}
+                        </router-link>
+                      </template>
+                    </el-table-column>
+                    <el-table-column width="90">
+                      <template slot-scope="Category">
+                        <router-link v-if="Category.row.classifySite_4" :to="Category.row.classifySite_4">
+                          {{Category.row.classifyName_4}}
+                        </router-link>
+                      </template>
+                    </el-table-column>
+                    <el-table-column width="90">
+                      <template slot-scope="Category">
+                        <router-link v-if="Category.row.classifySite_5" :to="Category.row.classifySite_5">
+                          {{Category.row.classifyName_5}}
+                        </router-link>
+                      </template>
+                    </el-table-column>
+                    <el-table-column width="90">
+                      <template slot-scope="Category">
+                        <router-link v-if="Category.row.classifySite_6" :to="Category.row.classifySite_6">
+                          {{Category.row.classifyName_6}}
+                        </router-link>
+                      </template>
+                    </el-table-column>
+                    <el-table-column width="90">
+                      <template slot-scope="Category">
+                        <router-link v-if="Category.row.classifySite_7" :to="Category.row.classifySite_7">
+                          {{Category.row.classifyName_7}}
+                        </router-link>
+                      </template>
+                    </el-table-column>
+                    <el-table-column width="90">
+                      <template slot-scope="Category">
+                        <router-link v-if="Category.row.classifySite_8" :to="Category.row.classifySite_8">
+                          {{Category.row.classifyName_8}}
+                        </router-link>
+                      </template>
+                    </el-table-column>
                   </el-table>
-                  <el-button type="text" size="small" style="font-size: 14px" @click="del()"
-                             slot="reference">
+                  <el-button type="text" size="small" style="font-size: 14px" slot="reference">
                     <router-link to="/" v-if="Categories.goodsName_1!=null">
-                      {{Categories.goodsName_1}} <span v-if="Categories.goodsName_2!=null" style="margin-right: 5px">/</span>
+                      {{Categories.goodsName_1}}
+                      <span v-if="Categories.goodsName_2!=null"
+                            style="margin-right: 5px">/</span>
                     </router-link>
                     <router-link to="/" v-if="Categories.goodsName_2!=null">
-                      {{Categories.goodsName_2}} <span v-if="Categories.goodsName_3!=null" style="margin-right: 5px">/</span>
+                      {{Categories.goodsName_2}}
+                      <span v-if="Categories.goodsName_3!=null" style="margin-right: 5px">/</span>
                     </router-link>
                     <router-link to="/" v-if="Categories.goodsName_3!=null">
                       {{Categories.goodsName_3}}
@@ -117,7 +176,7 @@
 </template>
 
 <script>
-  const search = ()=>import("./Search");
+  const search = () => import("./Search");
 
   export default {
     name: "Carousel",
@@ -130,7 +189,10 @@
         username: null,
         avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
         CategoriesList: [],
+        CategoriesLists:[],
         CommonFunctionsList: [],
+        CategoryDetailsList: [],
+
       }
     },
     methods: {
@@ -155,9 +217,10 @@
         this.$router.push("/login");
       },
       getCategoriesList() {
-        this.axios.get("api/homepageController/findNavigation1").then(res => {
+        this.axios.get("api/homepageController/navigationInDetail").then(res => {
           if (res.data.success) {
-            this.CategoriesList = res.data.queryResult.list[0];
+            this.CategoriesList = res.data.queryResult.list[0].navigations[0];
+            this.CategoriesLists = res.data.queryResult.list[0];
           }
         })
       },
@@ -167,7 +230,15 @@
             this.CommonFunctionsList = res.data.queryResult.list[0];
           }
         })
-      }
+      },
+      enter(nid) {
+        this.CategoryDetailsList = [];
+        this.CategoriesLists.navigationClassify[0].forEach((item, index) => {
+          if (item.nid == nid) {
+            this.CategoryDetailsList.push(this.CategoriesLists.navigationClassify[0][index]);
+          }
+        })
+      },
     },
     created() {
       this.getRotationChart();

@@ -16,33 +16,36 @@
                   <div class="se-en">
                     <svg-icon name="seckill" class="icon"/>
                   </div>
-                  <div class="se-info"><span style="font-weight:700;font-size: 21px">18:00 </span>场到计时
+                  <div class="se-info"><span style="font-weight:700;font-size: 21px">{{spikeSessions}} </span>场到计时
                   </div>
                   <div class="se-count">
                     <count-down v-on:start_callback="countDownS_cb(1)"
                                 v-on:end_callback="countDownE_cb(1)"
-                                :startTime="startTime" :endTime="endTime"
+                                :startTime="startTime"
+                                :endTime="endTime"
                                 :secondsTxt="''">
                     </count-down>
                   </div>
                 </div>
                 <!-- 秒杀商品部分 -->
-                <div style="float: left;width: 808px;margin-top:-20px ">
+                <div class="spike_product">
                   <el-carousel :interval="10000" indicator-position="none" arrow="hover"
                                height="260px">
-                    <el-carousel-item v-for="item in 4" :key="item">
-                      <div class="Spike_div" v-for="o in 4" :key="o">
-                        <router-link to="/"
-                                     title="联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银">
+                    <el-carousel-item v-for="(spikeProducts,index) in spikeProductList.seckillProduct"
+                                      :key="index">
+                      <div class="Spike_div" v-for="spikeProduct in spikeProducts"
+                           :key="spikeProduct.id">
+                        <router-link :to="spikeProduct.productSite"
+                                     :title="spikeProduct.productName">
                           <div class="Spike_Product_img">
-                            <el-image src="http://img.fhxasdsada.xyz/8e4b9d53e41b72a4.jpg"
+                            <el-image :src="spikeProduct.productPicture"
                                       fit="fill"/>
                           </div>
-                          <div class="spike_product_name">{{o}}联想ThinkPad 翼480（1ACD）英特尔酷睿i7
-                            14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银
+                          <div class="spike_product_name">{{spikeProduct.productName}}
                           </div>
                           <div style="margin-top: 10px">
-                            <span class="spike_price">￥59.00</span><span class="spike_before_price">￥70.00</span>
+                            <span class="spike_price">￥{{spikeProduct.seckillPrice}}</span>
+                            <span class="spike_before_price">￥{{spikeProduct.buyingPrice}}</span>
                           </div>
                         </router-link>
                       </div>
@@ -82,10 +85,10 @@
                     <router-link to="/">
                       <transition name="el-zoom-in-center">
                         <div v-show="display" class="low_price_product">
-                          <el-image :src="lowPriceProduct.img" fit="fill"></el-image>
+                          <el-image :src="lowPriceProduct.productImage" fit="fill"></el-image>
                           <svg-icon name="lowPrice" class="low_Price_icon"/>
                           <!-- 价格不能超过6位 -->
-                          <div class="low_price">￥{{lowPriceProduct.a}}</div>
+                          <div class="low_price">￥{{lowPriceProduct.price}}</div>
                         </div>
                       </transition>
                     </router-link>
@@ -108,11 +111,11 @@
 
 <script>
   // @ is an alias to /src
-  const Header = ()=>import("./Header"); //组件懒加载
-  const Footer = ()=>import("./Footer");
-  const Carousel = ()=>import("./Carousel");
-  const CountDown = ()=>import("../UtilsComponent/vue2-countdown");
-  const ProductsFeatured = ()=>import("./ProductsFeatured");
+  const Header = () => import("./Header"); //组件懒加载
+  const Footer = () => import("./Footer");
+  const Carousel = () => import("./Carousel");
+  const CountDown = () => import("../UtilsComponent/vue2-countdown");
+  const ProductsFeatured = () => import("./ProductsFeatured");
 
   export default {
     name: 'Home',
@@ -120,83 +123,37 @@
     data() {
       return {
         display: true,
-        startTime: new Date().getTime(), //开始时间
-        endTime: new Date('2020/2/26 21:00:00').getTime(), //结束时间
+        startTime: new Date().getTime(), //剩余开始时间
+        endTime: new Date().setTime(new Date().getTime() + 1000 * 60 * 60 * 2 * 1), //剩余结束时间
+        spikeSessions:'',
         firstItem: 0,
         lastItem: 1,
-        timer: 0,
-        spikeAdList:[],
-        lowPriceProductList: [
-          [
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-          ],
-          [
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 2},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-
-          ],
-          [
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 3},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-
-          ],
-          [
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 4},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-
-          ],
-          [
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 5},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-            {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-
-          ],
-
-        ],
+        spikeAdList: [],
+        spikeProductList: [],
+        lowPriceProductList: [],
       }
     },
     methods: {
       countDownS_cb(value) {
-        console.log('callBack--' + value + '--开始倒计时结束回调');
+        console.log('callBack--' + value + '--开始倒计回调');
       },
       countDownE_cb(value) {
-        console.log('callBack--' + value + '--活动剩余倒计时结束回调');
+        console.log('callBack--' + value + '--结束倒计时回调');
         if (this.endTime <= 0) {
           return
         }
       },
       lowPriceProductSwitch() {
-        this.timer = setInterval(() => {
+        setTimeout(() => {
           this.lowPriceProductSwitch_1();
           this.lowPriceProductSwitch_2();
-        }, 3000);
+        }, 4000);
       },
       lowPriceProductSwitch_1() {
         this.display = false;
       },
       lowPriceProductSwitch_2() {
         setTimeout(() => {
-          clearInterval(this.timer);
           this.firstItem += 1;
           this.lastItem += 1;
           if (this.lowPriceProductList.length < this.lastItem) {
@@ -207,18 +164,44 @@
           this.lowPriceProductSwitch();
         }, 300);
       },
-      getSpikeAdList(){
-        this.axios.get('/api/CommodityController/findAd').then(res=>{
-          if (res.data.success){
-            this.spikeAdList=res.data.queryResult.list[0];
+      getSpikeAdList() {
+        this.axios.get('/api/CommodityController/findAd').then(res => {
+          if (res.data.success) {
+            this.spikeAdList = res.data.queryResult.list[0];
           }
         })
       },
+      getSpikeProductList() {
+        this.axios.get('/api/CommodityController/findSeckill').then(res => {
+          if (res.data.success) {
+            this.spikeProductList = res.data.queryResult.list[0];
+          }
+        })
+      },
+      getSpikeSessions(){
+        let hours=new Date().getHours();
+        if (hours%2!==1){
+          this.spikeSessions=hours+2+':00';
+        }else {
+          this.spikeSessions=hours+1+':00';
+        }
+      },
+      getLowPriceProductList(){
+        this.axios.get("/api/CommodityController/findProductLowPrice").then(res => {
+          if (res.data.success) {
+            this.lowPriceProductList = res.data.queryResult.list[0].productLowPrice;
+          }
+        })
+      },
+
     },
     created() {
-      this.lowPriceProductSwitch();
+      this.getLowPriceProductList();
+      this.getSpikeSessions();
       this.getSpikeAdList();
-    }
+      this.lowPriceProductSwitch();
+      this.getSpikeProductList();
+    },
 
   }
 </script>
@@ -331,6 +314,12 @@
     margin: -20px -20px 0 0;
     float: right;
     width: 155px
+  }
+
+  .spike_product {
+    float: left;
+    width: 808px;
+    margin-top: -20px
   }
 
   .icon {
