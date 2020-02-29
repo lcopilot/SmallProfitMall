@@ -8,8 +8,8 @@
        SELECT * FROM Seckill limit #{StartingValue},#{Quantity}
     </select>
 
-    <select id="findProductLowPrice" resultType="cn.itcast.domain.ProductLowPrice">
-        SELECT * from ProductLowPrice
+    <select id="findProductLowPrice" resultType="cn.itcast.domain.ProductLowPrice" parameterType="INT">
+        SELECT * from ProductLowPrice limit #{StartingValue},#{Quantity}
     </select>
 
     <select id="findAd" resultType="cn.itcast.domain.Ad">
