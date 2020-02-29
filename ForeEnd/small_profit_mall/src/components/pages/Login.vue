@@ -58,9 +58,10 @@
 
 <script>
   // @ is an alias to /src
-  import Header from "./Header.vue";
-  import Footer from "./Footer.vue";
-  import Verify from 'vue2-verify';
+  const Header = ()=>import("./Header");
+  const Footer = ()=>import("./Footer");
+  const Verify = ()=>import("vue2-verify");
+
 
   export default {
     components: {Header, Footer, Verify},

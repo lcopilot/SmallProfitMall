@@ -1,10 +1,10 @@
 <template>
   <el-container>
     <el-header height="100px">
-      <Search/>
+      <search/>
     </el-header>
     <el-main>
-      <el-row type="flex" class="row-bg" justify="center" :gutter="20">
+      <el-row type="flex"  justify="center" :gutter="20">
         <el-col :span="4">
           <el-card style="height: 370px;">
             <ul>
@@ -117,12 +117,12 @@
 </template>
 
 <script>
-  import Search from "./Search";
+  const search = ()=>import("./Search");
 
   export default {
     name: "Carousel",
     components: {
-      Search
+      search
     },
     data() {
       return {
@@ -172,7 +172,6 @@
     created() {
       this.getRotationChart();
       this.getCategoriesList();
-      this.getPagePilot();
       this.getCommonFunctionsList();
       this.username = sessionStorage.getItem("username");
     }
@@ -221,7 +220,5 @@
     height: 32px
   }
 
-  a:hover {
-    color: #e1251b;
-  }
+
 </style>

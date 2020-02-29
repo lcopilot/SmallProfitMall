@@ -3,7 +3,7 @@
     <img class="bg" src="http://img.fhxasdsada.xyz/404.png"/>
     <div class="btn">
       <a class="goindex" onclick="history.back()">返回上一页面</a>
-      <a class="lx" onclick="history.back()">返回上首页</a>
+      <a class="lx" onclick="history.back()">返回上一页面</a>
       <div style="clear:both;"></div>
     </div>
   </div>

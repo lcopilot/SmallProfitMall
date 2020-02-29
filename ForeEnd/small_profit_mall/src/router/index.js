@@ -46,6 +46,11 @@ const routes = [
     name:"Register",
     component: () => import('@/components/pages/Register')
   },
+  {
+    path:'/product',
+    name:"Product",
+    component: () => import('@/components/pages/Product')
+  },
     //捕获404
   {
     path: "/404",

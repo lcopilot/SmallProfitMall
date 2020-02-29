@@ -61,8 +61,8 @@
 </template>
 
 <script>
-  import Header from "./Header.vue";
-  import Footer from "./Footer.vue";
+  const Header = ()=>import("./Header");
+  const Footer = ()=>import("./Footer");
 
   export default {
     components: {Header, Footer},

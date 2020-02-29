@@ -50,18 +50,16 @@
                   </el-carousel>
                 </div>
                 <div class="spike_product_ad">
-                  <el-carousel :interval="4000" arrow="hover" height="260px"
+                  <el-carousel :interval="4000" arrow="hover" height="280px"
                                indicator-position="none">
-                    <el-carousel-item v-for="item in 4" :key="item">
-                      <router-link to="/">
-                        <el-image src="http://img.fhxasdsada.xyz/8e4b9d53e41b72a4.jpg"
-                                  fit="scale-down"/>
+                    <el-carousel-item v-for="spikeAd in spikeAdList" :key="spikeAd.id">
+                      <router-link :to="spikeAd.site">
+                        <el-image :src="spikeAd.img"
+                                  fit="fill"/>
                       </router-link>
                     </el-carousel-item>
                   </el-carousel>
                 </div>
-
-
               </el-card>
             </div>
           </el-col>
@@ -110,11 +108,11 @@
 
 <script>
   // @ is an alias to /src
-  import Header from "./Header.vue";
-  import Footer from "./Footer.vue";
-  import Carousel from "./Carousel";
-  import CountDown from '../UtilsComponent/vue2-countdown';
-  import ProductsFeatured from './ProductsFeatured';
+  const Header = ()=>import("./Header"); //组件懒加载
+  const Footer = ()=>import("./Footer");
+  const Carousel = ()=>import("./Carousel");
+  const CountDown = ()=>import("../UtilsComponent/vue2-countdown");
+  const ProductsFeatured = ()=>import("./ProductsFeatured");
 
   export default {
     name: 'Home',
@@ -127,6 +125,7 @@
         firstItem: 0,
         lastItem: 1,
         timer: 0,
+        spikeAdList:[],
         lowPriceProductList: [
           [
             {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
@@ -135,7 +134,6 @@
             {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
             {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
             {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 1},
-
           ],
           [
             {'img': 'http://img.fhxasdsada.xyz/cee1d8b002df_340x340_90.jpg', 'a': 2},
@@ -209,9 +207,17 @@
           this.lowPriceProductSwitch();
         }, 300);
       },
+      getSpikeAdList(){
+        this.axios.get('/api/CommodityController/findAd').then(res=>{
+          if (res.data.success){
+            this.spikeAdList=res.data.queryResult.list[0];
+          }
+        })
+      },
     },
-    mounted() {
+    created() {
       this.lowPriceProductSwitch();
+      this.getSpikeAdList();
     }
 
   }
@@ -322,7 +328,7 @@
   }
 
   .spike_product_ad {
-    margin: -20px -10px 0 0;
+    margin: -20px -20px 0 0;
     float: right;
     width: 155px
   }
