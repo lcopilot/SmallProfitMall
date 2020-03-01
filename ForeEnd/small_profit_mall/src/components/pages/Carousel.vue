@@ -15,7 +15,7 @@
                     width="840"
                     trigger="hover"
                     @mouseenter.native="enter(Categories.nid)">
-                  <el-table :data="CategoryDetailsList" style="width: 100%;font-size: 11px;"
+                  <el-table :data="CategoryDetailsList" style="width: 100%;font-size: 11px; "
                             :show-header="false" @mouseenter.native="enter_table(Categories.nid)">
                     <el-table-column prop="classificationHeader" width="90">
                     </el-table-column>
@@ -176,6 +176,8 @@
 </template>
 
 <script>
+  import {mapActions} from "vuex";
+
   const search = () => import("./Search");
 
   export default {
@@ -187,6 +189,7 @@
       return {
         rotationCharts: [],
         username: null,
+        addressData:[],
         avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
         CategoriesList: [],
         CategoriesLists:[],
@@ -195,7 +198,11 @@
 
       }
     },
+
     methods: {
+      ...mapActions([
+        "getAddressData"
+      ]),
       goto(articleId) {
         this.$router.push({
           name: "Login",
@@ -233,11 +240,20 @@
       },
       enter(nid) {
         this.CategoryDetailsList = [];
-        this.CategoriesLists.navigationClassify[0].forEach((item, index) => {
-          if (item.nid == nid) {
+        this.CategoriesLists.navigationClassify[0].forEach((Categories, index) => {
+          if (Categories.nid == nid) {
             this.CategoryDetailsList.push(this.CategoriesLists.navigationClassify[0][index]);
           }
         })
+      },
+      getAddressDataList() {
+        if (this.$store.state.addressData.length==0){
+          this.axios.get("http://img.fhxasdsada.xyz/pcas-code.json").then(res => {
+            if (res.status == 200) {
+              this.getAddressData(res.data);
+            }
+          })
+        }
       },
     },
     created() {
@@ -245,6 +261,8 @@
       this.getCategoriesList();
       this.getCommonFunctionsList();
       this.username = sessionStorage.getItem("username");
+      this.getAddressDataList();
+
     }
   }
 </script>
