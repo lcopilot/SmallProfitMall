@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     CartSum: 0,
+    addressData:[],
   },
   mutations: {
     getCartSum(state, sum) {
@@ -14,7 +15,9 @@ export default new Vuex.Store({
     modifyCartSum(state, sum) {
       state.CartSum += sum
     },
-
+    getAddressData(state,addressData){
+      state.addressData=addressData;
+    }
   },
   actions: {
     //获取购物车的数量
@@ -25,7 +28,10 @@ export default new Vuex.Store({
     modifyCartSum: (context, sum) => {
       context.commit('modifyCartSum', sum);
     },
-
+    //提前获取全国城市数据
+    getAddressData: (context, addressData) => {
+      context.commit('getAddressData', addressData);
+    },
   },
   modules: {}
 })

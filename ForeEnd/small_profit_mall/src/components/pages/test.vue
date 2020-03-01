@@ -1,42 +1,46 @@
 <template>
-  <div style="width: 418px;height: 418px">
-
-    <div class="pic-box"> <!--pic-box:width:500px;height:500px-->
-      <pic-zoom :url="url" :scale="3"></pic-zoom>
-    </div>
-    <div style="width: 100px;height: 100px;display: inline-block;margin-right: 4px" v-for="(img,index) in imgList" @mouseenter="enter(index)">
-        <el-image :src="img.img"></el-image>
-    </div>
+  <div style="width: 600px;height: 400px">
+    <video
+        id="myVideo"
+        class="video-js"
+    >
+      <source
+          src="http://img.fhxasdsada.xyz/asdasd.mp4"
+          type="video/mp4"
+      >
+    </video>
   </div>
-
 </template>
 
 <script>
-  import PicZoom from 'vue-piczoom'
-
+  /* eslint-disable */
   export default {
-    name: "test",
-    components: {PicZoom},
-    data(){
-      return{
-        show2:true,
-        url:'http://img.fhxasdsada.xyz/O1CN01PweeQr22AEJuIJv81_%21%211917047079.png_430x430q90.png',
-        imgList:[
-          {img:'http://img.fhxasdsada.xyz/O1CN01jRWwWw22AEIAVOrqe_%21%211917047079.jpeg_430x430q90.png'},
-          {img:'http://img.fhxasdsada.xyz/O1CN01gDQHPJ22AEDl61L9W_%21%211917047079.jpg_430x430q90.jpg'},
-          {img:'http://img.fhxasdsada.xyz/O1CN01aVSHBx22AEJy0gFkG_%21%212-item_pic.png_430x430q90.png'},
-          {img:'http://img.fhxasdsada.xyz/O1CN01PweeQr22AEJuIJv81_%21%211917047079.png_430x430q90.png'}
-        ],
-      }
+    name: "TestTwo",
+    data() {
+      return {};
     },
-    methods:{
-      enter(index){
-        this.url=this.imgList[index].img;
+    mounted() {
+      this.initVideo();
+    },
+    methods: {
+      initVideo() {
+        //初始化视频方法
+        let myPlayer = this.$video(myVideo, {
+          //确定播放器是否具有用户可以与之交互的控件。没有控件，启动视频播放的唯一方法是使用autoplay属性或通过Player API。
+          controls: true,
+          //自动播放属性,muted:静音播放
+          autoplay: "muted",
+          //建议浏览器是否应在<video>加载元素后立即开始下载视频数据。
+          preload: "auto",
+          //设置视频播放器的显示宽度（以像素为单位）
+          width: "800px",
+          //设置视频播放器的显示高度（以像素为单位）
+          height: "400px"
+        });
       }
     }
-  }
+  };
 </script>
 
 <style scoped>
-
 </style>

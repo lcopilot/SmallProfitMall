@@ -22,7 +22,7 @@
                     <count-down v-on:start_callback="countDownS_cb(1)"
                                 v-on:end_callback="countDownE_cb(1)"
                                 :startTime="startTime"
-                                :endTime="endTime"
+                                :endTime="this.endTime"
                                 :secondsTxt="''">
                     </count-down>
                   </div>
@@ -123,8 +123,8 @@
     data() {
       return {
         display: true,
-        startTime: new Date().getTime(), //剩余开始时间
-        endTime: new Date().setTime(new Date().getTime() + 1000 * 60 * 60 * 2 * 1), //剩余结束时间
+        startTime: 0, //剩余开始时间
+        endTime: 0, //剩余结束时间
         spikeSessions:'',
         firstItem: 0,
         lastItem: 1,
@@ -175,6 +175,7 @@
         this.axios.get('/api/CommodityController/findSeckill').then(res => {
           if (res.data.success) {
             this.spikeProductList = res.data.queryResult.list[0];
+            this.endTime= res.data.queryResult.list[0].spikeTime;
           }
         })
       },

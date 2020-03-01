@@ -14,13 +14,21 @@ import './router/guard'
 import 'vue2-animate/dist/vue2-animate.min.css'
 //提升事件响应
 import 'default-passive-events'
+//放大镜组件
+import VuePhotoZoomPro from "vue-photo-zoom-pro";
+//视频播放组件
+import Video from 'video.js';
+import 'video.js/dist/video-js.css'
+
+Vue.prototype.$video = Video
 
 
 //全局注册组件
 Vue.component('SvgIcon', SvgIcon)
 Vue.use(VueAxios,axios);
 Vue.use(ElementUI)//全局使用ElementUI
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+Vue.use(VuePhotoZoomPro);
 
 
 new Vue({
