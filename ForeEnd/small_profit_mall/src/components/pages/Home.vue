@@ -182,13 +182,13 @@
         let hours=new Date().getHours();
         if (hours%2!==1){
           if (hours==22){
-            hours='00';
+            this.spikeSessions='00:00';
           }else {
             this.spikeSessions=hours+2+':00';
           }
         }else {
           if (hours==23){
-            hours='00';
+            this.spikeSessions='00:00';
           }else {
             this.spikeSessions=hours+1+':00';
           }
@@ -208,8 +208,13 @@
       startTime(){
         return this.$store.state.startTime;
       },
-      endTime(){
-        return this.$store.getters.endTime;
+      endTime:{
+        get(){
+          return this.$store.getters.endTime;
+        },
+        set(val){
+          return this.$store.getters.endTime=val;
+        }
       }
     },
     created() {
