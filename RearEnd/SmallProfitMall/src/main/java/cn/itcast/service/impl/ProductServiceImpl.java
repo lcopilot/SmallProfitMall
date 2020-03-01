@@ -8,6 +8,7 @@ import cn.itcast.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
     ProductLowPriceResult productLowPriceResult = new ProductLowPriceResult();
     //秒杀
     @Override
-    public SeckillResult findSeckill() {
+    public SeckillResult findSeckill() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//格式化输出日期
         ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findSeckill(0,4)),new ArrayList(ProducDao.findSeckill(4,4)),new ArrayList(ProducDao.findSeckill(8,4)),new ArrayList(ProducDao.findSeckill(12,4))};
         System.out.println(arrayLists1);
@@ -38,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
         Date date=new Date();//获取当前时间
         Date time1 = timeUtil.AddTwoTours(date);//获取两个小时后时间
         String time3 = sdf.format(date);    //当前时间转为字符串
-        String time2 =sdf.format(time1);    //两小时后时间转字符串
+        Long time2 =timeUtil.timestamp();    //两小时后时间转字符串
         seckillResult.setSpikeTime(time2);//设置两小时后时间
         seckillResult.setCurrentTime(time3);//设置当前时间
         return seckillResult;
