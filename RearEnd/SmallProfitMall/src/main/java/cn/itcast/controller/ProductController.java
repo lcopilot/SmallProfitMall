@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class ProductController {
      * @return
      */
     @RequestMapping("/findSeckill")
-    public QueryResponseResult findSeckill() {
+    public QueryResponseResult findSeckill() throws ParseException {
         // 调用service的方法
         SeckillResult seckillResult = commodityService.findSeckill();
         List<SeckillResult> logins= Arrays.asList(seckillResult);

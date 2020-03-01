@@ -1,34 +1,59 @@
 package cn.itcast.Test;
 
+import org.junit.Test;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class d {
+    private static final String FORMAT_FULL = null;
+
     public static void main(String[] args) {
-        List a =new  ArrayList();
-        a.add("1");
-        a.add("2");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/HH mm:ss");//格式化输出日期
+        long timeStamp = System.currentTimeMillis();
+        System.currentTimeMillis();
+        Date date = new Date();
 
-        List b = new ArrayList();
-        b.add("3");
-        b.add("4");
+        System.out.println(sdf.format(date));
 
-        List c = new ArrayList();
-        c.add("5");
-        c.add("6");
+        System.out.println();
+        if(getHour(date)==11){
+            System.out.println("加油！武汉");
+            Long startTs = System.currentTimeMillis();
+            System.out.println(startTs);
+        }
+        int a = 0;
+        switch(1){
+            case 0:
+              a  = 3;
+                break;
+            case 5:
 
-        List d = new ArrayList();
-        d.add("7");
-        d.add("8");
+            break;
+        }
+        System.out.println(a);
 
-              //  System.out.println(a[0][0]);
-
-        ArrayList[][] arrayLists1 = {{new ArrayList(a), new ArrayList(b)},{new ArrayList(c), new ArrayList(d)}};
-        System.out.println(arrayLists1);
 
     }
+    public static int getHour(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.HOUR_OF_DAY);
+    }
 
-
+    @Test
+    public void f() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");//格式化输出日期
+        Date date = new Date();
+        String  r =sdf.format(date);
+        System.out.println();
+        Date c = new SimpleDateFormat("yyyy/MM/dd/HH mm:ss").parse(r+"/12 00:00");
+        long ts = c.getTime();
+        System.out.println(c);
+        System.out.println(ts);
+    }
 }
