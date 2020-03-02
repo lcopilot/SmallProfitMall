@@ -72,4 +72,23 @@ public class ProductServiceImpl implements ProductService {
             return redis;
         }
     }
+
+    //为你推荐商品
+    @Override
+    public List<Recommend> findRecommend() {
+        List<Recommend> redis = (List<Recommend>) redisUtil.lGet("recommend", 0, -1);
+        System.out.println(redis);
+        if (redis.size() == 0) {
+            System.out.println("数据库中取");
+            List<Recommend> recommend = ProducDao.findRecommend();
+            redisUtil.lSet("recommend", recommend);  //存入缓存
+            return recommend;
+        } else {
+            System.out.println("缓存中取");
+            //取缓存
+            return redis;
+        }
+    }
+
+
 }

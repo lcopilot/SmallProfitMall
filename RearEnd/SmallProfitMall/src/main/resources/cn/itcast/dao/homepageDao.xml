@@ -15,14 +15,16 @@
     <select id="findNavigation2" resultType="cn.itcast.domain.Navigation_2">
         SELECT * from navigation_2
     </select>
-    
+    <!--查询所有广告-->
     <select id="findIcon" resultType="cn.itcast.domain.Icon">
         SELECT * from homepageIcon
     </select>
 
+    <!--根据id查询消息分类-->
     <select id="findById" resultType="cn.itcast.domain.NavigationClassify">
         select * from classification where nid = #{nid}
     </select>
+    <!--询所有商品分类-->
     <select id="findClassification" resultType="cn.itcast.domain.NavigationClassify">
         select * from classification
     </select>

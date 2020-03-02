@@ -78,6 +78,7 @@ public class HomepageController {
         List<Classification> logins= Arrays.asList(classification);
         QueryResult<Classification> result = new QueryResult<>();
         result.setList(logins);
+
         return new QueryResponseResult(CommonCode.SUCCESS,result);
     }
 
