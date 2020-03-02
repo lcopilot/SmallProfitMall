@@ -137,10 +137,8 @@
         console.log('callBack--' + value + '--开始倒计回调');
       },
       countDownE_cb(value) {
+        this.$router.go(0);
         console.log('callBack--' + value + '--结束倒计时回调');
-        if (this.endTime <= 0) {
-          return
-        }
       },
       lowPriceProductSwitch() {
         setTimeout(() => {

@@ -12,39 +12,40 @@
         <el-col :span="19" :push="2">
           <div style="width: 1208px;position:relative;">
             <el-card shadow="hover" class="recommended_products_card"
-                     v-for="(o, index) in 50" :key="index">
+                     v-for="(productsFeatured ,index) in productsFeaturedList" :key="productsFeatured.id">
               <div style="position: relative;">
                 <router-link to="/"
-                             title="联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银">
-                  <el-image  fit="fit" src="http://img.fhxasdsada.xyz/0e741b5c4358dbea.jpg" :lazy="true" />
+                             :title="productsFeatured.productName">
+                  <el-image fit="fit" :src="productsFeatured.productPicture"
+                            :lazy="true"/>
                   <div class="recommended_products_name">
-                    联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄笔记本电脑(i7-8550U 8G 128GSSD+1T 2G独显 FHD)冰原银
+                    {{productsFeatured.productName}}
                     <div>
-                      <span class="recommended_products_price">￥18956.00</span>
+                      <span class="recommended_products_price">￥{{productsFeatured.productPrice}}</span>
                     </div>
                   </div>
                 </router-link>
                 <a>
-                  <div @mouseenter="enter(1)" v-show="!show2"
+                  <div @mouseenter="enterFavorite(index)" v-if="productsFeatured.favorite==1"
                        class="recommended_products_favorite">
                     <svg-icon name="Uncollected"/>
                   </div>
-                  <div class="recommended_products_favorite" v-show="show2" @click="favorite()"
-                       @mouseout="shiftOut(1)">
+                  <div class="recommended_products_favorite" v-if="productsFeatured.favorite==2" @click="favorite()"
+                       @mouseout="shiftOutFavorite(index)">
                     <svg-icon name="Favorite"></svg-icon>
                   </div>
                 </a>
                 <a>
-                  <div @mouseenter="enter(1)" v-show="!show2"
+                  <div @mouseenter="enterShoppingTrolley(index)" v-if="productsFeatured.shoppingTrolley==1"
                        class="recommended_products_Cart">
                     <svg-icon name="added"/>
                   </div>
-                  <div class="recommended_products_Cart" v-show="show2" @click="addCart()"
-                       @mouseout="shiftOut(1)">
+                  <div class="recommended_products_Cart" v-if="productsFeatured.shoppingTrolley==2" @click="addCart()"
+                       @mouseout="shiftOutShoppingTrolley(index)">
                     <svg-icon name="addCart"></svg-icon>
                   </div>
                 </a>
-                <div class="recommended_products_hot">
+                <div class="recommended_products_hot" v-if="productsFeatured.hot==1">
                   <svg-icon name="hot"></svg-icon>
                 </div>
               </div>
@@ -62,14 +63,21 @@
     data() {
       return {
         show2: false,
+        productsFeaturedList: [],
       }
     },
     methods: {
-      enter(index) {
-        this.show2 = true;
+      enterFavorite(index) {
+        this.productsFeaturedList[index].favorite=2;
       },
-      shiftOut(index) {
-        this.show2 = false;
+      shiftOutFavorite(index) {
+        this.productsFeaturedList[index].favorite=1;
+      },
+      enterShoppingTrolley(index){
+        this.productsFeaturedList[index].shoppingTrolley=2;
+      },
+      shiftOutShoppingTrolley(index){
+        this.productsFeaturedList[index].shoppingTrolley=1;
       },
       favorite(ProductId) {
         console.log("sdfs");
@@ -77,6 +85,18 @@
       addCart(ProductId) {
         console.log("sdfs");
       },
+      getProductsFeatured() {
+        this.axios.get("/api/CommodityController/Recommend").then(res => {
+              if (res.data.success) {
+                this.productsFeaturedList = res.data.queryResult.list[0];
+                console.log(this.productsFeaturedList)
+              }
+            }
+        )
+      }
+    },
+    created() {
+      this.getProductsFeatured();
     }
   }
 </script>
@@ -102,6 +122,7 @@
     margin-right: 10px;
     display: inline-block;
   }
+
   .recommended_products_card:hover {
     transform: scale(1.06);
   }

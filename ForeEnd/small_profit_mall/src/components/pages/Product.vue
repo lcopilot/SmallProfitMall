@@ -26,20 +26,77 @@
             </div>
           </el-col>
           <el-col :span="10">
-            <div>
-              商品名字
-            </div>
-            <div>
-              价格
-            </div>
-            <div>
-              <el-cascader :options="options" :props="defaultParams" v-model="selectedOptions"
-                           @change="handleChange" separator=" " :filterable="true" placeholder="请选择地址"
-                           :clearable="true" style="width: 300px" ref="cityAll"/>
-            </div>
-            <div>
-              颜色 尺码
-            </div>
+            <el-form ref="form" :model="sizeForm" label-width="80px" style="width: 90%" size="small" label-position="right">
+              <el-form-item >
+                <div style="text-align:left;font-size: 14px;font-weight:600;">
+                  Apple 2019新品 MacBook Pro 16【带触控栏】九代六核i7 16G 512G 深空灰 Radeon Pro 5300M显卡 笔记本电脑 轻薄本 MVVJ2CH/A
+                </div>
+              </el-form-item>
+              <el-form-item label="价格">
+                <div style="text-align: left">
+                  <el-card class="box-card">
+                    <div>微利价: ￥189.00</div>
+                    <div>促销 会员特价: <router-link to="/login">登录</router-link>,确认是否享受优惠</div>
+                  </el-card>
+                </div>
+              </el-form-item>
+              <el-form-item label="配送至">
+                <div style="text-align: left">
+                  <el-cascader :options="options" :props="defaultParams" v-model="selectedOptions"
+                               @change="handleChange" separator=" " :filterable="true" placeholder="请选择地址"
+                               :clearable="true"  ref="cityAll"/>
+                </div>
+
+              </el-form-item>
+              <el-form-item label="重量">
+                <div style="text-align: left">
+                    5.67Kg
+                </div>
+              </el-form-item>
+              <el-form-item label="尺码">
+                <div style="text-align: left">
+                  <el-select v-model="value" placeholder="请选择">
+                    <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                    >
+                    </el-option>
+                  </el-select>
+                </div>
+              </el-form-item>
+              <el-form-item label="颜色">
+                <div style="text-align: left">
+                  <el-radio-group v-model="sizeForm.resource" size="medium">
+                    <el-radio-button label="上海"></el-radio-button>
+                    <el-radio-button label="北京"></el-radio-button>
+                    <el-radio-button label="广州"></el-radio-button>
+                    <el-radio-button label="深圳"></el-radio-button>
+                    <el-radio-button label="深圳"></el-radio-button>
+                  </el-radio-group>
+                </div>
+              </el-form-item>
+              <el-form-item label="套餐">
+                <div style="text-align: left">
+                  <el-radio-group v-model="sizeForm.resource" size="medium">
+                    <el-radio-button label="上海" ></el-radio-button>
+                    <el-radio-button label="北京"></el-radio-button>
+                    <el-radio-button label="广州"></el-radio-button>
+                    <el-radio-button label="深圳"></el-radio-button>
+                    <el-radio-button label="深圳"></el-radio-button>
+                  </el-radio-group>
+                </div>
+              </el-form-item>
+              <el-form-item size="large">
+                <div style="text-align: left">
+                  <el-input-number v-model="num1" style="width: 30%" max="99"></el-input-number>
+                  <el-button type="danger" @click="onSubmit" style="margin-left: 10px" icon="el-icon-circle-plus-outline">加入购物车</el-button>
+                  <el-button type="danger" @click="onSubmit">立即购买</el-button>
+                </div>
+              </el-form-item>
+            </el-form>
+
           </el-col>
           <el-col :span="3">
             <div style="background-color: red">
@@ -57,7 +114,6 @@
 </template>
 
 <script>
-  import {mapActions} from "vuex";
 
   const Header = () => import("./Header"); //组件懒加载
   const Footer = () => import("./Footer");
@@ -67,12 +123,12 @@
     name: "Product",
     data() {
       return {
-        show2: true,
+        num1:1,
         bigImg: '',
         magnifierImg: '',
         productImgList: [
           {
-            img: 'http://img.fhxasdsada.xyz/O1CN01jRWwWw22AEIAVOrqe_%21%211917047079.jpeg_430x430q90.png',
+            img: 'http://img.fhxasdsada.xyz/aee0a989e72627dab77f3fb1002bb739_2_3_photo.png',
             magnifierImg: 'http://img.fhxasdsada.xyz/aee0a989e72627dab77f3fb1002bb739_2_3_photo.png'
           },
           {
@@ -91,7 +147,6 @@
             img: 'http://img.fhxasdsada.xyz/O1CN01PweeQr22AEJuIJv81_%21%211917047079.png_430x430q90.png',
             magnifierImg: 'http://img.fhxasdsada.xyz/b202c8d2e990743cbfe239cb860e4a41_2_3_photo.png'
           },
-
         ],
         item: 0,
         timer: '',
@@ -103,16 +158,19 @@
           children: 'children'
         },
         address:'',
-
+        sizeForm: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        }
       }
     },
     components: {Header, Footer, search},
-    computed: {
-      //vuex
-      options() {
-        return this.$store.state.addressData;
-      },
-    },
     methods: {
       getProductImg() {
         this.bigImg = this.productImgList[1].img;
@@ -145,7 +203,7 @@
         console.log(this.address);
       },
       getAddressData() {
-        if (JSON.parse(sessionStorage.getItem('addressData'))){
+        if (JSON.parse(sessionStorage.getItem('addressData'))==null){
           this.axios.get("http://img.fhxasdsada.xyz/pcas-code.json").then(res => {
             if (res.status == 200) {
               this.options=res.data;
