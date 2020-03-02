@@ -1,9 +1,6 @@
 package cn.itcast.dao;
 
-import cn.itcast.domain.Ad;
-import cn.itcast.domain.Icon;
-import cn.itcast.domain.ProductLowPrice;
-import cn.itcast.domain.Seckill;
+import cn.itcast.domain.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -18,4 +15,7 @@ public interface ProductDao {
 
     //广告
     public List<Ad> findAd();
+
+    //查询所有为你推荐
+    public List<Recommend> findRecommend();
 }

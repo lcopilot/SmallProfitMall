@@ -61,6 +61,22 @@ public class ProductController {
         // 调用service的方法
         List<Ad> list = commodityService.findAd();
         QueryResult<Ad> result = new QueryResult<>();
+        result.setTotal(list.size());
+        result.setList(list);
+        return  new QueryResponseResult(CommonCode.SUCCESS,result);
+    }
+
+    /**
+     * 为你推荐商品
+     * @return
+     */
+    @RequestMapping("/Recommend")
+    public QueryResponseResult findRecommend() {
+        // 调用service的方法
+        List<Recommend> list = commodityService.findRecommend();
+        int a =list.size();
+        QueryResult<Recommend> result = new QueryResult<>();
+        result.setTotal(a);
         result.setList(list);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
