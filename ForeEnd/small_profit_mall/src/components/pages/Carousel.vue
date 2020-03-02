@@ -200,9 +200,6 @@
     },
 
     methods: {
-      ...mapActions([
-        "getAddressData"
-      ]),
       goto(articleId) {
         this.$router.push({
           name: "Login",
@@ -246,11 +243,11 @@
           }
         })
       },
-      getAddressDataList() {
-        if (this.$store.state.addressData.length==0){
+      getAddressData() {
+        if (JSON.parse(sessionStorage.getItem('addressData'))){
           this.axios.get("http://img.fhxasdsada.xyz/pcas-code.json").then(res => {
             if (res.status == 200) {
-              this.getAddressData(res.data);
+              sessionStorage.setItem("addressData",JSON.stringify(res.data));
             }
           })
         }
@@ -261,7 +258,7 @@
       this.getCategoriesList();
       this.getCommonFunctionsList();
       this.username = sessionStorage.getItem("username");
-      this.getAddressDataList();
+      this.getAddressData();
 
     }
   }

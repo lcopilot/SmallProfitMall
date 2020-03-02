@@ -110,7 +110,8 @@
 </template>
 
 <script>
-  // @ is an alias to /src
+
+  import { mapGetters } from 'vuex'
   const Header = () => import("./Header"); //组件懒加载
   const Footer = () => import("./Footer");
   const Carousel = () => import("./Carousel");
@@ -123,8 +124,6 @@
     data() {
       return {
         display: true,
-        startTime: 0, //剩余开始时间
-        endTime: 0, //剩余结束时间
         spikeSessions:'',
         firstItem: 0,
         lastItem: 1,
@@ -182,9 +181,18 @@
       getSpikeSessions(){
         let hours=new Date().getHours();
         if (hours%2!==1){
-          this.spikeSessions=hours+2+':00';
+          if (hours==22){
+            hours='00';
+          }else {
+            this.spikeSessions=hours+2+':00';
+          }
         }else {
-          this.spikeSessions=hours+1+':00';
+          if (hours==23){
+            hours='00';
+          }else {
+            this.spikeSessions=hours+1+':00';
+          }
+
         }
       },
       getLowPriceProductList(){
@@ -195,6 +203,14 @@
         })
       },
 
+    },
+    computed: {
+      startTime(){
+        return this.$store.state.startTime;
+      },
+      endTime(){
+        return this.$store.getters.endTime;
+      }
     },
     created() {
       this.getLowPriceProductList();

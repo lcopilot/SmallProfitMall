@@ -95,6 +95,7 @@
         ],
         item: 0,
         timer: '',
+        options:[],
         selectedOptions: [],
         defaultParams: {
           label: 'name',
@@ -113,9 +114,6 @@
       },
     },
     methods: {
-      ...mapActions([
-        "getAddressData"
-      ]),
       getProductImg() {
         this.bigImg = this.productImgList[1].img;
         this.magnifierImg = this.productImgList[1].magnifierImg;
@@ -146,18 +144,21 @@
         });
         console.log(this.address);
       },
-      getAddressDataList() {
-        if (this.$store.state.addressData.length==0){
+      getAddressData() {
+        if (JSON.parse(sessionStorage.getItem('addressData'))){
           this.axios.get("http://img.fhxasdsada.xyz/pcas-code.json").then(res => {
             if (res.status == 200) {
-              this.getAddressData(res.data);
+              this.options=res.data;
+              sessionStorage.setItem("addressData",JSON.stringify(res.data));
             }
           })
+        }else{
+          this.options=JSON.parse(sessionStorage.getItem('addressData'));
         }
       },
     },
     created() {
-      this.getAddressDataList();
+      this.getAddressData();
       this.getProductImg();
       this.switchProductImg();
     }
