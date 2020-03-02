@@ -9,6 +9,15 @@ public class Recommend {
     private String ProductPrice;
     private String Favorite;
     private String shoppingTrolley;
+    private String hot;
+
+    public String getHot() {
+        return hot;
+    }
+
+    public void setHot(String hot) {
+        this.hot = hot;
+    }
 
     public String getShoppingTrolley() {
         return shoppingTrolley;
