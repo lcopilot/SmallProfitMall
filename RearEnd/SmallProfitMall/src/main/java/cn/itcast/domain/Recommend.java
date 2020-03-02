@@ -3,11 +3,19 @@ package cn.itcast.domain;
 //为你推荐
 public class Recommend {
     private int id;
+    private String rid;
     private String ProductPicture;
     private String ProductName;
     private String ProductPrice;
-    private String ProductSite;
     private String Favorite;
+
+    public String getRid() {
+        return rid;
+    }
+
+    public void setRid(String rid) {
+        this.rid = rid;
+    }
 
     public String getFavorite() {
         return Favorite;
@@ -49,11 +57,4 @@ public class Recommend {
         ProductPrice = productPrice;
     }
 
-    public String getProductSite() {
-        return ProductSite;
-    }
-
-    public void setProductSite(String productSite) {
-        ProductSite = productSite;
-    }
 }
