@@ -6,7 +6,33 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     CartSum: 0,
-    addressData:[],
+    startTime: new Date().getTime(), //剩余开始时间
+    endTime: new Date(), //剩余结束时间
+  },
+  getters: {
+    endTime: state => {
+      let time = state.endTime;
+      let Y = time.getFullYear();
+      let M = time.getMonth();
+      let D = time.getDate();
+      let H = time.getHours();
+      let m=0;
+      let s=0;
+      if (H % 2 == 1) {
+        if (H==23){
+          H=0
+        }else {
+          H += 1;
+        }
+      } else {
+        if(H==22){
+          H=0;
+        }else {
+          H += 2;
+        }
+      }
+      return new Date(Y,M,D,H,m,s).getTime();
+    },
   },
   mutations: {
     getCartSum(state, sum) {
@@ -15,24 +41,18 @@ export default new Vuex.Store({
     modifyCartSum(state, sum) {
       state.CartSum += sum
     },
-    getAddressData(state,addressData){
-      state.addressData=addressData;
-    }
   },
   actions: {
     //获取购物车的数量
     getCartSum: (context, sum) => {
       context.commit('getCartSum', sum);
     },
-    //修改购物车的数量
-    modifyCartSum: (context, sum) => {
+     //修改购物车的数量
+    modifyCartSum:(context, sum) => {
       context.commit('modifyCartSum', sum);
     },
-    //提前获取全国城市数据
-    getAddressData: (context, addressData) => {
-      context.commit('getAddressData', addressData);
-    },
-  },
+  }
+  ,
   modules: {}
 })
 
