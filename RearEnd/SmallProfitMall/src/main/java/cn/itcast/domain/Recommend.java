@@ -8,6 +8,15 @@ public class Recommend {
     private String ProductName;
     private String ProductPrice;
     private String Favorite;
+    private String shoppingTrolley;
+
+    public String getShoppingTrolley() {
+        return shoppingTrolley;
+    }
+
+    public void setShoppingTrolley(String shoppingTrolley) {
+        this.shoppingTrolley = shoppingTrolley;
+    }
 
     public String getRid() {
         return rid;
