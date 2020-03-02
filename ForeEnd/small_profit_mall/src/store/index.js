@@ -19,17 +19,9 @@ export default new Vuex.Store({
       let m=0;
       let s=0;
       if (H % 2 == 1) {
-        if (H==23){
-          H=0
-        }else {
           H += 1;
-        }
       } else {
-        if(H==22){
-          H=0;
-        }else {
           H += 2;
-        }
       }
       return new Date(Y,M,D,H,m,s).getTime();
     },
