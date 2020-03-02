@@ -1,31 +1,17 @@
 package cn.itcast.domain;
 
+import java.io.Serializable;
+
 //为你推荐
-public class Recommend {
+public class Recommend implements Serializable {
     private int id;
     private String rid;
     private String ProductPicture;
     private String ProductName;
     private String ProductPrice;
-    private String Favorite;
-    private String shoppingTrolley;
-    private String hot;
-
-    public String getHot() {
-        return hot;
-    }
-
-    public void setHot(String hot) {
-        this.hot = hot;
-    }
-
-    public String getShoppingTrolley() {
-        return shoppingTrolley;
-    }
-
-    public void setShoppingTrolley(String shoppingTrolley) {
-        this.shoppingTrolley = shoppingTrolley;
-    }
+    private int Favorite;
+    private int shoppingTrolley;
+    private int hot;
 
     public String getRid() {
         return rid;
@@ -35,12 +21,28 @@ public class Recommend {
         this.rid = rid;
     }
 
-    public String getFavorite() {
+    public int getFavorite() {
         return Favorite;
     }
 
-    public void setFavorite(String favorite) {
+    public void setFavorite(int favorite) {
         Favorite = favorite;
+    }
+
+    public int getShoppingTrolley() {
+        return shoppingTrolley;
+    }
+
+    public void setShoppingTrolley(int shoppingTrolley) {
+        this.shoppingTrolley = shoppingTrolley;
+    }
+
+    public int getHot() {
+        return hot;
+    }
+
+    public void setHot(int hot) {
+        this.hot = hot;
     }
 
     public int getId() {
