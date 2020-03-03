@@ -9,8 +9,10 @@ import cn.itcast.response.QueryResult;
 import cn.itcast.service.ProductDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Arrays;
@@ -26,8 +28,8 @@ public class ProductDetailsController {
      * 商品详细
      * @return
      */
-    @RequestMapping("/productDetailsResult")
-    public QueryResponseResult ProductLowPrice(@RequestBody String pid) {
+    @RequestMapping(value = "/productDetailsResult",method = RequestMethod.GET)
+    public QueryResponseResult ProductLowPrice(String pid) {
         // 调用service的方法
         ProductDetailsResult productDetails = productDetailsService.findByPid(pid);
         List<ProductDetailsResult> logins= Arrays.asList(productDetails);

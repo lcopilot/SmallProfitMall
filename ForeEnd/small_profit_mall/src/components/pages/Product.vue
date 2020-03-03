@@ -123,8 +123,9 @@
                 <div class="form_left">
                   <el-select v-model="productForm.size" filterable placeholder="请选择尺码">
                     <el-option
-                        v-for="item in sizeList"
-                        :label="item.label"
+                        v-for="(size,index) in product.sizeList"
+                        :label="size"
+                        :value="index"
                     >
                     </el-option>
                   </el-select>
@@ -144,11 +145,7 @@
               <el-form-item label="颜色">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.colour" size="medium">
-                    <el-radio-button label="1">星河银</el-radio-button>
-                    <el-radio-button label="2">翡冷翠</el-radio-button>
-                    <el-radio-button label="3">罗兰紫</el-radio-button>
-                    <el-radio-button label="4">丹霞橙</el-radio-button>
-                    <el-radio-button label="5">青山黛</el-radio-button>
+                    <el-radio-button v-for="colour in product.colour" :label="colour"></el-radio-button>
                   </el-radio-group>
                 </div>
               </el-form-item>
@@ -226,11 +223,10 @@
                   <el-col :span="4">
                     <el-progress type="dashboard"  :stroke-width="8" :percentage="98"></el-progress>
                     <div style="margin-top: -28px;">
-                      <h3> 好评度</h3>
+                      <h3>好评度</h3>
                     </div>
                   </el-col>
                   <el-col :span="16">
-
                   </el-col>
                 </el-row>
               </el-tab-pane>
@@ -307,18 +303,7 @@
             fullscreenToggle: true
           }
         },
-        sizeList: [
-          {
-            label: 'S(165)'
-          }, {
-            label: 'M(170)'
-          }, {
-            label: 'L(175)'
-          }, {
-            label: 'XL(180)'
-          }, {
-            label: 'XL(185)'
-          }],
+        sizeList: [],
         specificationList: [
           {
             label: '[新品]16英寸 九代i7 16+512灰'
@@ -360,6 +345,7 @@
           children: 'children'
         },
         address: '',
+        product:[],
         productForm: {
           name: '',
           specification: '',
@@ -368,7 +354,7 @@
           combo: 1,
           taste: 1,
           quantity: 1,
-        }
+        },
       }
     },
     components: {Header, Footer, search},
@@ -427,6 +413,17 @@
       endedVideo() {
         this.videoShow = false;
         this.onPlayerEnded()
+      },
+      //获取商品数据
+      getProduct(pid){
+        this.axios.get("/api/ProductDetails/productDetailsResult",{
+          params:{pid}
+        }).then(res=> {
+              if (res.data.success) {
+                this.product=res.data.queryResult.list[0];
+              }
+            }
+        )
       }
     },
     computed: {
@@ -435,6 +432,7 @@
       }
     },
     created() {
+      this.getProduct("p1");
       this.getAddressData();
       this.getProductImg();
       this.switchProductImg();
