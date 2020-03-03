@@ -17,11 +17,11 @@ import 'default-passive-events'
 //放大镜组件
 import VuePhotoZoomPro from "vue-photo-zoom-pro";
 //视频播放组件
-import Video from 'video.js';
+import VideoPlayer from 'vue-video-player'
+import 'vue-video-player/src/custom-theme.css'
 import 'video.js/dist/video-js.css'
 
-Vue.prototype.$video = Video
-
+Vue.use(VideoPlayer)
 
 //全局注册组件
 Vue.component('SvgIcon', SvgIcon)
