@@ -33,8 +33,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public SeckillResult findSeckill() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//格式化输出日期
-        ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findSeckill(0,4)),new ArrayList(ProducDao.findSeckill(4,4)),new ArrayList(ProducDao.findSeckill(8,4)),new ArrayList(ProducDao.findSeckill(12,4))};
-        System.out.println(arrayLists1);
+        ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findSeckill(0,4)),
+                new ArrayList(ProducDao.findSeckill(4,4)),
+                new ArrayList(ProducDao.findSeckill(8,4)),
+                new ArrayList(ProducDao.findSeckill(12,4))};
         seckillResult.setSeckillProduct(arrayLists1);
         Date date=new Date();//获取当前时间
         Date time1 = timeUtil.AddTwoTours(date);//获取两个小时后时间

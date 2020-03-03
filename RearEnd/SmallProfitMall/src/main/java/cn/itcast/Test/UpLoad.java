@@ -24,7 +24,7 @@ public class UpLoad {
 
     public static void main(String[] args) {
 
-        Configuration cfg = new Configuration(Zone.zone2());                //zong1() 代表华北地区
+        Configuration cfg = new Configuration(Zone.zone2());                //zong1() 代表华南地区
 
         UploadManager uploadManager = new UploadManager(cfg);
 
