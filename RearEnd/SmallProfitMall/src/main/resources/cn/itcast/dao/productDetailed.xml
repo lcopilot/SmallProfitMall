@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.ProductDetailsDao">
+
+    <!--查询所有秒杀商品信息-->
+    <select id="findByPid" resultType="cn.itcast.domain.ProductDetails" parameterType="String">
+       SELECT * FROM productDetails where pid=#{pid}
+    </select>
+
+    <!--查询所有秒杀商品信息-->
+    <select id="findSizeByPid" resultType="cn.itcast.domain.ProductDatails.Size" parameterType="String">
+       SELECT * FROM size where sid=#{sid}
+    </select>
+</mapper>
