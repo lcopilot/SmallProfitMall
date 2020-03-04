@@ -27,7 +27,7 @@ public class ProductDetailsController {
      * @return
      */
     @RequestMapping("/productDetailsResult")
-    public QueryResponseResult ProductLowPrice(@RequestBody String pid) {
+    public QueryResponseResult ProductLowPrice(String pid) {
         // 调用service的方法
         ProductDetailsResult productDetails = productDetailsService.findByPid(pid);
         List<ProductDetailsResult> logins= Arrays.asList(productDetails);

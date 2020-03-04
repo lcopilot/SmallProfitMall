@@ -71,7 +71,7 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
         String specifications=productDetails.getSpecification();
         if (specifications!=null){
             String[] specification = specifications.split(",");//转规格数组
-            productDetailsResult.setSize(specification);     //设置规格数组
+            productDetailsResult.setSpecification(specification);     //设置规格数组
         }
 
         String tastes=productDetails.getTaste();
