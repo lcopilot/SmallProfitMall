@@ -89,7 +89,6 @@
         this.axios.get("/api/CommodityController/Recommend").then(res => {
               if (res.data.success) {
                 this.productsFeaturedList = res.data.queryResult.list[0];
-                console.log(this.productsFeaturedList)
               }
             }
         )
