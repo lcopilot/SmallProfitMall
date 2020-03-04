@@ -8,11 +8,31 @@
       <el-main>
         <el-row type="flex" justify="center" :gutter="20" style="margin-top: 40px">
           <el-col :span="6">
-            <div>
+            <div style="position: relative;" v-if="!videoShow">
               <vue-photo-zoom-pro style="width: 355px;" type="circle"
-                                  :url="bigImg" :high-url="magnifierImg"
+                                  :url="bigImg" :scale="3"
                                   @mouseenter="stopSwitchProductImg()"
                                   @mouseleave="switchProductImg()"/>
+              <div class="product_play" v-if="playerOptions.sources[0].src">
+                <el-link :underline="false" @click.native="playerVideo()">
+                  <svg-icon name="play" class="icon_play"/>
+                </el-link>
+              </div>
+            </div>
+            <div v-if="videoShow" style="position: relative;">
+              <video-player class="video-player vjs-custom-skin"
+                            ref="videoPlayer"
+                            :playsinline="true"
+                            :options="playerOptions"
+                            @play="onPlayerPlay($event)"
+                            @ended="onPlayerEnded($event)"
+                            style="width: 355px;height: 355px">
+              </video-player>
+              <div class="product_end">
+                <el-link :underline="false" @click.native="endedVideo()">
+                  <svg-icon name="ended" class="icon_ended"/>
+                </el-link>
+              </div>
             </div>
             <div>
               <el-row type="flex" justify="center" :gutter="6">
@@ -26,17 +46,28 @@
               <el-row style="font-size: 13px;color: red">
                 <el-col :span="4">
                   <el-link :underline="false">
+                    <svg-icon name="service"
+                              class="icon"></svg-icon>
+                    客服
+                  </el-link>
+                </el-col>
+                <el-col :span="4">
+                  <el-link :underline="false">
                     <svg-icon name="Favorite"
-                              style="margin-bottom: -2px;width: 18px;height: 18px"></svg-icon>
+                              class="icon"></svg-icon>
                     收藏
                   </el-link>
-
                 </el-col>
                 <el-col :span="4">
                   <el-link :underline="false">
                     <svg-icon name="share"
-                              style="margin-bottom: -2px;width: 18px;height: 18px"></svg-icon>
+                              class="icon"></svg-icon>
                     分享
+                  </el-link>
+                </el-col>
+                <el-col :span="12">
+                  <el-link :underline="false" style="text-align: right;margin-left: 130px;color: #999999">
+                    举报
                   </el-link>
                 </el-col>
               </el-row>
@@ -92,8 +123,9 @@
                 <div class="form_left">
                   <el-select v-model="productForm.size" filterable placeholder="请选择尺码">
                     <el-option
-                        v-for="item in sizeList"
-                        :label="item.label"
+                        v-for="(size,index) in product.sizeList"
+                        :label="size"
+                        :value="index"
                     >
                     </el-option>
                   </el-select>
@@ -113,11 +145,7 @@
               <el-form-item label="颜色">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.colour" size="medium">
-                    <el-radio-button label="1">星河银</el-radio-button>
-                    <el-radio-button label="2">翡冷翠</el-radio-button>
-                    <el-radio-button label="3">罗兰紫</el-radio-button>
-                    <el-radio-button label="4">丹霞橙</el-radio-button>
-                    <el-radio-button label="5">青山黛</el-radio-button>
+                    <el-radio-button v-for="colour in product.colour" :label="colour"></el-radio-button>
                   </el-radio-group>
                 </div>
               </el-form-item>
@@ -156,7 +184,7 @@
                   剩余库存 <span class="product_repertory">7.8</span>万件
                 </div>
               </el-form-item>
-              <el-form-item label="保障">
+              <el-form-item>
                 <el-collapse @change="handleChange">
                   <el-collapse-item title="服务承诺" name="1">
                     <div>支持七天与理由</div>
@@ -175,7 +203,51 @@
           </el-col>
         </el-row>
       </el-main>
-
+      <el-main>
+        <el-row>
+          <el-col :span="17" :push="3">
+            <el-tabs type="border-card">
+              <el-tab-pane>
+                <div slot="label" style="font-size: 17px">
+                  <svg-icon name="introduction"></svg-icon>
+                  商品介绍
+                </div>
+                我的行程
+              </el-tab-pane>
+              <el-tab-pane>
+                <div slot="label" style="font-size: 17px">
+                  <svg-icon name="evaluation"></svg-icon>
+                  商品评价
+                </div>
+                <el-row>
+                  <el-col :span="4">
+                    <el-progress type="dashboard"  :stroke-width="8" :percentage="98"></el-progress>
+                    <div style="margin-top: -28px;">
+                      <h3>好评度</h3>
+                    </div>
+                  </el-col>
+                  <el-col :span="16">
+                  </el-col>
+                </el-row>
+              </el-tab-pane>
+              <el-tab-pane>
+                <div slot="label" style="font-size: 17px">
+                  <svg-icon name="afterSale"></svg-icon>
+                  售后保障
+                </div>
+                lk;kl;kl;kl;
+              </el-tab-pane>
+              <el-tab-pane>
+                <div slot="label" style="font-size: 17px">
+                  <svg-icon name="parameter"></svg-icon>
+                  商品参数
+                </div>
+                hjkhkjhjk
+              </el-tab-pane>
+            </el-tabs>
+          </el-col>
+        </el-row>
+      </el-main>
     </el-main>
     <el-footer>
       <Footer/>
@@ -194,18 +266,44 @@
     data() {
       return {
         bigImg: '',
-        sizeList: [
-          {
-            label: 'S(165)'
-          }, {
-            label: 'M(170)'
-          }, {
-            label: 'L(175)'
-          }, {
-            label: 'XL(180)'
-          }, {
-            label: 'XL(185)'
+        videoShow: false,
+        playerOptions: {
+          //播放速度
+          playbackRates: [0.5, 1.0, 1.5, 2.0],
+          //如果true,浏览器准备好时开始回放。
+          autoplay: true,
+          // 默认情况下将会消除任何音频。
+          muted: false,
+          // 导致视频一结束就重新开始。
+          loop: false,
+          // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+          preload: 'auto',
+          language: 'zh-CN',
+          // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+          aspectRatio: '1:1',
+          // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
+          fluid: true,
+          sources: [{
+            //类型
+            type: "video/ogg",
+            type: "video/webm",
+            type: "video/mp4",
+            //url地址
+            src: 'http://img.fhxasdsada.xyz/asdasd.mp4'
           }],
+          //你的封面地址
+          poster: '',
+          //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+          notSupportedMessage: '此视频暂无法播放，请稍后再试',
+          controlBar: {
+            timeDivider: true,
+            durationDisplay: true,
+            remainingTimeDisplay: false,
+            //全屏按钮
+            fullscreenToggle: true
+          }
+        },
+        sizeList: [],
         specificationList: [
           {
             label: '[新品]16英寸 九代i7 16+512灰'
@@ -223,23 +321,18 @@
         productImgList: [
           {
             img: 'http://img.fhxasdsada.xyz/aee0a989e72627dab77f3fb1002bb739_2_3_photo.png',
-            magnifierImg: 'http://img.fhxasdsada.xyz/aee0a989e72627dab77f3fb1002bb739_2_3_photo.png'
           },
           {
-            img: 'http://img.fhxasdsada.xyz/O1CN01gDQHPJ22AEDl61L9W_%21%211917047079.jpg_430x430q90.jpg',
-            magnifierImg: 'http://img.fhxasdsada.xyz/efbaa56776e405d6944fd9041040a19d_2_3_photo.jpg'
+            img: 'http://img.fhxasdsada.xyz/efbaa56776e405d6944fd9041040a19d_2_3_photo.jpg'
           },
           {
-            img: 'http://img.fhxasdsada.xyz/O1CN01PweeQr22AEJuIJv81_%21%211917047079.png_430x430q90.png',
-            magnifierImg: 'http://img.fhxasdsada.xyz/b202c8d2e990743cbfe239cb860e4a41_2_3_photo.png'
+            img: 'http://img.fhxasdsada.xyz/b202c8d2e990743cbfe239cb860e4a41_2_3_photo.png'
           },
           {
-            img: 'http://img.fhxasdsada.xyz/O1CN01aVSHBx22AEJy0gFkG_%21%212-item_pic.png_430x430q90.png',
-            magnifierImg: 'http://img.fhxasdsada.xyz/bcfee3e5a67cf23413e11d8afa99117f_2_3_photo.png'
+            img: 'http://img.fhxasdsada.xyz/bcfee3e5a67cf23413e11d8afa99117f_2_3_photo.png'
           },
           {
-            img: 'http://img.fhxasdsada.xyz/O1CN01PweeQr22AEJuIJv81_%21%211917047079.png_430x430q90.png',
-            magnifierImg: 'http://img.fhxasdsada.xyz/b202c8d2e990743cbfe239cb860e4a41_2_3_photo.png'
+            img: 'http://img.fhxasdsada.xyz/b202c8d2e990743cbfe239cb860e4a41_2_3_photo.png'
           },
         ],
         item: 0,
@@ -252,6 +345,7 @@
           children: 'children'
         },
         address: '',
+        product:[],
         productForm: {
           name: '',
           specification: '',
@@ -260,19 +354,17 @@
           combo: 1,
           taste: 1,
           quantity: 1,
-        }
+        },
       }
     },
     components: {Header, Footer, search},
     methods: {
       getProductImg() {
         this.bigImg = this.productImgList[1].img;
-        this.magnifierImg = this.productImgList[1].magnifierImg;
       },
       enter(index) {
         this.stopSwitchProductImg();
         this.bigImg = this.productImgList[index].img;
-        this.magnifierImg = this.productImgList[index].magnifierImg;
       },
       switchProductImg() {
         this.timer = setInterval(() => {
@@ -280,7 +372,6 @@
             this.item = 0;
           }
           this.bigImg = this.productImgList[this.item].img;
-          this.magnifierImg = this.productImgList[this.item].magnifierImg;
           this.item += 1;
         }, 3000);
       },
@@ -307,8 +398,41 @@
           this.options = JSON.parse(sessionStorage.getItem('addressData'));
         }
       },
+      onPlayerPlay() {
+        const myPlayer = this.$refs.videoPlayer.player;
+        myPlayer.play();
+      },
+      onPlayerEnded() {
+        const myPlayer = this.$refs.videoPlayer.player;
+        myPlayer.ended();
+      },
+      playerVideo() {
+        this.videoShow = true;
+        this.onPlayerPlay()
+      },
+      endedVideo() {
+        this.videoShow = false;
+        this.onPlayerEnded()
+      },
+      //获取商品数据
+      getProduct(pid){
+        this.axios.get("/api/ProductDetails/productDetailsResult",{
+          params:{pid}
+        }).then(res=> {
+              if (res.data.success) {
+                this.product=res.data.queryResult.list[0];
+              }
+            }
+        )
+      }
+    },
+    computed: {
+      player() {
+        return this.$refs.videoPlayer.player;
+      }
     },
     created() {
+      this.getProduct("p1");
       this.getAddressData();
       this.getProductImg();
       this.switchProductImg();
@@ -353,5 +477,48 @@
   .product_repertory {
     color: red;
     font-weight: 750;
+  }
+
+  .icon_play {
+    width: 40px;
+    height: 40px;
+  }
+
+  .icon_play:hover {
+    transform: scale(1.1);
+  }
+
+  .icon_ended {
+    width: 28px;
+    height: 28px;
+  }
+
+  .icon_ended:hover {
+    transform: scale(1.1);
+  }
+
+  .icon {
+    margin-bottom: -2px;
+    width: 18px;
+    height: 18px
+  }
+
+  .product_play {
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+    margin-top: -50px;
+    position: absolute;
+    left: 0;
+  }
+
+  .product_end {
+    width: 24px;
+    height: 24px;
+    margin-right: 7px;
+    margin-top: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 </style>
