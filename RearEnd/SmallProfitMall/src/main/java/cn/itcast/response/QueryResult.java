@@ -3,6 +3,7 @@ package cn.itcast.response;
 import java.util.List;
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.stereotype.Component;
 
 /**
  * @Author: mrt.
@@ -12,6 +13,7 @@ import lombok.ToString;
  */
 @Data
 @ToString
+@Component
 public class QueryResult<T> {
     //数据列表
     private List<T> list;

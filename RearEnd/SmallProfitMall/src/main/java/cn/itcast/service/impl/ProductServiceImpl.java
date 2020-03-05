@@ -22,11 +22,8 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     RedisUtil redisUtil;
 
-
-    SeckillResult seckillResult = new SeckillResult();
-
-
-    TimeUtil timeUtil = new TimeUtil();
+    @Autowired
+    SeckillResult seckillResult;
 
     ProductLowPriceResult productLowPriceResult = new ProductLowPriceResult();
     //秒杀
@@ -39,9 +36,9 @@ public class ProductServiceImpl implements ProductService {
                 new ArrayList(ProducDao.findSeckill(12,4))};
         seckillResult.setSeckillProduct(arrayLists1);
         Date date=new Date();//获取当前时间
-        Date time1 = timeUtil.AddTwoTours(date);//获取两个小时后时间
+        Date time1 = TimeUtil.AddTwoTours(date);//获取两个小时后时间
         String time3 = sdf.format(date);    //当前时间转为字符串
-        Long time2 =timeUtil.timestamp();    //两小时后时间转字符串
+        Long time2 =TimeUtil.timestamp();    //两小时后时间转字符串
         seckillResult.setSpikeTime(time2);//设置两小时后时间
         seckillResult.setCurrentTime(time3);//设置当前时间
         return seckillResult;
@@ -62,7 +59,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Ad> findAd() {
         List<Ad> redis = (List<Ad>) redisUtil.lGet("Ad", 0, -1);
-        System.out.println(redis);
         if (redis.size() == 0) {
             System.out.println("数据库中取");
             List<Ad> ad = ProducDao.findAd();
@@ -79,7 +75,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Recommend> findRecommend() {
         List<Recommend> redis = (List<Recommend>) redisUtil.lGet("recommend", 0, -1);
-        System.out.println(redis);
         if (redis.size() == 0) {
             System.out.println("数据库中取");
             List<Recommend> recommend = ProducDao.findRecommend();

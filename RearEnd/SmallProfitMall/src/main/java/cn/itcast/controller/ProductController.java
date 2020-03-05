@@ -24,6 +24,9 @@ public class ProductController {
 
     @Autowired
     ProductLowPriceResult productLowPriceResult;
+
+    @Autowired
+    QueryResult result;
     /**
      * 秒杀商品
      * @return
@@ -33,7 +36,6 @@ public class ProductController {
         // 调用service的方法
         SeckillResult seckillResult = commodityService.findSeckill();
         List<SeckillResult> logins= Arrays.asList(seckillResult);
-        QueryResult<SeckillResult> result = new QueryResult<>();
         result.setList(logins);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
@@ -47,7 +49,6 @@ public class ProductController {
         // 调用service的方法
         ProductLowPriceResult productLowPriceResult = commodityService.findProductLowPrice();
         List<ProductLowPriceResult> logins= Arrays.asList(productLowPriceResult);
-        QueryResult<ProductLowPriceResult> result = new QueryResult<>();
         result.setList(logins);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
@@ -60,7 +61,6 @@ public class ProductController {
     public QueryResponseResult findAd() {
         // 调用service的方法
         List<Ad> list = commodityService.findAd();
-        QueryResult<Ad> result = new QueryResult<>();
         result.setTotal(list.size());
         result.setList(list);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
@@ -75,7 +75,6 @@ public class ProductController {
         // 调用service的方法
         List<Recommend> list = commodityService.findRecommend();
         int a =list.size();
-        QueryResult<Recommend> result = new QueryResult<>();
         result.setTotal(a);
         result.setList(list);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
@@ -85,7 +84,6 @@ public class ProductController {
     public QueryResponseResult cs() {
         // 调用service的方法
         List<Ad> list = commodityService.findAd();
-        QueryResult<Ad> result = new QueryResult<>();
         result.setList(list);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }

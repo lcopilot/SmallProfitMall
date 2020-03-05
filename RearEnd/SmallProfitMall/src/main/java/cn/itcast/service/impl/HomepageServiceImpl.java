@@ -21,7 +21,8 @@ public class HomepageServiceImpl implements HomepageService {
     @Autowired
     RedisUtil redisUtil;
 
-    Classification classification = new Classification();
+    @Autowired
+    Classification classification;
 
     //轮播图
     @Override

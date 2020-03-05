@@ -1,12 +1,13 @@
 package cn.itcast.domain;
 
 import cn.itcast.domain.ProductDatails.Size;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Controller("productDetailsResult")
+@Component("productDetailsResult")
 public class ProductDetailsResult implements Serializable {
     private int id;
     private String pid;

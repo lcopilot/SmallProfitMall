@@ -1,9 +1,10 @@
 package cn.itcast.domain;
 //用户实体类
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.io.Serializable;
-@Controller("user")
+@Component("user")
 public class User implements Serializable {
     private Integer id;
     private String uid;
