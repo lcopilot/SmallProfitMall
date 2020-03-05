@@ -15,8 +15,7 @@
                      v-for="(productsFeatured ,index) in productsFeaturedList"
                      :key="productsFeatured.id">
               <div style="position: relative;">
-                <a :href="'/product?productId='+productsFeatured.rid"
-                             :title="productsFeatured.productName">
+                <router-link :to="{path: '/product', query: {productId:productsFeatured.rid}}" >
                   <el-image fit="fit" :src="productsFeatured.productPicture"
                             :lazy="true"/>
                   <div class="recommended_products_name">
@@ -26,7 +25,7 @@
                           class="recommended_products_price">￥{{productsFeatured.productPrice}}</span>
                     </div>
                   </div>
-                </a>
+                </router-link>
                 <a>
                   <div @mouseenter="enterFavorite(index)" v-if="productsFeatured.favorite==1"
                        class="recommended_products_favorite">
