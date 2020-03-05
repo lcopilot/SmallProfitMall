@@ -111,6 +111,7 @@
                         });
                       } else {
                         this.$message.error("账户或密码错误!")
+                        this.$router.go(0);
                       }
                     })
                     .catch(error => {
@@ -123,6 +124,19 @@
             }
         );
       },
+      alert(code) {
+        console.log(code)
+        if (code == 'success') {
+          this.checkCode = true;
+        } else {
+          this.checkCode = false;
+          if (code == 'success') {
+            this.checkCode = true;
+          } else {
+            this.checkCode = false;
+          }
+        }
+      }
     },
     mounted() {
 
