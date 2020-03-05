@@ -1,11 +1,12 @@
 package cn.itcast.domain;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Controller("productLowPriceResult")
+@Component("productLowPriceResult")
 public class ProductLowPriceResult implements Serializable {
     private List[] ProductLowPrice ;
 

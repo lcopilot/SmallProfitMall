@@ -14,7 +14,7 @@ public class TimeUtil {
     private static final String FORMAT_FULL = null;
 
     //当前时间增加两个小时
-    public Date AddTwoTours(Date date){
+    public static Date AddTwoTours(Date date){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/HH mm:ss");//格式化输出日期
         Date now = new Date();
         long time = 60*1000*60*2;//60秒
@@ -24,7 +24,7 @@ public class TimeUtil {
     }
 
     //获取偶数小时间戳
-    public long timestamp() throws ParseException {
+    public static long timestamp() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");//格式化输出日期
         Date date = new Date();
         int hour =getHour(date);//获取小时
@@ -37,12 +37,12 @@ public class TimeUtil {
         }
         long ts =0;
         Date c = new SimpleDateFormat("yyyy/MM/dd/HH mm:ss").parse(r + "/"+h+" 00:00");
-        System.out.println(c);
+
         ts = c.getTime();
         return ts;
     }
     //获得当前小时
-    public int getHour(Date date) {
+    public static int getHour(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.HOUR_OF_DAY);

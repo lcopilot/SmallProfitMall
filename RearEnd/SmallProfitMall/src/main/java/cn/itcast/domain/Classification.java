@@ -1,7 +1,10 @@
 package cn.itcast.domain;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 //分类集合返回
+@Component
 public class Classification {
     private List<Navigation> navigations;
     private List<NavigationClassify> navigationClassify;

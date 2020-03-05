@@ -16,7 +16,8 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     @Autowired
     ProductDetailsDao productDetailsDao;
 
-    ProductDetailsResult productDetailsResult = new ProductDetailsResult();
+    @Autowired
+    ProductDetailsResult productDetailsResult;
 
     @Override
     public ProductDetailsResult findByPid(String pid) {
@@ -40,6 +41,12 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
             Double sales = productDetails.getSales();
             sales =sales/10000;
             sale=sales+"W+";
+        }
+        if (productDetails.getInventory()==null) {  //库存为空 则设置为零
+            productDetailsResult.setInventory("0");
+        }
+        if (productDetails.getSales()==null){
+            productDetailsResult.setSales("0"); //如果销量为空 则设置为零
         }
         productDetailsResult.setInventory(inventory);//设置库存
         productDetailsResult.setSales(sale);

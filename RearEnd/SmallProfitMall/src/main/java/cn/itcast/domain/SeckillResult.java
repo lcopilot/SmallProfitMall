@@ -1,12 +1,13 @@
 package cn.itcast.domain;
 
 import jdk.nashorn.internal.runtime.ListAdapter;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Controller("seckillResult")
+@Component("seckillResult")
 public class SeckillResult implements Serializable {
     private String currentTime;       //当前时间
     private Long SpikeTime;         //两小时后时间

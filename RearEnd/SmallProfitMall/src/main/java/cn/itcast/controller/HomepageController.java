@@ -27,6 +27,8 @@ public class HomepageController {
     @Autowired
     RedisUtil redisUtil;
 
+    @Autowired
+    QueryResult result;
     /**
      * 轮播图
      * @return
@@ -35,7 +37,6 @@ public class HomepageController {
     public QueryResponseResult findRotationChart() {
         // 调用service的方法
         List<RotationChart> list = homepageService.findRotationChart();
-        QueryResult<RotationChart> result = new QueryResult<>();
         result.setList(list);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
@@ -45,7 +46,6 @@ public class HomepageController {
     public QueryResponseResult findNavigation(){
         // 调用service的方法
         List<Navigation> list = homepageService.findNavigation();
-        QueryResult<Navigation> result = new QueryResult<>();
         result.setList(list);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
      }
@@ -55,7 +55,6 @@ public class HomepageController {
     public QueryResponseResult findNavigation2(){
         // 调用service的方法
         List<Navigation_2> list = homepageService.findNavigation2();
-        QueryResult<Navigation_2> result = new QueryResult<>();
         result.setList(list);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
@@ -65,7 +64,6 @@ public class HomepageController {
     public QueryResponseResult findIcon(){
         // 调用service的方法
         List<Icon> list = homepageService.findIcon();
-        QueryResult<Icon> result = new QueryResult<>();
         result.setList(list);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
@@ -76,7 +74,6 @@ public class HomepageController {
     public QueryResponseResult cs(){
         Classification classification = homepageService.navigationInDetail();
         List<Classification> logins= Arrays.asList(classification);
-        QueryResult<Classification> result = new QueryResult<>();
         result.setList(logins);
 
         return new QueryResponseResult(CommonCode.SUCCESS,result);

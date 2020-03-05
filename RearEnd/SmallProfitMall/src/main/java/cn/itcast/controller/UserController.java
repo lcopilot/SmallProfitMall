@@ -35,6 +35,9 @@ public class UserController {
     @Autowired
     private GetFourRandom getFourRandom;
 
+    @Autowired
+    QueryResult result;
+
     /**
      * 查询所有方法
      * @return
@@ -43,7 +46,6 @@ public class UserController {
     public QueryResponseResult findAll(){
         // 调用service的方法
         List<User> list = userService.findAll();
-        QueryResult<User> result = new QueryResult<>();
         result.setList(list);
         return new QueryResponseResult(CommonCode.SUCCESS,result);
     }
@@ -66,7 +68,6 @@ public class UserController {
                         login.setUid(name.getUid());
                         login.setToken(name.getToken());
                         List<Login> logins= Arrays.asList(login);
-                        QueryResult<Login> result = new QueryResult<>();
                         result.setList(logins);
                         return new QueryResponseResult(CommonCode.SUCCESS,result);   //登录成功
                     }else {
@@ -78,7 +79,6 @@ public class UserController {
                         login.setUid(phone.getUid());
                         login.setToken(phone.getToken());
                         List<Login> logins= Arrays.asList(login);
-                        QueryResult<Login> result = new QueryResult<>();
                         result.setList(logins);
                         return new QueryResponseResult(CommonCode.SUCCESS,result);   //登录成功
                     }else {
@@ -93,20 +93,20 @@ public class UserController {
 
     /**
      * 注册手机验证接口
-     * @param register
+     * @param phone
      * @return
      * @throws ClientException
      */
-    @RequestMapping("/registerVerify")
-    public QueryResponseResult registerVerify(@RequestBody Register register , HttpSession session) throws ClientException {
-        if (register.getPhone().length()==11){      //判断手机号是否正确
-            User phone = userService.findByPhone(register.getPhone()); //根据手机号查询
-            if (phone==null){       //手机尚未注册
+    @RequestMapping("/registerVerify/{phone}")
+    public QueryResponseResult registerVerify(@PathVariable("phone") String phone , HttpSession session) throws ClientException {
+        if (phone.length()==11){      //判断手机号是否正确
+            User user_phone = userService.findByPhone(phone); //根据手机号查询
+            if (user_phone==null){       //手机尚未注册
                 String FR = getFourRandom.getFourRandom();
                 System.out.println("验证码为 "+FR);
                 session.setAttribute("Verify",FR);//设置验证码session
-                session.setAttribute("phone",register.getPhone());//设置手机号session
-                boolean flag= sm.sendRegistSms(register.getPhone(),FR);
+                session.setAttribute("phone",phone);//设置手机号session
+                boolean flag= SmsUtils.sendRegistSms(phone,FR);
                 if(flag){
                     removeAttrbute(session,"Verify");//存入session
                     return new QueryResponseResult(CommonCode.SUCCESS,null);
@@ -120,6 +120,7 @@ public class UserController {
             return new QueryResponseResult(CommonCode.INVALID_PARAM,null);
         }
     }
+
     /**
      * 注册
      * @return
@@ -138,21 +139,21 @@ public class UserController {
 
     /**
      * 短信验证接口(修改登录密码，支付密码）
-     * @param user
+     * @param phone
      * @param session
      * @return
      * @throws ClientException
      */
-    @RequestMapping("/SmVerify")
-    public  QueryResponseResult SmVerify(@RequestBody User user , HttpSession session) throws ClientException {
-        User user1 =userService.findByPhone(user.getPhone());
+    @RequestMapping("/SmVerify/{phone}")
+    public  QueryResponseResult SmVerify(@PathVariable("phone") String phone , HttpSession session) throws ClientException {
+        User user1 =userService.findByPhone(phone);
         if (user1!=null){
             String FR = getFourRandom.getFourRandom();
             System.out.println("修改验证码为 "+FR);
-            boolean flag = sm.sendRegistSms(user1.getPhone(),FR);
+            boolean flag = SmsUtils.sendRegistSms(user1.getPhone(),FR);
             if(flag){
                 session.setAttribute("passwordVerify",FR);//存入验证码session
-                session.setAttribute("upPasswordPhone",user.getPhone());//手机号存入session
+                session.setAttribute("upPasswordPhone",phone);//手机号存入session
                 return new QueryResponseResult(CommonCode.SUCCESS,null);
             }else {
                 return new QueryResponseResult(CommonCode.SERVER_ERROR,null);
