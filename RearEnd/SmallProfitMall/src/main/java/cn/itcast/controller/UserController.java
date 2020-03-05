@@ -27,9 +27,6 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private SmsUtils sm;
-
-    @Autowired
     private Login login;
 
     @Autowired

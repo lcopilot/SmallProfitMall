@@ -395,7 +395,7 @@
         return this.$refs.videoPlayer.player;
       }
     },
-    created() {
+    beforeMount() {
       if (this.$route.query.productId != null) {
         sessionStorage.setItem("productId", this.$route.query.productId);
       }

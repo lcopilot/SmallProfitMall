@@ -109,7 +109,7 @@
         })
       }
     },
-    created() {
+    beforeMount() {
       this.getProductsFeatured();
     }
   }
