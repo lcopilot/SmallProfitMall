@@ -4,19 +4,20 @@ module.exports = {
     host: '0.0.0.0',
     // 设置默认端口
     port: 13000,
-
     // 设置代理
     proxy: {
-      '/api': {
+      '/apiUrl': {
         // 目标 API 地址
         target: 'http://localhost:3167',
         pathRewrite: {
-          '^/api': ''
+          '^/apiUrl': ''
         },
         // 是否要代理 websockets
         ws: false,
         //是否跨域
-        changeOrigin: true
+        changeOrigin: true,
+
+
       }
     }
   },

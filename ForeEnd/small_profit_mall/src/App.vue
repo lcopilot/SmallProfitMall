@@ -28,9 +28,6 @@
   line-height: 40px;
   color: #1989fa;
 }
-#nav {
-  padding: 30px;
-}
 
 #nav a {
   font-weight: bold;

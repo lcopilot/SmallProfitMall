@@ -58,10 +58,10 @@
 
 <script>
   // @ is an alias to /src
-  const Header = ()=>import("./Header");
-  const Footer = ()=>import("./Footer");
-  const Verify = ()=>import("vue2-verify");
-
+  const Header = () => import("./Header");
+  const Footer = () => import("./Footer");
+  const Verify = () => import("vue2-verify");
+  import *as userApi from '../../api/page/user'  //*as别名
 
   export default {
     components: {Header, Footer, Verify},
@@ -96,21 +96,16 @@
                   });
                 } else {
                   {
-                    this.axios
-                    .post("/api/user/accountLogin", {
-                      name: this.loginForm.name,
-                      password: this.loginForm.password
-                    })
+                    userApi.login(this.loginForm)
                     .then(res => {
-                      if (res.data.success) {
-                        // this.list=res.data.queryResult.list;
+                      if (res.success) {
                         this.$message({
                           message: "登录成功",
                           type: "success"
                         });
-                        sessionStorage.setItem("username", res.data.queryResult.list[0].name);
-                        sessionStorage.setItem("uId", res.data.queryResult.list[0].uid);
-                        sessionStorage.setItem("token", res.data.queryResult.list[0].token);
+                        sessionStorage.setItem("username", res.queryResult.list[0].name);
+                        sessionStorage.setItem("uId", res.queryResult.list[0].uid);
+                        sessionStorage.setItem("token", res.queryResult.list[0].token);
                         this.$router.push({
                           path: "/Home" //跳转的路径
                         });
@@ -128,14 +123,6 @@
             }
         );
       },
-      alert(code) {
-        if (code == 'success') {
-          this.checkCode = true;
-        } else {
-          this.checkCode = false;
-        }
-      },
-
     },
     mounted() {
 

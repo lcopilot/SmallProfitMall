@@ -176,8 +176,8 @@
 </template>
 
 <script>
-  import {mapActions} from "vuex";
-
+  import *as homeApi from '../../api/page/home'
+  import *as commonApi from '../../api/util/common'
   const search = () => import("./Search");
 
   export default {
@@ -208,11 +208,11 @@
           }
         });
       },
+      //获取轮播图
       getRotationChart() {
-        this.axios.get("/api/homepageController/findRotationChart")
-        .then(res => {
-          if (res.data.success) {
-            this.rotationCharts = res.data.queryResult.list;
+        homeApi.getRotationChart().then(res => {
+          if (res.success) {
+            this.rotationCharts = res.queryResult.list;
           }
         })
       },
@@ -220,18 +220,20 @@
         sessionStorage.clear();
         this.$router.push("/login");
       },
+      //获取分类列表
       getCategoriesList() {
-        this.axios.get("api/homepageController/navigationInDetail").then(res => {
-          if (res.data.success) {
-            this.CategoriesList = res.data.queryResult.list[0].navigations[0];
-            this.CategoriesLists = res.data.queryResult.list[0];
+        homeApi.getCategoriesList().then(res => {
+          if (res.success) {
+            this.CategoriesList = res.queryResult.list[0].navigations[0];
+            this.CategoriesLists = res.queryResult.list[0];
           }
         })
       },
+      //获取常用功能
       getCommonFunctionsList() {
-        this.axios.get("api/homepageController/icon").then(res => {
-          if (res.data.success) {
-            this.CommonFunctionsList = res.data.queryResult.list[0];
+        homeApi.getCommonFunctionsList().then(res => {
+          if (res.success) {
+            this.CommonFunctionsList = res.queryResult.list[0];
           }
         })
       },
@@ -244,10 +246,10 @@
         })
       },
       getAddressData() {
-        if (JSON.parse(sessionStorage.getItem('addressData'))){
-          this.axios.get("http://img.fhxasdsada.xyz/pcas-code.json").then(res => {
-            if (res.status == 200) {
-              sessionStorage.setItem("addressData",JSON.stringify(res.data));
+        if (JSON.parse(sessionStorage.getItem('addressData'))==null){
+          commonApi.getAddressData().then(res => {
+            if (res.length!=0) {
+              sessionStorage.setItem("addressData",JSON.stringify(res));
             }
           })
         }

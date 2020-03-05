@@ -32,10 +32,11 @@
                   <svg-icon name="verification_code" class="icon"/>
                   <el-input placeholder="请输入手机验证码" v-model="registerForm.verify" clearable
                             class="username"
-                            style="width: 210px;margin-right: 5px"
+                            style="width: 170px;margin-right: 5px"
                             @keyup.enter.native="register('registerForm')"/>
-                  <span v-show="show" @click="getCode" class="span">获取验证码</span>
-                  <span v-show="!show" class="span">重新发送({{count}})</span>
+                  <el-button type="primary" @click="getPhoneCode()"  :disabled="!BtnStatus" class="code_btn">
+                    {{BtnStatus?'获取验证码':`重新获取(${countDownTime})`}}
+                  </el-button>
                 </el-form-item>
                 <el-form-item>
                   <el-button class="login-btn" @click="resetPassword('registerForm')">重置密码</el-button>
@@ -57,6 +58,7 @@
 <script>
   const Header = ()=>import("./Header");
   const Footer = ()=>import("./Footer");
+  import *as userApi from '../../api/page/user'
 
   export default {
     components: {Header, Footer},
@@ -82,7 +84,8 @@
         verificationCode: "",
         show: true,
         count: '',
-        timer: null,
+        BtnStatus: true,
+        countDownTime: 60,
         registerForm: {
           phone: '',
           password: '',
@@ -107,10 +110,9 @@
       resetPassword(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.axios
-            .post("/api/user/updatePasswordPhone", this.registerForm)
+            userApi.resetPassword(this.registerForm)
             .then(res => {
-              if (res.data.success) {
+              if (res.success) {
                 this.$message({
                   message: "重置密码成功",
                   type: "success"
@@ -119,7 +121,7 @@
                   path: "/login" //跳转的路径
                 });
               } else {
-                this.$message.error("重置密码失败");
+                this.$message.error("重置密码失败,请稍后重试");
               }
             })
             .catch(error => {
@@ -129,47 +131,60 @@
           }
         });
       },
-      getCode() {
+      getPhoneCode() {
         if ((/^1[34578]\d{9}$/.test(this.registerForm.phone))) {
-          this.axios
-          .post("/api/user/SmVerify", {
-            phone: this.registerForm.phone,
-          }).then(res => {
-            if (res.data.success) {
+          userApi.get_Phone_Code_FP(
+           this.registerForm.phone).then(res => {
+            if (res.success) {
               this.$message({
                 message: "短信发送成功",
                 type: "success"
               });
             } else {
-              if (res.data.code == 99999) {
-                this.$message.error(this.data.message);
+              if (res.code == 99999) {
+                this.$message.error(res.message);
               } else {
                 this.$message.error("手机号已经被注册或手机号不存在");
               }
             }
           })
-          const TIME_COUNT = 60;
-          if (!this.timer) {
-            this.count = TIME_COUNT;
-            this.show = false;
-            this.timer = setInterval(() => {
-              if (this.count > 0 && this.count <= TIME_COUNT) {
-                this.count--;
-              } else {
-                this.show = true;
-                clearInterval(this.timer);
-                this.timer = null;
-              }
-            }, 1000)
-          }
+          this.GetCode();
         } else {
           this.$message({
             message: "请输入正确的手机号",
             type: "error"
           });
         }
+      },
+      GetCode () {
+        let endMsRes = (new Date()).getTime() + 60000;
+        //Setitem 为封装 localStoryge 方法
+        sessionStorage.setItem('myEndTime', JSON.stringify(endMsRes));
+        this.codeCountDown(endMsRes)
+      },
+      codeCountDown ( endMsRes) {
+        this.BtnStatus = false;
+        this.countDownTime= Math.ceil((endMsRes - (new Date()).getTime()) / 1000)
+        let time = setTimeout(() => {
+          this.countDownTime--
+          if (this.countDownTime< 1) {
+            this.BtnStatus = true
+            this.countDownTime= 60
+            clearTimeout(time)
+            sessionStorage.removeItem('myEndTime')
+
+          } else {
+            this.codeCountDown(endMsRes)
+          }
+        }, 1000)
       }
     },
+    created () {
+      let myEndTime= sessionStorage.getItem('myEndTime')
+      if(myEndTime && this.codeCountDown(myEndTime)){
+        this.codeCountDown(myEndTime)
+      }
+    }
 
   };
 </script>
@@ -217,10 +232,9 @@
     color: #409EFF;
   }
 
-  .span {
-    color: #409EFF;
+  .code_btn {
     display: inline-block;
-    width: 90px
+    width: 130px;
   }
 
   a {

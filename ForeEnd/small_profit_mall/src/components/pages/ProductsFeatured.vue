@@ -12,35 +12,40 @@
         <el-col :span="19" :push="2">
           <div style="width: 1208px;position:relative;">
             <el-card shadow="hover" class="recommended_products_card"
-                     v-for="(productsFeatured ,index) in productsFeaturedList" :key="productsFeatured.id">
+                     v-for="(productsFeatured ,index) in productsFeaturedList"
+                     :key="productsFeatured.id">
               <div style="position: relative;">
-                <router-link to="/"
+                <a :href="'/product?productId='+productsFeatured.rid"
                              :title="productsFeatured.productName">
                   <el-image fit="fit" :src="productsFeatured.productPicture"
                             :lazy="true"/>
                   <div class="recommended_products_name">
                     {{productsFeatured.productName}}
                     <div>
-                      <span class="recommended_products_price">￥{{productsFeatured.productPrice}}</span>
+                      <span
+                          class="recommended_products_price">￥{{productsFeatured.productPrice}}</span>
                     </div>
                   </div>
-                </router-link>
+                </a>
                 <a>
                   <div @mouseenter="enterFavorite(index)" v-if="productsFeatured.favorite==1"
                        class="recommended_products_favorite">
                     <svg-icon name="Uncollected"/>
                   </div>
-                  <div class="recommended_products_favorite" v-if="productsFeatured.favorite==2" @click="favorite()"
+                  <div class="recommended_products_favorite" v-if="productsFeatured.favorite==2"
+                       @click="favorite()"
                        @mouseout="shiftOutFavorite(index)">
                     <svg-icon name="Favorite"></svg-icon>
                   </div>
                 </a>
                 <a>
-                  <div @mouseenter="enterShoppingTrolley(index)" v-if="productsFeatured.shoppingTrolley==1"
+                  <div @mouseenter="enterShoppingTrolley(index)"
+                       v-if="productsFeatured.shoppingTrolley==1"
                        class="recommended_products_Cart">
                     <svg-icon name="added"/>
                   </div>
-                  <div class="recommended_products_Cart" v-if="productsFeatured.shoppingTrolley==2" @click="addCart()"
+                  <div class="recommended_products_Cart" v-if="productsFeatured.shoppingTrolley==2"
+                       @click="addCart()"
                        @mouseout="shiftOutShoppingTrolley(index)">
                     <svg-icon name="addCart"></svg-icon>
                   </div>
@@ -58,6 +63,7 @@
 </template>
 
 <script>
+  import *as homeApi from '../../api/page/home'
   export default {
     name: "ProductsFeatured",
     data() {
@@ -68,16 +74,16 @@
     },
     methods: {
       enterFavorite(index) {
-        this.productsFeaturedList[index].favorite=2;
+        this.productsFeaturedList[index].favorite = 2;
       },
       shiftOutFavorite(index) {
-        this.productsFeaturedList[index].favorite=1;
+        this.productsFeaturedList[index].favorite = 1;
       },
-      enterShoppingTrolley(index){
-        this.productsFeaturedList[index].shoppingTrolley=2;
+      enterShoppingTrolley(index) {
+        this.productsFeaturedList[index].shoppingTrolley = 2;
       },
-      shiftOutShoppingTrolley(index){
-        this.productsFeaturedList[index].shoppingTrolley=1;
+      shiftOutShoppingTrolley(index) {
+        this.productsFeaturedList[index].shoppingTrolley = 1;
       },
       favorite(ProductId) {
         console.log("sdfs");
@@ -85,13 +91,22 @@
       addCart(ProductId) {
         console.log("sdfs");
       },
+      //商品推荐
       getProductsFeatured() {
-        this.axios.get("/api/CommodityController/Recommend").then(res => {
-              if (res.data.success) {
-                this.productsFeaturedList = res.data.queryResult.list[0];
+        homeApi.getProductsFeatured().then(res => {
+              if (res.success) {
+                this.productsFeaturedList = res.queryResult.list[0];
               }
             }
         )
+      },
+      goProduct(ProductId) {
+        this.$router.push({
+            path: '/product',
+            query: {
+              productId: ProductId
+            },
+        })
       }
     },
     created() {

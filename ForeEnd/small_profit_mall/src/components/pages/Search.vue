@@ -79,6 +79,7 @@
 
 <script>
   import {mapActions} from 'vuex'
+  import *as homeApi from '../../api/page/home';
 
   export default {
     name: "Search",
@@ -112,10 +113,10 @@
       getCartPreview(){
         console.log("sdfsd")
       },
+      //获取导航栏数据
       getPagePilot() {
-        this.axios.get("api/homepageController/findNavigation2").then(res => {
-          if (res.data.success) {
-            this.PagePilotList = res.data.queryResult.list[0];
+        homeApi.getPagePilot().then(res => {if (res.success) {
+            this.PagePilotList = res.queryResult.list[0];
           }
         })
       },
