@@ -402,6 +402,7 @@
       let productId = sessionStorage.getItem("productId")
       this.getProduct(productId);
       this.getAddressData();
+
       this.switchProductImg();
     }
 
