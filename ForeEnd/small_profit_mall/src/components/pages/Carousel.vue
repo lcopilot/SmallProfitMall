@@ -16,7 +16,7 @@
                     trigger="hover"
                     @mouseenter.native="enter(Categories.nid)">
                   <el-table :data="CategoryDetailsList" style="width: 100%;font-size: 11px; "
-                            :show-header="false" @mouseenter.native="enter_table(Categories.nid)">
+                            :show-header="false" >
                     <el-table-column prop="classificationHeader" width="90">
                     </el-table-column>
                     <el-table-column width="90">
@@ -255,7 +255,7 @@
         }
       },
     },
-    created() {
+    beforeMount() {
       this.getRotationChart();
       this.getCategoriesList();
       this.getCommonFunctionsList();

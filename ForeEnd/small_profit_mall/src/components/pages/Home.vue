@@ -195,7 +195,6 @@
           }else {
             this.spikeSessions=hours+1+':00';
           }
-
         }
       },
       //低价商品
@@ -221,7 +220,7 @@
         }
       }
     },
-    created() {
+    beforeMount() {
       this.getLowPriceProductList();
       this.getSpikeSessions();
       this.getSpikeAdList();
