@@ -112,6 +112,7 @@
 <script>
 
   import { mapGetters } from 'vuex'
+  import *as homeApi from '../../api/page/home';
   const Header = () => import("./Header"); //组件懒加载
   const Footer = () => import("./Footer");
   const Carousel = () => import("./Carousel");
@@ -140,6 +141,7 @@
         this.$router.go(0);
         console.log('callBack--' + value + '--结束倒计时回调');
       },
+      //低价商品转换动画
       lowPriceProductSwitch() {
         setTimeout(() => {
           this.lowPriceProductSwitch_1();
@@ -161,21 +163,24 @@
           this.lowPriceProductSwitch();
         }, 300);
       },
+      //秒杀商品部分的广告
       getSpikeAdList() {
-        this.axios.get('/api/CommodityController/findAd').then(res => {
-          if (res.data.success) {
-            this.spikeAdList = res.data.queryResult.list[0];
+        homeApi.getSpikeAdList().then(res => {
+          if (res.success) {
+            this.spikeAdList = res.queryResult.list[0];
           }
         })
       },
+      //秒杀商品
       getSpikeProductList() {
-        this.axios.get('/api/CommodityController/findSeckill').then(res => {
-          if (res.data.success) {
-            this.spikeProductList = res.data.queryResult.list[0];
-            this.endTime= res.data.queryResult.list[0].spikeTime;
+        homeApi.getSpikeProductList().then(res => {
+          if (res.success) {
+            this.spikeProductList = res.queryResult.list[0];
+            this.endTime= res.queryResult.list[0].spikeTime;
           }
         })
       },
+      //秒杀场次
       getSpikeSessions(){
         let hours=new Date().getHours();
         if (hours%2!==1){
@@ -193,10 +198,11 @@
 
         }
       },
+      //低价商品
       getLowPriceProductList(){
-        this.axios.get("/api/CommodityController/findProductLowPrice").then(res => {
-          if (res.data.success) {
-            this.lowPriceProductList = res.data.queryResult.list[0].productLowPrice;
+        homeApi.getLowPriceProductList().then(res => {
+          if (res.success) {
+            this.lowPriceProductList = res.queryResult.list[0].productLowPrice;
           }
         })
       },

@@ -31,6 +31,7 @@ Vue.config.productionTip = false;
 Vue.use(VuePhotoZoomPro);
 
 
+
 new Vue({
   router,
   store,
