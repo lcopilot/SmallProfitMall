@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
                 new ArrayList(ProducDao.findSeckill(8,4)),
                 new ArrayList(ProducDao.findSeckill(12,4))};
         seckillResult.setSeckillProduct(arrayLists1);
-        Date date=new Date();//获取当前时间
+        Date date=new Date();//获取当前时 间
         Date time1 = TimeUtil.AddTwoTours(date);//获取两个小时后时间
         String time3 = sdf.format(date);    //当前时间转为字符串
         Long time2 =TimeUtil.timestamp();    //两小时后时间转字符串
@@ -44,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
         return seckillResult;
     }
 
-     //查询低价商品
+     //查询低 价商品
     @Override
     public ProductLowPriceResult findProductLowPrice() {
         ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findProductLowPrice(0, 6)),
@@ -61,8 +62,11 @@ public class ProductServiceImpl implements ProductService {
         List<Ad> redis = (List<Ad>) redisUtil.lGet("Ad", 0, -1);
         if (redis.size() == 0) {
             System.out.println("数据库中取");
-            List<Ad> ad = ProducDao.findAd();
-            redisUtil.lSet("Ad", ad);  //存入缓存
+            List<Ad> ads = ProducDao.findAd();
+            redisUtil.lSet("Ad", ads);  //存入缓存
+            ArrayList[] arrayLists = {(ArrayList) ads}; //转换返回格式
+            List list= Arrays.asList(arrayLists);//增加一层数组
+            List<Ad>  ad = list;
             return ad;
         } else {
             System.out.println("缓存中取");
@@ -71,15 +75,19 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+
     //为你推荐商品
     @Override
     public List<Recommend> findRecommend() {
         List<Recommend> redis = (List<Recommend>) redisUtil.lGet("recommend", 0, -1);
         if (redis.size() == 0) {
             System.out.println("数据库中取");
-            List<Recommend> recommend = ProducDao.findRecommend();
-            redisUtil.lSet("recommend", recommend);  //存入缓存
-            return recommend;
+            List<Recommend> recommends = ProducDao.findRecommend();
+            redisUtil.lSet("recommend", recommends);  //存入缓存
+            ArrayList[] arrayLists = {(ArrayList) recommends}; //转换返回格式
+            List list= Arrays.asList(arrayLists);//增加一层数组
+            List<Recommend>  recommend = list;
+            return  recommend;
         } else {
             System.out.println("缓存中取");
             //取缓存
