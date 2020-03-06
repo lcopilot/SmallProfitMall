@@ -1,5 +1,5 @@
 <template>
-  <div ref="vaptcha" style="width: 300px;height: 36px;margin-bottom: 10px; ">
+  <div ref="vaptcha" style="width: 300px;height: 10px;margin-left: 70px ">
     <div class="vaptcha-init-main">
       <div class="vaptcha-init-loading">
         <a href="https: //www.vaptcha.com/" target="_blank"><img src="https://cdn.vaptcha.com/vaptcha-loading.gif"/></a>
@@ -51,16 +51,19 @@
       this.loadV2Script().then(() => {
         window.vaptcha(config).then(obj => {
           obj.listen('pass', res=> {
-            this.success();
-            console.log(obj.getToken())
+            this.success(obj.getToken());
           })
-          obj.render()
+          //关闭验证弹窗时触发
+          obj.listen('close', function() {
+            obj.render();
+          })
+          obj.render();
         })
       })
     },
     data() {
       return {
-        script: null,
+      script: null,
       }
     },
     methods: {
@@ -72,8 +75,9 @@
             let script = document.createElement('script')
             script.src = 'https://v.vaptcha.com/v3.js'
             script.async = true
-            script.onload = script.onreadystatechange = function() {
-              if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
+            script.onload = script.onreadystatechange = function () {
+              if (!this.readyState || this.readyState == 'loaded' || this.readyState
+                  == 'complete') {
                 resolve()
                 script.onload = script.onreadystatechange = null
               }
@@ -82,10 +86,9 @@
           })
         }
       },
-      pass() {
-        console.log("asda")
-        this.$emit('kkkk')
-      }
+      success(toke) {
+        this.$emit('success',toke)
+      },
     }
   }
 </script>
