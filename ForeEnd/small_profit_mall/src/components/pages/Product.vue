@@ -218,13 +218,49 @@
                   商品评价
                 </div>
                 <el-row>
-                  <el-col :span="4">
+                  <el-col :span="5">
                     <el-progress type="dashboard" :stroke-width="8" :percentage="98"></el-progress>
                     <div style="margin-top: -28px;">
                       <h3>好评度</h3>
                     </div>
                   </el-col>
-                  <el-col :span="16">
+                  <el-col :span="18" >
+                    <div style="text-align: left">
+                      <el-tag style="margin-right: 15px;margin-bottom: 10px"
+                              v-for="item in tags"
+                              :key="item.label"
+                              :type="item.type"
+                              effect="plain">
+                        <el-link :underline="false" :type="item.type" v-text="item.label"/>
+                      </el-tag>
+                    </div>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <el-col :span="22" :push="1">
+                    <el-tabs style="margin-top: 20px">
+                      <el-tab-pane label="全部评价(600+)" >
+<!--                        <el-rate-->
+<!--                            v-model="value"-->
+<!--                            show-text-->
+<!--                            :colors="colors"-->
+<!--                            :texts="['1.0', '2.0', '3.0', '4.0', '5.0']" >-->
+<!--                        </el-rate>-->
+                        <el-rate
+                            v-model="value"
+                            disabled
+                            show-score
+                            text-color="#ff9900"
+                            score-template="{value}">
+                        </el-rate>
+                      </el-tab-pane>
+                      <el-tab-pane label="晒图(111)">配置管理</el-tab-pane>
+                      <el-tab-pane label="视频晒单(6)">角色管理</el-tab-pane>
+                      <el-tab-pane label="追评(6)" >定时任务补偿</el-tab-pane>
+                      <el-tab-pane label="好评(9)" >定时任务补偿</el-tab-pane>
+                      <el-tab-pane label="中评(6)" >定时任务补偿</el-tab-pane>
+                      <el-tab-pane label="差评(6)" >定时任务补偿</el-tab-pane>
+                    </el-tabs>
                   </el-col>
                 </el-row>
               </el-tab-pane>
@@ -265,6 +301,7 @@
     name: "Product",
     data() {
       return {
+        value:3.7,
         bigImg: '',
         videoShow: false,
         playerOptions: {
@@ -303,7 +340,19 @@
             fullscreenToggle: true
           }
         },
-        item: 0,
+        tags: [
+          { type: '', label: '物流快(2)' },
+          { type: 'success', label: '超级好用(5)' },
+          { type: 'info', label: '做工细致(9)' },
+          { type: 'danger', label: '商家服务态度好(12)' },
+          { type: 'warning', label: '物超所值(3)' },
+          { type: '', label: '舒适度高(19)' },
+          { type: 'success', label: '外观漂亮(24)' },
+          { type: 'info', label: '操作简便(16)' },
+          { type: 'danger', label: '使用顺手(2)' },
+          { type: 'warning', label: '操作简便(6)' }
+        ],
+        colors: ['#99A9BF', '#F7BA2A', '#FF9900'],  // 等同于 { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' }],
         timer: '',
         options: [],
         selectedOptions: [],
