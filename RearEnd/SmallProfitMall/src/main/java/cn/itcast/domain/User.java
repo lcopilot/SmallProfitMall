@@ -17,6 +17,8 @@ public class User implements Serializable {
     private String token;
     private String verify;
 
+
+
     public Integer getId() {
         return id;
     }

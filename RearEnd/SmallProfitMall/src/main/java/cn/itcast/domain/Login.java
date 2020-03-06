@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 @Component("login")
 public class Login {
     private String name;
-    private String token;
+    private String tokens;
     private String uid;
 
     public String getName() {
@@ -18,11 +18,11 @@ public class Login {
     }
 
     public String getToken() {
-        return token;
+        return tokens;
     }
 
     public void setToken(String token) {
-        this.token = token;
+        this.tokens = token;
     }
 
     public String getUid() {
