@@ -1,18 +1,22 @@
 package cn.itcast.controller;
 
+import cn.itcast.constant.Constant;
 import cn.itcast.domain.*;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.service.UserService;
+import cn.itcast.skd.Vaptcha;
 import cn.itcast.util.GetFourRandom;
 import cn.itcast.util.SmsUtils;
+import cn.itcast.util.VerifyUtil;
 import com.aliyuncs.exceptions.ClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -35,6 +39,10 @@ public class UserController {
     @Autowired
     QueryResult result;
 
+    @Autowired
+    VerifyUtil verifyUtil;
+
+    private Vaptcha vaptcha = Vaptcha.getInstance(Constant.SecretKey, Constant.Vid, Constant.Scene);
     /**
      * 查询所有方法
      * @return
@@ -52,7 +60,11 @@ public class UserController {
      * @return
      */
     @RequestMapping("/accountLogin")
-    public QueryResponseResult accountLogin(@RequestBody User user){
+    public QueryResponseResult accountLogin(@RequestBody User user,HttpServletRequest request){
+        if (!verifyUtil.VaptchaVerify(user.getToken(),request))
+        {
+            return new QueryResponseResult(CommonCode.ValidationFails,null); //令牌错误不正确
+        }
         User name = userService.findByName(user.getName()); //根据用户名查询
         User phone = userService.findByPhone(user.getName()); //根据手机号查询
         if(user !=null && user.getPassword()!=null){ //判断用户输入是否完整

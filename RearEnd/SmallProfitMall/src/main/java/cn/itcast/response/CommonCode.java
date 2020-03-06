@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 @ToString
 public enum CommonCode implements ResultCode{
 
+    ValidationFails(false,10009,"人机验证失败"),
     INVALID_PARAM(false,10003,"参数非法"),
     SUCCESS(true,10000,"操作成功！"),
     FAIL(false,11111,"操作失败！"),
