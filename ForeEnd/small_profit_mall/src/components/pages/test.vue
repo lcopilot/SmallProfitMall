@@ -1,5 +1,5 @@
 <template>
-  <vaptcha @kkkk="aaa"></vaptcha>
+  <vaptcha @success="login" ></vaptcha>
 </template>
 
 <script>
@@ -9,8 +9,9 @@
     name: "test",
     components:{vaptcha},
     methods:{
-      aaa(){
-        console.log("asdkasjkl");
+      login(data){
+        console.log(data)
+        console.log("测试");
       }
     }
   }
