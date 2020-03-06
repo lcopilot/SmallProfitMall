@@ -240,19 +240,26 @@
                   <el-col :span="22" :push="1">
                     <el-tabs style="margin-top: 20px">
                       <el-tab-pane label="全部评价(600+)" >
-<!--                        <el-rate-->
-<!--                            v-model="value"-->
-<!--                            show-text-->
-<!--                            :colors="colors"-->
-<!--                            :texts="['1.0', '2.0', '3.0', '4.0', '5.0']" >-->
-<!--                        </el-rate>-->
-                        <el-rate
-                            v-model="value"
-                            disabled
-                            show-score
-                            text-color="#ff9900"
-                            score-template="{value}">
-                        </el-rate>
+                        <el-row :gutter="20">
+                          <el-col :span="4">
+                            <img :src="avatar" style="width: 25px; border-radius: 50%;margin-right: 5px">
+                            <span style="font-size: 12px">小白第点还看电视</span>
+                          </el-col>
+                          <el-col :span="19">
+                            <div style="text-align: left">
+                              <el-rate
+                                  v-model="value"
+                                  disabled
+                                  show-text
+                                  text-color="#ff9900"
+                                  score-template="{value}"
+                                  :colors="colors"
+                                  :texts="['1.0', '2.0', '3.0', '4.0', '5.0']">
+                              </el-rate>
+                            </div>
+
+                          </el-col>
+                        </el-row>
                       </el-tab-pane>
                       <el-tab-pane label="晒图(111)">配置管理</el-tab-pane>
                       <el-tab-pane label="视频晒单(6)">角色管理</el-tab-pane>
@@ -301,7 +308,8 @@
     name: "Product",
     data() {
       return {
-        value:3.7,
+        avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
+        value:1,
         bigImg: '',
         videoShow: false,
         playerOptions: {

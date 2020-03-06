@@ -11,7 +11,6 @@
             <router-link to="/login">您好,请登录</router-link>
           </li>
 
-
           <li v-if="this.username!=null">
             <el-dropdown trigger="click">
               <span class="el-dropdown-link">
