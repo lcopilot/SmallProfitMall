@@ -1,6 +1,9 @@
 package cn.itcast.util;
 
-import com.vaptcha.domain.HttpResp;
+
+
+
+import cn.itcast.domain.verification.HttpResp;
 import org.apache.commons.codec.Charsets;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

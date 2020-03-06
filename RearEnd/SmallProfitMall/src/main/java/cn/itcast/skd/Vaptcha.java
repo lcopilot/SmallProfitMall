@@ -1,16 +1,18 @@
 package cn.itcast.skd;
 
 import cn.itcast.constant.Constant;
+import cn.itcast.domain.verification.SecondVerify;
 import cn.itcast.util.Common;
 import cn.itcast.util.HttpClientUtil;
-import com.google.gson.Gson;
+
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vaptcha.domain.SecondVerify;
+
+import com.google.gson.Gson;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
