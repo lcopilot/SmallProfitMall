@@ -1,8 +1,9 @@
 package cn.itcast.util;
 
 import cn.itcast.constant.Constant;
-import cn.itcast.domain.validation.SecondVerify;
+
 import cn.itcast.skd.Vaptcha;
+import com.vaptcha.domain.SecondVerify;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
