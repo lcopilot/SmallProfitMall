@@ -35,9 +35,7 @@
                 <el-form-item>
                   <svg-icon name="verification_code" class="icon"
                             style="float: left;margin-left:30px "/>
-                  <Verify style="float: left" @success="alert('success')" @error="alert('error')"
-                          :type="3" :show-button='false'
-                          :bar-size="{width:'300px',height:'40px'}"/>
+                  <Verify @success="verifyToken"></Verify>
                 </el-form-item>
                 <el-form-item>
                   <el-button class="login-btn" @click="login('loginForm')">登录</el-button>
@@ -60,18 +58,17 @@
   // @ is an alias to /src
   const Header = () => import("./Header");
   const Footer = () => import("./Footer");
-  const Verify = () => import("vue2-verify");
+  const Verify = () => import("../UtilsComponent/vaptcha-code"); //验证码
   import *as userApi from '../../api/page/user'  //*as别名
 
   export default {
     components: {Header, Footer, Verify},
     data() {
       return {
-        checkCode: false,
         loginForm: {
           name: '',
           password: '',
-          verificationCode: '',
+          token: '',
         },
         rules: {
           name: [
@@ -89,57 +86,51 @@
       login(formName) {
         this.$refs[formName].validate((valid) => {
               if (valid) {
-                if (!this.checkCode) {
+                if (this.loginForm.token==null) {
                   this.$message({
-                    message: "请完成验证",
+                    message: "请完成人机验证",
                     type: "warning"
                   });
                 } else {
-                  {
-                    userApi.login(this.loginForm)
-                    .then(res => {
-                      if (res.success) {
-                        this.$message({
-                          message: "登录成功",
-                          type: "success"
-                        });
-                        sessionStorage.setItem("username", res.queryResult.list[0].name);
-                        sessionStorage.setItem("uId", res.queryResult.list[0].uid);
-                        sessionStorage.setItem("token", res.queryResult.list[0].token);
-                        this.$router.push({
-                          path: "/Home" //跳转的路径
-                        });
-                      } else {
+                  userApi.login(this.loginForm)
+                  .then(res => {
+                    if (res.success) {
+                      this.$message({
+                        message: "登录成功",
+                        type: "success"
+                      });
+                      sessionStorage.setItem("username", res.queryResult.list[0].name);
+                      sessionStorage.setItem("uId", res.queryResult.list[0].uid);
+                      sessionStorage.setItem("token", res.queryResult.list[0].tokens);
+                      this.$router.push({
+                        path: "/Home" //跳转的路径
+                      });
+                    } else {
+                      if (res.code=10009){
+                        this.$message.error("人机验证二次失败,请稍后重试")
+                        this.$router.go(0);
+                      }else {
                         this.$message.error("账户或密码错误!")
                         this.$router.go(0);
                       }
-                    })
-                    .catch(error => {
-                      this.$message.error("服务器错误");
-                      console.log(error);
-                    });
-                  }
+
+                    }
+                  })
+                  .catch(error => {
+                    this.$message.error("服务器错误");
+                    console.log(error);
+                    this.$router.go(0);
+
+                  });
                 }
+
               }
             }
         );
       },
-      alert(code) {
-        console.log(code)
-        if (code == 'success') {
-          this.checkCode = true;
-        } else {
-          this.checkCode = false;
-          if (code == 'success') {
-            this.checkCode = true;
-          } else {
-            this.checkCode = false;
-          }
-        }
+      verifyToken(token) {
+        this.loginForm.token=token;
       }
-    },
-    mounted() {
-
     },
 
   };
