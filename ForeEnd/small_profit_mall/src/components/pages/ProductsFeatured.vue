@@ -13,25 +13,25 @@
           <div style="width: 1208px;position:relative;">
             <el-card shadow="hover" class="recommended_products_card"
                      v-for="(productsFeatured ,index) in productsFeaturedList"
-                     :key="productsFeatured.id">
-              <div style="position: relative;">
-                <router-link :to="{path: '/product', query: {productId:productsFeatured.rid}}" >
+                     :key="productsFeatured.id" @mouseenter="enterProduct(index)">
+              <div style="position: relative;" @mouseenter="enterProduct(index)">
+                <router-link :to="{path: '/product', query: {productId:productsFeatured.rid}}">
                   <el-image fit="fit" :src="productsFeatured.productPicture"
                             :lazy="true"/>
-                  <div class="recommended_products_name">
-                    {{productsFeatured.productName}}
+                  <div class="recommended_products_name" >
+                    <span v-text="productsFeatured.productName"></span>
                     <div>
                       <span
-                          class="recommended_products_price">￥{{productsFeatured.productPrice}}</span>
+                          class="recommended_products_price" v-text="'￥'+productsFeatured.productPrice"/>
                     </div>
                   </div>
                 </router-link>
                 <a>
-                  <div @mouseenter="enterFavorite(index)" v-if="productsFeatured.favorite==1"
+                  <div @mouseenter="enterFavorite(index)" v-show="productsFeatured.favorite==1" v-cloak
                        class="recommended_products_favorite">
                     <svg-icon name="Uncollected"/>
                   </div>
-                  <div class="recommended_products_favorite" v-if="productsFeatured.favorite==2"
+                  <div class="recommended_products_favorite" v-show="productsFeatured.favorite==2" v-cloak
                        @click="favorite()"
                        @mouseout="shiftOutFavorite(index)">
                     <svg-icon name="Favorite"></svg-icon>
@@ -39,11 +39,11 @@
                 </a>
                 <a>
                   <div @mouseenter="enterShoppingTrolley(index)"
-                       v-if="productsFeatured.shoppingTrolley==1"
+                       v-show="productsFeatured.shoppingTrolley==1" v-cloak
                        class="recommended_products_Cart">
                     <svg-icon name="added"/>
                   </div>
-                  <div class="recommended_products_Cart" v-if="productsFeatured.shoppingTrolley==2"
+                  <div class="recommended_products_Cart" v-show="productsFeatured.shoppingTrolley==2" v-cloak
                        @click="addCart()"
                        @mouseout="shiftOutShoppingTrolley(index)">
                     <svg-icon name="addCart"></svg-icon>
@@ -63,6 +63,7 @@
 
 <script>
   import *as homeApi from '../../api/page/home'
+
   export default {
     name: "ProductsFeatured",
     data() {
@@ -72,13 +73,19 @@
       }
     },
     methods: {
+      enterProduct(index){
+        this.productsFeaturedList[index].favorite = 1;
+        this.productsFeaturedList[index].shoppingTrolley = 1;
+      },
       enterFavorite(index) {
+        this.productsFeaturedList[index].shoppingTrolley = 1;
         this.productsFeaturedList[index].favorite = 2;
       },
       shiftOutFavorite(index) {
         this.productsFeaturedList[index].favorite = 1;
       },
       enterShoppingTrolley(index) {
+        this.productsFeaturedList[index].favorite = 1;
         this.productsFeaturedList[index].shoppingTrolley = 2;
       },
       shiftOutShoppingTrolley(index) {
@@ -101,10 +108,10 @@
       },
       goProduct(ProductId) {
         this.$router.push({
-            path: '/product',
-            query: {
-              productId: ProductId
-            },
+          path: '/product',
+          query: {
+            productId: ProductId
+          },
         })
       }
     },
@@ -115,6 +122,10 @@
 </script>
 
 <style scoped>
+  [v-cloak] {
+    display: none
+  }
+
   .recommended_products_name {
     margin-top: 7px;
     width: 198px;
@@ -137,7 +148,7 @@
   }
 
   .recommended_products_card:hover {
-    transform: scale(1.06);
+    transform: scale(1.03);
   }
 
   .recommended_products_favorite {
