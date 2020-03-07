@@ -7,10 +7,11 @@
       <search/>
       <el-main>
         <el-row type="flex" justify="center" :gutter="20" style="margin-top: 40px">
+          <!-- 商品图片区域-->
           <el-col :span="6">
             <div style="position: relative;" v-if="!videoShow">
               <vue-photo-zoom-pro style="width: 355px;" type="circle"
-                                  :url="bigImg" :scale="3"
+                                  :url="bigImg" :scale="2"
                                   @mouseenter="stopSwitchProductImg()"
                                   @mouseleave="switchProductImg()"/>
               <div class="product_play" v-if="playerOptions.sources[0].src">
@@ -89,7 +90,7 @@
                     <el-row>
                       <el-col :span="4" style="color: #999999"> 微利价:</el-col>
                       <el-col :span="16" class="product_price">
-                        ￥{{product.productPrice}}.00
+                        ￥{{product.productPrice}}
                       </el-col>
                       <el-col :span="4" style="color: #999999"> 累计销量<span
                           class="product_sales">{{product.sales}}</span></el-col>
@@ -203,7 +204,7 @@
       </el-main>
       <el-main>
         <el-row>
-          <el-col :span="17" :push="3">
+          <el-col :span="20" :push="2">
             <el-tabs type="border-card">
               <el-tab-pane>
                 <div slot="label" style="font-size: 17px">
@@ -224,7 +225,7 @@
                       <h3>好评度</h3>
                     </div>
                   </el-col>
-                  <el-col :span="18" >
+                  <el-col :span="18">
                     <div style="text-align: left">
                       <el-tag style="margin-right: 15px;margin-bottom: 10px"
                               v-for="item in tags"
@@ -239,14 +240,15 @@
                 <el-row>
                   <el-col :span="22" :push="1">
                     <el-tabs style="margin-top: 20px">
-                      <el-tab-pane label="全部评价(600+)" >
-                        <el-row :gutter="20">
+                      <el-tab-pane label="全部评价(600+)">
+                        <el-row :gutter="10">
                           <el-col :span="4">
-                            <img :src="avatar" style="width: 25px; border-radius: 50%;margin-right: 5px">
+                            <img :src="avatar"
+                                 style="width: 25px; border-radius: 50%;margin-right: 5px">
                             <span style="font-size: 12px">小白第点还看电视</span>
                           </el-col>
-                          <el-col :span="19">
-                            <div style="text-align: left">
+                          <el-col :span="20" style="text-align: left">
+                            <div >
                               <el-rate
                                   v-model="value"
                                   disabled
@@ -257,16 +259,54 @@
                                   :texts="['1.0', '2.0', '3.0', '4.0', '5.0']">
                               </el-rate>
                             </div>
+                            <div >评论内容
+                              水电费类似的啥电话客服卡萨丁福利卡开始大幅还看见爱上加速大部分卡水电费击杀的好机会阿萨德饭好加速度博览会家岁的女孩寄啥德令哈asUSDA
+                              尽可能尽快落实到 即可健康assauce
+                              啊UIA段数段数安居客的监考老师合计为埃及法少得可怜很可能是哒了好尬水电费kg嫁得好即可健康暗示健康as大都很困难那肯定是好几个考虑到市房管局代理商好几个克鲁赛德圣诞快乐发个链接时空来电可能的顺灏股份时空来电克里斯多夫会经过类似的考虑到福建省kg了很多个就阿UK水电费考虑到拿手机电话发送豆腐砂贾浩说得对吉安市工会玩儿回来跪了䦹囧水电费带哦开始的安徽
+                              的时候GV诗歌朗诵奇偶个人三个父接口订货会速开关沃尔特固定块人身攻击山东黄金公司电话尽可能公司电话尽可能可好看是加拿大和
+                            </div>
+                            <div>
+                              <div style="display:inline-block;border:1px solid #999999;margin-right: 5px;margin-bottom:5px;max-width: 58px;max-height: 58px;overflow:hidden" v-for="item in 50">
+                                <el-image
+                                    src="http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg"
+                                    fit="scale-down"   :preview-src-list="srcList"></el-image>
+                              </div>
 
+                            </div>
+                            <el-row
+                                style="font-size: 12px;margin-top: 10px;text-align: left;color: #999999">
+                              <el-col :span="20">
+                                <span style="margin-right: 20px">
+                                  牧马人黑色彩虹背光键盘+七彩黑鼠标
+                                </span>
+                                <span>
+                                  2020-03-07 11:59
+                                </span>
+                              </el-col>
+                              <el-col :span="4">
+                                <span style="margin-right: 10px">
+                                  <router-link to="/">  举报</router-link>
+                                </span>
+                                <span style="margin-right: 10px">
+                                  <svg-icon name="like" style="height: 19px;width: 18px"></svg-icon>
+                                  2588
+                                </span>
+                                <span style="margin-right: 10px">
+                                  <svg-icon name="reply" style="height: 19px;width: 18px"></svg-icon>
+                                  25
+                                </span>
+                              </el-col>
+
+                            </el-row>
                           </el-col>
                         </el-row>
                       </el-tab-pane>
                       <el-tab-pane label="晒图(111)">配置管理</el-tab-pane>
                       <el-tab-pane label="视频晒单(6)">角色管理</el-tab-pane>
-                      <el-tab-pane label="追评(6)" >定时任务补偿</el-tab-pane>
-                      <el-tab-pane label="好评(9)" >定时任务补偿</el-tab-pane>
-                      <el-tab-pane label="中评(6)" >定时任务补偿</el-tab-pane>
-                      <el-tab-pane label="差评(6)" >定时任务补偿</el-tab-pane>
+                      <el-tab-pane label="追评(6)">定时任务补偿</el-tab-pane>
+                      <el-tab-pane label="好评(9)">定时任务补偿</el-tab-pane>
+                      <el-tab-pane label="中评(6)">定时任务补偿</el-tab-pane>
+                      <el-tab-pane label="差评(6)">定时任务补偿</el-tab-pane>
                     </el-tabs>
                   </el-col>
                 </el-row>
@@ -309,9 +349,10 @@
     data() {
       return {
         avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
-        value:1,
-        bigImg: '',
+        value: 1,
+        bigImg: '',//商品大图
         videoShow: false,
+        //商品视频相关的播放参数
         playerOptions: {
           //播放速度
           playbackRates: [0.5, 1.0, 1.5, 2.0, 2.5, 3.0],
@@ -349,21 +390,23 @@
           }
         },
         tags: [
-          { type: '', label: '物流快(2)' },
-          { type: 'success', label: '超级好用(5)' },
-          { type: 'info', label: '做工细致(9)' },
-          { type: 'danger', label: '商家服务态度好(12)' },
-          { type: 'warning', label: '物超所值(3)' },
-          { type: '', label: '舒适度高(19)' },
-          { type: 'success', label: '外观漂亮(24)' },
-          { type: 'info', label: '操作简便(16)' },
-          { type: 'danger', label: '使用顺手(2)' },
-          { type: 'warning', label: '操作简便(6)' }
+          {type: '', label: '物流快(2)'},
+          {type: 'success', label: '超级好用(5)'},
+          {type: 'info', label: '做工细致(9)'},
+          {type: 'danger', label: '商家服务态度好(12)'},
+          {type: 'warning', label: '物超所值(3)'},
+          {type: '', label: '舒适度高(19)'},
+          {type: 'success', label: '外观漂亮(24)'},
+          {type: 'info', label: '操作简便(16)'},
+          {type: 'danger', label: '使用顺手(2)'},
+          {type: 'warning', label: '操作简便(6)'}
         ],
         colors: ['#99A9BF', '#F7BA2A', '#FF9900'],  // 等同于 { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' }],
-        timer: '',
+        timer: 0,//商品图片切换的定时器
+        item:1, //商品图片切换的序号
         options: [],
         selectedOptions: [],
+        //地址选择的级联列表参数
         defaultParams: {
           label: 'name',
           value: 'code',
@@ -380,6 +423,10 @@
           taste: '',
           quantity: 1,
         },
+        srcList: [
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
+        ]
       }
     },
     components: {Header, Footer, search},
@@ -388,6 +435,7 @@
         this.stopSwitchProductImg();
         this.bigImg = this.product.imageSite[index];
       },
+      //每隔三秒切换商品图片
       switchProductImg() {
         this.timer = setInterval(() => {
           if (this.item == this.product.imageSite.length) {
@@ -411,8 +459,8 @@
       getAddressData() {
         if (JSON.parse(sessionStorage.getItem('addressData')) == null) {
           commonApi.getAddressData().then(res => {
-            if (res.length!=0) {
-              sessionStorage.setItem("addressData",JSON.stringify(res));
+            if (res.length != 0) {
+              sessionStorage.setItem("addressData", JSON.stringify(res));
             }
           })
         } else {
@@ -439,9 +487,9 @@
       getProduct(productId) {
         productApi.getProduct(productId).then(res => {
               if (res.success) {
+                this.bigImg = res.queryResult.list[0].imageSite[1];
                 this.product = res.queryResult.list[0];
                 this.playerOptions.sources[0].src = this.product.video;
-                this.bigImg = this.product.imageSite[1];
               }
             }
         )
