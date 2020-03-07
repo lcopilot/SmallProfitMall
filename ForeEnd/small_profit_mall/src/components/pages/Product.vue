@@ -14,10 +14,8 @@
                                   :url="bigImg" :scale="2"
                                   @mouseenter="stopSwitchProductImg()"
                                   @mouseleave="switchProductImg()"/>
-              <div class="product_play" v-if="playerOptions.sources[0].src">
-                <el-link :underline="false" @click.native="playerVideo()">
-                  <svg-icon name="play" class="icon_play"/>
-                </el-link>
+              <div class="product_play" v-if="product.video">
+                <svg-icon name="play" class="icon_play" @click.native="playerVideo()"/>
               </div>
             </div>
             <div v-if="videoShow" style="position: relative;">
@@ -30,9 +28,9 @@
                             style="width: 355px;height: 355px">
               </video-player>
               <div class="product_end">
-                <el-link :underline="false" @click.native="endedVideo()">
-                  <svg-icon name="ended" class="icon_ended"/>
-                </el-link>
+                <a>
+                  <svg-icon name="ended" class="icon_ended" @click.native="endedVideo()"/>
+                </a>
               </div>
             </div>
             <div>
@@ -241,65 +239,137 @@
                   <el-col :span="22" :push="1">
                     <el-tabs style="margin-top: 20px">
                       <el-tab-pane label="全部评价(600+)">
-                        <el-row :gutter="10">
-                          <el-col :span="4">
-                            <img :src="avatar"
-                                 style="width: 25px; border-radius: 50%;margin-right: 5px">
-                            <span style="font-size: 12px">小白第点还看电视</span>
-                          </el-col>
-                          <el-col :span="20" style="text-align: left">
-                            <div >
-                              <el-rate
-                                  v-model="value"
-                                  disabled
-                                  show-text
-                                  text-color="#ff9900"
-                                  score-template="{value}"
-                                  :colors="colors"
-                                  :texts="['1.0', '2.0', '3.0', '4.0', '5.0']">
-                              </el-rate>
-                            </div>
-                            <div >评论内容
-                              水电费类似的啥电话客服卡萨丁福利卡开始大幅还看见爱上加速大部分卡水电费击杀的好机会阿萨德饭好加速度博览会家岁的女孩寄啥德令哈asUSDA
-                              尽可能尽快落实到 即可健康assauce
-                              啊UIA段数段数安居客的监考老师合计为埃及法少得可怜很可能是哒了好尬水电费kg嫁得好即可健康暗示健康as大都很困难那肯定是好几个考虑到市房管局代理商好几个克鲁赛德圣诞快乐发个链接时空来电可能的顺灏股份时空来电克里斯多夫会经过类似的考虑到福建省kg了很多个就阿UK水电费考虑到拿手机电话发送豆腐砂贾浩说得对吉安市工会玩儿回来跪了䦹囧水电费带哦开始的安徽
-                              的时候GV诗歌朗诵奇偶个人三个父接口订货会速开关沃尔特固定块人身攻击山东黄金公司电话尽可能公司电话尽可能可好看是加拿大和
-                            </div>
-                            <div>
-                              <div style="display:inline-block;border:1px solid #999999;margin-right: 5px;margin-bottom:5px;max-width: 58px;max-height: 58px;overflow:hidden" v-for="item in 50">
-                                <el-image
-                                    src="http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg"
-                                    fit="scale-down"   :preview-src-list="srcList"></el-image>
+                        <div v-for="item in 6">
+                          <el-row :gutter="10">
+                            <el-col :span="4">
+                              <img :src="avatar"
+                                   class="product_comment_avatar">
+                              <span style="font-size: 12px">小白第点还看电视</span>
+                            </el-col>
+                            <el-col :span="20" style="text-align: left">
+                              <div>
+                                <el-rate
+                                    v-model="value"
+                                    disabled
+                                    show-text
+                                    text-color="#ff9900"
+                                    score-template="{value}"
+                                    :colors="colors"
+                                    :texts="['1.0', '2.0', '3.0', '4.0', '5.0']">
+                                </el-rate>
                               </div>
-
-                            </div>
-                            <el-row
-                                style="font-size: 12px;margin-top: 10px;text-align: left;color: #999999">
-                              <el-col :span="20">
+                              <div>
+                                评论内容水电费类似的啥电话客服卡萨丁福利卡开始大幅还看见爱上加速大部分卡水电费击杀的好机会阿萨德饭好加速度博览会家岁的女孩寄啥德令哈asUSDA
+                              </div>
+                              <div>
+                                <div class="product_comment_img">
+                                  <el-image
+                                      src="http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg"
+                                      fit="scale-down"/>
+                                  <div class="product_play" style="margin-top: -55px"
+                                       v-if="product.video">
+                                    <el-link :underline="false"
+                                             @click.native="playerVideoComment()">
+                                      <svg-icon name="play" class="icon_play"/>
+                                    </el-link>
+                                  </div>
+                                </div>
+                                <div class="product_comment_img" v-for="item in 10">
+                                  <el-image title="查看大图"
+                                            src="http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg"
+                                            fit="scale-down" :preview-src-list="srcList"/>
+                                </div>
+                                <div v-if="videoShow" class="product_comment_video">
+                                  <video-player class="video-player vjs-custom-skin"
+                                                ref="videoPlayer_1"
+                                                :playsinline="true"
+                                                :options="{
+                                                    playbackRates: [0.5, 1.0, 1.5, 2.0, 2.5, 3.0],
+                                                    autoplay: false,
+                                                    muted: false,
+                                                    loop: true,
+                                                    preload: 'auto',
+                                                    language: 'zh-CN',
+                                                    aspectRatio: '1:1',
+                                                    fluid: true,
+                                                    sources: [{
+                                                    //类型
+                                                    type: 'video/ogg',
+                                                    type: 'video/webm',
+                                                    type: 'video/mp4',
+                                                    //url地址
+                                                    src: 'http://productdata.fhxasdsada.xyz/sdkjj.mp4',
+                                                    }],
+                                                    //你的封面地址
+                                                    poster: '',
+                                                    //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+                                                    notSupportedMessage: '此视频暂无法播放，请稍后再试',
+                                                    controlBar: {
+                                                    timeDivider: true,
+                                                    durationDisplay: true,
+                                                    remainingTimeDisplay: false,
+                                                    //全屏按钮
+                                                    fullscreenToggle: true
+                                                }}"
+                                                @play="onPlayerPlay($event)"
+                                                @ended="onPlayerEnded($event)"
+                                                style="width: 355px;height: 355px">
+                                  </video-player>
+                                  <div class="product_end">
+                                    <a>
+                                      <svg-icon name="ended" class="icon_ended" @click.native="endedVideo()"/>
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                              <el-row
+                                  class="product_comment_information">
+                                <el-col :span="20">
                                 <span style="margin-right: 20px">
                                   牧马人黑色彩虹背光键盘+七彩黑鼠标
                                 </span>
-                                <span>
+                                  <span>
                                   2020-03-07 11:59
                                 </span>
-                              </el-col>
-                              <el-col :span="4">
+                                </el-col>
+                                <el-col :span="4">
                                 <span style="margin-right: 10px">
                                   <router-link to="/">  举报</router-link>
                                 </span>
-                                <span style="margin-right: 10px">
-                                  <svg-icon name="like" style="height: 19px;width: 18px"></svg-icon>
+                                  <span style="margin-right: 10px">
+                                      <router-link to="/">
+                                         <svg-icon name="like"
+                                                   style="height: 19px;width: 18px"></svg-icon>
                                   2588
-                                </span>
-                                <span style="margin-right: 10px">
-                                  <svg-icon name="reply" style="height: 19px;width: 18px"></svg-icon>
-                                  25
-                                </span>
-                              </el-col>
+                                      </router-link>
 
-                            </el-row>
-                          </el-col>
-                        </el-row>
+                                </span>
+                                  <span style="margin-right: 10px">
+                                      <router-link to="/">
+                                        <svg-icon name="reply"
+                                                  style="height: 19px;width: 18px"></svg-icon>
+                                  25
+                                      </router-link>
+                                </span>
+                                </el-col>
+                              </el-row>
+                            </el-col>
+                          </el-row>
+                          <el-divider/>
+                        </div>
+                        <div style="text-align: right">
+                          <el-pagination
+                              background
+                              @size-change="changeNumber"
+                              @current-change="changePage"
+                              :current-page="comment_params.currentPage"
+                              :page-sizes="[6,7, 8, 10, 12,15]"
+                              :page-size="comment_params.pageSize"
+                              layout="total, sizes, prev, pager, next, jumper"
+                              :hide-on-single-page="true"
+                              :total="comment_params.totalCount">
+                          </el-pagination>
+                        </div>
                       </el-tab-pane>
                       <el-tab-pane label="晒图(111)">配置管理</el-tab-pane>
                       <el-tab-pane label="视频晒单(6)">角色管理</el-tab-pane>
@@ -402,8 +472,8 @@
           {type: 'warning', label: '操作简便(6)'}
         ],
         colors: ['#99A9BF', '#F7BA2A', '#FF9900'],  // 等同于 { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' }],
-        timer: 0,//商品图片切换的定时器
-        item:1, //商品图片切换的序号
+        timer: '',//商品图片切换的定时器
+        item: 1, //商品图片切换的序号
         options: [],
         selectedOptions: [],
         //地址选择的级联列表参数
@@ -423,14 +493,23 @@
           taste: '',
           quantity: 1,
         },
+        //评论图片数组
         srcList: [
           'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
           'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
-        ]
+        ],
+        //评论分页参数
+        comment_params: {
+          currentPage: 1,//页码
+          pageSize: 6,//每页显示个数
+          totalCount: 400,//总记录数
+          totalPage: 1,//总页数
+        },
       }
     },
     components: {Header, Footer, search},
     methods: {
+      //鼠标切换商品图片
       enter(index) {
         this.stopSwitchProductImg();
         this.bigImg = this.product.imageSite[index];
@@ -476,6 +555,7 @@
         myPlayer.ended();
       },
       playerVideo() {
+        this.playerOptions.sources[0].src = this.product.video;
         this.videoShow = true;
         this.onPlayerPlay()
       },
@@ -483,16 +563,32 @@
         this.videoShow = false;
         this.onPlayerEnded()
       },
+      //评论视频的播放
+      onPlayerPlayComment() {
+        const myPlayer = this.$refs.videoPlayer_1.player;
+        myPlayer.play();
+      },
+      playerVideoComment() {
+        this.videoShow = true;
+        this.onPlayerPlayComment()
+      },
       //获取商品数据
       getProduct(productId) {
         productApi.getProduct(productId).then(res => {
               if (res.success) {
                 this.bigImg = res.queryResult.list[0].imageSite[1];
                 this.product = res.queryResult.list[0];
-                this.playerOptions.sources[0].src = this.product.video;
               }
             }
         )
+      },
+      //切换评论分页时触发
+      changePage(currentPage) {
+        this.comment_params.currentPage = currentPage;
+      },
+      //切换每页显示多少条评论时触发
+      changeNumber(pageSize){
+        this.comment_params.pageSize=pageSize;
       }
     },
     computed: {
@@ -557,6 +653,7 @@
   }
 
   .icon_play:hover {
+    cursor: pointer;
     transform: scale(1.1);
   }
 
@@ -566,6 +663,7 @@
   }
 
   .icon_ended:hover {
+    cursor: pointer;
     transform: scale(1.1);
   }
 
@@ -592,5 +690,35 @@
     position: absolute;
     top: 0;
     right: 0;
+  }
+
+  .product_comment_avatar {
+    width: 25px;
+    border-radius: 50%;
+    margin-right: 5px
+  }
+
+  .product_comment_img {
+    display: inline-block;
+    position: relative;
+    border: 1px solid #999999;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    max-width: 58px;
+    max-height: 58px;
+    overflow: hidden;
+  }
+
+  .product_comment_video {
+    position: relative;
+    width: 355px;
+    height: 355px
+  }
+
+  .product_comment_information {
+    font-size: 12px;
+    margin-top: 10px;
+    text-align: left;
+    color: #999999;
   }
 </style>
