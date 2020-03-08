@@ -31,7 +31,7 @@ router.beforeEach((to, from, next) => {
       next({
         path: '/login',
         query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
-      })
+      });
     }
   } else {
     if (sessionStorage.getItem("token")) {
@@ -39,9 +39,7 @@ router.beforeEach((to, from, next) => {
         next();
       } else {
         next('/');
-
       }
-
     } else {
       next()
     }
