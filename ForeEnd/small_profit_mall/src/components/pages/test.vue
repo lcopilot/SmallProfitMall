@@ -4,8 +4,8 @@
 
       <el-row>
         <el-col :span="22">
-          <div v-for="item in 10"> {{item}}</div>
-          {{item}}
+          <div v-for="item in 10"> </div>
+
         </el-col>
       </el-row>
     </div>
