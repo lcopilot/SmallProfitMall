@@ -1,11 +1,12 @@
-package cn.itcast.domain;
+package cn.itcast.domain.homepag;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.List;
 //分类集合返回
 @Component
-public class Classification {
+public class Classification implements Serializable {
     private List<Navigation> navigations;
     private List<NavigationClassify> navigationClassify;
 

@@ -1,6 +1,9 @@
 package cn.itcast.controller;
 
-import cn.itcast.domain.*;
+import cn.itcast.domain.commodity.Ad;
+import cn.itcast.domain.commodity.ProductLowPriceResult;
+import cn.itcast.domain.commodity.Recommend;
+import cn.itcast.domain.commodity.SeckillResult;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;

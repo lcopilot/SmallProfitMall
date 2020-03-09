@@ -1,10 +1,10 @@
 package cn.itcast.service.impl;
 
 import cn.itcast.dao.HomepageDao;
-import cn.itcast.domain.*;
+import cn.itcast.domain.commodity.Classify;
+import cn.itcast.domain.homepag.*;
 import cn.itcast.service.HomepageService;
-import cn.itcast.util.RedisUtil;
-import com.sun.org.apache.xpath.internal.objects.XNull;
+import cn.itcast.util.cache.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,16 +78,16 @@ public class HomepageServiceImpl implements HomepageService {
 
     //查询搜索栏下导航栏
     @Override
-    public List<Navigation_2> findNavigation2() {
-        List<Navigation_2> redis = (List<Navigation_2>) redisUtil.lGet("Navigation_2", 0, -1);
+    public List<Classify> findNavigation2() {
+        List<Classify> redis = (List<Classify>) redisUtil.lGet("Classify", 0, -1);
         if (redis.size() == 0) {
             System.out.println("数据库中取");
-            List<Navigation_2> Navigation_2s = homepageDao.findNavigation2();
-            redisUtil.lSet("Navigation_2", Navigation_2s);  //存入缓存
+            List<Classify> Navigation_2s = homepageDao.findNavigation2();
+            redisUtil.lSet("Classify", Navigation_2s);  //存入缓存
             ArrayList[] arrayLists = {(ArrayList) Navigation_2s}; //转换返回格式
             List list= Arrays.asList(arrayLists);   //增加一层数组
-            List<Navigation_2>  Navigation_2 = list;
-            return Navigation_2;
+            List<Classify>  Classify = list;
+            return Classify;
         } else {
             System.out.println("缓存中取");
             //取缓存

@@ -1,10 +1,13 @@
 package cn.itcast.service.impl;
 
 import cn.itcast.dao.ProductDao;
-import cn.itcast.domain.*;
+import cn.itcast.domain.commodity.Ad;
+import cn.itcast.domain.commodity.ProductLowPriceResult;
+import cn.itcast.domain.commodity.Recommend;
+import cn.itcast.domain.commodity.SeckillResult;
 import cn.itcast.service.ProductService;
-import cn.itcast.util.RedisUtil;
-import cn.itcast.util.TimeUtil;
+import cn.itcast.util.cache.RedisUtil;
+import cn.itcast.util.logic.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

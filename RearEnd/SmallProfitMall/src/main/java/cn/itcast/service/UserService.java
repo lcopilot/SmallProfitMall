@@ -1,6 +1,6 @@
 package cn.itcast.service;
 
-import cn.itcast.domain.User;
+import cn.itcast.domain.user.User;
 
 import java.util.List;
 

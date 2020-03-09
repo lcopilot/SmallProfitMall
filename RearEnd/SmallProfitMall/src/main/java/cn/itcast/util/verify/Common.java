@@ -1,6 +1,6 @@
-package cn.itcast.util;
+package cn.itcast.util.verify;
 
-import cn.itcast.constant.Constant;
+import cn.itcast.skd.Constant;
 import org.springframework.util.DigestUtils;
 
 import javax.servlet.http.HttpServletRequest;

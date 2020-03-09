@@ -1,15 +1,13 @@
 package cn.itcast.service.impl;
 
 import cn.itcast.dao.ProductDetailsDao;
-import cn.itcast.domain.Navigation;
 import cn.itcast.domain.ProductDatails.ProductBasis;
 import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import cn.itcast.service.ProductDetailsService;
-import cn.itcast.util.RedisUtil;
+import cn.itcast.util.cache.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

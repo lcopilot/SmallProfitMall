@@ -1,15 +1,17 @@
 package cn.itcast.controller;
 
-import cn.itcast.constant.Constant;
-import cn.itcast.domain.*;
+import cn.itcast.skd.Constant;
+import cn.itcast.domain.user.Login;
+import cn.itcast.domain.user.Password;
+import cn.itcast.domain.user.User;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.service.UserService;
 import cn.itcast.skd.Vaptcha;
-import cn.itcast.util.GetFourRandom;
-import cn.itcast.util.SmsUtils;
-import cn.itcast.util.VerifyUtil;
+import cn.itcast.util.logic.GetFourRandom;
+import cn.itcast.util.user.SmsUtils;
+import cn.itcast.util.verify.VerifyUtil;
 import com.aliyuncs.exceptions.ClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -159,7 +161,7 @@ public class UserController {
         if (user1!=null){
             String FR = getFourRandom.getFourRandom();
             System.out.println("修改验证码为 "+FR);
-            boolean flag = SmsUtils.sendRegistSms(user1.getPhone(),FR);
+            boolean flag = SmsUtils.forgetPassword(user1.getPhone(),FR);
             if(flag){
                 session.setAttribute("passwordVerify",FR);//存入验证码session
                 session.setAttribute("upPasswordPhone",phone);//手机号存入session

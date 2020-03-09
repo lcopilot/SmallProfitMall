@@ -1,4 +1,4 @@
-package cn.itcast.util;
+package cn.itcast.util.picture;
 //七牛云上传文件工具类
 import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;

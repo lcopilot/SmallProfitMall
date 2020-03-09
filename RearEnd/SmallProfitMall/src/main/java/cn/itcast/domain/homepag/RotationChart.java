@@ -1,6 +1,9 @@
-package cn.itcast.domain;
+package cn.itcast.domain.homepag;
+
+import java.io.Serializable;
+
 //轮播图
-public class RotationChart {
+public class RotationChart implements Serializable {
     private String Rid;                         //id
     private String RotationChartOne;            //大轮播图图片
     private String RotationChartOneSite;        //大轮播图地址

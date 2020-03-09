@@ -1,4 +1,4 @@
-package cn.itcast.domain;
+package cn.itcast.domain.user;
 
 import org.apache.ibatis.annotations.Select;
 //修改密码

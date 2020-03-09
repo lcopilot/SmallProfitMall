@@ -1,6 +1,6 @@
-package cn.itcast.util;
+package cn.itcast.util.verify;
 
-import cn.itcast.constant.Constant;
+import cn.itcast.skd.Constant;
 
 
 import cn.itcast.domain.verification.SecondVerify;

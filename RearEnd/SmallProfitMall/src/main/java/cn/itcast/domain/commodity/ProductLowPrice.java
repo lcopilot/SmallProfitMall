@@ -1,4 +1,4 @@
-package cn.itcast.domain;
+package cn.itcast.domain.commodity;
 
 import java.io.Serializable;
 //低价商品查询

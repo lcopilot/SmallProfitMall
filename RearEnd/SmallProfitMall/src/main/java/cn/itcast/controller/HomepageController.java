@@ -1,12 +1,12 @@
 package cn.itcast.controller;
 
-import cn.itcast.domain.*;
+import cn.itcast.domain.commodity.Classify;
+import cn.itcast.domain.homepag.*;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.service.HomepageService;
-import cn.itcast.util.RedisUtil;
-import java.util.ArrayList;
+import cn.itcast.util.cache.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,7 +54,7 @@ public class HomepageController {
     @RequestMapping("/findNavigation2")
     public QueryResponseResult findNavigation2(){
         // 调用service的方法
-        List<Navigation_2> list = homepageService.findNavigation2();
+        List<Classify> list = homepageService.findNavigation2();
         result.setList(list);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
