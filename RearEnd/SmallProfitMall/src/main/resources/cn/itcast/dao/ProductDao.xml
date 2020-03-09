@@ -19,7 +19,16 @@
         SELECT * from ad
     </select>
 
+    <!--查询推荐商品-->
     <select id="findRecommend" resultType="cn.itcast.domain.Recommend">
-        select * from recommend
+        SELECT
+            pl.*,pp.ProductPrice,pb.ProductName,pi.ImageSite
+        FROM ProductLowPrice pl
+            LEFT JOIN ProductBasis pb ON pl.ProductId = pb.ProductId
+            LEFT JOIN ProductPrice pp ON pb.ProductId = pp.ProductId
+            LEFT JOIN ProductImage pi ON pp.ProductId = pi.ProductId
+        WHERE
+            pi.sign=1
     </select>
+
 </mapper>

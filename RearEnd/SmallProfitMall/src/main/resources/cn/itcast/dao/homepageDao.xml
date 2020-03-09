@@ -28,4 +28,6 @@
     <select id="findClassification" resultType="cn.itcast.domain.NavigationClassify">
         select * from classification
     </select>
+
+
 </mapper>
