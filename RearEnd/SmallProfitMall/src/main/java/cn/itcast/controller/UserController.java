@@ -49,7 +49,7 @@ public class UserController {
      * 查询所有方法
      * @return
      */
-    @RequestMapping("/findAll")
+    @RequestMapping(value = "/findAll")
     public QueryResponseResult findAll(){
         // 调用service的方法
         List<User> list = userService.findAll();
