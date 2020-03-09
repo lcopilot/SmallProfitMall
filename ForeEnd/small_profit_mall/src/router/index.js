@@ -37,21 +37,31 @@ const routes = [
     component: () => import('@/components/pages/test'), //路由懒加载
   },
   {
-    path:'/login',
-    name:"Login",
+    path: '/login',
+    name: "Login",
     component: () => import('@/components/pages/Login')
   },
   {
-    path:'/register',
-    name:"Register",
+    path: '/register',
+    name: "Register",
     component: () => import('@/components/pages/Register')
   },
   {
-    path:'/product',
-    name:"Product",
+    path: '/product',
+    name: "Product",
     component: () => import('@/components/pages/Product')
   },
-    //捕获404
+
+  {
+    path: '/shoppingCart',
+    name: 'ShoppingCart',
+    meta: {
+      requireAuth: true,
+    },
+    component: () => import('@/components/admin/shoppingCart')
+
+  },
+  //捕获404
   {
     path: "/404",
     name: "NotFound",

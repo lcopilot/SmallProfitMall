@@ -128,6 +128,7 @@
         );
       },
       verifyToken(token) {
+        console.table(token)
         this.loginForm.token=token;
       }
     },

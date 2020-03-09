@@ -3,7 +3,7 @@
     <div class="vaptcha-init-main">
       <div class="vaptcha-init-loading">
         <a href="https: //www.vaptcha.com/" target="_blank"><img src="https://cdn.vaptcha.com/vaptcha-loading.gif"/></a>
-        <span class="vaptcha-text">VAPTCHA启动中...</span>
+        <span class="vaptcha-text">验证码启动中...</span>
       </div>
     </div>
   </div>
