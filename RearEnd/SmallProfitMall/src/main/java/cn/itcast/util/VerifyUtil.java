@@ -7,7 +7,7 @@ import cn.itcast.domain.verification.SecondVerify;
 import cn.itcast.skd.Vaptcha;
 
 import org.springframework.stereotype.Controller;
-
+//登录二次验证
 import javax.servlet.http.HttpServletRequest;
 @Controller("verifyUtil")
 public class VerifyUtil {

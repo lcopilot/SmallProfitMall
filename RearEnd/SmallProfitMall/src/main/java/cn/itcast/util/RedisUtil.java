@@ -12,7 +12,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.util.CollectionUtils;
-
+//缓存工具类
 public class RedisUtil {
 
 	private Logger log = LoggerFactory.getLogger(this.getClass());

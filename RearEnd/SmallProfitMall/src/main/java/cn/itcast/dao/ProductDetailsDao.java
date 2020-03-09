@@ -1,14 +1,27 @@
 package cn.itcast.dao;
 
-import cn.itcast.domain.ProductDatails.Size;
-import cn.itcast.domain.ProductDetails;
+
+import cn.itcast.domain.ProductDatails.ProductBasis;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
 public interface ProductDetailsDao {
-    //商品详细页
-    public ProductDetails findByPid (@Param("pid")String pid );
 
-    public Size findSizeByPid(@Param("sid")String sid);
+    //根据id查询商品基础表跟价格表
+    public ProductBasis findByIdBasis(@Param("ProductId") int ProductId);
+
+    //根据id查询商品图片
+    public String[] findByIdImage(@Param("ProductId") int ProductId);
+
+    //根据id查询商品规格
+    public String[] findByIdSpecification(@Param("ProductId") int ProductId);
+
+    //根据id查询商品口味
+    public String[] findByIdTaste(@Param("ProductId") int ProductId);
+    //根据id查询商品颜色
+    public String[] findByIdColour(@Param("ProductId") int ProductId);
+    //根据id查询商品套餐
+    public String[] findByIdCombo(@Param("ProductId") int ProductId);
+    //根据id查询商品ProductSize
+
+    public String[] findBySize(@Param("ProductId") int ProductId);
 }

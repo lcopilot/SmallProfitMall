@@ -1,8 +1,7 @@
 package cn.itcast.controller;
 
-import cn.itcast.domain.ProductDetails;
-import cn.itcast.domain.ProductDetailsResult;
-import cn.itcast.domain.ProductLowPriceResult;
+import cn.itcast.domain.ProductDatails.ProductBasis;
+import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
@@ -10,7 +9,6 @@ import cn.itcast.service.ProductDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -31,12 +29,11 @@ public class ProductDetailsController {
      * @return
      */
     @RequestMapping("/productDetailsResult/{productId}")
-    public QueryResponseResult ProductLowPrice(@PathVariable("productId") String productId) {
+    public QueryResponseResult ProductLowPrice(@PathVariable("productId") int productId) {
         // 调用service的方法
-        ProductDetailsResult productDetails = productDetailsService.findByPid(productId);
-        List<ProductDetailsResult> logins= Arrays.asList(productDetails);
+        List<ProductDetailsResult> productDetails = productDetailsService.findByPid(productId);
         QueryResult<ProductDetailsResult> result = new QueryResult<>();
-        result.setList(logins);
+        result.setList(productDetails);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
 

@@ -3,14 +3,53 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.ProductDetailsDao">
+<!--    <resultMap id="ProductDatailsMap" type="cn.itcast.domain.ProductDatails.a">-->
+<!--        <id property="ProductId" column="ProductId"></id>-->
+<!--        <result property="ProductName" column="ProductName"></result>-->
+<!--         &lt;!&ndash; 配置角色集合的映射 &ndash;&gt;-->
+<!--        <collection property="ImageSite" ofType="cn.itcast.domain.ProductDatails.ImageSite">-->
+<!--            <id property="id" column="Iid"></id>-->
+<!--            <result property="ProductId" column="IProductId"></result>-->
+<!--            <result property="ImageSite" column="ImageSite"></result>-->
+<!--        </collection>-->
+<!--    </resultMap>-->
+    <!--根据id查询商品基础表跟价格表-->
+    <select id="findByIdBasis" resultType="cn.itcast.domain.ProductDatails.ProductBasis">
+        SELECT
+        pb.*,
+        pp.ProductInventory,pp.ProductPrice,pp.ProductSales,pp.SalesPrice,pp.SpikePrice
 
-    <!--查询所有秒杀商品信息-->
-    <select id="findByPid" resultType="cn.itcast.domain.ProductDetails" parameterType="String">
-       SELECT * FROM productDetails where pid=#{pid}
+        FROM
+            ProductBasis pb
+        LEFT JOIN ProductPrice pp
+            ON pb.ProductId = pp.ProductId
+        WHERE pb.ProductId=#{ProductId}
+</select>
+
+    <select id="findByIdImage" resultType="java.lang.String" parameterType="INT">
+        select ImageSite from ProductImage WHERE ProductId=#{ProductId}
+    </select>
+    
+    <select id="findByIdSpecification" resultType="java.lang.String" parameterType="INT">
+    select Specification from ProductSpecification WHERE ProductId=#{ProductId}
     </select>
 
-    <!--查询所有秒杀商品信息-->
-    <select id="findSizeByPid" resultType="cn.itcast.domain.ProductDatails.Size" parameterType="String">
-       SELECT * FROM size where sid=#{sid}
+    <select id="findByIdTaste" resultType="java.lang.String" parameterType="INT">
+        select ProductTaste from ProductTaste WHERE ProductId=#{ProductId}
     </select>
+
+    <select id="findByIdColour" resultType="java.lang.String" parameterType="INT">
+        select ProductColour from ProductColour WHERE ProductId=#{ProductId}
+    </select>
+
+    <select id="findByIdCombo" resultType="java.lang.String" parameterType="INT">
+        select ProductCombo from ProductCombo WHERE ProductId=#{ProductId}
+    </select>
+
+
+    <select id="findBySize" resultType="java.lang.String" parameterType="INT">
+        select ProductSize from ProductSize WHERE ProductId=#{ProductId}
+    </select>
+
+
 </mapper>

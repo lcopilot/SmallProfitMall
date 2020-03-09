@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
-
+//时间工具类
 @Controller("timeUtil")
 public class TimeUtil {
     private static final String FORMAT_FULL = null;
