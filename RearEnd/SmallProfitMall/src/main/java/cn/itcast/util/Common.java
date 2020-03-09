@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Random;
 import java.util.UUID;
-
+//二次验证工具类
 public class Common {
     /**
      * 获取4位随机字符串

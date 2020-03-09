@@ -3,7 +3,7 @@ package cn.itcast.util;
 import org.springframework.stereotype.Controller;
 
 import java.util.Random;
-
+//参数随机数工具类
 @Controller("getFourRandom")
 public class GetFourRandom {
     /**
