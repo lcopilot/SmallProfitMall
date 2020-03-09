@@ -1,12 +1,11 @@
 <template>
   <div id="app">
-
-    <el-backtop :bottom="100">
+    <el-backtop target="#app" :right="60" :bottom="100">
       <div class="backTop">
         UP
       </div>
     </el-backtop>
-    <el-backtop :bottom="50"></el-backtop>
+    <el-backtop target="#app" :right="60" :bottom="50"></el-backtop>
     <!-- 解决vue相同路由跳转强制刷新该路由组件 二次搜索-->
     <router-view :key="$route.fullPath"/>
   </div>
@@ -22,6 +21,7 @@
   width: 100%;
   height: 100%;
   overflow: auto;
+
 }
 .backTop{
   height: 100%;
