@@ -21,7 +21,8 @@ public interface ProductDetailsDao {
     public String[] findByIdColour(@Param("ProductId") int ProductId);
     //根据id查询商品套餐
     public String[] findByIdCombo(@Param("ProductId") int ProductId);
-    //根据id查询商品ProductSize
-
+    //根据id查询商品尺寸
     public String[] findBySize(@Param("ProductId") int ProductId);
+    //根据id查询商品种类
+    public String[] findByKind(@Param("ProductId") int ProductId);
 }

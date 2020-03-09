@@ -51,5 +51,8 @@
         select ProductSize from ProductSize WHERE ProductId=#{ProductId}
     </select>
 
+    <select id="findByKind" resultType="java.lang.String" parameterType="INT">
+        select ProductKind from ProductKind WHERE ProductId=#{ProductId}
+    </select>
 
 </mapper>
