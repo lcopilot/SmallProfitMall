@@ -4,28 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.UserDao">
     <!-- 查询所有 -->
-    <select id="findAll" resultType="cn.itcast.domain.User">
+    <select id="findAll" resultType="cn.itcast.domain.user.User">
         select * from user;
     </select>
 
     <!-- 根据用户名查询用户信息 -->
-    <select id="findByName" resultType="cn.itcast.domain.User">
+    <select id="findByName" resultType="cn.itcast.domain.user.User">
          select * from user where name = #{name}
     </select>
 
     <!-- 根据用户手机号码查询用户 -->
-    <select id="findByPhone" resultType="cn.itcast.domain.User">
+    <select id="findByPhone" resultType="cn.itcast.domain.user.User">
          select * from user where  phone = #{phone}
     </select>
 
     <!-- 根据用户手机号码查询用户 -->
-    <select id="findByUid" resultType="cn.itcast.domain.User">
+    <select id="findByUid" resultType="cn.itcast.domain.user.User">
          select * from user where  Uid = #{Uid}
     </select>
 
 
     <!--注册用户 -->
-    <insert id="saveAccount" parameterType="cn.itcast.domain.User">
+    <insert id="saveAccount" parameterType="cn.itcast.domain.user.User">
          INSERT INTO user (uid,name,password,sex,phone,mail,image,token) VALUES (#{uid},#{name},#{password},#{sex},#{phone},#{mail},#{image},#{token})
     </insert>
 

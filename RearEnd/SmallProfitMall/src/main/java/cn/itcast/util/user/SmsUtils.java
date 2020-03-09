@@ -1,4 +1,4 @@
-package cn.itcast.util;
+package cn.itcast.util.user;
 
 
 import com.aliyuncs.DefaultAcsClient;
@@ -38,6 +38,9 @@ public class SmsUtils {
     }
     public static boolean sendLoginSms(String phone, String code) throws ClientException {
         return sendSms(phone, code, "SMS_180956525");
+    }
+    public static boolean forgetPassword(String phone, String code) throws ClientException {
+        return sendSms(phone, code, "SMS_184210080");
     }
 
     public static QuerySendDetailsResponse querySendDetails(String bizId) throws ClientException {

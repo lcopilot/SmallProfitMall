@@ -4,28 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.HomepageDao">
 
-    <select id="findRotationChart" resultType="cn.itcast.domain.RotationChart">
+    <select id="findRotationChart" resultType="cn.itcast.domain.homepag.RotationChart">
         SELECT * from RotationChart
     </select>
 
-    <select id="findNavigation" resultType="cn.itcast.domain.Navigation">
+    <select id="findNavigation" resultType="cn.itcast.domain.homepag.Navigation">
         SELECT * from navigation
     </select>
 
-    <select id="findNavigation2" resultType="cn.itcast.domain.Navigation_2">
+    <!--查询所有商品栏下分类-->
+    <select id="findNavigation2" resultType="cn.itcast.domain.commodity.Classify">
         SELECT * from category
     </select>
     <!--查询所有广告-->
-    <select id="findIcon" resultType="cn.itcast.domain.Icon">
+    <select id="findIcon" resultType="cn.itcast.domain.homepag.Icon">
         SELECT * from homepageIcon
     </select>
 
     <!--根据id查询消息分类-->
-    <select id="findById" resultType="cn.itcast.domain.NavigationClassify">
+    <select id="findById" resultType="cn.itcast.domain.homepag.NavigationClassify">
         select * from classification where nid = #{nid}
     </select>
     <!--询所有商品分类-->
-    <select id="findClassification" resultType="cn.itcast.domain.NavigationClassify">
+    <select id="findClassification" resultType="cn.itcast.domain.homepag.NavigationClassify">
         select * from classification
     </select>
 

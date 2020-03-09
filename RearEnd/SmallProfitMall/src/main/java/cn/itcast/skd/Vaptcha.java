@@ -1,9 +1,8 @@
 package cn.itcast.skd;
 
-import cn.itcast.constant.Constant;
 import cn.itcast.domain.verification.SecondVerify;
-import cn.itcast.util.Common;
-import cn.itcast.util.HttpClientUtil;
+import cn.itcast.util.verify.Common;
+import cn.itcast.util.verify.HttpClientUtil;
 
 
 import javax.servlet.http.HttpServletRequest;

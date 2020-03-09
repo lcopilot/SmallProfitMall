@@ -1,8 +1,4 @@
-package cn.itcast.util;
-
-
-
-
+package cn.itcast.util.verify;
 import cn.itcast.domain.verification.HttpResp;
 import org.apache.commons.codec.Charsets;
 import org.apache.http.HttpEntity;

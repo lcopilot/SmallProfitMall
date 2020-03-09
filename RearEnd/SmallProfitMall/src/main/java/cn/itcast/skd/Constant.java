@@ -1,4 +1,4 @@
-package cn.itcast.constant;
+package cn.itcast.skd;
 
 public class Constant {
     public static final String Char = "0123456789abcdef";

@@ -1,9 +1,7 @@
 package cn.itcast.dao;
 
-import cn.itcast.domain.User;
-import org.apache.ibatis.annotations.Insert;
+import cn.itcast.domain.user.User;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

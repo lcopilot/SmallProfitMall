@@ -1,6 +1,9 @@
 package cn.itcast.service;
 
-import cn.itcast.domain.*;
+import cn.itcast.domain.commodity.Ad;
+import cn.itcast.domain.commodity.ProductLowPriceResult;
+import cn.itcast.domain.commodity.Recommend;
+import cn.itcast.domain.commodity.SeckillResult;
 
 import java.text.ParseException;
 import java.util.List;

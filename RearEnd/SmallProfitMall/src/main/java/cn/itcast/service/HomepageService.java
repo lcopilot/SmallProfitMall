@@ -1,6 +1,7 @@
 package cn.itcast.service;
 
-import cn.itcast.domain.*;
+import cn.itcast.domain.commodity.Classify;
+import cn.itcast.domain.homepag.*;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface HomepageService {
     public List<Navigation> findNavigation();
 
     //商品分类导航栏2
-    public List<Navigation_2> findNavigation2();
+    public List<Classify> findNavigation2();
 
 
     //查询图标

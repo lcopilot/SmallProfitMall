@@ -1,8 +1,8 @@
-package cn.itcast.domain;
+package cn.itcast.domain.commodity;
 
 import java.io.Serializable;
-//主页导航
-public class Navigation_2 implements Serializable {
+
+public class Classify implements Serializable {
     private int cid;
     private String goodsName_1_c;
     private String goodsId_1_c;
@@ -30,14 +30,4 @@ public class Navigation_2 implements Serializable {
     public void setGoodsId_1_c(String goodsId_1_c) {
         this.goodsId_1_c = goodsId_1_c;
     }
-
-    @Override
-    public String toString() {
-        return "Navigation_2{" +
-                "cid=" + cid +
-                ", goodsName_1_c='" + goodsName_1_c + '\'' +
-                ", goodsId_1_c='" + goodsId_1_c + '\'' +
-                '}';
-    }
 }
-

@@ -1,4 +1,4 @@
-package cn.itcast.domain;
+package cn.itcast.domain.homepag;
 
 import java.io.Serializable;
 

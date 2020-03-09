@@ -1,4 +1,4 @@
-package cn.itcast.util;
+package cn.itcast.util.logic;
 
 
 import org.springframework.stereotype.Controller;
