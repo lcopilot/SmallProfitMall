@@ -102,7 +102,7 @@
       //进入购物车页面
       EnterCart() {
         this.$router.push({
-          path: "/product" //跳转的路径
+          path: "/shoppingCart" //跳转的路径
         });
       },
       ...mapActions([

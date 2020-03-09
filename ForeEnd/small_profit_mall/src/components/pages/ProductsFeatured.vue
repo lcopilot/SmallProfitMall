@@ -15,8 +15,8 @@
                      v-for="(productsFeatured ,index) in productsFeaturedList"
                      :key="productsFeatured.id" @mouseenter="enterProduct(index)">
               <div style="position: relative;" @mouseenter="enterProduct(index)">
-                <router-link :to="{path: '/product', query: {productId:productsFeatured.rid}}">
-                  <el-image fit="fit" :src="productsFeatured.productPicture"
+                <router-link :to="{path: '/product', query: {productId:productsFeatured.productId}}">
+                  <el-image fit="fit" :src="productsFeatured.imageSite"
                             :lazy="true"/>
                   <div class="recommended_products_name" >
                     <span v-text="productsFeatured.productName"></span>

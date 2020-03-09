@@ -88,7 +88,7 @@
                     <el-row>
                       <el-col :span="4" style="color: #999999"> 微利价:</el-col>
                       <el-col :span="16" class="product_price">
-                        ￥{{product.productPrice}}
+                        ￥{{product.productPrice.toFixed(2)}}
                       </el-col>
                       <el-col :span="4" style="color: #999999"> 累计销量<span
                           class="product_sales">{{product.sales}}</span></el-col>
@@ -145,9 +145,17 @@
               </el-form-item>
               <el-form-item label="颜色" v-if="product.colour[0]">
                 <div class="form_left">
-                  <el-radio-group v-model="productForm.colour" size="medium">
+                  <el-radio-group v-model="productForm.kind" size="medium">
                     <el-radio-button v-for="(colour,index) in product.colour" :key="index"
                                      :label="colour" :value="index"></el-radio-button>
+                  </el-radio-group>
+                </div>
+              </el-form-item>
+              <el-form-item label="种类" v-if="product.kind[0]">
+                <div class="form_left">
+                  <el-radio-group v-model="productForm.kind" size="medium">
+                    <el-radio-button v-for="(kind,index) in product.kind" :key="index"
+                                     :label="kind" :value="index"></el-radio-button>
                   </el-radio-group>
                 </div>
               </el-form-item>
@@ -159,7 +167,7 @@
                   </el-radio-group>
                 </div>
               </el-form-item>
-              <el-form-item label="口味" v-if="product.taste">
+              <el-form-item label="口味" v-if="product.taste[0]">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.taste" size="medium">
                     <el-radio-button :label="taste" :value="index" :key="index"
@@ -174,7 +182,7 @@
                   <el-button type="danger" @click="onSubmit" style="margin-left: 10px"
                              icon="el-icon-circle-plus-outline">加入购物车
                   </el-button>
-                  <el-button type="danger" @click="onSubmit" :disabled="product.inventory>0">立即购买
+                  <el-button type="danger" @click="onSubmit" :disabled="(product.inventorys)<=0">立即购买
                   </el-button>
                 </div>
                 <div class="form_left" style="color:#999999;">
@@ -420,6 +428,7 @@
           combo: '',
           taste: '',
           quantity: 1,
+          kind:'',
         },
 
       }
