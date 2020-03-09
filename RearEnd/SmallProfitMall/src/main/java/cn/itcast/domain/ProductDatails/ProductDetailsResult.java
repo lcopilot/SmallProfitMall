@@ -16,13 +16,30 @@ public class ProductDetailsResult implements Serializable {
     private String inventory;       //库存
     private String freeShipping;    //是否包邮
     private String video;           //视频
-    private String ProductCategory;        //商品种类
     private String[] size;               //尺寸(返回前端）
     private String[] colour;              //颜色(返回前端）
     private String[] combo;                 //套餐(返回前端）
     private String[] specification;         //规格(返回前端）
     private String[] imageSite;           //图片（返回前端）
     private String[] taste;             //口味(返回前端）
+    private String[] kind;              //商品种类
+    private int inventorys;             //库存
+
+    public String[] getKind() {
+        return kind;
+    }
+
+    public void setKind(String[] kind) {
+        this.kind = kind;
+    }
+
+    public int getInventorys() {
+        return inventorys;
+    }
+
+    public void setInventorys(int inventorys) {
+        this.inventorys = inventorys;
+    }
 
     public int getId() {
         return id;
@@ -96,14 +113,6 @@ public class ProductDetailsResult implements Serializable {
         this.video = video;
     }
 
-    public String getProductCategory() {
-        return ProductCategory;
-    }
-
-    public void setProductCategory(String productCategory) {
-        ProductCategory = productCategory;
-    }
-
     public String[] getSize() {
         return size;
     }
@@ -164,7 +173,6 @@ public class ProductDetailsResult implements Serializable {
                 ", inventory='" + inventory + '\'' +
                 ", freeShipping='" + freeShipping + '\'' +
                 ", video='" + video + '\'' +
-                ", ProductCategory='" + ProductCategory + '\'' +
                 ", size=" + Arrays.toString(size) +
                 ", colour=" + Arrays.toString(colour) +
                 ", combo=" + Arrays.toString(combo) +

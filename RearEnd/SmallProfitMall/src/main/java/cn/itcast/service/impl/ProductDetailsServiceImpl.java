@@ -86,7 +86,8 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
             productDetailsResult.setSpecification(productDetailsDao.findByIdSpecification(pid));     //设置规格数组
 
             productDetailsResult.setTaste(productDetailsDao.findByIdTaste(pid));     //设置规格数组
-            productDetailsResult.setProductCategory(productDetails.getProductCategory());
+            productDetailsResult.setKind(productDetailsDao.findByKind(pid));    //设置商品种类
+            productDetailsResult.setInventorys(new Double(productDetails.getProductInventory()).intValue());
             redisUtil.lSet(productDetailsResult.getPid(),productDetailsResult);
             System.out.println("数据库中取");
             List<ProductDetailsResult> productDetailsResults= Arrays.asList(productDetailsResult);
