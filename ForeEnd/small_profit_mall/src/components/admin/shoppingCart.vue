@@ -9,9 +9,9 @@
         <el-row :gutter="10" style="margin-top: 60px">
           <el-col :span="20" :push="2">
             <el-card shadow="always">
-              <div style="text-align: left;margin:0 0 10px 10px">
-                <span style="font-size: 30px;font-weight: 600;color: red">微利</span><span
-                  style="font-weight: 600;margin-left: 5px">购物车</span>
+              <div class="cart_name">
+                <span class="cart_name_span1">微利</span><span
+                  class="cart_name_span2">购物车</span>
               </div>
               <el-table
                   ref="cartTable"
@@ -37,19 +37,20 @@
                       </el-col>
                       <el-col :span="9">
                         <div style="font-size: 13px;">
-                          <el-tooltip class="item" effect="dark" :content="product.row.productName" placement="bottom">
+                          <el-tooltip class="item" effect="dark" :content="product.row.productName"
+                                      placement="bottom">
                             <router-link to="/">{{product.row.productName}}
                             </router-link>
                           </el-tooltip>
                         </div>
                       </el-col>
                       <el-col :span="9">
-                        <el-tooltip class="item" effect="dark" :content="product.row.Configuration" placement="top">
+                        <el-tooltip class="item" effect="dark" :content="product.row.Configuration"
+                                    placement="top">
                           <div style="font-size: 13px;">
                             {{product.row.Configuration}}
                           </div>
                         </el-tooltip>
-
                       </el-col>
                     </el-row>
                   </template>
@@ -61,7 +62,7 @@
                     width="110"
                     column-key="date">
                   <template slot-scope="product">
-                    ￥<span style="color: red;font-size: 18px;font-weight: 600">
+                    ￥<span class="cart_product_price">
                      {{product.row.price.toFixed(2)}}
                     </span>
                   </template>
@@ -78,7 +79,7 @@
                     label="小计"
                     width="120">
                   <template slot-scope="product">
-                    ￥<span style="color: red;font-size: 18px;font-weight: 600">
+                    ￥<span class="cart_product_price">
                     {{(((product.row.price)*100)*product.row.Quantity)/100}}
                     </span>
                   </template>
@@ -87,26 +88,33 @@
                     label="操作"
                     show-overflow-tooltip
                     width="120">
-                  <template slot-scope="scope">
+                  <template slot-scope="product">
                     <el-button
                         type="danger"
-                        @click.native.prevent="deleteRow(scope.$index, tableData)">
+                        @click="buyProduct(product.row.productId)">
                       立即购买
                     </el-button>
                   </template>
                 </el-table-column>
                 <el-table-column
                     width="80">
-                  <template slot-scope="scope">
+                  <template slot-scope="product">
                     <div>
+                      <!-- 已收藏就不显示 待完成-->
                       <div>
-                        <el-link :underline="false" >收藏</el-link>
+                        <el-link :underline="false" @click="favorite(product.row.productId)">收藏
+                        </el-link>
+                      </div>
+                      <!-- 库存不足时显示 待完成-->
+                      <div>
+                        <el-link :underline="false" @click="arrivalNotice(product.row.productId)">
+                          到货通知
+                        </el-link>
                       </div>
                       <div>
-                        <el-link :underline="false" >到货通知</el-link>
-                      </div>
-                      <div>
-                        <el-link :underline="false" >移除</el-link>
+                        <el-link :underline="false"
+                                 @click="removeCartProduct(product.row.productId)">移除
+                        </el-link>
                       </div>
                     </div>
                     <br/>
@@ -114,42 +122,36 @@
                 </el-table-column>
               </el-table>
             </el-card>
-            <el-card shadow="always"
-                     style="max-height: 65px;z-index: 2000;position: fixed;width:80%;bottom: 0px;">
+            <el-card shadow="always" class="cart_footer">
               <el-row>
                 <el-col :span="2">
                   <el-checkbox v-model="selectAll" @change="checkAll">全选</el-checkbox>
                 </el-col>
                 <el-col :span="3">
-                  <el-button
-                      @click.native.prevent="deleteRow(scope.$index, tableData)"
-                      type="text"
-                      size="small">
-                    全部收藏
+                  <el-button @click="favoriteAll()" type="text" size="small">
+                    收藏已选择
                   </el-button>
-                  <el-button
-                      @click.native.prevent="deleteRow(scope.$index, tableData)"
-                      type="text"
-                      size="small">
-                    清空购物车
+                  <el-button @click="removeAll()" type="text" size="small">
+                    移除已选择
                   </el-button>
                 </el-col>
                 <el-col :span="3" :push="11">
                   <div style="color: #999999">
-                    已选<span style="color: red">{{number}}</span>件商品
+                    已选<span style="color: red">{{productNumber}}</span>件商品
                   </div>
                 </el-col>
                 <el-col :span="5" :push="10">
-                  <div style="font-size: 12px;color: #999999;margin-top: -10px">总价:
-                    <span style="font-size: 22px;color: red;font-weight: 700">￥{{cartFrom.totalPrice.toFixed(2)}}</span>
+                  <div class="cart_product_total_price1">总价:
+                    <span class="cart_product_total_price2">
+                      ￥{{cartFrom.totalPrice.toFixed(2)}}
+                    </span>
                   </div>
                   <div style="font-size: 12px;color: #999999">促销:-￥0.00</div>
                 </el-col>
                 <el-col :span="3" :push="9">
-                  <div
-                      style="background-color: #e64347;margin-top: -20px;height: 65px;width: 100px;margin-left: 20px">
-                    <a>
-                      <div style="color: white;font-size: 20px;font-weight: 600;margin-top: 16px">
+                  <div class="cart_settlement1">
+                    <a @click="settlement()">
+                      <div class="cart_settlement2">
                         去结算
                       </div>
                     </a>
@@ -179,8 +181,10 @@
     components: {search, Header, Footer},
     data() {
       return {
+        //底栏的全选绑定
         selectAll: false,
-        number: 0,
+        //底栏商品数量
+        productNumber: 0,
         cartList: [
           {
             productImg: 'http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg',
@@ -245,27 +249,60 @@
       }
     },
     methods: {
+      //全选时触发
       select_all(selection) {
         this.selectAll = !this.selectAll;
         this.select(selection)
       },
+      // 选择单个时触发
       select(selection) {
         this.cartFrom.totalPrice = 0;
         this.cartFrom.productList = selection;
-        this.number = selection.length;
+        this.productNumber = selection.length;
         selection.forEach(product => {
           this.cartFrom.totalPrice += (((product.price) * 100) * product.Quantity) / 100
         })
       },
-      quantityChange(){
+      //商品数量改变时触发
+      quantityChange() {
         this.select(this.$refs.cartTable.selection);
       },
+      //底栏全选事件
       checkAll(state) {
         if (state) {
           this.$refs.cartTable.toggleAllSelection();
         } else {
           this.$refs.cartTable.clearSelection();
         }
+      },
+      //立即购买
+      buyProduct(cartProductId) {
+      },
+      //收藏
+      favorite(productId) {
+
+      },
+      //收藏已选择
+      favoriteAll() {
+        this.$refs.cartTable.selection
+      },
+      //到货通知
+      arrivalNotice(productId) {
+
+      },
+      //删除单个商品
+      removeCartProduct(productId) {
+
+      },
+      //删除已选择商品
+      removeAll() {
+        this.$refs.cartTable.selection
+      },
+      //结算
+      settlement() {
+
+        this.$refs.cartTable.selection
+
       }
     },
 
@@ -273,12 +310,72 @@
 </script>
 
 <style>
+  /*增加scoped el-table样式无法使用
+    #sCart 增加id防止影响其他页面
+  */
   #sCart .el-table thead {
-    color: #8EB7FA;
+    color: #a8d8ea;
     font-weight: 500;
   }
 
   #sCart .el-table th {
     background: #f3f3f3;
+  }
+
+  #sCart .cart_name {
+    text-align: left;
+    margin: 0 0 10px 10px
+  }
+
+  #sCart .cart_name_span1 {
+    font-size: 30px;
+    font-weight: 600;
+    color: red
+  }
+
+  #sCart .cart_name_span2 {
+    font-weight: 600;
+    margin-left: 5px
+  }
+
+  #sCart .cart_product_price {
+    color: red;
+    font-size: 18px;
+    font-weight: 600
+  }
+
+  #sCart .cart_footer {
+    max-height: 65px;
+    z-index: 2000;
+    position: fixed;
+    width: 80%;
+    bottom: 0px;
+  }
+
+  #sCart .cart_product_total_price1 {
+    font-size: 12px;
+    color: #999999;
+    margin-top: -10px
+  }
+
+  #sCart .cart_product_total_price2 {
+    font-size: 22px;
+    color: red;
+    font-weight: 700
+  }
+
+  #sCart .cart_settlement1 {
+    background-color: #e64347;
+    margin-top: -20px;
+    height: 65px;
+    width: 100px;
+    margin-left: 20px
+  }
+
+  #sCart .cart_settlement2 {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 16px
   }
 </style>
