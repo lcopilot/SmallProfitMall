@@ -21,5 +21,6 @@ public interface HomepageDao {
     //根据id查询详细分类
     public List<NavigationClassify> findById(int nid);
 
+
     public List<NavigationClassify> findClassification();
 }

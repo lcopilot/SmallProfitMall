@@ -5,20 +5,52 @@ import java.io.Serializable;
 //为你推荐
 public class Recommend implements Serializable {
     private int id;
-    private String rid;
-    private String ProductPicture;
+    private String ProductId;
+    private String ImageSite;
     private String ProductName;
     private String ProductPrice;
     private int Favorite;
     private int shoppingTrolley;
     private int hot;
 
-    public String getRid() {
-        return rid;
+    public int getId() {
+        return id;
     }
 
-    public void setRid(String rid) {
-        this.rid = rid;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getProductId() {
+        return ProductId;
+    }
+
+    public void setProductId(String productId) {
+        ProductId = productId;
+    }
+
+    public String getImageSite() {
+        return ImageSite;
+    }
+
+    public void setImageSite(String imageSite) {
+        ImageSite = imageSite;
+    }
+
+    public String getProductName() {
+        return ProductName;
+    }
+
+    public void setProductName(String productName) {
+        ProductName = productName;
+    }
+
+    public String getProductPrice() {
+        return ProductPrice;
+    }
+
+    public void setProductPrice(String productPrice) {
+        ProductPrice = productPrice;
     }
 
     public int getFavorite() {
@@ -44,37 +76,4 @@ public class Recommend implements Serializable {
     public void setHot(int hot) {
         this.hot = hot;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getProductPicture() {
-        return ProductPicture;
-    }
-
-    public void setProductPicture(String productPicture) {
-        ProductPicture = productPicture;
-    }
-
-    public String getProductName() {
-        return ProductName;
-    }
-
-    public void setProductName(String productName) {
-        ProductName = productName;
-    }
-
-    public String getProductPrice() {
-        return ProductPrice;
-    }
-
-    public void setProductPrice(String productPrice) {
-        ProductPrice = productPrice;
-    }
-
 }
