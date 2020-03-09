@@ -1,5 +1,15 @@
 <template>
-  <vaptcha @success="login" ></vaptcha>
+  <div>
+    <div v-for="item in 10">
+
+      <el-row>
+        <el-col :span="22">
+          <div v-for="item in 10"> </div>
+
+        </el-col>
+      </el-row>
+    </div>
+  </div>
 </template>
 
 <script>
