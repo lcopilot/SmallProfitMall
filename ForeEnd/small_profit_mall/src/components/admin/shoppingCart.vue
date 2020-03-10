@@ -72,7 +72,7 @@
                     width="180">
                   <template slot-scope="product">
                     <el-input-number v-model="product.row.Quantity" size="mini" :min="1"
-                                     :max="99" @change="quantityChange"/>
+                                     :max="99" @change="quantityChange()"/>
                   </template>
                 </el-table-column>
                 <el-table-column
@@ -251,7 +251,11 @@
     methods: {
       //全选时触发
       select_all(selection) {
-        this.selectAll = !this.selectAll;
+        if (selection.length==0){
+          this.selectAll=false;
+        }else {
+          this.selectAll = true;
+        }
         this.select(selection)
       },
       // 选择单个时触发
@@ -264,7 +268,8 @@
         })
       },
       //商品数量改变时触发
-      quantityChange() {
+      quantityChange(productNumber) {
+
         this.select(this.$refs.cartTable.selection);
       },
       //底栏全选事件
