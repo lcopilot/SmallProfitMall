@@ -5,12 +5,21 @@ import java.util.Date;
 
 //秒杀实体
 public class Seckill implements Serializable {
-    private int SeckillId;
+    private int SeckillId;      //秒杀id
+    private int ProductId;      //商品id
     private Double ProductPrice;        //原价
     private Double SpikePrice;         //秒杀价
     private String ProductName;       //商品名字
     private String ImageSite;      //商品图片
 
+
+    public int getProductId() {
+        return ProductId;
+    }
+
+    public void setProductId(int productId) {
+        ProductId = productId;
+    }
 
     public Double getProductPrice() {
         return ProductPrice;
