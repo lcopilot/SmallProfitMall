@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 09/03/2020 14:28:50
+ Date: 10/03/2020 20:00:37
 */
 
 SET NAMES utf8mb4;
@@ -24,17 +24,33 @@ DROP TABLE IF EXISTS `ProductBasis`;
 CREATE TABLE `ProductBasis`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ProductId` int(11) NOT NULL,
-  `ProductName` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ProductVideo` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `ProductName` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `ProductVideo` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `ProductWeight` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10003 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10018 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductBasis
 -- ----------------------------
 INSERT INTO `ProductBasis` VALUES (1, 10001, 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.fhxasdsada.xyz/v.f30.mp4', '0.74kg');
 INSERT INTO `ProductBasis` VALUES (3, 10002, 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.fhxasdsada.xyz/v.f30.mp4', '0.24kg');
+INSERT INTO `ProductBasis` VALUES (4, 10010, '阿玛尼（ Emporio Armani）满天星手表 女新款玫瑰金钢制表带镶钻石英轻奢女士腕表礼物 AR11244 ', '\r\nhttp://productdata.fhxasdsada.xyz/v.f30%20%281%29.mp4', '\r\n0.485kg');
+INSERT INTO `ProductBasis` VALUES (5, 10011, 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.fhxasdsada.xyz/v.f10011.mp4', '0.56kg');
+INSERT INTO `ProductBasis` VALUES (6, 10012, '联想(Lenovo)小新Pro13.3英寸全面屏超轻薄笔记本电脑(标压锐龙R5-3550H 16G 512G 2.5K QHD 100%sRGB)银 ', '\r\nhttp://productdata.fhxasdsada.xyz/10012%5B1%5D.mp4', '2.08kg');
+INSERT INTO `ProductBasis` VALUES (7, 10013, '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080 ', 'https://jdvod.300hu.com/4c1f7a6atransbjngwcloud1oss/7d07cd26107144746580840449/v.f30.mp4?dockingId=88290b33-b297-4d55-aa10-3996cc45a4b6&storageSource=3', '2.08kg');
+INSERT INTO `ProductBasis` VALUES (8, 10014, '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/sdfjsdfjmrthnndvisdgsdg.mp4', '2.8kg');
+INSERT INTO `ProductBasis` VALUES (9, 10015, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/sdkjj.mp4', '0.15kg');
+INSERT INTO `ProductBasis` VALUES (10, 10016, '华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机', '\r\nhttp://productdata.fhxasdsada.xyz/v.f30%20%282%29.mp4', '0.54kg');
+INSERT INTO `ProductBasis` VALUES (11, 10017, 'Apple Watch Series 5智能手表（GPS款 40毫米深空灰色铝金属表壳 黑色运动型表带 MWV82CH/A)\r\n', 'http://productdata.fhxasdsada.xyz/asuashfoeryubvxcmivmdsfomaosaergl.mp4', '0.23kg');
+INSERT INTO `ProductBasis` VALUES (12, 10003, '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', NULL, '不计重');
+INSERT INTO `ProductBasis` VALUES (13, 10004, '新款Huawei/华为折叠手机mates xs 5g版大屏双屏全面屏双面屏官方旗舰店对折手机可折叠屏 Mate XS折叠\r\n', 'http://productdata.fhxasdsada.xyz/sdfjsdomytupj,nkc.mp4', '0.24kg');
+INSERT INTO `ProductBasis` VALUES (14, 10005, 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/diferwngmopsvm,jaks.mp4', '2.8kg');
+INSERT INTO `ProductBasis` VALUES (15, 10006, ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.fhxasdsada.xyz/iorhmm,wcvihj.mp4', '0.6kg');
+INSERT INTO `ProductBasis` VALUES (16, 10007, 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', NULL, '5kg');
+INSERT INTO `ProductBasis` VALUES (17, 10008, '万代（BANDAI） Megahouse POP 海贼王 路飞9人 模型玩具（无售后！！！） 四档路飞\r\n', NULL, '100kg');
+INSERT INTO `ProductBasis` VALUES (18, 10009, '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n', NULL, '5.6kg');
+INSERT INTO `ProductBasis` VALUES (19, 10018, '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.fhxasdsada.xyz/v.f30%20%284%29.mp4\r\n\r\n', '0.4kg');
 
 -- ----------------------------
 -- Table structure for ProductColour
@@ -45,7 +61,7 @@ CREATE TABLE `ProductColour`  (
   `ProductId` int(11) NULL DEFAULT NULL,
   `ProductColour` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductColour
@@ -54,6 +70,50 @@ INSERT INTO `ProductColour` VALUES (1, 10001, '黑色');
 INSERT INTO `ProductColour` VALUES (2, 10001, '绿色');
 INSERT INTO `ProductColour` VALUES (3, 10001, '紫色');
 INSERT INTO `ProductColour` VALUES (4, 10002, '白色');
+INSERT INTO `ProductColour` VALUES (5, 10010, '圣颜色');
+INSERT INTO `ProductColour` VALUES (6, 10010, '钢质表带AR1957');
+INSERT INTO `ProductColour` VALUES (7, 10010, '璀璨满天星AR1926');
+INSERT INTO `ProductColour` VALUES (8, 10010, '闪耀满天星AR1925');
+INSERT INTO `ProductColour` VALUES (9, 10010, '钢质表带AR11129');
+INSERT INTO `ProductColour` VALUES (10, 10010, '玫瑰金满天星AR11244');
+INSERT INTO `ProductColour` VALUES (11, 10011, '银色');
+INSERT INTO `ProductColour` VALUES (12, 10011, '暗夜绿色');
+INSERT INTO `ProductColour` VALUES (13, 10011, '深空灰色');
+INSERT INTO `ProductColour` VALUES (14, 10012, '小清新蓝');
+INSERT INTO `ProductColour` VALUES (18, 10014, '黑色');
+INSERT INTO `ProductColour` VALUES (19, 10014, '黑色+骨伽LLC750全模组电源');
+INSERT INTO `ProductColour` VALUES (20, 10016, '星河银');
+INSERT INTO `ProductColour` VALUES (21, 10016, '亮黑色');
+INSERT INTO `ProductColour` VALUES (22, 10016, '翡冷翠');
+INSERT INTO `ProductColour` VALUES (23, 10016, '罗兰紫');
+INSERT INTO `ProductColour` VALUES (24, 10017, '黑色');
+INSERT INTO `ProductColour` VALUES (25, 10017, '白色');
+INSERT INTO `ProductColour` VALUES (26, 10017, '粉砂色');
+INSERT INTO `ProductColour` VALUES (27, 10004, '星际蓝');
+INSERT INTO `ProductColour` VALUES (28, 10004, '华为mate Xs星际蓝(新款)');
+INSERT INTO `ProductColour` VALUES (29, 10006, '黑色');
+INSERT INTO `ProductColour` VALUES (30, 10006, '铂金银');
+INSERT INTO `ProductColour` VALUES (31, 10009, '[A51M]9代i9 2080 低蓝光屏 黑 ');
+INSERT INTO `ProductColour` VALUES (32, 10009, '[A51M]9代i9 512GX2+1T 2080 144');
+INSERT INTO `ProductColour` VALUES (33, 10009, '[A51M]9代i7 512GX2 2070 144 白');
+INSERT INTO `ProductColour` VALUES (34, 10009, ' [A51M]9代i7 1TSSD 2060OC 144黑');
+INSERT INTO `ProductColour` VALUES (35, 10009, '[A51M]9代i7 512GX2 2070 144 黑');
+INSERT INTO `ProductColour` VALUES (36, 10009, ' [鼠标耳机]+i7 512GX2 20700C 白');
+INSERT INTO `ProductColour` VALUES (37, 10009, '[鼠标耳机]+i7 512GX2 20700C 黑 ');
+INSERT INTO `ProductColour` VALUES (38, 10009, '[耳机]+9代i7 512GX2 20700C 白');
+INSERT INTO `ProductColour` VALUES (39, 10009, '[耳机]+9代i7 512GX2 20700C 黑');
+INSERT INTO `ProductColour` VALUES (40, 10018, '028#滋润珊瑚红');
+INSERT INTO `ProductColour` VALUES (41, 10018, '999#滋润传奇正红');
+INSERT INTO `ProductColour` VALUES (42, 10018, '080#滋润微笑红');
+INSERT INTO `ProductColour` VALUES (43, 10018, '888#哑光开运红');
+INSERT INTO `ProductColour` VALUES (44, 10018, '772#哑光豆沙红');
+INSERT INTO `ProductColour` VALUES (45, 10018, '771#哑光树玫红');
+INSERT INTO `ProductColour` VALUES (46, 10018, '[限量版星星5支套装礼盒]');
+INSERT INTO `ProductColour` VALUES (47, 10018, '[情人节星星限量版五只装套盒]');
+INSERT INTO `ProductColour` VALUES (48, 10018, '挚爱红管999#传奇正红[赠专柜礼盒]');
+INSERT INTO `ProductColour` VALUES (49, 10018, '[红弯心动6支套装] [赠视频玫瑰礼盒 ]');
+INSERT INTO `ProductColour` VALUES (50, 10018, '[限量版挚爱红管烟花5支装套盒]');
+INSERT INTO `ProductColour` VALUES (51, 10018, '999+ 520+花漾甜心100ML [口红香水套装]');
 
 -- ----------------------------
 -- Table structure for ProductCombo
@@ -64,18 +124,14 @@ CREATE TABLE `ProductCombo`  (
   `ProductId` int(11) NULL DEFAULT NULL,
   `ProductCombo` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductCombo
 -- ----------------------------
-INSERT INTO `ProductCombo` VALUES (1, 10001, '优惠套餐一');
-INSERT INTO `ProductCombo` VALUES (2, 10001, '优惠套餐二');
-INSERT INTO `ProductCombo` VALUES (3, 10001, '优惠套餐三');
 INSERT INTO `ProductCombo` VALUES (4, 10002, '优惠套餐一');
 INSERT INTO `ProductCombo` VALUES (5, 10002, '优惠套餐二');
 INSERT INTO `ProductCombo` VALUES (6, 10002, '优惠套餐三');
-INSERT INTO `ProductCombo` VALUES (7, 10002, '优惠弹出四');
 
 -- ----------------------------
 -- Table structure for ProductImage
@@ -85,22 +141,102 @@ CREATE TABLE `ProductImage`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ProductId` int(11) NULL DEFAULT NULL,
   `ImageSite` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `sign` int(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 92 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductImage
 -- ----------------------------
-INSERT INTO `ProductImage` VALUES (1, 10001, 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg');
-INSERT INTO `ProductImage` VALUES (2, 10001, 'http://productdata.fhxasdsada.xyz/43a1962b41270d97.jpg');
-INSERT INTO `ProductImage` VALUES (3, 10001, 'http://productdata.fhxasdsada.xyz/ee567a1dea515d38.jpg');
-INSERT INTO `ProductImage` VALUES (4, 10001, 'http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg');
-INSERT INTO `ProductImage` VALUES (5, 10001, 'http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg');
-INSERT INTO `ProductImage` VALUES (6, 10002, '\r\nhttp://productdata.fhxasdsada.xyz/2b6fc898ee704a36.jpg\r\n');
-INSERT INTO `ProductImage` VALUES (7, 10002, '\r\nhttp://productdata.fhxasdsada.xyz/6a155195eb3285c9.jpg');
-INSERT INTO `ProductImage` VALUES (8, 10002, 'http://productdata.fhxasdsada.xyz/7193b42ba13929fd.jpg');
-INSERT INTO `ProductImage` VALUES (9, 10002, '\r\nhttp://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg');
-INSERT INTO `ProductImage` VALUES (10, 10002, '');
+INSERT INTO `ProductImage` VALUES (1, 10001, 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg', 1);
+INSERT INTO `ProductImage` VALUES (2, 10001, 'http://productdata.fhxasdsada.xyz/43a1962b41270d97.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (3, 10001, 'http://productdata.fhxasdsada.xyz/ee567a1dea515d38.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (4, 10001, 'http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (5, 10001, 'http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (6, 10002, '\r\nhttp://productdata.fhxasdsada.xyz/2b6fc898ee704a36.jpg\r\n', 1);
+INSERT INTO `ProductImage` VALUES (7, 10002, '\r\nhttp://productdata.fhxasdsada.xyz/6a155195eb3285c9.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (8, 10002, 'http://productdata.fhxasdsada.xyz/7193b42ba13929fd.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (9, 10002, '\r\nhttp://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (11, 10002, 'http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (13, 10010, '\r\nhttp://productdata.fhxasdsada.xyz/8c0b0a13e48adce3.jpg', 1);
+INSERT INTO `ProductImage` VALUES (14, 10010, '\r\nhttp://productdata.fhxasdsada.xyz/19f5df0ae27b218a.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (15, 10010, '\r\nhttp://productdata.fhxasdsada.xyz/48f8745314110ddd.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (16, 10010, '\r\nhttp://productdata.fhxasdsada.xyz/220f4a39216bc62b.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (17, 10011, '\r\nhttp://productdata.fhxasdsada.xyz/04e04ec4954e07bd.jpg', 1);
+INSERT INTO `ProductImage` VALUES (18, 10011, '\r\nhttp://productdata.fhxasdsada.xyz/3957b8e1cce2b048.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (19, 10011, '\r\nhttp://productdata.fhxasdsada.xyz/394596a8af6149cf.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (20, 10011, '\r\nhttp://productdata.fhxasdsada.xyz/da0eb4c6670eab20.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (21, 10011, '\r\nhttp://productdata.fhxasdsada.xyz/e54ca7b1b222a83b.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (22, 10012, '\r\nhttp://productdata.fhxasdsada.xyz/2b0744939bd398f0.jpg', 1);
+INSERT INTO `ProductImage` VALUES (23, 10012, '\r\nhttp://productdata.fhxasdsada.xyz/5ce4b1fcNc14ca9c7.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (24, 10012, '\r\nhttp://productdata.fhxasdsada.xyz/6522a53a673ee61d.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (25, 10012, '\r\nhttp://productdata.fhxasdsada.xyz/c15786ad5136e74f.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (26, 10012, '\r\nhttp://productdata.fhxasdsada.xyz/caa1b677b914cb5f.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (27, 10013, 'http://productdata.fhxasdsada.xyz/1f3f9fd0e759383f.jpg', 1);
+INSERT INTO `ProductImage` VALUES (28, 10013, 'http://productdata.fhxasdsada.xyz/4fc927901b1aae32.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (29, 10013, 'http://productdata.fhxasdsada.xyz/5bc47ce4Ne79570db.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (30, 10013, 'http://productdata.fhxasdsada.xyz/3480e2930d6e9a25.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (31, 10013, 'http://productdata.fhxasdsada.xyz/562d20d464bb56ac.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (32, 10014, 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', 1);
+INSERT INTO `ProductImage` VALUES (33, 10014, 'http://productdata.fhxasdsada.xyz/5b2473c4Nea457f92.png', NULL);
+INSERT INTO `ProductImage` VALUES (34, 10014, 'http://productdata.fhxasdsada.xyz/5b2473e0Ne5d2fed8.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (35, 10014, 'http://productdata.fhxasdsada.xyz/5b2473e3Nc422faf9.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (36, 10014, 'http://productdata.fhxasdsada.xyz/e8a8c0ac848fd663.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (37, 10015, 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', 1);
+INSERT INTO `ProductImage` VALUES (38, 10015, 'http://productdata.fhxasdsada.xyz/65d595ccc0df91701a30c5b9af96662c_2_3_photo.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (39, 10015, 'http://productdata.fhxasdsada.xyz/6ad6e5468f3c79afd9e2aaac6235b643_2_3_photo.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (40, 10015, 'http://productdata.fhxasdsada.xyz/a6bd598ec1911c7cd8f850f3e88e7ba5_2_3_photo.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (41, 10015, 'http://productdata.fhxasdsada.xyz/a6bd598ec1911c7cd8f850f3e88e7ba5_2_3_photo.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (42, 10016, '\r\nhttp://productdata.fhxasdsada.xyz/971ec333c8ef1de2.jpg', 1);
+INSERT INTO `ProductImage` VALUES (43, 10016, '\r\nhttp://productdata.fhxasdsada.xyz/8053c011fc5f3f37.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (44, 10016, '\r\nhttp://productdata.fhxasdsada.xyz/66447aca06daf84d.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (45, 10016, '\r\nhttp://productdata.fhxasdsada.xyz/b13aea126799a8f7.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (46, 10016, '\r\nhttp://productdata.fhxasdsada.xyz/fb8e44067242df88.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (47, 10017, 'http://productdata.fhxasdsada.xyz/44c3c5495c1b5145.jpg', 1);
+INSERT INTO `ProductImage` VALUES (48, 10017, 'http://productdata.fhxasdsada.xyz/2501bf3e7f96c1fb.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (49, 10017, 'http://productdata.fhxasdsada.xyz/38043e785531d4f5.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (50, 10017, 'http://productdata.fhxasdsada.xyz/bb905838dcde3ccd.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (51, 10017, 'http://productdata.fhxasdsada.xyz/cc8e307f5aeccb49.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (52, 10003, 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg', 1);
+INSERT INTO `ProductImage` VALUES (53, 10003, 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (54, 10003, 'http://productdata.fhxasdsada.xyz/7e885a6364ff7b21.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (55, 10003, 'http://productdata.fhxasdsada.xyz/ad914e4c1ac2e465.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (56, 10003, 'http://productdata.fhxasdsada.xyz/d094f60a2c15d012.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (57, 10004, 'http://productdata.fhxasdsada.xyz/7a3a192a7fca3c35.png', 1);
+INSERT INTO `ProductImage` VALUES (58, 10004, 'http://productdata.fhxasdsada.xyz/9c03f65ed857d88a.png', NULL);
+INSERT INTO `ProductImage` VALUES (59, 10004, 'http://productdata.fhxasdsada.xyz/4686681b97deebb2.png', NULL);
+INSERT INTO `ProductImage` VALUES (60, 10004, 'http://productdata.fhxasdsada.xyz/b0d64ec97f4d8f0d.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (61, 10004, 'http://productdata.fhxasdsada.xyz/f88f82bdd98d9a68.png', NULL);
+INSERT INTO `ProductImage` VALUES (62, 10006, 'http://productdata.fhxasdsada.xyz/2ca45e2fd9758794.jpg', 1);
+INSERT INTO `ProductImage` VALUES (63, 10006, 'http://productdata.fhxasdsada.xyz/223e72e6bb404498.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (64, 10006, 'http://productdata.fhxasdsada.xyz/a2ba77e3e7b4a561.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (65, 10006, 'http://productdata.fhxasdsada.xyz/a673d6639eecfb31.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (66, 10006, 'http://productdata.fhxasdsada.xyz/b452b971225f3837.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (67, 10007, 'http://productdata.fhxasdsada.xyz/9bf639975363fbb0.jpg', 1);
+INSERT INTO `ProductImage` VALUES (68, 10007, 'http://productdata.fhxasdsada.xyz/15ae759577a35aa9.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (69, 10007, 'http://productdata.fhxasdsada.xyz/9153db93fc57f0c4.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (70, 10007, 'http://productdata.fhxasdsada.xyz/9153db93fc57f0c4.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (71, 10007, 'http://productdata.fhxasdsada.xyz/e7dacfdfe765ab9c.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (72, 10008, '\r\nhttp://productdata.fhxasdsada.xyz/5b90958cN736d78c4.jpg', 1);
+INSERT INTO `ProductImage` VALUES (73, 10008, 'http://productdata.fhxasdsada.xyz/5b90958dN5fb23f95.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (74, 10008, 'http://productdata.fhxasdsada.xyz/6c7fafb8a6841a8c.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (75, 10008, 'http://productdata.fhxasdsada.xyz/9a92c2762bb5c57b.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (76, 10008, 'http://productdata.fhxasdsada.xyz/59fed11aN25bcc727.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (77, 10009, 'http://productdata.fhxasdsada.xyz/0fb1612d25f44013.jpg', 1);
+INSERT INTO `ProductImage` VALUES (78, 10009, 'http://productdata.fhxasdsada.xyz/4cc5b3d55b1d5695.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (79, 10009, 'http://productdata.fhxasdsada.xyz/82805185280bf7fe.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (80, 10009, 'http://productdata.fhxasdsada.xyz/a83b14d7249e7b35.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (81, 10009, 'http://productdata.fhxasdsada.xyz/b081f2d2c95ed76d.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (82, 10005, 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 1);
+INSERT INTO `ProductImage` VALUES (83, 10005, 'http://productdata.fhxasdsada.xyz/7112412352ada3c6.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (84, 10005, 'http://productdata.fhxasdsada.xyz/a2e58b389d88d1d9.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (85, 10005, 'http://productdata.fhxasdsada.xyz/b4c0df48e4bbcc4a.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (86, 10005, 'http://productdata.fhxasdsada.xyz/d695e3db95cf66cb.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (87, 10018, '\r\nhttp://productdata.fhxasdsada.xyz/5cd5acfbN24c0ee18.jpg', 1);
+INSERT INTO `ProductImage` VALUES (88, 10018, '\r\nhttp://productdata.fhxasdsada.xyz/5ce44b68N134a0ce4.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (89, 10018, '\r\nhttp://productdata.fhxasdsada.xyz/5ce44b70N7a533656.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (90, 10018, '\r\nhttp://productdata.fhxasdsada.xyz/12d9fdefc091d9e7.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (91, 10018, '\r\nhttp://productdata.fhxasdsada.xyz/0938b8c9db25d916.jpg', NULL);
 
 -- ----------------------------
 -- Table structure for ProductKind
@@ -111,50 +247,43 @@ CREATE TABLE `ProductKind`  (
   `ProductId` int(11) NULL DEFAULT NULL,
   `ProductKind` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductKind
 -- ----------------------------
-INSERT INTO `ProductKind` VALUES (1, 10001, '豪华版');
-INSERT INTO `ProductKind` VALUES (2, 10001, '标志版');
+INSERT INTO `ProductKind` VALUES (9, 10003, '【超大款】帝王蟹礼盒4.5-4.0斤 ');
+INSERT INTO `ProductKind` VALUES (10, 10003, '【大蟹款】帝王蟹礼盒4.0-3.6斤 ');
+INSERT INTO `ProductKind` VALUES (11, 10003, '【尊享款】帝王蟹礼盒5.5-5.0斤\r\n');
+INSERT INTO `ProductKind` VALUES (12, 10003, '【尝鲜款】帝王蟹礼盒2.8-2.4斤');
+INSERT INTO `ProductKind` VALUES (13, 10003, '黄金蟹礼盒1000-800g');
+INSERT INTO `ProductKind` VALUES (14, 10003, '黄金蟹礼盒800-600g');
 
 -- ----------------------------
 -- Table structure for ProductLowPrice
 -- ----------------------------
 DROP TABLE IF EXISTS `ProductLowPrice`;
 CREATE TABLE `ProductLowPrice`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ProductImage` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ProductSite` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `ProductId` int(11) NULL DEFAULT NULL,
-  `Price` decimal(10, 2) NULL DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductLowPrice
 -- ----------------------------
-INSERT INTO `ProductLowPrice` VALUES (1, 'http://img.fhxasdsada.xyz/lowprice1.jpg', '/', 10001, 68.00);
-INSERT INTO `ProductLowPrice` VALUES (2, 'http://img.fhxasdsada.xyz/lowprice10.jpg', '/', 10002, 36.00);
-INSERT INTO `ProductLowPrice` VALUES (3, 'http://img.fhxasdsada.xyz/lowprice11.jpg', '/', NULL, 26.00);
-INSERT INTO `ProductLowPrice` VALUES (4, 'http://img.fhxasdsada.xyz/lowprice12.jpg', '/', NULL, 366.00);
-INSERT INTO `ProductLowPrice` VALUES (5, 'http://img.fhxasdsada.xyz/lowprice8.jpg', '/1', NULL, 99.00);
-INSERT INTO `ProductLowPrice` VALUES (6, 'http://img.fhxasdsada.xyz/lowprice14.jpg', '/', NULL, 46.00);
-INSERT INTO `ProductLowPrice` VALUES (7, 'http://img.fhxasdsada.xyz/lowprice15.jpg', '/', NULL, 163.00);
-INSERT INTO `ProductLowPrice` VALUES (8, 'http://img.fhxasdsada.xyz/lowprice16.jpg', '/', NULL, 99.00);
-INSERT INTO `ProductLowPrice` VALUES (9, 'http://img.fhxasdsada.xyz/lowprice17.jpg', '/', NULL, 46.00);
-INSERT INTO `ProductLowPrice` VALUES (10, 'http://img.fhxasdsada.xyz/lowprice18.jpg', '/', NULL, 86.00);
-INSERT INTO `ProductLowPrice` VALUES (11, 'http://img.fhxasdsada.xyz/lowprice19.jpg', '/', NULL, 98.00);
-INSERT INTO `ProductLowPrice` VALUES (12, 'http://img.fhxasdsada.xyz/lowprice2.jpg', '/', NULL, 365.00);
-INSERT INTO `ProductLowPrice` VALUES (13, 'http://img.fhxasdsada.xyz/lowprice20.jpg', '/', NULL, 298.00);
-INSERT INTO `ProductLowPrice` VALUES (14, 'http://img.fhxasdsada.xyz/lowprice3.jpg', '/', NULL, 9.90);
-INSERT INTO `ProductLowPrice` VALUES (15, 'http://img.fhxasdsada.xyz/lowprice4.jpg', '/', NULL, 9.90);
-INSERT INTO `ProductLowPrice` VALUES (16, 'http://img.fhxasdsada.xyz/lowprice5.jpg', '/', NULL, 66.00);
-INSERT INTO `ProductLowPrice` VALUES (17, 'http://img.fhxasdsada.xyz/lowprice6.jpg', '/', NULL, 86.00);
-INSERT INTO `ProductLowPrice` VALUES (18, 'http://img.fhxasdsada.xyz/lowprice7.jpg', '/', NULL, 99.00);
-INSERT INTO `ProductLowPrice` VALUES (19, 'http://img.fhxasdsada.xyz/lowprice8.jpg', '/', NULL, NULL);
-INSERT INTO `ProductLowPrice` VALUES (20, 'http://img.fhxasdsada.xyz/lowprice9.jpg', '/', NULL, NULL);
+INSERT INTO `ProductLowPrice` VALUES (10006, 1);
+INSERT INTO `ProductLowPrice` VALUES (10007, 2);
+INSERT INTO `ProductLowPrice` VALUES (10008, 3);
+INSERT INTO `ProductLowPrice` VALUES (10009, 23);
+INSERT INTO `ProductLowPrice` VALUES (10010, 24);
+INSERT INTO `ProductLowPrice` VALUES (10011, 25);
+INSERT INTO `ProductLowPrice` VALUES (10012, 26);
+INSERT INTO `ProductLowPrice` VALUES (10013, 27);
+INSERT INTO `ProductLowPrice` VALUES (10014, 28);
+INSERT INTO `ProductLowPrice` VALUES (10015, 29);
+INSERT INTO `ProductLowPrice` VALUES (10016, 30);
+INSERT INTO `ProductLowPrice` VALUES (10017, 31);
 
 -- ----------------------------
 -- Table structure for ProductPrice
@@ -164,18 +293,34 @@ CREATE TABLE `ProductPrice`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ProductId` int(11) NULL DEFAULT NULL,
   `ProductPrice` decimal(10, 2) NULL DEFAULT NULL,
-  `SalesPrice` decimal(10, 2) NULL DEFAULT NULL,
+  `SalesPrice` decimal(10, 0) NULL DEFAULT NULL,
   `SpikePrice` decimal(10, 2) NULL DEFAULT NULL,
   `ProductSales` decimal(10, 2) NULL DEFAULT NULL,
   `ProductInventory` decimal(10, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductPrice
 -- ----------------------------
-INSERT INTO `ProductPrice` VALUES (1, 10001, 5999.00, 4999.00, 4549.00, 10.00, NULL);
-INSERT INTO `ProductPrice` VALUES (2, 10002, 1999.00, 1899.00, 15886.00, 15000.00, 152000.00);
+INSERT INTO `ProductPrice` VALUES (1, 10001, 5999.00, 4844, 4549.00, 10.00, NULL);
+INSERT INTO `ProductPrice` VALUES (2, 10002, 1999.00, 1899, 15886.00, 15000.00, 152000.00);
+INSERT INTO `ProductPrice` VALUES (3, 10010, 3596.00, 2563, 2523.00, 1500.00, 1863.00);
+INSERT INTO `ProductPrice` VALUES (4, 10011, 10398.00, 19888, 9999.00, 18900.00, 15555.00);
+INSERT INTO `ProductPrice` VALUES (5, 10012, 4999.00, 4888, 4760.00, 17666.00, 58666.00);
+INSERT INTO `ProductPrice` VALUES (6, 10013, 11999.00, 18999, 10888.00, 1122222.00, 144455.00);
+INSERT INTO `ProductPrice` VALUES (7, 10014, 2898.00, 2584, 2541.00, 14444.00, 18885.00);
+INSERT INTO `ProductPrice` VALUES (8, 10015, 20.00, 10, 8.80, 88888.00, 74565.00);
+INSERT INTO `ProductPrice` VALUES (9, 10016, 5399.00, 4999, 4988.00, 158555.00, 786325.00);
+INSERT INTO `ProductPrice` VALUES (10, 10017, 3199.00, 2999, 3012.00, 4456.00, 78588.00);
+INSERT INTO `ProductPrice` VALUES (11, 10003, 758.00, 666, 589.00, 18885.00, 5665555.00);
+INSERT INTO `ProductPrice` VALUES (12, 10006, 1499.00, 1399, 1360.00, 156366.00, 4855454.00);
+INSERT INTO `ProductPrice` VALUES (13, 10007, 3350.00, 2899, 1569.00, 156999.00, 145552.00);
+INSERT INTO `ProductPrice` VALUES (14, 10008, 3500.00, 15588, 1585.00, 10002.00, 15255.00);
+INSERT INTO `ProductPrice` VALUES (15, 10009, 47699.00, 4688, 45666.00, 666666.00, 48599.00);
+INSERT INTO `ProductPrice` VALUES (16, 10004, 30576.00, 29999, 28999.00, 10000.00, 158555.00);
+INSERT INTO `ProductPrice` VALUES (17, 10005, 7890.00, 5888, 4585.00, 155555.00, 14565.00);
+INSERT INTO `ProductPrice` VALUES (18, 10018, 1140.00, 1111, 999.00, 1856.00, 15555.00);
 
 -- ----------------------------
 -- Table structure for ProductSize
@@ -189,13 +334,6 @@ CREATE TABLE `ProductSize`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of ProductSize
--- ----------------------------
-INSERT INTO `ProductSize` VALUES (1, 10001, 'M');
-INSERT INTO `ProductSize` VALUES (2, 10001, 'L');
-INSERT INTO `ProductSize` VALUES (3, 10001, 'X');
-
--- ----------------------------
 -- Table structure for ProductSpecification
 -- ----------------------------
 DROP TABLE IF EXISTS `ProductSpecification`;
@@ -204,14 +342,28 @@ CREATE TABLE `ProductSpecification`  (
   `ProductId` int(11) NULL DEFAULT NULL,
   `Specification` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductSpecification
 -- ----------------------------
-INSERT INTO `ProductSpecification` VALUES (1, 10001, '公开版');
-INSERT INTO `ProductSpecification` VALUES (2, 10001, '换修无忧首月免费版');
-INSERT INTO `ProductSpecification` VALUES (3, 10001, '换休无忧年费版');
+INSERT INTO `ProductSpecification` VALUES (1, 10001, '256G+8G\r\n');
+INSERT INTO `ProductSpecification` VALUES (2, 10001, '128G+2G');
+INSERT INTO `ProductSpecification` VALUES (3, 10001, '64G+3G');
+INSERT INTO `ProductSpecification` VALUES (4, 10011, '128G+2G');
+INSERT INTO `ProductSpecification` VALUES (5, 10011, '128G+3G');
+INSERT INTO `ProductSpecification` VALUES (6, 10011, '64G+2G');
+INSERT INTO `ProductSpecification` VALUES (7, 10017, '40毫米');
+INSERT INTO `ProductSpecification` VALUES (8, 10017, '44毫米');
+INSERT INTO `ProductSpecification` VALUES (9, 10011, '256G+3G');
+INSERT INTO `ProductSpecification` VALUES (10, 10012, 'Pro13|标压R5 16G 512G QHD');
+INSERT INTO `ProductSpecification` VALUES (11, 10012, '小新Air14|R5 12G 512G');
+INSERT INTO `ProductSpecification` VALUES (12, 10012, '小新14大固态|R5 8G 1T 128G');
+INSERT INTO `ProductSpecification` VALUES (13, 10013, '华硕PRIME X299-A主板+ ');
+INSERT INTO `ProductSpecification` VALUES (14, 10013, 'PRIME X299-DELUXE II 主板+');
+INSERT INTO `ProductSpecification` VALUES (15, 10013, 'RAMPAGE VI EXTREME OMEGA+ ');
+INSERT INTO `ProductSpecification` VALUES (16, 10013, 'TUF X299 MARK 2电竞主板+');
+INSERT INTO `ProductSpecification` VALUES (17, 10013, 'ROG STRIX X299-E GAMING+');
 
 -- ----------------------------
 -- Table structure for ProductTaste
@@ -227,11 +379,38 @@ CREATE TABLE `ProductTaste`  (
 -- ----------------------------
 -- Records of ProductTaste
 -- ----------------------------
-INSERT INTO `ProductTaste` VALUES (1, 10001, '奶茶味');
-INSERT INTO `ProductTaste` VALUES (2, 10001, '茉莉味');
-INSERT INTO `ProductTaste` VALUES (3, 10001, '香蕉味');
-INSERT INTO `ProductTaste` VALUES (4, 10001, '苹果味');
-INSERT INTO `ProductTaste` VALUES (5, 10001, '奶油味');
+INSERT INTO `ProductTaste` VALUES (1, 10015, '奶茶味');
+INSERT INTO `ProductTaste` VALUES (2, 10015, '茉莉味');
+INSERT INTO `ProductTaste` VALUES (3, 10015, '香蕉味');
+INSERT INTO `ProductTaste` VALUES (4, 10015, '苹果味');
+INSERT INTO `ProductTaste` VALUES (5, 10015, '奶油味');
+
+-- ----------------------------
+-- Table structure for ProductVersion
+-- ----------------------------
+DROP TABLE IF EXISTS `ProductVersion`;
+CREATE TABLE `ProductVersion`  (
+  `ProductId` int(11) NULL DEFAULT NULL,
+  `version` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of ProductVersion
+-- ----------------------------
+INSERT INTO `ProductVersion` VALUES (10005, 'WLAN版64G');
+INSERT INTO `ProductVersion` VALUES (10005, ' WLAN版256G ');
+INSERT INTO `ProductVersion` VALUES (10005, 'WLAN版512G');
+INSERT INTO `ProductVersion` VALUES (10005, ' WLAN版1TB');
+INSERT INTO `ProductVersion` VALUES (10005, 'Cellular版64G ');
+INSERT INTO `ProductVersion` VALUES (10005, 'Cellular版256G');
+INSERT INTO `ProductVersion` VALUES (10005, 'Cellular版512G ');
+INSERT INTO `ProductVersion` VALUES (10005, 'Cellular版1TB');
+INSERT INTO `ProductVersion` VALUES (10001, '豪华版');
+INSERT INTO `ProductVersion` VALUES (10001, '标志版');
+INSERT INTO `ProductVersion` VALUES (10017, 'GPS版');
+INSERT INTO `ProductVersion` VALUES (10017, ' 蜂窝版');
+INSERT INTO `ProductVersion` VALUES (10017, 'GPS版AC+');
+INSERT INTO `ProductVersion` VALUES (10017, '蜂窝版AC+');
 
 -- ----------------------------
 -- Table structure for RotationChart
@@ -264,36 +443,23 @@ INSERT INTO `RotationChart` VALUES (5, 'http://carousel.fhxasdsada.xyz/56a09e6aN
 -- ----------------------------
 DROP TABLE IF EXISTS `Seckill`;
 CREATE TABLE `Seckill`  (
-  `id` int(11) NOT NULL,
-  `BuyingPrice` double(10, 0) NULL DEFAULT NULL,
-  `seckillPrice` double(10, 0) NULL DEFAULT NULL,
-  `productName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `productPicture` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `productSite` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `productIntroduce` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `ProductId` int(11) NULL DEFAULT NULL,
   `time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `SeckillId` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`SeckillId`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of Seckill
 -- ----------------------------
-INSERT INTO `Seckill` VALUES (1, 99, 39, 'HP/惠普G200黑色CF/LOL/守望先锋专业电竞游戏鼠标大尺寸厚重款|', '\r\nhttp://img.fhxasdsada.xyz/O1CN010orf751iMmrqdaUmf_%21%210-item_pic.jpg', '/', NULL, '2020-03-02 16:00:00');
-INSERT INTO `Seckill` VALUES (2, 288, 128, '大嘴猴女鞋2020新款春季高帮鞋女韩版嘻哈女鞋子潮帆布鞋女经典款', '\r\nhttp://img.fhxasdsada.xyz/O1CN014zxHqf2G3jKmoBchY_%21%210-item_pic.jpg', '/', NULL, '2020-03-02 16:00:00');
-INSERT INTO `Seckill` VALUES (3, 188, 99, 'Deborah金管口红女学生黄皮肤番茄色豆沙梅子色滋润保湿显白平价', '\r\nhttp://img.fhxasdsada.xyz/O1CN0150IkHO1KMHf8cFgm1_%21%210-item_pic.jpg', '/', NULL, '2020-02-02 16:00:00');
-INSERT INTO `Seckill` VALUES (4, 566, 399, '[嘭弹小白瓶] Swisse斯维诗水润光感胶原蛋白饮延缓衰老50ml*10', '\r\nhttp://img.fhxasdsada.xyz/O1CN019tXeRZ1O57EvvXE0z_%21%212-item_pic.png', '/', NULL, '2020-03-02 16:00:00');
-INSERT INTO `Seckill` VALUES (5, 358, 128, 'Eucerin优色林润唇膏4.8g保湿抗干燥深层修护3支装', '\r\nhttp://img.fhxasdsada.xyz/O1CN01A4XXxW1e5bXKFqkIa_%21%212206496073820.jpg', '/', NULL, NULL);
-INSERT INTO `Seckill` VALUES (6, 199, 76, 'vga转hami线转换器VGA公转HDMI公电脑连接电视高清头1.5米3米5米 ', '\r\nhttp://img.fhxasdsada.xyz/O1CN01BnHEDF1j2StiaI4yn_%21%210-item_pic.jpg', '/', NULL, NULL);
-INSERT INTO `Seckill` VALUES (7, 8644, 6544, '蜜茶手机苹果xs iphone xs Apple/苹果 iphonexs 苹果手机xs 苹果xs手机 国行正品全网通苹果手机', '\r\nhttp://img.fhxasdsada.xyz/O1CN01QsqIKS1vDFbpMdXAm_%21%210-item_pic.jpg', '/', NULL, NULL);
-INSERT INTO `Seckill` VALUES (8, 299, 179, '瑞戈瑞士军刀男士胸包户外休闲瑞士单肩包斜挎包男包胸前包韩版潮 ', '\r\nhttp://img.fhxasdsada.xyz/O1CN01SSoIRx1EXNZ7qGeE8_%21%210-item_pic.jpg', '/', NULL, NULL);
-INSERT INTO `Seckill` VALUES (9, 149, 116, 'Edifier/漫步者 H293P Plus 手机耳机通用带麦有线入耳式运动音乐 ', '\r\nhttp://img.fhxasdsada.xyz/O1CN01VrK33a2Gahq5o3aYs_%21%210-item_pic.jpg', '/', NULL, NULL);
-INSERT INTO `Seckill` VALUES (10, 399, 199, '七匹狼男士长袖T恤青年卫衣男秋冬款宽松休闲男装圆领秋装打底衫 ', '\r\nhttp://img.fhxasdsada.xyz/O1CN01aGUysb1EGtHkbSGxZ_%21%212214950325.jpg', '/', NULL, NULL);
-INSERT INTO `Seckill` VALUES (11, 1890, 1429, 'HiVi/惠威M-50WMKIII蓝牙数字有源2.1音箱客厅电视手机音响 ', '\r\nhttp://img.fhxasdsada.xyz/O1CN01fY3F1O1xy5N2RspYl_%21%210-item_pic.jpg', '/', NULL, NULL);
-INSERT INTO `Seckill` VALUES (12, 118, 70, '赫恩男士面膜去黑头淡化痘印送美白补水保湿控油祛痘收缩毛孔专用', '\r\nhttp://img.fhxasdsada.xyz/O1CN01meyDHq1Xzkjx77KyS_%21%210-item_pic.gif.jpg', '/', NULL, NULL);
-INSERT INTO `Seckill` VALUES (13, 499, 144, '大嘴猴女鞋2020新款春季高帮鞋女韩版嘻哈女鞋子潮帆布鞋女经典款', '\r\nhttp://img.fhxasdsada.xyz/O1CN01nLuWva1hKD27hVdQ8_%21%210-item_pic.jpg', '/', NULL, NULL);
-INSERT INTO `Seckill` VALUES (14, 279, 179, '乔丹男鞋纯黑色山地跑步鞋春季款网眼面透气运动鞋越野跑鞋旅游鞋 ', '\r\nhttp://img.fhxasdsada.xyz/O1CN01vNxfq01fwYt731YeL_%21%210-item_pic.jpg', '/', NULL, NULL);
-INSERT INTO `Seckill` VALUES (15, 120, 98, 'PC Steam 文明5 美丽的新世界 Civilization5 Brave New World', '\r\nhttp://img.fhxasdsada.xyz/TB1IMv7eL5TBuNjSspmXXaDRVXa_%21%210-item_pic.jpg', '/', NULL, NULL);
-INSERT INTO `Seckill` VALUES (16, 788, 580, 'Maeil每日名作奶粉3段 800g*3罐装宝宝奶粉原装进口 ', '\r\nhttp://img.fhxasdsada.xyz/TB1e.JxgpT7gK0jSZFpXXaTkpXa-400-400.jpg', '/', NULL, NULL);
+INSERT INTO `Seckill` VALUES (10010, '2020-03-10 03:51:53', 1);
+INSERT INTO `Seckill` VALUES (10011, '2020-03-10 04:26:31', 2);
+INSERT INTO `Seckill` VALUES (10012, '2020-03-10 04:30:25', 3);
+INSERT INTO `Seckill` VALUES (10013, '2020-03-10 04:30:29', 4);
+INSERT INTO `Seckill` VALUES (10014, '2020-03-10 13:32:42', 5);
+INSERT INTO `Seckill` VALUES (10015, '2020-03-10 13:32:45', 6);
+INSERT INTO `Seckill` VALUES (10016, '2020-03-10 13:32:48', 7);
+INSERT INTO `Seckill` VALUES (10017, '2020-03-10 13:32:50', 8);
 
 -- ----------------------------
 -- Table structure for ad
@@ -485,79 +651,39 @@ INSERT INTO `navigation` VALUES (9, '房产', '/', '汽车', '/', '汽车用品'
 INSERT INTO `navigation` VALUES (10, '母婴', '/', '玩具', '/', NULL, NULL, NULL, NULL);
 
 -- ----------------------------
--- Table structure for productDetails
--- ----------------------------
-DROP TABLE IF EXISTS `productDetails`;
-CREATE TABLE `productDetails`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pid` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `productName` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `productPrice` decimal(10, 2) NULL DEFAULT NULL,
-  `sales` double(255, 0) NULL DEFAULT NULL,
-  `weight` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `size` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `inventory` double(11, 0) NULL DEFAULT NULL,
-  `combo` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `colour` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `freeShipping` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `video` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `taste` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `specification` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `imageSite` varchar(700) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of productDetails
--- ----------------------------
-INSERT INTO `productDetails` VALUES (1, 'p1', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 5999.00, 14000, '0.74kg', '', 15000, '优惠套餐一,优惠套餐2,优惠套餐三', '黑色', 'true', '\r\nhttp://productdata.fhxasdsada.xyz/v.f30.mp4', NULL, '公开版,换修无忧首月免费版,换休无忧年费版', 'http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg,http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg,http://productdata.fhxasdsada.xyz/ee567a1dea515d38.jpg,http://productdata.fhxasdsada.xyz/43a1962b41270d97.jpg,http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg');
-INSERT INTO `productDetails` VALUES (2, '2', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 9.80, 2300, '0.15kg', NULL, 1800, NULL, NULL, 'true', 'http://productdata.fhxasdsada.xyz/sdkjj.mp4', NULL, NULL, 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg,http://productdata.fhxasdsada.xyz/65d595ccc0df91701a30c5b9af96662c_2_3_photo.jpg,http://productdata.fhxasdsada.xyz/6ad6e5468f3c79afd9e2aaac6235b643_2_3_photo.jpg,http://productdata.fhxasdsada.xyz/a6bd598ec1911c7cd8f850f3e88e7ba5_2_3_photo.jpg,http://productdata.fhxasdsada.xyz/a6bd598ec1911c7cd8f850f3e88e7ba5_2_3_photo.jpg');
-INSERT INTO `productDetails` VALUES (3, '3', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 758.00, 2500, '不计重', NULL, 1500678, NULL, NULL, NULL, NULL, NULL, NULL, 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg,\r\nhttp://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg,\r\nhttp://productdata.fhxasdsada.xyz/7e885a6364ff7b21.jpg,\r\nhttp://productdata.fhxasdsada.xyz/ad914e4c1ac2e465.jpg,\r\nhttp://productdata.fhxasdsada.xyz/d094f60a2c15d012.jpg');
-
--- ----------------------------
 -- Table structure for recommend
 -- ----------------------------
 DROP TABLE IF EXISTS `recommend`;
 CREATE TABLE `recommend`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rid` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ProductPicture` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ProductName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ProductPrice` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Favorite` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `ProductId` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `Favorite` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `shoppingTrolley` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `hot` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of recommend
 -- ----------------------------
-INSERT INTO `recommend` VALUES (5, 'p1', '\r\nhttp://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', '5999', '1', '1', '1');
-INSERT INTO `recommend` VALUES (6, NULL, 'http://hotproducts.fhxasdsada.xyz/00055b92d669b40c.jpg', '海信（Hisense）HZ65E5D 65英寸4K超高清 超薄全面屏 AI声控智慧屏家电 网络WiFi液晶平板智能教育电视机', '4169', '1', '1', '1');
-INSERT INTO `recommend` VALUES (7, NULL, 'http://hotproducts.fhxasdsada.xyz/55d7ddf23a788a6e.jpg', '海信（Hisense）HZ55E60D 55英寸 AI声控 3+32GB MEMC 超薄全面屏 京品家电 智慧屏 教育电视 京鱼座智能产品', '3499', '1', '1', '1');
-INSERT INTO `recommend` VALUES (8, NULL, 'http://hotproducts.fhxasdsada.xyz/99010a38549a00da.jpg', 'TCL 65Q9 65英寸液晶电视机 4k超高清 6.9mm超薄全面屏 人工智能 智慧屏 哈曼音响 3+32GB大内存 教育电视', '6199', '1', '1', '2');
-INSERT INTO `recommend` VALUES (9, NULL, 'http://hotproducts.fhxasdsada.xyz/ad8ca60793aa2c54.jpg', '海信（Hisense）HZ65E7D 65英寸 超高色域 3GB+32GB 超音画 AI声控 杜比全景声 超薄全面屏 教育电视', '5699', '1', '1', '2');
-INSERT INTO `recommend` VALUES (10, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583128904.jpg', '创维（SKYWORTH）40X6 40英寸10核窄边高清 人工智能 网络WiFi 教育资源 家用卧室液晶平板电视机', '1088', '1', '1', '1');
-INSERT INTO `recommend` VALUES (11, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583129054.jpg', '海信（Hisense）HZ40E35D 40英寸 海量内容 纤薄机身 家庭 教育 VIDAA AI 智能操控 智能电视机', '1088', '1', '1', '1');
-INSERT INTO `recommend` VALUES (12, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583129224.jpg', '联想小新潮7000 15.6英寸全高清独显窄边框超轻薄便携家用商务学生办公游戏笔记本电脑手提 升级:9系CPU丨4G内存 256G固态 独显', '3299', '1', '1', '2');
-INSERT INTO `recommend` VALUES (13, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583129394.jpg', '小米全面屏电视E65A 65英寸 4K超高清 内置小爱 2GB+8GB 教育电视 AI人工智能网络液晶平板电视L65M5-EA', '2699', '1', '1', '1');
-INSERT INTO `recommend` VALUES (14, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583129635.jpg', '创维 酷开(coocaa) 43K5D 43英寸全高清 智能WiFi 教育电视 腾讯影视 人工智能液晶网络电视机', '999', '1', '1', '1');
-INSERT INTO `recommend` VALUES (15, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583129766.jpg', '索尼（SONY）KD-55X9500G 55英寸 4K超高清 HDR 智能网络 液晶平板电视 人工智能语音 安卓8.0 蓝牙/WiFi', '6199', '1', '1', '2');
-INSERT INTO `recommend` VALUES (16, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583129971.jpg', '海信（Hisense）65英寸E3D京享版 65E3D-J 无边全面屏 AI语音 超高清4K HDR 教育电视 人工智能电视机', '2799', '1', '1', '1');
-INSERT INTO `recommend` VALUES (17, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583130086.jpg', '飞利浦（PHILIPS）70PUF7295/T3 70英寸全面屏 16G 杜比全景声 4K运动防抖HDR 人工智能语音 网络液晶电视机', '3999', '1', '1', '2');
-INSERT INTO `recommend` VALUES (18, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583130234.jpg', '创维（SKYWORTH）32X3 32英寸窄边蓝光高清节能 家用液晶平板电视机', '699', '1', '1', '1');
-INSERT INTO `recommend` VALUES (19, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583130353.jpg', '乐视（Letv）超级电视 X40C 40英寸 1GB+8GB大存储 全高清人工智能超薄网络液晶平板电视机（标配底座）', '949', '1', '1', '2');
-INSERT INTO `recommend` VALUES (20, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583130472.jpg', '飞利浦（PHILIPS）65PUF6192/T3 65英寸 人工智能 4K超高清 HDR网络智能液晶电视机', '2699', '1', '1', '1');
-INSERT INTO `recommend` VALUES (21, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583130577.jpg', '创维（SKYWORTH）65A8 65英寸4K超高清超薄全面屏 2+64G 声控智慧屏 教育 京鱼座智能生态平板电视 京品家电', '4899', '1', '1', '2');
-INSERT INTO `recommend` VALUES (22, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583130703.jpg', '飞利浦（PHILIPS）55PUF6023/T3 55英寸 人工智能 4K超高清HDR 二级能效 网络智能液晶电视机', '1899', '1', '1', '1');
-INSERT INTO `recommend` VALUES (23, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583130796.jpg', '海信（Hisense）HZ65E3D-PRO 65英寸 AI声控 MEMC防抖 16GB大存储 无边全面屏 智慧屏 教育电视', '3599', '1', '1', '2');
-INSERT INTO `recommend` VALUES (24, NULL, '\r\nhttp://hotproducts.fhxasdsada.xyz/tuhaokuai_1583130950.jpg', '飞利浦（PHILIPS）70PUF6894/T3 70英寸 人工智能超大屏幕金属边框 16G大内存4K超高清HDR网络智能液晶电视机', '3599', '1', '1', '1');
-INSERT INTO `recommend` VALUES (25, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583131061.jpg', '创维 酷开(coocaa) 32K5C 32英寸 高清 智能WiFi 15核 教育电视 丰富影视 人工智能液晶网络电视机', '699', '1', '1', '1');
-INSERT INTO `recommend` VALUES (26, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583134314.jpg', '飞利浦（PHILIPS）39PHF5292/T3 39英寸 人工智能 海量应用 网络智能高清LED液晶电视机', '999', '1', '1', '2');
-INSERT INTO `recommend` VALUES (27, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583134504.jpg', '小米全面屏电视E40A 40英寸 全高清HDR 内置小爱 1GB+8GB 教育电视 AI 人工智能网络液晶平板电视 L40M5-FA', '1199', '1', '1', '1');
-INSERT INTO `recommend` VALUES (28, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583134629.jpg', '康佳（KONKA） LED32E330C 32英寸 高清窄边LED液晶电视机', '688', '1', '1', '1');
-INSERT INTO `recommend` VALUES (29, NULL, 'http://hotproducts.fhxasdsada.xyz/tuhaokuai_1583134740.jpg', '飞利浦（PHILIPS）43PFF5292/T3 43英寸 人工智能 全高清 二级省电能效 网络智能液晶电视机', '1299', '1', '1', '2');
+INSERT INTO `recommend` VALUES (30, '10001', '1', '1', '1');
+INSERT INTO `recommend` VALUES (31, '10002', '1', '1', '1');
+INSERT INTO `recommend` VALUES (32, '10003', '1', '1', '1');
+INSERT INTO `recommend` VALUES (33, '10010', '1', '1', '2');
+INSERT INTO `recommend` VALUES (34, '10011', '1', '1', '1');
+INSERT INTO `recommend` VALUES (35, '10012', '1', '1', '2');
+INSERT INTO `recommend` VALUES (36, '10013', '1', '1', '1');
+INSERT INTO `recommend` VALUES (37, '10014', '1', '1', '2');
+INSERT INTO `recommend` VALUES (38, '10015', '1', '1', '1');
+INSERT INTO `recommend` VALUES (39, '10016', '1', '1', '1');
+INSERT INTO `recommend` VALUES (40, '10017', '1', '1', '2');
+INSERT INTO `recommend` VALUES (41, '10008', '1', '1', '2');
+INSERT INTO `recommend` VALUES (42, '10006', '1', '1', '2');
+INSERT INTO `recommend` VALUES (43, '10007', '1', '1', '2');
+INSERT INTO `recommend` VALUES (44, '10009', '1', '1', '2');
+INSERT INTO `recommend` VALUES (45, '10004', '1', '1', '1');
+INSERT INTO `recommend` VALUES (46, '10005', '1', '1', '2');
+INSERT INTO `recommend` VALUES (47, '10018', '1', '1', '2');
 
 -- ----------------------------
 -- Table structure for user
@@ -580,7 +706,7 @@ CREATE TABLE `user`  (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (18, 'c69bf9c84f4542418e56f7f8adb3663b', '小白', '123456', '男', '15367885410', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM');
-INSERT INTO `user` VALUES (19, '0cfd86808ed3444598a9267d5241d868', '黎明', '123456', '男', '18598814121', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM');
+INSERT INTO `user` VALUES (19, '0cfd86808ed3444598a9267d5241d868', '黎明', 'asdfghjkl', '男', '18598814121', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM');
 INSERT INTO `user` VALUES (20, '4f69423c02324aa49d659e2d77d46bc1', '小白', '123456', '男', '15074163638', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM');
 INSERT INTO `user` VALUES (21, 'b45c37994b3d4a29aae6af60f8b2584d', '小白', '123456', '男', '15536362521', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM');
 INSERT INTO `user` VALUES (23, 'aed3b900483e459dbd956733227f3f0a', '小白', '123456', '男', '15569636362', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM');
