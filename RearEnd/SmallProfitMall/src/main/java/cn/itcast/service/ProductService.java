@@ -13,7 +13,7 @@ public interface ProductService {
     public List<SeckillResult> findSeckill() throws ParseException;
 
     //查询低价商品
-    public ProductLowPriceResult findProductLowPrice();
+    public List<ProductLowPriceResult> findProductLowPrice();
 
     //查询所有广告
     public List<Ad> findAd();

@@ -50,13 +50,21 @@ public class ProductServiceImpl implements ProductService {
 
      //查询低 价商品
     @Override
-    public ProductLowPriceResult findProductLowPrice() {
-        ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findProductLowPrice(0, 6)),
-                new ArrayList(ProducDao.findProductLowPrice(6, 6)),
-                new ArrayList(ProducDao.findProductLowPrice(12, 6)),
-        };
-        productLowPriceResult.setProductLowPrice(arrayLists1);
-        return productLowPriceResult;
+    public  List<ProductLowPriceResult> findProductLowPrice() {
+        List<ProductLowPriceResult> redis = (List<ProductLowPriceResult>) redisUtil.lGet("ProductLowPriceResult", 0, -1);
+        if(redis.size()==0){
+            ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findProductLowPrice(0, 6)),
+                    new ArrayList(ProducDao.findProductLowPrice(6, 6))
+            };
+            productLowPriceResult.setProductLowPrice(arrayLists1);
+            redisUtil.lSet("productLowPriceResult", productLowPriceResult);  //存入缓存
+            List list= Arrays.asList(productLowPriceResult);//增加一层数组
+            List<ProductLowPriceResult>  recommend = list;
+            System.out.println("存入数据库");
+            return recommend;
+        }
+
+        return redis;
     }
 
     //查询广告

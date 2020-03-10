@@ -3,40 +3,32 @@ package cn.itcast.domain.commodity;
 import java.io.Serializable;
 //低价商品查询
 public class ProductLowPrice implements Serializable {
-    private int id;
-    private String ProductImage;    //商品图片
-    private String ProductSite;     //商品链接
-    private String Price;       //低价价格
+    private int ProductId;
+    private String ImageSite;    //商品图片
+    private String SalesPrice;       //低价价格
 
-    public String getPrice() {
-        return Price;
+
+    public int getProductId() {
+        return ProductId;
     }
 
-    public void setPrice(String price) {
-        Price = price;
+    public void setProductId(int productId) {
+        ProductId = productId;
     }
 
-    public int getId() {
-        return id;
+    public String getImageSite() {
+        return ImageSite;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setImageSite(String imageSite) {
+        ImageSite = imageSite;
     }
 
-    public String getProductImage() {
-        return ProductImage;
+    public String getSalesPrice() {
+        return SalesPrice;
     }
 
-    public void setProductImage(String productImage) {
-        ProductImage = productImage;
-    }
-
-    public String getProductSite() {
-        return ProductSite;
-    }
-
-    public void setProductSite(String productSite) {
-        ProductSite = productSite;
+    public void setSalesPrice(String salesPrice) {
+        SalesPrice = salesPrice;
     }
 }

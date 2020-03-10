@@ -49,9 +49,8 @@ public class ProductController {
     @RequestMapping("/findProductLowPrice")
     public QueryResponseResult ProductLowPrice() {
         // 调用service的方法
-        ProductLowPriceResult productLowPriceResult = commodityService.findProductLowPrice();
-        List<ProductLowPriceResult> logins= Arrays.asList(productLowPriceResult);
-        result.setList(logins);
+        List<ProductLowPriceResult> productLowPriceResult = commodityService.findProductLowPrice();
+        result.setList(productLowPriceResult);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
 
