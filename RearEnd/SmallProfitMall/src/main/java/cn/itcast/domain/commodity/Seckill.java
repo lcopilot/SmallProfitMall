@@ -5,68 +5,50 @@ import java.util.Date;
 
 //秒杀实体
 public class Seckill implements Serializable {
-    private int id;
-    private Double BuyingPrice;        //原价
-    private Double seckillPrice;         //秒杀价
-    private String productName;       //商品名字
-    private String productPicture;      //商品图片
-    private String productSite;        //商品链接
-    private String productIntroduce;     //商品介绍
+    private int SeckillId;
+    private Double ProductPrice;        //原价
+    private Double SpikePrice;         //秒杀价
+    private String ProductName;       //商品名字
+    private String ImageSite;      //商品图片
 
-    public int getId() {
-        return id;
+
+    public Double getProductPrice() {
+        return ProductPrice;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setProductPrice(Double productPrice) {
+        ProductPrice = productPrice;
     }
 
-    public Double getBuyingPrice() {
-        return BuyingPrice;
+    public Double getSpikePrice() {
+        return SpikePrice;
     }
 
-    public void setBuyingPrice(Double buyingPrice) {
-        BuyingPrice = buyingPrice;
+    public void setSpikePrice(Double spikePrice) {
+        SpikePrice = spikePrice;
     }
 
-    public Double getSeckillPrice() {
-        return seckillPrice;
+    public int getSeckillId() {
+        return SeckillId;
     }
 
-    public void setSeckillPrice(Double seckillPrice) {
-        this.seckillPrice = seckillPrice;
+    public void setSeckillId(int seckillId) {
+        SeckillId = seckillId;
     }
 
     public String getProductName() {
-        return productName;
+        return ProductName;
     }
 
     public void setProductName(String productName) {
-        this.productName = productName;
+        ProductName = productName;
     }
 
-    public String getProductPicture() {
-        return productPicture;
+    public String getImageSite() {
+        return ImageSite;
     }
 
-    public void setProductPicture(String productPicture) {
-        this.productPicture = productPicture;
+    public void setImageSite(String imageSite) {
+        ImageSite = imageSite;
     }
-
-    public String getProductSite() {
-        return productSite;
-    }
-
-    public void setProductSite(String productSite) {
-        this.productSite = productSite;
-    }
-
-    public String getProductIntroduce() {
-        return productIntroduce;
-    }
-
-    public void setProductIntroduce(String productIntroduce) {
-        this.productIntroduce = productIntroduce;
-    }
-
 }

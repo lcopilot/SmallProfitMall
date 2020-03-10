@@ -37,9 +37,8 @@ public class ProductController {
     @RequestMapping("/findSeckill")
     public QueryResponseResult findSeckill() throws ParseException {
         // 调用service的方法
-        SeckillResult seckillResult = commodityService.findSeckill();
-        List<SeckillResult> logins= Arrays.asList(seckillResult);
-        result.setList(logins);
+        List<SeckillResult> seckillResult = commodityService.findSeckill();
+        result.setList(seckillResult);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
 

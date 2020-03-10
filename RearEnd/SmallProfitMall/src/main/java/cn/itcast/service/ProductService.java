@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ProductService {
     //查询秒杀
-    public SeckillResult findSeckill() throws ParseException;
+    public List<SeckillResult> findSeckill() throws ParseException;
 
     //查询低价商品
     public ProductLowPriceResult findProductLowPrice();

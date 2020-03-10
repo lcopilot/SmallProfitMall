@@ -6,7 +6,16 @@
 
     <!--查询所有秒杀商品信息-->
     <select id="findSeckill" resultType="cn.itcast.domain.commodity.Seckill" parameterType="INT">
-       SELECT * FROM Seckill limit #{StartingValue},#{Quantity}
+		SELECT
+	sk.ProductId,sk.SeckillId,pp.SpikePrice,pp.ProductPrice,pb.ProductName,pi.ImageSite
+	FROM
+		Seckill sk
+	JOIN ProductBasis pb ON sk.ProductId = pb.ProductId
+	JOIN ProductImage pi ON pb.ProductId = pi.ProductId
+	JOIN ProductPrice pp ON pi.ProductId = pp.ProductId
+    WHERE pi.sign=1
+    limit #{StartingValue},#{Quantity}
+
     </select>
 
     <!--查询所有低价商品-->
