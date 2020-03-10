@@ -151,14 +151,14 @@
                   </el-radio-group>
                 </div>
               </el-form-item>
-<!--              <el-form-item label="版本" v-if="product.version[0]">-->
-<!--                <div class="form_left">-->
-<!--                  <el-radio-group v-model="productForm.version" size="medium">-->
-<!--                    <el-radio-button v-for="(version,index) in product.version" :key="index"-->
-<!--                                     :label="version" :value="index"></el-radio-button>-->
-<!--                  </el-radio-group>-->
-<!--                </div>-->
-<!--              </el-form-item>-->
+              <el-form-item label="版本" v-if="product.version[0]">
+                <div class="form_left">
+                  <el-radio-group v-model="productForm.version" size="medium">
+                    <el-radio-button v-for="(version,index) in product.version" :key="index"
+                                     :label="version" :value="index"></el-radio-button>
+                  </el-radio-group>
+                </div>
+              </el-form-item>
               <el-form-item label="种类" v-if="product.kind[0]">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.kind" size="medium">

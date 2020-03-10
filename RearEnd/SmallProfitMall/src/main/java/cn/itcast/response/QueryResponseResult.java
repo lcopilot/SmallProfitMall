@@ -15,4 +15,5 @@ public class QueryResponseResult extends ResponseResult {
        this.queryResult = queryResult;
     }
 
+
 }
