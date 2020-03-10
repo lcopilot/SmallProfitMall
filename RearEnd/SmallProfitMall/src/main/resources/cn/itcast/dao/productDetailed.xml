@@ -53,7 +53,12 @@
 
     <select id="findByKind" resultType="java.lang.String" parameterType="INT">
         select ProductKind from ProductKind WHERE ProductId=#{ProductId}
+    </select>
 
+
+
+    <select id="findByVersion" resultType="java.lang.String" parameterType="INT">
+       select  version from  ProductVersion WHERE ProductId=#{ProductId}
     </select>
 
 </mapper>
