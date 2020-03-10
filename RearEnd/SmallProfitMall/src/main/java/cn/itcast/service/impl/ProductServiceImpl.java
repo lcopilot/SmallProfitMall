@@ -32,20 +32,20 @@ public class ProductServiceImpl implements ProductService {
     ProductLowPriceResult productLowPriceResult = new ProductLowPriceResult();
     //秒杀
     @Override
-    public SeckillResult findSeckill() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//格式化输出日期
-        ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findSeckill(0,4)),
-                new ArrayList(ProducDao.findSeckill(4,4)),
-                new ArrayList(ProducDao.findSeckill(8,4)),
-                new ArrayList(ProducDao.findSeckill(12,4))};
-        seckillResult.setSeckillProduct(arrayLists1);
-        Date date=new Date();//获取当前时 间
-        Date time1 = TimeUtil.AddTwoTours(date);//获取两个小时后时间
-        String time3 = sdf.format(date);    //当前时间转为字符串
-        Long time2 =TimeUtil.timestamp();    //两小时后时间转字符串
-        seckillResult.setSpikeTime(time2);//设置两小时后时间
-        seckillResult.setCurrentTime(time3);//设置当前时间
-        return seckillResult;
+    public List<SeckillResult> findSeckill() throws ParseException {
+        List<SeckillResult> redis = (List<SeckillResult>) redisUtil.lGet("SeckillResult", 0, -1);
+        if (redis.size()==0) {
+            ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findSeckill(0,4)),
+                    new ArrayList(ProducDao.findSeckill(4,4))};
+            seckillResult.setSeckillProduct(arrayLists1);
+            redisUtil.lSet("SeckillResult", seckillResult);  //存入缓存
+            List list= Arrays.asList(seckillResult);//增加一层数组
+            List<SeckillResult>  recommend = list;
+            System.out.println("存入数据库");
+            return recommend;
+        }
+        System.out.println("缓中取");
+        return redis;
     }
 
      //查询低 价商品
