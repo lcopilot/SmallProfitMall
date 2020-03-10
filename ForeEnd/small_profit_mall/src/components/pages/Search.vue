@@ -111,7 +111,7 @@
       ]),
       //获取购物车的预览内容
       getCartPreview(){
-        console.log("sdfsd")
+        console.log("购物车的预览内容")
       },
       //获取导航栏数据
       getPagePilot() {
