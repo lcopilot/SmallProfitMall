@@ -146,7 +146,8 @@
               <el-form-item label="颜色" v-if="product.colour[0]">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.colour" size="medium">
-                    <el-radio-button v-for="(colour,index) in product.colour" :key="index"
+                    <el-radio-button class="product_radio_btn"
+                                     v-for="(colour,index) in product.colour" :key="index"
                                      :label="colour" :value="index"></el-radio-button>
                   </el-radio-group>
                 </div>
@@ -154,7 +155,8 @@
               <el-form-item label="版本" v-if="product.version[0]">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.version" size="medium">
-                    <el-radio-button v-for="(version,index) in product.version" :key="index"
+                    <el-radio-button class="product_radio_btn"
+                                     v-for="(version,index) in product.version" :key="index"
                                      :label="version" :value="index"></el-radio-button>
                   </el-radio-group>
                 </div>
@@ -162,7 +164,8 @@
               <el-form-item label="种类" v-if="product.kind[0]">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.kind" size="medium">
-                    <el-radio-button v-for="(kind,index) in product.kind" :key="index"
+                    <el-radio-button class="product_radio_btn" v-for="(kind,index) in product.kind"
+                                     :key="index"
                                      :label="kind" :value="index"></el-radio-button>
                   </el-radio-group>
                 </div>
@@ -170,7 +173,8 @@
               <el-form-item label="套餐" v-if="product.combo[0]">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.combo" size="medium">
-                    <el-radio-button :label="combo" :value="index" :key="index"
+                    <el-radio-button class="product_radio_btn" :label="combo" :value="index"
+                                     :key="index"
                                      v-for="(combo,index) in product.combo"></el-radio-button>
                   </el-radio-group>
                 </div>
@@ -178,7 +182,8 @@
               <el-form-item label="口味" v-if="product.taste[0]">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.taste" size="medium">
-                    <el-radio-button :label="taste" :value="index" :key="index"
+                    <el-radio-button class="product_radio_btn" :label="taste" :value="index"
+                                     :key="index"
                                      v-for="(taste,index) in product.taste"></el-radio-button>
                   </el-radio-group>
                 </div>
@@ -190,7 +195,8 @@
                   <el-button type="danger" @click="onSubmit" style="margin-left: 10px"
                              icon="el-icon-circle-plus-outline">加入购物车
                   </el-button>
-                  <el-button type="danger" @click="onSubmit" :disabled="(product.inventorys)<=0">立即购买
+                  <el-button type="danger" @click="onSubmit" :disabled="(product.inventorys)<=0">
+                    立即购买
                   </el-button>
                 </div>
                 <div class="form_left" style="color:#999999;">
@@ -426,17 +432,18 @@
           value: 'code',
           children: 'children'
         },
+        //地址数据
         address: '',
         product: [],
         productForm: {
           //商品id
-          productId:0,
+          productId: 0,
           //名字
           name: '',
           //配置
           specification: '',
           //版本
-          version:'',
+          version: '',
           //尺码
           size: '',
           //颜色
@@ -448,7 +455,7 @@
           //数量
           quantity: 1,
           //种类
-          kind:'',
+          kind: '',
         },
 
       }
@@ -514,8 +521,16 @@
       getProduct(productId) {
         productApi.getProduct(productId).then(res => {
               if (res.success) {
-                this.bigImg = res.queryResult.list[0].imageSite[1];
                 this.product = res.queryResult.list[0];
+                //设置默认选项
+                this.bigImg = res.queryResult.list[0].imageSite[1];
+                this.productForm.version = res.queryResult.list[0].version[0];
+                this.productForm.colour = res.queryResult.list[0].colour[0];
+                this.productForm.combo = res.queryResult.list[0].combo[0];
+                this.productForm.taste = res.queryResult.list[0].taste[0];
+                this.productForm.kind = res.queryResult.list[0].kind[0];
+                this.productForm.specification = res.queryResult.list[0].specification[0];
+                this.productForm.size = res.queryResult.list[0].size[0];
               }
             }
         )
@@ -540,6 +555,11 @@
 </script>
 
 <style scoped>
+  .product_radio_btn {
+    border-left: 1px solid #dcdfe6;
+    margin: 0 5px 5px 0;
+  }
+
   .product_small_img {
     width: 60px;
     height: 60px;
