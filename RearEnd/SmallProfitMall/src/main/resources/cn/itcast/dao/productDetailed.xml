@@ -54,8 +54,8 @@
     <select id="findByKind" resultType="java.lang.String" parameterType="INT">
         select ProductKind from ProductKind WHERE ProductId=#{ProductId}
     </select>
-    <!--根据商品id查询商品图片-->
-    <select id="findBy版本" resultType="java.lang.String" parameterType="INT">
+    <!--根据商品id查询商品版本-->
+    <select id="findByVersion" resultType="java.lang.String" parameterType="INT">
        select  version from  ProductVersion WHERE ProductId=#{ProductId}
     </select>
 
