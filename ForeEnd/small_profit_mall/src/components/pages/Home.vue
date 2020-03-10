@@ -35,17 +35,17 @@
                                       :key="index">
                       <div class="Spike_div" v-for="spikeProduct in spikeProducts"
                            :key="spikeProduct.id">
-                        <router-link :to="spikeProduct.productSite"
+                        <router-link to="/"
                                      :title="spikeProduct.productName">
                           <div class="Spike_Product_img">
-                            <el-image :src="spikeProduct.productPicture"
+                            <el-image :src="spikeProduct.imageSite"
                                       fit="fill"/>
                           </div>
                           <div class="spike_product_name">{{spikeProduct.productName}}
                           </div>
                           <div style="margin-top: 10px">
-                            <span class="spike_price">￥{{spikeProduct.seckillPrice}}</span>
-                            <span class="spike_before_price">￥{{spikeProduct.buyingPrice}}</span>
+                            <span class="spike_price">￥{{spikeProduct.spikePrice}}</span>
+                            <span class="spike_before_price">￥{{spikeProduct.productPrice}}</span>
                           </div>
                         </router-link>
                       </div>
@@ -176,7 +176,6 @@
         homeApi.getSpikeProductList().then(res => {
           if (res.success) {
             this.spikeProductList = res.queryResult.list[0];
-            this.endTime= res.queryResult.list[0].spikeTime;
           }
         })
       },
@@ -202,6 +201,7 @@
         homeApi.getLowPriceProductList().then(res => {
           if (res.success) {
             this.lowPriceProductList = res.queryResult.list[0].productLowPrice;
+
           }
         })
       },

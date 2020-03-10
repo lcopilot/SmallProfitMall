@@ -145,12 +145,20 @@
               </el-form-item>
               <el-form-item label="颜色" v-if="product.colour[0]">
                 <div class="form_left">
-                  <el-radio-group v-model="productForm.kind" size="medium">
+                  <el-radio-group v-model="productForm.colour" size="medium">
                     <el-radio-button v-for="(colour,index) in product.colour" :key="index"
                                      :label="colour" :value="index"></el-radio-button>
                   </el-radio-group>
                 </div>
               </el-form-item>
+<!--              <el-form-item label="版本" v-if="product.version[0]">-->
+<!--                <div class="form_left">-->
+<!--                  <el-radio-group v-model="productForm.version" size="medium">-->
+<!--                    <el-radio-button v-for="(version,index) in product.version" :key="index"-->
+<!--                                     :label="version" :value="index"></el-radio-button>-->
+<!--                  </el-radio-group>-->
+<!--                </div>-->
+<!--              </el-form-item>-->
               <el-form-item label="种类" v-if="product.kind[0]">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.kind" size="medium">
@@ -421,13 +429,25 @@
         address: '',
         product: [],
         productForm: {
+          //商品id
+          productId:0,
+          //名字
           name: '',
+          //配置
           specification: '',
+          //版本
+          version:'',
+          //尺码
           size: '',
+          //颜色
           colour: '',
+          //套餐
           combo: '',
+          //口味
           taste: '',
+          //数量
           quantity: 1,
+          //种类
           kind:'',
         },
 
