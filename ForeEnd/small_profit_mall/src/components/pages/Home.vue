@@ -31,8 +31,9 @@
                 <div class="spike_product">
                   <el-carousel :interval="10000" indicator-position="none" arrow="hover"
                                height="260px">
-                    <el-carousel-item v-for="(spikeProducts,index) in spikeProductList.seckillProduct"
-                                      :key="index">
+                    <el-carousel-item
+                        v-for="(spikeProducts,index) in spikeProductList.seckillProduct"
+                        :key="index">
                       <div class="Spike_div" v-for="spikeProduct in spikeProducts"
                            :key="spikeProduct.id">
                         <router-link to="/"
@@ -80,15 +81,14 @@
                 <div
                     v-for="(lowPriceProducts,index) in lowPriceProductList.slice(firstItem,lastItem)"
                     :key="index">
-                  <div v-for="(lowPriceProduct,index) in lowPriceProducts" :key="index"
-                       style="float: left;width: 182px;height: 250px;margin-left: 10px">
+                  <div v-for="(lowPriceProduct,index) in lowPriceProducts" :key="index" class="product_low">
                     <router-link to="/">
                       <transition name="el-zoom-in-center">
                         <div v-show="display" class="low_price_product">
-                          <el-image :src="lowPriceProduct.productImage" fit="fill"></el-image>
+                          <el-image :src="lowPriceProduct.imageSite" fit="fill"></el-image>
                           <svg-icon name="lowPrice" class="low_Price_icon"/>
-                          <!-- 价格不能超过6位 -->
-                          <div class="low_price">￥{{lowPriceProduct.price}}</div>
+                          <!-- 价格不能超过7位 -->
+                          <div class="low_price">￥{{lowPriceProduct.salesPrice}}</div>
                         </div>
                       </transition>
                     </router-link>
@@ -111,8 +111,9 @@
 
 <script>
 
-  import { mapGetters } from 'vuex'
+  import {mapGetters} from 'vuex'
   import *as homeApi from '../../api/page/home';
+
   const Header = () => import("./Header"); //组件懒加载
   const Footer = () => import("./Footer");
   const Carousel = () => import("./Carousel");
@@ -125,7 +126,7 @@
     data() {
       return {
         display: true,
-        spikeSessions:'',
+        spikeSessions: '',
         firstItem: 0,
         lastItem: 1,
         spikeAdList: [],
@@ -180,24 +181,24 @@
         })
       },
       //秒杀场次
-      getSpikeSessions(){
-        let hours=new Date().getHours();
-        if (hours%2!==1){
-          if (hours==22){
-            this.spikeSessions='00:00';
-          }else {
-            this.spikeSessions=hours+2+':00';
+      getSpikeSessions() {
+        let hours = new Date().getHours();
+        if (hours % 2 !== 1) {
+          if (hours == 22) {
+            this.spikeSessions = '00:00';
+          } else {
+            this.spikeSessions = hours + 2 + ':00';
           }
-        }else {
-          if (hours==23){
-            this.spikeSessions='00:00';
-          }else {
-            this.spikeSessions=hours+1+':00';
+        } else {
+          if (hours == 23) {
+            this.spikeSessions = '00:00';
+          } else {
+            this.spikeSessions = hours + 1 + ':00';
           }
         }
       },
       //低价商品
-      getLowPriceProductList(){
+      getLowPriceProductList() {
         homeApi.getLowPriceProductList().then(res => {
           if (res.success) {
             this.lowPriceProductList = res.queryResult.list[0].productLowPrice;
@@ -208,15 +209,15 @@
 
     },
     computed: {
-      startTime(){
+      startTime() {
         return this.$store.state.startTime;
       },
-      endTime:{
-        get(){
+      endTime: {
+        get() {
           return this.$store.getters.endTime;
         },
-        set(val){
-          return this.$store.getters.endTime=val;
+        set(val) {
+          return this.$store.getters.endTime = val;
         }
       }
     },
@@ -249,6 +250,13 @@
     text-align: center;
     font-size: 34px;
     color: #fff;
+  }
+
+  .product_low {
+    float: left;
+    width: 182px;
+    height: 250px;
+    margin-left: 10px
   }
 
   .se-en {
@@ -287,7 +295,7 @@
   }
 
   .Spike_Product_img:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
 
   .Spike_Product_img {
@@ -381,19 +389,19 @@
   }
 
   .low_price_product:hover {
-    transform: scale(1.1);
+    transform: scale(1.02);
   }
 
   .low_Price_icon {
     width: 80px;
-    height: 28px;
+    height: 26px;
     float: left;
     margin-left: 10px
   }
 
   .low_price {
     float: left;
-    font-size: 18px;
+    font-size: 17px;
     margin-left: 5px
   }
 
