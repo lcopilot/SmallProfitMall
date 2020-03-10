@@ -23,7 +23,16 @@ public class ProductDetailsResult implements Serializable {
     private String[] imageSite;           //图片（返回前端）
     private String[] taste;             //口味(返回前端）
     private String[] kind;              //商品种类
+    private String[] version;           //商品版本
     private int inventorys;             //库存
+
+    public String[] getVersion() {
+        return version;
+    }
+
+    public void setVersion(String[] version) {
+        this.version = version;
+    }
 
     public String[] getKind() {
         return kind;
