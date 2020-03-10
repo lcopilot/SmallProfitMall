@@ -25,39 +25,37 @@
             ON pb.ProductId = pp.ProductId
         WHERE pb.ProductId=#{ProductId}
 </select>
-
+    <!--根据商品id查询商品图片-->
     <select id="findByIdImage" resultType="java.lang.String" parameterType="INT">
         select ImageSite from ProductImage WHERE ProductId=#{ProductId}
     </select>
-    
+    <!--根据商品id查询商品规格-->
     <select id="findByIdSpecification" resultType="java.lang.String" parameterType="INT">
     select Specification from ProductSpecification WHERE ProductId=#{ProductId}
     </select>
-
+    <!--根据商品id查询商品口味-->
     <select id="findByIdTaste" resultType="java.lang.String" parameterType="INT">
         select ProductTaste from ProductTaste WHERE ProductId=#{ProductId}
     </select>
-
+    <!--根据商品id查询商品颜色-->
     <select id="findByIdColour" resultType="java.lang.String" parameterType="INT">
         select ProductColour from ProductColour WHERE ProductId=#{ProductId}
     </select>
-
+    <!--根据商品id查询商品套餐-->
     <select id="findByIdCombo" resultType="java.lang.String" parameterType="INT">
         select ProductCombo from ProductCombo WHERE ProductId=#{ProductId}
     </select>
 
-
+    <!--根据商品id查询商品尺寸-->
     <select id="findBySize" resultType="java.lang.String" parameterType="INT">
         select ProductSize from ProductSize WHERE ProductId=#{ProductId}
     </select>
-
+    <!--根据商品id查询商品种类-->
     <select id="findByKind" resultType="java.lang.String" parameterType="INT">
         select ProductKind from ProductKind WHERE ProductId=#{ProductId}
     </select>
-
-
-
-    <select id="findByVersion" resultType="java.lang.String" parameterType="INT">
+    <!--根据商品id查询商品图片-->
+    <select id="findBy版本" resultType="java.lang.String" parameterType="INT">
        select  version from  ProductVersion WHERE ProductId=#{ProductId}
     </select>
 
