@@ -242,14 +242,14 @@
         <el-row>
           <el-col :span="20" :push="2">
             <el-tabs type="border-card">
-              <el-tab-pane>
+              <el-tab-pane lazy>
                 <div slot="label" style="font-size: 17px">
                   <svg-icon name="introduction"></svg-icon>
                   商品介绍
                 </div>
                 我的行程
               </el-tab-pane>
-              <el-tab-pane>
+              <el-tab-pane lazy>
                 <div slot="label" style="font-size: 17px">
                   <svg-icon name="evaluation"></svg-icon>
                   商品评价
@@ -276,32 +276,32 @@
                 <el-row>
                   <el-col :span="22" :push="1">
                     <el-tabs style="margin-top: 20px">
-                      <el-tab-pane label="全部评价(600+)">
+                      <el-tab-pane label="全部评价(600+)" lazy>
                         <commentContent :genre="2"/>
                       </el-tab-pane>
-                      <el-tab-pane label="晒图(111)">
+                      <el-tab-pane label="晒图(111)" lazy>
                         <commentContent/>
                       </el-tab-pane>
-                      <el-tab-pane label="视频晒单(6)">
+                      <el-tab-pane label="视频晒单(6)" lazy>
                         <commentContent/>
                       </el-tab-pane>
-                      <el-tab-pane label="追评(6)">
+                      <el-tab-pane label="追评(6)" lazy>
                         <commentContent/>
                       </el-tab-pane>
-                      <el-tab-pane label="好评(9)">
+                      <el-tab-pane label="好评(9)" lazy>
                         <commentContent/>
                       </el-tab-pane>
-                      <el-tab-pane label="中评(6)">
+                      <el-tab-pane label="中评(6)" lazy>
                         <commentContent/>
                       </el-tab-pane>
-                      <el-tab-pane label="差评(6)">
+                      <el-tab-pane label="差评(6)" lazy>
                         <commentContent/>
                       </el-tab-pane>
                     </el-tabs>
                   </el-col>
                 </el-row>
               </el-tab-pane>
-              <el-tab-pane>
+              <el-tab-pane lazy>
                 <div slot="label" style="font-size: 17px">
                   <svg-icon name="afterSale"></svg-icon>
                   售后保障
@@ -340,7 +340,7 @@
                   </div>
                 </div>
               </el-tab-pane>
-              <el-tab-pane>
+              <el-tab-pane lazy>
                 <div slot="label" style="font-size: 17px">
                   <svg-icon name="parameter"></svg-icon>
                   商品参数

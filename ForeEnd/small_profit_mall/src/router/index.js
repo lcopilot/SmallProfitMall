@@ -21,9 +21,6 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    // meta: {
-    //   requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
-    // },
     component: () => import('@/components/pages/Home'), //路由懒加载
   },
   {
@@ -51,15 +48,22 @@ const routes = [
     name: "Product",
     component: () => import('@/components/pages/Product')
   },
-
   {
     path: '/shoppingCart',
     name: 'ShoppingCart',
     meta: {
-      requireAuth: true,
+      requireAuth: true,   // 添加该字段，表示进入这个路由是需要登录的
     },
     component: () => import('@/components/admin/shoppingCart')
 
+  },
+  {
+    path: '/personalCenter',
+    name: 'PersonalCenter',
+    meta: {
+      requireAuth: true,
+    },
+    component: () => import('@/components/admin/personalCenter')
   },
   //捕获404
   {

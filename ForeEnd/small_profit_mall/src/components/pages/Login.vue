@@ -11,7 +11,7 @@
         <el-col :span="12">
           <div class="login">
             <el-card shadow="hover">
-              <el-form :model="loginForm" :rules="rules" ref="loginForm">
+              <el-form :model="loginForm" :rules="rules" ref="loginForm" :status-icon="true">
                 <el-form-item>
                   <h1 class="header-title">
                     <router-link to="/">SmallProfit</router-link>
@@ -22,7 +22,7 @@
                   <el-input placeholder="请输入手机号或用户名" v-model="loginForm.name" clearable
                             class="username"/>
                 </el-form-item>
-                <el-form-item prop="password">
+                <el-form-item prop="password" >
                   <svg-icon name="password" class="icon"/>
                   <el-input
                       placeholder="请输入密码"
@@ -35,7 +35,7 @@
                 <el-form-item>
                   <svg-icon name="verification_code" class="icon"
                             style="float: left;margin-left:30px "/>
-                  <Verify @success="verifyToken"></Verify>
+                  <Verify @success="verifyToken" :key="verify"></Verify>
                 </el-form-item>
                 <el-form-item>
                   <el-button class="login-btn" @click="login('loginForm')">登录</el-button>
@@ -69,6 +69,7 @@
           name: '',
           password: '',
           token: '',
+          verify:1,
         },
         rules: {
           name: [
@@ -86,7 +87,7 @@
       login(formName) {
         this.$refs[formName].validate((valid) => {
               if (valid) {
-                if (this.loginForm.token==null) {
+                if (this.loginForm.token=="") {
                   this.$message({
                     message: "请完成人机验证",
                     type: "warning"
@@ -106,12 +107,14 @@
                         path: "/Home" //跳转的路径
                       });
                     } else {
-                      if (res.code=10009){
+                      if (res.code==10009){
+                        ++this.verify;
+                        this.resetForm('loginForm');
                         this.$message.error("人机验证二次失败,请稍后重试")
-                        this.$router.go(0);
                       }else {
+                        ++this.verify;
+                        this.resetForm('loginForm');
                         this.$message.error("账户或密码错误!")
-                        this.$router.go(0);
                       }
                     }
                   })
@@ -119,7 +122,6 @@
                     this.$message.error("服务器错误");
                     console.log(error);
                     this.$router.go(0);
-
                   });
                 }
 
@@ -128,9 +130,11 @@
         );
       },
       verifyToken(token) {
-        console.table(token)
         this.loginForm.token=token;
-      }
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      },
     },
 
   };
