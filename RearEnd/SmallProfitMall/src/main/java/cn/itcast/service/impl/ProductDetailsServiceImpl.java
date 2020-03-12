@@ -28,7 +28,9 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     private ProductDetailsResult productDetailsResult;
 
     public List<ProductDetailsResult> findByPid(int pid) {
-        String ProductId = String.valueOf(pid);
+        String transition = String.valueOf(pid);
+        String ProductId ="productId_"+transition;
+        System.out.println(ProductId);
         List<ProductDetailsResult>  redis = (List<ProductDetailsResult>)redisUtil.lGet(ProductId,0,-1); //从缓存中查询
         if(redis.size()==0){
             String inventory = "";   //库存价格(转换)

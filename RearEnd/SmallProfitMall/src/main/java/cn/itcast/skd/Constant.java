@@ -1,5 +1,5 @@
 package cn.itcast.skd;
-
+//验证码
 public class Constant {
     public static final String Char = "0123456789abcdef";
     public static final String ChannelUrl = "https://channel2.vaptcha.com/";
