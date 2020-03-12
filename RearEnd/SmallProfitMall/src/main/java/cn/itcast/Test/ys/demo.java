@@ -14,8 +14,8 @@ public class demo {
     public void  a() throws IOException {
         PictureUtilOne a =new PictureUtilOne();
    Resources.getResourceAsStream("temporaryFiles/Bjxu9RqIzP3Ee5QkFP6d1A.jpg").getClass().getResource("Bjxu9RqIzP3Ee5QkFP6d1A.jpg").getPath();
-        System.out.println(in);
-      a.pictureUtilOne(com_path,"D:");
+   //     System.out.println(in);
+     // a.pictureUtilOne(com_path,"D:");
 
     }
 
