@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  const vaptcha = () => import("../UtilsComponent/vaptcha-code");
+  const vaptcha = () => import("../components/UtilsComponent/vaptcha-code");
 
   export default {
     name: "test",

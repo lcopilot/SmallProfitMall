@@ -362,10 +362,10 @@
   import *as productApi from '../../api/page/product'
   import *as commonApi from '../../api/util/common'
 
-  const Header = () => import("./Header"); //组件懒加载
-  const Footer = () => import("./Footer");
-  const search = () => import("./Search");
-  const commentContent = () => import("./commentContent");
+  const Header = () => import("../../components/pages/Header"); //组件懒加载
+  const Footer = () => import("../../components/pages/Footer");
+  const search = () => import("../../components/pages/Search");
+  const commentContent = () => import("../../components/pages/commentContent");
 
   export default {
     name: "Product",

@@ -58,9 +58,9 @@
 
 <script>
   // @ is an alias to /src
-  const Header = () => import("./Header");
-  const Footer = () => import("./Footer");
-  const Verify = () => import("../UtilsComponent/vaptcha-code"); //验证码
+  const Header = () => import("../../components/pages/Header");
+  const Footer = () => import("../../components/pages/Footer");
+  const Verify = () => import("../../components/UtilsComponent/vaptcha-code"); //验证码
   import *as userApi from '../../api/page/user'  //*as别名
 
   export default {

@@ -172,9 +172,9 @@
 </template>
 
 <script>
-  const search = () => import("../pages/Search");
-  const Header = () => import("../pages/Header"); //组件懒加载
-  const Footer = () => import("../pages/Footer");
+  const search = () => import("../../components/pages/Search");
+  const Header = () => import("../../components/pages/Header"); //组件懒加载
+  const Footer = () => import("../../components/pages/Footer");
 
   export default {
     name: "shoppingCart",
