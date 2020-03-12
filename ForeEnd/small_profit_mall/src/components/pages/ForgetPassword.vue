@@ -11,7 +11,7 @@
         <el-col :span="12">
           <div class="login">
             <el-card shadow="hover">
-              <el-form :model="registerForm" :rules="rules" ref="registerForm">
+              <el-form :status-icon="true" :model="registerForm" :rules="rules" ref="registerForm">
                 <el-form-item>
                   <h1 class="header-title">
                     <router-link to="/">SmallProfit</router-link>
