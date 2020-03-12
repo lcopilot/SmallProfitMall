@@ -5,6 +5,9 @@
         <div>
           <div class="personal_page">账户设置</div>
           <div class="personal_page_child">
+            <router-link to="/personalCenter">个人中心</router-link>
+          </div>
+          <div class="personal_page_child">
             <router-link to="/personalInformation">个人信息</router-link>
           </div>
           <div class="personal_page_child">
