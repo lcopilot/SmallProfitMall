@@ -97,17 +97,25 @@
             <el-col :span="16">
               <el-card>
                 <div slot="header">
-                  <span>我的订单</span>
+                  <div style="text-align: left">我的订单</div>
                 </div>
                 <div>
-
+                  <div style="padding-left: 50px">
+                    <el-row :gutter="20">
+                      <el-col :span="4">待付款</el-col>
+                      <el-col :span="4">待收货</el-col>
+                      <el-col :span="4">待评价</el-col>
+                      <el-col :span="4">退换/售后</el-col>
+                      <el-col :span="4">全部订单</el-col>
+                    </el-row>
+                  </div>
                 </div>
               </el-card>
             </el-col>
             <el-col :span="8">
               <el-card>
                 <div slot="header">
-                  <span>我的收藏</span>
+                  <div style="text-align: left">我的收藏</div>
                 </div>
                 <div>
 
