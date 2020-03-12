@@ -107,7 +107,6 @@
         if(type == 5){
           this.dayright();
         }
-
         //操作父组件方法
         let obj ={year:this.yearsModel,month:this.monthsModel,day:this.daysModel }
         this.$emit('change',obj)
