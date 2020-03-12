@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 @ToString
 public enum CommonCode implements ResultCode{
 
+    nameError(false,10008,"不可以使用初始名登录"),
     ValidationFails(false,10009,"人机验证失败"),
     INVALID_PARAM(false,10003,"参数非法"),
     SUCCESS(true,10000,"操作成功！"),
@@ -21,6 +22,7 @@ public enum CommonCode implements ResultCode{
     UNAUTHENTICATED(false,10001,"此操作需要登陆系统！"),
     UNAUTHORISE(false,10002,"权限不足，无权操作！"),
     SERVER_ERROR(false,99999,"抱歉，系统繁忙，请稍后重试！");
+
 
 //   private static ImmutableMap<Integer, CommonCode> codes ;
     //操作是否成功
