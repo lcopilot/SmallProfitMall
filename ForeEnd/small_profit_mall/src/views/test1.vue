@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import CountDown from '../UtilsComponent/vue2-countdown'
+  import CountDown from '../components/UtilsComponent/vue2-countdown'
 
   export default {
     data() {

@@ -112,7 +112,7 @@
                             style="width:30px;height: 30px;margin-bottom: -8px"/>
                 </div>
               </el-form-item>
-              <el-form-item label="重量">
+              <el-form-item label="重量" v-if="product.weight">
                 <div class="form_left">
                   {{product.weight}}
                 </div>
@@ -362,10 +362,10 @@
   import *as productApi from '../../api/page/product'
   import *as commonApi from '../../api/util/common'
 
-  const Header = () => import("./Header"); //组件懒加载
-  const Footer = () => import("./Footer");
-  const search = () => import("./Search");
-  const commentContent = () => import("./commentContent");
+  const Header = () => import("../../components/pages/Header"); //组件懒加载
+  const Footer = () => import("../../components/pages/Footer");
+  const search = () => import("../../components/pages/Search");
+  const commentContent = () => import("../../components/pages/commentContent");
 
   export default {
     name: "Product",

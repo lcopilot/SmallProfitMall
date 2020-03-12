@@ -22,7 +22,7 @@
                   <el-input placeholder="请输入手机号或用户名" v-model="loginForm.name" clearable
                             class="username"/>
                 </el-form-item>
-                <el-form-item prop="password" >
+                <el-form-item prop="password">
                   <svg-icon name="password" class="icon"/>
                   <el-input
                       placeholder="请输入密码"
@@ -38,7 +38,9 @@
                   <Verify @success="verifyToken" :key="verify"></Verify>
                 </el-form-item>
                 <el-form-item>
-                  <el-button class="login-btn" @click="login('loginForm')">登录</el-button>
+                  <el-button :loading="loginStatus" class="login-btn" :key="login_btn"
+                             @click="login('loginForm')">{{loginBtnContent}}
+                  </el-button>
                 </el-form-item>
               </el-form>
               <router-link to="/register" style="margin: 7% 52% 0 0">没有账号,去注册</router-link>
@@ -56,9 +58,9 @@
 
 <script>
   // @ is an alias to /src
-  const Header = () => import("./Header");
-  const Footer = () => import("./Footer");
-  const Verify = () => import("../UtilsComponent/vaptcha-code"); //验证码
+  const Header = () => import("../../components/pages/Header");
+  const Footer = () => import("../../components/pages/Footer");
+  const Verify = () => import("../../components/UtilsComponent/vaptcha-code"); //验证码
   import *as userApi from '../../api/page/user'  //*as别名
 
   export default {
@@ -69,8 +71,15 @@
           name: '',
           password: '',
           token: '',
-          verify:1,
         },
+        //重载验证码组件的key
+        verify: 0,
+        //重载登录按钮的key
+        login_btn: 0,
+        //登录按钮的状态
+        loginStatus: false,
+        //登录按钮的内容
+        loginBtnContent: '登录',
         rules: {
           name: [
             {required: true, message: '请输入用户名或手机号', trigger: 'blur'},
@@ -85,14 +94,17 @@
     },
     methods: {
       login(formName) {
+
         this.$refs[formName].validate((valid) => {
               if (valid) {
-                if (this.loginForm.token=="") {
+                if (this.loginForm.token == "") {
                   this.$message({
                     message: "请完成人机验证",
                     type: "warning"
                   });
                 } else {
+                  this.loginStatus = true;
+                  this.loginBtnContent = '登录中...';
                   userApi.login(this.loginForm)
                   .then(res => {
                     if (res.success) {
@@ -107,21 +119,33 @@
                         path: "/Home" //跳转的路径
                       });
                     } else {
-                      if (res.code==10009){
-                        ++this.verify;
+                      if (res.code == 10009) {
+                        this.loginForm.token = "";
+                        this.verify = new Date().getTime();
+                        this.login_btn = new Date().getTime();
                         this.resetForm('loginForm');
-                        this.$message.error("人机验证二次失败,请稍后重试")
-                      }else {
-                        ++this.verify;
+                        this.$message.error("人机验证二次失败,请稍后重试");
+                        this.loginStatus = false;
+                        this.loginBtnContent = '登录';
+                      } else {
+                        this.loginForm.token = "";
+                        this.verify = new Date().getTime();
+                        this.login_btn = new Date().getTime();
                         this.resetForm('loginForm');
                         this.$message.error("账户或密码错误!")
+                        this.loginStatus = false;
+                        this.loginBtnContent = '登录';
                       }
                     }
                   })
                   .catch(error => {
+                    this.loginForm.token = "";
+                    this.verify = new Date().getTime();
+                    this.login_btn = new Date().getTime();
+                    this.resetForm('loginForm');
                     this.$message.error("服务器错误");
-                    console.log(error);
-                    this.$router.go(0);
+                    this.loginStatus = false;
+                    this.loginBtnContent = '登录';
                   });
                 }
 
@@ -130,8 +154,9 @@
         );
       },
       verifyToken(token) {
-        this.loginForm.token=token;
+        this.loginForm.token = token;
       },
+      //重置表单
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
