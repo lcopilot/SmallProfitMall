@@ -38,7 +38,7 @@
                   <Verify @success="verifyToken" :key="verify"></Verify>
                 </el-form-item>
                 <el-form-item>
-                  <el-button class="login-btn" @click="login('loginForm')">登录</el-button>
+                  <el-button class="login-btn" :key="login_btn" @click="login('loginForm')">登录</el-button>
                 </el-form-item>
               </el-form>
               <router-link to="/register" style="margin: 7% 52% 0 0">没有账号,去注册</router-link>
@@ -69,8 +69,11 @@
           name: '',
           password: '',
           token: '',
-          verify:1,
         },
+        //重载验证码组件的key
+        verify:0,
+        //重载登录按钮的key
+        login_btn:0,
         rules: {
           name: [
             {required: true, message: '请输入用户名或手机号', trigger: 'blur'},
@@ -108,20 +111,26 @@
                       });
                     } else {
                       if (res.code==10009){
-                        ++this.verify;
+                        this.loginForm.token="";
+                        this.verify=new Date().getTime();
+                        this.login_btn=new Date().getTime();
                         this.resetForm('loginForm');
                         this.$message.error("人机验证二次失败,请稍后重试")
                       }else {
-                        ++this.verify;
+                        this.loginForm.token="";
+                        this.verify=new Date().getTime();
+                        this.login_btn=new Date().getTime();
                         this.resetForm('loginForm');
                         this.$message.error("账户或密码错误!")
                       }
                     }
                   })
                   .catch(error => {
+                    this.loginForm.token="";
+                    this.verify=new Date().getTime();
+                    this.login_btn=new Date().getTime();
+                    this.resetForm('loginForm');
                     this.$message.error("服务器错误");
-                    console.log(error);
-                    this.$router.go(0);
                   });
                 }
 
@@ -132,6 +141,7 @@
       verifyToken(token) {
         this.loginForm.token=token;
       },
+      //重置表单
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },

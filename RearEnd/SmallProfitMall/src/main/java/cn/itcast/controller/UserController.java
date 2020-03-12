@@ -63,8 +63,7 @@ public class UserController {
      */
     @RequestMapping("/accountLogin")
     public QueryResponseResult accountLogin(@RequestBody User user,HttpServletRequest request){
-        if (!verifyUtil.VaptchaVerify(user.getToken(),request))
-        {
+        if (!verifyUtil.VaptchaVerify(user.getToken(),request)) {
             return new QueryResponseResult(CommonCode.ValidationFails,null); //令牌错误不正确
         }
         User name = userService.findByName(user.getName()); //根据用户名查询

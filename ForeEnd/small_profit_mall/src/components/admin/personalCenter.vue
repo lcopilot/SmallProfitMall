@@ -1,51 +1,91 @@
 <template>
-  <el-container id="personalCenter">
+  <el-container>
     <el-header>
       <Header></Header>
     </el-header>
 
     <el-main>
-      <el-row>
-        <el-col :span="19" :push="2">
-          <el-tabs type="border-card">
-            <el-tab-pane lazy>
-              <span slot="label">账户设置</span>
-              <el-form label-position="right" label-width="80px" :status-icon="true" :hide-required-asterisk="true" :model="formLabelAlign">
-                <el-form-item >
-                  <span slot="label">账户设置</span>
-                  <el-input v-model="formLabelAlign.name"></el-input>
+      <el-row :gutter="20">
+        <el-col :span="3" :push="3">
+          <el-card>
+            <div style="text-align: left">
+              <div>
+                <div class="personal_page">账户设置</div>
+                <div class="personal_page_child">
+                  <router-link to="/">个人信息</router-link>
+                </div>
+                <div class="personal_page_child">
+                  <router-link to="/">我的会员</router-link>
+                </div>
+                <el-divider/>
+              </div>
+              <div>
+                <div class="personal_page">订单中心</div>
+                <div class="personal_page_child">
+                  <router-link to="/">待付款</router-link>
+                </div>
+                <div class="personal_page_child">
+                  <router-link to="/">待收货</router-link>
+                </div>
+                <div class="personal_page_child">
+                  <router-link to="/">待评价</router-link>
+                </div>
+                <div class="personal_page_child">
+                  <router-link to="/"> 退换/售后</router-link>
+                </div>
+                <el-divider/>
+              </div>
+              <div>
+                <div class="personal_page">我的收藏</div>
+                <div class="personal_page_child">
+                  <router-link to="/"> 收藏</router-link>
+                </div>
+                <div class="personal_page_child">
+                  <router-link to="/"> 足迹</router-link>
+                </div>
+                <el-divider/>
+              </div>
+              <div>
+                <div class="personal_page">消息中心</div>
+                <div class="personal_page_child">
+                  <router-link to="/">系统消息</router-link>
+                </div>
+                <div class="personal_page_child">
+                  <router-link to="/">订单消息</router-link>
+                </div>
+              </div>
+            </div>
+          </el-card>
+        </el-col>
+        <el-col :span="15" :push="3">
+          <el-card style="margin-bottom: 20px;">
+            <div class="text item">
+              会员信息
+            </div>
+          </el-card>
+          <el-row :gutter="20">
+            <el-col :span="16">
+              <el-card>
+                <div slot="header">
+                  <span>我的订单</span>
+                </div>
+                <div>
 
-                </el-form-item>
-                <el-form-item label="活动区域">
-                  <el-input v-model="formLabelAlign.region"></el-input>
-                </el-form-item>
-                <el-form-item label="活动形式">
-                  <el-input v-model="formLabelAlign.type"></el-input>
-                </el-form-item>
-              </el-form>
-            </el-tab-pane>
-            <el-tab-pane lazy>
-              <span slot="label">我的会员</span>
-              个人信息
-            </el-tab-pane>
-            <el-tab-pane lazy>
-              <span slot="label">我的收藏</span>
-              我的收藏
-            </el-tab-pane>
-            <el-tab-pane lazy>
-              <span slot="label">足迹</span>
-              足迹
-            </el-tab-pane>
-            <el-tab-pane lazy>
-              <span slot="label">我的订单</span>
-              我的订单
-            </el-tab-pane>
-            <el-tab-pane lazy>
-              <span slot="label">未支付订单</span>
-              未支付订单
-            </el-tab-pane>
-          </el-tabs>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :span="8">
+              <el-card>
+                <div slot="header">
+                  <span>我的收藏</span>
+                </div>
+                <div>
 
+                </div>
+              </el-card>
+
+            </el-col>
+          </el-row>
         </el-col>
       </el-row>
     </el-main>
@@ -61,8 +101,8 @@
   export default {
     name: "personalCenter",
     components: {Header, Footer},
-    data(){
-      return{
+    data() {
+      return {
         formLabelAlign: {
           name: '',
           region: '',
@@ -70,21 +110,25 @@
         }
       }
     },
-    methods: {
-
-    }
+    methods: {}
 
   }
 </script>
 
-<style>
-  .el-tabs--top .el-tabs__item.is-top {
-    text-align: center;
-    color: #24292e;
+<style scoped>
+
+  .personal_page {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 13px
   }
 
-  #personalCenter .el-tabs__item {
-    font-size: 15px;
-    font-weight: 700;
+  .personal_page_child {
+    font-size: 14px;
+    margin-bottom: 8px
+  }
+
+  a:hover {
+    color: #e1251b;
   }
 </style>

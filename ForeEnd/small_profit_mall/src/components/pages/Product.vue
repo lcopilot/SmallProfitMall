@@ -112,7 +112,7 @@
                             style="width:30px;height: 30px;margin-bottom: -8px"/>
                 </div>
               </el-form-item>
-              <el-form-item label="重量">
+              <el-form-item label="重量" v-if="product.weight">
                 <div class="form_left">
                   {{product.weight}}
                 </div>
