@@ -14,7 +14,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-
+//验证码
 public class Vaptcha {
 
     // 验证单元key
