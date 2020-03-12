@@ -17,6 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -224,7 +228,17 @@ public class UserController {
         }
     }
 
-
+    /**
+     * 根据uid修改头像
+     * @param
+     * @return
+     */
+    @RequestMapping("/updatePortrait")
+    public QueryResponseResult updatePortrait(@RequestBody MultipartFile file, String uId) throws IOException {
+        FileInputStream fileInputStream = (FileInputStream) file.getInputStream();
+            userService.updatePortrait(fileInputStream,uId);
+        return new QueryResponseResult(CommonCode.SUCCESS,null);
+    }
 
 
     //删除session
