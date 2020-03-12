@@ -233,9 +233,9 @@ public class UserController {
      * @return
      */
     @RequestMapping("/updatePortrait")
-    public QueryResponseResult updatePortrait(@RequestBody MultipartFile file, String uId) throws IOException {
+    public QueryResponseResult updatePortrait(@RequestBody MultipartFile file, String userId) throws IOException {
         FileInputStream fileInputStream = (FileInputStream) file.getInputStream();
-            userService.updatePortrait(fileInputStream,uId);
+            userService.updatePortrait(fileInputStream,userId);
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
 
