@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -234,7 +235,7 @@ public class UserController {
      */
     @RequestMapping("/updatePortrait")
     public QueryResponseResult updatePortrait(@RequestBody MultipartFile file, String userId) throws IOException {
-        FileInputStream fileInputStream = (FileInputStream) file.getInputStream();
+        InputStream fileInputStream = (InputStream) file.getInputStream();
             userService.updatePortrait(fileInputStream,userId);
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }

@@ -12,7 +12,7 @@ import java.util.UUID;
 import static cn.itcast.util.compressPicture.PathUtil.getImgBasePath;
 
 public class UploadPicturesUtil {
-    public static String UploadPicturesUtil(InputStream ins) throws IOException {
+    public static String UploadPicturesUtil(InputStream ins,String uuid) throws IOException {
         PictureUtilOne pictureUtil = new PictureUtilOne();
         InputStream in =ins ;
         File file = new File(getImgBasePath());
@@ -20,12 +20,11 @@ public class UploadPicturesUtil {
             // 创建该文件夹
             file.mkdirs();
         }
-        String uuid = UUID.randomUUID().toString().replace("-", "");
         pictureUtil.pictureUtilOne(in,getImgBasePath()+"\\"+uuid);
         SimpleUpload c = new SimpleUpload();
         c.overrideUpload(getImgBasePath()+"\\"+uuid+".JPEG",uuid,"mugebl");
         PathUtil.deleteFile("\\"+uuid+".JPEG");
-        String site ="http://productdata.fhxasdsada.xyz/"+uuid+new Date().getTime();
+        String site ="http://productdata.fhxasdsada.xyz/"+uuid+"?t="+new Date().getTime();
         return site;
     }
 
