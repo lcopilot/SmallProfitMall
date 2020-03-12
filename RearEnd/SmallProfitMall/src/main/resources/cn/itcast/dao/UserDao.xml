@@ -39,5 +39,8 @@
         UPDATE user SET password = #{password} WHERE uid = #{uid}
     </update>
 
-
+    <!--根据uid修改用户头像-->
+    <update id="updatePortrait" parameterType="cn.itcast.domain.user.User">
+        UPDATE user SET Image = ${Image} WHERE uid = #{uid}
+    </update>
 </mapper>

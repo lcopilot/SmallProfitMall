@@ -1,7 +1,10 @@
 package cn.itcast.service;
 
 import cn.itcast.domain.user.User;
+import org.apache.ibatis.annotations.Param;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public interface UserService {
@@ -28,5 +31,6 @@ public interface UserService {
     //根据uid修改密码
     public void updatePasswordUid(String uid,String password);
 
-
+    //根据uid修改用户头像
+    public void updatePortrait(InputStream Images, String uid) throws IOException;
 }

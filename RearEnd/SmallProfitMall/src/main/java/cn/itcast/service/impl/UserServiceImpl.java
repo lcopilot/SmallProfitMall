@@ -4,9 +4,12 @@ import cn.itcast.dao.UserDao;
 import cn.itcast.domain.user.User;
 import cn.itcast.service.UserService;
 
+import cn.itcast.util.compressPicture.UploadPicturesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 
@@ -60,6 +63,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updatePasswordUid(String uid,String password) {
         UserDao.updatePasswordUid(uid,password);
+    }
+
+    //根据uid修改用户头像
+    @Override
+    public void updatePortrait(InputStream Images, String uid) throws IOException {
+        String Image = UploadPicturesUtil.UploadPicturesUtil(Images);
+        UserDao.updatePortrait(Image,uid);
     }
 
 }
