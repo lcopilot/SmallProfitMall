@@ -59,7 +59,7 @@
                     class="user_avatar_span">点击头像修改</em></span>
                 <div>
                   <el-upload
-                      action="/api/user/avatarUpload"
+                      action="/apiUrl/user/updatePortrait"
                       :show-file-list="false"
                       :data="params"
                       :on-success="handleAvatarSuccess">
@@ -119,8 +119,9 @@
             }
           ],
         },
+        //头像上传携带的参数
         params: {
-          uId: "",
+          userId: "",
         },
         avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
       };
@@ -180,7 +181,7 @@
       }
     },
     created() {
-      this.params.uId = sessionStorage.getItem("uId");
+      this.params.userId = sessionStorage.getItem("uId");
       this.getUser();
     }
   }
