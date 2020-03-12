@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         return UserDao.findByName(name);
     }
 
-    //根据用户手机查询用户信息
+    //根据用户手机查询用 户信息
     @Override
     public User findByPhone(String phone) {
         return UserDao.findByPhone(phone);
