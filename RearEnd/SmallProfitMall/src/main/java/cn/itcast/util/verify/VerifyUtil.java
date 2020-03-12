@@ -18,12 +18,14 @@ public class VerifyUtil {
     public  Boolean VaptchaVerify(String tokens, HttpServletRequest request) {
 
         String token = tokens;
+        System.out.println();
         SecondVerify result = vaptcha.Verify(request, token);
         if (result.getSuccess() == Constant.VerifySuccess) {
             // 二次验证成功
             // 执行后续逻辑 比如:登录 注册
             return true;
         } else {
+
             // 二次验证失败
             // 前端重新人机验证
             return false;

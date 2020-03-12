@@ -66,6 +66,9 @@ public class UserController {
         if (!verifyUtil.VaptchaVerify(user.getToken(),request)) {
             return new QueryResponseResult(CommonCode.ValidationFails,null); //令牌错误不正确
         }
+        if (user.getName().equals("小白")){
+            return new QueryResponseResult(CommonCode.nameError,null); //不能使用初始名字登录不
+        }
         User name = userService.findByName(user.getName()); //根据用户名查询
         User phone = userService.findByPhone(user.getName()); //根据手机号查询
         if(user !=null && user.getPassword()!=null){ //判断用户输入是否完整
