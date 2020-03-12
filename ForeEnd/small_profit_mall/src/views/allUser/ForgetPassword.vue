@@ -56,8 +56,8 @@
 </template>
 
 <script>
-  const Header = ()=>import("./Header");
-  const Footer = ()=>import("./Footer");
+  const Header = ()=>import("../../components/pages/Header");
+  const Footer = ()=>import("../../components/pages/Footer");
   import *as userApi from '../../api/page/user'
 
   export default {

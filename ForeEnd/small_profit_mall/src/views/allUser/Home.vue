@@ -114,11 +114,11 @@
   import {mapGetters} from 'vuex'
   import *as homeApi from '../../api/page/home';
 
-  const Header = () => import("./Header"); //组件懒加载
-  const Footer = () => import("./Footer");
-  const Carousel = () => import("./Carousel");
-  const CountDown = () => import("../UtilsComponent/vue2-countdown");
-  const ProductsFeatured = () => import("./ProductsFeatured");
+  const Header = () => import("../../components/pages/Header"); //组件懒加载
+  const Footer = () => import("../../components/pages/Footer");
+  const Carousel = () => import("../../components/pages/Carousel");
+  const CountDown = () => import("../../components/UtilsComponent/vue2-countdown");
+  const ProductsFeatured = () => import("../../components/pages/ProductsFeatured");
 
   export default {
     name: 'Home',

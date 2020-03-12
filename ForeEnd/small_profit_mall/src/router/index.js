@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../components/pages/Home.vue'
-import Login from "../components/pages/Login";
 
 Vue.use(VueRouter)
 
@@ -21,32 +19,32 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: () => import('@/components/pages/Home'), //路由懒加载
+    component: () => import('@/views/allUser/Home'), //路由懒加载
   },
   {
     path: '/forgetPassword',
     name: 'ForgetPassword',
-    component: () => import('@/components/pages/ForgetPassword'), //路由懒加载
+    component: () => import('@/views/allUser/ForgetPassword'), //路由懒加载
   },
   {
     path: '/test',
     name: 'test',
-    component: () => import('@/components/pages/test'), //路由懒加载
+    component: () => import('@/views/test'), //路由懒加载
   },
   {
     path: '/login',
     name: "Login",
-    component: () => import('@/components/pages/Login')
+    component: () => import('@/views/allUser/Login')
   },
   {
     path: '/register',
     name: "Register",
-    component: () => import('@/components/pages/Register')
+    component: () => import('@/views/allUser/Register')
   },
   {
     path: '/product',
     name: "Product",
-    component: () => import('@/components/pages/Product')
+    component: () => import('@/views/allUser/Product')
   },
   {
     path: '/shoppingCart',
@@ -54,7 +52,7 @@ const routes = [
     meta: {
       requireAuth: true,   // 添加该字段，表示进入这个路由是需要登录的
     },
-    component: () => import('@/components/admin/shoppingCart')
+    component: () => import('@/views/user/shoppingCart')
 
   },
   {
@@ -63,13 +61,20 @@ const routes = [
     meta: {
       requireAuth: true,
     },
-    component: () => import('@/components/admin/personalCenter')
+    component: () => import('@/views/user/personalCenter')
+  },{
+    path: '/personalInformation',
+    name: 'PersonalInformation',
+    meta: {
+      requireAuth: true,
+    },
+    component: () => import('@/views/user/personalInformation')
   },
   //捕获404
   {
     path: "/404",
     name: "NotFound",
-    component: resolve => require(['@/components/pages/NotFound'], resolve)
+    component: () => import('@/views/allUser/NotFound')
   },
   {
     path: "*",
