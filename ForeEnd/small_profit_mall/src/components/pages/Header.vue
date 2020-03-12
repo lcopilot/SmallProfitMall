@@ -20,7 +20,7 @@
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>
-                  <router-link to="/">个人中心</router-link>
+                  <router-link to="/personalCenter">个人中心</router-link>
                 </el-dropdown-item>
                 <el-dropdown-item divided>
                   <router-link to="/">个人中心</router-link>
