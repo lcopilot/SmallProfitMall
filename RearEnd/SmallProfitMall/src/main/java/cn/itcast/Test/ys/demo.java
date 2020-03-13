@@ -26,11 +26,16 @@ public class demo {
             // 创建该文件夹
             file.mkdirs();
         }
+
         String uuid = UUID.randomUUID().toString().replace("-", "");
-        a.pictureUtilOne(in,getImgBasePath()+"\\"+uuid);
-        SimpleUpload c = new SimpleUpload();
-//        System.out.println(getImgBasePath()+"\\"+uuid+".JPEG");
-      //  System.out.println(getImgBasePath()+"\\"+uuid+".JPEG"+"-----"+uuid+"------"+"mugebl");
+        a.pictureUtilOne(in,getImgBasePath()+"\\"+uuid+".jpg");
+//        File file1 =new File(getImgBasePath()+"\\"+uuid);
+//        String fileName=file1.getName();
+//        String[] token = fileName.split(".");
+//        String pf = token[1];
+//        SimpleUpload c = new SimpleUpload();
+//        System.out.println(getImgBasePath()+"\\"+uuid+pf);
+        System.out.println(getImgBasePath()+"\\"+uuid+""+"-----"+uuid+"------"+"mugebl");
      //  c.overrideUpload(getImgBasePath()+"\\"+uuid+".JPEG",uuid,"mugebl");
 
         System.out.println();
