@@ -26,7 +26,7 @@
 
     <!--注册用户 -->
     <insert id="saveAccount" parameterType="cn.itcast.domain.user.User">
-         INSERT INTO user (uid,name,password,sex,phone,mail,image,token) VALUES (#{uid},#{name},#{password},#{sex},#{phone},#{mail},#{image},#{token})
+         INSERT INTO user (uid,name,password,sex,phone,email,image,token) VALUES (#{uid},#{name},#{password},#{sex},#{phone},#{email},#{image},#{token})
     </insert>
 
     <!-- 根据用户手机号码修改手机密码-->
@@ -48,4 +48,6 @@
     <select id="findByIdInformation" resultType="cn.itcast.domain.user.User" parameterType="java.lang.String">
       select name,birthday,sex,phone,email,Image FROM user WHERE uid=#{uid}
     </select>
+
+    <!---->
 </mapper>
