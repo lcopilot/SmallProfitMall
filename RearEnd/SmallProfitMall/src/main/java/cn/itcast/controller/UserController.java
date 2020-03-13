@@ -234,10 +234,9 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/updatePortrait",method = RequestMethod.POST)
-    public QueryResponseResult updatePortrait(MultipartFile file, Integer uid) throws IOException {
-        System.out.println(file+""+uid);
-      //  InputStream fileInputStream = (InputStream) file.getInputStream();
-         //   userService.updatePortrait(fileInputStream,userId);
+    public QueryResponseResult updatePortrait(MultipartFile file, String userId) throws IOException {
+        InputStream fileInputStream = file.getInputStream();
+            userService.updatePortrait(fileInputStream,userId);
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
 
