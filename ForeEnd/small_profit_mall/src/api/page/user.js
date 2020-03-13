@@ -24,3 +24,7 @@ export const get_Phone_Code_FP = phone => {
 export const getUserInformation = userId => {
   return http.requestGet('/apiUrl/user/findByIdInformation/' + userId);
 }
+//修改用户信息
+export const modifyUser = params => {
+  return http.requestPost('/apiUrl/user/updateInformation' ,params);
+}

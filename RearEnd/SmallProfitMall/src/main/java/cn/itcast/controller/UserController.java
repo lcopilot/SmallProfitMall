@@ -277,7 +277,6 @@ public class UserController {
      */
     @RequestMapping(value = "/updateInformation",method = RequestMethod.POST)
     public QueryResponseResult updateInformation(@RequestBody User user) {
-        System.out.println(user);
         int result = userService.updateInformation(user);
         if (result == 1){
             return new QueryResponseResult(CommonCode.SUCCESS, null);//修改成功

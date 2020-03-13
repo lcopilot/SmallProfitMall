@@ -94,7 +94,6 @@
     },
     methods: {
       login(formName) {
-
         this.$refs[formName].validate((valid) => {
               if (valid) {
                 if (this.loginForm.token == "") {

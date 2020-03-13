@@ -6,7 +6,7 @@
     <el-main>
       <el-row :gutter="20">
         <personalPage/>
-        <el-col :span="15" :push="3">
+        <el-col v-if="!phoneSign && !emailSign" :span="15" :push="3">
           <el-card>
             <div slot="header" style="text-align: left">
               <span style="font-weight: bold">修改个人信息</span>
@@ -15,7 +15,7 @@
               <el-col :span="18">
                 <div style="text-align: left">
                   <el-form label-position="left" label-width="80px" :model="userFrom"
-                           :rules="rule" :status-icon="true">
+                           :rules="rule" :status-icon="true"  ref="userForm">
                     <el-form-item label="昵称" prop="name">
                       <el-input type="text" v-model="userFrom.name" maxlength="15"
                                 :show-word-limit="true" style="max-width: 200px"></el-input>
@@ -29,8 +29,8 @@
                     <el-form-item label="生日">
                       <el-row>
                         <el-col :span="13">
-                          <DataSelect :year="userFrom.birthday.year"
-                                      :month="userFrom.birthday.month" :day="userFrom.birthday.day"
+                          <DataSelect :year="birthday.year"
+                                      :month="birthday.month" :day="birthday.day"
                                       @change="dateChange"/>
                         </el-col>
                         <el-col :span="11">
@@ -41,7 +41,7 @@
                       </el-row>
                     </el-form-item>
                     <el-form-item label="性别">
-                      <el-radio-group v-model="userFrom.gender">
+                      <el-radio-group v-model="userFrom.sex">
                         <el-radio :label="'1'">男</el-radio>
                         <el-radio :label="'2'">女</el-radio>
                         <el-radio :label="'3'">保密</el-radio>
@@ -49,7 +49,8 @@
                     </el-form-item>
                     <el-form-item label="电话">
                       {{userFrom.phone}}
-                      <el-button style="margin-left: 20px" type="text">修改</el-button>
+                      <el-button style="margin-left: 20px" type="text" @click="modifyPhone">修改
+                      </el-button>
                     </el-form-item>
                     <el-form-item label="邮箱">
                       <div v-if="!userFrom.email">
@@ -62,7 +63,7 @@
                       </div>
                     </el-form-item>
                     <el-form-item>
-                      <el-button type="primary">提交</el-button>
+                      <el-button type="primary" @click="modifyUser('userForm')">提交</el-button>
                     </el-form-item>
                   </el-form>
                 </div>
@@ -83,6 +84,7 @@
             </el-row>
           </el-card>
         </el-col>
+        <phoneModification v-if="phoneSign"/>
       </el-row>
     </el-main>
     <el-footer>
@@ -96,12 +98,17 @@
   const Footer = () => import("../../components/pages/Footer");
   const personalPage = () => import("../../components/admin/personalHubPage");
   const DataSelect = () => import("../../components/UtilsComponent/DateSelect");
+  const phoneModification = () => import("../../components/admin/phoneModification");
   import *as userApi from '../../api/page/user'  //*as别名
   export default {
     name: "personalInformation",
-    components: {Header, Footer, personalPage, DataSelect},
+    components: {Header, Footer, personalPage, DataSelect, phoneModification},
     data() {
       return {
+        //修改邮箱
+        emailSign: false,
+        //修改手机号
+        phoneSign: false,
         //重载头部组件
         header: '',
         //头像上传的进度条切换
@@ -109,14 +116,16 @@
         //进度条
         progressPercent: 0,
         //用户信息
+        birthday: {
+          year: '',
+          month: '',
+          day: '',
+        },
         userFrom: {
+          uid:'',
           name: '小白',
-          gender: "3",
-          birthday: {
-            year: '',
-            month: '',
-            day: '',
-          },
+          birthday:'',
+          sex: "3",
           phone: 0,
           email: 0,
         },
@@ -195,7 +204,10 @@
         let userId = sessionStorage.getItem("uId");
         userApi.getUserInformation(userId)
         .then(res => {
-          this.userFrom.gender = res.queryResult.list[0].sex;
+          this.birthday.year = res.queryResult.list[0].birthdays[0];
+          this.birthday.month = res.queryResult.list[0].birthdays[1];
+          this.birthday.day = res.queryResult.list[0].birthdays[2];
+          this.userFrom.sex = res.queryResult.list[0].sex;
           this.userFrom.name = res.queryResult.list[0].name;
           this.userFrom.phone = res.queryResult.list[0].phone;
           this.userFrom.email = res.queryResult.list[0].email;
@@ -205,42 +217,38 @@
           console.log(error);
         });
       },
-      modifyUser() {
-        if (this.signature == "") {
-          this.$message({
-            message: "签名不能为空",
-            type: "warning"
-          });
-        } else {
-          let uId = sessionStorage.getItem("uId");
-          this.axios.post("/api/user/updateUser", {
-            uid: uId,
-            signature: this.signature,
-            introduction: this.introduction,
-          }).then(res => {
-            if (res.data.success) {
-              this.$message({
-                message: "修改成功!",
-                type: "success",
-                onClose: this.getUser()
-              });
-            } else {
-              this.$message({
-                message: "修改失败!",
-                type: "error",
-              })
-            }
-          }).catch(error => {
-            console.log(error);
-          })
-        }
+      modifyPhone() {
+        this.phoneSign = true;
+      },
+      modifyUser(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            userApi.modifyUser(this.userFrom).then(res => {
+              if (res.success) {
+                this.$message({
+                  message: "修改成功!",
+                  type: "success",
+                  onClose: this.getUser()
+                });
+              } else {
+                this.$message({
+                  message: "修改失败!",
+                  type: "error",
+                })
+              }
+            }).catch(error => {
+              console.log(error);
+            })
+          }
+        })
       },
       //生日选择算法
       dateChange(Data) {
-        console.log(Data.year + '-' + Data.month + '-' + Data.day);
+        this.userFrom.birthday=Data.year + '-' + Data.month + '-' + Data.day;
       }
     },
     created() {
+      this.userFrom.uid=sessionStorage.getItem("uId");
       this.imageUrl = sessionStorage.getItem("avatar");
       this.params.userId = sessionStorage.getItem("uId");
       this.getUser();

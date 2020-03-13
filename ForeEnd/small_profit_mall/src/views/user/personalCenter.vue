@@ -408,7 +408,7 @@
 
   .personal_center_order_div:hover {
     transform: scale(1.02);
-    box-shadow: #DCDFE6 0 0 8px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
   }
 
   .personal_center_order_div_order {
