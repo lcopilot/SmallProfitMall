@@ -20,7 +20,7 @@ public class UploadPicturesUtil {
             // 创建该文件夹
             file.mkdirs();
         }
-        pictureUtil.pictureUtilOne(in,getImgBasePath()+"\\"+uuid);
+        pictureUtil.pictureUtilOne(in,getImgBasePath()+"\\"+uuid+".JPEG");
         SimpleUpload c = new SimpleUpload();
         c.overrideUpload(getImgBasePath()+"\\"+uuid+".JPEG",uuid,"mugebl");
         PathUtil.deleteFile("\\"+uuid+".JPEG");
