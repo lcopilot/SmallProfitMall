@@ -13,6 +13,9 @@
           <div class="personal_page_child">
             <router-link to="/">我的会员</router-link>
           </div>
+          <div class="personal_page_child">
+            <router-link to="/">地址管理</router-link>
+          </div>
           <el-divider/>
         </div>
         <div>

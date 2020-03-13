@@ -18,7 +18,7 @@
                                  src="http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938"/>
                     </router-link>
                   </div>
-                  <div style="color: white;">小白</div>
+                  <div style="color: white;">{{user.name}}</div>
                   <div style="padding: 12px 0 12px 60px">
                     <div class="personal_center_div3">
                       成长值1560
@@ -100,13 +100,87 @@
                   <div style="text-align: left">我的订单</div>
                 </div>
                 <div>
-                  <div style="padding-left: 50px">
-                    <el-row :gutter="20">
-                      <el-col :span="4">待付款</el-col>
-                      <el-col :span="4">待收货</el-col>
-                      <el-col :span="4">待评价</el-col>
-                      <el-col :span="4">退换/售后</el-col>
-                      <el-col :span="4">全部订单</el-col>
+                  <div style="padding: 20px">
+                    <el-row :gutter="15">
+                      <el-col :span="5">
+                        <div class="personal_center_order_div" @mouseenter="enter_payment()"
+                             @mouseleave="leave_payment()">
+                          <router-link to="/">
+                            <div>
+                              <el-badge :value="Quantity.payment" :max="99">
+                                <svg-icon name="payment" v-show="icon.payment" v-cloak
+                                          class="personal_center_order_icon"/>
+                                <svg-icon name="payment_no" v-show="!icon.payment" v-cloak
+                                          class="personal_center_order_icon"/>
+                              </el-badge>
+                            </div>
+                            <div style="font-size: 12px">待付款</div>
+                          </router-link>
+                        </div>
+                      </el-col>
+                      <el-col :span="5">
+                        <div class="personal_center_order_div" @mouseenter="enter_receipt()"
+                             @mouseleave="leave_receipt()">
+                          <router-link to="/">
+                            <div>
+                              <el-badge :value="Quantity.receipt" :max="99">
+                                <svg-icon name="receipt" v-show="icon.receipt" v-cloak
+                                          class="personal_center_order_icon"/>
+                                <svg-icon name="receipt_no" v-show="!icon.receipt" v-cloak
+                                          class="personal_center_order_icon"/>
+                              </el-badge>
+                            </div>
+                            <div style="font-size: 12px">待收货</div>
+                          </router-link>
+                        </div>
+                      </el-col>
+                      <el-col :span="5">
+                        <div class="personal_center_order_div" @mouseenter="enter_evaluation()"
+                             @mouseleave="leave_evaluation()">
+                          <router-link to="/">
+                            <div>
+                              <el-badge :value="Quantity.evaluation" :max="99">
+                                <svg-icon name="evaluation" v-show="icon.evaluation" v-cloak
+                                          class="personal_center_order_icon"/>
+                                <svg-icon name="evaluation_no" v-show="!icon.evaluation" v-cloak
+                                          class="personal_center_order_icon"/>
+                              </el-badge>
+                            </div>
+                            <div style="font-size: 12px">待评价</div>
+                          </router-link>
+                        </div>
+                      </el-col>
+                      <el-col :span="5">
+                        <div class="personal_center_order_div" @mouseenter="enter_afterSale()"
+                             @mouseleave="leave_afterSale()">
+                          <router-link to="/">
+                            <div>
+                              <el-badge :value="Quantity.afterSale" :max="99">
+                                <svg-icon name="afterSale_pc" v-show="icon.afterSale" v-cloak
+                                          class="personal_center_order_icon"/>
+                                <svg-icon name="afterSale_pc_no" v-show="!icon.afterSale" v-cloak
+                                          class="personal_center_order_icon"/>
+                              </el-badge>
+                            </div>
+                            <div style="font-size: 12px">退换/售后</div>
+                          </router-link>
+                        </div>
+                      </el-col>
+                      <el-col :span="4">
+                        <div class="personal_center_order_div_order" @mouseenter="enter_order()"
+                             @mouseleave="leave_order()">
+                          <router-link to="/">
+                            <div>
+                              <svg-icon name="order" v-show="icon.order" v-cloak
+                                        class="personal_center_order_icon"/>
+                              <svg-icon name="order_no" v-show="!icon.order" v-cloak
+                                        class="personal_center_order_icon"/>
+                            </div>
+                            <div style="font-size: 12px">全部订单</div>
+                          </router-link>
+                        </div>
+                      </el-col>
+
                     </el-row>
                   </div>
                 </div>
@@ -115,10 +189,25 @@
             <el-col :span="8">
               <el-card>
                 <div slot="header">
-                  <div style="text-align: left">我的收藏</div>
+                  <div style="text-align: left">
+                    <svg-icon name="footprint" style="width: 20px;height: 20px"/>&emsp;&emsp;
+                    <span>足迹</span>
+                    <router-link to="/" class="footprint_a">更多 ></router-link>
+                  </div>
                 </div>
                 <div>
-
+                  <el-carousel :interval="5000" indicator-position="none" arrow="hover"
+                               height="135px">
+                    <el-carousel-item v-for="(footprints,index) in footprintList" :key="index">
+                      <div v-for="product in footprints" class="footprint_carousel_div">
+                        <router-link to="{path: '/product', query: {productId:product.productId}}">
+                          <div>
+                            <el-image :src="product.imageSite" fit="scale-down"/>
+                          </div>
+                        </router-link>
+                      </div>
+                    </el-carousel-item>
+                  </el-carousel>
                 </div>
               </el-card>
             </el-col>
@@ -141,20 +230,107 @@
     components: {Header, Footer, personalPage},
     data() {
       return {
-        formLabelAlign: {
-          name: '',
-          region: '',
-          type: ''
-        }
+        //图标切换
+        icon: {
+          //待付款图标的切换
+          payment: true,
+          //待收货图标的切换
+          receipt: true,
+          //待评价图标切换
+          evaluation: true,
+          //退换售后图标切换
+          afterSale: true,
+          //全部订单图标切换
+          order: true,
+        },
+        //订单数量
+        Quantity: {
+          payment: 5,
+          receipt: 6,
+          evaluation: 68,
+          afterSale: 10,
+        },
+        //用户信息
+        user:{
+          name:'',
+          avatar:'',
+          uId:'',
+        },
+        footprintList: [
+          [
+            {"imageSite": "http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg"},
+            {"imageSite": "http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg"},
+            {"imageSite": "http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg"},
+          ],
+          [
+            {"imageSite": "http://productdata.fhxasdsada.xyz/43a1962b41270d97.jpg"},
+            {"imageSite": "http://productdata.fhxasdsada.xyz/43a1962b41270d97.jpg"},
+            {"imageSite": "http://productdata.fhxasdsada.xyz/43a1962b41270d97.jpg"},
+          ],
+          [
+            {"imageSite": "http://productdata.fhxasdsada.xyz/ee567a1dea515d38.jpg"},
+            {"imageSite": "http://productdata.fhxasdsada.xyz/ee567a1dea515d38.jpg"},
+            {"imageSite": "http://productdata.fhxasdsada.xyz/ee567a1dea515d38.jpg"},
+          ],
+          [
+            {"imageSite": "http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg"},
+            {"imageSite": "http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg"},
+            {"imageSite": "http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg"},
+          ],
+          [
+            {"imageSite": "http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg"},
+            {"imageSite": "http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg"},
+            {"imageSite": "http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg"},
+          ],
+        ]
+
       }
     },
-    methods: {}
+    methods: {
+      //图标切换的方法
+      enter_payment() {
+        this.icon.payment = false;
+      },
+      leave_payment() {
+        this.icon.payment = true;
+      },
+      enter_receipt() {
+        this.icon.receipt = false;
+      },
+      leave_receipt() {
+        this.icon.receipt = true;
+      },
+      enter_evaluation() {
+        this.icon.evaluation = false;
+      },
+      leave_evaluation() {
+        this.icon.evaluation = true;
+      },
+      enter_afterSale() {
+        this.icon.afterSale = false;
+      },
+      leave_afterSale() {
+        this.icon.afterSale = true;
+      },
+      enter_order() {
+        this.icon.order = false;
+      },
+      leave_order() {
+        this.icon.order = true;
+      },
+    },
+    created() {
+      this.user.name=sessionStorage.getItem("username");
+      this.user.uId=sessionStorage.getItem("uId");
+    }
 
   }
 </script>
 
 <style scoped>
-
+  [v-cloak] {
+    display: none
+  }
 
   .activate_now_btn {
     float: right;
@@ -224,5 +400,44 @@
 
   .personal_center_wallet3_a:hover {
     color: #e1251b;
+  }
+
+  .personal_center_order_div {
+    padding: 10px;
+  }
+
+  .personal_center_order_div:hover {
+    transform: scale(1.02);
+    box-shadow: #DCDFE6 0 0 8px;
+  }
+
+  .personal_center_order_div_order {
+    padding: 10px;
+  }
+
+  .personal_center_order_div_order:hover {
+    transform: scale(1.05);
+  }
+
+  .personal_center_order_icon {
+    width: 50px;
+    height: 50px
+  }
+
+  .footprint_a {
+    float: right;
+    padding: 3px 0;
+    font-size: 12px
+  }
+
+  .footprint_carousel_div {
+    margin: 20px 0px 0px 2px;
+    float: left;
+    width: 80px;
+    height: 80px
+  }
+
+  a:hover {
+    color: #c81623;
   }
 </style>

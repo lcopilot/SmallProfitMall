@@ -1,13 +1,13 @@
 <template>
   <el-container>
     <el-header>
-      <Header></Header>
+      <Header :key="header"></Header>
     </el-header>
     <el-main>
       <el-row :gutter="20">
         <personalPage/>
         <el-col :span="15" :push="3">
-          <el-card class="box-card">
+          <el-card>
             <div slot="header" style="text-align: left">
               <span style="font-weight: bold">修改个人信息</span>
             </div>
@@ -19,8 +19,11 @@
                     <el-form-item label="昵称" prop="name">
                       <el-input type="text" v-model="userFrom.name" maxlength="15"
                                 :show-word-limit="true" style="max-width: 200px"></el-input>
-                      <span class="user_name_span">
+                      <span class="user_name_span" v-if="userFrom.name!='小白'">
                         可用于登录，请牢记哦~
+                      </span>
+                      <span class="user_name_span" v-if="userFrom.name=='小白'">
+                        此用户名为初始用户名,不可用,请尽快修改哦~
                       </span>
                     </el-form-item>
                     <el-form-item label="生日">
@@ -39,16 +42,24 @@
                     </el-form-item>
                     <el-form-item label="性别">
                       <el-radio-group v-model="userFrom.gender">
-                        <el-radio :label="1">男</el-radio>
-                        <el-radio :label="2">女</el-radio>
-                        <el-radio :label="3">保密</el-radio>
+                        <el-radio :label="'1'">男</el-radio>
+                        <el-radio :label="'2'">女</el-radio>
+                        <el-radio :label="'3'">保密</el-radio>
                       </el-radio-group>
                     </el-form-item>
                     <el-form-item label="电话">
                       {{userFrom.phone}}
+                      <el-button style="margin-left: 20px" type="text">修改</el-button>
                     </el-form-item>
                     <el-form-item label="邮箱">
-                      {{userFrom.email}}
+                      <div v-if="!userFrom.email">
+                        未绑定~
+                        <el-button style="margin-left: 20px" type="text">绑定邮箱</el-button>
+                      </div>
+                      <div v-if="userFrom.email">
+                        {{userFrom.email}}
+                        <el-button style="margin-left: 20px" type="text">修改</el-button>
+                      </div>
                     </el-form-item>
                     <el-form-item>
                       <el-button type="primary">提交</el-button>
@@ -59,7 +70,7 @@
               <el-col :span="5">
                 <div>
                   <img v-if="!progressFlag" class="avatar" :src="imageUrl"/>
-                  <div v-show="progressFlag" >
+                  <div v-show="progressFlag">
                     <el-progress type="circle" :percentage="progressPercent"></el-progress>
                   </div>
                   <el-upload class="img-btn" action="#" :data="params"
@@ -85,18 +96,22 @@
   const Footer = () => import("../../components/pages/Footer");
   const personalPage = () => import("../../components/admin/personalHubPage");
   const DataSelect = () => import("../../components/UtilsComponent/DateSelect");
+  import *as userApi from '../../api/page/user'  //*as别名
   export default {
     name: "personalInformation",
     components: {Header, Footer, personalPage, DataSelect},
     data() {
       return {
+        //重载头部组件
+        header: '',
         //头像上传的进度条切换
         progressFlag: false,
         //进度条
         progressPercent: 0,
+        //用户信息
         userFrom: {
           name: '小白',
-          gender: 3,
+          gender: "3",
           birthday: {
             year: '',
             month: '',
@@ -121,13 +136,13 @@
         params: {
           userId: "",
         },
+        //头像链接
         imageUrl: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
       };
     },
     methods: {
       //头像上传的方法
       uploadImg(f) {
-        console.log(f)
         this.progressFlag = true
         let formData = new FormData()
         formData.append('file', f.file)
@@ -143,37 +158,48 @@
             this.progressPercent = (progressEvent.loaded / progressEvent.total * 100)
           }
         }).then(res => {
-          this.imageUrl = res.data.data
-          if (this.progressPercent === 100) {
-            this.progressFlag = false
-            this.progressPercent = 0
+          if (res.data.success) {
+            sessionStorage.setItem("avatar", res.data.queryResult.list[0]);
+            this.imageUrl = res.data.queryResult.list[0];
+            this.header = new Date().getTime();
+            if (this.progressPercent === 100) {
+              this.progressFlag = false
+              this.progressPercent = 0
+            }
           }
-        }).then(error => {
+        }).catch(error => {
+          this.progressFlag = false
+          this.progressPercent = 0
+          this.$message({
+            message: "头像上传失败,请重试",
+            type: "error"
+          });
           console.log(error)
         })
       },
+      //头像上传之前的方法
       beforeAvatarUpload(file) {
         const isJPG = file.type === 'image/jpeg';
         const isPNG = file.type === 'image/png';
         const isBMP = file.type === 'image/bmp';
-        const isLt2M = file.size / 1024 / 1024 < 4;
+        const isLt2M = file.size / 1024 / 1024 < 2;
         if (!isJPG && !isPNG && !isBMP) {
           this.$message.error('上传图片必须是JPG/PNG/BMP 格式!');
         }
         if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 4MB!');
+          this.$message.error('上传头像图片大小不能超过 2MB!');
         }
         return (isJPG || isBMP || isPNG) && isLt2M;
       },
       getUser() {
-        let id = sessionStorage.getItem("uId");
-        this.axios.get("/apiUrl/user/findById", {
-          params: {id}
-        })
+        let userId = sessionStorage.getItem("uId");
+        userApi.getUserInformation(userId)
         .then(res => {
-          this.signature = res.data.queryResult.list[0].signature;
-          this.introduction = res.data.queryResult.list[0].introduction;
-          this.avatar = res.data.queryResult.list[0].avatar;
+          this.userFrom.gender = res.queryResult.list[0].sex;
+          this.userFrom.name = res.queryResult.list[0].name;
+          this.userFrom.phone = res.queryResult.list[0].phone;
+          this.userFrom.email = res.queryResult.list[0].email;
+          this.imageUrl = res.queryResult.list[0].image;
         })
         .catch(error => {
           console.log(error);
@@ -215,6 +241,7 @@
       }
     },
     created() {
+      this.imageUrl = sessionStorage.getItem("avatar");
       this.params.userId = sessionStorage.getItem("uId");
       this.getUser();
     }

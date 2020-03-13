@@ -115,6 +115,7 @@
                       sessionStorage.setItem("username", res.queryResult.list[0].name);
                       sessionStorage.setItem("uId", res.queryResult.list[0].uid);
                       sessionStorage.setItem("token", res.queryResult.list[0].tokens);
+                      sessionStorage.setItem("avatar", res.queryResult.list[0].image);
                       this.$router.push({
                         path: "/Home" //跳转的路径
                       });
@@ -127,7 +128,14 @@
                         this.$message.error("人机验证二次失败,请稍后重试");
                         this.loginStatus = false;
                         this.loginBtnContent = '登录';
-                      } else {
+                      } if(res.code == 10008){
+                        this.loginForm.token = "";
+                        this.verify = new Date().getTime();
+                        this.login_btn = new Date().getTime();
+                        this.$message.warning("此用户名为初始用户名不可用,请更换用户名");
+                        this.loginStatus = false;
+                        this.loginBtnContent = '登录';
+                      }else {
                         this.loginForm.token = "";
                         this.verify = new Date().getTime();
                         this.login_btn = new Date().getTime();
