@@ -45,7 +45,7 @@
     </update>
 
     <!--根据id查询头像-->
-    <select id="findByidPortrait" parameterType="java.lang.String">
-       select Image FROM `user` WHERE `user`.uid= #{uid}
+    <select id="findByIdInformation" resultType="cn.itcast.domain.user.User" parameterType="java.lang.String">
+      select name,birthday,sex,phone,mail,Image FROM user WHERE uid=#{uid}
     </select>
 </mapper>

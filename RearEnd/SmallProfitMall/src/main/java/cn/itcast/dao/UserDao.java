@@ -27,7 +27,6 @@ public interface UserDao {
     //.根据uid查询用户信息
     public User findByUid(String uid);
 
-
     // 保存帐户信息
     public void saveAccount(User user);
 
@@ -40,6 +39,7 @@ public interface UserDao {
     //根据uid修改用户头像
     public void updatePortrait(@Param("Image") String Image,@Param("uid") String uid);
 
-    public String findByidPortrait(@Param("uid") String uid);
+    //根据uid查询用户信息
+    public User findByIdInformation(@Param("uid") String uid);
 
 }

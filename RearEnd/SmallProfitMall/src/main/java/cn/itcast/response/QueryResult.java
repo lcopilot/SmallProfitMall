@@ -1,6 +1,8 @@
 package cn.itcast.response;
 
 import java.util.List;
+
+import cn.itcast.domain.user.User;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
@@ -21,6 +23,7 @@ public class QueryResult<T> {
 
     private String string;
 
+    private User user;
     //数据总数
     private long total;
 
