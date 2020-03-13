@@ -29,9 +29,9 @@
                     <el-form-item label="生日">
                       <el-row>
                         <el-col :span="13">
-                          <DataSelect :year="birthday.year"
-                                      :month="birthday.month" :day="birthday.day"
-                                      @change="dateChange"/>
+                          <DataSelect :year="birthday[0]"
+                                      :month="birthday[1]" :day="birthday[2]"
+                                      @change="dateChange" :key="DataSelect"/>
                         </el-col>
                         <el-col :span="11">
                            <span class="user_name_span">
@@ -105,6 +105,8 @@
     components: {Header, Footer, personalPage, DataSelect, phoneModification},
     data() {
       return {
+        //生日选择的组件重载的key
+        DataSelect:0,
         //修改邮箱
         emailSign: false,
         //修改手机号
@@ -116,11 +118,7 @@
         //进度条
         progressPercent: 0,
         //用户信息
-        birthday: {
-          year: '',
-          month: '',
-          day: '',
-        },
+        birthday: [],
         userFrom: {
           uid:'',
           name: '小白',
@@ -204,14 +202,13 @@
         let userId = sessionStorage.getItem("uId");
         userApi.getUserInformation(userId)
         .then(res => {
-          this.birthday.year = res.queryResult.list[0].birthdays[0];
-          this.birthday.month = res.queryResult.list[0].birthdays[1];
-          this.birthday.day = res.queryResult.list[0].birthdays[2];
+          this.birthday = res.queryResult.list[0].birthdays;
           this.userFrom.sex = res.queryResult.list[0].sex;
           this.userFrom.name = res.queryResult.list[0].name;
           this.userFrom.phone = res.queryResult.list[0].phone;
           this.userFrom.email = res.queryResult.list[0].email;
           this.imageUrl = res.queryResult.list[0].image;
+          this.DataSelect=new Date().getTime();
         })
         .catch(error => {
           console.log(error);
