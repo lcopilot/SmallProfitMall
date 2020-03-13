@@ -40,7 +40,12 @@
     </update>
 
     <!--根据uid修改用户头像-->
-    <update id="updatePortrait" parameterType="cn.itcast.domain.user.User">
-        UPDATE user SET Image = ${Image} WHERE uid = #{uid}
+    <update id="updatePortrait" parameterType="java.lang.String">
+        UPDATE user SET Image = #{Image} WHERE uid = #{uid}
     </update>
+
+    <!--根据id查询头像-->
+    <select id="findByidPortrait" parameterType="java.lang.String">
+       select Image FROM `user` WHERE `user`.uid= #{uid}
+    </select>
 </mapper>

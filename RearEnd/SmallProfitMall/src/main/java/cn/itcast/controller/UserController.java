@@ -44,7 +44,7 @@ public class UserController {
     private GetFourRandom getFourRandom;
 
     @Autowired
-    QueryResult result;
+    QueryResult queryResult;
 
     @Autowired
     VerifyUtil verifyUtil;
@@ -58,8 +58,8 @@ public class UserController {
     public QueryResponseResult findAll(){
         // 调用service的方法
         List<User> list = userService.findAll();
-        result.setList(list);
-        return new QueryResponseResult(CommonCode.SUCCESS,result);
+        queryResult.setList(list);
+        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
     }
 
     /**
@@ -86,8 +86,8 @@ public class UserController {
                         login.setUid(name.getUid());
                         login.setToken(name.getToken());
                         List<Login> logins= Arrays.asList(login);
-                        result.setList(logins);
-                        return new QueryResponseResult(CommonCode.SUCCESS,result);   //登录成功
+                        queryResult.setList(logins);
+                        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);   //登录成功
                     }else {
                         return new QueryResponseResult(CommonCode.FAIL,null);//密码不正确
                     }
@@ -97,8 +97,8 @@ public class UserController {
                         login.setUid(phone.getUid());
                         login.setToken(phone.getToken());
                         List<Login> logins= Arrays.asList(login);
-                        result.setList(logins);
-                        return new QueryResponseResult(CommonCode.SUCCESS,result);   //登录成功
+                        queryResult.setList(logins);
+                        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);   //登录成功
                     }else {
                         return new QueryResponseResult(CommonCode.FAIL,null); //密码不正确
                     }
@@ -236,8 +236,9 @@ public class UserController {
     @RequestMapping(value = "/updatePortrait",method = RequestMethod.POST)
     public QueryResponseResult updatePortrait(MultipartFile file, String userId) throws IOException {
         InputStream fileInputStream = file.getInputStream();
-            userService.updatePortrait(fileInputStream,userId);
-        return new QueryResponseResult(CommonCode.SUCCESS,null);
+        String Image = userService.updatePortrait(fileInputStream,userId);
+        queryResult.setString(Image);
+        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
     }
 
 

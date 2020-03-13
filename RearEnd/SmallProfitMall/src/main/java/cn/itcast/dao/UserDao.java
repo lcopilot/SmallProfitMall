@@ -39,4 +39,7 @@ public interface UserDao {
 
     //根据uid修改用户头像
     public void updatePortrait(@Param("Image") String Image,@Param("uid") String uid);
+
+    public String findByidPortrait(@Param("uid") String uid);
+
 }
