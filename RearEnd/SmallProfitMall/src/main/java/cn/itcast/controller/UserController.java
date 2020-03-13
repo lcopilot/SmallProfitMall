@@ -49,9 +49,6 @@ public class UserController {
     @Autowired
     VerifyUtil verifyUtil;
 
-    @Autowired
-    ReturnResult returnResult;
-
     private Vaptcha vaptcha = Vaptcha.getInstance(Constant.SecretKey, Constant.Vid, Constant.Scene);
     /**
      * 查询所有方法
