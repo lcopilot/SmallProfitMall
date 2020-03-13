@@ -85,6 +85,7 @@ public class UserController {
                         login.setName(name.getName());
                         login.setUid(name.getUid());
                         login.setToken(name.getToken());
+                        login.setImage(name.getImage());
                         List<Login> logins= Arrays.asList(login);
                         queryResult.setList(logins);
                         return new QueryResponseResult(CommonCode.SUCCESS,queryResult);   //登录成功
