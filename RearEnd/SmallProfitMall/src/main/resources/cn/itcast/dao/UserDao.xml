@@ -46,6 +46,6 @@
 
     <!--根据id查询头像-->
     <select id="findByIdInformation" resultType="cn.itcast.domain.user.User" parameterType="java.lang.String">
-      select name,birthday,sex,phone,mail,Image FROM user WHERE uid=#{uid}
+      select name,birthday,sex,phone,email,Image FROM user WHERE uid=#{uid}
     </select>
 </mapper>

@@ -8,6 +8,23 @@ public class Login {
     private String name;
     private String tokens;
     private String uid;
+    private String Image;
+
+    public String getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(String tokens) {
+        this.tokens = tokens;
+    }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
+    }
 
     public String getName() {
         return name;
