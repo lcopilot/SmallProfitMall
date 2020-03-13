@@ -32,5 +32,5 @@ public interface UserService {
     public void updatePasswordUid(String uid,String password);
 
     //根据uid修改用户头像
-    public void updatePortrait(InputStream Images, String uid) throws IOException;
+    public String updatePortrait(InputStream Images, String uid) throws IOException;
 }

@@ -24,7 +24,7 @@ public class UploadPicturesUtil {
         SimpleUpload c = new SimpleUpload();
         c.overrideUpload(getImgBasePath()+"\\"+uuid+".JPEG",uuid,"mugebl");
         PathUtil.deleteFile("\\"+uuid+".JPEG");
-        String site ="http://productdata.fhxasdsada.xyz/"+uuid+"?t="+new Date().getTime();
+        String site =" http://img.fhxasdsada.xyz/"+uuid+"?t="+new Date().getTime();
         return site;
     }
 

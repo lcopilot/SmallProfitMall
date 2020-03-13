@@ -67,9 +67,10 @@ public class UserServiceImpl implements UserService {
 
     //根据uid修改用户头像
     @Override
-    public void updatePortrait(InputStream Images, String uid) throws IOException {
+    public String updatePortrait(InputStream Images, String uid) throws IOException {
         String Image = UploadPicturesUtil.UploadPicturesUtil(Images,uid);
         UserDao.updatePortrait(Image,uid);
+        return Image;
     }
 
 }

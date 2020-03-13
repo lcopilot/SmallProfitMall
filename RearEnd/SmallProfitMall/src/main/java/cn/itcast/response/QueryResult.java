@@ -19,6 +19,8 @@ public class QueryResult<T> {
     //数据列表
     private List<T> list;
 
+    private String string;
+
     //数据总数
     private long total;
 
