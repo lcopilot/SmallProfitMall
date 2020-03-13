@@ -227,6 +227,7 @@
                   type: "success",
                   onClose: this.getUser()
                 });
+                sessionStorage.setItem("username", this.userFrom.name);
               } else {
                 this.$message({
                   message: "修改失败!",
