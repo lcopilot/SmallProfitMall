@@ -42,4 +42,7 @@ public interface UserDao {
     //根据uid查询用户信息
     public User findByIdInformation(@Param("uid") String uid);
 
+    //根据id修改用户资料
+    public int updateInformation(@Param("user") User user);
+
 }

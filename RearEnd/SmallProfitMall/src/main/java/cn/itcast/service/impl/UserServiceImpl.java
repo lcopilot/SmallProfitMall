@@ -93,6 +93,14 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
+    @Override
+    public int updateInformation(User user) {
+        return UserDao.updateInformation(user);
+    }
+
+    //传入用户对象修改用户
+
+
     //隐藏手机号
     private String concealPhone(String Phone){
         String phoneNumber = Phone;

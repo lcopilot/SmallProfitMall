@@ -1,9 +1,6 @@
 package cn.itcast.domain.user;
 //用户实体类
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-
-import javax.xml.crypto.Data;
 import java.io.Serializable;
 import java.util.List;
 

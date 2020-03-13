@@ -36,4 +36,7 @@ public interface UserService {
 
     //根据uid查询用户信息
     public User findByIdInformation(String uid);
+
+    //传入用户对象修改用户信息
+    public int updateInformation( User user);
 }

@@ -49,6 +49,8 @@
       select name,birthday,sex,phone,email,Image FROM user WHERE uid=#{uid}
     </select>
 
-    <!--根据id添加商品-->
-
+    <!--根据id修改用户信息-->
+    <update id="updateInformation"  parameterType="cn.itcast.domain.user.User">
+        update  user set  name = #{user.name},sex=#{user.sex},birthday=#{user.birthday} where uid=#{user.uid}
+    </update>
 </mapper>
