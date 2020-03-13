@@ -3,6 +3,7 @@ package cn.itcast.domain.user;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
+import javax.xml.crypto.Data;
 import java.io.Serializable;
 @Component("user")
 public class User implements Serializable {
@@ -12,12 +13,28 @@ public class User implements Serializable {
     private String password;
     private String sex;
     private String phone;
-    private String mail;
+    private String email;
     private String Image;
     private String token;
     private String verify;
+    private Data birthday;
 
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Data getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Data birthday) {
+        this.birthday = birthday;
+    }
 
     public Integer getId() {
         return id;
@@ -67,14 +84,6 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
     public String getImage() {
         return Image;
     }
@@ -99,19 +108,4 @@ public class User implements Serializable {
         this.verify = verify;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", uid='" + uid + '\'' +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", sex='" + sex + '\'' +
-                ", phone='" + phone + '\'' +
-                ", mail='" + mail + '\'' +
-                ", Image='" + Image + '\'' +
-                ", token='" + token + '\'' +
-                ", verify='" + verify + '\'' +
-                '}';
-    }
 }

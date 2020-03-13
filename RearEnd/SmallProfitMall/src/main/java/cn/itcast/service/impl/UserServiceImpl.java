@@ -80,8 +80,8 @@ public class UserServiceImpl implements UserService {
     public User findByIdInformation(String uid) {
         User users=UserDao.findByIdInformation(uid);
         users.setPhone(concealPhone(users.getPhone()));
-        if(users.getMail()!=null){
-            users.setMail(concealEmail(users.getMail()));
+        if(users.getEmail()!=null){
+            users.setEmail(concealEmail(users.getEmail()));
         }
         return users;
     }
