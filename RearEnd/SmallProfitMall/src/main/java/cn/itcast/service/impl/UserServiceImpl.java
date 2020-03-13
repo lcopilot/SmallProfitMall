@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -79,9 +80,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByIdInformation(String uid) {
         User users=UserDao.findByIdInformation(uid);
+        System.out.println(users);
         users.setPhone(concealPhone(users.getPhone()));
         if(users.getEmail()!=null){
             users.setEmail(concealEmail(users.getEmail()));
+        }
+
+        if (users.getBirthday()!=null){
+           List birthday = Arrays.asList(users.getBirthday().split("-"));
+            users.setBirthdays(birthday);
         }
         return users;
     }

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 
 import javax.xml.crypto.Data;
 import java.io.Serializable;
+import java.util.List;
+
 @Component("user")
 public class User implements Serializable {
     private Integer id;
@@ -17,8 +19,16 @@ public class User implements Serializable {
     private String Image;
     private String token;
     private String verify;
-    private Data birthday;
+    private String birthday;
+    private List birthdays;
 
+    public List getBirthdays() {
+        return birthdays;
+    }
+
+    public void setBirthdays(List birthdays) {
+        this.birthdays = birthdays;
+    }
 
     public String getEmail() {
         return email;
@@ -28,11 +38,11 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public Data getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Data birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
