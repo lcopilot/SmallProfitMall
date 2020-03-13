@@ -108,4 +108,20 @@ public class User implements Serializable {
         this.verify = verify;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", uid='" + uid + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", sex='" + sex + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", Image='" + Image + '\'' +
+                ", token='" + token + '\'' +
+                ", verify='" + verify + '\'' +
+                ", birthday=" + birthday +
+                '}';
+    }
 }

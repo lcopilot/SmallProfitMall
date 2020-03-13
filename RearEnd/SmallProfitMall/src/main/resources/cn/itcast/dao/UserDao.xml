@@ -49,5 +49,6 @@
       select name,birthday,sex,phone,email,Image FROM user WHERE uid=#{uid}
     </select>
 
-    <!---->
+    <!--根据id添加商品-->
+
 </mapper>

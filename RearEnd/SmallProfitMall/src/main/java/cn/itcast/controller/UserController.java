@@ -76,6 +76,7 @@ public class UserController {
         }
         User name = userService.findByName(user.getName()); //根据用户名查询
         User phone = userService.findByPhone(user.getName()); //根据手机号查询
+        System.out.println(phone);
         if(user !=null && user.getPassword()!=null){ //判断用户输入是否完整
             if (name == null && phone == null) {  //判断用户是否存在
                 return new QueryResponseResult(CommonCode.FAIL, null); //用户不存在
@@ -97,6 +98,7 @@ public class UserController {
                         login.setName(phone.getName());
                         login.setUid(phone.getUid());
                         login.setToken(phone.getToken());
+                        login.setImage(phone.getImage());
                         List<Login> logins= Arrays.asList(login);
                         queryResult.setList(logins);
                         return new QueryResponseResult(CommonCode.SUCCESS,queryResult);   //登录成功
