@@ -233,7 +233,7 @@ public class UserController {
      * @param
      * @return
      */
-    @RequestMapping("/updatePortrait")
+    @RequestMapping(value = "/updatePortrait",method = RequestMethod.POST)
     public QueryResponseResult updatePortrait(MultipartFile file, Integer uid) throws IOException {
         System.out.println(file+""+uid);
       //  InputStream fileInputStream = (InputStream) file.getInputStream();
