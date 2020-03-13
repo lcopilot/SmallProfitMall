@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
         user.setName("小白");
         user.setToken("DM");
         user.setImage("http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938");
-        user.setSex("男");
+        user.setSex("1");
         UserDao.saveAccount(user);
     }
 
@@ -80,8 +80,9 @@ public class UserServiceImpl implements UserService {
     public User findByIdInformation(String uid) {
         User users=UserDao.findByIdInformation(uid);
         users.setPhone(concealPhone(users.getPhone()));
-        users.setMail(concealEmail(users.getMail()));
-        System.out.println(users);
+        if(users.getMail()!=null){
+            users.setMail(concealEmail(users.getMail()));
+        }
         return users;
     }
 
