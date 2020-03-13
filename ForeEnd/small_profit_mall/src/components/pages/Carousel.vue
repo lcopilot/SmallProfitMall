@@ -256,6 +256,7 @@
       },
     },
     beforeMount() {
+      this.avatar=sessionStorage.getItem("avatar");
       this.getRotationChart();
       this.getCategoriesList();
       this.getCommonFunctionsList();

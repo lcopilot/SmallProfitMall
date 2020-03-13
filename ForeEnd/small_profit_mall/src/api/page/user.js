@@ -20,3 +20,7 @@ export const resetPassword=params=>{
 export const get_Phone_Code_FP = phone => {
   return http.requestGet('/apiUrl/user/SmVerify/' + phone);
 }
+//获取用户信息
+export const getUserInformation = userId => {
+  return http.requestGet('/apiUrl/user/findByIdInformation/' + userId);
+}

@@ -64,9 +64,10 @@
       exit() {
         sessionStorage.clear();
         this.$router.push("/login");
-      }
+      },
     },
     created() {
+      this.avatar=sessionStorage.getItem("avatar");
       this.username = sessionStorage.getItem("username");
     }
   };

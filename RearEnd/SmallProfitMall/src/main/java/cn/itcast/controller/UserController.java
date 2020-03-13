@@ -14,6 +14,7 @@ import cn.itcast.util.user.SmsUtils;
 import cn.itcast.util.verify.VerifyUtil;
 import com.aliyuncs.exceptions.ClientException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.*;

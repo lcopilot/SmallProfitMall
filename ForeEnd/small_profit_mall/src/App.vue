@@ -1,11 +1,24 @@
 <template>
   <div id="app">
-    <el-backtop target="#app" :right="60" :bottom="100">
+    <el-backtop target="#app" :right="70" :bottom="200">
       <div class="backTop">
-        UP
+        <div style="margin-top: 5px">
+          <svg-icon name="backTop"/>
+        </div>
+        <div>
+          <router-link to="/">
+            <svg-icon name="home"/>
+          </router-link>
+        </div>
+        <div>
+          <router-link to="/personalCenter">
+            <svg-icon name="personalCenter"/>
+          </router-link>
+        </div>
+
+
       </div>
     </el-backtop>
-    <el-backtop target="#app" :right="60" :bottom="50"></el-backtop>
     <!-- 解决vue相同路由跳转强制刷新该路由组件 二次搜索-->
     <router-view :key="$route.fullPath"/>
   </div>
@@ -24,9 +37,9 @@
 
 }
 .backTop{
-  height: 100%;
+  height: 200px;
   width: 100%;
-  background-color: #f2f5f6;
+  background-color: #ffffff;
   box-shadow: 0 0 6px rgba(0,0,0, .12);
   text-align: center;
   line-height: 40px;
