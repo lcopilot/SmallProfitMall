@@ -14,9 +14,9 @@
             <el-row :gutter="30">
               <el-col :span="18">
                 <div style="text-align: left">
-                  <el-form label-position="right" label-width="80px" :model="userFrom"
+                  <el-form label-position="left" label-width="80px" :model="userFrom"
                            :rules="rule" :status-icon="true">
-                    <el-form-item label="用户名" prop="name">
+                    <el-form-item label="昵称" prop="name">
                       <el-input type="text" v-model="userFrom.name" maxlength="15"
                                 :show-word-limit="true" style="max-width: 200px"></el-input>
                       <span class="user_name_span">
@@ -26,7 +26,9 @@
                     <el-form-item label="生日">
                       <el-row>
                         <el-col :span="13">
-                          <DataSelect :year="userFrom.birthday.year" :month="userFrom.birthday.month" :day="userFrom.birthday.day" @change="dateChange"/>
+                          <DataSelect :year="userFrom.birthday.year"
+                                      :month="userFrom.birthday.month" :day="userFrom.birthday.day"
+                                      @change="dateChange"/>
                         </el-col>
                         <el-col :span="11">
                            <span class="user_name_span">
@@ -55,22 +57,20 @@
                 </div>
               </el-col>
               <el-col :span="5">
-                <span style="font-weight: bold">修改头像<em
-                    class="user_avatar_span">点击头像修改</em></span>
                 <div>
-                  <el-upload
-                      action="/apiUrl/user/updatePortrait"
-                      :show-file-list="false"
-                      :data="params"
-                      :on-success="handleAvatarSuccess">
-                    <img v-if="avatar" :src="avatar" class="avatar">
-                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                  <img v-if="!progressFlag" class="avatar" :src="imageUrl"/>
+                  <div v-show="progressFlag" >
+                    <el-progress type="circle" :percentage="progressPercent"></el-progress>
+                  </div>
+                  <el-upload class="img-btn" action="#" :data="params"
+                             :show-file-list="false" :before-upload="beforeAvatarUpload"
+                             :http-request="uploadImg">
+                    <el-button type="success" plain round size="mini">更改头像</el-button>
                   </el-upload>
                 </div>
               </el-col>
             </el-row>
           </el-card>
-
         </el-col>
       </el-row>
     </el-main>
@@ -90,19 +90,17 @@
     components: {Header, Footer, personalPage, DataSelect},
     data() {
       return {
-        yearsModel: null,
-        years: [],
-        monthsModel: null,
-        months: [],
-        daysModel: null,
-        days: [],
+        //头像上传的进度条切换
+        progressFlag: false,
+        //进度条
+        progressPercent: 0,
         userFrom: {
           name: '小白',
           gender: 3,
           birthday: {
-            year:'',
-            month:'',
-            day:'',
+            year: '',
+            month: '',
+            day: '',
           },
           phone: 0,
           email: 0,
@@ -123,17 +121,53 @@
         params: {
           userId: "",
         },
-        avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
+        imageUrl: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
       };
     },
     methods: {
-      handleAvatarSuccess() {
-        this.getUser();
+      //头像上传的方法
+      uploadImg(f) {
+        console.log(f)
+        this.progressFlag = true
+        let formData = new FormData()
+        formData.append('file', f.file)
+        formData.append('userId', f.data.userId)
+        this.axios({
+          url: '/apiUrl/user/updatePortrait',
+          method: 'post',
+          data: formData,
+          headers: {'Content-Type': 'multipart/form-data'},
+          onUploadProgress: progressEvent => {
+            // progressEvent.loaded:已上传文件大小
+            // progressEvent.total:被上传文件的总大小
+            this.progressPercent = (progressEvent.loaded / progressEvent.total * 100)
+          }
+        }).then(res => {
+          this.imageUrl = res.data.data
+          if (this.progressPercent === 100) {
+            this.progressFlag = false
+            this.progressPercent = 0
+          }
+        }).then(error => {
+          console.log(error)
+        })
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isPNG = file.type === 'image/png';
+        const isBMP = file.type === 'image/bmp';
+        const isLt2M = file.size / 1024 / 1024 < 4;
+        if (!isJPG && !isPNG && !isBMP) {
+          this.$message.error('上传图片必须是JPG/PNG/BMP 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 4MB!');
+        }
+        return (isJPG || isBMP || isPNG) && isLt2M;
       },
       getUser() {
         let id = sessionStorage.getItem("uId");
-        this.axios
-        .get("/api/user/findById", {
+        this.axios.get("/apiUrl/user/findById", {
           params: {id}
         })
         .then(res => {
@@ -201,21 +235,6 @@
     border-color: #409EFF;
   }
 
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
-
-  .user_avatar_span {
-    color: #999999;
-    font-size: 70%;
-    font-weight: lighter;
-    margin-left: 2%
-  }
 
   .user_name_span {
     font-size: 14px;
@@ -224,8 +243,12 @@
   }
 
   .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
+    width: 84%;
+    height: 84%;
+    border-radius: 100px;
+  }
+
+  .img-btn {
+    margin-top: 12%;
   }
 </style>
