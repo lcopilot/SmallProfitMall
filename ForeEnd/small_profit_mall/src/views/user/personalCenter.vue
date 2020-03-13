@@ -15,7 +15,7 @@
                   <div>
                     <router-link to="/">
                       <el-avatar :size="75" class="personal_center_avatar"
-                                 src="http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938"/>
+                                 :src="avatar"/>
                     </router-link>
                   </div>
                   <div style="color: white;">{{user.name}}</div>
@@ -230,6 +230,8 @@
     components: {Header, Footer, personalPage},
     data() {
       return {
+        //头像
+        avatar:'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
         //图标切换
         icon: {
           //待付款图标的切换
@@ -320,6 +322,7 @@
       },
     },
     created() {
+      this.avatar=sessionStorage.getItem("avatar");
       this.user.name=sessionStorage.getItem("username");
       this.user.uId=sessionStorage.getItem("uId");
     }
