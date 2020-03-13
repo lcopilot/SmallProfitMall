@@ -49,6 +49,9 @@ public class UserController {
     @Autowired
     VerifyUtil verifyUtil;
 
+    @Autowired
+    ReturnResult returnResult;
+
     private Vaptcha vaptcha = Vaptcha.getInstance(Constant.SecretKey, Constant.Vid, Constant.Scene);
     /**
      * 查询所有方法
@@ -237,7 +240,9 @@ public class UserController {
     public QueryResponseResult updatePortrait(MultipartFile file, String userId) throws IOException {
         InputStream fileInputStream = file.getInputStream();
         String Image = userService.updatePortrait(fileInputStream,userId);
-        queryResult.setString(Image);
+        List Images = new  ArrayList();
+        Images.add(Image);
+        queryResult.setList(Images);
         return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
     }
 
