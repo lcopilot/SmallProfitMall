@@ -243,6 +243,20 @@ public class UserController {
         return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
     }
 
+    /**
+     * 查询用户信息
+     * @return
+     */
+    @RequestMapping(value = "/findByIdInformation/{userId}",method = RequestMethod.GET)
+    public QueryResponseResult findByIdInformation(@PathVariable("userId") String userId){
+        // 调用service的方法
+        System.out.println(userId);
+        User user = userService.findByIdInformation(userId);
+        List<User> users= Arrays.asList(user);
+        queryResult.setList(users);
+        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+    }
+
 
     //删除session
     public void removeAttrbute(HttpSession session, String codeName) {

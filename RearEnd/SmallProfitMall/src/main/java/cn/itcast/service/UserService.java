@@ -33,4 +33,7 @@ public interface UserService {
 
     //根据uid修改用户头像
     public String updatePortrait(InputStream Images, String uid) throws IOException;
+
+    //根据uid查询用户信息
+    public User findByIdInformation(String uid);
 }

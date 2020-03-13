@@ -21,7 +21,7 @@
 
     <!--Spring整合MyBatis框架-->
     <!--配置连接池-->
-    <!-- 引入db.properties属性文件 -->
+    <!-- 引入jdbc.properties属性文件 -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
     <!-- 阿里 druid 数据库连接池 配置  -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">

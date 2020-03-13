@@ -19,6 +19,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao UserDao;
 
+    @Autowired
+    private User user;
     //查询所有用户
     public List<User> findAll() {
         return UserDao.findAll();
@@ -46,7 +48,7 @@ public class UserServiceImpl implements UserService {
     public void saveAccount(User user) {
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
         user.setUid(uuid);
-        user.setName(" System.out.println");
+        user.setName("小白");
         user.setToken("DM");
         user.setImage("http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938");
         user.setSex("男");
@@ -71,6 +73,30 @@ public class UserServiceImpl implements UserService {
         String Image = UploadPicturesUtil.UploadPicturesUtil(Images,uid);
         UserDao.updatePortrait(Image,uid);
         return Image;
+    }
+
+    //根据uid查询用户个人信息
+    @Override
+    public User findByIdInformation(String uid) {
+        User users=UserDao.findByIdInformation(uid);
+        users.setPhone(concealPhone(users.getPhone()));
+        users.setMail(concealEmail(users.getMail()));
+        System.out.println(users);
+        return users;
+    }
+
+    //隐藏手机号
+    private String concealPhone(String Phone){
+        String phoneNumber = Phone;
+        String resultPhone= phoneNumber.replaceAll("(\\d{3})\\d{4}(\\d{4})","$1****$2");
+        return resultPhone;
+    }
+
+    //隐藏邮箱
+    private String concealEmail(String Email){
+        String email = Email;
+        String resultEmail = email.replaceAll("(\\w?)(\\w+)(\\w)(@\\w+\\.[a-z]+(\\.[a-z]+)?)", "$1****$3$4");
+        return resultEmail;
     }
 
 }
