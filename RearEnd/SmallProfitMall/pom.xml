@@ -268,8 +268,7 @@
       <version>0.4.8</version>
     </dependency>
 
-    <!--文件解析器-->
-
+    <!--文件上传-->
     <dependency>
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
@@ -281,6 +280,12 @@
       <version>2.4</version>
     </dependency>
 
+    <!--这是整合 druid源-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.1.10</version>
+    </dependency>
 
 
   </dependencies>

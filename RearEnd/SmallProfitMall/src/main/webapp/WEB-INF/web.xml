@@ -16,6 +16,7 @@
   </context-param>
   <context-param>
     <param-name/>
+
     <param-value/>
   </context-param>
 
@@ -49,5 +50,15 @@
     <filter-name>characterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
+
+  <!-- druid连接池 启用 Web 监控统计功能    end-->
+  <servlet>
+    <servlet-name>DruidStatView</servlet-name>
+    <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DruidStatView</servlet-name>
+    <url-pattern>/druid/*</url-pattern>
+  </servlet-mapping>
+
 </web-app>
