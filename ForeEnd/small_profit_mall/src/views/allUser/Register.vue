@@ -129,7 +129,7 @@
       register(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            userApi.register( this.registerForm)
+            userApi.register(this.registerForm)
             .then(res => {
               if (res.success) {
                 this.$message({
