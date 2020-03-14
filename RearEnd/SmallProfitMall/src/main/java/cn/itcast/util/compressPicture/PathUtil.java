@@ -39,8 +39,7 @@ public class PathUtil {
 
     //删除文件夹目录
     public static void deleteFile(String storePath) {
-        File file = new File(getImgBasePath() + storePath);
-        System.out.println(getImgBasePath() + storePath);
+        File file = new File(storePath);
         if (file.exists()) {
             if (file.isDirectory()) {
                 File files[] = file.listFiles();
