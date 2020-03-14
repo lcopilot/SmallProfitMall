@@ -30,7 +30,7 @@
                 <!-- 秒杀商品部分 -->
                 <div class="spike_product">
                   <el-carousel :interval="10000" indicator-position="none" arrow="hover"
-                               height="260px" >
+                               height="260px" :key="homeOverloadKey" >
                     <el-carousel-item
                         v-for="(spikeProducts,index) in spikeProductList.seckillProduct"
                         :key="index">
