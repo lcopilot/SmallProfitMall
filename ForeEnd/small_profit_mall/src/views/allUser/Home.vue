@@ -55,7 +55,7 @@
                 </div>
                 <div class="spike_product_ad">
                   <el-carousel :interval="4000" arrow="hover" height="280px"
-                               indicator-position="none">
+                               indicator-position="none" :key="homeOverloadKey">
                     <el-carousel-item v-for="spikeAd in spikeAdList" :key="spikeAd.id">
                       <router-link :to="spikeAd.site">
                         <el-image :src="spikeAd.img"
@@ -99,7 +99,7 @@
           </el-col>
         </el-row>
       </el-main>
-      <ProductsFeatured  :key="homeOverloadKey" />
+      <ProductsFeatured  />
     </el-main>
     <el-footer>
       <Footer></Footer>

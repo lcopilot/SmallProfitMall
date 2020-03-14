@@ -13,58 +13,78 @@
         <el-row style="margin-top: 50px;margin-bottom: 50px">
           <el-col :span="15" :push="3">
             <div v-if="active==1">
-              <el-input
-                  autofocus
-                  type='text'
-                  placeholder="请输入原手机号"
-                  v-model.number="oldPhone"
-                  maxlength="11"
-                  show-word-limit
-                  clearable
-                  prefix-icon="el-icon-mobile-phone"
-                  style="width: 45%;margin-right: 5%"
-              >
-              </el-input>
-              <el-button type="primary" @click="verificationPhone" :loading="verification_btn">
-                {{verification_btn_content}}
-              </el-button>
+              <div>
+                <el-input
+                    autofocus
+                    type='text'
+                    placeholder="请输入原手机号"
+                    v-model.number="oldPhone"
+                    maxlength="11"
+                    show-word-limit
+                    clearable
+                    prefix-icon="el-icon-mobile-phone"
+                    style="width: 46%;margin-right: 5%"
+                >
+                </el-input>
+              </div>
+              <div style="margin-top: 10px;margin-left: -5%">
+                <el-button type="primary" @click="verificationPhone" style="width: 120px"
+                           :loading="verification_btn">
+                  {{verification_btn_content}}
+                </el-button>
+                <el-button type="primary" @click="cancelModifyPhone" style="width: 120px">
+                  取消
+                </el-button>
+              </div>
             </div>
             <div v-if="active==2">
-              <el-input
-                  autofocus
-                  type='text'
-                  placeholder="请输入短信验证码"
-                  v-model.number="smsCode"
-                  maxlength="4"
-                  show-word-limit
-                  clearable
-                  prefix-icon="el-icon-mobile-phone"
-                  style="width: 45%;margin-right: 5%"
-              >
-              </el-input>
-              <el-button type="primary" @click="verificationSmsCode" :loading="verification_btn">
-                {{verification_btn_content}}
-              </el-button>
-              <el-button type="primary" @click="getPhoneCode()" :disabled="!md_BtnStatus"
-                         class="code_btn">
-                {{md_BtnStatus?'获取验证码':`重新获取(${md_countDownTime})`}}
-              </el-button>
+              <div>
+                <el-input
+                    autofocus
+                    type='text'
+                    placeholder="请输入短信验证码"
+                    v-model.number="smsCode"
+                    maxlength="4"
+                    show-word-limit
+                    clearable
+                    prefix-icon="el-icon-mobile-phone"
+                    style="width: 36%;margin-right: 2%;margin-left: -5%"
+                >
+                </el-input>
+                <el-button type="primary" @click="getPhoneCode()" :disabled="!md_BtnStatus"
+                           style="width: 120px">
+                  {{md_BtnStatus?'获取验证码':`重新获取(${md_countDownTime})`}}
+                </el-button>
+              </div>
+              <div style="margin: 3% 0 3% 0;">
+                <el-button type="primary" style="width: 60%;margin-left: -5%"
+                           @click="verificationSmsCode" :loading="verification_btn">
+                  {{verification_btn_content}}
+                </el-button>
+              </div>
+              <div>
+                <el-button type="primary" style="width: 60%;margin-left: -5%"
+                           @click="cancelModifyPhone">
+                  取消
+                </el-button>
+              </div>
             </div>
             <div v-if="active==3">
-              <div style="margin-bottom: 10px"><el-input
-                  autofocus
-                  type='text'
-                  placeholder="请输新手机号"
-                  v-model.number="smsCode"
-                  maxlength="4"
-                  show-word-limit
-                  clearable
-                  prefix-icon="el-icon-mobile-phone"
-                  style="width: 45%;margin-right: 5%"
-              >
-              </el-input>
+              <div style="margin-bottom: 10px">
+                <el-input
+                    autofocus
+                    type='text'
+                    placeholder="请输新手机号"
+                    v-model.number="smsCode"
+                    maxlength="4"
+                    show-word-limit
+                    clearable
+                    prefix-icon="el-icon-mobile-phone"
+                    style="width: 60%;margin-right: 5%"
+                >
+                </el-input>
               </div>
-              <div  style="margin-bottom: 10px">
+              <div style="margin-bottom: 10px">
                 <el-input
                     autofocus
                     type='text'
@@ -74,17 +94,24 @@
                     show-word-limit
                     clearable
                     prefix-icon="el-icon-mobile-phone"
-                    style="width: 45%;margin-right: 5%"
+                    style="width: 35%;margin-right: 3%;margin-left: -5%;"
                 >
                 </el-input>
+                <el-button type="primary" @click="getPhoneCodeNew()" :disabled="!md_BtnStatusNew"
+                           style="width: 120px">
+                  {{md_BtnStatusNew ?'获取验证码':`重新获取(${md_countDownTimeNew})`}}
+                </el-button>
               </div>
-              <div>
-                <el-button type="primary" @click="verificationSmsCode" :loading="verification_btn">
+              <div style="margin: 3% 0 3% 0;">
+                <el-button type="primary" style="width: 60%;margin-left: -5%"
+                           @click="verificationSmsCode" :loading="verification_btn">
                   {{verification_btn_content}}
                 </el-button>
-                <el-button type="primary" @click="getPhoneCode()" :disabled="!md_BtnStatus"
-                           class="code_btn">
-                  {{md_BtnStatus?'获取验证码':`重新获取(${md_countDownTime})`}}
+              </div>
+              <div>
+                <el-button type="primary" style="width: 60%;margin-left: -5%"
+                           @click="cancelModifyPhone" :loading="verification_btn">
+                  取消
                 </el-button>
               </div>
             </div>
@@ -99,6 +126,7 @@
   import * as userApi from "../../api/page/user";
 
   export default {
+    inject: ["reload"],
     name: "phoneModification",
     data() {
       return {
@@ -106,6 +134,9 @@
         md_BtnStatus: true,
         md_countDownTime: 60,
         timer: 0,
+        md_BtnStatusNew: true,
+        md_countDownTimeNew: 60,
+        timerNew: 0,
         //步骤条进度
         active: 1,
         //旧手机号
@@ -127,6 +158,7 @@
             this.verification_btn = true;
         setTimeout(() => {
           this.active = 2;
+          sessionStorage.setItem('phone_active', JSON.stringify(this.active));
           this.verification_btn_content = '验证',
               this.verification_btn = false;
           this.GetCode();
@@ -141,14 +173,18 @@
             this.verification_btn = true;
         setTimeout(() => {
           this.active = 3;
+          sessionStorage.setItem('phone_active', JSON.stringify(this.active));
           this.verification_btn_content = '验证',
               this.verification_btn = false;
-
         }, 3000);
       },
       //获取手机验证码
       getPhoneCode() {
         this.GetCode();
+      },
+      //获取新手机验证码
+      getPhoneCodeNew(){
+        this.GetCodeNew();
       },
       //到计时
       GetCode() {
@@ -172,11 +208,49 @@
           }
         }, 1000)
       },
+      GetCodeNew() {
+        let endMsResNew = new Date().getTime() + 60000;
+        //Setitem 为封装 localStoryge 方法
+        sessionStorage.setItem('md_myEndTimeNew', JSON.stringify(endMsResNew));
+        this.codeCountDownNew(endMsResNew)
+      },
+      codeCountDownNew(endMsResNew) {
+        this.md_BtnStatusNew = false;
+        this.md_countDownTimeNew = Math.ceil((endMsResNew - new Date().getTime()) / 1000);
+        this.timerNew = setTimeout(() => {
+          this.md_countDownTimeNew--
+          if (this.md_countDownTimeNew < 1) {
+            this.md_BtnStatusNew = true
+            this.md_countDownTimeNew = 60
+            clearTimeout(this.timerNew)
+            sessionStorage.removeItem('md_myEndTimeNew')
+          } else {
+            this.codeCountDownNew(endMsResNew)
+          }
+        }, 1000)
+      },
+      //取消
+      cancelModifyPhone() {
+        sessionStorage.setItem('phone_active', JSON.stringify(1));
+        sessionStorage.setItem("phoneSign", JSON.stringify(false));
+        this.reload();
+      }
     },
     created() {
+      if(sessionStorage.getItem('phone_active')=="1"){
+        this.active=1;
+      }if(sessionStorage.getItem('phone_active')=="2"){
+        this.active=2;
+      }if(sessionStorage.getItem('phone_active')=="3"){
+        this.active=3;
+      }
       let myEndTime = sessionStorage.getItem('md_myEndTime');
       if (myEndTime && this.codeCountDown(myEndTime)) {
         this.codeCountDown(myEndTime)
+      }
+      let myEndTimeNew = sessionStorage.getItem('md_myEndTimeNew');
+      if (myEndTimeNew && this.codeCountDownNew(myEndTimeNew)) {
+        this.codeCountDownNew(myEndTimeNew)
       }
     }
   }

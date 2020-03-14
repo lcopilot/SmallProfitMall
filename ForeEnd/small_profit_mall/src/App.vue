@@ -15,15 +15,35 @@
             <svg-icon name="personalCenter"/>
           </router-link>
         </div>
-
-
       </div>
     </el-backtop>
-    <!-- 解决vue相同路由跳转强制刷新该路由组件 二次搜索-->
-    <router-view :key="$route.fullPath"/>
+    <!-- 同路由下刷新页面-->
+    <router-view v-if="isRouterAlive"/>
   </div>
 </template>
-
+<script>
+  export default {
+    name:'App',
+    provide(){
+      return{
+        reload:this.reload
+      }
+    },
+    data(){
+      return{
+        isRouterAlive:true,
+      }
+    },
+    methods:{
+      reload(){
+        this.isRouterAlive=false,
+            this.$nextTick(()=>{
+              this.isRouterAlive=true
+            })
+      }
+    }
+  }
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -37,10 +57,11 @@
 
 }
 .backTop{
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 34px;
   height: 200px;
   width: 100%;
   background-color: #ffffff;
-  box-shadow: 0 0 6px rgba(0,0,0, .12);
   text-align: center;
   line-height: 40px;
   color: #1989fa;

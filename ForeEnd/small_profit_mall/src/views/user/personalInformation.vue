@@ -15,7 +15,7 @@
               <el-col :span="18">
                 <div style="text-align: left">
                   <el-form label-position="left" label-width="80px" :model="userFrom"
-                           :rules="rule" :status-icon="true"  ref="userForm">
+                           :rules="rule" :status-icon="true" ref="userForm">
                     <el-form-item label="昵称" prop="name">
                       <el-input type="text" v-model="userFrom.name" maxlength="15"
                                 :show-word-limit="true" style="max-width: 200px"></el-input>
@@ -106,7 +106,7 @@
     data() {
       return {
         //生日选择的组件重载的key
-        DataSelect:0,
+        DataSelect: 0,
         //修改邮箱
         emailSign: false,
         //修改手机号
@@ -119,10 +119,15 @@
         progressPercent: 0,
         //用户信息
         birthday: [],
+        birthdays: {
+          year:"",
+          month:"",
+          day:"",
+        },
         userFrom: {
-          uid:'',
+          uid: '',
           name: '小白',
-          birthday:'',
+          birthday: '',
           sex: "3",
           phone: 0,
           email: 0,
@@ -202,13 +207,20 @@
         let userId = sessionStorage.getItem("uId");
         userApi.getUserInformation(userId)
         .then(res => {
+
           this.birthday = res.queryResult.list[0].birthdays;
           this.userFrom.sex = res.queryResult.list[0].sex;
           this.userFrom.name = res.queryResult.list[0].name;
           this.userFrom.phone = res.queryResult.list[0].phone;
           this.userFrom.email = res.queryResult.list[0].email;
           this.imageUrl = res.queryResult.list[0].image;
-          this.DataSelect=new Date().getTime();
+          sessionStorage.setItem("userSex",this.userFrom.sex);
+          this.DataSelect = new Date().getTime();
+          setTimeout(()=>{
+            this.birthdays.year=this.birthday[0];
+            this.birthdays.month=this.birthday[1];
+            this.birthdays.day=this.birthday[2];
+          },200)
         })
         .catch(error => {
           console.log(error);
@@ -216,10 +228,16 @@
       },
       modifyPhone() {
         this.phoneSign = true;
+        sessionStorage.setItem("phoneSign", JSON.stringify(true));
       },
       modifyUser(formName) {
         this.$refs[formName].validate((valid) => {
-          if (valid) {
+          if (this.userFrom.name==sessionStorage.getItem("username") && this.userFrom.sex==sessionStorage.getItem("userSex") && this.birthday[0]==this.birthdays.year && this.birthday[1]==this.birthdays.month && this.birthday[2]==this.birthdays.day ) {
+            this.$message({
+              message: "您还没有修改哦~",
+              type: "warning",
+            })
+          } else if (valid) {
             userApi.modifyUser(this.userFrom).then(res => {
               if (res.success) {
                 this.$message({
@@ -237,16 +255,29 @@
             }).catch(error => {
               console.log(error);
             })
+          } else {
+            this.$message({
+              message: "请输入正确的用户名哦~",
+              type: "warning",
+            })
           }
         })
       },
       //生日选择算法
       dateChange(Data) {
-        this.userFrom.birthday=Data.year + '-' + Data.month + '-' + Data.day;
+        this.birthdays.year=Data.year;
+        this.birthdays.month=Data.month;
+        this.birthdays.day=Data.day;
+        this.userFrom.birthday = Data.year + '-' + Data.month + '-' + Data.day;
       }
     },
     created() {
-      this.userFrom.uid=sessionStorage.getItem("uId");
+      if (sessionStorage.getItem("phoneSign") == "true") {
+        this.phoneSign = true;
+      } else {
+        this.phoneSign = false;
+      }
+      this.userFrom.uid = sessionStorage.getItem("uId");
       this.imageUrl = sessionStorage.getItem("avatar");
       this.params.userId = sessionStorage.getItem("uId");
       this.getUser();
