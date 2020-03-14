@@ -4,12 +4,12 @@
       <Header></Header>
     </el-header>
     <el-main>
-      <Carousel/>
+      <Carousel :key="homeOverloadKey" />
       <el-main>
         <el-row>
           <el-col :span="19" :push="2">
             <div style="width: 1198px">
-              <el-card>
+              <el-card :key="homeOverloadKey">
                 <!-- 到计时部分 -->
                 <div class="se-kl">
                   <div class="se-cn">微利秒杀</div>
@@ -30,7 +30,7 @@
                 <!-- 秒杀商品部分 -->
                 <div class="spike_product">
                   <el-carousel :interval="10000" indicator-position="none" arrow="hover"
-                               height="260px">
+                               height="260px" >
                     <el-carousel-item
                         v-for="(spikeProducts,index) in spikeProductList.seckillProduct"
                         :key="index">
@@ -73,7 +73,7 @@
         <el-row>
           <el-col :span="19" :push="2">
             <div style="width: 1198px">
-              <el-card>
+              <el-card :key="homeOverloadKey">
                 <div class="low_price_div">
                   <router-link to="/" class="low_price_name1">品质好物·天天低价</router-link>
                   <router-link to="/" class="low_price_name2">美好生活抢先到 ></router-link>
@@ -83,8 +83,8 @@
                     :key="index">
                   <div v-for="(lowPriceProduct,index) in lowPriceProducts" :key="index" class="product_low">
                     <router-link to="/">
-                      <transition name="el-zoom-in-center">
-                        <div v-show="display" class="low_price_product">
+                      <transition name="el-zoom-in-center" >
+                        <div class="low_price_product">
                           <el-image :src="lowPriceProduct.imageSite" fit="fill"></el-image>
                           <svg-icon name="lowPrice" class="low_Price_icon"/>
                           <!-- 价格不能超过7位 -->
@@ -94,15 +94,13 @@
                     </router-link>
                   </div>
                 </div>
-
               </el-card>
             </div>
           </el-col>
         </el-row>
       </el-main>
-      <ProductsFeatured/>
+      <ProductsFeatured  :key="homeOverloadKey" />
     </el-main>
-
     <el-footer>
       <Footer></Footer>
     </el-footer>
@@ -125,12 +123,18 @@
     components: {ProductsFeatured, Header, Footer, Carousel, CountDown},
     data() {
       return {
-        display: true,
+        //重载首页组件的key
+        homeOverloadKey:0,
+        //秒杀场次
         spikeSessions: '',
+        //低价广告的开始向
         firstItem: 0,
         lastItem: 1,
+        //秒杀广告列表
         spikeAdList: [],
+        //秒杀商品列表
         spikeProductList: [],
+        //低价商品列表
         lowPriceProductList: [],
       }
     },
@@ -221,12 +225,13 @@
         }
       }
     },
-    beforeMount() {
+    created() {
       this.getLowPriceProductList();
       this.getSpikeSessions();
       this.getSpikeAdList();
       this.lowPriceProductSwitch();
       this.getSpikeProductList();
+      this.homeOverloadKey=new Date().getTime();
     },
 
   }
