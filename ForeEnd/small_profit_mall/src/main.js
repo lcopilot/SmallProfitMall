@@ -21,11 +21,6 @@ import VideoPlayer from 'vue-video-player'
 import 'vue-video-player/src/custom-theme.css'
 import 'video.js/dist/video-js.css'
 
-import Router from 'vue-router'
-const routerPush = Router.prototype.push
-Router.prototype.push = function push(location) {
-  return routerPush.call(this, location).catch(error=> error)
-}
 
 Vue.use(VideoPlayer)
 

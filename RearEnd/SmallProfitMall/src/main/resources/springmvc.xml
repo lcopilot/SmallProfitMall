@@ -31,7 +31,6 @@
 
   <!--josn格式支持-->
 
-
   <bean id="jsonConverter"
     class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
     <property name="supportedMediaTypes">

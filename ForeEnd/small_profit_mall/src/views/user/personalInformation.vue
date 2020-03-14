@@ -55,11 +55,12 @@
                     <el-form-item label="邮箱">
                       <div v-if="!userFrom.email">
                         未绑定~
-                        <el-button style="margin-left: 20px" type="text">绑定邮箱</el-button>
+                        <el-button style="margin-left: 20px" type="text" @click="bindEmail()">绑定邮箱</el-button>
                       </div>
                       <div v-if="userFrom.email">
                         {{userFrom.email}}
-                        <el-button style="margin-left: 20px" type="text">修改</el-button>
+                        <el-button style="margin-left: 20px" type="text" @click="modifyEmail">修改</el-button>
+                        <el-button style="margin-left: 20px" type="text" @click="untieEmail" >解绑</el-button>
                       </div>
                     </el-form-item>
                     <el-form-item>
@@ -84,7 +85,8 @@
             </el-row>
           </el-card>
         </el-col>
-        <phoneModification v-if="phoneSign"/>
+        <phoneModify v-if="phoneSign"/>
+        <emailModify v-if="emailSign" :emailType="emailType"/>
       </el-row>
     </el-main>
     <el-footer>
@@ -98,13 +100,16 @@
   const Footer = () => import("../../components/pages/Footer");
   const personalPage = () => import("../../components/admin/personalHubPage");
   const DataSelect = () => import("../../components/UtilsComponent/DateSelect");
-  const phoneModification = () => import("../../components/admin/phoneModification");
+  const phoneModify = () => import("../../components/admin/phoneModify");
+  const emailModify = () => import("../../components/admin/emailModify");
   import *as userApi from '../../api/page/user'  //*as别名
   export default {
     name: "personalInformation",
-    components: {Header, Footer, personalPage, DataSelect, phoneModification},
+    components: {Header, Footer, personalPage, DataSelect, phoneModify,emailModify},
     data() {
       return {
+        //邮箱变更类型
+        emailType:1,
         //生日选择的组件重载的key
         DataSelect: 0,
         //修改邮箱
@@ -203,6 +208,7 @@
         }
         return (isJPG || isBMP || isPNG) && isLt2M;
       },
+      //获取用户信息
       getUser() {
         let userId = sessionStorage.getItem("uId");
         userApi.getUserInformation(userId)
@@ -226,10 +232,12 @@
           console.log(error);
         });
       },
+      //修改手机号
       modifyPhone() {
         this.phoneSign = true;
         sessionStorage.setItem("phoneSign", JSON.stringify(true));
       },
+      //修改用户信息
       modifyUser(formName) {
         this.$refs[formName].validate((valid) => {
           if (this.userFrom.name==sessionStorage.getItem("username") && this.userFrom.sex==sessionStorage.getItem("userSex") && this.birthday[0]==this.birthdays.year && this.birthday[1]==this.birthdays.month && this.birthday[2]==this.birthdays.day ) {
@@ -240,10 +248,10 @@
           } else if (valid) {
             userApi.modifyUser(this.userFrom).then(res => {
               if (res.success) {
+                this.getUser();
                 this.$message({
                   message: "修改成功!",
                   type: "success",
-                  onClose: this.getUser()
                 });
                 sessionStorage.setItem("username", this.userFrom.name);
               } else {
@@ -263,19 +271,46 @@
           }
         })
       },
+      //绑定邮箱
+      bindEmail(){
+        this.emailType=1;
+        this.emailSign = true;
+        sessionStorage.setItem("emailType", this.emailType);
+        sessionStorage.setItem("emailSign", JSON.stringify(true));
+      },
+      //解绑邮箱
+      untieEmail(){
+        this.emailType=3;
+        this.emailSign = true;
+        sessionStorage.setItem("emailType", this.emailType);
+        sessionStorage.setItem("emailSign", JSON.stringify(true));
+      },
+      //修改邮箱
+      modifyEmail(){
+        this.emailType=2;
+        this.emailSign = true;
+        sessionStorage.setItem("emailType", this.emailType);
+        sessionStorage.setItem("emailSign", JSON.stringify(true));
+      },
       //生日选择算法
       dateChange(Data) {
         this.birthdays.year=Data.year;
         this.birthdays.month=Data.month;
         this.birthdays.day=Data.day;
         this.userFrom.birthday = Data.year + '-' + Data.month + '-' + Data.day;
-      }
+      },
+
     },
     created() {
       if (sessionStorage.getItem("phoneSign") == "true") {
         this.phoneSign = true;
       } else {
         this.phoneSign = false;
+      }
+      if (sessionStorage.getItem("emailSign") == "true") {
+        this.emailSign = true;
+      } else {
+        this.emailSign = false;
       }
       this.userFrom.uid = sessionStorage.getItem("uId");
       this.imageUrl = sessionStorage.getItem("avatar");

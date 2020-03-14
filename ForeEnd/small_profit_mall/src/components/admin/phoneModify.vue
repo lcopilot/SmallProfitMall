@@ -23,11 +23,11 @@
                     show-word-limit
                     clearable
                     prefix-icon="el-icon-mobile-phone"
-                    style="width: 46%;margin-right: 5%"
+                    class="phone_active_1_input"
                 >
                 </el-input>
               </div>
-              <div style="margin-top: 10px;margin-left: -5%">
+              <div class="phone_active_1_div">
                 <el-button type="primary" @click="verificationPhone" style="width: 120px"
                            :loading="verification_btn">
                   {{verification_btn_content}}
@@ -48,7 +48,7 @@
                     show-word-limit
                     clearable
                     prefix-icon="el-icon-mobile-phone"
-                    style="width: 36%;margin-right: 2%;margin-left: -5%"
+                    class="phone_active_2_input"
                 >
                 </el-input>
                 <el-button type="primary" @click="getPhoneCode()" :disabled="!md_BtnStatus"
@@ -57,13 +57,13 @@
                 </el-button>
               </div>
               <div style="margin: 3% 0 3% 0;">
-                <el-button type="primary" style="width: 60%;margin-left: -5%"
+                <el-button type="primary" class="phone_active_2_btn"
                            @click="verificationSmsCode" :loading="verification_btn">
                   {{verification_btn_content}}
                 </el-button>
               </div>
               <div>
-                <el-button type="primary" style="width: 60%;margin-left: -5%"
+                <el-button type="primary" class="phone_active_2_btn"
                            @click="cancelModifyPhone">
                   取消
                 </el-button>
@@ -75,12 +75,12 @@
                     autofocus
                     type='text'
                     placeholder="请输新手机号"
-                    v-model.number="smsCode"
-                    maxlength="4"
+                    v-model.number="newPhone"
+                    maxlength="11"
                     show-word-limit
                     clearable
                     prefix-icon="el-icon-mobile-phone"
-                    style="width: 60%;margin-right: 5%"
+                    class="phone_active_3_input"
                 >
                 </el-input>
               </div>
@@ -94,7 +94,7 @@
                     show-word-limit
                     clearable
                     prefix-icon="el-icon-mobile-phone"
-                    style="width: 35%;margin-right: 3%;margin-left: -5%;"
+                    class="phone_active_3_input_code"
                 >
                 </el-input>
                 <el-button type="primary" @click="getPhoneCodeNew()" :disabled="!md_BtnStatusNew"
@@ -103,14 +103,14 @@
                 </el-button>
               </div>
               <div style="margin: 3% 0 3% 0;">
-                <el-button type="primary" style="width: 60%;margin-left: -5%"
+                <el-button type="primary" class="phone_active_2_btn"
                            @click="verificationSmsCode" :loading="verification_btn">
                   {{verification_btn_content}}
                 </el-button>
               </div>
               <div>
-                <el-button type="primary" style="width: 60%;margin-left: -5%"
-                           @click="cancelModifyPhone" :loading="verification_btn">
+                <el-button type="primary" class="phone_active_2_btn"
+                           @click="cancelModifyPhone">
                   取消
                 </el-button>
               </div>
@@ -141,8 +141,11 @@
         active: 1,
         //旧手机号
         oldPhone: '',
+        //新手机
+        newPhone: '',
         //短信验证码
         smsCode: '',
+        //验证按钮
         verification_btn: false,
         verification_btn_content: '验证',
       }
@@ -183,7 +186,7 @@
         this.GetCode();
       },
       //获取新手机验证码
-      getPhoneCodeNew(){
+      getPhoneCodeNew() {
         this.GetCodeNew();
       },
       //到计时
@@ -237,12 +240,14 @@
       }
     },
     created() {
-      if(sessionStorage.getItem('phone_active')=="1"){
-        this.active=1;
-      }if(sessionStorage.getItem('phone_active')=="2"){
-        this.active=2;
-      }if(sessionStorage.getItem('phone_active')=="3"){
-        this.active=3;
+      if (sessionStorage.getItem('phone_active') == "1") {
+        this.active = 1;
+      }
+      if (sessionStorage.getItem('phone_active') == "2") {
+        this.active = 2;
+      }
+      if (sessionStorage.getItem('phone_active') == "3") {
+        this.active = 3;
       }
       let myEndTime = sessionStorage.getItem('md_myEndTime');
       if (myEndTime && this.codeCountDown(myEndTime)) {
@@ -257,5 +262,35 @@
 </script>
 
 <style scoped>
+  .phone_active_1_input {
+    width: 46%;
+    margin-right: 5%
+  }
 
+  .phone_active_1_div {
+    margin-top: 10px;
+    margin-left: -5%
+  }
+
+  .phone_active_2_input {
+    width: 36%;
+    margin-right: 2%;
+    margin-left: -5%
+  }
+
+  .phone_active_2_btn {
+    width: 60%;
+    margin-left: -5%
+  }
+
+  .phone_active_3_input {
+    width: 60%;
+    margin-right: 5%
+  }
+
+  .phone_active_3_input_code {
+    width: 35%;
+    margin-right: 3%;
+    margin-left: -5%;
+  }
 </style>
