@@ -142,6 +142,7 @@
         <property name="poolConfig" ref="poolConfig" />
         <!-- usePool：是否使用连接池 -->
         <property name="usePool" value="true"/>
+        <property name="password" value="${redis.password}"/>
     </bean>
 
     <!-- redis template definition -->
