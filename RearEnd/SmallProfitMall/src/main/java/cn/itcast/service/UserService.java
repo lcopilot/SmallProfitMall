@@ -39,4 +39,10 @@ public interface UserService {
 
     //传入用户对象修改用户信息
     public int updateInformation( User user);
+
+    //根据id查询手机号码
+    public String findByIdPhone(String uid);
+
+    //根据id修改手机号码
+    public int updatePhone( String Phone,String uid);
 }
