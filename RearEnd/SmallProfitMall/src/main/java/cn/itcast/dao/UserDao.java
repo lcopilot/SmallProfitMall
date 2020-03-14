@@ -39,10 +39,15 @@ public interface UserDao {
     //根据uid修改用户头像
     public void updatePortrait(@Param("Image") String Image,@Param("uid") String uid);
 
-    //根据uid查询用户信息
+    //根据uid查询用户个人资料信息
     public User findByIdInformation(@Param("uid") String uid);
 
     //根据id修改用户资料
     public int updateInformation(@Param("user") User user);
 
+    //根据id查询手机号码
+    public String findByIdPhone(@Param("uid") String uid);
+
+    //根据id修改手机号码
+    public int updatePhone(@Param("phone") String phone,@Param("uid") String uid);
 }

@@ -1,5 +1,6 @@
 package cn.itcast.controller;
 
+import cn.itcast.dao.UserDao;
 import cn.itcast.skd.Constant;
 import cn.itcast.domain.user.Login;
 import cn.itcast.domain.user.Password;
@@ -10,9 +11,11 @@ import cn.itcast.response.QueryResult;
 import cn.itcast.service.UserService;
 import cn.itcast.skd.Vaptcha;
 import cn.itcast.util.logic.GetFourRandom;
+import cn.itcast.util.logic.sessionUtil;
 import cn.itcast.util.user.SmsUtils;
 import cn.itcast.util.verify.VerifyUtil;
 import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -40,9 +43,6 @@ public class UserController {
 
     @Autowired
     private Login login;
-
-    @Autowired
-    private GetFourRandom getFourRandom;
 
     @Autowired
     QueryResult queryResult;
@@ -127,13 +127,13 @@ public class UserController {
         if (phone.length() == 11) {      //判断手机号是否正确
             User user_phone = userService.findByPhone(phone); //根据手机号查询
             if (user_phone == null) {       //手机尚未注册
-                String FR = getFourRandom.getFourRandom();
-                System.out.println("验证码为 " + FR);
-                session.setAttribute("Verify", FR);//设置验证码session
-                session.setAttribute("phone", phone);//设置手机号session
+                String FR = GetFourRandom.getFourRandom();
                 boolean flag = SmsUtils.sendRegistSms(phone, FR);
                 if (flag) {
-                    removeAttrbute(session, "Verify");//存入session
+                    System.out.println("验证码为 " + FR);
+                    session.setAttribute("Verify", FR);//设置验证码session
+                    session.setAttribute("phone", phone);//设置手机号session
+                    sessionUtil.removeAttrbute(session, "Verify");//倒计时删除session
                     return new QueryResponseResult(CommonCode.SUCCESS, null);
                 } else {
                     return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
@@ -173,14 +173,15 @@ public class UserController {
      */
     @RequestMapping("/SmVerify/{phone}")
     public QueryResponseResult SmVerify(@PathVariable("phone") String phone, HttpSession session) throws ClientException {
-        User user1 = userService.findByPhone(phone);
-        if (user1 != null) {
-            String FR = getFourRandom.getFourRandom();
+        User users = userService.findByPhone(phone);
+        if (users != null) {
+            String FR = GetFourRandom.getFourRandom();
             System.out.println("修改验证码为 " + FR);
-            boolean flag = SmsUtils.forgetPassword(user1.getPhone(), FR);
+            boolean flag = SmsUtils.forgetPassword(users.getPhone(), FR);
             if (flag) {
                 session.setAttribute("passwordVerify", FR);//存入验证码session
                 session.setAttribute("upPasswordPhone", phone);//手机号存入session
+                sessionUtil.removeAttrbute(session, "passwordVerify");
                 return new QueryResponseResult(CommonCode.SUCCESS, null);
             } else {
                 return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
@@ -191,7 +192,7 @@ public class UserController {
     }
 
     /**
-     * 根据手机号码修改接口
+     * 根据手机号码修改密码
      *
      * @param user
      * @param session
@@ -202,14 +203,10 @@ public class UserController {
         String passwordVerify = (String) session.getAttribute("passwordVerify");
         String phone = (String) session.getAttribute("upPasswordPhone");
         String password = user.getPassword();
-        System.out.println(passwordVerify);
-        System.out.println(phone);
         if (user.getPhone().equals(phone)) {
             if (user.getVerify().equals(passwordVerify)) {
                 System.out.println(password);
-                System.out.println();
                 userService.updatePasswordPhone(phone, password);
-                System.out.println("执行完成");
                 return new QueryResponseResult(CommonCode.SUCCESS, null);
             } else {
                 return new QueryResponseResult(CommonCode.FAIL, null);
@@ -283,22 +280,99 @@ public class UserController {
     }else{
         return new QueryResponseResult(CommonCode.FAIL, null);//修改失败
     }
+
 }
 
-    //删除session
-    public void removeAttrbute(HttpSession session, String codeName) {
-        System.out.println("开始倒计时五分钟");
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            public void run() {
-                // 删除session中存的验证码
-                session.removeAttribute(codeName);
-                System.out.println("删除成功");
+    /**
+     * 修改旧手机号码短信验证
+     */
+    @RequestMapping(value = "/formerPhoneSMS/{phone}/{userId}",method = RequestMethod.POST)
+    public QueryResponseResult formerPhoneSMS(@PathVariable("phone")String phone,@PathVariable("userId")String userId, HttpSession session) throws ClientException {
+        String phones = userService.findByIdPhone(userId);
+        if (phones.equals(phone)) {
+            String verificationCode = GetFourRandom.getFourRandom();
+            System.out.println("修改验证码为 " + verificationCode);
+            boolean flag = SmsUtils.updatePhone(phone, verificationCode);
+            if (flag) {
+                session.setAttribute("formerPhoneVerify", verificationCode);//存入验证码session
+                session.setAttribute("formerPhone", phone);//手机号存入session
+                sessionUtil.removeAttrbute(session, "formerPhoneVerify");
+                List Phone= new ArrayList();
+                Phone.add(phone);
+                queryResult.setList(Phone);
+                return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
+            } else {
+                return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
             }
-            //设置时间为五分钟
-        }, 10*1000*3000);
+        } else {
+            return new QueryResponseResult(CommonCode.FAIL, null);
+        }
     }
 
+    /**
+     *验证旧手机是否成功
+     * @param
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/formerPhone/{verification}/{phone}",method = RequestMethod.POST)
+    public QueryResponseResult updateFormerPhone(@PathVariable("verification") String verification,@PathVariable("phone")String phone, HttpSession session) {
+        String formerPhoneVerify = (String) session.getAttribute("formerPhoneVerify");
+        String formerPhone = (String) session.getAttribute("formerPhone");
+        if (verification.equals(formerPhoneVerify) && phone.equals(formerPhone)) {
+            return new QueryResponseResult(CommonCode.SUCCESS, null);
+        } else {
+            return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
+        }
+    }
+
+    /**
+     * 验证新手机号码短信验证
+     */
+    @RequestMapping(value = "/newPhoneSMS/{phone}",method = RequestMethod.POST)
+    public QueryResponseResult newPhoneSMS(@PathVariable("phone")String phone, HttpSession session) throws ClientException {
+        User users = userService.findByPhone(phone);
+        String formerPhone = (String) session.getAttribute("formerPhone");
+        if (phone.equals(formerPhone)){
+            return new QueryResponseResult(CommonCode.same, null);  //手机号于原手机号相同
+        }
+        if (users !=null){
+            return new QueryResponseResult(CommonCode.FALL_USER_REGISTER, null);    //该手机号已经存在
+        }
+            String FR = GetFourRandom.getFourRandom();  //随机验证码
+            System.out.println("修改验证码为 " + FR);
+            boolean flag = SmsUtils.updatePhone(phone, FR);
+            if (flag) {
+                session.setAttribute("newPhoneVerify", FR);//存入验证码session
+                session.setAttribute("newPhone", phone);//手机号存入session
+                sessionUtil.removeAttrbute(session, "passwordVerify");
+                return new QueryResponseResult(CommonCode.SUCCESS, null);
+            } else {
+                return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
+            }
+    }
+
+    /**
+     *修改手机
+     * @param
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/updatePhone/{phone}/{userId}/{verification}",method = RequestMethod.POST)
+    public QueryResponseResult updatePhone(@PathVariable("verification")String verification,@PathVariable("phone")String phone,@PathVariable("userId")String userId, HttpSession session) {
+        String newPhoneVerify = (String) session.getAttribute("newPhoneVerify");
+        String newPhone = (String) session.getAttribute("newPhone");
+        if (verification.equals(newPhoneVerify) && phone.equals(newPhone)) {
+            int phones =userService.updatePhone(phone,userId);
+            if (phones==1){
+                return new QueryResponseResult(CommonCode.SUCCESS, null);
+            }else {
+                return new QueryResponseResult(CommonCode.SERVER_ERROR,null);
+            }
+        } else {
+            return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
+        }
+    }
 
 
 }

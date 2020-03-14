@@ -98,6 +98,16 @@ public class UserServiceImpl implements UserService {
         return UserDao.updateInformation(user);
     }
 
+    @Override
+    public String findByIdPhone(String uid) {
+        return UserDao.findByIdPhone(uid);
+    }
+
+    @Override
+    public int updatePhone(String phone, String uid) {
+         return UserDao.updatePhone(phone,uid);
+    }
+
     //传入用户对象修改用户
 
 

@@ -10,7 +10,7 @@ public class GetFourRandom {
      * 产生4位随机数(0000-9999)
      * @return 4位随机数
      */
-    public String getFourRandom(){
+    public static String getFourRandom(){
         Random random = new Random();
         String fourRandom = random.nextInt(10000) + "";
         int randLength = fourRandom.length();

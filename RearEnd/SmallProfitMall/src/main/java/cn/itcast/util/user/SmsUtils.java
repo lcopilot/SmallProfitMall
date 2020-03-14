@@ -43,6 +43,10 @@ public class SmsUtils {
         return sendSms(phone, code, "SMS_184210080");
     }
 
+    public static boolean updatePhone(String phone, String code) throws ClientException {
+        return sendSms(phone, code, "SMS_184210080");
+    }
+
     public static QuerySendDetailsResponse querySendDetails(String bizId) throws ClientException {
 
         // 可自助调整超时时间
@@ -109,7 +113,7 @@ public class SmsUtils {
         request.setPhoneNumbers(phone);
 
         // 必填:短信签名-可在短信控制台中找到
-        request.setSignName("黑马旅游");
+        request.setSignName("SmallProfit");
         // 必填:短信模板-可在短信控制台中找到
         request.setTemplateCode(CODE);
 
