@@ -297,10 +297,8 @@ public class UserController {
                 session.setAttribute("formerPhoneVerify", verificationCode);//存入验证码session
                 session.setAttribute("formerPhone", phone);//手机号存入session
                 sessionUtil.removeAttrbute(session, "formerPhoneVerify");
-                List Phone= new ArrayList();
-                Phone.add(phone);
-                queryResult.setList(Phone);
-                return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
+
+                return new QueryResponseResult(CommonCode.SUCCESS, null);
             } else {
                 return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
             }
@@ -320,7 +318,10 @@ public class UserController {
         String formerPhoneVerify = (String) session.getAttribute("formerPhoneVerify");
         String formerPhone = (String) session.getAttribute("formerPhone");
         if (verification.equals(formerPhoneVerify) && phone.equals(formerPhone)) {
-            return new QueryResponseResult(CommonCode.SUCCESS, null);
+            List Phone= new ArrayList();
+            Phone.add(phone);
+            queryResult.setList(Phone);
+            return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
         } else {
             return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
         }
