@@ -104,7 +104,7 @@
               </div>
               <div style="margin: 3% 0 3% 0;">
                 <el-button type="primary" class="phone_active_2_btn"
-                           @click="verificationSmsCode" :loading="verification_btn">
+                           @click="verificationNewSmsCode" :loading="verification_btn">
                   {{verification_btn_content}}
                 </el-button>
               </div>
@@ -156,38 +156,176 @@
         let phone = /^1[0-9]{10}$/
         if (this.oldPhone == '' || this.oldPhone.length <= 11 || !phone.test(this.oldPhone)) {
           this.$message.warning("请输入正确的手机号")
+        } else {
+          let formData = new FormData()
+          formData.append('phone', this.oldPhone)
+          formData.append('userId', sessionStorage.getItem('uId'))
+          userApi.verifyPhone(formData).then(res => {
+            this.verification_btn_content = '验证中..',
+                this.verification_btn = true;
+            if (res.success) {
+              this.$message({
+                message: "短信验证码已发送",
+                type: "success",
+              })
+              this.active = 2;
+              sessionStorage.setItem('phone_active', JSON.stringify(this.active));
+              this.verification_btn_content = '验证',
+                  this.verification_btn = false;
+              this.GetCode();
+            } else {
+              if (res.code==99999){
+                this.$message({
+                  message: "操作频繁,请稍后重试",
+                  type: "warning",
+                })
+              }else{
+                this.$message({
+                  message: "手机号验证失败",
+                  type: "error",
+                })
+              }
+              this.active = 1;
+              sessionStorage.setItem('phone_active', JSON.stringify(this.active));
+              this.verification_btn_content = '验证',
+                  this.verification_btn = false;
+            }
+          }).catch(error => {
+            this.$message({
+              message: "服务器错误,请稍后重试!",
+              type: "error",
+            })
+            this.active = 1;
+            sessionStorage.setItem('phone_active', JSON.stringify(this.active));
+            this.verification_btn_content = '验证',
+                this.verification_btn = false;
+          })
+
         }
-        this.verification_btn_content = '验证中..',
-            this.verification_btn = true;
-        setTimeout(() => {
-          this.active = 2;
-          sessionStorage.setItem('phone_active', JSON.stringify(this.active));
-          this.verification_btn_content = '验证',
-              this.verification_btn = false;
-          this.GetCode();
-        }, 3000);
+
       },
       //验证短信验证码
       verificationSmsCode() {
         if (this.smsCode == '' || this.smsCode.length <= 4) {
           this.$message.warning("请输入正确的验证码")
+        } else {
+          let formData = new FormData()
+          formData.append('phone', this.oldPhone)
+          formData.append('verification', this.smsCode)
+          userApi.verifyPhoneCode(formData).then(res => {
+            this.verification_btn_content = '验证中..',
+                this.verification_btn = true;
+            if (res.success) {
+              this.$message({
+                message: "验证成功!请验证新手机号",
+                type: "success"
+              })
+              this.smsCode = "",
+                  this.active = 3;
+              sessionStorage.setItem('phone_active', JSON.stringify(this.active));
+              this.verification_btn_content = '验证',
+                  this.verification_btn = false;
+            } else {
+              this.$message({
+                message: "验证码错误,请重试!",
+                type: "error",
+              })
+              this.active = 2;
+              sessionStorage.setItem('phone_active', JSON.stringify(this.active));
+              this.verification_btn_content = '验证',
+                  this.verification_btn = false;
+            }
+          }).catch(error => {
+            this.$message({
+              message: "服务器错误,请稍后重试!",
+              type: "error",
+            })
+            this.active = 2;
+            sessionStorage.setItem('phone_active', JSON.stringify(this.active));
+            this.verification_btn_content = '验证',
+                this.verification_btn = false;
+          })
         }
-        this.verification_btn_content = '验证中..',
-            this.verification_btn = true;
-        setTimeout(() => {
-          this.active = 3;
-          sessionStorage.setItem('phone_active', JSON.stringify(this.active));
-          this.verification_btn_content = '验证',
-              this.verification_btn = false;
-        }, 3000);
       },
       //获取手机验证码
       getPhoneCode() {
-        this.GetCode();
+        this.verificationPhone();
       },
       //获取新手机验证码
       getPhoneCodeNew() {
-        this.GetCodeNew();
+        let phone = /^1[0-9]{10}$/
+        if (this.newPhone == '' || this.newPhone.length <= 11 || !phone.test(this.newPhone)) {
+          this.$message.warning("请输入正确的手机号")
+        } else {
+          let formData = new FormData()
+          formData.append('phone', this.newPhone)
+          userApi.sendNewPhoneCode(formData).then(res => {
+            if (res.success) {
+              this.$message({
+                message: "验证码已发送",
+                type: "success",
+              })
+              this.GetCodeNew();
+            } else {
+              if(res.code==11211){
+                this.$message({
+                  message: "该手机号已被其他用户绑定",
+                  type: "warning",
+                })
+              }else{
+                this.$message({
+                  message: "验证码发送失败,请稍后重试",
+                  type: "error",
+                })
+              }
+            }
+          }).catch(error => {
+            this.$message({
+              message: "服务器累了~,请稍后重试",
+              type: "error",
+            })
+          })
+        }
+
+      },
+      //验证新手机
+      verificationNewSmsCode() {
+        let phone = /^1[0-9]{10}$/
+        if (this.newPhone == '' || this.newPhone.length <= 11 || !phone.test(this.newPhone)) {
+          this.$message.warning("请输入正确的手机号")
+        } else if (this.smsCode == '' || this.smsCode.length <= 4) {
+          this.$message.warning("请输入正确的验证码")
+        } else {
+          let formData = new FormData()
+          formData.append('phone', this.newPhone)
+          formData.append('verification', this.smsCode)
+          formData.append('userId', sessionStorage.getItem('uId'))
+          userApi.verifyNewPhoneCode(formData).then(res => {
+            this.verification_btn_content = '验证中..',
+                this.verification_btn = true;
+            if (res.success) {
+              this.$message({
+                message: "手机号修改成功!",
+                type: "success"
+              })
+              this.cancelModifyPhone();
+            } else {
+              this.$message({
+                message: "验证码错误,请重试!",
+                type: "error",
+              })
+              this.verification_btn_content = '验证',
+                  this.verification_btn = false;
+            }
+          }).catch(error => {
+            this.$message({
+              message: "服务器累了~,请稍后重试!",
+              type: "error",
+            })
+            this.verification_btn_content = '验证',
+                this.verification_btn = false;
+          })
+        }
       },
       //到计时
       GetCode() {
