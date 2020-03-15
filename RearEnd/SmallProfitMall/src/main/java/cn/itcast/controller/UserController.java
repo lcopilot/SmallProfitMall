@@ -287,7 +287,7 @@ public class UserController {
      * 修改旧手机号码短信验证
      */
     @RequestMapping(value = "/formerPhoneSMS",method = RequestMethod.POST)
-    public QueryResponseResult formerPhoneSMS(@RequestBody String phone,String userId, HttpSession session) throws ClientException {
+    public QueryResponseResult formerPhoneSMS(String phone,String userId, HttpSession session) throws ClientException {
         String phones = userService.findByIdPhone(userId);
         if (phones.equals(phone)) {
             String verificationCode = GetFourRandom.getFourRandom();
@@ -314,7 +314,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/formerPhone",method = RequestMethod.POST)
-    public QueryResponseResult updateFormerPhone(@RequestBody  String verification,String phone, HttpSession session) {
+    public QueryResponseResult updateFormerPhone( String verification,String phone, HttpSession session) {
         String formerPhoneVerify = (String) session.getAttribute("formerPhoneVerify");
         String formerPhone = (String) session.getAttribute("formerPhone");
         if (verification.equals(formerPhoneVerify) && phone.equals(formerPhone)) {
@@ -331,7 +331,7 @@ public class UserController {
      * 验证新手机号码短信验证
      */
     @RequestMapping(value = "/newPhoneSMS",method = RequestMethod.POST)
-    public QueryResponseResult newPhoneSMS(@RequestBody String phone, HttpSession session) throws ClientException {
+    public QueryResponseResult newPhoneSMS(String phone, HttpSession session) throws ClientException {
         User users = userService.findByPhone(phone);
         String formerPhone = (String) session.getAttribute("formerPhone");
         if (phone.equals(formerPhone)){
@@ -360,7 +360,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/updatePhone",method = RequestMethod.POST)
-    public QueryResponseResult updatePhone(@RequestBody String verification,String phone,String userId, HttpSession session) {
+    public QueryResponseResult updatePhone(String verification,String phone,String userId, HttpSession session) {
         String newPhoneVerify = (String) session.getAttribute("newPhoneVerify");
         String newPhone = (String) session.getAttribute("newPhone");
         if (verification.equals(newPhoneVerify) && phone.equals(newPhone)) {
