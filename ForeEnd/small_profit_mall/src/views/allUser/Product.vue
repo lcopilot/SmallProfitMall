@@ -280,7 +280,7 @@
                         <commentContent :genre="2"/>
                       </el-tab-pane>
                       <el-tab-pane label="晒图(111)" lazy>
-                        <commentContent/>
+                        <commentContent :genre="2"/>
                       </el-tab-pane>
                       <el-tab-pane label="视频晒单(6)" lazy>
                         <commentContent/>

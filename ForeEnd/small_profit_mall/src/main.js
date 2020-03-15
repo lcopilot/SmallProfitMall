@@ -22,7 +22,6 @@ import 'vue-video-player/src/custom-theme.css'
 import 'video.js/dist/video-js.css'
 
 
-
 Vue.use(VideoPlayer)
 
 //全局注册组件
