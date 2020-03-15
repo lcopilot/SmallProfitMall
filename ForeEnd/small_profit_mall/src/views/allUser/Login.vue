@@ -123,7 +123,7 @@
                         this.loginForm.token = "";
                         this.verify = new Date().getTime();
                         this.login_btn = new Date().getTime();
-                        this.resetForm('loginForm');
+                        this.$refs['loginForm'].resetFields();
                         this.$message.error("人机验证二次失败,请稍后重试");
                         this.loginStatus = false;
                         this.loginBtnContent = '登录';
@@ -138,7 +138,7 @@
                         this.loginForm.token = "";
                         this.verify = new Date().getTime();
                         this.login_btn = new Date().getTime();
-                        this.resetForm('loginForm');
+                        this.$refs['loginForm'].resetFields();
                         this.$message.error("账户或密码错误!")
                         this.loginStatus = false;
                         this.loginBtnContent = '登录';

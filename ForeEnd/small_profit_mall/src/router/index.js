@@ -70,6 +70,14 @@ const routes = [
     },
     component: () => import('@/views/user/personalInformation')
   },
+  {
+    path: '/addressManagement',
+    name: 'AddressManagement',
+    meta: {
+      requireAuth: true,
+    },
+    component: () => import('@/views/user/addressManagement')
+  },
   //捕获404
   {
     path: "/404",

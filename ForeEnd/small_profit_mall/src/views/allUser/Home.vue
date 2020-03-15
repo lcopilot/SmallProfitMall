@@ -4,12 +4,12 @@
       <Header></Header>
     </el-header>
     <el-main>
-      <Carousel :key="homeOverloadKey" />
+      <Carousel  />
       <el-main>
         <el-row>
           <el-col :span="19" :push="2">
             <div style="width: 1198px">
-              <el-card :key="homeOverloadKey">
+              <el-card >
                 <!-- 到计时部分 -->
                 <div class="se-kl">
                   <div class="se-cn">微利秒杀</div>
@@ -30,7 +30,7 @@
                 <!-- 秒杀商品部分 -->
                 <div class="spike_product">
                   <el-carousel :interval="10000" indicator-position="none" arrow="hover"
-                               height="260px" :key="homeOverloadKey" >
+                               height="260px"  >
                     <el-carousel-item
                         v-for="(spikeProducts,index) in spikeProductList.seckillProduct"
                         :key="index">
@@ -55,7 +55,7 @@
                 </div>
                 <div class="spike_product_ad">
                   <el-carousel :interval="4000" arrow="hover" height="280px"
-                               indicator-position="none" :key="homeOverloadKey">
+                               indicator-position="none" >
                     <el-carousel-item v-for="spikeAd in spikeAdList" :key="spikeAd.id">
                       <router-link :to="spikeAd.site">
                         <el-image :src="spikeAd.img"
@@ -73,7 +73,7 @@
         <el-row>
           <el-col :span="19" :push="2">
             <div style="width: 1198px">
-              <el-card :key="homeOverloadKey">
+              <el-card >
                 <div class="low_price_div">
                   <router-link to="/" class="low_price_name1">品质好物·天天低价</router-link>
                   <router-link to="/" class="low_price_name2">美好生活抢先到 ></router-link>
@@ -123,8 +123,6 @@
     components: {ProductsFeatured, Header, Footer, Carousel, CountDown},
     data() {
       return {
-        //重载首页组件的key
-        homeOverloadKey:0,
         //秒杀场次
         spikeSessions: '',
         //低价广告的开始向
@@ -226,14 +224,14 @@
       }
     },
     created() {
-      this.getLowPriceProductList();
-      this.getSpikeSessions();
-      this.getSpikeAdList();
-      this.lowPriceProductSwitch();
-      this.getSpikeProductList();
-      this.homeOverloadKey=new Date().getTime();
+      this.$nextTick(()=>{
+        this.getLowPriceProductList();
+        this.getSpikeSessions();
+        this.getSpikeAdList();
+        this.lowPriceProductSwitch();
+        this.getSpikeProductList();
+      })
     },
-
   }
 </script>
 

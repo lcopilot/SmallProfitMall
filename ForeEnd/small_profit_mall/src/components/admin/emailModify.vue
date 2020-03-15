@@ -300,7 +300,12 @@
             message: "请输入正确的邮箱格式",
             type: "warning"
           });
-        } else {
+        } else if(this.emailCode=="" || this.emailCode<=4){
+          this.$message({
+            message: "请输入正确格式的验证码",
+            type: "warning"
+          });
+        }else {
           this.verification_btn_content = '验证中..',
               this.verification_btn = true;
           setTimeout(() => {

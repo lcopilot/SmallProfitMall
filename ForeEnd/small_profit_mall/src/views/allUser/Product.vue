@@ -430,7 +430,9 @@
         defaultParams: {
           label: 'name',
           value: 'code',
-          children: 'children'
+          children: 'children',
+          //单选任意一级
+          // checkStrictly: true,
         },
         //地址数据
         address: '',

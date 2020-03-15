@@ -28,3 +28,19 @@ export const getUserInformation = userId => {
 export const modifyUser = params => {
   return http.requestPost('/apiUrl/user/updateInformation' ,params);
 }
+//验证原手机号
+export const verifyPhone = params => {
+  return http.requestPost('/apiUrl/user/formerPhoneSMS',params);
+}
+//验证原手机号验证码
+export const verifyPhoneCode = params => {
+  return http.requestPost('/apiUrl/user/formerPhone' ,params);
+}
+//新手机号发送验证码
+export const sendNewPhoneCode = params => {
+  return http.requestPost('/apiUrl/user/newPhoneSMS' ,params);
+}
+//验证原手机号验证码
+export const verifyNewPhoneCode = params => {
+  return http.requestPost('/apiUrl/user/updatePhone' ,params);
+}

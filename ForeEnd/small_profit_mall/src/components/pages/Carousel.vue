@@ -136,7 +136,7 @@
               </div>
               <div class="username_div">
                 <span v-if="username!=null" class="username_span">
-                  <router-link to="/" :title="username">Hi,{{username}}</router-link>
+                  <router-link to="/personalCenter" :title="username">Hi,{{username}}</router-link>
                 </span>
                 <span v-if="username==null" class="username_span">
                   <router-link to="/login">Hi~欢迎逛微利</router-link>
@@ -256,13 +256,15 @@
       },
     },
     beforeMount() {
-      this.avatar=sessionStorage.getItem("avatar");
-      this.getRotationChart();
-      this.getCategoriesList();
-      this.getCommonFunctionsList();
-      this.username = sessionStorage.getItem("username");
-      this.getAddressData();
-
+      //dom加载完成再加载数据
+      this.$nextTick(()=>{
+        this.avatar=sessionStorage.getItem("avatar");
+        this.getRotationChart();
+        this.getCategoriesList();
+        this.getCommonFunctionsList();
+        this.username = sessionStorage.getItem("username");
+        this.getAddressData();
+      })
     }
   }
 </script>

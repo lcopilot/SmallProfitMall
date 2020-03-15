@@ -106,17 +106,12 @@
             }
         )
       },
-      goProduct(ProductId) {
-        this.$router.push({
-          path: '/product',
-          query: {
-            productId: ProductId
-          },
-        })
-      }
     },
-    beforeMount() {
-      this.getProductsFeatured();
+    created() {
+      this.$nextTick(()=>{
+        this.getProductsFeatured();
+      })
+
     }
   }
 </script>
