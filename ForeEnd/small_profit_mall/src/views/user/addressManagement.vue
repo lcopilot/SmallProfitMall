@@ -7,25 +7,29 @@
       <el-row :gutter="20">
         <personalPage/>
         <el-col :span="16" :push="3">
-          <el-card style="width: 97%">
-            <div style="text-align: left">
-              收货地址管理
-              <el-button class="el-icon-plus" style="float: right; padding: 3px 0" type="text"
+          <el-card class="address_top_card">
+            <div>
+              <span class="address_top_span">
+                 收货地址管理
+              </span>
+              <el-button class="el-icon-plus address_top_btn" type="text"
                          @click="addAddress()">新增
               </el-button>
             </div>
           </el-card>
-          <el-card style="margin: 2% 2% 0 0;width: 31%;float: left" v-for="(address,index) in addressList" :key="index">
+          <el-card class="address_bottom_card"
+                   v-for="(address,index) in addressList" :key="index">
             <div slot="header">
               <el-row :gutter="20">
                 <el-col :span="8">
                   <el-tag type="success" effect="dark" size="small">{{address.alias}}</el-tag>
                 </el-col>
                 <el-col :span="3" :offset="address.alias==''? 17:9">
-                  <el-button type="text" @click="editAddress(index)">编辑</el-button>
+                  <el-button type="text" class="address_Btn" @click="editAddress(index)">编辑
+                  </el-button>
                 </el-col>
                 <el-col :span="3">
-                  <el-button type="text" @click="removeAddress()">删除</el-button>
+                  <el-button type="text" class="address_Btn" @click="removeAddress()">删除</el-button>
                 </el-col>
               </el-row>
             </div>
@@ -48,27 +52,27 @@
                   <div class="address_message_div">{{address.email}}</div>
                 </el-form-item>
               </el-form>
-              <div style="margin-top: 3%;height: 15px">
+              <div class="address_bottom_card_def">
                 <el-switch
-                    style="float: right; padding: 3px 0"
+                    class="address_top_btn"
                     v-model="address.default"
                     active-text="默认" @change="changeDefault(index)">
                 </el-switch>
               </div>
             </div>
           </el-card>
-          <el-dialog title="新增收货地址" :visible.sync="dialogFormVisible" @close="cancel" >
-            <div style="text-align: left;margin:0 0 3% 20%;font-size: 12px;color: #999999">
+          <el-dialog title="新增收货地址" :visible.sync="dialogFormVisible" @close="cancel">
+            <div class="address_add_div">
               温馨提示:*号为必填哦~
             </div>
             <div style="width: 70%;margin-left: 12%">
               <el-form :model="addressForm" :rules="rules" label-position="right" ref="addressForm"
-                       label-width="110px">
+                       label-width="110px" :status-icon="true">
                 <el-form-item label="收件人姓名" prop="name">
                   <el-input v-model="addressForm.name"
                             clearable></el-input>
                 </el-form-item>
-                <el-form-item label="收件人电话" prop="phone">
+                <el-form-item label="收件人电话" prop="phone" >
                   <el-input v-model.number="addressForm.phone" clearable :maxlength="11"
                             show-word-limit></el-input>
                 </el-form-item>
@@ -107,10 +111,12 @@
                 </el-form-item>
               </el-form>
               <div slot="footer">
-                <el-button v-if="addBtn" type="primary" @click="submitAddress('addressForm')" style="width: 28%">确
+                <el-button v-if="addBtn" type="primary" @click="submitAddress('addressForm')"
+                           style="width: 28%">确
                   定
                 </el-button>
-                <el-button v-if="editBtn" type="primary" @click="submitAddress('addressForm',3)" style="width: 28%">提交
+                <el-button v-if="editBtn" type="primary" @click="submitAddress('addressForm',3)"
+                           style="width: 28%">提交
                 </el-button>
                 <el-button @click="cancel()" style="width: 28%">取 消</el-button>
               </div>
@@ -157,16 +163,16 @@
       };
       return {
         //新增按钮
-        addBtn:false,
+        addBtn: false,
         //编辑按钮
-        editBtn:false,
+        editBtn: false,
         //地址别名输入建议的提示数据
         restaurants: [],
         //对话框
         dialogFormVisible: false,
         options: [],
         //完整地址
-        address:'',
+        address: '',
         //新增地址的表单
         addressForm: {
           //地址备注限制10个字
@@ -176,7 +182,7 @@
           //收件人手机
           phone: '',
           //所在地区
-          areaCode: '',
+          areaCode: [],
           //具体地址
           address: "",
           //邮件
@@ -204,9 +210,9 @@
             phone: "18569419873",
             //所在地区
             areaCode: [
-                "14","1403","140321","140321101"
+              "14", "1403", "140321", "140321101"
             ],
-            area:"湖南长沙市天心区暮云镇",
+            area: "湖南长沙市天心区暮云镇",
             //具体地址
             address: "湖南科技职业学院(暮云校区)阿萨德饭框内容爱你说得好",
             //邮件
@@ -305,29 +311,30 @@
       },
       //新增调用的方法
       addAddress() {
-        this.addBtn=true,
-        this.dialogFormVisible = true;
+        this.addBtn = true,
+            this.dialogFormVisible = true;
         this.getAddressData();
       },
       //编辑调用的方法
-      editAddress(index){
-        this.editBtn=true;
+      editAddress(index) {
+        this.editBtn = true;
         this.dialogFormVisible = true;
         this.getAddressData();
-        this.addressForm=this.addressList[index];
+        this.addressForm = this.addressList[index];
+        sessionStorage.setItem("addressListIndex",index);
       },
       //修改默认时的方法
-      changeDefault(index,addressId){
-          if(!this.addressList[index].default){
-            this.$message({
-              message:"必须拥有默认地址哦~",
-              type:"warning"
-            })
-          }
-            this.addressList.forEach((address)=>{
-              address.default=false;
-            });
-            this.addressList[index].default=true;
+      changeDefault(index, addressId) {
+        if (!this.addressList[index].default) {
+          this.$message({
+            message: "必须拥有默认地址哦~",
+            type: "warning"
+          })
+        }
+        this.addressList.forEach((address) => {
+          address.default = false;
+        });
+        this.addressList[index].default = true;
 
       },
       //关闭取消的回调
@@ -338,9 +345,26 @@
       submitAddress(formName,addressId) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            if(addressId!=null){
-
-            }else{
+            if (addressId != null) {
+              let addressList=this.addressList;
+              let index=sessionStorage.getItem("addressListIndex");
+              let addressForm=this.addressForm;
+              if (addressList[index].name==addressForm.name &&
+                  addressList[index].phone==addressForm.phone &&
+                  addressList[index].areaCode==addressForm.areaCode &&
+                  addressList[index].address==addressForm.address &&
+                  addressList[index].email==addressForm.email &&
+                  addressList[index].default==addressForm.default &&
+                  addressList[index].alias==addressForm.alias
+              ){
+                this.$message({
+                  message:"您还没有修改哦~",
+                  type:"warning"
+                })
+              }else{
+                console.log('uiiu')
+              }
+            } else {
               this.dialogFormVisible = false
             }
 
@@ -349,7 +373,7 @@
 
       },
       //删除地址
-      removeAddress(addressId){
+      removeAddress(addressId) {
         this.$confirm('此操作将永久删除该地址, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -371,7 +395,7 @@
       handleChange(value) {
         console.log(value)
         const checkedNodes = this.$refs['cityAll'].getCheckedNodes()
-        if(checkedNodes.length!=0){
+        if (checkedNodes.length != 0) {
           checkedNodes[0].pathLabels.forEach((item) => {
             this.address += item + ' ';
           });
@@ -407,5 +431,47 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .address_Btn:hover {
+    color: #e2231a;
+  }
+
+  .address_top_card {
+    width: 97%;
+    text-align: left
+  }
+
+  .address_top_span {
+    font-weight: 600;
+    font-size: 17px
+  }
+
+  .address_top_btn {
+    float: right;
+    padding: 3px 0;
+    margin-right: 2%
+  }
+
+  .address_top_btn:hover {
+    color: #e2231a;
+  }
+
+  .address_bottom_card_def {
+    margin-top: 3%;
+    height: 15px
+  }
+
+  .address_bottom_card {
+    margin: 2% 2% 0 0;
+    width: 31%;
+    float: left
+  }
+
+  .address_add_div {
+    text-align: left;
+    margin: 0 0 3% 20%;
+    font-size: 12px;
+    color: #999999
   }
 </style>
