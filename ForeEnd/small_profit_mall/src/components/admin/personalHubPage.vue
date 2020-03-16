@@ -21,6 +21,9 @@
         <div>
           <div class="personal_page">订单中心</div>
           <div class="personal_page_child">
+            <router-link to="/">全部订单</router-link>
+          </div>
+          <div class="personal_page_child">
             <router-link to="/">待付款</router-link>
           </div>
           <div class="personal_page_child">
