@@ -20,16 +20,28 @@
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>
-                  <router-link to="/personalCenter">个人中心</router-link>
+                  <router-link to="/personalCenter">
+                    <svg-icon name="personalCenter_h" class="icon"></svg-icon>
+                    个人中心
+                  </router-link>
                 </el-dropdown-item>
                 <el-dropdown-item divided>
-                  <router-link to="/">个人中心</router-link>
+                  <router-link to="/allOrders">
+                    <svg-icon name="orderCenter" class="icon"></svg-icon>
+                    订单中心
+                  </router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <router-link to="/">个人中心</router-link>
+                  <router-link to="/">
+                    <svg-icon name="favorite_h" class="icon"></svg-icon>
+                    收藏
+                  </router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <router-link to="/">个人中心</router-link>
+                  <router-link to="/">
+                    <svg-icon name="message" class="icon"></svg-icon>
+                    消息中心
+                  </router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
                   <router-link @click.native="exit" to="/login">
@@ -67,7 +79,7 @@
       },
     },
     created() {
-      this.avatar=sessionStorage.getItem("avatar");
+      this.avatar = sessionStorage.getItem("avatar");
       this.username = sessionStorage.getItem("username");
     }
   };
