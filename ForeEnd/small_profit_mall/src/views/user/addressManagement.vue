@@ -15,26 +15,21 @@
               </el-button>
             </div>
           </el-card>
-          <el-card style="margin: 2% 2% 0 0;width: 31%;float: left" v-for="address in addressList">
+          <el-card style="margin: 2% 2% 0 0;width: 31%;float: left" v-for="(address,index) in addressList" :key="index">
             <div slot="header">
               <el-row :gutter="20">
                 <el-col :span="8">
                   <el-tag type="success" effect="dark" size="small">{{address.alias}}</el-tag>
                 </el-col>
-                <el-col :span="3" :offset="address.alias==''? 14:6">
-                  <el-button type="text">
-                    详情
-                  </el-button>
+                <el-col :span="3" :offset="address.alias==''? 17:9">
+                  <el-button type="text" @click="editAddress(index)">编辑</el-button>
                 </el-col>
                 <el-col :span="3">
-                  <el-button type="text">编辑</el-button>
-                </el-col>
-                <el-col :span="3">
-                  <el-button type="text">删除</el-button>
+                  <el-button type="text" @click="removeAddress()">删除</el-button>
                 </el-col>
               </el-row>
             </div>
-            <div style="text-align: left">
+            <div style="text-align: left;">
               <el-form label-position="right" id="addressList" label-width="70px"
                        :model="addressForm">
                 <el-form-item label="姓名">
@@ -57,12 +52,12 @@
                 <el-switch
                     style="float: right; padding: 3px 0"
                     v-model="address.default"
-                    active-text="默认">
+                    active-text="默认" @change="changeDefault()">
                 </el-switch>
               </div>
             </div>
           </el-card>
-          <el-dialog title="新增收货地址" :visible.sync="dialogFormVisible">
+          <el-dialog title="新增收货地址" :visible.sync="dialogFormVisible" @close="cancel" >
             <div style="text-align: left;margin:0 0 3% 20%;font-size: 12px;color: #999999">
               温馨提示:*号为必填
             </div>
@@ -93,18 +88,29 @@
                   <el-input type="textarea" v-model="addressForm.address" rows="3"
                             :maxlength="250" show-word-limit></el-input>
                 </el-form-item>
-                <el-form-item label="地址别名">
+                <el-form-item label="地址别名" prop="alias">
                   <div style="text-align: left">
-                    <el-autocomplete style="width: 80%" :maxlength="10"
+                    <el-autocomplete style="width: 80%" :maxlength="12"
                                      show-word-limit v-model="addressForm.alias"
                                      :fetch-suggestions="querySearch" placeholder="建议填写常用地址名称"
                                      clearable></el-autocomplete>
                   </div>
                 </el-form-item>
+                <el-form-item>
+                  <div style="text-align: left">
+                    <el-switch
+                        v-model="addressForm.default"
+                        active-text="默认"
+                        inactive-text="不默认">
+                    </el-switch>
+                  </div>
+                </el-form-item>
               </el-form>
               <div slot="footer">
-                <el-button type="primary" @click="submitAddress('addressForm')" style="width: 28%">确
+                <el-button v-if="addBtn" type="primary" @click="submitAddress('addressForm')" style="width: 28%">确
                   定
+                </el-button>
+                <el-button v-if="editBtn" type="primary" @click="submitAddress('addressForm',3)" style="width: 28%">提交
                 </el-button>
                 <el-button @click="cancel()" style="width: 28%">取 消</el-button>
               </div>
@@ -128,9 +134,11 @@
   const Footer = () => import("../../components/pages/Footer");
   const personalPage = () => import("../../components/admin/personalHubPage");
   export default {
+    inject: ["reload"],
     name: "addressManagement",
     components: {Header, Footer, personalPage},
     data() {
+      //手机号校验
       let checkPhone = (rule, value, callback) => {
         const phoneReg = /^1[3|4|5|6|7|8][0-9]{9}$/
         if (!value) {
@@ -149,6 +157,10 @@
         }, 100)
       };
       return {
+        //新增按钮
+        addBtn:false,
+        //编辑按钮
+        editBtn:false,
         //地址别名输入建议的提示数据
         restaurants: [],
         //对话框
@@ -159,7 +171,7 @@
         //新增地址的表单
         addressForm: {
           //地址备注限制10个字
-          alias: "",
+          alias: '',
           //收件人姓名
           name: "",
           //收件人手机
@@ -262,6 +274,10 @@
           address: [
             {required: true, message: "请填写具体地址", trigger: 'blur'}
           ],
+          alias: [
+            {required: false, trigger: 'blur'},
+            {max: 12, message: '地址别名只能在0-12位之间', trigger: 'blur'},
+          ],
         }
       }
     },
@@ -290,34 +306,67 @@
       },
       //新增调用的方法
       addAddress() {
-
+        this.addBtn=true,
         this.dialogFormVisible = true;
         this.getAddressData();
-        this.$nextTick(()=>{
-          this.$refs['addressForm'].resetFields();
-        })
+      },
+      //编辑调用的方法
+      editAddress(index){
+        this.editBtn=true;
+        this.dialogFormVisible = true;
+        this.getAddressData();
+        this.addressForm=this.addressList[index];
+      },
+      //修改默认时的方法
+      changeDefault(addressId){
 
       },
-      //新增地址的取消方法
+      //关闭取消的回调
       cancel() {
-        this.dialogFormVisible = false
-        this.$refs['addressForm'].resetFields();
+        this.reload();
       },
-      //提交地信息
-      submitAddress(formName) {
+      //编辑,提交修改
+      submitAddress(formName,addressId) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.dialogFormVisible = false
+            if(addressId!=null){
+
+            }else{
+              this.dialogFormVisible = false
+            }
+
           }
+        });
+
+      },
+      //删除地址
+      removeAddress(addressId){
+        this.$confirm('此操作将永久删除该地址, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
         });
       },
       //地址级联选择器变化时调用的方法
       handleChange(value) {
         console.log(value)
         const checkedNodes = this.$refs['cityAll'].getCheckedNodes()
-        checkedNodes[0].pathLabels.forEach((item) => {
-          this.address += item + ' ';
-        });
+        if(checkedNodes.length!=0){
+          checkedNodes[0].pathLabels.forEach((item) => {
+            this.address += item + ' ';
+          });
+        }
         console.log(this.address);
       },
       //获取级联列表的数据
