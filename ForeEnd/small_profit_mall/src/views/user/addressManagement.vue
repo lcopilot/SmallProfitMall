@@ -52,14 +52,14 @@
                 <el-switch
                     style="float: right; padding: 3px 0"
                     v-model="address.default"
-                    active-text="默认" @change="changeDefault()">
+                    active-text="默认" @change="changeDefault(index)">
                 </el-switch>
               </div>
             </div>
           </el-card>
           <el-dialog title="新增收货地址" :visible.sync="dialogFormVisible" @close="cancel" >
             <div style="text-align: left;margin:0 0 3% 20%;font-size: 12px;color: #999999">
-              温馨提示:*号为必填
+              温馨提示:*号为必填哦~
             </div>
             <div style="width: 70%;margin-left: 12%">
               <el-form :model="addressForm" :rules="rules" label-position="right" ref="addressForm"
@@ -116,7 +116,6 @@
               </div>
             </div>
           </el-dialog>
-
         </el-col>
       </el-row>
     </el-main>
@@ -318,7 +317,17 @@
         this.addressForm=this.addressList[index];
       },
       //修改默认时的方法
-      changeDefault(addressId){
+      changeDefault(index,addressId){
+          if(!this.addressList[index].default){
+            this.$message({
+              message:"必须拥有默认地址哦~",
+              type:"warning"
+            })
+          }
+            this.addressList.forEach((address)=>{
+              address.default=false;
+            });
+            this.addressList[index].default=true;
 
       },
       //关闭取消的回调

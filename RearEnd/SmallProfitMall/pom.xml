@@ -273,7 +273,17 @@
       <artifactId>commons-io</artifactId>
       <version>2.4</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.springframework.amqp</groupId>
+      <artifactId>spring-rabbit</artifactId>
+      <version>2.1.4.RELEASE</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>spring-context</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <!--这是整合 druid源-->
     <dependency>
       <groupId>com.alibaba</groupId>

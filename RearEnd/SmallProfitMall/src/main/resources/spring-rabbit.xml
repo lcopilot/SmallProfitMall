@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/util
+	  http://www.springframework.org/schema/util/spring-util-3.0.xsd
+	 http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+	 http://www.springframework.org/schema/tx
+	  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	  http://www.springframework.org/schema/aop
+	  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	  http://www.springframework.org/schema/context
+	  http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+  <!--生产者配置  -->
+  <!-- rabbitMQ创建连接类 -->
+  <bean class="cn.itcast.util.rabbitMq.RabbitMQ" />
+
+  <bean id="connectionFactory"  class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
+    <constructor-arg value="localhost" />
+    <property name="username" value="${mq.user}" />
+    <property name="password" value="${mq.pwd}" />
+    <property name="host" value="${mq.ip}" />
+    <property name="port" value="${mq.port}" />
+  </bean>
+
+
+  <bean id="rabbitAdmin"  class="org.springframework.amqp.rabbit.core.RabbitAdmin">
+    <constructor-arg ref="connectionFactory" />
+  </bean>
+
+  <!-- 创建rabbitTemplate 消息模板类 -->
+  <bean id="rabbitTemplate"  class="org.springframework.amqp.rabbit.core.RabbitTemplate">
+    <!--  <constructor-arg ref="connectionFactory"></constructor-arg>   -->
+    <property name="replyTimeout" value="50000" />
+    <property name="connectionFactory" ref="connectionFactory"/>
+  </bean>
+  <!-- bean 注入 -->
+  <bean class="cn.itcast.util.rabbitMq.SpringUtil" />
+  <!-- 消费者                                                          配置 -->
+  <!-- 创建消息转换器为SimpleMessageConverter -->
+  <bean id="serializerMessageConverter"
+    class="org.springframework.amqp.support.converter.SimpleMessageConverter"></bean>
+
+
+  <!-- 设置持久化的队列 -->
+  <bean id="queue" class="org.springframework.amqp.core.Queue">
+    <constructor-arg index="0" value="${routeKey}"></constructor-arg>
+    <constructor-arg index="1" value="true"></constructor-arg>
+    <constructor-arg index="2" value="false"></constructor-arg>
+    <constructor-arg index="3" value="false"></constructor-arg>
+  </bean>
+  <!-- 1、<bean id="queue1" class="org.springframework.amqp.core.Queue"> -->
+  <!-- <constructor-arg index="0" value="${routeKey4}"></constructor-arg> -->
+  <!-- <constructor-arg index="1" value="true"></constructor-arg> -->
+  <!-- <constructor-arg index="2" value="false"></constructor-arg> -->
+  <!-- <constructor-arg index="3" value="false"></constructor-arg> -->
+  <!-- </bean> -->
+
+  <!--创建交换器的类型 并持久化 -->
+  <bean id="directExchange" class="org.springframework.amqp.core.DirectExchange">
+    <constructor-arg index="0" value="${exchange}"></constructor-arg>
+    <constructor-arg index="1" value="true"></constructor-arg>
+    <constructor-arg index="2" value="false"></constructor-arg>
+  </bean>
+
+  <util:map id="arguments"></util:map>
+
+
+  <!-- 绑定交换器、队列 -->
+  <bean id="binding" class="org.springframework.amqp.core.Binding">
+    <constructor-arg index="0" value="${routeKey}"></constructor-arg>
+    <constructor-arg index="1" value="QUEUE"></constructor-arg>
+    <constructor-arg index="2" value="${exchange}"></constructor-arg>
+    <constructor-arg index="3" value="${routeKey}"></constructor-arg>
+    <constructor-arg index="4" value="#{arguments}"></constructor-arg>
+  </bean>
+  <!-- 2、绑定 -->
+  <!-- <bean id="binding1" class="org.springframework.amqp.core.Binding"> -->
+  <!-- <constructor-arg index="0" value="${routeKey4}"></constructor-arg> -->
+  <!-- <constructor-arg index="1" value="QUEUE"></constructor-arg> -->
+  <!-- <constructor-arg index="2" value="${exchange}"></constructor-arg> -->
+  <!-- <constructor-arg index="3" value="${routeKey4}"></constructor-arg> -->
+  <!-- <constructor-arg index="4" value="#{arguments}"></constructor-arg> -->
+  <!-- </bean> -->
+
+  <!-- 用于接收消息的处理类 -->
+  <bean id="rmqConsumer" class="cn.itcast.util.rabbitMq.RmqConsumer"></bean>
+
+  <bean id="messageListenerAdapter"
+    class="org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter">
+    <constructor-arg ref="rmqConsumer" />
+    <!--可以指定哪个队列用哪个方法  -->
+    <property name="queueOrTagToMethodName">
+      <map>
+        <entry key="${routeKey}" value="rmqProducerMessage"></entry>
+      </map>
+    </property>
+    <property name="defaultListenerMethod" value="rmqProducerMessage"></property>
+    <property name="messageConverter" ref="serializerMessageConverter"></property>
+  </bean>
+
+  <!-- 用于消息的监听的容器类SimpleMessageListenerContainer,监听队列 queues可以传多个 -->
+  <bean id="listenerContainer"
+    class="org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer">
+    <property name="queues">
+      <list>
+        <ref bean="queue"></ref>
+        <!-- 3、<ref bean="queue1"></ref> -->
+      </list>
+    </property>
+    <property name="connectionFactory" ref="connectionFactory"></property>
+    <property name="messageListener" ref="messageListenerAdapter"></property>
+  </bean>
+
+</beans>

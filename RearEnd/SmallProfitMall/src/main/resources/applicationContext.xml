@@ -22,7 +22,8 @@
     <!--Spring整合MyBatis框架-->
     <!--配置连接池-->
     <!-- 引入jdbc.properties属性文件 -->
-    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath*:rabbitMq.properties" ignore-unresolvable="true"/>
     <!-- 阿里 druid 数据库连接池 配置  -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
         <!-- 数据库基本信息配置 -->
@@ -163,7 +164,7 @@
         <!--开启事务  -->
         <property name="enableTransactionSupport" value="true"></property>
     </bean>
-
+    <import resource="classpath:spring-rabbit.xml" />
     <!--自定义redis工具类,在需要缓存的地方注入此类  -->
     <bean id="redisService" class="cn.itcast.util.cache.RedisUtil">
         <constructor-arg ref="redisTemplate"/>
