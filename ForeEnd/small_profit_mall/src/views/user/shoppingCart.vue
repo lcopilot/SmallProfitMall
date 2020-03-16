@@ -19,8 +19,7 @@
                   tooltip-effect="dark"
                   style="width: 100%"
                   @select="select"
-                  @select-all="select_all"
-              >
+                  @select-all="select_all">
                 <el-table-column
                     type="selection"
                     width="55">
@@ -324,8 +323,8 @@
   }
 
   #sCart .el-table th {
-    background: #f3f3f3;
-  }
+     background: #f3f3f3;
+   }
 
   #sCart .cart_name {
     text-align: left;

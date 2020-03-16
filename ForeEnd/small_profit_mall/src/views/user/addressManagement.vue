@@ -9,14 +9,16 @@
         <el-col :span="16" :push="3">
           <el-card class="address_top_card">
             <div>
-              <span class="address_top_span">
+              <span class="address_top_span1">
                  收货地址管理
               </span>
+              <span class="address_top_span2">已添加{{addressList.length}}个,一共可以添加9个</span>
               <el-button class="el-icon-plus address_top_btn" type="text"
                          @click="addAddress()">新增
               </el-button>
             </div>
           </el-card>
+
           <el-card class="address_bottom_card"
                    v-for="(address,index) in addressList" :key="index">
             <div slot="header">
@@ -72,7 +74,7 @@
                   <el-input v-model="addressForm.name"
                             clearable></el-input>
                 </el-form-item>
-                <el-form-item label="收件人电话" prop="phone" >
+                <el-form-item label="收件人电话" prop="phone">
                   <el-input v-model.number="addressForm.phone" clearable :maxlength="11"
                             show-word-limit></el-input>
                 </el-form-item>
@@ -311,9 +313,17 @@
       },
       //新增调用的方法
       addAddress() {
-        this.addBtn = true,
-            this.dialogFormVisible = true;
-        this.getAddressData();
+        if (this.addressList.length<=9){
+          this.addBtn = true,
+              this.dialogFormVisible = true;
+          this.getAddressData();
+        }else {
+          this.$message({
+            message:"只能添加9个哦~",
+            type:"warning"
+          })
+        }
+
       },
       //编辑调用的方法
       editAddress(index) {
@@ -321,7 +331,7 @@
         this.dialogFormVisible = true;
         this.getAddressData();
         this.addressForm = this.addressList[index];
-        sessionStorage.setItem("addressListIndex",index);
+        sessionStorage.setItem("addressListIndex", index);
       },
       //修改默认时的方法
       changeDefault(index, addressId) {
@@ -342,26 +352,26 @@
         this.reload();
       },
       //编辑,提交修改
-      submitAddress(formName,addressId) {
+      submitAddress(formName, addressId) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             if (addressId != null) {
-              let addressList=this.addressList;
-              let index=sessionStorage.getItem("addressListIndex");
-              let addressForm=this.addressForm;
-              if (addressList[index].name==addressForm.name &&
-                  addressList[index].phone==addressForm.phone &&
-                  addressList[index].areaCode==addressForm.areaCode &&
-                  addressList[index].address==addressForm.address &&
-                  addressList[index].email==addressForm.email &&
-                  addressList[index].default==addressForm.default &&
-                  addressList[index].alias==addressForm.alias
-              ){
+              let addressList = this.addressList;
+              let index = sessionStorage.getItem("addressListIndex");
+              let addressForm = this.addressForm;
+              if (addressList[index].name == addressForm.name &&
+                  addressList[index].phone == addressForm.phone &&
+                  addressList[index].areaCode == addressForm.areaCode &&
+                  addressList[index].address == addressForm.address &&
+                  addressList[index].email == addressForm.email &&
+                  addressList[index].default == addressForm.default &&
+                  addressList[index].alias == addressForm.alias
+              ) {
                 this.$message({
-                  message:"您还没有修改哦~",
-                  type:"warning"
+                  message: "您还没有修改哦~",
+                  type: "warning"
                 })
-              }else{
+              } else {
                 console.log('uiiu')
               }
             } else {
@@ -442,13 +452,20 @@
     text-align: left
   }
 
-  .address_top_span {
+  .address_top_span1 {
     font-weight: 600;
-    font-size: 17px
+    font-size: 18px
+  }
+
+  .address_top_span2 {
+    font-size: 12px;
+    color: #999999;
+    margin-left: 2%;
   }
 
   .address_top_btn {
     float: right;
+    font-size: 16px;
     padding: 3px 0;
     margin-right: 2%
   }
