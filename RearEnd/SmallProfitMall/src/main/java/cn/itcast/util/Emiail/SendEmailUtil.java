@@ -32,9 +32,6 @@ public class SendEmailUtil {
             javaMailSender.send(mMessage);//发送邮件
         } catch (MessagingException e) {
         }
-
-
-
         System.out.println(verification);
         return verification;
     }
