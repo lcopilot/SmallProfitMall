@@ -31,4 +31,10 @@ public class EmailServiceImpl implements EmailService {
     public String fendByIdEmail(String uid) {
         return emailDao.fendByIdEmail(uid);
     }
+
+    //查询用户是否存在
+    @Override
+    public String fendEmail(String email) {
+        return emailDao.fendEmail(email);
+    }
 }

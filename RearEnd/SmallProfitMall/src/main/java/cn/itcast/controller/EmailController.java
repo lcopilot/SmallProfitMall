@@ -59,6 +59,9 @@ public class EmailController {
     //更新邮箱
     @RequestMapping(value = "/updateEmail",method = RequestMethod.POST)
     public QueryResponseResult updateEmail(String userId, String verification, String email, HttpSession session) {
+        if(emailService.fendEmail(email)!=null){
+            return new QueryResponseResult(CommonCode.FALL_USER_REGISTER, null);
+        }
         String Verify = (String) session.getAttribute("content");
         System.out.println(verification);
         session.invalidate();
@@ -108,6 +111,7 @@ public class EmailController {
             List Phone = new ArrayList();
             Phone.add(updateEmailPhone);
             result.setList(Phone);
+
             return new QueryResponseResult(CommonCode.SUCCESS, result);
         } else {
             return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
