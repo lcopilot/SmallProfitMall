@@ -13,6 +13,7 @@ import cn.itcast.util.user.SmsUtils;
 import com.aliyuncs.exceptions.ClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,8 +38,8 @@ public class EmailController {
     UserService userService;
 
     //发送邮箱验证码（绑定,修改）
-    @RequestMapping(value = "/relieveEmail",method = RequestMethod.GET )
-    public QueryResponseResult sendEmail(String email,String uid, HttpSession session) {
+    @RequestMapping(value = "/relieveEmail/{uid}/{email}",method = RequestMethod.GET )
+    public QueryResponseResult sendEmail(@PathVariable("uid") String uid,@PathVariable("email")String email, HttpSession session) {
         String userEmail=email;
         String verification = GetFourRandom.getFourRandom();
         String theme = "微利商城";
