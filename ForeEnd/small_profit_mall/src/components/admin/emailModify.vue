@@ -83,8 +83,8 @@
               </div>
               <div style="margin: 3% 0 3% 0;">
                 <el-button type="primary" class="ver_btn"
-                           @click="sendCode">
-                  发送验证码
+                           @click="getCode()" :loading="sendCode_btn">
+                  {{sendCode_btn_content}}
                 </el-button>
               </div>
               <div>
@@ -209,7 +209,8 @@
                     style="width: 35%;margin-right: 3%;margin-left: -5%;"
                 >
                 </el-input>
-                <el-button type="primary" @click="getUntieEmailCode()" :disabled="!untieEmailBtnStatus"
+                <el-button type="primary" @click="getUntieEmailCode()"
+                           :disabled="!untieEmailBtnStatus"
                            style="width: 120px">
                   {{untieEmailBtnStatus ?'获取验证码':`重新获取(${untieEmailCountDownTime})`}}
                 </el-button>
@@ -235,6 +236,7 @@
 </template>
 
 <script>
+  import *as userApi from '../../api/page/user'  //*as别名
   export default {
     inject: ["reload"],
     name: "emailModify",
@@ -265,6 +267,9 @@
         //验证按钮
         verification_btn: false,
         verification_btn_content: '验证',
+        //发送验证码按钮
+        sendCode_btn: false,
+        sendCode_btn_content: "获取验证码",
         //邮箱验步数
         activeEmail: 1,
         emailTypeM: this.emailType,
@@ -300,19 +305,36 @@
             message: "请输入正确的邮箱格式",
             type: "warning"
           });
-        } else if(this.emailCode=="" || this.emailCode<=4){
+        } else if (this.emailCode == "" || this.emailCode <= 4) {
           this.$message({
             message: "请输入正确格式的验证码",
             type: "warning"
           });
-        }else {
+        } else {
           this.verification_btn_content = '验证中..',
               this.verification_btn = true;
-          setTimeout(() => {
-            this.verification_btn_content = '验证',
-                this.verification_btn = false;
-            this.GetCode();
-          }, 3000);
+          let formData = new FormData()
+          formData.append('userId', sessionStorage.getItem("uId"))
+          formData.append('email', this.email);
+          formData.append('verification', this.emailCode);
+          userApi.validationEmail(formData).then(res => {
+            if (res.success) {
+                this.$message({
+                  message:"邮箱绑定成功!",
+                  type:"success",
+                })
+              this.verification_btn_content = '验证',
+                  this.verification_btn = false;
+                this.cancelModifyEmail();
+            }else{
+              this.$message({
+                message:"邮箱绑定失败!",
+                type:"error",
+              })
+              this.verification_btn_content = '验证',
+                  this.verification_btn = false;
+            }
+          })
 
         }
       },
@@ -331,13 +353,37 @@
           });
         } else {
           this.GetCodeEmail();
-
+          let formData = new FormData()
+          formData.append('uId', sessionStorage.getItem("uId"))
+          formData.append('email', this.email)
+          userApi.getEmailCode(formData).then(res => {
+            if (res.success) {
+              this.$message({
+                message: "邮箱验证码已发送",
+                type: "success",
+              })
+            } else {
+              this.$message({
+                message: "邮箱验证码发送失败,请检查邮箱",
+                type: "error",
+              })
+            }
+          })
         }
 
       },
       //修改邮箱时获取验证码
       getCode() {
-        this.GetCodeMdEmail();
+        this.sendCode_btn = true;
+        this.sendCode_btn_content = "发送中";
+        setTimeout(() => {
+          this.sendCode_btn = false;
+          this.sendCode_btn_content = "获取验证码";
+          this.GetCodeMdEmail();
+          this.activeEmail = 2;
+          sessionStorage.setItem('email_active', JSON.stringify(this.activeEmail));
+        }, 3000)
+
       },
       verificationMdEmail() {
         if (this.code == '' || this.code.length <= 4) {
@@ -356,12 +402,7 @@
           }, 3000);
         }
       },
-      //修改邮箱时发送验证码 步骤1
-      sendCode() {
-        this.GetCodeMdEmail();
-        this.activeEmail = 2;
-        sessionStorage.setItem('email_active', JSON.stringify(this.activeEmail));
-      },
+
       //获取新邮箱验证码
       getNewEmailCode() {
         const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
@@ -416,11 +457,11 @@
         }
       },
       //获取解绑邮箱的验证码
-      getUntieEmailCode(){
+      getUntieEmailCode() {
         this.GetCodeUntieEmail();
       },
       //验证解绑邮箱
-      verificationUntieEmail(){
+      verificationUntieEmail() {
         if (this.code == '' || this.code.length <= 4) {
           this.$message({
             message: "请输入正确格式的验证码",
@@ -432,7 +473,6 @@
           setTimeout(() => {
             this.verification_btn_content = '验证',
                 this.verification_btn = false;
-
 
           }, 3000);
         }

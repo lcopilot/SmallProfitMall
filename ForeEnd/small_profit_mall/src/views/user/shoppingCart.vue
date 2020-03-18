@@ -262,6 +262,11 @@
         this.cartFrom.totalPrice = 0;
         this.cartFrom.productList = selection;
         this.productNumber = selection.length;
+        if(selection.length!=this.cartList.length){
+          this.selectAll=false;
+        }else{
+          this.selectAll=true;
+        }
         selection.forEach(product => {
           this.cartFrom.totalPrice += (((product.price) * 100) * product.Quantity) / 100
         })
