@@ -1,6 +1,5 @@
 package cn.itcast.controller;
 
-import cn.itcast.domain.user.User;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
@@ -38,14 +37,14 @@ public class EmailController {
     UserService userService;
 
     //发送邮箱验证码（绑定,修改）
-    @RequestMapping(value = "/relieveEmail/{uid}/{email}",method = RequestMethod.GET )
-    public QueryResponseResult sendEmail(@PathVariable("uid") String uid,@PathVariable("email")String email, HttpSession session) {
+    @RequestMapping(value = "/relieveEmail",method = RequestMethod.POST )
+    public QueryResponseResult sendEmail(String email,String uId ,HttpSession session) {
         String userEmail=email;
         String verification = GetFourRandom.getFourRandom();
         String theme = "微利商城";
         String sendEmail = "liliu_muge@163.com";
         if(userEmail==null){
-             userEmail = emailService.fendByIdEmail(uid);
+             userEmail = emailService.fendByIdEmail(uId);
         }
         String content = verification;
         int redis = sendEmailUtil.sendEmailUtil(theme, sendEmail, userEmail, content);
@@ -115,19 +114,5 @@ public class EmailController {
         }
     }
 
-    /**
-     * 解绑邮箱
-     * @param userId
-     * @return
-     */
 
-    @RequestMapping(value = "/relieveEmail", method = RequestMethod.POST)
-    public QueryResponseResult relieveEmail(String userId) {
-        String email=null;
-        int redis = emailService.addEmail(userId,email);
-        if (redis == 1) {
-            return new QueryResponseResult(CommonCode.SUCCESS, null);
-        }
-        return new QueryResponseResult(CommonCode.FAIL, null);
-    }
 }
