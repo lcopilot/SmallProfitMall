@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.EmailDao">
+
+    <!--根据id修改手机号码-->
+    <update id="addEmail" parameterType="java.lang.String">
+        update user set email = #{email} where uid=#{uid}
+    </update>
+
+    <!--根据uid查询邮箱-->
+    <select id="fendByIdEmail" parameterType="java.lang.String" resultType="java.lang.String">
+        select email from user where uid=#{uid}
+    </select>
+</mapper>

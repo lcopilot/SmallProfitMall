@@ -1,35 +1,17 @@
 package cn.itcast.util.compressPicture;
-
 import java.awt.Color;
-
 import java.awt.Graphics;
-
 import java.awt.Image;
-
 import java.awt.image.BufferedImage;
-
 import java.awt.image.ConvolveOp;
-
 import java.awt.image.Kernel;
-
 import java.io.File;
-
 import java.io.FileOutputStream;
-
 import java.io.IOException;
-
-
-
 import javax.swing.ImageIcon;
-
-
-
 import com.sun.image.codec.jpeg.JPEGCodec;
-
 import com.sun.image.codec.jpeg.JPEGEncodeParam;
-
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
-
 
 
 public class imagesFiler {
