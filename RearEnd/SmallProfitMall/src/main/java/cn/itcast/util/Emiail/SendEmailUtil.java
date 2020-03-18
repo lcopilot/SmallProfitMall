@@ -30,10 +30,8 @@ public class SendEmailUtil {
             mMessageHelper.setSubject(theme);//邮件的主题
             mMessageHelper.setText(content,true);//邮件的文本内容，true表示文本以html格式打开
             javaMailSender.send(mMessage);//发送邮件
-        } catch (MessagingException e){
-            System.out.println("sdfs");
+        } catch (MessagingException e) {
         }
-
 
 
 

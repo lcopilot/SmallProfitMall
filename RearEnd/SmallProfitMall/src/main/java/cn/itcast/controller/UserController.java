@@ -319,8 +319,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/formerPhone", method = RequestMethod.POST)
-	public QueryResponseResult updateFormerPhone(String verification, String phone,
-			HttpSession session) {
+	public QueryResponseResult updateFormerPhone(String verification, String phone, HttpSession session) {
 		String formerPhoneVerify = (String) session.getAttribute("formerPhoneVerify");
 		String formerPhone = (String) session.getAttribute("formerPhone");
 		if (verification.equals(formerPhoneVerify) && phone.equals(formerPhone)) {
