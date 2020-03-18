@@ -75,7 +75,7 @@ public class EmailController {
     /**
      * 验证新手机更改邮箱短信验证(用户解绑邮箱,更新邮箱)
      */
-    @RequestMapping(value = "/updateEmailPhone", method = RequestMethod.GET)
+    @RequestMapping(value = "/updateEmailPhone", method = RequestMethod.POST)
     public QueryResponseResult updateEmailPhone(String userId, HttpSession session) throws ClientException {
         String phone = userService.findByIdPhone(userId);
         String FR = GetFourRandom.getFourRandom();  //随机验证码
