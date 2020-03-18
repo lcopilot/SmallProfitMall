@@ -44,3 +44,12 @@ export const sendNewPhoneCode = params => {
 export const verifyNewPhoneCode = params => {
   return http.requestPost('/apiUrl/user/updatePhone' ,params);
 }
+//绑定邮箱
+export const getEmailCode = params => {
+  return http.requestPost('/apiUrl/EmailController/relieveEmail',params);
+}
+//验证邮箱验证码
+export const validationEmail = params => {
+  return http.requestPost('/apiUrl/EmailController/updateEmail',params);
+}
+
