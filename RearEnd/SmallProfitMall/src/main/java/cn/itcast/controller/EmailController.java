@@ -37,7 +37,7 @@ public class EmailController {
     UserService userService;
 
     //发送邮箱验证码（绑定,修改）
-    @RequestMapping("/relieveEmail")
+    @RequestMapping(value = "/relieveEmail",method = RequestMethod.GET )
     public QueryResponseResult sendEmail(String email,String uid, HttpSession session) {
         String userEmail=email;
         String verification = GetFourRandom.getFourRandom();
@@ -75,7 +75,7 @@ public class EmailController {
     /**
      * 验证新手机更改邮箱短信验证(用户解绑邮箱,更新邮箱)
      */
-    @RequestMapping(value = "/updateEmailPhone", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateEmailPhone", method = RequestMethod.GET)
     public QueryResponseResult updateEmailPhone(String userId, HttpSession session) throws ClientException {
         String phone = userService.findByIdPhone(userId);
         String FR = GetFourRandom.getFourRandom();  //随机验证码
