@@ -78,6 +78,14 @@ const routes = [
     },
     component: () => import('@/views/user/addressManagement')
   },
+  {
+    path: '/allOrders',
+    name: 'AllOrders',
+    meta: {
+      requireAuth: true,
+    },
+    component: () => import('@/views/user/allOrders')
+  },
   //捕获404
   {
     path: "/404",

@@ -275,27 +275,27 @@
                 </el-row>
                 <el-row>
                   <el-col :span="22" :push="1">
-                    <el-tabs style="margin-top: 20px">
-                      <el-tab-pane label="全部评价(600+)" lazy>
-                        <commentContent :genre="2"/>
+                    <el-tabs style="margin-top: 20px" v-model="commentType">
+                      <el-tab-pane label="全部评价(600+)" name="1" lazy>
+                        <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane label="晒图(111)" lazy>
-                        <commentContent :genre="2"/>
+                      <el-tab-pane label="晒图(111)" name="2" lazy>
+                        <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane label="视频晒单(6)" lazy>
-                        <commentContent/>
+                      <el-tab-pane label="视频晒单(6)" name="3" lazy>
+                        <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane label="追评(6)" lazy>
-                        <commentContent/>
+                      <el-tab-pane label="追评(6)" name="4" lazy>
+                        <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane label="好评(9)" lazy>
-                        <commentContent/>
+                      <el-tab-pane label="好评(9)" name="5" lazy>
+                        <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane label="中评(6)" lazy>
-                        <commentContent/>
+                      <el-tab-pane label="中评(6)" name="6" lazy>
+                        <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane label="差评(6)" lazy>
-                        <commentContent/>
+                      <el-tab-pane label="差评(6)" name="7" lazy>
+                        <commentContent :genre="commentType"/>
                       </el-tab-pane>
                     </el-tabs>
                   </el-col>
@@ -371,6 +371,8 @@
     name: "Product",
     data() {
       return {
+        //评论类型
+        commentType:"1",
         bigImg: '',//商品大图
         videoShow: false,
         //商品视频相关的播放参数
