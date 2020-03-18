@@ -83,8 +83,8 @@
                     :key="index">
                   <div v-for="(lowPriceProduct,index) in lowPriceProducts" :key="index" class="product_low">
                     <router-link to="/">
-                      <transition name="el-zoom-in-center" >
-                        <div class="low_price_product">
+                      <transition name="el-zoom-in-center">
+                        <div class="low_price_product" v-if="display">
                           <el-image :src="lowPriceProduct.imageSite" fit="fill"></el-image>
                           <svg-icon name="lowPrice" class="low_Price_icon"/>
                           <!-- 价格不能超过7位 -->
@@ -123,6 +123,8 @@
     components: {ProductsFeatured, Header, Footer, Carousel, CountDown},
     data() {
       return {
+        //天天低价童话
+        display:false,
         //秒杀场次
         spikeSessions: '',
         //低价广告的开始向
@@ -204,7 +206,6 @@
         homeApi.getLowPriceProductList().then(res => {
           if (res.success) {
             this.lowPriceProductList = res.queryResult.list[0].productLowPrice;
-
           }
         })
       },
@@ -224,11 +225,11 @@
       }
     },
     created() {
+      this.lowPriceProductSwitch();
       this.$nextTick(()=>{
         this.getLowPriceProductList();
         this.getSpikeSessions();
         this.getSpikeAdList();
-        this.lowPriceProductSwitch();
         this.getSpikeProductList();
       })
     },
