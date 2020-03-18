@@ -154,9 +154,9 @@
     props:{
       //评论类型
       genre: {
-        type:Number,
+        type:String,
         required:false,
-        default: 1
+        default: "1"
       }
     },
     methods: {
@@ -188,6 +188,9 @@
         return this.$refs.videoPlayer.player;
       }
     },
+    created() {
+
+    }
   }
 </script>
 
