@@ -44,7 +44,7 @@ public class EmailController {
         String theme = "微利商城";
         String sendEmail = "liliu_muge@163.com";
         if(userEmail==null){
-             userEmail = emailService.fendByIdEmail(uId);
+            userEmail = emailService.fendByIdEmail(uId);
         }
         String content = verification;
         int redis = sendEmailUtil.sendEmailUtil(theme, sendEmail, userEmail, content);
