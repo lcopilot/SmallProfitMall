@@ -24,6 +24,9 @@
     <!-- 引入jdbc.properties属性文件 -->
     <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
     <context:property-placeholder location="classpath*:rabbitMq.properties" ignore-unresolvable="true"/>
+    <!--邮件配置-->
+    <context:property-placeholder location="classpath:mail.properties" ignore-unresolvable="true"/>
+
     <!-- 阿里 druid 数据库连接池 配置  -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
         <!-- 数据库基本信息配置 -->
@@ -164,12 +167,31 @@
         <!--开启事务  -->
         <property name="enableTransactionSupport" value="true"></property>
     </bean>
-    <import resource="classpath:spring-rabbit.xml" />
+
+
     <!--自定义redis工具类,在需要缓存的地方注入此类  -->
     <bean id="redisService" class="cn.itcast.util.cache.RedisUtil">
         <constructor-arg ref="redisTemplate"/>
         <property name="redisTemplate" ref="redisTemplate" />
     </bean>
 
+
+    <!--导入MQ配置文件-->
+    <import resource="classpath:producer.xml" />
+
+
+    <!--配置邮件接口-->
+    <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${mail.smtp.host}"/>
+        <property name="username" value="${mail.smtp.username}"/>
+        <property name="password" value="${mail.smtp.password}"/>
+        <property name="defaultEncoding" value="${mail.smtp.defaultEncoding}"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+                <prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
+            </props>
+        </property>
+    </bean>
 
 </beans>

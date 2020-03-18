@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/rabbit
+	http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+  <!--生产者者配置如下：-->
+  <!-- 定义RabbitMQ的连接工厂 -->
+  <rabbit:connection-factory id="connectionFactory"
+                             host="${rabbitmq.host}" port="${rabbitmq.port}" username="${rabbitmq.username}"
+                             password="${rabbitmq.password}" virtual-host="${rabbitmq.vhost}"/>
+  <!-- 管理消息队列 -->
+  <rabbit:admin connection-factory="connectionFactory"/>
+
+  <!-- 定义交换机 自动声明-->
+  <rabbit:direct-exchange name="EMAIL-EXCHANGE" auto-declare="true" durable="true"/>
+
+  <!-- 定义MQ消息模板 -->
+  <rabbit:template id="rabbitTemplate"
+                   connection-factory="connectionFactory" exchange="EMAIL-EXCHANGE"/>
+
+  <!-- 监听队列 -->
+  <rabbit:listener-container connection-factory="connectionFactory">
+    <rabbit:listener ref="mQSimpleMsgHandler" method="execute" queue-names="EMAIL-QUEUE"/>
+  </rabbit:listener-container>
+
+  <!--监听队列-->
+  <rabbit:listener-container connection-factory="connectionFactory">
+    <rabbit:listener ref="sms" method="sms" queue-names="SMS-QUEUE"/>
+  </rabbit:listener-container>
+
+  <!-- 声明多个消费者对象 -->
+  <bean id="mQSimpleMsgHandler" class="cn.itcast.util.rabbitMq.MQSimpleMsgHandler"/>
+  <bean id="sms" class="cn.itcast.Test.mq.sms"/>
+</beans>

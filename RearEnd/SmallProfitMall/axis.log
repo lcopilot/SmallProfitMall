@@ -1,2 +1,210 @@
 2018-05-06 00:10:05,711 1      [           main] INFO  ClassPathXmlApplicationContext  - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3fb6a447: startup date [Sun May 06 00:10:05 GMT+08:00 2018]; root of context hierarchy
 2018-05-06 00:10:05,851 141    [           main] INFO  ry.xml.XmlBeanDefinitionReader  - Loading XML bean definitions from class path resource [applicationContext.xml]
+2020-03-16 18:10:33,791 0      [           main] INFO  ClassPathXmlApplicationContext  - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51016012: startup date [Mon Mar 16 18:10:33 CST 2020]; root of context hierarchy
+2020-03-16 18:10:33,841 50     [           main] INFO  ry.xml.XmlBeanDefinitionReader  - Loading XML bean definitions from class path resource [consumer.xml]
+2020-03-16 18:10:34,099 308    [           main] WARN  ClassPathXmlApplicationContext  - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'connectionFactory': Initialization of bean failed; nested exception is org.springframework.beans.TypeMismatchException: Failed to convert property value of type 'java.lang.String' to required type 'int' for property 'port'; nested exception is java.lang.NumberFormatException: For input string: "${rabbitmq.port}"
+2020-03-16 18:11:25,747 0      [           main] INFO  ClassPathXmlApplicationContext  - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51016012: startup date [Mon Mar 16 18:11:25 CST 2020]; root of context hierarchy
+2020-03-16 18:11:25,800 53     [           main] INFO  ry.xml.XmlBeanDefinitionReader  - Loading XML bean definitions from class path resource [consumer.xml]
+2020-03-16 18:11:26,055 308    [           main] WARN  ClassPathXmlApplicationContext  - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'connectionFactory': Initialization of bean failed; nested exception is org.springframework.beans.TypeMismatchException: Failed to convert property value of type 'java.lang.String' to required type 'int' for property 'port'; nested exception is java.lang.NumberFormatException: For input string: "${rabbitmq.port}"
+2020-03-17 10:53:22,224 0      [           main] INFO  ClassPathXmlApplicationContext  - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@51016012: startup date [Tue Mar 17 10:53:22 CST 2020]; root of context hierarchy
+2020-03-17 10:53:22,280 56     [           main] INFO  ry.xml.XmlBeanDefinitionReader  - Loading XML bean definitions from class path resource [consumer.xml]
+2020-03-17 10:53:22,659 435    [           main] WARN  ClassPathXmlApplicationContext  - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'connectionFactory': Initialization of bean failed; nested exception is org.springframework.beans.TypeMismatchException: Failed to convert property value of type 'java.lang.String' to required type 'int' for property 'port'; nested exception is java.lang.NumberFormatException: For input string: "${rabbitmq.port}"
+2020-03-18 10:14:09,930 0      [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient try connect to host:mx3.qq.com.
+2020-03-18 10:14:15,147 5217   [           main] INFO  st.Test.CheckEmailValidityUtil  - 找到MX记录:qq.com
+2020-03-18 10:14:15,148 5218   [           main] INFO  st.Test.CheckEmailValidityUtil  - 建立链接成功：qq.com
+2020-03-18 10:14:15,148 5218   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:220 newxmmxsza63.qq.com MX QQ Mail Server.
+
+2020-03-18 10:14:15,211 5281   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient login:ranguisheng...
+2020-03-18 10:14:15,211 5281   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250-newxmmxsza63.qq.com-10.62.16.84-17363320
+250-SIZE 73400320
+250 OK
+
+2020-03-18 10:14:15,273 5343   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置发送者 :ranguisheng@163.com
+2020-03-18 10:14:15,273 5343   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250 OK.
+
+2020-03-18 10:14:15,364 5434   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置接收者:2252821162@qq.com
+2020-03-18 10:14:15,364 5434   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250 OK 1
+
+2020-03-18 10:14:15,364 5434   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyCode：250(250表示正常)
+2020-03-18 10:14:43,264 1      [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient try connect to host:mx3.qq.com.
+2020-03-18 10:14:48,386 5123   [           main] INFO  st.Test.CheckEmailValidityUtil  - 找到MX记录:qq.com
+2020-03-18 10:14:48,387 5124   [           main] INFO  st.Test.CheckEmailValidityUtil  - 建立链接成功：qq.com
+2020-03-18 10:14:48,387 5124   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:220 newxmmxszb55.qq.com MX QQ Mail Server.
+
+2020-03-18 10:14:48,442 5179   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient login:ranguisheng...
+2020-03-18 10:14:48,442 5179   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250-newxmmxszb55.qq.com-100.107.146.206-1704500
+250-SIZE 73400320
+250 OK
+
+2020-03-18 10:14:48,505 5242   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置发送者 :ranguisheng@163.com
+2020-03-18 10:14:48,506 5243   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250 OK.
+
+2020-03-18 10:14:48,589 5326   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置接收者:165148919189189@qq.com
+2020-03-18 10:14:48,589 5326   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250 OK 1
+
+2020-03-18 10:14:48,589 5326   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyCode：250(250表示正常)
+2020-03-18 10:15:09,179 0      [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient try connect to host:mx3.qq.com.
+2020-03-18 10:15:14,326 5147   [           main] INFO  st.Test.CheckEmailValidityUtil  - 找到MX记录:qq.com
+2020-03-18 10:15:14,327 5148   [           main] INFO  st.Test.CheckEmailValidityUtil  - 建立链接成功：qq.com
+2020-03-18 10:15:14,327 5148   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:220 newxmmxszc69.qq.com MX QQ Mail Server.
+
+2020-03-18 10:15:14,389 5210   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient login:ranguisheng...
+2020-03-18 10:15:14,389 5210   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250-newxmmxszc69.qq.com-100.77.13.98-64212157
+250-SIZE 73400320
+250 OK
+
+2020-03-18 10:15:14,458 5279   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置发送者 :ranguisheng@163.com
+2020-03-18 10:15:14,458 5279   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250 OK.
+
+2020-03-18 10:15:14,567 5388   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置接收者:1651489191891asda89@qq.com
+2020-03-18 10:15:14,567 5388   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250 OK 1
+
+2020-03-18 10:15:14,567 5388   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyCode：250(250表示正常)
+2020-03-18 10:15:39,931 0      [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient try connect to host:mx3.qq.com.
+2020-03-18 10:15:45,067 5136   [           main] INFO  st.Test.CheckEmailValidityUtil  - 找到MX记录:qq.com
+2020-03-18 10:15:45,067 5136   [           main] INFO  st.Test.CheckEmailValidityUtil  - 建立链接成功：qq.com
+2020-03-18 10:15:45,067 5136   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:220 newxmmxszc62.qq.com MX QQ Mail Server.
+
+2020-03-18 10:15:45,121 5190   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient login:ranguisheng...
+2020-03-18 10:15:45,121 5190   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250-newxmmxszc62.qq.com-100.77.4.225-72709443
+250-SIZE 73400320
+250 OK
+
+2020-03-18 10:15:45,174 5243   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置发送者 :ranguisheng@163.com
+2020-03-18 10:15:45,174 5243   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250 OK.
+
+2020-03-18 10:15:45,285 5354   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置接收者:12331223121323@qq.com
+2020-03-18 10:15:45,285 5354   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250 OK 1
+
+2020-03-18 10:15:45,285 5354   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyCode：250(250表示正常)
+2020-03-18 10:18:03,016 1      [           main] ERROR st.Test.CheckEmailValidityUtil  - 邮箱（12331223121323@qqwe.com）校验未通过，未找到对应的MX记录!
+2020-03-18 10:18:33,916 0      [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient try connect to host:mx3.qq.com.
+2020-03-18 10:18:39,060 5144   [           main] INFO  st.Test.CheckEmailValidityUtil  - 找到MX记录:qq.com
+2020-03-18 10:18:39,060 5144   [           main] INFO  st.Test.CheckEmailValidityUtil  - 建立链接成功：qq.com
+2020-03-18 10:18:39,060 5144   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:220 newxmmxsza61.qq.com MX QQ Mail Server.
+
+2020-03-18 10:18:39,122 5206   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient login:ranguisheng...
+2020-03-18 10:18:39,122 5206   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250-newxmmxsza61.qq.com-10.55.209.13-33150894
+250-SIZE 73400320
+250 OK
+
+2020-03-18 10:18:39,172 5256   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置发送者 :ranguisheng@163.com
+2020-03-18 10:18:39,172 5256   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250 OK.
+
+2020-03-18 10:18:39,311 5395   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置接收者:1231231125691489112356121359112323131221312@qq.com
+2020-03-18 10:18:39,311 5395   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250 OK 1
+
+2020-03-18 10:18:39,311 5395   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyCode：250(250表示正常)
+2020-03-18 10:19:08,722 0      [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient try connect to host:163mx00.mxmail.netease.com.
+2020-03-18 10:19:09,902 1180   [           main] INFO  st.Test.CheckEmailValidityUtil  - 找到MX记录:163.com
+2020-03-18 10:19:09,902 1180   [           main] INFO  st.Test.CheckEmailValidityUtil  - 建立链接成功：163.com
+2020-03-18 10:19:09,902 1180   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:220 163.com Anti-spam GT for Coremail System (163com[20141201])
+
+2020-03-18 10:19:09,954 1232   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient login:ranguisheng...
+2020-03-18 10:19:09,954 1232   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250 OK
+
+2020-03-18 10:19:11,014 2292   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置发送者 :ranguisheng@163.com
+2020-03-18 10:19:11,014 2292   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:550 User not found: ranguisheng@163.com
+
+2020-03-18 10:19:11,068 2346   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置接收者:qewqeweqwe@163.com
+2020-03-18 10:19:11,068 2346   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:503 bad sequence of commands
+
+2020-03-18 10:19:11,068 2346   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyCode：503(250表示正常)
+2020-03-18 10:19:51,760 0      [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient try connect to host:163mx00.mxmail.netease.com.
+2020-03-18 10:19:51,918 158    [           main] INFO  st.Test.CheckEmailValidityUtil  - 找到MX记录:163.com
+2020-03-18 10:19:51,919 159    [           main] INFO  st.Test.CheckEmailValidityUtil  - 建立链接成功：163.com
+2020-03-18 10:19:51,919 159    [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:220 163.com Anti-spam GT for Coremail System (163com[20141201])
+
+2020-03-18 10:19:51,978 218    [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient login:ranguisheng...
+2020-03-18 10:19:51,978 218    [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250 OK
+
+2020-03-18 10:19:53,037 1277   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置发送者 :ranguisheng@163.com
+2020-03-18 10:19:53,037 1277   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:550 User not found: ranguisheng@163.com
+
+2020-03-18 10:19:53,089 1329   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置接收者:fhx210114@163.com
+2020-03-18 10:19:53,090 1330   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:503 bad sequence of commands
+
+2020-03-18 10:19:53,090 1330   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyCode：503(250表示正常)
+2020-03-18 10:20:42,784 0      [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient try connect to host:163mx00.mxmail.netease.com.
+2020-03-18 10:20:42,930 146    [           main] INFO  st.Test.CheckEmailValidityUtil  - 找到MX记录:163.com
+2020-03-18 10:20:42,930 146    [           main] INFO  st.Test.CheckEmailValidityUtil  - 建立链接成功：163.com
+2020-03-18 10:20:42,930 146    [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:220 163.com Anti-spam GT for Coremail System (163com[20141201])
+
+2020-03-18 10:20:42,985 201    [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient login:ranguisheng...
+2020-03-18 10:20:42,985 201    [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:250 OK
+
+2020-03-18 10:20:44,054 1270   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置发送者 :ranguisheng@163.com
+2020-03-18 10:20:44,054 1270   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:550 User not found: ranguisheng@163.com
+
+2020-03-18 10:20:44,119 1335   [           main] INFO  st.Test.CheckEmailValidityUtil  - 设置接收者:ranguisheng@163.com
+2020-03-18 10:20:44,119 1335   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyString:503 bad sequence of commands
+
+2020-03-18 10:20:44,120 1336   [           main] INFO  st.Test.CheckEmailValidityUtil  - SMTPClient ReplyCode：503(250表示正常)
+2020-03-18 10:24:01,213 0      [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient try connect to host:mx3.qq.com.
+2020-03-18 10:24:06,430 5217   [           main] INFO      cn.itcast.Test.PostBoxVail  - 找到MX记录:qq.com
+2020-03-18 10:24:06,430 5217   [           main] INFO      cn.itcast.Test.PostBoxVail  - 建立链接成功：qq.com
+2020-03-18 10:24:06,430 5217   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:220 newxmmxszc19.qq.com MX QQ Mail Server.
+
+2020-03-18 10:24:06,483 5270   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient login:ranguisheng...
+2020-03-18 10:24:06,483 5270   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:250-newxmmxszc19.qq.com-100.110.30.130-48265336
+250-SIZE 73400320
+250 OK
+
+2020-03-18 10:24:06,540 5327   [           main] INFO      cn.itcast.Test.PostBoxVail  - 设置发送者 :ranguisheng@163.com
+2020-03-18 10:24:06,540 5327   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:250 OK.
+
+2020-03-18 10:24:06,623 5410   [           main] INFO      cn.itcast.Test.PostBoxVail  - 设置接收者:2252821162@qq.com
+2020-03-18 10:24:06,623 5410   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:250 OK 1
+
+2020-03-18 10:24:06,624 5411   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyCode：250(250表示正常)
+2020-03-18 10:24:26,250 0      [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient try connect to host:mx3.qq.com.
+2020-03-18 10:24:31,374 5124   [           main] INFO      cn.itcast.Test.PostBoxVail  - 找到MX记录:qq.com
+2020-03-18 10:24:31,374 5124   [           main] INFO      cn.itcast.Test.PostBoxVail  - 建立链接成功：qq.com
+2020-03-18 10:24:31,374 5124   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:220 newxmmxszc48.qq.com MX QQ Mail Server.
+
+2020-03-18 10:24:31,424 5174   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient login:ranguisheng...
+2020-03-18 10:24:31,424 5174   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:250-newxmmxszc48.qq.com-100.77.8.147-39316979
+250-SIZE 73400320
+250 OK
+
+2020-03-18 10:24:31,478 5228   [           main] INFO      cn.itcast.Test.PostBoxVail  - 设置发送者 :ranguisheng@163.com
+2020-03-18 10:24:31,478 5228   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:250 OK.
+
+2020-03-18 10:24:31,597 5347   [           main] INFO      cn.itcast.Test.PostBoxVail  - 设置接收者:225282asd1162@qq.com
+2020-03-18 10:24:31,597 5347   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:250 OK 1
+
+2020-03-18 10:24:31,597 5347   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyCode：250(250表示正常)
+2020-03-18 10:24:55,655 0      [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient try connect to host:mx3.qq.com.
+2020-03-18 10:25:00,882 5227   [           main] INFO      cn.itcast.Test.PostBoxVail  - 找到MX记录:qq.com
+2020-03-18 10:25:00,882 5227   [           main] INFO      cn.itcast.Test.PostBoxVail  - 建立链接成功：qq.com
+2020-03-18 10:25:00,882 5227   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:220 newxmmxszc52.qq.com MX QQ Mail Server.
+
+2020-03-18 10:25:00,926 5271   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient login:ranguisheng...
+2020-03-18 10:25:00,926 5271   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:250-newxmmxszc52.qq.com-100.77.6.31-38546931
+250-SIZE 73400320
+250 OK
+
+2020-03-18 10:25:00,980 5325   [           main] INFO      cn.itcast.Test.PostBoxVail  - 设置发送者 :ranguisheng@163.com
+2020-03-18 10:25:00,980 5325   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:250 OK.
+
+2020-03-18 10:25:01,084 5429   [           main] INFO      cn.itcast.Test.PostBoxVail  - 设置接收者:123123123123waqedawedaw123321@qq.com
+2020-03-18 10:25:01,084 5429   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:250 OK 1
+
+2020-03-18 10:25:01,084 5429   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyCode：250(250表示正常)
+2020-03-18 10:25:30,046 0      [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient try connect to host:mx3.qq.com.
+2020-03-18 10:25:35,194 5148   [           main] INFO      cn.itcast.Test.PostBoxVail  - 找到MX记录:qq.com
+2020-03-18 10:25:35,194 5148   [           main] INFO      cn.itcast.Test.PostBoxVail  - 建立链接成功：qq.com
+2020-03-18 10:25:35,194 5148   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:220 newxmmxszc24.qq.com MX QQ Mail Server.
+
+2020-03-18 10:25:35,244 5198   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient login:ranguisheng...
+2020-03-18 10:25:35,244 5198   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:250-newxmmxszc24.qq.com-100.110.15.27-24768770
+250-SIZE 73400320
+250 OK
+
+2020-03-18 10:25:35,297 5251   [           main] INFO      cn.itcast.Test.PostBoxVail  - 设置发送者 :ranguisheng@163.com
+2020-03-18 10:25:35,297 5251   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:250 OK.
+
+2020-03-18 10:25:35,398 5352   [           main] INFO      cn.itcast.Test.PostBoxVail  - 设置接收者:123123123123waqedawe111111111111111111111daw123321@qq.com
+2020-03-18 10:25:35,398 5352   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyString:250 OK 1
+
+2020-03-18 10:25:35,398 5352   [           main] INFO      cn.itcast.Test.PostBoxVail  - SMTPClient ReplyCode：250(250表示正常)
