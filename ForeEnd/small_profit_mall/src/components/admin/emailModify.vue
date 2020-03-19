@@ -25,7 +25,7 @@
                     autofocus
                     type='text'
                     placeholder="请输入验证码"
-                    v-model.number="emailCode"
+                    v-model="emailCode"
                     maxlength="4"
                     show-word-limit
                     clearable
@@ -33,14 +33,14 @@
                     style="width: 35%;margin-right: 3%;margin-left: -5%;"
                 >
                 </el-input>
-                <el-button type="primary" @click="getEmailCode()" :disabled="!emailBtnStatus"
+                <el-button type="primary" @click="getEmailCode(1)" :disabled="!emailBtnStatus"
                            style="width: 120px">
                   {{emailBtnStatus ?'获取验证码':`重新获取(${emailCountDownTime})`}}
                 </el-button>
               </div>
               <div style="margin: 3% 0 3% 0;">
                 <el-button type="primary" style="width: 60%;margin-left: -5%"
-                           @click="verificationEmailCode" :loading="verification_btn">
+                           @click="verificationEmailCode()" :loading="verification_btn">
                   {{verification_btn_content}}
                 </el-button>
               </div>
@@ -83,7 +83,7 @@
               </div>
               <div style="margin: 3% 0 3% 0;">
                 <el-button type="primary" class="ver_btn"
-                           @click="getCode()" :loading="sendCode_btn">
+                           @click="getCode(1)" :loading="sendCode_btn">
                   {{sendCode_btn_content}}
                 </el-button>
               </div>
@@ -100,7 +100,7 @@
                     autofocus
                     type='text'
                     placeholder="请输入验证码"
-                    v-model.number="code"
+                    v-model="code"
                     maxlength="4"
                     show-word-limit
                     clearable
@@ -144,7 +144,7 @@
                     autofocus
                     type='text'
                     placeholder="请输入验证码"
-                    v-model.number="emailCode"
+                    v-model="emailCode"
                     maxlength="4"
                     show-word-limit
                     clearable
@@ -152,7 +152,7 @@
                     style="width: 35%;margin-right: 3%;margin-left: -5%;"
                 >
                 </el-input>
-                <el-button type="primary" @click="getEmailCode()"
+                <el-button type="primary" @click="getEmailCode(2)"
                            :disabled="!mdNewEmailBtnStatus"
                            style="width: 120px">
                   {{mdNewEmailBtnStatus ?'获取验证码':`重新获取(${mdNewEmailCountDownTime})`}}
@@ -201,7 +201,7 @@
                     autofocus
                     type='text'
                     placeholder="请输入验证码"
-                    v-model.number="code"
+                    v-model="code"
                     maxlength="4"
                     show-word-limit
                     clearable
@@ -209,7 +209,7 @@
                     style="width: 35%;margin-right: 3%;margin-left: -5%;"
                 >
                 </el-input>
-                <el-button type="primary" @click="getUntieEmailCode()"
+                <el-button type="primary" @click="getCode(2)"
                            :disabled="!untieEmailBtnStatus"
                            style="width: 120px">
                   {{untieEmailBtnStatus ?'获取验证码':`重新获取(${untieEmailCountDownTime})`}}
@@ -217,7 +217,7 @@
               </div>
               <div style="margin: 3% 0 3% 0;">
                 <el-button type="primary" style="width: 60%;margin-left: -5%"
-                           @click="verificationUntieEmail" :loading="verification_btn">
+                           @click="verificationUntieEmail()" :loading="verification_btn">
                   {{verification_btn_content}}
                 </el-button>
               </div>
@@ -294,6 +294,7 @@
       },
       //绑定邮箱时校验邮箱验证码
       verificationEmailCode() {
+        const code = /^[0-9]*$/
         const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
         if (!this.email) {
           this.$message({
@@ -305,7 +306,8 @@
             message: "请输入正确的邮箱格式",
             type: "warning"
           });
-        } else if (this.emailCode == "" || this.emailCode <= 4) {
+        } else if (!code.test(this.emailCode) || this.emailCode == '' || this.emailCode.length
+            < 4) {
           this.$message({
             message: "请输入正确格式的验证码",
             type: "warning"
@@ -337,9 +339,10 @@
           })
 
         }
+
       },
-      //绑定邮箱时发送邮箱验证码
-      getEmailCode() {
+      //获取邮箱验证码
+      getEmailCode(standard) {
         const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
         if (!this.email) {
           this.$message({
@@ -352,7 +355,11 @@
             type: "warning"
           });
         } else {
-          this.GetCodeEmail();
+          if (standard == 1) {
+            this.GetCodeEmail();
+          } else {
+            this.GetCodeMdNewEmail();
+          }
           let formData = new FormData()
           formData.append('uId', sessionStorage.getItem("uId"))
           formData.append('email', this.email)
@@ -373,7 +380,7 @@
 
       },
       //修改邮箱时获取验证码
-      getCode() {
+      getCode(standard) {
         this.sendCode_btn = true;
         this.sendCode_btn_content = "发送中";
         let formData = new FormData()
@@ -387,10 +394,15 @@
             })
             this.sendCode_btn = false;
             this.sendCode_btn_content = "获取验证码";
-            this.GetCodeMdEmail();
-            this.activeEmail = 2;
-            sessionStorage.setItem("UpdateMailingCode", res.queryResult.list[0]);
-            sessionStorage.setItem('email_active', JSON.stringify(this.activeEmail));
+            if (standard == 1) {
+              this.GetCodeMdEmail();
+              this.activeEmail = 2;
+              sessionStorage.setItem("UpdateMailingCode", res.queryResult.list[0]);
+              sessionStorage.setItem('email_active', JSON.stringify(this.activeEmail));
+            } else {
+              //获取解绑邮箱的验证码
+              this.GetCodeUntieEmail();
+            }
           } else {
             this.$message({
               message: "验证码发送失败,请稍后重试",
@@ -403,7 +415,8 @@
       },
       //验证修改邮箱时的验证码
       verificationMdCode() {
-        if (this.code == '' || this.code.length <= 4) {
+        const codeMail = /^[0-9]*$/
+        if (this.code == '' || this.code.length < 4 || !codeMail.test(this.code)) {
           this.$message({
             message: "请输入正确格式的验证码",
             type: "warning"
@@ -437,13 +450,10 @@
           })
         }
       },
-      //获取解绑邮箱的验证码
-      getUntieEmailCode() {
-        this.GetCodeUntieEmail();
-      },
       //验证解绑邮箱
       verificationUntieEmail() {
-        if (this.code == '' || this.code.length <= 4) {
+        const codeMail = /^[0-9]*$/
+        if (!codeMail.test(this.code) || this.code == '' || this.code.length < 4) {
           this.$message({
             message: "请输入正确格式的验证码",
             type: "warning"
@@ -451,12 +461,39 @@
         } else {
           this.verification_btn_content = '验证中..',
               this.verification_btn = true;
-          setTimeout(() => {
+          let formData = new FormData();
+          formData.append('validationFunctions', "3");
+          formData.append('userId', sessionStorage.getItem("uId"))
+          formData.append('account', sessionStorage.getItem("UpdateMailingCode"));
+          formData.append('verification', this.code);
+          formData.append('verificationType', this.verificationType);
+          userApi.verificationModifyEmailCode(formData).then(res => {
+            if (res.success) {
+              this.$message({
+                message: "邮箱解绑成功!",
+                type: "success",
+              })
+              this.verification_btn_content = '验证',
+                  this.verification_btn = false;
+              this.cancelModifyEmail();
+            } else {
+              this.$message({
+                message: "验证失败,请重试",
+                type: "error",
+              })
+              this.verification_btn_content = '验证',
+                  this.verification_btn = false;
+            }
+          }).catch(error=>{
+            this.$message({
+              message: "服务器累啦,请稍后重试",
+              type: "error",
+            })
             this.verification_btn_content = '验证',
                 this.verification_btn = false;
-
-          }, 3000);
+          })
         }
+
       },
       //绑定邮箱的到计时
       GetCodeEmail() {

@@ -89,7 +89,7 @@
                     autofocus
                     type='text'
                     placeholder="请输入验证码"
-                    v-model.number="smsCode"
+                    v-model="smsCode"
                     maxlength="4"
                     show-word-limit
                     clearable
@@ -206,7 +206,8 @@
       },
       //验证短信验证码
       verificationSmsCode() {
-        if (this.smsCode == '' || this.smsCode.length <= 4) {
+        const code = /^[0-9]*$/
+        if (this.smsCode == '' || this.smsCode.length <= 4 || !code.test(this.smsCode)) {
           this.$message.warning("请输入正确的验证码")
         } else {
           let formData = new FormData()
