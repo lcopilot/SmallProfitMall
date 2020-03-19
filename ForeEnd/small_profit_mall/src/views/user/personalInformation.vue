@@ -219,7 +219,6 @@
           this.userFrom.phone = res.queryResult.list[0].phone;
           this.userFrom.email = res.queryResult.list[0].email;
           this.imageUrl = res.queryResult.list[0].image;
-
           sessionStorage.setItem("userSex",this.userFrom.sex);
           this.DataSelect = new Date().getTime();
           setTimeout(()=>{
@@ -246,6 +245,9 @@
               type: "warning",
             })
           } else if (valid) {
+            if (this.userFrom.birthday==new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate()){
+              this.userFrom.birthday='';
+            }
             userApi.modifyUser(this.userFrom).then(res => {
               if (res.success) {
                 this.getUser();
