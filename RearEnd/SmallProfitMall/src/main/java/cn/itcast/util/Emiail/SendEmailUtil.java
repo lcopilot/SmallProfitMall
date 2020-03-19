@@ -21,7 +21,6 @@ public class SendEmailUtil {
         int verification=0;
         MimeMessage mMessage=javaMailSender.createMimeMessage();//创建邮件对象
                 MimeMessageHelper mMessageHelper;
-
             //从配置文件中拿到发件人邮箱地址
         try {
             mMessageHelper=new MimeMessageHelper(mMessage,true);
