@@ -36,13 +36,13 @@ public class EmailController {
     @Autowired
     UserService userService;
 
-    String verification = GetFourRandom.getFourRandom();
     String theme = "微利商城";
     String sendEmail = "liliu_muge@163.com";
 
     //发送邮箱验证码（绑定,修改）
     @RequestMapping(value = "/relieveEmail",method = RequestMethod.POST )
     public QueryResponseResult sendEmail(String email,String uId ,HttpSession session) {
+        String verification = GetFourRandom.getFourRandom();
         String userEmail=email;
         if(userEmail==null){
             userEmail = emailService.fendByIdEmail(uId);
@@ -64,7 +64,6 @@ public class EmailController {
             return new QueryResponseResult(CommonCode.FALL_USER_REGISTER, null);
         }
         String Verify = (String) session.getAttribute("content");
-        System.out.println(verification);
         session.invalidate();
         if (verification.equals(Verify)) {
             int redis = emailService.addEmail(userId, email);
@@ -83,7 +82,7 @@ public class EmailController {
     public QueryResponseResult updateEmailPhone(String userId,String verificationType, HttpSession session) throws ClientException {
         String phone = userService.findByIdPhone(userId);
         String FR = GetFourRandom.getFourRandom();  //随机验证码
-        System.out.println("修改验证码为 " + FR);
+        System.out.println(FR);
         session.setAttribute("verificationType", verificationType);//验证是否
         if (verificationType.equals("1")){    //手机号码方式
             boolean flag = SmsUtils.updatePhone(phone, FR);
@@ -99,6 +98,7 @@ public class EmailController {
                 return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
             }
         }else if(verificationType.equals("2")){   //邮箱验证
+            String verification = GetFourRandom.getFourRandom();
             String userEmail = emailService.fendByIdEmail(userId);  //查询绑定邮箱
             int redis=7;
             if (userEmail!=null){
@@ -119,28 +119,51 @@ public class EmailController {
     }
 
     /**
-     * 验证手机是否成功
+     * 验证是否成功
      *
      * @param
      * @param session
      * @return
      */
     @RequestMapping(value = "/PhoneSucceed", method = RequestMethod.POST)
-    public QueryResponseResult updateFormerPhone(String verification,String account,String userId,String verificationType, HttpSession session) {
+    public QueryResponseResult updateFormerPhone(String verification,String account,String userId,String verificationType,String validationFunctions, HttpSession session) {
         String verificationTypes = (String) session.getAttribute("verificationType");//验证方式
         String updateEmailPhoneFR = (String) session.getAttribute("updateEmailPhoneFR");//手机验证码
         String updateEmailPhone = (String) session.getAttribute("updateEmailPhone");//手机号码
         String content = (String) session.getAttribute("content");//邮件验证码
         String Email = (String) session.getAttribute("Email");//邮件
         session.invalidate();
-        if(verificationTypes.equals("1")){
+    if (!verificationTypes.equals(verificationType)){
+        return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
+    }
+        if(verificationTypes.equals("1")){//手机验证
             if (verification.equals(updateEmailPhoneFR)&&account.equals(updateEmailPhone)) {
+                if (validationFunctions!=null){
+                    if (validationFunctions.equals("3")){   //解绑
+                        int redis = emailService.addEmail(userId, null);
+                        if(redis==1){
+                            return new QueryResponseResult(CommonCode.SUCCESS,null);//解绑成功
+                        }else {
+                            return new QueryResponseResult(CommonCode.SERVER_ERROR,null);
+                        }
+                    }
+                }
                 return new QueryResponseResult(CommonCode.SUCCESS,null);
             } else {
                 return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
             }
-        }else if (verificationTypes.equals("2")){
+        }else if (verificationTypes.equals("2")){//邮箱验证
             if (verification.equals(content)&&account.equals(Email)) {
+                if (validationFunctions!=null){
+                    if (validationFunctions.equals("3")){   //解绑
+                        int redis = emailService.addEmail(userId, null);
+                        if(redis==1){
+                            return new QueryResponseResult(CommonCode.SUCCESS,null);//解绑成功
+                        }else {
+                            return new QueryResponseResult(CommonCode.SERVER_ERROR,null);
+                        }
+                    }
+                }
                 return new QueryResponseResult(CommonCode.SUCCESS,null);
             } else {
                 return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
@@ -148,6 +171,7 @@ public class EmailController {
         }
         return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
     }
+
 
 
 }
