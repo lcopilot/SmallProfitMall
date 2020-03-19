@@ -52,4 +52,7 @@ export const getEmailCode = params => {
 export const validationEmail = params => {
   return http.requestPost('/apiUrl/EmailController/updateEmail',params);
 }
-
+//修改邮箱时获取验证码
+export const getCode = params => {
+  return http.requestPost('/apiUrl/EmailController/updateEmail',params);
+}
