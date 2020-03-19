@@ -11,6 +11,6 @@
     </insert>
     
     <select id="findById" resultType="cn.itcast.domain.address.Address">
-        SELECT * FROM `userAddress` WHERE uid=#{uid}
+        SELECT * FROM `userAddress` WHERE userId=#{userId}
     </select>
 </mapper>
