@@ -15,8 +15,8 @@ public class AddressImpl implements AddressService {
     AddressDao addressDao;
     //根据id查询
     @Override
-    public List<Address> findById(String uid) {
-        List<Address> addresses=addressDao.findById(uid);
+    public List<Address> findById(String userId) {
+        List<Address> addresses=addressDao.findById(userId);
         for (int i = 0; i <addresses.size() ; i++) {
             String areaCodes=addresses.get(i).getAreaCodes();
            String[] areaCode = areaCodes.split(",");
@@ -30,7 +30,10 @@ public class AddressImpl implements AddressService {
     @Override
     public int addAddress(Address address) {
         String[] areaCodes=address.getAreaCode();
-        String areaCode=areaCodes[0]+","+areaCodes[1]+","+areaCodes[2];
+        String areaCode=null;
+        for (int i = 0; i <areaCodes.length; i++) {
+           areaCode=areaCode+areaCodes[i]+",";
+        }
         address.setAreaCodes(areaCode);
         return addressDao.addAddress(address);
     }

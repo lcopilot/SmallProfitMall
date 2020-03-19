@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface AddressDao {
     //查询用户地址
-    public List<Address> findById(@Param("uid")String uid);
+    public List<Address> findById(@Param("userId")String userId);
 
     //新增用户收货地址地址
     public int addAddress(Address address);
@@ -19,5 +19,5 @@ public interface AddressDao {
     public int updateAddress(Address address);
 
     //删除用户地址
-    public int deleteAddress(@Param("uid")String uid ,@Param("addressId")String addressId);
+    public int deleteAddress(@Param("userId")String userId ,@Param("addressId")String addressId);
 }
