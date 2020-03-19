@@ -311,7 +311,9 @@
       settlement() {
 
         this.$refs.cartTable.selection
-
+        this.$router.push({
+          path: "/orders" //跳转的路径
+        });
       }
     },
 

@@ -225,7 +225,7 @@
             this.birthdays.year=this.birthday[0];
             this.birthdays.month=this.birthday[1];
             this.birthdays.day=this.birthday[2];
-          },10)
+          },200)
         })
         .catch(error => {
           console.log(error);
@@ -245,6 +245,9 @@
               type: "warning",
             })
           } else if (valid) {
+            if (this.birthday[0]==this.birthdays.year && this.birthday[1]==this.birthdays.month && this.birthday[2]==this.birthdays.day){
+              this.userFrom.birthday=this.birthday[0]+'-'+this.birthday[1]+'-'+this.birthday[2];
+            }
             if (this.userFrom.birthday==new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate()){
               this.userFrom.birthday='';
             }

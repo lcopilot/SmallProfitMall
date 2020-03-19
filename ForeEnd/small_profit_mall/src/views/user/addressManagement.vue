@@ -219,7 +219,7 @@
             address: "湖南科技职业学院(暮云校区)阿萨德饭框内容爱你说得好",
             //邮件
             email: "liuxianliangli@foxmail.com",
-            //是否默认地址 1不默认 2默认
+            //是否默认地址 false不默认 true默认
             default: true,
           },
           {
