@@ -91,7 +91,10 @@ public class EmailController {
                 session.setAttribute("updateEmailPhoneFR", FR);//存入验证码session
                 session.setAttribute("updateEmailPhone", phone);//手机号存入session
                 sessionUtil.removeAttrbute(session, "passwordVerify");
-                return new QueryResponseResult(CommonCode.SUCCESS, null);
+                List Phone = new ArrayList();
+                Phone.add(phone);
+                result.setList(Phone);
+                return new QueryResponseResult(CommonCode.SUCCESS, result);
             } else {
                 return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
             }
@@ -101,7 +104,10 @@ public class EmailController {
             if (redis == 0) {
                 session.setAttribute("content", verification);//设置验证码session
                 sessionUtil.removeAttrbute(session, "content");//倒计时删除session
-                return new QueryResponseResult(CommonCode.SUCCESS, null);
+                List Email = new ArrayList();
+                Email.add(userEmail);
+                result.setList(Email);
+                return new QueryResponseResult(CommonCode.SUCCESS, result);
             }
             return new QueryResponseResult(CommonCode.FAIL, null);
         }
