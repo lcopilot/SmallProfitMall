@@ -6,14 +6,23 @@ import cn.itcast.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AddressImpl implements AddressService {
 
     @Autowired
     AddressDao addressDao;
     @Override
-    public Address findById(String uid) {
-        return null;
+    public List<Address> findById(String uid) {
+        List<Address> addresses=addressDao.findById(uid);
+        for (int i = 0; i <addresses.size() ; i++) {
+            String areaCodes=addresses.get(i).getAreaCodes();
+           String[] areaCode = areaCodes.split(",");
+            System.out.println(areaCodes);
+          // addresses.get(i).getAreaCode(areaCode);
+        }
+        return addressDao.findById(uid);
     }
 
     @Override

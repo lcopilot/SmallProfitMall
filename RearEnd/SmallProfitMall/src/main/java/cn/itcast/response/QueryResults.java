@@ -1,13 +1,10 @@
 package cn.itcast.response;
 
-import java.util.List;
-
-;
-import cn.itcast.domain.user.User;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 /**
  * @Author: mrt.
  * @Description:
@@ -17,15 +14,6 @@ import org.springframework.stereotype.Component;
 @Data
 @ToString
 @Component
-public class QueryResult<T> {
-
-    //数据列表
-    private List<T> list;
+public class QueryResults {
     private  List<?>[] addressList;
-    private User user;
-    //数据总数
-    private long total;
-
-
-
 }

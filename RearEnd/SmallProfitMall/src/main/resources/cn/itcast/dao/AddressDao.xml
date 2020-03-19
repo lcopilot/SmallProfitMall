@@ -5,9 +5,9 @@
 <mapper namespace="cn.itcast.dao.AddressDao">
     <insert id="addAddress" parameterType="cn.itcast.domain.address.Address">
      INSERT INTO userAddress
-		(uid,name,areas,detailedAddress,phone,email,areaCodes,defaults)
+		(userId,name,areas,detailedAddress,phone,email,areaCodes,defaults,alias)
 	VALUES
-	    (#{uid},#{name},#{areas},#{detailedAddress},#{phone},#{email},#{areaCodes},#{defaults})
+	    (#{userId},#{name},#{areas},#{detailedAddress},#{phone},#{email},#{areaCodes},#{defaults},#{alias})
     </insert>
     
     <select id="findById" resultType="cn.itcast.domain.address.Address">
