@@ -402,6 +402,7 @@
             } else {
               //获取解绑邮箱的验证码
               this.GetCodeUntieEmail();
+              sessionStorage.setItem("UpdateMailingCode", res.queryResult.list[0]);
             }
           } else {
             this.$message({
