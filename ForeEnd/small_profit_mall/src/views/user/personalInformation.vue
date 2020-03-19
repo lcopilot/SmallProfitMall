@@ -19,10 +19,10 @@
                     <el-form-item label="昵称" prop="name">
                       <el-input type="text" v-model="userFrom.name" :maxlength="15"
                                 :show-word-limit="true" style="max-width: 200px"></el-input>
-                      <span class="user_name_span" v-if="userFrom.name!='小白'">
+                      <span class="user_name_span" v-if="userFrom.name!='smallProfit'">
                         可用于登录，请牢记哦~
                       </span>
-                      <span class="user_name_span" v-if="userFrom.name=='小白'">
+                      <span class="user_name_span" v-if="userFrom.name=='smallProfit'">
                         此用户名为初始用户名,不可用,请尽快修改哦~
                       </span>
                     </el-form-item>

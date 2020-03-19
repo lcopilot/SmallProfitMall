@@ -115,7 +115,7 @@
               </div>
               <div style="margin: 3% 0 3% 0;">
                 <el-button type="primary" style="width: 60%;margin-left: -5%"
-                           @click="verificationMdEmail" :loading="verification_btn">
+                           @click="verificationMdCode" :loading="verification_btn">
                   {{verification_btn_content}}
                 </el-button>
               </div>
@@ -376,16 +376,30 @@
       getCode() {
         this.sendCode_btn = true;
         this.sendCode_btn_content = "发送中";
-        setTimeout(() => {
-          this.sendCode_btn = false;
-          this.sendCode_btn_content = "获取验证码";
-          this.GetCodeMdEmail();
-          this.activeEmail = 2;
-          sessionStorage.setItem('email_active', JSON.stringify(this.activeEmail));
-        }, 3000)
 
+        userApi.getCode().then(res=>{
+          if (res.success){
+            this.$message({
+              message:"验证码发送成功",
+              type:"success",
+            })
+            this.sendCode_btn = false;
+            this.sendCode_btn_content = "获取验证码";
+            this.GetCodeMdEmail();
+            this.activeEmail = 2;
+            sessionStorage.setItem('email_active', JSON.stringify(this.activeEmail));
+          }else{
+            this.$message({
+              message:"验证码发送失败,请稍后重试",
+              type:"error",
+            })
+            this.sendCode_btn = false;
+            this.sendCode_btn_content = "获取验证码";
+          }
+        })
       },
-      verificationMdEmail() {
+      //验证修改邮箱时的验证码
+      verificationMdCode() {
         if (this.code == '' || this.code.length <= 4) {
           this.$message({
             message: "请输入正确格式的验证码",
