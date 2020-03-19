@@ -29,8 +29,8 @@
                     <el-form-item label="生日">
                       <el-row>
                         <el-col :span="13">
-                          <DataSelect :year="birthday[0]"
-                                      :month="birthday[1]" :day="birthday[2]"
+                          <DataSelect :year="birthday!=null?birthday[0]:''"
+                                      :month="birthday!=null?birthday[1]:''" :day="birthday!=null?birthday[2]:''"
                                       @change="dateChange" :key="DataSelect"/>
                         </el-col>
                         <el-col :span="11">
@@ -131,7 +131,7 @@
         },
         userFrom: {
           uid: '',
-          name: '小白',
+          name: '',
           birthday: '',
           sex: "3",
           phone: 0,
@@ -213,20 +213,20 @@
         let userId = sessionStorage.getItem("uId");
         userApi.getUserInformation(userId)
         .then(res => {
-
           this.birthday = res.queryResult.list[0].birthdays;
           this.userFrom.sex = res.queryResult.list[0].sex;
           this.userFrom.name = res.queryResult.list[0].name;
           this.userFrom.phone = res.queryResult.list[0].phone;
           this.userFrom.email = res.queryResult.list[0].email;
           this.imageUrl = res.queryResult.list[0].image;
+
           sessionStorage.setItem("userSex",this.userFrom.sex);
           this.DataSelect = new Date().getTime();
           setTimeout(()=>{
             this.birthdays.year=this.birthday[0];
             this.birthdays.month=this.birthday[1];
             this.birthdays.day=this.birthday[2];
-          },200)
+          },10)
         })
         .catch(error => {
           console.log(error);
