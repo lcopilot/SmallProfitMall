@@ -13,18 +13,20 @@ public class AddressImpl implements AddressService {
 
     @Autowired
     AddressDao addressDao;
+    //根据id查询
     @Override
     public List<Address> findById(String uid) {
         List<Address> addresses=addressDao.findById(uid);
         for (int i = 0; i <addresses.size() ; i++) {
             String areaCodes=addresses.get(i).getAreaCodes();
            String[] areaCode = areaCodes.split(",");
-            System.out.println(areaCodes);
-          // addresses.get(i).getAreaCode(areaCode);
+            addresses.get(i).setAreaCode(areaCode);
         }
-        return addressDao.findById(uid);
+
+        return addresses;
     }
 
+    //添加
     @Override
     public int addAddress(Address address) {
         String[] areaCodes=address.getAreaCode();
