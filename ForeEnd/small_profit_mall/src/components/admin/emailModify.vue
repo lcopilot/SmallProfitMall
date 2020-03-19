@@ -376,8 +376,10 @@
       getCode() {
         this.sendCode_btn = true;
         this.sendCode_btn_content = "发送中";
-
-        userApi.getCode().then(res=>{
+        let formData = new FormData()
+        formData.append('userId', sessionStorage.getItem("uId"))
+        formData.append('verificationType', this.verificationType);
+        userApi.getCode(formData).then(res=>{
           if (res.success){
             this.$message({
               message:"验证码发送成功",
@@ -387,6 +389,7 @@
             this.sendCode_btn_content = "获取验证码";
             this.GetCodeMdEmail();
             this.activeEmail = 2;
+            sessionStorage.setItem("UpdateMailingCode",res.queryResult.list[0]);
             sessionStorage.setItem('email_active', JSON.stringify(this.activeEmail));
           }else{
             this.$message({
@@ -408,12 +411,30 @@
         } else {
           this.verification_btn_content = '验证中..',
               this.verification_btn = true;
-          setTimeout(() => {
-            this.verification_btn_content = '验证',
-                this.verification_btn = false;
-            this.activeEmail = 3;
-            sessionStorage.setItem('email_active', JSON.stringify(this.activeEmail));
-          }, 3000);
+          let formData = new FormData()
+          formData.append('userId', sessionStorage.getItem("uId"))
+          formData.append('account', sessionStorage.getItem("UpdateMailingCode"));
+          formData.append('verificationType', this.verificationType);
+          formData.append('verification', this.code);
+          userApi.verificationModifyEmailCode(formData).then(res=>{
+            if (res.success){
+              this.$message({
+                message:"验证成功",
+                type:"success",
+              })
+              this.verification_btn_content = '验证',
+                  this.verification_btn = false;
+              this.activeEmail = 3;
+              sessionStorage.setItem('email_active', JSON.stringify(this.activeEmail));
+            }else{
+              this.$message({
+                message:"验证失败,请重试",
+                type:"error",
+              })
+              this.verification_btn_content = '验证',
+                  this.verification_btn = false;
+            }
+          })
         }
       },
 
