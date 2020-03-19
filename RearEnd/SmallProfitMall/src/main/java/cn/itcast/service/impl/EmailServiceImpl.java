@@ -12,13 +12,13 @@ public class EmailServiceImpl implements EmailService {
     EmailDao emailDao;
     @Autowired
     MQSendMsgUtils mqSendMsgUtils;
-    //发送邮箱验证码
-    @Override
-    public int sendEmail(String email,String verification) {
-        String type="email";
-        mqSendMsgUtils.sendMsg("绑验证码为"+verification,type,email);
-        return 0;
-    }
+//    //发送邮箱验证码
+//    @Override
+//    public int sendEmail(String email,String verification) {
+//        String type="email";
+//        mqSendMsgUtils.sendMsg("绑验证码为"+verification,type,email);
+//        return 0;
+//    }
 
     //跟新邮箱方法
     @Override
