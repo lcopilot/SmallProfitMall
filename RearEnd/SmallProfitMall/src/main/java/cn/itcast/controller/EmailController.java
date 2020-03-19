@@ -85,11 +85,12 @@ public class EmailController {
         System.out.println(FR);
         session.setAttribute("verificationType", verificationType);//验证是否
         if (verificationType.equals("1")){    //手机号码方式
+
             boolean flag = SmsUtils.updatePhone(phone, FR);
             if (flag) {
                 session.setAttribute("updateEmailPhoneFR", FR);//存入验证码session
                 session.setAttribute("updateEmailPhone", phone);//手机号存入session
-                sessionUtil.removeAttrbute(session, "passwordVerify");
+                sessionUtil.removeAttrbute(session, "passwordVerify");//倒计时销毁
                 List Phone = new ArrayList();
                 Phone.add(phone);
                 result.setList(Phone);

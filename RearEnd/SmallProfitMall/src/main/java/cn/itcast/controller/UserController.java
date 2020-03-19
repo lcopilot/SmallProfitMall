@@ -277,6 +277,11 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/updateInformation", method = RequestMethod.POST)
 	public QueryResponseResult updateInformation(@RequestBody User user) {
+		String birthday = user.getBirthday();
+		List birthdays = Arrays.asList(birthday.split("-"));
+		if (birthdays.get(1).equals(0)||birthdays.get(1).equals(0)){
+			user.setBirthday(null);
+		}
 		int result = userService.updateInformation(user);
 		if (result == 1) {
 			return new QueryResponseResult(CommonCode.SUCCESS, null);//修改成功
