@@ -20,6 +20,7 @@ public class AddressImpl implements AddressService {
         for (int i = 0; i <addresses.size() ; i++) {
             String areaCodes=addresses.get(i).getAreaCodes();
            String[] areaCode = areaCodes.split(",");
+
             addresses.get(i).setAreaCode(areaCode);
         }
 

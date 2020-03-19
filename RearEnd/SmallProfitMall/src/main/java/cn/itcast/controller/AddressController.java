@@ -46,8 +46,7 @@ public class AddressController {
     @RequestMapping("/findById")
     public QueryResponseResult findById(String userId) {
         List<Address> address =addressService.findById(userId);
-        List<Address>[] redis= new List[]{address};
-        result.setAddressList(redis);
+        result.setList(address);
         return new QueryResponseResult(CommonCode.SUCCESS, result);//注册成功
     }
 }
