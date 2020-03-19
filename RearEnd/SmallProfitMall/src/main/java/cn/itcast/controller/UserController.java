@@ -75,7 +75,7 @@ public class UserController {
 		if (!verifyUtil.VaptchaVerify(user.getToken(), request)) {
 			return new QueryResponseResult(CommonCode.ValidationFails, null); //令牌错误不正确
 		}
-		if (user.getName().equals("SmallProfitMall")) {
+		if (user.getName().equals("smallProfit")) {
 			return new QueryResponseResult(CommonCode.nameError, null); //不能使用初始名字登录不
 		}
 		User name = userService.findByName(user.getName()); //根据用户名查询

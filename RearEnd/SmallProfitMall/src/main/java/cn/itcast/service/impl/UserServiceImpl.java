@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     public void saveAccount(User user) {
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
         user.setUid(uuid);
-        user.setName("SmallProfitMall");
+        user.setName("smallProfit");
         user.setToken("DM");
         user.setImage("http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938");
         user.setSex("1");
