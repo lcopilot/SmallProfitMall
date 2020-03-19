@@ -13,7 +13,7 @@
               <div class="personal_center_div1">
                 <div class="personal_center_div2">
                   <div>
-                    <router-link to="/">
+                    <router-link to="/personalInformation">
                       <el-avatar :size="75" class="personal_center_avatar"
                                  :src="avatar"/>
                     </router-link>

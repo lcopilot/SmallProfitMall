@@ -86,6 +86,14 @@ const routes = [
     },
     component: () => import('@/views/user/allOrders')
   },
+  {
+    path: '/orders',
+    name: 'orders',
+    meta: {
+      requireAuth: true,
+    },
+    component: () => import('@/views/user/orders')
+  },
   //捕获404
   {
     path: "/404",
