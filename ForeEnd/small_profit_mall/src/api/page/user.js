@@ -54,5 +54,9 @@ export const validationEmail = params => {
 }
 //修改邮箱时获取验证码
 export const getCode = params => {
-  return http.requestPost('/apiUrl/EmailController/updateEmail',params);
+  return http.requestPost('/apiUrl/EmailController/updateEmailPhone',params);
 }
+export const verificationModifyEmailCode = params => {
+  return http.requestPost('/apiUrl/EmailController/updateEmailPhone',params);
+}
+
