@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AddressService {
     //查询用户地址
-    public List<Address> findById(String uid);
+    public List<Address> findById(String userId);
 
     //新增用户收货地址地址
     public int addAddress(Address address);
