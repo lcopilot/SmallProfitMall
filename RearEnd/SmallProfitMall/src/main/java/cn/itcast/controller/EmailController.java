@@ -36,13 +36,14 @@ public class EmailController {
     @Autowired
     UserService userService;
 
+    String verification = GetFourRandom.getFourRandom();
+    String theme = "微利商城";
+    String sendEmail = "liliu_muge@163.com";
+
     //发送邮箱验证码（绑定,修改）
     @RequestMapping(value = "/relieveEmail",method = RequestMethod.POST )
     public QueryResponseResult sendEmail(String email,String uId ,HttpSession session) {
         String userEmail=email;
-        String verification = GetFourRandom.getFourRandom();
-        String theme = "微利商城";
-        String sendEmail = "liliu_muge@163.com";
         if(userEmail==null){
             userEmail = emailService.fendByIdEmail(uId);
         }
@@ -79,20 +80,32 @@ public class EmailController {
      * 验证新手机更改邮箱短信验证(用户解绑邮箱,更新邮箱)
      */
     @RequestMapping(value = "/updateEmailPhone", method = RequestMethod.POST)
-    public QueryResponseResult updateEmailPhone(String userId, HttpSession session) throws ClientException {
+    public QueryResponseResult updateEmailPhone(String userId,String verificationType, HttpSession session) throws ClientException {
         String phone = userService.findByIdPhone(userId);
         String FR = GetFourRandom.getFourRandom();  //随机验证码
         System.out.println(phone);
         System.out.println("修改验证码为 " + FR);
-        boolean flag = SmsUtils.updatePhone(phone, FR);
-        if (flag) {
-            session.setAttribute("updateEmailPhoneFR", FR);//存入验证码session
-            session.setAttribute("updateEmailPhone", phone);//手机号存入session
-            sessionUtil.removeAttrbute(session, "passwordVerify");
-            return new QueryResponseResult(CommonCode.SUCCESS, null);
-        } else {
-            return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
+        if (verificationType.equals("1")){    //手机号码方式
+            boolean flag = SmsUtils.updatePhone(phone, FR);
+            if (flag) {
+                session.setAttribute("updateEmailPhoneFR", FR);//存入验证码session
+                session.setAttribute("updateEmailPhone", phone);//手机号存入session
+                sessionUtil.removeAttrbute(session, "passwordVerify");
+                return new QueryResponseResult(CommonCode.SUCCESS, null);
+            } else {
+                return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
+            }
+        }else if(verificationType.equals("2")){   //邮箱验证
+            String userEmail = emailService.fendByIdEmail(userId);  //查询绑定邮箱
+            int redis = sendEmailUtil.sendEmailUtil(theme, sendEmail, userEmail, verification);
+            if (redis == 0) {
+                session.setAttribute("content", verification);//设置验证码session
+                sessionUtil.removeAttrbute(session, "content");//倒计时删除session
+                return new QueryResponseResult(CommonCode.SUCCESS, null);
+            }
+            return new QueryResponseResult(CommonCode.FAIL, null);
         }
+        return new QueryResponseResult(CommonCode.FAIL, null);
     }
 
     /**
