@@ -13,4 +13,9 @@
     <select id="fendByIdEmail" parameterType="java.lang.String" resultType="java.lang.String">
         select email from user where uid=#{uid}
     </select>
+
+    <!--查询邮箱是否存在-->
+    <select id="fendEmail" parameterType="java.lang.String" resultType="java.lang.String">
+        select email from user where email=#{email}
+    </select>
 </mapper>

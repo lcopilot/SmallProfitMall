@@ -9,4 +9,6 @@ public interface EmailDao {
     public int addEmail(@Param("uid")String uid, @Param("email")String email);
     //查询是否有邮箱
     public String fendByIdEmail(@Param("uid")String uid);
+    //查询邮箱是否存在
+    public String fendEmail(@Param("email")String email);
 }
