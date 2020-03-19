@@ -152,7 +152,7 @@
                     style="width: 35%;margin-right: 3%;margin-left: -5%;"
                 >
                 </el-input>
-                <el-button type="primary" @click="getNewEmailCode()"
+                <el-button type="primary" @click="getEmailCode()"
                            :disabled="!mdNewEmailBtnStatus"
                            style="width: 120px">
                   {{mdNewEmailBtnStatus ?'获取验证码':`重新获取(${mdNewEmailCountDownTime})`}}
@@ -160,7 +160,7 @@
               </div>
               <div style="margin: 3% 0 3% 0;">
                 <el-button type="primary" style="width: 60%;margin-left: -5%"
-                           @click="verificationMdNewEmail" :loading="verification_btn">
+                           @click="verificationEmailCode" :loading="verification_btn">
                   {{verification_btn_content}}
                 </el-button>
               </div>
@@ -319,17 +319,17 @@
           formData.append('verification', this.emailCode);
           userApi.validationEmail(formData).then(res => {
             if (res.success) {
-                this.$message({
-                  message:"邮箱绑定成功!",
-                  type:"success",
-                })
+              this.$message({
+                message: "邮箱验证成功!",
+                type: "success",
+              })
               this.verification_btn_content = '验证',
                   this.verification_btn = false;
-                this.cancelModifyEmail();
-            }else{
+              this.cancelModifyEmail();
+            } else {
               this.$message({
-                message:"邮箱绑定失败!",
-                type:"error",
+                message: "邮箱绑定失败!",
+                type: "error",
               })
               this.verification_btn_content = '验证',
                   this.verification_btn = false;
@@ -379,22 +379,22 @@
         let formData = new FormData()
         formData.append('userId', sessionStorage.getItem("uId"))
         formData.append('verificationType', this.verificationType);
-        userApi.getCode(formData).then(res=>{
-          if (res.success){
+        userApi.getCode(formData).then(res => {
+          if (res.success) {
             this.$message({
-              message:"验证码发送成功",
-              type:"success",
+              message: "验证码发送成功",
+              type: "success",
             })
             this.sendCode_btn = false;
             this.sendCode_btn_content = "获取验证码";
             this.GetCodeMdEmail();
             this.activeEmail = 2;
-            sessionStorage.setItem("UpdateMailingCode",res.queryResult.list[0]);
+            sessionStorage.setItem("UpdateMailingCode", res.queryResult.list[0]);
             sessionStorage.setItem('email_active', JSON.stringify(this.activeEmail));
-          }else{
+          } else {
             this.$message({
-              message:"验证码发送失败,请稍后重试",
-              type:"error",
+              message: "验证码发送失败,请稍后重试",
+              type: "error",
             })
             this.sendCode_btn = false;
             this.sendCode_btn_content = "获取验证码";
@@ -416,79 +416,25 @@
           formData.append('account', sessionStorage.getItem("UpdateMailingCode"));
           formData.append('verificationType', this.verificationType);
           formData.append('verification', this.code);
-          userApi.verificationModifyEmailCode(formData).then(res=>{
-            if (res.success){
+          userApi.verificationModifyEmailCode(formData).then(res => {
+            if (res.success) {
               this.$message({
-                message:"验证成功",
-                type:"success",
+                message: "验证成功",
+                type: "success",
               })
               this.verification_btn_content = '验证',
                   this.verification_btn = false;
               this.activeEmail = 3;
               sessionStorage.setItem('email_active', JSON.stringify(this.activeEmail));
-            }else{
+            } else {
               this.$message({
-                message:"验证失败,请重试",
-                type:"error",
+                message: "验证失败,请重试",
+                type: "error",
               })
               this.verification_btn_content = '验证',
                   this.verification_btn = false;
             }
           })
-        }
-      },
-
-      //获取新邮箱验证码
-      getNewEmailCode() {
-        const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
-        if (!this.email) {
-          this.$message({
-            message: "请输入邮箱",
-            type: "warning"
-          });
-        } else if (!mailReg.test(this.email)) {
-          this.$message({
-            message: "请输入正确的邮箱格式",
-            type: "warning"
-          });
-        } else {
-          this.GetCodeMdNewEmail();
-          this.verification_btn_content = '验证中..',
-              this.verification_btn = true;
-          setTimeout(() => {
-            this.verification_btn_content = '验证',
-                this.verification_btn = false;
-            this.GetCode();
-          }, 3000);
-        }
-      },
-      //校验新邮箱
-      verificationMdNewEmail() {
-        const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
-        if (!this.email) {
-          this.$message({
-            message: "请输入邮箱",
-            type: "warning"
-          });
-        } else if (!mailReg.test(this.email)) {
-          this.$message({
-            message: "请输入正确的邮箱格式",
-            type: "warning"
-          });
-        } else if (this.emailCode == '' || this.code.emailCode <= 4) {
-          this.$message({
-            message: "请输入正确格式的验证码",
-            type: "warning"
-          });
-        } else {
-          this.verification_btn_content = '验证中..',
-              this.verification_btn = true;
-          setTimeout(() => {
-            this.verification_btn_content = '验证',
-                this.verification_btn = false;
-            this.activeEmail = 3;
-            sessionStorage.setItem('email_active', JSON.stringify(this.activeEmail));
-          }, 3000);
         }
       },
       //获取解绑邮箱的验证码

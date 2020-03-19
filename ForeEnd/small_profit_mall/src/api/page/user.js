@@ -56,7 +56,8 @@ export const validationEmail = params => {
 export const getCode = params => {
   return http.requestPost('/apiUrl/EmailController/updateEmailPhone',params);
 }
+//验证修改邮箱是的验证码
 export const verificationModifyEmailCode = params => {
-  return http.requestPost('/apiUrl/EmailController/updateEmailPhone',params);
+  return http.requestPost('/apiUrl/EmailController/PhoneSucceed',params);
 }
 
