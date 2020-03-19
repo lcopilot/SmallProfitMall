@@ -83,8 +83,8 @@ public class EmailController {
     public QueryResponseResult updateEmailPhone(String userId,String verificationType, HttpSession session) throws ClientException {
         String phone = userService.findByIdPhone(userId);
         String FR = GetFourRandom.getFourRandom();  //随机验证码
-        System.out.println(phone);
         System.out.println("修改验证码为 " + FR);
+        session.setAttribute("verificationType", verificationType);//验证是否
         if (verificationType.equals("1")){    //手机号码方式
             boolean flag = SmsUtils.updatePhone(phone, FR);
             if (flag) {
@@ -100,9 +100,13 @@ public class EmailController {
             }
         }else if(verificationType.equals("2")){   //邮箱验证
             String userEmail = emailService.fendByIdEmail(userId);  //查询绑定邮箱
-            int redis = sendEmailUtil.sendEmailUtil(theme, sendEmail, userEmail, verification);
+            int redis=7;
+            if (userEmail!=null){
+                redis = sendEmailUtil.sendEmailUtil(theme, sendEmail, userEmail, verification);
+            }
             if (redis == 0) {
                 session.setAttribute("content", verification);//设置验证码session
+                session.setAttribute("Email", userEmail);//手机号存入session
                 sessionUtil.removeAttrbute(session, "content");//倒计时删除session
                 List Email = new ArrayList();
                 Email.add(userEmail);
@@ -122,19 +126,27 @@ public class EmailController {
      * @return
      */
     @RequestMapping(value = "/PhoneSucceed", method = RequestMethod.POST)
-    public QueryResponseResult updateFormerPhone(String verification, HttpSession session) {
-        String updateEmailPhoneFR = (String) session.getAttribute("updateEmailPhoneFR");
-        String updateEmailPhone = (String) session.getAttribute("updateEmailPhone");
+    public QueryResponseResult updateFormerPhone(String verification,String account,String userId,String verificationType, HttpSession session) {
+        String verificationTypes = (String) session.getAttribute("verificationType");//验证方式
+        String updateEmailPhoneFR = (String) session.getAttribute("updateEmailPhoneFR");//手机验证码
+        String updateEmailPhone = (String) session.getAttribute("updateEmailPhone");//手机号码
+        String content = (String) session.getAttribute("content");//邮件验证码
+        String Email = (String) session.getAttribute("Email");//邮件
         session.invalidate();
-        if (verification.equals(updateEmailPhoneFR)) {
-            List Phone = new ArrayList();
-            Phone.add(updateEmailPhone);
-            result.setList(Phone);
-
-            return new QueryResponseResult(CommonCode.SUCCESS, result);
-        } else {
-            return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
+        if(verificationTypes.equals("1")){
+            if (verification.equals(updateEmailPhoneFR)&&account.equals(updateEmailPhone)) {
+                return new QueryResponseResult(CommonCode.SUCCESS,null);
+            } else {
+                return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
+            }
+        }else if (verificationTypes.equals("2")){
+            if (verification.equals(content)&&account.equals(Email)) {
+                return new QueryResponseResult(CommonCode.SUCCESS,null);
+            } else {
+                return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
+            }
         }
+        return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
     }
 
 
