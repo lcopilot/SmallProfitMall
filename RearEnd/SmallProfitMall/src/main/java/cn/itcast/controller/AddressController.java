@@ -8,10 +8,7 @@ import cn.itcast.response.QueryResult;
 import cn.itcast.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -43,8 +40,8 @@ public class AddressController {
     }
 
     //根据id查询用户信息
-    @RequestMapping("/findById")
-    public QueryResponseResult findById(String userId) {
+    @RequestMapping(value = "/findById/{userId}",method = RequestMethod.GET)
+    public QueryResponseResult findById(@PathVariable("userId")String userId) {
         List<Address> address =addressService.findById(userId);
         result.setList(address);
         return new QueryResponseResult(CommonCode.SUCCESS, result);//注册成功
