@@ -41,7 +41,7 @@ public class AddressController {
 
     //根据id查询用户信息
     @RequestMapping(value = "/findById/{userId}",method = RequestMethod.GET)
-    public QueryResponseResult findById(@PathVariable("userId")String userId) {
+    public QueryResponseResult findById(@PathVariable("userId") String userId) {
         List<Address> address =addressService.findById(userId);
         result.setList(address);
         return new QueryResponseResult(CommonCode.SUCCESS, result);//注册成功
