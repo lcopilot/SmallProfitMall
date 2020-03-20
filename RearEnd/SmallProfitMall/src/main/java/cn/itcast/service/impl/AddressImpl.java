@@ -20,8 +20,7 @@ public class AddressImpl implements AddressService {
         for (int i = 0; i <addresses.size() ; i++) {
             String areaCodes=addresses.get(i).getAreaCodes();
            String[] areaCode = areaCodes.split(",");
-
-            addresses.get(i).setAreaCode(areaCode);
+           addresses.get(i).setAreaCode(areaCode);
         }
 
         return addresses;
@@ -31,11 +30,11 @@ public class AddressImpl implements AddressService {
     @Override
     public int addAddress(Address address) {
         String[] areaCodes=address.getAreaCode();
-        String areaCode=null;
-        for (int i = 0; i <areaCodes.length; i++) {
-           areaCode=areaCode+areaCodes[i]+",";
+        String areaCode="";
+        for (String s : areaCodes){
+            areaCode = areaCode+s+",";
         }
-        address.setAreaCodes(areaCode);
+       address.setAreaCodes(areaCode);
         return addressDao.addAddress(address);
     }
 

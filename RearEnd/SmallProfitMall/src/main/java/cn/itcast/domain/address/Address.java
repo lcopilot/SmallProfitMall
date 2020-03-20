@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 public class Address implements Serializable {
+    private int addressId;  //地址id
     private String userId;//用户id
     private String detailedAddress;//详细地址
     private String name;    //收货人名字
