@@ -1,7 +1,7 @@
 package cn.itcast.domain.address;
 
 import java.io.Serializable;
-import java.util.Arrays;
+
 
 public class Address implements Serializable {
     private int addressId;  //地址id
@@ -15,6 +15,14 @@ public class Address implements Serializable {
     private String[] areaCode;// 接收的区域代码
     private String areaCodes;   //存数据库的区域代码
     private String alias;   //备注地点
+
+    public int getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
+    }
 
     public String getUserId() {
         return userId;

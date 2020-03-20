@@ -3,14 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.AddressDao">
+    <!--添加商品-->
     <insert id="addAddress" parameterType="cn.itcast.domain.address.Address">
      INSERT INTO userAddress
 		(userId,name,areas,detailedAddress,phone,email,areaCodes,defaults,alias)
 	VALUES
 	    (#{userId},#{name},#{areas},#{detailedAddress},#{phone},#{email},#{areaCodes},#{defaults},#{alias})
     </insert>
-    
+    <!--根据id查询所有地址-->
     <select id="findById" resultType="cn.itcast.domain.address.Address">
         SELECT * FROM `userAddress` WHERE userId=#{userId}
     </select>
+
+    <!--根据id查询是否有默认值-->
+    <select id="findByIdDefaults" resultType="java.lang.Boolean" parameterType="java.util.List">
+        select defaults from userAddress where userId=#{userId} AND defaults=#{defaults}
+     </select>
+
+    <update id="updateDefaults">
+        update userAddress set defaults=#{defaults} where userId=#{userId}
+    </update>
+
 </mapper>
