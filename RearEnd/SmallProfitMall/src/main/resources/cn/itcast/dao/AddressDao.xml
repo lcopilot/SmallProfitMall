@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.AddressDao">
-    <!--添加商品-->
+    <!--添加地址-->
     <insert id="addAddress" parameterType="cn.itcast.domain.address.Address">
      INSERT INTO userAddress
 		(userId,name,areas,detailedAddress,phone,email,areaCodes,defaults,alias)
@@ -20,8 +20,18 @@
         select defaults from userAddress where userId=#{userId} AND defaults=#{defaults}
      </select>
 
+    <!--设置全部默认地址-->
     <update id="updateDefaults">
         update userAddress set defaults=#{defaults} where userId=#{userId}
+    </update>
+
+    <!--跟新地址-->
+    <update id="updateAddress" parameterType="cn.itcast.domain.address.Address">
+        update userAddress
+        set
+        name=#{name},areas=#{areas},detailedAddress=#{detailedAddress},phone=#{phone},email=#{email},areaCodes=#{areaCodes},defaults=#{defaults},alias=#{alias}
+        where
+        addressId=#{addressId}
     </update>
 
 </mapper>
