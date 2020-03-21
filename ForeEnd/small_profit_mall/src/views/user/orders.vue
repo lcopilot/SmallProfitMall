@@ -119,7 +119,27 @@
               <div style="padding-left: 2%">
                   <el-row>
                     <el-col :span="7">
-                      <div>配送方式</div>
+                      <div>
+                        <el-radio-group v-model="expressType">
+                          <el-radio label="1">
+                            <svg-icon name="postal" style="width:25px;margin-bottom: -8px"/>
+                            邮政
+                          </el-radio>
+                          <el-radio label="2">
+                            <svg-icon name="FS"
+                                      style="width:25px;margin-bottom: -8px"/>
+                            顺丰
+                          </el-radio>
+                        </el-radio-group>
+                      </div>
+                      <div>
+                        标准达:预计3月21日09:00-21:00送达
+                        <el-button type="text">修改</el-button>
+                      </div>
+                      <div>
+                        自签收后7天内退货，15天内换货，可享1次上门取件服务
+                        <el-button type="text">查看详情</el-button>
+                      </div>
                     </el-col>
                     <el-col :span="17">
                       商品列表
@@ -149,6 +169,8 @@
       return {
         //支付方式
         paymentMethod:"1",
+        //快递类型
+        expressType:"1",
       }
     },
     methods:{
