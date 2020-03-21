@@ -50,8 +50,6 @@ public class AddressImpl implements AddressService {
             List<Address> addresses=addressDao.findById(userId);
             if (addresses!=null){
                 addresses.get(1).setDefaults(true);
-                System.out.println(addresses.get(1).getAddressId());
-                System.out.println(addresses.get(1).getDefaults());
                 int rediss= addressDao.updateDefaults(addresses.get(1).getAddressId(),addresses.get(1).getDefaults());
                 return rediss;
             }
