@@ -20,7 +20,7 @@
                 <el-form-item prop="name">
                   <svg-icon name="login" class="icon"/>
                   <el-input placeholder="请输入手机号或用户名" v-model="loginForm.name" clearable
-                            class="username" @change="CheckLoginBtn"/>
+                            class="username" @blur="CheckLoginBtn"/>
                 </el-form-item>
                 <el-form-item prop="password">
                   <svg-icon name="password" class="icon"/>
@@ -29,8 +29,8 @@
                       v-model="loginForm.password"
                       show-password
                       class="username"
-                      autocomplete="off"
-                      @keyup.enter.native="login"/>
+                      @blur="CheckLoginBtn"
+                      @keyup.enter.native="login('loginForm')"/>
                 </el-form-item>
                 <!--       <el-form-item>
                          <svg-icon name="verification_code" class="icon"
@@ -41,7 +41,7 @@
                   <el-button :loading="loginStatus" id="TencentCaptcha"
                              data-appid="2093846053"
                              data-cbfn="callback"
-                             class="login-btn" :key="login_btn"
+                             class="login-btn" :key="login_btn" :disabled="loginBtnUsable"
                   >{{loginBtnContent}}
                   </el-button>
                 </el-form-item>
@@ -83,6 +83,7 @@
         login_btn: 0,
         //登录按钮的状态
         loginStatus: false,
+        loginBtnUsable:true,
         //登录按钮的内容
         loginBtnContent: '登录',
         rules: {
@@ -160,9 +161,11 @@
       },
       //校验表单状态
       CheckLoginBtn(){
+        console.log('dasdas')
         this.$refs['loginForm'].validate((valid) => {
             if (valid) {
-
+              console.log('hhhhhh')
+              this.loginBtnUsable=false;
             }
         })
       },
@@ -225,7 +228,10 @@
     background-color: #42b983;
     width: 300px;
   }
-
+  .login-btn:hover{
+    color: #409EFF;
+    background-color: #ecf5ff;
+  }
   a {
     color: #42b983;
   }
