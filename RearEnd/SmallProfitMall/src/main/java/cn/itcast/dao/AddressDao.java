@@ -22,7 +22,7 @@ public interface AddressDao {
     //删除用户地址
     public int deleteAddress(@Param("addressId")int addressId);
 
-    //根据id查询
+    //根据id查询默认值
     public ArrayList findByIdDefaults(@Param("userId")String userId,@Param("defaults")Boolean defaults);
 
     //根据userId修改全部默地址

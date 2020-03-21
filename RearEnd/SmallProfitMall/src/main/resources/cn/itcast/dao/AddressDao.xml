@@ -16,7 +16,7 @@
     </select>
 
     <!--根据id查询是否有默认值-->
-    <select id="findByIdDefaults" resultType="java.util.ArrayList" parameterType="java.util.List">
+    <select id="findByIdDefaults" resultType="java.lang.String">
         select defaults from userAddress where userId=#{userId} AND defaults=#{defaults}
      </select>
 
