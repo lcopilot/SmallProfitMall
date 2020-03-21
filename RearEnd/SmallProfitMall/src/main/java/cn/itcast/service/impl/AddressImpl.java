@@ -94,6 +94,7 @@ public class AddressImpl implements AddressService {
                 addressDao.updateFindDefaults(address.getUserId(),false);
             }
         }
+
         address.setAreaCodes(areaCode);
         return address;
     }
