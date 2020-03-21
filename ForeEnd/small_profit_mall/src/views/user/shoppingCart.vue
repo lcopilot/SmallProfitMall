@@ -273,7 +273,6 @@
       },
       //商品数量改变时触发
       quantityChange(productNumber) {
-
         this.select(this.$refs.cartTable.selection);
       },
       //底栏全选事件
@@ -282,6 +281,7 @@
           this.$refs.cartTable.toggleAllSelection();
         } else {
           this.$refs.cartTable.clearSelection();
+          this.select(this.$refs.cartTable.selection);
         }
       },
       //立即购买
