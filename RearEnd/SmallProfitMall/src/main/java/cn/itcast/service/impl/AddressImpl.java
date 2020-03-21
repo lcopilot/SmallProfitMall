@@ -3,6 +3,7 @@ package cn.itcast.service.impl;
 import cn.itcast.dao.AddressDao;
 import cn.itcast.domain.address.Address;
 import cn.itcast.service.AddressService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,9 +42,44 @@ public class AddressImpl implements AddressService {
         return addressDao.updateAddress(redisAddress);
     }
 
+    //更具addressId刪除地址
     @Override
-    public int deleteAddress(String uid, String addressId) {
-        return 0;
+    public int deleteAddress(String userId, int addressId,Boolean defaults) {
+       int redis = addressDao.deleteAddress(addressId);
+        if (defaults){
+            List<Address> addresses=addressDao.findById(userId);
+            if (addresses!=null){
+                addresses.get(1).setDefaults(true);
+                System.out.println(addresses.get(1).getAddressId());
+                System.out.println(addresses.get(1).getDefaults());
+                int rediss= addressDao.updateDefaults(addresses.get(1).getAddressId(),addresses.get(1).getDefaults());
+                return rediss;
+            }
+        }
+        return redis;
+    }
+
+    //修改默認地址
+    @Override
+    public int updateDefaults(int addressId,String userId, Boolean defaults) {
+        if (defaults){
+            List defaultss= addressDao.findByIdDefaults(userId,true);
+            if (defaultss.size()>0){
+                addressDao.findByIdDefaults(userId,false);
+                int rediss= addressDao.updateDefaults(addressId,defaults);
+                return rediss;
+            }else {
+                return 0;
+            }
+        }else {
+            List<Address> addresses=addressDao.findById(userId);
+            if (addresses!=null){
+                addresses.get(1).setDefaults(true);
+                int rediss= addressDao.updateDefaults(addresses.get(1).getAddressId(),addresses.get(1).getDefaults());
+                return rediss;
+            }
+            return 0;
+        }
     }
 
     //添加修改方法转换存入格式方法
@@ -57,7 +93,7 @@ public class AddressImpl implements AddressService {
         if (defaults==true){        //修改默认地址
             List defaultss= addressDao.findByIdDefaults(address.getUserId(),true);
             if (defaultss.size()>0){
-                addressDao.updateDefaults(address.getUserId(),false);
+                addressDao.findByIdDefaults(address.getUserId(),false);
             }
         }
         address.setAreaCodes(areaCode);
