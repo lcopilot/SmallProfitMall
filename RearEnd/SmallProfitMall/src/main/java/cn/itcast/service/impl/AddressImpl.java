@@ -61,9 +61,9 @@ public class AddressImpl implements AddressService {
     @Override
     public int updateDefaults(int addressId,String userId, Boolean defaults) {
         if (defaults){
-            List defaultss= addressDao.findByIdDefaults(userId,true);
+            ArrayList defaultss = addressDao.findByIdDefaults(userId,true);
             if (defaultss.size()>0){
-                addressDao.findByIdDefaults(userId,false);
+                addressDao.updateFindDefaults(userId,false);
                 int rediss= addressDao.updateDefaults(addressId,defaults);
                 return rediss;
             }else {
@@ -91,7 +91,7 @@ public class AddressImpl implements AddressService {
         if (defaults==true){        //修改默认地址
             List defaultss= addressDao.findByIdDefaults(address.getUserId(),true);
             if (defaultss.size()>0){
-                addressDao.findByIdDefaults(address.getUserId(),false);
+                addressDao.updateFindDefaults(address.getUserId(),false);
             }
         }
         address.setAreaCodes(areaCode);

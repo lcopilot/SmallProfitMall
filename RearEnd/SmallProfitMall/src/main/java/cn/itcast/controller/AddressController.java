@@ -54,8 +54,8 @@ public class AddressController {
 
 
     //刪除
-    @RequestMapping(value = "/deleteAddress",method = RequestMethod.DELETE)
-    public QueryResponseResult deleteAddress(String userId,int addressId,Boolean defaults) {
+    @RequestMapping(value = "/deleteAddress/{userId}/{addressId}/{defaults}",method = RequestMethod.DELETE)
+    public QueryResponseResult deleteAddress(@PathVariable("userId")String userId,@PathVariable("addressId")int addressId,@PathVariable("defaults")Boolean defaults) {
         int redis = addressService.deleteAddress(userId, addressId, defaults);
         if (redis == 1) {
             return new QueryResponseResult(CommonCode.SUCCESS, null);//刪除成功
