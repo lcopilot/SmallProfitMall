@@ -17,8 +17,6 @@ public class AddressController {
 
     @Autowired
     AddressService addressService;
-
-
     @Autowired
     QueryResult result;
     /**
@@ -55,4 +53,26 @@ public class AddressController {
     }
 
 
+    //刪除
+    @RequestMapping(value = "/deleteAddress/{userId}/{addressId}/{defaults}",method = RequestMethod.GET)
+    public QueryResponseResult deleteAddress(@PathVariable("userId")String userId,@PathVariable("addressId")int addressId,@PathVariable("defaults")Boolean defaults) {
+        int redis = addressService.deleteAddress(userId, addressId, defaults);
+        if (redis == 1) {
+            return new QueryResponseResult(CommonCode.SUCCESS, null);//刪除成功
+        } else {
+            return new QueryResponseResult(CommonCode.FAIL,null);
+        }
+
+    }
+
+    //修改默認地址
+    @RequestMapping(value = "/updateDefault/{userId}/{addressId}/{defaults}",method = RequestMethod.GET)
+    public QueryResponseResult updateDefaults(@PathVariable("userId")String userId,@PathVariable("addressId")int addressId,@PathVariable("defaults")Boolean defaults) {
+        int redis = addressService.updateDefaults(addressId,userId,defaults);
+        if (redis == 1) {
+            return new QueryResponseResult(CommonCode.SUCCESS, null);//刪除成功
+        } else {
+            return new QueryResponseResult(CommonCode.FAIL,null);
+        }
+    }
 }

@@ -20,11 +20,16 @@ public interface AddressDao {
     public int updateAddress(Address address);
 
     //删除用户地址
-    public int deleteAddress(@Param("userId")String userId ,@Param("addressId")String addressId);
+    public int deleteAddress(@Param("addressId")int addressId);
 
     //根据id查询
     public ArrayList findByIdDefaults(@Param("userId")String userId,@Param("defaults")Boolean defaults);
 
-      //根据id修改默地址
-    public int updateDefaults(@Param("userId")String userId,@Param("defaults")Boolean defaults);
+    //根据userId修改全部默地址
+    public int updateFindDefaults(@Param("userId")String userId,@Param("defaults")Boolean defaults);
+
+    //跟据addressId修改默認地址
+    public int updateDefaults(@Param("addressId")int addressId,@Param("defaults")Boolean defaults);
+
+
 }

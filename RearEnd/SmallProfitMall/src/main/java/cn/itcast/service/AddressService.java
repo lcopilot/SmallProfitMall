@@ -16,5 +16,8 @@ public interface AddressService {
     public int updateAddress(Address address);
 
     //删除用户地址
-    public int deleteAddress(@Param("uid")String uid ,@Param("addressId")String addressId);
+    public int deleteAddress(String uid ,int addressId , Boolean defaults);
+
+    //跟据addressId修改默認地址
+    public int updateDefaults(int addressId,String userId, Boolean defaults);
 }
