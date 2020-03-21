@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 10/03/2020 20:00:37
+ Date: 21/03/2020 19:43:18
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `ProductBasis`  (
   `ProductVideo` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `ProductWeight` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10018 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10028 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductBasis
@@ -51,6 +51,16 @@ INSERT INTO `ProductBasis` VALUES (16, 10007, 'Hot Toys 复仇者联盟3 无限�
 INSERT INTO `ProductBasis` VALUES (17, 10008, '万代（BANDAI） Megahouse POP 海贼王 路飞9人 模型玩具（无售后！！！） 四档路飞\r\n', NULL, '100kg');
 INSERT INTO `ProductBasis` VALUES (18, 10009, '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n', NULL, '5.6kg');
 INSERT INTO `ProductBasis` VALUES (19, 10018, '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.fhxasdsada.xyz/v.f30%20%284%29.mp4\r\n\r\n', '0.4kg');
+INSERT INTO `ProductBasis` VALUES (10018, 10019, '【二手95新】劳力士 系列:迪通拿系列 型号:116505 材质:18k玫瑰金 镜面:蓝宝石玻璃 未使用', NULL, '220克');
+INSERT INTO `ProductBasis` VALUES (10019, 10020, '华硕（ASUS）ROG Strix XG27VQ 27英寸144HZ 1800R Free-Sync旋转升降AURA-RGB电竞显示器（HDMI/DP/DVI）', 'http://productdata.fhxasdsada.xyz/0a2dn6qco6afmqiL4K2doafhoaGdmaydo6M.mp4', '16.84kg');
+INSERT INTO `ProductBasis` VALUES (10020, 10021, '长虹（CHANGHONG）D6U 长虹 激光电视 影院 投影仪 激光电视 私人电影院 投影机 长虹 4K画质 3500流明 115%广色域 AI人工智能 语音控制\r\n4K画质，3500流明，115%广色域，AI人工智能，语音控制  ', '', '5.84kg');
+INSERT INTO `ProductBasis` VALUES (10021, 10023, '\r\nCOACH PARKER 16 女士山茶花装饰可斜挎双肩包', NULL, NULL);
+INSERT INTO `ProductBasis` VALUES (10022, 10024, 'HHKB Professional BT 蓝牙版黑无刻静电容键盘 程序员码农专用便携迷你键盘 编程适用', 'http://productdata.fhxasdsada.xyz/0a2dn62WqaCdmqiL4K2doafhoaOhnqeZpKc.mp4', NULL);
+INSERT INTO `ProductBasis` VALUES (10023, 10025, '【良品铺子】综合果仁525g 每日坚果组合混合干果礼盒零食大礼包健康零食', NULL, '575.5g');
+INSERT INTO `ProductBasis` VALUES (10024, 10022, 'Classic | 40mm Canterbury', NULL, NULL);
+INSERT INTO `ProductBasis` VALUES (10025, 10026, '2019新款翻领磨破短款女士休闲牛仔外套', NULL, NULL);
+INSERT INTO `ProductBasis` VALUES (10026, 10027, '【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金', NULL, NULL);
+INSERT INTO `ProductBasis` VALUES (10027, 10028, '小米（MI）小爱智能音箱Pro 无线蓝牙音响 语音控制智能家居 APP远程操控 专业DTS 音效 黑色', NULL, '\r\n1.56kg');
 
 -- ----------------------------
 -- Table structure for ProductColour
@@ -61,7 +71,7 @@ CREATE TABLE `ProductColour`  (
   `ProductId` int(11) NULL DEFAULT NULL,
   `ProductColour` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 94 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductColour
@@ -114,6 +124,43 @@ INSERT INTO `ProductColour` VALUES (48, 10018, '挚爱红管999#传奇正红[赠
 INSERT INTO `ProductColour` VALUES (49, 10018, '[红弯心动6支套装] [赠视频玫瑰礼盒 ]');
 INSERT INTO `ProductColour` VALUES (50, 10018, '[限量版挚爱红管烟花5支装套盒]');
 INSERT INTO `ProductColour` VALUES (51, 10018, '999+ 520+花漾甜心100ML [口红香水套装]');
+INSERT INTO `ProductColour` VALUES (56, 10019, '玫瑰金');
+INSERT INTO `ProductColour` VALUES (57, 10022, '多彩尼龙白盘');
+INSERT INTO `ProductColour` VALUES (58, 10022, '粉色尼龙白盘');
+INSERT INTO `ProductColour` VALUES (59, 10022, '黑色尼龙黑盘');
+INSERT INTO `ProductColour` VALUES (60, 10022, '黑色尼龙白盘');
+INSERT INTO `ProductColour` VALUES (61, 10022, '蓝红尼龙白盘');
+INSERT INTO `ProductColour` VALUES (62, 10022, '蓝粉尼龙白盘');
+INSERT INTO `ProductColour` VALUES (63, 10023, '棕黄色锈色');
+INSERT INTO `ProductColour` VALUES (64, 10023, '粉色');
+INSERT INTO `ProductColour` VALUES (65, 10023, '黄褐色');
+INSERT INTO `ProductColour` VALUES (66, 10027, '磨砂黑');
+INSERT INTO `ProductColour` VALUES (67, 10027, ' POP水蓝色');
+INSERT INTO `ProductColour` VALUES (68, 10027, ' POP赘蓝色');
+INSERT INTO `ProductColour` VALUES (69, 10027, 'POP红色');
+INSERT INTO `ProductColour` VALUES (70, 10027, ' POP紫色');
+INSERT INTO `ProductColour` VALUES (71, 10027, ' 丝锻金');
+INSERT INTO `ProductColour` VALUES (72, 10027, '丝锻银 ');
+INSERT INTO `ProductColour` VALUES (73, 10027, '炫黑色');
+INSERT INTO `ProductColour` VALUES (74, 10027, '炫白色 ');
+INSERT INTO `ProductColour` VALUES (75, 10027, '金色 ');
+INSERT INTO `ProductColour` VALUES (76, 10027, '玫瑰金 ');
+INSERT INTO `ProductColour` VALUES (77, 10027, '银色 ');
+INSERT INTO `ProductColour` VALUES (78, 10027, '红色');
+INSERT INTO `ProductColour` VALUES (80, 10027, '黑红十周年纪念版 ');
+INSERT INTO `ProductColour` VALUES (81, 10027, '猪年限量版 90周年');
+INSERT INTO `ProductColour` VALUES (82, 10027, '米奇老鼠版 ');
+INSERT INTO `ProductColour` VALUES (83, 10027, '学院白 ');
+INSERT INTO `ProductColour` VALUES (84, 10027, '学院蓝');
+INSERT INTO `ProductColour` VALUES (85, 10027, '学院红');
+INSERT INTO `ProductColour` VALUES (86, 10027, ' 学院黄');
+INSERT INTO `ProductColour` VALUES (87, 10027, ' 紫色');
+INSERT INTO `ProductColour` VALUES (88, 10028, 'Redmi 小爱音箱Play ');
+INSERT INTO `ProductColour` VALUES (89, 10028, '【小爱触屏音箱-白色】');
+INSERT INTO `ProductColour` VALUES (90, 10028, '【小爱触屏音箱-红色】 ');
+INSERT INTO `ProductColour` VALUES (91, 10028, '【新品】小爱触屏音箱Pro ');
+INSERT INTO `ProductColour` VALUES (92, 10028, '【新品】小爱音箱 ');
+INSERT INTO `ProductColour` VALUES (93, 10028, '【新品】小爱音箱Pro ');
 
 -- ----------------------------
 -- Table structure for ProductCombo
@@ -124,7 +171,7 @@ CREATE TABLE `ProductCombo`  (
   `ProductId` int(11) NULL DEFAULT NULL,
   `ProductCombo` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductCombo
@@ -132,6 +179,11 @@ CREATE TABLE `ProductCombo`  (
 INSERT INTO `ProductCombo` VALUES (4, 10002, '优惠套餐一');
 INSERT INTO `ProductCombo` VALUES (5, 10002, '优惠套餐二');
 INSERT INTO `ProductCombo` VALUES (6, 10002, '优惠套餐三');
+INSERT INTO `ProductCombo` VALUES (13, 10021, '官方标配');
+INSERT INTO `ProductCombo` VALUES (14, 10021, '100寸黑栅硬屏套餐');
+INSERT INTO `ProductCombo` VALUES (15, 10021, '100菲涅尔硬屏套餐');
+INSERT INTO `ProductCombo` VALUES (16, 10025, '750g(30天装)');
+INSERT INTO `ProductCombo` VALUES (17, 10025, '525g(21天装)');
 
 -- ----------------------------
 -- Table structure for ProductImage
@@ -143,7 +195,7 @@ CREATE TABLE `ProductImage`  (
   `ImageSite` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `sign` int(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 92 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 142 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductImage
@@ -237,6 +289,56 @@ INSERT INTO `ProductImage` VALUES (88, 10018, '\r\nhttp://productdata.fhxasdsada
 INSERT INTO `ProductImage` VALUES (89, 10018, '\r\nhttp://productdata.fhxasdsada.xyz/5ce44b70N7a533656.jpg', NULL);
 INSERT INTO `ProductImage` VALUES (90, 10018, '\r\nhttp://productdata.fhxasdsada.xyz/12d9fdefc091d9e7.jpg', NULL);
 INSERT INTO `ProductImage` VALUES (91, 10018, '\r\nhttp://productdata.fhxasdsada.xyz/0938b8c9db25d916.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (92, 10019, '\r\nhttp://productdata.fhxasdsada.xyz/2-SXJILMjHoQXj66aurkzg.jpg', 1);
+INSERT INTO `ProductImage` VALUES (93, 10019, '\r\nhttp://productdata.fhxasdsada.xyz/bHr9HgsqtllBbPtMov6jww.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (94, 10019, '\r\nhttp://productdata.fhxasdsada.xyz/ca9NrNg1kMP-VoP8tOYNxg.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (95, 10019, '\r\nhttp://productdata.fhxasdsada.xyz/jg1eWej2dz72FeRkl0C_8w.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (96, 10019, '\r\nhttp://productdata.fhxasdsada.xyz/xranhinAPpnEuaarT7JhRw.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (97, 10020, 'http://productdata.fhxasdsada.xyz/0070137366-000000010059586574_3.jpg', 1);
+INSERT INTO `ProductImage` VALUES (98, 10020, 'http://productdata.fhxasdsada.xyz/0070137366-000000010059586574_4.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (99, 10020, 'http://productdata.fhxasdsada.xyz/0070137366-000000010059586574_5.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (100, 10020, 'http://productdata.fhxasdsada.xyz/225731782139609909464061_x.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (101, 10020, 'http://productdata.fhxasdsada.xyz/367000235486258003552709_x.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (102, 10021, 'http://productdata.fhxasdsada.xyz/dbBltniJF2LoPk9QQ3YWaw.jpg', 1);
+INSERT INTO `ProductImage` VALUES (103, 10021, 'http://productdata.fhxasdsada.xyz/DjtdSBwAWuSxHs6yAAc3Yw.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (104, 10021, 'http://productdata.fhxasdsada.xyz/iLSvW0r_-YDo4L7iUT7xkw.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (105, 10021, 'http://productdata.fhxasdsada.xyz/N_lvVexzFxRREgxewSkOxA.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (106, 10021, 'http://productdata.fhxasdsada.xyz/vqMAvTS5sJGYjfaD_qEVWA.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (107, 10022, '\r\nhttp://productdata.fhxasdsada.xyz/adadas3e.jpg', 1);
+INSERT INTO `ProductImage` VALUES (108, 10022, '\r\nhttp://productdata.fhxasdsada.xyz/Bjxu9RqIzP3Ee5QkFP6d1A.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (109, 10022, '\r\nhttp://productdata.fhxasdsada.xyz/aIcBs8oaW7BK7O_XjKnyDw.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (110, 10022, '\r\nhttp://productdata.fhxasdsada.xyz/RUbeN8NHFbwRkkH4-AuKbQ.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (111, 10022, '\r\nhttp://productdata.fhxasdsada.xyz/x-0NQEGxSXEpg4GUBE7gkQ.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (112, 10023, '\r\nhttp://productdata.fhxasdsada.xyz/tuhaokuai_1583977278.jpg', 1);
+INSERT INTO `ProductImage` VALUES (113, 10023, '\r\nhttp://productdata.fhxasdsada.xyz/tuhaokuai_1583977330.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (114, 10023, '\r\nhttp://productdata.fhxasdsada.xyz/tuhaokuai_1583977307.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (115, 10023, '\r\nhttp://productdata.fhxasdsada.xyz/tuhaokuai_1583977378.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (116, 10023, 'http://productdata.fhxasdsada.xyz/tuhaokuai_1583977378.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (117, 10024, 'http://productdata.fhxasdsada.xyz/AD8JQ6Q0jfeySzdxAVglqw.jpg', 1);
+INSERT INTO `ProductImage` VALUES (118, 10024, 'http://productdata.fhxasdsada.xyz/1k7IJMBhmkX97QGmsBnJmA.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (119, 10024, 'http://productdata.fhxasdsada.xyz/QlCRL5Qc2PQ1Ds9msLQ0aw.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (120, 10024, 'http://productdata.fhxasdsada.xyz/vGYPFoIyeYmz5oRZzvZdgQ.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (121, 10024, 'http://productdata.fhxasdsada.xyz/YZNbG7O6_BbGM7S33OAZxQ.jpg\r\n', NULL);
+INSERT INTO `ProductImage` VALUES (122, 10025, 'http://productdata.fhxasdsada.xyz/FlnxmuE-gh4YKIj4txsLfg.jpg', 1);
+INSERT INTO `ProductImage` VALUES (123, 10025, 'http://productdata.fhxasdsada.xyz/NL-OSHZUQGs6vGjGsmI__w.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (124, 10025, 'http://productdata.fhxasdsada.xyz/CZ5siXML-q9UXRnuqpww0g.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (125, 10025, 'http://productdata.fhxasdsada.xyz/GVEWb_biyayx8a3dNgKA2g.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (126, 10025, 'http://productdata.fhxasdsada.xyz/i7kQ4Pf_DtOVDPRC-HazMg.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (127, 10026, 'http://productdata.fhxasdsada.xyz/a1.jpg', 1);
+INSERT INTO `ProductImage` VALUES (128, 10026, 'http://productdata.fhxasdsada.xyz/a2.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (129, 10026, 'http://productdata.fhxasdsada.xyz/b1.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (130, 10026, 'http://productdata.fhxasdsada.xyz/b2.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (131, 10026, 'http://productdata.fhxasdsada.xyz/b3.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (132, 10027, 'http://productdata.fhxasdsada.xyz/135638619666091357760161_x.jpg', 1);
+INSERT INTO `ProductImage` VALUES (133, 10027, 'http://productdata.fhxasdsada.xyz/147494239513439282291194_x.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (134, 10027, 'http://productdata.fhxasdsada.xyz/194496895094406041420196_x.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (135, 10027, 'http://productdata.fhxasdsada.xyz/216693731079825961722732_x.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (136, 10027, 'http://productdata.fhxasdsada.xyz/HtNyjfPMAhzQjw1RPlMUoA.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (137, 10028, 'http://productdata.fhxasdsada.xyz/5JR1uDh09y-dhv8RSstl9g.jpg', 1);
+INSERT INTO `ProductImage` VALUES (138, 10028, 'http://productdata.fhxasdsada.xyz/jU8rPyTxL3Siw6dLEUHhDQ.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (139, 10028, 'http://productdata.fhxasdsada.xyz/MUak68zcW1wihVXkpQ3rIQ.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (140, 10028, 'http://productdata.fhxasdsada.xyz/nV358PZUk4icX1T7fBcc_Q.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (141, 10028, 'http://productdata.fhxasdsada.xyz/XJSBumEOLmp8H7P3GX2ASw.jpg', NULL);
 
 -- ----------------------------
 -- Table structure for ProductKind
@@ -298,7 +400,7 @@ CREATE TABLE `ProductPrice`  (
   `ProductSales` decimal(10, 2) NULL DEFAULT NULL,
   `ProductInventory` decimal(10, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductPrice
@@ -321,6 +423,16 @@ INSERT INTO `ProductPrice` VALUES (15, 10009, 47699.00, 4688, 45666.00, 666666.0
 INSERT INTO `ProductPrice` VALUES (16, 10004, 30576.00, 29999, 28999.00, 10000.00, 158555.00);
 INSERT INTO `ProductPrice` VALUES (17, 10005, 7890.00, 5888, 4585.00, 155555.00, 14565.00);
 INSERT INTO `ProductPrice` VALUES (18, 10018, 1140.00, 1111, 999.00, 1856.00, 15555.00);
+INSERT INTO `ProductPrice` VALUES (19, 10019, 260000.00, 259999, 259999.00, 1.00, 1.00);
+INSERT INTO `ProductPrice` VALUES (20, 10020, 5199.00, 4999, 4855.00, 100.00, 11111.00);
+INSERT INTO `ProductPrice` VALUES (21, 10021, 18599.00, 1855, 1599.00, 1000.00, 5555.00);
+INSERT INTO `ProductPrice` VALUES (22, 10023, 1299.00, 1152, 1258.00, 1000.00, 252.00);
+INSERT INTO `ProductPrice` VALUES (23, 10024, 2188.00, 2088, 1999.00, 1516.00, 4894651.00);
+INSERT INTO `ProductPrice` VALUES (24, 10025, 71.00, 66, 59.90, 161456.00, 156165.00);
+INSERT INTO `ProductPrice` VALUES (25, 10022, 1289.00, 1206, 1126.00, 54615165.00, 465156.00);
+INSERT INTO `ProductPrice` VALUES (26, 10026, 636.00, 620, 599.00, 15661156.00, 1846818.00);
+INSERT INTO `ProductPrice` VALUES (27, 10027, 773.00, 666, 689.00, 154854.00, 1666.00);
+INSERT INTO `ProductPrice` VALUES (28, 10028, 265.00, 222, 218.00, 151515.00, 156165.00);
 
 -- ----------------------------
 -- Table structure for ProductSize
@@ -331,7 +443,16 @@ CREATE TABLE `ProductSize`  (
   `ProductId` int(11) NULL DEFAULT NULL,
   `ProductSize` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of ProductSize
+-- ----------------------------
+INSERT INTO `ProductSize` VALUES (4, 10023, '均码');
+INSERT INTO `ProductSize` VALUES (5, 10026, 'XS');
+INSERT INTO `ProductSize` VALUES (6, 10026, 'S');
+INSERT INTO `ProductSize` VALUES (7, 10026, 'M');
+INSERT INTO `ProductSize` VALUES (8, 10026, 'L');
 
 -- ----------------------------
 -- Table structure for ProductSpecification
@@ -411,6 +532,22 @@ INSERT INTO `ProductVersion` VALUES (10017, 'GPS版');
 INSERT INTO `ProductVersion` VALUES (10017, ' 蜂窝版');
 INSERT INTO `ProductVersion` VALUES (10017, 'GPS版AC+');
 INSERT INTO `ProductVersion` VALUES (10017, '蜂窝版AC+');
+INSERT INTO `ProductVersion` VALUES (10024, '标准白有刻 ');
+INSERT INTO `ProductVersion` VALUES (10024, '标准白无刻');
+INSERT INTO `ProductVersion` VALUES (10024, '标准黑有刻 ');
+INSERT INTO `ProductVersion` VALUES (10024, '标准黑无刻');
+INSERT INTO `ProductVersion` VALUES (10024, '蓝牙白有刻 ');
+INSERT INTO `ProductVersion` VALUES (10024, '蓝牙白无刻 ');
+INSERT INTO `ProductVersion` VALUES (10024, '蓝牙黑有刻 ');
+INSERT INTO `ProductVersion` VALUES (10024, '蓝牙黑无刻');
+INSERT INTO `ProductVersion` VALUES (10024, '静音白有刻 ');
+INSERT INTO `ProductVersion` VALUES (10024, '静音白无刻');
+INSERT INTO `ProductVersion` VALUES (10028, '小爱音箱万能遥控版 ');
+INSERT INTO `ProductVersion` VALUES (10028, '小爱音箱play版');
+INSERT INTO `ProductVersion` VALUES (10028, '小米小爱音箱【HD版 深灰色】');
+INSERT INTO `ProductVersion` VALUES (10028, '小米小爱音箱【HD版 浅灰色】');
+INSERT INTO `ProductVersion` VALUES (10028, ' Redmi 小爱音箱Play 蓝色');
+INSERT INTO `ProductVersion` VALUES (10028, 'Redmi 小爱音箱Play 绿色');
 
 -- ----------------------------
 -- Table structure for RotationChart
@@ -596,6 +733,18 @@ CREATE TABLE `evaluation`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for footprint
+-- ----------------------------
+DROP TABLE IF EXISTS `footprint`;
+CREATE TABLE `footprint`  (
+  `userId` varchar(0) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `productId` int(11) NULL DEFAULT NULL,
+  `footprintId` int(11) NOT NULL AUTO_INCREMENT,
+  `time` date NULL DEFAULT NULL,
+  PRIMARY KEY (`footprintId`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for homepageIcon
 -- ----------------------------
 DROP TABLE IF EXISTS `homepageIcon`;
@@ -611,7 +760,7 @@ CREATE TABLE `homepageIcon`  (
 -- Records of homepageIcon
 -- ----------------------------
 INSERT INTO `homepageIcon` VALUES (1, 'http://img.fhxasdsada.xyz/e.png', '/', '会员');
-INSERT INTO `homepageIcon` VALUES (2, 'http://img.fhxasdsada.xyz/d.png', '/', '我的');
+INSERT INTO `homepageIcon` VALUES (2, 'http://img.fhxasdsada.xyz/d.png', '/personalCenter', '我的');
 INSERT INTO `homepageIcon` VALUES (3, 'http://img.fhxasdsada.xyz/a.png', '/', '消息');
 INSERT INTO `homepageIcon` VALUES (4, '\r\nhttp://img.fhxasdsada.xyz/f.png', '/', '收藏');
 INSERT INTO `homepageIcon` VALUES (5, '\r\nhttp://img.fhxasdsada.xyz/h.png', '/', '购物车');
@@ -659,9 +808,9 @@ CREATE TABLE `recommend`  (
   `ProductId` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `Favorite` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `shoppingTrolley` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `hot` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `hot` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '1 表示热门  2表示不热门',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of recommend
@@ -684,6 +833,29 @@ INSERT INTO `recommend` VALUES (44, '10009', '1', '1', '2');
 INSERT INTO `recommend` VALUES (45, '10004', '1', '1', '1');
 INSERT INTO `recommend` VALUES (46, '10005', '1', '1', '2');
 INSERT INTO `recommend` VALUES (47, '10018', '1', '1', '2');
+INSERT INTO `recommend` VALUES (48, '10019', '1', '1', '2');
+INSERT INTO `recommend` VALUES (49, '10020', '1', '1', '2');
+INSERT INTO `recommend` VALUES (50, '10021', '1', '1', '1');
+INSERT INTO `recommend` VALUES (51, '10022', '1', '1', '1');
+INSERT INTO `recommend` VALUES (52, '10023', '1', '1', '1');
+INSERT INTO `recommend` VALUES (53, '10024', '1', '1', '1');
+INSERT INTO `recommend` VALUES (54, '10025', '1', '1', '1');
+INSERT INTO `recommend` VALUES (55, '10026', '1', '1', '2');
+INSERT INTO `recommend` VALUES (56, '10027', '1', '1', '2');
+INSERT INTO `recommend` VALUES (57, '10028', '1', '1', '2');
+
+-- ----------------------------
+-- Table structure for shoppingCart
+-- ----------------------------
+DROP TABLE IF EXISTS `shoppingCart`;
+CREATE TABLE `shoppingCart`  (
+  `shoppingCartId` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` varbinary(0) NULL DEFAULT NULL,
+  `productId` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `productDeploy` varbinary(250) NULL DEFAULT NULL,
+  `quantity` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`shoppingCartId`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user
@@ -696,19 +868,61 @@ CREATE TABLE `user`  (
   `password` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `sex` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `phone` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `mail` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `Image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `token` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `birthday` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (18, 'c69bf9c84f4542418e56f7f8adb3663b', '小白', '123456', '男', '15367885410', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM');
-INSERT INTO `user` VALUES (19, '0cfd86808ed3444598a9267d5241d868', '黎明', 'asdfghjkl', '男', '18598814121', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM');
-INSERT INTO `user` VALUES (20, '4f69423c02324aa49d659e2d77d46bc1', '小白', '123456', '男', '15074163638', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM');
-INSERT INTO `user` VALUES (21, 'b45c37994b3d4a29aae6af60f8b2584d', '小白', '123456', '男', '15536362521', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM');
-INSERT INTO `user` VALUES (23, 'aed3b900483e459dbd956733227f3f0a', '小白', '123456', '男', '15569636362', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM');
+INSERT INTO `user` VALUES (37, 'f05d7667b5384a02b45fb540ba0ed2da', 'MuGe', '123456', '1', '15367885410', 'liuxianliangli@foxmail.com', ' http://img.fhxasdsada.xyz/f05d7667b5384a02b45fb540ba0ed2da?t=1584597021086', 'DM', '2019-4-15');
+INSERT INTO `user` VALUES (38, 'asdfghjkl', '方鸢', '123456', '1', '18598814121', '2252821162@qq.com', ' http://img.fhxasdsada.xyz/asdfghjkl?t=1584768785710', 'DM', '2017-2-1');
+INSERT INTO `user` VALUES (39, '8b616d638682406f96acd3b54dfbc723', 'HuangFan', '123123', '1', '13135361457', '552449824@qq.com', ' http://img.fhxasdsada.xyz/8b616d638682406f96acd3b54dfbc723?t=1584605671330', 'DM', '2019-4-4');
+
+-- ----------------------------
+-- Table structure for userAddress
+-- ----------------------------
+DROP TABLE IF EXISTS `userAddress`;
+CREATE TABLE `userAddress`  (
+  `addressId` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `areas` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `detailedAddress` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `phone` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `areaCodes` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `defaults` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `alias` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `isdelete` int(11) NULL DEFAULT 1,
+  PRIMARY KEY (`addressId`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of userAddress
+-- ----------------------------
+INSERT INTO `userAddress` VALUES (76, 'f05d7667b5384a02b45fb540ba0ed2da', '格式的函数的啊实打实', '河北省 唐山市 路北区 东新村街道 河北省 唐山市 路北区 文化路街道 江苏省 徐州市 鼓楼区 牌楼街道 江苏省 徐州市 贾汪区 大吴街道 江苏省 徐州市 贾汪区 大泉街道 ', '速度还是大速度还都是是大三大法师啊实打实东方闪电速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '32,3203,320305,320305003,', '0', '学校', 0);
+INSERT INTO `userAddress` VALUES (77, 'f05d7667b5384a02b45fb540ba0ed2da', '大范甘迪', '河北省 石家庄市 井陉矿区 四微街道 ', '读后感', '15367885410', 'liuxianliangli@foxmail.com', '13,1301,130107,130107002,', '0', '读后感', 0);
+INSERT INTO `userAddress` VALUES (78, 'f05d7667b5384a02b45fb540ba0ed2da', '速度还是大', '河北省 唐山市 丰南区 黄各庄镇 ', '速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130207,130207104,', '0', '速度还是大', 0);
+INSERT INTO `userAddress` VALUES (79, 'f05d7667b5384a02b45fb540ba0ed2da', '水电费', '天津市 市辖区 南开区 兴南街道 ', '三大法师', '15367885410', 'liuxianliangli@foxmail.com', '12,1201,120104,120104003,', '0', '水电费', 0);
+INSERT INTO `userAddress` VALUES (80, 'f05d7667b5384a02b45fb540ba0ed2da', '速度还是大', '河北省 石家庄市 新华区 宁安街道 ', '速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '13,1301,130105,130105004,', '0', '速度还是大', 0);
+INSERT INTO `userAddress` VALUES (81, 'f05d7667b5384a02b45fb540ba0ed2da', '速度还是大', '山西省 太原市 杏花岭区 鼓楼街道 ', '生活的速度', '15367885410', 'liuxianliangli@foxmail.com', '14,1401,140107,140107003,', '0', '水电费', 1);
+INSERT INTO `userAddress` VALUES (82, 'f05d7667b5384a02b45fb540ba0ed2da', '递四方速递', '河北省 石家庄市 井陉矿区 贾庄镇 ', '是多喝点水', '15367885410', 'liuxianliangli@foxmail.com', '13,1301,130107,130107100,', '0', '电话', 0);
+INSERT INTO `userAddress` VALUES (83, 'f05d7667b5384a02b45fb540ba0ed2da', '三大法师', '山西省 大同市 阳高县 罗文皂镇 ', '速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140221,140221101,', '0', '公司', 0);
+INSERT INTO `userAddress` VALUES (84, 'f05d7667b5384a02b45fb540ba0ed2da', '速度还是大', '河北省 唐山市 开平区 开平街道 ', '速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130205,130205002,', '0', '父母家', 0);
+INSERT INTO `userAddress` VALUES (86, 'f05d7667b5384a02b45fb540ba0ed2da', '方鸿鑫', '河北省 唐山市 开平区 开平街道 ', '试婚纱', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130205,130205002,', '1', '学校', 1);
+INSERT INTO `userAddress` VALUES (87, 'f05d7667b5384a02b45fb540ba0ed2da', '方式', '河北省 唐山市 开平区 开平街道 ', '试婚纱', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130205,130205002,', '0', '学校', 1);
+INSERT INTO `userAddress` VALUES (88, 'f05d7667b5384a02b45fb540ba0ed2da', '速度还是大', '河北省 石家庄市 井陉矿区 四微街道 ', '三大法师', '15367885410', 'liuxianliangli@foxmail.com', '13,1301,130107,130107002,', '0', '闺蜜家', 1);
+INSERT INTO `userAddress` VALUES (90, 'f05d7667b5384a02b45fb540ba0ed2da', '萨迪', '河北省 石家庄市 裕华区 裕兴街道 ', '的时候', '15367885410', 'liuxianliangli@foxmail.com', '13,1301,130108,130108001,', '0', '学校', 1);
+INSERT INTO `userAddress` VALUES (91, 'f05d7667b5384a02b45fb540ba0ed2da', '啊实打实', '山西省 太原市 尖草坪区 尖草坪街道 ', '啊实打实', '15367885410', 'liuxianliangli@foxmail.com', '14,1401,140108,140108001,', '0', '公司', 1);
+INSERT INTO `userAddress` VALUES (98, 'adsasdasd', '小小', '湖南省,长沙市', '湖南大学', '18598814121', '2252821162@qq.com', '123,123,123,123,', '0', '家', 1);
+INSERT INTO `userAddress` VALUES (99, 'adsasdasd', '小小', '湖南省,长沙市', '湖南大学', '18598814121', '2252821162@qq.com', '123,123,123,123,', '0', '家', 1);
+INSERT INTO `userAddress` VALUES (100, 'adsasdasd', '小小', '湖南省,长沙市', '湖南大学', '18598814121', '2252821162@qq.com', '123,123,123,123,', '0', '家', 1);
+INSERT INTO `userAddress` VALUES (101, 'adsasdasd', '小小', '湖南省,长沙市', '湖南大学', '18598814121', '2252821162@qq.com', '123,123,123,123,', '0', '家', 1);
+INSERT INTO `userAddress` VALUES (102, 'adsasdasd', '小小', '湖南省,长沙市', '湖南大学', '18598814121', '2252821162@qq.com', '123,123,123,123,', '0', '家', 1);
+INSERT INTO `userAddress` VALUES (103, 'asdfghjkl', '方', '天津市 市辖区 和平区 劝业场街道 ', '桂东', '18598814121', '2252821162@qq.com', '12,1201,120101,120101001,', '1', '家', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
