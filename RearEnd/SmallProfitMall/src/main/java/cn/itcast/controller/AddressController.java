@@ -66,8 +66,8 @@ public class AddressController {
     }
 
     //修改默認地址
-    @RequestMapping(value = "/updateDefault/{userId}/{addressId}",method = RequestMethod.PUT)
-    public QueryResponseResult updateDefaults(@PathVariable("userId")String userId,@PathVariable("addressId")int addressId) {
+    @RequestMapping(value = "/updateDefault",method = RequestMethod.PUT)
+    public QueryResponseResult updateDefaults(String userId,Integer addressId) {
         int redis = addressService.updateDefaults(addressId,userId,true);
         if (redis == 1) {
             return new QueryResponseResult(CommonCode.SUCCESS, null);//修改成功
