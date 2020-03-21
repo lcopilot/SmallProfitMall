@@ -148,7 +148,7 @@
                   vm.loginForm.randStr='';
                   vm.login_btn = new Date().getTime();
                   vm.resetForm('loginForm');
-                  vm.$message.error("服务器错误");
+                  vm.$message.error("服务器错误,请稍后重试");
                   vm.loginStatus = false;
                   vm.loginBtnContent = '登录';
                 });
