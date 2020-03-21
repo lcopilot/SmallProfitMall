@@ -24,14 +24,17 @@
             <div slot="header">
               <el-row :gutter="20">
                 <el-col :span="8">
-                  <el-tag type="success" effect="dark" size="small">{{address.alias}}</el-tag>
+                  <el-tag type="success" v-if="address.alias" effect="dark" size="small">
+                    {{address.alias}}
+                  </el-tag>
                 </el-col>
                 <el-col :span="3" :offset="address.alias==''? 17:9">
                   <el-button type="text" class="address_Btn" @click="editAddress(index)">编辑
                   </el-button>
                 </el-col>
                 <el-col :span="3">
-                  <el-button type="text" class="address_Btn" @click="removeAddress()">删除</el-button>
+                  <el-button type="text" class="address_Btn" @click="removeAddress(index)">删除
+                  </el-button>
                 </el-col>
               </el-row>
             </div>
@@ -45,10 +48,10 @@
                   <div class="address_message_div">{{address.phone}}</div>
                 </el-form-item>
                 <el-form-item label="所在区域">
-                  <div class="address_message_div">{{address.area}}</div>
+                  <div class="address_message_div">{{address.areas}}</div>
                 </el-form-item>
                 <el-form-item label="地址">
-                  <div class="address_message_div">{{address.address}}</div>
+                  <div class="address_message_div">{{address.detailedAddress}}</div>
                 </el-form-item>
                 <el-form-item label="邮箱">
                   <div class="address_message_div">{{address.email}}</div>
@@ -57,13 +60,13 @@
               <div class="address_bottom_card_def">
                 <el-switch
                     class="address_top_btn"
-                    v-model="address.default"
+                    v-model="address.defaults"
                     active-text="默认" @change="changeDefault(index)">
                 </el-switch>
               </div>
             </div>
           </el-card>
-          <el-dialog title="新增收货地址" :visible.sync="dialogFormVisible" @close="cancel">
+          <el-dialog :title="editBtn==false ? '新增收货地址':'修改收货地址'" :visible.sync="dialogFormVisible" @close="cancel">
             <div class="address_add_div">
               温馨提示:*号为必填哦~
             </div>
@@ -87,16 +90,16 @@
                                  v-model="addressForm.areaCode"
                                  @change="handleChange" separator=" " :filterable="true"
                                  placeholder="请选择地址"
-                                 :clearable="true" ref="cityAll" style="width:80%;"/>
+                                 :clearable="true" ref="cityAll" style="width:100%;"/>
                   </div>
                 </el-form-item>
-                <el-form-item label="具体地址" prop="address">
-                  <el-input type="textarea" v-model="addressForm.address" rows="3"
+                <el-form-item label="具体地址" prop="detailedAddress">
+                  <el-input type="textarea" v-model="addressForm.detailedAddress" rows="3"
                             :maxlength="250" show-word-limit></el-input>
                 </el-form-item>
                 <el-form-item label="地址别名" prop="alias">
                   <div style="text-align: left">
-                    <el-autocomplete style="width: 80%" :maxlength="12"
+                    <el-autocomplete  :maxlength="12"
                                      show-word-limit v-model="addressForm.alias"
                                      :fetch-suggestions="querySearch" placeholder="建议填写常用地址名称"
                                      clearable></el-autocomplete>
@@ -105,7 +108,7 @@
                 <el-form-item>
                   <div style="text-align: left">
                     <el-switch
-                        v-model="addressForm.default"
+                        v-model="addressForm.defaults"
                         active-text="默认"
                         inactive-text="不默认">
                     </el-switch>
@@ -117,7 +120,8 @@
                            style="width: 28%">确
                   定
                 </el-button>
-                <el-button v-if="editBtn" type="primary" @click="submitAddress('addressForm',3)"
+                <el-button v-if="editBtn" type="primary"
+                           @click="submitAddress('addressForm',addressForm.addressId)"
                            style="width: 28%">提交
                 </el-button>
                 <el-button @click="cancel()" style="width: 28%">取 消</el-button>
@@ -140,6 +144,7 @@
   const Header = () => import("../../components/pages/Header"); //组件懒加载
   const Footer = () => import("../../components/pages/Footer");
   const personalPage = () => import("../../components/admin/personalHubPage");
+
   export default {
     inject: ["reload"],
     name: "addressManagement",
@@ -172,11 +177,12 @@
         restaurants: [],
         //对话框
         dialogFormVisible: false,
+        //地址级联选择器绑定的参数
         options: [],
-        //完整地址
-        address: '',
         //新增地址的表单
         addressForm: {
+          //用户id
+          userId: '',
           //地址备注限制10个字
           alias: '',
           //收件人姓名
@@ -185,14 +191,15 @@
           phone: '',
           //所在地区
           areaCode: [],
+          //所在区域
+          areas: '',
           //具体地址
-          address: "",
+          detailedAddress: "",
           //邮件
           email: "",
           //是否默认地址 1不默认 2默认
-          default: false,
+          defaults: false,
         },
-
         //地址选择的级联列表参数
         defaultParams: {
           label: 'name',
@@ -202,67 +209,7 @@
           // checkStrictly: true,
         },
         //地址列表
-        addressList: [
-          {
-            //地址备注限制10个字
-            alias: "家庭地址不同校验简答",
-            //收件人姓名
-            name: "方鸿鑫",
-            //收件人手机
-            phone: "18569419873",
-            //所在地区
-            areaCode: [
-              "14", "1403", "140321", "140321101"
-            ],
-            area: "湖南长沙市天心区暮云镇",
-            //具体地址
-            address: "湖南科技职业学院(暮云校区)阿萨德饭框内容爱你说得好",
-            //邮件
-            email: "liuxianliangli@foxmail.com",
-            //是否默认地址 false不默认 true默认
-            default: true,
-          },
-          {
-            alias: "学校地址",
-            name: "方鸿鑫",
-            phone: "18569419873",
-            area: "湖南长沙市天心区暮云镇",
-            address: "湖南科技职业学院(暮云校区)阿萨德饭框内容爱你说得好",
-            email: "liuxianliangli@foxmail.com",
-            //是否默认地址
-            default: false,
-          },
-          {
-            alias: "公司地址",
-            name: "方鸿鑫",
-            phone: "18569419873",
-            area: "湖南长沙市天心区暮云镇",
-            address: "湖南科技职业学院(暮云校区)阿萨德饭框内容爱你说得好",
-            email: "liuxianliangli@foxmail.com",
-            //是否默认地址
-            default: false,
-          },
-          {
-            alias: "公司地址",
-            name: "方鸿鑫",
-            phone: "18569419873",
-            area: "湖南长沙市天心区暮云镇",
-            address: "湖南科技职业学院(暮云校区)阿萨德饭框内容爱你说得好",
-            email: "liuxianliangli@foxmail.com",
-            //是否默认地址
-            default: false,
-          },
-          {
-            alias: "公司地址",
-            name: "方鸿鑫",
-            phone: "18569419873",
-            area: "湖南长沙市天心区暮云镇",
-            address: "湖南科技职业学院(暮云校区)阿萨德饭框内容爱你说得好",
-            email: "liuxianliangli@foxmail.com",
-            //是否默认地址
-            default: false,
-          },
-        ],
+        addressList: [],
         //新增地址表单校验
         rules: {
           name: [
@@ -278,7 +225,7 @@
           areaCode: [
             {required: true, message: "请选择所在区域", trigger: 'blur'}
           ],
-          address: [
+          detailedAddress: [
             {required: true, message: "请填写具体地址", trigger: 'blur'}
           ],
           alias: [
@@ -313,39 +260,62 @@
       },
       //新增调用的方法
       addAddress() {
-        if (this.addressList.length<=9){
+        if (this.addressList.length < 9) {
           this.addBtn = true,
               this.dialogFormVisible = true;
           this.getAddressData();
-        }else {
+        } else {
           this.$message({
-            message:"只能添加9个哦~",
-            type:"warning"
+            message: "只能添加9个哦~",
+            type: "warning"
           })
         }
 
       },
-      //编辑调用的方法
+      //编辑按钮调用的方法
       editAddress(index) {
         this.editBtn = true;
         this.dialogFormVisible = true;
         this.getAddressData();
         this.addressForm = this.addressList[index];
         sessionStorage.setItem("addressListIndex", index);
+        sessionStorage.setItem("addressListData", JSON.stringify(this.addressList[index]))
       },
       //修改默认时的方法
       changeDefault(index, addressId) {
-        if (!this.addressList[index].default) {
+        if (!this.addressList[index].defaults) {
           this.$message({
             message: "必须拥有默认地址哦~",
             type: "warning"
           })
-        }
-        this.addressList.forEach((address) => {
-          address.default = false;
-        });
-        this.addressList[index].default = true;
+          this.addressList.forEach((address) => {
+            address.defaults = false;
+          });
+          this.addressList[index].defaults = true;
+        }else{
+          this.addressList.forEach((address) => {
+            address.defaults = false;
+          });
+          this.addressList[index].defaults = true;
+          let addressModificationParams={
+            "userId":sessionStorage.getItem("uId"),
+            "addressId":this.addressList[index].addressId
+          };
+          userApi.modifyDefault(addressModificationParams).then(res=>{
+            if (res.success){
+              this.$message({
+                message: "默认地址修改成功",
+                type: "success"
+              })
 
+            }
+          }).catch(error=>{
+            this.$message({
+              message: "服务器累了~",
+              type: "warning"
+            })
+          })
+        }
       },
       //关闭取消的回调
       cancel() {
@@ -356,26 +326,70 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             if (addressId != null) {
-              let addressList = this.addressList;
+              let addressList = JSON.parse(sessionStorage.getItem('addressListData'));
+              console.log()
               let index = sessionStorage.getItem("addressListIndex");
               let addressForm = this.addressForm;
-              if (addressList[index].name == addressForm.name &&
-                  addressList[index].phone == addressForm.phone &&
-                  addressList[index].areaCode == addressForm.areaCode &&
-                  addressList[index].address == addressForm.address &&
-                  addressList[index].email == addressForm.email &&
-                  addressList[index].default == addressForm.default &&
-                  addressList[index].alias == addressForm.alias
+              if (addressList.name == addressForm.name &&
+                  addressList.phone == addressForm.phone &&
+                  addressList.areaCode.toString() == addressForm.areaCode.toString() &&
+                  addressList.address == addressForm.address &&
+                  addressList.email == addressForm.email &&
+                  addressList.default == addressForm.default &&
+                  addressList.alias == addressForm.alias
               ) {
                 this.$message({
                   message: "您还没有修改哦~",
                   type: "warning"
                 })
               } else {
-                console.log('uiiu')
+                if (this.addressList.length == 1) {
+                  this.addressForm.defaults = true;
+                }
+                userApi.addAddress(this.addressForm).then(res => {
+                  if (res.success) {
+                    this.$message({
+                      message: "地址修改成功!",
+                      type: "success",
+                    })
+                    this.dialogFormVisible = false
+                  } else {
+                    this.$message({
+                      message: "地址修改失败!,请重试",
+                      type: "error",
+                    })
+                  }
+                }).catch(error => {
+                  this.$message({
+                    message: "服务器累了!",
+                    type: "error",
+                  })
+                })
               }
             } else {
-              this.dialogFormVisible = false
+              if (this.addressList.length == 0) {
+                this.addressForm.defaults = true;
+              }
+              this.addressForm.userId = sessionStorage.getItem("uId");
+              userApi.addAddress(this.addressForm).then(res => {
+                if (res.success) {
+                  this.$message({
+                    message: "添加成功!",
+                    type: "success",
+                  })
+                  this.dialogFormVisible = false
+                } else {
+                  this.$message({
+                    message: "添加失败!,请重试",
+                    type: "error",
+                  })
+                }
+              }).catch(error => {
+                this.$message({
+                  message: "服务器累了!",
+                  type: "error",
+                })
+              })
             }
 
           }
@@ -383,17 +397,23 @@
 
       },
       //删除地址
-      removeAddress(addressId) {
+      removeAddress(index) {
         this.$confirm('此操作将永久删除该地址, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          userApi.removeAddress(sessionStorage.getItem("uId"), this.addressList[index].addressId,
+              this.addressList[index].defaults).then(res => {
+            if (res.success) {
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+              this.cancel();
+            }
+          })
 
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
         }).catch(() => {
           this.$message({
             type: 'info',
@@ -401,16 +421,24 @@
           });
         });
       },
+      //获取地址
+      getAddress() {
+        userApi.getAddress(sessionStorage.getItem("uId")).then(
+            res => {
+              if (res.success) {
+                this.addressList = res.queryResult.list;
+              }
+            }
+        )
+      },
       //地址级联选择器变化时调用的方法
       handleChange(value) {
-        console.log(value)
         const checkedNodes = this.$refs['cityAll'].getCheckedNodes()
         if (checkedNodes.length != 0) {
           checkedNodes[0].pathLabels.forEach((item) => {
-            this.address += item + ' ';
+            this.addressForm.areas += item + ' ';
           });
         }
-        console.log(this.address);
       },
       //获取级联列表的数据
       getAddressData() {
@@ -427,6 +455,7 @@
     },
     created() {
       this.restaurants = this.loadAll();
+      this.getAddress();
     }
   }
 </script>

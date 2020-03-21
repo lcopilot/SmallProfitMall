@@ -1,4 +1,6 @@
 import http from '../util/public';
+//将参数拼接成字符串
+import querystring from 'querystring'
 
 //登录
 export const login = params => {
@@ -59,6 +61,24 @@ export const getCode = params => {
 //验证修改邮箱是的验证码
 export const verificationModifyEmailCode = params => {
   return http.requestPost('/apiUrl/EmailController/PhoneSucceed',params);
+}
+//添加地址
+export const addAddress = params => {
+  return http.requestPost('/apiUrl/AddressController/addAddress',params);
+}
+//获取地址数据
+export const getAddress = userId => {
+  return http.requestGet('/apiUrl/AddressController/findById/'+userId);
+}
+//删除地址
+export const removeAddress=(userId,addressId,defaults)=>{
+  return http.requestDelete('apiUrl/AddressController/deleteAddress/'+userId+'/'+addressId+'/'+defaults)
+}
+//修改默认
+export const modifyDefault=params=>{
+  //将params拼接成key/value串
+  let queryString=querystring.stringify(params);
+  return http.requestPut('apiUrl/AddressController/updateDefault?'+queryString)
 }
 
 

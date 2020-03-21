@@ -148,9 +148,9 @@ export default {
     })
   },
   //post请求
-  requestPost (url, params = {}) {
+  requestPost (url, data = {}) {
     return new Promise((resolve, reject) => {
-      axios.post(url, params).then(res => {
+      axios.post(url, data).then(res => {
         resolve(res.data)
       }).catch(error => {
         reject(error)
@@ -158,9 +158,9 @@ export default {
     })
   },
   //post请求(表单)
-  requestPostForm (url, params = {}) {
+  requestPostForm (url, data = {}) {
     return new Promise((resolve, reject) => {
-      axios.post(url, params, {
+      axios.post(url, data, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',  //请求头添加表单头
         },
@@ -172,9 +172,9 @@ export default {
     })
   },
   //put请求
-  requestPut (url, params = {}) {
+  requestPut (url, data = {}) {
     return new Promise((resolve, reject) => {
-      axios.put(url, params).then(res => {
+      axios.put(url, data).then(res => {
         resolve(res.data)
       }).catch(error => {
         reject(error)
@@ -182,9 +182,9 @@ export default {
     })
   },
   //delete请求
-  requestDelete (url, params = {}) {
+  requestDelete (url, data = {}) {
     return new Promise((resolve, reject) => {
-      axios.delete(url, params).then(res => {
+      axios.delete(url, data).then(res => {
         resolve(res.data)
       }).catch(error => {
         reject(error)
