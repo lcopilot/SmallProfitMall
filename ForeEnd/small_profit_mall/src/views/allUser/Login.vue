@@ -74,8 +74,6 @@
           ticket: '',
           randStr: '',
         },
-        //重载验证码组件的key
-        verify: 0,
         //重载登录按钮的key
         login_btn: 0,
         //登录按钮的状态
@@ -99,7 +97,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             let vm=this;
-            let captcha1 = new TencentCaptcha('2093846053', function (result) {
+            const tencentCode = new TencentCaptcha('2093846053', function (result) {
               if (result.ret === 0) {
                 vm.loginForm.ticket=result.ticket;
                 vm.loginForm.randStr=result.randstr;
@@ -139,24 +137,24 @@
                       vm.loginForm.ticket='';
                       vm.loginForm.randStr='';
                       vm.login_btn = new Date().getTime();
-                      vm.$message.warning("此用户名为初始用户名不可用,请更换用户名");
+                      vm.$message.warning("用户名或密码错误");
                       vm.loginStatus = false;
                       vm.loginBtnContent = '登录';
                     }
                   }
                 })
                 .catch(error => {
-                  this.loginForm.token = "";
-                  this.verify = new Date().getTime();
-                  this.login_btn = new Date().getTime();
-                  this.resetForm('loginForm');
-                  this.$message.error("服务器错误");
-                  this.loginStatus = false;
-                  this.loginBtnContent = '登录';
+                  vm.loginForm.ticket='';
+                  vm.loginForm.randStr='';
+                  vm.login_btn = new Date().getTime();
+                  vm.resetForm('loginForm');
+                  vm.$message.error("服务器错误");
+                  vm.loginStatus = false;
+                  vm.loginBtnContent = '登录';
                 });
               }
             });
-            captcha1.show(); // 显示验证码
+            tencentCode.show(); // 显示验证码
           }
         });
 
