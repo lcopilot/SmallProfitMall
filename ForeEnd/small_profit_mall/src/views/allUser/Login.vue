@@ -20,7 +20,7 @@
                 <el-form-item prop="name">
                   <svg-icon name="login" class="icon"/>
                   <el-input placeholder="请输入手机号或用户名" v-model="loginForm.name" clearable
-                            class="username"/>
+                            class="username" @change="CheckLoginBtn"/>
                 </el-form-item>
                 <el-form-item prop="password">
                   <svg-icon name="password" class="icon"/>
@@ -32,14 +32,17 @@
                       autocomplete="off"
                       @keyup.enter.native="login"/>
                 </el-form-item>
+                <!--       <el-form-item>
+                         <svg-icon name="verification_code" class="icon"
+                                   style="float: left;margin-left:30px "/>
+                         <Verify @success="verifyToken" :key="verify"></Verify>
+                       </el-form-item> -->
                 <el-form-item>
-                  <svg-icon name="verification_code" class="icon"
-                            style="float: left;margin-left:30px "/>
-                  <Verify @success="verifyToken" :key="verify"></Verify>
-                </el-form-item>
-                <el-form-item>
-                  <el-button :loading="loginStatus" class="login-btn" :key="login_btn"
-                             @click="login('loginForm')">{{loginBtnContent}}
+                  <el-button :loading="loginStatus" id="TencentCaptcha"
+                             data-appid="2093846053"
+                             data-cbfn="callback"
+                             class="login-btn" :key="login_btn"
+                  >{{loginBtnContent}}
                   </el-button>
                 </el-form-item>
               </el-form>
@@ -57,6 +60,7 @@
 </template>
 
 <script>
+
   // @ is an alias to /src
   const Header = () => import("../../components/pages/Header");
   const Footer = () => import("../../components/pages/Footer");
@@ -70,7 +74,8 @@
         loginForm: {
           name: '',
           password: '',
-          token: '',
+          ticket:'',
+          randStr:'',
         },
         //重载验证码组件的key
         verify: 0,
@@ -96,79 +101,90 @@
       login(formName) {
         this.$refs[formName].validate((valid) => {
               if (valid) {
-                if (this.loginForm.token == "") {
-                  this.$message({
-                    message: "请完成人机验证",
-                    type: "warning"
-                  });
-                } else {
-                  this.loginStatus = true;
-                  this.loginBtnContent = '登录中...';
-                  userApi.login(this.loginForm)
-                  .then(res => {
-                    if (res.success) {
-                      this.$message({
-                        message: "登录成功",
-                        type: "success"
-                      });
-                      sessionStorage.setItem("username", res.queryResult.list[0].name);
-                      sessionStorage.setItem("uId", res.queryResult.list[0].uid);
-                      sessionStorage.setItem("token", res.queryResult.list[0].tokens);
-                      sessionStorage.setItem("avatar", res.queryResult.list[0].image);
-                      this.$router.push({
-                        path: "/Home" //跳转的路径
-                      });
+                this.loginStatus = true;
+                this.loginBtnContent = '登录中...';
+                userApi.login(this.loginForm)
+                .then(res => {
+                  if (res.success) {
+                    this.$message({
+                      message: "登录成功",
+                      type: "success"
+                    });
+                    sessionStorage.setItem("username", res.queryResult.list[0].name);
+                    sessionStorage.setItem("uId", res.queryResult.list[0].uid);
+                    sessionStorage.setItem("token", res.queryResult.list[0].tokens);
+                    sessionStorage.setItem("avatar", res.queryResult.list[0].image);
+                    this.$router.push({
+                      path: "/Home" //跳转的路径
+                    });
+                  } else {
+                    if (res.code == 10009) {
+                      this.loginForm.token = "";
+                      this.verify = new Date().getTime();
+                      this.login_btn = new Date().getTime();
+                      this.$refs['loginForm'].resetFields();
+                      this.$message.error("人机验证二次失败,请稍后重试");
+                      this.loginStatus = false;
+                      this.loginBtnContent = '登录';
+                    } else if (res.code == 10008) {
+                      this.loginForm.token = "";
+                      this.verify = new Date().getTime();
+                      this.login_btn = new Date().getTime();
+                      this.$message.warning("此用户名为初始用户名不可用,请更换用户名");
+                      this.loginStatus = false;
+                      this.loginBtnContent = '登录';
                     } else {
-                      if (res.code == 10009) {
-                        this.loginForm.token = "";
-                        this.verify = new Date().getTime();
-                        this.login_btn = new Date().getTime();
-                        this.$refs['loginForm'].resetFields();
-                        this.$message.error("人机验证二次失败,请稍后重试");
-                        this.loginStatus = false;
-                        this.loginBtnContent = '登录';
-                      } if(res.code == 10008){
-                        this.loginForm.token = "";
-                        this.verify = new Date().getTime();
-                        this.login_btn = new Date().getTime();
-                        this.$message.warning("此用户名为初始用户名不可用,请更换用户名");
-                        this.loginStatus = false;
-                        this.loginBtnContent = '登录';
-                      }else {
-                        this.loginForm.token = "";
-                        this.verify = new Date().getTime();
-                        this.login_btn = new Date().getTime();
-                        this.$refs['loginForm'].resetFields();
-                        this.$message.error("账户或密码错误!")
-                        this.loginStatus = false;
-                        this.loginBtnContent = '登录';
-                      }
+                      this.loginForm.token = "";
+                      this.verify = new Date().getTime();
+                      this.login_btn = new Date().getTime();
+                      this.$refs['loginForm'].resetFields();
+                      this.$message.error("账户或密码错误!")
+                      this.loginStatus = false;
+                      this.loginBtnContent = '登录';
                     }
-                  })
-                  .catch(error => {
-                    this.loginForm.token = "";
-                    this.verify = new Date().getTime();
-                    this.login_btn = new Date().getTime();
-                    this.resetForm('loginForm');
-                    this.$message.error("服务器错误");
-                    this.loginStatus = false;
-                    this.loginBtnContent = '登录';
-                  });
-                }
-
+                  }
+                })
+                .catch(error => {
+                  this.loginForm.token = "";
+                  this.verify = new Date().getTime();
+                  this.login_btn = new Date().getTime();
+                  this.resetForm('loginForm');
+                  this.$message.error("服务器错误");
+                  this.loginStatus = false;
+                  this.loginBtnContent = '登录';
+                });
               }
+
             }
         );
       },
-      verifyToken(token) {
-        this.loginForm.token = token;
+      //校验表单状态
+      CheckLoginBtn(){
+        this.$refs['loginForm'].validate((valid) => {
+            if (valid) {
+
+            }
+        })
       },
       //重置表单
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
     },
-
+    mounted() {
+      let vm = this;
+      window.callback = function callback(res) {
+        console.log(res)
+        // res（用户主动关闭验证码）= {ret: 2, ticket: null}
+        // res（验证成功） = {ret: 0, ticket: "String", randstr: "String"}
+        if (res.ret === 0) {
+          console.log(res.ticket)   // 票据
+          vm.loginForm.ticket = res.ticket;
+          vm.loginForm.randStr  = res.randstr;
+          vm.login('loginForm');
+        }
+      }
+    }
   };
 </script>
 
@@ -210,8 +226,10 @@
     width: 300px;
   }
 
-
   a {
     color: #42b983;
+  }
+  a:hover {
+    color: #409EFF;
   }
 </style>

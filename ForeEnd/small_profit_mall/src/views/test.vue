@@ -1,29 +1,40 @@
 <template>
   <div>
-    <div v-for="item in 10">
+    <el-button id="TencentCaptcha"
+            data-appid="2093846053"
+            data-cbfn="callback"
+            type="button"
+    >验证</el-button>
 
-      <el-row>
-        <el-col :span="22">
-          <div v-for="item in 10"> </div>
-
-        </el-col>
-      </el-row>
-    </div>
   </div>
 </template>
 
 <script>
-  const vaptcha = () => import("../components/UtilsComponent/vaptcha-code");
+  window.callback = function callback(res){
+    console.log(res)
+    // res（用户主动关闭验证码）= {ret: 2, ticket: null}
+    // res（验证成功） = {ret: 0, ticket: "String", randstr: "String"}
+    if(res.ret === 0){
+      console.log(res.ticket)   // 票据
+    }
+  }
+
 
   export default {
     name: "test",
-    components:{vaptcha},
     methods:{
-      login(data){
+      callback(data){
         console.log(data)
         console.log("测试");
       }
-    }
+    },
+    mounted: function () {
+      this.captcha = new window.TencentCaptcha('2093846053', function (res) {
+        if (res.ret === 0) {
+          console.log('asda')
+        }
+      })
+    },
   }
 </script>
 
