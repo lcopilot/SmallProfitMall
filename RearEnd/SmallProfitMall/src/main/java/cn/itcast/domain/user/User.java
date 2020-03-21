@@ -18,6 +18,24 @@ public class User implements Serializable {
     private String verify;
     private String birthday;
     private List birthdays;
+    private String  ticket;
+    private String randStr;
+
+    public String getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(String ticket) {
+        this.ticket = ticket;
+    }
+
+    public String getRandStr() {
+        return randStr;
+    }
+
+    public void setRandStr(String randStr) {
+        this.randStr = randStr;
+    }
 
     public List getBirthdays() {
         return birthdays;

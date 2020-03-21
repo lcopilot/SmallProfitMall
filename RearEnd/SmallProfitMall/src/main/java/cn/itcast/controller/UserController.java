@@ -13,6 +13,8 @@ import cn.itcast.skd.Vaptcha;
 import cn.itcast.util.logic.GetFourRandom;
 import cn.itcast.util.logic.sessionUtil;
 import cn.itcast.util.user.SmsUtils;
+import cn.itcast.util.verify.IPUtil;
+import cn.itcast.util.verify.TCaptchaVerify;
 import cn.itcast.util.verify.VerifyUtil;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.HttpRequest;
@@ -72,9 +74,16 @@ public class UserController {
 	 */
 	@RequestMapping("/accountLogin")
 	public QueryResponseResult accountLogin(@RequestBody User user, HttpServletRequest request) {
-		if (!verifyUtil.VaptchaVerify(user.getToken(), request)) {
-			return new QueryResponseResult(CommonCode.ValidationFails, null); //令牌错误不正确
+//		if (!verifyUtil.VaptchaVerify(user.getToken(), request)) {
+//			return new QueryResponseResult(CommonCode.ValidationFails, null); //令牌错误不正确
+//		}
+		int verifyTicket=TCaptchaVerify.verifyTicket(user.getTicket(),user.getRandStr(), IPUtil.getIP(request));
+		if (verifyTicket==1){
+			return new QueryResponseResult(CommonCode.SUCCESS,null);
+		}else if (verifyTicket==-1){
+			return new QueryResponseResult(CommonCode.ValidationFails,null);
 		}
+
 		if (user.getName().equals("smallProfit")) {
 			return new QueryResponseResult(CommonCode.nameError, null); //不能使用初始名字登录不
 		}
