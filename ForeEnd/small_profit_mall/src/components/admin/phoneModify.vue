@@ -294,7 +294,7 @@
         let phone = /^1[0-9]{10}$/
         if (this.newPhone == '' || this.newPhone.length <= 11 || !phone.test(this.newPhone)) {
           this.$message.warning("请输入正确的手机号")
-        } else if (this.smsCode == '' || this.smsCode.length <= 4) {
+        } else if (this.smsCode == '' || this.smsCode.length <4) {
           this.$message.warning("请输入正确的验证码")
         } else {
           let formData = new FormData()
