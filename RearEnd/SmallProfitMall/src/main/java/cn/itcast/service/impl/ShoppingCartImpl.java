@@ -82,5 +82,16 @@ public class ShoppingCartImpl implements ShoppingCartService {
         return shoppingCart;
     }
 
+    //根据shoppingCartId删除购物车
+    @Override
+    public Integer deleteCart(int shoppingCartId) {
+        return shoppingCartDao.deleteCart(shoppingCartId);
+    }
+
+    @Override
+    public Integer findByuId(String userId) {
+        return shoppingCartDao.findByuId(userId);
+    }
+
 
 }
