@@ -192,7 +192,7 @@
                 <div class="form_left">
                   <el-input-number v-model="productForm.quantity" style="width: 30%" :min="1"
                                    :max="99"/>
-                  <el-button type="danger" @click="onSubmit" style="margin-left: 10px"
+                  <el-button type="danger" @click="addCart" style="margin-left: 10px"
                              icon="el-icon-circle-plus-outline">加入购物车
                   </el-button>
                   <el-button type="danger" @click="onSubmit" :disabled="(product.inventorys)<=0">
@@ -440,26 +440,28 @@
         address: '',
         product: [],
         productForm: {
+          //用户id
+          userId:"",
           //商品id
           productId: 0,
           //名字
-          name: '',
+          name: ' ',
           //配置
-          specification: '',
+          specification: ' ',
           //版本
-          version: '',
+          version: ' ',
           //尺码
-          size: '',
+          size: ' ',
           //颜色
-          colour: '',
+          colour: ' ',
           //套餐
-          combo: '',
+          combo: ' ',
           //口味
-          taste: '',
+          taste: ' ',
           //数量
           quantity: 1,
           //种类
-          kind: '',
+          kind: ' ',
         },
 
       }
@@ -525,6 +527,7 @@
       getProduct(productId) {
         productApi.getProduct(productId).then(res => {
               if (res.success) {
+                console.log(res)
                 this.product = res.queryResult.list[0];
                 //设置默认选项
                 this.bigImg = res.queryResult.list[0].imageSite[1];
@@ -539,6 +542,29 @@
             }
         )
       },
+      //加入购物车
+      addCart(){
+        this.productForm.productId=sessionStorage.getItem("productId");
+        this.productForm.userId=sessionStorage.getItem("uId");
+        productApi.addCart(this.productForm).then(res=>{
+          if (res){
+            this.$message({
+              message:"商品已加入购物车",
+              type:"success"
+            })
+          }else{
+            this.$message({
+              message:"加入购物车失败,请稍后重试",
+              type:"error"
+            })
+          }
+        }).catch(error=>{
+          this.$message({
+            message:"服务器累了~,请稍后重试",
+            type:"error"
+          })
+        })
+      },
     },
     computed: {
       player() {
@@ -549,7 +575,7 @@
       if (this.$route.query.productId != null) {
         sessionStorage.setItem("productId", this.$route.query.productId);
       }
-      let productId = sessionStorage.getItem("productId")
+      let productId = sessionStorage.getItem("productId");
       this.getProduct(productId);
       this.getAddressData();
       this.switchProductImg();
