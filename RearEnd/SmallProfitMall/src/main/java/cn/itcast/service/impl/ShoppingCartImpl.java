@@ -85,8 +85,12 @@ public class ShoppingCartImpl implements ShoppingCartService {
 
     //根据shoppingCartId删除购物车
     @Override
-    public Integer deleteCart(int shoppingCartId) {
-        return shoppingCartDao.deleteCart(shoppingCartId);
+    public Integer deleteCart(int[] cartIdList) {
+        int redis=0;
+        for (int shoppingCartId : cartIdList){
+           redis = shoppingCartDao.deleteCart(shoppingCartId);
+        }
+        return redis;
     }
 
     @Override

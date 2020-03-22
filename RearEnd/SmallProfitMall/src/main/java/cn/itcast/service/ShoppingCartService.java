@@ -18,7 +18,7 @@ public interface ShoppingCartService {
     public List<ShoppingCart> findByUserId(String userId);
 
     //根据id删除
-    public Integer deleteCart(int shoppingCartId);
+    public Integer deleteCart(int[] shoppingCartId);
 
     //根据用户id查询购物车商品数量
     public ArrayList findByuId(String userId);
