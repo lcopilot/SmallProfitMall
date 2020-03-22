@@ -5,8 +5,11 @@ import cn.itcast.dao.ShoppingCartDao;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.domain.shoppingCar.ShoppingCart;
 import cn.itcast.service.ShoppingCartService;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ShoppingCartImpl implements ShoppingCartService {
@@ -58,4 +61,26 @@ public class ShoppingCartImpl implements ShoppingCartService {
         int redis = shoppingCartDao.addShoppingCar(shoppingCart);
         return redis;
     }
+
+    //查询购物车
+    public List<ShoppingCart> findByUserId(String userId){
+        List<ShoppingCart> shoppingCart = shoppingCartDao.findByUserId(userId);
+        for (int i = 0; i <shoppingCart.size() ; i++) {
+            String a=shoppingCart.get(i).getUserId();
+            int c=shoppingCart.get(i).getProductId();
+            String redis="";
+                redis = shoppingCartDao.findByUidEvaluation(shoppingCart.get(i).getUserId(),shoppingCart.get(i).getProductId());
+             if (redis!=null){
+                 if (redis.equals("true")){
+                     shoppingCart.get(i).setEvaluation(true);
+                 }
+             }else {
+                 shoppingCart.get(i).setEvaluation(false);
+                 continue;
+             }
+        }
+        return shoppingCart;
+    }
+
+
 }

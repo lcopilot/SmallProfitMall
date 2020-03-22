@@ -13,12 +13,47 @@
     <!--根据id查询商品价格名字库存-->
     <select id="findByPid" resultType="cn.itcast.domain.shoppingCar.PurchaseInformation">
         SELECT
-				pb.ProductName,pp.ProductPrice,pp.ProductInventory
+			pb.ProductName,pp.ProductPrice,pp.ProductInventory
         FROM
             ProductBasis pb
-        LEFT JOIN ProductPrice pp
-            ON pb.ProductId = pp.ProductId
-        WHERE pb.ProductId=#{productId}
+        LEFT JOIN
+            ProductPrice pp
+        ON
+            pb.ProductId = pp.ProductId
+        WHERE
+            pb.ProductId=#{productId}
+    </select>
+
+    <!--根据uid查询购物车-->
+    <select id="findByUserId" resultType="cn.itcast.domain.shoppingCar.ShoppingCart" parameterType="java.lang.String">
+        select
+            sc.*,pp.ProductInventory,pi.ImageSite
+        from
+            shoppingCart sc
+        LEFT JOIN
+            ProductPrice pp
+        ON
+            sc.productId=pp.ProductId
+        LEFT JOIN
+            ProductImage pi
+		ON
+			pp.ProductId = pi.ProductId
+        WHERE
+            sc.userId=#{userId}
+		AND
+		    pi.sign=1
+    </select>
+
+    <!--查询是否收藏-->
+    <select id="findByUidEvaluation" resultType="java.lang.String">
+         SELECT
+            sign
+        FROM
+            userEvaluation
+        WHERE
+            userId=#{userId}
+        AND
+            produvtId=#{productId}
     </select>
 
 </mapper>
