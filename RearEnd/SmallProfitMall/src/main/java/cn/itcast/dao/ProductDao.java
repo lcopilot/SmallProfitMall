@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+//商品列表
 @Repository
 public interface ProductDao {
     //查询秒杀商品表

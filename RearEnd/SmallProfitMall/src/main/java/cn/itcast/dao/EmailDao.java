@@ -2,7 +2,7 @@ package cn.itcast.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-
+//发送邮件
 @Repository
 public interface EmailDao {
     //跟新邮箱

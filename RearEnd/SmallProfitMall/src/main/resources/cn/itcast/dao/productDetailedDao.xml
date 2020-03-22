@@ -26,36 +26,36 @@
         WHERE pb.ProductId=#{ProductId}
 </select>
     <!--根据商品id查询商品图片-->
-    <select id="findByIdImage" resultType="java.lang.String" parameterType="INT">
-        select ImageSite from ProductImage WHERE ProductId=#{ProductId}
+    <select id="findByIdImage" resultType="java.lang.String" parameterType="java.lang.Integer">
+        select ImageSite,ColourInventory from ProductImage WHERE ProductId=#{ProductId}
     </select>
     <!--根据商品id查询商品规格-->
-    <select id="findByIdSpecification" resultType="java.lang.String" parameterType="INT">
+    <select id="findByIdSpecification" resultType="java.lang.String" parameterType="java.lang.Integer">
     select Specification from ProductSpecification WHERE ProductId=#{ProductId}
     </select>
     <!--根据商品id查询商品口味-->
-    <select id="findByIdTaste" resultType="java.lang.String" parameterType="INT">
+    <select id="findByIdTaste" resultType="java.lang.String" parameterType="java.lang.Integer">
         select ProductTaste from ProductTaste WHERE ProductId=#{ProductId}
     </select>
     <!--根据商品id查询商品颜色-->
-    <select id="findByIdColour" resultType="java.lang.String" parameterType="INT">
+    <select id="findByIdColour" resultType="java.lang.String" parameterType="java.lang.Integer">
         select ProductColour from ProductColour WHERE ProductId=#{ProductId}
     </select>
     <!--根据商品id查询商品套餐-->
-    <select id="findByIdCombo" resultType="java.lang.String" parameterType="INT">
+    <select id="findByIdCombo" resultType="java.lang.String" parameterType="java.lang.Integer">
         select ProductCombo from ProductCombo WHERE ProductId=#{ProductId}
     </select>
 
     <!--根据商品id查询商品尺寸-->
-    <select id="findBySize" resultType="java.lang.String" parameterType="INT">
+    <select id="findBySize" resultType="java.lang.String" parameterType="java.lang.Integer">
         select ProductSize from ProductSize WHERE ProductId=#{ProductId}
     </select>
     <!--根据商品id查询商品种类-->
-    <select id="findByKind" resultType="java.lang.String" parameterType="INT">
+    <select id="findByKind" resultType="java.lang.String" parameterType="java.lang.Integer">
         select ProductKind from ProductKind WHERE ProductId=#{ProductId}
     </select>
     <!--根据商品id查询商品版本-->
-    <select id="findByVersion" resultType="java.lang.String" parameterType="INT">
+    <select id="findByVersion" resultType="java.lang.String" parameterType="java.lang.Integer">
        select  version from  ProductVersion WHERE ProductId=#{ProductId}
     </select>
 

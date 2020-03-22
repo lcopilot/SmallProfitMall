@@ -3,7 +3,10 @@ package cn.itcast.dao;
 
 import cn.itcast.domain.ProductDatails.ProductBasis;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+//商品详细
+@Repository
 public interface ProductDetailsDao {
 
     //根据id查询商品基础表跟价格表
