@@ -46,6 +46,31 @@ public class ShoppingCartController {
          List<ShoppingCart> shoppingCart =shoppingCartService.findByUserId(userId);
             queryResult.setList(shoppingCart);
             return new QueryResponseResult(CommonCode.SUCCESS, queryResult);//添加成功
+    }
+
+    //删除
+    @RequestMapping(value = "/deleteCart/{shoppingCartId}",method = RequestMethod.DELETE)
+    public QueryResponseResult deleteCart(@PathVariable("shoppingCartId")Integer shoppingCartId) {
+        if (shoppingCartId == null) {
+            return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
+        }
+        int redis = shoppingCartService.deleteCart(shoppingCartId);
+        if (redis == 1) {   //删除成功
+            return new QueryResponseResult(CommonCode.SUCCESS, null);//添加成功
+        } else {
+            return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
+        }
+    }
+
+    //查询商品
+    @RequestMapping(value = "/findByuId/{userId}",method = RequestMethod.GET)
+    public QueryResponseResult findByuId(@PathVariable("userId")String userId) {
+        if (userId == null) {
+            return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
+        }
+        int redis = shoppingCartService.findByuId(userId);
+        queryResult.setTotal(redis);
+            return new QueryResponseResult(CommonCode.SUCCESS, queryResult);//添加成功
 
     }
 }

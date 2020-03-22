@@ -56,4 +56,14 @@
             produvtId=#{productId}
     </select>
 
+    <!--删除购物车-->
+    <delete id="deleteCart" parameterType="java.lang.Integer">
+        DELETE FROM shoppingCart WHERE shoppingCartId = #{shoppingCartId}
+    </delete>
+
+    <!--查询购物车数量-->
+    <select id="findByuId" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT * FROM shoppingCart WHERE userId=#{userId}
+    </select>
+
 </mapper>

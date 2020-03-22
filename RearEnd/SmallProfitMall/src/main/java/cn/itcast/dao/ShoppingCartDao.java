@@ -18,4 +18,10 @@ public interface ShoppingCartDao {
 
     //根据uid productId查询用户是否收藏
     public  String  findByUidEvaluation(@Param("userId")String userId,@Param("productId")int productId);
+
+    //根据id删除
+    public Integer deleteCart(@Param("shoppingCartId")Integer shoppingCartId);
+
+    //根据用户id查询购物车商品数量
+    public Integer findByuId(String userId);
 }
