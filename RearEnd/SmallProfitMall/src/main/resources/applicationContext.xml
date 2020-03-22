@@ -109,6 +109,8 @@
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* cn.itcast.service.impl.*ServiceImpl.*(..))"/>
     </aop:config>
 
+
+
     <context:component-scan base-package="cn.itcast.util"></context:component-scan>
 
     <bean id="annotationPropertyConfigurerRedis"

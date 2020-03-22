@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 
-//商品详控制器
+//商品详细
 @Service("productDetailsServiceImpl")
 public class ProductDetailsServiceImpl implements ProductDetailsService {
 
