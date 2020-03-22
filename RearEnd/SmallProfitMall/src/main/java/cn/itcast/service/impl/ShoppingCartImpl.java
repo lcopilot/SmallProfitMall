@@ -33,28 +33,27 @@ public class ShoppingCartImpl implements ShoppingCartService {
         shoppingCart.setUserId(purchaseInformation.getUserId());                //设置用户id
 
         String productDeploy = "";
-        if (!purchaseInformation.getColour().equals("")||!purchaseInformation.getColour().equals(null)){           //颜色
+        if (purchaseInformation.getColour()!=null){           //颜色
             productDeploy = productDeploy+purchaseInformation.getColour()+" ";
         }
-        if (!purchaseInformation.getCombo().equals("")||purchaseInformation.getCombo()==null){           //套餐
+        if (purchaseInformation.getCombo()!=null){           //套餐
             productDeploy = productDeploy+purchaseInformation.getCombo()+" ";
         }
-        if (!purchaseInformation.getKind().equals("")||purchaseInformation.getKind().equals(null)){         //种类
+        if (purchaseInformation.getKind()!=null){         //种类
             productDeploy = productDeploy+purchaseInformation.getKind()+" ";
         }
-        if (!purchaseInformation.getSize().equals("")||purchaseInformation.getSize().equals(null)){         //尺寸
+        if (purchaseInformation.getSize()!=null){         //尺寸
             productDeploy = productDeploy+purchaseInformation.getSize()+" ";
         }
-        if (!purchaseInformation.getVersion().equals("")||purchaseInformation.getVersion().equals(null)){      //版本
+        if (purchaseInformation.getVersion()!=null){      //版本
             productDeploy = productDeploy+purchaseInformation.getVersion()+" ";
         }
-        if(!purchaseInformation.getTaste().equals("")||purchaseInformation.getTaste().equals(null)){         //口味
+        if(purchaseInformation.getTaste()!=null){         //口味
             productDeploy = productDeploy+purchaseInformation.getTaste()+" ";
         }
-        if(!purchaseInformation.getSpecification().equals("")||purchaseInformation.getSpecification().equals(null)){ //规格
+        if(purchaseInformation.getSpecification()!=null){ //规格
             productDeploy = productDeploy+purchaseInformation.getSpecification()+" ";
         }
-
         shoppingCart.setProductDeploy(productDeploy);
         int redis = shoppingCartDao.addShoppingCar(shoppingCart);
         return redis;
