@@ -63,7 +63,7 @@
 
     <!--查询购物车数量-->
     <select id="findByuId" resultType="java.lang.Integer" parameterType="java.lang.String">
-        SELECT * FROM shoppingCart WHERE userId=#{userId}
+        SELECT shoppingCartId FROM shoppingCart WHERE userId=#{userId}
     </select>
 
 </mapper>

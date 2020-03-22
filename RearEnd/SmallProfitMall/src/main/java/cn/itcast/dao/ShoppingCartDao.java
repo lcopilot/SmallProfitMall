@@ -23,5 +23,5 @@ public interface ShoppingCartDao {
     public Integer deleteCart(@Param("shoppingCartId")Integer shoppingCartId);
 
     //根据用户id查询购物车商品数量
-    public Integer findByuId(String userId);
+    public List findByuId(String userId);
 }
