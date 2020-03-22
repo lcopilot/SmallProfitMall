@@ -27,7 +27,7 @@
 </select>
     <!--根据商品id查询商品图片-->
     <select id="findByIdImage" resultType="java.lang.String" parameterType="java.lang.Integer">
-        select ImageSite,ColourInventory from ProductImage WHERE ProductId=#{ProductId}
+        select ImageSite from ProductImage WHERE ProductId=#{ProductId}
     </select>
     <!--根据商品id查询商品规格-->
     <select id="findByIdSpecification" resultType="java.lang.String" parameterType="java.lang.Integer">
