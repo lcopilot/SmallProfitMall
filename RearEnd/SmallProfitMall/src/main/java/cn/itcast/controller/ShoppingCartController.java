@@ -51,11 +51,12 @@ public class ShoppingCartController {
 
     //删除
     @RequestMapping(value = "/deleteCart/{shoppingCartId}",method = RequestMethod.DELETE)
-    public QueryResponseResult deleteCart(@PathVariable("shoppingCartId")Integer shoppingCartId) {
-        if (shoppingCartId == null) {
+    public QueryResponseResult deleteCart(@PathVariable("shoppingCartId")int[] cartIdList) {
+        if (cartIdList== null) {
             return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
         }
-        int redis = shoppingCartService.deleteCart(shoppingCartId);
+
+        int redis = shoppingCartService.deleteCart(cartIdList);
         if (redis == 1) {   //删除成功
             return new QueryResponseResult(CommonCode.SUCCESS, null);//添加成功
         } else {
