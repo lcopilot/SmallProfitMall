@@ -1,10 +1,10 @@
 package cn.itcast.service;
 
-import cn.itcast.domain.shoppingCar.ShoppingCar;
-import org.springframework.stereotype.Service;
+import cn.itcast.domain.shoppingCar.PurchaseInformation;
+import cn.itcast.domain.shoppingCar.ShoppingCart;
 
 
 public interface ShoppingCartService {
     //添加到购物车
-    public int addShoppingCar(ShoppingCar shoppingCar);
+    public int addShoppingCar(PurchaseInformation purchaseInformation);
 }
