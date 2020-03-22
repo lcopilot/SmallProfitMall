@@ -5,6 +5,7 @@ import cn.itcast.domain.shoppingCar.ShoppingCart;
 import org.apache.ibatis.annotations.Param;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,7 +21,7 @@ public interface ShoppingCartService {
     public Integer deleteCart(int shoppingCartId);
 
     //根据用户id查询购物车商品数量
-    public Integer findByuId(String userId);
+    public ArrayList findByuId(String userId);
 
 
 }

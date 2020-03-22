@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -68,8 +69,8 @@ public class ShoppingCartController {
         if (userId == null) {
             return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
         }
-        int redis = shoppingCartService.findByuId(userId);
-        queryResult.setTotal(redis);
+        ArrayList redis = shoppingCartService.findByuId(userId);
+        queryResult.setTotal(redis.size());
             return new QueryResponseResult(CommonCode.SUCCESS, queryResult);//添加成功
 
     }
