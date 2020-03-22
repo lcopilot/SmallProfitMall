@@ -5,7 +5,9 @@ import cn.itcast.dao.ShoppingCartDao;
 import cn.itcast.domain.shoppingCar.ShoppingCar;
 import cn.itcast.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ShoppingCartImpl implements ShoppingCartService {
 
     @Autowired
