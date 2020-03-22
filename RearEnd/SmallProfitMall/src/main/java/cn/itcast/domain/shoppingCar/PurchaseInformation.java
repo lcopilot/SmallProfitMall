@@ -6,7 +6,7 @@ import java.io.Serializable;
 @Component
 public class PurchaseInformation implements Serializable {
     private String userId;          //用户id
-    private int pid;
+    private int productId;
     private String ProductName;         //商品名字
     private Double ProductPrice;         //商品价格
     private Double ProductInventory;    //商品库存
@@ -43,12 +43,12 @@ public class PurchaseInformation implements Serializable {
         this.userId = userId;
     }
 
-    public int getPid() {
-        return pid;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
-    public void setPid(int pid) {
-        this.pid = pid;
+    public int getProductId() {
+        return productId;
     }
 
     public String getProductName() {
@@ -123,21 +123,5 @@ public class PurchaseInformation implements Serializable {
         this.version = version;
     }
 
-    @Override
-    public String toString() {
-        return "PurchaseInformation{" +
-                "userId='" + userId + '\'' +
-                ", pid=" + pid +
-                ", ProductName='" + ProductName + '\'' +
-                ", ProductPrice=" + ProductPrice +
-                ", size='" + size + '\'' +
-                ", colour='" + colour + '\'' +
-                ", combo='" + combo + '\'' +
-                ", specification='" + specification + '\'' +
-                ", taste='" + taste + '\'' +
-                ", kind='" + kind + '\'' +
-                ", version='" + version + '\'' +
-                ", quantity=" + quantity +
-                '}';
-    }
+
 }

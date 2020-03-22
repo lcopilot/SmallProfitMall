@@ -23,12 +23,12 @@ public class ShoppingCartImpl implements ShoppingCartService {
     @Override
     public int addShoppingCar(PurchaseInformation purchaseInformation) {
         //根据ic查询价格
-        PurchaseInformation purchaseInformation1 =  shoppingCartDao.findByPid(purchaseInformation.getPid());//数据库取商品价格名字
+        PurchaseInformation purchaseInformation1 =  shoppingCartDao.findByPid(purchaseInformation.getProductId());//数据库取商品价格名字
         System.out.println(purchaseInformation1);
         shoppingCart.setProductName(purchaseInformation1.getProductName());     //设置商品名字
         shoppingCart.setProductPrice(purchaseInformation1.getProductPrice());   //设置商品价格
         shoppingCart.setProductInventory(purchaseInformation1.getProductInventory());   //设置库存
-        shoppingCart.setProductId(purchaseInformation.getPid());                //设置商品id
+        shoppingCart.setProductId(purchaseInformation.getProductId());                //设置商品id
         shoppingCart.setQuantity(purchaseInformation.getQuantity());            //设置购买数量
         shoppingCart.setUserId(purchaseInformation.getUserId());                //设置用户id
 
