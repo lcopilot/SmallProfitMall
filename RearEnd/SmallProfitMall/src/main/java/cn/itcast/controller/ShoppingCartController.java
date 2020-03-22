@@ -1,15 +1,16 @@
 package cn.itcast.controller;
 
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
+import cn.itcast.domain.shoppingCar.ShoppingCart;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
+import cn.itcast.response.QueryResult;
 import cn.itcast.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/ShoppingCartController")
@@ -18,6 +19,11 @@ public class ShoppingCartController {
     @Autowired
     ShoppingCartService shoppingCartService;
 
+    @Autowired
+    QueryResult queryResult;
+
+
+    //添加购物车
     @RequestMapping(value = "/addShoppingCart",method = RequestMethod.POST)
     public QueryResponseResult addShoppingCart(@RequestBody PurchaseInformation purchaseInformation) {
         if(purchaseInformation==null){
@@ -31,4 +37,15 @@ public class ShoppingCartController {
         }
     }
 
+    //查询购物车
+    @RequestMapping(value = "/findByUserId/{userId}",method = RequestMethod.GET)
+    public QueryResponseResult findByUserId(@PathVariable("userId")String userId) {
+        if(userId==null){
+            return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
+        }
+         List<ShoppingCart> shoppingCart =shoppingCartService.findByUserId(userId);
+            queryResult.setList(shoppingCart);
+            return new QueryResponseResult(CommonCode.SUCCESS, queryResult);//添加成功
+
+    }
 }

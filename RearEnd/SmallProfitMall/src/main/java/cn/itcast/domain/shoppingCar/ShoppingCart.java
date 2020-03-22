@@ -6,6 +6,7 @@ import java.io.Serializable;
 @Component
 public class ShoppingCart implements Serializable {
     private Integer shoppingCartId; //购物车id
+    private String ImageSite;   //商品图片
     private String productName;     //商品名字
     private String userId;          //用户id
     private Integer productId;      //商品id
@@ -13,6 +14,23 @@ public class ShoppingCart implements Serializable {
     private Integer quantity;       //购买数量
     private Double productPrice;    //价格
     private Double ProductInventory;    //商品库存
+    private Boolean evaluation;         //是否收藏
+
+    public String getImageSite() {
+        return ImageSite;
+    }
+
+    public void setImageSite(String imageSite) {
+        ImageSite = imageSite;
+    }
+
+    public Boolean getEvaluation() {
+        return evaluation;
+    }
+
+    public void setEvaluation(Boolean evaluation) {
+        this.evaluation = evaluation;
+    }
 
     public Double getProductInventory() {
         return ProductInventory;
