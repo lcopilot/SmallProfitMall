@@ -4,11 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.ShoppingCartDao">
     <!--添加购物车-->
-    <insert id="addShoppingCar" parameterType="cn.itcast.domain.address.Address">
-     INSERT INTO ShoppingCar
-		(userId,productId,productDeploy,quantity)
+    <insert id="addShoppingCar" parameterType="cn.itcast.domain.shoppingCar.ShoppingCart">
+     INSERT INTO shoppingCart
+		(userId,productId,productDeploy,quantity,productPrice,productName)
 	VALUES
-	    (#{userId},#{productId},#{productDeploy},#{quantity})
+	    (#{userId},#{productId},#{productDeploy},#{quantity},#{productPrice},#{productName})
     </insert>
+    <!--根据id查询商品价格名字库存-->
+    <select id="findByPid" resultType="cn.itcast.domain.shoppingCar.PurchaseInformation">
+        SELECT
+				pb.ProductName,pp.ProductPrice,pp.ProductInventory
+        FROM
+            ProductBasis pb
+        LEFT JOIN ProductPrice pp
+            ON pb.ProductId = pp.ProductId
+        WHERE pb.ProductId=#{productId}
+    </select>
 
 </mapper>

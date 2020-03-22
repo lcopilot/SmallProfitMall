@@ -1,15 +1,26 @@
 package cn.itcast.domain.shoppingCar;
 
-import java.io.Serializable;
+import org.springframework.stereotype.Component;
 
-public class ShoppingCar implements Serializable {
-    private Integer shoppingCartId;
-    private String productName;
-    private String userId;
-    private Integer productId;
-    private String productDeploy;
-    private Integer quantity;
-    private Double productPrice;
+import java.io.Serializable;
+@Component
+public class ShoppingCart implements Serializable {
+    private Integer shoppingCartId; //购物车id
+    private String productName;     //商品名字
+    private String userId;          //用户id
+    private Integer productId;      //商品id
+    private String productDeploy;   //商品配置
+    private Integer quantity;       //购买数量
+    private Double productPrice;    //价格
+    private Double ProductInventory;    //商品库存
+
+    public Double getProductInventory() {
+        return ProductInventory;
+    }
+
+    public void setProductInventory(Double productInventory) {
+        ProductInventory = productInventory;
+    }
 
     public String getProductName() {
         return productName;
