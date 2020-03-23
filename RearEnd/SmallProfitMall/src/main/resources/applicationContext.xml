@@ -177,11 +177,8 @@
         <property name="redisTemplate" ref="redisTemplate" />
     </bean>
 
-
     <!--导入MQ配置文件-->
     <import resource="classpath:producer.xml" />
-
-
     <!--配置邮件接口-->
     <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="${mail.smtp.host}"/>
@@ -195,5 +192,8 @@
             </props>
         </property>
     </bean>
+
+
+
 
 </beans>
