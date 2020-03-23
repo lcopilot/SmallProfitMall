@@ -64,7 +64,7 @@ public class ShoppingCartController {
         }
     }
 
-    //查询商品
+    //查询商品数量
     @RequestMapping(value = "/findByuId/{userId}",method = RequestMethod.GET)
     public QueryResponseResult findByuId(@PathVariable("userId")String userId) {
         if (userId == null) {
