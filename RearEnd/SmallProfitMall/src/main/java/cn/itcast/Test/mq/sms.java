@@ -2,7 +2,7 @@ package cn.itcast.Test.mq;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+
 public class sms {
     /**
      * 接收MQ消息
