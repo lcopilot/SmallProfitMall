@@ -1,6 +1,7 @@
 package cn.itcast.service.impl;
 
 import cn.itcast.dao.UserDao;
+import cn.itcast.domain.user.Login;
 import cn.itcast.domain.user.User;
 import cn.itcast.service.UserService;
 
@@ -20,6 +21,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao UserDao;
 
+
+    @Autowired
+    private Login login;
+
     @Autowired
     private User user;
     //查询所有用户
@@ -32,6 +37,7 @@ public class UserServiceImpl implements UserService {
     public User findByName(String name) {
         return UserDao.findByName(name);
     }
+
 
     //根据用户手机查询用 户信息
     @Override
@@ -106,6 +112,19 @@ public class UserServiceImpl implements UserService {
     public int updatePhone(String phone, String uid) {
          return UserDao.updatePhone(phone,uid);
     }
+
+    //根据id查询返回对象
+    @Override
+    public Login findLogin(String uid) {
+        User user=this.findByName(uid); //根据用户名查询
+        login.setName(user.getName());
+        login.setUid(user.getUid());
+        login.setToken(user.getToken());
+        login.setImage(user.getImage());
+        return login;
+    }
+
+
 
     //传入用户对象修改用户
 

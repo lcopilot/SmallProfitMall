@@ -5,10 +5,47 @@ import org.springframework.stereotype.Controller;
 //登录
 @Component("login")
 public class Login {
+
     private String name;
     private String tokens;
     private String uid;
     private String Image;
+    private String account;  //登录输入的账户
+    private String password;    //输入的密码
+    private String  ticket;
+    private String randStr;
+
+    public String getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(String ticket) {
+        this.ticket = ticket;
+    }
+
+    public String getRandStr() {
+        return randStr;
+    }
+
+    public void setRandStr(String randStr) {
+        this.randStr = randStr;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
 
     public String getTokens() {
         return tokens;

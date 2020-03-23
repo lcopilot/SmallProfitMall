@@ -19,7 +19,7 @@ public class demo {
     @Test
     public void  a() throws IOException {
         PictureUtilOne a =new PictureUtilOne();
-        InputStream in = Resources.getResourceAsStream("temporaryFiles/0cfd86808ed3444598a9267d5241d868.png");
+        InputStream in = Resources.getResourceAsStream("C:\\Users\\86185\\Desktop\\5YGCJPRAT7R)TC{VFFA4(_1.png");
         System.out.println(in);
         File file = new File(getImgBasePath());
         if(!file.exists()){
