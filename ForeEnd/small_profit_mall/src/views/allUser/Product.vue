@@ -361,6 +361,7 @@
 <script>
   import *as productApi from '../../api/page/product'
   import *as commonApi from '../../api/util/common'
+  import {mapActions} from "vuex";
 
   const Header = () => import("../../components/pages/Header"); //组件懒加载
   const Footer = () => import("../../components/pages/Footer");
@@ -467,7 +468,11 @@
       }
     },
     components: {Header, Footer, search, commentContent},
+
     methods: {
+      ...mapActions([
+        "modifyCartSum",
+      ]),
       //鼠标切换商品图片
       enter(index) {
         this.stopSwitchProductImg();
@@ -552,17 +557,13 @@
               message:"商品已加入购物车",
               type:"success"
             })
+            this.modifyCartSum(+1);
           }else{
             this.$message({
               message:"加入购物车失败,请稍后重试",
               type:"error"
             })
           }
-        }).catch(error=>{
-          this.$message({
-            message:"服务器累了~,请稍后重试",
-            type:"error"
-          })
         })
       },
     },

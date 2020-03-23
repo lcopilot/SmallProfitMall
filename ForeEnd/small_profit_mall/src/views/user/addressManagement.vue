@@ -307,13 +307,7 @@
                 message: "默认地址修改成功",
                 type: "success"
               })
-
             }
-          }).catch(error=>{
-            this.$message({
-              message: "服务器累了~",
-              type: "warning"
-            })
           })
         }
       },
@@ -359,11 +353,6 @@
                       type: "error",
                     })
                   }
-                }).catch(error => {
-                  this.$message({
-                    message: "服务器累了!",
-                    type: "error",
-                  })
                 })
               }
             } else {
@@ -384,11 +373,6 @@
                     type: "error",
                   })
                 }
-              }).catch(error => {
-                this.$message({
-                  message: "服务器累了!",
-                  type: "error",
-                })
               })
             }
 
@@ -413,7 +397,6 @@
               this.cancel();
             }
           })
-
         }).catch(() => {
           this.$message({
             type: 'info',

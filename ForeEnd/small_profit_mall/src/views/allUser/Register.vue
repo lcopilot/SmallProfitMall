@@ -143,10 +143,6 @@
                 this.$message.error("注册失败");
               }
             })
-            .catch(error => {
-              this.$message.error("服务器错误");
-              console.log(error);
-            });
           }
         });
       },

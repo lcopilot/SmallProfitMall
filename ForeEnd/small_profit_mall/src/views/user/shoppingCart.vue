@@ -174,6 +174,7 @@
 
 <script>
   import *as productApi from '../../api/page/product'
+  import {mapActions} from "vuex";
 
   const search = () => import("../../components/pages/Search");
   const Header = () => import("../../components/pages/Header"); //组件懒加载
@@ -197,6 +198,9 @@
       }
     },
     methods: {
+      ...mapActions([
+        "modifyCartSum",
+      ]),
       //购物车初始化的选择框状态判断 无库存时处于禁用状态
       changeStateC(row, index) {
         if (row.productInventory != 0) {
@@ -280,25 +284,20 @@
         }
         productApi.removeCart(cartIdList).then(res=>{
             if (res.success){
-              this.getShoppingCart();
               this.$message({
-                message:"移除购物车成功!",
+                message:"商品已移出购物车",
                 type:"success"
               })
+              this.modifyCartSum(-cartIdList.length);
+              this.getShoppingCart();
+              this.selectAll=false;
             }else {
               this.$message({
-                message:"移除购物车失败!,请重试",
+                message:"商品移出购物车失败!,请稍后重试",
                 type:"error"
               })
             }
-        }).catch(error=>{
-          console.log(error);
-          this.$message({
-            message:"服务器累了~,请稍后重试",
-            type:"error"
-          })
         })
-
       },
       //结算
       settlement() {

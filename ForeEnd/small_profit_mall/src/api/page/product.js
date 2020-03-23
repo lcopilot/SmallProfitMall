@@ -16,3 +16,7 @@ export const getShoppingCart=userId=>{
 export const removeCart=cartIdList=>{
   return http.requestDelete('apiUrl/ShoppingCartController/deleteCart/'+cartIdList)
 }
+//获取购物车数据
+export const getShoppingCartNumber=userId=>{
+  return http.requestGet('apiUrl/ShoppingCartController/findByuId/'+userId)
+}

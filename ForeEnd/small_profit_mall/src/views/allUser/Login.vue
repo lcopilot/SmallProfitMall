@@ -20,7 +20,7 @@
                 <el-form-item prop="name">
                   <svg-icon name="login" class="icon"/>
                   <el-input placeholder="请输入手机号或用户名" v-model="loginForm.name" clearable
-                            class="username" @blur="CheckLoginBtn"/>
+                            class="username" />
                 </el-form-item>
                 <el-form-item prop="password">
                   <svg-icon name="password" class="icon"/>
@@ -29,7 +29,7 @@
                       v-model="loginForm.password"
                       show-password
                       class="username"
-                      @blur="CheckLoginBtn"/>
+                      @keyup.enter.native="login('loginForm')"/>
                 </el-form-item>
                 <!--       <el-form-item>
                          <svg-icon name="verification_code" class="icon"
@@ -148,7 +148,6 @@
                   vm.loginForm.randStr='';
                   vm.login_btn = new Date().getTime();
                   vm.resetForm('loginForm');
-                  vm.$message.error("服务器错误,请稍后重试");
                   vm.loginStatus = false;
                   vm.loginBtnContent = '登录';
                 });
@@ -165,6 +164,7 @@
       },
     },
     created() {
+      //加载验证码
       if (window.TencentCaptcha === undefined) {
         let script = document.createElement('script');
         let head = document.getElementsByTagName('head')[0];
