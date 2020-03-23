@@ -1,5 +1,6 @@
 package cn.itcast.util.picture;
 
+import com.qiniu.storage.Region;
 import java.io.File;
 
 
@@ -26,7 +27,7 @@ import com.qiniu.util.StringMap;
 
 public class SimpleUpload {
     Auth auth = Auth.create(AccountMgr.ACCESS_KEY, AccountMgr.SECRET_KEY);
-    Configuration cfg = new Configuration(Zone.zone2());                //zong1() 代表华南地区
+    Configuration cfg = new Configuration(Region.region2());                //zong1() 代表华南地区
     UploadManager uploadManager = new UploadManager(cfg);
 
     /**
