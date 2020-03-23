@@ -19,6 +19,7 @@ import cn.itcast.util.verify.TCaptchaVerify;
 import cn.itcast.util.verify.VerifyUtil;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.HttpRequest;
+import com.google.gson.internal.$Gson$Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -129,19 +130,19 @@ public class UserController {
 	@RequestMapping(value = "/registerVerify",method = RequestMethod.GET)
 	public QueryResponseResult registerVerify(String phone,
 			HttpSession session) throws Exception {
-
-		if (phone.length() != 11) {      //判断手机号是否正确
+		String phones = AesEncryptUtil.desEncrypt(phone,KEY,IV);
+		if (phones.length() != 11) {      //判断手机号是否正确
 			return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
 		}
 		User user_phone = userService.findByPhone(phone); //根据手机号查询
 		if (user_phone == null) {       //手机尚未注册
 			String FR = GetFourRandom.getFourRandom();
-			String phones = AesEncryptUtil.desEncrypt(phone,KEY,IV);
+
 			boolean flag = SmsUtils.sendRegistSms(phones, FR);
 			if (flag) {
 				System.out.println("验证码为 " + FR);
 				session.setAttribute("Verify", FR);//设置验证码session
-				session.setAttribute("phone", phones);//设置手机号session
+				session.setAttribute("phone", phone);//设置手机号session
 				sessionUtil.removeAttrbute(session, "Verify");//倒计时删除session
 				return new QueryResponseResult(CommonCode.SUCCESS, null);
 			} else {
@@ -159,7 +160,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/register")
-	public QueryResponseResult register(@RequestBody User user, HttpSession session) {
+	public QueryResponseResult register(@RequestBody User user, HttpSession session) throws Exception {
 		String Verify = (String) session.getAttribute("Verify");
 		String phone = (String) session.getAttribute("phone");
 		if (user.getVerify().equals(Verify) && user.getPhone().equals(phone)) {

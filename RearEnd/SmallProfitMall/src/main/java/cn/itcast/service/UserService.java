@@ -21,6 +21,9 @@ public interface UserService {
     //.根据uid查询用户信息
     public User findByUid(String uid);
 
+//    //更具account查询用户信息
+//    public User findBy
+
 
     // 保存帐户信息
     public void saveAccount(User user);
@@ -46,8 +49,5 @@ public interface UserService {
     //根据id修改手机号码
     public int updatePhone( String Phone,String uid);
 
-    //根据uid返回返回数据
-    public Login findLogin(String uid);
 
-    //
 }
