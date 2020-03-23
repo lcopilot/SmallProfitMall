@@ -68,11 +68,12 @@ public class ShoppingCartController {
     @RequestMapping(value = "/findByuId/{userId}",method = RequestMethod.GET)
     public QueryResponseResult findByuId(@PathVariable("userId")String userId) {
         if (userId == null) {
-            return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
+            return new QueryResponseResult(CommonCode.FAIL, null);//查询失败
         }
         ArrayList redis = shoppingCartService.findByuId(userId);
+        QueryResult queryResult = new QueryResult();
         queryResult.setTotal(redis.size());
-            return new QueryResponseResult(CommonCode.SUCCESS, queryResult);//添加成功
+            return new QueryResponseResult(CommonCode.SUCCESS, queryResult);//查询成功
 
     }
 }
