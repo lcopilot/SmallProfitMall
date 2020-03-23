@@ -79,6 +79,7 @@ public class AesEncryptUtil {
 
             byte[] original = cipher.doFinal(encrypted1);
             String originalString = new String(original);
+            originalString=originalString.trim();
             return originalString;
         } catch (Exception e) {
             e.printStackTrace();

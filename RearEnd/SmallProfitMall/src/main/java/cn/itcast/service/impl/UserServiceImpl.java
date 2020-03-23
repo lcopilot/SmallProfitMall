@@ -38,7 +38,6 @@ public class UserServiceImpl implements UserService {
         return UserDao.findByName(name);
     }
 
-
     //根据用户手机查询用 户信息
     @Override
     public User findByPhone(String phone) {
@@ -113,20 +112,7 @@ public class UserServiceImpl implements UserService {
          return UserDao.updatePhone(phone,uid);
     }
 
-    //根据id查询返回对象
-    @Override
-    public Login findLogin(String uid) {
-        User user=this.findByName(uid); //根据用户名查询
-        login.setName(user.getName());
-        login.setUid(user.getUid());
-        login.setToken(user.getToken());
-        login.setImage(user.getImage());
-        return login;
-    }
 
-
-
-    //传入用户对象修改用户
 
 
     //隐藏手机号
