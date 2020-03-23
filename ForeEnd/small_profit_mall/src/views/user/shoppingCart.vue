@@ -22,32 +22,33 @@
                   @select-all="select_all">
                 <el-table-column
                     type="selection"
+                    :selectable='changeStateC'
                     width="55">
                 </el-table-column>
                 <el-table-column
                     label="商品"
-                    width="520">
+                    width="500">
                   <template slot-scope="product">
                     <el-row :gutter="20">
                       <el-col :span="5">
                         <div style="max-width: 70px;max-height: 70px;">
-                          <el-image fit="scale-down" :src="product.row.productImg"></el-image>
+                          <el-image fit="scale-down" :src="product.row.imageSite"></el-image>
                         </div>
                       </el-col>
-                      <el-col :span="9">
+                      <el-col :span="10">
                         <div style="font-size: 13px;">
                           <el-tooltip class="item" effect="dark" :content="product.row.productName"
                                       placement="bottom">
-                            <router-link to="/">{{product.row.productName}}
+                            <router-link :to="{path: '/product', query: {productId:product.row.productId}}">{{product.row.productName}}
                             </router-link>
                           </el-tooltip>
                         </div>
                       </el-col>
-                      <el-col :span="9">
-                        <el-tooltip class="item" effect="dark" :content="product.row.Configuration"
+                      <el-col :span="8">
+                        <el-tooltip class="item" effect="dark" :content="product.row.productDeploy"
                                     placement="top">
                           <div style="font-size: 13px;">
-                            {{product.row.Configuration}}
+                            {{product.row.productDeploy}}
                           </div>
                         </el-tooltip>
                       </el-col>
@@ -58,11 +59,11 @@
                     label="单价"
                     prop="price"
                     sortable
-                    width="110"
+                    width="130"
                     column-key="date">
                   <template slot-scope="product">
                     ￥<span class="cart_product_price">
-                     {{product.row.price.toFixed(2)}}
+                     {{product.row.productPrice.toFixed(2)}}
                     </span>
                   </template>
                 </el-table-column>
@@ -70,7 +71,7 @@
                     label="数量"
                     width="180">
                   <template slot-scope="product">
-                    <el-input-number v-model="product.row.Quantity" size="mini" :min="1"
+                    <el-input-number v-model="product.row.quantity" size="mini" :min="1"
                                      :max="99" @change="quantityChange()"/>
                   </template>
                 </el-table-column>
@@ -79,7 +80,7 @@
                     width="120">
                   <template slot-scope="product">
                     ￥<span class="cart_product_price">
-                    {{(((product.row.price)*100)*product.row.Quantity)/100}}
+                    {{(((product.row.productPrice)*100)*product.row.quantity)/100}}
                     </span>
                   </template>
                 </el-table-column>
@@ -90,6 +91,7 @@
                   <template slot-scope="product">
                     <el-button
                         type="danger"
+                        :disabled="product.row.productInventory==0"
                         @click="buyProduct(product.row.productId)">
                       立即购买
                     </el-button>
@@ -100,19 +102,19 @@
                   <template slot-scope="product">
                     <div>
                       <!-- 已收藏就不显示 待完成-->
-                      <div>
+                      <div v-if="product.row.evaluation">
                         <el-link :underline="false" @click="favorite(product.row.productId)">收藏
                         </el-link>
                       </div>
                       <!-- 库存不足时显示 待完成-->
-                      <div>
+                      <div v-if="product.row.productInventory==0">
                         <el-link :underline="false" @click="arrivalNotice(product.row.productId)">
                           到货通知
                         </el-link>
                       </div>
                       <div>
                         <el-link :underline="false"
-                                 @click="removeCartProduct(product.row.productId)">移除
+                                 @click="removeCartProduct(product.row.shoppingCartId)">移除
                         </el-link>
                       </div>
                     </div>
@@ -130,7 +132,7 @@
                   <el-button @click="favoriteAll()" type="text" size="small">
                     收藏已选择
                   </el-button>
-                  <el-button @click="removeAll()" type="text" size="small">
+                  <el-button @click="removeCartProduct()" type="text" size="small">
                     移除已选择
                   </el-button>
                 </el-col>
@@ -171,6 +173,8 @@
 </template>
 
 <script>
+  import *as productApi from '../../api/page/product'
+
   const search = () => import("../../components/pages/Search");
   const Header = () => import("../../components/pages/Header"); //组件懒加载
   const Footer = () => import("../../components/pages/Footer");
@@ -184,75 +188,30 @@
         selectAll: false,
         //底栏商品数量
         productNumber: 0,
-        cartList: [
-          {
-            productImg: 'http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg',
-            productName: 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ',
-            price: 225.2,
-            Configuration: '256G + 8',
-            Quantity: 5,
-          }, {
-            productImg: 'http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg',
-            productName: 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ',
-            price: 225.2,
-            Configuration: '256G + 8',
-            Quantity: 1,
-          }, {
-            productImg: 'http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg',
-            productName: 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ',
-            price: 225.00,
-            Configuration: '128G + 8',
-            Quantity: 4,
-          }, {
-            productImg: 'http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg',
-            productName: 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ',
-            price: 2250.00,
-            Configuration: '256G + 8',
-            Quantity: 2,
-          }, {
-            productImg: 'http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg',
-            productName: 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ',
-            price: 2250.00,
-            Configuration: '256G + 8',
-            Quantity: 2,
-          }, {
-            productImg: 'http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg',
-            productName: 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ',
-            price: 2250.00,
-            Configuration: '256G + 8',
-            Quantity: 2,
-          }, {
-            productImg: 'http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg',
-            productName: 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ',
-            price: 2250.00,
-            Configuration: '256G + 8',
-            Quantity: 2,
-          }, {
-            productImg: 'http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg',
-            productName: 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ',
-            price: 2250.00,
-            Configuration: '256G + 8',
-            Quantity: 2,
-          }, {
-            productImg: 'http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg',
-            productName: 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ',
-            price: 2250.00,
-            Configuration: '256G + 8',
-            Quantity: 2,
-          }
-        ],
+        cartList: [],
         cartFrom: {
           productList: [],
           totalPrice: 0.00,
         },
+        cartListUsableNumber: 0,
       }
     },
     methods: {
+      //购物车初始化的选择框状态判断 无库存时处于禁用状态
+      changeStateC(row, index) {
+        if (row.productInventory != 0) {
+          //不禁用
+          return 1;
+        } else {
+          //禁用
+          return 0;
+        }
+      },
       //全选时触发
       select_all(selection) {
-        if (selection.length==0){
-          this.selectAll=false;
-        }else {
+        if (selection.length == 0) {
+          this.selectAll = false;
+        } else {
           this.selectAll = true;
         }
         this.select(selection)
@@ -262,13 +221,13 @@
         this.cartFrom.totalPrice = 0;
         this.cartFrom.productList = selection;
         this.productNumber = selection.length;
-        if(selection.length!=this.cartList.length){
-          this.selectAll=false;
-        }else{
-          this.selectAll=true;
+        if (selection.length != sessionStorage.getItem("cartListUsableNumber")) {
+          this.selectAll = false;
+        } else {
+          this.selectAll = true;
         }
         selection.forEach(product => {
-          this.cartFrom.totalPrice += (((product.price) * 100) * product.Quantity) / 100
+          this.cartFrom.totalPrice += (((product.productPrice) * 100) * product.quantity) / 100
         })
       },
       //商品数量改变时触发
@@ -284,8 +243,18 @@
           this.select(this.$refs.cartTable.selection);
         }
       },
+      //可购买商品数量
+      availableProduct() {
+        this.cartList.forEach((product) => {
+          if (product.productInventory != 0) {
+            this.cartListUsableNumber += 1;
+            sessionStorage.setItem("cartListUsableNumber", this.cartListUsableNumber);
+          }
+        })
+      },
       //立即购买
       buyProduct(cartProductId) {
+
       },
       //收藏
       favorite(productId) {
@@ -299,23 +268,58 @@
       arrivalNotice(productId) {
 
       },
-      //删除单个商品
-      removeCartProduct(productId) {
+      //删除商品
+      removeCartProduct(shoppingCartId) {
+        let cartIdList=[];
+        if (shoppingCartId!=null){
+          cartIdList.push(shoppingCartId);
+        }else {
+          this.$refs.cartTable.selection.forEach((shoppingCart)=>{
+            cartIdList.push(shoppingCart.shoppingCartId);
+          })
+        }
+        productApi.removeCart(cartIdList).then(res=>{
+            if (res.success){
+              this.getShoppingCart();
+              this.$message({
+                message:"移除购物车成功!",
+                type:"success"
+              })
+            }else {
+              this.$message({
+                message:"移除购物车失败!,请重试",
+                type:"error"
+              })
+            }
+        }).catch(error=>{
+          console.log(error);
+          this.$message({
+            message:"服务器累了~,请稍后重试",
+            type:"error"
+          })
+        })
 
-      },
-      //删除已选择商品
-      removeAll() {
-        this.$refs.cartTable.selection
       },
       //结算
       settlement() {
-
         this.$refs.cartTable.selection
         this.$router.push({
           path: "/orders" //跳转的路径
         });
+      },
+      //获取购物车数据
+      getShoppingCart() {
+        productApi.getShoppingCart(sessionStorage.getItem("uId")).then(res => {
+          if (res.success) {
+            this.cartList = res.queryResult.list;
+            this.availableProduct();
+          }
+        })
       }
     },
+    created() {
+      this.getShoppingCart();
+    }
 
   }
 </script>
@@ -330,8 +334,8 @@
   }
 
   #sCart .el-table th {
-     background: #f3f3f3;
-   }
+    background: #f3f3f3;
+  }
 
   #sCart .cart_name {
     text-align: left;
