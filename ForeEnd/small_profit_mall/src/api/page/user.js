@@ -12,7 +12,8 @@ export const register = params => {
 }
 //注册短信验证码接口
 export const getPhone_Code = phone => {
-  return http.requestGet('/apiUrl/user/registerVerify/' + phone);
+  let queryString=querystring.stringify(phone);
+  return http.requestGet('/apiUrl/user/registerVerify?' + queryString);
 }
 //忘记密码
 export const resetPassword=params=>{

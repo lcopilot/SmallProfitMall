@@ -7,7 +7,6 @@ import java.io.File;
 import cn.itcast.skd.AccountMgr;
 import com.qiniu.common.QiniuException;
 
-import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
 
 import com.qiniu.storage.Configuration;

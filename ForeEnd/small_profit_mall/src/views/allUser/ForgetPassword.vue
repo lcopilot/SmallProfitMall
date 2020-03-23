@@ -43,7 +43,7 @@
                 </el-form-item>
               </el-form>
               <router-link to="/login" style="margin: 7% 52% 0 0">已有账号,去登录</router-link>
-              <router-link to="/register">去注册</router-link>
+              <router-link to="/login">去注册</router-link>
             </el-card>
           </div>
         </el-col>

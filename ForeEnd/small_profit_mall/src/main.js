@@ -20,7 +20,10 @@ import VuePhotoZoomPro from "vue-photo-zoom-pro";
 import VideoPlayer from 'vue-video-player'
 import 'vue-video-player/src/custom-theme.css'
 import 'video.js/dist/video-js.css'
+//animated动画
+import animated from 'animate.css'
 
+Vue.use(animated)
 
 Vue.use(VideoPlayer)
 

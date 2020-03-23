@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 21/03/2020 19:43:18
+ Date: 23/03/2020 14:30:33
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `ProductBasis`  (
   `ProductVideo` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `ProductWeight` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10028 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10029 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductBasis
@@ -61,6 +61,7 @@ INSERT INTO `ProductBasis` VALUES (10024, 10022, 'Classic | 40mm Canterbury', NU
 INSERT INTO `ProductBasis` VALUES (10025, 10026, '2019新款翻领磨破短款女士休闲牛仔外套', NULL, NULL);
 INSERT INTO `ProductBasis` VALUES (10026, 10027, '【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金', NULL, NULL);
 INSERT INTO `ProductBasis` VALUES (10027, 10028, '小米（MI）小爱智能音箱Pro 无线蓝牙音响 语音控制智能家居 APP远程操控 专业DTS 音效 黑色', NULL, '\r\n1.56kg');
+INSERT INTO `ProductBasis` VALUES (10028, 10029, '美国正品代购阿迪达斯adidas YEEZY BOOST 350 V2 侃爷冰蓝椰子鞋新款男跑步鞋', NULL, '2.5kg');
 
 -- ----------------------------
 -- Table structure for ProductColour
@@ -71,7 +72,7 @@ CREATE TABLE `ProductColour`  (
   `ProductId` int(11) NULL DEFAULT NULL,
   `ProductColour` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 94 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductColour
@@ -161,6 +162,16 @@ INSERT INTO `ProductColour` VALUES (90, 10028, '【小爱触屏音箱-红色】 
 INSERT INTO `ProductColour` VALUES (91, 10028, '【新品】小爱触屏音箱Pro ');
 INSERT INTO `ProductColour` VALUES (92, 10028, '【新品】小爱音箱 ');
 INSERT INTO `ProductColour` VALUES (93, 10028, '【新品】小爱音箱Pro ');
+INSERT INTO `ProductColour` VALUES (94, 10029, 'BB1826灰橙色 ');
+INSERT INTO `ProductColour` VALUES (95, 10029, 'BY9611黑灰色');
+INSERT INTO `ProductColour` VALUES (96, 10029, 'BY9612黑橙色 ');
+INSERT INTO `ProductColour` VALUES (97, 10029, 'CP9654白斑马');
+INSERT INTO `ProductColour` VALUES (98, 10029, 'B37572黄斑马');
+INSERT INTO `ProductColour` VALUES (99, 10029, 'AH2203新灰橙 ');
+INSERT INTO `ProductColour` VALUES (100, 10029, 'B37571冰蓝色 ');
+INSERT INTO `ProductColour` VALUES (101, 10029, 'CP9652黑红色 ');
+INSERT INTO `ProductColour` VALUES (102, 10029, 'BY1604黑灰色 ');
+INSERT INTO `ProductColour` VALUES (103, 10029, 'BY1605黑铜色');
 
 -- ----------------------------
 -- Table structure for ProductCombo
@@ -195,7 +206,7 @@ CREATE TABLE `ProductImage`  (
   `ImageSite` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `sign` int(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 142 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 147 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductImage
@@ -339,6 +350,11 @@ INSERT INTO `ProductImage` VALUES (138, 10028, 'http://productdata.fhxasdsada.xy
 INSERT INTO `ProductImage` VALUES (139, 10028, 'http://productdata.fhxasdsada.xyz/MUak68zcW1wihVXkpQ3rIQ.jpg', NULL);
 INSERT INTO `ProductImage` VALUES (140, 10028, 'http://productdata.fhxasdsada.xyz/nV358PZUk4icX1T7fBcc_Q.jpg', NULL);
 INSERT INTO `ProductImage` VALUES (141, 10028, 'http://productdata.fhxasdsada.xyz/XJSBumEOLmp8H7P3GX2ASw.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (142, 10029, '\r\nhttp://productdata.fhxasdsada.xyz/317865394161552203721050_x.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (143, 10029, 'http://productdata.fhxasdsada.xyz/334355456168161240400082_x.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (144, 10029, 'http://productdata.fhxasdsada.xyz/619597484920156642971000_x.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (145, 10029, 'http://productdata.fhxasdsada.xyz/907405909774268174160400_x.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (146, 10029, 'http://productdata.fhxasdsada.xyz/hfQeM5SNL7aIQsnz4m2MwA.jpg', NULL);
 
 -- ----------------------------
 -- Table structure for ProductKind
@@ -400,13 +416,13 @@ CREATE TABLE `ProductPrice`  (
   `ProductSales` decimal(10, 2) NULL DEFAULT NULL,
   `ProductInventory` decimal(10, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductPrice
 -- ----------------------------
-INSERT INTO `ProductPrice` VALUES (1, 10001, 5999.00, 4844, 4549.00, 10.00, NULL);
-INSERT INTO `ProductPrice` VALUES (2, 10002, 1999.00, 1899, 15886.00, 15000.00, 152000.00);
+INSERT INTO `ProductPrice` VALUES (1, 10001, 5999.00, 4844, 4549.00, 10.00, 0.00);
+INSERT INTO `ProductPrice` VALUES (2, 10002, 1999.00, 1899, 15886.00, 15000.00, 0.00);
 INSERT INTO `ProductPrice` VALUES (3, 10010, 3596.00, 2563, 2523.00, 1500.00, 1863.00);
 INSERT INTO `ProductPrice` VALUES (4, 10011, 10398.00, 19888, 9999.00, 18900.00, 15555.00);
 INSERT INTO `ProductPrice` VALUES (5, 10012, 4999.00, 4888, 4760.00, 17666.00, 58666.00);
@@ -433,6 +449,7 @@ INSERT INTO `ProductPrice` VALUES (25, 10022, 1289.00, 1206, 1126.00, 54615165.0
 INSERT INTO `ProductPrice` VALUES (26, 10026, 636.00, 620, 599.00, 15661156.00, 1846818.00);
 INSERT INTO `ProductPrice` VALUES (27, 10027, 773.00, 666, 689.00, 154854.00, 1666.00);
 INSERT INTO `ProductPrice` VALUES (28, 10028, 265.00, 222, 218.00, 151515.00, 156165.00);
+INSERT INTO `ProductPrice` VALUES (29, 10029, 2920.00, 288, 2999.00, 21261.00, 165161.00);
 
 -- ----------------------------
 -- Table structure for ProductSize
@@ -443,7 +460,7 @@ CREATE TABLE `ProductSize`  (
   `ProductId` int(11) NULL DEFAULT NULL,
   `ProductSize` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductSize
@@ -453,6 +470,18 @@ INSERT INTO `ProductSize` VALUES (5, 10026, 'XS');
 INSERT INTO `ProductSize` VALUES (6, 10026, 'S');
 INSERT INTO `ProductSize` VALUES (7, 10026, 'M');
 INSERT INTO `ProductSize` VALUES (8, 10026, 'L');
+INSERT INTO `ProductSize` VALUES (9, 10029, '标准46.5/US12 ');
+INSERT INTO `ProductSize` VALUES (10, 10029, '标准40/US7 ');
+INSERT INTO `ProductSize` VALUES (11, 10029, '标准40.5/US7.5 ');
+INSERT INTO `ProductSize` VALUES (12, 10029, '标准41/US8 ');
+INSERT INTO `ProductSize` VALUES (13, 10029, '标准42/US8.5');
+INSERT INTO `ProductSize` VALUES (14, 10029, '标准42.5/US9 ');
+INSERT INTO `ProductSize` VALUES (15, 10029, '标准43/US9.5');
+INSERT INTO `ProductSize` VALUES (16, 10029, '标准44/US10 ');
+INSERT INTO `ProductSize` VALUES (17, 10029, '标准44.5/US10.5 ');
+INSERT INTO `ProductSize` VALUES (18, 10029, '标准45/US11 ');
+INSERT INTO `ProductSize` VALUES (19, 10029, '标准46/US11.5 ');
+INSERT INTO `ProductSize` VALUES (20, 10029, '其他大码请咨询客服');
 
 -- ----------------------------
 -- Table structure for ProductSpecification
@@ -737,12 +766,17 @@ CREATE TABLE `evaluation`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `footprint`;
 CREATE TABLE `footprint`  (
-  `userId` varchar(0) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `productId` int(11) NULL DEFAULT NULL,
   `footprintId` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `productId` int(11) NULL DEFAULT NULL,
   `time` date NULL DEFAULT NULL,
   PRIMARY KEY (`footprintId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of footprint
+-- ----------------------------
+INSERT INTO `footprint` VALUES (1, 'asdfghjkl', 10002, '2020-03-23');
 
 -- ----------------------------
 -- Table structure for homepageIcon
@@ -810,7 +844,7 @@ CREATE TABLE `recommend`  (
   `shoppingTrolley` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `hot` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '1 表示热门  2表示不热门',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of recommend
@@ -843,6 +877,7 @@ INSERT INTO `recommend` VALUES (54, '10025', '1', '1', '1');
 INSERT INTO `recommend` VALUES (55, '10026', '1', '1', '2');
 INSERT INTO `recommend` VALUES (56, '10027', '1', '1', '2');
 INSERT INTO `recommend` VALUES (57, '10028', '1', '1', '2');
+INSERT INTO `recommend` VALUES (58, '10029', '1', '1', '2');
 
 -- ----------------------------
 -- Table structure for shoppingCart
@@ -850,12 +885,32 @@ INSERT INTO `recommend` VALUES (57, '10028', '1', '1', '2');
 DROP TABLE IF EXISTS `shoppingCart`;
 CREATE TABLE `shoppingCart`  (
   `shoppingCartId` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` varbinary(0) NULL DEFAULT NULL,
-  `productId` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `productDeploy` varbinary(250) NULL DEFAULT NULL,
+  `userId` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `productId` int(150) NULL DEFAULT NULL,
+  `productDeploy` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `quantity` int(11) NULL DEFAULT NULL,
+  `productPrice` decimal(10, 2) NULL DEFAULT NULL,
+  `productName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`shoppingCartId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 127 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of shoppingCart
+-- ----------------------------
+INSERT INTO `shoppingCart` VALUES (36, 'adsasd', 10009, '黑色 套餐一 ', 100, 47699.00, '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n');
+INSERT INTO `shoppingCart` VALUES (37, 'adsasd', 10009, '黑色 套餐一 ', 100, 47699.00, '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n');
+INSERT INTO `shoppingCart` VALUES (38, 'adsasd', 10009, '黑色 套餐一 ', 100, 47699.00, '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n');
+INSERT INTO `shoppingCart` VALUES (96, 'f05d7667b5384a02b45fb540ba0ed2da', 10015, '奶茶味 ', 1, 20.00, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋');
+INSERT INTO `shoppingCart` VALUES (98, 'f05d7667b5384a02b45fb540ba0ed2da', 10008, '', 1, 3500.00, '万代（BANDAI） Megahouse POP 海贼王 路飞9人 模型玩具（无售后！！！） 四档路飞\r\n');
+INSERT INTO `shoppingCart` VALUES (118, 'f05d7667b5384a02b45fb540ba0ed2da', 10015, '奶茶味 ', 1, 20.00, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋');
+INSERT INTO `shoppingCart` VALUES (119, 'f05d7667b5384a02b45fb540ba0ed2da', 10015, '香蕉味 ', 1, 20.00, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋');
+INSERT INTO `shoppingCart` VALUES (120, 'f05d7667b5384a02b45fb540ba0ed2da', 10015, '茉莉味 ', 1, 20.00, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋');
+INSERT INTO `shoppingCart` VALUES (121, 'f05d7667b5384a02b45fb540ba0ed2da', 10015, '奶油味 ', 1, 20.00, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋');
+INSERT INTO `shoppingCart` VALUES (122, 'f05d7667b5384a02b45fb540ba0ed2da', 10015, '奶油味 ', 1, 20.00, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋');
+INSERT INTO `shoppingCart` VALUES (123, 'f05d7667b5384a02b45fb540ba0ed2da', 10015, '茉莉味 ', 1, 20.00, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋');
+INSERT INTO `shoppingCart` VALUES (124, 'f05d7667b5384a02b45fb540ba0ed2da', 10011, '暗夜绿色 128G+2G ', 1, 10398.00, 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ');
+INSERT INTO `shoppingCart` VALUES (125, 'f05d7667b5384a02b45fb540ba0ed2da', 10011, '暗夜绿色 64G+2G ', 1, 10398.00, 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ');
+INSERT INTO `shoppingCart` VALUES (126, 'f05d7667b5384a02b45fb540ba0ed2da', 10011, '深空灰色 64G+2G ', 1, 10398.00, 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ');
 
 -- ----------------------------
 -- Table structure for user
@@ -873,14 +928,15 @@ CREATE TABLE `user`  (
   `token` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `birthday` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (37, 'f05d7667b5384a02b45fb540ba0ed2da', 'MuGe', '123456', '1', '15367885410', 'liuxianliangli@foxmail.com', ' http://img.fhxasdsada.xyz/f05d7667b5384a02b45fb540ba0ed2da?t=1584597021086', 'DM', '2019-4-15');
+INSERT INTO `user` VALUES (37, 'f05d7667b5384a02b45fb540ba0ed2da', 'MuGe', '123456', '1', '15367885410', 'liuxianliangli@foxmail.com', ' http://img.fhxasdsada.xyz/f05d7667b5384a02b45fb540ba0ed2da?t=1584944811380', 'DM', '2019-4-15');
 INSERT INTO `user` VALUES (38, 'asdfghjkl', '方鸢', '123456', '1', '18598814121', '2252821162@qq.com', ' http://img.fhxasdsada.xyz/asdfghjkl?t=1584768785710', 'DM', '2017-2-1');
 INSERT INTO `user` VALUES (39, '8b616d638682406f96acd3b54dfbc723', 'HuangFan', '123123', '1', '13135361457', '552449824@qq.com', ' http://img.fhxasdsada.xyz/8b616d638682406f96acd3b54dfbc723?t=1584605671330', 'DM', '2019-4-4');
+INSERT INTO `user` VALUES (40, '46d254f0c27b4cdc85da8ea9246394be', 'smallProfit', '123456', '1', '15575702771', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM', NULL);
 
 -- ----------------------------
 -- Table structure for userAddress
@@ -924,5 +980,23 @@ INSERT INTO `userAddress` VALUES (100, 'adsasdasd', '小小', '湖南省,长沙�
 INSERT INTO `userAddress` VALUES (101, 'adsasdasd', '小小', '湖南省,长沙市', '湖南大学', '18598814121', '2252821162@qq.com', '123,123,123,123,', '0', '家', 1);
 INSERT INTO `userAddress` VALUES (102, 'adsasdasd', '小小', '湖南省,长沙市', '湖南大学', '18598814121', '2252821162@qq.com', '123,123,123,123,', '0', '家', 1);
 INSERT INTO `userAddress` VALUES (103, 'asdfghjkl', '方', '天津市 市辖区 和平区 劝业场街道 ', '桂东', '18598814121', '2252821162@qq.com', '12,1201,120101,120101001,', '1', '家', 1);
+
+-- ----------------------------
+-- Table structure for userEvaluation
+-- ----------------------------
+DROP TABLE IF EXISTS `userEvaluation`;
+CREATE TABLE `userEvaluation`  (
+  `evaluationId` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `produvtId` int(11) NULL DEFAULT NULL,
+  `sign` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`evaluationId`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of userEvaluation
+-- ----------------------------
+INSERT INTO `userEvaluation` VALUES (1, 'adsasd', 10001, 'true');
+INSERT INTO `userEvaluation` VALUES (2, 'f05d7667b5384a02b45fb540ba0ed2da', 10001, 'true');
 
 SET FOREIGN_KEY_CHECKS = 1;
