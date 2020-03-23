@@ -10,6 +10,7 @@ import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.service.UserService;
 import cn.itcast.skd.Vaptcha;
+import cn.itcast.util.encryption.AesEncryptUtil;
 import cn.itcast.util.logic.GetFourRandom;
 import cn.itcast.util.logic.sessionUtil;
 import cn.itcast.util.user.SmsUtils;
@@ -43,8 +44,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private Login login;
+	private static String KEY = "a9s8i5tlj32fa3l2";
+	private static String IV = "a2s5i6tlj32f2i12";
 
 	@Autowired
 	QueryResult queryResult;
@@ -73,54 +74,48 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/accountLogin")
-	public QueryResponseResult accountLogin(@RequestBody User user, HttpServletRequest request) {
+	public QueryResponseResult accountLogin(@RequestBody Login Login, HttpServletRequest request) {
 //		if (!verifyUtil.VaptchaVerify(user.getToken(), request)) {
 //			return new QueryResponseResult(CommonCode.ValidationFails, null); //令牌错误不正确
 //		}
-		int verifyTicket=TCaptchaVerify.verifyTicket(user.getTicket(),user.getRandStr(), IPUtil.getIP(request));
+		int verifyTicket=TCaptchaVerify.verifyTicket(Login.getTicket(),Login.getRandStr(), IPUtil.getIP(request));
 		if (verifyTicket==1){
 			return new QueryResponseResult(CommonCode.SUCCESS,null);
 		}else if (verifyTicket==-1){
 			return new QueryResponseResult(CommonCode.ValidationFails,null);
 		}
 
-		if (user.getName().equals("smallProfit")) {
+		if (Login.getName().equals("smallProfit")) {
 			return new QueryResponseResult(CommonCode.nameError, null); //不能使用初始名字登录不
 		}
-		User name = userService.findByName(user.getName()); //根据用户名查询
-		User phone = userService.findByPhone(user.getName()); //根据手机号查询
-		if (user != null && user.getPassword() != null) { //判断用户输入是否完整
-			if (name == null && phone == null) {  //判断用户是否存在
-				return new QueryResponseResult(CommonCode.FAIL, null); //用户不存在
-			}
-			if (user.getName().length() != 11) {  //判断用户是使用用户名登录
-				if (name.getPassword().equals(user.getPassword())) {
-					login.setName(name.getName());
-					login.setUid(name.getUid());
-					login.setToken(name.getToken());
-					login.setImage(name.getImage());
-					List<Login> logins = Arrays.asList(login);
-					queryResult.setList(logins);
-					return new QueryResponseResult(CommonCode.SUCCESS, queryResult);   //登录成功
-				} else {
-					return new QueryResponseResult(CommonCode.FAIL, null);//密码不正确
-				}
-			} else if (user.getName().length() == 11) { //判断用户是使用手机号码登录
-				if (phone.getPassword().equals(user.getPassword())) {
-					login.setName(phone.getName());
-					login.setUid(phone.getUid());
-					login.setToken(phone.getToken());
-					login.setImage(phone.getImage());
-					List<Login> logins = Arrays.asList(login);
-					queryResult.setList(logins);
-					return new QueryResponseResult(CommonCode.SUCCESS, queryResult);   //登录成功
-				} else {
-					return new QueryResponseResult(CommonCode.FAIL, null); //密码不正确
-				}
-			}
-		} else {
-			return new QueryResponseResult(CommonCode.FAIL, null); //用户输入信息不完整
-		}
+
+//
+//		if (user == null && user.getPassword() == null) { //判断用户输入是否完整
+//			return new QueryResponseResult(CommonCode.FAIL, null); //用户输入信息不完整
+//		}
+//		if (name == null && phone == null) {  //判断用户是否存在
+//			return new QueryResponseResult(CommonCode.FAIL, null); //用户不存在
+//		}
+//		if (user.getName().length() != 11) {  //判断用户是使用用户名登录
+//			if (name.getPassword().equals(user.getPassword())) {
+//				Login login=userService.findLogin(user.getName());
+//				List<Login> logins = Arrays.asList(login);
+//				queryResult.setList(logins);
+//				return new QueryResponseResult(CommonCode.SUCCESS, queryResult);   //登录成功
+//			} else {
+//				return new QueryResponseResult(CommonCode.FAIL, null);//密码不正确
+//			}
+//		} else if (user.getName().length() == 11) { //判断用户是使用手机号码登录
+//			if (phone.getPassword().equals(user.getPassword())) {
+//				Login login=userService.findLogin(user.getName());
+//				List<Login> logins = Arrays.asList(login);
+//				queryResult.setList(logins);
+//				return new QueryResponseResult(CommonCode.SUCCESS, queryResult);   //登录成功
+//			} else {
+//				return new QueryResponseResult(CommonCode.FAIL, null); //密码不正确
+//			}
+//		}
+
 		return null;
 	}
 
@@ -131,29 +126,31 @@ public class UserController {
 	 * @return
 	 * @throws ClientException
 	 */
-	@RequestMapping("/registerVerify/{phone}")
-	public QueryResponseResult registerVerify(@PathVariable("phone") String phone,
-			HttpSession session) throws ClientException {
-		if (phone.length() == 11) {      //判断手机号是否正确
-			User user_phone = userService.findByPhone(phone); //根据手机号查询
-			if (user_phone == null) {       //手机尚未注册
-				String FR = GetFourRandom.getFourRandom();
-				boolean flag = SmsUtils.sendRegistSms(phone, FR);
-				if (flag) {
-					System.out.println("验证码为 " + FR);
-					session.setAttribute("Verify", FR);//设置验证码session
-					session.setAttribute("phone", phone);//设置手机号session
-					sessionUtil.removeAttrbute(session, "Verify");//倒计时删除session
-					return new QueryResponseResult(CommonCode.SUCCESS, null);
-				} else {
-					return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
-				}
-			} else {
-				return new QueryResponseResult(CommonCode.FALL_USER_REGISTER, null);
-			}
-		} else {
+	@RequestMapping(value = "/registerVerify",method = RequestMethod.GET)
+	public QueryResponseResult registerVerify(String phone,
+			HttpSession session) throws Exception {
+
+		if (phone.length() != 11) {      //判断手机号是否正确
 			return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
 		}
+		User user_phone = userService.findByPhone(phone); //根据手机号查询
+		if (user_phone == null) {       //手机尚未注册
+			String FR = GetFourRandom.getFourRandom();
+			String phones = AesEncryptUtil.desEncrypt(phone,KEY,IV);
+			boolean flag = SmsUtils.sendRegistSms(phones, FR);
+			if (flag) {
+				System.out.println("验证码为 " + FR);
+				session.setAttribute("Verify", FR);//设置验证码session
+				session.setAttribute("phone", phones);//设置手机号session
+				sessionUtil.removeAttrbute(session, "Verify");//倒计时删除session
+				return new QueryResponseResult(CommonCode.SUCCESS, null);
+			} else {
+				return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
+			}
+		} else {
+			return new QueryResponseResult(CommonCode.FALL_USER_REGISTER, null);
+		}
+
 	}
 
 	/**

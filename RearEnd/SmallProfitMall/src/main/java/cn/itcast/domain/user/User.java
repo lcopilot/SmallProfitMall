@@ -21,6 +21,7 @@ public class User implements Serializable {
     private String  ticket;
     private String randStr;
 
+
     public String getTicket() {
         return ticket;
     }

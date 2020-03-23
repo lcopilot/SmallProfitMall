@@ -1,4 +1,4 @@
-package cn.itcast.Test;
+package cn.itcast.util.encryption;
 
 /**
  * AES 128bit 加密解密工具类
@@ -15,9 +15,9 @@ import javax.crypto.spec.SecretKeySpec;
 public class AesEncryptUtil {
 
     //使用AES-128-CBC加密模式，key需要为16位,key和iv可以相同！
-    private static String KEY = "1234567890123456";
+    private static String KEY = "a9s8i5tlj32fa3l2";
 
-    private static String IV = "1234567890123456";
+    private static String IV = "a2s5i6tlj32f2i12";
 
 
     /**

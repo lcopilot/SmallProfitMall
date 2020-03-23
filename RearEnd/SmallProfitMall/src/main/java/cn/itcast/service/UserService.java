@@ -1,7 +1,7 @@
 package cn.itcast.service;
 
+import cn.itcast.domain.user.Login;
 import cn.itcast.domain.user.User;
-import org.apache.ibatis.annotations.Param;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,4 +45,9 @@ public interface UserService {
 
     //根据id修改手机号码
     public int updatePhone( String Phone,String uid);
+
+    //根据uid返回返回数据
+    public Login findLogin(String uid);
+
+    //
 }
