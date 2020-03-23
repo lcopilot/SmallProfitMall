@@ -1,14 +1,14 @@
 <template>
   <el-col :span="15" :push="3">
     <el-card v-if="emailTypeM==1">
-      <div slot="header" style="text-align: left">
-        <span style="font-weight: bold">绑定邮箱</span>
+      <div slot="header" class="email_type1_header">
+        绑定邮箱
       </div>
       <div>
-        <el-row style="margin-top: 50px;margin-bottom: 50px">
+        <el-row class="email_type1_main">
           <el-col :span="15" :push="4">
             <div>
-              <div style="margin-bottom: 10px">
+              <div>
                 <el-input
                     autofocus
                     type='text'
@@ -16,7 +16,7 @@
                     v-model="email"
                     clearable
                     prefix-icon="el-icon-mobile-phone"
-                    style="width: 60%;margin-right: 5%"
+                    class="email_type1_main_input"
                 >
                 </el-input>
               </div>
@@ -30,7 +30,7 @@
                     show-word-limit
                     clearable
                     prefix-icon="el-icon-mobile-phone"
-                    style="width: 35%;margin-right: 3%;margin-left: -5%;"
+                    class="email_type1_main_code"
                 >
                 </el-input>
                 <el-button type="primary" @click="getEmailCode(1)" :disabled="!emailBtnStatus"
@@ -38,14 +38,14 @@
                   {{emailBtnStatus ?'获取验证码':`重新获取(${emailCountDownTime})`}}
                 </el-button>
               </div>
-              <div style="margin: 3% 0 3% 0;">
-                <el-button type="primary" style="width: 60%;margin-left: -5%"
+              <div style="">
+                <el-button type="primary" class="email_type1_main_btn"
                            @click="verificationEmailCode()" :loading="verification_btn">
                   {{verification_btn_content}}
                 </el-button>
               </div>
               <div>
-                <el-button type="primary" style="width: 60%;margin-left: -5%"
+                <el-button type="primary" class="email_type1_main_cancel"
                            @click="cancelModifyEmail">
                   取消
                 </el-button>
@@ -56,8 +56,8 @@
       </div>
     </el-card>
     <el-card v-if="emailTypeM==2">
-      <div slot="header" style="text-align: left">
-        <span style="font-weight: bold">修改邮箱</span>
+      <div slot="header" class="email_type1_header">
+        修改邮箱
       </div>
       <div>
         <el-steps :active="activeEmail" simple :align-center="true">
@@ -65,11 +65,11 @@
           <el-step title="验证码" icon="el-icon-mobile-phone"></el-step>
           <el-step title="验证新邮箱" icon="el-icon-mobile-phone"></el-step>
         </el-steps>
-        <el-row style="margin-top: 50px;margin-bottom: 50px">
+        <el-row class="email_type2_main">
           <el-col :span="15" :push="3">
             <div v-if="activeEmail==1">
               <h3 style="margin-right: 32%">请选择校验方式</h3>
-              <div style="margin: 5% 21% 5% 0">
+              <div class="email_type2_main_div">
                 <template>
                   <el-radio v-model="verificationType" label="1">
                     <svg-icon name="phone" style="margin-bottom: -8%"/>
@@ -105,29 +105,29 @@
                     show-word-limit
                     clearable
                     prefix-icon="el-icon-mobile-phone"
-                    style="width: 36%;margin-right: 2%;margin-left: -5%"
+                    class="email_type2_main_code"
                 >
                 </el-input>
-                <el-button type="primary" @click="getCode()" :disabled="!mdEmailBtnStatus"
+                <el-button type="primary" @click="getCode(1)" :disabled="!mdEmailBtnStatus"
                            style="width: 120px">
                   {{mdEmailBtnStatus?'获取验证码':`重新获取(${mdEmailCountDownTime})`}}
                 </el-button>
               </div>
-              <div style="margin: 3% 0 3% 0;">
-                <el-button type="primary" style="width: 60%;margin-left: -5%"
+              <div>
+                <el-button type="primary" class="email_type2_main_btn"
                            @click="verificationMdCode" :loading="verification_btn">
                   {{verification_btn_content}}
                 </el-button>
               </div>
               <div>
-                <el-button type="primary" style="width: 60%;margin-left: -5%"
+                <el-button type="primary" class="email_type2_main_cancel"
                            @click="cancelModifyEmail">
                   取消
                 </el-button>
               </div>
             </div>
             <div v-if="activeEmail==3">
-              <div style="margin-bottom: 10px">
+              <div>
                 <el-input
                     autofocus
                     type='text'
@@ -135,11 +135,11 @@
                     v-model="email"
                     clearable
                     prefix-icon="el-icon-mobile-phone"
-                    style="width: 60%;margin-right: 5%"
+                    class="email_type2_main_newEmail"
                 >
                 </el-input>
               </div>
-              <div style="margin-bottom: 10px">
+              <div>
                 <el-input
                     autofocus
                     type='text'
@@ -149,7 +149,7 @@
                     show-word-limit
                     clearable
                     prefix-icon="el-icon-mobile-phone"
-                    style="width: 35%;margin-right: 3%;margin-left: -5%;"
+                    class="email_type2_main_codeNew"
                 >
                 </el-input>
                 <el-button type="primary" @click="getEmailCode(2)"
@@ -158,14 +158,14 @@
                   {{mdNewEmailBtnStatus ?'获取验证码':`重新获取(${mdNewEmailCountDownTime})`}}
                 </el-button>
               </div>
-              <div style="margin: 3% 0 3% 0;">
-                <el-button type="primary" style="width: 60%;margin-left: -5%"
+              <div>
+                <el-button type="primary" class="email_type1_main_btn"
                            @click="verificationEmailCode" :loading="verification_btn">
                   {{verification_btn_content}}
                 </el-button>
               </div>
               <div>
-                <el-button type="primary" style="width: 60%;margin-left: -5%"
+                <el-button type="primary" class="email_type1_main_cancel"
                            @click="cancelModifyEmail">
                   取消
                 </el-button>
@@ -176,15 +176,15 @@
       </div>
     </el-card>
     <el-card v-if="emailTypeM==3">
-      <div slot="header" style="text-align: left">
-        <span style="font-weight: bold">解绑邮箱</span>
+      <div slot="header" class="email_type1_header">
+        解绑邮箱
       </div>
       <div>
-        <el-row style="margin-top: 50px;margin-bottom: 50px">
+        <el-row class="email_type2_main">
           <el-col :span="15" :push="4">
             <div>
               <h3 style="margin-right: 38%">请选择校验方式</h3>
-              <div style="margin: 5% 28% 8% 0">
+              <div class="email_type3_main_div">
                 <template>
                   <el-radio v-model="verificationType" label="1">
                     <svg-icon name="phone" style="margin-bottom: -8%"/>
@@ -196,7 +196,7 @@
                   </el-radio>
                 </template>
               </div>
-              <div style="margin-bottom: 10px">
+              <div>
                 <el-input
                     autofocus
                     type='text'
@@ -206,7 +206,7 @@
                     show-word-limit
                     clearable
                     prefix-icon="el-icon-mobile-phone"
-                    style="width: 35%;margin-right: 3%;margin-left: -5%;"
+                    class="email_type2_main_codeNew"
                 >
                 </el-input>
                 <el-button type="primary" @click="getCode(2)"
@@ -215,14 +215,14 @@
                   {{untieEmailBtnStatus ?'获取验证码':`重新获取(${untieEmailCountDownTime})`}}
                 </el-button>
               </div>
-              <div style="margin: 3% 0 3% 0;">
-                <el-button type="primary" style="width: 60%;margin-left: -5%"
+              <div>
+                <el-button type="primary" class="email_type2_main_newEmail"
                            @click="verificationUntieEmail()" :loading="verification_btn">
                   {{verification_btn_content}}
                 </el-button>
               </div>
               <div>
-                <el-button type="primary" style="width: 60%;margin-left: -5%"
+                <el-button type="primary" class="email_type3_main_cancel"
                            @click="cancelModifyEmail">
                   取消
                 </el-button>
@@ -485,11 +485,7 @@
               this.verification_btn_content = '验证',
                   this.verification_btn = false;
             }
-          }).catch(error=>{
-            this.$message({
-              message: "服务器累啦,请稍后重试",
-              type: "error",
-            })
+          }).catch(error => {
             this.verification_btn_content = '验证',
                 this.verification_btn = false;
           })
@@ -619,8 +615,83 @@
 </script>
 
 <style scoped>
+  .email_type3_main_div {
+    margin: 5% 28% 8% 0
+  }
+
+  .email_type2_main_div {
+    margin: 5% 21% 5% 0
+  }
+
+  .email_type3_main_cancel {
+    width: 60%;
+    margin-left: -5%
+  }
+
+  .email_type2_main {
+    margin: 5% 0 5% 15%
+  }
+
+  .email_type2_main_codeNew {
+    width: 31%;
+    margin: 0 3% 1% -5%;
+  }
+
+  .email_type2_main_newEmail {
+    width: 60%;
+    margin: 2% 0 3% -5%
+  }
+
+  .email_type2_main_code {
+    width: 36%;
+    margin-right: 2%;
+    margin-left: -5%
+  }
+
+  .email_type2_main_btn {
+    width: 65%;
+    margin: 3% 0 3% -5%;
+  }
+
+  .email_type2_main_cancel {
+    width: 65%;
+    margin-left: -5%
+  }
+
+  .email_type1_main_cancel {
+    width: 60%;
+    margin-left: -5%
+  }
+
+  .email_type1_main_btn {
+    width: 60%;
+    margin: 3% 0 3% -5%;
+  }
+
+  .email_type1_main_code {
+    width: 35%;
+    margin-right: 3%;
+    margin-left: -5%;
+  }
+
+  .email_type1_main_input {
+    width: 60%;
+    margin-right: 5%;
+    margin-bottom: 10px;
+  }
+
+  .email_type1_header {
+    text-align: left;
+    font-weight: bold
+  }
+
   .ver_btn {
     width: 35%;
     margin-left: -20%
+  }
+
+  .email_type1_main {
+    margin-top: 50px;
+    margin-bottom: 50px
   }
 </style>

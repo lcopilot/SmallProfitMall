@@ -191,10 +191,6 @@
                   this.verification_btn = false;
             }
           }).catch(error => {
-            this.$message({
-              message: "服务器错误,请稍后重试!",
-              type: "error",
-            })
             this.active = 1;
             sessionStorage.setItem('phone_active', JSON.stringify(this.active));
             this.verification_btn_content = '验证',
@@ -237,10 +233,6 @@
                   this.verification_btn = false;
             }
           }).catch(error => {
-            this.$message({
-              message: "服务器错误,请稍后重试!",
-              type: "error",
-            })
             this.active = 2;
             sessionStorage.setItem('phone_active', JSON.stringify(this.active));
             this.verification_btn_content = '验证',
@@ -280,11 +272,6 @@
                 })
               }
             }
-          }).catch(error => {
-            this.$message({
-              message: "服务器累了~,请稍后重试",
-              type: "error",
-            })
           })
         }
 
@@ -319,10 +306,6 @@
                   this.verification_btn = false;
             }
           }).catch(error => {
-            this.$message({
-              message: "服务器累了~,请稍后重试!",
-              type: "error",
-            })
             this.verification_btn_content = '验证',
                 this.verification_btn = false;
           })

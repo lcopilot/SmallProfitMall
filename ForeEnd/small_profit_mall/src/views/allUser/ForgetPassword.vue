@@ -124,10 +124,6 @@
                 this.$message.error("重置密码失败,请稍后重试");
               }
             })
-            .catch(error => {
-              this.$message.error("服务器错误");
-              console.log(error);
-            });
           }
         });
       },

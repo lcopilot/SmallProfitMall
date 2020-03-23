@@ -265,8 +265,6 @@
                   type: "error",
                 })
               }
-            }).catch(error => {
-              console.log(error);
             })
           } else {
             this.$message({
