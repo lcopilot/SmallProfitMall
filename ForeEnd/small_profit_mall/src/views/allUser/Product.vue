@@ -51,7 +51,7 @@
                   </el-link>
                 </el-col>
                 <el-col :span="4">
-                  <el-link :underline="false">
+                  <el-link :underline="false" @click="addFavorite">
                     <svg-icon name="Favorite"
                               class="icon"></svg-icon>
                     收藏
@@ -361,6 +361,7 @@
 <script>
   import *as productApi from '../../api/page/product'
   import *as commonApi from '../../api/util/common'
+  import *as userApi from '../../api/page/user'
   import {mapActions} from "vuex";
 
   const Header = () => import("../../components/pages/Header"); //组件懒加载
@@ -372,6 +373,8 @@
     name: "Product",
     data() {
       return {
+        //商品Id
+        productId:0,
         //评论类型
         commentType:"1",
         bigImg: '',//商品大图
@@ -533,7 +536,6 @@
       getProduct(productId) {
         productApi.getProduct(productId).then(res => {
               if (res.success) {
-                console.log(res)
                 this.product = res.queryResult.list[0];
                 //设置默认选项
                 this.bigImg = res.queryResult.list[0].imageSite[1];
@@ -553,7 +555,7 @@
         this.productForm.productId=sessionStorage.getItem("productId");
         this.productForm.userId=sessionStorage.getItem("uId");
         productApi.addCart(this.productForm).then(res=>{
-          if (res){
+          if (res.success){
             this.$message({
               message:"商品已加入购物车",
               type:"success"
@@ -571,6 +573,35 @@
           }
         })
       },
+      //添加收藏
+      addFavorite(){
+        if (!sessionStorage.getItem("uId")){
+          this.$message.warning("还没有登录哦~,请先登录吧")
+        }else{
+          let productIdList=[];
+          productIdList.push(this.productId);
+          userApi.addFavorite(sessionStorage.getItem("uId"),productIdList).then(res=>{
+            if (res.success){
+              this.$message.success("收藏成功!")
+            }else {
+              if (res.code==11111){
+                this.$message({
+                  message:"商品已经被收藏,请勿重复收藏"
+                })
+              }
+            }
+          })
+        }
+      },
+      addFootprint(){
+        if (sessionStorage.getItem("uId")){
+          let data={
+            userId:sessionStorage.getItem("uId"),
+            productId:this.productId
+          };
+          userApi.addFootprint(data);
+        }
+      },
     },
     computed: {
       player() {
@@ -581,8 +612,9 @@
       if (this.$route.query.productId != null) {
         sessionStorage.setItem("productId", this.$route.query.productId);
       }
-      let productId = sessionStorage.getItem("productId");
-      this.getProduct(productId);
+      this.productId = sessionStorage.getItem("productId");
+      this.addFootprint();
+      this.getProduct(this.productId);
       this.getAddressData();
       this.switchProductImg();
     }
