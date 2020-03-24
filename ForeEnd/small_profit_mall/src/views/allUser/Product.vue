@@ -558,16 +558,16 @@
               message:"商品已加入购物车",
               type:"success"
             })
-            productApi.getShoppingCartNumber( this.productForm.userId).then(res => {
-              if (res.success) {
-                this.getCartSum(res.queryResult.total);
-              }
-            })
+            this.getCartSum(res.queryResult.total);
           }else{
-            this.$message({
-              message:"加入购物车失败,请稍后重试",
-              type:"error"
-            })
+            if (res.code==11111){
+              this.$message.warning("购物车已满!");
+            }else{
+              this.$message({
+                message:"加入购物车失败,请稍后重试",
+                type:"error"
+              })
+            }
           }
         })
       },
