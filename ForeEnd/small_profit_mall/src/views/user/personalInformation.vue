@@ -199,7 +199,7 @@
         const isJPG = file.type === 'image/jpeg';
         const isPNG = file.type === 'image/png';
         const isBMP = file.type === 'image/bmp';
-        const isLt2M = file.size / 1024 / 1024 < 2;
+        const isLt2M = file.size / 1024 / 1024 < 20;
         if (!isJPG && !isPNG && !isBMP) {
           this.$message.error('上传图片必须是JPG/PNG/BMP 格式!');
         }
