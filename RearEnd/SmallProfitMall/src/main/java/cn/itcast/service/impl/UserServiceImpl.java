@@ -21,12 +21,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao UserDao;
 
+    @Autowired
+    private User users;
+
 
     @Autowired
     private Login login;
 
-    @Autowired
-    private User user;
     //查询所有用户
     public List<User> findAll() {
         return UserDao.findAll();
@@ -44,10 +45,35 @@ public class UserServiceImpl implements UserService {
         return UserDao.findByPhone(phone);
     }
 
+
+
     //.根据uid查询用户信息
     @Override
     public User findByUid(String uid) {
         return UserDao.findByUid(uid);
+    }
+
+    //根据传入的账户查询信息查询
+    @Override
+    public User findAccount(User user) {
+        if (user.getName().length()==11){
+           users = this.findByPhone(user.getName());
+          if (users==null){
+            users = this.findByName(user.getName());
+          }
+        }else {
+            users = this.findByName(user.getName());
+        }
+        return users;
+    }
+
+    //查询返回值
+    public Login findLogin(User user){
+        login.setUid(user.getUid());
+        login.setImage(user.getImage());
+        login.setToken(user.getToken());
+        login.setName(user.getName());
+        return login;
     }
 
     //保存用户

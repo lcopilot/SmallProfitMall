@@ -75,49 +75,37 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/accountLogin")
-	public QueryResponseResult accountLogin(@RequestBody Login Login, HttpServletRequest request) {
+	public QueryResponseResult accountLogin(@RequestBody User user, HttpServletRequest request) {
 //		if (!verifyUtil.VaptchaVerify(user.getToken(), request)) {
 //			return new QueryResponseResult(CommonCode.ValidationFails, null); //令牌错误不正确
 //		}
-		int verifyTicket=TCaptchaVerify.verifyTicket(Login.getTicket(),Login.getRandStr(), IPUtil.getIP(request));
+		int verifyTicket=TCaptchaVerify.verifyTicket(user.getTicket(),user.getRandStr(), IPUtil.getIP(request));
 		if (verifyTicket==1){
 			return new QueryResponseResult(CommonCode.SUCCESS,null);
 		}else if (verifyTicket==-1){
 			return new QueryResponseResult(CommonCode.ValidationFails,null);
 		}
 
-		if (Login.getName().equals("smallProfit")) {
+		if (user.getName().equals("smallProfit")) {
 			return new QueryResponseResult(CommonCode.nameError, null); //不能使用初始名字登录不
 		}
 
-//
-//		if (user == null && user.getPassword() == null) { //判断用户输入是否完整
-//			return new QueryResponseResult(CommonCode.FAIL, null); //用户输入信息不完整
-//		}
-//		if (name == null && phone == null) {  //判断用户是否存在
-//			return new QueryResponseResult(CommonCode.FAIL, null); //用户不存在
-//		}
-//		if (user.getName().length() != 11) {  //判断用户是使用用户名登录
-//			if (name.getPassword().equals(user.getPassword())) {
-//				Login login=userService.findLogin(user.getName());
-//				List<Login> logins = Arrays.asList(login);
-//				queryResult.setList(logins);
-//				return new QueryResponseResult(CommonCode.SUCCESS, queryResult);   //登录成功
-//			} else {
-//				return new QueryResponseResult(CommonCode.FAIL, null);//密码不正确
-//			}
-//		} else if (user.getName().length() == 11) { //判断用户是使用手机号码登录
-//			if (phone.getPassword().equals(user.getPassword())) {
-//				Login login=userService.findLogin(user.getName());
-//				List<Login> logins = Arrays.asList(login);
-//				queryResult.setList(logins);
-//				return new QueryResponseResult(CommonCode.SUCCESS, queryResult);   //登录成功
-//			} else {
-//				return new QueryResponseResult(CommonCode.FAIL, null); //密码不正确
-//			}
-//		}
 
-		return null;
+		if (user == null && user.getPassword() == null) { //判断用户输入是否完整
+			return new QueryResponseResult(CommonCode.FAIL, null); //用户输入信息不完整
+		}
+		User users= userService.findAccount(user);
+		if (users == null) {  //判断用户是否存在
+			return new QueryResponseResult(CommonCode.FAIL, null); //用户不存在
+		}
+		if (users.getPassword().equals(user.getPassword())) {
+			Login login=userService.findLogin(users);
+			List<Login> logins = Arrays.asList(login);
+			queryResult.setList(logins);
+			return new QueryResponseResult(CommonCode.SUCCESS, queryResult);   //登录成功
+			} else {
+				return new QueryResponseResult(CommonCode.FAIL, null);//密码不正确
+			}
 	}
 
 	/**
