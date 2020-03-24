@@ -124,7 +124,7 @@
 
 <script>
   import * as userApi from "../../api/page/user";
-
+  import encryption from "../../util/encryption";  //*as别名
   export default {
     inject: ["reload"],
     name: "phoneModification",
@@ -157,9 +157,9 @@
         if (this.oldPhone == '' || this.oldPhone.length <= 11 || !phone.test(this.oldPhone)) {
           this.$message.warning("请输入正确的手机号")
         } else {
-          let formData = new FormData()
-          formData.append('phone', this.oldPhone)
-          formData.append('userId', sessionStorage.getItem('uId'))
+          let formData = new FormData();
+          formData.append('phone', encryption.encrypt(this.oldPhone));
+          formData.append('userId', sessionStorage.getItem('uId'));
           userApi.verifyPhone(formData).then(res => {
             this.verification_btn_content = '验证中..',
                 this.verification_btn = true;
@@ -207,7 +207,7 @@
           this.$message.warning("请输入正确的验证码")
         } else {
           let formData = new FormData()
-          formData.append('phone', this.oldPhone)
+          formData.append('phone', encryption.encrypt(this.oldPhone))
           formData.append('verification', this.smsCode)
           userApi.verifyPhoneCode(formData).then(res => {
             this.verification_btn_content = '验证中..',
@@ -246,12 +246,12 @@
       },
       //获取新手机验证码
       getPhoneCodeNew() {
-        let phone = /^1[0-9]{10}$/
+        let phone = /^1[0-9]{10}$/;
         if (this.newPhone == '' || this.newPhone.length <= 11 || !phone.test(this.newPhone)) {
           this.$message.warning("请输入正确的手机号")
         } else {
-          let formData = new FormData()
-          formData.append('phone', this.newPhone)
+          let formData = new FormData();
+          formData.append('phone', encryption.encrypt(this.newPhone));
           userApi.sendNewPhoneCode(formData).then(res => {
             if (res.success) {
               this.$message({
@@ -285,7 +285,7 @@
           this.$message.warning("请输入正确的验证码")
         } else {
           let formData = new FormData()
-          formData.append('phone', this.newPhone)
+          formData.append('phone', encryption.encrypt(this.newPhone));
           formData.append('verification', this.smsCode)
           formData.append('userId', sessionStorage.getItem('uId'))
           userApi.verifyNewPhoneCode(formData).then(res => {
