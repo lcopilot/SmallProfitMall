@@ -26,7 +26,7 @@
 
     <!--注册用户 -->
     <insert id="saveAccount" parameterType="cn.itcast.domain.user.User">
-         INSERT INTO user (uid,name,password,sex,phone,email,image,token) VALUES (#{uid},#{name},#{password},#{sex},#{phone},#{email},#{image},#{token})
+         INSERT INTO user (uid,name,password,sex,phone,email,image,token,birthday) VALUES (#{uid},#{name},#{password},#{sex},#{phone},#{email},#{image},#{token},#{birthday})
     </insert>
 
     <!-- 根据用户手机号码修改手机密码-->
