@@ -75,12 +75,12 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/accountLogin")
-	public QueryResponseResult accountLogin(@RequestBody User user, HttpServletRequest request) {
+	public QueryResponseResult accountLogin(@RequestBody User user, HttpServletRequest request) throws Exception {
 //		if (!verifyUtil.VaptchaVerify(user.getToken(), request)) {
 //			return new QueryResponseResult(CommonCode.ValidationFails, null); //令牌错误不正确
 //		}
 		int verifyTicket=TCaptchaVerify.verifyTicket(user.getTicket(),user.getRandStr(), IPUtil.getIP(request));
-		if (verifyTicket==1){
+		if (verifyTicket==1){			//二次验证验证码
 			return new QueryResponseResult(CommonCode.SUCCESS,null);
 		}else if (verifyTicket==-1){
 			return new QueryResponseResult(CommonCode.ValidationFails,null);
@@ -94,18 +94,20 @@ public class UserController {
 		if (user == null && user.getPassword() == null) { //判断用户输入是否完整
 			return new QueryResponseResult(CommonCode.FAIL, null); //用户输入信息不完整
 		}
+
 		User users= userService.findAccount(user);
 		if (users == null) {  //判断用户是否存在
 			return new QueryResponseResult(CommonCode.FAIL, null); //用户不存在
 		}
-		if (users.getPassword().equals(user.getPassword())) {
+		String password=AesEncryptUtil.desEncrypt(users.getPassword(),KEY,IV);
+		if (password.equals(user.getPassword())) {
 			Login login=userService.findLogin(users);
 			List<Login> logins = Arrays.asList(login);
 			queryResult.setList(logins);
 			return new QueryResponseResult(CommonCode.SUCCESS, queryResult);   //登录成功
-			} else {
-				return new QueryResponseResult(CommonCode.FAIL, null);//密码不正确
-			}
+		} else {
+			return new QueryResponseResult(CommonCode.FAIL, null);//密码不正确
+		}
 	}
 
 	/**
@@ -125,7 +127,6 @@ public class UserController {
 		User user_phone = userService.findByPhone(phone); //根据手机号查询
 		if (user_phone == null) {       //手机尚未注册
 			String FR = GetFourRandom.getFourRandom();
-
 			boolean flag = SmsUtils.sendRegistSms(phones, FR);
 			if (flag) {
 				System.out.println("验证码为 " + FR);
@@ -151,6 +152,7 @@ public class UserController {
 	public QueryResponseResult register(@RequestBody User user, HttpSession session) throws Exception {
 		String Verify = (String) session.getAttribute("Verify");
 		String phone = (String) session.getAttribute("phone");
+		session.invalidate();	//销毁session
 		if (user.getVerify().equals(Verify) && user.getPhone().equals(phone)) {
 			userService.saveAccount(user);  //存入对象
 			return new QueryResponseResult(CommonCode.SUCCESS, null);//注册成功
@@ -200,6 +202,7 @@ public class UserController {
 		String passwordVerify = (String) session.getAttribute("passwordVerify");
 		String phone = (String) session.getAttribute("upPasswordPhone");
 		String password = user.getPassword();
+		session.invalidate();	//销毁session
 		if (user.getPhone().equals(phone)) {
 			if (user.getVerify().equals(passwordVerify)) {
 				System.out.println(password);
@@ -256,7 +259,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/findByIdInformation/{userId}", method = RequestMethod.GET)
-	public QueryResponseResult findByIdInformation(@PathVariable("userId") String userId) {
+	public QueryResponseResult findByIdInformation(@PathVariable("userId") String userId) throws Exception {
 		// 调用service的方法
 		System.out.println(userId);
 		User user = userService.findByIdInformation(userId);
