@@ -24,4 +24,7 @@ public interface ShoppingCartDao {
 
     //根据用户id查询购物车商品数量
     public List findByuId(String userId);
+
+    //修改购物车商品数量
+    public int updateQuantity(@Param("quantity")int quantity,@Param("shoppingCartId")int shoppingCartId);
 }

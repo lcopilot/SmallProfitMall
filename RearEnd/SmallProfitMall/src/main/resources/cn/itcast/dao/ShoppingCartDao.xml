@@ -66,4 +66,9 @@
         SELECT shoppingCartId FROM shoppingCart WHERE userId=#{userId}
     </select>
 
+    <!--修改购物车数量-->
+    <update id="updateQuantity" parameterType="java.lang.Integer">
+          UPDATE shoppingCart SET quantity = #{quantity} WHERE shoppingCartId = #{shoppingCartId}
+    </update>
+
 </mapper>
