@@ -171,8 +171,9 @@ public class UserController {
 	 */
 	@RequestMapping("/SmVerify/{phone}")
 	public QueryResponseResult SmVerify(@PathVariable("phone") String phone, HttpSession session)
-			throws ClientException {
-		User users = userService.findByPhone(phone);
+			throws Exception {
+		String phones = AesEncryptUtil.encrypt(phone);	//加密
+		User users = userService.findByPhone(phones);
 		if (users != null) {
 			String FR = GetFourRandom.getFourRandom();
 			System.out.println("修改验证码为 " + FR);
@@ -198,15 +199,15 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/updatePasswordPhone")
-	public QueryResponseResult updatePasswordPhone(@RequestBody User user, HttpSession session) {
+	public QueryResponseResult updatePasswordPhone(@RequestBody User user, HttpSession session) throws Exception {
 		String passwordVerify = (String) session.getAttribute("passwordVerify");
 		String phone = (String) session.getAttribute("upPasswordPhone");
 		String password = user.getPassword();
 		session.invalidate();	//销毁session
 		if (user.getPhone().equals(phone)) {
 			if (user.getVerify().equals(passwordVerify)) {
-				System.out.println(password);
-				userService.updatePasswordPhone(phone, password);
+				String phones = AesEncryptUtil.encrypt(phone);	//加密
+				userService.updatePasswordPhone(phones, password);
 				return new QueryResponseResult(CommonCode.SUCCESS, null);
 			} else {
 				return new QueryResponseResult(CommonCode.FAIL, null);
