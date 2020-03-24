@@ -199,7 +199,7 @@
         const isJPG = file.type === 'image/jpeg';
         const isPNG = file.type === 'image/png';
         const isBMP = file.type === 'image/bmp';
-        const isLt2M = file.size / 1024 / 1024 < 50;
+        const isLt2M = file.size / 1024 / 1024 < 2;
         if (!isJPG && !isPNG && !isBMP) {
           this.$message.error('上传图片必须是JPG/PNG/BMP 格式!');
         }
@@ -251,6 +251,7 @@
             if (this.userFrom.birthday==new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate()){
               this.userFrom.birthday='';
             }
+
             userApi.modifyUser(this.userFrom).then(res => {
               if (res.success) {
                 this.getUser();
