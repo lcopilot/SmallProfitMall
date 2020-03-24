@@ -237,6 +237,7 @@
 
 <script>
   import *as userApi from '../../api/page/user'  //*as别名
+  import encryption from "../../util/encryption";
   export default {
     inject: ["reload"],
     name: "emailModify",
@@ -317,7 +318,7 @@
               this.verification_btn = true;
           let formData = new FormData()
           formData.append('userId', sessionStorage.getItem("uId"))
-          formData.append('email', this.email);
+          formData.append('email', encryption.encrypt(this.email));
           formData.append('verification', this.emailCode);
           userApi.validationEmail(formData).then(res => {
             if (res.success) {
@@ -360,9 +361,9 @@
           } else {
             this.GetCodeMdNewEmail();
           }
-          let formData = new FormData()
-          formData.append('uId', sessionStorage.getItem("uId"))
-          formData.append('email', this.email)
+          let formData = new FormData();
+          formData.append('uId', sessionStorage.getItem("uId"));
+          formData.append('email', encryption.encrypt(this.email));
           userApi.getEmailCode(formData).then(res => {
             if (res.success) {
               this.$message({

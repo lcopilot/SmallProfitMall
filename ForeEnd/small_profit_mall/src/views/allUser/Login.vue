@@ -2,7 +2,8 @@
   <el-container class="login_div">
     <el-main>
       <el-card class="login_component">
-        <transition enter-active-class="animated fadeInRightBig" leave-active-class="animated fadeOut">
+        <transition enter-active-class="animated fadeInRightBig"
+                    leave-active-class="animated fadeOut">
           <div class="login_div_left div_left" v-cloak v-show="!loginSwitch1">
             <div class="login_div_left_div ">
               <el-form :model="loginForm" :rules="rules" ref="loginForm" :status-icon="true">
@@ -34,8 +35,9 @@
             </div>
           </div>
         </transition>
-        <transition  enter-active-class="animated fadeOut" leave-active-class="animated fadeOutRightBig">
-          <div class="login_div_right" v-cloak  v-show="!loginSwitch2">
+        <transition enter-active-class="animated fadeOut"
+                    leave-active-class="animated fadeOutRightBig">
+          <div class="login_div_right" v-cloak v-show="!loginSwitch2">
             <div class="login_div_right_div div_right_div">
               <h1>欢迎光临</h1>
               <p>输入您的个人资料，开始您的购物之旅</p>
@@ -44,7 +46,8 @@
             </div>
           </div>
         </transition>
-        <transition enter-active-class="animated fadeInLeftBig" leave-active-class="animated fadeOut">
+        <transition enter-active-class="animated fadeInLeftBig"
+                    leave-active-class="animated fadeOut">
           <div class="register_div_left div_left" v-cloak v-show="registerSwitch1">
             <div class="login_div_left_div">
               <el-form :status-icon="true" :model="registerForm" :rules="rulesRegister"
@@ -79,7 +82,8 @@
                   </el-button>
                 </el-form-item>
                 <el-form-item>
-                  <el-button class="login-btn" round @click="register('registerForm')">注册</el-button>
+                  <el-button class="login-btn" round @click="register('registerForm')">注册
+                  </el-button>
                 </el-form-item>
               </el-form>
               <router-link to="/forgetPassword">忘记密码</router-link>
@@ -105,7 +109,7 @@
 
   // @ is an alias to /src
   import *as userApi from '../../api/page/user'
-  import encryption from "../../util/encryption";  //*as别名
+  import encryption from "../../util/encryption";
 
   export default {
     data() {
@@ -154,12 +158,6 @@
           verify: ''
         },
         //传递的注册加密参数
-        registerFormParameter: {
-          phone: '',
-          password: '',
-          checkPass: '',
-          verify: ''
-        },
         rulesRegister: {
           phone: [
             {required: true, validator: checkPhone, trigger: 'blur'}
@@ -205,11 +203,17 @@
       register(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.registerFormParameter.password =encryption.encrypt(this.registerForm.password);
-            this.registerFormParameter.checkPass=encryption.encrypt(this.registerForm.checkPass);
-            this.registerFormParameter.phone=encryption.encrypt(this.registerForm.phone);
-            this.registerFormParameter.verify=this.registerForm.verify;
-            userApi.register(this.registerFormParameter)
+            let registerFormParameter = {
+              phone: '',
+              password: '',
+              checkPass: '',
+              verify: ''
+            };
+            registerFormParameter.password = encryption.encrypt(this.registerForm.password);
+            registerFormParameter.checkPass = encryption.encrypt(this.registerForm.checkPass);
+            registerFormParameter.phone = encryption.encrypt(this.registerForm.phone);
+            registerFormParameter.verify = this.registerForm.verify;
+            userApi.register(registerFormParameter)
             .then(res => {
               if (res.success) {
                 this.$message({
@@ -228,8 +232,8 @@
       getPhoneCode() {
         if ((/^1[34578]\d{9}$/.test(this.registerForm.phone))) {
           this.GetCode();
-          let phone={
-            "phone":encryption.encrypt(this.registerForm.phone),
+          let phone = {
+            "phone": encryption.encrypt(this.registerForm.phone),
           };
           userApi.getPhone_Code(phone).then(res => {
             if (res.success) {
@@ -347,26 +351,26 @@
       switchLoginRegister(type) {
         if (type == 1) {
           this.loginSwitch2 = true;
-            this.loginSwitch1 = true;
-            setTimeout(()=>{
-              this.registerSwitch1=true;
-              setTimeout(()=>{
-                this.registerSwitch2=true;
-              },400)
-            },400)
+          this.loginSwitch1 = true;
+          setTimeout(() => {
+            this.registerSwitch1 = true;
+            setTimeout(() => {
+              this.registerSwitch2 = true;
+            }, 400)
+          }, 400)
           this.resetForm('loginForm');
           this.resetForm('registerForm');
         } else {
-            this.loginSwitch1 = false;
-            this.loginSwitch2= false;
-            setTimeout(()=>{
-              this.registerSwitch1=false;
-              setTimeout(()=>{
-                this.registerSwitch2=false;
-              },400)
-            },400)
-            this.resetForm('loginForm');
-            this.resetForm('registerForm');
+          this.loginSwitch1 = false;
+          this.loginSwitch2 = false;
+          setTimeout(() => {
+            this.registerSwitch1 = false;
+            setTimeout(() => {
+              this.registerSwitch2 = false;
+            }, 400)
+          }, 400)
+          this.resetForm('loginForm');
+          this.resetForm('registerForm');
 
         }
       }
@@ -394,6 +398,7 @@
   [v-cloak] {
     display: none
   }
+
   .login_div {
     height: 100%;
     width: 100%;
@@ -424,23 +429,25 @@
 
   .login_component {
     margin: 0 auto;
-    height: 72%;
+    height: 70%;
     width: 53%;
     position: relative;
     top: 50%;
-    transform: translateY(-50%);/* 元素往下位移自身高度50%的距离 */
+    transform: translateY(-50%); /* 元素往下位移自身高度50%的距离 */
   }
 
   .header-title {
     font-size: 20px;
     font-weight: 700;
   }
-  .div_left{
+
+  .div_left {
     padding: 2%;
     background: rgba(0, 0, 0, 0.4); /* r:red g:green b:blue a:alpha(半透明):0-1,1是不透明，0是全透明 */
     width: 50%;
     height: 480px;
   }
+
   .login_div_left {
     float: left;
   }
@@ -468,7 +475,8 @@
     height: 480px;
     float: right;
   }
-  .div_right_div{
+
+  .div_right_div {
     color: #f5f5e1;
     position: absolute;
     top: 0;
@@ -483,6 +491,7 @@
     /*transition: transform 0.6s ease-in-out;*/
     /*transform: translateX(0);*/
   }
+
   .login_div_right_div {
     right: 0;
   }
