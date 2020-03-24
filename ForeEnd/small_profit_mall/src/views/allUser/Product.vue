@@ -472,6 +472,7 @@
     methods: {
       ...mapActions([
         "modifyCartSum",
+        "getCartSum"
       ]),
       //鼠标切换商品图片
       enter(index) {
@@ -557,7 +558,11 @@
               message:"商品已加入购物车",
               type:"success"
             })
-            this.modifyCartSum(+1);
+            productApi.getShoppingCartNumber( this.productForm.userId).then(res => {
+              if (res.success) {
+                this.getCartSum(res.queryResult.total);
+              }
+            })
           }else{
             this.$message({
               message:"加入购物车失败,请稍后重试",

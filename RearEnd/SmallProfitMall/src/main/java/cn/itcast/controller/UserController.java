@@ -140,7 +140,6 @@ public class UserController {
 		} else {
 			return new QueryResponseResult(CommonCode.FALL_USER_REGISTER, null);
 		}
-
 	}
 
 	/**
