@@ -177,7 +177,8 @@ public class UserController {
 		if (users != null) {
 			String FR = GetFourRandom.getFourRandom();
 			System.out.println("修改验证码为 " + FR);
-			boolean flag = SmsUtils.forgetPassword(users.getPhone(), FR);
+			String phoness = AesEncryptUtil.desEncrypt(users.getPhone());
+			boolean flag = SmsUtils.forgetPassword(phoness, FR);
 			if (flag) {
 				session.setAttribute("passwordVerify", FR);//存入验证码session
 				session.setAttribute("upPasswordPhone", phone);//手机号存入session
