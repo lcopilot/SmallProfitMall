@@ -50,10 +50,10 @@
         <div>
           <div class="personal_page">消息中心</div>
           <div class="personal_page_child">
-            <router-link to="/">系统消息</router-link>
+            <router-link to="/messageCenter">系统消息</router-link>
           </div>
           <div class="personal_page_child">
-            <router-link to="/">订单消息</router-link>
+            <router-link to="/messageCenter">订单消息</router-link>
           </div>
         </div>
       </div>

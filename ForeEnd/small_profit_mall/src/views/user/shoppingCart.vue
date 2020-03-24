@@ -103,12 +103,11 @@
                     <div style="padding-top: 30%">
                       <!-- 已收藏就不显示 待完成-->
                       <div v-if="!product.row.evaluation">
-                        <el-link :underline="false" @click="favorite(product.row.productId)" style="font-size: 13px">
+                        <el-link :underline="false" @click="addFavorite(product.row.productId)" style="font-size: 13px">
                           收藏
                         </el-link>
                       </div>
-                      <!-- 库存不足时显示 待完成-->
-                      <div v-if="product.row.productInventory==0">
+                      <div v-if="product.row.productInventory<=0">
                         <el-link :underline="false" @click="arrivalNotice(product.row.productId)" style="font-size: 13px">
                           到货通知
                         </el-link>
@@ -130,7 +129,7 @@
                   <el-checkbox v-model="selectAll" @change="checkAll">全选</el-checkbox>
                 </el-col>
                 <el-col :span="3">
-                  <el-button @click="favoriteAll()" type="text" size="small">
+                  <el-button @click="addFavorite()" type="text" size="small">
                     收藏已选择
                   </el-button>
                   <el-button @click="removeCartProduct()" type="text" size="small">
@@ -175,6 +174,7 @@
 
 <script>
   import *as productApi from '../../api/page/product'
+  import *as userApi from '../../api/page/user'
   import {mapActions} from "vuex";
 
   const search = () => import("../../components/pages/Search");
@@ -261,13 +261,30 @@
       buyProduct(cartProductId) {
 
       },
-      //收藏
-      favorite(productId) {
+      //添加收藏
+      addFavorite(productId){
+        let productIdList=[];
+        if (productId!=null){
+          productIdList.push(productId);
+        }else {
+          this.$refs.cartTable.selection.forEach((shoppingCart)=>{
+            if (!shoppingCart.evaluation){
+              productIdList.push(shoppingCart.productId);
+            }
+          })
+        }
+          userApi.addFavorite(sessionStorage.getItem("uId"),productIdList).then(res=>{
+            if (res.success){
+              this.$message.success("收藏成功!")
+            }else {
+              if (res.code==11111){
+                this.$message({
+                  message:"商品已经被收藏,请勿重复收藏"
+                })
+              }
+            }
+          })
 
-      },
-      //收藏已选择
-      favoriteAll() {
-        this.$refs.cartTable.selection
       },
       //到货通知
       arrivalNotice(productId) {
