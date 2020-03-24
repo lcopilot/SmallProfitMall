@@ -6,6 +6,7 @@ import cn.itcast.response.QueryResult;
 import cn.itcast.service.EmailService;
 import cn.itcast.service.UserService;
 import cn.itcast.util.Emiail.SendEmailUtil;
+import cn.itcast.util.encryption.AesEncryptUtil;
 import cn.itcast.util.logic.GetFourRandom;
 import cn.itcast.util.logic.sessionUtil;
 import cn.itcast.util.user.SmsUtils;
@@ -39,11 +40,13 @@ public class EmailController {
     String theme = "微利商城";
     String sendEmail = "liliu_muge@163.com";
 
-    //发送邮箱验证码（绑定,修改）
+    //发送邮箱验证码（绑定邮箱）
     @RequestMapping(value = "/relieveEmail",method = RequestMethod.POST )
-    public QueryResponseResult sendEmail(String email,String uId ,HttpSession session) {
+    public QueryResponseResult sendEmail(String email,String uId ,HttpSession session) throws Exception {
+        //解密邮箱
+        String emails = AesEncryptUtil.desEncrypt(email);
         String verification = GetFourRandom.getFourRandom();
-        String userEmail=email;
+        String userEmail=emails;
         if(userEmail==null){
             userEmail = emailService.fendByIdEmail(uId);
         }
@@ -79,14 +82,14 @@ public class EmailController {
      * 验证新手机更改邮箱短信验证(用户解绑邮箱,更新邮箱)
      */
     @RequestMapping(value = "/updateEmailPhone", method = RequestMethod.POST)
-    public QueryResponseResult updateEmailPhone(String userId,String verificationType, HttpSession session) throws ClientException {
+    public QueryResponseResult updateEmailPhone(String userId,String verificationType, HttpSession session) throws Exception {
         String phone = userService.findByIdPhone(userId);
         String FR = GetFourRandom.getFourRandom();  //随机验证码
         System.out.println(FR);
         session.setAttribute("verificationType", verificationType);//验证是否
         if (verificationType.equals("1")){    //手机号码方式
-
-            boolean flag = SmsUtils.updatePhone(phone, FR);
+            String phones = AesEncryptUtil.desEncrypt(phone);//解密手机发送短信
+            boolean flag = SmsUtils.updatePhone(phones, FR);
             if (flag) {
                 session.setAttribute("updateEmailPhoneFR", FR);//存入验证码session
                 session.setAttribute("updateEmailPhone", phone);//手机号存入session
@@ -101,9 +104,10 @@ public class EmailController {
         }else if(verificationType.equals("2")){   //邮箱验证
             String verification = GetFourRandom.getFourRandom();
             String userEmail = emailService.fendByIdEmail(userId);  //查询绑定邮箱
+            String Emails=AesEncryptUtil.desEncrypt(userEmail);
             int redis=7;
             if (userEmail!=null){
-                redis = sendEmailUtil.sendEmailUtil(theme, sendEmail, userEmail, verification);
+                redis = sendEmailUtil.sendEmailUtil(theme, sendEmail, Emails, verification);
             }
             if (redis == 0) {
                 session.setAttribute("content", verification);//设置验证码session
