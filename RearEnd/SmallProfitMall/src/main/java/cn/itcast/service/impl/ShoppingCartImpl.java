@@ -27,7 +27,7 @@ public class ShoppingCartImpl implements ShoppingCartService {
     @Override
     public int[] addShoppingCar(PurchaseInformation purchaseInformation) {
         List<ShoppingCart> shoppingCarts = this.findByUserId(purchaseInformation.getUserId());
-        if (shoppingCarts.size()>99){   //购物车大于99
+        if (shoppingCarts.size()==99|| shoppingCarts.size()>99){   //购物车大于99
             int redis = 2;
             int[] rediss = new int[2];
             rediss[0]=redis;

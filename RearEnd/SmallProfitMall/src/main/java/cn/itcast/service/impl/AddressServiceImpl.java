@@ -3,16 +3,14 @@ package cn.itcast.service.impl;
 import cn.itcast.dao.AddressDao;
 import cn.itcast.domain.address.Address;
 import cn.itcast.service.AddressService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class AddressImpl implements AddressService {
-
+@Service("addressService")
+public class AddressServiceImpl implements AddressService {
     @Autowired
     AddressDao addressDao;
     //根据id查询

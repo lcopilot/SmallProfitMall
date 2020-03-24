@@ -3,7 +3,6 @@ package cn.itcast.dao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 //发送邮件
-@Repository
 public interface EmailDao {
     //跟新邮箱
     public int addEmail(@Param("uid")String uid, @Param("email")String email);

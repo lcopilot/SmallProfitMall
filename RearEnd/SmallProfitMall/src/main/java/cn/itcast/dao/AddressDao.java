@@ -1,6 +1,7 @@
 package cn.itcast.dao;
 
 import cn.itcast.domain.address.Address;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //收货地址
-@Repository
+
 public interface AddressDao {
     //查询用户地址
     public List<Address> findById(@Param("userId")String userId);

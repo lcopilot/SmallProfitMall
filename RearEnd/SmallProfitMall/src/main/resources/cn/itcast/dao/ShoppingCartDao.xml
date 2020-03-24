@@ -49,7 +49,7 @@
          SELECT
             sign
         FROM
-            userEvaluation
+                userEvaluation
         WHERE
             userId=#{userId}
         AND
