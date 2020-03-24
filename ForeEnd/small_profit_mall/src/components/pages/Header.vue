@@ -10,14 +10,15 @@
           <li v-if="this.$route.path!='/login' && this.username==null">
             <router-link to="/login">您好,请登录</router-link>
           </li>
-
           <li v-if="this.username!=null">
             <el-dropdown trigger="click">
-              <span class="el-dropdown-link">
-                <img :src="avatar" style="width: 35px; border-radius: 10%;margin-top: 6%">
+              <el-badge is-dot class="header_sign">
+                <span class="el-dropdown-link">
+                  <img :src="avatar" style="width: 35px; border-radius: 10%;margin-top: 6%">
                         您好,{{username}}
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
+                  <i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+              </el-badge>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>
                   <router-link to="/personalCenter">
@@ -39,8 +40,10 @@
                 </el-dropdown-item>
                 <el-dropdown-item>
                   <router-link to="/">
-                    <svg-icon name="message" class="icon"></svg-icon>
-                    消息中心
+                    <el-badge :value="80" :max="99">
+                      <svg-icon name="message" class="icon"></svg-icon>
+                      消息中心
+                    </el-badge>
                   </router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
@@ -131,5 +134,11 @@
     width: 16px;
     height: 16px;
   }
-
+  .header_sign /deep/ .el-badge__content.is-dot{
+    height: 13px;
+    width: 13px;
+    padding: 0;
+    border-radius: 50%;
+    margin-top: 10%;
+  }
 </style>
