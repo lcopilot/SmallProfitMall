@@ -6,6 +6,7 @@ import cn.itcast.domain.user.User;
 import cn.itcast.service.UserService;
 
 import cn.itcast.util.compressPicture.UploadPicturesUtil;
+import cn.itcast.util.encryption.AesEncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,8 +46,6 @@ public class UserServiceImpl implements UserService {
         return UserDao.findByPhone(phone);
     }
 
-
-
     //.根据uid查询用户信息
     @Override
     public User findByUid(String uid) {
@@ -55,9 +54,10 @@ public class UserServiceImpl implements UserService {
 
     //根据传入的账户查询信息查询
     @Override
-    public User findAccount(User user) {
+    public User findAccount(User user) throws Exception {
+        String Account=AesEncryptUtil.encrypt(user.getName());
         if (user.getName().length()==11){
-           users = this.findByPhone(user.getName());
+           users = this.findByPhone(Account);    //根据手机号查
           if (users==null){
             users = this.findByName(user.getName());
           }
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
     }
 
     //查询返回值
-    public Login findLogin(User user){
+    public Login findLogin(User user) throws Exception {
         login.setUid(user.getUid());
         login.setImage(user.getImage());
         login.setToken(user.getToken());
@@ -110,9 +110,11 @@ public class UserServiceImpl implements UserService {
 
     //根据uid查询用户个人信息
     @Override
-    public User findByIdInformation(String uid) {
+    public User findByIdInformation(String uid) throws Exception {
         User users=UserDao.findByIdInformation(uid);
-        users.setPhone(concealPhone(users.getPhone()));
+        //解密手机号
+        String phone=AesEncryptUtil.desEncrypt(users.getPhone());
+        users.setPhone(concealPhone(phone));
         if(users.getEmail()!=null){
             users.setEmail(concealEmail(users.getEmail()));
         }

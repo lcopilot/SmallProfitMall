@@ -22,10 +22,10 @@ public interface UserService {
     public User findByUid(String uid);
 
     //更具account查询用户信息
-    public User findAccount(User user);
+    public User findAccount(User user) throws Exception;
 
     //返回客户端信息
-    public Login findLogin(User user);
+    public Login findLogin(User user) throws Exception;
 
     // 保存帐户信息
     public void saveAccount(User user);
@@ -40,7 +40,7 @@ public interface UserService {
     public String updatePortrait(InputStream Images, String uid) throws IOException;
 
     //根据uid查询用户信息
-    public User findByIdInformation(String uid);
+    public User findByIdInformation(String uid) throws Exception;
 
     //传入用户对象修改用户信息
     public int updateInformation( User user);
