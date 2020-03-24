@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 //商品列表
-@Repository
 public interface ProductDao {
     //查询秒杀商品表
     public List<Seckill> findSeckill (@Param("StartingValue")int StartingValue , @Param("Quantity") int Quantity);

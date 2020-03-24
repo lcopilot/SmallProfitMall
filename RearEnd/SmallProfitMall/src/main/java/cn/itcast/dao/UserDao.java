@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * 帐户dao接口
  */
-@Repository
 public interface UserDao {
     // 查询所有账户
     public List<User> findAll();

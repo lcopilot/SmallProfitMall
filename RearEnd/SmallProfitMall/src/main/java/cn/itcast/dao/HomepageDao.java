@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 //主页
-@Repository
 public interface HomepageDao {
     //查询轮播图图片
     public List<RotationChart> findRotationChart();
