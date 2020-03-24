@@ -13,7 +13,7 @@ public interface UserService {
     public List<User> findAll();
 
     //.根据用户名查询用户
-    public User findByName(String string);
+    public User findByName(String name);
 
     //.根据用户手机查询用户信息
     public User findByPhone(String phone);
@@ -21,9 +21,11 @@ public interface UserService {
     //.根据uid查询用户信息
     public User findByUid(String uid);
 
-//    //更具account查询用户信息
-//    public User findBy
+    //更具account查询用户信息
+    public User findAccount(User user);
 
+    //返回客户端信息
+    public Login findLogin(User user);
 
     // 保存帐户信息
     public void saveAccount(User user);
