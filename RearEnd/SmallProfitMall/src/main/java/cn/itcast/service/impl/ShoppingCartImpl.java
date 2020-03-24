@@ -25,7 +25,7 @@ public class ShoppingCartImpl implements ShoppingCartService {
     private ProductDetailsDao productDetailsDao;
     //添加购物车
     @Override
-    public int addShoppingCar(PurchaseInformation purchaseInformation) {
+    public int[] addShoppingCar(PurchaseInformation purchaseInformation) {
         List<ShoppingCart> shoppingCarts = this.findByUserId(purchaseInformation.getUserId());
         String productDeploy = "";
         if (purchaseInformation.getColour()!=null){           //颜色
@@ -54,7 +54,10 @@ public class ShoppingCartImpl implements ShoppingCartService {
                 int quantity=shoppingCart.getQuantity()+purchaseInformation.getQuantity();
                 int ShoppingCartId = shoppingCart.getShoppingCartId();
                 int redis = shoppingCartDao.updateQuantity(quantity,ShoppingCartId);
-                return redis;
+                int[] rediss = new int[2];
+                rediss[0]=redis;
+                rediss[1]=shoppingCarts.size();
+                return rediss;
             }
         }
         //根据ic查询价格
@@ -69,7 +72,10 @@ public class ShoppingCartImpl implements ShoppingCartService {
 
         shoppingCart.setProductDeploy(productDeploy);
         int redis = shoppingCartDao.addShoppingCar(shoppingCart);
-        return redis;
+        int[] rediss = new int[2];
+        rediss[0]=redis;
+        rediss[1]=shoppingCarts.size()+1;
+        return rediss;
     }
 
     //查询购物车
