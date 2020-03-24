@@ -261,7 +261,6 @@ public class UserController {
 	@RequestMapping(value = "/findByIdInformation/{userId}", method = RequestMethod.GET)
 	public QueryResponseResult findByIdInformation(@PathVariable("userId") String userId) throws Exception {
 		// 调用service的方法
-		System.out.println(userId);
 		User user = userService.findByIdInformation(userId);
 		List<User> users = Arrays.asList(user);
 		queryResult.setList(users);
