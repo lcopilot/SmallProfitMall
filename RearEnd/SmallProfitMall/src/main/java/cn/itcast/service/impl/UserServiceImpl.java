@@ -118,6 +118,8 @@ public class UserServiceImpl implements UserService {
         if(users.getEmail()!=null){
             users.setEmail(concealEmail(users.getEmail()));
         }
+        //解密邮箱
+        String emails=AesEncryptUtil.desEncrypt(users.getEmail());
         if (users.getBirthday()!=null){
            List birthday = Arrays.asList(users.getBirthday().split("-"));
             users.setBirthdays(birthday);
