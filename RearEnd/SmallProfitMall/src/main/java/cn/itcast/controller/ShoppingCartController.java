@@ -46,6 +46,7 @@ public class ShoppingCartController {
         }
          List<ShoppingCart> shoppingCart =shoppingCartService.findByUserId(userId);
             queryResult.setList(shoppingCart);
+            queryResult.setTotal(shoppingCart.size());
             return new QueryResponseResult(CommonCode.SUCCESS, queryResult);//添加成功
     }
 
