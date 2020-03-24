@@ -120,8 +120,8 @@ public class UserServiceImpl implements UserService {
         }
         //解密邮箱
         String emails=AesEncryptUtil.desEncrypt(users.getEmail());
-        if (users.getBirthday()!=null){
-           List birthday = Arrays.asList(users.getBirthday().split("-"));
+        if (emails!=null){
+           List birthday = Arrays.asList(emails.split("-"));
             users.setBirthdays(birthday);
         }
         return users;
