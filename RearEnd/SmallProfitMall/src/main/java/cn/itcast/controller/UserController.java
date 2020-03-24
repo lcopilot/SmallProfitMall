@@ -293,12 +293,13 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/formerPhoneSMS", method = RequestMethod.POST)
 	public QueryResponseResult formerPhoneSMS(String phone, String userId, HttpSession session)
-			throws ClientException {
+			throws Exception {
 		String phones = userService.findByIdPhone(userId);
 		if (phones.equals(phone)) {
 			String verificationCode = GetFourRandom.getFourRandom();
 			System.out.println("修改验证码为 " + verificationCode);
-			boolean flag = SmsUtils.updatePhone(phone, verificationCode);
+			String phoness = AesEncryptUtil.desEncrypt(phone);
+			boolean flag = SmsUtils.updatePhone(phoness, verificationCode);
 			if (flag) {
 				session.setAttribute("formerPhoneVerify", verificationCode);//存入验证码session
 				session.setAttribute("formerPhone", phone);//手机号存入session
@@ -339,7 +340,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/newPhoneSMS", method = RequestMethod.POST)
 	public QueryResponseResult newPhoneSMS(String phone, HttpSession session)
-			throws ClientException {
+			throws Exception {
 		User users = userService.findByPhone(phone);
 		String formerPhone = (String) session.getAttribute("formerPhone");
 		if (phone.equals(formerPhone)) {
@@ -350,7 +351,8 @@ public class UserController {
 		}
 		String FR = GetFourRandom.getFourRandom();  //随机验证码
 		System.out.println("修改验证码为 " + FR);
-		boolean flag = SmsUtils.updatePhone(phone, FR);
+		String phoness=AesEncryptUtil.desEncrypt(phone);
+		boolean flag = SmsUtils.updatePhone(phoness, FR);
 		if (flag) {
 			session.setAttribute("newPhoneVerify", FR);//存入验证码session
 			session.setAttribute("newPhone", phone);//手机号存入session
