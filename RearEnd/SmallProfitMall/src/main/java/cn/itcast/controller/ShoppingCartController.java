@@ -30,9 +30,10 @@ public class ShoppingCartController {
         if(purchaseInformation==null){
             return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
         }
-        int redis =shoppingCartService.addShoppingCar(purchaseInformation);
-        if(redis==1){   //修改成功
-            return new QueryResponseResult(CommonCode.SUCCESS, null);//添加成功
+        int[] redis =shoppingCartService.addShoppingCar(purchaseInformation);
+        if(redis[0]==1){   //修改成功
+            queryResult.setTotal(redis[1]);
+            return new QueryResponseResult(CommonCode.SUCCESS, queryResult);//添加成功
         }else {
             return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
         }
