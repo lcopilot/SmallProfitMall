@@ -26,16 +26,7 @@ public class ShoppingCartImpl implements ShoppingCartService {
     //添加购物车
     @Override
     public int addShoppingCar(PurchaseInformation purchaseInformation) {
-        //根据ic查询价格
-        PurchaseInformation purchaseInformation1 =  shoppingCartDao.findByPid(purchaseInformation.getProductId());//数据库取商品价格名字
-        System.out.println(purchaseInformation1);
-        shoppingCart.setProductName(purchaseInformation1.getProductName());     //设置商品名字
-        shoppingCart.setProductPrice(purchaseInformation1.getProductPrice());   //设置商品价格
-        shoppingCart.setProductInventory(purchaseInformation1.getProductInventory());   //设置库存
-        shoppingCart.setProductId(purchaseInformation.getProductId());                //设置商品id
-        shoppingCart.setQuantity(purchaseInformation.getQuantity());            //设置购买数量
-        shoppingCart.setUserId(purchaseInformation.getUserId());                //设置用户id
-
+        List<ShoppingCart> shoppingCarts = this.findByUserId(purchaseInformation.getUserId());
         String productDeploy = "";
         if (purchaseInformation.getColour()!=null){           //颜色
             productDeploy = productDeploy+purchaseInformation.getColour()+" ";
@@ -58,6 +49,24 @@ public class ShoppingCartImpl implements ShoppingCartService {
         if(purchaseInformation.getSpecification()!=null){ //规格
             productDeploy = productDeploy+purchaseInformation.getSpecification()+" ";
         }
+        for (ShoppingCart shoppingCart : shoppingCarts){
+            if(purchaseInformation.getProductId()==shoppingCart.getProductId() && shoppingCart.getProductDeploy().equals(productDeploy)){
+                int quantity=shoppingCart.getQuantity()+purchaseInformation.getQuantity();
+                int ShoppingCartId = shoppingCart.getShoppingCartId();
+                int redis = shoppingCartDao.updateQuantity(quantity,ShoppingCartId);
+                return redis;
+            }
+        }
+        //根据ic查询价格
+        PurchaseInformation purchaseInformation1 =  shoppingCartDao.findByPid(purchaseInformation.getProductId());//数据库取商品价格名字
+        shoppingCart.setProductName(purchaseInformation1.getProductName());     //设置商品名字
+        shoppingCart.setProductPrice(purchaseInformation1.getProductPrice());   //设置商品价格
+        shoppingCart.setProductInventory(purchaseInformation1.getProductInventory());   //设置库存
+        shoppingCart.setProductId(purchaseInformation.getProductId());                //设置商品id
+        shoppingCart.setQuantity(purchaseInformation.getQuantity());            //设置购买数量
+        shoppingCart.setUserId(purchaseInformation.getUserId());                //设置用户id
+
+
         shoppingCart.setProductDeploy(productDeploy);
         int redis = shoppingCartDao.addShoppingCar(shoppingCart);
         return redis;
