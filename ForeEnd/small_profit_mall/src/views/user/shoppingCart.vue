@@ -100,21 +100,22 @@
                 <el-table-column
                     width="80">
                   <template slot-scope="product">
-                    <div>
+                    <div style="padding-top: 30%">
                       <!-- 已收藏就不显示 待完成-->
-                      <div v-if="product.row.evaluation">
-                        <el-link :underline="false" @click="favorite(product.row.productId)">收藏
+                      <div v-if="!product.row.evaluation">
+                        <el-link :underline="false" @click="favorite(product.row.productId)" style="font-size: 13px">
+                          收藏
                         </el-link>
                       </div>
                       <!-- 库存不足时显示 待完成-->
                       <div v-if="product.row.productInventory==0">
-                        <el-link :underline="false" @click="arrivalNotice(product.row.productId)">
+                        <el-link :underline="false" @click="arrivalNotice(product.row.productId)" style="font-size: 13px">
                           到货通知
                         </el-link>
                       </div>
                       <div>
                         <el-link :underline="false"
-                                 @click="removeCartProduct(product.row.shoppingCartId)">移除
+                                 @click="removeCartProduct(product.row.shoppingCartId)" style="font-size: 13px">移除
                         </el-link>
                       </div>
                     </div>
