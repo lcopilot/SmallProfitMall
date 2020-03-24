@@ -59,6 +59,7 @@
   const Header = ()=>import("../../components/pages/Header");
   const Footer = ()=>import("../../components/pages/Footer");
   import *as userApi from '../../api/page/user'
+  import encryption from "../../util/encryption";
 
   export default {
     components: {Header, Footer},
@@ -107,10 +108,19 @@
       };
     },
     methods: {
+      //重置密码
       resetPassword(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            userApi.resetPassword(this.registerForm)
+            let registerFormParameter = {
+              phone: '',
+              password: '',
+              verify: ''
+            };
+            registerFormParameter.password = encryption.encrypt(this.registerForm.password);
+            registerFormParameter.phone = this.registerForm.phone;
+            registerFormParameter.verify = this.registerForm.verify;
+            userApi.resetPassword(registerFormParameter)
             .then(res => {
               if (res.success) {
                 this.$message({
