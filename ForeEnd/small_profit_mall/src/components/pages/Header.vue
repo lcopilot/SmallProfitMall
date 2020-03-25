@@ -39,7 +39,7 @@
                   </router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <router-link to="/">
+                  <router-link to="/messageCenter">
                     <el-badge :value="80" :max="99">
                       <svg-icon name="message" class="icon"></svg-icon>
                       消息中心
