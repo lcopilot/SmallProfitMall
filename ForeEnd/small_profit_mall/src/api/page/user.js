@@ -101,8 +101,8 @@ export const modifyDefault=params=>{
  */
 
 //添加收藏
-export const addFavorite=(userId,productId)=>{
-  return http.requestPost('apiUrl//'+userId+'/'+productId);
+export const addFavorite=data=>{
+  return http.requestPost('apiUrl/EvaluationController/addEvaluation',data);
 }
 
 

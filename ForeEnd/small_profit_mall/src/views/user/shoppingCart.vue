@@ -39,7 +39,9 @@
                         <div style="font-size: 13px;">
                           <el-tooltip class="item" effect="dark" :content="product.row.productName"
                                       placement="bottom">
-                            <router-link :to="{path: '/product', query: {productId:product.row.productId}}">{{product.row.productName}}
+                            <router-link
+                                :to="{path: '/product', query: {productId:product.row.productId}}">
+                              {{product.row.productName}}
                             </router-link>
                           </el-tooltip>
                         </div>
@@ -103,18 +105,21 @@
                     <div style="padding-top: 30%">
                       <!-- 已收藏就不显示 待完成-->
                       <div v-if="!product.row.evaluation">
-                        <el-link :underline="false" @click="addFavorite(product.row.productId)" style="font-size: 13px">
+                        <el-link :underline="false" @click="addFavorite(product.row.productId)"
+                                 style="font-size: 13px">
                           收藏
                         </el-link>
                       </div>
                       <div v-if="product.row.productInventory<=0">
-                        <el-link :underline="false" @click="arrivalNotice(product.row.productId)" style="font-size: 13px">
+                        <el-link :underline="false" @click="arrivalNotice(product.row.productId)"
+                                 style="font-size: 13px">
                           到货通知
                         </el-link>
                       </div>
                       <div>
                         <el-link :underline="false"
-                                 @click="removeCartProduct(product.row.shoppingCartId)" style="font-size: 13px">移除
+                                 @click="removeCartProduct(product.row.shoppingCartId)"
+                                 style="font-size: 13px">移除
                         </el-link>
                       </div>
                     </div>
@@ -182,6 +187,7 @@
   const Footer = () => import("../../components/pages/Footer");
 
   export default {
+    inject: ["reload"],
     name: "shoppingCart",
     components: {search, Header, Footer},
     data() {
@@ -262,29 +268,46 @@
 
       },
       //添加收藏
-      addFavorite(productId){
-        let productIdList=[];
-        if (productId!=null){
-          productIdList.push(productId);
-        }else {
-          this.$refs.cartTable.selection.forEach((shoppingCart)=>{
-            if (!shoppingCart.evaluation){
-              productIdList.push(shoppingCart.productId);
-            }
-          })
+      addFavorite(productId) {
+        if (this.$refs.cartTable.selection.length == 0) {
+          return this.$message.warning("您还未选择商品哦~");
         }
-          userApi.addFavorite(sessionStorage.getItem("uId"),productIdList).then(res=>{
-            if (res.success){
-              this.$message.success("收藏成功!")
-            }else {
-              if (res.code==11111){
-                this.$message({
-                  message:"商品已经被收藏,请勿重复收藏"
-                })
+        let data = {
+          productIds: [],
+          userId: sessionStorage.getItem("uId"),
+        };
+        if (productId != null) {
+          data.productIds.push(productId);
+        } else {
+          this.$refs.cartTable.selection.forEach((shoppingCart) => {
+            if (!shoppingCart.evaluation) {
+              if (data.productIds.indexOf(shoppingCart.productId) == -1) {
+                data.productIds.push(shoppingCart.productId);
               }
             }
           })
-
+        }
+        if (data.productIds.length > 0) {
+          console.log(data.productIds.length)
+          userApi.addFavorite(data).then(res => {
+            if (res.success) {
+              this.$message.success("已选商品收藏成功!");
+              this.reload();
+            } else {
+              if (res.code == 11111) {
+                this.$message({
+                  message: "商品已经被收藏,请勿重复收藏"
+                })
+                data.productIds = [];
+              }
+            }
+          })
+        } else if (data.productIds.length == 0) {
+          this.$message({
+            message: "已选商品均以被收藏,请勿重复收藏",
+            type: "warning"
+          })
+        }
       },
       //到货通知
       arrivalNotice(productId) {
@@ -292,29 +315,32 @@
       },
       //删除商品
       removeCartProduct(shoppingCartId) {
-        let cartIdList=[];
-        if (shoppingCartId!=null){
+        if (this.$refs.cartTable.selection.length == 0) {
+          return this.$message.warning("您还未选择商品哦~");
+        }
+        let cartIdList = [];
+        if (shoppingCartId != null) {
           cartIdList.push(shoppingCartId);
-        }else {
-          this.$refs.cartTable.selection.forEach((shoppingCart)=>{
+        } else {
+          this.$refs.cartTable.selection.forEach((shoppingCart) => {
             cartIdList.push(shoppingCart.shoppingCartId);
           })
         }
-        productApi.removeCart(cartIdList).then(res=>{
-            if (res.success){
-              this.$message({
-                message:"商品已移出购物车",
-                type:"success"
-              })
-              this.modifyCartSum(-cartIdList.length);
-              this.getShoppingCart();
-              this.selectAll=false;
-            }else {
-              this.$message({
-                message:"商品移出购物车失败!,请稍后重试",
-                type:"error"
-              })
-            }
+        productApi.removeCart(cartIdList).then(res => {
+          if (res.success) {
+            this.$message({
+              message: "商品已移出购物车",
+              type: "success"
+            })
+            this.modifyCartSum(-cartIdList.length);
+            this.getShoppingCart();
+            this.selectAll = false;
+          } else {
+            this.$message({
+              message: "商品移出购物车失败!,请稍后重试",
+              type: "error"
+            })
+          }
         })
       },
       //结算
