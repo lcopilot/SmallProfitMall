@@ -10,23 +10,7 @@ public class Evaluation {
     private int productId;
     private String userId;
     private String sign;
-    private Timestamp evaluationTime;
-
-    public String getSign() {
-        return sign;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
-
-    public Timestamp getEvaluationTime() {
-        return evaluationTime;
-    }
-
-    public void setEvaluationTime(Timestamp evaluationTime) {
-        this.evaluationTime = evaluationTime;
-    }
+    private Date evaluationTime;
 
     public int getEvaluationId() {
         return evaluationId;
@@ -52,4 +36,19 @@ public class Evaluation {
         this.userId = userId;
     }
 
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
+    public Date getEvaluationTime() {
+        return evaluationTime;
+    }
+
+    public void setEvaluationTime(Date evaluationTime) {
+        this.evaluationTime = evaluationTime;
+    }
 }
