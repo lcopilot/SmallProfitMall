@@ -10,7 +10,7 @@
     userEvaluation
     (userId,productId,sign,evaluationTime)
     VALUES
-    (#{userId},#{productId},#{sign},evaluationTime)
+    (#{userId},#{productId},#{sign},#{evaluationTime})
 
     </insert>
     <select id="fendEvaluation" resultType="cn.itcast.domain.Evaluation.Evaluation">
