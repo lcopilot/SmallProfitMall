@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class EvaluationController {
     @Autowired
     EvaluationService evaluationService;
-    //添加足迹
+    //添加收藏
     @RequestMapping(value = "/addEvaluation",method = RequestMethod.POST)
     public QueryResponseResult addEvaluation(@RequestBody Evaluation evaluation) {
         if(evaluation==null){
