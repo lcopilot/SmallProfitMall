@@ -59,9 +59,15 @@ public class ShoppingCartImpl implements ShoppingCartService {
         for (ShoppingCart shoppingCart : shoppingCarts){
             if(purchaseInformation.getProductId()==shoppingCart.getProductId() && shoppingCart.getProductDeploy().equals(productDeploy)){
                 int quantity=shoppingCart.getQuantity()+purchaseInformation.getQuantity();
+                int[] rediss = new int[2];
+                if (quantity>99){
+                    rediss[0]=3;
+                    rediss[1]=shoppingCarts.size();
+                    return rediss;
+                }
                 int ShoppingCartId = shoppingCart.getShoppingCartId();
                 int redis = shoppingCartDao.updateQuantity(quantity,ShoppingCartId);
-                int[] rediss = new int[2];
+
                 rediss[0]=redis;
                 rediss[1]=shoppingCarts.size();
                 return rediss;

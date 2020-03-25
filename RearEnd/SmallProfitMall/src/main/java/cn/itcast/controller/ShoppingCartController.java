@@ -27,16 +27,24 @@ public class ShoppingCartController {
     //添加购物车
     @RequestMapping(value = "/addShoppingCart",method = RequestMethod.POST)
     public QueryResponseResult addShoppingCart(@RequestBody PurchaseInformation purchaseInformation) {
+
         if(purchaseInformation==null){
             return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
         }
+        if (purchaseInformation.getQuantity()>99){
+            return new QueryResponseResult(CommonCode.INVALID_PARAM, null);//添加失败
+        }
+
         int[] redis =shoppingCartService.addShoppingCar(purchaseInformation);
         if(redis[0]==1){   //修改成功
             queryResult.setTotal(redis[1]);
             return new QueryResponseResult(CommonCode.SUCCESS, queryResult);//添加成功
-        }else {
+        }else if (redis[1]==2){
             return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
+        }else if (redis[0]==3){
+            return new QueryResponseResult(CommonCode.INVALID_PARAM, null);//添加失败
         }
+        return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
     }
 
     //查询购物车
