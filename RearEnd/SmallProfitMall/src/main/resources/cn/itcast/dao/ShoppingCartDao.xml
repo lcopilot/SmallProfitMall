@@ -6,9 +6,9 @@
     <!--添加购物车-->
     <insert id="addShoppingCar" parameterType="cn.itcast.domain.shoppingCar.ShoppingCart">
      INSERT INTO shoppingCart
-		(userId,productId,productDeploy,quantity,productPrice,productName)
+		(userId,productId,productDeploy,quantity)
 	VALUES
-	    (#{userId},#{productId},#{productDeploy},#{quantity},#{productPrice},#{productName})
+	    (#{userId},#{productId},#{productDeploy},#{quantity})
     </insert>
     <!--根据id查询商品价格名字库存-->
     <select id="findByPid" resultType="cn.itcast.domain.shoppingCar.PurchaseInformation">
@@ -27,7 +27,7 @@
     <!--根据uid查询购物车-->
     <select id="findByUserId" resultType="cn.itcast.domain.shoppingCar.ShoppingCart" parameterType="java.lang.String">
         select
-            sc.*,pp.ProductInventory,pi.ImageSite
+        sc.*,pp.ProductInventory,pi.ImageSite,pp.ProductPrice,pb.ProductName
         from
             shoppingCart sc
         LEFT JOIN
@@ -37,7 +37,11 @@
         LEFT JOIN
             ProductImage pi
 		ON
-			pp.ProductId = pi.ProductId
+		    pp.ProductId = pi.ProductId
+		LEFT JOIN
+		    ProductBasis pb
+		ON
+		    pi.ProductId = pb.ProductId
         WHERE
             sc.userId=#{userId}
 		AND

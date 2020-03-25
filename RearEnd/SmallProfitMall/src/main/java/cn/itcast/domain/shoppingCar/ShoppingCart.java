@@ -7,12 +7,12 @@ import java.io.Serializable;
 public class ShoppingCart implements Serializable {
     private Integer shoppingCartId; //购物车id
     private String ImageSite;   //商品图片
-    private String productName;     //商品名字
+    private String ProductName;     //商品名字
     private String userId;          //用户id
     private Integer productId;      //商品id
     private String productDeploy;   //商品配置
     private Integer quantity;       //购买数量
-    private Double productPrice;    //价格
+    private Double ProductPrice;    //价格
     private Double ProductInventory;    //商品库存
     private Boolean evaluation;         //是否收藏
 
@@ -40,13 +40,7 @@ public class ShoppingCart implements Serializable {
         ProductInventory = productInventory;
     }
 
-    public String getProductName() {
-        return productName;
-    }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
 
     public Integer getShoppingCartId() {
         return shoppingCartId;
@@ -88,11 +82,19 @@ public class ShoppingCart implements Serializable {
         this.quantity = quantity;
     }
 
+    public String getProductName() {
+        return ProductName;
+    }
+
+    public void setProductName(String productName) {
+        ProductName = productName;
+    }
+
     public Double getProductPrice() {
-        return productPrice;
+        return ProductPrice;
     }
 
     public void setProductPrice(Double productPrice) {
-        this.productPrice = productPrice;
+        ProductPrice = productPrice;
     }
 }
