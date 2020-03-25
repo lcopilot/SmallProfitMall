@@ -429,7 +429,7 @@
 
   .login_component {
     margin: 0 auto;
-    height: 70%;
+    height: 480px;
     width: 53%;
     position: relative;
     top: 50%;

@@ -89,6 +89,14 @@ const routes = [
     },
     component: () => import('@/views/user/orders')
   },
+  {
+    path: '/messageCenter',
+    name: 'MessageCenter',
+    meta: {
+      requireAuth: true,
+    },
+    component: () => import('@/views/user/messageCenter')
+  },
   //捕获404
   {
     path: "/404",
