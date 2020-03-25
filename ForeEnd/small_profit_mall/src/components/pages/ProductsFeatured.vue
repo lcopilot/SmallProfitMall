@@ -32,7 +32,7 @@
                     <svg-icon name="Uncollected"/>
                   </div>
                   <div class="recommended_products_favorite" v-show="productsFeatured.favorite==2" v-cloak
-                       @click="favorite()"
+                       @click="addFavorite(productsFeatured.productId)"
                        @mouseout="shiftOutFavorite(index)">
                     <svg-icon name="Favorite"></svg-icon>
                   </div>
@@ -63,6 +63,7 @@
 
 <script>
   import *as homeApi from '../../api/page/home'
+  import * as userApi from "../../api/page/user";
 
   export default {
     name: "ProductsFeatured",
@@ -91,8 +92,25 @@
       shiftOutShoppingTrolley(index) {
         this.productsFeaturedList[index].shoppingTrolley = 1;
       },
-      favorite(ProductId) {
-        console.log("sdfs");
+      //添加收藏
+      addFavorite(productId){
+        if (!sessionStorage.getItem("uId")){
+          this.$message.warning("还没有登录哦~,请先登录吧")
+        }else{
+          let productIdList=[];
+          productIdList.push(productId);
+          userApi.addFavorite(sessionStorage.getItem("uId"),productIdList).then(res=>{
+            if (res.success){
+              this.$message.success("收藏成功!")
+            }else {
+              if (res.code==11111){
+                this.$message({
+                  message:"商品已经被收藏,请勿重复收藏"
+                })
+              }
+            }
+          })
+        }
       },
       addCart(ProductId) {
         console.log("sdfs");

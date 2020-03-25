@@ -2,6 +2,10 @@ import http from '../util/public';
 //将参数拼接成字符串
 import querystring from 'querystring'
 
+/**
+ * 注册登录
+ */
+
 //登录
 export const login = params => {
   return http.requestPost('/apiUrl/user/accountLogin', params);
@@ -23,6 +27,11 @@ export const resetPassword=params=>{
 export const get_Phone_Code_FP = phone => {
   return http.requestGet('/apiUrl/user/SmVerify/' + phone);
 }
+
+/**
+ * 用户信息
+ */
+
 //获取用户信息
 export const getUserInformation = userId => {
   return http.requestGet('/apiUrl/user/findByIdInformation/' + userId);
@@ -63,6 +72,11 @@ export const getCode = params => {
 export const verificationModifyEmailCode = params => {
   return http.requestPost('/apiUrl/EmailController/PhoneSucceed',params);
 }
+
+/**
+ * 用户地址
+ */
+
 //添加地址
 export const addAddress = params => {
   return http.requestPost('/apiUrl/AddressController/addAddress',params);
@@ -82,4 +96,21 @@ export const modifyDefault=params=>{
   return http.requestPut('apiUrl/AddressController/updateDefault?'+queryString)
 }
 
+/**
+ * 用户收藏
+ */
 
+//添加收藏
+export const addFavorite=(userId,productId)=>{
+  return http.requestPost('apiUrl//'+userId+'/'+productId);
+}
+
+
+/**
+ * 足迹
+ */
+
+//添加足迹
+export const addFootprint=data=>{
+  return http.requestPost('apiUrl/FootprintController/addShoppingCart',data);
+}
