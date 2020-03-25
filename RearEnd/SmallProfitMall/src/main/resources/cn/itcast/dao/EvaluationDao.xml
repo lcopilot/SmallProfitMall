@@ -8,8 +8,12 @@
     INSERT
     INTO
     userEvaluation
-    (userId,produvtId,sign,times)
+    (userId,productId,sign,evaluationTime)
     VALUES
-    (#{userId},#{produvtId},#{sign},)
+    (#{userId},#{productId},#{sign},evaluationTime)
+
     </insert>
+    <select id="fendEvaluation" resultType="cn.itcast.domain.Evaluation.Evaluation">
+         SELECT * FROM userEvaluation where productId = #{productId} AND userId = #{userId}
+    </select>
 </mapper>

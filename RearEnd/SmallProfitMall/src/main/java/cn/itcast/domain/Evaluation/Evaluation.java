@@ -1,6 +1,7 @@
 package cn.itcast.domain.Evaluation;
 
 import javax.xml.crypto.Data;
+import java.sql.Timestamp;
 import java.util.Date;
 
 //收藏
@@ -8,13 +9,22 @@ public class Evaluation {
     private int evaluationId;
     private int productId;
     private String userId;
-    private Date evaluationTime;
+    private String sign;
+    private Timestamp evaluationTime;
 
-    public Date getEvaluationTime() {
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
+    public Timestamp getEvaluationTime() {
         return evaluationTime;
     }
 
-    public void setEvaluationTime(Date evaluationTime) {
+    public void setEvaluationTime(Timestamp evaluationTime) {
         this.evaluationTime = evaluationTime;
     }
 
@@ -41,4 +51,5 @@ public class Evaluation {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
 }
