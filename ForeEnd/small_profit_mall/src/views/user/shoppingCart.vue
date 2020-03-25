@@ -315,13 +315,13 @@
       },
       //删除商品
       removeCartProduct(shoppingCartId) {
-        if (this.$refs.cartTable.selection.length == 0) {
-          return this.$message.warning("您还未选择商品哦~");
-        }
         let cartIdList = [];
         if (shoppingCartId != null) {
           cartIdList.push(shoppingCartId);
         } else {
+          if (this.$refs.cartTable.selection.length == 0) {
+            return this.$message.warning("您还未选择商品哦~");
+          }
           this.$refs.cartTable.selection.forEach((shoppingCart) => {
             cartIdList.push(shoppingCart.shoppingCartId);
           })
