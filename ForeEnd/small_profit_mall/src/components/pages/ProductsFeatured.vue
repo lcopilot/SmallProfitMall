@@ -97,9 +97,12 @@
         if (!sessionStorage.getItem("uId")){
           this.$message.warning("还没有登录哦~,请先登录吧")
         }else{
-          let productIdList=[];
-          productIdList.push(productId);
-          userApi.addFavorite(sessionStorage.getItem("uId"),productIdList).then(res=>{
+          let data={
+            productIds:[],
+            userId:sessionStorage.getItem("uId"),
+          };
+          data.productIds.push(productId);
+          userApi.addFavorite(data).then(res=>{
             if (res.success){
               this.$message.success("收藏成功!")
             }else {

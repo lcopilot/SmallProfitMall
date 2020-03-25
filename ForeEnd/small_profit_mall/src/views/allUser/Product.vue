@@ -374,9 +374,9 @@
     data() {
       return {
         //商品Id
-        productId:0,
+        productId: 0,
         //评论类型
-        commentType:"1",
+        commentType: "1",
         bigImg: '',//商品大图
         videoShow: false,
         //商品视频相关的播放参数
@@ -445,7 +445,7 @@
         product: [],
         productForm: {
           //用户id
-          userId:"",
+          userId: "",
           //商品id
           productId: 0,
           //名字
@@ -551,53 +551,60 @@
         )
       },
       //加入购物车
-      addCart(){
-        this.productForm.productId=sessionStorage.getItem("productId");
-        this.productForm.userId=sessionStorage.getItem("uId");
-        productApi.addCart(this.productForm).then(res=>{
-          if (res.success){
+      addCart() {
+        this.productForm.productId = sessionStorage.getItem("productId");
+        this.productForm.userId = sessionStorage.getItem("uId");
+        productApi.addCart(this.productForm).then(res => {
+          if (res.success) {
             this.$message({
-              message:"商品已加入购物车",
-              type:"success"
+              message: "商品已加入购物车",
+              type: "success"
             })
             this.getCartSum(res.queryResult.total);
-          }else{
-            if (res.code==11111){
+          } else {
+            if (res.code == 11111) {
               this.$message.warning("购物车已满!");
-            }else{
+            }
+            if (res.code == 10003) {
+              this.$message.warning("商品同一配置数量已达上限!无法再添加哦~");
+            } else {
               this.$message({
-                message:"加入购物车失败,请稍后重试",
-                type:"error"
+                message: "加入购物车失败,请稍后重试",
+                type: "error"
               })
             }
           }
         })
       },
       //添加收藏
-      addFavorite(){
-        if (!sessionStorage.getItem("uId")){
+      addFavorite() {
+        if (!sessionStorage.getItem("uId")) {
           this.$message.warning("还没有登录哦~,请先登录吧")
-        }else{
-          let productIdList=[];
-          productIdList.push(this.productId);
-          userApi.addFavorite(sessionStorage.getItem("uId"),productIdList).then(res=>{
-            if (res.success){
+        } else {
+          let data = {
+            productIds: [],
+            userId: sessionStorage.getItem("uId"),
+          };
+          data.productIds.push(this.productId);
+          userApi.addFavorite(data).then(res => {
+            if (res.success) {
               this.$message.success("收藏成功!")
-            }else {
-              if (res.code==11111){
+            } else {
+              if (res.code == 11111) {
                 this.$message({
-                  message:"商品已经被收藏,请勿重复收藏"
+                  message: "商品已经被收藏,请勿重复收藏"
                 })
               }
             }
           })
         }
       },
-      addFootprint(){
-        if (sessionStorage.getItem("uId")){
-          let data={
-            userId:sessionStorage.getItem("uId"),
-            productId:this.productId
+      //添加足迹
+      addFootprint() {
+        if (sessionStorage.getItem("uId")) {
+          let data = {
+            userId: sessionStorage.getItem("uId"),
+            productId: this.productId
           };
           userApi.addFootprint(data);
         }
