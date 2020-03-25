@@ -7,25 +7,25 @@
       <el-row :gutter="20">
         <personalPage/>
         <el-col :span="16" :push="3">
-          <el-card>
+          <el-card class="message">
             <el-row>
               <el-col :span="7">
-                <div class="contact_list_div message_list" v-infinite-scroll="loadMore"
-                     :infinite-scroll-disabled="busy"
+                <div style="height: 50px">
+                </div>
+                <div class="contact_list_div message_list" v-infinite-scroll="getMessageList"
+                     :infinite-scroll-disabled="messageDisable"
                      :infinite-scroll-distance="1">
                   <ul>
                     <li v-for="i in list">{{i}}</li>
-                     
                   </ul>
                 </div>
               </el-col>
-              <el-col :span="17" style="height: 530px;background-color: #f5f6f7">
-
-                  <div class="message_list_div message_list">
-                    <div v-for="i in 10">{{i}}</div>
-                  </div>
-
-
+              <el-col :span="17" class="message_content_div">
+                <div class="message_list_div message_list">
+                  <el-card>
+                    sss
+                  </el-card>
+                </div>
               </el-col>
             </el-row>
           </el-card>
@@ -48,17 +48,22 @@
     components: {Header, Footer, personalPage, orderContent},
     data() {
       return {
-        busy: false,
+        messageDisable: false,
         pageSize: 0,
         list: [],
+        loading:false,
+        timer:0,
       }
     },
     methods: {
-      loadMore() {
-        this.busy = true;
-        this.pageSize++;
-        this.loading = true;
-        setTimeout(() => {
+      aa(){
+
+      },
+      getMessageList() {
+          this.messageDisable = true;
+          this.loading = true;
+          this.pageSize++;
+          clearTimeout(this.timer);
           this.axios.get(
               "apiUrl/TestController/Test/" + this.pageSize
           )
@@ -66,34 +71,49 @@
             console.log(res);
             this.list = this.list.concat(res.data.queryResult.list); //因为每次后端返回的都是数组，所以这边把数组拼接到一起
           })
-          .catch(err => {
-            console.log(err);
-          });
-        }, 500)
-        this.loading = false;
-        this.busy = false;
+        this.calf();
+        this.messageDisable = false;
       },
+      calf(){
+        this.timer=setTimeout(()=>{
+          this.loading = false;
+        },2000)
+      }
     }
   }
 </script>
 
 <style scoped>
+  .message_content_div {
+    height: 570px;
+    background-color: #f5f6f7;
+    padding: 20px
+  }
+
+  .message /deep/ .el-card__body {
+    padding: 0;
+  }
+
   .contact_list_div {
+    position: relative;
+    height: 520px;
     border-right: 1px solid #e6e6e6;
   }
-  .message_list_div {
-    background-color:Transparent ;
+
+   .message_list_div {
+    background-color: Transparent;
   }
-  .message_list{
-    max-height: 530px;
+
+  .message_list {
+    max-height: 570px;
     overflow: auto;
   }
+
   /**
 　　1、::-webkit-scrollbar 定义了滚动条整体的样式；
    2、::-webkit-scrollbar-thumb 滑块部分；
 　 3、::-webkit-scrollbar-thumb 轨道部分；
    */
-
 
   .message_list::-webkit-scrollbar { /*滚动条整体样式*/
     width: 8px; /*高宽分别对应横竖滚动条的尺寸*/
@@ -105,12 +125,23 @@
     -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0);
     background: transparent;
   }
+
   .message_list:hover::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
     background: #afb0b0;
   }
+
   .message_list::-webkit-scrollbar-track { /*滚动条里面轨道*/
     -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0);
     border-radius: 10px;
     background: transparent;
+  }
+  .loading span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #409eff;
+    border-left: transparent;
+    animation: zhuan 0.5s linear infinite;
+    border-radius: 50%;
   }
 </style>

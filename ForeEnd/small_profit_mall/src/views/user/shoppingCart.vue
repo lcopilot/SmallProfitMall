@@ -406,7 +406,7 @@
     max-height: 65px;
     z-index: 2000;
     position: fixed;
-    width: 80%;
+    width: 80.7%;
     bottom: 0px;
   }
 
