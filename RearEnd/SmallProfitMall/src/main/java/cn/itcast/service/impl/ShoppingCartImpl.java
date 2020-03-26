@@ -187,13 +187,12 @@ public class ShoppingCartImpl implements ShoppingCartService {
     /**
      * 查询购物车预览商品
      * @param userId    用户id
-     * @param Start 查询起点
      * @param End   查询条数
      * @return
      */
     @Override
-    public List<ShoppingCart> findPreview(String userId,Integer Start , Integer End) {
-        List<ShoppingCart> findPreview = shoppingCartDao.findPreview(userId,Start,End);
+    public List<ShoppingCart> findPreview(String userId, Integer End) {
+        List<ShoppingCart> findPreview = shoppingCartDao.findPreview(userId,0,End);
         return findPreview;
     }
 

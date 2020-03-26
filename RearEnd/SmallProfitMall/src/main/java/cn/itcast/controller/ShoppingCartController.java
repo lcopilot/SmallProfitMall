@@ -148,22 +148,20 @@ public class ShoppingCartController {
     }
 
     /**
-     *修改商品数量
+     *擦好像预览商品
      */
-    @RequestMapping(value = "/findPreview/{userId}/{Start}/{Ends}",method = RequestMethod.GET)
-    public QueryResponseResult findPreview(@PathVariable("userId")String userId,@PathVariable("Start") String Start,
+    @RequestMapping(value = "/findPreview/{userId}/{Ends}",method = RequestMethod.GET)
+    public QueryResponseResult findPreview(@PathVariable("userId")String userId,
                                            @PathVariable("Ends")String Ends){
         if (userId == null){
             //传入参数为空
             return new QueryResponseResult(CommonCode.FAIL, null);
         }
-        if (Start==null){
-            Start="0";
-        }
+
         if (Ends==null){
             Ends="4";
         }
-        List<ShoppingCart> redis = shoppingCartService.findPreview(userId,Integer.parseInt(Start),Integer.parseInt(Ends));
+        List<ShoppingCart> redis = shoppingCartService.findPreview(userId,Integer.parseInt(Ends));
         QueryResult queryResult = new QueryResult();
         queryResult.setList(redis);
         queryResult.setTotal(redis.size());
