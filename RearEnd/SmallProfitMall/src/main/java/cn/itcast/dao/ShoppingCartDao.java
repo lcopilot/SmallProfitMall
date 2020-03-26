@@ -43,4 +43,14 @@ public interface ShoppingCartDao {
      * @return
      */
     public int addArrivalNotice(@Param("userId")String userId,@Param("productId")int productId);
+
+
+    /**
+     * 查询预览购物车
+     * @param userId   用户id
+     * @param Start 查询开始值
+     * @param End   查询的数量
+     * @return
+     */
+    public List<ShoppingCart> findPreview(@Param("userId")String userId,@Param("Start") Integer Start,@Param("End") Integer End);
 }
