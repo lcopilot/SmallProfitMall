@@ -74,7 +74,7 @@
                     width="180">
                   <template slot-scope="product">
                     <el-input-number v-model="product.row.quantity" size="mini" :min="1"
-                                     :max="99" @change="quantityChange()"/>
+                                     :max="99" @change="quantityChange(product.row.quantity,product.row.shoppingCartId)"/>
                   </template>
                 </el-table-column>
                 <el-table-column
@@ -110,7 +110,7 @@
                           收藏
                         </el-link>
                       </div>
-                      <div v-if="product.row.productInventory<=0">
+                      <div v-if="product.row.productInventory<=0 && !product.row.notice">
                         <el-link :underline="false" @click="arrivalNotice(product.row.productId)"
                                  style="font-size: 13px">
                           到货通知
@@ -242,8 +242,12 @@
         })
       },
       //商品数量改变时触发
-      quantityChange(productNumber) {
-        this.select(this.$refs.cartTable.selection);
+      quantityChange(productNumber,shoppingCartId) {
+        productApi.modifyProductNumber(productNumber,shoppingCartId).then(res=>{
+          if (res.success){
+            this.select(this.$refs.cartTable.selection);
+          }
+        })
       },
       //底栏全选事件
       checkAll(state) {
@@ -269,9 +273,6 @@
       },
       //添加收藏
       addFavorite(productId) {
-        if (this.$refs.cartTable.selection.length == 0) {
-          return this.$message.warning("您还未选择商品哦~");
-        }
         let data = {
           productIds: [],
           userId: sessionStorage.getItem("uId"),
@@ -279,6 +280,9 @@
         if (productId != null) {
           data.productIds.push(productId);
         } else {
+          if (this.$refs.cartTable.selection.length == 0) {
+            return this.$message.warning("您还未选择商品哦~");
+          }
           this.$refs.cartTable.selection.forEach((shoppingCart) => {
             if (!shoppingCart.evaluation) {
               if (data.productIds.indexOf(shoppingCart.productId) == -1) {
@@ -291,7 +295,7 @@
           console.log(data.productIds.length)
           userApi.addFavorite(data).then(res => {
             if (res.success) {
-              this.$message.success("已选商品收藏成功!");
+              this.$message.success("商品收藏成功!");
               this.reload();
             } else {
               if (res.code == 11111) {
@@ -311,7 +315,15 @@
       },
       //到货通知
       arrivalNotice(productId) {
-
+        productApi.arrivalNotice(sessionStorage.getItem("uId"),productId).then(res=>{
+          if (res.success){
+            this.$message({
+              message:"已添加到货通知,商品已经在快马加鞭赶来的路上~",
+              type:"success",
+            })
+            this.getShoppingCart();
+          }
+        })
       },
       //删除商品
       removeCartProduct(shoppingCartId) {

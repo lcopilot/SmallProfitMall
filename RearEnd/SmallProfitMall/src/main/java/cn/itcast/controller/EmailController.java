@@ -102,7 +102,7 @@ public class EmailController {
         String FR = GetFourRandom.getFourRandom();  //随机验证码
         System.out.println(FR);
         session.setAttribute("verificationType", verificationType);//验证是否
-        if (verificationType.equals("1")){    //手机号码方式
+        if ("1".equals(verificationType)){    //手机号码方式
             String phones = AesEncryptUtil.desEncrypt(phone);//解密手机发送短信
             boolean flag = SmsUtils.updatePhone(phones, FR);
             if (flag) {
@@ -116,7 +116,7 @@ public class EmailController {
             } else {
                 return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
             }
-        }else if(verificationType.equals("2")){   //邮箱验证
+        }else if("2".equals(verificationType)){   //邮箱验证
             String verification = GetFourRandom.getFourRandom();
             String userEmail = emailService.fendByIdEmail(userId);  //查询绑定邮箱
             String Emails=AesEncryptUtil.desEncrypt(userEmail);
@@ -156,10 +156,10 @@ public class EmailController {
     if (!verificationTypes.equals(verificationType)){
         return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
     }
-        if(verificationTypes.equals("1")){//手机验证
+        if("1".equals(verificationTypes)){//手机验证
             if (verification.equals(updateEmailPhoneFR)&&account.equals(updateEmailPhone)) {
                 if (validationFunctions!=null){
-                    if (validationFunctions.equals("3")){   //解绑
+                    if ("3".equals(validationFunctions)){   //解绑
                         int redis = emailService.addEmail(userId, null);
                         if(redis==1){
                             return new QueryResponseResult(CommonCode.SUCCESS,null);//解绑成功
@@ -172,10 +172,10 @@ public class EmailController {
             } else {
                 return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
             }
-        }else if (verificationTypes.equals("2")){//邮箱验证
+        }else if ("2".equals(verificationTypes)){//邮箱验证
             if (verification.equals(content)&&account.equals(Email)) {
                 if (validationFunctions!=null){
-                    if (validationFunctions.equals("3")){   //解绑
+                    if ("3".equals(validationFunctions)){   //解绑
                         int redis = emailService.addEmail(userId, null);
                         if(redis==1){
                             return new QueryResponseResult(CommonCode.SUCCESS,null);//解绑成功
