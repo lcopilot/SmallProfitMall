@@ -377,7 +377,7 @@
     max-height: 65px;
     z-index: 2000;
     position: fixed;
-    width: 72%;
+    width: 72.6%;
     bottom: 0px;
   }
 

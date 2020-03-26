@@ -402,7 +402,7 @@
   .login_div {
     height: 100%;
     width: 100%;
-    background: url("http://img.fhxasdsada.xyz/ab61d89de821c8b8895ee0ae57d41b0.jpg") no-repeat;
+    background: url("http://img.fhxasdsada.xyz/AAVVCCC") no-repeat;
     -moz-background-size: 100% 100%;
     background-size: 100% 100%;
   }

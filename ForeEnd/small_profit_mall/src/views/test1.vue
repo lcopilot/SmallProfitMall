@@ -1,8 +1,7 @@
 <template>
   <div id="box">
-    <div class="box" v-infinite-scroll="load" :infinite-scroll-disabled="busy"
-         :infinite-scroll-distance="1" :infinite-scroll-delay="2000" >
-      <ul class="list" >
+    <div class="box" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
+      <ul class="list">
         <li v-for="(i,index) in list" class="list-item" :key="index">{{ i}}</li>
       </ul>
       <p v-if="loading" style="margin-top:10px;" class="loading">
@@ -16,15 +15,16 @@
   export default {
     data() {
       return {
-        busy: false,
-        pageSize: 0,
-        list: [],
-        loading: false,
         count: 0,//起始页数值为0
+        loading: false,
         totalPages: "",//取后端返回内容的总页数
+        list: [] //后端返回的数组
       };
     },
     computed: {
+      disabled() {
+        return false;
+      }
     },
     created() {
       this.getMessage();
@@ -32,24 +32,20 @@
     methods: {
       load() {
         //滑到底部时进行加载
-        this.pageSize++; //页数+1
+        this.loading = true;
+          this.count += 1; //页数+1
           this.getMessage(); //调用接口，此时页数+1，查询下一页数据
       },
       getMessage() {
-        this.busy = true;
-        this.pageSize++;
-        this.loading=true;
-        this.axios.get(
-            "apiUrl/TestController/Test/" + this.pageSize
+        this.axios
+        .get(
+            "apiUrl/TestController/Test/" + this.count
         )
         .then(res => {
           console.log(res);
           this.list = this.list.concat(res.data.queryResult.list); //因为每次后端返回的都是数组，所以这边把数组拼接到一起
           this.loading = false;
         })
-        .catch(err => {
-          console.log(err);
-        });
       }
     }
   };
