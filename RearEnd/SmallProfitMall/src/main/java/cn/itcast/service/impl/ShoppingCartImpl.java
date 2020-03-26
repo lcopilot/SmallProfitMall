@@ -5,9 +5,8 @@ import cn.itcast.dao.ShoppingCartDao;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.domain.shoppingCar.ShoppingCart;
 
-import cn.itcast.messageQueue.producer.shoppingCart.ShoppingCartProducer;
+import cn.itcast.messageQueue.producer.shopping.ShoppingProducer;
 import cn.itcast.service.ShoppingCartService;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +23,7 @@ public class ShoppingCartImpl implements ShoppingCartService {
     private ProductDetailsDao productDetailsDao;
 
     @Autowired
-    private ShoppingCartProducer shoppingCartProducer;
+    private ShoppingProducer shoppingProducer;
 
     //添加购物车
     @Override
@@ -118,10 +117,6 @@ public class ShoppingCartImpl implements ShoppingCartService {
     //根据shoppingCartId删除购物车
     @Override
     public Integer deleteCart(int[] cartIdList) {
-        if (cartIdList.length>=5){
-            shoppingCartProducer.sendDeleteCart("deleteCart",cartIdList);
-            return 1;
-        }
         int redis=0;
         for (int shoppingCartId : cartIdList){
            redis = shoppingCartDao.deleteCart(shoppingCartId);

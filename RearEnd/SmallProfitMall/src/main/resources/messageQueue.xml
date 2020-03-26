@@ -29,12 +29,12 @@
   <rabbit:template id="favoriteTemplate"
                    connection-factory="connectionFactory" exchange="FAVORITE-EXCHANGE"/>
 
-  <!--定义购物车的交换机自动声明-->
-  <rabbit:direct-exchange name="SHOPPING-CART-EXCHANGE" auto-declare="true" durable="true"/>
+  <!--定义商品交换机自动声明-->
+  <rabbit:direct-exchange name="SHOPPING-EXCHANGE" auto-declare="true" durable="true"/>
 
-  <!-- 定义购物车MQ消息模板 -->
-  <rabbit:template id="shoppingCartTemplate"
-                   connection-factory="connectionFactory" exchange="SHOPPING-CART-EXCHANGE"/>
+  <!-- 定义商品消息模板 -->
+  <rabbit:template id="shoppingTemplate"
+                   connection-factory="connectionFactory" exchange="SHOPPING-EXCHANGE"/>
 
   <!-- 监听邮件队列 -->
   <rabbit:listener-container connection-factory="connectionFactory">
@@ -51,9 +51,9 @@
     <rabbit:listener ref="favorite" method="addEvaluation" queue-names="FAVORITE-QUEUE"/>
   </rabbit:listener-container>
 
-  <!--监听购物车队列-->
+  <!--监听到货通知队列-->
   <rabbit:listener-container connection-factory="connectionFactory">
-    <rabbit:listener ref="shoppingCart" method="deleteCart" queue-names="SHOPPING-CART-QUEUE"/>
+    <rabbit:listener ref="arrivalNotification" method="arrivalNotification" queue-names="ARRIVAL-NOTIFICATION-QUEUE"/>
   </rabbit:listener-container>
 
   <!-- 声明多个消费者对象 -->
@@ -62,7 +62,7 @@
   <bean id="sms" class="cn.itcast.Test.mq.sms"/>
   <!--声明收藏消费者-->
   <bean id="favorite" class="cn.itcast.messageQueue.consumer.favorite.FavoriteConsumer"></bean>
-  <!--声明购物车消费者-->
-  <bean id="shoppingCart" class="cn.itcast.messageQueue.consumer.shoppingCart.ShoppingCartConsumer"></bean>
+  <!--声明商品到货通知消费者-->
+  <bean id="arrivalNotification" class="cn.itcast.messageQueue.consumer.shopping.ArrivalNotification"></bean>
 
 </beans>
