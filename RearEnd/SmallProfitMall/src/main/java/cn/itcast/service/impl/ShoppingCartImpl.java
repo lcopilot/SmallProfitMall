@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -28,13 +29,14 @@ public class ShoppingCartImpl implements ShoppingCartService {
     /**
      * 添加购物车
      * @param purchaseInformation
-     * @return
+     * @return rediss[0]结果状态 rediss[1]购物车商品数量
      */
     @Override
     public int[] addShoppingCar(PurchaseInformation purchaseInformation) {
         ShoppingCart shoppingCart = new ShoppingCart();
         List<ShoppingCart> shoppingCarts = this.findByUserId(purchaseInformation.getUserId());
-        if (shoppingCarts.size()==99|| shoppingCarts.size()>99){   //购物车大于99
+        //购物车大于99返回
+        if (shoppingCarts.size()==99|| shoppingCarts.size()>99){
             int redis = 2;
             int[] rediss = new int[2];
             rediss[0]=redis;
@@ -180,6 +182,19 @@ public class ShoppingCartImpl implements ShoppingCartService {
     @Override
     public int updateQuantity(int quantity, int shoppingCartId) {
         return shoppingCartDao.updateQuantity(quantity,shoppingCartId);
+    }
+
+    /**
+     * 查询购物车预览商品
+     * @param userId    用户id
+     * @param Start 查询起点
+     * @param End   查询条数
+     * @return
+     */
+    @Override
+    public List<ShoppingCart> findPreview(String userId,Integer Start , Integer End) {
+        List<ShoppingCart> findPreview = shoppingCartDao.findPreview(userId,Start,End);
+        return findPreview;
     }
 
 

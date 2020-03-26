@@ -15,7 +15,7 @@ public interface ShoppingCartService {
     public int[] addShoppingCar(PurchaseInformation purchaseInformation);
 
     /**
-     * 根据uid查询购物车
+     * 查询购物车
      * @param userId    用户id
      * @return          购物车商品数据
      */
@@ -47,5 +47,11 @@ public interface ShoppingCartService {
      */
     public int updateQuantity(int quantity,int shoppingCartId);
 
+    /**
+     *查询预览
+     * @param userId
+     * @return
+     */
+    public List<ShoppingCart> findPreview(String userId,Integer Start , Integer End);
 
 }

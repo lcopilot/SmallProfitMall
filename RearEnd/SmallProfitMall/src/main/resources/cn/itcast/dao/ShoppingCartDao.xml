@@ -88,6 +88,7 @@
             productId = #{productId}
     </select>
 
+    <!--修改购物车单个商品数量-->
     <insert id="addArrivalNotice">
         INSERT
         INTO
@@ -95,5 +96,30 @@
         VALUES
             (#{userId},#{productId})
     </insert>
+
+    <!--查询预览商品-->
+    <select id="findPreview" resultType="cn.itcast.domain.shoppingCar.ShoppingCart">
+        SELECT
+            sc.shoppingCartId,sc.quantity ,pb.ProductName,pi.ImageSite
+        FROM
+            shoppingCart sc
+        JOIN
+            ProductBasis pb
+        ON
+            sc.productId=pb.ProductId
+        JOIN
+            ProductImage pi
+        ON
+            pb.ProductId=pi.ProductId
+        WHERE
+            pi.sign=1
+        AND
+            sc.userId = #{userId}
+        order by
+            sc.shoppingCartId
+        desc
+        limit #{Start},#{End}
+    </select>
+
 
 </mapper>
