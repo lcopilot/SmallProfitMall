@@ -52,6 +52,6 @@ public interface ShoppingCartService {
      * @param userId
      * @return
      */
-    public List<ShoppingCart> findPreview(String userId,Integer Start , Integer End);
+    public List<ShoppingCart> findPreview(String userId,Integer End);
 
 }
