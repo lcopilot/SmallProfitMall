@@ -17,6 +17,15 @@ public class SendEmailUtil {
     MQSendMsgUtils mqSendMsgUtils;
     @Autowired
     private JavaMailSender javaMailSender;//在spring中配置的邮件发送的bean
+
+    /**
+     *
+     * @param theme         邮件的主题
+     * @param sendEmail     发件人邮箱
+     * @param userEmail     收件人邮箱
+     * @param content       邮件的文本内容，
+     * @return
+     */
     public  int sendEmailUtil(String theme,String sendEmail,String userEmail,String content)  {
         int verification=0;
         MimeMessage mMessage=javaMailSender.createMimeMessage();//创建邮件对象
@@ -24,10 +33,10 @@ public class SendEmailUtil {
             //从配置文件中拿到发件人邮箱地址
         try {
             mMessageHelper=new MimeMessageHelper(mMessage,true);
-            mMessageHelper.setFrom(sendEmail);//发件人邮箱
-            mMessageHelper.setTo(userEmail);//收件人邮箱
-            mMessageHelper.setSubject(theme);//邮件的主题
-            mMessageHelper.setText(content,true);//邮件的文本内容，true表示文本以html格式打开
+            mMessageHelper.setFrom(sendEmail);
+            mMessageHelper.setTo(userEmail);
+            mMessageHelper.setSubject(theme);
+            mMessageHelper.setText(content,true);//true表示文本以html格式打开
             javaMailSender.send(mMessage);//发送邮件
         } catch (MessagingException e) {
         }
