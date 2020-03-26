@@ -22,8 +22,6 @@ public class ProductDetailsController {
     @Autowired
     ProductDetailsService productDetailsService;
 
-    @Autowired
-    QueryResult result;
     
     /**
      * 商品详细

@@ -1,6 +1,6 @@
 package cn.itcast.controller;
 
-import cn.itcast.domain.Evaluation.Evaluation;
+import cn.itcast.domain.favorite.Evaluation;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.service.EvaluationService;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/EvaluationController")
 @ResponseBody
-public class EvaluationController {
+public class FavoriteController {
     @Autowired
     EvaluationService evaluationService;
     //添加收藏

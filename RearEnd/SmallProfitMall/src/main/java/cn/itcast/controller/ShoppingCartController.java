@@ -20,14 +20,13 @@ public class ShoppingCartController {
     @Autowired
     ShoppingCartService shoppingCartService;
 
-    @Autowired
-    QueryResult queryResult;
+
 
 
     //添加购物车
     @RequestMapping(value = "/addShoppingCart",method = RequestMethod.POST)
     public QueryResponseResult addShoppingCart(@RequestBody PurchaseInformation purchaseInformation) {
-
+        QueryResult queryResult = new QueryResult();
         if(purchaseInformation==null){
             return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
         }
@@ -50,6 +49,7 @@ public class ShoppingCartController {
     //查询购物车
     @RequestMapping(value = "/findByUserId/{userId}",method = RequestMethod.GET)
     public QueryResponseResult findByUserId(@PathVariable("userId")String userId) {
+        QueryResult queryResult = new QueryResult();
         if(userId==null){
             return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
         }

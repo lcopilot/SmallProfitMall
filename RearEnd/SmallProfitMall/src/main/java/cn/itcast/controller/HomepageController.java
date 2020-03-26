@@ -27,14 +27,13 @@ public class HomepageController {
     @Autowired
     RedisUtil redisUtil;
 
-    @Autowired
-    QueryResult result;
     /**
      * 轮播图
      * @return
      */
     @RequestMapping("/findRotationChart")
     public QueryResponseResult findRotationChart() {
+        QueryResult result = new QueryResult();
         // 调用service的方法
         List<RotationChart> list = homepageService.findRotationChart();
         result.setList(list);
@@ -44,6 +43,7 @@ public class HomepageController {
     //商品分类导航栏
     @RequestMapping("/findNavigation1")
     public QueryResponseResult findNavigation(){
+        QueryResult result = new QueryResult();
         // 调用service的方法
         List<Navigation> list = homepageService.findNavigation();
         result.setList(list);
@@ -53,6 +53,7 @@ public class HomepageController {
     //商品分类导航栏2
     @RequestMapping("/findNavigation2")
     public QueryResponseResult findNavigation2(){
+        QueryResult result = new QueryResult();
         // 调用service的方法
         List<Classify> list = homepageService.findNavigation2();
         result.setList(list);
@@ -62,6 +63,7 @@ public class HomepageController {
     //主页右侧图标
     @RequestMapping("/icon")
     public QueryResponseResult findIcon(){
+        QueryResult result = new QueryResult();
         // 调用service的方法
         List<Icon> list = homepageService.findIcon();
         result.setList(list);
@@ -72,6 +74,7 @@ public class HomepageController {
     //商品导航栏详细
     @RequestMapping("/navigationInDetail")
     public QueryResponseResult cs(){
+        QueryResult result = new QueryResult();
         Classification classification = homepageService.navigationInDetail();
         List<Classification> logins= Arrays.asList(classification);
         result.setList(logins);

@@ -1,9 +1,11 @@
-package cn.itcast.domain.Evaluation;
+package cn.itcast.domain.favorite;
+
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 
 //收藏
-public class Evaluation {
+public class Evaluation  implements Serializable {
     private int evaluationId;
     private int productId;
     private String userId;
@@ -59,4 +61,15 @@ public class Evaluation {
         this.evaluationTime = evaluationTime;
     }
 
+    @Override
+    public String toString() {
+        return "Evaluation{" +
+                "evaluationId=" + evaluationId +
+                ", productId=" + productId +
+                ", userId='" + userId + '\'' +
+                ", sign='" + sign + '\'' +
+                ", productIds=" + Arrays.toString(productIds) +
+                ", evaluationTime=" + evaluationTime +
+                '}';
+    }
 }

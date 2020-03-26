@@ -26,13 +26,13 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     RedisUtil redisUtil;
 
-    @Autowired
-    SeckillResult seckillResult;
 
-    ProductLowPriceResult productLowPriceResult = new ProductLowPriceResult();
+
+
     //秒杀
     @Override
     public List<SeckillResult> findSeckill() throws ParseException {
+        SeckillResult seckillResult = new SeckillResult();
         List<SeckillResult> redis = (List<SeckillResult>) redisUtil.lGet("SeckillResult", 0, -1);
         if (redis.size()==0) {
             ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findSeckill(0,4)),
@@ -51,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
      //查询低 价商品
     @Override
     public  List<ProductLowPriceResult> findProductLowPrice() {
+        ProductLowPriceResult productLowPriceResult = new ProductLowPriceResult();
         List<ProductLowPriceResult> redis = (List<ProductLowPriceResult>) redisUtil.lGet("ProductLowPriceResult", 0, -1);
         if(redis.size()==0){
             ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findProductLowPrice(0, 6)),

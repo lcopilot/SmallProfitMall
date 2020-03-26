@@ -4,6 +4,8 @@ import cn.itcast.dao.ProductDetailsDao;
 import cn.itcast.dao.ShoppingCartDao;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.domain.shoppingCar.ShoppingCart;
+
+import cn.itcast.messageQueue.producer.shoppingCart.ShoppingCartProducer;
 import cn.itcast.service.ShoppingCartService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +21,15 @@ public class ShoppingCartImpl implements ShoppingCartService {
     private ShoppingCartDao shoppingCartDao;
 
     @Autowired
-    private ShoppingCart shoppingCart;
+    private ProductDetailsDao productDetailsDao;
 
     @Autowired
-    private ProductDetailsDao productDetailsDao;
+    private ShoppingCartProducer shoppingCartProducer;
+
     //添加购物车
     @Override
     public int[] addShoppingCar(PurchaseInformation purchaseInformation) {
+        ShoppingCart shoppingCart = new ShoppingCart();
         List<ShoppingCart> shoppingCarts = this.findByUserId(purchaseInformation.getUserId());
         if (shoppingCarts.size()==99|| shoppingCarts.size()>99){   //购物车大于99
             int redis = 2;
@@ -56,16 +60,16 @@ public class ShoppingCartImpl implements ShoppingCartService {
         if(purchaseInformation.getSpecification()!=null){ //规格
             productDeploy = productDeploy+purchaseInformation.getSpecification()+" ";
         }
-        for (ShoppingCart shoppingCart : shoppingCarts){
-            if(purchaseInformation.getProductId()==shoppingCart.getProductId() && shoppingCart.getProductDeploy().equals(productDeploy)){
-                int quantity=shoppingCart.getQuantity()+purchaseInformation.getQuantity();
+        for (ShoppingCart shoppingCartss : shoppingCarts){
+            if(purchaseInformation.getProductId()==shoppingCartss.getProductId() && shoppingCartss.getProductDeploy().equals(productDeploy)){
+                int quantity=shoppingCartss.getQuantity()+purchaseInformation.getQuantity();
                 int[] rediss = new int[2];
                 if (quantity>99){
                     rediss[0]=3;
                     rediss[1]=shoppingCarts.size();
                     return rediss;
                 }
-                int ShoppingCartId = shoppingCart.getShoppingCartId();
+                int ShoppingCartId = shoppingCartss.getShoppingCartId();
                 int redis = shoppingCartDao.updateQuantity(quantity,ShoppingCartId);
 
                 rediss[0]=redis;
@@ -93,27 +97,31 @@ public class ShoppingCartImpl implements ShoppingCartService {
 
     //查询购物车
     public List<ShoppingCart> findByUserId(String userId){
-        List<ShoppingCart> shoppingCart = shoppingCartDao.findByUserId(userId);
-        for (int i = 0; i <shoppingCart.size() ; i++) {
-            String a=shoppingCart.get(i).getUserId();
-            int c=shoppingCart.get(i).getProductId();
+        List<ShoppingCart> shoppingCartss = shoppingCartDao.findByUserId(userId);
+        for (int i = 0; i <shoppingCartss.size() ; i++) {
+            String a=shoppingCartss.get(i).getUserId();
+            int c=shoppingCartss.get(i).getProductId();
             String redis="";
-                redis = shoppingCartDao.findByUidEvaluation(shoppingCart.get(i).getUserId(),shoppingCart.get(i).getProductId());
+                redis = shoppingCartDao.findByUidEvaluation(shoppingCartss.get(i).getUserId(),shoppingCartss.get(i).getProductId());
              if (redis!=null){
                  if (redis.equals("true")){
-                     shoppingCart.get(i).setEvaluation(true);
+                     shoppingCartss.get(i).setEvaluation(true);
                  }
              }else {
-                 shoppingCart.get(i).setEvaluation(false);
+                 shoppingCartss.get(i).setEvaluation(false);
                  continue;
              }
         }
-        return shoppingCart;
+        return shoppingCartss;
     }
 
     //根据shoppingCartId删除购物车
     @Override
     public Integer deleteCart(int[] cartIdList) {
+        if (cartIdList.length>=5){
+            shoppingCartProducer.sendDeleteCart("deleteCart",cartIdList);
+            return 1;
+        }
         int redis=0;
         for (int shoppingCartId : cartIdList){
            redis = shoppingCartDao.deleteCart(shoppingCartId);
