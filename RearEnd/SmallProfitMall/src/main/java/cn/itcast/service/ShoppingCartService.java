@@ -39,5 +39,13 @@ public interface ShoppingCartService {
      */
     public int addArrivalNotice(String userId,int productId);
 
+    /**
+     * 修改购物车商品数量
+     * @param quantity
+     * @param shoppingCartId
+     * @return
+     */
+    public int updateQuantity(int quantity,int shoppingCartId);
+
 
 }
