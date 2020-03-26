@@ -21,69 +21,111 @@ public class ShoppingCartController {
     ShoppingCartService shoppingCartService;
 
 
-
-
-    //添加购物车
+    /**
+     * 添加购物车
+     * @param purchaseInformation
+     * @return
+     */
     @RequestMapping(value = "/addShoppingCart",method = RequestMethod.POST)
     public QueryResponseResult addShoppingCart(@RequestBody PurchaseInformation purchaseInformation) {
         QueryResult queryResult = new QueryResult();
         if(purchaseInformation==null){
-            return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
+            //传入参数为空
+            return new QueryResponseResult(CommonCode.FAIL, null);
         }
         if (purchaseInformation.getQuantity()>99){
-            return new QueryResponseResult(CommonCode.INVALID_PARAM, null);//添加失败
+            //添加商品失败 单个商品大于99
+            return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
         }
 
         int[] redis =shoppingCartService.addShoppingCar(purchaseInformation);
-        if(redis[0]==1){   //修改成功
+        if(redis[0]==1){
+            //添加成功
             queryResult.setTotal(redis[1]);
-            return new QueryResponseResult(CommonCode.SUCCESS, queryResult);//添加成功
+            return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
         }else if (redis[1]==2){
-            return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
+            //添加失败
+            return new QueryResponseResult(CommonCode.FAIL, null);
         }else if (redis[0]==3){
-            return new QueryResponseResult(CommonCode.INVALID_PARAM, null);//添加失败
+            //添加失败
+            return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
         }
         return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
     }
 
-    //查询购物车
+    /**
+     * 查询购物车
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "/findByUserId/{userId}",method = RequestMethod.GET)
     public QueryResponseResult findByUserId(@PathVariable("userId")String userId) {
         QueryResult queryResult = new QueryResult();
         if(userId==null){
-            return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
+            //传入参数为空
+            return new QueryResponseResult(CommonCode.FAIL, null);
         }
          List<ShoppingCart> shoppingCart =shoppingCartService.findByUserId(userId);
             queryResult.setList(shoppingCart);
             queryResult.setTotal(shoppingCart.size());
-            return new QueryResponseResult(CommonCode.SUCCESS, queryResult);//添加成功
+            return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
     }
 
-    //删除
+    /**
+     * 删除购物车
+     * @param cartIdList
+     * @return
+     */
     @RequestMapping(value = "/deleteCart/{shoppingCartId}",method = RequestMethod.DELETE)
     public QueryResponseResult deleteCart(@PathVariable("shoppingCartId")int[] cartIdList) {
         if (cartIdList== null) {
-            return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
+            //查询传入参数为空
+            return new QueryResponseResult(CommonCode.FAIL, null);
         }
 
         int redis = shoppingCartService.deleteCart(cartIdList);
-        if (redis == 1) {   //删除成功
-            return new QueryResponseResult(CommonCode.SUCCESS, null);//添加成功
+        if (redis == 1) {
+            //删除购物车成功
+            return new QueryResponseResult(CommonCode.SUCCESS, null);
         } else {
-            return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
+            //删除购物车失败
+            return new QueryResponseResult(CommonCode.FAIL, null);
         }
     }
 
-    //查询商品数量
+    /**
+     * 查询商品数量
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "/findByuId/{userId}",method = RequestMethod.GET)
     public QueryResponseResult findByuId(@PathVariable("userId")String userId) {
         if (userId == null) {
-            return new QueryResponseResult(CommonCode.FAIL, null);//查询失败
+            //传入参数为空
+            return new QueryResponseResult(CommonCode.FAIL, null);
         }
         ArrayList redis = shoppingCartService.findByuId(userId);
         QueryResult queryResult = new QueryResult();
         queryResult.setTotal(redis.size());
-            return new QueryResponseResult(CommonCode.SUCCESS, queryResult);//查询成功
+        //查询成功
+        return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
+    }
 
+    /**
+     * 添加到货通知
+     */
+    @RequestMapping(value = "/addArrivalNotice/{userId}/{productId}",method = RequestMethod.POST)
+    public QueryResponseResult addArrivalNotice(@PathVariable("userId")String userId,@PathVariable("productId") int productId){
+        if (userId ==null && productId ==0){
+            //传入参数为空
+            return new QueryResponseResult(CommonCode.FAIL, null);
+        }
+        int redis = shoppingCartService.addArrivalNotice(userId,productId);
+        QueryResult queryResult = new QueryResult();
+        if (redis==1){
+            return  new QueryResponseResult(CommonCode.SUCCESS, queryResult);
+        }else {
+            return new QueryResponseResult(CommonCode.FAIL,null);
+        }
     }
 }

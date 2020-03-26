@@ -38,7 +38,14 @@ public class EmailController {
     String theme = "微利商城";
     String sendEmail = "liliu_muge@163.com";
 
-    //发送邮箱验证码（绑定邮箱）
+    /**
+     * 发送邮箱验证码（绑定邮箱）
+     * @param email     发送邮箱
+     * @param uId       用户id
+     * @param session
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/relieveEmail",method = RequestMethod.POST )
     public QueryResponseResult sendEmail(String email,String uId ,HttpSession session) throws Exception {
         //解密邮箱
@@ -51,14 +58,23 @@ public class EmailController {
         String content = verification;
         int redis = sendEmailUtil.sendEmailUtil(theme, sendEmail, userEmail, content);
         if (redis == 0) {
-            session.setAttribute("content", content);//设置验证码session
-            sessionUtil.removeAttrbute(session, "content");//倒计时删除session
+            //设置验证码session
+            session.setAttribute("content", content);
+            //倒计时删除session
+            sessionUtil.removeAttrbute(session, "content");
             return new QueryResponseResult(CommonCode.SUCCESS, null);
         }
         return new QueryResponseResult(CommonCode.FAIL, null);
     }
 
-    //更新邮箱
+    /**
+     * 跟新邮箱
+     * @param userId
+     * @param verification
+     * @param email
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/updateEmail",method = RequestMethod.POST)
     public QueryResponseResult updateEmail(String userId, String verification, String email, HttpSession session) {
         if(emailService.fendEmail(email)!=null){

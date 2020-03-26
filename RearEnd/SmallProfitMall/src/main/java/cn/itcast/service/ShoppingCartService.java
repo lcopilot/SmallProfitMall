@@ -14,14 +14,30 @@ public interface ShoppingCartService {
     //添加到购物车
     public int[] addShoppingCar(PurchaseInformation purchaseInformation);
 
-    //根据uid查询购物车
+    /**
+     * 根据uid查询购物车
+     * @param userId    用户id
+     * @return          购物车商品数据
+     */
     public List<ShoppingCart> findByUserId(String userId);
 
     //根据id删除
     public Integer deleteCart(int[] shoppingCartId);
 
-    //根据用户id查询购物车商品数量
+    /**
+     *  查询购物车商品数量
+     * @param userId
+     * @return
+     */
     public ArrayList findByuId(String userId);
+
+    /**
+     * 添加到货通知
+     * @param userId    用户id
+     * @param productId 商品id
+     * @return
+     */
+    public int addArrivalNotice(String userId,int productId);
 
 
 }

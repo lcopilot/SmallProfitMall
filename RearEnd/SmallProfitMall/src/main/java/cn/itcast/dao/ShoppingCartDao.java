@@ -23,8 +23,19 @@ public interface ShoppingCartDao {
     public Integer deleteCart(@Param("shoppingCartId")Integer shoppingCartId);
 
     //根据用户id查询购物车商品数量
-    public List findByuId(String userId);
+    public List<Integer> findByuId(String userId);
 
     //修改购物车商品数量
     public int updateQuantity(@Param("quantity")int quantity,@Param("shoppingCartId")int shoppingCartId);
+
+    //查询到货通知
+    public List<String> findArrivalNotice(@Param("userId")String userId,@Param("productId")int productId);
+
+    /**
+     * 添加到货通知
+     * @param userId
+     * @param productId
+     * @return
+     */
+    public int addArrivalNotice(@Param("userId")String userId,@Param("productId")int productId);
 }

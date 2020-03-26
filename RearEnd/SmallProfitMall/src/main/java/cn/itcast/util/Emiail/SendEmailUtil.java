@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 
 
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 
 @Component("sendEmailUtil")
 public class SendEmailUtil {
@@ -33,12 +35,12 @@ public class SendEmailUtil {
             //从配置文件中拿到发件人邮箱地址
         try {
             mMessageHelper=new MimeMessageHelper(mMessage,true);
-            mMessageHelper.setFrom(sendEmail);
+            mMessageHelper.setFrom (new InternetAddress(sendEmail, "微利团队", "UTF-8"));
             mMessageHelper.setTo(userEmail);
             mMessageHelper.setSubject(theme);
             mMessageHelper.setText(content,true);//true表示文本以html格式打开
             javaMailSender.send(mMessage);//发送邮件
-        } catch (MessagingException e) {
+        } catch (MessagingException | UnsupportedEncodingException e) {
         }
         System.out.println(verification);
         return verification;

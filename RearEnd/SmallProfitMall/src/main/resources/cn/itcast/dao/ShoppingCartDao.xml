@@ -5,11 +5,12 @@
 <mapper namespace="cn.itcast.dao.ShoppingCartDao">
     <!--添加购物车-->
     <insert id="addShoppingCar" parameterType="cn.itcast.domain.shoppingCar.ShoppingCart">
-     INSERT INTO shoppingCart
-		(userId,productId,productDeploy,quantity)
-	VALUES
-	    (#{userId},#{productId},#{productDeploy},#{quantity})
+        INSERT INTO shoppingCart
+            (userId,productId,productDeploy,quantity)
+        VALUES
+            (#{userId},#{productId},#{productDeploy},#{quantity})
     </insert>
+
     <!--根据id查询商品价格名字库存-->
     <select id="findByPid" resultType="cn.itcast.domain.shoppingCar.PurchaseInformation">
         SELECT
@@ -74,5 +75,25 @@
     <update id="updateQuantity" parameterType="java.lang.Integer">
           UPDATE shoppingCart SET quantity = #{quantity} WHERE shoppingCartId = #{shoppingCartId}
     </update>
+
+
+    <!--查询到货通知-->
+    <select id="findArrivalNotice" resultType="java.lang.String">
+        select id
+        from
+            arrivalNotice
+        WHERE
+            userId = #{userId}
+        AND
+            productId = #{productId}
+    </select>
+
+    <insert id="addArrivalNotice">
+        INSERT
+        INTO
+            arrivalNotice (userId,productId)
+        VALUES
+            (#{userId},#{productId})
+    </insert>
 
 </mapper>
