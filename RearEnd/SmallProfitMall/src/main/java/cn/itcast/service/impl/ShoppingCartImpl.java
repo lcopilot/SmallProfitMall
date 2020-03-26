@@ -136,7 +136,11 @@ public class ShoppingCartImpl implements ShoppingCartService {
         return shoppingCartss;
     }
 
-    //根据shoppingCartId删除购物车
+    /**
+     * 删除购物车
+     * @param cartIdList
+     * @return
+     */
     @Override
     public Integer deleteCart(int[] cartIdList) {
         int redis=0;
@@ -165,6 +169,17 @@ public class ShoppingCartImpl implements ShoppingCartService {
     @Override
     public int addArrivalNotice(String userId, int productId) {
         return shoppingCartDao.addArrivalNotice(userId,productId);
+    }
+
+    /**
+     * 修改单个商品数量
+     * @param quantity
+     * @param shoppingCartId
+     * @return
+     */
+    @Override
+    public int updateQuantity(int quantity, int shoppingCartId) {
+        return shoppingCartDao.updateQuantity(quantity,shoppingCartId);
     }
 
 

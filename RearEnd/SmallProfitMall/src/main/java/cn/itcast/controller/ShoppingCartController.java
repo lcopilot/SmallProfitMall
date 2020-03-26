@@ -128,4 +128,22 @@ public class ShoppingCartController {
             return new QueryResponseResult(CommonCode.FAIL,null);
         }
     }
+
+    /**
+     *修改商品数量
+     */
+    @RequestMapping(value = "/updateQuantity/{quantity}/{shoppingCartId}",method = RequestMethod.PUT)
+    public QueryResponseResult updateQuantity(@PathVariable("quantity")int quantity,@PathVariable("shoppingCartId") int shoppingCartId){
+        if (quantity == 0 && shoppingCartId == 0){
+            //传入参数为空
+            return new QueryResponseResult(CommonCode.FAIL, null);
+        }
+        int redis = shoppingCartService.updateQuantity(quantity,shoppingCartId);
+        QueryResult queryResult = new QueryResult();
+        if (redis==1){
+            return  new QueryResponseResult(CommonCode.SUCCESS, queryResult);
+        }else {
+            return new QueryResponseResult(CommonCode.FAIL,null);
+        }
+    }
 }
