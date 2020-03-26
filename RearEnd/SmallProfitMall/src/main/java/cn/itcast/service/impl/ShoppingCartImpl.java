@@ -25,7 +25,11 @@ public class ShoppingCartImpl implements ShoppingCartService {
     @Autowired
     private ShoppingProducer shoppingProducer;
 
-    //添加购物车
+    /**
+     * 添加购物车
+     * @param purchaseInformation
+     * @return
+     */
     @Override
     public int[] addShoppingCar(PurchaseInformation purchaseInformation) {
         ShoppingCart shoppingCart = new ShoppingCart();
@@ -63,8 +67,11 @@ public class ShoppingCartImpl implements ShoppingCartService {
             if(purchaseInformation.getProductId()==shoppingCartss.getProductId() && shoppingCartss.getProductDeploy().equals(productDeploy)){
                 int quantity=shoppingCartss.getQuantity()+purchaseInformation.getQuantity();
                 int[] rediss = new int[2];
+                //单个数量是否大于99
                 if (quantity>99){
+                    //返回是否更改
                     rediss[0]=3;
+                    //购物车数量
                     rediss[1]=shoppingCarts.size();
                     return rediss;
                 }
@@ -94,15 +101,30 @@ public class ShoppingCartImpl implements ShoppingCartService {
         return rediss;
     }
 
-    //查询购物车
+    /**
+     * 查询购物车
+     * @param userId    用户id
+     * @return      购物车商品信息集合
+     */
+    @Override
     public List<ShoppingCart> findByUserId(String userId){
         List<ShoppingCart> shoppingCartss = shoppingCartDao.findByUserId(userId);
         for (int i = 0; i <shoppingCartss.size() ; i++) {
-            String a=shoppingCartss.get(i).getUserId();
-            int c=shoppingCartss.get(i).getProductId();
-            String redis="";
-                redis = shoppingCartDao.findByUidEvaluation(shoppingCartss.get(i).getUserId(),shoppingCartss.get(i).getProductId());
+            int productId=shoppingCartss.get(i).getProductId();
+            //用户是否有到货通知
+            List<String> strings = shoppingCartDao.findArrivalNotice(userId,productId);
+            if (strings == null||strings.size()==0) {
+                //查询没有到货通知设置为false
+                shoppingCartss.get(i).setNotice(false);
+            }else {
+                //查询有到货通知设置为true
+                shoppingCartss.get(i).setNotice(true);
+            }
+
+            //判断是否收藏
+            String  redis = shoppingCartDao.findByUidEvaluation(userId,productId);
              if (redis!=null){
+                 //查询有收藏置为true
                  if (redis.equals("true")){
                      shoppingCartss.get(i).setEvaluation(true);
                  }
@@ -124,9 +146,25 @@ public class ShoppingCartImpl implements ShoppingCartService {
         return redis;
     }
 
+    /**
+     * 查询购物车数量
+     * @param userId
+     * @return
+     */
     @Override
     public ArrayList findByuId(String userId) {
         return (ArrayList) shoppingCartDao.findByuId(userId);
+    }
+
+    /**
+     * 添加到货通知
+     * @param userId    用户id
+     * @param productId 商品id
+     * @return
+     */
+    @Override
+    public int addArrivalNotice(String userId, int productId) {
+        return shoppingCartDao.addArrivalNotice(userId,productId);
     }
 
 

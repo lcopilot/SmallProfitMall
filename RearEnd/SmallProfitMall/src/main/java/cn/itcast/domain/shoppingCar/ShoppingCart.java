@@ -3,7 +3,9 @@ package cn.itcast.domain.shoppingCar;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-//购物车
+/**
+ * 购物车
+ */
 @Component
 public class ShoppingCart implements Serializable {
     private Integer shoppingCartId; //购物车id
@@ -16,6 +18,15 @@ public class ShoppingCart implements Serializable {
     private Double ProductPrice;    //价格
     private Double ProductInventory;    //商品库存
     private Boolean evaluation;         //是否收藏
+    private Boolean notice;             //是否有到货通知
+
+    public Boolean getNotice() {
+        return notice;
+    }
+
+    public void setNotice(Boolean notice) {
+        this.notice = notice;
+    }
 
     public String getImageSite() {
         return ImageSite;

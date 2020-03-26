@@ -17,17 +17,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class FavoriteController {
     @Autowired
     EvaluationService evaluationService;
-    //添加收藏
+
+    /**
+     * 添加收藏
+     * @param evaluation
+     * @return
+     */
     @RequestMapping(value = "/addEvaluation",method = RequestMethod.POST)
     public QueryResponseResult addEvaluation(@RequestBody Evaluation evaluation) {
         if(evaluation==null){
-            return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
+            //添加失败
+            return new QueryResponseResult(CommonCode.FAIL, null);
         }
         int redis =evaluationService.addEvaluation(evaluation);
-        if(redis == 1 ){   //添加成功
-            return new QueryResponseResult(CommonCode.SUCCESS, null);//添加成功
+        if(redis == 1 ){
+            //添加成功
+            return new QueryResponseResult(CommonCode.SUCCESS, null);
         }else {
-            return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
+            //添加失败
+            return new QueryResponseResult(CommonCode.FAIL, null);
         }
     }
 }
