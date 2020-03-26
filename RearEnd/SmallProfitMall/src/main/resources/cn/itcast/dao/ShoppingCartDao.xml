@@ -68,7 +68,7 @@
 
     <!--查询购物车数量-->
     <select id="findByuId" resultType="java.lang.Integer" parameterType="java.lang.String">
-        SELECT shoppingCartId FROM shoppingCart WHERE userId=#{userId}
+        SELECT count(*) FROM shoppingCart WHERE userId=#{userId}
     </select>
 
     <!--修改购物车数量-->
