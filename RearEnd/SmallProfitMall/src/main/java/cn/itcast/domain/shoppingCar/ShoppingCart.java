@@ -3,6 +3,7 @@ package cn.itcast.domain.shoppingCar;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+//购物车
 @Component
 public class ShoppingCart implements Serializable {
     private Integer shoppingCartId; //购物车id

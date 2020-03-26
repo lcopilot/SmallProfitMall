@@ -19,11 +19,10 @@ import java.util.List;
 @RequestMapping("/TestController")
 @ResponseBody
 public class TestController {
-    @Autowired
-    QueryResult queryResult;
     //商品分类导航栏
     @RequestMapping(value = "/Test/{test}",method = RequestMethod.GET)
     public QueryResponseResult findNavigation(@PathVariable("test")int test){
+        QueryResult queryResult = new QueryResult();
         List a=new ArrayList();
         for (int i = 0; i <10 ; i++) {
             if (test==1){

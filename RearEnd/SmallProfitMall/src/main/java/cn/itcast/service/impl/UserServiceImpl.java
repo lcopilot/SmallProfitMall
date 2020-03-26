@@ -22,8 +22,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao UserDao;
 
-    @Autowired
-    private User users;
+
 
 
     @Autowired
@@ -55,6 +54,7 @@ public class UserServiceImpl implements UserService {
     //根据传入的账户查询信息查询
     @Override
     public User findAccount(User user) throws Exception {
+         User users = new User();
         String Account=AesEncryptUtil.encrypt(user.getName());
         if (user.getName().length()==11){
            users = this.findByPhone(Account);    //根据手机号查

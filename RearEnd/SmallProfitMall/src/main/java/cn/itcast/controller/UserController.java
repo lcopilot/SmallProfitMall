@@ -1,6 +1,5 @@
 package cn.itcast.controller;
 
-import cn.itcast.dao.UserDao;
 import cn.itcast.skd.Constant;
 import cn.itcast.domain.user.Login;
 import cn.itcast.domain.user.Password;
@@ -18,16 +17,12 @@ import cn.itcast.util.verify.IPUtil;
 import cn.itcast.util.verify.TCaptchaVerify;
 import cn.itcast.util.verify.VerifyUtil;
 import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.http.HttpRequest;
-import com.google.gson.internal.$Gson$Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -45,12 +40,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	private static String KEY = "a9s8i5tlj32fa3l2";
-	private static String IV = "a2s5i6tlj32f2i12";
-
-	@Autowired
-	QueryResult queryResult;
-
 	@Autowired
 	VerifyUtil verifyUtil;
 
@@ -63,6 +52,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/findAll")
 	public QueryResponseResult findAll() {
+		QueryResult queryResult = new QueryResult();
 		// 调用service的方法
 		List<User> list = userService.findAll();
 		queryResult.setList(list);
@@ -99,8 +89,9 @@ public class UserController {
 		if (users == null) {  //判断用户是否存在
 			return new QueryResponseResult(CommonCode.FAIL, null); //用户不存在
 		}
-		String password=AesEncryptUtil.desEncrypt(users.getPassword(),KEY,IV);
+		String password=AesEncryptUtil.desEncrypt(users.getPassword());
 		if (password.equals(user.getPassword())) {
+			QueryResult queryResult = new QueryResult();
 			Login login=userService.findLogin(users);
 			List<Login> logins = Arrays.asList(login);
 			queryResult.setList(logins);
@@ -120,7 +111,7 @@ public class UserController {
 	@RequestMapping(value = "/registerVerify",method = RequestMethod.GET)
 	public QueryResponseResult registerVerify(String phone,
 			HttpSession session) throws Exception {
-		String phones = AesEncryptUtil.desEncrypt(phone,KEY,IV);
+		String phones = AesEncryptUtil.desEncrypt(phone);
 		if (phones.length() != 11) {      //判断手机号是否正确
 			return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
 		}
@@ -246,6 +237,7 @@ public class UserController {
 	@RequestMapping(value = "/updatePortrait", method = RequestMethod.POST)
 	public QueryResponseResult updatePortrait(MultipartFile file, String userId)
 			throws IOException {
+		QueryResult queryResult = new QueryResult();
 		InputStream fileInputStream = file.getInputStream();
 		String Image = userService.updatePortrait(fileInputStream, userId);
 		List Images = new ArrayList();
@@ -261,6 +253,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/findByIdInformation/{userId}", method = RequestMethod.GET)
 	public QueryResponseResult findByIdInformation(@PathVariable("userId") String userId) throws Exception {
+		QueryResult queryResult = new QueryResult();
 		// 调用service的方法
 		User user = userService.findByIdInformation(userId);
 		List<User> users = Arrays.asList(user);
@@ -324,6 +317,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/formerPhone", method = RequestMethod.POST)
 	public QueryResponseResult updateFormerPhone(String verification, String phone, HttpSession session) {
+		QueryResult queryResult = new QueryResult();
 		String formerPhoneVerify = (String) session.getAttribute("formerPhoneVerify");
 		String formerPhone = (String) session.getAttribute("formerPhone");
 		if (verification.equals(formerPhoneVerify) && phone.equals(formerPhone)) {

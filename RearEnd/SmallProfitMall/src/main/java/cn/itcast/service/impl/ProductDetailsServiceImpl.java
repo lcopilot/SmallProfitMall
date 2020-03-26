@@ -18,19 +18,14 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     @Autowired
     private ProductDetailsDao productDetailsDao;
 
-    @Autowired
-    private ProductBasis productBasis;
 
     @Autowired
     private RedisUtil redisUtil;
 
-    @Autowired
-    private ProductDetailsResult productDetailsResult;
-
     public List<ProductDetailsResult> findByPid(int pid) {
+        ProductDetailsResult productDetailsResult = new ProductDetailsResult();
         String transition = String.valueOf(pid);
         String ProductId ="productId_"+transition;
-        System.out.println(ProductId);
         List<ProductDetailsResult>  redis = (List<ProductDetailsResult>)redisUtil.lGet(ProductId,0,-1); //从缓存中查询
         if(redis.size()==0){
             String inventory = "";   //库存价格(转换)

@@ -30,7 +30,7 @@ public class MQSendMsgUtils {
 
 
 	@Autowired//注入发送消息模板
-			RabbitTemplate rabbitTemplate;
+	RabbitTemplate rabbitTemplate;
 
 	public void sendMsg(String content, String type, String userEmail) {
 		String prefix = "user.";

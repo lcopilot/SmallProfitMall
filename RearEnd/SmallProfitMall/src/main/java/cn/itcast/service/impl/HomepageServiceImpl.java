@@ -23,8 +23,7 @@ public class HomepageServiceImpl implements HomepageService {
     @Autowired
     RedisUtil redisUtil;
 
-    @Autowired
-    Classification classification;
+
 
     //轮播图
     @Override
@@ -71,6 +70,7 @@ public class HomepageServiceImpl implements HomepageService {
 
     //详细分类
     public Classification navigationInDetail(){
+        Classification classification = new Classification();
         classification.setNavigationClassify(findClassification());
         classification.setNavigations(findNavigation());
         return classification;

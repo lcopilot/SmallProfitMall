@@ -28,14 +28,13 @@ public class ProductController {
     @Autowired
     ProductLowPriceResult productLowPriceResult;
 
-    @Autowired
-    QueryResult result;
     /**
      * 秒杀商品
      * @return
      */
     @RequestMapping("/findSeckill")
     public QueryResponseResult findSeckill() throws ParseException {
+        QueryResult result = new QueryResult();
         // 调用service的方法
         List<SeckillResult> seckillResult = commodityService.findSeckill();
         result.setList(seckillResult);
@@ -48,6 +47,7 @@ public class ProductController {
      */
     @RequestMapping("/findProductLowPrice")
     public QueryResponseResult ProductLowPrice() {
+        QueryResult result = new QueryResult();
         // 调用service的方法
         List<ProductLowPriceResult> productLowPriceResult = commodityService.findProductLowPrice();
         result.setList(productLowPriceResult);
@@ -60,6 +60,7 @@ public class ProductController {
      */
     @RequestMapping("/findAd")
     public QueryResponseResult findAd() {
+        QueryResult result = new QueryResult();
         // 调用service的方法
         List<Ad> list = commodityService.findAd();
         result.setTotal(list.size());
@@ -73,6 +74,7 @@ public class ProductController {
      */
     @RequestMapping("/Recommend")
     public QueryResponseResult findRecommend() {
+        QueryResult result = new QueryResult();
         // 调用service的方法
         List<Recommend> list = commodityService.findRecommend();
         int a =list.size();
@@ -83,6 +85,7 @@ public class ProductController {
 
     @RequestMapping("/cs")
     public QueryResponseResult cs() {
+        QueryResult result = new QueryResult();
         // 调用service的方法
         List<Ad> list = commodityService.findAd();
         result.setList(list);

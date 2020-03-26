@@ -1,6 +1,6 @@
 package cn.itcast.dao;
 
-import cn.itcast.domain.Evaluation.Evaluation;
+import cn.itcast.domain.favorite.Evaluation;
 import org.apache.ibatis.annotations.Param;
 
 //收藏

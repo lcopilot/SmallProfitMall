@@ -25,8 +25,6 @@ import java.util.List;
 @RequestMapping("/EmailController")
 @ResponseBody
 public class EmailController {
-    @Autowired
-    QueryResult result;
 
     @Autowired
     EmailService emailService;
@@ -83,6 +81,7 @@ public class EmailController {
      */
     @RequestMapping(value = "/updateEmailPhone", method = RequestMethod.POST)
     public QueryResponseResult updateEmailPhone(String userId,String verificationType, HttpSession session) throws Exception {
+        QueryResult result = new QueryResult();
         String phone = userService.findByIdPhone(userId);
         String FR = GetFourRandom.getFourRandom();  //随机验证码
         System.out.println(FR);
