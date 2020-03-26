@@ -127,7 +127,7 @@ public class ShoppingCartImpl implements ShoppingCartService {
             String  redis = shoppingCartDao.findByUidEvaluation(userId,productId);
              if (redis!=null){
                  //查询有收藏置为true
-                 if (redis.equals("true")){
+                 if ("true".equals(redis)){
                      shoppingCartss.get(i).setEvaluation(true);
                  }
              }else {
