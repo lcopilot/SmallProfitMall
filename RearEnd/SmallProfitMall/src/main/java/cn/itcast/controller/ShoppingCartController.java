@@ -93,23 +93,6 @@ public class ShoppingCartController {
         }
     }
 
-    /**
-     * 查询商品数量
-     * @param userId
-     * @return
-     */
-    @RequestMapping(value = "/findByuId/{userId}",method = RequestMethod.GET)
-    public QueryResponseResult findByuId(@PathVariable("userId")String userId) {
-        if (userId == null) {
-            //传入参数为空
-            return new QueryResponseResult(CommonCode.FAIL, null);
-        }
-        ArrayList redis = shoppingCartService.findByuId(userId);
-        QueryResult queryResult = new QueryResult();
-        queryResult.setTotal(redis.size());
-        //查询成功
-        return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
-    }
 
     /**
      * 添加到货通知
@@ -148,7 +131,7 @@ public class ShoppingCartController {
     }
 
     /**
-     *擦好像预览商品
+     *查询预览商品
      */
     @RequestMapping(value = "/findPreview/{userId}/{Ends}",method = RequestMethod.GET)
     public QueryResponseResult findPreview(@PathVariable("userId")String userId,
@@ -157,14 +140,14 @@ public class ShoppingCartController {
             //传入参数为空
             return new QueryResponseResult(CommonCode.FAIL, null);
         }
-
         if (Ends==null){
             Ends="4";
         }
         List<ShoppingCart> redis = shoppingCartService.findPreview(userId,Integer.parseInt(Ends));
+        Integer quantity = shoppingCartService.findByuId(userId);
         QueryResult queryResult = new QueryResult();
         queryResult.setList(redis);
-        queryResult.setTotal(redis.size());
+        queryResult.setTotal(quantity);
         return  new QueryResponseResult(CommonCode.SUCCESS, queryResult);
 
     }

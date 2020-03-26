@@ -29,7 +29,7 @@ public interface ShoppingCartService {
      * @param userId
      * @return
      */
-    public ArrayList findByuId(String userId);
+    public Integer findByuId(String userId);
 
     /**
      * 添加到货通知

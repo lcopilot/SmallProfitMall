@@ -158,8 +158,8 @@ public class ShoppingCartImpl implements ShoppingCartService {
      * @return
      */
     @Override
-    public ArrayList findByuId(String userId) {
-        return (ArrayList) shoppingCartDao.findByuId(userId);
+    public Integer findByuId(String userId) {
+        return  shoppingCartDao.findByuId(userId);
     }
 
     /**
