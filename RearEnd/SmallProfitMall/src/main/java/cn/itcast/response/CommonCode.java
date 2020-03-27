@@ -18,6 +18,7 @@ public enum CommonCode implements ResultCode{
     ValidationFails(false,10009,"人机验证失败"),
     INVALID_PARAM(false,10003,"参数非法"),
     SUCCESS(true,10000,"操作成功！"),
+    PARTIALLY_SUCCESS(true,11000,"部分成功"),
     FAIL(false,11111,"操作失败！"),
     FALL_USER_REGISTER(false,11211,"用户已存在!"),
     UNAUTHENTICATED(false,10001,"此操作需要登陆系统！"),

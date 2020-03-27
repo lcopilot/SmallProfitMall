@@ -23,8 +23,6 @@ public class UserServiceImpl implements UserService {
     private UserDao UserDao;
 
 
-
-
     @Autowired
     private Login login;
 
@@ -57,7 +55,8 @@ public class UserServiceImpl implements UserService {
          User users = new User();
         String Account=AesEncryptUtil.encrypt(user.getName());
         if (user.getName().length()==11){
-           users = this.findByPhone(Account);    //根据手机号查
+            //根据手机号查
+           users = this.findByPhone(Account);
           if (users==null){
             users = this.findByName(user.getName());
           }
@@ -123,8 +122,6 @@ public class UserServiceImpl implements UserService {
         }
         //解密邮箱
 
-
-
         if (users.getBirthday()!=null){
            List birthday = Arrays.asList(users.getBirthday().split("-"));
             users.setBirthdays(birthday);
@@ -132,9 +129,21 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
+    /**
+     * 修改个人信息
+     * @param user
+     * @return 返回1代表全部成功 返回2代表部分修改成功
+     */
     @Override
     public int updateInformation(User user) {
-        return UserDao.updateInformation(user);
+        int redis=0;
+        if(UserDao.findByName(user.getName())!=null){
+            User users = UserDao.findByIdInformation(user.getUid());
+            user.setName(users.getName());
+            redis=1;
+        }
+        redis =redis + UserDao.updateInformation(user);
+        return redis;
     }
 
     @Override
