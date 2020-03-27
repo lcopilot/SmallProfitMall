@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,10 +40,21 @@ public class TestController {
         queryResult.setList(a);
         return  new QueryResponseResult(CommonCode.SUCCESS,queryResult);
     }
-    @RequestMapping(value = "/email/{e}",method = RequestMethod.GET)
-    public void email(){
-        String[] a = {"2252821162@qq.com","尊敬的微利会员，您关注的商品"};
-        shoppingProducer.sendDeleteCart("arrival",a);
-    }
 
+
+//    @RequestMapping(value = "/email/{e}",method = RequestMethod.GET)
+//    public void email(){
+//        String[] a = {"2252821162@qq.com","尊敬的微利会员，您关注的商品"};
+//        shoppingProducer.sendDeleteCart("arrival",a);
+//    }
+//
+//    @RequestMapping(value = "/wevSocket/{userId}/{msg}",method = RequestMethod.GET)
+//    public void wevSocket(@PathVariable("userId")String userId,@PathVariable("msg")String msg) throws IOException {
+//        webSocket.sendMessage(userId,msg);
+//    }
+//
+//    @RequestMapping(value = "/close/{userId}/{msg}",method = RequestMethod.GET)
+//    public void close(@PathVariable("userId")String userId,@PathVariable("msg")String msg) throws IOException {
+//        webSocket.sendMessage(userId,msg);
+//    }
 }
