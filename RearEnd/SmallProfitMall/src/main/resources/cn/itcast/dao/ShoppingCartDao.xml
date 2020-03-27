@@ -100,7 +100,7 @@
     <!--查询预览商品-->
     <select id="findPreview" resultType="cn.itcast.domain.shoppingCar.ShoppingCart">
         SELECT
-            sc.shoppingCartId,sc.quantity ,pb.ProductName,pi.ImageSite
+            sc.shoppingCartId,sc.productId,sc.quantity ,pb.ProductName,pi.ImageSite
         FROM
             shoppingCart sc
         JOIN

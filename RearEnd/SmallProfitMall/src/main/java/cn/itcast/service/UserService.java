@@ -42,7 +42,11 @@ public interface UserService {
     //根据uid查询用户信息
     public User findByIdInformation(String uid) throws Exception;
 
-    //传入用户对象修改用户信息
+    /**
+     * 跟新用户信息用户信息
+     * @param user
+     * @return
+     */
     public int updateInformation( User user);
 
     //根据id查询手机号码

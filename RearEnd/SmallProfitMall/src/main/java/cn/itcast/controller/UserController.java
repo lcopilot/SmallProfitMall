@@ -217,9 +217,12 @@ public class UserController {
 	@RequestMapping("/updatePasswordUid")
 	public QueryResponseResult updatePasswordUid(@RequestBody Password password) {
 		User user = userService.findByUid(password.getUid());
-		String SqlPassword = user.getPassword();//数据库密码
-		String ExpiredPassword = password.getExpiredPassword();//旧密码
-		String LatestPassword = password.getLatestPassword();//新密码
+		//数据库查询密码
+		String SqlPassword = user.getPassword();
+		//用户输入的旧密码
+		String ExpiredPassword = password.getExpiredPassword();
+		//用户输入的新密码
+		String LatestPassword = password.getLatestPassword();
 		if (SqlPassword.equals(ExpiredPassword)) {
 			userService.updatePasswordUid(password.getUid(), LatestPassword);
 			return new QueryResponseResult(CommonCode.SUCCESS, null);
@@ -275,9 +278,14 @@ public class UserController {
 		}
 		int result = userService.updateInformation(user);
 		if (result == 1) {
-			return new QueryResponseResult(CommonCode.SUCCESS, null);//修改成功
-		} else {
-			return new QueryResponseResult(CommonCode.FAIL, null);//修改失败
+			//数据库更新成功
+			return new QueryResponseResult(CommonCode.SUCCESS, null);
+		} else if (result == 2){
+			//修改用户名失败 用户名已存在
+			return new QueryResponseResult(CommonCode.PARTIALLY_SUCCESS,null);
+		}else {
+			//数据库更新失败失败
+			return new QueryResponseResult(CommonCode.FAIL, null);
 		}
 
 	}

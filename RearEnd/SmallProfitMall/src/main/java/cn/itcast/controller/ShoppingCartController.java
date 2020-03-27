@@ -44,13 +44,14 @@ public class ShoppingCartController {
             queryResult.setTotal(redis[1]);
             return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
         }else if (redis[1]==2){
-            //添加失败
+            //添加失败 购物车数量大于99
             return new QueryResponseResult(CommonCode.FAIL, null);
         }else if (redis[0]==3){
-            //添加失败
+            //添加失败 单个商品数量大于99
             return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
         }
-        return new QueryResponseResult(CommonCode.FAIL, null);//添加失败
+        //添加失败 添加数据失败
+        return new QueryResponseResult(CommonCode.FAIL, null);
     }
 
     /**
@@ -144,6 +145,7 @@ public class ShoppingCartController {
             Ends="4";
         }
         List<ShoppingCart> redis = shoppingCartService.findPreview(userId,Integer.parseInt(Ends));
+        //查询购物车中商品数
         Integer quantity = shoppingCartService.findByuId(userId);
         QueryResult queryResult = new QueryResult();
         queryResult.setList(redis);
