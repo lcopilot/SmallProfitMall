@@ -22,6 +22,12 @@ import 'vue-video-player/src/custom-theme.css'
 import 'video.js/dist/video-js.css'
 //animated动画
 import animated from 'animate.css'
+const Header = () => import("./components/pages/Header"); //组件懒加载
+const Footer = () => import("./components/pages/Footer");
+
+Vue.component("Header",Header)
+Vue.component("Footer",Footer)
+
 
 Vue.use(animated)
 
@@ -37,7 +43,6 @@ Vue.use(VueAxios,axios);
 Vue.use(ElementUI)//全局使用ElementUI
 Vue.config.productionTip = false;
 Vue.use(VuePhotoZoomPro);
-
 
 
 new Vue({

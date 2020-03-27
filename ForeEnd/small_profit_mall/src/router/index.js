@@ -87,12 +87,12 @@ const routes = [
     component: () => import('@/views/user/allOrders')
   },
   {
-    path: '/orders',
-    name: 'orders',
+    path: '/order',
+    name: 'order',
     meta: {
       requireAuth: true,
     },
-    component: () => import('@/views/user/orders')
+    component: () => import('@/views/user/order')
   },
   {
     path: '/messageCenter',
@@ -101,6 +101,30 @@ const routes = [
       requireAuth: true,
     },
     component: () => import('@/views/user/messageCenter')
+  },
+  {
+    path: '/orderComplete',
+    name: 'OrderComplete',
+    meta: {
+      requireAuth: true,
+    },
+    component: () => import('@/views/user/orderComplete')
+  },
+  {
+    path: '/favorite',
+    name: 'Favorite',
+    meta: {
+      requireAuth: true,
+    },
+    component: () => import('@/views/user/favorite')
+  },
+  {
+    path: '/footprint',
+    name: 'Footprint',
+    meta: {
+      requireAuth: true,
+    },
+    component: () => import('@/views/user/footprint')
   },
   //捕获404
   {

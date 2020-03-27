@@ -359,7 +359,7 @@
       settlement() {
         this.$refs.cartTable.selection
         this.$router.push({
-          path: "/orders" //跳转的路径
+          path: "/order" //跳转的路径
         });
       },
       //获取购物车数据

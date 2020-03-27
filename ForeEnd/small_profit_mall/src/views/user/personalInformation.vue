@@ -96,8 +96,6 @@
 </template>
 
 <script>
-  const Header = () => import("../../components/pages/Header"); //组件懒加载
-  const Footer = () => import("../../components/pages/Footer");
   const personalPage = () => import("../../components/admin/personalHubPage");
   const DataSelect = () => import("../../components/UtilsComponent/DateSelect");
   const phoneModify = () => import("../../components/admin/phoneModify");
@@ -105,7 +103,7 @@
   import *as userApi from '../../api/page/user'  //*as别名
   export default {
     name: "personalInformation",
-    components: {Header, Footer, personalPage, DataSelect, phoneModify,emailModify},
+    components: {personalPage, DataSelect, phoneModify,emailModify},
     data() {
       return {
         //邮箱变更类型
@@ -238,6 +236,9 @@
       },
       //修改用户信息
       modifyUser(formName) {
+        if (this.userFrom.name=='smallProfit'){
+          return this.$message.warning("用户名为初始用户名不可修改哦~")
+        }
         this.$refs[formName].validate((valid) => {
           if (this.userFrom.name==sessionStorage.getItem("username") && this.userFrom.sex==sessionStorage.getItem("userSex") && this.birthday[0]==this.birthdays.year && this.birthday[1]==this.birthdays.month && this.birthday[2]==this.birthdays.day ) {
             this.$message({
@@ -254,6 +255,13 @@
 
             userApi.modifyUser(this.userFrom).then(res => {
               if (res.success) {
+                if (res.code==11000){
+                  this.$message({
+                    message: "用户名修改失败,用户名重复",
+                    type: "warning",
+                  });
+                  return this.getUser();
+                }
                 this.getUser();
                 this.$message({
                   message: "修改成功!",

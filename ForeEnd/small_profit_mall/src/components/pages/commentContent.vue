@@ -116,12 +116,12 @@
           background
           @size-change="changeNumber"
           @current-change="changePage"
-          :current-page="comment_params.currentPage"
+          :current-page="commentParams.currentPage"
           :page-sizes="[6,7, 8, 10, 12,15]"
-          :page-size="comment_params.pageSize"
+          :page-size="commentParams.pageSize"
           layout="total, sizes, prev, pager, next, jumper"
           :hide-on-single-page="true"
-          :total="comment_params.totalCount">
+          :total="commentParams.totalCount">
       </el-pagination>
     </div>
   </div>
@@ -143,7 +143,7 @@
           'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
         ],
         //评论分页参数
-        comment_params: {
+        commentParams: {
           currentPage: 1,//页码
           pageSize: 6,//每页显示个数
           totalCount: 400,//总记录数
@@ -176,11 +176,11 @@
       },
       //切换评论分页时触发
       changePage(currentPage) {
-        this.comment_params.currentPage = currentPage;
+        this.commentParams.currentPage = currentPage;
       },
       //切换每页显示多少条评论时触发
       changeNumber(pageSize) {
-        this.comment_params.pageSize = pageSize;
+        this.commentParams.pageSize = pageSize;
       }
     },
     computed: {

@@ -268,12 +268,10 @@
 
 <script>
   import *as ordersApi from '../../api/page/orders'
-  const Header = () => import("../../components/pages/Header"); //组件懒加载
-  const Footer = () => import("../../components/pages/Footer");
   const addressManagement = () => import("../user/addressManagement");
   export default {
     name: "order",
-    components: {Header, Footer, addressManagement},
+    components: { addressManagement},
     data() {
       return {
         //人脸识别的对话框
@@ -314,6 +312,9 @@
       //结算
       settlement(){
         if (this.paymentMethod==1){
+          this.$router.push({
+            path: "/orderComplete"
+          });
           this.faceRecognitionDialogVisible=true;
           ordersApi.facePayment().then(res=>{
             if (res.success){

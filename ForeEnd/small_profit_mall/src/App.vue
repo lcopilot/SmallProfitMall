@@ -21,6 +21,13 @@
             </router-link>
           </div>
         </el-tooltip>
+        <el-tooltip class="item" effect="dark" content="足迹" placement="left">
+          <div>
+            <router-link to="/footprint">
+              <svg-icon name="footprint2"/>
+            </router-link>
+          </div>
+        </el-tooltip>
       </div>
     </el-backtop>
     <!-- 同路由下刷新页面-->

@@ -151,6 +151,7 @@
         if (userId != null) {
           productApi.getShoppingCartPreview(userId,4).then(res => {
             if (res.success) {
+              console.log(res)
               this.getCartSum(res.queryResult.total);
               this.cartList=res.queryResult.list;
             }
