@@ -85,7 +85,7 @@
                         </div>
                       </div>
                       <div style="text-align: left;margin-right:-5%;float:right;padding: 2%;width: 100%;">
-                      彭浩 湖南科技职业学院上课了较好的那开发商和 15367885410
+                      彭cdf 学院上课了较好的那开发商和 1536788534sdf5410
                       </div>
                       <div
                           style="text-align: right;margin-right:5%;float:right;padding: 2%;width: 100%;margin-bottom: 5%">
@@ -122,38 +122,7 @@
         pageSize: 0,
         list: [],
         product: [
-
           {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjsdfsdfsdfsdklfjsdklfjsdklfdjsdkldjklsdjsdkldfjsdfkljsdfkljlsdfjsdkljsdfsdkljsdklfsdl;jsdklfsjaklfjkasjkksdklsdfkasdfklnsfadjklsdfjklsdfasdfjklksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
             url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
             name: "dsjksd",
           }, {

@@ -135,8 +135,7 @@ public class ShoppingCartController {
      *查询预览商品
      */
     @RequestMapping(value = "/findPreview/{userId}/{Ends}",method = RequestMethod.GET)
-    public QueryResponseResult findPreview(@PathVariable("userId")String userId,
-                                           @PathVariable("Ends")String Ends){
+    public QueryResponseResult findPreview(@PathVariable("userId")String userId,@PathVariable("Ends")String Ends){
         if (userId == null){
             //传入参数为空
             return new QueryResponseResult(CommonCode.FAIL, null);

@@ -40,10 +40,10 @@
         <div>
           <div class="personal_page">我的收藏</div>
           <div class="personal_page_child">
-            <router-link to="/"> 收藏</router-link>
+            <router-link to="/favorite"> 收藏</router-link>
           </div>
           <div class="personal_page_child">
-            <router-link to="/"> 足迹</router-link>
+            <router-link to="/footprint"> 足迹</router-link>
           </div>
           <el-divider/>
         </div>
