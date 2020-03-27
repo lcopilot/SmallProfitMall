@@ -397,6 +397,13 @@
 
 
     <!--WebSocket-->
+    <!-- webSocket 开始-->
+    <dependency>
+      <groupId>javax.websocket</groupId>
+      <artifactId>javax.websocket-api</artifactId>
+      <version>1.1</version>
+      <scope>provided</scope>
+    </dependency>
 
     <dependency>
       <groupId>javax</groupId>
@@ -404,18 +411,7 @@
       <version>7.0</version>
       <scope>provided</scope>
     </dependency>
-
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-websocket</artifactId>
-      <version>4.3.13.RELEASE</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-messaging</artifactId>
-      <version>4.2.8.RELEASE</version>
-    </dependency>
+    <!-- webSocket 结束-->
 
   </dependencies>
 
