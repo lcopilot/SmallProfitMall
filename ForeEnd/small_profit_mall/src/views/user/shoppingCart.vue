@@ -357,10 +357,11 @@
       },
       //结算
       settlement() {
-        this.$refs.cartTable.selection
-        this.$router.push({
-          path: "/order" //跳转的路径
-        });
+        this.socketApi.sendMessage("sadas");
+        // this.$refs.cartTable.selection
+        // this.$router.push({
+        //   path: "/order" //跳转的路径
+        // });
       },
       //获取购物车数据
       getShoppingCart() {
