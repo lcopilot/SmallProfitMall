@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 public enum CommonCode implements ResultCode{
 
     same(false,10007,"跟原有信息相同"),
+    normal(true,80002,"webSocket连接正常"),
     nameError(false,10008,"不可以使用初始名登录"),
     ValidationFails(false,10009,"人机验证失败"),
     INVALID_PARAM(false,10003,"参数非法"),

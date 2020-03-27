@@ -1,18 +1,33 @@
 package cn.itcast.controller;
 
+import cn.itcast.response.CommonCode;
+import cn.itcast.response.QueryResponseResult;
+import cn.itcast.util.logic.ConversionJson;
+import com.alibaba.fastjson.JSONException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.concurrent.ConcurrentHashMap;
 
 @ServerEndpoint("/notification/{userId}")
 public class WebSocket {
+
     private static Logger logger = Logger.getLogger(WebSocket.class);
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的
     public static int onlineCount = 0;
+
+
+
+    //在线用户的SOCKETsession(存储了所有的通信通道)
+    public static final ConcurrentHashMap<String, Session> USER_ONLINE_MAP = new ConcurrentHashMap<>();
 
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     public Session session;
@@ -24,12 +39,14 @@ public class WebSocket {
     @OnOpen
     public void onOpen(@PathParam("userId") String userId, Session session){
         this.session = session;
+        System.out.println(session);
+        USER_ONLINE_MAP.put(userId,this.session);
         System.out.println(userId);
         addOnlineCount();           //在线数加1
-
+        System.out.println(USER_ONLINE_MAP.get(userId));
         System.out.println("有新连接加入！当前在线人数为" + getOnlineCount());
-
     }
+
 
     /**
      * 连接关闭调用的方法
@@ -37,7 +54,6 @@ public class WebSocket {
     @OnClose
     public void onClose(){
         subOnlineCount();           //在线数减1
-
         try {
             if(session != null){
                 session.close();
@@ -54,16 +70,17 @@ public class WebSocket {
      * @param session 可选的参数
      */
     @OnMessage
-    public String onMessage(String message, Session session) {
-        System.out.println("来自客户端的消息:" + message);
-
-        if (message.equals("&")){
-            return "&";
+    public String onMessage(String message, Session session) throws IOException {
+        //返回的数据
+        String redis="";
+        //连接正常
+        if (message.equals("80001")){
+            return redis = ConversionJson.objectToJson(new QueryResponseResult(CommonCode.normal,null));
         }else{
-
-            return "Got your message ("+ message +")";
+            return redis;
         }
     }
+
 
     /**
      * 发生错误时调用
@@ -78,12 +95,17 @@ public class WebSocket {
     }
 
     //单发消息
-    public void sendMessage(String message) throws IOException {
+    public void sendMessage(String id,String message) throws IOException {
+        Session session = USER_ONLINE_MAP.get(id);
+        session.getAsyncRemote().sendText(message);
+
         //阻塞式（同步）
         //this.session.getBasicRemote().sendText(message);
         //非阻塞式（异步）
-        this.session.getAsyncRemote().sendText(message);
+       // this.session.getAsyncRemote().sendText(message);
     }
+
+
 
     //群发消息
     public void sendMessageAll(String message) throws IOException{
