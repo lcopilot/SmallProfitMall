@@ -5,9 +5,13 @@ import java.util.Date;
 
 //足迹
 public class Footprint {
+    //足迹id
     private int footprintId;
+    //商品id
     private int productId;
+    //用户id
     private String userId;
+    //浏览时间
     private Date footprintTime;
 
     public int getFootprintId() {

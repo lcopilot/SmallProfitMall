@@ -22,6 +22,7 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     @Autowired
     private RedisUtil redisUtil;
 
+    @Override
     public List<ProductDetailsResult> findByPid(int pid) {
         ProductDetailsResult productDetailsResult = new ProductDetailsResult();
         String transition = String.valueOf(pid);
