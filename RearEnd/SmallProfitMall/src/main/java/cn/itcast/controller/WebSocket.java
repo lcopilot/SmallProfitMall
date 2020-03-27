@@ -1,16 +1,16 @@
 package cn.itcast.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.websocket.*;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 
 @ServerEndpoint("/notification/{userId}")
 public class WebSocket {
-
-
-
+    private static Logger logger = Logger.getLogger(WebSocket.class);
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的
     public static int onlineCount = 0;
 
@@ -22,7 +22,7 @@ public class WebSocket {
      * @param session  可选的参数。session为与某个客户端的连接会话，需要通过它来给客户端发送数据
      */
     @OnOpen
-    public void onOpen(@PathVariable("userId") String userId, Session session){
+    public void onOpen(@PathParam("userId") String userId, Session session){
         this.session = session;
         System.out.println(userId);
         addOnlineCount();           //在线数加1
@@ -36,7 +36,6 @@ public class WebSocket {
      */
     @OnClose
     public void onClose(){
-
         subOnlineCount();           //在线数减1
 
         try {
