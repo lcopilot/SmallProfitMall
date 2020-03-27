@@ -16,7 +16,15 @@ export const getShoppingCart=userId=>{
 export const removeCart=cartIdList=>{
   return http.requestDelete('apiUrl/ShoppingCartController/deleteCart/'+cartIdList)
 }
-//获取购物车数据
-export const getShoppingCartNumber=userId=>{
-  return http.requestGet('apiUrl/ShoppingCartController/findByuId/'+userId)
+//到货通知
+export const arrivalNotice=(userId,productId)=>{
+  return http.requestPost('apiUrl/ShoppingCartController/addArrivalNotice/'+userId+'/'+productId)
+}
+//修改购物车商品数量
+export const modifyProductNumber=(productNumber,cartId)=>{
+  return http.requestPut('apiUrl/ShoppingCartController/updateQuantity/'+productNumber+'/'+cartId)
+}
+//获取购物车预览数据
+export const getShoppingCartPreview=(userId,number)=>{
+  return http.requestGet('apiUrl/ShoppingCartController/findPreview/'+userId+'/'+number)
 }

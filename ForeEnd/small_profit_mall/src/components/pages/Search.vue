@@ -27,7 +27,7 @@
                 trigger="hover"
                 transition="el-zoom-in-top"
                 :open-delay="200"
-                @show="getCartPreview()"
+                @show="getShoppingCartPreview()"
             >
               <div v-if="!toke" style="text-align: center;padding: 6%;">
                 <router-link to="/login">您还没有登录,请先登录吧</router-link>
@@ -112,26 +112,7 @@
         //判断登录状态
         toke: '',
         //购物车预览数据
-        cartList: [
-          {
-            productId: '10001',
-            imageSite: "http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg",
-            productName: "快闪店时间的话啥拉萨计划iOS家爱德华奥斯丁你发我奥士大夫 库数据案发时阿斯顿发生卡水电费卢卡申科的集合南科技撒地方猎杀对决好看可能是打飞机开始啦卡萨丁卷发梳嫁得好上刊登和安康啥的看法内连发忘记了as的好机会喀纳斯加速带回家加速带回家看",
-            quantity: 20,
-          }, {
-            imageSite: "http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg",
-            productName: "快闪店时间的话啥拉萨计划iOS家爱德华奥斯丁你发我奥士大夫 库数据案发时阿斯顿发生卡水电费卢卡申科的集合南科技撒地方猎杀对决好看可能是打飞机开始啦卡萨丁卷发梳嫁得好上刊登和安康啥的看法内连发忘记了as的好机会喀纳斯加速带回家加速带回家看",
-            quantity: 220,
-          }, {
-            imageSite: "http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg",
-            productName: "快闪店时间的话啥拉萨计划iOS家爱德华奥斯丁你发我奥士大夫 库数据案发时阿斯顿发生卡水电费卢卡申科的集合南科技撒地方猎杀对决好看可能是打飞机开始啦卡萨丁卷发梳嫁得好上刊登和安康啥的看法内连发忘记了as的好机会喀纳斯加速带回家加速带回家看",
-            quantity: 20,
-          }, {
-            imageSite: "http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg",
-            productName: "快闪店时间的话啥拉萨计划iOS家爱德华奥斯丁你发我奥士大夫 库数据案发时阿斯顿发生卡水电费卢卡申科的集合南科技撒地方猎杀对决好看可能是打飞机开始啦卡萨丁卷发梳嫁得好上刊登和安康啥的看法内连发忘记了as的好机会喀纳斯加速带回家加速带回家看",
-            quantity: 220,
-          }
-        ],
+        cartList: [],
         searchContent: '',
         restaurants: [],
         state1: '',
@@ -156,30 +137,6 @@
         "modifyCartSum",
         "getCartSum"
       ]),
-      //获取购物车的预览内容
-      getCartPreview() {
-        console.log("购物车的预览内容")
-      },
-      //删除商品
-      removeCartProduct(shoppingCartId) {
-        let cartIdList = [];
-        cartIdList.push(shoppingCartId);
-        productApi.removeCart(cartIdList).then(res => {
-          if (res.success) {
-            this.$message({
-              message: "商品已移出购物车!",
-              type: "success"
-            })
-            this.modifyCartSum(-cartIdList.length);
-            this.getCartPreview();
-          } else {
-            this.$message({
-              message: "商品已移出购物车失败!,请重试",
-              type: "error"
-            })
-          }
-        })
-      },
       //获取导航栏数据
       getPagePilot() {
         homeApi.getPagePilot().then(res => {
@@ -188,15 +145,36 @@
           }
         })
       },
-      //获取购物车数量
-      getShoppingCartNum() {
+      //获取购物车预览数据
+      getShoppingCartPreview() {
         let userId = sessionStorage.getItem("uId");
-        if (userId == null) {
-          userId = 0;
+        if (userId != null) {
+          productApi.getShoppingCartPreview(userId,4).then(res => {
+            if (res.success) {
+              this.getCartSum(res.queryResult.total);
+              this.cartList=res.queryResult.list;
+            }
+          })
+        }else{
+          this.getCartSum(0);
         }
-        productApi.getShoppingCartNumber(userId).then(res => {
+      },
+      //删除商品
+      removeCartProduct(shoppingCartId) {
+        let cartIdList = [];
+        cartIdList.push(shoppingCartId);
+        productApi.removeCart(cartIdList).then(res => {
           if (res.success) {
-            this.getCartSum(res.queryResult.total);
+            this.$message({
+              message: "商品已移出购物车",
+              type: "success"
+            })
+            this.getShoppingCartPreview();
+          } else {
+            this.$message({
+              message: "商品移出购物车失败!,请稍后重试",
+              type: "error"
+            })
           }
         })
       },
@@ -270,7 +248,7 @@
     },
     created() {
       this.getPagePilot();
-      this.getShoppingCartNum();
+      this.getShoppingCartPreview();
     },
     mounted() {
       this.toke = sessionStorage.getItem('token');

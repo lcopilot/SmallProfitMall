@@ -27,6 +27,10 @@ Vue.use(animated)
 
 Vue.use(VideoPlayer)
 
+//引用websocket
+import * as socketApi from './api/util/socket'
+Vue.prototype.socketApi = socketApi
+
 //全局注册组件
 Vue.component('SvgIcon', SvgIcon)
 Vue.use(VueAxios,axios);

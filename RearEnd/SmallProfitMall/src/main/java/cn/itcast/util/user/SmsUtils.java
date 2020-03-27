@@ -127,7 +127,7 @@ public class SmsUtils {
             sendSmsResponse = client.getAcsResponse(request);
             System.out.println(sendSmsResponse.getMessage());
             //短信发送状态
-            if (sendSmsResponse.getCode().equalsIgnoreCase("OK")) {
+            if ("OK".equalsIgnoreCase(sendSmsResponse.getCode())) {
                 return true;
 
             }
