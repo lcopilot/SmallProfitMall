@@ -76,7 +76,7 @@ public class UserController {
 			return new QueryResponseResult(CommonCode.ValidationFails,null);
 		}
 
-		if (user.getName().equals("smallProfit")) {
+		if ("smallProfit".equals(user.getName())) {
 			return new QueryResponseResult(CommonCode.nameError, null); //不能使用初始名字登录不
 		}
 
