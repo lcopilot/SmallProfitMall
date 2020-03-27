@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    CartSum: 0,
+    CartSum: 0, //购物车数量
     startTime: new Date().getTime(), //剩余开始时间
     endTime: new Date(), //剩余结束时间
   },
@@ -33,6 +33,7 @@ export default new Vuex.Store({
     modifyCartSum(state, sum) {
       state.CartSum += sum
     },
+
   },
   actions: {
     //获取购物车的数量
