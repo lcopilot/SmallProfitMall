@@ -6,11 +6,17 @@ import java.util.Date;
 
 //收藏
 public class Evaluation  implements Serializable {
+    //收藏id
     private int evaluationId;
+    //商品id 存入数据库
     private int productId;
+    //用户id
     private String userId;
+    //是否收藏标志
     private String sign;
+    //商品id 接收
     private int[] productIds;
+    //收藏时间
     private Date evaluationTime;
 
     public int[] getProductIds() {

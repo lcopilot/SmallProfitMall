@@ -82,13 +82,4 @@ public class ProductController {
         result.setList(list);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
-
-    @RequestMapping("/cs")
-    public QueryResponseResult cs() {
-        QueryResult result = new QueryResult();
-        // 调用service的方法
-        List<Ad> list = commodityService.findAd();
-        result.setList(list);
-        return  new QueryResponseResult(CommonCode.SUCCESS,result);
-    }
 }

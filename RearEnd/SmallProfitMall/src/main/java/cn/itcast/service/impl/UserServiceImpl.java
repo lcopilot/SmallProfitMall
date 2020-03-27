@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
     private Login login;
 
     //查询所有用户
+    @Override
     public List<User> findAll() {
         return UserDao.findAll();
     }
@@ -67,6 +68,7 @@ public class UserServiceImpl implements UserService {
     }
 
     //查询返回值
+    @Override
     public Login findLogin(User user) throws Exception {
         login.setUid(user.getUid());
         login.setImage(user.getImage());
@@ -75,7 +77,11 @@ public class UserServiceImpl implements UserService {
         return login;
     }
 
-    //保存用户
+    /**
+     * 用户注册
+     * @param user
+     */
+    @Override
     public void saveAccount(User user) {
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
         user.setUid(uuid);
