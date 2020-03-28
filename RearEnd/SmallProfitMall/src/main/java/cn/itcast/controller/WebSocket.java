@@ -6,6 +6,8 @@ import cn.itcast.response.*;
 import cn.itcast.response.connection.QueryResponseResultString;
 import cn.itcast.response.connection.QueryResultString;
 import cn.itcast.util.logic.ConversionJson;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONString;
 import org.apache.log4j.Logger;
 
 import javax.websocket.*;
@@ -79,18 +81,21 @@ public class WebSocket {
         String redis="";
         String code="80001";
         //解析发送过来的数据,并封装到connection实体类
-        ConnectionReceive connectionReceive = (ConnectionReceive) ConversionJson.JSONToObj(message, ConnectionReceive.class);
-        System.out.println(connectionReceive);
-        //连接正常
-        if (code.equals(connectionReceive.getMessage().getCode())){
-            List rediss = new ArrayList();
-            rediss.add(connectionReceive.getCallback().getCallbackName());
-            QueryResult result = new QueryResult();
-            result.setList(rediss);
-            return redis = ConversionJson.objectToJson(new QueryResponseResult(CommonCode.normal,result));
-        }else{
-            return redis;
+//        ConnectionReceive connectionReceive = (ConnectionReceive) ConversionJson.JSONToObj(message, ConnectionReceive.class);
+//        //连接正常
+//        if (code.equals(connectionReceive.getMessage().getCode())){
+//            QueryResultString result = new QueryResultString();
+//            result.setCallback(connectionReceive.getCallback().getCallbackName());
+//            return redis = ConversionJson.objectToJson(new QueryResponseResultString(CommonCode.normal,result));
+//        }else{
+//            return redis;
+//        }
+        if (code.equals(message)){
+            return redis= ConversionJson.objectToJson(new  QueryResponseResult(CommonCode.normal,null));
+        }else {
+            return "";
         }
+
     }
 
 

@@ -1,15 +1,20 @@
 package cn.itcast.response.connection;
 
+import cn.itcast.response.ResponseResult;
 import cn.itcast.response.ResultCode;
+import lombok.Data;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
-
+import lombok.Data;
 /**
  * @author Kite
  * @date 2020/3/28
  */
-public class QueryResponseResultString extends ResponseResultString implements Serializable {
+@Data
+@ToString
+public class QueryResponseResultString extends ResponseResult{
 
     @Autowired
     QueryResultString queryResultString;
@@ -18,5 +23,4 @@ public class QueryResponseResultString extends ResponseResultString implements S
         super(resultCode);
         this.queryResultString = queryResultString;
     }
-
 }
