@@ -1,6 +1,8 @@
 package cn.itcast.domain.webSocket;
 
-public class Connection {
+import java.io.Serializable;
+
+public class Connection implements Serializable {
     //连接的用户id
     private String userId;
     //客户端传代码

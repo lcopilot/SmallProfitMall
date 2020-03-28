@@ -9,6 +9,7 @@ import cn.itcast.util.logic.ConversionJson;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONString;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 @ServerEndpoint("/notification/{userId}")
+@Component
 public class WebSocket {
 
     private static Logger logger = Logger.getLogger(WebSocket.class);
@@ -81,7 +83,8 @@ public class WebSocket {
         String redis="";
         String code="80001";
         //解析发送过来的数据,并封装到connection实体类
-//        ConnectionReceive connectionReceive = (ConnectionReceive) ConversionJson.JSONToObj(message, ConnectionReceive.class);
+        Connection connection = (Connection) ConversionJson.JSONToObj(message, Connection.class);
+        System.out.println(connection);
 //        //连接正常
 //        if (code.equals(connectionReceive.getMessage().getCode())){
 //            QueryResultString result = new QueryResultString();
@@ -90,7 +93,7 @@ public class WebSocket {
 //        }else{
 //            return redis;
 //        }
-        if (code.equals(message)){
+        if (code.equals(connection.getCode())){
             return redis= ConversionJson.objectToJson(new  QueryResponseResult(CommonCode.normal,null));
         }else {
             return "";

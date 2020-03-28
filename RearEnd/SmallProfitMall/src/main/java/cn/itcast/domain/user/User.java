@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 import java.util.List;
 
-@Component("user")
 public class User implements Serializable {
     private Integer id;
     private String uid;
