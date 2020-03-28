@@ -1,9 +1,13 @@
 package cn.itcast.domain.webSocket;
 
 public class Connection {
+    //连接的用户id
     private String userId;
+    //客户端传代码
     private String code;
+    //客户端发送的数据
     private String message;
+
 
     public String getUserId() {
         return userId;
