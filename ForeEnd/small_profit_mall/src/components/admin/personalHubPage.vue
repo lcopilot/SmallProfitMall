@@ -14,7 +14,7 @@
             <router-link to="/addressManagement">收货地址</router-link>
           </div>
           <div class="personal_page_child">
-            <router-link to="/">账户设置</router-link>
+            <router-link to="/accountSettings">账户设置</router-link>
           </div>
           <el-divider/>
         </div>
