@@ -1,10 +1,12 @@
 package cn.itcast.controller;
 
+import cn.itcast.domain.webSocket.Connection;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.util.logic.ConversionJson;
 import com.alibaba.fastjson.JSONException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +41,15 @@ public class WebSocket {
     @OnOpen
     public void onOpen(@PathParam("userId") String userId, Session session){
         this.session = session;
-        System.out.println(session);
-        USER_ONLINE_MAP.put(userId,this.session);
-        System.out.println(userId);
+
+        if (USER_ONLINE_MAP.get(userId)!=null){
+            USER_ONLINE_MAP.replace(userId,session);
+        }else {
+            USER_ONLINE_MAP.put(userId,this.session);
+        }
         addOnlineCount();           //在线数加1
         System.out.println(USER_ONLINE_MAP.get(userId));
+        System.out.println(USER_ONLINE_MAP.size());
         System.out.println("有新连接加入！当前在线人数为" + getOnlineCount());
     }
 
@@ -54,6 +60,7 @@ public class WebSocket {
     @OnClose
     public void onClose(){
         subOnlineCount();           //在线数减1
+        System.out.println("关闭连接");
         try {
             if(session != null){
                 session.close();
@@ -73,8 +80,10 @@ public class WebSocket {
     public String onMessage(String message, Session session) throws IOException {
         //返回的数据
         String redis="";
+        //解析发送过来的数据,并封装到connection实体类
+        Connection connection = (Connection) ConversionJson.JSONToObj(message, Connection.class);
         //连接正常
-        if (message.equals("80001")){
+        if (connection.getCode().equals("80001")){
             return redis = ConversionJson.objectToJson(new QueryResponseResult(CommonCode.normal,null));
         }else{
             return redis;
