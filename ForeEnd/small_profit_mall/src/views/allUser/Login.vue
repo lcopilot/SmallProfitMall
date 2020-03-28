@@ -302,6 +302,7 @@
                     vm.$router.push({
                       path: "/Home" //跳转的路径
                     });
+
                   } else {
                     if (res.code == 10009) {
                       vm.loginForm.ticket = '';

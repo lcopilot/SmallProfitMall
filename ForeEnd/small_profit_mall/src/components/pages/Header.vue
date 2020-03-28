@@ -55,7 +55,6 @@
               </el-dropdown-menu>
             </el-dropdown>
           </li>
-
         </ul>
       </nav>
     </header>
@@ -63,7 +62,6 @@
 </template>
 <script>
   import {mapActions} from "vuex";
-
   export default {
     name: "Header",
     data() {
@@ -72,16 +70,27 @@
         avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938'
       };
     },
+    computed: {
+      //vuex
+      websocketStatus() {
+        return this.$store.state.websocketStatus;
+      },
+    },
     methods: {
       ...mapActions([
-        "modifyLoginStatus"
+        "modifyWebsocketStatus"
       ]),
       exit() {
         sessionStorage.clear();
         this.$router.push("/login");
+        this.socketApi.close();
       },
     },
     created() {
+      if (sessionStorage.getItem("uId") && !this.websocketStatus){
+          this.socketApi.initWebSocket();
+          this.modifyWebsocketStatus(this.socketApi.getWebsocketStatus());
+      }
       this.avatar = sessionStorage.getItem("avatar");
       this.username = sessionStorage.getItem("username");
     }
