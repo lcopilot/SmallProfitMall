@@ -72,11 +72,14 @@
     },
     computed: {
       //vuex
-      webSocket() {
-        return this.$store.state.webSocket;
+      websocketStatus() {
+        return this.$store.state.websocketStatus;
       },
     },
     methods: {
+      ...mapActions([
+        "modifyWebsocketStatus"
+      ]),
       exit() {
         sessionStorage.clear();
         this.$router.push("/login");
@@ -84,9 +87,9 @@
       },
     },
     created() {
-
-      if (sessionStorage.getItem("uId")){
+      if (sessionStorage.getItem("uId") && !this.websocketStatus){
           this.socketApi.initWebSocket();
+          this.modifyWebsocketStatus(this.socketApi.getWebsocketStatus());
       }
       this.avatar = sessionStorage.getItem("avatar");
       this.username = sessionStorage.getItem("username");
