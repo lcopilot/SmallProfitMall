@@ -1,22 +1,19 @@
 package cn.itcast.controller;
 
 import cn.itcast.domain.webSocket.Connection;
-import cn.itcast.response.CommonCode;
-import cn.itcast.response.QueryResponseResult;
+import cn.itcast.domain.webSocket.ConnectionReceive;
+import cn.itcast.response.*;
+import cn.itcast.response.connection.QueryResponseResultString;
+import cn.itcast.response.connection.QueryResultString;
 import cn.itcast.util.logic.ConversionJson;
-import com.alibaba.fastjson.JSONException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 @ServerEndpoint("/notification/{userId}")
@@ -80,11 +77,17 @@ public class WebSocket {
     public String onMessage(String message, Session session) throws IOException {
         //返回的数据
         String redis="";
+        String code="80001";
         //解析发送过来的数据,并封装到connection实体类
-        Connection connection = (Connection) ConversionJson.JSONToObj(message, Connection.class);
+        ConnectionReceive connectionReceive = (ConnectionReceive) ConversionJson.JSONToObj(message, ConnectionReceive.class);
+        System.out.println(connectionReceive);
         //连接正常
-        if (connection.getCode().equals("80001")){
-            return redis = ConversionJson.objectToJson(new QueryResponseResult(CommonCode.normal,null));
+        if (code.equals(connectionReceive.getMessage().getCode())){
+            List rediss = new ArrayList();
+            rediss.add(connectionReceive.getCallback().getCallbackName());
+            QueryResult result = new QueryResult();
+            result.setList(rediss);
+            return redis = ConversionJson.objectToJson(new QueryResponseResult(CommonCode.normal,result));
         }else{
             return redis;
         }

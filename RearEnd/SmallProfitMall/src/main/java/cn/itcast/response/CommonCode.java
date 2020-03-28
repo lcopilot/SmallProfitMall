@@ -40,6 +40,11 @@ public enum CommonCode implements ResultCode{
         this.code = code;
         this.message = message;
     }
+    private CommonCode(boolean success,int code, String message,String redis){
+        this.success = success;
+        this.code = code;
+        this.message = message;
+    }
 
     @Override
     public boolean success() {
