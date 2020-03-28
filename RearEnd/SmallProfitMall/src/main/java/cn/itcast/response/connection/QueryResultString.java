@@ -11,6 +11,6 @@ import org.springframework.stereotype.Component;
 @Data
 @ToString
 @Component
-public class QueryResultString {
+public class QueryResultString<T> {
     private String callback ;
 }
