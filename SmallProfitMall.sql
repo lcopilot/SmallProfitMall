@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 23/03/2020 14:30:33
+ Date: 28/03/2020 20:07:12
 */
 
 SET NAMES utf8mb4;
@@ -446,7 +446,7 @@ INSERT INTO `ProductPrice` VALUES (22, 10023, 1299.00, 1152, 1258.00, 1000.00, 2
 INSERT INTO `ProductPrice` VALUES (23, 10024, 2188.00, 2088, 1999.00, 1516.00, 4894651.00);
 INSERT INTO `ProductPrice` VALUES (24, 10025, 71.00, 66, 59.90, 161456.00, 156165.00);
 INSERT INTO `ProductPrice` VALUES (25, 10022, 1289.00, 1206, 1126.00, 54615165.00, 465156.00);
-INSERT INTO `ProductPrice` VALUES (26, 10026, 636.00, 620, 599.00, 15661156.00, 1846818.00);
+INSERT INTO `ProductPrice` VALUES (26, 10026, 100000.00, 620, 599.00, 15661156.00, 1846818.00);
 INSERT INTO `ProductPrice` VALUES (27, 10027, 773.00, 666, 689.00, 154854.00, 1666.00);
 INSERT INTO `ProductPrice` VALUES (28, 10028, 265.00, 222, 218.00, 151515.00, 156165.00);
 INSERT INTO `ProductPrice` VALUES (29, 10029, 2920.00, 288, 2999.00, 21261.00, 165161.00);
@@ -646,6 +646,23 @@ INSERT INTO `ad` VALUES (2, 'http://img.fhxasdsada.xyz/7XJAXW7H%5B%24%299J%40%40
 INSERT INTO `ad` VALUES (3, 'http://img.fhxasdsada.xyz/CM5%7D~T3XEPPZ934W%40MCPP64.png', '/');
 
 -- ----------------------------
+-- Table structure for arrivalNotice
+-- ----------------------------
+DROP TABLE IF EXISTS `arrivalNotice`;
+CREATE TABLE `arrivalNotice`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `productId` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of arrivalNotice
+-- ----------------------------
+INSERT INTO `arrivalNotice` VALUES (13, '7c9fdfa3177042a08766aed29e7de6cd', 10001);
+INSERT INTO `arrivalNotice` VALUES (14, '7c9fdfa3177042a08766aed29e7de6cd', 10002);
+
+-- ----------------------------
 -- Table structure for category
 -- ----------------------------
 DROP TABLE IF EXISTS `category`;
@@ -762,23 +779,6 @@ CREATE TABLE `evaluation`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for footprint
--- ----------------------------
-DROP TABLE IF EXISTS `footprint`;
-CREATE TABLE `footprint`  (
-  `footprintId` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `productId` int(11) NULL DEFAULT NULL,
-  `time` date NULL DEFAULT NULL,
-  PRIMARY KEY (`footprintId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of footprint
--- ----------------------------
-INSERT INTO `footprint` VALUES (1, 'asdfghjkl', 10002, '2020-03-23');
-
--- ----------------------------
 -- Table structure for homepageIcon
 -- ----------------------------
 DROP TABLE IF EXISTS `homepageIcon`;
@@ -832,6 +832,44 @@ INSERT INTO `navigation` VALUES (7, '女鞋', '/', '箱包', '/', '钟表', '/',
 INSERT INTO `navigation` VALUES (8, '男鞋', '/', '运动', '/', '户外', '/', NULL, NULL);
 INSERT INTO `navigation` VALUES (9, '房产', '/', '汽车', '/', '汽车用品', '/', NULL, NULL);
 INSERT INTO `navigation` VALUES (10, '母婴', '/', '玩具', '/', NULL, NULL, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for newsContent
+-- ----------------------------
+DROP TABLE IF EXISTS `newsContent`;
+CREATE TABLE `newsContent`  (
+  `newsId` int(11) NULL DEFAULT NULL,
+  `userId` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `newsTime` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `newsContent` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `newsType` int(11) NULL DEFAULT NULL,
+  `contentId` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`contentId`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of newsContent
+-- ----------------------------
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 1);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 2);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 3);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 4);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 5);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 6);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 7);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 8);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 9);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 10);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 11);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 12);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 13);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 14);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 15);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 16);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 17);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 18);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 19);
+INSERT INTO `newsContent` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-28 19:12:40', '武汉加油！', 1, 20);
 
 -- ----------------------------
 -- Table structure for recommend
@@ -889,28 +927,18 @@ CREATE TABLE `shoppingCart`  (
   `productId` int(150) NULL DEFAULT NULL,
   `productDeploy` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `quantity` int(11) NULL DEFAULT NULL,
-  `productPrice` decimal(10, 2) NULL DEFAULT NULL,
-  `productName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`shoppingCartId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 127 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 744 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of shoppingCart
 -- ----------------------------
-INSERT INTO `shoppingCart` VALUES (36, 'adsasd', 10009, '黑色 套餐一 ', 100, 47699.00, '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n');
-INSERT INTO `shoppingCart` VALUES (37, 'adsasd', 10009, '黑色 套餐一 ', 100, 47699.00, '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n');
-INSERT INTO `shoppingCart` VALUES (38, 'adsasd', 10009, '黑色 套餐一 ', 100, 47699.00, '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n');
-INSERT INTO `shoppingCart` VALUES (96, 'f05d7667b5384a02b45fb540ba0ed2da', 10015, '奶茶味 ', 1, 20.00, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋');
-INSERT INTO `shoppingCart` VALUES (98, 'f05d7667b5384a02b45fb540ba0ed2da', 10008, '', 1, 3500.00, '万代（BANDAI） Megahouse POP 海贼王 路飞9人 模型玩具（无售后！！！） 四档路飞\r\n');
-INSERT INTO `shoppingCart` VALUES (118, 'f05d7667b5384a02b45fb540ba0ed2da', 10015, '奶茶味 ', 1, 20.00, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋');
-INSERT INTO `shoppingCart` VALUES (119, 'f05d7667b5384a02b45fb540ba0ed2da', 10015, '香蕉味 ', 1, 20.00, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋');
-INSERT INTO `shoppingCart` VALUES (120, 'f05d7667b5384a02b45fb540ba0ed2da', 10015, '茉莉味 ', 1, 20.00, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋');
-INSERT INTO `shoppingCart` VALUES (121, 'f05d7667b5384a02b45fb540ba0ed2da', 10015, '奶油味 ', 1, 20.00, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋');
-INSERT INTO `shoppingCart` VALUES (122, 'f05d7667b5384a02b45fb540ba0ed2da', 10015, '奶油味 ', 1, 20.00, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋');
-INSERT INTO `shoppingCart` VALUES (123, 'f05d7667b5384a02b45fb540ba0ed2da', 10015, '茉莉味 ', 1, 20.00, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋');
-INSERT INTO `shoppingCart` VALUES (124, 'f05d7667b5384a02b45fb540ba0ed2da', 10011, '暗夜绿色 128G+2G ', 1, 10398.00, 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ');
-INSERT INTO `shoppingCart` VALUES (125, 'f05d7667b5384a02b45fb540ba0ed2da', 10011, '暗夜绿色 64G+2G ', 1, 10398.00, 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ');
-INSERT INTO `shoppingCart` VALUES (126, 'f05d7667b5384a02b45fb540ba0ed2da', 10011, '深空灰色 64G+2G ', 1, 10398.00, 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ');
+INSERT INTO `shoppingCart` VALUES (627, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '白色 优惠套餐一 ', 99);
+INSERT INTO `shoppingCart` VALUES (628, '8b616d638682406f96acd3b54dfbc723', 10001, '白色 ', 99);
+INSERT INTO `shoppingCart` VALUES (701, '8b616d638682406f96acd3b54dfbc723', 10015, '白色 ', 99);
+INSERT INTO `shoppingCart` VALUES (740, '7c9fdfa3177042a08766aed29e7de6cd', 10002, '白色 优惠套餐二 ', 1);
+INSERT INTO `shoppingCart` VALUES (742, '7c9fdfa3177042a08766aed29e7de6cd', 10005, 'WLAN版64G ', 1);
+INSERT INTO `shoppingCart` VALUES (743, '7c9fdfa3177042a08766aed29e7de6cd', 10016, '星河银 ', 1);
 
 -- ----------------------------
 -- Table structure for user
@@ -919,24 +947,22 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `password` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `password` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `sex` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `phone` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `phone` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `Image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `token` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `birthday` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (37, 'f05d7667b5384a02b45fb540ba0ed2da', 'MuGe', '123456', '1', '15367885410', 'liuxianliangli@foxmail.com', ' http://img.fhxasdsada.xyz/f05d7667b5384a02b45fb540ba0ed2da?t=1584944811380', 'DM', '2019-4-15');
-INSERT INTO `user` VALUES (38, 'asdfghjkl', '方鸢', '123456', '1', '18598814121', '2252821162@qq.com', ' http://img.fhxasdsada.xyz/asdfghjkl?t=1584768785710', 'DM', '2017-2-1');
-INSERT INTO `user` VALUES (39, '8b616d638682406f96acd3b54dfbc723', 'HuangFan', '123123', '1', '13135361457', '552449824@qq.com', ' http://img.fhxasdsada.xyz/8b616d638682406f96acd3b54dfbc723?t=1584605671330', 'DM', '2019-4-4');
-INSERT INTO `user` VALUES (40, '46d254f0c27b4cdc85da8ea9246394be', 'smallProfit', '123456', '1', '15575702771', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM', NULL);
+INSERT INTO `user` VALUES (52, 'f92b9f8f372e445fb6564cdd57aa3c3e', '小白', '++OrO3KQIS+TzybCOsQhcw==', '1', 't45eesyhFshmLr/zH6A2Dw==', 'NOCyNow6lg6D1Wibn5x0WCnRmd72oX+WfuO6bjCodHY=', ' http://img.fhxasdsada.xyz/f92b9f8f372e445fb6564cdd57aa3c3e?t=1585387604931', 'DM', '0-0-0');
+INSERT INTO `user` VALUES (53, '7c9fdfa3177042a08766aed29e7de6cd', 'MuGe', '++OrO3KQIS+TzybCOsQhcw==', '1', '7/nilpLOcaBpX6+BnSD+SQ==', 'NOCyNow6lg6D1Wibn5x0WCnRmd72oX+WfuO6bjCodHY=', ' http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781', 'DM', '2017-4-15');
 
 -- ----------------------------
 -- Table structure for userAddress
@@ -955,31 +981,15 @@ CREATE TABLE `userAddress`  (
   `alias` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `isdelete` int(11) NULL DEFAULT 1,
   PRIMARY KEY (`addressId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 109 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userAddress
 -- ----------------------------
-INSERT INTO `userAddress` VALUES (76, 'f05d7667b5384a02b45fb540ba0ed2da', '格式的函数的啊实打实', '河北省 唐山市 路北区 东新村街道 河北省 唐山市 路北区 文化路街道 江苏省 徐州市 鼓楼区 牌楼街道 江苏省 徐州市 贾汪区 大吴街道 江苏省 徐州市 贾汪区 大泉街道 ', '速度还是大速度还都是是大三大法师啊实打实东方闪电速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '32,3203,320305,320305003,', '0', '学校', 0);
-INSERT INTO `userAddress` VALUES (77, 'f05d7667b5384a02b45fb540ba0ed2da', '大范甘迪', '河北省 石家庄市 井陉矿区 四微街道 ', '读后感', '15367885410', 'liuxianliangli@foxmail.com', '13,1301,130107,130107002,', '0', '读后感', 0);
-INSERT INTO `userAddress` VALUES (78, 'f05d7667b5384a02b45fb540ba0ed2da', '速度还是大', '河北省 唐山市 丰南区 黄各庄镇 ', '速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130207,130207104,', '0', '速度还是大', 0);
-INSERT INTO `userAddress` VALUES (79, 'f05d7667b5384a02b45fb540ba0ed2da', '水电费', '天津市 市辖区 南开区 兴南街道 ', '三大法师', '15367885410', 'liuxianliangli@foxmail.com', '12,1201,120104,120104003,', '0', '水电费', 0);
-INSERT INTO `userAddress` VALUES (80, 'f05d7667b5384a02b45fb540ba0ed2da', '速度还是大', '河北省 石家庄市 新华区 宁安街道 ', '速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '13,1301,130105,130105004,', '0', '速度还是大', 0);
-INSERT INTO `userAddress` VALUES (81, 'f05d7667b5384a02b45fb540ba0ed2da', '速度还是大', '山西省 太原市 杏花岭区 鼓楼街道 ', '生活的速度', '15367885410', 'liuxianliangli@foxmail.com', '14,1401,140107,140107003,', '0', '水电费', 1);
-INSERT INTO `userAddress` VALUES (82, 'f05d7667b5384a02b45fb540ba0ed2da', '递四方速递', '河北省 石家庄市 井陉矿区 贾庄镇 ', '是多喝点水', '15367885410', 'liuxianliangli@foxmail.com', '13,1301,130107,130107100,', '0', '电话', 0);
-INSERT INTO `userAddress` VALUES (83, 'f05d7667b5384a02b45fb540ba0ed2da', '三大法师', '山西省 大同市 阳高县 罗文皂镇 ', '速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140221,140221101,', '0', '公司', 0);
-INSERT INTO `userAddress` VALUES (84, 'f05d7667b5384a02b45fb540ba0ed2da', '速度还是大', '河北省 唐山市 开平区 开平街道 ', '速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130205,130205002,', '0', '父母家', 0);
-INSERT INTO `userAddress` VALUES (86, 'f05d7667b5384a02b45fb540ba0ed2da', '方鸿鑫', '河北省 唐山市 开平区 开平街道 ', '试婚纱', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130205,130205002,', '1', '学校', 1);
-INSERT INTO `userAddress` VALUES (87, 'f05d7667b5384a02b45fb540ba0ed2da', '方式', '河北省 唐山市 开平区 开平街道 ', '试婚纱', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130205,130205002,', '0', '学校', 1);
-INSERT INTO `userAddress` VALUES (88, 'f05d7667b5384a02b45fb540ba0ed2da', '速度还是大', '河北省 石家庄市 井陉矿区 四微街道 ', '三大法师', '15367885410', 'liuxianliangli@foxmail.com', '13,1301,130107,130107002,', '0', '闺蜜家', 1);
-INSERT INTO `userAddress` VALUES (90, 'f05d7667b5384a02b45fb540ba0ed2da', '萨迪', '河北省 石家庄市 裕华区 裕兴街道 ', '的时候', '15367885410', 'liuxianliangli@foxmail.com', '13,1301,130108,130108001,', '0', '学校', 1);
-INSERT INTO `userAddress` VALUES (91, 'f05d7667b5384a02b45fb540ba0ed2da', '啊实打实', '山西省 太原市 尖草坪区 尖草坪街道 ', '啊实打实', '15367885410', 'liuxianliangli@foxmail.com', '14,1401,140108,140108001,', '0', '公司', 1);
-INSERT INTO `userAddress` VALUES (98, 'adsasdasd', '小小', '湖南省,长沙市', '湖南大学', '18598814121', '2252821162@qq.com', '123,123,123,123,', '0', '家', 1);
-INSERT INTO `userAddress` VALUES (99, 'adsasdasd', '小小', '湖南省,长沙市', '湖南大学', '18598814121', '2252821162@qq.com', '123,123,123,123,', '0', '家', 1);
-INSERT INTO `userAddress` VALUES (100, 'adsasdasd', '小小', '湖南省,长沙市', '湖南大学', '18598814121', '2252821162@qq.com', '123,123,123,123,', '0', '家', 1);
-INSERT INTO `userAddress` VALUES (101, 'adsasdasd', '小小', '湖南省,长沙市', '湖南大学', '18598814121', '2252821162@qq.com', '123,123,123,123,', '0', '家', 1);
-INSERT INTO `userAddress` VALUES (102, 'adsasdasd', '小小', '湖南省,长沙市', '湖南大学', '18598814121', '2252821162@qq.com', '123,123,123,123,', '0', '家', 1);
-INSERT INTO `userAddress` VALUES (103, 'asdfghjkl', '方', '天津市 市辖区 和平区 劝业场街道 ', '桂东', '18598814121', '2252821162@qq.com', '12,1201,120101,120101001,', '1', '家', 1);
+INSERT INTO `userAddress` VALUES (105, '7c9fdfa3177042a08766aed29e7de6cd', 'sdfsdfsd', '河北省 邯郸市 丛台区 光明桥街道 ', 'sdf', '15367885410', 'liuxianliangli@foxmail.com', '13,1304,130403,130403004,', '0', '公司', 1);
+INSERT INTO `userAddress` VALUES (106, '7c9fdfa3177042a08766aed29e7de6cd', 'dfsf', '山西省 大同市 云州区 西坪镇 ', 'dsfs', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140215,140215100,', '0', '学校', 1);
+INSERT INTO `userAddress` VALUES (107, '7c9fdfa3177042a08766aed29e7de6cd', 'sdfsd', '河北省 唐山市 开平区 开平街道 ', 'sfsd', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130205,130205002,', '0', '学校', 1);
+INSERT INTO `userAddress` VALUES (108, '7c9fdfa3177042a08766aed29e7de6cd', 'sdfds', '河北省 秦皇岛市 山海关区 西关街道 ', 'sdfsd', '15367885410', 'liuxianliangli@foxmail.com', '13,1303,130303,130303003,', '1', 'sdd', 1);
 
 -- ----------------------------
 -- Table structure for userEvaluation
@@ -988,15 +998,75 @@ DROP TABLE IF EXISTS `userEvaluation`;
 CREATE TABLE `userEvaluation`  (
   `evaluationId` int(11) NOT NULL AUTO_INCREMENT,
   `userId` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `produvtId` int(11) NULL DEFAULT NULL,
+  `productId` int(11) NULL DEFAULT NULL,
   `sign` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `evaluationTime` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`evaluationId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 97 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userEvaluation
 -- ----------------------------
-INSERT INTO `userEvaluation` VALUES (1, 'adsasd', 10001, 'true');
-INSERT INTO `userEvaluation` VALUES (2, 'f05d7667b5384a02b45fb540ba0ed2da', 10001, 'true');
+INSERT INTO `userEvaluation` VALUES (94, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 'true', '2020-03-26 12:32:51');
+INSERT INTO `userEvaluation` VALUES (95, '7c9fdfa3177042a08766aed29e7de6cd', 10023, 'true', '2020-03-26 12:33:18');
+INSERT INTO `userEvaluation` VALUES (96, '7c9fdfa3177042a08766aed29e7de6cd', 10002, 'true', '2020-03-26 17:30:27');
+
+-- ----------------------------
+-- Table structure for userFootprint
+-- ----------------------------
+DROP TABLE IF EXISTS `userFootprint`;
+CREATE TABLE `userFootprint`  (
+  `footprintId` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `productId` int(11) NULL DEFAULT NULL,
+  `footprintTime` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`footprintId`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of userFootprint
+-- ----------------------------
+INSERT INTO `userFootprint` VALUES (10, '7c9fdfa3177042a08766aed29e7de6cd', 10006, '2020-03-26 11:19:01');
+INSERT INTO `userFootprint` VALUES (11, '7c9fdfa3177042a08766aed29e7de6cd', 10013, '2020-03-28 11:27:53');
+INSERT INTO `userFootprint` VALUES (12, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '2020-03-28 11:26:43');
+INSERT INTO `userFootprint` VALUES (13, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '2020-03-25 12:01:52');
+INSERT INTO `userFootprint` VALUES (14, '7c9fdfa3177042a08766aed29e7de6cd', 10028, '2020-03-26 10:44:56');
+INSERT INTO `userFootprint` VALUES (15, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '2020-03-26 09:17:33');
+INSERT INTO `userFootprint` VALUES (16, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '2020-03-26 12:33:09');
+INSERT INTO `userFootprint` VALUES (17, '7c9fdfa3177042a08766aed29e7de6cd', 10017, '2020-03-24 21:05:38');
+INSERT INTO `userFootprint` VALUES (18, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '2020-03-27 12:03:24');
+INSERT INTO `userFootprint` VALUES (19, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-03-25 13:03:25');
+INSERT INTO `userFootprint` VALUES (20, '7c9fdfa3177042a08766aed29e7de6cd', 10019, '2020-03-24 21:07:14');
+INSERT INTO `userFootprint` VALUES (21, '7c9fdfa3177042a08766aed29e7de6cd', 10009, '2020-03-24 21:07:22');
+INSERT INTO `userFootprint` VALUES (22, 'abcd', 10005, '2020-03-26 19:48:53');
+INSERT INTO `userFootprint` VALUES (23, 'asdasd', 0, '2020-03-27 09:52:30');
+INSERT INTO `userFootprint` VALUES (24, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-03-25 12:38:29');
+INSERT INTO `userFootprint` VALUES (25, '7c9fdfa3177042a08766aed29e7de6cd', 10021, '2020-03-25 13:05:35');
+INSERT INTO `userFootprint` VALUES (26, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '2020-03-26 11:17:53');
+INSERT INTO `userFootprint` VALUES (27, '7c9fdfa3177042a08766aed29e7de6cd', 10026, '2020-03-26 10:44:33');
+INSERT INTO `userFootprint` VALUES (28, '7c9fdfa3177042a08766aed29e7de6cd', 10025, '2020-03-25 12:02:15');
+INSERT INTO `userFootprint` VALUES (29, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '2020-03-28 11:25:04');
+INSERT INTO `userFootprint` VALUES (30, '7c9fdfa3177042a08766aed29e7de6cd', 10004, '2020-03-25 12:50:16');
+INSERT INTO `userFootprint` VALUES (31, '7c9fdfa3177042a08766aed29e7de6cd', 10011, '2020-03-25 12:47:44');
+INSERT INTO `userFootprint` VALUES (32, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '2020-03-26 12:32:40');
+INSERT INTO `userFootprint` VALUES (33, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '2020-03-25 13:28:35');
+INSERT INTO `userFootprint` VALUES (34, '7c9fdfa3177042a08766aed29e7de6cd', 10016, '2020-03-28 13:33:19');
+
+-- ----------------------------
+-- Table structure for userNews
+-- ----------------------------
+DROP TABLE IF EXISTS `userNews`;
+CREATE TABLE `userNews`  (
+  `userId` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `senderName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `senderAvatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `newsStatus` int(11) NULL DEFAULT NULL,
+  `newsId` int(11) NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of userNews
+-- ----------------------------
+INSERT INTO `userNews` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '微利官方', 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 1, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
