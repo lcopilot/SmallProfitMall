@@ -1,9 +1,10 @@
-
 let websocket = null;
 let globalCallback = null;
-let timeout = 30 * 1000;//30秒一次心跳
+let websocketStatus=false; //websocket链接状态
+const timeout = 30 * 1000;//30秒一次心跳
 let heartbeatTimer=0; //心跳计时器
-let isHeartbeat=false; //连接状态
+let HeartbeatStatus=false; //心跳连接状态
+
 export const initWebSocket = () => { //初始化websocket
   if (!sessionStorage.getItem("uId")) {
     return;
@@ -31,17 +32,18 @@ export const initWebSocket = () => { //初始化websocket
 
 // 发送信息
 const sendMessage = (msg, callback) => {
-  // stopHeartbeat();
   globalCallback = callback;
   if (websocket.readyState === websocket.OPEN) {
+    //停止心跳
+    stopHeartbeat();
     //若是ws开启状态
-    websocketSend(msg)
+    websocketSend(msg);
   } else if (websocket.readyState !== websocket.CONNECTING) {
     initWebSocket();
-    // 若未开启 ，则等待1.2s后重新调用
+    // 若未开启 ，则等待1s后重新调用
     setTimeout(function () {
       sendMessage(msg, callback);
-    }, 1200);
+    }, 1000);
   } else {
     // 若是 正在开启状态，则等待1s后重新调用
     setTimeout(function () {
@@ -53,12 +55,18 @@ const sendMessage = (msg, callback) => {
 //关闭连接
 const close = () => {
   websocket.onclose();
-}
+  //停止心跳
+  stopHeartbeat();
+};
 
 //数据接收
 function websocketOnMessage(e) {
-  // startHeartbeat();
-  globalCallback(JSON.parse(e.data));
+  console.log('数据接收')
+  if (e!=null){
+    globalCallback(JSON.parse(e.data));
+    //开启心跳
+    startHeartbeat();
+  }
 }
 
 //数据发送
@@ -72,45 +80,55 @@ function websocketClose() {
 }
 //连接成功
 function websocketOpen(e) {
-  // startHeartbeat();
+  //修改连接状态
+  websocketStatus=true;
   console.log("连接成功");
-  return true;
+  startHeartbeat();
 }
 
 
+//启动心跳包
+function startHeartbeat() {
+  clearTimeout(heartbeatTimer);
+  HeartbeatStatus=false;
+  const heartbeatPacket={userId:sessionStorage.getItem("uId"),code:"80001",message:"Confirm heartbeat link"}
+  heartbeatTimer=setTimeout(()=>{
+     sendMessage(heartbeatPacket,HeartbeatMessageCallback());
+  },timeout)
+}
+//心跳消息回调
+function HeartbeatMessageCallback(msg) {
+    if (msg!=null && msg.code===80002){
+      HeartbeatStatus=true;
+    }
+    checkConnection();
+}
+//心跳连接状态
+function checkConnection(){
+    if (HeartbeatStatus){
+      clearTimeout(heartbeatTimer);
+      startHeartbeat();
+    }else {
+      clearTimeout(heartbeatTimer);
+      //尝试重连 2秒一次
+      let reconnection=setInterval(()=>{
+        if (websocketStatus){
+          console.log('重连成功')
+          clearTimeout(reconnection);
+        }
+        initWebSocket();
+      },2000)
+    }
+}
+//停止心跳
+function stopHeartbeat() {
+  HeartbeatStatus=false;
+  clearTimeout(heartbeatTimer);
+}
 
-//心跳包
-// function startHeartbeat() {
-//   console.log('心跳包启动')
-//   isHeartbeat=false;
-//   const heartbeatPacket={userId:sessionStorage.getItem("uId"),code:"80001",message:"Confirm heartbeat link"}
-//   sendMessage(JSON.stringify(heartbeatPacket),HeartbeatMessageCallback());
-//   heartbeatTimer=setTimeout(()=>{
-//     checkConnection();
-//   },timeout)
-// }
-//
-// //心跳消息回调
-// function HeartbeatMessageCallback(msg) {
-//     if (msg.code==80002){
-//       isHeartbeat=true;
-//     }
-// }
-//
-// //连接状态
-// function checkConnection(){
-//     if (isHeartbeat){
-//       clearTimeout(heartbeatTimer);
-//       startHeartbeat();
-//     }else {
-//       initWebSocket();
-//       clearTimeout(heartbeatTimer);
-//     }
-// }
-// //停止心跳
-// function stopHeartbeat() {
-//   isHeartbeat=false;
-//   clearTimeout(heartbeatTimer);
-// }
+//获取websocket链接状态
+const getWebsocketStatus=()=>{
+  return websocketStatus;
+};
 
-export {sendMessage, close}
+export {sendMessage, close,getWebsocketStatus}

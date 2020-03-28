@@ -8,6 +8,7 @@ export default new Vuex.Store({
     CartSum: 0, //购物车数量
     startTime: new Date().getTime(), //剩余开始时间
     endTime: new Date(), //剩余结束时间
+    websocketStatus: false,
   },
   getters: {
     endTime: state => {
@@ -16,14 +17,14 @@ export default new Vuex.Store({
       let M = time.getMonth();
       let D = time.getDate();
       let H = time.getHours();
-      let m=0;
-      let s=0;
+      let m = 0;
+      let s = 0;
       if (H % 2 == 1) {
-          H += 1;
+        H += 1;
       } else {
-          H += 2;
+        H += 2;
       }
-      return new Date(Y,M,D,H,m,s).getTime();
+      return new Date(Y, M, D, H, m, s).getTime();
     },
   },
   mutations: {
@@ -33,6 +34,9 @@ export default new Vuex.Store({
     modifyCartSum(state, sum) {
       state.CartSum += sum
     },
+    modifyWebsocketStatus(state, websocketStatus) {
+      state.websocketStatus = websocketStatus
+    },
 
   },
   actions: {
@@ -40,9 +44,12 @@ export default new Vuex.Store({
     getCartSum: (context, sum) => {
       context.commit('getCartSum', sum);
     },
-     //修改购物车的数量
-    modifyCartSum:(context, sum) => {
+    //修改购物车的数量
+    modifyCartSum: (context, sum) => {
       context.commit('modifyCartSum', sum);
+    },//修改购物车的数量
+    modifyWebsocketStatus: (context, websocketStatus) => {
+      context.commit('modifyWebsocketStatus', websocketStatus);
     },
   }
   ,
