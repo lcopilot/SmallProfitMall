@@ -101,7 +101,7 @@ export const modifyDefault=params=>{
  */
 export const getMessageHistory=params=>{
   let queryString=querystring.stringify(params);
-  return http.requestGet('apiUrl/NewsController/findNews/?'+queryString)
+  return http.requestGet('apiUrl/NewsController/findNews?'+queryString)
 };
 
 /**
