@@ -3,9 +3,9 @@
     <el-card>
       <div style="text-align: left">
         <div>
-          <div class="personal_page">账户设置</div>
+          <div class="personal_page">个人中心</div>
           <div class="personal_page_child">
-            <router-link to="/personalCenter">个人中心</router-link>
+            <router-link to="/personalCenter">我的会员</router-link>
           </div>
           <div class="personal_page_child">
             <router-link to="/personalInformation">个人信息</router-link>
@@ -14,7 +14,7 @@
             <router-link to="/addressManagement">收货地址</router-link>
           </div>
           <div class="personal_page_child">
-            <router-link to="/">我的会员</router-link>
+            <router-link to="/accountSettings">账户设置</router-link>
           </div>
           <el-divider/>
         </div>

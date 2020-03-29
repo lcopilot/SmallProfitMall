@@ -126,6 +126,14 @@ const routes = [
     },
     component: () => import('@/views/user/footprint')
   },
+  {
+    path: '/accountSettings',
+    name: 'AccountSettings',
+    meta: {
+      requireAuth: true,
+    },
+    component: () => import('@/views/user/accountSettings')
+  },
   //捕获404
   {
     path: "/404",
