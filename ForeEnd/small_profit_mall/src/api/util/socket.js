@@ -5,6 +5,7 @@ const timeout = 27 * 1000;//30秒一次心跳
 let heartbeatTimer=0; //心跳计时器
 let HeartbeatStatus=false; //心跳连接状态
 let checkConnectionTimer=0; //心跳检测延迟定时器
+let callbackNameMap=new Map();
 
 export const initWebSocket = () => { //初始化websocket
   if (!sessionStorage.getItem("uId")) {
@@ -34,8 +35,8 @@ export const initWebSocket = () => { //初始化websocket
 };
 
 // 发送信息
-const sendMessage = (message, callback) => {
-  globalCallback=callback;
+const sendMessage = (message, code,callback) => {
+  depositMethod(code,callback);
   /**
    * webSocket的readyState属性用来定义连接状态，该属性的值有下面几种：
    0 ：对应常量CONNECTING (numeric value 0)，
@@ -77,6 +78,8 @@ const close = () => {
 //数据接收
 function websocketOnMessage(e) {
   if (e!=null){
+    stopHeartbeat();
+    globalCallback=callbackNameMap.get(JSON.parse(e.data).code);
     globalCallback(JSON.parse(e.data));
     //开启心跳
     startHeartbeat();
@@ -104,17 +107,17 @@ function websocketOpen(e) {
 //启动心跳包
 function startHeartbeat() {
   clearTimeout(heartbeatTimer);
-  const heartbeatPacket={userId:sessionStorage.getItem("uId"),code:"80001",message:"Confirm heartbeat link"};
+  const heartbeatPacket={userId:sessionStorage.getItem("uId"),code:"81000",message:"Confirm heartbeat link"};
   heartbeatTimer=setTimeout(()=>{
-      HeartbeatStatus=false;
-     sendMessage(heartbeatPacket,eval(heartbeatMessageCallback));
+     HeartbeatStatus=false;
+     sendMessage(heartbeatPacket,81000,eval(heartbeatMessageCallback));
      checkConnection();
   },timeout)
 }
 //心跳消息回调
 function heartbeatMessageCallback(msg) {
   clearTimeout(heartbeatTimer);
-  if (msg!=null && msg.code==80002){
+  if (msg!=null && msg.code==81000){
       HeartbeatStatus=true;
     }
 }
@@ -152,4 +155,11 @@ const getWebsocketStatus=()=>{
   return websocketStatus;
 };
 
-export {sendMessage, close,getWebsocketStatus}
+//将接收消息的方法放入map
+const depositMethod=(code,callback)=>{
+  if (callbackNameMap.get(code)==null){
+    callbackNameMap.set(code,callback);
+  }
+};
+
+export {sendMessage, close,getWebsocketStatus,depositMethod}

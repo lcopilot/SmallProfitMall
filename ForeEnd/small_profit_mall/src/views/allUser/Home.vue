@@ -113,15 +113,13 @@
   import {mapGetters} from 'vuex'
   import *as homeApi from '../../api/page/home';
 
-  const Header = () => import("../../components/pages/Header"); //组件懒加载
-  const Footer = () => import("../../components/pages/Footer");
   const Carousel = () => import("../../components/pages/Carousel");
   const CountDown = () => import("../../components/UtilsComponent/vue2-countdown");
   const ProductsFeatured = () => import("../../components/pages/ProductsFeatured");
 
   export default {
     name: 'Home',
-    components: {ProductsFeatured, Header, Footer, Carousel, CountDown},
+    components: {ProductsFeatured, Carousel, CountDown},
     data() {
       return {
         //天天低价童话
@@ -240,6 +238,8 @@
       }
     },
     beforeMount() {
+      //清除搜索内容
+      sessionStorage.setItem("searchContent",'');
       this.getLowPriceProductList();
       this.getSpikeSessions();
       this.getSpikeAdList();

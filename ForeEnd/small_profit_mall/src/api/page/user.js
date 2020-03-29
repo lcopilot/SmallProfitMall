@@ -97,6 +97,14 @@ export const modifyDefault=params=>{
 }
 
 /**
+ * 用户消息
+ */
+export const getMessageHistory=params=>{
+  let queryString=querystring.stringify(params);
+  return http.requestGet('apiUrl/NewsController/findNews/?'+queryString)
+};
+
+/**
  * 用户收藏
  */
 
