@@ -5,6 +5,7 @@ import cn.itcast.domain.webSocket.ConnectionReceive;
 import cn.itcast.response.*;
 import cn.itcast.response.connection.QueryResponseResultString;
 import cn.itcast.response.connection.QueryResultString;
+import cn.itcast.response.connection.SocketCommonCode;
 import cn.itcast.util.logic.ConversionJson;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONString;
@@ -96,7 +97,7 @@ public class WebSocket {
 //            return redis;
 //        }
         if (code.equals(connection.getCode())){
-            return redis= ConversionJson.objectToJson(new  QueryResponseResult(CommonCode.normal,null));
+            return redis= ConversionJson.objectToJson(new  QueryResponseResult(SocketCommonCode.redis,null));
         }else {
             return "";
         }
@@ -112,7 +113,6 @@ public class WebSocket {
     @OnError
     public void onError(Session session, Throwable error){
         System.out.println("发生错误");
-
         error.printStackTrace();
     }
 
@@ -121,7 +121,7 @@ public class WebSocket {
         Session session = USER_ONLINE_MAP.get(id);
         QueryResultString queryResultString = new QueryResultString();
         queryResultString.setCallback(message);
-        session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(CommonCode.redis,queryResultString)));
+        session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis,queryResultString)));
         //阻塞式（同步）
         //this.session.getBasicRemote().sendText(message);
         //非阻塞式（异步）

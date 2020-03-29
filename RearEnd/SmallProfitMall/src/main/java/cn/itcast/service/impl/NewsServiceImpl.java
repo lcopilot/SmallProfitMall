@@ -22,7 +22,8 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     NewsDao newsDao;
     @Override
-    public List<News> fendNews(String userId) {
-        return newsDao.fendNews(userId);
+    public List<News> fendNews(String userId,Integer currentPage, Integer pageSize) {
+        currentPage=currentPage-1;
+        return newsDao.fendNews(userId,currentPage,pageSize);
     }
 }

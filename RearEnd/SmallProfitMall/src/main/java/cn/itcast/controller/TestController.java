@@ -63,10 +63,10 @@ public class TestController {
 //        webSocket.sendMessage(userId,msg);
 //    }
 
-    @RequestMapping(value = "/test",method = RequestMethod.GET)
-    public void wevSocket() throws IOException {
-        List<News> news = newsDao.fendNews("7c9fdfa3177042a08766aed29e7de6cd");
-        System.out.println( news.get(0));
-        System.out.println( news.get(1));
-    }
+//    @RequestMapping(value = "/test",method = RequestMethod.GET)
+//    public void wevSocket() throws IOException {
+//        List<News> news = newsDao.fendNews("7c9fdfa3177042a08766aed29e7de6cd");
+//        System.out.println( news.get(0));
+//        System.out.println( news.get(1));
+//    }
 }

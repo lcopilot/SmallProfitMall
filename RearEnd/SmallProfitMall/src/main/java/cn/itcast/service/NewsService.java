@@ -17,5 +17,5 @@ public interface NewsService {
      * @param userId
      * @return
      */
-    public List<News> fendNews(String userId);
+    public List<News> fendNews(String userId ,Integer currentPage, Integer pageSize);
 }

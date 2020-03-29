@@ -33,9 +33,10 @@ public class NewsController {
      * 查询所有消息
      * @return
      */
-    @RequestMapping(value = "/findNews/{userId}",method = RequestMethod.GET)
-    public QueryResponseResult findNews(@PathVariable("userId") String userId) {
-        List<News> news = newsService.fendNews(userId);
+    @RequestMapping(value = "/findNews/{userId}/{currentPage}/{pageSize}",method = RequestMethod.GET)
+    public QueryResponseResult findNews(@PathVariable("userId") String userId,@PathVariable("currentPage") Integer currentPage
+    ,@PathVariable("pageSize") Integer pageSize) {
+        List<News> news = newsService.fendNews(userId,currentPage,pageSize);
         QueryResult queryResult = new QueryResult();
         queryResult.setList(news);
         queryResult.setTotal(news.size());

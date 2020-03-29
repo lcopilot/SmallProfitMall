@@ -20,17 +20,77 @@ public class News  implements Serializable {
     private String newsStatus;
     //消息内容id
     private int newsId;
+//    //消息内容
+//    private NewsContent newsContent;
+    //消息种类
+    private int newsType;
+    //消息内容id
+    private int contentId;
+    //消息时间
+    private String newsTime;
     //消息内容
-    private List<NewsContent> newsContent;
+    private String newsContent;
+    //消息标注
+    private Boolean sign;
+    //消息标题
+    private String title;
+    //消息代码
+    private String code;
 
+    public String getCode() {
+        return code;
+    }
 
+    public int getNewsType() {
+        return newsType;
+    }
 
-    public List<NewsContent> getNewsContent() {
+    public void setNewsType(int newsType) {
+        this.newsType = newsType;
+    }
+
+    public int getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(int contentId) {
+        this.contentId = contentId;
+    }
+
+    public String getNewsTime() {
+        return newsTime;
+    }
+
+    public void setNewsTime(String newsTime) {
+        this.newsTime = newsTime;
+    }
+
+    public String getNewsContent() {
         return newsContent;
     }
 
-    public void setNewsContent(List<NewsContent> newsContent) {
+    public void setNewsContent(String newsContent) {
         this.newsContent = newsContent;
+    }
+
+    public Boolean getSign() {
+        return sign;
+    }
+
+    public void setSign(Boolean sign) {
+        this.sign = sign;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getUserId() {
@@ -90,7 +150,13 @@ public class News  implements Serializable {
                 ", senderAvatar='" + senderAvatar + '\'' +
                 ", newsStatus='" + newsStatus + '\'' +
                 ", newsId=" + newsId +
-                ", newsContent=" + newsContent +
+                ", newsType=" + newsType +
+                ", contentId=" + contentId +
+                ", newsTime='" + newsTime + '\'' +
+                ", newsContent='" + newsContent + '\'' +
+                ", sign=" + sign +
+                ", title='" + title + '\'' +
+                ", code='" + code + '\'' +
                 '}';
     }
 }
