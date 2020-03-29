@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class News  implements Serializable {
     //消息id
-    private int id;
+    private Integer id;
     //用户id
     private String userId;
     //消息推送者名字
@@ -19,18 +19,28 @@ public class News  implements Serializable {
     //消息状态
     private String newsStatus;
     //消息内容id
-    private int newsId;
+    private Integer newsId;
+    //消息种类
+    private Integer newsType;
+    //消息内容id
+    private Integer contentId;
+    //消息时间
+    private String newsTime;
     //消息内容
-    private List<NewsContent> newsContent;
+    private String newsContent;
+    //消息标注
+    private Boolean sign;
+    //消息标题
+    private String title;
+    //消息代码
+    private String code;
 
-
-
-    public List<NewsContent> getNewsContent() {
-        return newsContent;
+    public Integer getId() {
+        return id;
     }
 
-    public void setNewsContent(List<NewsContent> newsContent) {
-        this.newsContent = newsContent;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUserId() {
@@ -65,32 +75,69 @@ public class News  implements Serializable {
         this.newsStatus = newsStatus;
     }
 
-    public int getNewsId() {
+    public Integer getNewsId() {
         return newsId;
     }
 
-    public void setNewsId(int newsId) {
+    public void setNewsId(Integer newsId) {
         this.newsId = newsId;
     }
 
-    public int getId() {
-        return id;
+    public Integer getNewsType() {
+        return newsType;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNewsType(Integer newsType) {
+        this.newsType = newsType;
     }
 
-    @Override
-    public String toString() {
-        return "News{" +
-                "id=" + id +
-                ", userId='" + userId + '\'' +
-                ", senderName='" + senderName + '\'' +
-                ", senderAvatar='" + senderAvatar + '\'' +
-                ", newsStatus='" + newsStatus + '\'' +
-                ", newsId=" + newsId +
-                ", newsContent=" + newsContent +
-                '}';
+    public Integer getContentId() {
+        return contentId;
     }
+
+    public void setContentId(Integer contentId) {
+        this.contentId = contentId;
+    }
+
+    public String getNewsTime() {
+        return newsTime;
+    }
+
+    public void setNewsTime(String newsTime) {
+        this.newsTime = newsTime;
+    }
+
+    public String getNewsContent() {
+        return newsContent;
+    }
+
+    public void setNewsContent(String newsContent) {
+        this.newsContent = newsContent;
+    }
+
+    public Boolean getSign() {
+        return sign;
+    }
+
+    public void setSign(Boolean sign) {
+        this.sign = sign;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+
 }
