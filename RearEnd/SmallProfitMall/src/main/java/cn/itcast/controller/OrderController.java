@@ -28,9 +28,9 @@ public class OrderController {
      * 订单
      * @return
      */
-    @RequestMapping("/Order/{userId}")
-    public QueryResponseResult Order(@PathVariable("userId") String userId) throws IOException {
-        webSocket.sendMessage(userId,"注册");
+    @RequestMapping("/Order/{userId}/{News}")
+    public QueryResponseResult Order(@PathVariable("userId") String userId,@PathVariable("News")String News) throws IOException {
+        webSocket.sendMessage(userId,News);
         return  new QueryResponseResult(CommonCode.SUCCESS,null);
     }
 }

@@ -1,7 +1,9 @@
 package cn.itcast.controller;
 
 
+import cn.itcast.dao.NewsDao;
 import cn.itcast.domain.homepag.Navigation;
+import cn.itcast.domain.news.News;
 import cn.itcast.messageQueue.producer.shopping.ShoppingProducer;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
@@ -23,6 +25,9 @@ import java.util.List;
 public class TestController {
     @Autowired
     ShoppingProducer shoppingProducer;
+
+    @Autowired
+    NewsDao newsDao;
 
     //测试
     @RequestMapping(value = "/Test/{test}",method = RequestMethod.GET)
@@ -57,4 +62,11 @@ public class TestController {
 //    public void close(@PathVariable("userId")String userId,@PathVariable("msg")String msg) throws IOException {
 //        webSocket.sendMessage(userId,msg);
 //    }
+
+    @RequestMapping(value = "/test",method = RequestMethod.GET)
+    public void wevSocket() throws IOException {
+        List<News> news = newsDao.fendNews("7c9fdfa3177042a08766aed29e7de6cd");
+        System.out.println( news.get(0));
+        System.out.println( news.get(1));
+    }
 }

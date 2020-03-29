@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.NewsDao">
+        <resultMap id="fendNewsMap" type="cn.itcast.domain.news.News">
+            <id property="id" column="id"></id>
+            <result property="senderName" column="senderName"></result>
+            <result property="senderAvatar" column="senderAvatar"></result>
+            <result property="newsStatus" column="newsStatus"></result>
+            <result property="userId" column="userId"></result>
+            <result property="newsId" column="newsId"></result>
+             <!-- 配置角色集合的映射 -->
+            <collection property="newsContent" ofType="cn.itcast.domain.news.NewsContent">
+                <id property="contentId" column="contentId"></id>
+                <result property="newsId" column="newsId"></result>
+                <result property="newsType" column="newsType"></result>
+                <result property="newsTime" column="newsTime"></result>
+                <result property="newsContent" column="newsContent"></result>
+                <result property="sign" column="sign"></result>
+                <result property="title" column="title"></result>
+                <result property="code" column="code"></result>
+            </collection>
+        </resultMap>
+
+    <select id="fendNews" resultMap="fendNewsMap">
+        SELECT
+            un.* ,nc.newsTime,nc.newsContent,nc.newsType,nc.contentId,nc.sign
+        FROM
+            userNews un
+        LEFT JOIN
+            newsContent nc
+        ON
+            un.newsId=nc.newsId
+        WHERE
+            un.userId=#{userId}
+        AND
+            un.newsId=nc.newsId
+    </select>
+</mapper>
