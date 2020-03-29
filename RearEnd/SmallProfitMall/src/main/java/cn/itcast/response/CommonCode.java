@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 
 @ToString
 public enum CommonCode implements ResultCode{
-
+    redis(true,82000,"返回消息"),
     same(false,10007,"跟原有信息相同"),
     normal(true,81000,"webSocket连接正常"),
     nameError(false,10008,"不可以使用初始名登录"),

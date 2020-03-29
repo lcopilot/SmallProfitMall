@@ -52,6 +52,7 @@ public class NewsController {
     @RequestMapping(value = "/close/{userId}/{msg}",method = RequestMethod.POST)
     public QueryResponseResult close(@PathVariable("userId")String userId,@PathVariable("msg")String msg) throws IOException {
         webSocket.sendMessage(userId,msg);
+
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
 
