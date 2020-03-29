@@ -119,8 +119,9 @@ public class WebSocket {
     //单发消息
     public void sendMessage(String id,String message) throws IOException {
         Session session = USER_ONLINE_MAP.get(id);
-        session.getAsyncRemote().sendText(message);
-
+        QueryResultString queryResultString = new QueryResultString();
+        queryResultString.setCallback(message);
+        session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(CommonCode.redis,queryResultString)));
         //阻塞式（同步）
         //this.session.getBasicRemote().sendText(message);
         //非阻塞式（异步）
