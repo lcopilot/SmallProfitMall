@@ -108,8 +108,7 @@
 </template>
 
 <script>
-  const Header = () => import("../../components/pages/Header"); //组件懒加载
-  const Footer = () => import("../../components/pages/Footer");
+  import *as userApi from '../../api/page/user';
   const personalPage = () => import("../../components/admin/personalHubPage");
   const orderContent = () => import("../../components/admin/orderContent");
   export default {
@@ -118,8 +117,11 @@
     data() {
       return {
         messageDisable: false,
-        dd: false,
-        pageSize: 0,
+        messagePaging:{
+          userId:sessionStorage.getItem("uId"),
+          currentPage:1,
+          pageSize: 0,
+        },
         list: [],
         product: [
           {
@@ -191,11 +193,9 @@
       //加载消息
       getMessageList() {
         this.messageDisable = true;
-        this.pageSize++;
+        this.currentPage++;
         clearTimeout(this.timer);
-        this.axios.get(
-            "apiUrl/TestController/Test/" + this.pageSize
-        )
+        userApi.getMessageHistory()
         .then(res => {
           console.log(res);
           this.list = this.list.concat(res.data.queryResult.list); //因为每次后端返回的都是数组，所以这边把数组拼接到一起
