@@ -1,16 +1,17 @@
 let websocket = null;
 let globalCallback = null;
 let websocketStatus=false; //websocket链接状态
-const timeout = 30 * 1000;//30秒一次心跳
+const timeout = 27 * 1000;//30秒一次心跳
 let heartbeatTimer=0; //心跳计时器
 let HeartbeatStatus=false; //心跳连接状态
+let checkConnectionTimer=0; //心跳检测延迟定时器
 
 export const initWebSocket = () => { //初始化websocket
   if (!sessionStorage.getItem("uId")) {
     return;
   }
-  const wsUri = "ws://localhost:3167/notification/" + sessionStorage.getItem(
-      "uId");
+  clearTimeout(checkConnectionTimer);
+  const wsUri =(window.location.protocol == 'http:') ? "ws://localhost:3167/notification/" + sessionStorage.getItem("uId") : "wss://localhost:3167/notification/" + sessionStorage.getItem("uId");
   websocket = new WebSocket(wsUri);
   //接收服务器的消息
   websocket.onmessage = function (e) {
@@ -27,27 +28,41 @@ export const initWebSocket = () => { //初始化websocket
   //连接报错
   websocket.onerror = function () {
     console.log("WebSocket连接发生错误");
+    //重连
+    reconnection();
   };
 };
 
 // 发送信息
-const sendMessage = (msg, callback) => {
-  globalCallback = callback;
+const sendMessage = (message, callback) => {
+  globalCallback=callback;
+  /**
+   * webSocket的readyState属性用来定义连接状态，该属性的值有下面几种：
+   0 ：对应常量CONNECTING (numeric value 0)，
+   正在建立连接连接，还没有完成。The connection has not yet been established.
+   1 ：对应常量OPEN (numeric value 1)，
+   连接成功建立，可以进行通信。The WebSocket connection is established and communication is possible.
+   2 ：对应常量CLOSING (numeric value 2)
+   连接正在进行关闭握手，即将关闭。The connection is going through the closing handshake.
+   3 : 对应常量CLOSED (numeric value 3)
+   连接已经关闭或者根本没有建立。The connection has been closed or could not be opened.
+   */
   if (websocket.readyState === websocket.OPEN) {
     //停止心跳
     stopHeartbeat();
     //若是ws开启状态
-    websocketSend(msg);
+    websocketSend(message);
   } else if (websocket.readyState !== websocket.CONNECTING) {
     initWebSocket();
     // 若未开启 ，则等待1s后重新调用
     setTimeout(function () {
-      sendMessage(msg, callback);
+      sendMessage(message, callback);
     }, 1000);
   } else {
     // 若是 正在开启状态，则等待1s后重新调用
+    //重新连接
     setTimeout(function () {
-      sendMessage(msg, callback);
+      sendMessage(message, callback);
     }, 1000);
   }
 };
@@ -61,13 +76,13 @@ const close = () => {
 
 //数据接收
 function websocketOnMessage(e) {
-  console.log('数据接收')
   if (e!=null){
     globalCallback(JSON.parse(e.data));
     //开启心跳
     startHeartbeat();
   }
 }
+
 
 //数据发送
 function websocketSend(agentData) {
@@ -86,39 +101,45 @@ function websocketOpen(e) {
   startHeartbeat();
 }
 
-
 //启动心跳包
 function startHeartbeat() {
   clearTimeout(heartbeatTimer);
-  HeartbeatStatus=false;
-  const heartbeatPacket={userId:sessionStorage.getItem("uId"),code:"80001",message:"Confirm heartbeat link"}
+  const heartbeatPacket={userId:sessionStorage.getItem("uId"),code:"80001",message:"Confirm heartbeat link"};
   heartbeatTimer=setTimeout(()=>{
-     sendMessage(heartbeatPacket,HeartbeatMessageCallback());
+      HeartbeatStatus=false;
+     sendMessage(heartbeatPacket,eval(heartbeatMessageCallback));
+     checkConnection();
   },timeout)
 }
 //心跳消息回调
-function HeartbeatMessageCallback(msg) {
-    if (msg!=null && msg.code===80002){
+function heartbeatMessageCallback(msg) {
+  clearTimeout(heartbeatTimer);
+  if (msg!=null && msg.code==80002){
       HeartbeatStatus=true;
     }
-    checkConnection();
 }
 //心跳连接状态
 function checkConnection(){
+  //心跳状态监测 延迟3秒防止服务器数据延迟
+  checkConnectionTimer=setTimeout(()=>{
     if (HeartbeatStatus){
       clearTimeout(heartbeatTimer);
       startHeartbeat();
     }else {
-      clearTimeout(heartbeatTimer);
-      //尝试重连 2秒一次
-      let reconnection=setInterval(()=>{
-        if (websocketStatus){
-          console.log('重连成功')
-          clearTimeout(reconnection);
-        }
-        initWebSocket();
-      },2000)
+      reconnection();
     }
+  },3000)
+}
+//重连
+function reconnection() {
+  clearTimeout(heartbeatTimer);
+  //尝试重连 2秒一次
+  let reconnection=setInterval(()=>{
+    if (websocketStatus){
+      clearTimeout(reconnection);
+    }
+    initWebSocket();
+  },1500)
 }
 //停止心跳
 function stopHeartbeat() {

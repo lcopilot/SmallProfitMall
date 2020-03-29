@@ -71,13 +71,37 @@
                       <div class="personal_center_wallet1">56.23</div>
                       <div class="personal_center_wallet2">零钱</div>
                       <div class="personal_center_wallet3">
-                        <router-link to="/" class="personal_center_wallet3_a">
+                        <router-link @click.native="rechargeDialogVisible=true" to="" class="personal_center_wallet3_a" >
                           充值
                         </router-link>
                         <router-link to="/" class="personal_center_wallet3_a">
                           | 提现
                         </router-link>
                       </div>
+                      <el-dialog
+                          @close="shutDown()"
+                          title="充 值"
+                          :visible.sync="rechargeDialogVisible"
+                          width="30%"
+                          center>
+                        <div>
+                          <el-input  placeholder="请输入你要充值的金额" v-model="amount"  maxlength="15">
+                              <div style="margin-top: 50%" slot="suffix">元</div>
+                              <svg-icon slot="prefix" name="yuan" style="margin-top: 30%"></svg-icon>
+                          </el-input>
+                          <el-radio-group v-model="amount" style="margin-top: 5%">
+                            <el-radio-button label="100"></el-radio-button>
+                            <el-radio-button label="300"></el-radio-button>
+                            <el-radio-button label="500"></el-radio-button>
+                            <el-radio-button label="700"></el-radio-button>
+                            <el-radio-button label="1000"></el-radio-button>
+                            <el-radio-button label="2000"></el-radio-button>
+                          </el-radio-group>
+                          <div class="recharge_btn">
+                            <el-button type="primary"  @click="recharge()">确 定</el-button>
+                          </div>
+                        </div>
+                      </el-dialog>
                     </el-col>
                     <el-col :span="6">
                       <div class="personal_center_wallet1">4</div>
@@ -230,6 +254,10 @@
     components: {Header, Footer, personalPage},
     data() {
       return {
+        //充值对话框
+        rechargeDialogVisible:false,
+        //充值的金额
+        amount:'',
         //头像
         avatar:'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
         //图标切换
@@ -320,6 +348,19 @@
       leave_order() {
         this.icon.order = true;
       },
+      //充值
+      recharge(){
+        const code = /^[0-9]*$/
+        if (this.amount.length >= 15 || !code.test(this.amount)){
+          this.$message.warning("请输入纯数字")
+        }else {
+          this.rechargeDialogVisible=false
+        }
+      },
+      //充值框关闭的回调
+      shutDown(){
+        this.amount='';
+      }
     },
     created() {
       this.avatar=sessionStorage.getItem("avatar");
@@ -334,7 +375,9 @@
   [v-cloak] {
     display: none
   }
-
+  .recharge_btn{
+    text-align: right;margin: 4% 3% 0 0;
+  }
   .activate_now_btn {
     float: right;
     padding: 0 10px;

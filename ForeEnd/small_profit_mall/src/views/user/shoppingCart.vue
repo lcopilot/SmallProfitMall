@@ -357,7 +357,8 @@
       },
       //结算
       settlement() {
-        this.socketApi.sendMessage("sadas");
+        let ss={code:"80001"}
+        this.socketApi.sendMessage(ss);
         // this.$refs.cartTable.selection
         // this.$router.push({
         //   path: "/order" //跳转的路径
