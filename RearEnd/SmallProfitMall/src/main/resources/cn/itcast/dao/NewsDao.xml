@@ -39,4 +39,8 @@
         desc
             limit #{currentPage},#{pageSize}
     </select>
+
+    <select id="fendTotal" resultType="java.lang.Integer">
+        select count(*) FROM newsContent WHERE userId=#{userId}
+    </select>
 </mapper>

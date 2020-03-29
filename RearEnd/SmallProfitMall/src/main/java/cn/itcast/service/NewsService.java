@@ -18,4 +18,11 @@ public interface NewsService {
      * @return
      */
     public List<News> fendNews(String userId ,Integer currentPage, Integer pageSize);
+
+    /**
+     * 查询总记录数
+     * @param userId
+     * @return
+     */
+    public Integer fendTotal(String userId);
 }

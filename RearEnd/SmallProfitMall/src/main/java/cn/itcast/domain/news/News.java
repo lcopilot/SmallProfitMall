@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class News  implements Serializable {
     //消息id
-    private int id;
+    private Integer id;
     //用户id
     private String userId;
     //消息推送者名字
@@ -19,13 +19,11 @@ public class News  implements Serializable {
     //消息状态
     private String newsStatus;
     //消息内容id
-    private int newsId;
-//    //消息内容
-//    private NewsContent newsContent;
+    private Integer newsId;
     //消息种类
-    private int newsType;
+    private Integer newsType;
     //消息内容id
-    private int contentId;
+    private Integer contentId;
     //消息时间
     private String newsTime;
     //消息内容
@@ -37,23 +35,67 @@ public class News  implements Serializable {
     //消息代码
     private String code;
 
-    public String getCode() {
-        return code;
+    public Integer getId() {
+        return id;
     }
 
-    public int getNewsType() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public String getSenderAvatar() {
+        return senderAvatar;
+    }
+
+    public void setSenderAvatar(String senderAvatar) {
+        this.senderAvatar = senderAvatar;
+    }
+
+    public String getNewsStatus() {
+        return newsStatus;
+    }
+
+    public void setNewsStatus(String newsStatus) {
+        this.newsStatus = newsStatus;
+    }
+
+    public Integer getNewsId() {
+        return newsId;
+    }
+
+    public void setNewsId(Integer newsId) {
+        this.newsId = newsId;
+    }
+
+    public Integer getNewsType() {
         return newsType;
     }
 
-    public void setNewsType(int newsType) {
+    public void setNewsType(Integer newsType) {
         this.newsType = newsType;
     }
 
-    public int getContentId() {
+    public Integer getContentId() {
         return contentId;
     }
 
-    public void setContentId(int contentId) {
+    public void setContentId(Integer contentId) {
         this.contentId = contentId;
     }
 
@@ -89,74 +131,13 @@ public class News  implements Serializable {
         this.title = title;
     }
 
+    public String getCode() {
+        return code;
+    }
+
     public void setCode(String code) {
         this.code = code;
     }
 
-    public String getUserId() {
-        return userId;
-    }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getSenderName() {
-        return senderName;
-    }
-
-    public void setSenderName(String senderName) {
-        this.senderName = senderName;
-    }
-
-    public String getSenderAvatar() {
-        return senderAvatar;
-    }
-
-    public void setSenderAvatar(String senderAvatar) {
-        this.senderAvatar = senderAvatar;
-    }
-
-    public String getNewsStatus() {
-        return newsStatus;
-    }
-
-    public void setNewsStatus(String newsStatus) {
-        this.newsStatus = newsStatus;
-    }
-
-    public int getNewsId() {
-        return newsId;
-    }
-
-    public void setNewsId(int newsId) {
-        this.newsId = newsId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "News{" +
-                "id=" + id +
-                ", userId='" + userId + '\'' +
-                ", senderName='" + senderName + '\'' +
-                ", senderAvatar='" + senderAvatar + '\'' +
-                ", newsStatus='" + newsStatus + '\'' +
-                ", newsId=" + newsId +
-                ", newsType=" + newsType +
-                ", contentId=" + contentId +
-                ", newsTime='" + newsTime + '\'' +
-                ", newsContent='" + newsContent + '\'' +
-                ", sign=" + sign +
-                ", title='" + title + '\'' +
-                ", code='" + code + '\'' +
-                '}';
-    }
 }

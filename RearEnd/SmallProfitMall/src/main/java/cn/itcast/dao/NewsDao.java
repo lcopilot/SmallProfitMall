@@ -16,4 +16,11 @@ public interface NewsDao {
      * @return 消息实体类
      */
     public List<News> fendNews(@Param("userId")String userId,@Param("currentPage")Integer currentPage,@Param("pageSize")Integer pageSize);
+
+    /**
+     * 查询总记录数
+     * @param userId
+     * @return 总记录数
+     */
+    public Integer fendTotal(@Param("userId")String userId);
 }
