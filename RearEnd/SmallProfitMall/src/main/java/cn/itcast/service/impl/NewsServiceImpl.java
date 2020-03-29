@@ -22,7 +22,20 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     NewsDao newsDao;
     @Override
-    public List<News> fendNews(String userId) {
-        return newsDao.fendNews(userId);
+    public List<News> fendNews(String userId,Integer currentPage, Integer pageSize) {
+        //传入当前页减一
+        currentPage=currentPage-1;
+        List<News> news =  newsDao.fendNews(userId,currentPage,pageSize);
+        return news;
+    }
+
+    /**
+     * 查询总记录数
+     * @param userId
+     * @return
+     */
+    @Override
+    public Integer fendTotal(String userId) {
+        return newsDao.fendTotal(userId);
     }
 }

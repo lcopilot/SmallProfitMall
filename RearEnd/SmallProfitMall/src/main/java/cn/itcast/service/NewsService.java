@@ -17,5 +17,12 @@ public interface NewsService {
      * @param userId
      * @return
      */
-    public List<News> fendNews(String userId);
+    public List<News> fendNews(String userId ,Integer currentPage, Integer pageSize);
+
+    /**
+     * 查询总记录数
+     * @param userId
+     * @return
+     */
+    public Integer fendTotal(String userId);
 }

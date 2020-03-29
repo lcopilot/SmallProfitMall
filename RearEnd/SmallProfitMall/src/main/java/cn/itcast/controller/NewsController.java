@@ -3,8 +3,10 @@ package cn.itcast.controller;
 import cn.itcast.domain.news.News;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
-import cn.itcast.response.QueryResult;
+import cn.itcast.response.news.Page;
+import cn.itcast.response.news.QueryResponseNews;
 import cn.itcast.service.NewsService;
+import cn.itcast.util.logic.TotalPages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,13 +35,19 @@ public class NewsController {
      * 查询所有消息
      * @return
      */
-    @RequestMapping(value = "/findNews/{userId}",method = RequestMethod.GET)
-    public QueryResponseResult findNews(@PathVariable("userId") String userId) {
-        List<News> news = newsService.fendNews(userId);
-        QueryResult queryResult = new QueryResult();
-        queryResult.setList(news);
-        queryResult.setTotal(news.size());
-        return  new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+    @RequestMapping(value = "/findNews",method = RequestMethod.GET)
+    public QueryResponseNews findNews(String userId,Integer currentPage , Integer pageSize) {
+        //消息数据
+        List<News> news = newsService.fendNews(userId,currentPage,pageSize);
+        //总数量
+        Integer total = newsService.fendTotal(userId);
+        Page page = new Page();
+        page.setNews(news);
+        //总记录时
+        page.setTotalCount(total);
+        //总页数
+        page.setTotalPage(TotalPages.totalPages(pageSize,total));
+        return  new QueryResponseNews(CommonCode.SUCCESS,page);
     }
 
     /**
