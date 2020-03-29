@@ -141,14 +141,12 @@
   import * as commonApi from "../../api/util/common";
   import * as userApi from "../../api/page/user";
 
-  const Header = () => import("../../components/pages/Header"); //组件懒加载
-  const Footer = () => import("../../components/pages/Footer");
   const personalPage = () => import("../../components/admin/personalHubPage");
 
   export default {
     inject: ["reload"],
     name: "addressManagement",
-    components: {Header, Footer, personalPage},
+    components: { personalPage},
     data() {
       //手机号校验
       let checkPhone = (rule, value, callback) => {

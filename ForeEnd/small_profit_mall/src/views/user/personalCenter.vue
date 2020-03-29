@@ -97,7 +97,7 @@
                             <el-radio-button label="1000"></el-radio-button>
                             <el-radio-button label="2000"></el-radio-button>
                           </el-radio-group>
-                          <div style="text-align: right;margin: 4% 3% 0 0;">
+                          <div class="recharge_btn">
                             <el-button type="primary"  @click="recharge()">确 定</el-button>
                           </div>
                         </div>
@@ -375,7 +375,9 @@
   [v-cloak] {
     display: none
   }
-
+  .recharge_btn{
+    text-align: right;margin: 4% 3% 0 0;
+  }
   .activate_now_btn {
     float: right;
     padding: 0 10px;
