@@ -24,6 +24,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WebSocket {
 
     private static Logger logger = Logger.getLogger(WebSocket.class);
+    public static final String code="80001";
+
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的
     public static int onlineCount = 0;
 
@@ -81,7 +83,7 @@ public class WebSocket {
     public String onMessage(String message, Session session) throws IOException {
         //返回的数据
         String redis="";
-        String code="80001";
+
         //解析发送过来的数据,并封装到connection实体类
         Connection connection = (Connection) ConversionJson.JSONToObj(message, Connection.class);
         System.out.println(connection);

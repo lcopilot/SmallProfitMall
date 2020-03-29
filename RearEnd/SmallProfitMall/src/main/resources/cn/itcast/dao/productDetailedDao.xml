@@ -13,12 +13,14 @@
 <!--            <result property="ImageSite" column="ImageSite"></result>-->
 <!--        </collection>-->
 <!--    </resultMap>-->
+
+    <!--根据id查询商品-->
+
     <!--根据id查询商品基础表跟价格表-->
     <select id="findByIdBasis" resultType="cn.itcast.domain.ProductDatails.ProductBasis">
         SELECT
         pb.*,
         pp.ProductInventory,pp.ProductPrice,pp.ProductSales,pp.SalesPrice,pp.SpikePrice
-
         FROM
             ProductBasis pb
         LEFT JOIN ProductPrice pp
