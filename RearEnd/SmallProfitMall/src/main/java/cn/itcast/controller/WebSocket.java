@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WebSocket {
 
     private static Logger logger = Logger.getLogger(WebSocket.class);
-    public static final String code="80001";
+    public static final String code="81000";
 
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的
     public static int onlineCount = 0;
