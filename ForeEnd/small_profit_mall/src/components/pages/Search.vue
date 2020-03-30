@@ -32,7 +32,6 @@
             >
               <div v-if="!toke" style="text-align: center;padding: 6%;">
                 <router-link to="/login">您还没有登录,请先登录吧</router-link>
-
               </div>
               <el-table v-if="toke" empty-text="购物车中还没有商品,赶紧选购吧!" :data="cartList"
                         :show-header="false">
