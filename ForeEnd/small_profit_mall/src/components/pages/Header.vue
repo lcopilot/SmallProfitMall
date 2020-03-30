@@ -80,11 +80,16 @@
       ...mapActions([
         "modifyWebsocketStatus"
       ]),
+      //退出
       exit() {
         sessionStorage.clear();
         this.$router.push("/login");
         this.socketApi.close();
       },
+      //接收消息
+      receiveMessage(msg){
+        console.log(msg);
+      }
     },
     created() {
       if (sessionStorage.getItem("uId") && !this.websocketStatus){
@@ -93,6 +98,7 @@
       }
       this.avatar = sessionStorage.getItem("avatar");
       this.username = sessionStorage.getItem("username");
+      this.socketApi.depositMethod(82000,this.receiveMessage);
     }
   };
 </script>

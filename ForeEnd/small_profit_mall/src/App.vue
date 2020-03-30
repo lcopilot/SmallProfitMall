@@ -31,7 +31,7 @@
       </div>
     </el-backtop>
     <!-- 同路由下刷新页面-->
-    <router-view v-if="isRouterAlive"/>
+    <router-view v-if="isRouterAlive" :key="$route.fullPath"/>
   </div>
 </template>
 <script>

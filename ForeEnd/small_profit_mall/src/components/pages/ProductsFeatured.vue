@@ -1,11 +1,16 @@
 <template>
   <el-container>
     <el-header height="80px">
-      ——————
-      <svg-icon name="Love"></svg-icon>
-      ——————
-      <h3>为你推荐</h3>
-      ——————
+      <div v-if="searchContent" style="text-align: left;font-size: 24px;font-weight: 600;margin:1% 0 0 10%">
+       关键词:'{{searchContent}}'
+      </div>
+      <div v-if="!searchContent">
+        ——————
+        <svg-icon name="Love"></svg-icon>
+        ——————
+        <h3>为你推荐</h3>
+        ——————
+      </div>
     </el-header>
     <el-main>
       <el-row>
@@ -55,9 +60,23 @@
               </div>
             </el-card>
           </div>
+          <div style="text-align: right;padding: 3% 0 1% 0" v-if="searchContent">
+            <el-pagination
+                background
+                @size-change="changeNumber"
+                @current-change="changePage"
+                :current-page="searchParams.currentPage"
+                :page-sizes="[6,7, 8, 10, 12,15]"
+                :page-size="searchParams.pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :hide-on-single-page="true"
+                :total="searchParams.totalCount">
+            </el-pagination>
+          </div>
         </el-col>
       </el-row>
     </el-main>
+
   </el-container>
 </template>
 
@@ -66,14 +85,23 @@
   import * as userApi from "../../api/page/user";
 
   export default {
+    inject: ["reload"],
     name: "ProductsFeatured",
     data() {
       return {
         show2: false,
+        searchContent:'',
         productsFeaturedList: [],
+        searchParams: {
+          currentPage: 1,//页码
+          pageSize: 6,//每页显示个数
+          totalCount: 400,//总记录数
+          totalPage: 1,//总页数
+        },
       }
     },
     methods: {
+      //图标变换
       enterProduct(index){
         this.productsFeaturedList[index].favorite = 1;
         this.productsFeaturedList[index].shoppingTrolley = 1;
@@ -115,10 +143,11 @@
           })
         }
       },
+
       addCart(ProductId) {
         console.log("sdfs");
       },
-      //商品推荐
+      //获取商品推荐
       getProductsFeatured() {
         homeApi.getProductsFeatured().then(res => {
               if (res.success) {
@@ -127,12 +156,25 @@
             }
         )
       },
+      //切换评论分页时触发
+      changePage(currentPage) {
+        this.searchParams.currentPage = currentPage;
+      },
+      //切换每页显示多少条评论时触发
+      changeNumber(pageSize) {
+        this.searchParams.pageSize = pageSize;
+      }
     },
     created() {
-      this.$nextTick(()=>{
+      if (!this.$route.query.searchContent){
+        this.searchContent=sessionStorage.getItem("searchContent");
+      }else {
+        this.searchContent=this.$route.query.searchContent;
+        sessionStorage.setItem("searchContent",this.searchContent);
+      }
+      if (!this.searchContent){
         this.getProductsFeatured();
-      })
-
+      }
     }
   }
 </script>

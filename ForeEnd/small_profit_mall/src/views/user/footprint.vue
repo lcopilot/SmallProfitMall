@@ -179,6 +179,7 @@
       removeFootprint(footprintId){
 
       },
+      //添加收藏
       addFavorite() {
         if (!sessionStorage.getItem("uId")) {
           this.$message.warning("还没有登录哦~,请先登录吧")

@@ -11,13 +11,14 @@
           <el-autocomplete
               style="width:75%;margin-right:2% "
               v-model="searchContent"
+              :maxlength="25"
               :fetch-suggestions="querySearch"
               placeholder="搜索 商品 / 品牌"
               @select="handleSelect"
               prefix-icon="el-icon-search"
           />
-          <el-button plain icon="el-icon-search" type="danger" round>搜索</el-button>
-
+          <el-button plain icon="el-icon-search" type="danger" round @click="searchProduct()">搜索
+          </el-button>
         </el-col>
         <el-col :span="3">
           <el-badge :value="CartSum" :max="99" class="item">
@@ -26,11 +27,12 @@
                 width="440"
                 trigger="hover"
                 transition="el-zoom-in-top"
-                :open-delay="200"
+                :open-delay="400"
                 @show="getShoppingCartPreview()"
             >
               <div v-if="!toke" style="text-align: center;padding: 6%;">
                 <router-link to="/login">您还没有登录,请先登录吧</router-link>
+
               </div>
               <el-table v-if="toke" empty-text="购物车中还没有商品,赶紧选购吧!" :data="cartList"
                         :show-header="false">
@@ -50,7 +52,7 @@
                 </el-table-column>
                 <el-table-column width="60">
                   <template slot-scope="product">
-                    <el-tag  size="small"  effect="dark" type="success">
+                    <el-tag size="small" effect="dark" type="success">
                       {{product.row.quantity<=99?'x'+product.row.quantity:'99+'}}
                     </el-tag>
                   </template>
@@ -113,6 +115,7 @@
         toke: '',
         //购物车预览数据
         cartList: [],
+        //搜索内容
         searchContent: '',
         restaurants: [],
         state1: '',
@@ -149,13 +152,13 @@
       getShoppingCartPreview() {
         let userId = sessionStorage.getItem("uId");
         if (userId != null) {
-          productApi.getShoppingCartPreview(userId,4).then(res => {
+          productApi.getShoppingCartPreview(userId, 4).then(res => {
             if (res.success) {
               this.getCartSum(res.queryResult.total);
-              this.cartList=res.queryResult.list;
+              this.cartList = res.queryResult.list;
             }
           })
-        }else{
+        } else {
           this.getCartSum(0);
         }
       },
@@ -244,7 +247,23 @@
       },
       handleSelect(item) {
         console.log(this.searchContent);
-      }
+      },
+      //搜索
+      searchProduct() {
+        const searchCh=/^[A-Za-z0-9\u4e00-\u9fa5]+$/;
+        if (this.searchContent=='' || !searchCh.test(this.searchContent)){
+          return this.$message({
+            message:"请输入正确格式的搜索内容,支持中英文数字",
+            type:"warning"
+          })
+        }
+        this.$router.push({
+          path: '/searchShow',
+          query: {
+            searchContent:this.searchContent
+          }
+        })
+      },
     },
     created() {
       this.getPagePilot();
