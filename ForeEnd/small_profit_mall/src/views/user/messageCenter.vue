@@ -149,7 +149,7 @@
         messagePaging: {
           state: 2,
           userId: sessionStorage.getItem("uId"),
-          currentPage: 1,
+          currentPage: 0,
           pageSize: 5,
           totalPage: 0,
         },
