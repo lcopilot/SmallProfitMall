@@ -7,6 +7,7 @@ import cn.itcast.response.QueryResult;
 import cn.itcast.response.news.Page;
 import cn.itcast.response.news.QueryResponseNews;
 import cn.itcast.service.NewsService;
+import cn.itcast.util.logic.ConversionJson;
 import cn.itcast.util.logic.TotalPages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,6 @@ public class NewsController {
         if (currentPage==0){
             currentPage =4;
         }
-
         //消息数据
         List<News> news = newsService.fendNews(userId,state,currentPage,pageSize);
         //总数量
@@ -65,8 +65,8 @@ public class NewsController {
      * @param contentId
      * @return
      */
-    @RequestMapping(value = "/updateNewsStatus",method = RequestMethod.PUT)
-    public QueryResponseResult updateNewsStatus(String userId,Integer contentId){
+    @RequestMapping(value = "/updateNewsStatus/{userId}/{contentId}",method = RequestMethod.PUT)
+    public QueryResponseResult updateNewsStatus(@PathVariable("userId")String userId,@PathVariable("contentId")Integer contentId){
         Integer redis = newsService.updateNewsStatus(userId,contentId);
         if (redis!=0){
             return new  QueryResponseResult(CommonCode.SUCCESS,null);
@@ -76,7 +76,6 @@ public class NewsController {
     }
 
     /**
-     *
      * 发送消息测试
      * @param userId
      * @param msg
@@ -84,8 +83,9 @@ public class NewsController {
      */
     @RequestMapping(value = "/close/{userId}/{msg}",method = RequestMethod.POST)
     public QueryResponseResult close(@PathVariable("userId")String userId,@PathVariable("msg")String msg) throws IOException {
-        webSocket.sendMessage(userId,msg);
-
+        List<News> news = newsService.fendNews(userId,2,1,5);
+        String a= ConversionJson.objectToJson(news.get(1)) ;
+        webSocket.sendMessage(userId,a);
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
 

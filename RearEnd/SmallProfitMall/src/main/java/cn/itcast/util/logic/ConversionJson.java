@@ -11,6 +11,14 @@ import java.io.IOException;
  */
 public class ConversionJson {
 
+    /**
+     * 实体类转json
+     * @param obj
+     * @param <T>
+     * @return
+     * @throws JSONException
+     * @throws IOException
+     */
     public static<T> String objectToJson(T obj) throws JSONException, IOException {
         ObjectMapper mapper = new ObjectMapper();
         // Convert object to JSON string
