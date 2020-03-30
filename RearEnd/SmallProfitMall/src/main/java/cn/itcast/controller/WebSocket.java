@@ -123,6 +123,7 @@ public class WebSocket {
         QueryResultString queryResultString = new QueryResultString();
         queryResultString.setNews(message);
         queryResultString.setUnreadQuantity(a);
+
         session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis,queryResultString)));
         //阻塞式（同步）
         //this.session.getBasicRemote().sendText(message);
