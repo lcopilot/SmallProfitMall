@@ -2,29 +2,22 @@ package cn.itcast.dao;
 
 
 import cn.itcast.domain.ProductDatails.ProductBasis;
+import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 //商品详细
 public interface ProductDetailsDao {
 
-    //根据id查询商品基础表跟价格表
-    public ProductBasis findByIdBasis(@Param("ProductId") int ProductId);
-    //根据id查询商品图片
-    public String[] findByIdImage(@Param("ProductId") int ProductId);
-    //根据id查询商品规格
-    public String[] findByIdSpecification(@Param("ProductId") int ProductId);
-    //根据id查询商品口味
-    public String[] findByIdTaste(@Param("ProductId") int ProductId);
-    //根据id查询商品颜色
-    public String[] findByIdColour(@Param("ProductId") int ProductId);
-    //根据id查询商品套餐
-    public String[] findByIdCombo(@Param("ProductId") int ProductId);
-    //根据id查询商品尺寸
-    public String[] findBySize(@Param("ProductId") int ProductId);
-    //根据id查询商品种类
-    public String[] findByKind(@Param("ProductId") int ProductId);
-    //根据id查询商品版本
-    public String[] findByVersion(@Param("ProductId") int ProductId);
+
+    /**
+     * 查询商品价格
+     * @param userId
+     * @return
+     */
+    public ProductDetailsResult fendProduct(@Param("userId")Integer userId);
+
 
 }

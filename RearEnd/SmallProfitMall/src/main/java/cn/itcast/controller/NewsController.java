@@ -37,6 +37,11 @@ public class NewsController {
      */
     @RequestMapping(value = "/findNews",method = RequestMethod.GET)
     public QueryResponseNews findNews(String userId,Integer currentPage , Integer pageSize) {
+
+        if (currentPage==0){
+            currentPage =4;
+        }
+
         //消息数据
         List<News> news = newsService.fendNews(userId,currentPage,pageSize);
         //总数量

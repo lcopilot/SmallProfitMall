@@ -2,6 +2,8 @@ package cn.itcast.controller;
 
 
 import cn.itcast.dao.NewsDao;
+import cn.itcast.dao.ProductDetailsDao;
+import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import cn.itcast.domain.homepag.Navigation;
 import cn.itcast.domain.news.News;
 import cn.itcast.messageQueue.producer.shopping.ShoppingProducer;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -28,6 +31,9 @@ public class TestController {
 
     @Autowired
     NewsDao newsDao;
+
+    @Autowired
+    ProductDetailsDao productDetailsDao;
 
     //测试
     @RequestMapping(value = "/Test/{test}",method = RequestMethod.GET)
@@ -64,9 +70,13 @@ public class TestController {
 //    }
 
 //    @RequestMapping(value = "/test",method = RequestMethod.GET)
-//    public void wevSocket() throws IOException {
-//        List<News> news = newsDao.fendNews("7c9fdfa3177042a08766aed29e7de6cd");
-//        System.out.println( news.get(0));
-//        System.out.println( news.get(1));
+//    public QueryResponseResult wevSocket() throws IOException {
+//        System.out.println(productDetailsDao.fend());
+//        List<ProductDetailsResult> productDetailsResults= Arrays.asList(productDetailsDao.fend());
+//        QueryResult queryResult = new QueryResult();
+//        queryResult.setList(productDetailsResults);
+//        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
 //    }
+
+
 }
