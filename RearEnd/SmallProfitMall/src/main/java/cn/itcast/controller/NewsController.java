@@ -62,10 +62,10 @@ public class NewsController {
      * @return
      */
     @RequestMapping(value = "/unreadQuantity",method = RequestMethod.GET)
-    public QueryResponseResult unreadQuantity(String userId){
-        QueryResult queryResult = new QueryResult();
-        queryResult.setTotal(newsService.unreadQuantity(userId));
-        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+    public QueryResponseNews unreadQuantity(String userId){
+        Page qage = new Page();
+        qage.setUnreadQuantity(newsService.unreadQuantity(userId));
+        return new QueryResponseNews(CommonCode.SUCCESS,qage);
     }
 
     /**

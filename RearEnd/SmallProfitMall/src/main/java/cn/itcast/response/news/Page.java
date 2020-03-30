@@ -21,4 +21,6 @@ public class Page<T> {
     private Integer totalCount;
     //总页数
     private Integer totalPage;
+    //未读数量
+    private Integer unreadQuantity;
 }
