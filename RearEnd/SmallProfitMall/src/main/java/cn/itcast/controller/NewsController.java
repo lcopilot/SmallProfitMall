@@ -53,20 +53,11 @@ public class NewsController {
         page.setTotalCount(total);
         //总页数
         page.setTotalPage(TotalPages.totalPages(pageSize,total));
+        //未读信息数量
+        page.setUnreadQuantity(newsService.unreadQuantity(userId));
         return  new QueryResponseNews(CommonCode.SUCCESS,page);
     }
 
-    /**
-     * 查询未读消息数量
-     * @param userId
-     * @return
-     */
-    @RequestMapping(value = "/unreadQuantity",method = RequestMethod.GET)
-    public QueryResponseNews unreadQuantity(String userId){
-        Page qage = new Page();
-        qage.setUnreadQuantity(newsService.unreadQuantity(userId));
-        return new QueryResponseNews(CommonCode.SUCCESS,qage);
-    }
 
     /**
      * 修改全部已读
