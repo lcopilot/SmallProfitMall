@@ -97,7 +97,7 @@ public class WebSocket {
 //            return redis;
 //        }
         if (code.equals(connection.getCode())){
-            return redis= ConversionJson.objectToJson(new  QueryResponseResult(SocketCommonCode.redis,null));
+            return redis= ConversionJson.objectToJson(new  QueryResponseResult(SocketCommonCode.normal,null));
         }else {
             return "";
         }
