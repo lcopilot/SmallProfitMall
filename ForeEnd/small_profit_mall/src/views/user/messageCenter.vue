@@ -247,7 +247,7 @@
             0, 0, 0, 0))) {
           return mTime.getMonth() + '-' + mTime.getDate();
         } else {
-          return mTime.getHours() + ":" + mTime.getSeconds();
+          return mTime.getHours() + ":" + mTime.getMinutes();
         }
       },
       //加载消息
