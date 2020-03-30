@@ -21,56 +21,56 @@
                     </el-table-column>
                     <el-table-column width="90">
                       <template slot-scope="Category">
-                        <router-link v-if="Category.row.classifySite_1" :to="Category.row.classifySite_1">
+                        <router-link v-if="Category.row.classifySite_1" :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_1}}">
                           {{Category.row.classifyName_1}}
                         </router-link>
                       </template>
                     </el-table-column>
                     <el-table-column width="90">
                       <template slot-scope="Category">
-                        <router-link v-if="Category.row.classifySite_2" :to="Category.row.classifySite_2">
+                        <router-link v-if="Category.row.classifySite_2" :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_2}}">
                           {{Category.row.classifyName_2}}
                         </router-link>
                       </template>
                     </el-table-column>
                     <el-table-column width="90">
                       <template slot-scope="Category">
-                        <router-link v-if="Category.row.classifySite_3" :to="Category.row.classifySite_3">
+                        <router-link v-if="Category.row.classifySite_3" :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_3}}">
                           {{Category.row.classifyName_3}}
                         </router-link>
                       </template>
                     </el-table-column>
                     <el-table-column width="90">
                       <template slot-scope="Category">
-                        <router-link v-if="Category.row.classifySite_4" :to="Category.row.classifySite_4">
+                        <router-link v-if="Category.row.classifySite_4" :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_4}}">
                           {{Category.row.classifyName_4}}
                         </router-link>
                       </template>
                     </el-table-column>
                     <el-table-column width="90">
                       <template slot-scope="Category">
-                        <router-link v-if="Category.row.classifySite_5" :to="Category.row.classifySite_5">
+                        <router-link v-if="Category.row.classifySite_5" :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_5}}">
                           {{Category.row.classifyName_5}}
                         </router-link>
                       </template>
                     </el-table-column>
                     <el-table-column width="90">
                       <template slot-scope="Category">
-                        <router-link v-if="Category.row.classifySite_6" :to="Category.row.classifySite_6">
+                        <router-link v-if="Category.row.classifySite_6" :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_6}}">
                           {{Category.row.classifyName_6}}
                         </router-link>
                       </template>
                     </el-table-column>
                     <el-table-column width="90">
                       <template slot-scope="Category">
-                        <router-link v-if="Category.row.classifySite_7" :to="Category.row.classifySite_7">
+                        <router-link v-if="Category.row.classifySite_7" :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_7}}">
                           {{Category.row.classifyName_7}}
                         </router-link>
                       </template>
                     </el-table-column>
                     <el-table-column width="90">
                       <template slot-scope="Category">
-                        <router-link v-if="Category.row.classifySite_8" :to="Category.row.classifySite_8">
+                        <router-link v-if="Category.row.classifySite_8" :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_8}}">
                           {{Category.row.classifyName_8}}
                         </router-link>
                       </template>
