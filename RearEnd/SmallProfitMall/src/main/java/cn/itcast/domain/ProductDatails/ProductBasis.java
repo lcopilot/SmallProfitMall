@@ -19,9 +19,15 @@ public class ProductBasis implements Serializable {
     private double SpikePrice;              //秒杀价格
     private double ProductSales;            //商品销量
     private double ProductInventory;        //商品库存
+    private List<String> imageSite;
 
+    public List<String> getImageSite() {
+        return imageSite;
+    }
 
-
+    public void setImageSite(List<String> imageSite) {
+        this.imageSite = imageSite;
+    }
 
     public int getId() {
         return id;

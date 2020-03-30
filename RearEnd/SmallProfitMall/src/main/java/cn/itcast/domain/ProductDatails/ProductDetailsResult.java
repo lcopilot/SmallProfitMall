@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class ProductDetailsResult implements Serializable {
@@ -16,38 +17,56 @@ public class ProductDetailsResult implements Serializable {
     private String inventory;       //库存
     private String freeShipping;    //是否包邮
     private String video;           //视频
-    private String[] size;               //尺寸(返回前端）
-    private String[] colour;              //颜色(返回前端）
-    private String[] combo;                 //套餐(返回前端）
-    private String[] specification;         //规格(返回前端）
-    private String[] imageSite;           //图片（返回前端）
-    private String[] taste;             //口味(返回前端）
-    private String[] kind;              //商品种类
-    private String[] version;           //商品版本
+    private List<String> size;               //尺寸(返回前端）
+    private List<String> colour;              //颜色(返回前端）
+    private List<String> combo;                 //套餐(返回前端）
+    private List<String> specification;         //规格(返回前端）
+    private List<String> imageSite;           //图片（返回前端）
+    private List<String> taste;             //口味(返回前端）
+    private List<String> kind;              //商品种类
+    private List<String> version;           //商品版本
     private int inventorys;             //库存
 
-    public String[] getVersion() {
-        return version;
+    private double ProductPrice;            //商品价格
+    private double SalesPrice;              //促销价格
+    private double SpikePrice;              //秒杀价格
+    private double ProductSales;            //商品销量
+    private double ProductInventory;        //商品库存
+
+    public void setProductPrice(double productPrice) {
+        ProductPrice = productPrice;
     }
 
-    public void setVersion(String[] version) {
-        this.version = version;
+    public double getSalesPrice() {
+        return SalesPrice;
     }
 
-    public String[] getKind() {
-        return kind;
+    public void setSalesPrice(double salesPrice) {
+        SalesPrice = salesPrice;
     }
 
-    public void setKind(String[] kind) {
-        this.kind = kind;
+    public double getSpikePrice() {
+        return SpikePrice;
     }
 
-    public int getInventorys() {
-        return inventorys;
+    public void setSpikePrice(double spikePrice) {
+        SpikePrice = spikePrice;
     }
 
-    public void setInventorys(int inventorys) {
-        this.inventorys = inventorys;
+    public double getProductSales() {
+        return ProductSales;
+    }
+
+    public void setProductSales(double productSales) {
+        ProductSales = productSales;
+    }
+
+    public double getProductInventory() {
+        return ProductInventory;
+    }
+
+    public void setProductInventory(double productInventory) {
+        ProductInventory = productInventory;
     }
 
     public int getId() {
@@ -122,72 +141,75 @@ public class ProductDetailsResult implements Serializable {
         this.video = video;
     }
 
-    public String[] getSize() {
+    public List<String> getSize() {
         return size;
     }
 
-    public void setSize(String[] size) {
+    public void setSize(List<String> size) {
         this.size = size;
     }
 
-    public String[] getColour() {
+    public List<String> getColour() {
         return colour;
     }
 
-    public void setColour(String[] colour) {
+    public void setColour(List<String> colour) {
         this.colour = colour;
     }
 
-    public String[] getCombo() {
+    public List<String> getCombo() {
         return combo;
     }
 
-    public void setCombo(String[] combo) {
+    public void setCombo(List<String> combo) {
         this.combo = combo;
     }
 
-    public String[] getSpecification() {
+    public List<String> getSpecification() {
         return specification;
     }
 
-    public void setSpecification(String[] specification) {
+    public void setSpecification(List<String> specification) {
         this.specification = specification;
     }
 
-    public String[] getImageSite() {
+    public List<String> getImageSite() {
         return imageSite;
     }
 
-    public void setImageSite(String[] imageSite) {
+    public void setImageSite(List<String> imageSite) {
         this.imageSite = imageSite;
     }
 
-    public String[] getTaste() {
+    public List<String> getTaste() {
         return taste;
     }
 
-    public void setTaste(String[] taste) {
+    public void setTaste(List<String> taste) {
         this.taste = taste;
     }
 
-    @Override
-    public String toString() {
-        return "ProductDetailsResult{" +
-                "id=" + id +
-                ", pid='" + pid + '\'' +
-                ", productName='" + productName + '\'' +
-                ", productPrice=" + productPrice +
-                ", sales='" + sales + '\'' +
-                ", weight='" + weight + '\'' +
-                ", inventory='" + inventory + '\'' +
-                ", freeShipping='" + freeShipping + '\'' +
-                ", video='" + video + '\'' +
-                ", size=" + Arrays.toString(size) +
-                ", colour=" + Arrays.toString(colour) +
-                ", combo=" + Arrays.toString(combo) +
-                ", specification=" + Arrays.toString(specification) +
-                ", imageSite=" + Arrays.toString(imageSite) +
-                ", taste=" + Arrays.toString(taste) +
-                '}';
+    public List<String> getKind() {
+        return kind;
+    }
+
+    public void setKind(List<String> kind) {
+        this.kind = kind;
+    }
+
+    public List<String> getVersion() {
+        return version;
+    }
+
+    public void setVersion(List<String> version) {
+        this.version = version;
+    }
+
+    public int getInventorys() {
+        return inventorys;
+    }
+
+    public void setInventorys(int inventorys) {
+        this.inventorys = inventorys;
     }
 }
