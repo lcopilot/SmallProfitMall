@@ -32,8 +32,7 @@ public class News  implements Serializable {
     private Boolean sign;
     //消息标题
     private String title;
-    //消息代码
-    private String code;
+
 
     public Integer getId() {
         return id;
@@ -131,13 +130,6 @@ public class News  implements Serializable {
         this.title = title;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 
 
 }

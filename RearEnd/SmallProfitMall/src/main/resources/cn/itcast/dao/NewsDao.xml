@@ -22,25 +22,48 @@
 <!--                <result property="code" column="code"></result>-->
 <!--            </collection>-->
 <!--        </resultMap>-->
-
+    <!--查询所有用户消息-->
     <select id="fendNews" resultType="cn.itcast.domain.news.News">
         SELECT
-             un.* ,nc.newsTime,nc.newsContent,nc.newsType,nc.contentId,nc.code,nc.sign,nc.title
+            un.* ,nc.newsTime,nc.newsContent,nc.newsType,nc.contentId,nc.sign,nc.title,nc.newsStatus
         FROM
             userNews un
         LEFT JOIN
             newsContent nc
         ON
             un.newsId=nc.newsId
-        WHERE
-            un.userId=#{userId}
+        <where>
+            and  un.userId=#{userId}
+            <if test="state!=2">
+                and newsStatus=#{state}
+            </if>
+        </where>
         order by
-          nc.contentId
+            nc.newsTime
         desc
             limit #{currentPage},#{pageSize}
     </select>
 
+    <!--查询总记录数-->
     <select id="fendTotal" resultType="java.lang.Integer">
         select count(*) FROM newsContent WHERE userId=#{userId}
     </select>
+
+    <!--查询所有未读数量-->
+    <select id="unreadQuantity" resultType="java.lang.Integer">
+        select count(*) FROM newsContent WHERE userId=#{userId} and newsStatus=1
+    </select>
+
+    <!--修改消息状态-->
+    <update id="updateNewsStatus">
+            UPDATE newsContent SET newsStatus=0
+        <where>
+            <if test="contentId!=null">
+                 contentId=1
+            </if>
+        </where>
+
+    </update>
+
+
 </mapper>
