@@ -60,9 +60,11 @@
                           <el-col :span="14">
                             <div style="text-align: left;">
                               <div>
-                                <div :class="message.newsStatus==1?'message_list_preview_div1_div1':''">
+                                <div
+                                    :class="message.newsStatus==1?'message_list_preview_div1_div1':''">
                                 </div>
-                                <div :class="message.newsStatus==1?'message_list_preview_div1_div2':''">
+                                <div
+                                    :class="message.newsStatus==1?'message_list_preview_div1_div2':''">
                                   {{message.senderName}}
                                 </div>
                               </div>
@@ -250,30 +252,20 @@
       },
       //加载消息
       getMessageList() {
-        if (this.messagePaging.currentPage == this.messagePaging.totalPage) {
+        if (this.messagePaging.currentPage > 0 ? this.messagePaging.currentPage
+            == this.messagePaging.totalPage : false) {
           return;
         }
         this.messageDisable = true;
-<<<<<<< HEAD
-        this.messagePaging.currentPage++;
-        if (this.messagePaging.currentPage==1){
-          this.messagePaging.currentPage=1;
-=======
-        if (this.messagePaging.currentPage==1){
-          this.messagePaging.currentPage=1;
-        }else {
-          this.messagePaging.currentPage++;
->>>>>>> origin/master
-        }
-        clearTimeout(this.timer);
+        this.messagePaging.currentPage += 1;
         userApi.getMessageHistory(this.messagePaging)
         .then(res => {
           if (res.success) {
             this.messageList = this.messageList.concat(res.page.news); //因为每次后端返回的都是数组，所以这边把数组拼接到一起
-            this.messagePaging.totalPage = res.page.totalPage + 1;
+            this.messagePaging.totalPage = res.page.totalPage;
             this.unreadQuantity = res.page.unreadQuantity;
-            if (this.unreadQuantity==0){
-              sessionStorage.setItem("unreadQuantity",this.unreadQuantity);
+            if (this.unreadQuantity == 0) {
+              sessionStorage.setItem("unreadQuantity", this.unreadQuantity);
             }
             this.messageArr = this.messageList;
           }
@@ -306,11 +298,11 @@
       },
       //接收后端消息推送
       receiveMessages(msg) {
-        let arr=msg.queryResultString.news;
-        arr.forEach((message)=>{
+        let arr = msg.queryResultString.news;
+        arr.forEach((message) => {
           this.messageList.unshift(message);
         });
-        this.$refs.header.newMessage(this.unreadQuantity+arr.length);
+        this.$refs.header.newMessage(this.unreadQuantity + arr.length);
       },
       //查看消息
       showMessage(index) {
@@ -320,7 +312,7 @@
           });
           this.messageList[index].sign = true;
           if (this.messageList[index].newsStatus == 1) {
-            this.haveRead(this.messageList[index].contentId,index);
+            this.haveRead(this.messageList[index].contentId, index);
           }
         }
       },
@@ -333,7 +325,7 @@
               this.messageList[index].newsStatus = 0;
               this.unreadQuantity--;
             } else if (contentId == 0) {
-              sessionStorage.setItem("unreadQuantity",'0');
+              sessionStorage.setItem("unreadQuantity", '0');
               this.reload();
             }
           }
