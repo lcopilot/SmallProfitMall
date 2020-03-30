@@ -19,43 +19,45 @@
                       <el-dropdown-item>仅未读</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
-                  <div class="message_list_header_div1" title="查看未读消息"><span>5</span>&nbsp;条未读</div>
+                  <div class="message_list_header_div1" title="查看未读消息"><span>{{unreadQuantity}}</span>&nbsp;条未读</div>
                   <div class="message_list_header_div2">全标已读</div>
                 </div>
                 <div class="contact_list_div message_list" v-infinite-scroll="getMessageList"
                      :infinite-scroll-disabled="messageDisable"
                      :infinite-scroll-distance="1">
                   <ul>
-                    <li v-for="i in list">
-                      <div :class="dd? 'message_list_preview':'message_list_preview3'"
-                           @click="showMessage($event)" @mouseenter="enterMessage($event)"
-                           @mouseleave="leaveMessage($event)">
+                    <li v-for="(message,index) in messageList" :key="index">
+                      <div :class="!message.sign ? 'message_list_preview':'message_list_preview2'"
+                           @click="showMessage(index)">
                         <el-row>
                           <el-col :span="6">
                             <div style="padding-top:5px">
-                              <el-avatar :size="size" shape="square"
-                                         src="http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938"></el-avatar>
+                              <el-avatar  shape="square"
+                                         :src="message.senderAvatar"></el-avatar>
                             </div>
                           </el-col>
                           <el-col :span="14">
                             <div style="text-align: left;">
-                              <div>
+                              <div v-if="message.newsStatus=='1'">
                                 <div class="message_list_preview_div1_div1"></div>
-                                <div class="message_list_preview_div1_div2">微利团队</div>
+                                <div class="message_list_preview_div1_div2">{{message.senderName}}</div>
+                              </div>
+                              <div v-if="message.newsStatus=='0'">
+                                <div>{{message.senderName}}</div>
                               </div>
                               <div class="message_list_preview_div message_list_preview_div2">
-                                确认订单信息
+                                {{message.title}}
                               </div>
                               <div class="message_list_preview_div message_list_preview_div3">
-                                打发时间看看了
+                                {{message.newsContent}}
                               </div>
                             </div>
                           </el-col>
-                          <el-col :span="2">
+                          <el-col :span="3">
                             <div title="标为已读">
                               <input class="message_list_read"></input>
                             </div>
-                            <div class="message_list_preview_time">10:47</div>
+                            <div class="message_list_preview_time">{{messageTime(message.newsTime)}}</div>
                           </el-col>
                         </el-row>
                       </div>
@@ -108,19 +110,26 @@
 </template>
 
 <script>
-  const Header = () => import("../../components/pages/Header"); //组件懒加载
-  const Footer = () => import("../../components/pages/Footer");
+  import *as userApi from '../../api/page/user';
   const personalPage = () => import("../../components/admin/personalHubPage");
   const orderContent = () => import("../../components/admin/orderContent");
   export default {
     name: "messageCenter",
-    components: {Header, Footer, personalPage, orderContent},
+    components: { personalPage, orderContent},
     data() {
       return {
+        //消息下拉加载的绑定值
         messageDisable: false,
-        dd: false,
-        pageSize: 0,
-        list: [],
+        //获取下拉数据
+        messagePaging:{
+          userId:sessionStorage.getItem("uId"),
+          currentPage:1,
+          pageSize: 5,
+          totalPage:0,
+        },
+        //未读数
+        unreadQuantity:0,
+        messageList: [],
         product: [
           {
             url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
@@ -188,41 +197,51 @@
       }
     },
     methods: {
+      //消息时间算法
+      messageTime(time){
+        let mTime=new Date(time);
+        let nTime=new Date();
+        const weekArr = ["周日","周一","周二","周三","周四","周五","周六"]
+        if (mTime.getTime()<(new Date(nTime.getTime() - 24 * 60 * 60 * 1000 * 1)) && mTime.getTime()>(new Date(nTime.getTime() - 24 * 60 * 60 * 1000 * 2))){
+          return '昨天';
+        }else if (mTime.getTime()<(new Date(nTime.getTime() - 24 * 60 * 60 * 1000 * 2)) && mTime.getTime()>(new Date(nTime.getTime() - 24 * 60 * 60 * 1000 * 7))){
+          return weekArr[mTime.getDay()];
+        }else if (mTime.getTime()<(new Date(nTime.getTime() - 24 * 60 * 60 * 1000 * 7))){
+          return mTime.getMonth()+'-'+mTime.getDate();
+        }else {
+          return mTime.getHours()+":"+mTime.getSeconds();
+        }
+      },
       //加载消息
       getMessageList() {
+        if (this.messagePaging.currentPage==this.messagePaging.totalPage){
+          return;
+        }
         this.messageDisable = true;
-        this.pageSize++;
+        this.messagePaging.currentPage++;
         clearTimeout(this.timer);
-        this.axios.get(
-            "apiUrl/TestController/Test/" + this.pageSize
-        )
+        userApi.getMessageHistory(this.messagePaging)
         .then(res => {
-          console.log(res);
-          this.list = this.list.concat(res.data.queryResult.list); //因为每次后端返回的都是数组，所以这边把数组拼接到一起
-        })
+          if (res.success){
+            this.messageList = this.messageList.concat(res.page.news); //因为每次后端返回的都是数组，所以这边把数组拼接到一起
+            this.messagePaging.totalPage=res.page.totalPage+1;
+            this.unreadQuantity=res.page.unreadQuantity;
+          }
+        });
         this.messageDisable = false;
       },
       /**
        * 查看消息
        *  @param $event 事件对象
        */
-      showMessage($event) {
-        $event.currentTarget.className = "message_list_preview2";
+      showMessage(index) {
+        this.messageList.forEach((message)=>{
+          message.sign=false;
+        })
+        this.messageList[index].sign=true;
       },
-      /**
-       * 进入消息的方法
-       * @param $event
-       */
-      enterMessage($event) {
-        $event.currentTarget.className = "message_list_preview2";
-      },
-      /**
-       * 离开消息的方法
-       * @param $event
-       */
-      leaveMessage($event) {
-        $event.currentTarget.className = "message_list_preview";
-      }
+    },
+    created() {
     }
   }
 </script>
@@ -243,24 +262,14 @@
     font-size: 18px
   }
 
-  .message_list_preview3 {
-    height: 80px;
-    padding: 3%;
-    background-color: #D8EAFE;
-  }
-
-  .message_list_preview3:hover {
-    background-color: #D8EAFE;
-  }
-
   .message_list_preview2 {
     height: 80px;
     padding: 3%;
-    background-color: #ecf5ff;
+    background-color: #D8EAFE;
   }
 
   .message_list_preview2:hover {
-    background-color: #ecf5ff;
+    background-color: #D8EAFE;
   }
 
   .message_list_read {
