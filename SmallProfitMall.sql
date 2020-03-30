@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 30/03/2020 12:09:40
+ Date: 30/03/2020 17:19:51
 */
 
 SET NAMES utf8mb4;
@@ -798,6 +798,10 @@ CREATE TABLE `evaluation`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of evaluation
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for homepageIcon
 -- ----------------------------
 DROP TABLE IF EXISTS `homepageIcon`;
@@ -865,7 +869,6 @@ CREATE TABLE `newsContent`  (
   `newsType` int(11) NULL DEFAULT NULL,
   `sign` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0',
   `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `code` int(11) NULL DEFAULT NULL,
   `newsStatus` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`contentId`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -873,36 +876,36 @@ CREATE TABLE `newsContent`  (
 -- ----------------------------
 -- Records of newsContent
 -- ----------------------------
-INSERT INTO `newsContent` VALUES (1, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-27 03:41:14', '武汉加油！', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (2, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '中国加油！', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (3, 3, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '中国加油', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (4, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '美国加油', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (5, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-04-23 03:42:03', '加油', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (6, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '加油', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (7, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '加油', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (8, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '30', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (9, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '30', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (10, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '加油', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (11, 3, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '加油', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (12, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '加油', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (13, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '加油', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (14, 3, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-31 03:42:03', '加油', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (15, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '30', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (16, 3, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '24', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (17, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '27', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (18, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '加油', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (19, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '28', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (20, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '加油', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (21, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:42:03', '30', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (22, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:19:01', '25', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (23, 3, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:19:01', '24', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (24, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:19:01', '21', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (25, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:19:01', '26', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (26, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:19:01', '23', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (27, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:19:01', '27', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (28, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:19:01', '28', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (29, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:19:01', '19', 1, '0', '加油', 81000, 0);
-INSERT INTO `newsContent` VALUES (30, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 03:19:01', '28', 1, '0', '加油', 81000, 0);
+INSERT INTO `newsContent` VALUES (1, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:08', '1', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (2, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:09', '2', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (3, 3, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:11', '3', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (4, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:11', '4', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (5, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:01:36', '5', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (6, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:11', '6', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (7, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:01:37', '7', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (8, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:01:37', '8', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (9, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:11', '30', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (10, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:01:37', '9', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (11, 3, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:08', '10', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (12, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:08', '11', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (13, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:08', '12', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (14, 3, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:09', '13', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (15, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:09', '14', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (16, 3, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:10', '20', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (17, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:11', '28', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (18, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:09', '15', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (19, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:10', '27', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (20, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:09', '16', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (21, 2, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:09', '17', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (22, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:01:36', '24', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (23, 3, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:09', '18', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (24, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:10', '21', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (25, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:10', '25', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (26, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:10', '23', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (27, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:10', '26', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (28, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:10', '23', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (29, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:09', '19', 1, '0', '加油', 1);
+INSERT INTO `newsContent` VALUES (30, 1, '7c9fdfa3177042a08766aed29e7de6cd', '2020-03-30 09:04:10', '22', 1, '0', '加油', 1);
 
 -- ----------------------------
 -- Table structure for recommend
@@ -962,7 +965,7 @@ CREATE TABLE `shoppingCart`  (
   `productDeploy` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `quantity` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`shoppingCartId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 754 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 787 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of shoppingCart
@@ -974,7 +977,7 @@ INSERT INTO `shoppingCart` VALUES (740, '7c9fdfa3177042a08766aed29e7de6cd', 1000
 INSERT INTO `shoppingCart` VALUES (742, '7c9fdfa3177042a08766aed29e7de6cd', 10005, 'WLAN版64G ', 1);
 INSERT INTO `shoppingCart` VALUES (744, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '蓝牙黑有刻  ', 1);
 INSERT INTO `shoppingCart` VALUES (745, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '标准黑有刻  ', 4);
-INSERT INTO `shoppingCart` VALUES (746, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '猪年限量版 90周年 ', 1);
+INSERT INTO `shoppingCart` VALUES (746, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '猪年限量版 90周年 ', 2);
 INSERT INTO `shoppingCart` VALUES (747, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '金色  ', 1);
 INSERT INTO `shoppingCart` VALUES (748, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '蓝牙黑无刻 ', 1);
 INSERT INTO `shoppingCart` VALUES (749, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '蓝牙白无刻  ', 1);
@@ -982,6 +985,39 @@ INSERT INTO `shoppingCart` VALUES (750, '7c9fdfa3177042a08766aed29e7de6cd', 1002
 INSERT INTO `shoppingCart` VALUES (751, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '静音白有刻  ', 2);
 INSERT INTO `shoppingCart` VALUES (752, '7c9fdfa3177042a08766aed29e7de6cd', 10028, '【新品】小爱音箱Pro  小米小爱音箱【HD版 深灰色】 ', 1);
 INSERT INTO `shoppingCart` VALUES (753, '7c9fdfa3177042a08766aed29e7de6cd', 10028, '【新品】小爱音箱Pro  Redmi 小爱音箱Play 绿色 ', 1);
+INSERT INTO `shoppingCart` VALUES (754, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '闪耀满天星AR1925 ', 2);
+INSERT INTO `shoppingCart` VALUES (755, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '璀璨满天星AR1926 ', 1);
+INSERT INTO `shoppingCart` VALUES (756, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '玫瑰金满天星AR11244 ', 1);
+INSERT INTO `shoppingCart` VALUES (757, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '钢质表带AR11129 ', 1);
+INSERT INTO `shoppingCart` VALUES (758, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '钢质表带AR1957 ', 1);
+INSERT INTO `shoppingCart` VALUES (759, '7c9fdfa3177042a08766aed29e7de6cd', 10030, '黑色 套餐 种类 XXXL 口味 规格 ', 1);
+INSERT INTO `shoppingCart` VALUES (760, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '黑色 ', 1);
+INSERT INTO `shoppingCart` VALUES (761, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '黑色+骨伽LLC750全模组电源 ', 1);
+INSERT INTO `shoppingCart` VALUES (762, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '棕黄色锈色 均码 ', 2);
+INSERT INTO `shoppingCart` VALUES (763, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '粉色 均码 ', 1);
+INSERT INTO `shoppingCart` VALUES (764, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '黄褐色 均码 ', 1);
+INSERT INTO `shoppingCart` VALUES (765, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '999#滋润传奇正红 ', 1);
+INSERT INTO `shoppingCart` VALUES (766, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '999+ 520+花漾甜心100ML [口红香水套装] ', 1);
+INSERT INTO `shoppingCart` VALUES (767, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '[限量版挚爱红管烟花5支装套盒] ', 1);
+INSERT INTO `shoppingCart` VALUES (768, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '[红弯心动6支套装] [赠视频玫瑰礼盒 ] ', 1);
+INSERT INTO `shoppingCart` VALUES (769, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '挚爱红管999#传奇正红[赠专柜礼盒] ', 1);
+INSERT INTO `shoppingCart` VALUES (770, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '[情人节星星限量版五只装套盒] ', 1);
+INSERT INTO `shoppingCart` VALUES (771, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '771#哑光树玫红 ', 1);
+INSERT INTO `shoppingCart` VALUES (772, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '[限量版星星5支套装礼盒] ', 1);
+INSERT INTO `shoppingCart` VALUES (773, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '888#哑光开运红 ', 1);
+INSERT INTO `shoppingCart` VALUES (774, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '080#滋润微笑红 ', 1);
+INSERT INTO `shoppingCart` VALUES (775, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '772#哑光豆沙红 ', 1);
+INSERT INTO `shoppingCart` VALUES (776, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '028#滋润珊瑚红 ', 1);
+INSERT INTO `shoppingCart` VALUES (777, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '磨砂黑 ', 1);
+INSERT INTO `shoppingCart` VALUES (778, '7c9fdfa3177042a08766aed29e7de6cd', 10027, ' POP水蓝色 ', 1);
+INSERT INTO `shoppingCart` VALUES (779, '7c9fdfa3177042a08766aed29e7de6cd', 10027, ' POP赘蓝色 ', 1);
+INSERT INTO `shoppingCart` VALUES (780, '7c9fdfa3177042a08766aed29e7de6cd', 10027, 'POP红色 ', 1);
+INSERT INTO `shoppingCart` VALUES (781, '7c9fdfa3177042a08766aed29e7de6cd', 10027, 'POP红色 ', 1);
+INSERT INTO `shoppingCart` VALUES (782, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '学院红 ', 2);
+INSERT INTO `shoppingCart` VALUES (783, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '学院蓝 ', 1);
+INSERT INTO `shoppingCart` VALUES (784, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '银色  ', 1);
+INSERT INTO `shoppingCart` VALUES (785, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '米奇老鼠版  ', 1);
+INSERT INTO `shoppingCart` VALUES (786, '7c9fdfa3177042a08766aed29e7de6cd', 10027, ' 学院黄 ', 1);
 
 -- ----------------------------
 -- Table structure for user
@@ -1075,10 +1111,10 @@ CREATE TABLE `userFootprint`  (
 INSERT INTO `userFootprint` VALUES (10, '7c9fdfa3177042a08766aed29e7de6cd', 10006, '2020-03-26 11:19:01');
 INSERT INTO `userFootprint` VALUES (11, '7c9fdfa3177042a08766aed29e7de6cd', 10013, '2020-03-28 11:27:53');
 INSERT INTO `userFootprint` VALUES (12, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '2020-03-30 11:10:59');
-INSERT INTO `userFootprint` VALUES (13, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '2020-03-25 12:01:52');
+INSERT INTO `userFootprint` VALUES (13, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '2020-03-30 17:16:24');
 INSERT INTO `userFootprint` VALUES (14, '7c9fdfa3177042a08766aed29e7de6cd', 10028, '2020-03-30 11:12:38');
-INSERT INTO `userFootprint` VALUES (15, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '2020-03-30 09:32:40');
-INSERT INTO `userFootprint` VALUES (16, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '2020-03-30 09:21:21');
+INSERT INTO `userFootprint` VALUES (15, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '2020-03-30 17:16:49');
+INSERT INTO `userFootprint` VALUES (16, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '2020-03-30 17:16:12');
 INSERT INTO `userFootprint` VALUES (17, '7c9fdfa3177042a08766aed29e7de6cd', 10017, '2020-03-24 21:05:38');
 INSERT INTO `userFootprint` VALUES (18, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '2020-03-30 11:56:02');
 INSERT INTO `userFootprint` VALUES (19, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-03-25 13:03:25');
@@ -1086,7 +1122,7 @@ INSERT INTO `userFootprint` VALUES (20, '7c9fdfa3177042a08766aed29e7de6cd', 1001
 INSERT INTO `userFootprint` VALUES (21, '7c9fdfa3177042a08766aed29e7de6cd', 10009, '2020-03-24 21:07:22');
 INSERT INTO `userFootprint` VALUES (22, 'abcd', 10005, '2020-03-26 19:48:53');
 INSERT INTO `userFootprint` VALUES (23, 'asdasd', 0, '2020-03-27 09:52:30');
-INSERT INTO `userFootprint` VALUES (24, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-03-30 11:12:11');
+INSERT INTO `userFootprint` VALUES (24, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-03-30 17:16:02');
 INSERT INTO `userFootprint` VALUES (25, '7c9fdfa3177042a08766aed29e7de6cd', 10021, '2020-03-25 13:05:35');
 INSERT INTO `userFootprint` VALUES (26, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '2020-03-26 11:17:53');
 INSERT INTO `userFootprint` VALUES (27, '7c9fdfa3177042a08766aed29e7de6cd', 10026, '2020-03-26 10:44:33');
@@ -1095,10 +1131,10 @@ INSERT INTO `userFootprint` VALUES (29, 'f92b9f8f372e445fb6564cdd57aa3c3e', 1000
 INSERT INTO `userFootprint` VALUES (30, '7c9fdfa3177042a08766aed29e7de6cd', 10004, '2020-03-25 12:50:16');
 INSERT INTO `userFootprint` VALUES (31, '7c9fdfa3177042a08766aed29e7de6cd', 10011, '2020-03-25 12:47:44');
 INSERT INTO `userFootprint` VALUES (32, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '2020-03-30 10:13:02');
-INSERT INTO `userFootprint` VALUES (33, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '2020-03-30 11:11:04');
+INSERT INTO `userFootprint` VALUES (33, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '2020-03-30 17:03:17');
 INSERT INTO `userFootprint` VALUES (34, '7c9fdfa3177042a08766aed29e7de6cd', 10016, '2020-03-28 13:33:19');
 INSERT INTO `userFootprint` VALUES (35, '7c9fdfa3177042a08766aed29e7de6cd', 10029, '2020-03-30 11:11:38');
-INSERT INTO `userFootprint` VALUES (36, '7c9fdfa3177042a08766aed29e7de6cd', 10030, '2020-03-30 11:06:30');
+INSERT INTO `userFootprint` VALUES (36, '7c9fdfa3177042a08766aed29e7de6cd', 10030, '2020-03-30 17:05:50');
 
 -- ----------------------------
 -- Table structure for userNews
@@ -1108,17 +1144,16 @@ CREATE TABLE `userNews`  (
   `userId` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `senderName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `senderAvatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `newsStatus` int(11) NULL DEFAULT NULL,
-  `newsId` int(11) NULL DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `newsId` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userNews
 -- ----------------------------
-INSERT INTO `userNews` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '微利官方', ' http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781', 0, 1, 1);
-INSERT INTO `userNews` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '微利助手', 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 1, 2, 2);
-INSERT INTO `userNews` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '微利支付', 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 1, 3, 3);
+INSERT INTO `userNews` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '微利官方', ' http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781', 1, 1);
+INSERT INTO `userNews` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '微利助手', 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 2, 2);
+INSERT INTO `userNews` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '微利支付', 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 3, 3);
 
 SET FOREIGN_KEY_CHECKS = 1;
