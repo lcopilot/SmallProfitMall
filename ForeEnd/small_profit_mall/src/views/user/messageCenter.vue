@@ -13,14 +13,29 @@
                 <div class="message_list_header">
                   <el-dropdown size="small" trigger="click" class="message_list_header_drop"
                                placement="bottom-start">
-                    <svg-icon name="filtrate"/>
+                    <svg-icon name="filtrate" v-show="!isFilter"/>
+                    <span v-show="isFilter">
+                      <svg-icon name="close" @click.native="closeFilter"/>
+                    </span>
                     <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item>仅已读</el-dropdown-item>
-                      <el-dropdown-item>仅未读</el-dropdown-item>
+                      <el-dropdown-item @click.native="readOnly(0)">仅已读</el-dropdown-item>
+                      <el-dropdown-item @click.native="readOnly(1)">仅未读</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
-                  <div class="message_list_header_div1" title="查看未读消息"><span>{{unreadQuantity}}</span>&nbsp;条未读</div>
-                  <div class="message_list_header_div2">全标已读</div>
+                  <el-dropdown v-show="isFilter" size="small" trigger="click"
+                               class="message_list_header_drop message_filter_dp"
+                               placement="bottom-start">
+                    <span>
+                      {{filterContent}}<i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item @click.native="readOnly(0)" v-if="filterContent=='仅未读'">仅已读</el-dropdown-item>
+                      <el-dropdown-item @click.native="readOnly(1)" v-if="filterContent=='仅已读'">仅未读</el-dropdown-item>
+                    </el-dropdown-menu>
+                  </el-dropdown>
+                  <div class="message_list_header_div1" title="查看未读消息" v-if="unreadQuantity"><span>{{unreadQuantity}}</span>&nbsp;条未读
+                  </div>
+                  <div class="message_list_header_div2" v-if="unreadQuantity">全标已读</div>
                 </div>
                 <div class="contact_list_div message_list" v-infinite-scroll="getMessageList"
                      :infinite-scroll-disabled="messageDisable"
@@ -32,7 +47,7 @@
                         <el-row>
                           <el-col :span="6">
                             <div style="padding-top:5px">
-                              <el-avatar  shape="square"
+                              <el-avatar shape="square"
                                          :src="message.senderAvatar"></el-avatar>
                             </div>
                           </el-col>
@@ -40,7 +55,8 @@
                             <div style="text-align: left;">
                               <div v-if="message.newsStatus=='1'">
                                 <div class="message_list_preview_div1_div1"></div>
-                                <div class="message_list_preview_div1_div2">{{message.senderName}}</div>
+                                <div class="message_list_preview_div1_div2">{{message.senderName}}
+                                </div>
                               </div>
                               <div v-if="message.newsStatus=='0'">
                                 <div>{{message.senderName}}</div>
@@ -54,10 +70,12 @@
                             </div>
                           </el-col>
                           <el-col :span="3">
-                            <div title="标为已读">
+                            <div>
                               <input class="message_list_read"></input>
                             </div>
-                            <div class="message_list_preview_time">{{messageTime(message.newsTime)}}</div>
+                            <div class="message_list_preview_time">
+                              {{messageTime(message.newsTime)}}
+                            </div>
                           </el-col>
                         </el-row>
                       </div>
@@ -86,8 +104,9 @@
                           </el-row>
                         </div>
                       </div>
-                      <div style="text-align: left;margin-right:-5%;float:right;padding: 2%;width: 100%;">
-                      彭cdf 学院上课了较好的那开发商和 1536788534sdf5410
+                      <div
+                          style="text-align: left;margin-right:-5%;float:right;padding: 2%;width: 100%;">
+                        彭cdf 学院上课了较好的那开发商和 1536788534sdf5410
                       </div>
                       <div
                           style="text-align: right;margin-right:5%;float:right;padding: 2%;width: 100%;margin-bottom: 5%">
@@ -111,24 +130,31 @@
 
 <script>
   import *as userApi from '../../api/page/user';
+
   const personalPage = () => import("../../components/admin/personalHubPage");
   const orderContent = () => import("../../components/admin/orderContent");
   export default {
     name: "messageCenter",
-    components: { personalPage, orderContent},
+    components: {personalPage, orderContent},
     data() {
       return {
         //消息下拉加载的绑定值
         messageDisable: false,
         //获取下拉数据
-        messagePaging:{
-          userId:sessionStorage.getItem("uId"),
-          currentPage:1,
+        messagePaging: {
+          userId: sessionStorage.getItem("uId"),
+          currentPage: 1,
           pageSize: 5,
-          totalPage:0,
+          totalPage: 0,
         },
+        //筛选已读未读的数组
+        messageArr: [],
+        //是否开启筛选
+        isFilter: false,
+        //筛选内容
+        filterContent:'',
         //未读数
-        unreadQuantity:0,
+        unreadQuantity: 0,
         messageList: [],
         product: [
           {
@@ -198,23 +224,27 @@
     },
     methods: {
       //消息时间算法
-      messageTime(time){
-        let mTime=new Date(time);
-        let nTime=new Date();
-        const weekArr = ["周日","周一","周二","周三","周四","周五","周六"]
-        if (mTime.getTime()<(new Date(nTime.getTime() - 24 * 60 * 60 * 1000 * 1)) && mTime.getTime()>(new Date(nTime.getTime() - 24 * 60 * 60 * 1000 * 2))){
+      messageTime(time) {
+        let mTime = new Date(time);
+        let nTime = new Date();
+        const weekArr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"]
+        if (mTime.getTime() < (new Date(nTime.setHours(0, 0, 0, 0))) && mTime.getTime() > (new Date(
+            nTime.getTime() - 24 * 60 * 60 * 1000 * 1).setHours(0, 0, 0, 0))) {
           return '昨天';
-        }else if (mTime.getTime()<(new Date(nTime.getTime() - 24 * 60 * 60 * 1000 * 2)) && mTime.getTime()>(new Date(nTime.getTime() - 24 * 60 * 60 * 1000 * 7))){
+        } else if (mTime.getTime() < (new Date(nTime.getTime() - 24 * 60 * 60 * 1000 * 1).setHours(
+            0, 0, 0, 0)) && mTime.getTime() > (new Date(
+            nTime.getTime() - 24 * 60 * 60 * 1000 * 7).setHours(0, 0, 0, 0))) {
           return weekArr[mTime.getDay()];
-        }else if (mTime.getTime()<(new Date(nTime.getTime() - 24 * 60 * 60 * 1000 * 7))){
-          return mTime.getMonth()+'-'+mTime.getDate();
-        }else {
-          return mTime.getHours()+":"+mTime.getSeconds();
+        } else if (mTime.getTime() < (new Date(nTime.getTime() - 24 * 60 * 60 * 1000 * 7).setHours(
+            0, 0, 0, 0))) {
+          return mTime.getMonth() + '-' + mTime.getDate();
+        } else {
+          return mTime.getHours() + ":" + mTime.getSeconds();
         }
       },
       //加载消息
       getMessageList() {
-        if (this.messagePaging.currentPage==this.messagePaging.totalPage){
+        if (this.messagePaging.currentPage == this.messagePaging.totalPage) {
           return;
         }
         this.messageDisable = true;
@@ -222,23 +252,45 @@
         clearTimeout(this.timer);
         userApi.getMessageHistory(this.messagePaging)
         .then(res => {
-          if (res.success){
+          if (res.success) {
             this.messageList = this.messageList.concat(res.page.news); //因为每次后端返回的都是数组，所以这边把数组拼接到一起
-            this.messagePaging.totalPage=res.page.totalPage+1;
-            this.unreadQuantity=res.page.unreadQuantity;
+            this.messagePaging.totalPage = res.page.totalPage + 1;
+            this.unreadQuantity = res.page.unreadQuantity;
+            this.messageArr = this.messageList;
           }
         });
         this.messageDisable = false;
+      },
+      //筛选显示的消息类型 已读或未读
+      readOnly(status) {
+        this.isFilter = true;
+        let messArr = [];
+        if (status==0){
+          this.filterContent='仅已读'
+        }else {
+          this.filterContent='仅未读'
+        }
+        this.messageArr.forEach((message) => {
+          if (message.newsStatus == status) {
+            messArr.push(message);
+          }
+        });
+        this.messageList = messArr;
+      },
+      //关闭筛选
+      closeFilter() {
+        this.isFilter = false;
+        this.messageList = this.messageArr;
       },
       /**
        * 查看消息
        *  @param $event 事件对象
        */
       showMessage(index) {
-        this.messageList.forEach((message)=>{
-          message.sign=false;
-        })
-        this.messageList[index].sign=true;
+        this.messageList.forEach((message) => {
+          message.sign = false;
+        });
+        this.messageList[index].sign = true;
       },
     },
     created() {
@@ -247,6 +299,9 @@
 </script>
 
 <style scoped>
+  .message_filter_dp{
+    margin-left: -3%;
+  }
   .message_list_preview_div1_div1 {
     width: 10px;
     height: 10px;

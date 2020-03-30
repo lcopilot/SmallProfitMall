@@ -531,7 +531,6 @@
         this.videoShow = false;
         this.onPlayerEnded()
       },
-
       //获取商品数据
       getProduct(productId) {
         productApi.getProduct(productId).then(res => {
