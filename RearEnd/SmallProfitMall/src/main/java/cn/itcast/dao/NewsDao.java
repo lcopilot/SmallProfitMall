@@ -37,7 +37,7 @@ public interface NewsDao {
     /**
      * 修改消息状态
      * @param userId 用户id
-     * @param contentId 消息id 消息id为空则代表修改所有未读消息已读
+     * @param contentId 消息id 消息id为0则代表修改所有未读消息已读
      * @return
      */
     public Integer updateNewsStatus(@Param("userId")String userId,@Param("contentId")Integer contentId);

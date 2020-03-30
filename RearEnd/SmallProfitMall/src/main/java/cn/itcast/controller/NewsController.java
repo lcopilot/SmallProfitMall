@@ -86,7 +86,8 @@ public class NewsController {
         List<News> news = newsService.fendNews(userId,2,1,5);
 //        String a= ConversionJson.objectToJson(news.get(1)) ;
 //        System.out.println(a);
-        webSocket.sendMessage(userId,news.get(1));
+
+        webSocket.sendMessage(userId,news);
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
 

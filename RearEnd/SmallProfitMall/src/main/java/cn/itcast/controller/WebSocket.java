@@ -118,7 +118,7 @@ public class WebSocket {
     }
 
     //单发消息
-    public void sendMessage(String id, News message) throws IOException {
+    public void sendMessage(String id, List<News> message) throws IOException {
         Session session = USER_ONLINE_MAP.get(id);
         QueryResultString queryResultString = new QueryResultString();
         queryResultString.setNews(message);
