@@ -56,7 +56,7 @@
 
     <!--修改消息状态-->
     <update id="updateNewsStatus">
-            UPDATE newsContent SET newsStatus=0
+        UPDATE newsContent SET newsStatus=0
         <where>
             <if test="contentId!=0">
                 and contentId=#{contentId}

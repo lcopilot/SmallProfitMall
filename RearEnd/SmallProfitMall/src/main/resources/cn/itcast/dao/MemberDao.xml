@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.MemberDao">
+        <!--更新余额-->
+        <update id="updateBalance">
+                UPDATE userMembe SET balance=#{balance} WHERE userId=#{userId}
+        </update>
+
+        <!--查询用户会员信息-->
+        <select id="findMember" parameterType="java.lang.String" resultType="cn.itcast.domain.member.Member">
+               SELECT * FROM userMembe WHERE userId=#{userId}
+        </select>
+
+        <!--查询用户当前余额-->
+        <select id="findBalance" parameterType="java.lang.String" resultType="java.lang.Double">
+                SELECT balance FROM userMembe WHERE userId=#{userId}
+        </select>
+        
+</mapper>
