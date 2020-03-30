@@ -254,9 +254,16 @@
           return;
         }
         this.messageDisable = true;
+<<<<<<< HEAD
         this.messagePaging.currentPage++;
         if (this.messagePaging.currentPage==1){
           this.messagePaging.currentPage=1;
+=======
+        if (this.messagePaging.currentPage==1){
+          this.messagePaging.currentPage=1;
+        }else {
+          this.messagePaging.currentPage++;
+>>>>>>> origin/master
         }
         clearTimeout(this.timer);
         userApi.getMessageHistory(this.messagePaging)
