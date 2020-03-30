@@ -3,6 +3,7 @@ package cn.itcast.service.impl;
 import cn.itcast.dao.NewsDao;
 import cn.itcast.domain.news.News;
 import cn.itcast.service.NewsService;
+import cn.itcast.util.logic.TotalPages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class NewsServiceImpl implements NewsService {
      * 查询消息
      * @param userId 用户id
      * @param state 消息状态
-     * @param currentPage 查询开始页
+     * @param currentPage 当前页
      * @param pageSize 每页查询的数量
      * @return 消息集合
      */
@@ -26,9 +27,10 @@ public class NewsServiceImpl implements NewsService {
     NewsDao newsDao;
     @Override
     public List<News> fendNews(String userId,Integer state,Integer currentPage, Integer pageSize) {
-        //传入当前页减一
-        currentPage=currentPage-1;
-        List<News> news =  newsDao.fendNews(userId,state,currentPage,pageSize);
+        //开始页
+//        this.totalPage=totalCount%pageSize==0?totalCount/pageSize:totalCount/pageSize+1;
+        Integer start=(currentPage-1)*pageSize;
+        List<News> news =  newsDao.fendNews(userId,state,start,pageSize);
         return news;
     }
 

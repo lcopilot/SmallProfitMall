@@ -33,15 +33,20 @@ public class NewsController {
 
     @Autowired
     WebSocket webSocket;
+
     /**
-     * 查询所有消息
+     * 查询历史消息
+     * @param userId 用户id
+     * @param state 查询的消息状态
+     * @param currentPage  查询的当前页
+     * @param pageSize 每页的长度
      * @return
      */
     @RequestMapping(value = "/findNews",method = RequestMethod.GET)
     public QueryResponseNews findNews(String userId,Integer state,Integer currentPage , Integer pageSize) {
 
-        if (currentPage==0){
-            currentPage =4;
+        if (currentPage == 0){
+            currentPage = 1;
         }
         //消息数据
         List<News> news = newsService.fendNews(userId,state,currentPage,pageSize);
