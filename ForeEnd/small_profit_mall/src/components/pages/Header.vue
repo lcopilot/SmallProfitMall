@@ -105,7 +105,8 @@
       if (sessionStorage.getItem("unreadQuantity")){
         this.unreadQuantity=sessionStorage.getItem("unreadQuantity");
       }
-
+      //接收新消息
+      this.socketApi.depositMethod(80000, this.newMessage);
     }
   };
 </script>
