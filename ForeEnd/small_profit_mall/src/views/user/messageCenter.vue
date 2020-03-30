@@ -255,6 +255,9 @@
         }
         this.messageDisable = true;
         this.messagePaging.currentPage++;
+        if (this.messagePaging.currentPage==1){
+          this.messagePaging.currentPage=1;
+        }
         clearTimeout(this.timer);
         userApi.getMessageHistory(this.messagePaging)
         .then(res => {
