@@ -6,13 +6,13 @@
     <resultMap id="ProductDatailsMap" type="cn.itcast.domain.ProductDatails.ProductDetailsResult">
         <id property="pid" column="ProductId"></id>
         <result property="productName" column="ProductName"></result>
-        <result property="ProductSales" column="ProductSales"></result>
+        <result property="productSales" column="ProductSales"></result>
         <result property="weight" column="ProductWeight"></result>
         <result property="video" column="ProductVideo"></result>
-        <result property="SalesPrice" column="SalesPrice"></result>
+        <result property="salesPrice" column="SalesPrice"></result>
         <result property="productPrice" column="ProductPrice"></result>
-        <result property="ProductInventory" column="ProductInventory"></result>
-        <result property="SpikePrice" column="SpikePrice"></result>
+        <result property="productInventory" column="ProductInventory"></result>
+        <result property="spikePrice" column="SpikePrice"></result>
         <result property="inventorys" column="ProductInventory"></result>
         <!--映射颜色集合-->
         <collection property="colour" ofType="java.lang.String">
@@ -65,7 +65,7 @@
 
     </resultMap>
 
-    <!--根据id查询商品 测试-->
+    <!--根据id查询商品-->
     <select id="fendProduct" resultMap="ProductDatailsMap">
            SELECT
                 pb.*,
