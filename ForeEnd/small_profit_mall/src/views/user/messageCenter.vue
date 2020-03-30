@@ -37,9 +37,9 @@
                       </el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
-                  <div class="message_list_header_div1" title="查看未读消息" v-if="unreadQuantity"><span>{{unreadQuantity}}</span>&nbsp;条未读
+                  <div class="message_list_header_div1" title="查看未读消息" v-if="unreadQuantity>0"><span>{{unreadQuantity}}</span>&nbsp;条未读
                   </div>
-                  <div class="message_list_header_div2" v-if="unreadQuantity">
+                  <div class="message_list_header_div2" v-if="unreadQuantity>0">
                     <el-button type="text" size="mini" @click.native="haveRead(0)">全标已读</el-button>
                   </div>
                 </div>
@@ -247,7 +247,7 @@
             0, 0, 0, 0))) {
           return mTime.getMonth() + '-' + mTime.getDate();
         } else {
-          return mTime.getHours() + ":" + mTime.getSeconds();
+          return mTime.getHours() + ":" + mTime.getMinutes();
         }
       },
       //加载消息
