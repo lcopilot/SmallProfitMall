@@ -58,7 +58,7 @@
     <update id="updateNewsStatus">
             UPDATE newsContent SET newsStatus=0
         <where>
-            <if test="contentId!=null">
+            <if test="contentId!=0">
                 and contentId=#{contentId}
             </if>
         </where>

@@ -1,5 +1,6 @@
 package cn.itcast.controller;
 
+import cn.itcast.domain.news.News;
 import cn.itcast.domain.webSocket.Connection;
 import cn.itcast.domain.webSocket.ConnectionReceive;
 import cn.itcast.response.*;
@@ -117,10 +118,10 @@ public class WebSocket {
     }
 
     //单发消息
-    public void sendMessage(String id,String message) throws IOException {
+    public void sendMessage(String id, News message) throws IOException {
         Session session = USER_ONLINE_MAP.get(id);
         QueryResultString queryResultString = new QueryResultString();
-        queryResultString.setCallback(message);
+        queryResultString.setNews(message);
         session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis,queryResultString)));
         //阻塞式（同步）
         //this.session.getBasicRemote().sendText(message);
