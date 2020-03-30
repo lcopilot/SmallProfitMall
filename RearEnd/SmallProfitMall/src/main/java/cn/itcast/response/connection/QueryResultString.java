@@ -1,5 +1,6 @@
 package cn.itcast.response.connection;
 
+import cn.itcast.domain.news.News;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
@@ -13,4 +14,5 @@ import org.springframework.stereotype.Component;
 @Component
 public class QueryResultString<T> {
     private String callback ;
+    private News news;
 }
