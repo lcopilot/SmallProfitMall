@@ -12,7 +12,7 @@
           </li>
           <li v-if="this.username!=null">
             <el-dropdown trigger="click">
-              <el-badge is-dot class="header_sign">
+              <el-badge :is-dot="unreadQuantity!=0" class="header_sign">
                 <span class="el-dropdown-link">
                   <img :src="avatar" style="width: 35px; border-radius: 10%;margin-top: 6%">
                         您好,{{username}}
@@ -40,7 +40,7 @@
                 </el-dropdown-item>
                 <el-dropdown-item>
                   <router-link to="/messageCenter">
-                    <el-badge :value="80" :max="99">
+                    <el-badge :value="unreadQuantity==0?'':unreadQuantity" :max="99">
                       <svg-icon name="message" class="icon"></svg-icon>
                       消息中心
                     </el-badge>
@@ -62,12 +62,15 @@
 </template>
 <script>
   import {mapActions} from "vuex";
+
   export default {
     name: "Header",
     data() {
       return {
         username: null,
-        avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938'
+        avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
+        //消息未读数
+        unreadQuantity:0,
       };
     },
     computed: {
@@ -86,9 +89,10 @@
         this.$router.push("/login");
         this.socketApi.close();
       },
-      //接收消息
-      receiveMessage(msg){
-        console.log(msg);
+      //新消息消息
+      newMessage(unreadQuantity){
+        this.unreadQuantity=unreadQuantity;
+        sessionStorage.setItem("unreadQuantity",this.unreadQuantity);
       }
     },
     created() {
@@ -98,7 +102,10 @@
       }
       this.avatar = sessionStorage.getItem("avatar");
       this.username = sessionStorage.getItem("username");
-      this.socketApi.depositMethod(82000,this.receiveMessage);
+      if (sessionStorage.getItem("unreadQuantity")){
+        this.unreadQuantity=sessionStorage.getItem("unreadQuantity");
+      }
+
     }
   };
 </script>

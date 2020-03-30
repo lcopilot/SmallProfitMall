@@ -99,9 +99,14 @@ export const modifyDefault=params=>{
 /**
  * 用户消息
  */
+//获取消息
 export const getMessageHistory=params=>{
   let queryString=querystring.stringify(params);
   return http.requestGet('apiUrl/NewsController/findNews?'+queryString)
+};
+//标为已读
+export const haveRead=(userId,contentId)=>{
+  return http.requestPut('apiUrl/NewsController/updateNewsStatus/'+userId+'/'+contentId)
 };
 
 /**

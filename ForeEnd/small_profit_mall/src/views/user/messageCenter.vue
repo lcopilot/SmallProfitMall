@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header>
-      <Header></Header>
+      <Header ref="header"></Header>
     </el-header>
     <el-main>
       <el-row :gutter="20">
@@ -29,17 +29,23 @@
                       {{filterContent}}<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item @click.native="readOnly(0)" v-if="filterContent=='仅未读'">仅已读</el-dropdown-item>
-                      <el-dropdown-item @click.native="readOnly(1)" v-if="filterContent=='仅已读'">仅未读</el-dropdown-item>
+                      <el-dropdown-item @click.native="readOnly(0)" v-if="filterContent=='仅未读'">
+                        仅已读
+                      </el-dropdown-item>
+                      <el-dropdown-item @click.native="readOnly(1)" v-if="filterContent=='仅已读'">
+                        仅未读
+                      </el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
                   <div class="message_list_header_div1" title="查看未读消息" v-if="unreadQuantity"><span>{{unreadQuantity}}</span>&nbsp;条未读
                   </div>
-                  <div class="message_list_header_div2" v-if="unreadQuantity">全标已读</div>
+                  <div class="message_list_header_div2" v-if="unreadQuantity">
+                    <el-button type="text" size="mini" @click.native="haveRead(0)">全标已读</el-button>
+                  </div>
                 </div>
                 <div class="contact_list_div message_list" v-infinite-scroll="getMessageList"
                      :infinite-scroll-disabled="messageDisable"
-                     :infinite-scroll-distance="1">
+                     :infinite-scroll-distance="0">
                   <ul>
                     <li v-for="(message,index) in messageList" :key="index">
                       <div :class="!message.sign ? 'message_list_preview':'message_list_preview2'"
@@ -53,13 +59,12 @@
                           </el-col>
                           <el-col :span="14">
                             <div style="text-align: left;">
-                              <div v-if="message.newsStatus=='1'">
-                                <div class="message_list_preview_div1_div1"></div>
-                                <div class="message_list_preview_div1_div2">{{message.senderName}}
+                              <div>
+                                <div :class="message.newsStatus==1?'message_list_preview_div1_div1':''">
                                 </div>
-                              </div>
-                              <div v-if="message.newsStatus=='0'">
-                                <div>{{message.senderName}}</div>
+                                <div :class="message.newsStatus==1?'message_list_preview_div1_div2':''">
+                                  {{message.senderName}}
+                                </div>
                               </div>
                               <div class="message_list_preview_div message_list_preview_div2">
                                 {{message.title}}
@@ -132,16 +137,17 @@
   import *as userApi from '../../api/page/user';
 
   const personalPage = () => import("../../components/admin/personalHubPage");
-  const orderContent = () => import("../../components/admin/orderContent");
   export default {
+    inject: ["reload"],
     name: "messageCenter",
-    components: {personalPage, orderContent},
+    components: {personalPage},
     data() {
       return {
         //消息下拉加载的绑定值
         messageDisable: false,
         //获取下拉数据
         messagePaging: {
+          state: 2,
           userId: sessionStorage.getItem("uId"),
           currentPage: 1,
           pageSize: 5,
@@ -152,7 +158,7 @@
         //是否开启筛选
         isFilter: false,
         //筛选内容
-        filterContent:'',
+        filterContent: '',
         //未读数
         unreadQuantity: 0,
         messageList: [],
@@ -256,6 +262,9 @@
             this.messageList = this.messageList.concat(res.page.news); //因为每次后端返回的都是数组，所以这边把数组拼接到一起
             this.messagePaging.totalPage = res.page.totalPage + 1;
             this.unreadQuantity = res.page.unreadQuantity;
+            if (this.unreadQuantity==0){
+              sessionStorage.setItem("unreadQuantity",this.unreadQuantity);
+            }
             this.messageArr = this.messageList;
           }
         });
@@ -265,10 +274,12 @@
       readOnly(status) {
         this.isFilter = true;
         let messArr = [];
-        if (status==0){
-          this.filterContent='仅已读'
-        }else {
-          this.filterContent='仅未读'
+        if (status == 0) {
+          this.messagePaging.state = 0;
+          this.filterContent = '仅已读';
+        } else {
+          this.messagePaging.state = 1;
+          this.filterContent = '仅未读';
         }
         this.messageArr.forEach((message) => {
           if (message.newsStatus == status) {
@@ -279,29 +290,58 @@
       },
       //关闭筛选
       closeFilter() {
+        this.messagePaging.state = 2;
         this.isFilter = false;
         this.messageList = this.messageArr;
       },
-      /**
-       * 查看消息
-       *  @param $event 事件对象
-       */
-      showMessage(index) {
-        this.messageList.forEach((message) => {
-          message.sign = false;
+      //接收后端消息推送
+      receiveMessages(msg) {
+        let arr=msg.queryResultString.news;
+        arr.forEach((message)=>{
+          this.messageList.unshift(message);
         });
-        this.messageList[index].sign = true;
+        this.$refs.header.newMessage(this.unreadQuantity+arr.length);
+      },
+      //查看消息
+      showMessage(index) {
+        if (index != null) {
+          this.messageList.forEach((message) => {
+            message.sign = false;
+          });
+          this.messageList[index].sign = true;
+          if (this.messageList[index].newsStatus == 1) {
+            this.haveRead(this.messageList[index].contentId,index);
+          }
+        }
+      },
+      //标为已读
+      haveRead(contentId, index) {
+        userApi.haveRead(sessionStorage.getItem("uId"), contentId).then(res => {
+          if (res.success) {
+            if (contentId) {
+              console.log(contentId);
+              this.messageList[index].newsStatus = 0;
+              this.unreadQuantity--;
+            } else if (contentId == 0) {
+              sessionStorage.setItem("unreadQuantity",'0');
+              this.reload();
+            }
+          }
+        })
       },
     },
     created() {
+      //将接收消息的方法放入接收消息方法的map
+      this.socketApi.depositMethod(82000, this.receiveMessages);
     }
   }
 </script>
 
 <style scoped>
-  .message_filter_dp{
+  .message_filter_dp {
     margin-left: -3%;
   }
+
   .message_list_preview_div1_div1 {
     width: 10px;
     height: 10px;
