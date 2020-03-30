@@ -59,10 +59,9 @@
             UPDATE newsContent SET newsStatus=0
         <where>
             <if test="contentId!=null">
-                 contentId=1
+                and contentId=#{contentId}
             </if>
         </where>
-
     </update>
 
 

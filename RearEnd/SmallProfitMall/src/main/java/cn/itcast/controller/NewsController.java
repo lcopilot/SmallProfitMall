@@ -85,6 +85,7 @@ public class NewsController {
     public QueryResponseResult close(@PathVariable("userId")String userId,@PathVariable("msg")String msg) throws IOException {
         List<News> news = newsService.fendNews(userId,2,1,5);
         String a= ConversionJson.objectToJson(news.get(1)) ;
+        System.out.println(a);
         webSocket.sendMessage(userId,a);
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
