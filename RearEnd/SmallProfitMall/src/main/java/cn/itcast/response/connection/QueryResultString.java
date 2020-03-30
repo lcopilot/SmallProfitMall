@@ -15,6 +15,8 @@ import java.util.List;
 @ToString
 @Component
 public class QueryResultString<T> {
-    private String callback ;
+    //未读数量
+    private Integer unreadQuantity;
+
     private List<News> news;
 }

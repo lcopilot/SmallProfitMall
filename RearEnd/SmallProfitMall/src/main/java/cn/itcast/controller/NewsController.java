@@ -87,7 +87,7 @@ public class NewsController {
 //        String a= ConversionJson.objectToJson(news.get(1)) ;
 //        System.out.println(a);
 
-        webSocket.sendMessage(userId,news);
+        webSocket.sendMessage(userId,news,newsService.unreadQuantity(userId));
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
 

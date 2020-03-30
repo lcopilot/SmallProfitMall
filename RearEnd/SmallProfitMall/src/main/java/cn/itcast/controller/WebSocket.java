@@ -118,10 +118,11 @@ public class WebSocket {
     }
 
     //单发消息
-    public void sendMessage(String id, List<News> message) throws IOException {
+    public void sendMessage(String id, List<News> message,Integer a) throws IOException {
         Session session = USER_ONLINE_MAP.get(id);
         QueryResultString queryResultString = new QueryResultString();
         queryResultString.setNews(message);
+        queryResultString.setUnreadQuantity(a);
         session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis,queryResultString)));
         //阻塞式（同步）
         //this.session.getBasicRemote().sendText(message);
