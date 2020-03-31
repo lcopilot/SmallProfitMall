@@ -357,12 +357,10 @@
       },
       //结算
       settlement() {
-        let ss={code:"80001"}
-        this.socketApi.sendMessage(ss);
-        // this.$refs.cartTable.selection
-        // this.$router.push({
-        //   path: "/order" //跳转的路径
-        // });
+        this.$refs.cartTable.selection;
+        this.$router.push({
+          path: "/order" //跳转的路径
+        });
       },
       //获取购物车数据
       getShoppingCart() {
