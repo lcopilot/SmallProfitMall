@@ -15,7 +15,7 @@ public interface MemberService {
      * @param balance 要修改余额数量
      * @return
      */
-    public Integer updateBalance(String userId, Double balance);
+    public Integer updateBalance(String userId, String balance) throws Exception;
 
     /**
      * 查询用户会员信息

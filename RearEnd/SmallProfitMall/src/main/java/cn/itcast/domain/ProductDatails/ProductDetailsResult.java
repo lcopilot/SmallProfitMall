@@ -9,7 +9,7 @@ import java.util.List;
 @Component
 public class ProductDetailsResult implements Serializable {
     private int id;
-    private String pid;
+    private String pid;                 //商品id
     private String productName;         //商品名字
     private Double productPrice;         //商品价格
     private String sales;               //商品销售量
@@ -26,12 +26,21 @@ public class ProductDetailsResult implements Serializable {
     private List<String> kind;              //商品种类
     private List<String> version;           //商品版本
     private int inventorys;             //库存
+    private int clicks; //商品点击量
 
     private double ProductPrice;            //商品价格
     private double SalesPrice;              //促销价格
     private double SpikePrice;              //秒杀价格
     private double ProductSales;            //商品销量
     private double ProductInventory;        //商品库存
+
+    public int getClicks() {
+        return clicks;
+    }
+
+    public void setClicks(int clicks) {
+        this.clicks = clicks;
+    }
 
     public void setProductPrice(double productPrice) {
         ProductPrice = productPrice;

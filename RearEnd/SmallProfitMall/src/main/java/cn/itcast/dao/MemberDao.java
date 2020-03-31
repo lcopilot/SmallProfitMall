@@ -16,7 +16,7 @@ public interface MemberDao {
      * @param balance 要修改余额数量
      * @return
      */
-    public Integer updateBalance(@Param("userId") String userId,@Param("balance")Double balance);
+    public Integer updateBalance(@Param("userId") String userId,@Param("balance")String balance);
 
     /**
      * 查询用户会员信息
@@ -30,6 +30,6 @@ public interface MemberDao {
      * @param userId
      * @return
      */
-    public Double findBalance(@Param("userId")String userId);
+    public String findBalance(@Param("userId")String userId);
 
 }
