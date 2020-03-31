@@ -1,6 +1,5 @@
 package cn.itcast.controller;
 
-import cn.itcast.domain.ProductDatails.ProductBasis;
 import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;

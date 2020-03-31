@@ -2,6 +2,7 @@ package cn.itcast.controller;
 
 
 import cn.itcast.dao.NewsDao;
+import cn.itcast.dao.ProductDao;
 import cn.itcast.dao.ProductDetailsDao;
 import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import cn.itcast.domain.homepag.Navigation;
@@ -78,5 +79,11 @@ public class TestController {
 //        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
 //    }
 
-
+//    @Autowired
+//    ProductDao productDao;
+//    @RequestMapping(value = "/test",method = RequestMethod.GET)
+//    public void a(){
+//
+//        System.out.println(  productDetailsDao.fendAttributes(10001));
+//    }
 }

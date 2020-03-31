@@ -122,7 +122,7 @@ public class AesEncryptUtil {
         String iv = IV;
         // /g2wzfqvMOeazgtsUVbq1kmJawROa6mcRAzwG1/GeJ4=
         data = encrypt(
-                "2252821162@qq.com", key, iv);
+                "0.01", key, iv);
         System.out.println("数据：" + test);
         System.out.println("加密：" + data);
         String jiemi = desEncrypt(data, key, iv).trim();
