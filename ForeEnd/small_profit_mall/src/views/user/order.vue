@@ -99,8 +99,7 @@
                     </a>
                   </el-collapse-item>
                 </el-collapse>
-                <addressManagement ref="addressManagement"
-                                   style=" position:absolute;top: -99999999px;left: -999999999px;"/>
+                <addressManagement ref="addressManagement" :isOrder="true"/>
               </div>
             </div>
             <div style="padding-left: 4%;margin-bottom: 1%">
@@ -193,7 +192,6 @@
                           <el-image src="http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg"
                           ></el-image>
                         </div>
-
                       </el-col>
                       <el-col :span="8">
                         <div style="font-size: 12px">Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机
@@ -246,19 +244,7 @@
           </el-card>
         </el-col>
       </el-row>
-      <el-dialog
-          :visible.sync="faceRecognitionDialogVisible"
-          width="15%"
-          center
-          top="35vh"
-          :close-on-press-escape="false"
-          :close-on-click-modal="false"
-          :show-close="false">
-        <div slot="title" style="font-size: 14px;">请将人脸对准摄像头</div>
-        <div style="text-align: center">
-          <img :src="faceAnimation" style="object-fit: cover;width: 160px"/>
-        </div>
-      </el-dialog>
+      <Face :isPayment="true" ref="face" @uploadFace="facePayment()"/>
     </el-main>
     <el-footer>
       <Footer/>
@@ -269,14 +255,12 @@
 <script>
   import *as ordersApi from '../../api/page/orders'
   const addressManagement = () => import("../user/addressManagement");
+  const Face = () => import("../../components/admin/face");
   export default {
     name: "order",
-    components: { addressManagement},
+    components: { addressManagement,Face},
     data() {
       return {
-        //人脸识别的对话框
-        faceRecognitionDialogVisible:false,
-        faceAnimation:"http://img.fhxasdsada.xyz/beforeRecognition.gif",
         //支付方式
         paymentMethod: "1",
         //快递类型
@@ -312,24 +296,30 @@
       //结算
       settlement(){
         if (this.paymentMethod==1){
-          this.$router.push({
-            path: "/orderComplete"
-          });
-          this.faceRecognitionDialogVisible=true;
-          ordersApi.facePayment().then(res=>{
-            if (res.success){
-              this.faceAnimation="http://img.fhxasdsada.xyz/afterRecognition.gif";
-              setTimeout(()=>{
-                this.$router.push({
-                  path: "/Home" //跳转的路径
-                });
-                //跳转支付成功页面
-              },2700)
-            }
-          })
+          this.$refs.face.faceVisible=true;
+          this.$refs.face.recognitionFailure();
+          setTimeout(()=>{
+            this.$refs.face.recognitionFailure(2019415);
+            this.$refs.face.collectionFace();
+          },2500);
         }
-      }
+      },
+      //刷脸支付
+      facePayment(image){
+        ordersApi.facePayment().then(res=>{
+          if (res.success){
+            this.$refs.face.faceAnimation="http://img.fhxasdsada.xyz/afterRecognition.gif";
+            setTimeout(()=>{
+              this.$router.push({
+                path: "/orderComplete"
+              });
+              //跳转支付成功页面
+            },2700)
+          }
+        })
+      },
     },
+
     created() {
 
     }

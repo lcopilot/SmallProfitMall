@@ -135,3 +135,11 @@ export const recharge=params=>{
   let queryString=querystring.stringify(params);
   return http.requestPost('apiUrl/MemberController/updateBalance?'+queryString);
 };
+
+/**
+ * 人脸管理
+ */
+//上传人脸
+export const uploadFace=data=>{
+  return http.requestPost('apiUrl/',data)
+}

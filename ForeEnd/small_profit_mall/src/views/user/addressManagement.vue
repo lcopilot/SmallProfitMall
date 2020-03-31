@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container v-if="!isOrder">
     <el-header>
       <Header></Header>
     </el-header>
@@ -147,6 +147,13 @@
     inject: ["reload"],
     name: "addressManagement",
     components: { personalPage},
+    props:{
+      isOrder:{
+        type:Boolean,
+        required:true,
+        defaults:false,
+      }
+    },
     data() {
       //手机号校验
       let checkPhone = (rule, value, callback) => {
