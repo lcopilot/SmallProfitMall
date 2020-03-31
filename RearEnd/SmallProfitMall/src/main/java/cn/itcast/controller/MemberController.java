@@ -34,7 +34,7 @@ public class MemberController {
      * @param balance 充值金额
      * @return
      */
-    @RequestMapping(value = "/updateBalance",method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateBalance",method = RequestMethod.POST)
     public QueryResponseResult updateBalance(String userId,String balance) throws Exception {
         // 调用service的方法
        Integer redis = memberService.updateBalance(userId,balance);
