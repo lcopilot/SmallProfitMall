@@ -88,6 +88,17 @@
       </el-row>
       <el-row type="flex" justify="space-around">
         <el-col :span="12">
+          <div class="product_categories" v-if="isCategories">
+            <el-popover
+                placement="bottom"
+                width="200"
+                trigger="click">
+              <div style="text-align: center">
+                <product-categories/>
+              </div>
+              <div slot="reference" style="font-weight: 600"><a>商品分类</a></div>
+            </el-popover>
+          </div>
           <div style="margin: 10px 0 -18px 0">
             <router-link :to="PagePilot.goodsId_1_c" class="navigation_span"
                          v-for="PagePilot in PagePilotList" :key="PagePilot.cid">
@@ -106,8 +117,11 @@
   import *as homeApi from '../../api/page/home';
   import *as productApi from '../../api/page/product';
 
+  const productCategories = () => import("./productCategories");
+
   export default {
     name: "Search",
+    components: {productCategories},
     data() {
       return {
         //判断登录状态
@@ -116,6 +130,8 @@
         cartList: [],
         //搜索内容
         searchContent: '',
+        //商品分类是否展示
+        isCategories: '',
         restaurants: [],
         state1: '',
         state2: '',
@@ -249,18 +265,20 @@
       },
       //搜索
       searchProduct() {
-        const searchCh=/^[A-Za-z0-9\u4e00-\u9fa5]+$/;
-        if (this.searchContent=='' || !searchCh.test(this.searchContent)){
+        const searchCh = /^[A-Za-z0-9\u4e00-\u9fa5]+$/;
+        if (this.searchContent == '' || !searchCh.test(this.searchContent)) {
           return this.$message({
-            message:"请输入正确格式的搜索内容,支持中英文数字",
-            type:"warning"
+            message: "请输入正确格式的搜索内容,支持中英文数字",
+            type: "warning"
           })
         }
+        sessionStorage.setItem("searchContent", this.searchContent);
         this.$router.push({
           path: '/searchShow',
           query: {
-            searchContent:this.searchContent
+            searchContent: this.searchContent
           }
+
         })
       },
     },
@@ -269,6 +287,7 @@
       this.getShoppingCartPreview();
     },
     mounted() {
+      this.isCategories = sessionStorage.getItem("searchContent");
       this.toke = sessionStorage.getItem('token');
       this.restaurants = this.loadAll();
     }
@@ -277,6 +296,13 @@
 </script>
 
 <style scoped>
+  .product_categories {
+    float: left;
+    position: absolute;
+    bottom: -100%;
+    left: 14%
+  }
+
   .cart_preview_product_name {
     font-size: 13px;
     overflow: hidden;

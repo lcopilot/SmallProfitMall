@@ -20,7 +20,6 @@
   const search = () => import("../../components/pages/Search");
   const ProductsFeatured = () => import("../../components/pages/ProductsFeatured");
 
-
   export default {
     inject: ["reload"],
     name: "shoppingCart",

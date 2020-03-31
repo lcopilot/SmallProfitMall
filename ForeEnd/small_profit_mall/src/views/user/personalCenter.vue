@@ -246,12 +246,12 @@
 </template>
 
 <script>
-  const Header = () => import("../../components/pages/Header"); //组件懒加载
-  const Footer = () => import("../../components/pages/Footer");
   const personalPage = () => import("../../components/admin/personalHubPage");
+  import *as userApi from '../../api/page/user';
+  import encryption from "../../util/encryption";
   export default {
     name: "personalCenter",
-    components: {Header, Footer, personalPage},
+    components: { personalPage},
     data() {
       return {
         //充值对话框
@@ -313,7 +313,6 @@
             {"imageSite": "http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg"},
           ],
         ]
-
       }
     },
     methods: {
@@ -350,11 +349,30 @@
       },
       //充值
       recharge(){
-        const code = /^[0-9]*$/
+        const code = /^[0-9]*$/;
         if (this.amount.length >= 6 || !code.test(this.amount)){
           this.$message.warning("请输入纯数字")
         }else {
-          this.rechargeDialogVisible=false
+          let params={
+            userId:sessionStorage.getItem("uId"),
+            balance:encryption.encrypt(this.amount)
+          };
+          userApi.recharge(params).then(res=>{
+            if (res.success){
+              this.$message.success("充值成功!")
+              this.rechargeDialogVisible=false
+            }else {
+              if (res.code==11111){
+                this.$message({
+                  message:"充值金额已达上限",
+                  type:"warning",
+                })
+              }
+            }
+          }).catch(error=>{
+            console.log(error);
+            this.rechargeDialogVisible=false
+          });
         }
       },
       //充值框关闭的回调
@@ -367,7 +385,6 @@
       this.user.name=sessionStorage.getItem("username");
       this.user.uId=sessionStorage.getItem("uId");
     }
-
   }
 </script>
 
