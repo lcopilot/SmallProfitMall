@@ -2,13 +2,13 @@
   <div class="camera_outer">
     <video id="videoCamera" :width="videoWidth" :height="videoHeight" autoplay></video>
     <canvas style="display:none;" id="canvasCamera" :width="videoWidth" :height="videoHeight" ></canvas>
-    <img src="" alt="" class="bg_r_img">
-    <div v-if="imgSrc" class="img_bg_camera">
-      <img :src="imgSrc" alt="" class="tx_img">
-      <div class="img_btn_camera">
-        {{validTip}}<img v-if="validTip === '验证中'" src="" alt="" class="loding_img">
-      </div>
-    </div>
+<!--    <img src="" alt="" class="bg_r_img">-->
+<!--    <div v-if="imgSrc" class="img_bg_camera">-->
+<!--&lt;!&ndash;      <img :src="imgSrc" alt="" class="tx_img">&ndash;&gt;-->
+<!--      <div class="img_btn_camera">-->
+<!--        {{validTip}}<img v-if="validTip === '验证中'" src="" alt="" class="loding_img">-->
+<!--      </div>-->
+<!--    </div>-->
 
   </div>
 </template>
@@ -102,7 +102,7 @@
       }
     },
     mounted () {
-      this.getCompetence()
+      this.getCompetence();
       setTimeout(()=>{
         this.setImage();
       },5000)

@@ -24,6 +24,8 @@ import 'video.js/dist/video-js.css'
 import animated from 'animate.css'
 const Header = () => import("./components/pages/Header"); //组件懒加载
 const Footer = () => import("./components/pages/Footer");
+import VueCropper from 'vue-cropper'
+Vue.use(VueCropper)
 
 Vue.component("Header",Header)
 Vue.component("Footer",Footer)

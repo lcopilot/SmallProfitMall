@@ -1,86 +1,128 @@
 <template>
-  <div id="box">
-    <div class="box" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
-      <ul class="list">
-        <li v-for="(i,index) in list" class="list-item" :key="index">{{ i}}</li>
-      </ul>
-      <p v-if="loading" style="margin-top:10px;" class="loading">
-        <span></span>
-      </p>
-    </div>
+  <div>
+    <el-upload class="upload-demo" action="" drag
+               :auto-upload="false" :show-file-list="false" :on-change='changeUpload'>
+      <i class="el-icon-upload"></i>
+      <div class="el-upload__text">点击上传</div>
+      <div class="el-upload__tip">支持绝大多数图片格式，单张图片最大支持5MB</div>
+    </el-upload>Ï
+    <!-- vueCropper 剪裁图片实现-->
+    <el-dialog title="图片剪裁" :visible.sync="dialogVisible" append-to-body>
+      <div class="cropper-content">
+        <div class="cropper" style="text-align:center">
+          <vueCropper
+              ref="cropper"
+              :img="option.img"
+              :outputSize="option.size"
+              :outputType="option.outputType"
+              :info="true"
+              :full="option.full"
+              :canMove="option.canMove"
+              :canMoveBox="option.canMoveBox"
+              :original="option.original"
+              :autoCrop="option.autoCrop"
+              :fixed="option.fixed"
+              :fixedNumber="option.fixedNumber"
+              :centerBox="option.centerBox"
+              :infoTrue="option.infoTrue"
+              :fixedBox="option.fixedBox"
+              @realTime="realTime"
+          ></vueCropper>
+        </div>
+      </div>
+      <div v-html="previews.html">
+
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary"  :loading="loading" @click="finish">确认</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
   export default {
-    data () {
+    data() {
       return {
-        ws: null,//建立的连接
-        lockReconnect: false,//是否真正建立连接
-        timeout: 28*1000,//30秒一次心跳
-        timeoutObj: null,//心跳心跳倒计时
-        serverTimeoutObj: null,//心跳倒计时
-        timeoutnum: null,//断开 重连倒计时
+        dialogVisible: false,
+        // 裁剪组件的基础配置option
+        option: {
+          img: '', // 裁剪图片的地址
+          info: true, // 裁剪框的大小信息
+          outputSize: 1, // 裁剪生成图片的质量
+          outputType: 'jpeg', // 裁剪生成图片的格式
+          canScale: true, // 图片是否允许滚轮缩放
+          autoCrop: true, // 是否默认生成截图框
+          // autoCropWidth: 300, // 默认生成截图框宽度
+          // autoCropHeight: 200, // 默认生成截图框高度
+          fixedBox: false, // 固定截图框大小 不允许改变
+          fixed: true, // 是否开启截图框宽高固定比例
+          fixedNumber: [1, 1], // 截图框的宽高比例
+          full: false, // 是否输出原图比例的截图
+          canMoveBox: false, // 截图框能否拖动
+          original: false, // 上传图片按照原始比例渲染
+          centerBox: true, // 截图框是否被限制在图片里面
+          infoTrue: true // true 为展示真实输出图片宽高 false 展示看到的截图框宽高
+        },
+        picsList: [],  //页面显示的数组
+        // 防止重复提交
+        loading: false,
+        previews:'',
+        fileinfo:'',
+      }
+
+    },
+
+    methods: {
+      // 上传按钮   限制图片大小
+      changeUpload(file) {
+        const isLt5M = file.size / 1024 / 1024 < 5
+        if (!isLt5M) {
+          this.$message.error('上传文件大小不能超过 5MB!')
+          return false
+        }
+        let vm=this;
+        // 上传成功后将图片地址赋值给裁剪框显示图片
+        this.$nextTick(() => {
+          vm.option.img=URL.createObjectURL(file.raw);
+          vm.dialogVisible = true
+          // var reader = new FileReader();
+          // reader.readAsDataURL(file.raw);
+          // reader.onload = function(e){
+          //   this.result;
+          //   vm.option.img= this.result;
+          //   vm.dialogVisible = true
+          // }
+        })
+      },
+      // 实时预览函数
+      realTime(data) {
+        console.log(data)
+        this.previews = data;
+      },
+      finish() {
+        this.$refs.cropper.getCropData((data) => {
+          // do something
+          console.log(data)
+        });
+        this.$refs.cropper.getCropBlob((data) => {
+          // do something
+          console.log(data)
+        })
       }
     },
-    created() {
-      let arr=[{"id":2,"userId":"7c9fdfa3177042a08766aed29e7de6cd","senderName":"微利助手","senderAvatar":"http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938","newsStatus":"0","newsId":2,"newsType":1,"contentId":21,"newsTime":"2020-03-30 09:57:35.0","newsContent":"17","sign":false,"title":"加油"},{"id":1,"userId":"7c9fdfa3177042a08766aed29e7de6cd","senderName":"微利官方","senderAvatar":" http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781","newsStatus":"0","newsId":1,"newsType":1,"contentId":4,"newsTime":"2020-03-30 09:57:35.0","newsContent":"4","sign":false,"title":"加油"},{"id":1,"userId":"7c9fdfa3177042a08766aed29e7de6cd","senderName":"微利官方","senderAvatar":" http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781","newsStatus":"0","newsId":1,"newsType":1,"contentId":19,"newsTime":"2020-03-30 09:57:35.0","newsContent":"27","sign":false,"title":"加油"},{"id":2,"userId":"7c9fdfa3177042a08766aed29e7de6cd","senderName":"微利助手","senderAvatar":"http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938","newsStatus":"0","newsId":2,"newsType":1,"contentId":2,"newsTime":"2020-03-30 09:57:35.0","newsContent":"2","sign":false,"title":"加油"},{"id":1,"userId":"7c9fdfa3177042a08766aed29e7de6cd","senderName":"微利官方","senderAvatar":" http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781","newsStatus":"0","newsId":1,"newsType":1,"contentId":17,"newsTime":"2020-03-30 09:57:35.0","newsContent":"28","sign":false,"title":"加油"},{"id":1,"userId":"7c9fdfa3177042a08766aed29e7de6cd","senderName":"微利官方","senderAvatar":" http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781","newsStatus":"0","newsId":1,"newsType":1,"contentId":4,"newsTime":"2020-03-30 09:57:35.0","newsContent":"4","sign":false,"title":"加油"},{"id":1,"userId":"7c9fdfa3177042a08766aed29e7de6cd","senderName":"微利官方","senderAvatar":" http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781","newsStatus":"0","newsId":1,"newsType":1,"contentId":19,"newsTime":"2020-03-30 09:57:35.0","newsContent":"27","sign":false,"title":"加油"},{"id":2,"userId":"7c9fdfa3177042a08766aed29e7de6cd","senderName":"微利助手","senderAvatar":"http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938","newsStatus":"0","newsId":2,"newsType":1,"contentId":2,"newsTime":"2020-03-30 09:57:35.0","newsContent":"2","sign":false,"title":"加油"},{"id":1,"userId":"7c9fdfa3177042a08766aed29e7de6cd","senderName":"微利官方","senderAvatar":" http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781","newsStatus":"0","newsId":1,"newsType":1,"contentId":17,"newsTime":"2020-03-30 09:57:35.0","newsContent":"28","sign":false,"title":"加油"},{"id":1,"userId":"7c9fdfa3177042a08766aed29e7de6cd","senderName":"微利官方","senderAvatar":" http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781","newsStatus":"0","newsId":1,"newsType":1,"contentId":15,"newsTime":"2020-03-30 09:57:35.0","newsContent":"14","sign":false,"title":"加油"}];
-      let bb=[];
-      arr.forEach((a)=>{
-        bb.push(a.contentId);
-      })
-      console.log(bb)
-    },
-    methods: {
 
-    },
-
-  };
+  }
 </script>
 
 <style scoped>
-  #box{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    overflow: auto;
+  .cropper-content {
+      width: auto;
+      height: 300px;
   }
-  .box {
-    width: 100%;
-    margin:  0 auto;
-  }
-  .list {
-    padding: 0;
-    font-size: 14px;
-  }
-  .list-item {
-    width: 100%;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    list-style: none;
-    padding: 0 1rem;
-    box-sizing: border-box;
-    height: 70px;
-    line-height: 70px;
-    border-bottom: 1px solid #e7e7e7;
-  }
-  .loading span {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #409eff;
-    border-left: transparent;
-    animation: zhuan 0.5s linear infinite;
-    border-radius: 50%;
-  }
-  @keyframes zhuan {
-    0% {
-      transform: rotate(0);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  .cropper {
+    width: 50%;
+    height: 300px;
   }
 </style>
