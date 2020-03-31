@@ -6,6 +6,7 @@ let heartbeatTimer=0; //心跳计时器
 let HeartbeatStatus=false; //心跳连接状态
 let checkConnectionTimer=0; //心跳检测延迟定时器
 let callbackNameMap=new Map();
+let reconnectionTimer=0; //重连计时器
 
 export const initWebSocket = () => { //初始化websocket
   if (!sessionStorage.getItem("uId")) {
@@ -136,8 +137,9 @@ function checkConnection(){
 //重连
 function reconnection() {
   clearTimeout(heartbeatTimer);
+  clearTimeout(reconnectionTimer);
   //尝试重连 2秒一次
-  let reconnection=setInterval(()=>{
+  reconnectionTimer=setInterval(()=>{
     if (websocketStatus){
       clearTimeout(reconnection);
     }

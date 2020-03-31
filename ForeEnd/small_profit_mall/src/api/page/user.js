@@ -126,4 +126,12 @@ export const addFavorite=data=>{
 //添加足迹
 export const addFootprint=data=>{
   return http.requestPost('apiUrl/FootprintController/addShoppingCart',data);
-}
+};
+
+/**
+ * 充值
+ */
+export const recharge=params=>{
+  let queryString=querystring.stringify(params);
+  return http.requestPost('apiUrl/MemberController/updateBalance?'+queryString);
+};
