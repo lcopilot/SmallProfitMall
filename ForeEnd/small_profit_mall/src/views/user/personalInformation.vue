@@ -30,7 +30,8 @@
                       <el-row>
                         <el-col :span="13">
                           <DataSelect :year="birthday!=null?birthday[0]:''"
-                                      :month="birthday!=null?birthday[1]:''" :day="birthday!=null?birthday[2]:''"
+                                      :month="birthday!=null?birthday[1]:''"
+                                      :day="birthday!=null?birthday[2]:''"
                                       @change="dateChange" :key="DataSelect"/>
                         </el-col>
                         <el-col :span="11">
@@ -55,12 +56,15 @@
                     <el-form-item label="邮箱">
                       <div v-if="!userFrom.email">
                         未绑定~
-                        <el-button style="margin-left: 20px" type="text" @click="bindEmail()">绑定邮箱</el-button>
+                        <el-button style="margin-left: 20px" type="text" @click="bindEmail()">绑定邮箱
+                        </el-button>
                       </div>
                       <div v-if="userFrom.email">
                         {{userFrom.email}}
-                        <el-button style="margin-left: 20px" type="text" @click="modifyEmail">修改</el-button>
-                        <el-button style="margin-left: 20px" type="text" @click="untieEmail" >解绑</el-button>
+                        <el-button style="margin-left: 20px" type="text" @click="modifyEmail">修改
+                        </el-button>
+                        <el-button style="margin-left: 20px" type="text" @click="untieEmail">解绑
+                        </el-button>
                       </div>
                     </el-form-item>
                     <el-form-item>
@@ -76,10 +80,47 @@
                     <el-progress type="circle" :percentage="progressPercent"></el-progress>
                   </div>
                   <el-upload class="img-btn" action="#" :data="params"
-                             :show-file-list="false" :before-upload="beforeAvatarUpload"
+                             :show-file-list="false" :auto-upload="false" :on-change='changeUpload'
                              :http-request="uploadImg">
                     <el-button type="success" plain round size="mini">更改头像</el-button>
                   </el-upload>
+                  <el-dialog title="图片剪裁" @close="shutDown()" :visible.sync="imgCrop"
+                             append-to-body>
+                    <el-row>
+                      <el-col :span="12">
+                        <div class="cropper-content">
+                          <div class="cropper" style="text-align:center">
+                            <vueCropper
+                                ref="cropper"
+                                :img="option.img"
+                                :outputSize="option.size"
+                                :outputType="option.outputType"
+                                :info="true"
+                                :full="option.full"
+                                :canMove="option.canMove"
+                                :canMoveBox="option.canMoveBox"
+                                :original="option.original"
+                                :autoCrop="option.autoCrop"
+                                :fixed="option.fixed"
+                                :fixedNumber="option.fixedNumber"
+                                :centerBox="option.centerBox"
+                                :infoTrue="option.infoTrue"
+                                :fixedBox="option.fixedBox"
+                                @realTime="realTime"
+                            ></vueCropper>
+                          </div>
+                        </div>
+                      </el-col>
+                      <el-col :span="12">
+                        <div v-html="previews.html" style="margin-left: 10%">
+                        </div>
+                      </el-col>
+                    </el-row>
+                    <div slot="footer" style="margin-right: 10%">
+                      <el-button type="primary" @click="uploadImg">确认</el-button>
+                      <el-button @click="imgCrop = false">取 消</el-button>
+                    </div>
+                  </el-dialog>
                 </div>
               </el-col>
             </el-row>
@@ -103,11 +144,34 @@
   import *as userApi from '../../api/page/user'  //*as别名
   export default {
     name: "personalInformation",
-    components: {personalPage, DataSelect, phoneModify,emailModify},
+    components: {personalPage, DataSelect, phoneModify, emailModify},
     data() {
       return {
+        //裁剪图片实时预览
+        previews: '',
+        // 裁剪组件的基础配置option
+        option: {
+          img: '', // 裁剪图片的地址
+          info: true, // 裁剪框的大小信息
+          outputSize: 1, // 裁剪生成图片的质量
+          outputType: 'jpeg', // 裁剪生成图片的格式
+          canScale: true, // 图片是否允许滚轮缩放
+          autoCrop: true, // 是否默认生成截图框
+          // autoCropWidth: 300, // 默认生成截图框宽度
+          // autoCropHeight: 200, // 默认生成截图框高度
+          fixedBox: false, // 固定截图框大小 不允许改变
+          fixed: true, // 是否开启截图框宽高固定比例
+          fixedNumber: [1, 1], // 截图框的宽高比例
+          full: false, // 是否输出原图比例的截图
+          canMoveBox: false, // 截图框能否拖动
+          original: false, // 上传图片按照原始比例渲染
+          centerBox: true, // 截图框是否被限制在图片里面
+          infoTrue: true // true 为展示真实输出图片宽高 false 展示看到的截图框宽高
+        },
+        //图片裁剪的弹出框
+        imgCrop: false,
         //邮箱变更类型
-        emailType:1,
+        emailType: 1,
         //生日选择的组件重载的key
         DataSelect: 0,
         //修改邮箱
@@ -123,9 +187,9 @@
         //用户信息
         birthday: [],
         birthdays: {
-          year:"",
-          month:"",
-          day:"",
+          year: "",
+          month: "",
+          day: "",
         },
         userFrom: {
           uid: '',
@@ -156,55 +220,77 @@
       };
     },
     methods: {
-      //头像上传的方法
-      uploadImg(f) {
-        this.progressFlag = true
-        let formData = new FormData()
-        formData.append('file', f.file)
-        formData.append('userId', f.data.userId)
-        this.axios({
-          url: '/apiUrl/user/updatePortrait',
-          method: 'post',
-          data: formData,
-          headers: {'Content-Type': 'multipart/form-data'},
-          onUploadProgress: progressEvent => {
-            // progressEvent.loaded:已上传文件大小
-            // progressEvent.total:被上传文件的总大小
-            this.progressPercent = (progressEvent.loaded / progressEvent.total * 100)
-          }
-        }).then(res => {
-          if (res.data.success) {
-            sessionStorage.setItem("avatar", res.data.queryResult.list[0]);
-            this.imageUrl = res.data.queryResult.list[0];
-            this.header = new Date().getTime();
-            if (this.progressPercent === 100) {
-              this.progressFlag = false
-              this.progressPercent = 0
-            }
-          }
-        }).catch(error => {
-          this.progressFlag = false
-          this.progressPercent = 0
-          this.$message({
-            message: "头像上传失败,请重试",
-            type: "error"
-          });
-          console.log(error)
-        })
+      //裁剪框关闭的方法
+      shutDown() {
+        this.option.img = '';
+        this.previews = '';
       },
-      //头像上传之前的方法
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isPNG = file.type === 'image/png';
-        const isBMP = file.type === 'image/bmp';
+      // 实时预览函数
+      realTime(data) {
+        this.previews = data;
+      },
+      //头像上传的方法
+      uploadImg() {
+        this.$refs.cropper.getCropBlob((data) => {
+          this.imgCrop = false;
+          this.progressFlag = true;
+          let formData = new FormData();
+          formData.append('file', data);
+          formData.append('userId', this.params.userId);
+          this.axios({
+            url: '/apiUrl/user/updatePortrait',
+            method: 'post',
+            data: formData,
+            headers: {'Content-Type': 'multipart/form-data'},
+            onUploadProgress: progressEvent => {
+              // progressEvent.loaded:已上传文件大小
+              // progressEvent.total:被上传文件的总大小
+              this.progressPercent = (progressEvent.loaded / progressEvent.total * 100)
+            }
+          }).then(res => {
+            if (res.data.success) {
+              sessionStorage.setItem("avatar", res.data.queryResult.list[0]);
+              this.imageUrl = res.data.queryResult.list[0];
+              this.header = new Date().getTime();
+              if (this.progressPercent === 100) {
+                this.progressFlag = false
+                this.progressPercent = 0
+              }
+            }
+          }).catch(error => {
+            this.progressFlag = false
+            this.progressPercent = 0
+            this.$message({
+              message: "头像上传失败,请重试",
+              type: "error"
+            });
+            console.log(error)
+          })
+        });
+
+      },
+      //裁剪头像
+      changeUpload(file) {
+        const isJPG = file.raw.type === 'image/jpeg';
+        const isPNG = file.raw.type === 'image/png';
+        const isBMP = file.raw.type === 'image/bmp';
         const isLt2M = file.size / 1024 / 1024 < 2;
+        console.log(file)
         if (!isJPG && !isPNG && !isBMP) {
           this.$message.error('上传图片必须是JPG/PNG/BMP 格式!');
         }
         if (!isLt2M) {
           this.$message.error('上传头像图片大小不能超过 2MB!');
         }
-        return (isJPG || isBMP || isPNG) && isLt2M;
+        // 上传成功后将图片地址赋值给裁剪框显示图片
+        if ((isJPG || isBMP || isPNG) && isLt2M) {
+          this.$nextTick(() => {
+            this.$nextTick(() => {
+              this.option.img = URL.createObjectURL(file.raw);
+              this.imgCrop = true;
+            });
+          })
+        }
       },
       //获取用户信息
       getUser() {
@@ -217,13 +303,13 @@
           this.userFrom.phone = res.queryResult.list[0].phone;
           this.userFrom.email = res.queryResult.list[0].email;
           this.imageUrl = res.queryResult.list[0].image;
-          sessionStorage.setItem("userSex",this.userFrom.sex);
+          sessionStorage.setItem("userSex", this.userFrom.sex);
           this.DataSelect = new Date().getTime();
-          setTimeout(()=>{
-            this.birthdays.year=this.birthday[0];
-            this.birthdays.month=this.birthday[1];
-            this.birthdays.day=this.birthday[2];
-          },200)
+          setTimeout(() => {
+            this.birthdays.year = this.birthday[0];
+            this.birthdays.month = this.birthday[1];
+            this.birthdays.day = this.birthday[2];
+          }, 200)
         })
         .catch(error => {
           console.log(error);
@@ -236,26 +322,32 @@
       },
       //修改用户信息
       modifyUser(formName) {
-        if (this.userFrom.name=='smallProfit'){
+        if (this.userFrom.name == 'smallProfit') {
           return this.$message.warning("用户名为初始用户名不可修改哦~")
         }
         this.$refs[formName].validate((valid) => {
-          if (this.userFrom.name==sessionStorage.getItem("username") && this.userFrom.sex==sessionStorage.getItem("userSex") && this.birthday[0]==this.birthdays.year && this.birthday[1]==this.birthdays.month && this.birthday[2]==this.birthdays.day ) {
+          if (this.userFrom.name == sessionStorage.getItem("username") && this.userFrom.sex
+              == sessionStorage.getItem("userSex") && this.birthday[0] == this.birthdays.year
+              && this.birthday[1] == this.birthdays.month && this.birthday[2]
+              == this.birthdays.day) {
             this.$message({
               message: "您还没有修改哦~",
               type: "warning",
             })
           } else if (valid) {
-            if (this.birthday[0]==this.birthdays.year && this.birthday[1]==this.birthdays.month && this.birthday[2]==this.birthdays.day){
-              this.userFrom.birthday=this.birthday[0]+'-'+this.birthday[1]+'-'+this.birthday[2];
+            if (this.birthday[0] == this.birthdays.year && this.birthday[1] == this.birthdays.month
+                && this.birthday[2] == this.birthdays.day) {
+              this.userFrom.birthday = this.birthday[0] + '-' + this.birthday[1] + '-'
+                  + this.birthday[2];
             }
-            if (this.userFrom.birthday==new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate()){
-              this.userFrom.birthday='';
+            if (this.userFrom.birthday == new Date().getFullYear() + '-' + (new Date().getMonth()
+                + 1) + '-' + new Date().getDate()) {
+              this.userFrom.birthday = '';
             }
 
             userApi.modifyUser(this.userFrom).then(res => {
               if (res.success) {
-                if (res.code==11000){
+                if (res.code == 11000) {
                   this.$message({
                     message: "用户名修改失败,用户名重复",
                     type: "warning",
@@ -284,31 +376,31 @@
         })
       },
       //绑定邮箱
-      bindEmail(){
-        this.emailType=1;
+      bindEmail() {
+        this.emailType = 1;
         this.emailSign = true;
         sessionStorage.setItem("emailType", this.emailType);
         sessionStorage.setItem("emailSign", JSON.stringify(true));
       },
       //解绑邮箱
-      untieEmail(){
-        this.emailType=3;
+      untieEmail() {
+        this.emailType = 3;
         this.emailSign = true;
         sessionStorage.setItem("emailType", this.emailType);
         sessionStorage.setItem("emailSign", JSON.stringify(true));
       },
       //修改邮箱
-      modifyEmail(){
-        this.emailType=2;
+      modifyEmail() {
+        this.emailType = 2;
         this.emailSign = true;
         sessionStorage.setItem("emailType", this.emailType);
         sessionStorage.setItem("emailSign", JSON.stringify(true));
       },
       //生日选择算法
       dateChange(Data) {
-        this.birthdays.year=Data.year;
-        this.birthdays.month=Data.month;
-        this.birthdays.day=Data.day;
+        this.birthdays.year = Data.year;
+        this.birthdays.month = Data.month;
+        this.birthdays.day = Data.day;
         this.userFrom.birthday = Data.year + '-' + Data.month + '-' + Data.day;
       },
 
@@ -324,15 +416,23 @@
       } else {
         this.emailSign = false;
       }
-      this.userFrom.uid = sessionStorage.getItem("uId");
+      this.params.userId = this.userFrom.uid = sessionStorage.getItem("uId");
       this.imageUrl = sessionStorage.getItem("avatar");
-      this.params.userId = sessionStorage.getItem("uId");
       this.getUser();
     }
   }
 </script>
 
 <style scoped>
+  .cropper-content {
+    width: auto;
+    height: 300px;
+  }
+
+  .cropper {
+    width: auto;
+    height: 300px;
+  }
 
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;

@@ -85,7 +85,7 @@
                           width="30%"
                           center>
                         <div>
-                          <el-input  placeholder="请输入你要充值的金额" v-model="amount"  maxlength="6">
+                          <el-input  placeholder="请输入你要充值的金额" v-model="amount"  maxlength="8">
                               <div style="margin-top: 50%" slot="suffix">元</div>
                               <svg-icon slot="prefix" name="yuan" style="margin-top: 30%"></svg-icon>
                           </el-input>
@@ -349,9 +349,9 @@
       },
       //充值
       recharge(){
-        const code = /^[0-9]*$/;
-        if (this.amount.length >= 6 || !code.test(this.amount)){
-          this.$message.warning("请输入纯数字")
+        const code = /^(0|[1-9]\d*)(\.\d{1,2})?/;
+        if (this.amount.length >= 8 || !code.test(this.amount)){
+          this.$message.warning("请输入正确的格式,小数点支持两位")
         }else {
           let params={
             userId:sessionStorage.getItem("uId"),
