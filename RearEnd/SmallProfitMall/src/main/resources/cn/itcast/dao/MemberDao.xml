@@ -14,7 +14,7 @@
         </select>
 
         <!--查询用户当前余额-->
-        <select id="findBalance" parameterType="java.lang.String" resultType="java.lang.Double">
+        <select id="findBalance" parameterType="java.lang.String" resultType="java.lang.String">
                 SELECT balance FROM userMembe WHERE userId=#{userId}
         </select>
         
