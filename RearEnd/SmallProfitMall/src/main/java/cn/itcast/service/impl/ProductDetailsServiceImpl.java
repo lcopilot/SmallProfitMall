@@ -1,7 +1,7 @@
 package cn.itcast.service.impl;
 
 import cn.itcast.dao.ProductDetailsDao;
-import cn.itcast.domain.ProductDatails.ProductBasis;
+import cn.itcast.domain.ProductDatails.ProductAttributes;
 import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import cn.itcast.service.ProductDetailsService;
 import cn.itcast.util.cache.RedisUtil;
@@ -24,6 +24,9 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
 
     @Override
     public List<ProductDetailsResult> findByPid(int pid) {
+        //查询商品有的属性
+      //  ProductAttributes productAttributes = productDetailsDao.fendAttributes(pid);
+        //查询商品详细信息
         ProductDetailsResult productDetailsResult = productDetailsDao.fendProduct(pid);
         String transition = String.valueOf(pid);
         String ProductId ="productId_"+transition;

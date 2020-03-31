@@ -92,10 +92,10 @@
 				ProductImage pi
 			ON
 				pb.ProductId=pi.ProductId
-			LEFT JOIN
-				ProductColour pc
-			ON
-				pb.ProductId=pc.ProductId
+            LEFT JOIN
+            ProductColour pc
+            ON
+            pb.ProductId=pc.ProductId
 			LEFT JOIN
 				ProductCombo pco
 			ON
@@ -122,6 +122,10 @@
 				pb.ProductId=pst.ProductId
             WHERE
                 pb.ProductId=#{userId}
+    </select>
+    
+    <select id="fendAttributes" parameterType="java.lang.Integer" resultType="cn.itcast.domain.ProductDatails.ProductAttributes">
+        SELECT * FROM productAttributes where productId = #{productId}
     </select>
 
 </mapper>

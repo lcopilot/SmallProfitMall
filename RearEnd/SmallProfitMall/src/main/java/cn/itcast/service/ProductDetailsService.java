@@ -1,8 +1,6 @@
 package cn.itcast.service;
 
-import cn.itcast.domain.ProductDatails.ProductBasis;
 import cn.itcast.domain.ProductDatails.ProductDetailsResult;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
