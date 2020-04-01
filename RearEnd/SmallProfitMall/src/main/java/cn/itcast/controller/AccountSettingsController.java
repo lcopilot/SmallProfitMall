@@ -32,8 +32,8 @@ public class AccountSettingsController {
      * @param paymentPassword 需要修改的密码
      * @return
      */
-    @RequestMapping(value = "/updatePaymentPassword/{userId}/{paymentPassword}" , method = RequestMethod.PUT)
-    public QueryResponseResult updatePaymentPassword(@PathVariable("userId")String userId,@PathVariable("paymentPassword")String paymentPassword){
+    @RequestMapping(value = "/updatePaymentPassword" , method = RequestMethod.PUT)
+    public QueryResponseResult updatePaymentPassword(String userId,String paymentPassword){
         Integer result =  accountSettingsService.updatePaymentPassword(userId, paymentPassword);
         if (result==1){
             return new QueryResponseResult(CommonCode.SUCCESS,null);
@@ -61,8 +61,8 @@ public class AccountSettingsController {
      * @param
      * @return
      */
-    @RequestMapping(value = "/updatePassword/{userId}/{password}",method = RequestMethod.PUT)
-    public QueryResponseResult updatePassword(@PathVariable("userId") String userId,@PathVariable("password") String password) {
+    @RequestMapping(value = "/updatePassword",method = RequestMethod.PUT)
+    public QueryResponseResult updatePassword( String userId, String password) {
 
        Integer result = accountSettingsService.updatePassword(userId,password);
         if (result==1){
