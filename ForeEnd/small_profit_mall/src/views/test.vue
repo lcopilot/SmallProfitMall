@@ -9,7 +9,7 @@
 <!--        {{validTip}}<img v-if="validTip === '验证中'" src="" alt="" class="loding_img">-->
 <!--      </div>-->
 <!--    </div>-->
-
+  <el-button @click="bindEvents">开始</el-button>
   </div>
 </template>
 <script>
@@ -23,10 +23,49 @@
         thisCancas: null,
         thisContext: null,
         thisVideo: null,
-        validTip: '验证中'
+        validTip: '验证中',
+        recorder:'',
+        stream:'',
+        chunks:[],
+        chunkList:[],
       }
     },
     methods: {
+      requestAudioAccess() {
+        navigator.mediaDevices
+        .getUserMedia({ audio: true, video: { facingMode: "user" } })
+        .then(
+            stream => {
+              this.mediaStreamTrack =
+                  typeof stream.stop === "function"
+                      ? stream
+                      : stream.getTracks()[1];
+              this.recorder = new window.MediaRecorder(stream);
+              this.stream = stream;
+              this.bindEvents();
+            },
+            error => {
+              alert("出错，请确保已允许浏览器获取音视频权限");
+            }
+        );
+      },
+      bindEvents () {
+        this.recorder.ondataavailable = this.getRecordingData;
+        this.recorder.onstop = this.saveRecordingData;
+      },
+      getRecordingData (e) {
+        console.log(e)
+        //录制的数据
+        this.chunks.push(e.data);
+      },
+
+//视频的话：保存视频数据
+      saveRecordingData  () {
+        let blob = new Blob(this.chunks, { 'type' : 'video/webm'}),
+            videoStream = URL.createObjectURL(blob);
+        this.chunkList.push({stream: videoStream});
+        this.chunks = [];
+      },
     //调用摄像头
       getCompetence () {
         let _this = this
@@ -102,18 +141,18 @@
       }
     },
     mounted () {
-      this.getCompetence();
-      setTimeout(()=>{
-        this.setImage();
-      },5000)
+      this.requestAudioAccess();
+      // this.getCompetence();
+      // setTimeout(()=>{
+      //   this.setImage();
+      // },5000)
     },
     beforeDestroy () {
       this.stopNavigator()
     },
     created() {
-      let kk=encryption.encrypt("231")
-      let dd=encryption.decrypt(kk);
-
+      // let kk=encryption.encrypt("231")
+      // let dd=encryption.decrypt(kk);
     }
   }
 

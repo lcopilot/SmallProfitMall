@@ -45,6 +45,8 @@
 
 <script>
 
+  import encryption from "../../util/encryption";
+
   export default {
     name: "face",
     props: {
@@ -77,6 +79,14 @@
         cameraStatus: false,
         //采集失败的提示语
         collectionPrompt: '',
+        //MediaRecorder对象
+        recorder:'',
+        //视频流
+        stream:'',
+        //录制的视频
+        chunks:[],
+        //保存的视频文件
+        faceImg:'',
       }
     },
     methods: {
@@ -109,6 +119,7 @@
         }
         this.faceLoading = true;
         this.faceBtnContent = '人脸采集中';
+        this.recorder.start();
         setTimeout(() => {
           this.photograph();
         }, 3000);
@@ -134,7 +145,7 @@
           navigator.mediaDevices.getUserMedia = function (constraints) {
             // 首先获取现存的getUserMedia(如果存在)
             let getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia
-                || navigator.getUserMedia
+                || navigator.getUserMedia;
             // 有些浏览器不支持，会返回错误信息
             // 保持接口一致
             if (!getUserMedia) {
@@ -151,6 +162,8 @@
           video: {width: this.videoWidth, height: this.videoHeight, transform: 'scaleX(-1)'}
         };
         navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
+          vm.recorder = new window.MediaRecorder(stream);
+          vm.stream = stream;
           // 旧的浏览器可能没有srcObject
           if ('srcObject' in vm.thisVideo) {
             vm.thisVideo.srcObject = stream
@@ -161,7 +174,9 @@
           vm.thisVideo.onloadedmetadata = function (e) {
             vm.thisVideo.play()
           };
+
           vm.cameraStatus = true;
+          vm.collectionPrompt='';
         }).catch(err => {
           console.log(err);
           vm.cameraStatus = false;
@@ -172,14 +187,40 @@
         // 点击，canvas画图
         this.thisContext.drawImage(this.thisVideo, 0, 0, this.videoWidth, this.videoHeight)
         // 获取图片base64链接
-        let image = this.thisCanvas.toDataURL('image/png');
-        this.$emit('upload-face', image);
+        this.faceImg = encryption.encrypt(this.thisCanvas.toDataURL('image/png').substring(22));
+        setTimeout(()=>{
+          //停止录制
+          this.recorder.stop();
+          //保存录制的视频
+          this.bindEvents();
+        },1000);
       },
       //关闭摄像头
       stopNavigator() {
         this.thisVideo.srcObject.getTracks()[0].stop();
         this.cameraStatus = false;
-      }
+      },
+      //保存录制的视频
+      saveRecordingData() {
+        let blob = new Blob(this.chunks, {'type': 'video/webm'}),
+            videoStream = URL.createObjectURL(blob);
+        // this.chunkList.push({stream: videoStream});
+        this.chunks = [];
+        let videoFile = new File([blob], 'msr-' + (new Date).toISOString().replace(/:|\./g, '-') + '.webm', {
+          type: 'video/webm'
+        });
+        this.$emit('upload-face', videoFile,this.faceImg);
+        this.faceImg='';
+      },
+      //获取录制的视频
+      getRecordingData(e) {
+        this.chunks.push(e.data);
+      },
+      //获取录制的视频 停止时保存视频
+      bindEvents() {
+        this.recorder.ondataavailable = this.getRecordingData;
+        this.recorder.onstop = this.saveRecordingData;
+      },
     }
   }
 </script>
