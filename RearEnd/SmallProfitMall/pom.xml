@@ -417,14 +417,9 @@
     <dependency>
       <groupId>com.baidu.aip</groupId>
       <artifactId>java-sdk</artifactId>
-      <version>4.12.0</version>
+      <version>4.8.0</version>
     </dependency>
 
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.8.5</version>
-    </dependency>
 
   </dependencies>
 
