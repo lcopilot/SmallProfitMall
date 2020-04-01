@@ -5,18 +5,27 @@ import cn.itcast.domain.footprint.Footprint;
 import cn.itcast.service.FootprintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.xml.crypto.Data;
 import java.util.Date;
 
-//足迹
+/**
+ * 足迹
+ */
 @Service
+@Transactional
 public class FootprintServiceImpl implements FootprintService {
 
     @Autowired
     private FootprintDao footprintDao;
 
-    //添加足迹
+    /**
+     * 添加足迹
+     * @param footprint 足迹对象
+     * @return
+     */
+    @Override
     public int addFootprint(Footprint footprint){
         String footprintId = footprintDao.findProduct(footprint.getProductId());
         if (footprintId == null){

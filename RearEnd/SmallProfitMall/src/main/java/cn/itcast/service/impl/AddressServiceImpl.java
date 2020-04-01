@@ -5,11 +5,13 @@ import cn.itcast.domain.address.Address;
 import cn.itcast.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service("addressService")
+@Transactional
 public class AddressServiceImpl implements AddressService {
     @Autowired
     AddressDao addressDao;

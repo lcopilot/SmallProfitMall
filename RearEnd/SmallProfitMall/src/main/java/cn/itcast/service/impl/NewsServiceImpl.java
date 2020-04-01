@@ -6,6 +6,7 @@ import cn.itcast.service.NewsService;
 import cn.itcast.util.logic.TotalPages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @date 2020/3/29
  */
 @Service
+@Transactional
 public class NewsServiceImpl implements NewsService {
     /**
      * 查询消息

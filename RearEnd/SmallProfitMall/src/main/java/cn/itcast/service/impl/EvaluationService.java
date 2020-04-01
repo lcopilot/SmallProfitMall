@@ -5,10 +5,12 @@ import cn.itcast.domain.favorite.Evaluation;
 import cn.itcast.messageQueue.producer.favorite.FavoriteProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
 @Service
+@Transactional
 public class EvaluationService implements cn.itcast.service.EvaluationService {
     @Autowired
     EvaluationDao evaluationDao;

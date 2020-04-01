@@ -6,6 +6,7 @@ import cn.itcast.util.humanFace.HumanFaceUtil;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import java.util.Map;
  * @date 2020/3/31
  */
 @Service
+@Transactional
 public class FaceRecognitionServiceImpl implements FaceRecognitionService {
     //判断返回结果
     public static final String AERROR_MSG = "SUCCESS";
