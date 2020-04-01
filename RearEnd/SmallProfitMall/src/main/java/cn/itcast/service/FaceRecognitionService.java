@@ -1,5 +1,7 @@
 package cn.itcast.service;
 
+import java.io.InputStream;
+
 /**
  * 人脸业务层
  * @author Kite
@@ -14,5 +16,5 @@ public interface FaceRecognitionService {
      * @return 上传结果
      * @throws Exception
      */
-    public String uploading(String image,String userId,String faceVideo) throws Exception;
+    public String uploading(String image, String userId, InputStream faceVideo) throws Exception;
 }
