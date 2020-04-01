@@ -11,15 +11,7 @@ public class AccountSettings {
     private Boolean faceRecognition;
 
     //支付密码是否存在
-    private Boolean paymentPasswords;
-
-    public Boolean getPaymentPasswords() {
-        return paymentPasswords;
-    }
-
-    public void setPaymentPasswords(Boolean paymentPasswords) {
-        this.paymentPasswords = paymentPasswords;
-    }
+    private Boolean paymentPasswordExists;
 
     public String getPaymentPassword() {
         return paymentPassword;
@@ -35,5 +27,13 @@ public class AccountSettings {
 
     public void setFaceRecognition(Boolean faceRecognition) {
         this.faceRecognition = faceRecognition;
+    }
+
+    public Boolean getPaymentPasswordExists() {
+        return paymentPasswordExists;
+    }
+
+    public void setPaymentPasswordExists(Boolean paymentPasswordExists) {
+        this.paymentPasswordExists = paymentPasswordExists;
     }
 }

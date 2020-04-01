@@ -338,18 +338,23 @@ public class UserController {
 		User users = userService.findByPhone(phone);
 		String formerPhone = (String) session.getAttribute("formerPhone");
 		if (phone.equals(formerPhone)) {
-			return new QueryResponseResult(CommonCode.same, null);  //手机号于原手机号相同
+			//验证失败,手机号于原手机号相同
+			return new QueryResponseResult(CommonCode.same, null);
 		}
 		if (users != null) {
-			return new QueryResponseResult(CommonCode.FALL_USER_REGISTER, null);    //该手机号已经存在
+			//验证失败，该手机号已经存在
+			return new QueryResponseResult(CommonCode.FALL_USER_REGISTER, null);
 		}
-		String FR = GetFourRandom.getFourRandom();  //随机验证码
+		//生成随机验证码
+		String FR = GetFourRandom.getFourRandom();
 		System.out.println("修改验证码为 " + FR);
 		String phoness=AesEncryptUtil.desEncrypt(phone);
 		boolean flag = SmsUtils.updatePhone(phoness, FR);
 		if (flag) {
-			session.setAttribute("newPhoneVerify", FR);//存入验证码session
-			session.setAttribute("newPhone", phone);//手机号存入session
+			//短信发送成功存入验证码session
+			session.setAttribute("newPhoneVerify", FR);
+			//手机号存入session
+			session.setAttribute("newPhone", phone);
 			sessionUtil.removeAttrbute(session, "passwordVerify");
 			return new QueryResponseResult(CommonCode.SUCCESS, null);
 		} else {

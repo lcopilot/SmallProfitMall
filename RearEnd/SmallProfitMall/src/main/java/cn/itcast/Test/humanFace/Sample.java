@@ -3,10 +3,17 @@ package cn.itcast.Test.humanFace;
 import com.alibaba.fastjson.JSON;
 import com.baidu.aip.face.AipFace;
 import com.baidu.aip.face.MatchRequest;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.output.ByteArrayOutputStream;
+import org.apache.ibatis.io.Resources;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.io.IOUtils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -82,7 +89,7 @@ public class Sample {
 
     }
 
-    //人脸商城
+    //人脸上传
     public void sample(AipFace client) {
         // 传入可选参数调用接口
         HashMap<String, String> options = new HashMap<String, String>();
@@ -120,17 +127,92 @@ public class Sample {
         System.out.println(res.toString(2));
 
     }
+
+    //语言校验
+    public String  voiceDetection(AipFace client) {
+        // 传入可选参数调用接口
+        HashMap<String, String> options = new HashMap<String, String>();
+        options.put("appid", "19185543");
+
+
+        // 语音校验码接口
+        JSONObject res = client.videoSessioncode( options);
+        Map map = JSON.parseObject(String.valueOf(res), Map.class);
+        String result = (String) map.get("session_id");
+        System.out.println(res.toString(2));
+        return result;
+
+
+    }
+
+    //视频活体检测
+    public void video(AipFace client ,String session, InputStream inputStream) throws IOException {
+        // 传入可选参数调用接口
+        HashMap<String, String> options = new HashMap<String, String>();
+
+        String sessionId = "110233112299822211";
+
+
+        // 参数为二进制数组
+        byte[] file = IOUtils.toByteArray(inputStream);
+        JSONObject res = client.videoFaceliveness(sessionId, file, options);
+        System.out.println(res.toString(2));
+    }
+
+
+    /**
+     * @author  李光光(编码小王子)
+     * @date    2018年6月28日 下午2:09:26
+     * @version 1.0
+     */
+        public static String getBase64FromInputStream(InputStream in) {
+            // 将图片文件转化为字节数组字符串，并对其进行Base64编码处理
+            byte[] data = null;
+            // 读取图片字节数组
+            try {
+                ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
+                byte[] buff = new byte[100];
+                int rc = 0;
+                while ((rc = in.read(buff, 0, 100)) > 0) {
+                    swapStream.write(buff, 0, rc);
+                }
+                data = swapStream.toByteArray();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return new String(Base64.encodeBase64(data));
+        }
+
+
     @Test
-    public void test(){
+    public void test() throws IOException {
         AipFace client = new AipFace(APP_ID, API_KEY, SECRET_KEY);
         String images1="";
         System.out.println(client);
         //测试人脸对比
       //  sample(client,images1,images1);
          //测试人脸检测
-        sample(client,images1);
+        //sample(client,images1);
         //人脸注册
         //uploading(client,images1,"vv");
-
+        //语音检测
+        String result = voiceDetection(client);
+        File file1 = new File("E:\\v.mp4");
+        System.out.println(file1);
+//        byte[] bytes = IOUtils.toByteArray(inputStream);
+//        String encoded = Base64.getEncoder().encodeToString(bytes);
+        InputStream input = new FileInputStream(file1);
+        System.out.println(input);
+        //视频活体检测
+        video(client,result,input);
     }
 }

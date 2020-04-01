@@ -41,10 +41,11 @@ public class AccountSettingsServiceImpl implements AccountSettingsService {
         String paymentPassword = accountSettings.getPaymentPassword();
         //判断支付密码是否设置
         if (paymentPassword == null) {
-            accountSettings.setPaymentPasswords(false);
+            accountSettings.setPaymentPasswordExists(false);
         }else {
-            accountSettings.setPaymentPasswords(true);
+            accountSettings.setPaymentPasswordExists(true);
         }
+        accountSettings.setPaymentPassword(null);
         return accountSettings;
     }
 
