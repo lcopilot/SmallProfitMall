@@ -17,5 +17,10 @@
         <select id="findBalance" parameterType="java.lang.String" resultType="java.lang.String">
                 SELECT balance FROM userMembe WHERE userId=#{userId}
         </select>
+
+        <!--注册新增初始-->
+        <insert id="addUser" parameterType="java.lang.String">
+        INSERT INTO  userMembe  (userId) VALUES (#{userId})
+    </insert>
         
 </mapper>

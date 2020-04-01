@@ -34,10 +34,6 @@
         UPDATE user SET password = #{password} WHERE phone = #{phone}
     </update>
 
-    <!--根据uid修改密码-->
-    <update id="updatePasswordUid" parameterType="java.lang.String">
-        UPDATE user SET password = #{password} WHERE uid = #{uid}
-    </update>
 
     <!--根据uid修改用户头像-->
     <update id="updatePortrait" parameterType="java.lang.String">

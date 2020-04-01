@@ -135,8 +135,10 @@ public class UserController {
 
 	/**
 	 * 注册
-	 *
-	 * @return
+	 * @param user 用户对象
+	 * @param session 传入的验证码消息
+	 * @return 返回是否成功
+	 * @throws Exception
 	 */
 	@RequestMapping("/register")
 	public QueryResponseResult register(@RequestBody User user, HttpSession session) throws Exception {
@@ -144,11 +146,18 @@ public class UserController {
 		String phone = (String) session.getAttribute("phone");
 		session.invalidate();	//销毁session
 		if (user.getVerify().equals(Verify) && user.getPhone().equals(phone)) {
-			userService.saveAccount(user);  //存入对象
-			return new QueryResponseResult(CommonCode.SUCCESS, null);//注册成功
+			//存入对象
+			Integer result = userService.saveAccount(user);
+			if (result != 3){
+				//注册失败
+				return new QueryResponseResult(CommonCode.FAIL, null);
+			}
 		} else {
-			return new QueryResponseResult(CommonCode.FAIL, null);//注册失败
+			//注册失败
+			return new QueryResponseResult(CommonCode.FAIL, null);
 		}
+		//注册成功
+		return new QueryResponseResult(CommonCode.SUCCESS,null);
 	}
 
 	/**
@@ -197,7 +206,8 @@ public class UserController {
 		session.invalidate();	//销毁session
 		if (user.getPhone().equals(phone)) {
 			if (user.getVerify().equals(passwordVerify)) {
-				String phones = AesEncryptUtil.encrypt(phone);	//加密
+				//加密手机号
+				String phones = AesEncryptUtil.encrypt(phone);
 				userService.updatePasswordPhone(phones, password);
 				return new QueryResponseResult(CommonCode.SUCCESS, null);
 			} else {
@@ -208,28 +218,6 @@ public class UserController {
 		}
 	}
 
-	/**
-	 * 根据旧密码修改密码
-	 *
-	 * @param
-	 * @return
-	 */
-	@RequestMapping("/updatePasswordUid")
-	public QueryResponseResult updatePasswordUid(@RequestBody Password password) {
-		User user = userService.findByUid(password.getUid());
-		//数据库查询密码
-		String SqlPassword = user.getPassword();
-		//用户输入的旧密码
-		String ExpiredPassword = password.getExpiredPassword();
-		//用户输入的新密码
-		String LatestPassword = password.getLatestPassword();
-		if (SqlPassword.equals(ExpiredPassword)) {
-			userService.updatePasswordUid(password.getUid(), LatestPassword);
-			return new QueryResponseResult(CommonCode.SUCCESS, null);
-		} else {
-			return new QueryResponseResult(CommonCode.FAIL, null);
-		}
-	}
 
 	/**
 	 * 根据uid修改头像
@@ -302,9 +290,12 @@ public class UserController {
 			System.out.println("修改验证码为 " + verificationCode);
 			String phoness = AesEncryptUtil.desEncrypt(phone);
 			boolean flag = SmsUtils.updatePhone(phoness, verificationCode);
+			//短信发送成功
 			if (flag) {
-				session.setAttribute("formerPhoneVerify", verificationCode);//存入验证码session
-				session.setAttribute("formerPhone", phone);//手机号存入session
+				//存入验证码session
+				session.setAttribute("formerPhoneVerify", verificationCode);
+				//手机号存入session
+				session.setAttribute("formerPhone", phone);
 				sessionUtil.removeAttrbute(session, "formerPhoneVerify");
 
 				return new QueryResponseResult(CommonCode.SUCCESS, null);

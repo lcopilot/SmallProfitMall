@@ -32,4 +32,11 @@ public interface MemberDao {
      */
     public String findBalance(@Param("userId")String userId);
 
+    /**
+     * 用户注册时候新增
+     * @param userId
+     * @return
+     */
+    public Integer addUser(@Param("userId")String userId);
+
 }

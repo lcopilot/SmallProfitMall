@@ -1,6 +1,9 @@
 package cn.itcast.service.impl;
 
+import cn.itcast.dao.AccountSettingsDao;
+import cn.itcast.dao.MemberDao;
 import cn.itcast.dao.UserDao;
+import cn.itcast.domain.accountSettings.AccountSettings;
 import cn.itcast.domain.user.Login;
 import cn.itcast.domain.user.User;
 import cn.itcast.service.UserService;
@@ -22,9 +25,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao UserDao;
 
+    @Autowired
+    private MemberDao memberDao;
 
     @Autowired
-    private Login login;
+    private AccountSettingsDao accountSettingsDao;
 
     //查询所有用户
     @Override
@@ -70,6 +75,7 @@ public class UserServiceImpl implements UserService {
     //查询返回值
     @Override
     public Login findLogin(User user) throws Exception {
+        Login login = new Login();
         login.setUid(user.getUid());
         login.setImage(user.getImage());
         login.setToken(user.getToken());
@@ -82,7 +88,7 @@ public class UserServiceImpl implements UserService {
      * @param user
      */
     @Override
-    public void saveAccount(User user) {
+    public Integer saveAccount(User user) {
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
         user.setUid(uuid);
         user.setName("smallProfit");
@@ -90,7 +96,11 @@ public class UserServiceImpl implements UserService {
         user.setBirthday("0-0-0");
         user.setImage("http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938");
         user.setSex("1");
-        UserDao.saveAccount(user);
+        Integer result = 0;
+        result = result +  UserDao.saveAccount(user);
+        result = result +accountSettingsDao.addUser(uuid);
+        result = result + memberDao.addUser(uuid);
+        return result;
     }
 
     //根据手机号码修改密码
@@ -99,11 +109,7 @@ public class UserServiceImpl implements UserService {
         UserDao.updatePasswordPhone(phone,password);
     }
 
-    //根据uid修改密码
-    @Override
-    public void updatePasswordUid(String uid,String password) {
-        UserDao.updatePasswordUid(uid,password);
-    }
+
 
     //根据uid修改用户头像
     @Override

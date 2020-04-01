@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.AccountSettingsDao">
+
+    <!--修改支付-->
+    <update id="updatePaymentPassword" parameterType="java.lang.String">
+     UPDATE userPassword SET paymentPassword = #{paymentPassword} WHERE userId=#{userId}
+    </update>
+    <!--根据用户账户设置-->
+    <select id="findAccountSettings" resultType="cn.itcast.domain.accountSettings.AccountSettings">
+        SELECT * FROM `userPassword` WHERE userId=#{userId}
+    </select>
+
+    <!--修改用户登录密码-->
+    <update id="updatePassword" parameterType="java.lang.String">
+        UPDATE user SET password = #{password} WHERE uid = #{userId}
+    </update>
+
+    <!--注册新增初始-->
+    <insert id="addUser" parameterType="java.lang.String">
+        INSERT INTO  userPassword  (userId) VALUES (#{userId})
+    </insert>
+</mapper>

@@ -7,6 +7,8 @@ import cn.itcast.response.faceRecognition.FaceRecognition;
 import cn.itcast.response.faceRecognition.FaceRecognitionResponse;
 import cn.itcast.service.FaceRecognitionService;
 import cn.itcast.util.humanFace.HumanFaceUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,7 +39,7 @@ public class FaceRecognitionController {
         return new FaceRecognitionResponse(CommonCode.SUCCESS, null);
     }
     FaceRecognition faceRecognition=new FaceRecognition();
-    faceRecognition.setResult(result);
+    faceRecognition.setResult((JSONObject) JSON.parse(result));
     return new FaceRecognitionResponse(CommonCode.FAIL, faceRecognition);
     }
 }
