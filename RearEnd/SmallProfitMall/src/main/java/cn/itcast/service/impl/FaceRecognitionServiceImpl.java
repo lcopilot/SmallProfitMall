@@ -34,7 +34,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         Map faceDetectionMap = (Map) JSON.parse(String.valueOf(faceDetectionRes));
         String faceDetectionRedis = (String)faceDetectionMap.get("error_msg");
         System.out.println(faceDetectionRes);
-        if (faceDetectionRedis==null||!faceDetectionRedis.equals(AERROR_MSG)){
+        if (!faceDetectionRedis.equals(AERROR_MSG)){
             return faceDetectionRes;
         }
         //活体检测
@@ -42,7 +42,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         System.out.println(livingBodyRes);
         Map livingBodyMap = (Map) JSON.parse(String.valueOf(livingBodyRes));
         String livingBodyRedis = (String)livingBodyMap.get("error_msg");
-        if (livingBodyRedis==null||!livingBodyRedis.equals(AERROR_MSG)){
+        if (!livingBodyRedis.equals(AERROR_MSG)){
             return livingBodyRes;
         }
         //人脸上传
@@ -50,7 +50,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         System.out.println(uploadingRes);
         Map uploadingMap = (Map) JSON.parse(String.valueOf(uploadingRes));
         String  uploadingRedis = (String)uploadingMap.get("error_msg");
-        if (uploadingRedis==null||!uploadingRedis.equals(AERROR_MSG)){
+        if (!uploadingRedis.equals(AERROR_MSG)){
             return uploadingRes;
         }
          return AERROR_MSG;
