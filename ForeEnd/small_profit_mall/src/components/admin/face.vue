@@ -96,6 +96,7 @@
           return  this.collectionPrompt="摄像头启动中...";
         }
         if(code==20190415){
+          this.faceBtnContent='面部识别中...';
           return  this.collectionPrompt="面部识别中...";
         }
         if (code==222202){
