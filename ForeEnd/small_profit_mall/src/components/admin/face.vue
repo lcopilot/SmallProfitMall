@@ -85,11 +85,11 @@
         if (code==null){
           return  this.collectionPrompt="摄像头启动中...";
         }
-        if(code=2019415){
+        if(code==20190415){
           return  this.collectionPrompt="面部识别中...";
         }
         if (code==222202){
-         return  this.collectionPrompt="未检测到人脸";
+         return  this.collectionPrompt="未检测到人脸...";
         }
         if (code==222203){
          return  this.collectionPrompt="人脸无法解析";
@@ -173,7 +173,7 @@
         this.thisContext.drawImage(this.thisVideo, 0, 0, this.videoWidth, this.videoHeight)
         // 获取图片base64链接
         let image = this.thisCanvas.toDataURL('image/png');
-        this.$emit('uploadFace', image);
+        this.$emit('upload-face', image);
       },
       //关闭摄像头
       stopNavigator() {

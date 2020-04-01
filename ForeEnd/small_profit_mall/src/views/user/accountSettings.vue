@@ -29,7 +29,7 @@
                   <el-button type="text" @click="callFace">更新人脸</el-button>
                   <el-button type="text">关闭刷脸支付</el-button>
                 </el-form-item>
-                <Face @uploadFace="uploadFace()" ref="face"></Face>
+                <Face @upload-face="uploadFace" ref="face"></Face>
               </el-form>
             </div>
           </el-card>
@@ -63,11 +63,14 @@
       //上传人脸
       uploadFace(image) {
         if (image) {
+          console.log(encryption.encrypt(image.substring(22)));
           let dataForm=new FormData();
           dataForm.append("userId",sessionStorage.getItem("uId"));
           //截取后端需要的Base64格式 并加密
-          dataForm.append("img",encryption.encrypt(image.substring(22)));
-          userApi.uploadFace().then(res => {
+          dataForm.append("image",encryption.encrypt(image.substring(22)));
+          this.$refs.face.recognitionFailure(20190415);
+          userApi.uploadFace(dataForm).then(res => {
+            console.log(res);
             if (res.success){
               this.$message({
                 message:"人脸采集成功!已上传至服务器",
@@ -81,16 +84,11 @@
             }else {
               this.$refs.face.faceLoading=false;
               this.$refs.face.faceBtnContent = '重新采集';
-              this.$refs.face.recognitionFailure();
+              this.$refs.face.recognitionFailure(JSON.parse(res.faceRecognition.result).error_code);
             }
           })
         }
       },
-      //关闭摄像头
-      stopNavigator() {
-        this.thisVideo.srcObject.getTracks()[0].stop();
-        this.cameraStatus = false;
-      }
     }
   }
 </script>

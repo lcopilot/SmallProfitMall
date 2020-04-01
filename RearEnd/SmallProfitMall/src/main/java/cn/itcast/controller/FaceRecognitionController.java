@@ -9,6 +9,7 @@ import cn.itcast.service.FaceRecognitionService;
 import cn.itcast.util.humanFace.HumanFaceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,7 +31,7 @@ public class FaceRecognitionController {
     FaceRecognitionService faceRecognitionService;
 
     @RequestMapping(value = "/uploading",method = RequestMethod.POST)
-    public FaceRecognitionResponse uploading(String image, String userId) throws Exception {
+    public FaceRecognitionResponse uploading( String image,  String userId) throws Exception {
     String result =faceRecognitionService.uploading(image,userId);
     if (result.equals("SUCCESS")){
         return new FaceRecognitionResponse(CommonCode.SUCCESS, null);
