@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.InputStream;
+
 /**
  * 人脸识别
  * @author Kite
@@ -33,7 +35,7 @@ public class FaceRecognitionController {
     FaceRecognitionService faceRecognitionService;
 
     @RequestMapping(value = "/uploading",method = RequestMethod.POST)
-    public FaceRecognitionResponse uploading( String image,  String userId ,String videoFile) throws Exception {
+    public FaceRecognitionResponse uploading(String image, String userId , InputStream videoFile) throws Exception {
     String result =faceRecognitionService.uploading(image,userId,videoFile);
     if (result.equals("SUCCESS")){
         return new FaceRecognitionResponse(CommonCode.SUCCESS, null);

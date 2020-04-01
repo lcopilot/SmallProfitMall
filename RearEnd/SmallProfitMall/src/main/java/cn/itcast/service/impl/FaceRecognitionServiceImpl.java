@@ -34,15 +34,11 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
      * @throws Exception
      */
     @Override
-    public String uploading(String image,String userId,String faceVideo) throws Exception {
+    public String uploading(String image,String userId,InputStream faceVideo) throws Exception {
         //解密人脸
         image=AesEncryptUtil.desEncrypt(image);
-        //解密视频人脸
-        faceVideo=AesEncryptUtil.desEncrypt(faceVideo);
-        //转换解密的视频为
-        InputStream faceVideos=new ByteArrayInputStream(faceVideo.getBytes());
         //人脸验证结果 验证失败 返回错误代码
-        String faceVerification = faceVerification(image,faceVideos);
+        String faceVerification = faceVerification(image,faceVideo);
         if(!faceVerification.equals(AERROR_MSG)){
             return faceVerification;
         }
