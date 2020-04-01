@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 31/03/2020 19:39:38
+ Date: 01/04/2020 19:58:22
 */
 
 SET NAMES utf8mb4;
@@ -1035,13 +1035,14 @@ CREATE TABLE `user`  (
   `token` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `birthday` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (52, 'f92b9f8f372e445fb6564cdd57aa3c3e', '小白', '++OrO3KQIS+TzybCOsQhcw==', '1', 't45eesyhFshmLr/zH6A2Dw==', 'NOCyNow6lg6D1Wibn5x0WCnRmd72oX+WfuO6bjCodHY=', ' http://img.fhxasdsada.xyz/f92b9f8f372e445fb6564cdd57aa3c3e?t=1585638018271', 'DM', '0-0-0');
-INSERT INTO `user` VALUES (53, '7c9fdfa3177042a08766aed29e7de6cd', 'MuGe', '++OrO3KQIS+TzybCOsQhcw==', '1', '7/nilpLOcaBpX6+BnSD+SQ==', 'NOCyNow6lg6D1Wibn5x0WCnRmd72oX+WfuO6bjCodHY=', ' http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585638099122', 'DM', '2017-4-15');
+INSERT INTO `user` VALUES (54, '0497326c70a447ceb815aa23743daeab', 'smallProfit', '++OrO3KQIS+TzybCOsQhcw==', '1', 'fedMKLH76FIJ74Tc9t1rkQ==', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM', '0-0-0');
+INSERT INTO `user` VALUES (55, '7c9fdfa3177042a08766aed29e7de6cd', 'MuGe', '++OrO3KQIS+TzybCOsQhcw==', '1', '7/nilpLOcaBpX6+BnSD+SQ==', NULL, ' http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585732332093', 'DM', '2019-4-15');
 
 -- ----------------------------
 -- Table structure for userAddress
@@ -1109,7 +1110,7 @@ CREATE TABLE `userFootprint`  (
 -- ----------------------------
 -- Records of userFootprint
 -- ----------------------------
-INSERT INTO `userFootprint` VALUES (10, '7c9fdfa3177042a08766aed29e7de6cd', 10006, '2020-03-26 11:19:01');
+INSERT INTO `userFootprint` VALUES (10, '7c9fdfa3177042a08766aed29e7de6cd', 10006, '2020-04-01 12:49:40');
 INSERT INTO `userFootprint` VALUES (11, '7c9fdfa3177042a08766aed29e7de6cd', 10013, '2020-03-28 11:27:53');
 INSERT INTO `userFootprint` VALUES (12, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '2020-03-30 11:10:59');
 INSERT INTO `userFootprint` VALUES (13, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '2020-03-30 17:16:24');
@@ -1142,8 +1143,8 @@ INSERT INTO `userFootprint` VALUES (36, '7c9fdfa3177042a08766aed29e7de6cd', 1003
 -- ----------------------------
 DROP TABLE IF EXISTS `userMembe`;
 CREATE TABLE `userMembe`  (
-  `balance` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `userId` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `balance` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `integral` int(11) NULL DEFAULT 0,
   `coupon` int(11) NULL DEFAULT 0,
   `membershipCard` int(11) NULL DEFAULT 0,
@@ -1153,7 +1154,10 @@ CREATE TABLE `userMembe`  (
 -- ----------------------------
 -- Records of userMembe
 -- ----------------------------
-INSERT INTO `userMembe` VALUES ('oUpx5aJiMe4t3KBTa9XVMQ==', '7c9fdfa3177042a08766aed29e7de6cd', 98000, 5, 2, 1540);
+INSERT INTO `userMembe` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', 'oUpx5aJiMe4t3KBTa9XVMQ==', 98000, 5, 2, 1540);
+INSERT INTO `userMembe` VALUES ('0497326c70a447ceb815aa23743daeab', NULL, 0, 0, 0, 0);
+INSERT INTO `userMembe` VALUES ('9c1e482cfabf48f7ab64baee9bd778fd', NULL, 0, 0, 0, 0);
+INSERT INTO `userMembe` VALUES ('f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 0, 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for userNews
@@ -1174,5 +1178,22 @@ CREATE TABLE `userNews`  (
 INSERT INTO `userNews` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '微利官方', ' http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781', 1, 1);
 INSERT INTO `userNews` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '微利助手', 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 2, 2);
 INSERT INTO `userNews` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '微利支付', 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 3, 3);
+
+-- ----------------------------
+-- Table structure for userPassword
+-- ----------------------------
+DROP TABLE IF EXISTS `userPassword`;
+CREATE TABLE `userPassword`  (
+  `userId` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `paymentPassword` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `faceRecognition` int(11) NULL DEFAULT 0
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of userPassword
+-- ----------------------------
+INSERT INTO `userPassword` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '++OrO3KQIS+TzybCOsQhcw==', 1);
+INSERT INTO `userPassword` VALUES ('9c1e482cfabf48f7ab64baee9bd778fd', NULL, 0);
+INSERT INTO `userPassword` VALUES ('f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;
