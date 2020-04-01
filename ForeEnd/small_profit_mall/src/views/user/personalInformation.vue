@@ -232,6 +232,7 @@
       //头像上传的方法
       uploadImg() {
         this.$refs.cropper.getCropBlob((data) => {
+          console.log(data);
           this.imgCrop = false;
           this.progressFlag = true;
           let formData = new FormData();
@@ -267,7 +268,6 @@
             console.log(error)
           })
         });
-
       },
       //裁剪头像
       changeUpload(file) {
@@ -275,21 +275,17 @@
         const isPNG = file.raw.type === 'image/png';
         const isBMP = file.raw.type === 'image/bmp';
         const isLt2M = file.size / 1024 / 1024 < 2;
-        console.log(file)
         if (!isJPG && !isPNG && !isBMP) {
           this.$message.error('上传图片必须是JPG/PNG/BMP 格式!');
         }
         if (!isLt2M) {
           this.$message.error('上传头像图片大小不能超过 2MB!');
         }
-        // 上传成功后将图片地址赋值给裁剪框显示图片
         if ((isJPG || isBMP || isPNG) && isLt2M) {
           this.$nextTick(() => {
-            this.$nextTick(() => {
-              this.option.img = URL.createObjectURL(file.raw);
-              this.imgCrop = true;
-            });
-          })
+            this.option.img = URL.createObjectURL(file.raw);
+            this.imgCrop = true;
+          });
         }
       },
       //获取用户信息

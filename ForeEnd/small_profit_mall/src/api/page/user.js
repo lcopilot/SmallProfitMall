@@ -137,9 +137,25 @@ export const recharge=params=>{
 };
 
 /**
- * 人脸管理
+ * 账户设置
  */
+//获取用户设置
+export const getAccountSetting=userId=>{
+  return http.requestGet('apiUrl/AccountSettingsController/findAccountSettings/'+userId)
+};
+//修改登录密码
+export const changePassword=params=>{
+  let queryString=querystring.stringify(params);
+  return http.requestPut('apiUrl/AccountSettingsController/updatePassword?'+queryString);
+};
+//修改设置支付密码
+export const changePaymentPassword=params=>{
+  let queryString=querystring.stringify(params);
+  return http.requestPut('apiUrl/AccountSettingsController/updatePaymentPassword?'+queryString);
+};
+
 //上传人脸
 export const uploadFace=(data)=>{
   return http.requestPost('apiUrl/FaceRecognitionController/uploading',data)
-}
+};
+
