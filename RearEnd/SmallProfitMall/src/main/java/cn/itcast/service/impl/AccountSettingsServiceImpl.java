@@ -5,6 +5,7 @@ import cn.itcast.domain.accountSettings.AccountSettings;
 import cn.itcast.service.AccountSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 用户账户设置
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
  * @date 2020/4/1
  */
 @Service
+@Transactional
 public class AccountSettingsServiceImpl implements AccountSettingsService {
 
     @Autowired

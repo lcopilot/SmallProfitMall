@@ -7,12 +7,14 @@ import cn.itcast.service.ProductDetailsService;
 import cn.itcast.util.cache.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
 
 //商品详细
 @Service("productDetailsServiceImpl")
+@Transactional
 public class ProductDetailsServiceImpl implements ProductDetailsService {
 
     @Autowired

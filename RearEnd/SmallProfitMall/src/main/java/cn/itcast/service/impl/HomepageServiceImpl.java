@@ -7,6 +7,7 @@ import cn.itcast.service.HomepageService;
 import cn.itcast.util.cache.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 
 
 @Service("homepageService")
+@Transactional
 public class HomepageServiceImpl implements HomepageService {
 
     @Autowired

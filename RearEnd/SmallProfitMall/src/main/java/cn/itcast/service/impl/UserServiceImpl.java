@@ -12,6 +12,7 @@ import cn.itcast.util.compressPicture.UploadPicturesUtil;
 import cn.itcast.util.encryption.AesEncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service("userService")
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -31,25 +33,40 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private AccountSettingsDao accountSettingsDao;
 
-    //查询所有用户
+    /**
+     * 查询所有用户
+     * @return
+     */
     @Override
     public List<User> findAll() {
         return UserDao.findAll();
     }
 
-    //根据用户名查询用户信息
+    /**
+     * 查询用户信息
+     * @param name 用户名
+     * @return 用户对象
+     */
     @Override
     public User findByName(String name) {
         return UserDao.findByName(name);
     }
 
-    //根据用户手机查询用 户信息
+    /**
+     * 查询用户信息
+     * @param phone 手机号
+     * @return 用户对象
+     */
     @Override
     public User findByPhone(String phone) {
         return UserDao.findByPhone(phone);
     }
 
-    //.根据uid查询用户信息
+    /**
+     *  查询用户对象
+     * @param uid 用户id
+     * @return 用户对象
+     */
     @Override
     public User findByUid(String uid) {
         return UserDao.findByUid(uid);
@@ -72,7 +89,12 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
-    //查询返回值
+    /**
+     * 查询返回值
+     * @param user 用户对象
+     * @return
+     * @throws Exception
+     */
     @Override
     public Login findLogin(User user) throws Exception {
         Login login = new Login();
