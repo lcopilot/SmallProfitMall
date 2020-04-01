@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 
@@ -35,8 +36,8 @@ public class FaceRecognitionController {
     FaceRecognitionService faceRecognitionService;
 
     @RequestMapping(value = "/uploading",method = RequestMethod.POST)
-    public FaceRecognitionResponse uploading(String image, String userId , InputStream videoFile) throws Exception {
-    String result =faceRecognitionService.uploading(image,userId,videoFile);
+    public FaceRecognitionResponse uploading(String image, String userId , MultipartFile videoFile) throws Exception {
+    String result =faceRecognitionService.uploading(image,userId,videoFile.getInputStream());
     if (result.equals("SUCCESS")){
         return new FaceRecognitionResponse(CommonCode.SUCCESS, null);
     }
