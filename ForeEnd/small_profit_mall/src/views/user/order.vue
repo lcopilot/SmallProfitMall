@@ -299,7 +299,7 @@
           this.$refs.face.faceVisible=true;
           this.$refs.face.recognitionFailure();
           setTimeout(()=>{
-            this.$refs.face.recognitionFailure(2019415);
+            this.$refs.face.recognitionFailure(20190415);
             this.$refs.face.collectionFace();
           },2500);
         }

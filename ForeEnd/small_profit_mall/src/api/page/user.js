@@ -140,6 +140,6 @@ export const recharge=params=>{
  * 人脸管理
  */
 //上传人脸
-export const uploadFace=data=>{
-  return http.requestPost('apiUrl/',data)
+export const uploadFace=(data)=>{
+  return http.requestPost('apiUrl/FaceRecognitionController/uploading',data)
 }

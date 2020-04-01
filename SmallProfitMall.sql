@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 30/03/2020 20:37:33
+ Date: 31/03/2020 19:39:38
 */
 
 SET NAMES utf8mb4;
@@ -908,6 +908,28 @@ INSERT INTO `newsContent` VALUES (29, 1, '7c9fdfa3177042a08766aed29e7de6cd', '19
 INSERT INTO `newsContent` VALUES (30, 1, '7c9fdfa3177042a08766aed29e7de6cd', '22', 1, '0', '加油', '2020-03-30 10:50:50', 0);
 
 -- ----------------------------
+-- Table structure for productAttributes
+-- ----------------------------
+DROP TABLE IF EXISTS `productAttributes`;
+CREATE TABLE `productAttributes`  (
+  `productId` int(11) NOT NULL,
+  `size` int(11) NULL DEFAULT 0,
+  `colour` int(11) NULL DEFAULT 0,
+  `combo` int(11) NULL DEFAULT 0,
+  `specification` int(11) NULL DEFAULT 0,
+  `taste` int(11) NULL DEFAULT 0,
+  `kind` int(11) NULL DEFAULT 0,
+  `version` int(11) NULL DEFAULT 0,
+  PRIMARY KEY (`productId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of productAttributes
+-- ----------------------------
+INSERT INTO `productAttributes` VALUES (10001, 0, 1, 0, 0, 0, 0, 1);
+INSERT INTO `productAttributes` VALUES (10002, 0, 1, 1, 0, 0, 0, 0);
+
+-- ----------------------------
 -- Table structure for recommend
 -- ----------------------------
 DROP TABLE IF EXISTS `recommend`;
@@ -936,6 +958,23 @@ INSERT INTO `recommend` VALUES (39, '10016', '1', '1', '1');
 INSERT INTO `recommend` VALUES (40, '10017', '1', '1', '2');
 INSERT INTO `recommend` VALUES (41, '10008', '1', '1', '2');
 INSERT INTO `recommend` VALUES (42, '10006', '1', '1', '2');
+INSERT INTO `recommend` VALUES (43, '10007', '1', '1', '2');
+INSERT INTO `recommend` VALUES (44, '10009', '1', '1', '2');
+INSERT INTO `recommend` VALUES (45, '10004', '1', '1', '1');
+INSERT INTO `recommend` VALUES (46, '10005', '1', '1', '2');
+INSERT INTO `recommend` VALUES (47, '10018', '1', '1', '2');
+INSERT INTO `recommend` VALUES (48, '10019', '1', '1', '2');
+INSERT INTO `recommend` VALUES (49, '10020', '1', '1', '2');
+INSERT INTO `recommend` VALUES (50, '10021', '1', '1', '1');
+INSERT INTO `recommend` VALUES (51, '10022', '1', '1', '1');
+INSERT INTO `recommend` VALUES (52, '10023', '1', '1', '1');
+INSERT INTO `recommend` VALUES (53, '10024', '1', '1', '1');
+INSERT INTO `recommend` VALUES (54, '10025', '1', '1', '1');
+INSERT INTO `recommend` VALUES (55, '10026', '1', '1', '2');
+INSERT INTO `recommend` VALUES (56, '10027', '1', '1', '2');
+INSERT INTO `recommend` VALUES (57, '10028', '1', '1', '2');
+INSERT INTO `recommend` VALUES (58, '10029', '1', '1', '2');
+INSERT INTO `recommend` VALUES (59, '10030', '1', '1', '2');
 
 -- ----------------------------
 -- Table structure for shoppingCart
@@ -1001,8 +1040,8 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (52, 'f92b9f8f372e445fb6564cdd57aa3c3e', '小白', '++OrO3KQIS+TzybCOsQhcw==', '1', 't45eesyhFshmLr/zH6A2Dw==', 'NOCyNow6lg6D1Wibn5x0WCnRmd72oX+WfuO6bjCodHY=', ' http://img.fhxasdsada.xyz/f92b9f8f372e445fb6564cdd57aa3c3e?t=1585387604931', 'DM', '0-0-0');
-INSERT INTO `user` VALUES (53, '7c9fdfa3177042a08766aed29e7de6cd', 'MuGe', '++OrO3KQIS+TzybCOsQhcw==', '1', '7/nilpLOcaBpX6+BnSD+SQ==', 'NOCyNow6lg6D1Wibn5x0WCnRmd72oX+WfuO6bjCodHY=', ' http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781', 'DM', '2017-4-15');
+INSERT INTO `user` VALUES (52, 'f92b9f8f372e445fb6564cdd57aa3c3e', '小白', '++OrO3KQIS+TzybCOsQhcw==', '1', 't45eesyhFshmLr/zH6A2Dw==', 'NOCyNow6lg6D1Wibn5x0WCnRmd72oX+WfuO6bjCodHY=', ' http://img.fhxasdsada.xyz/f92b9f8f372e445fb6564cdd57aa3c3e?t=1585638018271', 'DM', '0-0-0');
+INSERT INTO `user` VALUES (53, '7c9fdfa3177042a08766aed29e7de6cd', 'MuGe', '++OrO3KQIS+TzybCOsQhcw==', '1', '7/nilpLOcaBpX6+BnSD+SQ==', 'NOCyNow6lg6D1Wibn5x0WCnRmd72oX+WfuO6bjCodHY=', ' http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585638099122', 'DM', '2017-4-15');
 
 -- ----------------------------
 -- Table structure for userAddress
@@ -1089,7 +1128,7 @@ INSERT INTO `userFootprint` VALUES (25, '7c9fdfa3177042a08766aed29e7de6cd', 1002
 INSERT INTO `userFootprint` VALUES (26, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '2020-03-26 11:17:53');
 INSERT INTO `userFootprint` VALUES (27, '7c9fdfa3177042a08766aed29e7de6cd', 10026, '2020-03-26 10:44:33');
 INSERT INTO `userFootprint` VALUES (28, '7c9fdfa3177042a08766aed29e7de6cd', 10025, '2020-03-30 11:08:57');
-INSERT INTO `userFootprint` VALUES (29, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '2020-03-30 11:10:48');
+INSERT INTO `userFootprint` VALUES (29, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '2020-03-31 19:37:46');
 INSERT INTO `userFootprint` VALUES (30, '7c9fdfa3177042a08766aed29e7de6cd', 10004, '2020-03-25 12:50:16');
 INSERT INTO `userFootprint` VALUES (31, '7c9fdfa3177042a08766aed29e7de6cd', 10011, '2020-03-25 12:47:44');
 INSERT INTO `userFootprint` VALUES (32, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '2020-03-30 10:13:02');
@@ -1103,18 +1142,18 @@ INSERT INTO `userFootprint` VALUES (36, '7c9fdfa3177042a08766aed29e7de6cd', 1003
 -- ----------------------------
 DROP TABLE IF EXISTS `userMembe`;
 CREATE TABLE `userMembe`  (
-  `balance` double(15, 2) NULL DEFAULT 0.00,
+  `balance` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `userId` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `integral` int(11) UNSIGNED ZEROFILL NULL DEFAULT 00000000000,
-  `coupon` int(11) UNSIGNED ZEROFILL NULL DEFAULT NULL,
-  `membershipCard` int(11) UNSIGNED ZEROFILL NULL DEFAULT 00000000000,
-  `growthValue` int(11) UNSIGNED ZEROFILL NULL DEFAULT 00000000000
+  `integral` int(11) NULL DEFAULT 0,
+  `coupon` int(11) NULL DEFAULT 0,
+  `membershipCard` int(11) NULL DEFAULT 0,
+  `growthValue` int(11) NULL DEFAULT 0
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userMembe
 -- ----------------------------
-INSERT INTO `userMembe` VALUES (NULL, '7c9fdfa3177042a08766aed29e7de6cd', NULL, NULL, NULL, NULL);
+INSERT INTO `userMembe` VALUES ('oUpx5aJiMe4t3KBTa9XVMQ==', '7c9fdfa3177042a08766aed29e7de6cd', 98000, 5, 2, 1540);
 
 -- ----------------------------
 -- Table structure for userNews
