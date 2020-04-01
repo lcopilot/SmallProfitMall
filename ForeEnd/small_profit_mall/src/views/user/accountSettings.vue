@@ -153,6 +153,10 @@
               this.$refs.face.faceBtnContent = '重新采集';
               this.$refs.face.recognitionFailure(res.faceRecognition.result.error_code);
             }
+          }).catch(error=>{
+            console.log(error);
+            this.$refs.face.faceLoading = false;
+            this.$refs.face.faceBtnContent = '重新采集';
           })
         }
       },
