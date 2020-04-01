@@ -1,5 +1,6 @@
 package cn.itcast.response.faceRecognition;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
@@ -13,5 +14,6 @@ import org.springframework.stereotype.Component;
 @ToString
 @Component
 public class FaceRecognition {
-    private String Result;
+
+    private JSONObject Result;
 }

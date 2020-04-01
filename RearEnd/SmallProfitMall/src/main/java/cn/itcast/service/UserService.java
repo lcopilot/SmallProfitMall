@@ -28,13 +28,10 @@ public interface UserService {
     public Login findLogin(User user) throws Exception;
 
     // 保存帐户信息
-    public void saveAccount(User user);
+    public Integer saveAccount(User user);
 
     //根据手机号码修改密码
     public void updatePasswordPhone (String phone,String password);
-
-    //根据uid修改密码
-    public void updatePasswordUid(String uid,String password);
 
     //根据uid修改用户头像
     public String updatePortrait(InputStream Images, String uid) throws IOException;
