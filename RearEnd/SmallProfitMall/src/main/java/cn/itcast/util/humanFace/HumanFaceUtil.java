@@ -1,13 +1,18 @@
 package cn.itcast.util.humanFace;
 
+import com.alibaba.fastjson.JSON;
 import com.baidu.aip.face.AipFace;
 import com.baidu.aip.face.FaceVerifyRequest;
 import com.baidu.aip.face.MatchRequest;
+import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Kite
@@ -45,7 +50,7 @@ public class HumanFaceUtil {
 
     /**
      * 活体检测
-     * @param images 传入的用户图片
+     * @param images 用户人脸
      */
     public String livingBody(String images) {
         String image = images;
@@ -56,6 +61,36 @@ public class HumanFaceUtil {
         return  res.toString(2);
     }
 
+    /**
+     *  语音校验 用于视频活体检测
+     * @return 验证id
+     */
+    public String  voiceDetection() {
+        // 传入可选参数调用接口
+        HashMap<String, String> options = new HashMap<String, String>();
+        options.put("appid", "19185543");
+        // 语音校验码接口
+        JSONObject res = client.videoSessioncode( options);
+        Map map = JSON.parseObject(String.valueOf(res), Map.class);
+        String result = (String) map.get("session_id");
+        return result;
+    }
+
+    /**
+     * 视频活体检测
+     * @param sessionIds 语言验证id
+     * @param inputStream 视频流
+     * @throws IOException
+     */
+    public String  videoValidation(String sessionIds, InputStream inputStream) throws IOException {
+        // 传入可选参数调用接口
+        HashMap<String, String> options = new HashMap<String, String>();
+        String sessionId = sessionIds;
+        // 参数为二进制数组 视频流
+        byte[] file = IOUtils.toByteArray(inputStream);
+        JSONObject res = client.videoFaceliveness(sessionId, file, options);
+        return  res.toString(2);
+    }
 
     /**
      * 人脸上传

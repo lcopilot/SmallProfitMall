@@ -33,8 +33,8 @@ public class FaceRecognitionController {
     FaceRecognitionService faceRecognitionService;
 
     @RequestMapping(value = "/uploading",method = RequestMethod.POST)
-    public FaceRecognitionResponse uploading( String image,  String userId) throws Exception {
-    String result =faceRecognitionService.uploading(image,userId);
+    public FaceRecognitionResponse uploading( String image,  String userId ,String videoFile) throws Exception {
+    String result =faceRecognitionService.uploading(image,userId,videoFile);
     if (result.equals("SUCCESS")){
         return new FaceRecognitionResponse(CommonCode.SUCCESS, null);
     }
