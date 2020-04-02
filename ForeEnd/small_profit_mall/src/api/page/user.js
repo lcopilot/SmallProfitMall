@@ -158,4 +158,8 @@ export const changePaymentPassword=params=>{
 export const uploadFace=(data)=>{
   return http.requestPost('apiUrl/FaceRecognitionController/uploading',data)
 };
+//关闭刷脸支付
+export const shutDownFace=userId=>{
+  return http.requestDelete('apiUrl/FaceRecognitionController/deleteFace/'+userId)
+};
 

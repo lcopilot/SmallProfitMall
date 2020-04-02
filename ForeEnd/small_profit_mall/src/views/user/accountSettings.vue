@@ -48,7 +48,8 @@
                   {{faceRecognition?'已开启':'未开启'}}
                   <el-button type="text" @click="callFace">{{faceRecognition?'更新人脸':'开启'}}
                   </el-button>
-                  <el-button type="text" v-if="faceRecognition">关闭刷脸支付</el-button>
+                  <el-button type="text" v-if="faceRecognition" @click="shutDownFace()">关闭刷脸支付
+                  </el-button>
                 </el-form-item>
                 <Face @upload-face="uploadFace" ref="face"></Face>
               </el-form>
@@ -94,14 +95,14 @@
         if (!regular.test(this.accountForm.password)) {
           return this.$message.warning("请输入正确的密码格式,6-18位支持(!@#$%^&*())")
         }
-        let params={
-          userId:sessionStorage.getItem("uId"),
-          password:encryption.encrypt(this.accountForm.password)
+        let params = {
+          userId: sessionStorage.getItem("uId"),
+          password: encryption.encrypt(this.accountForm.password)
         };
         userApi.changePassword(params).then(res => {
           if (res.success) {
             this.$message.success("登录密码修改成功!")
-            this.passwordVisible=false;
+            this.passwordVisible = false;
           }
         });
       },
@@ -111,14 +112,14 @@
         if (!regular.test(this.accountForm.paymentPassword)) {
           return this.$message.warning("请输入正确的6位支付密码!")
         }
-        let params={
-          userId:sessionStorage.getItem("uId"),
-          paymentPassword:encryption.encrypt(this.accountForm.paymentPassword)
+        let params = {
+          userId: sessionStorage.getItem("uId"),
+          paymentPassword: encryption.encrypt(this.accountForm.paymentPassword)
         };
         userApi.changePaymentPassword(params).then(res => {
           if (res.success) {
             this.$message.success("支付密码修改成功!")
-            this.paymentPasswordVisible=false;
+            this.paymentPasswordVisible = false;
           }
         });
       },
@@ -128,7 +129,7 @@
         this.$refs.face.recognitionFailure();
       },
       //上传人脸
-      uploadFace(videoFile,image) {
+      uploadFace(videoFile, image) {
         if (videoFile && image) {
           let dataForm = new FormData();
           dataForm.append("userId", sessionStorage.getItem("uId"));
@@ -153,13 +154,30 @@
               this.$refs.face.faceBtnContent = '重新采集';
               this.$refs.face.recognitionFailure(res.faceRecognition.result.error_code);
             }
-          }).catch(error=>{
+          }).catch(error => {
             console.log(error);
             this.$refs.face.faceLoading = false;
             this.$refs.face.faceBtnContent = '重新采集';
-            this.$refs.face.recognitionFailure(114);
           })
         }
+      },
+      //关闭刷脸支付
+      shutDownFace() {
+        this.$confirm('确定关闭刷脸支付吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }).then(() => {
+          userApi.shutDownFace(sessionStorage.getItem("uId")).then(res => {
+            if (res.success){
+              this.$message({
+                type: 'success',
+                message: '刷脸支付已关闭!'
+              });
+              this.getAccountSetting();
+            }
+          });
+        })
       },
       //获取账户设置
       getAccountSetting() {

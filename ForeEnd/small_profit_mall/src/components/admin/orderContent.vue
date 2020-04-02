@@ -47,17 +47,17 @@
               </div>
             </td>
             <td style="width: 12%">
-              <div style="margin-top:10%;font-size:14px;padding-left: 10%;padding-right: 10%">
+              <div class="order_recipient">
                 {{order.recipient}}
               </div>
             </td>
             <td style="width: 12%">
-              <div style="margin-top:10%;font-size:13px;padding-left: 10%;padding-right: 10%;color: red">
+              <div class="order_recipient" style="font-size:13px;color: red">
                 ￥{{order.amount}}
               </div>
             </td>
             <td style="width: 12%">
-              <div style="margin-top:10%;font-size:14px;padding-left: 10%;padding-right: 10%">
+              <div class="order_recipient">
                 {{order.status=1?'待签收':'待付款'}}
               </div>
             </td>
@@ -221,6 +221,13 @@
     border: 1px solid #dcdfe6;
     vertical-align: top;
 
+  }
+
+  .order_recipient {
+    margin-top: 10%;
+    font-size: 14px;
+    padding-left: 10%;
+    padding-right: 10%
   }
 
   table {
