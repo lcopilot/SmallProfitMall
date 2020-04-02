@@ -276,6 +276,9 @@
       readOnly(status) {
         this.isFilter = true;
         let messArr = [];
+        this.messageList.forEach((message) => {
+          message.sign = false;
+        });
         if (status == 0) {
           this.messagePaging.state = 0;
           this.filterContent = '仅已读';
