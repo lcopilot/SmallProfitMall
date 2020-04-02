@@ -117,7 +117,7 @@
         };
         userApi.changePaymentPassword(params).then(res => {
           if (res.success) {
-            this.$message.success("登录密码修改成功!")
+            this.$message.success("支付密码修改成功!")
             this.paymentPasswordVisible=false;
           }
         });
@@ -157,6 +157,7 @@
             console.log(error);
             this.$refs.face.faceLoading = false;
             this.$refs.face.faceBtnContent = '重新采集';
+            this.$refs.face.recognitionFailure(114);
           })
         }
       },
