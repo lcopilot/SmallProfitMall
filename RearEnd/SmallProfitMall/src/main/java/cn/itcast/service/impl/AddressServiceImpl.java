@@ -15,7 +15,12 @@ import java.util.List;
 public class AddressServiceImpl implements AddressService {
     @Autowired
     AddressDao addressDao;
-    //根据id查询
+
+    /**
+     * 查询地址
+     * @param userId 用户id
+     * @return
+     */
     @Override
     public List<Address> findById(String userId) {
         List<Address> addresses=addressDao.findById(userId);
@@ -28,36 +33,57 @@ public class AddressServiceImpl implements AddressService {
         return addresses;
     }
 
-    //添加
+    /**
+     * 新增地址
+     * @param address 地址对象
+     * @return
+     */
     @Override
     public int addAddress(Address address) {
         Address redisAddress = this.defaults(address);
         return addressDao.addAddress(redisAddress);
     }
 
-    //跟新地址
+    /**
+     * 跟新地址
+     * @param address 地址对象
+     * @return
+     */
     @Override
     public int updateAddress(Address address) {
         Address redisAddress = this.defaults(address);
         return addressDao.updateAddress(redisAddress);
     }
 
-    //更具addressId刪除地址
+    /**
+     * 刪除地址
+     * @param userId 用户id
+     * @param addressId 地址id
+     * @param defaults 是否为默认地址
+     * @return
+     */
     @Override
     public int deleteAddress(String userId, int addressId,Boolean defaults) {
        int redis = addressDao.deleteAddress(addressId);
+       //删除的地址为默认地址 设置当前地址的
         if (defaults){
             List<Address> addresses=addressDao.findById(userId);
-            if (addresses!=null){
+            if (addresses.size()>1){
                 addresses.get(0).setDefaults(true);
-                int rediss= addressDao.updateDefaults(addresses.get(0).getAddressId(),addresses.get(0).getDefaults());
-                return rediss;
+                int result= addressDao.updateDefaults(addresses.get(0).getAddressId(),addresses.get(0).getDefaults());
+                return result;
             }
         }
         return redis;
     }
 
-    //修改默認地址
+    /**
+     * 修改默認地址
+     * @param addressId 地址地
+     * @param userId 用户id
+     * @param defaults 是否为默认地址
+     * @return
+     */
     @Override
     public int updateDefaults(int addressId,String userId, Boolean defaults) {
         if (defaults){
@@ -80,21 +106,26 @@ public class AddressServiceImpl implements AddressService {
         }
     }
 
-    //添加修改方法转换存入格式方法
+    /**
+     * 添加修改方法转换存入格式方法
+     * @param address
+     * @return
+     */
     public Address defaults(Address address){
-        String[] areaCodes=address.getAreaCode();   //存储区域代码格式转换
+        //存储区域代码格式转换
+        String[] areaCodes=address.getAreaCode();
         String areaCode="";
         for (String s : areaCodes){
             areaCode = areaCode+s+",";
         }
         Boolean defaults=address.getDefaults();
-        if (defaults==true){        //修改默认地址
+        //修改默认地址
+        if (defaults==true){
             List defaultss= addressDao.findByIdDefaults(address.getUserId(),true);
             if (defaultss.size()>0){
                 addressDao.updateFindDefaults(address.getUserId(),false);
             }
         }
-       //  int a=1/0;
         address.setAreaCodes(areaCode);
         return address;
     }
