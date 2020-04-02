@@ -25,13 +25,14 @@
         update userAddress set defaults=#{defaults} where userId=#{userId}
     </update>
 
-    <!--跟新地址-->
+    <!--更新新地址-->
     <update id="updateAddress" parameterType="cn.itcast.domain.address.Address">
         update userAddress
         set
         name=#{name},areas=#{areas},detailedAddress=#{detailedAddress},
         phone=#{phone},email=#{email},areaCodes=#{areaCodes},defaults=#{defaults},
         alias=#{alias}
+        WHERE
         addressId=#{addressId}
     </update>
 
