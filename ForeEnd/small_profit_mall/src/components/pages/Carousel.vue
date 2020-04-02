@@ -135,7 +135,6 @@
         sessionStorage.clear();
         this.$router.push("/login");
       },
-
       //获取常用功能
       getCommonFunctionsList() {
         homeApi.getCommonFunctionsList().then(res => {
