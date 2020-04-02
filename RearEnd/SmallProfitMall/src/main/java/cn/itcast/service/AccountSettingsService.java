@@ -18,6 +18,14 @@ public interface AccountSettingsService {
     public Integer updatePaymentPassword(String userId ,String paymentPassword);
 
     /**
+     * 修改人脸
+     * @param userId
+     * @param faceRecognition
+     * @return
+     */
+    public Integer updateFaceRecognition(String userId ,String faceToken, Integer faceRecognition);
+
+    /**
      * 查询用户账户设置
      * @param userId 用户id
      * @return 用户账户设置信息

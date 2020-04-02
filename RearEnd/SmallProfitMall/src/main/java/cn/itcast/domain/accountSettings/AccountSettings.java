@@ -13,6 +13,16 @@ public class AccountSettings {
     //支付密码是否存在
     private Boolean paymentPasswordExists;
 
+    private String faceToken;
+
+    public String getFaceToken() {
+        return faceToken;
+    }
+
+    public void setFaceToken(String faceToken) {
+        this.faceToken = faceToken;
+    }
+
     public String getPaymentPassword() {
         return paymentPassword;
     }

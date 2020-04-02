@@ -17,4 +17,11 @@ public interface FaceRecognitionService {
      * @throws Exception
      */
     public String uploading(String image, String userId, InputStream faceVideo) throws Exception;
+
+    /**
+     * 删除人脸
+     * @param userId 用户io
+     * @return 删除结果
+     */
+    public String deleteFace(String userId) throws Exception;
 }
