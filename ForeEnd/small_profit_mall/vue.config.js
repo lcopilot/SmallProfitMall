@@ -17,15 +17,37 @@ module.exports = {
         //是否跨域
         changeOrigin: true,
 
-
       }
     }
   },
 
+  /**
+   * svg的使用
+   * @param config
+   */
+
   chainWebpack: config => {
     config.module
-      .rule('svg-sprite')
-      .use('svgo-loader')
-      .loader('svgo-loader')
+    .rule('svg-sprite')
+    .use('svgo-loader')
+    .loader('svgo-loader')
+  },
+
+  /**
+   * autoprefixer 在项目编译的时候，会根据 loader 的规则编译相应的 CSS。
+   * Vue-Cli 创建的项目，默认只处理了 .vue 文件中的 CSS，
+   * 对于直接 import 引入的样式，需要另外配置 loader 规则。
+   */
+  css: {
+    loaderOptions: {
+      css: {
+        // 这里的选项会传递给 css-loader
+        importLoaders: 1,
+      },
+      less: {
+        // 这里的选项会传递给 postcss-loader
+        importLoaders: 1,
+      }
+    }
   }
 }
