@@ -23,11 +23,11 @@
                 <el-table-column
                     type="selection"
                     :selectable='changeStateC'
-                    width="55">
+                    min-width="4%">
                 </el-table-column>
                 <el-table-column
                     label="商品"
-                    width="500">
+                    min-width="45%">
                   <template slot-scope="product">
                     <el-row :gutter="20">
                       <el-col :span="5">
@@ -61,7 +61,7 @@
                     label="单价"
                     prop="price"
                     sortable
-                    width="130"
+                    min-width="10%"
                     column-key="date">
                   <template slot-scope="product">
                     ￥<span class="cart_product_price">
@@ -71,7 +71,7 @@
                 </el-table-column>
                 <el-table-column
                     label="数量"
-                    width="180">
+                    min-width="13%">
                   <template slot-scope="product">
                     <el-input-number v-model="product.row.quantity" size="mini" :min="1"
                                      :max="99" @change="quantityChange(product.row.quantity,product.row.shoppingCartId)"/>
@@ -79,7 +79,7 @@
                 </el-table-column>
                 <el-table-column
                     label="小计"
-                    width="120">
+                    min-width="10%">
                   <template slot-scope="product">
                     ￥<span class="cart_product_price">
                     {{(((product.row.productPrice)*100)*product.row.quantity)/100}}
@@ -89,7 +89,7 @@
                 <el-table-column
                     label="操作"
                     show-overflow-tooltip
-                    width="120">
+                    min-width="10%">
                   <template slot-scope="product">
                     <el-button
                         type="danger"
@@ -100,7 +100,7 @@
                   </template>
                 </el-table-column>
                 <el-table-column
-                    width="80">
+                    min-width="8%">
                   <template slot-scope="product">
                     <div style="padding-top: 30%">
                       <!-- 已收藏就不显示 待完成-->
@@ -418,8 +418,17 @@
     max-height: 65px;
     z-index: 2000;
     position: fixed;
-    width: 80.7%;
     bottom: 0px;
+  }
+  @media all and (min-width:0){
+    .cart_footer{
+      width: 80.7%;
+    }
+  }
+  @-moz-document url-prefix() {
+    .cart_footer{
+      width: 80.2%;
+    }
   }
 
   #sCart .cart_product_total_price1 {
