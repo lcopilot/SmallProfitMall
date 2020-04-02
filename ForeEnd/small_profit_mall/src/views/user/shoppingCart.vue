@@ -93,10 +93,11 @@
                   <template slot-scope="product">
                     <el-button
                         type="danger"
-                        :disabled="product.row.productInventory==0"
+                        v-if="product.row.productInventory!=0"
                         @click="buyProduct(product.row.productId)">
                       立即购买
                     </el-button>
+                    <el-button type="text" v-if="product.row.productInventory==0">暂时缺货</el-button>
                   </template>
                 </el-table-column>
                 <el-table-column
