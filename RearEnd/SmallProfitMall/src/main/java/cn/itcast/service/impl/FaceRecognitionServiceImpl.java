@@ -54,7 +54,6 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         }
         //人脸上传
         JSONObject uploadingRes =humanFaceUtil.uploading(image,userId);
-
         String  uploadingRedis = uploadingRes.getString("error_msg");
         if (!uploadingRedis.equals(AERROR_MSG)){
             JSONObject  uploadingError = new JSONObject();
@@ -99,12 +98,11 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
     public String faceVerification(String image , InputStream faceVideo) throws IOException {
         //人脸检测
         JSONObject faceDetectionRes = humanFaceUtil.faceDetection(image);
-        Map faceDetectionMap = (Map) JSON.parse(String.valueOf(faceDetectionRes));
         //人脸检测结果
-        String faceDetectionRedis = (String)faceDetectionMap.get("error_msg");
+        String faceDetectionRedis =faceDetectionRes.getString("error_msg");
         if (!faceDetectionRedis.equals(AERROR_MSG)){
             JSONObject faceError = new JSONObject();
-            faceError.put("error_code", faceDetectionMap.get("error_code"));
+            faceError.put("error_code", faceDetectionRes.getString("error_code"));
             return faceError.toString(2);
         }
         //取检测返回可信度
