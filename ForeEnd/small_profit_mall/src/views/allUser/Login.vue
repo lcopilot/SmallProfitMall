@@ -209,10 +209,10 @@
               checkPass: '',
               verify: ''
             };
-            registerFormParameter.password = encryption.encrypt(this.registerForm.password);
-            registerFormParameter.checkPass = encryption.encrypt(this.registerForm.checkPass);
-            registerFormParameter.phone = encryption.encrypt(this.registerForm.phone);
-            registerFormParameter.verify = this.registerForm.verify;
+            registerFormParameter.password = encryption.encrypt(this.registerForm.password.replace(/\s+/g,""));
+            registerFormParameter.checkPass = encryption.encrypt(this.registerForm.checkPass.replace(/\s+/g,""));
+            registerFormParameter.phone = encryption.encrypt(this.registerForm.phone.replace(/\s+/g,""));
+            registerFormParameter.verify = this.registerForm.verify.replace(/\s+/g,"");
             userApi.register(registerFormParameter)
             .then(res => {
               if (res.success) {
@@ -233,7 +233,7 @@
         if ((/^1[34578]\d{9}$/.test(this.registerForm.phone))) {
           this.GetCode();
           let phone = {
-            "phone": encryption.encrypt(this.registerForm.phone),
+            "phone": encryption.encrypt(this.registerForm.phone.replace(/\s+/g,"")),
           };
           userApi.getPhone_Code(phone).then(res => {
             if (res.success) {
@@ -278,6 +278,7 @@
           }
         }, 1000)
       },
+      //登录
       login(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {

@@ -47,24 +47,26 @@
                   </el-col>
                 </el-row>
                 <el-collapse class="order_more_address">
-                  <el-collapse-item title="更多地址">
-                    <a>
+                  <el-collapse-item title="更多地址" @click.native="moreAddress()">
+                    <a v-for="address in addressList">
                       <el-row :gutter="10">
                         <el-col :span="2">
                           <el-tag type="success" size="mini" effect="dark">
-                            学校地址
+                            {{address.alias}}
                           </el-tag>
                         </el-col>
                         <el-col :span="2">
-                          <div class="orders_address">方鸿鑫递的时候</div>
+                          <div class="orders_address">{{address.name}}</div>
                         </el-col>
-                        <el-col :span="14">
-                          <div class="orders_address">湖南 长沙市 天心区 暮云街道
-                            中意三路122号(红星南北大楼西北)湖南科技职业学院(暮云...
+                        <el-col :span="12">
+                          <div class="orders_address">
+                            {{address.areas}} {{address.detailedAddress}}
                           </div>
                         </el-col>
-                        <el-col :span="3">
-                          <div class="orders_address">153****5410</div>
+                        <el-col :span="5">
+                          <div class="orders_address">
+                            {{fuzzyPhone(address.phone)}}
+                          </div>
                         </el-col>
                         <el-col :span="3">
                           <el-button type="text" class="orders_address" style="margin-top: -5px">
@@ -73,31 +75,7 @@
                         </el-col>
                       </el-row>
                     </a>
-                    <a>
-                      <el-row :gutter="10">
-                        <el-col :span="2">
-                          <el-tag type="success" size="mini" effect="dark">
-                            学校地址
-                          </el-tag>
-                        </el-col>
-                        <el-col :span="2">
-                          <div class="orders_address">方鸿鑫递的时候</div>
-                        </el-col>
-                        <el-col :span="14">
-                          <div class="orders_address">湖南 长沙市 天心区 暮云街道
-                            中意三路122号(红星南北大楼西北)湖南科技职业学院(暮云...
-                          </div>
-                        </el-col>
-                        <el-col :span="3">
-                          <div class="orders_address">153****5410</div>
-                        </el-col>
-                        <el-col :span="3">
-                          <el-button type="text" class="orders_address" style="margin-top: -5px">
-                            编辑
-                          </el-button>
-                        </el-col>
-                      </el-row>
-                    </a>
+                    <br/>
                   </el-collapse-item>
                 </el-collapse>
                 <addressManagement ref="addressManagement" :isOrder="true"/>
@@ -263,6 +241,8 @@
     components: {addressManagement, Face},
     data() {
       return {
+        //地址数据
+        addressList: [],
         //支付方式
         paymentMethod: "1",
         //快递类型
@@ -320,11 +300,16 @@
           }
         })
       },
+      moreAddress() {
+        this.addressList = this.$refs.addressManagement.addressList;
+      },
+      fuzzyPhone(phone) {
+        let newPhone = String(phone).slice(0, 3) + "*".repeat(6)
+            + String(phone).slice(9, String(phone).length);
+        return newPhone.slice(0, 11)
+      }
     },
 
-    created() {
-
-    }
   }
 </script>
 

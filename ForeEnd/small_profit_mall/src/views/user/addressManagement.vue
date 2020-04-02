@@ -65,7 +65,7 @@
               </div>
             </div>
           </el-card>
-          <el-dialog  v-if="isOrder" :title="editBtn==false ? '新增收货地址':'修改收货地址'" :visible.sync="dialogFormVisible" @close="cancel">
+          <el-dialog  :title="editBtn==false ? '新增收货地址':'修改收货地址'" :visible.sync="dialogFormVisible" @close="cancel">
             <div class="address_add_div">
               温馨提示:*号为必填哦~
             </div>
@@ -149,7 +149,7 @@
     props:{
       isOrder:{
         type:Boolean,
-        required:true,
+        required:false,
         defaults:false,
       }
     },
@@ -274,7 +274,6 @@
             type: "warning"
           })
         }
-
       },
       //编辑按钮调用的方法
       editAddress(index) {
@@ -413,10 +412,10 @@
         userApi.getAddress(sessionStorage.getItem("uId")).then(
             res => {
               if (res.success) {
-                this.addressList = res.queryResult.list;
+               this.addressList = res.queryResult.list;
               }
             }
-        )
+        );
       },
       //地址级联选择器变化时调用的方法
       handleChange(value) {
