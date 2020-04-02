@@ -92,6 +92,9 @@
     methods: {
       //识别采集失败提示语
       recognitionFailure(code){
+        if (code==114){
+          return  this.collectionPrompt="录入失败,请重新录入";
+        }
         if (code==null){
           return  this.collectionPrompt="摄像头启动中...";
         }
@@ -103,13 +106,19 @@
          return  this.collectionPrompt="未检测到人脸...";
         }
         if (code==222203){
-         return  this.collectionPrompt="人脸无法解析";
+         return  this.collectionPrompt="人脸无法解析...";
         }
-        if (code==223114){
-         return  this.collectionPrompt="人脸模糊";
+        if (code==223116 || code==223114){
+          return  this.collectionPrompt="人脸模糊...";
         }
-        if (code==223114){
-         return  this.collectionPrompt="人脸模糊";
+        if (code==223115){
+          return  this.collectionPrompt="请保证环境光线柔和...";
+        }
+        if (code==223120 || code==30000){
+         return  this.collectionPrompt="活体检测失败...";
+        }
+        if (code==223102){
+         return  this.collectionPrompt="该用户已与其他账号绑定...";
         }
 
       },
