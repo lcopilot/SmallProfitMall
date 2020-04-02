@@ -18,11 +18,25 @@ public interface AccountSettingsDao {
     public Integer updatePaymentPassword(@Param("userId")String userId ,@Param("paymentPassword") String paymentPassword);
 
     /**
+     * 修改人脸
+     * @param userId
+     * @param faceRecognition
+     * @return
+     */
+    public Integer updateFaceRecognition(@Param("userId")String userId,@Param("faceToken")String faceToken,@Param("faceRecognition") Integer faceRecognition);
+
+    /**
      * 查询用户账户设置
      * @param userId 用户id
      * @return 用户账户设置信息
      */
     public AccountSettings findAccountSettings(@Param("userId")String userId );
+
+    /**
+     * setAccount
+     * @param userId
+     * @return
+     */
 
     /**
      * 修改用户登录密码

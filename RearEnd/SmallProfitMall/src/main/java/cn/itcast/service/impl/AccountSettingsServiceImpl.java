@@ -3,6 +3,7 @@ package cn.itcast.service.impl;
 import cn.itcast.dao.AccountSettingsDao;
 import cn.itcast.domain.accountSettings.AccountSettings;
 import cn.itcast.service.AccountSettingsService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,18 @@ public class AccountSettingsServiceImpl implements AccountSettingsService {
     }
 
     /**
+     *  修改人脸状态
+     * @param userId
+     * @param faceRecognition
+     * @return
+     */
+    @Override
+    public Integer updateFaceRecognition(String userId ,String faceToken, Integer faceRecognition) {
+        return accountSettingsDao.updateFaceRecognition(userId,faceToken,faceRecognition);
+    }
+
+
+    /**
      * 查询用户信息
      * @param userId 用户id
      * @return 用户设置信息
@@ -40,12 +53,13 @@ public class AccountSettingsServiceImpl implements AccountSettingsService {
        AccountSettings accountSettings = accountSettingsDao.findAccountSettings(userId);
         String paymentPassword = accountSettings.getPaymentPassword();
         //判断支付密码是否设置
-        if (paymentPassword == null) {
+        if (paymentPassword == null || paymentPassword.equals("")) {
             accountSettings.setPaymentPasswordExists(false);
         }else {
             accountSettings.setPaymentPasswordExists(true);
         }
         accountSettings.setPaymentPassword(null);
+        accountSettings.setFaceToken(null);
         return accountSettings;
     }
 

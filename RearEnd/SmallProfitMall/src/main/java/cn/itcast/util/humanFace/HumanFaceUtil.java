@@ -26,6 +26,8 @@ public class HumanFaceUtil {
     public static final String API_KEY = "C9XXG5MPrF2EyFjMDKqUGi4P";
     public static final String SECRET_KEY = "PQI8COHGxNOWyu1ZNsTuXY6oCTzggb5M";
 
+    //设置用户组
+    public static final String  GROUPID = "payment";
     AipFace client =new AipFace(APP_ID, API_KEY, SECRET_KEY);
 
     /**
@@ -53,13 +55,13 @@ public class HumanFaceUtil {
      * 图片活体检测
      * @param images 用户人脸
      */
-    public String livingBody(String images) {
+    public JSONObject livingBody(String images) {
         String image = images;
         FaceVerifyRequest req = new FaceVerifyRequest(image, "BASE64");
         ArrayList<FaceVerifyRequest> list = new ArrayList<FaceVerifyRequest>();
         list.add(req);
         JSONObject res = client.faceverify(list);
-        return  res.toString(2);
+        return  res;
     }
 
     /**
@@ -99,7 +101,7 @@ public class HumanFaceUtil {
      * @param userIds 传入的用户id
      * @return
      */
-    public String uploading(String images, String userIds) {
+    public JSONObject uploading(String images, String userIds) {
         // 传入可选参数调用接口
         HashMap<String, String> options = new HashMap<String, String>();
         options.put("user_info", "user's info");
@@ -109,11 +111,12 @@ public class HumanFaceUtil {
 
         String image = images;
         String imageType = "BASE64";
-        String groupId = "payment";
+        //上传的用户组
+        String groupId = GROUPID;
         String userId = userIds;
         // 人脸注册
         JSONObject res = client.addUser(image, imageType, groupId, userId, options);
-        return res.toString(2);
+        return res;
     }
     /**
      *人脸比对
@@ -153,6 +156,24 @@ public class HumanFaceUtil {
         // 人脸更新
         JSONObject res = client.updateUser(image, imageType, groupId, userId, options);
         return res.toString(2);
+    }
+
+
+    /**
+     * 删除人脸
+     * @param userIds
+     */
+    public JSONObject delete(String userIds) {
+        // 传入可选参数调用接口
+        HashMap<String, String> options = new HashMap<String, String>();
+
+        String groupId = GROUPID;
+        String userId = userIds;
+
+        // 删除用户
+        JSONObject res = client.deleteUser(groupId, userId, options);
+        return res;
+
     }
 
 
