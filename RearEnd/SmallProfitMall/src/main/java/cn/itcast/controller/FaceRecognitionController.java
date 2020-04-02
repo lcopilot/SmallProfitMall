@@ -37,12 +37,17 @@ public class FaceRecognitionController {
 
     @RequestMapping(value = "/uploading",method = RequestMethod.POST)
     public FaceRecognitionResponse uploading(String image, String userId , MultipartFile videoFile) throws Exception {
-    String result =faceRecognitionService.uploading(image,userId,videoFile.getInputStream());
-    if (result.equals("SUCCESS")){
-        return new FaceRecognitionResponse(CommonCode.SUCCESS, null);
-    }
-    FaceRecognition faceRecognition=new FaceRecognition();
-    faceRecognition.setResult((JSONObject) JSON.parse(result));
-    return new FaceRecognitionResponse(CommonCode.FAIL, faceRecognition);
+        //视频是否存在
+        InputStream videoFiles = null;
+        if(videoFile!=null){
+            videoFiles=videoFile.getInputStream();
+        }
+        String result =faceRecognitionService.uploading(image,userId,videoFiles);
+        if (result.equals("SUCCESS")){
+            return new FaceRecognitionResponse(CommonCode.SUCCESS, null);
+        }
+        FaceRecognition faceRecognition=new FaceRecognition();
+        faceRecognition.setResult((JSONObject) JSON.parse(result));
+        return new FaceRecognitionResponse(CommonCode.FAIL, faceRecognition);
     }
 }

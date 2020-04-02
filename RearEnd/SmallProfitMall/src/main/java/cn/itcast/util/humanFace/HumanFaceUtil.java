@@ -5,6 +5,7 @@ import com.baidu.aip.face.AipFace;
 import com.baidu.aip.face.FaceVerifyRequest;
 import com.baidu.aip.face.MatchRequest;
 import org.apache.commons.io.IOUtils;
+
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,7 @@ public class HumanFaceUtil {
      * 人脸检测
      * @param images
      */
-    public  String faceDetection(String images) {
+    public  JSONObject faceDetection(String images) {
         // 传入可选参数调用接口
         HashMap<String, String> options = new HashMap<String, String>();
         options.put("face_field", "age");
@@ -44,12 +45,12 @@ public class HumanFaceUtil {
 
         // 人脸检测
         JSONObject res = client.detect(image, imageType, options);
-       return  res.toString(2);
+       return  res;
 
     }
 
     /**
-     * 活体检测
+     * 图片活体检测
      * @param images 用户人脸
      */
     public String livingBody(String images) {
