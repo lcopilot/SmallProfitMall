@@ -16,7 +16,7 @@
                   :default-sort="{prop: 'date', order: 'descending'}"
               >
                 <el-table-column
-                    width="560">
+                    min-width="60%">
                   <template slot="header">
                     <el-input
                         v-model="searchKeyword"
@@ -51,17 +51,17 @@
                     prop="productPrice"
                     label="价格"
                     sortable
-                    width="100">
+                    min-width="13%">
                 </el-table-column>
                 <el-table-column
                     prop="evaluationTime"
                     label="时间"
                     sortable
-                    width="120">
+                    min-width="14%">
                 </el-table-column>
                 <el-table-column
                     align="right"
-                    width="100"
+                    min-width="13%"
                 >
                   <template slot="header">
                     <el-button

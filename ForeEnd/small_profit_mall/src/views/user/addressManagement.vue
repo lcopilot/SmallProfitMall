@@ -1,13 +1,13 @@
 <template>
-  <el-container v-if="!isOrder">
-    <el-header>
+  <el-container>
+    <el-header v-if="!isOrder">
       <Header></Header>
     </el-header>
     <el-main>
       <el-row :gutter="20">
-        <personalPage/>
+        <personalPage v-if="!isOrder" />
         <el-col :span="16" :push="3">
-          <el-card class="address_top_card">
+          <el-card v-if="!isOrder" class="address_top_card">
             <div>
               <span class="address_top_span1">
                  收货地址管理
@@ -18,8 +18,7 @@
               </el-button>
             </div>
           </el-card>
-
-          <el-card class="address_bottom_card"
+          <el-card v-if="!isOrder" class="address_bottom_card"
                    v-for="(address,index) in addressList" :key="index">
             <div slot="header">
               <el-row :gutter="20">
@@ -66,7 +65,7 @@
               </div>
             </div>
           </el-card>
-          <el-dialog :title="editBtn==false ? '新增收货地址':'修改收货地址'" :visible.sync="dialogFormVisible" @close="cancel">
+          <el-dialog  v-if="isOrder" :title="editBtn==false ? '新增收货地址':'修改收货地址'" :visible.sync="dialogFormVisible" @close="cancel">
             <div class="address_add_div">
               温馨提示:*号为必填哦~
             </div>
@@ -131,7 +130,7 @@
         </el-col>
       </el-row>
     </el-main>
-    <el-footer>
+    <el-footer v-if="!isOrder">
       <Footer></Footer>
     </el-footer>
   </el-container>
