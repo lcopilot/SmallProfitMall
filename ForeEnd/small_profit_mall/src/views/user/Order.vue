@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container v-if="orderNumber">
     <el-header>
       <Header/>
     </el-header>
@@ -42,7 +42,7 @@
                     <div class="orders_address">{{fuzzyPhone(orderAddress.phone)}}</div>
                   </el-col>
                   <el-col :span="3">
-                    <el-tag type="success" size="mini" effect="dark">
+                    <el-tag type="success" size="mini" effect="dark" v-if="orderAddress.defaults">
                       默认地址
                     </el-tag>
                   </el-col>
@@ -51,7 +51,7 @@
                   <el-collapse-item title="更多地址">
                     <div v-for="(address,index) in addressList" class="order_address"
                          @click="selectAddress(index)">
-                      <el-row :gutter="10" v-if="!address.defaults">
+                      <el-row :gutter="10">
                         <el-col :span="3">
                           <el-tag type="success" size="mini" effect="dark">
                             {{address.alias}}
@@ -180,7 +180,7 @@
                                     fit="fill"></el-image>
                         </div>
                       </el-col>
-                      <el-col :span="8">
+                      <el-col :span="6">
                         <div style="font-size: 12px">Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机
                           双卡双待水电费纳斯达克福建省那开始记得发
                         </div>
@@ -189,11 +189,16 @@
                           <span>支持7天无理由退货</span>
                         </div>
                       </el-col>
-                      <el-col :span="2" :push="2" class="order_product_price">
+                      <el-col :span="6" :push="1">
+                        <div style="font-size: 12px">
+                          枯井中等级考试放声大哭水电费就开始人兽斗合辑和输入绿山咖啡技术的了卡萨丁卷发梳
+                        </div>
+                      </el-col>
+                      <el-col :span="2" :push="2"  class="order_product_price">
                         <div style="color: red;">￥156.00</div>
                         <div>0.025kg</div>
                       </el-col>
-                      <el-col :span="2" :push="5">
+                      <el-col :span="2" :push="3">
                         <div>x1</div>
                       </el-col>
                     </el-row>
@@ -241,13 +246,15 @@
 <script>
   import *as ordersApi from '../../api/page/orders'
 
-  const addressManagement = () => import("../user/addressManagement");
-  const Face = () => import("../../components/admin/face");
+  const addressManagement = () => import("./AddressManagement");
+  const Face = () => import("../../components/admin/Face");
   export default {
     name: "order",
     components: {addressManagement, Face},
     data() {
       return {
+        //订单id
+        orderNumber:'',
         //默认地址
         orderAddress: {},
         //地址数据
@@ -322,7 +329,10 @@
       }
     },
     created() {
-
+      if (this.$route.params.orderNumber != null) {
+        sessionStorage.setItem("orderNumber", this.$route.params.orderNumber);
+      }
+      this.orderNumber = sessionStorage.getItem("orderNumber");
     }
 
   }

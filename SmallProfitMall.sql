@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 02/04/2020 20:25:57
+ Date: 03/04/2020 20:08:19
 */
 
 SET NAMES utf8mb4;
@@ -908,29 +908,81 @@ INSERT INTO `newsContent` VALUES (29, 1, '7c9fdfa3177042a08766aed29e7de6cd', '19
 INSERT INTO `newsContent` VALUES (30, 1, '7c9fdfa3177042a08766aed29e7de6cd', '22', 1, '0', '加油', '2020-03-30 10:50:50', 0);
 
 -- ----------------------------
--- Table structure for order
+-- Table structure for orders
 -- ----------------------------
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order`  (
-  `orderId` int(30) NULL DEFAULT NULL,
-  `shoppingCartId` int(40) NULL DEFAULT NULL,
-  `orderNote` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders`  (
+  `orderId` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `productName` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `productImage` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `productConfiguration` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `productQuantity` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `productPrice` double NULL DEFAULT NULL,
   `productWeight` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `receiptStatus` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `paymentWay` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `weight` double NULL DEFAULT NULL,
-  `orderTime` datetime(0) NULL DEFAULT NULL,
-  `deliveryTime` datetime(0) NULL DEFAULT NULL,
-  `paymentTime` datetime(0) NULL DEFAULT NULL
+  `evaluate` int(11) NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of order
+-- Records of orders
 -- ----------------------------
+INSERT INTO `orders` VALUES ('16516165', 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', 'http://productdata.fhxasdsada.xyz/9bf639975363fbb0.jpg', 'asda', '3', 3350, NULL, 0);
+INSERT INTO `orders` VALUES ('16516165', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色+骨伽LLC750全模组电源 ', '1', 2898, NULL, 0);
+INSERT INTO `orders` VALUES ('1', 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.fhxasdsada.xyz/04e04ec4954e07bd.jpg', '银色 128G+2G ', '1', 10398, NULL, 0);
+INSERT INTO `orders` VALUES ('1', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '2', 2898, NULL, 0);
+INSERT INTO `orders` VALUES ('2', '2019新款翻领磨破短款女士休闲牛仔外套', 'http://productdata.fhxasdsada.xyz/a1.jpg', 'XS ', '1', 100000, NULL, 0);
+INSERT INTO `orders` VALUES ('2', '【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金', 'http://productdata.fhxasdsada.xyz/135638619666091357760161_x.jpg', '磨砂黑 ', '1', 773, NULL, 0);
+INSERT INTO `orders` VALUES ('3', '万代（BANDAI） Megahouse POP 海贼王 路飞9人 模型玩具（无售后！！！） 四档路飞\r\n', '\r\nhttp://productdata.fhxasdsada.xyz/5b90958cN736d78c4.jpg', 'asd', '1', 3500, NULL, 0);
+INSERT INTO `orders` VALUES ('3', 'HHKB Professional BT 蓝牙版黑无刻静电容键盘 程序员码农专用便携迷你键盘 编程适用', 'http://productdata.fhxasdsada.xyz/AD8JQ6Q0jfeySzdxAVglqw.jpg', '标准白有刻  ', '1', 2188, NULL, 0);
+INSERT INTO `orders` VALUES ('4', 'Classic | 40mm Canterbury', '\r\nhttp://productdata.fhxasdsada.xyz/adadas3e.jpg', '多彩尼龙白盘 ', '1', 1289, NULL, 0);
+INSERT INTO `orders` VALUES ('4', '\r\nCOACH PARKER 16 女士山茶花装饰可斜挎双肩包', '\r\nhttp://productdata.fhxasdsada.xyz/tuhaokuai_1583977278.jpg', '棕黄色锈色 均码 ', '1', 1299, NULL, 0);
+INSERT INTO `orders` VALUES ('1585909515380111112', '华硕（ASUS）ROG Strix XG27VQ 27英寸144HZ 1800R Free-Sync旋转升降AURA-RGB电竞显示器（HDMI/DP/DVI）', 'http://productdata.fhxasdsada.xyz/0070137366-000000010059586574_3.jpg', '', '1', 5199, NULL, 0);
+INSERT INTO `orders` VALUES ('1585909515380111112', 'HHKB Professional BT 蓝牙版黑无刻静电容键盘 程序员码农专用便携迷你键盘 编程适用', 'http://productdata.fhxasdsada.xyz/AD8JQ6Q0jfeySzdxAVglqw.jpg', '标准白有刻  ', '1', 2188, NULL, 0);
+INSERT INTO `orders` VALUES ('1585912376647111113', 'HHKB Professional BT 蓝牙版黑无刻静电容键盘 程序员码农专用便携迷你键盘 编程适用', 'http://productdata.fhxasdsada.xyz/AD8JQ6Q0jfeySzdxAVglqw.jpg', '标准白有刻  ', '1', 2188, NULL, 0);
+INSERT INTO `orders` VALUES ('1585912751468111114', '美国正品代购阿迪达斯adidas YEEZY BOOST 350 V2 侃爷冰蓝椰子鞋新款男跑步鞋', 'http://productdata.fhxasdsada.xyz/334355456168161240400082_x.jpg', 'BB1826灰橙色  标准46.5/US12  ', '1', 2920, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '1', 5999, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg', '紫色 豪华版 256G+8G\r\n ', '1', 5999, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg', '紫色 标志版 256G+8G\r\n ', '1', 5999, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '联想(Lenovo)小新Pro13.3英寸全面屏超轻薄笔记本电脑(标压锐龙R5-3550H 16G 512G 2.5K QHD 100%sRGB)银 ', '\r\nhttp://productdata.fhxasdsada.xyz/2b0744939bd398f0.jpg', '小清新蓝 Pro13|标压R5 16G 512G QHD ', '1', 4999, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '【二手95新】劳力士 系列:迪通拿系列 型号:116505 材质:18k玫瑰金 镜面:蓝宝石玻璃 未使用', '\r\nhttp://productdata.fhxasdsada.xyz/2-SXJILMjHoQXj66aurkzg.jpg', '玫瑰金 ', '99', 260000, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '\r\nCOACH PARKER 16 女士山茶花装饰可斜挎双肩包', '\r\nhttp://productdata.fhxasdsada.xyz/tuhaokuai_1583977278.jpg', '黄褐色 均码 ', '9', 1299, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '\r\nCOACH PARKER 16 女士山茶花装饰可斜挎双肩包', '\r\nhttp://productdata.fhxasdsada.xyz/tuhaokuai_1583977278.jpg', '粉色 均码 ', '10', 1299, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '\r\nCOACH PARKER 16 女士山茶花装饰可斜挎双肩包', '\r\nhttp://productdata.fhxasdsada.xyz/tuhaokuai_1583977278.jpg', '棕黄色锈色 均码 ', '38', 1299, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '2019新款翻领磨破短款女士休闲牛仔外套', 'http://productdata.fhxasdsada.xyz/a1.jpg', 'XS ', '1', 100000, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金', 'http://productdata.fhxasdsada.xyz/135638619666091357760161_x.jpg', '磨砂黑 ', '1', 773, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '小米（MI）小爱智能音箱Pro 无线蓝牙音响 语音控制智能家居 APP远程操控 专业DTS 音效 黑色', 'http://productdata.fhxasdsada.xyz/5JR1uDh09y-dhv8RSstl9g.jpg', '【新品】小爱音箱Pro  小米小爱音箱【HD版 深灰色】 ', '97', 265, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '小米（MI）小爱智能音箱Pro 无线蓝牙音响 语音控制智能家居 APP远程操控 专业DTS 音效 黑色', 'http://productdata.fhxasdsada.xyz/5JR1uDh09y-dhv8RSstl9g.jpg', '【新品】小爱音箱Pro  小米小爱音箱【HD版 深灰色】 ', '1', 265, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '小米（MI）小爱智能音箱Pro 无线蓝牙音响 语音控制智能家居 APP远程操控 专业DTS 音效 黑色', 'http://productdata.fhxasdsada.xyz/5JR1uDh09y-dhv8RSstl9g.jpg', 'Redmi 小爱音箱Play  小爱音箱万能遥控版  ', '1', 265, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '小米（MI）小爱智能音箱Pro 无线蓝牙音响 语音控制智能家居 APP远程操控 专业DTS 音效 黑色', 'http://productdata.fhxasdsada.xyz/5JR1uDh09y-dhv8RSstl9g.jpg', 'Redmi 小爱音箱Play  Redmi 小爱音箱Play 绿色 ', '3', 265, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '小米（MI）小爱智能音箱Pro 无线蓝牙音响 语音控制智能家居 APP远程操控 专业DTS 音效 黑色', 'http://productdata.fhxasdsada.xyz/5JR1uDh09y-dhv8RSstl9g.jpg', 'Redmi 小爱音箱Play   Redmi 小爱音箱Play 蓝色 ', '2', 265, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '小米（MI）小爱智能音箱Pro 无线蓝牙音响 语音控制智能家居 APP远程操控 专业DTS 音效 黑色', 'http://productdata.fhxasdsada.xyz/5JR1uDh09y-dhv8RSstl9g.jpg', 'Redmi 小爱音箱Play  小米小爱音箱【HD版 深灰色】 ', '3', 265, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '小米（MI）小爱智能音箱Pro 无线蓝牙音响 语音控制智能家居 APP远程操控 专业DTS 音效 黑色', 'http://productdata.fhxasdsada.xyz/5JR1uDh09y-dhv8RSstl9g.jpg', 'Redmi 小爱音箱Play  小爱音箱play版 ', '1', 265, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913781453111115', '小米（MI）小爱智能音箱Pro 无线蓝牙音响 语音控制智能家居 APP远程操控 专业DTS 音效 黑色', 'http://productdata.fhxasdsada.xyz/5JR1uDh09y-dhv8RSstl9g.jpg', 'Redmi 小爱音箱Play  小米小爱音箱【HD版 浅灰色】 ', '3', 265, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913835453111116', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '1', 2898, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913835453111116', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色+骨伽LLC750全模组电源 ', '1', 2898, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913873439111117', '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.fhxasdsada.xyz/5cd5acfbN24c0ee18.jpg', '028#滋润珊瑚红 ', '1', 1140, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913873439111117', '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.fhxasdsada.xyz/5cd5acfbN24c0ee18.jpg', '999+ 520+花漾甜心100ML [口红香水套装] ', '1', 1140, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913873439111117', '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.fhxasdsada.xyz/5cd5acfbN24c0ee18.jpg', '[限量版挚爱红管烟花5支装套盒] ', '1', 1140, NULL, 0);
+INSERT INTO `orders` VALUES ('1585913873439111117', '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.fhxasdsada.xyz/5cd5acfbN24c0ee18.jpg', '[红弯心动6支套装] [赠视频玫瑰礼盒 ] ', '1', 1140, NULL, 0);
+INSERT INTO `orders` VALUES ('15859139314731', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '1', 2898, NULL, 0);
+INSERT INTO `orders` VALUES ('15859139314731', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色+骨伽LLC750全模组电源 ', '1', 2898, NULL, 0);
+INSERT INTO `orders` VALUES ('1585914020135314732', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'Cellular版1TB ', '1', 7890, NULL, 0);
+INSERT INTO `orders` VALUES ('1585914020135314732', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'WLAN版512G ', '1', 7890, NULL, 0);
+INSERT INTO `orders` VALUES ('1585914020135314732', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'Cellular版512G  ', '1', 7890, NULL, 0);
+INSERT INTO `orders` VALUES ('1585914226792314733', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '香蕉味 ', '1', 20, NULL, 0);
+INSERT INTO `orders` VALUES ('15859142564371', 'HHKB Professional BT 蓝牙版黑无刻静电容键盘 程序员码农专用便携迷你键盘 编程适用', 'http://productdata.fhxasdsada.xyz/AD8JQ6Q0jfeySzdxAVglqw.jpg', '蓝牙黑无刻 ', '1', 2188, NULL, 0);
+INSERT INTO `orders` VALUES ('15859142564371', 'HHKB Professional BT 蓝牙版黑无刻静电容键盘 程序员码农专用便携迷你键盘 编程适用', 'http://productdata.fhxasdsada.xyz/AD8JQ6Q0jfeySzdxAVglqw.jpg', '蓝牙白无刻  ', '1', 2188, NULL, 0);
+INSERT INTO `orders` VALUES ('15859142564371', 'HHKB Professional BT 蓝牙版黑无刻静电容键盘 程序员码农专用便携迷你键盘 编程适用', 'http://productdata.fhxasdsada.xyz/AD8JQ6Q0jfeySzdxAVglqw.jpg', '蓝牙黑有刻  ', '1', 2188, NULL, 0);
+INSERT INTO `orders` VALUES ('15859143724151', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '1', 20, NULL, 0);
+INSERT INTO `orders` VALUES ('15859143724151', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '香蕉味 ', '1', 20, NULL, 0);
+INSERT INTO `orders` VALUES ('15859144129681', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '1', 2898, NULL, 0);
+INSERT INTO `orders` VALUES ('15859144129681', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色+骨伽LLC750全模组电源 ', '1', 2898, NULL, 0);
+INSERT INTO `orders` VALUES ('15859148982332', 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', 'http://productdata.fhxasdsada.xyz/9bf639975363fbb0.jpg', '', '1', 3350, NULL, 0);
+INSERT INTO `orders` VALUES ('1585915052953982333', 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', 'http://productdata.fhxasdsada.xyz/9bf639975363fbb0.jpg', '', '1', 3350, NULL, 0);
+INSERT INTO `orders` VALUES ('1585915209148982334', 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', 'http://productdata.fhxasdsada.xyz/9bf639975363fbb0.jpg', '', '1', 3350, NULL, 0);
+INSERT INTO `orders` VALUES ('15859154036891', 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', 'http://productdata.fhxasdsada.xyz/9bf639975363fbb0.jpg', '', '1', 3350, NULL, 0);
+INSERT INTO `orders` VALUES ('15859155109191', 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', 'http://productdata.fhxasdsada.xyz/9bf639975363fbb0.jpg', '', '1', 3350, NULL, 0);
+INSERT INTO `orders` VALUES ('15859155109191', '万代（BANDAI） Megahouse POP 海贼王 路飞9人 模型玩具（无售后！！！） 四档路飞\r\n', '\r\nhttp://productdata.fhxasdsada.xyz/5b90958cN736d78c4.jpg', '', '1', 3500, NULL, 0);
+INSERT INTO `orders` VALUES ('15859156147061', 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', 'http://productdata.fhxasdsada.xyz/9bf639975363fbb0.jpg', '', '1', 3350, NULL, 0);
 
 -- ----------------------------
 -- Table structure for productAttributes
@@ -1012,41 +1064,18 @@ CREATE TABLE `shoppingCart`  (
   `productDeploy` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `quantity` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`shoppingCartId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 818 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 880 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of shoppingCart
 -- ----------------------------
-INSERT INTO `shoppingCart` VALUES (627, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '白色 优惠套餐一 ', 99);
+INSERT INTO `shoppingCart` VALUES (627, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '白色 优惠套餐一 ', 84);
 INSERT INTO `shoppingCart` VALUES (628, '8b616d638682406f96acd3b54dfbc723', 10001, '白色 ', 99);
 INSERT INTO `shoppingCart` VALUES (701, '8b616d638682406f96acd3b54dfbc723', 10015, '白色 ', 99);
-INSERT INTO `shoppingCart` VALUES (740, '7c9fdfa3177042a08766aed29e7de6cd', 10002, '白色 优惠套餐二 ', 5);
-INSERT INTO `shoppingCart` VALUES (787, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10014, '黑色 ', 1);
-INSERT INTO `shoppingCart` VALUES (793, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '绿色 豪华版 256G+8G\r\n ', 1);
-INSERT INTO `shoppingCart` VALUES (794, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '紫色 豪华版 256G+8G\r\n ', 1);
-INSERT INTO `shoppingCart` VALUES (795, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '黑色 豪华版 256G+8G\r\n ', 1);
-INSERT INTO `shoppingCart` VALUES (796, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '黑色 标志版 256G+8G\r\n ', 1);
-INSERT INTO `shoppingCart` VALUES (797, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '', 1);
-INSERT INTO `shoppingCart` VALUES (798, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '黑色 ', 2);
-INSERT INTO `shoppingCart` VALUES (799, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '黑色+骨伽LLC750全模组电源 ', 2);
-INSERT INTO `shoppingCart` VALUES (800, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '棕黄色锈色 均码 ', 1);
-INSERT INTO `shoppingCart` VALUES (801, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '棕黄色锈色 均码 ', 1);
-INSERT INTO `shoppingCart` VALUES (802, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '棕黄色锈色 均码 ', 1);
-INSERT INTO `shoppingCart` VALUES (803, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '棕黄色锈色 均码 ', 1);
-INSERT INTO `shoppingCart` VALUES (804, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '黄褐色 均码 ', 2);
-INSERT INTO `shoppingCart` VALUES (805, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '黄褐色 均码 ', 1);
-INSERT INTO `shoppingCart` VALUES (806, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '黄褐色 均码 ', 1);
-INSERT INTO `shoppingCart` VALUES (807, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '粉色 均码 ', 1);
-INSERT INTO `shoppingCart` VALUES (808, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '粉色 均码 ', 1);
-INSERT INTO `shoppingCart` VALUES (809, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '粉色 均码 ', 1);
-INSERT INTO `shoppingCart` VALUES (810, '7c9fdfa3177042a08766aed29e7de6cd', 10008, '', 12);
-INSERT INTO `shoppingCart` VALUES (811, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '', 2);
-INSERT INTO `shoppingCart` VALUES (812, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '', 1);
-INSERT INTO `shoppingCart` VALUES (813, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '', 1);
-INSERT INTO `shoppingCart` VALUES (814, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '', 1);
-INSERT INTO `shoppingCart` VALUES (815, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '', 1);
-INSERT INTO `shoppingCart` VALUES (816, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10007, '', 2);
-INSERT INTO `shoppingCart` VALUES (817, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10014, '黑色+骨伽LLC750全模组电源 ', 1);
+INSERT INTO `shoppingCart` VALUES (829, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10019, '玫瑰金 ', 3);
+INSERT INTO `shoppingCart` VALUES (831, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10004, '星际蓝 ', 1);
+INSERT INTO `shoppingCart` VALUES (872, '7c9fdfa3177042a08766aed29e7de6cd', 10002, '白色 优惠套餐一 ', 1);
+INSERT INTO `shoppingCart` VALUES (873, '7c9fdfa3177042a08766aed29e7de6cd', 10002, '白色 优惠套餐二 ', 1);
 
 -- ----------------------------
 -- Table structure for user
@@ -1090,7 +1119,7 @@ CREATE TABLE `userAddress`  (
   `alias` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `isdelete` int(11) NULL DEFAULT 1,
   PRIMARY KEY (`addressId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 135 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 140 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userAddress
@@ -1099,15 +1128,20 @@ INSERT INTO `userAddress` VALUES (122, '7c9fdfa3177042a08766aed29e7de6cd', '东�
 INSERT INTO `userAddress` VALUES (123, '7c9fdfa3177042a08766aed29e7de6cd', '三大法师', '山西省 阳泉市 郊区 西南舁乡 ', '三大法师', '15367885410', 'liuxianliangli@foxmail.com', '14,1403,140311,140311200,', '0', '父母家', 0);
 INSERT INTO `userAddress` VALUES (124, 'f92b9f8f372e445fb6564cdd57aa3c3e', '18598814121', '河北省 石家庄市 长安区 建北街道 ', 'buyibgu', '18598814121', '2252821162@qq.com', '13,1301,130102,130102001,', '0', 'hu vjiu', 0);
 INSERT INTO `userAddress` VALUES (125, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩1号', '河北省 秦皇岛市 青龙满族自治县 青龙镇 ', '放松放松电饭锅电饭锅', '15367885410', 'liuxianliangli@foxmail.com', '13,1303,130321,130321100,', '0', '儿子', 1);
-INSERT INTO `userAddress` VALUES (126, 'f92b9f8f372e445fb6564cdd57aa3c3e', 'fff', '天津市 市辖区 和平区 劝业场街道 ', 'asdasasw', '15899855554', '2252821162@qq.com', '12,1201,120101,120101001,', '1', 'dsad', 0);
-INSERT INTO `userAddress` VALUES (127, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩2号', '山西省 大同市 云冈区 新胜街道 ', '大大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214001,', '1', '学校', 1);
-INSERT INTO `userAddress` VALUES (128, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩3号', '山东省 枣庄市 薛城区 临城街道 ', '所发生的速度还是大的黑社会的啥的婚纱大华氏度速度还是大速度还是大速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '37,3704,370403,370403001,', '0', '学校', 1);
-INSERT INTO `userAddress` VALUES (129, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩4号', '河北省 唐山市 开平区 马家沟街道 ', '速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130205,130205001,', '0', '多喝水', 1);
+INSERT INTO `userAddress` VALUES (126, 'f92b9f8f372e445fb6564cdd57aa3c3e', 'fff', '天津市 市辖区 和平区 劝业场街道 ', 'asdasasw', '15899855554', '2252821162@qq.com', '12,1201,120101,120101001,', '0', 'dsad', 0);
+INSERT INTO `userAddress` VALUES (127, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩2号', '山西省 大同市 云冈区 新胜街道 ', '大大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214001,', '0', '学校', 1);
+INSERT INTO `userAddress` VALUES (128, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩3号', '山东省 枣庄市 薛城区 临城街道 ', '所发生的速度还是大的黑社会的啥的婚纱大华氏度速度还是大速度还是大速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '37,3704,370403,370403001,', '0', '家', 1);
+INSERT INTO `userAddress` VALUES (129, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩4号', '河北省 唐山市 开平区 马家沟街道 河北省 唐山市 开平区 陡电街道 ', '速度还是大六角恐龙', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130205,130205005,', '0', '公司', 1);
 INSERT INTO `userAddress` VALUES (130, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩5号', '河北省 唐山市 丰南区 大新庄镇 ', '速度还是大啥的婚纱大和', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130207,130207106,', '0', '速度还是大速度还是大速度', 0);
 INSERT INTO `userAddress` VALUES (131, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩5号', '河北省 邯郸市 丛台区 光明桥街道 ', '速度还是大三大法师', '15367885410', 'liuxianliangli@foxmail.com', '13,1304,130403,130403004,', '0', '学校速度还是大速度还是大', 0);
 INSERT INTO `userAddress` VALUES (132, '7c9fdfa3177042a08766aed29e7de6cd', '速度还是大和递四方速递', '河北省 唐山市 开平区 开平街道 ', '速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130205,130205002,', '0', '速度还是大的时候速度还是', 0);
-INSERT INTO `userAddress` VALUES (133, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩7号', '上海市 市辖区 静安区 石门二路街道 ', '速度还是大速度还是大所发生的速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '31,3101,310106,310106011,', '0', '速度还是大东', 1);
+INSERT INTO `userAddress` VALUES (133, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩7号', '上海市 市辖区 静安区 石门二路街道 ', '速度还是大速度还是大所发生的速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '31,3101,310106,310106011,', '1', '速度还是大东', 1);
 INSERT INTO `userAddress` VALUES (134, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩8号', '福建省 莆田市 秀屿区 笏石镇 ', '发送到发送到鼎折覆餗', '15367885410', 'liuxianliangli@foxmail.com', '35,3503,350305,350305100,', '0', '发送到发送到防守', 1);
+INSERT INTO `userAddress` VALUES (135, 'f92b9f8f372e445fb6564cdd57aa3c3e', 'asd', '山西省 大同市 新荣区 新荣镇 ', 'asda', '18599999999', '225252@qq.com', '14,1402,140212,140212100,', '0', 'asd', 0);
+INSERT INTO `userAddress` VALUES (136, 'f92b9f8f372e445fb6564cdd57aa3c3e', 'adfsas', '天津市 市辖区 和平区 劝业场街道 ', 'sadas', '18599666666', 'qqq@qq.coim', '12,1201,120101,120101001,', '0', '闺蜜家', 0);
+INSERT INTO `userAddress` VALUES (137, 'f92b9f8f372e445fb6564cdd57aa3c3e', 'sdffasd', '天津市 市辖区 和平区 劝业场街道 ', 'asdasd', '16516191596', 'Q@qq.com', '12,1201,120101,120101001,', '0', 'adas', 0);
+INSERT INTO `userAddress` VALUES (138, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1', '天津市 市辖区 和平区 劝业场街道 ', 'asdcas', '15456468456', '2@qq.com', '12,1201,120101,120101001,', '1', '公司', 1);
+INSERT INTO `userAddress` VALUES (139, 'f92b9f8f372e445fb6564cdd57aa3c3e', '2', '天津市 市辖区 和平区 劝业场街道 ', 'qewqw', '18598814121', 'qwq@aa.com', '12,1201,120101,120101001,', '0', 'qweqw', 1);
 
 -- ----------------------------
 -- Table structure for userEvaluation
@@ -1120,18 +1154,23 @@ CREATE TABLE `userEvaluation`  (
   `sign` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `evaluationTime` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`evaluationId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 101 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 122 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userEvaluation
 -- ----------------------------
-INSERT INTO `userEvaluation` VALUES (94, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 'true', '2020-03-26 12:32:51');
-INSERT INTO `userEvaluation` VALUES (95, '7c9fdfa3177042a08766aed29e7de6cd', 10023, 'true', '2020-03-26 12:33:18');
-INSERT INTO `userEvaluation` VALUES (96, '7c9fdfa3177042a08766aed29e7de6cd', 10002, 'true', '2020-03-26 17:30:27');
-INSERT INTO `userEvaluation` VALUES (97, '7c9fdfa3177042a08766aed29e7de6cd', 10024, 'true', '2020-03-30 11:09:15');
-INSERT INTO `userEvaluation` VALUES (98, '7c9fdfa3177042a08766aed29e7de6cd', 10016, 'true', '2020-03-30 11:57:09');
-INSERT INTO `userEvaluation` VALUES (99, '7c9fdfa3177042a08766aed29e7de6cd', 10005, 'true', '2020-03-30 11:57:26');
-INSERT INTO `userEvaluation` VALUES (100, '7c9fdfa3177042a08766aed29e7de6cd', 10010, 'true', '2020-03-30 20:09:51');
+INSERT INTO `userEvaluation` VALUES (110, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10014, 'true', '2020-04-03 12:51:52');
+INSERT INTO `userEvaluation` VALUES (111, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10007, 'true', '2020-04-03 12:51:52');
+INSERT INTO `userEvaluation` VALUES (112, '7c9fdfa3177042a08766aed29e7de6cd', 10012, 'true', '2020-04-03 12:52:34');
+INSERT INTO `userEvaluation` VALUES (113, '7c9fdfa3177042a08766aed29e7de6cd', 10023, 'true', '2020-04-03 12:52:34');
+INSERT INTO `userEvaluation` VALUES (114, '7c9fdfa3177042a08766aed29e7de6cd', 10005, 'true', '2020-04-03 12:52:53');
+INSERT INTO `userEvaluation` VALUES (115, '7c9fdfa3177042a08766aed29e7de6cd', 10030, 'true', '2020-04-03 12:53:02');
+INSERT INTO `userEvaluation` VALUES (116, '7c9fdfa3177042a08766aed29e7de6cd', 10027, 'true', '2020-04-03 12:53:07');
+INSERT INTO `userEvaluation` VALUES (117, '7c9fdfa3177042a08766aed29e7de6cd', 10028, 'true', '2020-04-03 12:53:07');
+INSERT INTO `userEvaluation` VALUES (118, '7c9fdfa3177042a08766aed29e7de6cd', 10002, 'true', '2020-04-03 12:53:18');
+INSERT INTO `userEvaluation` VALUES (119, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 'true', '2020-04-03 13:04:44');
+INSERT INTO `userEvaluation` VALUES (120, '7c9fdfa3177042a08766aed29e7de6cd', 10019, 'true', '2020-04-03 13:04:45');
+INSERT INTO `userEvaluation` VALUES (121, '7c9fdfa3177042a08766aed29e7de6cd', 10026, 'true', '2020-04-03 13:08:18');
 
 -- ----------------------------
 -- Table structure for userFootprint
@@ -1143,39 +1182,41 @@ CREATE TABLE `userFootprint`  (
   `productId` int(11) NULL DEFAULT NULL,
   `footprintTime` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`footprintId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userFootprint
 -- ----------------------------
 INSERT INTO `userFootprint` VALUES (10, '7c9fdfa3177042a08766aed29e7de6cd', 10006, '2020-04-01 12:49:40');
 INSERT INTO `userFootprint` VALUES (11, '7c9fdfa3177042a08766aed29e7de6cd', 10013, '2020-03-28 11:27:53');
-INSERT INTO `userFootprint` VALUES (12, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '2020-04-02 15:40:09');
-INSERT INTO `userFootprint` VALUES (13, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '2020-03-30 17:16:24');
-INSERT INTO `userFootprint` VALUES (14, '7c9fdfa3177042a08766aed29e7de6cd', 10028, '2020-03-30 11:12:38');
-INSERT INTO `userFootprint` VALUES (15, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '2020-04-02 15:39:07');
-INSERT INTO `userFootprint` VALUES (16, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '2020-04-02 15:40:47');
+INSERT INTO `userFootprint` VALUES (12, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '2020-04-03 13:04:22');
+INSERT INTO `userFootprint` VALUES (13, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '2020-04-03 19:37:42');
+INSERT INTO `userFootprint` VALUES (14, '7c9fdfa3177042a08766aed29e7de6cd', 10028, '2020-04-03 13:07:52');
+INSERT INTO `userFootprint` VALUES (15, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '2020-04-03 16:19:07');
+INSERT INTO `userFootprint` VALUES (16, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '2020-04-03 16:30:19');
 INSERT INTO `userFootprint` VALUES (17, '7c9fdfa3177042a08766aed29e7de6cd', 10017, '2020-03-24 21:05:38');
-INSERT INTO `userFootprint` VALUES (18, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '2020-03-30 11:56:02');
-INSERT INTO `userFootprint` VALUES (19, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-03-25 13:03:25');
-INSERT INTO `userFootprint` VALUES (20, '7c9fdfa3177042a08766aed29e7de6cd', 10019, '2020-03-24 21:07:14');
+INSERT INTO `userFootprint` VALUES (18, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '2020-04-03 19:44:03');
+INSERT INTO `userFootprint` VALUES (19, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-04-03 19:47:48');
+INSERT INTO `userFootprint` VALUES (20, '7c9fdfa3177042a08766aed29e7de6cd', 10019, '2020-04-03 19:50:40');
 INSERT INTO `userFootprint` VALUES (21, '7c9fdfa3177042a08766aed29e7de6cd', 10009, '2020-03-24 21:07:22');
-INSERT INTO `userFootprint` VALUES (22, 'abcd', 10005, '2020-03-26 19:48:53');
+INSERT INTO `userFootprint` VALUES (22, 'abcd', 10005, '2020-04-03 19:40:06');
 INSERT INTO `userFootprint` VALUES (23, 'asdasd', 0, '2020-03-27 09:52:30');
-INSERT INTO `userFootprint` VALUES (24, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-04-02 19:47:11');
+INSERT INTO `userFootprint` VALUES (24, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-04-03 19:46:42');
 INSERT INTO `userFootprint` VALUES (25, '7c9fdfa3177042a08766aed29e7de6cd', 10021, '2020-03-25 13:05:35');
-INSERT INTO `userFootprint` VALUES (26, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '2020-04-02 15:41:33');
-INSERT INTO `userFootprint` VALUES (27, '7c9fdfa3177042a08766aed29e7de6cd', 10026, '2020-03-26 10:44:33');
+INSERT INTO `userFootprint` VALUES (26, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '2020-04-03 17:28:12');
+INSERT INTO `userFootprint` VALUES (27, '7c9fdfa3177042a08766aed29e7de6cd', 10026, '2020-04-03 16:18:46');
 INSERT INTO `userFootprint` VALUES (28, '7c9fdfa3177042a08766aed29e7de6cd', 10025, '2020-03-30 11:08:57');
-INSERT INTO `userFootprint` VALUES (29, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '2020-03-31 19:37:46');
-INSERT INTO `userFootprint` VALUES (30, '7c9fdfa3177042a08766aed29e7de6cd', 10004, '2020-03-25 12:50:16');
-INSERT INTO `userFootprint` VALUES (31, '7c9fdfa3177042a08766aed29e7de6cd', 10011, '2020-03-25 12:47:44');
-INSERT INTO `userFootprint` VALUES (32, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '2020-04-02 19:37:49');
+INSERT INTO `userFootprint` VALUES (29, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '2020-04-03 19:54:02');
+INSERT INTO `userFootprint` VALUES (30, '7c9fdfa3177042a08766aed29e7de6cd', 10004, '2020-04-03 12:52:28');
+INSERT INTO `userFootprint` VALUES (31, '7c9fdfa3177042a08766aed29e7de6cd', 10011, '2020-04-03 14:15:55');
+INSERT INTO `userFootprint` VALUES (32, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '2020-04-03 20:05:58');
 INSERT INTO `userFootprint` VALUES (33, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '2020-03-30 17:03:17');
-INSERT INTO `userFootprint` VALUES (34, '7c9fdfa3177042a08766aed29e7de6cd', 10016, '2020-03-28 13:33:19');
-INSERT INTO `userFootprint` VALUES (35, '7c9fdfa3177042a08766aed29e7de6cd', 10029, '2020-03-30 11:11:38');
-INSERT INTO `userFootprint` VALUES (36, '7c9fdfa3177042a08766aed29e7de6cd', 10030, '2020-03-30 20:10:17');
-INSERT INTO `userFootprint` VALUES (37, '7c9fdfa3177042a08766aed29e7de6cd', 10008, '2020-04-02 15:41:13');
+INSERT INTO `userFootprint` VALUES (34, '7c9fdfa3177042a08766aed29e7de6cd', 10016, '2020-04-03 13:05:28');
+INSERT INTO `userFootprint` VALUES (35, '7c9fdfa3177042a08766aed29e7de6cd', 10029, '2020-04-03 20:04:14');
+INSERT INTO `userFootprint` VALUES (36, '7c9fdfa3177042a08766aed29e7de6cd', 10030, '2020-04-03 12:52:58');
+INSERT INTO `userFootprint` VALUES (37, '7c9fdfa3177042a08766aed29e7de6cd', 10008, '2020-04-03 20:04:31');
+INSERT INTO `userFootprint` VALUES (38, '7c9fdfa3177042a08766aed29e7de6cd', 10012, '2020-04-03 12:36:08');
+INSERT INTO `userFootprint` VALUES (39, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10022, '2020-04-03 16:30:11');
 
 -- ----------------------------
 -- Table structure for userMembe
@@ -1219,6 +1260,28 @@ INSERT INTO `userNews` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '微利助手
 INSERT INTO `userNews` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '微利支付', 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 3, 3);
 
 -- ----------------------------
+-- Table structure for userOrder
+-- ----------------------------
+DROP TABLE IF EXISTS `userOrder`;
+CREATE TABLE `userOrder`  (
+  `userId` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `orderId` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `paymentWay` int(11) NULL DEFAULT NULL,
+  `deliveryWay` int(255) NULL DEFAULT NULL,
+  `orderTime` datetime(0) NULL DEFAULT NULL,
+  `deliveryTime` datetime(0) NULL DEFAULT NULL,
+  `paymentTime` datetime(0) NULL DEFAULT NULL,
+  `orderNote` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `orderTotal` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`orderId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of userOrder
+-- ----------------------------
+INSERT INTO `userOrder` VALUES ('f92b9f8f372e445fb6564cdd57aa3c3e', '15859156147061', NULL, NULL, '2020-04-03 20:07:40', NULL, NULL, NULL, '3350.00');
+
+-- ----------------------------
 -- Table structure for userPassword
 -- ----------------------------
 DROP TABLE IF EXISTS `userPassword`;
@@ -1232,7 +1295,7 @@ CREATE TABLE `userPassword`  (
 -- ----------------------------
 -- Records of userPassword
 -- ----------------------------
-INSERT INTO `userPassword` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '++OrO3KQIS+TzybCOsQhcw==', 0, NULL);
+INSERT INTO `userPassword` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '++OrO3KQIS+TzybCOsQhcw==', 1, '74a937ee8110584aef876a5ea2ab3482');
 INSERT INTO `userPassword` VALUES ('9c1e482cfabf48f7ab64baee9bd778fd', NULL, 0, NULL);
 INSERT INTO `userPassword` VALUES ('f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 0, NULL);
 
