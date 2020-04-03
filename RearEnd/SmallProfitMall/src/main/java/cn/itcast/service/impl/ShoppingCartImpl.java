@@ -111,7 +111,7 @@ public class ShoppingCartImpl implements ShoppingCartService {
      */
     @Override
     public List<ShoppingCart> findByUserId(String userId){
-        List<ShoppingCart> shoppingCartss = shoppingCartDao.findByUserId(userId);
+        List<ShoppingCart> shoppingCartss = shoppingCartDao.findShoppingCart(userId,null);
         for (int i = 0; i <shoppingCartss.size() ; i++) {
             int productId=shoppingCartss.get(i).getProductId();
             //用户是否有到货通知

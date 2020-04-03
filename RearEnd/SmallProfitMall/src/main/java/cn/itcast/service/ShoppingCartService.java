@@ -21,7 +21,11 @@ public interface ShoppingCartService {
      */
     public List<ShoppingCart> findByUserId(String userId);
 
-    //根据id删除
+    /**
+     * 删除购物车
+     * @param shoppingCartId 购物车id集合
+     * @return
+     */
     public Integer deleteCart(int[] shoppingCartId);
 
     /**

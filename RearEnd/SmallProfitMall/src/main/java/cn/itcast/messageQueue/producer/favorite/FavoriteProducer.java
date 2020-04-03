@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class FavoriteProducer {
 
-
-    @Autowired//注入发送消息模板
+    //注入发送消息模板
+    @Autowired
     RabbitTemplate favoriteTemplate;
 
     public void sendFavorite(String type, Evaluation evaluation) {

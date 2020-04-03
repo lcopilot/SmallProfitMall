@@ -4,6 +4,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.OrderDao">
 
+    <!--新增订单-->
+    <insert id="addOrder" parameterType="cn.itcast.domain.order.Order">
+        INSERT INTO
+           userOrder(userId,orderId,orderTime,orderTotal)
+        VALUES
+            (#{userId},#{orderId},#{orderTime},#{orderTotal})
+    </insert>
+    <!--新增订单商品内容-->
+    <insert id="addProductContent" parameterType="cn.itcast.domain.order.ProductContent">
+        INSERT INTO
+           orders(orderId,productName,productImage,productConfiguration,productQuantity,productPrice,productWeight,evaluate)
+        VALUES
+            (#{orderId},#{productName},#{productImage},#{productConfiguration},#{productQuantity},#{productPrice},#{productWeight},#{evaluate})
 
+    </insert>
+
+
+
+    <!--查询最后一条记录流水号-->
+    <select id="findSerialnumber" resultType="java.lang.String">
+      SELECT orderId FROM userOrder WHERE TO_DAYS(orderTime) = TO_DAYS(NOW()) ORDER BY orderTime DESC LIMIT 1
+    </select>
 
 </mapper>
