@@ -22,12 +22,11 @@
                   @select-all="select_all">
                 <el-table-column
                     type="selection"
-                    :selectable='changeStateC'
-                    min-width="4%">
+                    :selectable='changeStateC'>
                 </el-table-column>
                 <el-table-column
                     label="商品"
-                    min-width="45%">
+                    min-width="47%">
                   <template slot-scope="product">
                     <el-row :gutter="20">
                       <el-col :span="5">
@@ -61,7 +60,7 @@
                     label="单价"
                     prop="price"
                     sortable
-                    min-width="10%"
+                    min-width="11%"
                     column-key="date">
                   <template slot-scope="product">
                     ￥<span class="cart_product_price">
@@ -79,7 +78,7 @@
                 </el-table-column>
                 <el-table-column
                     label="小计"
-                    min-width="10%">
+                    min-width="11%">
                   <template slot-scope="product">
                     ￥<span class="cart_product_price">
                     {{(((product.row.productPrice)*100)*product.row.quantity)/100}}
@@ -94,7 +93,7 @@
                     <el-button
                         type="danger"
                         v-if="product.row.productInventory!=0"
-                        @click="buyProduct(product.row.productId)">
+                        @click="settlement(product.row.shoppingCartId)">
                       立即购买
                     </el-button>
                     <el-button type="text" v-if="product.row.productInventory==0">暂时缺货</el-button>
@@ -268,10 +267,6 @@
           }
         })
       },
-      //立即购买
-      buyProduct(cartProductId) {
-
-      },
       //添加收藏
       addFavorite(productId) {
         let data = {
@@ -336,7 +331,7 @@
             return this.$message.warning("您还未选择商品哦~");
           }
           this.$refs.cartTable.selection.forEach((shoppingCart) => {
-            cartIdList.push(shoppingCart.shoppingCartId);
+            cartIdList.push(ShoppingCart.shoppingCartId);
           })
         }
         productApi.removeCart(cartIdList).then(res => {
@@ -356,12 +351,35 @@
           }
         })
       },
-      //结算
-      settlement() {
-        this.$refs.cartTable.selection;
-        this.$router.push({
-          path: "/order" //跳转的路径
-        });
+      //结算 立即购买
+      settlement(cartProductId) {
+        let cartProductIdList=[];
+        if (cartProductId){
+          cartProductIdList.push(cartProductId);
+        }else {
+          if (this.$refs.cartTable.selection.length==0){
+            return this.$message({
+              message:"您还没有选择商品哦~",
+              type:"warning"
+            })
+          }
+          this.$refs.cartTable.selection.forEach((shoppingCart)=>{
+            cartProductIdList.push(shoppingCart.shoppingCartId);
+          });
+        }
+        let dataForm=new FormData();
+        dataForm.append("userId",sessionStorage.getItem("uId"));
+        dataForm.append("shoppingCartId",cartProductIdList);
+        productApi.settlement(dataForm).then(res=>{
+            if (res.success){
+              this.$router.push({
+                name: "Order",
+                params:{
+                  orderNumber:res.queryResult.list[0],
+                }
+              });
+            }
+        })
       },
       //获取购物车数据
       getShoppingCart() {

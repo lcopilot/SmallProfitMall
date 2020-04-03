@@ -364,10 +364,8 @@
   import *as userApi from '../../api/page/user'
   import {mapActions} from "vuex";
 
-  const Header = () => import("../../components/pages/Header"); //组件懒加载
-  const Footer = () => import("../../components/pages/Footer");
   const search = () => import("../../components/pages/Search");
-  const commentContent = () => import("../../components/pages/commentContent");
+  const commentContent = () => import("../../components/pages/CommentContent");
 
   export default {
     name: "Product",
@@ -470,7 +468,7 @@
 
       }
     },
-    components: {Header, Footer, search, commentContent},
+    components: { search, commentContent},
 
     methods: {
       ...mapActions([

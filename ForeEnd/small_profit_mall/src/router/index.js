@@ -52,7 +52,7 @@ const routes = [
     meta: {
       requireAuth: true,   // 添加该字段，表示进入这个路由是需要登录的
     },
-    component: () => import('@/views/user/shoppingCart')
+    component: () => import('@/views/user/ShoppingCart')
 
   },
   {
@@ -61,14 +61,14 @@ const routes = [
     meta: {
       requireAuth: true,
     },
-    component: () => import('@/views/user/personalCenter')
+    component: () => import('@/views/user/PersonalCenter')
   },{
     path: '/personalInformation',
     name: 'PersonalInformation',
     meta: {
       requireAuth: true,
     },
-    component: () => import('@/views/user/personalInformation')
+    component: () => import('@/views/user/PersonalInformation')
   },
   {
     path: '/addressManagement',
@@ -76,7 +76,7 @@ const routes = [
     meta: {
       requireAuth: true,
     },
-    component: () => import('@/views/user/addressManagement')
+    component: () => import('@/views/user/AddressManagement')
   },
   {
     path: '/allOrders',
@@ -84,15 +84,15 @@ const routes = [
     meta: {
       requireAuth: true,
     },
-    component: () => import('@/views/user/allOrders')
+    component: () => import('@/views/user/AllOrders')
   },
   {
     path: '/order',
-    name: 'order',
+    name: 'Order',
     meta: {
       requireAuth: true,
     },
-    component: () => import('@/views/user/order')
+    component: () => import('@/views/user/Order')
   },
   {
     path: '/messageCenter',
@@ -100,7 +100,7 @@ const routes = [
     meta: {
       requireAuth: true,
     },
-    component: () => import('@/views/user/messageCenter')
+    component: () => import('@/views/user/MessageCenter')
   },
   {
     path: '/orderComplete',
@@ -108,7 +108,7 @@ const routes = [
     meta: {
       requireAuth: true,
     },
-    component: () => import('@/views/user/orderComplete')
+    component: () => import('@/views/user/OrderComplete')
   },
   {
     path: '/favorite',
@@ -116,7 +116,7 @@ const routes = [
     meta: {
       requireAuth: true,
     },
-    component: () => import('@/views/user/favorite')
+    component: () => import('@/views/user/Favorite')
   },
   {
     path: '/footprint',
@@ -124,7 +124,7 @@ const routes = [
     meta: {
       requireAuth: true,
     },
-    component: () => import('@/views/user/footprint')
+    component: () => import('@/views/user/Footprint')
   },
   {
     path: '/accountSettings',
@@ -132,7 +132,7 @@ const routes = [
     meta: {
       requireAuth: true,
     },
-    component: () => import('@/views/user/accountSettings')
+    component: () => import('@/views/user/AccountSettings')
   },
   {
     path: '/searchShow',
@@ -140,7 +140,7 @@ const routes = [
     meta: {
       requireAuth: true,
     },
-    component: () => import('@/views/allUser/searchShow')
+    component: () => import('@/views/allUser/SearchShow')
   },
   //捕获404
   {
@@ -153,12 +153,12 @@ const routes = [
     redirect: "/404"
   }
 
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
-})
+});
 
 export default router
