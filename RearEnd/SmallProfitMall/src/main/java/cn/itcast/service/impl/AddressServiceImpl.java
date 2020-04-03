@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("addressService")
-@Transactional
 public class AddressServiceImpl implements AddressService {
     @Autowired
     AddressDao addressDao;
@@ -41,7 +40,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public int addAddress(Address address) {
         Address redisAddress = this.defaults(address);
-        return addressDao.addAddress(redisAddress);
+        return  addressDao.addAddress(redisAddress);
     }
 
     /**

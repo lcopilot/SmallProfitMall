@@ -20,7 +20,6 @@ import java.util.Date;
 import java.util.List;
 
 @Service("commodityService")
-@Transactional
 public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductDao ProducDao;
@@ -29,9 +28,11 @@ public class ProductServiceImpl implements ProductService {
     RedisUtil redisUtil;
 
 
-
-
-    //秒杀
+    /**
+     * 秒杀
+     * @return
+     * @throws ParseException
+     */
     @Override
     public List<SeckillResult> findSeckill() throws ParseException {
         SeckillResult seckillResult = new SeckillResult();
@@ -40,10 +41,12 @@ public class ProductServiceImpl implements ProductService {
             ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findSeckill(0,4)),
                     new ArrayList(ProducDao.findSeckill(4,4))};
             seckillResult.setSeckillProduct(arrayLists1);
-            redisUtil.lSet("SeckillResult", seckillResult);  //存入缓存
-            List list= Arrays.asList(seckillResult);//增加一层数组
+            //存入缓存
+            redisUtil.lSet("SeckillResult", seckillResult);
+            //增加一层数组
+            List list= Arrays.asList(seckillResult);
             List<SeckillResult>  recommend = list;
-            System.out.println("存入数据库");
+            System.out.println("秒杀商品信息从数据库取");
             return recommend;
         }
         System.out.println("缓中取");
@@ -70,16 +73,22 @@ public class ProductServiceImpl implements ProductService {
         return redis;
     }
 
-    //查询广告
+    /**
+     * 查询广告
+     * @return
+     */
     @Override
     public List<Ad> findAd() {
         List<Ad> redis = (List<Ad>) redisUtil.lGet("Ad", 0, -1);
         if (redis.size() == 0) {
             System.out.println("数据库中取");
             List<Ad> ads = ProducDao.findAd();
-            redisUtil.lSet("Ad", ads);  //存入缓存
-            ArrayList[] arrayLists = {(ArrayList) ads}; //转换返回格式
-            List list= Arrays.asList(arrayLists);//增加一层数组
+            //存入缓存
+            redisUtil.lSet("Ad", ads);
+            //转换返回格式
+            ArrayList[] arrayLists = {(ArrayList) ads};
+            //增加一层数组
+            List list= Arrays.asList(arrayLists);
             List<Ad>  ad = list;
             return ad;
         } else {
@@ -97,9 +106,12 @@ public class ProductServiceImpl implements ProductService {
         if (redis.size() == 0) {
             System.out.println("数据库中取");
             List<Recommend> recommends = ProducDao.findRecommend();
-            redisUtil.lSet("recommend", recommends);  //存入缓存
-            ArrayList[] arrayLists = {(ArrayList) recommends}; //转换返回格式
-            List list= Arrays.asList(arrayLists);//增加一层数组
+            //存入缓存
+            redisUtil.lSet("recommend", recommends);
+            //转换返回格式
+            ArrayList[] arrayLists = {(ArrayList) recommends};
+            //增加一层数组
+            List list= Arrays.asList(arrayLists);
             List<Recommend>  recommend = list;
             return  recommend;
         } else {

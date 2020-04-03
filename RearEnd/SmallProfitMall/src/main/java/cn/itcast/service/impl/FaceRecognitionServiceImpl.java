@@ -18,7 +18,6 @@ import java.util.Map;
  * @date 2020/3/31
  */
 @Service
-@Transactional
 public class FaceRecognitionServiceImpl implements FaceRecognitionService {
 
     @Autowired
@@ -27,7 +26,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
     public static final String AERROR_MSG = "SUCCESS";
 
     //人脸检测信用度
-    public static final Double CREDIT = 0.84;
+    public static final Double CREDIT = 0.82;
 
     //信用不足错误代码
     public static final int ERROR_CODE = 30000;

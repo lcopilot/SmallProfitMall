@@ -15,7 +15,6 @@ import java.util.List;
  * @date 2020/3/29
  */
 @Service
-@Transactional
 public class NewsServiceImpl implements NewsService {
     /**
      * 查询消息

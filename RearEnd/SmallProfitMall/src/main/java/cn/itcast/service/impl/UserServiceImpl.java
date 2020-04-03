@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Service("userService")
-@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired

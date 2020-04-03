@@ -14,7 +14,6 @@ import java.util.Date;
  * 足迹
  */
 @Service
-@Transactional
 public class FootprintServiceImpl implements FootprintService {
 
     @Autowired
