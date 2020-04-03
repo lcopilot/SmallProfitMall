@@ -12,7 +12,7 @@
         </div>
       </el-col>
     </el-main>
-    <el-footer>SmallProfit @2020</el-footer>
+    <el-footer>SmallProfit @2020<br/> 既然选择了远方，便只顾风雨兼程</el-footer>
   </el-container>
 
 </template>

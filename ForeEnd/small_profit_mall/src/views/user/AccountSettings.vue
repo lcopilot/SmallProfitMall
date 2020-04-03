@@ -65,13 +65,13 @@
 </template>
 
 <script>
-  const personalPage = () => import("../../components/admin/personalHubPage");
-  const Face = () => import("../../components/admin/face");
+  const personalPage = () => import("../../components/admin/PersonalHubPage");
+  const Face = () => import("../../components/admin/Face");
   import *as userApi from '../../api/page/user';
   import encryption from "../../util/encryption";
 
   export default {
-    name: "accountSettings",
+    name: "AccountSettings",
     components: {personalPage, Face},
     data() {
       return {
@@ -138,7 +138,6 @@
           dataForm.append("videoFile", videoFile);
           this.$refs.face.recognitionFailure(20190415);
           userApi.uploadFace(dataForm).then(res => {
-            console.log(res);
             if (res.success) {
               this.$message({
                 message: "人脸采集成功!已上传至服务器",
@@ -149,9 +148,11 @@
               this.$refs.face.faceBtnContent = '开始采集';
               this.$refs.face.collectionPrompt = '';
               this.$refs.face.stopNavigator();
+              this.getAccountSetting();
             } else {
               this.$refs.face.faceLoading = false;
               this.$refs.face.faceBtnContent = '重新采集';
+              console.log(res.faceRecognition.result.error_code)
               this.$refs.face.recognitionFailure(res.faceRecognition.result.error_code);
             }
           }).catch(error => {

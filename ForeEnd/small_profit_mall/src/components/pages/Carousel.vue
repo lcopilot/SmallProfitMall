@@ -94,7 +94,7 @@
   import *as homeApi from '../../api/page/home'
   import *as commonApi from '../../api/util/common'
   const search = () => import("./Search");
-  const productCategories=()=>import("./productCategories");
+  const productCategories=()=>import("./ProductCategories");
   export default {
     name: "Carousel",
     components: {

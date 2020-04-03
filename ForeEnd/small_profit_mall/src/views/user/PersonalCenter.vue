@@ -246,7 +246,7 @@
 </template>
 
 <script>
-  const personalPage = () => import("../../components/admin/personalHubPage");
+  const personalPage = () => import("../../components/admin/PersonalHubPage");
   import *as userApi from '../../api/page/user';
   import encryption from "../../util/encryption";
   export default {
