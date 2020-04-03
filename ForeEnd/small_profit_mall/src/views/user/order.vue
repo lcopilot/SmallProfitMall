@@ -19,66 +19,75 @@
               </span>
               </div>
               <div style="padding-left: 2%">
-                <el-row :gutter="10" @mouseenter.native="showEdit" @mouseleave.native="showDefault">
-                  <el-col :span="2">
+                <div v-if="!orderAddress">还没有地址哦~
+                  <el-button @click="addAddress" type="text">添加地址</el-button>
+                </div>
+                <el-row :gutter="10" v-if="orderAddress">
+                  <el-col :span="3">
                     <el-tag type="success" size="mini" effect="dark">
-                      学校地址
+                      {{orderAddress.alias}}
                     </el-tag>
                   </el-col>
                   <el-col :span="2">
-                    <div class="orders_address">方鸿鑫递的时候</div>
+                    <div class="orders_address">
+                      {{orderAddress.name}}
+                    </div>
                   </el-col>
-                  <el-col :span="14">
-                    <div class="orders_address">湖南 长沙市 天心区 暮云街道
-                      中意三路122号(红星南北大楼西北)湖南科技职业学院(暮云...
+                  <el-col :span="13">
+                    <div class="orders_address">
+                      {{orderAddress.areas+''+orderAddress.detailedAddress}}
                     </div>
                   </el-col>
                   <el-col :span="3">
-                    <div class="orders_address">153****5410</div>
+                    <div class="orders_address">{{fuzzyPhone(orderAddress.phone)}}</div>
                   </el-col>
                   <el-col :span="3">
-                    <el-tag type="success" v-cloak v-show="!editShow" size="mini" effect="dark">
+                    <el-tag type="success" size="mini" effect="dark">
                       默认地址
                     </el-tag>
-                    <el-button v-show="editShow" v-cloak type="text" style="margin-top: -5px"
-                               class="orders_address">
-                      编辑
-                    </el-button>
                   </el-col>
                 </el-row>
                 <el-collapse class="order_more_address">
-                  <el-collapse-item title="更多地址" @click.native="moreAddress()">
-                    <a v-for="address in addressList">
-                      <el-row :gutter="10">
-                        <el-col :span="2">
+                  <el-collapse-item title="更多地址">
+                    <div v-for="(address,index) in addressList" class="order_address"
+                         @click="selectAddress(index)">
+                      <el-row :gutter="10" v-if="!address.defaults">
+                        <el-col :span="3">
                           <el-tag type="success" size="mini" effect="dark">
                             {{address.alias}}
                           </el-tag>
                         </el-col>
                         <el-col :span="2">
-                          <div class="orders_address">{{address.name}}</div>
-                        </el-col>
-                        <el-col :span="12">
                           <div class="orders_address">
-                            {{address.areas}} {{address.detailedAddress}}
+                            <a>
+                              {{address.name}}
+                            </a>
                           </div>
                         </el-col>
-                        <el-col :span="5">
+                        <el-col :span="13">
+                          <div class="orders_address">
+                            <a>
+                              {{address.areas+' '+address.detailedAddress}}
+                            </a>
+                          </div>
+                        </el-col>
+                        <el-col :span="3">
                           <div class="orders_address">
                             {{fuzzyPhone(address.phone)}}
                           </div>
                         </el-col>
                         <el-col :span="3">
-                          <el-button type="text" class="orders_address" style="margin-top: -5px">
+                          <el-button type="text" class="orders_address" style="margin-top: -5px"
+                                     @click="$refs.addressManagement.editAddress(index)">
                             编辑
                           </el-button>
                         </el-col>
                       </el-row>
-                    </a>
-                    <br/>
+                    </div>
                   </el-collapse-item>
                 </el-collapse>
-                <addressManagement ref="addressManagement" :isOrder="true"/>
+                <addressManagement ref="addressManagement" :isOrder="true"
+                                   @getAddress="getAddress"/>
               </div>
             </div>
             <div class="order_div">
@@ -110,12 +119,11 @@
                     <div>
                       <el-radio-group v-model="expressType">
                         <el-radio label="1">
-                          <svg-icon name="postal" style="width:25px;margin-bottom: -8px"/>
+                          <svg-icon name="postal" class="order_express"/>
                           邮政
                         </el-radio>
                         <el-radio label="2">
-                          <svg-icon name="FS"
-                                    style="width:25px;margin-bottom: -8px"/>
+                          <svg-icon name="FS" class="order_express"/>
                           顺丰
                         </el-radio>
                       </el-radio-group>
@@ -183,7 +191,7 @@
                       </el-col>
                       <el-col :span="2" :push="2" class="order_product_price">
                         <div style="color: red;">￥156.00</div>
-                        <div> 0.025kg</div>
+                        <div>0.025kg</div>
                       </el-col>
                       <el-col :span="2" :push="5">
                         <div>x1</div>
@@ -193,7 +201,6 @@
                 </el-row>
               </div>
             </div>
-
           </el-card>
           <el-card shadow="always" class="cart_footer">
             <el-row>
@@ -223,7 +230,7 @@
           </el-card>
         </el-col>
       </el-row>
-      <Face :isPayment="true" ref="face" @uploadFace="facePayment()"/>
+      <Face :isPayment="true" ref="face" @uploadFace="facePayment"/>
     </el-main>
     <el-footer>
       <Footer/>
@@ -241,6 +248,8 @@
     components: {addressManagement, Face},
     data() {
       return {
+        //默认地址
+        orderAddress: {},
         //地址数据
         addressList: [],
         //支付方式
@@ -263,13 +272,9 @@
       }
     },
     methods: {
-      //显示默认地址的编辑按钮
-      showEdit() {
-        this.editShow = true;
-      },
-      //显示默认标签
-      showDefault() {
-        this.editShow = false;
+      //选择配送地址
+      selectAddress(index) {
+        this.orderAddress = this.addressList[index];
       },
       //添加地址
       addAddress() {
@@ -300,15 +305,25 @@
           }
         })
       },
-      moreAddress() {
-        this.addressList = this.$refs.addressManagement.addressList;
+      //获取地址数据
+      getAddress(addressList) {
+        this.addressList = addressList;
+        addressList.forEach((address) => {
+          if (address.defaults) {
+            this.orderAddress = address;
+          }
+        })
       },
+      //模糊处理手机号
       fuzzyPhone(phone) {
         let newPhone = String(phone).slice(0, 3) + "*".repeat(6)
             + String(phone).slice(9, String(phone).length);
         return newPhone.slice(0, 11)
       }
     },
+    created() {
+
+    }
 
   }
 </script>
@@ -357,6 +372,10 @@
     font-size: 14px;
   }
 
+  .order_express {
+    width: 25px;
+    margin-bottom: -8px
+  }
 
   .order_7Day span {
     color: #1296db;
@@ -367,6 +386,10 @@
     margin-bottom: -2%;
     width: 20px;
     height: 20px
+  }
+
+  .order_address:hover {
+    cursor: pointer;
   }
 
   .order_pay {
