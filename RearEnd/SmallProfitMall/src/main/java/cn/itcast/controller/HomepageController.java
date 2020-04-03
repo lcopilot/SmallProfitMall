@@ -40,7 +40,10 @@ public class HomepageController {
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
 
-    //商品分类导航栏
+    /**
+     * 商品分类导航栏
+     * @return
+     */
     @RequestMapping("/findNavigation1")
     public QueryResponseResult findNavigation(){
         QueryResult result = new QueryResult();
@@ -50,7 +53,10 @@ public class HomepageController {
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
      }
 
-    //商品分类导航栏2
+    /**
+     * 商品分类导航栏2
+     * @return
+     */
     @RequestMapping("/findNavigation2")
     public QueryResponseResult findNavigation2(){
         QueryResult result = new QueryResult();
@@ -60,7 +66,10 @@ public class HomepageController {
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
 
-    //主页右侧图标
+    /**
+     * 主页右侧图标
+     * @return
+     */
     @RequestMapping("/icon")
     public QueryResponseResult findIcon(){
         QueryResult result = new QueryResult();
@@ -71,7 +80,10 @@ public class HomepageController {
     }
 
 
-    //商品导航栏详细
+    /**
+     * 商品导航栏详细
+     * @return
+     */
     @RequestMapping("/navigationInDetail")
     public QueryResponseResult cs(){
         QueryResult result = new QueryResult();

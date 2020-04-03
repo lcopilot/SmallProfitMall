@@ -60,7 +60,13 @@ public class AddressController {
     }
 
 
-    //刪除收货地址
+    /**
+     * 刪除收货地址
+     * @param userId 用户id
+     * @param addressId 地址id
+     * @param defaults 是否为默认地址
+     * @return
+     */
     @RequestMapping(value = "/deleteAddress/{userId}/{addressId}/{defaults}",method = RequestMethod.DELETE)
     public QueryResponseResult deleteAddress(@PathVariable("userId")String userId,@PathVariable("addressId")Integer addressId,@PathVariable("defaults")Boolean defaults) {
         int redis = addressService.deleteAddress(userId, addressId, defaults);
@@ -73,7 +79,12 @@ public class AddressController {
 
     }
 
-    //修改默認地址
+    /**
+     * 修改默認地址
+     * @param userId 用户id
+     * @param addressId 地址id
+     * @return
+     */
     @RequestMapping(value = "/updateDefault",method = RequestMethod.PUT)
     public QueryResponseResult updateDefaults(String userId,Integer addressId) {
         int redis = addressService.updateDefaults(addressId,userId,true);

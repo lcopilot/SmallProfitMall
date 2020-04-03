@@ -7,22 +7,47 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface ShoppingCartDao {
-    //添加到购物车
+    /**
+     * 添加到购物车
+     * @param shoppingCar 购物车对象
+     * @return
+     */
     public int addShoppingCar(ShoppingCart shoppingCar);
 
-    //根据pid查询商品价格跟名字
+    /**
+     * 查询商品价格跟名字
+     * @param productId 商品id
+     * @return
+     */
     public PurchaseInformation findByPid(int productId);
 
-    //根据uid查询购物车
+    /**
+     * 查询购物车
+     * @param userId 用户id
+     * @return
+     */
     public List<ShoppingCart> findByUserId(@Param("userId")String userId);
 
-    //根据uid productId查询用户是否收藏
+    /**
+     * 查询用户是否收藏
+     * @param userId 用户id
+     * @param productId 商品id
+     * @return
+     */
     public  String  findByUidEvaluation(@Param("userId")String userId,@Param("productId")int productId);
 
-    //根据id删除
+    /**
+     * 删除购物车
+     * @param shoppingCartId 购物车id
+     * @return
+     */
     public Integer deleteCart(@Param("shoppingCartId")Integer shoppingCartId);
 
-    //根据用户id查询购物车商品数量
+    /**
+     * /询购物车商品数量
+     * @param userId 用户id
+     * @return
+     */
     public Integer findByuId(String userId);
 
     /**
@@ -33,7 +58,12 @@ public interface ShoppingCartDao {
      */
     public int updateQuantity(@Param("quantity")int quantity,@Param("shoppingCartId")int shoppingCartId);
 
-    //查询到货通知
+    /**
+     * 查询到货通知
+     * @param userId 用户id
+     * @param productId 商品id
+     * @return
+     */
     public List<String> findArrivalNotice(@Param("userId")String userId,@Param("productId")int productId);
 
     /**
