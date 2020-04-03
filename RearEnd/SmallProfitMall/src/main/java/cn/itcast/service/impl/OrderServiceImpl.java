@@ -85,7 +85,10 @@ public class OrderServiceImpl implements OrderService {
             //删除该购物车购物车
             shoppingCartDao.deleteCart(shoppingCartIds);
         }
+        //设置总计
         order.setOrderTotal(orderNotes);
+        //设置用户id
+        order.setUserId(userId);
         //设置订单号
         order.setOrderId(orderId);
         Integer result = orderDao.addOrder(order);

@@ -1,11 +1,8 @@
 package cn.itcast.controller;
 
-import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
-import cn.itcast.response.order.Order;
-import cn.itcast.response.order.QueryOrder;
 import cn.itcast.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
