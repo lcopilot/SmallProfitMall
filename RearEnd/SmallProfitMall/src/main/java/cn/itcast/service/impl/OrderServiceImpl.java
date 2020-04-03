@@ -35,13 +35,14 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public String addOrder(String userId, Integer[] shoppingCartId) {
         Order order= new Order();
+        String initialId="111111";
         //获取当前时间戳
         Long timeStamp = System.currentTimeMillis();
         //获取今天最后一个订单号
         String orderIds=orderDao.findSerialnumber();
         //若为今天第一个订单 则为000000
-        if (orderIds==null||orderIds.equals("")){
-            orderIds="000000";
+        if (orderIds==null||"".equals(orderIds)){
+            orderIds=initialId;
         }
         //截取最后六位
         Integer Serialnumber =Integer.parseInt(orderIds.substring(orderIds.length() -6,orderIds.length()));
