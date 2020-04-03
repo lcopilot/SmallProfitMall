@@ -7,8 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 //商品详细
 public interface ProductDetailsDao {
-
-
     /**
      * 查询商品详细信息
      * @param userId

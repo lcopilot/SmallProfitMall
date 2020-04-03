@@ -26,7 +26,7 @@
     </select>
 
     <!--根据uid查询购物车-->
-    <select id="findByUserId" resultType="cn.itcast.domain.shoppingCar.ShoppingCart" parameterType="java.lang.String">
+    <select id="findShoppingCart" resultType="cn.itcast.domain.shoppingCar.ShoppingCart">
         select
         sc.*,pp.ProductInventory,pi.ImageSite,pp.ProductPrice,pb.ProductName
         from
@@ -43,8 +43,17 @@
 		    ProductBasis pb
 		ON
 		    pi.ProductId = pb.ProductId
-        WHERE
-            sc.userId=#{userId}
+        <where>
+            <if test="userId!=null">
+                AND sc.userId=#{userId}
+            </if>
+
+            <if test="shoppingCartId!=null">
+              AND  sc.shoppingCartId=#{shoppingCartId}
+            </if>
+
+        </where>
+
 		AND
 		    pi.sign=1
     </select>
@@ -119,6 +128,28 @@
             sc.shoppingCartId
         desc
         limit #{Start},#{End}
+    </select>
+    <select id="finByShoppingCartId" resultType="cn.itcast.domain.shoppingCar.ShoppingCart">
+          select
+        sc.*,pp.ProductInventory,pi.ImageSite,pp.ProductPrice,pb.ProductName
+        from
+            shoppingCart sc
+        LEFT JOIN
+            ProductPrice pp
+        ON
+            sc.productId=pp.ProductId
+        LEFT JOIN
+            ProductImage pi
+		ON
+		    pp.ProductId = pi.ProductId
+		LEFT JOIN
+		    ProductBasis pb
+		ON
+		    pi.ProductId = pb.ProductId
+        WHERE
+            sc.userId=#{userId}
+		AND
+		    pi.sign=1
     </select>
 
 

@@ -24,9 +24,10 @@ public interface ShoppingCartDao {
     /**
      * 查询购物车
      * @param userId 用户id
+     * @param shoppingCartId 购物车id
      * @return
      */
-    public List<ShoppingCart> findByUserId(@Param("userId")String userId);
+    public List<ShoppingCart> findShoppingCart(@Param("userId")String userId ,@Param("shoppingCartId")Integer shoppingCartId);
 
     /**
      * 查询用户是否收藏

@@ -4,13 +4,15 @@ import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
+import cn.itcast.response.order.Order;
+import cn.itcast.response.order.QueryOrder;
+import cn.itcast.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,12 +26,18 @@ public class OrderController {
 
     @Autowired
     WebSocket webSocket;
+
+    @Autowired
+    OrderService orderService;
     /**
      * 订单
      * @return
      */
-    @RequestMapping("/Order/{userId}/{News}")
-    public QueryResponseResult Order(@PathVariable("userId") String userId,@PathVariable("News")String News) throws IOException {
-        return  new QueryResponseResult(CommonCode.SUCCESS,null);
+    @RequestMapping(value = "/addOrder" ,method = RequestMethod.POST)
+    public QueryResponseResult addOrder(String userId ,Integer[] shoppingCartId) throws IOException {
+        String result = orderService.addOrder(userId,shoppingCartId);
+        QueryResult queryResult=new QueryResult();
+        queryResult.setList(Collections.singletonList(result));
+        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
     }
 }
