@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
      * 创建订单
      * @param userId 用户id
      * @param shoppingCartId 购物车id
-     * @return
+     * @return 返回订单号
      */
     @Override
     public String addOrder(String userId, Integer[] shoppingCartId) {
@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
         //获取今天最后一个订单号
         String orderIds=orderDao.findSerialnumber();
         //若为今天第一个订单 则为000000
-        if (orderIds==null){
+        if (orderIds==null||orderIds.equals("")){
             orderIds="000000";
         }
         //截取最后六位
@@ -91,7 +91,8 @@ public class OrderServiceImpl implements OrderService {
         order.setUserId(userId);
         //设置订单号
         order.setOrderId(orderId);
-        Integer result = orderDao.addOrder(order);
+        //数据库新增
+        orderDao.addOrder(order);
         return orderId;
     }
 
