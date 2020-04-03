@@ -137,10 +137,10 @@
 </template>
 
 <script>
-  const personalPage = () => import("../../components/admin/personalHubPage");
+  const personalPage = () => import("../../components/admin/PersonalHubPage");
   const DataSelect = () => import("../../components/UtilsComponent/DateSelect");
-  const phoneModify = () => import("../../components/admin/phoneModify");
-  const emailModify = () => import("../../components/admin/emailModify");
+  const phoneModify = () => import("../../components/admin/PhoneModify");
+  const emailModify = () => import("../../components/admin/EmailModify");
   import *as userApi from '../../api/page/user'  //*as别名
   export default {
     name: "personalInformation",

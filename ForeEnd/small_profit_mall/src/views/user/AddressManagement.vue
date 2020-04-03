@@ -140,7 +140,7 @@
   import * as commonApi from "../../api/util/common";
   import * as userApi from "../../api/page/user";
 
-  const personalPage = () => import("../../components/admin/personalHubPage");
+  const personalPage = () => import("../../components/admin/PersonalHubPage");
 
   export default {
     inject: ["reload"],

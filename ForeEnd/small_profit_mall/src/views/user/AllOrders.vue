@@ -63,8 +63,8 @@
 <script>
   const Header = () => import("../../components/pages/Header"); //组件懒加载
   const Footer = () => import("../../components/pages/Footer");
-  const personalPage = () => import("../../components/admin/personalHubPage");
-  const orderContent = () => import("../../components/admin/orderContent");
+  const personalPage = () => import("../../components/admin/PersonalHubPage");
+  const orderContent = () => import("../../components/admin/OrderContent");
   export default {
     name: "allOrders",
     components: {Header, Footer, personalPage,orderContent},

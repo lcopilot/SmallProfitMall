@@ -35,12 +35,12 @@
               </div>
               <el-table v-if="toke" empty-text="购物车中还没有商品,赶紧选购吧!" :data="cartList"
                         :show-header="false">
-                <el-table-column width="80">
+                <el-table-column min-width="15%">
                   <template slot-scope="product">
                     <el-image fit="scale-down" :src="product.row.imageSite"/>
                   </template>
                 </el-table-column>
-                <el-table-column width="215">
+                <el-table-column min-width="45%">
                   <template slot-scope="product">
                     <router-link :to="{path: '/product',query:{productId:product.row.productId}}">
                       <div class="cart_preview_product_name">
@@ -49,14 +49,14 @@
                     </router-link>
                   </template>
                 </el-table-column>
-                <el-table-column width="60">
+                <el-table-column min-width="12%">
                   <template slot-scope="product">
                     <el-tag size="small" effect="dark" type="success">
                       {{product.row.quantity<=99?'x'+product.row.quantity:'99+'}}
                     </el-tag>
                   </template>
                 </el-table-column>
-                <el-table-column width="60">
+                <el-table-column min-width="10%">
                   <template slot-scope="product">
                     <el-button size="medium" @click="removeCartProduct(product.row.shoppingCartId)"
                                icon="el-icon-delete" circle></el-button>
@@ -117,7 +117,7 @@
   import *as homeApi from '../../api/page/home';
   import *as productApi from '../../api/page/product';
 
-  const productCategories = () => import("./productCategories");
+  const productCategories = () => import("./ProductCategories");
 
   export default {
     name: "Search",

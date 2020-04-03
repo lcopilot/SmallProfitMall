@@ -11,10 +11,13 @@
     </div>
     <div style="margin-top: 20px;"
          v-for="order in orderList">
-      <div class="order_information">
+      <div class="order_information" @mouseenter="deleteBtn=true" @mouseleave="deleteBtn=false">
         <el-row>
           <el-col :span="5" :push="1">时间:{{order.time}}</el-col>
           <el-col :span="10" :push="1">订单号:{{order.orderNumber}}</el-col>
+          <el-col :span="2" :push="8" v-if="deleteBtn">
+            <li class="el-icon-delete order_delete"></li>
+          </el-col>
         </el-row>
       </div>
       <div>
@@ -39,7 +42,7 @@
                     </router-link>
                   </el-col>
                   <el-col :span="5">
-                    <div style="margin-top: 19%;font-size: 14px">
+                    <div style="margin-top: 19%;font-size: 13px">
                       x{{product.number}}
                     </div>
                   </el-col>
@@ -51,9 +54,13 @@
                 {{order.recipient}}
               </div>
             </td>
-            <td style="width: 12%">
-              <div class="order_recipient" style="font-size:13px;color: red">
+            <td style="width: 12%" class="el_divider">
+              <div class="order_recipient">
                 ￥{{order.amount}}
+              </div>
+              <el-divider></el-divider>
+              <div style="color: #999999;font-size: 12px">
+                钱包支付
               </div>
             </td>
             <td style="width: 12%">
@@ -62,10 +69,10 @@
               </div>
             </td>
             <td style="width: 10%">
-              <div style="margin-top:10%;font-size:14px;padding-left: 10%;padding-right: 10%;">
-                <el-button type="text">去付款</el-button>
-                <el-button type="text">申请售后</el-button>
-                <el-button type="text">删除记录</el-button>
+              <div class="order_operate">
+                <el-button type="text" size="mini">去付款</el-button>
+                <el-button type="text" size="mini">申请售后</el-button>
+                <el-button type="text" size="mini">评价晒单</el-button>
               </div>
             </td>
           </tr>
@@ -101,6 +108,8 @@
     },
     data() {
       return {
+        //删除按钮
+        deleteBtn: false,
         //订单分页参数
         orderParams: {
           currentPage: 1,//页码
@@ -179,26 +188,6 @@
                 name: 'ssasdas',
                 number: '65'
               },
-              {
-                img: 'http://productdata.fhxasdsada.xyz/19f5df0ae27b218a.jpg',
-                name: 'ssasdas',
-                number: '65'
-              },
-              {
-                img: 'http://productdata.fhxasdsada.xyz/19f5df0ae27b218a.jpg',
-                name: 'ssasdas',
-                number: '65'
-              },
-              {
-                img: 'http://productdata.fhxasdsada.xyz/19f5df0ae27b218a.jpg',
-                name: 'ssasdas',
-                number: '65'
-              },
-              {
-                img: 'http://productdata.fhxasdsada.xyz/19f5df0ae27b218a.jpg',
-                name: 'ssasdas',
-                number: '65'
-              },
             ]
           },],
       }
@@ -223,11 +212,21 @@
 
   }
 
+  .order_operate {
+    margin-top: 3%;
+    font-size: 12px;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .order_operate /deep/ .el-button--mini{
+    padding:3px 15px;
+  }
   .order_recipient {
     margin-top: 10%;
-    font-size: 14px;
+    font-size: 13px;
     padding-left: 10%;
-    padding-right: 10%
+    padding-right: 10%;
+    color: #999999;
   }
 
   table {
@@ -238,9 +237,19 @@
 
   }
 
+  .order_delete:hover {
+    color: #FF2002;
+    cursor: pointer;
+  }
+
   .order_product_img {
     margin: 5% 0 0 15%;
     width: 55%
+  }
+
+  .el_divider /deep/ .el-divider--horizontal {
+    margin: 0 0 0 5%;
+    width: 90%;
   }
 
   .order_head {

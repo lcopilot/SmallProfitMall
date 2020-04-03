@@ -104,7 +104,7 @@
 </template>
 
 <script>
-  const personalPage = () => import("../../components/admin/personalHubPage");
+  const personalPage = () => import("../../components/admin/PersonalHubPage");
 
   export default {
     name: "favorite",
