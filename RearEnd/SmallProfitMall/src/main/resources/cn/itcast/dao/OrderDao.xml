@@ -20,6 +20,10 @@
 
     </insert>
 
+    <!--查询订单内容-->
+    <select id="findOrder" resultType="cn.itcast.domain.order.Order">
+        s
+    </select>
 
 
     <!--查询最后一条记录流水号-->
