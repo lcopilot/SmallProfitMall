@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 01/04/2020 19:58:22
+ Date: 02/04/2020 20:25:57
 */
 
 SET NAMES utf8mb4;
@@ -908,6 +908,31 @@ INSERT INTO `newsContent` VALUES (29, 1, '7c9fdfa3177042a08766aed29e7de6cd', '19
 INSERT INTO `newsContent` VALUES (30, 1, '7c9fdfa3177042a08766aed29e7de6cd', '22', 1, '0', '加油', '2020-03-30 10:50:50', 0);
 
 -- ----------------------------
+-- Table structure for order
+-- ----------------------------
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order`  (
+  `orderId` int(30) NULL DEFAULT NULL,
+  `shoppingCartId` int(40) NULL DEFAULT NULL,
+  `orderNote` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `productImage` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `productConfiguration` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `productQuantity` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `productPrice` double NULL DEFAULT NULL,
+  `productWeight` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `receiptStatus` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `paymentWay` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `weight` double NULL DEFAULT NULL,
+  `orderTime` datetime(0) NULL DEFAULT NULL,
+  `deliveryTime` datetime(0) NULL DEFAULT NULL,
+  `paymentTime` datetime(0) NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for productAttributes
 -- ----------------------------
 DROP TABLE IF EXISTS `productAttributes`;
@@ -987,7 +1012,7 @@ CREATE TABLE `shoppingCart`  (
   `productDeploy` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `quantity` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`shoppingCartId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 787 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 818 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of shoppingCart
@@ -995,29 +1020,33 @@ CREATE TABLE `shoppingCart`  (
 INSERT INTO `shoppingCart` VALUES (627, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '白色 优惠套餐一 ', 99);
 INSERT INTO `shoppingCart` VALUES (628, '8b616d638682406f96acd3b54dfbc723', 10001, '白色 ', 99);
 INSERT INTO `shoppingCart` VALUES (701, '8b616d638682406f96acd3b54dfbc723', 10015, '白色 ', 99);
-INSERT INTO `shoppingCart` VALUES (740, '7c9fdfa3177042a08766aed29e7de6cd', 10002, '白色 优惠套餐二 ', 1);
-INSERT INTO `shoppingCart` VALUES (742, '7c9fdfa3177042a08766aed29e7de6cd', 10005, 'WLAN版64G ', 1);
-INSERT INTO `shoppingCart` VALUES (744, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '蓝牙黑有刻  ', 1);
-INSERT INTO `shoppingCart` VALUES (745, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '标准黑有刻  ', 4);
-INSERT INTO `shoppingCart` VALUES (746, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '猪年限量版 90周年 ', 2);
-INSERT INTO `shoppingCart` VALUES (747, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '金色  ', 1);
-INSERT INTO `shoppingCart` VALUES (748, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '蓝牙黑无刻 ', 1);
-INSERT INTO `shoppingCart` VALUES (749, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '蓝牙白无刻  ', 1);
-INSERT INTO `shoppingCart` VALUES (750, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '静音白无刻 ', 3);
-INSERT INTO `shoppingCart` VALUES (751, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '静音白有刻  ', 2);
-INSERT INTO `shoppingCart` VALUES (752, '7c9fdfa3177042a08766aed29e7de6cd', 10028, '【新品】小爱音箱Pro  小米小爱音箱【HD版 深灰色】 ', 1);
-INSERT INTO `shoppingCart` VALUES (753, '7c9fdfa3177042a08766aed29e7de6cd', 10028, '【新品】小爱音箱Pro  Redmi 小爱音箱Play 绿色 ', 1);
-INSERT INTO `shoppingCart` VALUES (754, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '闪耀满天星AR1925 ', 4);
-INSERT INTO `shoppingCart` VALUES (755, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '璀璨满天星AR1926 ', 2);
-INSERT INTO `shoppingCart` VALUES (756, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '玫瑰金满天星AR11244 ', 1);
-INSERT INTO `shoppingCart` VALUES (757, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '钢质表带AR11129 ', 1);
-INSERT INTO `shoppingCart` VALUES (758, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '钢质表带AR1957 ', 1);
-INSERT INTO `shoppingCart` VALUES (759, '7c9fdfa3177042a08766aed29e7de6cd', 10030, '黑色 套餐 种类 XXXL 口味 规格 ', 1);
-INSERT INTO `shoppingCart` VALUES (760, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '黑色 ', 1);
-INSERT INTO `shoppingCart` VALUES (761, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '黑色+骨伽LLC750全模组电源 ', 1);
-INSERT INTO `shoppingCart` VALUES (762, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '棕黄色锈色 均码 ', 2);
-INSERT INTO `shoppingCart` VALUES (775, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '772#哑光豆沙红 ', 1);
-INSERT INTO `shoppingCart` VALUES (777, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '磨砂黑 ', 1);
+INSERT INTO `shoppingCart` VALUES (740, '7c9fdfa3177042a08766aed29e7de6cd', 10002, '白色 优惠套餐二 ', 5);
+INSERT INTO `shoppingCart` VALUES (787, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10014, '黑色 ', 1);
+INSERT INTO `shoppingCart` VALUES (793, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '绿色 豪华版 256G+8G\r\n ', 1);
+INSERT INTO `shoppingCart` VALUES (794, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '紫色 豪华版 256G+8G\r\n ', 1);
+INSERT INTO `shoppingCart` VALUES (795, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '黑色 豪华版 256G+8G\r\n ', 1);
+INSERT INTO `shoppingCart` VALUES (796, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '黑色 标志版 256G+8G\r\n ', 1);
+INSERT INTO `shoppingCart` VALUES (797, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '', 1);
+INSERT INTO `shoppingCart` VALUES (798, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '黑色 ', 2);
+INSERT INTO `shoppingCart` VALUES (799, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '黑色+骨伽LLC750全模组电源 ', 2);
+INSERT INTO `shoppingCart` VALUES (800, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '棕黄色锈色 均码 ', 1);
+INSERT INTO `shoppingCart` VALUES (801, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '棕黄色锈色 均码 ', 1);
+INSERT INTO `shoppingCart` VALUES (802, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '棕黄色锈色 均码 ', 1);
+INSERT INTO `shoppingCart` VALUES (803, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '棕黄色锈色 均码 ', 1);
+INSERT INTO `shoppingCart` VALUES (804, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '黄褐色 均码 ', 2);
+INSERT INTO `shoppingCart` VALUES (805, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '黄褐色 均码 ', 1);
+INSERT INTO `shoppingCart` VALUES (806, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '黄褐色 均码 ', 1);
+INSERT INTO `shoppingCart` VALUES (807, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '粉色 均码 ', 1);
+INSERT INTO `shoppingCart` VALUES (808, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '粉色 均码 ', 1);
+INSERT INTO `shoppingCart` VALUES (809, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '粉色 均码 ', 1);
+INSERT INTO `shoppingCart` VALUES (810, '7c9fdfa3177042a08766aed29e7de6cd', 10008, '', 12);
+INSERT INTO `shoppingCart` VALUES (811, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '', 2);
+INSERT INTO `shoppingCart` VALUES (812, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '', 1);
+INSERT INTO `shoppingCart` VALUES (813, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '', 1);
+INSERT INTO `shoppingCart` VALUES (814, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '', 1);
+INSERT INTO `shoppingCart` VALUES (815, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '', 1);
+INSERT INTO `shoppingCart` VALUES (816, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10007, '', 2);
+INSERT INTO `shoppingCart` VALUES (817, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10014, '黑色+骨伽LLC750全模组电源 ', 1);
 
 -- ----------------------------
 -- Table structure for user
@@ -1042,7 +1071,7 @@ CREATE TABLE `user`  (
 -- ----------------------------
 INSERT INTO `user` VALUES (52, 'f92b9f8f372e445fb6564cdd57aa3c3e', '小白', '++OrO3KQIS+TzybCOsQhcw==', '1', 't45eesyhFshmLr/zH6A2Dw==', 'NOCyNow6lg6D1Wibn5x0WCnRmd72oX+WfuO6bjCodHY=', ' http://img.fhxasdsada.xyz/f92b9f8f372e445fb6564cdd57aa3c3e?t=1585638018271', 'DM', '0-0-0');
 INSERT INTO `user` VALUES (54, '0497326c70a447ceb815aa23743daeab', 'smallProfit', '++OrO3KQIS+TzybCOsQhcw==', '1', 'fedMKLH76FIJ74Tc9t1rkQ==', NULL, 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM', '0-0-0');
-INSERT INTO `user` VALUES (55, '7c9fdfa3177042a08766aed29e7de6cd', 'MuGe', '++OrO3KQIS+TzybCOsQhcw==', '1', '7/nilpLOcaBpX6+BnSD+SQ==', NULL, ' http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585732332093', 'DM', '2019-4-15');
+INSERT INTO `user` VALUES (55, '7c9fdfa3177042a08766aed29e7de6cd', 'MuGe', '++OrO3KQIS+TzybCOsQhcw==', '1', '7/nilpLOcaBpX6+BnSD+SQ==', NULL, ' http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585809883145', 'DM', '2019-4-15');
 
 -- ----------------------------
 -- Table structure for userAddress
@@ -1061,15 +1090,24 @@ CREATE TABLE `userAddress`  (
   `alias` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `isdelete` int(11) NULL DEFAULT 1,
   PRIMARY KEY (`addressId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 109 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 135 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userAddress
 -- ----------------------------
-INSERT INTO `userAddress` VALUES (105, '7c9fdfa3177042a08766aed29e7de6cd', 'sdfsdfsd', '河北省 邯郸市 丛台区 光明桥街道 ', 'sdf', '15367885410', 'liuxianliangli@foxmail.com', '13,1304,130403,130403004,', '1', '公司', 1);
-INSERT INTO `userAddress` VALUES (106, '7c9fdfa3177042a08766aed29e7de6cd', 'dfsf', '山西省 大同市 云州区 西坪镇 ', 'dsfs', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140215,140215100,', '0', '学校', 1);
-INSERT INTO `userAddress` VALUES (107, '7c9fdfa3177042a08766aed29e7de6cd', 'sdfsd', '河北省 唐山市 开平区 开平街道 ', 'sfsd', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130205,130205002,', '0', '学校', 1);
-INSERT INTO `userAddress` VALUES (108, '7c9fdfa3177042a08766aed29e7de6cd', 'sdfds', '河北省 秦皇岛市 山海关区 西关街道 ', 'sdfsd', '15367885410', 'liuxianliangli@foxmail.com', '13,1303,130303,130303003,', '0', 'sdd', 1);
+INSERT INTO `userAddress` VALUES (122, '7c9fdfa3177042a08766aed29e7de6cd', '东方闪电', '内蒙古自治区 乌海市 海勃湾区 新华西街道 ', '速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '15,1503,150302,150302004,', '0', '学校', 0);
+INSERT INTO `userAddress` VALUES (123, '7c9fdfa3177042a08766aed29e7de6cd', '三大法师', '山西省 阳泉市 郊区 西南舁乡 ', '三大法师', '15367885410', 'liuxianliangli@foxmail.com', '14,1403,140311,140311200,', '0', '父母家', 0);
+INSERT INTO `userAddress` VALUES (124, 'f92b9f8f372e445fb6564cdd57aa3c3e', '18598814121', '河北省 石家庄市 长安区 建北街道 ', 'buyibgu', '18598814121', '2252821162@qq.com', '13,1301,130102,130102001,', '0', 'hu vjiu', 0);
+INSERT INTO `userAddress` VALUES (125, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩1号', '河北省 秦皇岛市 青龙满族自治县 青龙镇 ', '放松放松电饭锅电饭锅', '15367885410', 'liuxianliangli@foxmail.com', '13,1303,130321,130321100,', '0', '儿子', 1);
+INSERT INTO `userAddress` VALUES (126, 'f92b9f8f372e445fb6564cdd57aa3c3e', 'fff', '天津市 市辖区 和平区 劝业场街道 ', 'asdasasw', '15899855554', '2252821162@qq.com', '12,1201,120101,120101001,', '1', 'dsad', 0);
+INSERT INTO `userAddress` VALUES (127, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩2号', '山西省 大同市 云冈区 新胜街道 ', '大大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214001,', '1', '学校', 1);
+INSERT INTO `userAddress` VALUES (128, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩3号', '山东省 枣庄市 薛城区 临城街道 ', '所发生的速度还是大的黑社会的啥的婚纱大华氏度速度还是大速度还是大速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '37,3704,370403,370403001,', '0', '学校', 1);
+INSERT INTO `userAddress` VALUES (129, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩4号', '河北省 唐山市 开平区 马家沟街道 ', '速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130205,130205001,', '0', '多喝水', 1);
+INSERT INTO `userAddress` VALUES (130, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩5号', '河北省 唐山市 丰南区 大新庄镇 ', '速度还是大啥的婚纱大和', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130207,130207106,', '0', '速度还是大速度还是大速度', 0);
+INSERT INTO `userAddress` VALUES (131, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩5号', '河北省 邯郸市 丛台区 光明桥街道 ', '速度还是大三大法师', '15367885410', 'liuxianliangli@foxmail.com', '13,1304,130403,130403004,', '0', '学校速度还是大速度还是大', 0);
+INSERT INTO `userAddress` VALUES (132, '7c9fdfa3177042a08766aed29e7de6cd', '速度还是大和递四方速递', '河北省 唐山市 开平区 开平街道 ', '速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '13,1302,130205,130205002,', '0', '速度还是大的时候速度还是', 0);
+INSERT INTO `userAddress` VALUES (133, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩7号', '上海市 市辖区 静安区 石门二路街道 ', '速度还是大速度还是大所发生的速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '31,3101,310106,310106011,', '0', '速度还是大东', 1);
+INSERT INTO `userAddress` VALUES (134, '7c9fdfa3177042a08766aed29e7de6cd', '彭浩8号', '福建省 莆田市 秀屿区 笏石镇 ', '发送到发送到鼎折覆餗', '15367885410', 'liuxianliangli@foxmail.com', '35,3503,350305,350305100,', '0', '发送到发送到防守', 1);
 
 -- ----------------------------
 -- Table structure for userEvaluation
@@ -1105,18 +1143,18 @@ CREATE TABLE `userFootprint`  (
   `productId` int(11) NULL DEFAULT NULL,
   `footprintTime` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`footprintId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userFootprint
 -- ----------------------------
 INSERT INTO `userFootprint` VALUES (10, '7c9fdfa3177042a08766aed29e7de6cd', 10006, '2020-04-01 12:49:40');
 INSERT INTO `userFootprint` VALUES (11, '7c9fdfa3177042a08766aed29e7de6cd', 10013, '2020-03-28 11:27:53');
-INSERT INTO `userFootprint` VALUES (12, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '2020-03-30 11:10:59');
+INSERT INTO `userFootprint` VALUES (12, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '2020-04-02 15:40:09');
 INSERT INTO `userFootprint` VALUES (13, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '2020-03-30 17:16:24');
 INSERT INTO `userFootprint` VALUES (14, '7c9fdfa3177042a08766aed29e7de6cd', 10028, '2020-03-30 11:12:38');
-INSERT INTO `userFootprint` VALUES (15, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '2020-03-30 20:05:56');
-INSERT INTO `userFootprint` VALUES (16, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '2020-03-30 17:16:12');
+INSERT INTO `userFootprint` VALUES (15, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '2020-04-02 15:39:07');
+INSERT INTO `userFootprint` VALUES (16, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '2020-04-02 15:40:47');
 INSERT INTO `userFootprint` VALUES (17, '7c9fdfa3177042a08766aed29e7de6cd', 10017, '2020-03-24 21:05:38');
 INSERT INTO `userFootprint` VALUES (18, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '2020-03-30 11:56:02');
 INSERT INTO `userFootprint` VALUES (19, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-03-25 13:03:25');
@@ -1124,19 +1162,20 @@ INSERT INTO `userFootprint` VALUES (20, '7c9fdfa3177042a08766aed29e7de6cd', 1001
 INSERT INTO `userFootprint` VALUES (21, '7c9fdfa3177042a08766aed29e7de6cd', 10009, '2020-03-24 21:07:22');
 INSERT INTO `userFootprint` VALUES (22, 'abcd', 10005, '2020-03-26 19:48:53');
 INSERT INTO `userFootprint` VALUES (23, 'asdasd', 0, '2020-03-27 09:52:30');
-INSERT INTO `userFootprint` VALUES (24, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-03-30 17:16:02');
+INSERT INTO `userFootprint` VALUES (24, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-04-02 19:47:11');
 INSERT INTO `userFootprint` VALUES (25, '7c9fdfa3177042a08766aed29e7de6cd', 10021, '2020-03-25 13:05:35');
-INSERT INTO `userFootprint` VALUES (26, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '2020-03-26 11:17:53');
+INSERT INTO `userFootprint` VALUES (26, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '2020-04-02 15:41:33');
 INSERT INTO `userFootprint` VALUES (27, '7c9fdfa3177042a08766aed29e7de6cd', 10026, '2020-03-26 10:44:33');
 INSERT INTO `userFootprint` VALUES (28, '7c9fdfa3177042a08766aed29e7de6cd', 10025, '2020-03-30 11:08:57');
 INSERT INTO `userFootprint` VALUES (29, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '2020-03-31 19:37:46');
 INSERT INTO `userFootprint` VALUES (30, '7c9fdfa3177042a08766aed29e7de6cd', 10004, '2020-03-25 12:50:16');
 INSERT INTO `userFootprint` VALUES (31, '7c9fdfa3177042a08766aed29e7de6cd', 10011, '2020-03-25 12:47:44');
-INSERT INTO `userFootprint` VALUES (32, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '2020-03-30 10:13:02');
+INSERT INTO `userFootprint` VALUES (32, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '2020-04-02 19:37:49');
 INSERT INTO `userFootprint` VALUES (33, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '2020-03-30 17:03:17');
 INSERT INTO `userFootprint` VALUES (34, '7c9fdfa3177042a08766aed29e7de6cd', 10016, '2020-03-28 13:33:19');
 INSERT INTO `userFootprint` VALUES (35, '7c9fdfa3177042a08766aed29e7de6cd', 10029, '2020-03-30 11:11:38');
 INSERT INTO `userFootprint` VALUES (36, '7c9fdfa3177042a08766aed29e7de6cd', 10030, '2020-03-30 20:10:17');
+INSERT INTO `userFootprint` VALUES (37, '7c9fdfa3177042a08766aed29e7de6cd', 10008, '2020-04-02 15:41:13');
 
 -- ----------------------------
 -- Table structure for userMembe
@@ -1186,14 +1225,15 @@ DROP TABLE IF EXISTS `userPassword`;
 CREATE TABLE `userPassword`  (
   `userId` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `paymentPassword` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `faceRecognition` int(11) NULL DEFAULT 0
+  `faceRecognition` int(11) NULL DEFAULT 0,
+  `faceToken` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userPassword
 -- ----------------------------
-INSERT INTO `userPassword` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '++OrO3KQIS+TzybCOsQhcw==', 1);
-INSERT INTO `userPassword` VALUES ('9c1e482cfabf48f7ab64baee9bd778fd', NULL, 0);
-INSERT INTO `userPassword` VALUES ('f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 0);
+INSERT INTO `userPassword` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '++OrO3KQIS+TzybCOsQhcw==', 0, NULL);
+INSERT INTO `userPassword` VALUES ('9c1e482cfabf48f7ab64baee9bd778fd', NULL, 0, NULL);
+INSERT INTO `userPassword` VALUES ('f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 0, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

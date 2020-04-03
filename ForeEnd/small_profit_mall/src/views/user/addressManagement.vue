@@ -98,7 +98,7 @@
                 </el-form-item>
                 <el-form-item label="地址别名" prop="alias">
                   <div style="text-align: left">
-                    <el-autocomplete  :maxlength="12"
+                    <el-autocomplete  :maxlength="8"
                                      show-word-limit v-model="addressForm.alias"
                                      :fetch-suggestions="querySearch" placeholder="建议填写常用地址名称"
                                      clearable></el-autocomplete>
@@ -333,7 +333,8 @@
                   addressList.address == addressForm.address &&
                   addressList.email == addressForm.email &&
                   addressList.default == addressForm.default &&
-                  addressList.alias == addressForm.alias
+                  addressList.alias == addressForm.alias &&
+                  addressList.detailedAddress == addressForm.detailedAddress
               ) {
                 this.$message({
                   message: "您还没有修改哦~",
@@ -413,6 +414,7 @@
             res => {
               if (res.success) {
                this.addressList = res.queryResult.list;
+               this.$emit("getAddress",res.queryResult.list);
               }
             }
         );
