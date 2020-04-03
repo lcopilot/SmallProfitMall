@@ -60,7 +60,8 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
             uploadingError.put("error_code", uploadingRes.getString("error_code"));
             return  uploadingError.toString(2);
         }
-         String faceToken =  uploadingRes.getString("face_token");
+        JSONObject result=uploadingRes.getJSONObject("result");
+         String faceToken =  result.getString("face_token");
         accountSettingsService.updateFaceRecognition(userId,faceToken,1);
          return AERROR_MSG;
     }

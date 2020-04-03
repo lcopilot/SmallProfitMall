@@ -8,19 +8,35 @@ import java.util.List;
 
 //主页
 public interface HomepageDao {
-    //查询轮播图图片
+    /**
+     * 查询轮播图图片
+     * @return
+     */
     public List<RotationChart> findRotationChart();
 
-    //商品分类导航栏
+    /**
+     * 商品分类导航栏
+     * @return
+     */
     public List<Navigation> findNavigation();
 
-    //商品分类导航栏2
+    /**
+     * 商品分类导航栏2
+     * @return
+     */
     public List<Classify> findNavigation2();
 
-    //查询图标
+    /**
+     * 查询图标
+     * @return
+     */
     public List<Icon> findIcon();
 
-    //根据id查询详细分类
+    /**
+     * 查询详细分类
+     * @param nid
+     * @return
+     */
     public List<NavigationClassify> findById(int nid);
 
 

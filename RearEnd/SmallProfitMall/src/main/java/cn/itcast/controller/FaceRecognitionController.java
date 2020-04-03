@@ -26,6 +26,8 @@ import java.io.InputStream;
 @ResponseBody
 public class FaceRecognitionController {
 
+    //判断返回结果
+    public static final String RESULT = "SUCCESS";
 
     @Autowired
     FaceRecognitionService faceRecognitionService;
@@ -46,7 +48,7 @@ public class FaceRecognitionController {
             videoFiles=videoFile.getInputStream();
         }
         String result =faceRecognitionService.uploading(image,userId,videoFiles);
-        if (result.equals("SUCCESS")){
+        if (RESULT.equals(result)){
             return new FaceRecognitionResponse(CommonCode.SUCCESS, null);
         }
         FaceRecognition faceRecognition=new FaceRecognition();
@@ -63,7 +65,7 @@ public class FaceRecognitionController {
     @RequestMapping(value = "/deleteFace/{userId}",method = RequestMethod.DELETE)
     public FaceRecognitionResponse deleteFace(@PathVariable("userId") String userId ) throws Exception {
         String result =faceRecognitionService.deleteFace(userId);
-        if (result.equals("SUCCESS")){
+        if (RESULT.equals(result)){
             return new FaceRecognitionResponse(CommonCode.SUCCESS, null);
         }
         FaceRecognition faceRecognition=new FaceRecognition();

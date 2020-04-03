@@ -8,7 +8,8 @@
     <update id="updatePaymentPassword" parameterType="java.lang.String">
      UPDATE userPassword SET paymentPassword = #{paymentPassword} WHERE userId=#{userId}
     </update>
-    
+
+    <!--修改人脸-->
     <update id="updateFaceRecognition">
           UPDATE userPassword SET faceRecognition = #{faceRecognition},faceToken = #{faceToken} WHERE userId=#{userId}
     </update>
