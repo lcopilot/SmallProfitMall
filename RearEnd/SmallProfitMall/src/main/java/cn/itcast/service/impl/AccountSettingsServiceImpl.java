@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2020/4/1
  */
 @Service
-@Transactional
 public class AccountSettingsServiceImpl implements AccountSettingsService {
 
     @Autowired

@@ -15,7 +15,6 @@ import java.math.BigDecimal;
  * @date 2020/3/30
  */
 @Service
-@Transactional
 public class MemberServiceImpl implements MemberService {
 
     @Autowired

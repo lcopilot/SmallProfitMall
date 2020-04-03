@@ -16,7 +16,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Service
-@Transactional
 public class ShoppingCartImpl implements ShoppingCartService {
 
     @Autowired

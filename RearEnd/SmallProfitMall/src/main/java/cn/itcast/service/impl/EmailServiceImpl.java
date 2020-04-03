@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class EmailServiceImpl implements EmailService {
     @Autowired
     EmailDao emailDao;
@@ -21,20 +20,33 @@ public class EmailServiceImpl implements EmailService {
 //        mqSendMsgUtils.sendMsg("绑验证码为"+verification,type,email);
 //        return 0;
 //    }
+    /**
+     * 跟新邮箱方法
+     * @param uid 用户id
+     * @param email 新邮箱
+     * @return 是否成功
+     */
 
-    //跟新邮箱方法
     @Override
     public int addEmail(String uid, String email) {
         return emailDao.addEmail(uid,email);
     }
 
-    //查询用户是否有邮箱
+    /**
+     * 查询用户是否有邮箱
+     * @param uid
+     * @return
+     */
     @Override
     public String fendByIdEmail(String uid) {
         return emailDao.fendByIdEmail(uid);
     }
 
-    //查询用户是否存在
+    /**
+     * 查询用户是否存在
+     * @param email
+     * @return
+     */
     @Override
     public String fendEmail(String email) {
         return emailDao.fendEmail(email);

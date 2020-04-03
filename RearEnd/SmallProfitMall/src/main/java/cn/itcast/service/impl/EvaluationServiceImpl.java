@@ -9,18 +9,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
+/**
+ * 收藏
+ */
 @Service
-@Transactional
-public class EvaluationService implements cn.itcast.service.EvaluationService {
+public class EvaluationServiceImpl implements cn.itcast.service.EvaluationService {
     @Autowired
     EvaluationDao evaluationDao;
 
-    //添加收藏
+    /**
+     * 添加收藏
+     * @param evaluation 收藏对象
+     * @return  是否收藏成功
+     */
     @Override
     public int addEvaluation(Evaluation evaluation) {
         FavoriteProducer favoriteProducer = new FavoriteProducer();
         int redis=0;
-        if (evaluation.getProductIds().length>=3){  //大于3 发送到消息队列
+        //大于3 发送到消息队列
+        if (evaluation.getProductIds().length>=3){
             favoriteProducer.sendFavorite("addFavorite",evaluation);
              return 1;
         }

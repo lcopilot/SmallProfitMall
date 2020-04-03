@@ -14,7 +14,6 @@ import java.util.List;
 
 //商品详细
 @Service("productDetailsServiceImpl")
-@Transactional
 public class ProductDetailsServiceImpl implements ProductDetailsService {
 
     @Autowired
@@ -24,6 +23,11 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     @Autowired
     private RedisUtil redisUtil;
 
+    /**
+     * 商品详细分类
+     * @param pid 商品id
+     * @return 商品详细对象
+     */
     @Override
     public List<ProductDetailsResult> findByPid(int pid) {
         //查询商品有的属性
@@ -32,7 +36,8 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
         ProductDetailsResult productDetailsResult = productDetailsDao.fendProduct(pid);
         String transition = String.valueOf(pid);
         String ProductId ="productId_"+transition;
-        List<ProductDetailsResult>  redis = (List<ProductDetailsResult>)redisUtil.lGet(ProductId,0,-1); //从缓存中查询
+        //从缓存中查询是否存在
+        List<ProductDetailsResult>  redis = (List<ProductDetailsResult>)redisUtil.lGet(ProductId,0,-1);
         if(redis.size()==0){
             //库存价格(转换)
             String inventory = "";
@@ -40,14 +45,18 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
             String sale = "";
             //库存转换 大于10000转换微1w
             if (productDetailsResult.getInventorys() > 10000) {
-                java.text.DecimalFormat   df=new   java.text.DecimalFormat("#.#");//取小数点后一位
+                //取小数点后一位
+                java.text.DecimalFormat   df=new   java.text.DecimalFormat("#.#");
                 Double inventorys = productDetailsResult.getProductInventory();
                 Double a = inventorys/10000;
                 inventory = df.format(a);
-                inventory = inventory + "W+";   //库存过万转换
+                //库存过万转换
+                inventory = inventory + "W+";
             }else {
-                inventory=""+productDetailsResult.getProductInventory(); //转为字符串类型
-                inventory =inventory.split("\\.")[0];   //取小数点前数组
+                //转为字符串类型
+                inventory=""+productDetailsResult.getProductInventory();
+                //取小数点前数组
+                inventory =inventory.split("\\.")[0];
             }
             if (productDetailsResult.getProductSales()>10000){
                 java.text.DecimalFormat   df=new   java.text.DecimalFormat("#.#");
