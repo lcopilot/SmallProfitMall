@@ -102,7 +102,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         String faceDetectionRedis =faceDetectionRes.getString("error_msg");
         if (!faceDetectionRedis.equals(AERROR_MSG)){
             JSONObject faceError = new JSONObject();
-            faceError.put("error_code", faceDetectionRes.getString("error_code"));
+            faceError.put("error_code", faceDetectionRes.getInt("error_code"));
             return faceError.toString(2);
         }
         //取检测返回可信度
