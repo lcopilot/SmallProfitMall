@@ -14,7 +14,7 @@
     <!--根据id查询商品价格名字库存-->
     <select id="findByPid" resultType="cn.itcast.domain.shoppingCar.PurchaseInformation">
         SELECT
-			pb.ProductName,pp.ProductPrice,pp.ProductInventory
+			pb.ProductName,pb.ProductWeight,pp.ProductPrice,pp.ProductInventory
         FROM
             ProductBasis pb
         LEFT JOIN
@@ -47,13 +47,14 @@
             <if test="userId!=null">
                 AND sc.userId=#{userId}
             </if>
-
             <if test="shoppingCartId!=null">
               AND  sc.shoppingCartId=#{shoppingCartId}
             </if>
         </where>
 		AND
 		    pi.sign=1
+        order by
+        sc.shoppingCartId
     </select>
 
     <!--查询是否收藏-->
@@ -66,6 +67,9 @@
             userId=#{userId}
         AND
             productId=#{productId}
+        order by
+            sc.shoppingCartId
+        desc
     </select>
 
     <!--删除购物车-->

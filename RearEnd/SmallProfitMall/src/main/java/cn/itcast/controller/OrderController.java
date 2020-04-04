@@ -29,12 +29,30 @@ public class OrderController {
     OrderService orderService;
 
     /**
-     * 订单
-     * @return
+     * 购物车订单结束
+     * @param userId 用户id
+     * @param shoppingCartId 购物车id
+     * @return 订单号
+     * @throws IOException
      */
     @RequestMapping(value = "/addOrder" ,method = RequestMethod.POST)
-    public QueryResponseResult addOrder(PurchaseInformation purchaseInformation,String userId ,Integer[] shoppingCartId) throws IOException {
-        String result = orderService.addOrder(purchaseInformation,userId,shoppingCartId);
+    public QueryResponseResult addOrder(String userId ,Integer[] shoppingCartId) throws IOException {
+        String result = orderService.addOrder(userId,shoppingCartId);
+        QueryResult queryResult=new QueryResult();
+        queryResult.setList(Collections.singletonList(result));
+        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+    }
+
+
+    /**
+     * 直接购买订单结算
+     * @param purchaseInformation 商品对象
+     * @return 订单号
+     * @throws IOException
+     */
+    @RequestMapping(value = "/purchaseOrder" ,method = RequestMethod.POST)
+    public QueryResponseResult purchaseOrder(PurchaseInformation purchaseInformation) throws IOException {
+        String result = orderService.purchaseOrder(purchaseInformation);
         QueryResult queryResult=new QueryResult();
         queryResult.setList(Collections.singletonList(result));
         return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
