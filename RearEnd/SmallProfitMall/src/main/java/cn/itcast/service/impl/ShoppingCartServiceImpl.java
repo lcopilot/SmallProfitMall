@@ -74,6 +74,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         shoppingCart.setProductName(purchaseInformation1.getProductName());
         //设置商品价格
         shoppingCart.setProductPrice(purchaseInformation1.getProductPrice());
+        //设置商品重量
+        shoppingCart.setProductWeight(purchaseInformation1.getProductWeight());
         //设置库存
         shoppingCart.setProductInventory(purchaseInformation1.getProductInventory());
         //设置商品id

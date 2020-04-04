@@ -15,6 +15,13 @@ public interface OrderService {
      * @param shoppingCartId 购物车id
      * @return
      */
-    public String addOrder(PurchaseInformation purchaseInformation,String userId, Integer[] shoppingCartId);
+    public String addOrder(String userId, Integer[] shoppingCartId);
+
+    /**
+     * 直接购买订单结算
+     * @param purchaseInformation
+     * @return
+     */
+    public String purchaseOrder(PurchaseInformation purchaseInformation);
 
 }

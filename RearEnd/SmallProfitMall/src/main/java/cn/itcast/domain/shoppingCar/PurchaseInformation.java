@@ -10,6 +10,7 @@ public class PurchaseInformation implements Serializable {
     private String ProductName;         //商品名字
     private Double ProductPrice;         //商品价格
     private Double ProductInventory;    //商品库存
+    private String ProductWeight;       //商品重量
     private String size;                //尺寸(返回前端）
     private String colour;              //颜色(返回前端）
     private String combo;               //套餐(返回前端）
@@ -18,6 +19,14 @@ public class PurchaseInformation implements Serializable {
     private String kind;                //商品种类
     private String version;             //商品版本
     private Integer quantity;           //购买数量
+
+    public String getProductWeight() {
+        return ProductWeight;
+    }
+
+    public void setProductWeight(String productWeight) {
+        ProductWeight = productWeight;
+    }
 
     public Double getProductInventory() {
         return ProductInventory;

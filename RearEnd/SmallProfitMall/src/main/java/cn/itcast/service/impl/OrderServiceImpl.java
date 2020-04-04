@@ -36,71 +36,83 @@ public class OrderServiceImpl implements OrderService {
     ShoppingCartService shoppingCartService;
 
     /**
-     * 创建订单
+     * 购物车订单
      * @param userId 用户id
      * @param shoppingCartId 购物车id
      * @return 返回订单号
      */
     @Override
-    public String addOrder(PurchaseInformation purchaseInformation,String userId, Integer[] shoppingCartId) {
+    public String addOrder(String userId, Integer[] shoppingCartId) {
         Order order= new Order();
-        if (shoppingCartId!=null){
-            //生成订单id
-            String orderId = generateOrderId();
-            order.setOrderTime(new Date());
-            //初始购物车id
-            Integer[] initialize=shoppingCartId;
-            //将购物车中商品信息添加到订单商品信息 返回总价格
-            BigDecimal orderNotes = addProduct(initialize,orderId);
-            //设置总计
-            order.setOrderTotal(orderNotes);
-            //设置用户id
-            order.setUserId(userId);
-            //设置订单时间
-            order.setOrderTime(new Date());
-            //设置订单号
-            order.setOrderId(orderId);
-            //数据库新增
-            orderDao.addOrder(order);
-            return orderId;
-        }else {
-            //数据库取商品价格名字
-            PurchaseInformation purchaseInformation1 =  shoppingCartDao.findByPid(purchaseInformation.getProductId());
-            //创建商品详细信息
-            ProductContent productContent = new ProductContent();
-            //生成订单id
-            String orderId = generateOrderId();
-            //设置商品名字
-            productContent.setProductName(purchaseInformation1.getProductName());
-            //设置商品图片
-            productContent.setProductImage(productDetailsDao.findProductImage(purchaseInformation.getProductId()));
-            //设置商品价格
-            productContent.setProductPrice(purchaseInformation1.getProductPrice());
-            //设置订单id
-            productContent.setOrderId(orderId);
-            //设置是否评价
-            productContent.setEvaluate(false);
-            //商品配置
-            String productDeploy = shoppingCartService.fenProductDeploy(purchaseInformation);
-            //设置商品配置
-            productContent.setProductConfiguration(productDeploy);
-            //设置商品购买数量
-            productContent.setProductQuantity(purchaseInformation.getQuantity());
-            //添加到订单商品信息表
-            orderDao.addProductContent(productContent);
-            BigDecimal total =new BigDecimal(purchaseInformation1.getProductPrice());
-            //设置总计
-            order.setOrderTotal(total);
-            //设置用户id
-            order.setUserId(userId);
-            //设置订单时间
-            order.setOrderTime(new Date());
-            //设置订单号
-            order.setOrderId(orderId);
-            //数据库新增
-            orderDao.addOrder(order);
-            return orderId;
-        }
+
+        //生成订单id
+        String orderId = generateOrderId();
+        order.setOrderTime(new Date());
+        //初始购物车id
+        Integer[] initialize=shoppingCartId;
+        //将购物车中商品信息添加到订单商品信息 返回总价格
+        BigDecimal orderNotes = addProduct(initialize,orderId);
+        //设置总计
+        order.setOrderTotal(orderNotes);
+        //设置用户id
+        order.setUserId(userId);
+        //设置订单时间
+        order.setOrderTime(new Date());
+        //设置订单号
+        order.setOrderId(orderId);
+        //数据库新增
+        orderDao.addOrder(order);
+        return orderId;
+
+    }
+
+    /**
+     * 直接购买结算订单
+     * @param purchaseInformation 商品对象
+     * @return
+     */
+    @Override
+    public String purchaseOrder(PurchaseInformation purchaseInformation){
+        Order order= new Order();
+        //数据库取商品价格名字
+        PurchaseInformation purchaseInformation1 =  shoppingCartDao.findByPid(purchaseInformation.getProductId());
+        //创建商品详细信息
+        ProductContent productContent = new ProductContent();
+        //生成订单id
+        String orderId = generateOrderId();
+        //设置商品名字
+        productContent.setProductName(purchaseInformation1.getProductName());
+        //设置商品图片
+        productContent.setProductImage(productDetailsDao.findProductImage(purchaseInformation.getProductId()));
+        //设置商品价格
+        productContent.setProductPrice(purchaseInformation1.getProductPrice());
+        //设置订单id
+        productContent.setOrderId(orderId);
+        //设置是否评价
+        productContent.setEvaluate(false);
+        //商品配置
+        String productDeploy = shoppingCartService.fenProductDeploy(purchaseInformation);
+        //设置商品配置
+        productContent.setProductConfiguration(productDeploy);
+        //设置商品购买数量
+        productContent.setProductQuantity(purchaseInformation.getQuantity());
+        //设置商品重量
+        productContent.setProductWeight(purchaseInformation1.getProductWeight());
+        //添加到订单商品信息表
+        orderDao.addProductContent(productContent);
+
+        BigDecimal total =new BigDecimal(purchaseInformation1.getProductPrice());
+        //设置总计
+        order.setOrderTotal(total);
+        //设置用户id
+        order.setUserId(purchaseInformation.getUserId());
+        //设置订单时间
+        order.setOrderTime(new Date());
+        //设置订单号
+        order.setOrderId(orderId);
+        //数据库新增
+        orderDao.addOrder(order);
+        return orderId;
     }
 
     /**
@@ -161,6 +173,8 @@ public class OrderServiceImpl implements OrderService {
             productContent.setEvaluate(false);
             //设置商品配置
             productContent.setProductConfiguration(shoppingCart1.getProductDeploy());
+            //设置商品重量
+            productContent.setProductWeight(shoppingCart1.getProductWeight());
             //设置商品购买数量
             productContent.setProductQuantity(shoppingCart1.getQuantity());
             //添加到订单商品信息表
