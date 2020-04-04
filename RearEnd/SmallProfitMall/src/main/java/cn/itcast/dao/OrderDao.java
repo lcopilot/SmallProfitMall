@@ -2,6 +2,7 @@ package cn.itcast.dao;
 
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 订单
@@ -17,6 +18,14 @@ public interface OrderDao {
     public Integer addOrder(Order order);
 
     /**
+     * 查询订单
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @return
+     */
+    public Order findOrder(@Param("userId")String userId , @Param("orderId")String orderId);
+
+    /**
      * 新增订单商品
      * @param productContent
      * @return
@@ -28,5 +37,7 @@ public interface OrderDao {
      * @return
      */
     public String findSerialnumber();
+
+
 
 }

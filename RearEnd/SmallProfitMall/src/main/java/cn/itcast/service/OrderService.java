@@ -24,4 +24,12 @@ public interface OrderService {
      */
     public String purchaseOrder(PurchaseInformation purchaseInformation);
 
+    /**
+     * 查询订单信息
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @return
+     */
+    public Order findOrder(String userId ,String orderId);
+
 }

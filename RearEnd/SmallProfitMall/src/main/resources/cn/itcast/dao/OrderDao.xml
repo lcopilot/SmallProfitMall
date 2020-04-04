@@ -4,6 +4,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.OrderDao">
 
+    <resultMap id="orderMap" type="cn.itcast.domain.order.Order">
+        <id property="id" column="id"></id>
+        <result property="userId" column="userId"></result>
+        <result property="orderId" column="orderId"></result>
+        <result property="paymentWay" column="paymentWay"></result>
+        <result property="deliveryWay" column="deliveryWay"></result>
+        <result property="orderTime" column="orderTime"></result>
+        <result property="submitTime" column="submitTime"></result>
+        <result property="deliveryTime" column="deliveryTime"></result>
+        <result property="paymentTime" column="paymentTime"></result>
+        <result property="orderNote" column="orderNote"></result>
+        <result property="orderTotal" column="orderTotal"></result>
+         <!-- 配置角色集合的映射 -->
+        <collection property="productContents" ofType="cn.itcast.domain.order.ProductContent">
+            <id property="id" column="ids"></id>
+            <result property="productName" column="productName"></result>
+            <result property="productImage" column="productImage"></result>
+            <result property="productPrice" column="productPrice"></result>
+            <result property="productConfiguration" column="productConfiguration"></result>
+            <result property="productQuantity" column="productQuantity"></result>
+            <result property="productWeight" column="productWeight"></result>
+            <result property="evaluate" column="evaluate"></result>
+        </collection>
+    </resultMap>
+
     <!--新增订单-->
     <insert id="addOrder" parameterType="cn.itcast.domain.order.Order">
         INSERT INTO
@@ -20,10 +45,21 @@
 
     </insert>
 
-    <!--查询订单内容-->
-<!--    <select id="findOrder" resultType="cn.itcast.domain.order.Order">-->
-
-<!--    </select>-->
+    <!--查询订单-->
+    <select id="findOrder" resultMap="orderMap">
+        SELECT
+            uo.userId,uo.id,uo.orderId,uo.orderTotal,o.productName,o.id AS ids,
+            o.productImage,o.productPrice,o.productConfiguration,
+            o.productQuantity,o.productWeight,o.evaluate
+        FROM
+            userOrder uo
+        LEFT JOIN orders o
+            ON uo.orderId=o.orderId
+        WHERE
+             uo.userId=#{userId}
+        AND
+            uo.orderId=#{orderId}
+    </select>
 
 
     <!--查询最后一条记录流水号-->

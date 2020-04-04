@@ -2,11 +2,13 @@ package cn.itcast.controller;
 
 
 import cn.itcast.dao.NewsDao;
+import cn.itcast.dao.OrderDao;
 import cn.itcast.dao.ProductDao;
 import cn.itcast.dao.ProductDetailsDao;
 import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import cn.itcast.domain.homepag.Navigation;
 import cn.itcast.domain.news.News;
+import cn.itcast.domain.order.Order;
 import cn.itcast.messageQueue.producer.shopping.ShoppingProducer;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
@@ -36,6 +38,8 @@ public class TestController {
     @Autowired
     ProductDetailsDao productDetailsDao;
 
+    @Autowired
+    OrderDao orderDao;
     //测试
     @RequestMapping(value = "/Test/{test}",method = RequestMethod.GET)
     public QueryResponseResult findNavigation(@PathVariable("test")int test){
@@ -51,6 +55,14 @@ public class TestController {
 
         queryResult.setList(a);
         return  new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+    }
+
+    @RequestMapping(value = "/t/{a}/{b}",method = RequestMethod.GET)
+    public QueryResponseResult test(@PathVariable("a")String a,@PathVariable("b") String b){
+        Order order = orderDao.findOrder(a,b);
+        QueryResult queryResult=new QueryResult();
+        queryResult.setList(Arrays.asList(order) );
+        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
     }
 
 

@@ -13,6 +13,7 @@ import java.util.List;
  * @date 2020/4/3
  */
 public class Order implements Serializable {
+    private int id;
     //用户id
     private String userId;
     //订单id
@@ -25,14 +26,27 @@ public class Order implements Serializable {
     private Integer deliveryWay;
     //订单时间
     private Date orderTime;
-    //发货时间
+    //送达时间
     private Date deliveryTime;
+    //发货时间
+    private Date submitTime;
     //支付时间
     private Date paymentTime;
     //订单备注
     private String orderNote;
     //订单总计
     private BigDecimal orderTotal;
+
+    //商品信息
+    List<ProductContent> productContents;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUserId() {
         return userId;
@@ -41,24 +55,6 @@ public class Order implements Serializable {
     public void setUserId(String userId) {
         this.userId = userId;
     }
-
-    public Integer[] getShoppingCartId() {
-        return shoppingCartId;
-    }
-
-    public void setShoppingCartId(Integer[] shoppingCartId) {
-        this.shoppingCartId = shoppingCartId;
-    }
-
-    public String getOrderNote() {
-        return orderNote;
-    }
-
-    public void setOrderNote(String orderNote) {
-        this.orderNote = orderNote;
-    }
-
-    private List<ProductContent> productContents;
 
     public String getOrderId() {
         return orderId;
@@ -74,6 +70,14 @@ public class Order implements Serializable {
 
     public void setPaymentWay(Integer paymentWay) {
         this.paymentWay = paymentWay;
+    }
+
+    public Integer[] getShoppingCartId() {
+        return shoppingCartId;
+    }
+
+    public void setShoppingCartId(Integer[] shoppingCartId) {
+        this.shoppingCartId = shoppingCartId;
     }
 
     public Integer getDeliveryWay() {
@@ -100,12 +104,28 @@ public class Order implements Serializable {
         this.deliveryTime = deliveryTime;
     }
 
+    public Date getSubmitTime() {
+        return submitTime;
+    }
+
+    public void setSubmitTime(Date submitTime) {
+        this.submitTime = submitTime;
+    }
+
     public Date getPaymentTime() {
         return paymentTime;
     }
 
     public void setPaymentTime(Date paymentTime) {
         this.paymentTime = paymentTime;
+    }
+
+    public String getOrderNote() {
+        return orderNote;
+    }
+
+    public void setOrderNote(String orderNote) {
+        this.orderNote = orderNote;
     }
 
     public BigDecimal getOrderTotal() {
@@ -122,22 +142,5 @@ public class Order implements Serializable {
 
     public void setProductContents(List<ProductContent> productContents) {
         this.productContents = productContents;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "userId='" + userId + '\'' +
-                ", orderId=" + orderId +
-                ", paymentWay=" + paymentWay +
-                ", shoppingCartId=" + Arrays.toString(shoppingCartId) +
-                ", deliveryWay=" + deliveryWay +
-                ", orderTime=" + orderTime +
-                ", deliveryTime=" + deliveryTime +
-                ", paymentTime=" + paymentTime +
-                ", orderNote='" + orderNote + '\'' +
-                ", orderTotal=" + orderTotal +
-                ", productContents=" + productContents +
-                '}';
     }
 }
