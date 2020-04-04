@@ -314,7 +314,7 @@
           this.$refs.face.recognitionFailure();
           setTimeout(() => {
             this.$refs.face.collectionFace();
-          }, 2500)
+          }, 3000)
         }
       },
       //验证支付密码 设置支付密码
@@ -482,6 +482,9 @@
   .order_product_img {
     width: 60%;
     border: 1px solid #999999;
+    padding-top:7%;
+    padding-right: 3%;
+    padding-left: 3%;
     margin-left: 10%
   }
 
