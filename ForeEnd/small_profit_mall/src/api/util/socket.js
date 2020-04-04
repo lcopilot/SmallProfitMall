@@ -101,6 +101,7 @@ function websocketClose() {
 function websocketOpen(e) {
   //修改连接状态
   websocketStatus=true;
+  clearTimeout(reconnectionTimer);
   console.log("连接成功");
   startHeartbeat();
 }
@@ -141,7 +142,7 @@ function reconnection() {
   //尝试重连 2秒一次
   reconnectionTimer=setInterval(()=>{
     if (websocketStatus){
-      clearTimeout(reconnection);
+      clearTimeout(reconnectionTimer);
     }
     initWebSocket();
   },1500)

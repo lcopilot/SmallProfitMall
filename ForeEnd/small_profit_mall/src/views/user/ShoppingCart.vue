@@ -73,7 +73,8 @@
                     min-width="13%">
                   <template slot-scope="product">
                     <el-input-number v-model="product.row.quantity" size="mini" :min="1"
-                                     :max="99" @change="quantityChange(product.row.quantity,product.row.shoppingCartId)"/>
+                                     :max="99"
+                                     @change="quantityChange(product.row.quantity,product.row.shoppingCartId)"/>
                   </template>
                 </el-table-column>
                 <el-table-column
@@ -87,7 +88,6 @@
                 </el-table-column>
                 <el-table-column
                     label="操作"
-                    show-overflow-tooltip
                     min-width="10%">
                   <template slot-scope="product">
                     <el-button
@@ -96,7 +96,8 @@
                         @click="settlement(product.row.shoppingCartId)">
                       立即购买
                     </el-button>
-                    <el-button type="text" v-if="product.row.productInventory==0">暂时缺货</el-button>
+                    <span v-if="product.row.productInventory==0" class="cart_stockOut">暂时缺货</span>
+                    <br/><span v-if="product.row.notice" class="cart_stockOut">到货通知已添加</span>
                   </template>
                 </el-table-column>
                 <el-table-column
@@ -192,6 +193,8 @@
     components: {search, Header, Footer},
     data() {
       return {
+        //结算加载
+        settlementLoading: false,
         //底栏的全选绑定
         selectAll: false,
         //底栏商品数量
@@ -242,9 +245,9 @@
         })
       },
       //商品数量改变时触发
-      quantityChange(productNumber,shoppingCartId) {
-        productApi.modifyProductNumber(productNumber,shoppingCartId).then(res=>{
-          if (res.success){
+      quantityChange(productNumber, shoppingCartId) {
+        productApi.modifyProductNumber(productNumber, shoppingCartId).then(res => {
+          if (res.success) {
             this.select(this.$refs.cartTable.selection);
           }
         })
@@ -311,11 +314,11 @@
       },
       //到货通知
       arrivalNotice(productId) {
-        productApi.arrivalNotice(sessionStorage.getItem("uId"),productId).then(res=>{
-          if (res.success){
+        productApi.arrivalNotice(sessionStorage.getItem("uId"), productId).then(res => {
+          if (res.success) {
             this.$message({
-              message:"已添加到货通知,商品已经在快马加鞭赶来的路上~",
-              type:"success",
+              message: "已添加到货通知,商品已经在快马加鞭赶来的路上~",
+              type: "success",
             })
             this.getShoppingCart();
           }
@@ -331,54 +334,63 @@
             return this.$message.warning("您还未选择商品哦~");
           }
           this.$refs.cartTable.selection.forEach((shoppingCart) => {
-            cartIdList.push(ShoppingCart.shoppingCartId);
+            cartIdList.push(shoppingCart.shoppingCartId);
           })
         }
-        productApi.removeCart(cartIdList).then(res => {
-          if (res.success) {
-            this.$message({
-              message: "商品已移出购物车",
-              type: "success"
-            })
-            this.modifyCartSum(-cartIdList.length);
-            this.getShoppingCart();
-            this.selectAll = false;
-          } else {
-            this.$message({
-              message: "商品移出购物车失败!,请稍后重试",
-              type: "error"
-            })
-          }
+        this.$confirm('确认移除这' + cartIdList.length + '个商品嘛?', {
+          confirmButtonText: '删除',
+          cancelButtonText: '我再想想',
+          type: 'warning',
+        }).then(() => {
+          productApi.removeCart(cartIdList).then(res => {
+            if (res.success) {
+              this.$message({
+                message: "商品已移出购物车",
+                type: "success"
+              })
+              this.modifyCartSum(-cartIdList.length);
+              this.getShoppingCart();
+              this.selectAll = false;
+            } else {
+              this.$message({
+                message: "商品移出购物车失败!,请稍后重试",
+                type: "error"
+              })
+            }
+          })
         })
+
       },
       //结算 立即购买
       settlement(cartProductId) {
-        let cartProductIdList=[];
-        if (cartProductId){
+        let cartProductIdList = [];
+        if (cartProductId) {
           cartProductIdList.push(cartProductId);
-        }else {
-          if (this.$refs.cartTable.selection.length==0){
+        } else {
+          if (this.$refs.cartTable.selection.length == 0) {
             return this.$message({
-              message:"您还没有选择商品哦~",
-              type:"warning"
+              message: "您还没有选择商品哦~",
+              type: "warning"
             })
           }
-          this.$refs.cartTable.selection.forEach((shoppingCart)=>{
+          this.$refs.cartTable.selection.forEach((shoppingCart) => {
             cartProductIdList.push(shoppingCart.shoppingCartId);
           });
         }
-        let dataForm=new FormData();
-        dataForm.append("userId",sessionStorage.getItem("uId"));
-        dataForm.append("shoppingCartId",cartProductIdList);
-        productApi.settlement(dataForm).then(res=>{
-            if (res.success){
-              this.$router.push({
-                name: "Order",
-                params:{
-                  orderNumber:res.queryResult.list[0],
-                }
-              });
-            }
+        this.openFullScreen();
+        let dataForm = new FormData();
+        dataForm.append("userId", sessionStorage.getItem("uId"));
+        dataForm.append("shoppingCartId", cartProductIdList);
+        productApi.settlement(dataForm).then(res => {
+          if (res.success) {
+            this.settlementLoading.close();
+            this.$router.push({
+              name: "Order",
+              params: {
+                orderNumber: res.queryResult.list[0],
+              }
+            });
+          }
         })
       },
       //获取购物车数据
@@ -389,9 +401,16 @@
             this.availableProduct();
           }
         })
+      },
+      //结算全屏加载动画
+      openFullScreen() {
+        this.settlementLoading = this.$loading({
+          lock: true,
+        });
       }
     },
     created() {
+
       this.getShoppingCart();
     }
 
@@ -399,9 +418,22 @@
 </script>
 
 <style>
+  .el-loading-spinner {
+    background-image: url('http://img.fhxasdsada.xyz/timgiusdf956dfsa8e52uf.gif');
+    background-size: 20% 30%;
+    background-repeat: no-repeat;
+    height: 100%;
+    background-position: center;
+    top: 0;
+  }
+
+  .el-loading-spinner .circular {
+    display: none;
+  }
+
   /*增加scoped el-table样式无法使用
-    #sCart 增加id防止影响其他页面
-  */
+   #sCart 增加id防止影响其他页面
+ */
   #sCart .el-table thead {
     color: #a8d8ea;
     font-weight: 500;
@@ -409,6 +441,11 @@
 
   #sCart .el-table th {
     background: #f3f3f3;
+  }
+
+  #sCart .cart_stockOut {
+    font-size: 12px;
+    color: #7fbeff;
   }
 
   #sCart .cart_name {
@@ -439,13 +476,15 @@
     position: fixed;
     bottom: 0px;
   }
-  @media all and (min-width:0){
-    .cart_footer{
+
+  @media all and (min-width: 0) {
+    .cart_footer {
       width: 80.7%;
     }
   }
+
   @-moz-document url-prefix() {
-    .cart_footer{
+    .cart_footer {
       width: 80.2%;
     }
   }

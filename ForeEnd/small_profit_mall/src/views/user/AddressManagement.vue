@@ -386,9 +386,9 @@
       },
       //删除地址
       removeAddress(index) {
-        this.$confirm('此操作将永久删除该地址, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+        this.$confirm('确认删除该地址嘛?', {
+          confirmButtonText: '删除',
+          cancelButtonText: '我再想想',
           type: 'warning'
         }).then(() => {
           userApi.removeAddress(sessionStorage.getItem("uId"), this.addressList[index].addressId,
@@ -401,12 +401,7 @@
               this.cancel();
             }
           })
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          });
-        });
+        })
       },
       //获取地址
       getAddress() {

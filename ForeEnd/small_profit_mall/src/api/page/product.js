@@ -28,7 +28,11 @@ export const modifyProductNumber=(productNumber,cartId)=>{
 export const getShoppingCartPreview=(userId,number)=>{
   return http.requestGet('apiUrl/ShoppingCartController/findPreview/'+userId+'/'+number)
 };
-//结算 立即够买
+//购物车结算 立即够买
 export const settlement=data=>{
   return http.requestPost("apiUrl/OrderController/addOrder",data)
+};
+//商品页立即够买
+export const buyNow=data=>{
+  return http.requestPost("apiUrl/OrderController/purchaseOrder",data)
 };

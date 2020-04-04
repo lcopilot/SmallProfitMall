@@ -31,11 +31,11 @@
                     {{paymentPasswordExists?'修改':'设置'}}
                   </el-button>
                   <el-dialog
-                      title="修改密码"
+                      :title="!paymentPasswordExists?'设置支付密码':'修改支付密码'"
                       :visible.sync="paymentPasswordVisible"
                       @close="accountForm.paymentPassword=''"
                       width="30%" center>
-                    <el-input placeholder="请输入新的支付密码"
+                    <el-input :placeholder="!paymentPasswordExists?'请输入支付密码':'请输入新的支付密码'"
                               v-model="accountForm.paymentPassword" maxlength="6"
                               show-password></el-input>
                     <span slot="footer" class="dialog-footer">
@@ -118,8 +118,9 @@
         };
         userApi.changePaymentPassword(params).then(res => {
           if (res.success) {
-            this.$message.success("支付密码修改成功!")
+            this.$message.success(this.paymentPasswordExists?'支付密码修改成功!':'支付密码设置成功!')
             this.paymentPasswordVisible = false;
+            this.getAccountSetting();
           }
         });
       },
@@ -133,7 +134,6 @@
         if (videoFile && image) {
           let dataForm = new FormData();
           dataForm.append("userId", sessionStorage.getItem("uId"));
-          //截取后端需要的Base64格式 并加密
           dataForm.append("image", image);
           dataForm.append("videoFile", videoFile);
           this.$refs.face.recognitionFailure(20190415);
@@ -152,7 +152,6 @@
             } else {
               this.$refs.face.faceLoading = false;
               this.$refs.face.faceBtnContent = '重新采集';
-              console.log(res.faceRecognition.result.error_code)
               this.$refs.face.recognitionFailure(res.faceRecognition.result.error_code);
             }
           }).catch(error => {
