@@ -39,7 +39,7 @@ public class OrderController {
     AccountSettingsService accountSettingsService;
 
     /**
-     * 购物车订单结束
+     * 购物车订单结算
      * @param userId 用户id
      * @param shoppingCartId 购物车id
      * @return 订单号
@@ -86,4 +86,18 @@ public class OrderController {
         return new QueryOrder(CommonCode.SUCCESS,orderResult);
     }
 
+    //验证支付密码
+    @RequestMapping(value = "/verificationPay",method = RequestMethod.POST)
+    public QueryResponseResult verificationPay(String userId,String faceRecognition) throws Exception {
+        if (userId==null||faceRecognition==null){
+            return new QueryResponseResult(CommonCode.INVALID_PARAM,null);
+        }
+        Boolean result = orderService.verificationPay(userId,faceRecognition);
+        if (result){
+            return new QueryResponseResult(CommonCode.SUCCESS,null);
+        }else {
+            return new QueryResponseResult(CommonCode.FAIL,null);
+        }
+
+    }
 }
