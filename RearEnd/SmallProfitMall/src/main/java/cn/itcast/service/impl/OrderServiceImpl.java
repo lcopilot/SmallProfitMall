@@ -116,6 +116,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
+     * 查询订单信息
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @return
+     */
+    @Override
+    public Order findOrder(String userId, String orderId) {
+        return orderDao.findOrder(userId,orderId);
+    }
+
+    /**
      * 生成订单号 时间戳加当天流水号
      * 取当天最后一笔订单的流水号加一
      * 今天第一笔订单流水号为1000000

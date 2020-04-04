@@ -5,6 +5,8 @@ package cn.itcast.domain.order;
  * @date 2020/4/3
  */
 public class ProductContent {
+    //id
+    private int id;
     //订单id
     private String orderId;
     //商品名字
@@ -21,6 +23,14 @@ public class ProductContent {
     private String productWeight;
     //是否评价
     private Boolean evaluate;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Double getProductPrice() {
         return productPrice;
