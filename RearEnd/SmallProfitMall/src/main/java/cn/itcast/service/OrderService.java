@@ -3,6 +3,10 @@ package cn.itcast.service;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author Kite
@@ -40,4 +44,12 @@ public interface OrderService {
      */
     public Boolean verificationPay(String userId , String faceRecognition) throws Exception;
 
+    /**
+     * 验证人脸
+     * @param image 人脸图片
+     * @param userId 用户id
+     * @param videoFile 人脸视频
+     * @return
+     */
+    public String verificationFace(String image, String userId, InputStream videoFile) throws IOException;
 }

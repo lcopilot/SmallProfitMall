@@ -10,12 +10,16 @@ import cn.itcast.domain.order.ProductContent;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.domain.shoppingCar.ShoppingCart;
 import cn.itcast.service.AccountSettingsService;
+import cn.itcast.service.FaceRecognitionService;
 import cn.itcast.service.OrderService;
 import cn.itcast.service.ShoppingCartService;
 import cn.itcast.util.encryption.AesEncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
@@ -42,6 +46,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     AccountSettingsDao accountSettingsDao;
+
+    @Autowired
+    FaceRecognitionService faceRecognitionService;
+
 
     /**
      * 购物车订单
@@ -154,6 +162,31 @@ public class OrderServiceImpl implements OrderService {
         }else {
             return false;
         }
+    }
+
+    /**
+     * 验证人脸
+     * @param image 人脸图片
+     * @param userId 用户id
+     * @param videoFile 人脸视频
+     * @return
+     */
+    @Override
+    public String verificationFace(String image, String userId, InputStream videoFile) throws IOException {
+        //进行人脸检测
+        String verification = faceRecognitionService.faceVerification(image,videoFile);
+        String result = "SUCCESS";
+        //判断是否通过活体检测
+        if (!result.equals(verification)){
+        return verification;
+        }
+        //查询用户人脸toke
+        AccountSettings accountSettings = accountSettingsDao.findAccountSettings(userId);
+        String results = faceRecognitionService.faceCheck(accountSettings.getFaceToken(),image);
+        if (!result.equals(results)){
+            return verification;
+        }
+        return result;
     }
 
     /**

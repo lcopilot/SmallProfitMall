@@ -71,7 +71,7 @@ public class Sample {
 
     //人脸对比
     public void sample(AipFace client ,String images1,String images2) {
-        String image1 ="asdsad";
+        String image1 ="cb856487ee7eef12dd5cd2cea6dddc4a";
         String image2 = images2;
 
         // image1/image2也可以为url或facetoken, 相应的imageType参数需要与之对应。
@@ -207,10 +207,10 @@ public class Sample {
     public void test() throws IOException {
         AipFace client = new AipFace(APP_ID, API_KEY, SECRET_KEY);
             String images1="";
-//            String images2 = ;
+           String images2 = "";
 //        System.out.println(client);
-      //  测试人脸对比
-   //     sample(client,images1,images2);
+       // 测试人脸对比
+        sample(client,images1,images2);
 //         测试人脸检测
         sample(client,images1);
 //        人脸注册

@@ -123,20 +123,19 @@ public class HumanFaceUtil {
      * @param images1
      * @param images2
      */
-    public void faceCheck(String images1,String images2) {
+    public JSONObject faceCheck(String images1,String images2) {
         String image1 =images1;
         String image2 = images2;
 
         // image1/image2也可以为url或facetoken, 相应的imageType参数需要与之对应。
-        MatchRequest req1 = new MatchRequest(image1, "BASE64");
+        MatchRequest req1 = new MatchRequest(image1, "FACE_TOKEN");
         MatchRequest req2 = new MatchRequest(image2, "BASE64");
         ArrayList<MatchRequest> requests = new ArrayList<MatchRequest>();
         requests.add(req1);
         requests.add(req2);
 
         JSONObject res = client.match(requests);
-        System.out.println(res.toString(2));
-
+        return res;
     }
 
 
