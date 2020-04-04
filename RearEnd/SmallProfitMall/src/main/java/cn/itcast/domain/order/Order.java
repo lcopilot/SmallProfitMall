@@ -36,6 +36,18 @@ public class Order implements Serializable {
     private String orderNote;
     //订单总计
     private BigDecimal orderTotal;
+    /**
+     * 订单状态  1代表未支付 2代表已支付
+     */
+    private Integer orderTestState;
+
+    public Integer getOrderTestState() {
+        return orderTestState;
+    }
+
+    public void setOrderTestState(Integer orderTestState) {
+        this.orderTestState = orderTestState;
+    }
 
     //商品信息
     List<ProductContent> productContents;

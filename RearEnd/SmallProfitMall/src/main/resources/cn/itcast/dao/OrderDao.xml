@@ -16,6 +16,7 @@
         <result property="paymentTime" column="paymentTime"></result>
         <result property="orderNote" column="orderNote"></result>
         <result property="orderTotal" column="orderTotal"></result>
+        <result property="orderTestState" column="orderTestState"></result>
          <!-- 配置角色集合的映射 -->
         <collection property="productContents" ofType="cn.itcast.domain.order.ProductContent">
             <id property="id" column="ids"></id>
