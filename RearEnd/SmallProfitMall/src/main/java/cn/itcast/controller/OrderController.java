@@ -51,7 +51,7 @@ public class OrderController {
      * @throws IOException
      */
     @RequestMapping(value = "/purchaseOrder" ,method = RequestMethod.POST)
-    public QueryResponseResult purchaseOrder(PurchaseInformation purchaseInformation) throws IOException {
+    public QueryResponseResult purchaseOrder(@RequestBody PurchaseInformation purchaseInformation) throws IOException {
         String result = orderService.purchaseOrder(purchaseInformation);
         QueryResult queryResult=new QueryResult();
         queryResult.setList(Collections.singletonList(result));
