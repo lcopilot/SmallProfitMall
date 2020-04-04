@@ -29,7 +29,7 @@ public class ShoppingCartController {
     @RequestMapping(value = "/addShoppingCart",method = RequestMethod.POST)
     public QueryResponseResult addShoppingCart(@RequestBody PurchaseInformation purchaseInformation) {
         QueryResult queryResult = new QueryResult();
-        if(purchaseInformation==null){
+        if(purchaseInformation==null|purchaseInformation.getUserId()==null){
             //传入参数为空
             return new QueryResponseResult(CommonCode.FAIL, null);
         }

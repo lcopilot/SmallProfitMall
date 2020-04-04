@@ -100,8 +100,11 @@ public class OrderServiceImpl implements OrderService {
         productContent.setProductWeight(purchaseInformation1.getProductWeight());
         //添加到订单商品信息表
         orderDao.addProductContent(productContent);
-
-        BigDecimal total =new BigDecimal(purchaseInformation1.getProductPrice());
+        //单价
+        BigDecimal productPrice1=new BigDecimal(Double.toString(purchaseInformation1.getProductPrice()));
+        //数量
+        BigDecimal Quantity=new BigDecimal(String.valueOf(purchaseInformation.getQuantity()));
+        BigDecimal total =productPrice1.multiply(Quantity);
         //设置总计
         order.setOrderTotal(total);
         //设置用户id
@@ -168,6 +171,7 @@ public class OrderServiceImpl implements OrderService {
         for (Integer shoppingCartIds : shoppingCartIdList){
             List<ShoppingCart> shoppingCart= shoppingCartDao.findShoppingCart(null,shoppingCartIds);
             ShoppingCart shoppingCart1 = shoppingCart.get(0);
+            PurchaseInformation purchaseInformation1 =  shoppingCartDao.findByPid(shoppingCart1.getProductId());
             //设置商品名字
             productContent.setProductName(shoppingCart1.getProductName());
             //设置商品图片
@@ -176,8 +180,14 @@ public class OrderServiceImpl implements OrderService {
             productContent.setProductPrice(shoppingCart1.getProductPrice());
             //计算总和
             Double productPrice = shoppingCart1.getProductPrice();
-            BigDecimal productPrices = new BigDecimal(String.valueOf(productPrice));
-            orderNotes = orderNotes.add(productPrices);
+
+            //单价
+            BigDecimal productPrice1=new BigDecimal(Double.toString(purchaseInformation1.getProductPrice()));
+            //数量
+            BigDecimal Quantity=new BigDecimal(String.valueOf(shoppingCart1.getQuantity()));
+            BigDecimal total =productPrice1.multiply(Quantity);
+
+            orderNotes = orderNotes.add(total);
             //设置订单id
             productContent.setOrderId(orderId);
             //设置是否评价
@@ -185,7 +195,7 @@ public class OrderServiceImpl implements OrderService {
             //设置商品配置
             productContent.setProductConfiguration(shoppingCart1.getProductDeploy());
             //设置商品重量
-            productContent.setProductWeight(shoppingCart1.getProductWeight());
+            productContent.setProductWeight(purchaseInformation1.getProductWeight());
             //设置商品购买数量
             productContent.setProductQuantity(shoppingCart1.getQuantity());
             //添加到订单商品信息表
