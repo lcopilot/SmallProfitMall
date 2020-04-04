@@ -236,12 +236,12 @@
       </el-row>
       <Face :isPayment="true" ref="face" @upload-face="facePayment"/>
       <el-dialog
-          :title="orderData.paymentPassword?'验证支付密码':'修改密码'"
+          :title="orderData.paymentPassword?'验证支付密码':'您还未设置支付密码,请先设置'"
           :visible.sync="paymentPasswordVisible"
           @close="paymentPassword=''"
           width="30%" center>
         <el-input :placeholder="orderData.paymentPassword?'请输入支付密码':'请输入您要设置的支付密码'"
-                  v-model="paymentPassword" maxlength="6"></el-input>
+                  v-model="paymentPassword" maxlength="6" show-password></el-input>
         <span slot="footer" class="dialog-footer">
                       <el-button type="primary" @click="verifyPaymentPassword()">确 定</el-button>
                     </span>
@@ -310,11 +310,15 @@
       //结算
       settlement() {
         if (this.paymentMethod == 1) {
-          this.$refs.face.faceVisible = true;
-          this.$refs.face.recognitionFailure();
-          setTimeout(() => {
-            this.$refs.face.collectionFace();
-          }, 3000)
+          if (this.orderData.faceRecognition){
+            this.$refs.face.faceVisible = true;
+            this.$refs.face.recognitionFailure();
+            setTimeout(() => {
+              this.$refs.face.collectionFace();
+            }, 3000)
+          }else {
+            this.paymentPasswordVisible=true;
+          }
         }
       },
       //验证支付密码 设置支付密码
@@ -323,16 +327,30 @@
         if (!regular.test(this.paymentPassword)) {
           return this.$message.warning("请输入正确的6位支付密码!")
         }
-        let params = {
-          userId: sessionStorage.getItem("uId"),
-          paymentPassword: encryption.encrypt(this.accountForm.paymentPassword)
-        };
-        userApi.changePaymentPassword(params).then(res => {
-          if (res.success) {
-            this.$message.success("支付密码修改成功!")
+        if(!this.orderData.paymentPassword){
+          let params = {
+            userId: sessionStorage.getItem("uId"),
+            paymentPassword: encryption.encrypt(this.paymentPassword)
+          };
+          userApi.changePaymentPassword(params).then(res => {
+            if (res.success) {
+              this.$message.success("支付密码设置成功!");
+              this.paymentPassword='';
+              this.orderData.paymentPassword=true;
+            }
+          });
+        }else {
+          let params = {
+            userId: sessionStorage.getItem("uId"),
+            faceRecognition: this.paymentPassword
+          };
+          userApi.verifyPaymentPassword(params).then(res => {
+            if (res.success) {
+              this.settlementOrder();
+            }
+          });
+        }
 
-          }
-        });
       },
       //刷脸支付
       facePayment(videoFile, image) {
