@@ -195,7 +195,7 @@
                   <el-button type="danger" @click="addCart" style="margin-left: 10px"
                              icon="el-icon-circle-plus-outline">加入购物车
                   </el-button>
-                  <el-button type="danger" @click="onSubmit" :disabled="(product.inventorys)<=0">
+                  <el-button type="danger" @click="buyNow()" :disabled="(product.inventorys)<=0">
                     立即购买
                   </el-button>
                 </div>
@@ -352,6 +352,7 @@
         </el-row>
       </el-main>
     </el-main>
+
     <el-footer>
       <Footer/>
     </el-footer>
@@ -468,7 +469,7 @@
 
       }
     },
-    components: { search, commentContent},
+    components: {search, commentContent},
 
     methods: {
       ...mapActions([
@@ -549,6 +550,13 @@
       },
       //加入购物车
       addCart() {
+        if (!sessionStorage.getItem("uId")) {
+          return this.$message({
+            dangerouslyUseHTMLString: true,
+            message: '您还没有登录哦~请先去登录吧 <a href="/login">去登录</a>',
+            type: "warning"
+          })
+        }
         this.productForm.productId = sessionStorage.getItem("productId");
         this.productForm.userId = sessionStorage.getItem("uId");
         productApi.addCart(this.productForm).then(res => {
@@ -560,10 +568,10 @@
             this.getCartSum(res.queryResult.total);
           } else {
             if (res.code == 11111) {
-              this.$message.warning("购物车已满!");
+              return this.$message.warning("购物车已满!");
             }
             if (res.code == 10003) {
-              this.$message.warning("商品同一配置数量已达上限!无法再添加哦~");
+              return this.$message.warning("商品同一配置数量已达上限!无法再添加哦~");
             } else {
               this.$message({
                 message: "加入购物车失败,请稍后重试",
@@ -573,28 +581,53 @@
           }
         })
       },
+      //立即购买
+      buyNow() {
+        if (!sessionStorage.getItem("uId")) {
+          return this.$message({
+            dangerouslyUseHTMLString: true,
+            message: '您还没有登录哦~请先去登录吧 <a href="/login">去登录</a>',
+            type: "warning"
+          })
+        }
+        this.productForm.productId = sessionStorage.getItem("productId");
+        this.productForm.userId = sessionStorage.getItem("uId");
+        productApi.buyNow(this.productForm).then(res => {
+          if (res.success) {
+            this.$router.push({
+              name: "Order",
+              params: {
+                orderNumber: res.queryResult.list[0],
+              }
+            });
+          }
+        })
+      },
       //添加收藏
       addFavorite() {
         if (!sessionStorage.getItem("uId")) {
-          this.$message.warning("还没有登录哦~,请先登录吧")
-        } else {
-          let data = {
-            productIds: [],
-            userId: sessionStorage.getItem("uId"),
-          };
-          data.productIds.push(this.productId);
-          userApi.addFavorite(data).then(res => {
-            if (res.success) {
-              this.$message.success("收藏成功!")
-            } else {
-              if (res.code == 11111) {
-                this.$message({
-                  message: "商品已经被收藏,请勿重复收藏"
-                })
-              }
-            }
+          return this.$message({
+            dangerouslyUseHTMLString: true,
+            message: '您还没有登录哦~请先去登录吧 <a href="/login">去登录</a>',
+            type: "warning"
           })
         }
+        let data = {
+          productIds: [],
+          userId: sessionStorage.getItem("uId"),
+        };
+        data.productIds.push(this.productId);
+        userApi.addFavorite(data).then(res => {
+          if (res.success) {
+            this.$message.success("收藏成功!")
+          } else {
+            if (res.code == 11111) {
+              this.$message({
+                message: "商品已经被收藏,请勿重复收藏"
+              })
+            }
+          }
+        })
       },
       //添加足迹
       addFootprint() {

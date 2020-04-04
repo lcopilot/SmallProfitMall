@@ -173,16 +173,15 @@
                     </div>
                   </el-col>
                   <el-col :span="17">
-                    <el-row v-for="i in 5" style="margin-bottom: 2%">
+                    <el-row v-for="(product,index) in orderProductList" style="margin-bottom: 2%" :key="index">
                       <el-col :span="4">
                         <div class="order_product_img">
-                          <el-image src="http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg"
+                          <el-image :src="product.productImage"
                                     fit="fill"></el-image>
                         </div>
                       </el-col>
                       <el-col :span="6">
-                        <div style="font-size: 12px">Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机
-                          双卡双待水电费纳斯达克福建省那开始记得发
+                        <div style="font-size: 12px">{{product.productName}}
                         </div>
                         <div class="order_7Day">
                           <svg-icon name="7Day" class="order_7Day_svg"></svg-icon>
@@ -191,15 +190,15 @@
                       </el-col>
                       <el-col :span="6" :push="1">
                         <div style="font-size: 12px">
-                          枯井中等级考试放声大哭水电费就开始人兽斗合辑和输入绿山咖啡技术的了卡萨丁卷发梳
+                          {{product.productConfiguration}}
                         </div>
                       </el-col>
-                      <el-col :span="2" :push="2"  class="order_product_price">
-                        <div style="color: red;">￥156.00</div>
-                        <div>0.025kg</div>
+                      <el-col :span="2" :push="2" class="order_product_price">
+                        <div style="color: red;">￥{{product.productPrice.toFixed(2)}}</div>
+                        <div>{{product.productWeight}}</div>
                       </el-col>
                       <el-col :span="2" :push="3">
-                        <div>x1</div>
+                        <div>x{{product.productQuantity}}</div>
                       </el-col>
                     </el-row>
                   </el-col>
@@ -211,13 +210,13 @@
             <el-row>
               <el-col :span="3" :offset="14">
                 <div style="color: #999999">
-                  共<span style="color: red">0</span>件商品
+                  共<span style="color: red">{{orderProductList.length}}</span>件商品
                 </div>
               </el-col>
               <el-col :span="4">
                 <div class="cart_product_total_price1">总价:
                   <span class="cart_product_total_price2">
-￥8588559.00
+                      ￥{{orderData.order.orderTotal.toFixed(2)}}
                   </span>
                 </div>
                 <div style="font-size: 12px;color: #999999">运费:￥0.00</div>
@@ -235,7 +234,18 @@
           </el-card>
         </el-col>
       </el-row>
-      <Face :isPayment="true" ref="face" @uploadFace="facePayment"/>
+      <Face :isPayment="true" ref="face" @upload-face="facePayment"/>
+      <el-dialog
+          :title="orderData.paymentPassword?'验证支付密码':'修改密码'"
+          :visible.sync="paymentPasswordVisible"
+          @close="paymentPassword=''"
+          width="30%" center>
+        <el-input :placeholder="orderData.paymentPassword?'请输入支付密码':'请输入您要设置的支付密码'"
+                  v-model="paymentPassword" maxlength="6"></el-input>
+        <span slot="footer" class="dialog-footer">
+                      <el-button type="primary" @click="verifyPaymentPassword()">确 定</el-button>
+                    </span>
+      </el-dialog>
     </el-main>
     <el-footer>
       <Footer/>
@@ -245,6 +255,8 @@
 
 <script>
   import *as ordersApi from '../../api/page/orders'
+  import encryption from "../../util/encryption";
+  import * as userApi from "../../api/page/user";
 
   const addressManagement = () => import("./AddressManagement");
   const Face = () => import("../../components/admin/Face");
@@ -253,9 +265,17 @@
     components: {addressManagement, Face},
     data() {
       return {
+        //支付密码弹出框
+        paymentPasswordVisible:false,
+        //订单数据
+        orderData:{},
+        //支付密码
+        paymentPassword:'',
+        //订单商品列表
+        orderProductList:[],
         //订单id
-        orderNumber:'',
-        //默认地址
+        orderNumber: '',
+        //定单地址
         orderAddress: {},
         //地址数据
         addressList: [],
@@ -293,15 +313,55 @@
           this.$refs.face.faceVisible = true;
           this.$refs.face.recognitionFailure();
           setTimeout(() => {
-            this.$refs.face.recognitionFailure(20190415);
             this.$refs.face.collectionFace();
-          }, 2500);
+          }, 2500)
         }
       },
-      //刷脸支付
-      facePayment(image) {
-        ordersApi.facePayment().then(res => {
+      //验证支付密码 设置支付密码
+      verifyPaymentPassword(){
+        let regular = /^\d{6}$/;
+        if (!regular.test(this.paymentPassword)) {
+          return this.$message.warning("请输入正确的6位支付密码!")
+        }
+        let params = {
+          userId: sessionStorage.getItem("uId"),
+          paymentPassword: encryption.encrypt(this.accountForm.paymentPassword)
+        };
+        userApi.changePaymentPassword(params).then(res => {
           if (res.success) {
+            this.$message.success("支付密码修改成功!")
+
+          }
+        });
+      },
+      //刷脸支付
+      facePayment(videoFile, image) {
+        let dataForm = new FormData();
+        dataForm.append("userId", sessionStorage.getItem("uId"));
+        dataForm.append("image", image);
+        dataForm.append("videoFile", videoFile);
+        this.$refs.face.recognitionFailure(20190415);
+        ordersApi.facePayment(dataForm).then(res => {
+          if (res.success) {
+            this.settlementOrder();
+          }else {
+            this.$refs.face.recognitionFailure(res.faceRecognition.result.error_code);
+          }
+        });
+      },
+      //支付成功之后传递订单数据
+      settlementOrder() {
+        let order = {
+          userId: sessionStorage.getItem("uId"),
+          orderId: this.orderNumber,
+          orderAddress: this.orderAddress,
+          orderNote: this.ordersNote,
+          deliveryTime: this.deliveryTime,
+          paymentWay: this.paymentMethod,
+          deliveryWay: this.expressType,
+        }
+        ordersApi.settlementOrder(order).then(res => {
+          if (res.success){
             this.$refs.face.faceAnimation = "http://img.fhxasdsada.xyz/afterRecognition.gif";
             setTimeout(() => {
               this.$router.push({
@@ -326,22 +386,29 @@
         let newPhone = String(phone).slice(0, 3) + "*".repeat(6)
             + String(phone).slice(9, String(phone).length);
         return newPhone.slice(0, 11)
-      }
+      },
+      //获取订单数据
+      getOrder() {
+        ordersApi.getOrder(sessionStorage.getItem("uId"),this.orderNumber).then(res => {
+          if (res.success) {
+            this.orderData=res.resultOrder;
+            this.orderProductList=res.resultOrder.order.productContents;
+          }
+        })
+      },
     },
     created() {
       if (this.$route.params.orderNumber != null) {
         sessionStorage.setItem("orderNumber", this.$route.params.orderNumber);
       }
       this.orderNumber = sessionStorage.getItem("orderNumber");
+      this.getOrder();
     }
 
   }
 </script>
 
 <style scoped>
-  [v-cloak] {
-    display: none
-  }
 
   /*
   通过 >>>，穿透scoped 修改第三方样式

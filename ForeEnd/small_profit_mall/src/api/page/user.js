@@ -155,7 +155,7 @@ export const changePaymentPassword=params=>{
 };
 
 //上传人脸
-export const uploadFace=(data)=>{
+export const uploadFace=data=>{
   return http.requestPost('apiUrl/FaceRecognitionController/uploading',data)
 };
 //关闭刷脸支付
