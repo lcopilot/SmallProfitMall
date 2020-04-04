@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -86,6 +87,32 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         return AERROR_MSG;
     }
 
+    /**
+     * 人脸比对
+     * @param token 用户token
+     * @param image 用户人脸照片
+     * @return
+     */
+    @Override
+    public String faceCheck(String token, String image){
+        //人脸比对
+        JSONObject faceCheck=humanFaceUtil.faceCheck(token,image);
+        //人脸比对返回结果
+        String deleteRedis =faceCheck.getString("error_msg");
+        if (!AERROR_MSG.equals(deleteRedis)){
+            JSONObject  faceCheckError = new JSONObject();
+            faceCheckError.put("error_code", faceCheckError.getInt("error_code"));
+            return  faceCheckError.toString(2);
+        }
+        Double score =faceCheck.getDouble("score");
+        if (score<CREDIT){
+            JSONObject faceCheckError = new JSONObject();
+            faceCheckError.put("error_code",ERROR_CODE);
+            return faceCheckError.toString(2);
+        }
+        return AERROR_MSG;
+    }
+
 
 
 
@@ -95,6 +122,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
      * @param faceVideo 人脸视频
      * @return 成功返回 AERROR_MSG 失败 返回错误代码
      */
+    @Override
     public String faceVerification(String image , InputStream faceVideo) throws IOException {
         //人脸检测
         JSONObject faceDetectionRes = humanFaceUtil.faceDetection(image);

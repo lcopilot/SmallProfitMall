@@ -6,16 +6,22 @@ import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
+import cn.itcast.response.faceRecognition.FaceRecognition;
+import cn.itcast.response.faceRecognition.FaceRecognitionResponse;
 import cn.itcast.response.queryOrder.QueryOrder;
 import cn.itcast.response.queryOrder.ResultOrder;
 import cn.itcast.service.AccountSettingsService;
 import cn.itcast.service.OrderService;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -38,6 +44,8 @@ public class OrderController {
     @Autowired
     AccountSettingsService accountSettingsService;
 
+    //判断返回结果
+    public static final String RESULT = "SUCCESS";
     /**
      * 购物车订单结算
      * @param userId 用户id
@@ -86,7 +94,13 @@ public class OrderController {
         return new QueryOrder(CommonCode.SUCCESS,orderResult);
     }
 
-    //验证支付密码
+    /**
+     * 验证支付密码
+     * @param userId 用户id
+     * @param faceRecognition 用户支付密码
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/verificationPay",method = RequestMethod.POST)
     public QueryResponseResult verificationPay(String userId,String faceRecognition) throws Exception {
         if (userId==null||faceRecognition==null){
@@ -98,6 +112,29 @@ public class OrderController {
         }else {
             return new QueryResponseResult(CommonCode.FAIL,null);
         }
+    }
 
+    /**
+     * 人脸上传
+     * @param image 用户人图片
+     * @param userId 用户id
+     * @param videoFile 视频流
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/verificationFace",method = RequestMethod.POST)
+    public FaceRecognitionResponse verificationFace(String image, String userId , MultipartFile videoFile) throws Exception {
+        //视频是否存在
+        InputStream videoFiles = null;
+        if(videoFile!=null){
+            videoFiles=videoFile.getInputStream();
+        }
+        String result =orderService.verificationFace(image,userId,videoFiles);
+        if (RESULT.equals(result)){
+            return new FaceRecognitionResponse(CommonCode.SUCCESS, null);
+        }
+        FaceRecognition faceRecognition=new FaceRecognition();
+        faceRecognition.setResult((JSONObject) JSON.parse(result));
+        return new FaceRecognitionResponse(CommonCode.FAIL, faceRecognition);
     }
 }

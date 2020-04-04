@@ -332,3 +332,7 @@
 2020-04-02 20:15:00,282 2      [           main] DEBUG om.baidu.aip.client.BaseClient  - current state after check priviledge: STATE_TRUE_AIP_USER
 2020-04-02 20:16:50,807 0      [           main] INFO  om.baidu.aip.client.BaseClient  - get access_token success. current state: STATE_AIP_AUTH_OK
 2020-04-02 20:16:50,810 3      [           main] DEBUG om.baidu.aip.client.BaseClient  - current state after check priviledge: STATE_TRUE_AIP_USER
+2020-04-04 20:43:38,725 0      [           main] INFO  om.baidu.aip.client.BaseClient  - get access_token success. current state: STATE_AIP_AUTH_OK
+2020-04-04 20:43:38,737 12     [           main] DEBUG om.baidu.aip.client.BaseClient  - current state after check priviledge: STATE_TRUE_AIP_USER
+2020-04-04 20:44:56,466 0      [           main] INFO  om.baidu.aip.client.BaseClient  - get access_token success. current state: STATE_AIP_AUTH_OK
+2020-04-04 20:44:56,467 1      [           main] DEBUG om.baidu.aip.client.BaseClient  - current state after check priviledge: STATE_TRUE_AIP_USER
