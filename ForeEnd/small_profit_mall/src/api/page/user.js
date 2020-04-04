@@ -153,6 +153,11 @@ export const changePaymentPassword=params=>{
   let queryString=querystring.stringify(params);
   return http.requestPut('apiUrl/AccountSettingsController/updatePaymentPassword?'+queryString);
 };
+//验证支付密码
+export const verifyPaymentPassword=params=>{
+  let queryString=querystring.stringify(params);
+  return http.requestPost('apiUrl/OrderController/verificationPay?'+queryString);
+};
 
 //上传人脸
 export const uploadFace=data=>{
