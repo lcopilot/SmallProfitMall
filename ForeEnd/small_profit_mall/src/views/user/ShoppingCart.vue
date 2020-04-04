@@ -31,7 +31,10 @@
                     <el-row :gutter="20">
                       <el-col :span="5">
                         <div style="max-width: 70px;max-height: 70px;">
-                          <el-image fit="scale-down" :src="product.row.imageSite"></el-image>
+                          <router-link
+                              :to="{path: '/product', query: {productId:product.row.productId}}">
+                            <el-image fit="scale-down" :src="product.row.imageSite"></el-image>
+                          </router-link>
                         </div>
                       </el-col>
                       <el-col :span="10">
