@@ -34,21 +34,26 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public String addOrder(String userId, Integer[] shoppingCartId) {
+        //订单号转换
+        String orderId1="";
         Order order= new Order();
-        String initialId="111111";
+        String initialId="000000";
         //获取当前时间戳
         Long timeStamp = System.currentTimeMillis();
         //获取今天最后一个订单号
         String orderIds=orderDao.findSerialnumber();
-        //若为今天第一个订单 则为000000
-        if (orderIds==null||"".equals(orderIds)){
-            orderIds=initialId;
+
+        if (orderIds!=null){
+            //截取最后六位
+            Integer Serialnumber =Integer.parseInt(orderIds.substring(orderIds.length() -6,orderIds.length()));
+            //订单号
+            orderId1 = String.valueOf(Serialnumber+1);
+        }else {
+            //若为今天第一个订单 则为000000
+            orderId1=initialId;
         }
-        //截取最后六位
-        Integer Serialnumber =Integer.parseInt(orderIds.substring(orderIds.length() -6,orderIds.length()));
-        //订单号
-        Integer orderId1 = Serialnumber+1;
-        String orderId =timeStamp.toString()+String.valueOf(orderId1);
+
+        String orderId =timeStamp.toString()+orderId1;
         //创建商品详细信息
         ProductContent productContent = new ProductContent();
         order.setOrderTime(new Date());

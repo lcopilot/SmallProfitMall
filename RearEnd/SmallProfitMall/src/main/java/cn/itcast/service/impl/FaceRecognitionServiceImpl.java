@@ -48,13 +48,13 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         image=AesEncryptUtil.desEncrypt(image);
         //人脸验证结果 验证失败 返回错误代码
         String faceVerification = faceVerification(image,faceVideo);
-        if(!faceVerification.equals(AERROR_MSG)){
+        if(!AERROR_MSG.equals(faceVerification)){
             return faceVerification;
         }
         //人脸上传
         JSONObject uploadingRes =humanFaceUtil.uploading(image,userId);
         String  uploadingRedis = uploadingRes.getString("error_msg");
-        if (!uploadingRedis.equals(AERROR_MSG)){
+        if (!AERROR_MSG.equals(uploadingRedis)){
             JSONObject  uploadingError = new JSONObject();
             uploadingError.put("error_code", uploadingRes.getString("error_code"));
             return  uploadingError.toString(2);
