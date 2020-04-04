@@ -54,7 +54,8 @@
 		AND
 		    pi.sign=1
         order by
-        sc.shoppingCartId
+            sc.shoppingCartId
+        desc
     </select>
 
     <!--查询是否收藏-->
@@ -67,9 +68,6 @@
             userId=#{userId}
         AND
             productId=#{productId}
-        order by
-            sc.shoppingCartId
-        desc
     </select>
 
     <!--删除购物车-->
