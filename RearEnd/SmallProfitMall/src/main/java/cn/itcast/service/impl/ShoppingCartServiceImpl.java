@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Service
-public class ShoppingCartImpl implements ShoppingCartService {
+public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Autowired
     private ShoppingCartDao shoppingCartDao;
@@ -44,28 +44,9 @@ public class ShoppingCartImpl implements ShoppingCartService {
             rediss[1]=shoppingCarts.size();
             return rediss;
         }
-        String productDeploy = "";
-        if (purchaseInformation.getColour()!=null){           //颜色
-            productDeploy = productDeploy+purchaseInformation.getColour()+" ";
-        }
-        if (purchaseInformation.getCombo()!=null){           //套餐
-            productDeploy = productDeploy+purchaseInformation.getCombo()+" ";
-        }
-        if (purchaseInformation.getKind()!=null){         //种类
-            productDeploy = productDeploy+purchaseInformation.getKind()+" ";
-        }
-        if (purchaseInformation.getSize()!=null){         //尺寸
-            productDeploy = productDeploy+purchaseInformation.getSize()+" ";
-        }
-        if (purchaseInformation.getVersion()!=null){      //版本
-            productDeploy = productDeploy+purchaseInformation.getVersion()+" ";
-        }
-        if(purchaseInformation.getTaste()!=null){         //口味
-            productDeploy = productDeploy+purchaseInformation.getTaste()+" ";
-        }
-        if(purchaseInformation.getSpecification()!=null){ //规格
-            productDeploy = productDeploy+purchaseInformation.getSpecification()+" ";
-        }
+        //商品配置
+        String productDeploy = fenProductDeploy(purchaseInformation);
+
         for (ShoppingCart shoppingCartss : shoppingCarts){
             if(purchaseInformation.getProductId()==shoppingCartss.getProductId() && shoppingCartss.getProductDeploy().equals(productDeploy)){
                 int quantity=shoppingCartss.getQuantity()+purchaseInformation.getQuantity();
@@ -87,13 +68,20 @@ public class ShoppingCartImpl implements ShoppingCartService {
             }
         }
         //根据ic查询价格
-        PurchaseInformation purchaseInformation1 =  shoppingCartDao.findByPid(purchaseInformation.getProductId());//数据库取商品价格名字
-        shoppingCart.setProductName(purchaseInformation1.getProductName());     //设置商品名字
-        shoppingCart.setProductPrice(purchaseInformation1.getProductPrice());   //设置商品价格
-        shoppingCart.setProductInventory(purchaseInformation1.getProductInventory());   //设置库存
-        shoppingCart.setProductId(purchaseInformation.getProductId());                //设置商品id
-        shoppingCart.setQuantity(purchaseInformation.getQuantity());            //设置购买数量
-        shoppingCart.setUserId(purchaseInformation.getUserId());                //设置用户id
+        //数据库取商品价格名字
+        PurchaseInformation purchaseInformation1 =  shoppingCartDao.findByPid(purchaseInformation.getProductId());
+        //设置商品名字
+        shoppingCart.setProductName(purchaseInformation1.getProductName());
+        //设置商品价格
+        shoppingCart.setProductPrice(purchaseInformation1.getProductPrice());
+        //设置库存
+        shoppingCart.setProductInventory(purchaseInformation1.getProductInventory());
+        //设置商品id
+        shoppingCart.setProductId(purchaseInformation.getProductId());
+        //设置购买数量
+        shoppingCart.setQuantity(purchaseInformation.getQuantity());
+        //设置用户id
+        shoppingCart.setUserId(purchaseInformation.getUserId());
 
 
         shoppingCart.setProductDeploy(productDeploy);
@@ -195,6 +183,45 @@ public class ShoppingCartImpl implements ShoppingCartService {
     public List<ShoppingCart> findPreview(String userId, Integer End) {
         List<ShoppingCart> findPreview = shoppingCartDao.findPreview(userId,0,End);
         return findPreview;
+    }
+
+    /**
+     * 查询该商品属性
+     * @param purchaseInformation 商品对象
+     * @return
+     */
+    @Override
+    public String fenProductDeploy(PurchaseInformation purchaseInformation){
+        String productDeploy = "";
+        //颜色
+        if (purchaseInformation.getColour()!=null){
+            productDeploy = productDeploy+purchaseInformation.getColour()+" ";
+        }
+        //套餐
+        if (purchaseInformation.getCombo()!=null){
+            productDeploy = productDeploy+purchaseInformation.getCombo()+" ";
+        }
+        //种类
+        if (purchaseInformation.getKind()!=null){
+            productDeploy = productDeploy+purchaseInformation.getKind()+" ";
+        }
+        //尺寸
+        if (purchaseInformation.getSize()!=null){
+            productDeploy = productDeploy+purchaseInformation.getSize()+" ";
+        }
+        //版本
+        if (purchaseInformation.getVersion()!=null){
+            productDeploy = productDeploy+purchaseInformation.getVersion()+" ";
+        }
+        //口味
+        if(purchaseInformation.getTaste()!=null){
+            productDeploy = productDeploy+purchaseInformation.getTaste()+" ";
+        }
+        //规格
+        if(purchaseInformation.getSpecification()!=null){
+            productDeploy = productDeploy+purchaseInformation.getSpecification()+" ";
+        }
+        return productDeploy;
     }
 
 

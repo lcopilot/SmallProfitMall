@@ -121,11 +121,19 @@
 			ON
 				pb.ProductId=pst.ProductId
             WHERE
-                pb.ProductId=#{userId}
+                pb.ProductId=#{productId}
     </select>
     
     <select id="fendAttributes" parameterType="java.lang.Integer" resultType="cn.itcast.domain.ProductDatails.ProductAttributes">
         SELECT * FROM productAttributes where productId = #{productId}
+    </select>
+    <!--查询商品图片-->
+    <select id="findProductImage" resultType="java.lang.String">
+       SELECT ImageSite FROM `ProductImage` WHERE ProductId=#{productId} AND sign=1
+    </select>
+    <!--查询商品价格-->
+    <select id="findProductPrice" resultType="java.lang.Double">
+        SELECT ProductPrice FROM `ProductPrice` WHERE ProductId=10001
     </select>
 
 </mapper>

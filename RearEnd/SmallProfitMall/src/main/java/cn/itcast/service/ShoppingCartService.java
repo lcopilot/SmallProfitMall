@@ -58,4 +58,11 @@ public interface ShoppingCartService {
      */
     public List<ShoppingCart> findPreview(String userId,Integer End);
 
+    /**
+     * 设置商品配置
+     * @param purchaseInformation 商品对象
+     * @return 商品配置拼接
+     */
+    public String fenProductDeploy(PurchaseInformation purchaseInformation);
+
 }

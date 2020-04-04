@@ -2,6 +2,7 @@ package cn.itcast.service;
 
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
+import cn.itcast.domain.shoppingCar.PurchaseInformation;
 
 /**
  * @author Kite
@@ -14,6 +15,6 @@ public interface OrderService {
      * @param shoppingCartId 购物车id
      * @return
      */
-    public String addOrder(String userId, Integer[] shoppingCartId);
+    public String addOrder(PurchaseInformation purchaseInformation,String userId, Integer[] shoppingCartId);
 
 }

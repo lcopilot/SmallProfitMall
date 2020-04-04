@@ -1,11 +1,14 @@
 package cn.itcast.service.impl;
 
 import cn.itcast.dao.OrderDao;
+import cn.itcast.dao.ProductDetailsDao;
 import cn.itcast.dao.ShoppingCartDao;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
+import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.domain.shoppingCar.ShoppingCart;
 import cn.itcast.service.OrderService;
+import cn.itcast.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +29,12 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     ShoppingCartDao shoppingCartDao;
 
+    @Autowired
+    ProductDetailsDao productDetailsDao;
+
+    @Autowired
+    ShoppingCartService shoppingCartService;
+
     /**
      * 创建订单
      * @param userId 用户id
@@ -33,32 +42,96 @@ public class OrderServiceImpl implements OrderService {
      * @return 返回订单号
      */
     @Override
-    public String addOrder(String userId, Integer[] shoppingCartId) {
-        //订单号转换
-        String orderId1="";
+    public String addOrder(PurchaseInformation purchaseInformation,String userId, Integer[] shoppingCartId) {
         Order order= new Order();
-        String initialId="000000";
+        if (shoppingCartId!=null){
+            //生成订单id
+            String orderId = generateOrderId();
+            order.setOrderTime(new Date());
+            //初始购物车id
+            Integer[] initialize=shoppingCartId;
+            //将购物车中商品信息添加到订单商品信息 返回总价格
+            BigDecimal orderNotes = addProduct(initialize,orderId);
+            //设置总计
+            order.setOrderTotal(orderNotes);
+            //设置用户id
+            order.setUserId(userId);
+            //设置订单号
+            order.setOrderId(orderId);
+            //数据库新增
+            orderDao.addOrder(order);
+            return orderId;
+        }else {
+            //数据库取商品价格名字
+            PurchaseInformation purchaseInformation1 =  shoppingCartDao.findByPid(purchaseInformation.getProductId());
+            //创建商品详细信息
+            ProductContent productContent = new ProductContent();
+            //生成订单id
+            String orderId = generateOrderId();
+            //设置商品名字
+            productContent.setProductName(purchaseInformation1.getProductName());
+            //设置商品图片
+            productContent.setProductImage(productDetailsDao.findProductImage(purchaseInformation.getProductId()));
+            //设置商品价格
+            productContent.setProductPrice(purchaseInformation1.getProductPrice());
+            //设置订单id
+            productContent.setOrderId(orderId);
+            //设置是否评价
+            productContent.setEvaluate(false);
+            //商品配置
+            String productDeploy = shoppingCartService.fenProductDeploy(purchaseInformation);
+            //设置商品配置
+            productContent.setProductConfiguration(productDeploy);
+            //设置商品购买数量
+            productContent.setProductQuantity(purchaseInformation.getQuantity());
+            //添加到订单商品信息表
+            orderDao.addProductContent(productContent);
+            BigDecimal total =new BigDecimal(purchaseInformation1.getProductPrice());
+            //设置总计
+            order.setOrderTotal(total);
+            //设置用户id
+            order.setUserId(userId);
+            //设置订单号
+            order.setOrderId(orderId);
+            //数据库新增
+            orderDao.addOrder(order);
+            return orderId;
+        }
+    }
+
+    /**
+     * 生成订单号 时间戳加当天流水号
+     * 取当天最后一笔订单的流水号加一
+     * 今天第一笔订单流水号为1000000
+     * @return
+     */
+    public String generateOrderId(){
+        String initialId="100000";
         //获取当前时间戳
         Long timeStamp = System.currentTimeMillis();
         //获取今天最后一个订单号
         String orderIds=orderDao.findSerialnumber();
-
-        if (orderIds!=null){
-            //截取最后六位
-            Integer Serialnumber =Integer.parseInt(orderIds.substring(orderIds.length() -6,orderIds.length()));
-            //订单号
-            orderId1 = String.valueOf(Serialnumber+1);
-        }else {
-            //若为今天第一个订单 则为000000
-            orderId1=initialId;
+        //若为今天第一个订单 则为000000
+        if (null==orderIds||"".equals(orderIds)){
+            orderIds=initialId;
         }
-
+        //截取最后六位
+        Integer Serialnumber =Integer.parseInt(orderIds.substring(orderIds.length() -6,orderIds.length()));
+        //订单号
+        Integer orderId1 = Serialnumber+1;
         String orderId =timeStamp.toString()+orderId1;
+        return orderId;
+    }
+
+    /**
+     * 将商品信息添加到订单
+     * @param initialize 购物车id数组
+     * @param orderId 订单id
+     * @return
+     */
+    public BigDecimal addProduct (Integer[] initialize ,String orderId){
         //创建商品详细信息
         ProductContent productContent = new ProductContent();
-        order.setOrderTime(new Date());
-        //初始购物车id
-        Integer[] initialize=shoppingCartId;
         //取出购物车id数组
         List<Integer> shoppingCartIdList = Arrays.asList(initialize) ;
         //商品总计
@@ -66,8 +139,8 @@ public class OrderServiceImpl implements OrderService {
 
         //将购物车商品新增设置到订单中
         for (Integer shoppingCartIds : shoppingCartIdList){
-         List<ShoppingCart> shoppingCart= shoppingCartDao.findShoppingCart(null,shoppingCartIds);
-         ShoppingCart shoppingCart1 = shoppingCart.get(0);
+            List<ShoppingCart> shoppingCart= shoppingCartDao.findShoppingCart(null,shoppingCartIds);
+            ShoppingCart shoppingCart1 = shoppingCart.get(0);
             //设置商品名字
             productContent.setProductName(shoppingCart1.getProductName());
             //设置商品图片
@@ -91,15 +164,6 @@ public class OrderServiceImpl implements OrderService {
             //删除该购物车购物车
             shoppingCartDao.deleteCart(shoppingCartIds);
         }
-        //设置总计
-        order.setOrderTotal(orderNotes);
-        //设置用户id
-        order.setUserId(userId);
-        //设置订单号
-        order.setOrderId(orderId);
-        //数据库新增
-        orderDao.addOrder(order);
-        return orderId;
+        return orderNotes;
     }
-
 }
