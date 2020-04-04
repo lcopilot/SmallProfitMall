@@ -1,14 +1,18 @@
 package cn.itcast.service.impl;
 
+import cn.itcast.dao.AccountSettingsDao;
 import cn.itcast.dao.OrderDao;
 import cn.itcast.dao.ProductDetailsDao;
 import cn.itcast.dao.ShoppingCartDao;
+import cn.itcast.domain.accountSettings.AccountSettings;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.domain.shoppingCar.ShoppingCart;
+import cn.itcast.service.AccountSettingsService;
 import cn.itcast.service.OrderService;
 import cn.itcast.service.ShoppingCartService;
+import cn.itcast.util.encryption.AesEncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +38,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     ShoppingCartService shoppingCartService;
+
+
+    @Autowired
+    AccountSettingsDao accountSettingsDao;
 
     /**
      * 购物车订单
@@ -127,6 +135,25 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order findOrder(String userId, String orderId) {
         return orderDao.findOrder(userId,orderId);
+    }
+
+    /**
+     * 验证支付密码
+     * @param userId 用户id
+     * @param faceRecognition 用户支付密码
+     * @return 是否正确
+     */
+    @Override
+    public Boolean verificationPay(String userId, String faceRecognition) throws Exception {
+        AccountSettings accountSettings =accountSettingsDao.findAccountSettings(userId);
+        String password = accountSettings.getPaymentPassword();
+        //解密
+       String sqlPassword = AesEncryptUtil.desEncrypt(password);
+        if (sqlPassword.equals(faceRecognition)){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     /**

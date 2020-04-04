@@ -32,4 +32,12 @@ public interface OrderService {
      */
     public Order findOrder(String userId ,String orderId);
 
+    /**
+     * 验证支付密码
+     * @param userId 用户id
+     * @param faceRecognition 用户支付密码
+     * @return 是否正确
+     */
+    public Boolean verificationPay(String userId , String faceRecognition) throws Exception;
+
 }
