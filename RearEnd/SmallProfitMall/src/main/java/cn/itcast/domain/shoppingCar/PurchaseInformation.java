@@ -123,5 +123,22 @@ public class PurchaseInformation implements Serializable {
         this.version = version;
     }
 
-
+    @Override
+    public String toString() {
+        return "PurchaseInformation{" +
+                "userId='" + userId + '\'' +
+                ", productId=" + productId +
+                ", ProductName='" + ProductName + '\'' +
+                ", ProductPrice=" + ProductPrice +
+                ", ProductInventory=" + ProductInventory +
+                ", size='" + size + '\'' +
+                ", colour='" + colour + '\'' +
+                ", combo='" + combo + '\'' +
+                ", specification='" + specification + '\'' +
+                ", taste='" + taste + '\'' +
+                ", kind='" + kind + '\'' +
+                ", version='" + version + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

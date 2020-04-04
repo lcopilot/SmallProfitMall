@@ -1,5 +1,6 @@
 package cn.itcast.controller;
 
+import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
@@ -32,8 +33,8 @@ public class OrderController {
      * @return
      */
     @RequestMapping(value = "/addOrder" ,method = RequestMethod.POST)
-    public QueryResponseResult addOrder(String userId ,Integer[] shoppingCartId) throws IOException {
-        String result = orderService.addOrder(userId,shoppingCartId);
+    public QueryResponseResult addOrder(PurchaseInformation purchaseInformation,String userId ,Integer[] shoppingCartId) throws IOException {
+        String result = orderService.addOrder(purchaseInformation,userId,shoppingCartId);
         QueryResult queryResult=new QueryResult();
         queryResult.setList(Collections.singletonList(result));
         return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
