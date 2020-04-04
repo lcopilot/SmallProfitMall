@@ -51,9 +51,7 @@
             <if test="shoppingCartId!=null">
               AND  sc.shoppingCartId=#{shoppingCartId}
             </if>
-
         </where>
-
 		AND
 		    pi.sign=1
     </select>
@@ -129,6 +127,7 @@
         desc
         limit #{Start},#{End}
     </select>
+
     <select id="finByShoppingCartId" resultType="cn.itcast.domain.shoppingCar.ShoppingCart">
           select
         sc.*,pp.ProductInventory,pi.ImageSite,pp.ProductPrice,pb.ProductName

@@ -56,6 +56,8 @@ public class OrderServiceImpl implements OrderService {
             order.setOrderTotal(orderNotes);
             //设置用户id
             order.setUserId(userId);
+            //设置订单时间
+            order.setOrderTime(new Date());
             //设置订单号
             order.setOrderId(orderId);
             //数据库新增
@@ -91,6 +93,8 @@ public class OrderServiceImpl implements OrderService {
             order.setOrderTotal(total);
             //设置用户id
             order.setUserId(userId);
+            //设置订单时间
+            order.setOrderTime(new Date());
             //设置订单号
             order.setOrderId(orderId);
             //数据库新增
