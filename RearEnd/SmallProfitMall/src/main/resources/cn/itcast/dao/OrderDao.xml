@@ -19,6 +19,7 @@
          <!-- 配置角色集合的映射 -->
         <collection property="productContents" ofType="cn.itcast.domain.order.ProductContent">
             <id property="id" column="ids"></id>
+            <result property="orderId" column="orderId"></result>
             <result property="productName" column="productName"></result>
             <result property="productImage" column="productImage"></result>
             <result property="productPrice" column="productPrice"></result>
