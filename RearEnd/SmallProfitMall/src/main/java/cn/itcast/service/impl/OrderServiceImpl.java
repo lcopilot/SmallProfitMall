@@ -182,9 +182,10 @@ public class OrderServiceImpl implements OrderService {
         }
         //查询用户人脸toke
         AccountSettings accountSettings = accountSettingsDao.findAccountSettings(userId);
+        System.out.println(accountSettings);
         String results = faceRecognitionService.faceCheck(accountSettings.getFaceToken(),image);
         if (!result.equals(results)){
-            return verification;
+            return results;
         }
         return result;
     }

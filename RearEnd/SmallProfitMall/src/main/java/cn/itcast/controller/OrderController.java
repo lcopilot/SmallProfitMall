@@ -115,7 +115,7 @@ public class OrderController {
     }
 
     /**
-     * 人脸上传
+     * 人脸验证
      * @param image 用户人图片
      * @param userId 用户id
      * @param videoFile 视频流
