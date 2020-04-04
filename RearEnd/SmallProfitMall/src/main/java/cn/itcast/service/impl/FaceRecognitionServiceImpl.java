@@ -104,8 +104,9 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
             faceCheckError.put("error_code", faceCheckError.getInt("error_code"));
             return  faceCheckError.toString(2);
         }
-        Double score =faceCheck.getDouble("score");
-        if (score<CREDIT){
+        JSONObject score=faceCheck.getJSONObject("result");
+        Double scores =score.getDouble("score");
+        if (scores<CREDIT){
             JSONObject faceCheckError = new JSONObject();
             faceCheckError.put("error_code",ERROR_CODE);
             return faceCheckError.toString(2);
@@ -128,9 +129,10 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         JSONObject faceDetectionRes = humanFaceUtil.faceDetection(image);
         //人脸检测结果
         String faceDetectionRedis =faceDetectionRes.getString("error_msg");
-        if (!faceDetectionRedis.equals(AERROR_MSG)){
+        System.out.println(faceDetectionRes.toString(2));
+        if (!AERROR_MSG.equals(faceDetectionRedis)){
             JSONObject faceError = new JSONObject();
-            faceError.put("error_code", faceDetectionRes.getString("error_code"));
+            faceError.put("error_code", faceDetectionRes.getInt("error_code"));
             return faceError.toString(2);
         }
         //取检测返回可信度
@@ -154,7 +156,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
             String livingBodyRedis = livingBodyRes.getString("error_msg");
             if (!livingBodyRedis.equals(AERROR_MSG)){
                 JSONObject livingError = new JSONObject();
-                livingError.put("error_code", livingBodyRes.getString("error_code"));
+                livingError.put("error_code", livingBodyRes.getInt("error_code"));
                 return  livingError.toString(2);
             }else {
                 JSONObject result = livingBodyRes.getJSONObject("result");

@@ -14,7 +14,7 @@
           UPDATE userPassword SET faceRecognition = #{faceRecognition},faceToken = #{faceToken} WHERE userId=#{userId}
     </update>
 
-    <!--根据用户账户设置-->
+    <!--查询用户账户设置-->
     <select id="findAccountSettings" resultType="cn.itcast.domain.accountSettings.AccountSettings">
         SELECT * FROM `userPassword` WHERE userId=#{userId}
     </select>
