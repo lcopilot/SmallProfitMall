@@ -33,6 +33,12 @@ public interface OrderDao {
     public Integer addProductContent(ProductContent productContent);
 
     /**
+     * 确认订单
+     * @param order 订单对象
+     * @return 是否成功
+     */
+    public Integer confirmOrder(Order order);
+    /**
      * 查询当天最后一条记录的订单号
      * @return
      */

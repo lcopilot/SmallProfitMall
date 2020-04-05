@@ -1,5 +1,6 @@
 package cn.itcast.controller;
 
+import cn.itcast.dao.MemberDao;
 import cn.itcast.domain.accountSettings.AccountSettings;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
@@ -43,6 +44,8 @@ public class OrderController {
 
     @Autowired
     AccountSettingsService accountSettingsService;
+
+
 
     //判断返回结果
     public static final String RESULT = "SUCCESS";
@@ -133,8 +136,25 @@ public class OrderController {
         if (RESULT.equals(result)){
             return new FaceRecognitionResponse(CommonCode.SUCCESS, null);
         }
+        //验证失败 返回错误代码
         FaceRecognition faceRecognition=new FaceRecognition();
         faceRecognition.setResult((JSONObject) JSON.parse(result));
         return new FaceRecognitionResponse(CommonCode.FAIL, faceRecognition);
+    }
+
+    /**
+     * 确认订单
+     * @param order
+     * @return
+     */
+    @RequestMapping(value = "/confirmOrder",method = RequestMethod.POST)
+    public QueryResponseResult confirmOrder(@RequestBody Order order) throws Exception {
+       Integer result =  orderService.confirmOrder(order);
+       if (result==1){
+           return new QueryResponseResult(CommonCode.SUCCESS,null);
+       }else if (result==2){
+           return new QueryResponseResult(CommonCode.InsufficientBalance,null);
+       }
+       return new QueryResponseResult(CommonCode.FAIL,null);
     }
 }

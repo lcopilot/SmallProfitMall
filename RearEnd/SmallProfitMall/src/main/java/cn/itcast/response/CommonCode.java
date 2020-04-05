@@ -16,6 +16,7 @@ public enum CommonCode implements ResultCode{
     credit(false,30000,"人脸信用度不足"),
     same(false,10007,"跟原有信息相同"),
     normal(true,81000,"webSocket连接正常"),
+    InsufficientBalance(false,40000,"余额不足"),
     nameError(false,10008,"不可以使用初始名登录"),
     ValidationFails(false,10009,"人机验证失败"),
     INVALID_PARAM(false,10003,"参数非法"),
