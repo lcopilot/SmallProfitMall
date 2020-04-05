@@ -377,12 +377,13 @@
           if (res.success) {
             this.$refs.face.faceAnimation = "http://img.fhxasdsada.xyz/afterRecognition.gif";
             this.$refs.face.stopNavigator();
+            this.$refs.face.collectionPrompt='';
             setTimeout(() => {
               this.$router.push({
                 path: "/orderComplete"
               });
               //跳转支付成功页面
-            }, 2700)
+            }, 2650)
             // this.settlementOrder();
           } else {
             if (res.code == 40000) {
@@ -396,6 +397,14 @@
             if (res.faceRecognition.result.error_code==32000){
               this.$message({
                 message: "刷脸支付失败",
+                type: "warning"
+              });
+              this.$refs.face.stopNavigator();
+              return this.$refs.face.faceVisible = false;
+            }
+            if (res.faceRecognition.result.error_code==17){
+              this.$message({
+                message: "服务器跑路了,请稍后重试!",
                 type: "warning"
               });
               this.$refs.face.stopNavigator();
