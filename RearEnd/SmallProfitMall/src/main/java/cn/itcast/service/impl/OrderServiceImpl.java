@@ -232,7 +232,7 @@ public class OrderServiceImpl implements OrderService {
                 orderDao.confirmOrder(order);
                 //添加地址
                 //转换地址
-                Address address = addressService.defaults(order.getAddress());
+                Address address = addressService.defaults(order.getOrderAddress());
                 //添加地址
                 orderDao.addOrdeAddress(order.getOrderId(),address);
                 result=1;

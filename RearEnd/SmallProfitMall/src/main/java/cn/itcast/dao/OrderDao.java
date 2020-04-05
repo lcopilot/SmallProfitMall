@@ -53,7 +53,7 @@ public interface OrderDao {
      * @param address 地址对象
      * @return 是否提交成功
      */
-    public Integer addOrdeAddress(@Param("orderId")String orderId, Address address);
+    public Integer addOrdeAddress(@Param("orderId") String orderId,@Param("address") Address address);
 
     /**
      * 查询当天最后一条记录的订单号

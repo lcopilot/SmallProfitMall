@@ -1,6 +1,7 @@
 package cn.itcast.domain.address;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  *地址
@@ -115,5 +116,22 @@ public class Address implements Serializable {
 
     public void setAlias(String alias) {
         this.alias = alias;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "addressId=" + addressId +
+                ", userId='" + userId + '\'' +
+                ", detailedAddress='" + detailedAddress + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", defaults=" + defaults +
+                ", areas='" + areas + '\'' +
+                ", areaCode=" + Arrays.toString(areaCode) +
+                ", areaCodes='" + areaCodes + '\'' +
+                ", alias='" + alias + '\'' +
+                '}';
     }
 }
