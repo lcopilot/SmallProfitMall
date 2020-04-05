@@ -228,7 +228,7 @@ public class OrderServiceImpl implements OrderService {
             String difference= balance.subtract(total).setScale(scale, BigDecimal.ROUND_HALF_UP).toString();
             double value = Double.valueOf(difference.toString());
             if (value<0){
-                return result;
+                return 2;
             }else {
                 //加密剩余余额
                 String balances = AesEncryptUtil.encrypt(difference);
