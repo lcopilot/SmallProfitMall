@@ -379,6 +379,9 @@
       if (myEndTimeNew && this.codeCountDownNew(myEndTimeNew)) {
         this.codeCountDownNew(myEndTimeNew)
       }
+    },
+    beforeDestroy() {
+      sessionStorage.setItem("phone_active", '1');
     }
   }
 </script>

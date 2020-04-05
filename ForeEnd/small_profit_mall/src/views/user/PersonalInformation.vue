@@ -415,6 +415,10 @@
       this.params.userId = this.userFrom.uid = sessionStorage.getItem("uId");
       this.imageUrl = sessionStorage.getItem("avatar");
       this.getUser();
+    },
+    beforeDestroy() {
+      sessionStorage.setItem("phoneSign", 'false');
+      sessionStorage.setItem("emailSign", 'false');
     }
   }
 </script>
