@@ -173,7 +173,8 @@
                     </div>
                   </el-col>
                   <el-col :span="17">
-                    <el-row v-for="(product,index) in orderProductList" style="margin-bottom: 2%" :key="index">
+                    <el-row v-for="(product,index) in orderProductList" style="margin-bottom: 2%"
+                            :key="index">
                       <el-col :span="4">
                         <div class="order_product_img">
                           <el-image :src="product.productImage"
@@ -266,13 +267,13 @@
     data() {
       return {
         //支付密码弹出框
-        paymentPasswordVisible:false,
+        paymentPasswordVisible: false,
         //订单数据
-        orderData:{},
+        orderData: {},
         //支付密码
-        paymentPassword:'',
+        paymentPassword: '',
         //订单商品列表
-        orderProductList:[],
+        orderProductList: [],
         //订单id
         orderNumber: '',
         //定单地址
@@ -310,27 +311,31 @@
       //结算
       settlement() {
         if (this.paymentMethod == 1) {
-          if (this.orderData.faceRecognition){
+          if (this.orderData.faceRecognition) {
             this.$refs.face.faceVisible = true;
             this.$refs.face.recognitionFailure();
-            let timer=setInterval(() => {
+            let timer = setInterval(() => {
               if (this.$refs.face.cameraStatus) {
                 this.$refs.face.collectionFace();
                 clearTimeout(timer);
               }
             }, 200)
-          }else {
-            this.paymentPasswordVisible=true;
+          } else {
+            this.paymentPasswordVisible = true;
           }
+        } else if (this.paymentMethod == 2) {
+
+        } else if (this.paymentMethod == 3) {
+          this.settlementOrder();
         }
       },
       //验证支付密码 设置支付密码
-      verifyPaymentPassword(){
+      verifyPaymentPassword() {
         let regular = /^\d{6}$/;
         if (!regular.test(this.paymentPassword)) {
           return this.$message.warning("请输入正确的6位支付密码!")
         }
-        if(!this.orderData.paymentPassword){
+        if (!this.orderData.paymentPassword) {
           let params = {
             userId: sessionStorage.getItem("uId"),
             paymentPassword: encryption.encrypt(this.paymentPassword)
@@ -338,11 +343,11 @@
           userApi.changePaymentPassword(params).then(res => {
             if (res.success) {
               this.$message.success("支付密码设置成功!");
-              this.paymentPassword='';
-              this.orderData.paymentPassword=true;
+              this.paymentPassword = '';
+              this.orderData.paymentPassword = true;
             }
           });
-        }else {
+        } else {
           let params = {
             userId: sessionStorage.getItem("uId"),
             faceRecognition: this.paymentPassword
@@ -350,10 +355,16 @@
           userApi.verifyPaymentPassword(params).then(res => {
             if (res.success) {
               this.settlementOrder();
+            } else if (res.code == 40000) {
+              this.$message({
+                message: "您的钱包余额不足,请换种支付方式吧!",
+                type: "waring"
+              })
+              this.paymentPasswordVisible = false;
+              this.paymentPassword = '';
             }
           });
         }
-
       },
       //刷脸支付
       facePayment(videoFile, image) {
@@ -373,7 +384,23 @@
               //跳转支付成功页面
             }, 2700)
             // this.settlementOrder();
-          }else {
+          } else {
+            if (res.code == 40000) {
+              this.$message({
+                message: "您的钱包余额不足,请换种支付方式吧!",
+                type: "waring"
+              })
+              this.$refs.face.stopNavigator();
+              return this.$refs.face.faceVisible = false;
+            }
+            if (res.faceRecognition.result.error_code==32000){
+              this.$message({
+                message: "刷脸支付失败",
+                type: "warning"
+              });
+              this.$refs.face.stopNavigator();
+              return this.$refs.face.faceVisible = false;
+            }
             this.$refs.face.recognitionFailure(res.faceRecognition.result.error_code);
             this.$refs.face.collectionFace();
           }
@@ -391,7 +418,7 @@
           deliveryWay: this.expressType,
         }
         ordersApi.settlementOrder(order).then(res => {
-          if (res.success){
+          if (res.success) {
 
           }
         })
@@ -413,10 +440,10 @@
       },
       //获取订单数据
       getOrder() {
-        ordersApi.getOrder(sessionStorage.getItem("uId"),this.orderNumber).then(res => {
+        ordersApi.getOrder(sessionStorage.getItem("uId"), this.orderNumber).then(res => {
           if (res.success) {
-            this.orderData=res.resultOrder;
-            this.orderProductList=res.resultOrder.order.productContents;
+            this.orderData = res.resultOrder;
+            this.orderProductList = res.resultOrder.order.productContents;
           }
         })
       },
@@ -427,8 +454,11 @@
       }
       this.orderNumber = sessionStorage.getItem("orderNumber");
       this.getOrder();
+    },
+    //页面关闭时销毁
+    beforeDestroy() {
+      sessionStorage.setItem("orderNumber", '');
     }
-
   }
 </script>
 
@@ -506,7 +536,7 @@
   .order_product_img {
     width: 60%;
     border: 1px solid #999999;
-    padding-top:7%;
+    padding-top: 7%;
     padding-right: 3%;
     padding-left: 3%;
     margin-left: 10%
