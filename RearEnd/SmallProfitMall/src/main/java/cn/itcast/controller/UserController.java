@@ -152,7 +152,6 @@ public class UserController {
 	public QueryResponseResult register(@RequestBody User user, HttpSession session) throws Exception {
 		String Verify = (String) session.getAttribute("Verify");
 		String phone = (String) session.getAttribute("phone");
-		session.invalidate();	//销毁session
 		if (user.getVerify().equals(Verify) && user.getPhone().equals(phone)) {
 			//存入对象
 			Integer result = userService.saveAccount(user);
@@ -165,6 +164,7 @@ public class UserController {
 			return new QueryResponseResult(CommonCode.FAIL, null);
 		}
 		//注册成功
+		session.invalidate();	//销毁session
 		return new QueryResponseResult(CommonCode.SUCCESS,null);
 	}
 
@@ -214,10 +214,11 @@ public class UserController {
 		String passwordVerify = (String) session.getAttribute("passwordVerify");
 		String phone = (String) session.getAttribute("upPasswordPhone");
 		String password = user.getPassword();
-		session.invalidate();	//销毁session
+
 		if (user.getPhone().equals(phone)) {
 			if (user.getVerify().equals(passwordVerify)) {
 				//加密手机号
+				session.invalidate();	//销毁session
 				String phones = AesEncryptUtil.encrypt(phone);
 				userService.updatePasswordPhone(phones, password);
 				return new QueryResponseResult(CommonCode.SUCCESS, null);
