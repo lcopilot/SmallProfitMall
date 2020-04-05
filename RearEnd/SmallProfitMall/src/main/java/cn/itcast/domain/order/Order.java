@@ -39,14 +39,14 @@ public class Order implements Serializable {
     /**
      * 订单状态  1代表未支付 2代表已支付
      */
-    private Integer orderTestState;
+    private Integer orderState;
 
-    public Integer getOrderTestState() {
-        return orderTestState;
+    public Integer getOrderState() {
+        return orderState;
     }
 
-    public void setOrderTestState(Integer orderTestState) {
-        this.orderTestState = orderTestState;
+    public void setOrderState(Integer orderState) {
+        this.orderState = orderState;
     }
 
     //商品信息

@@ -1,9 +1,6 @@
 package cn.itcast.service.impl;
 
-import cn.itcast.dao.AccountSettingsDao;
-import cn.itcast.dao.OrderDao;
-import cn.itcast.dao.ProductDetailsDao;
-import cn.itcast.dao.ShoppingCartDao;
+import cn.itcast.dao.*;
 import cn.itcast.domain.accountSettings.AccountSettings;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
@@ -32,24 +29,27 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
     @Autowired
-    OrderDao orderDao;
+    private OrderDao orderDao;
 
     @Autowired
-    ShoppingCartDao shoppingCartDao;
+    private ShoppingCartDao shoppingCartDao;
 
     @Autowired
-    ProductDetailsDao productDetailsDao;
+    private ProductDetailsDao productDetailsDao;
 
     @Autowired
-    ShoppingCartService shoppingCartService;
+    private ShoppingCartService shoppingCartService;
 
 
     @Autowired
-    AccountSettingsDao accountSettingsDao;
+    private AccountSettingsDao accountSettingsDao;
 
     @Autowired
-    FaceRecognitionService faceRecognitionService;
+    private FaceRecognitionService faceRecognitionService;
 
+    //会员信息
+    @Autowired
+    private MemberDao memberDao;
 
     /**
      * 购物车订单
@@ -76,6 +76,8 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderTime(new Date());
         //设置订单号
         order.setOrderId(orderId);
+        //订单状态 1代表未付款
+        order.setOrderState(1);
         //数据库新增
         orderDao.addOrder(order);
         return orderId;
@@ -191,6 +193,42 @@ public class OrderServiceImpl implements OrderService {
         }
         return result;
     }
+
+    /**
+     * 确认订单
+     * @param order 订单对象
+     * @return 1为支付成功 2 为余额不足
+     */
+    @Override
+    public Integer confirmOrder(Order order) throws Exception {
+        Integer result=0;
+        //用户余额
+        String encryptionBalance =  memberDao.findBalance(order.getUserId());
+        //解密余额
+        String decodeBalances = AesEncryptUtil.desEncrypt(encryptionBalance);
+        BigDecimal balance=new BigDecimal(decodeBalances);
+        BigDecimal total = order.getOrderTotal();
+        //保留两位小数
+        int scale=2;
+        //相减结果
+        String difference= balance.subtract(total).setScale(scale, BigDecimal.ROUND_HALF_UP).toString();
+        double value = Double.valueOf(difference.toString());
+        if (value<0){
+            return result;
+        }else {
+            //加密剩余余额
+            String balances = AesEncryptUtil.encrypt(difference);
+            //跟新账户余额
+            memberDao.updateBalance(order.getUserId(),balances);
+            //修改订单状态 2为确认订单
+            order.setOrderState(2);
+            //确认订单
+            orderDao.confirmOrder(order);
+            result=1;
+        }
+        return result;
+    }
+
 
     /**
      * 生成订单号 时间戳加当天流水号

@@ -16,7 +16,7 @@
         <result property="paymentTime" column="paymentTime"></result>
         <result property="orderNote" column="orderNote"></result>
         <result property="orderTotal" column="orderTotal"></result>
-        <result property="orderTestState" column="orderTestState"></result>
+        <result property="orderState" column="orderState"></result>
          <!-- 配置角色集合的映射 -->
         <collection property="productContents" ofType="cn.itcast.domain.order.ProductContent">
             <id property="id" column="ids"></id>
@@ -34,9 +34,9 @@
     <!--新增订单-->
     <insert id="addOrder" parameterType="cn.itcast.domain.order.Order">
         INSERT INTO
-           userOrder(userId,orderId,orderTime,orderTotal)
+           userOrder(userId,orderId,orderTime,orderTotal,orderState)
         VALUES
-            (#{userId},#{orderId},#{orderTime},#{orderTotal})
+            (#{userId},#{orderId},#{orderTime},#{orderTotal},#{orderState})
     </insert>
     <!--新增订单商品内容-->
     <insert id="addProductContent" parameterType="cn.itcast.domain.order.ProductContent">
@@ -63,10 +63,26 @@
             uo.orderId=#{orderId}
     </select>
 
+    <!--确认订单-->
+    <update id="confirmOrder" parameterType="cn.itcast.domain.order.Order">
+        UPDATE
+            userOrder
+        SET
+             paymentWay=#{paymentWay},deliveryWay=#{deliveryWay},
+             deliveryTime=#{deliveryTime},paymentTime=#{paymentTime},
+             submitTime=#{submitTime},orderNote=#{orderNote},orderState=orderState
+        WHERE
+            userId=#{userId}
+        AND
+            orderId=#{orderId}
+
+    </update>
 
     <!--查询最后一条记录流水号-->
     <select id="findSerialnumber" resultType="java.lang.String">
       SELECT orderId FROM userOrder WHERE TO_DAYS(orderTime) = TO_DAYS(NOW()) ORDER BY orderTime DESC LIMIT 1
     </select>
+
+
 
 </mapper>

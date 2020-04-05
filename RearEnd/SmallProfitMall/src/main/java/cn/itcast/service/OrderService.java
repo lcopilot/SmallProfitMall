@@ -52,4 +52,12 @@ public interface OrderService {
      * @return
      */
     public String verificationFace(String image, String userId, InputStream videoFile) throws Exception;
+
+
+    /**
+     * 确认订单
+     * @param order 订单对象
+     * @return 是否成功
+     */
+    public Integer confirmOrder(Order order) throws Exception;
 }

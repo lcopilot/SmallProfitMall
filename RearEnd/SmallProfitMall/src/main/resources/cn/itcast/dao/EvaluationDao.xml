@@ -7,10 +7,10 @@
     <insert id="addEvaluation" parameterType="cn.itcast.domain.favorite.Evaluation">
     INSERT
     INTO
-    userEvaluation
-    (userId,productId,sign,evaluationTime)
+        userEvaluation
+        (userId,productId,sign,evaluationTime)
     VALUES
-    (#{userId},#{productId},#{sign},#{evaluationTime})
+        (#{userId},#{productId},#{sign},#{evaluationTime})
     </insert>
     <!--查询-->
     <select id="fendEvaluation" resultType="cn.itcast.domain.favorite.Evaluation">

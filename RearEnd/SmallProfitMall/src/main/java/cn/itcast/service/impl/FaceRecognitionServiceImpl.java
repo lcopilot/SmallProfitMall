@@ -29,8 +29,14 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
     //人脸检测信用度
     public static final Double CREDIT = 0.82;
 
+    //人脸比对分数
+    public static final Double SIMILARITY=85.00;
+
     //信用不足错误代码
     public static final int ERROR_CODE = 30000;
+
+    //人脸用户不匹配
+    public static final int  NOUSER =320000;
 
     @Autowired
     HumanFaceUtil humanFaceUtil;
@@ -106,9 +112,9 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         }
         JSONObject score=faceCheck.getJSONObject("result");
         Double scores =score.getDouble("score");
-        if (scores<CREDIT){
+        if (scores<SIMILARITY){
             JSONObject faceCheckError = new JSONObject();
-            faceCheckError.put("error_code",ERROR_CODE);
+            faceCheckError.put("error_code",NOUSER);
             return faceCheckError.toString(2);
         }
         return AERROR_MSG;
@@ -174,6 +180,9 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
             String sessionId = humanFaceUtil.voiceDetection();
             //视频活体检测
             String videoValidation = humanFaceUtil.videoValidation(sessionId, faceVideo);
+            System.out.println("--------活体检测分数---------");
+            System.out.println(videoValidation);
+            System.out.println("--------------------");
             Map videoValidationMap = (Map) JSON.parse(String.valueOf(videoValidation));
             //取是否成功属性
             String videoValidationMapRedis= (String) videoValidationMap.get("error_msg");
