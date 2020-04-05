@@ -88,7 +88,7 @@
                     <el-row>
                       <el-col :span="4" style="color: #999999"> 微利价:</el-col>
                       <el-col :span="16" class="product_price">
-                        ￥{{product.productPrice.toFixed(2)}}
+                        ￥{{product.productPrice?product.productPrice.toFixed(2):''}}
                       </el-col>
                       <el-col :span="4" style="color: #999999"> 累计销量<span
                           class="product_sales">{{product.sales}}</span></el-col>
