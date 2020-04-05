@@ -80,8 +80,12 @@ const close = () => {
 function websocketOnMessage(e) {
   if (e!=null){
     stopHeartbeat();
-    globalCallback=callbackNameMap.get(JSON.parse(e.data).code);
-    globalCallback(JSON.parse(e.data));
+    if (JSON.parse(e.data).code){
+      globalCallback=callbackNameMap.get(80000);
+      globalCallback(JSON.parse(e.data));
+      globalCallback=callbackNameMap.get(JSON.parse(e.data).code);
+      globalCallback(JSON.parse(e.data));
+    }
     //开启心跳
     startHeartbeat();
   }

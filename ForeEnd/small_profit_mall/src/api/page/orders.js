@@ -10,5 +10,5 @@ export const getOrder=(userId,orderNumber)=>{
 };
 //订单结算
 export  const settlementOrder=order=>{
-  return http.requestPost('apiUrl/',order)
+  return http.requestPost('apiUrl/OrderController/confirmOrder',order)
 };

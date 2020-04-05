@@ -59,16 +59,20 @@
                         </el-col>
                         <el-col :span="2">
                           <div class="orders_address">
-                            <a>
-                              {{address.name}}
-                            </a>
+                            <el-tooltip class="item" effect="dark" :content="address.name" placement="top">
+                              <a>
+                                {{address.name}}
+                              </a>
+                            </el-tooltip>
                           </div>
                         </el-col>
                         <el-col :span="13">
                           <div class="orders_address">
-                            <a>
-                              {{address.areas+' '+address.detailedAddress}}
-                            </a>
+                            <el-tooltip class="item" effect="dark" :content="address.areas+' '+address.detailedAddress" placement="top">
+                              <a>
+                                {{address.areas+' '+address.detailedAddress}}
+                              </a>
+                            </el-tooltip>
                           </div>
                         </el-col>
                         <el-col :span="3">
@@ -355,13 +359,6 @@
           userApi.verifyPaymentPassword(params).then(res => {
             if (res.success) {
               this.settlementOrder();
-            } else if (res.code == 40000) {
-              this.$message({
-                message: "您的钱包余额不足,请换种支付方式吧!",
-                type: "waring"
-              })
-              this.paymentPasswordVisible = false;
-              this.paymentPassword = '';
             }
           });
         }
@@ -379,21 +376,11 @@
             this.$refs.face.stopNavigator();
             this.$refs.face.collectionPrompt='';
             setTimeout(() => {
-              this.$router.push({
-                path: "/orderComplete"
-              });
+                this.settlementOrder();
               //跳转支付成功页面
             }, 2650)
             // this.settlementOrder();
           } else {
-            if (res.code == 40000) {
-              this.$message({
-                message: "您的钱包余额不足,请换种支付方式吧!",
-                type: "waring"
-              })
-              this.$refs.face.stopNavigator();
-              return this.$refs.face.faceVisible = false;
-            }
             if (res.faceRecognition.result.error_code==32000){
               this.$message({
                 message: "刷脸支付失败",
@@ -425,10 +412,23 @@
           deliveryTime: this.deliveryTime,
           paymentWay: this.paymentMethod,
           deliveryWay: this.expressType,
-        }
+        };
         ordersApi.settlementOrder(order).then(res => {
           if (res.success) {
-
+            this.$router.push({
+              path: "/orderComplete"
+            });
+          }else {
+            if (res.code == 40000) {
+              this.$message({
+                message: "您的钱包余额不足,请换种支付方式吧!",
+                type: "waring"
+              });
+              this.$refs.face.stopNavigator();
+              return this.$refs.face.faceVisible = false;
+              this.paymentPasswordVisible = false;
+              this.paymentPassword = '';
+            }
           }
         })
       },

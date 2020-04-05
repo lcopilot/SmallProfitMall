@@ -90,8 +90,8 @@
         this.socketApi.close();
       },
       //新消息消息
-      newMessage(unreadQuantity){
-        this.unreadQuantity=unreadQuantity;
+      newMessage(msg){
+        this.unreadQuantity=msg.queryResultString.unreadQuantity;
         sessionStorage.setItem("unreadQuantity",this.unreadQuantity);
       }
     },
