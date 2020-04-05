@@ -3,7 +3,7 @@
     <el-header>
       <Header/>
     </el-header>
-    <el-main>
+    <el-main v-if="orderData">
       <el-row :gutter="10">
         <el-col :span="18" :push="3">
           <el-card style="text-align: left">
@@ -206,7 +206,7 @@
               </div>
             </div>
           </el-card>
-          <el-card shadow="always" class="cart_footer">
+          <el-card shadow="always" class="cart_footer" v-if="orderData">
             <el-row>
               <el-col :span="3" :offset="14">
                 <div style="color: #999999">
@@ -216,7 +216,7 @@
               <el-col :span="4">
                 <div class="cart_product_total_price1">总价:
                   <span class="cart_product_total_price2">
-                      ￥{{orderData.order.orderTotal.toFixed(2)}}
+                      ￥{{orderData.order?orderData.order.orderTotal.toFixed(2):''}}
                   </span>
                 </div>
                 <div style="font-size: 12px;color: #999999">运费:￥0.00</div>
@@ -313,9 +313,12 @@
           if (this.orderData.faceRecognition){
             this.$refs.face.faceVisible = true;
             this.$refs.face.recognitionFailure();
-            setTimeout(() => {
-              this.$refs.face.collectionFace();
-            }, 3000)
+            let timer=setInterval(() => {
+              if (this.$refs.face.cameraStatus) {
+                this.$refs.face.collectionFace();
+                clearTimeout(timer);
+              }
+            }, 200)
           }else {
             this.paymentPasswordVisible=true;
           }
@@ -361,9 +364,18 @@
         this.$refs.face.recognitionFailure(20190415);
         ordersApi.facePayment(dataForm).then(res => {
           if (res.success) {
-            this.settlementOrder();
+            this.$refs.face.faceAnimation = "http://img.fhxasdsada.xyz/afterRecognition.gif";
+            this.$refs.face.stopNavigator();
+            setTimeout(() => {
+              this.$router.push({
+                path: "/orderComplete"
+              });
+              //跳转支付成功页面
+            }, 2700)
+            // this.settlementOrder();
           }else {
             this.$refs.face.recognitionFailure(res.faceRecognition.result.error_code);
+            this.$refs.face.collectionFace();
           }
         });
       },
@@ -380,13 +392,7 @@
         }
         ordersApi.settlementOrder(order).then(res => {
           if (res.success){
-            this.$refs.face.faceAnimation = "http://img.fhxasdsada.xyz/afterRecognition.gif";
-            setTimeout(() => {
-              this.$router.push({
-                path: "/orderComplete"
-              });
-              //跳转支付成功页面
-            }, 2700)
+
           }
         })
       },

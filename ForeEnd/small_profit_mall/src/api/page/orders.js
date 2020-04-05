@@ -2,7 +2,7 @@ import http from '../util/public';
 
 //支付人脸识别
 export const facePayment =data=>{
-  return http.requestPost('',data)
+  return http.requestPost('apiUrl/OrderController/verificationFace',data)
 };
 //获取订单数据
 export const getOrder=(userId,orderNumber)=>{
