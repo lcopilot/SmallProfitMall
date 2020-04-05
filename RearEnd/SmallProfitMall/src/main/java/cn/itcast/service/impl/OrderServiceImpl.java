@@ -59,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
      * @return 返回订单号
      */
     @Override
-    public String addOrder(String userId, Integer[] shoppingCartId, HttpSession session) {
+    public String addOrder(String userId, Integer[] shoppingCartId) {
         Order order= new Order();
 
         //生成订单id
@@ -71,8 +71,6 @@ public class OrderServiceImpl implements OrderService {
         BigDecimal orderNotes = addProduct(initialize,orderId);
         //设置总计
         order.setOrderTotal(orderNotes);
-        //将总计存入sessio
-        session.setAttribute(orderId, orderNotes);
         //设置用户id
         order.setUserId(userId);
         //设置订单时间
@@ -93,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     @Override
-    public String purchaseOrder(PurchaseInformation purchaseInformation, HttpSession session){
+    public String purchaseOrder(PurchaseInformation purchaseInformation){
         Order order= new Order();
         //数据库取商品价格名字
         PurchaseInformation purchaseInformation1 =  shoppingCartDao.findByPid(purchaseInformation.getProductId());
@@ -128,8 +126,6 @@ public class OrderServiceImpl implements OrderService {
         BigDecimal total =productPrice1.multiply(Quantity);
         //设置总计
         order.setOrderTotal(total);
-        //将总计放入session
-        session.setAttribute(orderId, total);
         //设置用户id
         order.setUserId(purchaseInformation.getUserId());
         //设置订单时间
@@ -205,7 +201,7 @@ public class OrderServiceImpl implements OrderService {
      * @return 1为支付成功 2 为余额不足
      */
     @Override
-    public Integer confirmOrder(Order order,HttpSession session) throws Exception {
+    public Integer confirmOrder(Order order) throws Exception {
         //返回结果
         Integer result=0;
         //判断用户付款方式 1为钱包支付 2为支付宝支付 3我微信支付
@@ -213,11 +209,7 @@ public class OrderServiceImpl implements OrderService {
             //用户余额
             String encryptionBalance =  memberDao.findBalance(order.getUserId());
             //从session获取订单总计
-            String totals =session.getAttribute(order.getOrderId()).toString();
-            //服务器重启从数据库查询
-            if (totals==null){
-                totals=orderDao.fenOrderTotal(order.getUserId(),order.getOrderId());
-            }
+            String totals = totals=orderDao.fenOrderTotal(order.getUserId(),order.getOrderId());
             //解密余额
             String decodeBalances = AesEncryptUtil.desEncrypt(encryptionBalance);
             BigDecimal balance=new BigDecimal(decodeBalances);

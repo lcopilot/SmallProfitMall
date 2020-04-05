@@ -20,14 +20,14 @@ public interface OrderService {
      * @param shoppingCartId 购物车id
      * @return
      */
-    public String addOrder(String userId, Integer[] shoppingCartId ,HttpSession session);
+    public String addOrder(String userId, Integer[] shoppingCartId);
 
     /**
      * 直接购买订单结算
      * @param purchaseInformation
      * @return
      */
-    public String purchaseOrder(PurchaseInformation purchaseInformation, HttpSession session);
+    public String purchaseOrder(PurchaseInformation purchaseInformation);
 
     /**
      * 查询订单信息
@@ -60,5 +60,5 @@ public interface OrderService {
      * @param order 订单对象
      * @return 是否成功
      */
-    public Integer confirmOrder(Order order, HttpSession session) throws Exception;
+    public Integer confirmOrder(Order order) throws Exception;
 }
