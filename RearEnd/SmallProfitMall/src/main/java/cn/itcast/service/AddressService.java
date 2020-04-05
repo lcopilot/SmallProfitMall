@@ -44,4 +44,11 @@ public interface AddressService {
      * @return
      */
     public int updateDefaults(int addressId,String userId, Boolean defaults);
+
+    /**
+     * 转换地址格式
+     * @param address 地址对象
+     * @return 转换后地址
+     */
+    public Address defaults(Address address);
 }

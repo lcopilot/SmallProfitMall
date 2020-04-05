@@ -1,5 +1,7 @@
 package cn.itcast.domain.order;
 
+import cn.itcast.domain.address.Address;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.DateTimeException;
@@ -20,8 +22,6 @@ public class Order implements Serializable {
     private String orderId;
     //支付方式
     private Integer paymentWay;
-    //购物车id
-    private Integer[] shoppingCartId;
     //配送方式
     private Integer deliveryWay;
     //订单时间
@@ -36,6 +36,17 @@ public class Order implements Serializable {
     private String orderNote;
     //订单总计
     private BigDecimal orderTotal;
+
+    public Address address;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     /**
      * 订单状态  1代表未支付 2代表已支付
      */
@@ -84,13 +95,6 @@ public class Order implements Serializable {
         this.paymentWay = paymentWay;
     }
 
-    public Integer[] getShoppingCartId() {
-        return shoppingCartId;
-    }
-
-    public void setShoppingCartId(Integer[] shoppingCartId) {
-        this.shoppingCartId = shoppingCartId;
-    }
 
     public Integer getDeliveryWay() {
         return deliveryWay;

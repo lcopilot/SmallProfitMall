@@ -2,19 +2,32 @@ package cn.itcast.domain.address;
 
 import java.io.Serializable;
 
-
+/**
+ *地址
+ */
 public class Address implements Serializable {
-    private int addressId;  //地址id
-    private String userId;//用户id
-    private String detailedAddress;//详细地址
-    private String name;    //收货人名字
-    private String phone;   //收货人手机
-    private String email;   //收货人邮箱
-    private Boolean defaults; //默认地址
-    private String areas;//区域
-    private String[] areaCode;// 接收的区域代码
-    private String areaCodes;   //存数据库的区域代码
-    private String alias;   //备注地点
+    //地址id
+    private int addressId;
+    //用户id
+    private String userId;
+    //详细地址
+    private String detailedAddress;
+    //收货人名字
+    private String name;
+    //收货人手机
+    private String phone;
+    //收货人邮箱
+    private String email;
+    //默认地址
+    private Boolean defaults;
+    //区域
+    private String areas;
+    // 接收的区域代码
+    private String[] areaCode;
+    //存数据库的区域代码
+    private String areaCodes;
+    //备注地点
+    private String alias;
 
     public int getAddressId() {
         return addressId;

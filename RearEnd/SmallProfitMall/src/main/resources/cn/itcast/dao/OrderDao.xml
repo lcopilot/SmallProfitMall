@@ -47,6 +47,14 @@
 
     </insert>
 
+    <!--添加订单地址-->
+    <insert id="addOrdeAddress" parameterType="java.lang.Integer">
+    INSERT INTO orderAddress
+		(userId,orderId,name,areas,detailedAddress,phone,email,areaCodes,alias)
+	VALUES
+	    (#{userId},#{orderId},#{name},#{areas},#{detailedAddress},#{phone},#{email},#{areaCodes},#{alias})
+    </insert>
+
     <!--查询订单-->
     <select id="findOrder" resultMap="orderMap">
         SELECT

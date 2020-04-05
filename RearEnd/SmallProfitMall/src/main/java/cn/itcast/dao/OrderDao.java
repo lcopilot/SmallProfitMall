@@ -1,5 +1,6 @@
 package cn.itcast.dao;
 
+import cn.itcast.domain.address.Address;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
 import org.apache.ibatis.annotations.Param;
@@ -46,6 +47,13 @@ public interface OrderDao {
      * @return 订单总计
      */
     public String fenOrderTotal(@Param("userId") String userId,@Param("orderId")String orderId);
+
+    /**
+     * 添加订单地址
+     * @param address 地址对象
+     * @return 是否提交成功
+     */
+    public Integer addOrdeAddress(@Param("orderId")String orderId, Address address);
 
     /**
      * 查询当天最后一条记录的订单号
