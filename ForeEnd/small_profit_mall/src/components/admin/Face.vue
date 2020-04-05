@@ -58,7 +58,6 @@
     },
     data() {
       return {
-        //刷脸支付识别提示内容
         //人脸识别动画
         faceAnimation: "http://img.fhxasdsada.xyz/beforeRecognition.gif",
         //视频大小

@@ -611,6 +611,9 @@
       if (myEndTimeUntieEmail && this.codeCountDownUntieEmail(myEndTimeUntieEmail)) {
         this.codeCountDownUntieEmail(myEndTimeUntieEmail)
       }
+    },
+    beforeDestroy() {
+      sessionStorage.setItem("email_active", '1');
     }
   }
 </script>
