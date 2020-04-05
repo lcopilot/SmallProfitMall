@@ -58,8 +58,8 @@ public class OrderController {
      * @throws IOException
      */
     @RequestMapping(value = "/addOrder" ,method = RequestMethod.POST)
-    public QueryResponseResult addOrder(String userId ,Integer[] shoppingCartId,HttpSession session) throws IOException {
-        String result = orderService.addOrder(userId,shoppingCartId,session);
+    public QueryResponseResult addOrder(String userId ,Integer[] shoppingCartId) throws IOException {
+        String result = orderService.addOrder(userId,shoppingCartId);
         QueryResult queryResult=new QueryResult();
         queryResult.setList(Collections.singletonList(result));
         return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
@@ -72,8 +72,8 @@ public class OrderController {
      * @throws IOException
      */
     @RequestMapping(value = "/purchaseOrder" ,method = RequestMethod.POST)
-    public QueryResponseResult purchaseOrder(@RequestBody PurchaseInformation purchaseInformation,HttpSession session) throws IOException {
-        String result = orderService.purchaseOrder(purchaseInformation,session);
+    public QueryResponseResult purchaseOrder(@RequestBody PurchaseInformation purchaseInformation) throws IOException {
+        String result = orderService.purchaseOrder(purchaseInformation);
         QueryResult queryResult=new QueryResult();
         queryResult.setList(Collections.singletonList(result));
         return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
@@ -149,8 +149,8 @@ public class OrderController {
      * @return
      */
     @RequestMapping(value = "/confirmOrder",method = RequestMethod.POST)
-    public QueryResponseResult confirmOrder(@RequestBody Order order,HttpSession session) throws Exception {
-       Integer result =  orderService.confirmOrder(order,session);
+    public QueryResponseResult confirmOrder(@RequestBody Order order) throws Exception {
+       Integer result =  orderService.confirmOrder(order);
        if (result==1){
            return new QueryResponseResult(CommonCode.SUCCESS,null);
        }else if (result==2){
