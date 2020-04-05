@@ -38,6 +38,15 @@ public interface OrderDao {
      * @return 是否成功
      */
     public Integer confirmOrder(Order order);
+
+    /**
+     * 查询订单总总计
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @return 订单总计
+     */
+    public String fenOrderTotal(@Param("userId") String userId,@Param("orderId")String orderId);
+
     /**
      * 查询当天最后一条记录的订单号
      * @return

@@ -5,6 +5,7 @@ import cn.itcast.domain.order.ProductContent;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -19,14 +20,14 @@ public interface OrderService {
      * @param shoppingCartId 购物车id
      * @return
      */
-    public String addOrder(String userId, Integer[] shoppingCartId);
+    public String addOrder(String userId, Integer[] shoppingCartId ,HttpSession session);
 
     /**
      * 直接购买订单结算
      * @param purchaseInformation
      * @return
      */
-    public String purchaseOrder(PurchaseInformation purchaseInformation);
+    public String purchaseOrder(PurchaseInformation purchaseInformation, HttpSession session);
 
     /**
      * 查询订单信息
@@ -59,5 +60,5 @@ public interface OrderService {
      * @param order 订单对象
      * @return 是否成功
      */
-    public Integer confirmOrder(Order order) throws Exception;
+    public Integer confirmOrder(Order order, HttpSession session) throws Exception;
 }

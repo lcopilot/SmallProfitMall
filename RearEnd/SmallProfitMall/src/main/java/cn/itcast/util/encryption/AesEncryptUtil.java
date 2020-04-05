@@ -129,5 +129,6 @@ public class AesEncryptUtil {
 //        String jiemi = desEncrypt(data, key, iv).trim();
 //        System.out.println("解密：" + jiemi);
 
+        System.out.println( desEncrypt("lvUlQ8/6TNEOxuD15FNC1A=="));
     }
 }
