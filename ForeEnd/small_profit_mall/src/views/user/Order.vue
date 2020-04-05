@@ -420,14 +420,18 @@
             });
           }else {
             if (res.code == 40000) {
-              this.$message({
-                message: "您的钱包余额不足,请换种支付方式吧!",
-                type: "waring"
+              this.$notify({
+                title: '余额不足',
+                message: '您的钱包余额不足,请更换支付方式',
+                type: 'warning',
               });
-              this.$refs.face.stopNavigator();
-              return this.$refs.face.faceVisible = false;
-              this.paymentPasswordVisible = false;
-              this.paymentPassword = '';
+              if (this.orderData.faceRecognition){
+                this.$refs.face.stopNavigator();
+                this.$refs.face.faceVisible = false;
+              }else {
+                this.paymentPasswordVisible = false;
+                this.paymentPassword = '';
+              }
             }
           }
         })
