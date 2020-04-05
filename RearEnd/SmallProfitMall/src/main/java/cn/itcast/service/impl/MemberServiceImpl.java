@@ -30,7 +30,7 @@ public class MemberServiceImpl implements MemberService {
         //查询用户当前余额
         String desEncrypt= memberDao.findBalance(userId);
         //解密当前余额
-        if (desEncrypt!=null){
+        if (desEncrypt!=null && !"".equals(desEncrypt)){
            desEncrypt =  AesEncryptUtil.desEncrypt(desEncrypt);
         }else {
             desEncrypt="0.00";
