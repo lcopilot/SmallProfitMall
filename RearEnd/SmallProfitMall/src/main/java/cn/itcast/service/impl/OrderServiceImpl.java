@@ -172,7 +172,9 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     @Override
-    public String verificationFace(String image, String userId, InputStream videoFile) throws IOException {
+    public String verificationFace(String image, String userId, InputStream videoFile) throws Exception {
+        //解密人脸
+        image=AesEncryptUtil.desEncrypt(image);
         //进行人脸检测
         String verification = faceRecognitionService.faceVerification(image,videoFile);
         String result = "SUCCESS";
