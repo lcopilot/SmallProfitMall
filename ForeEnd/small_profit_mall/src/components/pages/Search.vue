@@ -287,7 +287,10 @@
       this.getShoppingCartPreview();
     },
     mounted() {
-      this.isCategories = sessionStorage.getItem("searchContent");
+      //延迟读取 防止searchContent可能还没存入session
+      setTimeout(()=>{
+        this.isCategories = sessionStorage.getItem("searchContent");
+      },100)
       this.toke = sessionStorage.getItem('token');
       this.restaurants = this.loadAll();
     }
