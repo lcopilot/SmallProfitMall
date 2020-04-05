@@ -51,5 +51,5 @@ public interface OrderService {
      * @param videoFile 人脸视频
      * @return
      */
-    public String verificationFace(String image, String userId, InputStream videoFile) throws IOException;
+    public String verificationFace(String image, String userId, InputStream videoFile) throws Exception;
 }
