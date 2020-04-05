@@ -36,7 +36,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
     public static final int ERROR_CODE = 30000;
 
     //人脸用户不匹配
-    public static final int  NOUSER =330000;
+    public static final int  NOUSER =32000;
 
     @Autowired
     HumanFaceUtil humanFaceUtil;
