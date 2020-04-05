@@ -2,14 +2,12 @@ package cn.itcast.service.impl;
 
 import cn.itcast.dao.*;
 import cn.itcast.domain.accountSettings.AccountSettings;
+import cn.itcast.domain.address.Address;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.domain.shoppingCar.ShoppingCart;
-import cn.itcast.service.AccountSettingsService;
-import cn.itcast.service.FaceRecognitionService;
-import cn.itcast.service.OrderService;
-import cn.itcast.service.ShoppingCartService;
+import cn.itcast.service.*;
 import cn.itcast.util.encryption.AesEncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +50,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private MemberDao memberDao;
 
+    @Autowired
+    public AddressService addressService;
     /**
      * 购物车订单
      * @param userId 用户id
@@ -230,6 +230,11 @@ public class OrderServiceImpl implements OrderService {
                 order.setOrderState(2);
                 //确认订单
                 orderDao.confirmOrder(order);
+                //添加地址
+                //转换地址
+                Address address = addressService.defaults(order.getAddress());
+                //添加地址
+                orderDao.addOrdeAddress(order.getOrderId(),address);
                 result=1;
             }
             return result;
