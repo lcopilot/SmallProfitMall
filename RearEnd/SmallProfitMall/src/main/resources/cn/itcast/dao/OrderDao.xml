@@ -83,6 +83,10 @@
       SELECT orderId FROM userOrder WHERE TO_DAYS(orderTime) = TO_DAYS(NOW()) ORDER BY orderTime DESC LIMIT 1
     </select>
 
+    <!--查询订单总计-->
+    <select id="fenOrderTotal" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT orderTotal FROM userOrder WHERE userId=#{userId} AND orderId=#{orderId}
+    </select>
 
 
 </mapper>

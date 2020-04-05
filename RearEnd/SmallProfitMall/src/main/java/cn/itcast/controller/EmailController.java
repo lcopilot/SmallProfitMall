@@ -51,6 +51,7 @@ public class EmailController {
         //解密邮箱
         String emails = AesEncryptUtil.desEncrypt(email);
         String verification = GetFourRandom.getFourRandom();
+        //解密后的用户邮箱
         String userEmail=emails;
         if(userEmail==null){
             userEmail = emailService.fendByIdEmail(uId);
@@ -80,11 +81,12 @@ public class EmailController {
         if(emailService.fendEmail(email)!=null){
             return new QueryResponseResult(CommonCode.FALL_USER_REGISTER, null);
         }
-        String Verify = (String) session.getAttribute("content");
-        session.invalidate();
+        String Verify = session.getAttribute("content").toString();
+
         if (verification.equals(Verify)) {
             int redis = emailService.addEmail(userId, email);
             if (redis == 1) {
+                session.invalidate();
                 return new QueryResponseResult(CommonCode.SUCCESS, null);
             }
             return new QueryResponseResult(CommonCode.FAIL, null);
@@ -170,8 +172,9 @@ public class EmailController {
         String content = (String) session.getAttribute("content");
         //邮件
         String Email = (String) session.getAttribute("Email");
-        session.invalidate();
+
     if (!verificationTypes.equals(verificationType)){
+
         return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
     }
         //手机验证
@@ -193,18 +196,22 @@ public class EmailController {
             } else {
                 return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
             }
-        }else if ("2".equals(verificationTypes)){//邮箱验证
+            //邮箱验证
+        }else if ("2".equals(verificationTypes)){
             if (verification.equals(content)&&account.equals(Email)) {
                 if (validationFunctions!=null){
-                    if ("3".equals(validationFunctions)){   //解绑
+                    //解绑
+                    if ("3".equals(validationFunctions)){
                         int redis = emailService.addEmail(userId, null);
                         if(redis==1){
-                            return new QueryResponseResult(CommonCode.SUCCESS,null);//解绑成功
+                            //解绑成功
+                            return new QueryResponseResult(CommonCode.SUCCESS,null);
                         }else {
                             return new QueryResponseResult(CommonCode.SERVER_ERROR,null);
                         }
                     }
                 }
+                session.invalidate();
                 return new QueryResponseResult(CommonCode.SUCCESS,null);
             } else {
                 return new QueryResponseResult(CommonCode.INVALID_PARAM, null);

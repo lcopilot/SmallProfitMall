@@ -70,14 +70,16 @@ public class UserController {
 //			return new QueryResponseResult(CommonCode.ValidationFails, null); //令牌错误不正确
 //		}
 		int verifyTicket=TCaptchaVerify.verifyTicket(user.getTicket(),user.getRandStr(), IPUtil.getIP(request));
-		if (verifyTicket==1){			//二次验证验证码
+		//二次验证验证码
+		if (verifyTicket==1){
 			return new QueryResponseResult(CommonCode.SUCCESS,null);
 		}else if (verifyTicket==-1){
 			return new QueryResponseResult(CommonCode.ValidationFails,null);
 		}
 
 		if ("smallProfit".equals(user.getName())) {
-			return new QueryResponseResult(CommonCode.nameError, null); //不能使用初始名字登录不
+			//不能使用初始名字登录不
+			return new QueryResponseResult(CommonCode.nameError, null);
 		}
 
 
@@ -112,18 +114,24 @@ public class UserController {
 	public QueryResponseResult registerVerify(String phone,
 			HttpSession session) throws Exception {
 		String phones = AesEncryptUtil.desEncrypt(phone);
-		if (phones.length() != 11) {      //判断手机号是否正确
+		//判断手机号是否正确
+		if (phones.length() != 11) {
 			return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
 		}
-		User user_phone = userService.findByPhone(phone); //根据手机号查询
-		if (user_phone == null) {       //手机尚未注册
+		//根据手机号查询
+		User user_phone = userService.findByPhone(phone);
+		//手机尚未注册
+		if (user_phone == null) {
 			String FR = GetFourRandom.getFourRandom();
 			boolean flag = SmsUtils.sendRegistSms(phones, FR);
 			if (flag) {
 				System.out.println("验证码为 " + FR);
-				session.setAttribute("Verify", FR);//设置验证码session
-				session.setAttribute("phone", phone);//设置手机号session
-				sessionUtil.removeAttrbute(session, "Verify");//倒计时删除session
+				//设置验证码session
+				session.setAttribute("Verify", FR);
+				//设置手机号session
+				session.setAttribute("phone", phone);
+				//倒计时删除session
+				sessionUtil.removeAttrbute(session, "Verify");
 				return new QueryResponseResult(CommonCode.SUCCESS, null);
 			} else {
 				return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
@@ -171,7 +179,8 @@ public class UserController {
 	@RequestMapping("/SmVerify/{phone}")
 	public QueryResponseResult SmVerify(@PathVariable("phone") String phone, HttpSession session)
 			throws Exception {
-		String phones = AesEncryptUtil.encrypt(phone);	//加密
+		//加密
+		String phones = AesEncryptUtil.encrypt(phone);
 		User users = userService.findByPhone(phones);
 		if (users != null) {
 			String FR = GetFourRandom.getFourRandom();
@@ -179,8 +188,10 @@ public class UserController {
 			String phoness = AesEncryptUtil.desEncrypt(users.getPhone());
 			boolean flag = SmsUtils.forgetPassword(phoness, FR);
 			if (flag) {
-				session.setAttribute("passwordVerify", FR);//存入验证码session
-				session.setAttribute("upPasswordPhone", phone);//手机号存入session
+				//存入验证码session
+				session.setAttribute("passwordVerify", FR);
+				//手机号存入session
+				session.setAttribute("upPasswordPhone", phone);
 				sessionUtil.removeAttrbute(session, "passwordVerify");
 				return new QueryResponseResult(CommonCode.SUCCESS, null);
 			} else {

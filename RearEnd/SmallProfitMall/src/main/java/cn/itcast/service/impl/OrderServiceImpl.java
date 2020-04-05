@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -58,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
      * @return 返回订单号
      */
     @Override
-    public String addOrder(String userId, Integer[] shoppingCartId) {
+    public String addOrder(String userId, Integer[] shoppingCartId, HttpSession session) {
         Order order= new Order();
 
         //生成订单id
@@ -70,6 +71,8 @@ public class OrderServiceImpl implements OrderService {
         BigDecimal orderNotes = addProduct(initialize,orderId);
         //设置总计
         order.setOrderTotal(orderNotes);
+        //将总计存入sessio
+        session.setAttribute(orderId, orderNotes);
         //设置用户id
         order.setUserId(userId);
         //设置订单时间
@@ -90,7 +93,7 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     @Override
-    public String purchaseOrder(PurchaseInformation purchaseInformation){
+    public String purchaseOrder(PurchaseInformation purchaseInformation, HttpSession session){
         Order order= new Order();
         //数据库取商品价格名字
         PurchaseInformation purchaseInformation1 =  shoppingCartDao.findByPid(purchaseInformation.getProductId());
@@ -125,6 +128,8 @@ public class OrderServiceImpl implements OrderService {
         BigDecimal total =productPrice1.multiply(Quantity);
         //设置总计
         order.setOrderTotal(total);
+        //将总计放入session
+        session.setAttribute(orderId, total);
         //设置用户id
         order.setUserId(purchaseInformation.getUserId());
         //设置订单时间
@@ -200,33 +205,45 @@ public class OrderServiceImpl implements OrderService {
      * @return 1为支付成功 2 为余额不足
      */
     @Override
-    public Integer confirmOrder(Order order) throws Exception {
+    public Integer confirmOrder(Order order,HttpSession session) throws Exception {
+        //返回结果
         Integer result=0;
-        //用户余额
-        String encryptionBalance =  memberDao.findBalance(order.getUserId());
-        //解密余额
-        String decodeBalances = AesEncryptUtil.desEncrypt(encryptionBalance);
-        BigDecimal balance=new BigDecimal(decodeBalances);
-        BigDecimal total = order.getOrderTotal();
-        //保留两位小数
-        int scale=2;
-        //相减结果
-        String difference= balance.subtract(total).setScale(scale, BigDecimal.ROUND_HALF_UP).toString();
-        double value = Double.valueOf(difference.toString());
-        if (value<0){
+        //判断用户付款方式 1为钱包支付 2为支付宝支付 3我微信支付
+        if (order.getPaymentWay().equals(1)){
+            //用户余额
+            String encryptionBalance =  memberDao.findBalance(order.getUserId());
+            //从session获取订单总计
+            String totals =session.getAttribute(order.getOrderId()).toString();
+            //服务器重启从数据库查询
+            if (totals==null){
+                totals=orderDao.fenOrderTotal(order.getUserId(),order.getOrderId());
+            }
+            //解密余额
+            String decodeBalances = AesEncryptUtil.desEncrypt(encryptionBalance);
+            BigDecimal balance=new BigDecimal(decodeBalances);
+            BigDecimal total = new BigDecimal(totals);
+            //保留两位小数
+            int scale=2;
+            //相减结果
+            String difference= balance.subtract(total).setScale(scale, BigDecimal.ROUND_HALF_UP).toString();
+            double value = Double.valueOf(difference.toString());
+            if (value<0){
+                return result;
+            }else {
+                //加密剩余余额
+                String balances = AesEncryptUtil.encrypt(difference);
+                //跟新账户余额
+                memberDao.updateBalance(order.getUserId(),balances);
+                //修改订单状态 2为确认订单
+                order.setOrderState(2);
+                //确认订单
+                orderDao.confirmOrder(order);
+                result=1;
+            }
             return result;
-        }else {
-            //加密剩余余额
-            String balances = AesEncryptUtil.encrypt(difference);
-            //跟新账户余额
-            memberDao.updateBalance(order.getUserId(),balances);
-            //修改订单状态 2为确认订单
-            order.setOrderState(2);
-            //确认订单
-            orderDao.confirmOrder(order);
-            result=1;
         }
-        return result;
+
+       return result;
     }
 
 
