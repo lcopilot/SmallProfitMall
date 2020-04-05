@@ -48,11 +48,11 @@
     </insert>
 
     <!--添加订单地址-->
-    <insert id="addOrdeAddress" parameterType="java.lang.Integer">
+    <insert id="addOrdeAddress">
     INSERT INTO orderAddress
 		(userId,orderId,name,areas,detailedAddress,phone,email,areaCodes,alias)
 	VALUES
-	    (#{userId},#{orderId},#{name},#{areas},#{detailedAddress},#{phone},#{email},#{areaCodes},#{alias})
+	    (#{address.userId},#{orderId},#{address.name},#{address.areas},#{address.detailedAddress},#{address.phone},#{address.email},#{address.areaCodes},#{address.alias})
     </insert>
 
     <!--查询订单-->

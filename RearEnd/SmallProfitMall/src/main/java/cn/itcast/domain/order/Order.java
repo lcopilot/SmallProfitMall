@@ -37,14 +37,14 @@ public class Order implements Serializable {
     //订单总计
     private BigDecimal orderTotal;
 
-    public Address address;
+    public Address orderAddress;
 
-    public Address getAddress() {
-        return address;
+    public Address getOrderAddress() {
+        return orderAddress;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setOrderAddress(Address orderAddress) {
+        this.orderAddress = orderAddress;
     }
 
     /**
@@ -159,4 +159,5 @@ public class Order implements Serializable {
     public void setProductContents(List<ProductContent> productContents) {
         this.productContents = productContents;
     }
+
 }
