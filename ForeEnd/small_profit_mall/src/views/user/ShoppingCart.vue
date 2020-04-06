@@ -145,12 +145,12 @@
                     移除已选择
                   </el-button>
                 </el-col>
-                <el-col :span="3" :push="11">
+                <el-col :span="3" :push="9">
                   <div style="color: #999999">
                     已选<span style="color: red">{{productNumber}}</span>件商品
                   </div>
                 </el-col>
-                <el-col :span="5" :push="10">
+                <el-col :span="5" :push="9">
                   <div class="cart_product_total_price1">总价:
                     <span class="cart_product_total_price2">
                       ￥{{cartFrom.totalPrice.toFixed(2)}}
@@ -172,7 +172,6 @@
           </el-col>
         </el-row>
       </el-main>
-
       <el-footer>
         <Footer/>
       </el-footer>

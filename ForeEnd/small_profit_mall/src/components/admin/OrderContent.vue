@@ -77,7 +77,7 @@
             </td>
           </tr>
         </table>
-        <el-dialog title="商品评论" :visible.sync="commentVisible">
+        <el-dialog title="商品评论" :visible.sync="commentVisible" @close="clearFiles">
           <el-form :model="commentForm" label-position="right" label-width="120px">
             <el-form-item label="描述相符">
               <div class="order_product_score">
@@ -90,40 +90,59 @@
               </div>
             </el-form-item>
             <el-form-item label="评论内容">
-              <div style="width: 80%;text-align: left">
+              <div class="order_comment_img">
                 <el-input type="textarea" v-model="commentForm.content" autosize :maxlength="1000"
                           show-word-limit placeholder="请输入您要评论的内容"></el-input>
               </div>
             </el-form-item>
             <el-form-item label="上传买家秀">
-              <div style="width: 80%;text-align: left">
+              <div class="order_comment_img">
+                <div class="product_comment_img" v-if="playerOptions.sources[0].src">
+                  <el-image
+                      src="http://img.fhxasdsada.xyz/safd20200406141323.png"
+                      fit="scale-down"/>
+                  <div class="product_play" v-if="true">
+                    <el-link :underline="false" @click.native="playerVideoComment()">
+                      <svg-icon name="play" class="icon_play"/>
+                    </el-link>
+                  </div>
+                </div>
+                <el-dialog :visible.sync="commentVideoVisible"  append-to-body>
+                  <video-player v-if="commentVideoVisible" class="video-player vjs-custom-skin"
+                                ref="videoPlayer"
+                                :playsinline="true"
+                                :options="playerOptions"
+                                style="width: 455px;height: 335px">
+                  </video-player>
+                </el-dialog>
                 <el-upload
                     action="https://jsonplaceholder.typicode.com/posts/"
                     list-type="picture-card"
+                    :multiple="true"
+                    ref="upload"
+                    :on-change="selectFile"
                     :on-preview="handlePictureCardPreview"
                     :on-remove="handleRemove">
                   <i class="el-icon-plus"></i>
-                  <div slot="file" slot-scope="{file}">
-                    <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" >
-                    <span class="el-upload-list__item-actions">
-                        <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)" >
-                          <i class="el-icon-zoom-in"></i>
-                        </span>
-                        <span v-if="!disabled" class="el-upload-list__item-delete" @click="handleRemove(file)" >
-                          <i class="el-icon-delete"></i>
-                        </span>
-                      </span>
-                  </div>
                 </el-upload>
-                <el-dialog :visible.sync="dialogVisible" append-to-body>
-                  <img width="100%" :src="dialogImageUrl" alt="">
+                <el-dialog :visible.sync="commentImgVisible" append-to-body>
+                  <img width="100%" :src="commentImgUrl" alt="">
                 </el-dialog>
+                <div style="font-size: 12px;color: #999999">注:允许上传10张图片,1个mp4视频,上传图片必须是JPG/PNG/BMP/MP4
+                  格式!
+                </div>
+              </div>
+            </el-form-item>
+            <el-form-item label="匿名评价">
+              <div class="order_comment_img">
+                <el-switch v-model="commentForm.isAnonymity" active-text="不公开头像,昵称">
+                </el-switch>
               </div>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+            <el-button @click="commentVisible = false">取 消</el-button>
+            <el-button type="primary" @click="">确 定</el-button>
           </div>
         </el-dialog>
       </div>
@@ -157,10 +176,49 @@
     },
     data() {
       return {
+        playerOptions: {
+          //播放速度
+          playbackRates: [0.5, 1.0, 1.5, 2.0, 2.5, 3.0],
+          //如果true,浏览器准备好时开始回放。
+          autoplay: false,
+          // 默认情况下将会消除任何音频。
+          muted: false,
+          // 导致视频一结束就重新开始。
+          loop: true,
+          // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+          preload: 'auto',
+          language: 'zh-CN',
+          // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+          aspectRatio: '4:3',
+          // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
+          fluid: true,
+          sources: [{
+            //类型
+            type: "video/ogg",
+            type: "video/webm",
+            type: "video/mp4",
+            //url地址
+            src: '',
+          }],
+          //你的封面地址
+          poster: '',
+          //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+          notSupportedMessage: '此视频暂无法播放，请稍后再试',
+          controlBar: {
+            timeDivider: true,
+            durationDisplay: true,
+            remainingTimeDisplay: false,
+            //全屏按钮
+            fullscreenToggle: true
+          }
+        },
+        imgList: [],
         //评论对话框
         commentVisible: false,
         //评论表单
         commentForm: {
+          //匿名评价
+          isAnonymity:false,
           //评分
           score: 5,
           //评论内容
@@ -248,33 +306,60 @@
               },
             ]
           },],
-        dialogImageUrl: '',
-        dialogVisible: false,
-        disabled: false
+        commentImgUrl: '',
+        //评论图片弹出框
+        commentImgVisible: false,
+        //评论视频弹出框
+        commentVideoVisible: false,
       }
     },
     methods: {
-      selectFile(file){
+      playerVideoComment() {
+        this.commentVideoVisible = true;
+      },
+      clearFiles() {
+        this.playerOptions.sources[0].src='';
+        const mainImg = this.$refs.upload;
+        if (mainImg && mainImg.length) {
+          mainImg.forEach(item => {
+            if (item.uploadFiles.length != 0) {
+              item.clearFiles();
+            }
+          });
+        }
+      },
+      selectFile(file, fileList) {
+        if (!file.raw.type) {
+          return this.$message.error('上传的文件必须是JPG/PNG/BMP/MP4格式!');
+        }
         const isJPG = file.raw.type === 'image/jpeg';
         const isPNG = file.raw.type === 'image/png';
         const isBMP = file.raw.type === 'image/bmp';
+        const isMP4 = file.raw.type === 'video/mp4';
         const isLt2M = file.size / 1024 / 1024 < 2;
+        if (isMP4) {
+          this.playerOptions.sources[0].src = file.url;
+          return fileList.pop();
+        }
+        if (fileList.length>10){
+          this.$message.error('只能上传10张图片哦~');
+          return fileList.pop();
+        }
         if (!isJPG && !isPNG && !isBMP) {
+          fileList.pop();
           return this.$message.error('上传图片必须是JPG/PNG/BMP 格式!');
         }
         if (!isLt2M) {
-           return this.$message.error('上传头像图片大小不能超过 2MB!');
+          fileList.pop();
+          return this.$message.error('上传评论图片大小不能超过 2MB!');
         }
       },
-      handleRemove(file) {
-        console.log(file);
+      handleRemove(file, fileList) {
+        console.log(fileList)
       },
       handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-      },
-      handleDownload(file) {
-        console.log(file);
+        this.commentImgUrl = file.url;
+        this.commentImgVisible = true;
       },
       //切换评论分页时触发
       changePage(currentPage) {
@@ -289,6 +374,42 @@
 </script>
 
 <style scoped>
+  .product_play {
+    width: 24px;
+    height: 24px;
+    margin-left: 20px;
+    margin-top: -78px;
+    position: absolute;
+    left: 0;
+  }
+
+  .icon_play {
+    width: 40px;
+    height: 40px;
+  }
+
+  .icon_play:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+  .product_comment_img:hover {
+    border: 1px dashed #409eff;
+  }
+
+  .product_comment_img {
+    float: left;
+    display: inline-block;
+    position: relative;
+    border: 1px dashed #999999;
+    border-radius: 5px;
+    margin-right: 2%;
+    margin-bottom: 5px;
+    max-width: 80px;
+    max-height: 80px;
+    overflow: hidden;
+  }
+
   table, table tr th, table tr td {
     border: 1px solid #dcdfe6;
     vertical-align: top;
@@ -325,6 +446,26 @@
   .order_delete:hover {
     color: #FF2002;
     cursor: pointer;
+  }
+
+  .order_comment_img {
+    width: 80%;
+    text-align: left
+  }
+
+  .order_comment_img /deep/ .el-upload-list__item-thumbnail {
+    object-fit: contain;
+  }
+
+  .order_comment_img /deep/ .el-upload-list__item {
+    width: 80px;
+    height: 80px;
+  }
+
+  .order_comment_img /deep/ .el-upload--picture-card {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
   }
 
   .order_product_img {

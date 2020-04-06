@@ -107,7 +107,7 @@
         //用户名
         username: null,
         addressData:[],
-        avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
+        avatar: 'http://img.fhxasdsada.xyz/iduyadfgjdekldjhf.png',
         CommonFunctionsList: [],
       }
     },
