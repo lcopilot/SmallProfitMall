@@ -405,7 +405,7 @@ public class OrderServiceImpl implements OrderService {
         //设置消息标志位
         news.setSign(false);
         //设置消息简介
-        news.setIntroduction(order.getProductContents().get(0).getProductName());
+        news.setIntroduction("消息简介");
         //新增消息
          newsDao.addNews(news);
         //查询当前消息
@@ -414,7 +414,7 @@ public class OrderServiceImpl implements OrderService {
         news1.add(news2);
         for (int i = 0; i <news1.size() ; i++) {
             //转换消息内容为JSON
-            news2.setNewsContentJson(JSONObject.parseObject(news1.get(i).getNewsContent()));;
+            news1.get(i).setNewsContentJson(JSONObject.parseObject(news1.get(i).getNewsContent()));;
             news1.get(i).setNewsContent(null);
         }
 
