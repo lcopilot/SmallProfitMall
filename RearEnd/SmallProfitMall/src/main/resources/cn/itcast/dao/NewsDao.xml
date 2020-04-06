@@ -22,18 +22,18 @@
 <!--                <result property="code" column="code"></result>-->
 <!--            </collection>-->
 <!--        </resultMap>-->
-    <!--查询所有用户消息-->
+    <!--查询用户消息-->
     <select id="fendNews" resultType="cn.itcast.domain.news.News">
         SELECT
-            un.* ,nc.newsTime,nc.newsContent,nc.newsType,nc.contentId,nc.sign,nc.title,nc.newsStatus
+            ns.senderName,ns.senderAvatar,nc.*
         FROM
-            userNews un
-        LEFT JOIN
             newsContent nc
+        LEFT JOIN
+            newsSender ns
         ON
-            un.newsId=nc.newsId
+            nc.SenderId=ns.SenderId
         <where>
-            and  un.userId=#{userId}
+            and  nc.userId=#{userId}
             <if test="state!=2">
                 and newsStatus=#{state}
             </if>
@@ -63,6 +63,25 @@
             </if>
         </where>
     </update>
-
+    <!--新增消息-->
+    <insert id="addNews" parameterType="cn.itcast.domain.news.News" useGeneratedKeys="true" keyProperty="contentId" keyColumn="contentId">
+        INSERT INTO
+           newsContent(senderId,userId,newsContent,newsType,sign,title,newsTime,newsStatus)
+        VALUES
+            (#{senderId},#{userId},#{newsContent},#{newsType},#{sign},#{title},#{newsTime},#{newsStatus})
+    </insert>
+    <!--查询指定消息-->
+    <select id="fenNewsById" parameterType="java.lang.Integer" resultType="cn.itcast.domain.news.News">
+        SELECT
+            ns.senderName,ns.senderAvatar,nc.*
+        FROM
+            newsContent nc
+        LEFT JOIN
+            newsSender ns
+        ON
+            nc.SenderId=ns.SenderId
+      where
+            contentId=#{contentId}
+    </select>
 
 </mapper>

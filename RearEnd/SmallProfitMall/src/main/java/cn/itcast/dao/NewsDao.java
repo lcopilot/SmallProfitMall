@@ -42,4 +42,18 @@ public interface NewsDao {
      */
     public Integer updateNewsStatus(@Param("userId")String userId,@Param("contentId")Integer contentId);
 
+    /**
+     * 新增消息
+     * @param news 消息对象
+     * @return
+     */
+    public void addNews(News news);
+
+    /**
+     * 查询指定消息
+     * @param contentId 消息id
+     * @return
+     */
+    public News fenNewsById(Integer contentId);
+
 }
