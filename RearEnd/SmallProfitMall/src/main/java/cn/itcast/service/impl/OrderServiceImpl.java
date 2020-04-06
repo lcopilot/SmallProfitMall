@@ -7,6 +7,7 @@ import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.domain.shoppingCar.ShoppingCart;
+import cn.itcast.messageQueue.producer.shopping.ShoppingProducer;
 import cn.itcast.service.*;
 import cn.itcast.util.encryption.AesEncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,17 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     public AddressService addressService;
+
+    /**
+     * 用于查询用户邮箱
+     */
+    @Autowired
+    private EmailDao emailDao;
+
+    //用于发送邮件
+    @Autowired
+    ShoppingProducer shoppingProducer;
+
     /**
      * 购物车订单
      * @param userId 用户id
@@ -235,6 +247,15 @@ public class OrderServiceImpl implements OrderService {
                 Address address = addressService.defaults(order.getOrderAddress());
                 //添加地址
                 orderDao.addOrdeAddress(order.getOrderId(),address);
+                //发送邮件
+                String email = emailDao.fendByIdEmail(order.getUserId());
+
+                if (email!=null &&! "".equals(email)){
+                    //解密邮箱
+                    email=AesEncryptUtil.desEncrypt(email);
+                    String[] msg = {email,"您已成功购买商品"};
+                    shoppingProducer.sendDeleteCart("shopping",msg);
+                }
                 result=1;
             }
             return result;

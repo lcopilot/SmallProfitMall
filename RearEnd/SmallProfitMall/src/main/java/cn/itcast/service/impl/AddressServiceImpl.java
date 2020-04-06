@@ -67,7 +67,7 @@ public class AddressServiceImpl implements AddressService {
        //删除的地址为默认地址 设置当前地址的
         if (defaults){
             List<Address> addresses=addressDao.findById(userId);
-            if (addresses.size()>1){
+            if (addresses.size()>0){
                 addresses.get(0).setDefaults(true);
                 int result= addressDao.updateDefaults(addresses.get(0).getAddressId(),addresses.get(0).getDefaults());
                 return result;
