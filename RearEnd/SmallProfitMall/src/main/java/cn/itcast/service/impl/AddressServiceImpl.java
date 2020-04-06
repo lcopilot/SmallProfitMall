@@ -28,7 +28,6 @@ public class AddressServiceImpl implements AddressService {
            String[] areaCode = areaCodes.split(",");
            addresses.get(i).setAreaCode(areaCode);
         }
-
         return addresses;
     }
 

@@ -265,7 +265,6 @@ public class OrderServiceImpl implements OrderService {
                 Address address = addressService.defaults(order.getOrderAddress());
                 //添加订单地址
                 orderDao.addOrdeAddress(order.getOrderId(),address);
-
                 //邮件通知
                 emailNotification(order.getUserId());
                 //推送消息
@@ -407,8 +406,14 @@ public class OrderServiceImpl implements OrderService {
          newsDao.addNews(news);
         //查询当前消息
         News news2 = newsDao.fenNewsById(news.getContentId());
-        List<News> news1 =new ArrayList() ;
+        List<News> news1 =new ArrayList();
         news1.add(news2);
+        for (int i = 0; i <news1.size() ; i++) {
+            JSONObject orderJson = JSONObject.parseObject(news1.get(i).getNewsContent());
+            news1.get(i).setNewsContent(null);
+            news1.get(i).setNewsContentJSON(orderJson);
+        }
+
         //未读消息数量
         Integer unreadQuantity =  newsService.unreadQuantity(order.getUserId());
         Integer results = newsService.pushNews(news1,unreadQuantity);
