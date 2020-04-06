@@ -138,7 +138,7 @@ public class WebSocket {
                 page.setUnreadQuantity(unreadQuantity);
 
                 Session testSession= USER_ONLINE_MAP.get(message.get(i).getUserId());
-                testSession.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseNews(CommonCode.SUCCESS,page)));
+                testSession.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseNews(CommonCode.redis,page)));
             }
         return redis=1;
         }else {
