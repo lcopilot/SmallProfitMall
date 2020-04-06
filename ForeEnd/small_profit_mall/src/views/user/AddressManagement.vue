@@ -5,7 +5,7 @@
     </el-header>
     <el-main>
       <el-row :gutter="20">
-        <personalPage v-if="!isOrder" />
+        <personalPage v-if="!isOrder"/>
         <el-col :span="16" :push="3">
           <el-card v-if="!isOrder" class="address_top_card">
             <div>
@@ -65,7 +65,8 @@
               </div>
             </div>
           </el-card>
-          <el-dialog  :title="editBtn==false ? '新增收货地址':'修改收货地址'" :visible.sync="dialogFormVisible" @close="cancel">
+          <el-dialog :close-on-click-modal="false" :title="editBtn==false ? '新增收货地址':'修改收货地址'"
+                     :visible.sync="dialogFormVisible" @close="cancel">
             <div class="address_add_div">
               温馨提示:*号为必填哦~
             </div>
@@ -98,7 +99,7 @@
                 </el-form-item>
                 <el-form-item label="地址别名" prop="alias">
                   <div style="text-align: left">
-                    <el-autocomplete  :maxlength="8"
+                    <el-autocomplete :maxlength="8"
                                      show-word-limit v-model="addressForm.alias"
                                      :fetch-suggestions="querySearch" placeholder="建议填写常用地址名称"
                                      clearable></el-autocomplete>
@@ -145,12 +146,12 @@
   export default {
     inject: ["reload"],
     name: "addressManagement",
-    components: { personalPage},
-    props:{
-      isOrder:{
-        type:Boolean,
-        required:false,
-        defaults:false,
+    components: {personalPage},
+    props: {
+      isOrder: {
+        type: Boolean,
+        required: false,
+        defaults: false,
       }
     },
     data() {
@@ -295,17 +296,17 @@
             address.defaults = false;
           });
           this.addressList[index].defaults = true;
-        }else{
+        } else {
           this.addressList.forEach((address) => {
             address.defaults = false;
           });
           this.addressList[index].defaults = true;
-          let addressModificationParams={
-            "userId":sessionStorage.getItem("uId"),
-            "addressId":this.addressList[index].addressId
+          let addressModificationParams = {
+            "userId": sessionStorage.getItem("uId"),
+            "addressId": this.addressList[index].addressId
           };
-          userApi.modifyDefault(addressModificationParams).then(res=>{
-            if (res.success){
+          userApi.modifyDefault(addressModificationParams).then(res => {
+            if (res.success) {
               this.$message({
                 message: "默认地址修改成功",
                 type: "success"
@@ -408,8 +409,8 @@
         userApi.getAddress(sessionStorage.getItem("uId")).then(
             res => {
               if (res.success) {
-               this.addressList = res.queryResult.list;
-               this.$emit("getAddress",res.queryResult.list);
+                this.addressList = res.queryResult.list;
+                this.$emit("getAddress", res.queryResult.list);
               }
             }
         );

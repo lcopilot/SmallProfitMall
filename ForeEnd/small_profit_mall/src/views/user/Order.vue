@@ -19,10 +19,10 @@
               </span>
               </div>
               <div style="padding-left: 2%">
-                <div v-if="!orderAddress">还没有地址哦~
+                <div v-if="!orderAddress.name">还没有地址哦~
                   <el-button @click="addAddress" type="text">添加地址</el-button>
                 </div>
-                <el-row :gutter="10" v-if="orderAddress">
+                <el-row :gutter="10" v-if="orderAddress.name">
                   <el-col :span="3">
                     <el-tag type="success" size="mini" effect="dark">
                       {{orderAddress.alias}}
@@ -378,7 +378,7 @@
             setTimeout(() => {
                 this.settlementOrder();
               //跳转支付成功页面
-            }, 2650)
+            }, 2500)
             // this.settlementOrder();
           } else {
             if (res.faceRecognition.result.error_code==32000){
@@ -420,14 +420,18 @@
             });
           }else {
             if (res.code == 40000) {
-              this.$message({
-                message: "您的钱包余额不足,请换种支付方式吧!",
-                type: "waring"
+              this.$notify({
+                title: '余额不足',
+                message: '您的钱包余额不足,请更换支付方式',
+                type: 'warning',
               });
-              this.$refs.face.stopNavigator();
-              return this.$refs.face.faceVisible = false;
-              this.paymentPasswordVisible = false;
-              this.paymentPassword = '';
+              if (this.orderData.faceRecognition){
+                this.$refs.face.stopNavigator();
+                this.$refs.face.faceVisible = false;
+              }else {
+                this.paymentPasswordVisible = false;
+                this.paymentPassword = '';
+              }
             }
           }
         })
