@@ -5,6 +5,8 @@ import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 订单
  * @author Kite
@@ -47,6 +49,13 @@ public interface OrderDao {
      * @return 订单总计
      */
     public String fenOrderTotal(@Param("userId") String userId,@Param("orderId")String orderId);
+
+    /**
+     * 查询商品信息
+     * @param orderId
+     * @return
+     */
+    public List<ProductContent> fendOrderProduct(@Param("orderId") String orderId);
 
     /**
      * 添加订单地址

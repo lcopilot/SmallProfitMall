@@ -70,6 +70,10 @@
         AND
             uo.orderId=#{orderId}
     </select>
+    <!--查询订单商品信息-->
+    <select id="fendOrderProduct" parameterType="java.lang.String" resultType="cn.itcast.domain.order.ProductContent">
+        SELECT * FROM orders WHERE orderId=#{}
+    </select>
 
     <!--确认订单-->
     <update id="confirmOrder" parameterType="cn.itcast.domain.order.Order">
