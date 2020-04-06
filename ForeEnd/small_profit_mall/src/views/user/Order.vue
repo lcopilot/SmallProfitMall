@@ -19,10 +19,10 @@
               </span>
               </div>
               <div style="padding-left: 2%">
-                <div v-if="!orderAddress.name">还没有地址哦~
+                <div v-if="addressList.length==0">还没有地址哦~
                   <el-button @click="addAddress" type="text">添加地址</el-button>
                 </div>
-                <el-row :gutter="10" v-if="orderAddress.name">
+                <el-row :gutter="10" v-if="addressList.length!=0">
                   <el-col :span="3">
                     <el-tag type="success" size="mini" effect="dark">
                       {{orderAddress.alias}}
@@ -441,9 +441,12 @@
         this.addressList = addressList;
         addressList.forEach((address) => {
           if (address.defaults) {
-            this.orderAddress = address;
+            return this.orderAddress = address;
           }
-        })
+        });
+        if (!this.orderAddress.name){
+          this.orderAddress=addressList[0];
+        }
       },
       //模糊处理手机号
       fuzzyPhone(phone) {

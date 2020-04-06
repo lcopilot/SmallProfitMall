@@ -81,7 +81,7 @@
                   </div>
                   <el-upload class="img-btn" action="#" :data="params"
                              :show-file-list="false" :auto-upload="false" :on-change='changeUpload'
-                             :http-request="uploadImg">
+                             >
                     <el-button type="success" plain round size="mini">更改头像</el-button>
                   </el-upload>
                   <el-dialog title="图片剪裁" @close="shutDown()" :visible.sync="imgCrop"
@@ -216,7 +216,7 @@
           userId: "",
         },
         //头像链接
-        imageUrl: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
+        imageUrl: 'http://img.fhxasdsada.xyz/iduyadfgjdekldjhf.png',
       };
     },
     methods: {
