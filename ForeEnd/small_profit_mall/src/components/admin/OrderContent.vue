@@ -72,11 +72,60 @@
               <div class="order_operate">
                 <el-button type="text" size="mini">去付款</el-button>
                 <el-button type="text" size="mini">申请售后</el-button>
-                <el-button type="text" size="mini">评价晒单</el-button>
+                <el-button type="text" size="mini" @click="commentVisible=true">评价晒单</el-button>
               </div>
             </td>
           </tr>
         </table>
+        <el-dialog title="商品评论" :visible.sync="commentVisible">
+          <el-form :model="commentForm" label-position="right" label-width="120px">
+            <el-form-item label="描述相符">
+              <div class="order_product_score">
+                <el-rate
+                    v-model="commentForm.score"
+                    show-text
+                    :texts="['非常差', '差', '一般', '好', '非常好']"
+                    :colors="['#99A9BF', '#F7BA2A', '#f56c6c']">
+                </el-rate>
+              </div>
+            </el-form-item>
+            <el-form-item label="评论内容">
+              <div style="width: 80%;text-align: left">
+                <el-input type="textarea" v-model="commentForm.content" autosize :maxlength="1000"
+                          show-word-limit placeholder="请输入您要评论的内容"></el-input>
+              </div>
+            </el-form-item>
+            <el-form-item label="上传买家秀">
+              <div style="width: 80%;text-align: left">
+                <el-upload
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    list-type="picture-card"
+                    :on-preview="handlePictureCardPreview"
+                    :on-remove="handleRemove">
+                  <i class="el-icon-plus"></i>
+                  <div slot="file" slot-scope="{file}">
+                    <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" >
+                    <span class="el-upload-list__item-actions">
+                        <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)" >
+                          <i class="el-icon-zoom-in"></i>
+                        </span>
+                        <span v-if="!disabled" class="el-upload-list__item-delete" @click="handleRemove(file)" >
+                          <i class="el-icon-delete"></i>
+                        </span>
+                      </span>
+                  </div>
+                </el-upload>
+                <el-dialog :visible.sync="dialogVisible" append-to-body>
+                  <img width="100%" :src="dialogImageUrl" alt="">
+                </el-dialog>
+              </div>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+          </div>
+        </el-dialog>
       </div>
     </div>
     <div style="text-align: right;padding: 3% 0 1% 0">
@@ -108,6 +157,15 @@
     },
     data() {
       return {
+        //评论对话框
+        commentVisible: false,
+        //评论表单
+        commentForm: {
+          //评分
+          score: 5,
+          //评论内容
+          content: '',
+        },
         //删除按钮
         deleteBtn: false,
         //订单分页参数
@@ -190,9 +248,34 @@
               },
             ]
           },],
+        dialogImageUrl: '',
+        dialogVisible: false,
+        disabled: false
       }
     },
     methods: {
+      selectFile(file){
+        const isJPG = file.raw.type === 'image/jpeg';
+        const isPNG = file.raw.type === 'image/png';
+        const isBMP = file.raw.type === 'image/bmp';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+        if (!isJPG && !isPNG && !isBMP) {
+          return this.$message.error('上传图片必须是JPG/PNG/BMP 格式!');
+        }
+        if (!isLt2M) {
+           return this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+      },
+      handleRemove(file) {
+        console.log(file);
+      },
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
+      },
+      handleDownload(file) {
+        console.log(file);
+      },
       //切换评论分页时触发
       changePage(currentPage) {
         this.orderParams.currentPage = currentPage;
@@ -218,9 +301,11 @@
     padding-left: 10%;
     padding-right: 10%;
   }
-  .order_operate /deep/ .el-button--mini{
-    padding:3px 15px;
+
+  .order_operate /deep/ .el-button--mini {
+    padding: 3px 15px;
   }
+
   .order_recipient {
     margin-top: 10%;
     font-size: 13px;
@@ -283,5 +368,17 @@
 
   .order_product_name:hover {
     color: #409EFF;
+  }
+
+  .order_product_score {
+    text-align: left
+  }
+
+  .order_product_score /deep/ .el-rate {
+    line-height: 2;
+  }
+
+  .order_product_score /deep/ .el-rate__icon {
+    font-size: 25px;
   }
 </style>
