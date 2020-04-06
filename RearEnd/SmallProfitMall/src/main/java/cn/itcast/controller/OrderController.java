@@ -150,7 +150,7 @@ public class OrderController {
      */
     @RequestMapping(value = "/confirmOrder",method = RequestMethod.POST)
     public QueryResponseResult confirmOrder(@RequestBody Order order) throws Exception {
-       Integer result =  orderService.confirmOrder(order);
+       Integer result = orderService.confirmOrder(order);
        if (result==1){
            return new QueryResponseResult(CommonCode.SUCCESS,null);
        }else if (result==2){

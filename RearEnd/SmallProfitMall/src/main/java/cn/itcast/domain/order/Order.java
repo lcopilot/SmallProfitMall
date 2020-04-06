@@ -38,6 +38,8 @@ public class Order implements Serializable {
     private BigDecimal orderTotal;
 
     public Address orderAddress;
+    //商品信息
+    List<ProductContent> productContents;
 
     public Address getOrderAddress() {
         return orderAddress;
@@ -60,8 +62,7 @@ public class Order implements Serializable {
         this.orderState = orderState;
     }
 
-    //商品信息
-    List<ProductContent> productContents;
+
 
     public int getId() {
         return id;

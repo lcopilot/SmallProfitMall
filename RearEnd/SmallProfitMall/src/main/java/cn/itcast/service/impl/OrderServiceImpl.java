@@ -383,7 +383,8 @@ public class OrderServiceImpl implements OrderService {
      * @throws Exception
      */
     public Integer notificationUser(Order order) throws Exception {
-
+        //添加商品信息
+        order.setProductContents(orderDao.fendOrderProduct(order.getOrderId()));
         String stringOrderJson=JSONObject.toJSONString(order);
         //推送消息
         News news = new News();
