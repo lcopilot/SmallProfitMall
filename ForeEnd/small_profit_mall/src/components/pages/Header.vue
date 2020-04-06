@@ -68,7 +68,7 @@
     data() {
       return {
         username: null,
-        avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
+        avatar: 'http://img.fhxasdsada.xyz/iduyadfgjdekldjhf.png',
         //消息未读数
         unreadQuantity:0,
       };

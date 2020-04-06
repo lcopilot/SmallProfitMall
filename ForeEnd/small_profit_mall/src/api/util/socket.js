@@ -81,8 +81,10 @@ function websocketOnMessage(e) {
   if (e!=null){
     stopHeartbeat();
     if (JSON.parse(e.data).code){
-      globalCallback=callbackNameMap.get(80000);
-      globalCallback(JSON.parse(e.data));
+      if (JSON.parse(e.data).code!=81000){
+        globalCallback=callbackNameMap.get(80000);
+        globalCallback(JSON.parse(e.data));
+      }
       globalCallback=callbackNameMap.get(JSON.parse(e.data).code);
       globalCallback(JSON.parse(e.data));
     }
@@ -101,6 +103,7 @@ function websocketSend(agentData) {
 function websocketClose() {
   console.log("连接断开");
 }
+
 //连接成功
 function websocketOpen(e) {
   //修改连接状态

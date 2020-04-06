@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header>
-      <Header ref="header"></Header>
+      <Header></Header>
     </el-header>
     <el-main>
       <el-row :gutter="20">
@@ -60,8 +60,7 @@
                           <el-col :span="14">
                             <div style="text-align: left;">
                               <div>
-                                <div
-                                    :class="message.newsStatus==1?'message_list_preview_div1_div1':''">
+                                <div :class="message.newsStatus==1?'message_list_preview_div1_div1':''">
                                 </div>
                                 <div
                                     :class="message.newsStatus==1?'message_list_preview_div1_div2':''">
@@ -72,7 +71,7 @@
                                 {{message.title}}
                               </div>
                               <div class="message_list_preview_div message_list_preview_div3">
-                                {{message.newsContent}}
+                                {{message.Introduction}}
                               </div>
                             </div>
                           </el-col>
@@ -91,32 +90,30 @@
                 </div>
               </el-col>
               <el-col :span="17" class="message_content_div">
-                <div class="message_list_div message_list">
+                <div class="message_list_div message_list" v-if="productList.length!=0">
                   <el-card>
                     <div slot="header">
                       <div style="text-align: left">确认订单</div>
                     </div>
                     <div>
                       <div>
-                        <div style="width: 25%;float: left" v-for="dd in product">
+                        <div style="width: 25%;float: left" v-for="product in productList">
                           <el-row>
                             <el-col :span="10">
-                              <el-image :src="dd.url"></el-image>
+                              <el-image :src="product.productImage"></el-image>
                             </el-col>
                             <el-col :span="14">
                               <div class="message_list_preview_div">
-                                {{dd.name}}
+                                {{product.productName}}
                               </div>
                             </el-col>
                           </el-row>
                         </div>
                       </div>
-                      <div
-                          style="text-align: left;margin-right:-5%;float:right;padding: 2%;width: 100%;">
-                        彭cdf 学院上课了较好的那开发商和 1536788534sdf5410
+                      <div style="text-align: left;margin-right:-5%;float:right;padding: 2%;width: 100%;">
+                        {{orderAddress.name}} {{orderAddress.areas+orderAddress.detailedAddress}} {{orderAddress.phone}}
                       </div>
-                      <div
-                          style="text-align: right;margin-right:5%;float:right;padding: 2%;width: 100%;margin-bottom: 5%">
+                      <div style="text-align: right;margin-right:5%;float:right;padding: 2%;width: 100%;margin-bottom: 5%">
                         <el-button round size="mini" type="primary">确认</el-button>
                         <el-button round size="mini" type="primary">转人工</el-button>
                       </div>
@@ -163,71 +160,12 @@
         filterContent: '',
         //未读数
         unreadQuantity: 0,
+        //消息列表
         messageList: [],
-        product: [
-          {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          }, {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          },
-          {
-            url: "http://productdata.fhxasdsada.xyz/8786efc04f001e50.jpg",
-            name: "dsjksd",
-          },
-        ],
+        //订单商品列表
+        productList: [],
+        //订单地址
+        orderAddress:{},
       }
     },
     methods: {
@@ -305,7 +243,6 @@
         arr.forEach((message) => {
           this.messageList.unshift(message);
         });
-        this.$refs.header.newMessage(this.unreadQuantity + arr.length);
       },
       //查看消息
       showMessage(index) {
@@ -313,6 +250,8 @@
           this.messageList.forEach((message) => {
             message.sign = false;
           });
+          this.productList=this.messageList[index].newsContentJson.productContents;
+          this.orderAddress=this.messageList[index].newsContentJson.orderAddress;
           this.messageList[index].sign = true;
           if (this.messageList[index].newsStatus == 1) {
             this.haveRead(this.messageList[index].contentId, index);
