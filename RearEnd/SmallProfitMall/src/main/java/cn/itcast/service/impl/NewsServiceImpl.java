@@ -5,6 +5,7 @@ import cn.itcast.dao.NewsDao;
 import cn.itcast.domain.news.News;
 import cn.itcast.service.NewsService;
 import cn.itcast.util.logic.TotalPages;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +41,11 @@ public class NewsServiceImpl implements NewsService {
         //开始页
         Integer start=(currentPage-1)*pageSize;
         List<News> news =  newsDao.fendNews(userId,state,start,pageSize);
+        for (int i = 0; i <news.size() ; i++) {
+            //转换消息内容为JSON
+            news.get(i).setNewsContentJson(JSONObject.parseObject(news.get(i).getNewsContent()));;
+            news.get(i).setNewsContent(null);
+        }
         return news;
     }
 
