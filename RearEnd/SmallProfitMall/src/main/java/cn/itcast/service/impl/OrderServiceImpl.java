@@ -404,13 +404,19 @@ public class OrderServiceImpl implements OrderService {
         news.setTitle("确认订单消息");
         //设置消息标志位
         news.setSign(false);
+        //设置消息简介
+        news.setIntroduction(order.getProductContents().get(0).getProductName());
         //新增消息
          newsDao.addNews(news);
         //查询当前消息
         News news2 = newsDao.fenNewsById(news.getContentId());
         List<News> news1 =new ArrayList();
         news1.add(news2);
-
+        for (int i = 0; i <news1.size() ; i++) {
+            //转换消息内容为JSON
+            news2.setNewsContentJson(JSONObject.parseObject(news1.get(i).getNewsContent()));;
+            news1.get(i).setNewsContent(null);
+        }
 
         //未读消息数量
         Integer unreadQuantity =  newsService.unreadQuantity(order.getUserId());
