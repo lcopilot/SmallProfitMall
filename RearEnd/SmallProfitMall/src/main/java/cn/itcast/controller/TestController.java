@@ -66,12 +66,12 @@ public class TestController {
     }
 
 
-//    @RequestMapping(value = "/email/{e}",method = RequestMethod.GET)
-//    public void email(){
-//        String[] a = {"2252821162@qq.com","尊敬的微利会员，您关注的商品"};
-//        shoppingProducer.sendDeleteCart("arrival",a);
-//    }
-//
+    @RequestMapping(value = "/email",method = RequestMethod.GET)
+    public void email(){
+        String[] a = {"2252821162@qq.com","尊敬的微利会员，您关注的商品"};
+        shoppingProducer.sendDeleteCart("arrival",a);
+    }
+
 //    @RequestMapping(value = "/wevSocket/{userId}/{msg}",method = RequestMethod.GET)
 //    public void wevSocket(@PathVariable("userId")String userId,@PathVariable("msg")String msg) throws IOException {
 //        webSocket.sendMessage(userId,msg);

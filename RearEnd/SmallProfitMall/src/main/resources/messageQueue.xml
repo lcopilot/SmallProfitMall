@@ -56,6 +56,11 @@
     <rabbit:listener ref="arrivalNotification" method="arrivalNotification" queue-names="ARRIVAL-NOTIFICATION-QUEUE"/>
   </rabbit:listener-container>
 
+  <!--监听确认订单队列-->
+  <rabbit:listener-container connection-factory="connectionFactory">
+    <rabbit:listener ref="orderPayment" method="orderPayment" queue-names="SHOPPING-NOTIFICATION-QUEUE"/>
+  </rabbit:listener-container>
+
   <!-- 声明多个消费者对象 -->
   <bean id="mQSimpleMsgHandler" class="cn.itcast.util.rabbitMq.MQSimpleMsgHandler"/>
   <!--测试-->
@@ -64,5 +69,7 @@
   <bean id="favorite" class="cn.itcast.messageQueue.consumer.favorite.FavoriteConsumer"></bean>
   <!--声明商品到货通知消费者-->
   <bean id="arrivalNotification" class="cn.itcast.messageQueue.consumer.shopping.ArrivalNotification"></bean>
+  <!--订单确认通知-->
+  <bean id="orderPayment" class="cn.itcast.messageQueue.consumer.order.OrderPayment"></bean>
 
 </beans>
