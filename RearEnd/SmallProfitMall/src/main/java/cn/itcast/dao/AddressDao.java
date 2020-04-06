@@ -45,7 +45,7 @@ public interface AddressDao {
      * @param defaults 是否为默认值
      * @return
      */
-    public ArrayList findByIdDefaults(@Param("userId")String userId,@Param("defaults")Boolean defaults);
+    public List<String> findByIdDefaults(@Param("userId")String userId,@Param("defaults")Boolean defaults);
 
     /**
      * 修改全部默地址
