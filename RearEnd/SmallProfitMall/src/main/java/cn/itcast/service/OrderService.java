@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 
 /**
  * @author Kite
@@ -61,4 +62,36 @@ public interface OrderService {
      * @return 是否成功
      */
     public Integer confirmOrder(Order order) throws Exception;
+
+    /**
+     * 生成订单号 时间戳加当天流水号
+     * 取当天最后一笔订单的流水号加一
+     * 今天第一笔订单流水号为1000000
+     * @return
+     */
+    public String generateOrderId();
+
+    /**
+     * 购物车商品信息添加到订单
+     * @param initialize 购物车id数组
+     * @param orderId 订单id
+     * @return
+     */
+    public BigDecimal addProduct (Integer[] initialize , String orderId);
+
+
+    /**
+     * 支付成功用于发送邮件
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    public Integer emailNotification(String userId) throws Exception;
+
+    /**
+     * 支付成功 推送订单消息
+     * @return
+     * @throws Exception
+     */
+    public Integer notificationUser(Order order) throws Exception;
 }

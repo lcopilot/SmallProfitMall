@@ -284,6 +284,7 @@ public class OrderServiceImpl implements OrderService {
      * 今天第一笔订单流水号为1000000
      * @return
      */
+    @Override
     public String generateOrderId(){
         String initialId="100000";
         //获取当前时间戳
@@ -308,7 +309,8 @@ public class OrderServiceImpl implements OrderService {
      * @param orderId 订单id
      * @return
      */
-    public BigDecimal addProduct (Integer[] initialize ,String orderId){
+    @Override
+    public BigDecimal addProduct (Integer[] initialize , String orderId){
         //创建商品详细信息
         ProductContent productContent = new ProductContent();
         //取出购物车id数组
@@ -361,6 +363,7 @@ public class OrderServiceImpl implements OrderService {
      * @return
      * @throws Exception
      */
+    @Override
     public Integer emailNotification(String userId) throws Exception {
 
         //发送邮件
@@ -382,6 +385,7 @@ public class OrderServiceImpl implements OrderService {
      * @return
      * @throws Exception
      */
+    @Override
     public Integer notificationUser(Order order) throws Exception {
         //添加商品信息
         order.setProductContents(orderDao.fendOrderProduct(order.getOrderId()));
