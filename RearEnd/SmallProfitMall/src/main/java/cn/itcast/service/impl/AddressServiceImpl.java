@@ -85,13 +85,14 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public int updateDefaults(int addressId,String userId, Boolean defaults) {
         if (defaults){
-            ArrayList defaultss = addressDao.findByIdDefaults(userId,true);
+            List<String> defaultss = addressDao.findByIdDefaults(userId,true);
             if (defaultss.size()>0){
                 addressDao.updateFindDefaults(userId,false);
                 int rediss= addressDao.updateDefaults(addressId,defaults);
                 return rediss;
             }else {
-                return 0;
+                int rediss= addressDao.updateDefaults(addressId,defaults);
+                return rediss;
             }
         }else {
             List<Address> addresses=addressDao.findById(userId);
