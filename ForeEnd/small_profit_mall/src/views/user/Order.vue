@@ -19,10 +19,10 @@
               </span>
               </div>
               <div style="padding-left: 2%">
-                <div v-if="!orderAddress">还没有地址哦~
+                <div v-if="!orderAddress.name">还没有地址哦~
                   <el-button @click="addAddress" type="text">添加地址</el-button>
                 </div>
-                <el-row :gutter="10" v-if="orderAddress">
+                <el-row :gutter="10" v-if="orderAddress.name">
                   <el-col :span="3">
                     <el-tag type="success" size="mini" effect="dark">
                       {{orderAddress.alias}}
@@ -378,7 +378,7 @@
             setTimeout(() => {
                 this.settlementOrder();
               //跳转支付成功页面
-            }, 2650)
+            }, 2500)
             // this.settlementOrder();
           } else {
             if (res.faceRecognition.result.error_code==32000){
