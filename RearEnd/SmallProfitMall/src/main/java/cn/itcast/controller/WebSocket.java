@@ -7,6 +7,8 @@ import cn.itcast.response.*;
 import cn.itcast.response.connection.QueryResponseResultString;
 import cn.itcast.response.connection.QueryResultString;
 import cn.itcast.response.connection.SocketCommonCode;
+import cn.itcast.response.news.Page;
+import cn.itcast.response.news.QueryResponseNews;
 import cn.itcast.util.logic.ConversionJson;
 import com.alibaba.fastjson.JSONObject;
 import net.sf.json.JSONString;
@@ -129,14 +131,14 @@ public class WebSocket {
         if(USER_ONLINE_MAP.get(message.get(0).getUserId())!=null){
             for (int i = 0; i <message.size() ; i++) {
                 //消息对象
-                QueryResultString queryResultString = new QueryResultString();
+                Page  page = new Page();
                 //设置消息信息
-                queryResultString.setNews(message);
+                page.setNews(message);
                 //未读消息数量
-                queryResultString.setUnreadQuantity(unreadQuantity);
+                page.setUnreadQuantity(unreadQuantity);
 
                 Session testSession= USER_ONLINE_MAP.get(message.get(i).getUserId());
-                testSession.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis,queryResultString)));
+                testSession.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseNews(CommonCode.SUCCESS,page)));
             }
         return redis=1;
         }else {
