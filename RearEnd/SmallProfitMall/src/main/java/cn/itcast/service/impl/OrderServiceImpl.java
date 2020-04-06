@@ -369,6 +369,7 @@ public class OrderServiceImpl implements OrderService {
             //解密邮箱
             email=AesEncryptUtil.desEncrypt(email);
             String[] msg = {email,"您已成功购买商品"};
+            //消息中间件推送
             shoppingProducer.sendDeleteCart("shopping",msg);
             return 1;
         }else {
@@ -408,11 +409,7 @@ public class OrderServiceImpl implements OrderService {
         News news2 = newsDao.fenNewsById(news.getContentId());
         List<News> news1 =new ArrayList();
         news1.add(news2);
-        for (int i = 0; i <news1.size() ; i++) {
-            JSONObject orderJson = JSONObject.parseObject(news1.get(i).getNewsContent());
-            news1.get(i).setNewsContent(null);
-            news1.get(i).setNewsContentJSON(orderJson);
-        }
+
 
         //未读消息数量
         Integer unreadQuantity =  newsService.unreadQuantity(order.getUserId());
