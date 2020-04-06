@@ -138,8 +138,8 @@ public class WebSocket {
                 com.alibaba.fastjson.JSONObject orderJson = JSONObject.parseObject(message.get(i).getNewsContent());
                 //设置消息内容
                 queryResultString.setNewsContent(orderJson);
-                Session testSession= USER_ONLINE_MAP.get(message.get(i));
-                session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis,queryResultString)));
+                Session testSession= USER_ONLINE_MAP.get(message.get(i).getUserId());
+                testSession.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis,queryResultString)));
             }
         return redis=1;
         }else {
