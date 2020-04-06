@@ -32,11 +32,19 @@ public class News  implements Serializable {
     private Date newsTime;
     //消息内容
     private String newsContent;
+    private JSONObject NewsContentJSON;
     //消息标注
     private Boolean sign;
     //消息标题
     private String title;
 
+    public JSONObject getNewsContentJSON() {
+        return NewsContentJSON;
+    }
+
+    public void setNewsContentJSON(JSONObject newsContentJSON) {
+        NewsContentJSON = newsContentJSON;
+    }
 
     public Integer getId() {
         return id;

@@ -18,8 +18,6 @@ import java.util.List;
 public class QueryResultString<T> {
     //未读数量
     private Integer unreadQuantity;
-    //消息内容
-    private JSONObject newsContent;
     //消息集合
     private List<News> news;
 }

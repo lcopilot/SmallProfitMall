@@ -49,7 +49,11 @@ public class AddressController {
 
     }
 
-    //根据id查询用户信息
+    /**
+     * 查询用户信息
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "/findById/{userId}",method = RequestMethod.GET)
     public QueryResponseResult findById(@PathVariable("userId") String userId) {
         QueryResult result = new QueryResult();

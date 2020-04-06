@@ -134,10 +134,7 @@ public class WebSocket {
                 queryResultString.setNews(message);
                 //未读消息数量
                 queryResultString.setUnreadQuantity(unreadQuantity);
-                //转换消息内容类型
-                com.alibaba.fastjson.JSONObject orderJson = JSONObject.parseObject(message.get(i).getNewsContent());
-                //设置消息内容
-                queryResultString.setNewsContent(orderJson);
+
                 Session testSession= USER_ONLINE_MAP.get(message.get(i).getUserId());
                 testSession.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis,queryResultString)));
             }
