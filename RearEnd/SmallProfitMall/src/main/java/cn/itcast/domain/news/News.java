@@ -1,6 +1,10 @@
 package cn.itcast.domain.news;
 
+import com.alibaba.fastjson.JSONObject;
+
+import javax.xml.crypto.Data;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,14 +22,14 @@ public class News  implements Serializable {
     private String senderAvatar;
     //消息状态
     private String newsStatus;
-    //消息内容id
-    private Integer newsId;
+    //推送者id
+    private Integer senderId;
     //消息种类
     private Integer newsType;
     //消息内容id
     private Integer contentId;
     //消息时间
-    private String newsTime;
+    private Date newsTime;
     //消息内容
     private String newsContent;
     //消息标注
@@ -74,12 +78,12 @@ public class News  implements Serializable {
         this.newsStatus = newsStatus;
     }
 
-    public Integer getNewsId() {
-        return newsId;
+    public Integer getSenderId() {
+        return senderId;
     }
 
-    public void setNewsId(Integer newsId) {
-        this.newsId = newsId;
+    public void setSenderId(Integer senderId) {
+        this.senderId = senderId;
     }
 
     public Integer getNewsType() {
@@ -98,11 +102,11 @@ public class News  implements Serializable {
         this.contentId = contentId;
     }
 
-    public String getNewsTime() {
+    public Date getNewsTime() {
         return newsTime;
     }
 
-    public void setNewsTime(String newsTime) {
+    public void setNewsTime(Date newsTime) {
         this.newsTime = newsTime;
     }
 
@@ -130,6 +134,21 @@ public class News  implements Serializable {
         this.title = title;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "News{" +
+                "id=" + id +
+                ", userId='" + userId + '\'' +
+                ", senderName='" + senderName + '\'' +
+                ", senderAvatar='" + senderAvatar + '\'' +
+                ", newsStatus='" + newsStatus + '\'' +
+                ", senderId=" + senderId +
+                ", newsType=" + newsType +
+                ", contentId=" + contentId +
+                ", newsTime='" + newsTime + '\'' +
+                ", newsContent=" + newsContent +
+                ", sign=" + sign +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }

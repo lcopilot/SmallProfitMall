@@ -31,8 +31,11 @@ public class NewsController {
     @Autowired
     NewsService newsService;
 
+    /**
+     * 用于消息推送
+     */
     @Autowired
-    WebSocket webSocket;
+    private WebSocket webSocket;
 
     /**
      * 查询历史消息
@@ -89,9 +92,9 @@ public class NewsController {
     @RequestMapping(value = "/close/{userId}/{msg}",method = RequestMethod.POST)
     public QueryResponseResult close(@PathVariable("userId")String userId,@PathVariable("msg")String msg) throws IOException {
         List<News> news = newsService.fendNews(userId,2,1,5);
-//        String a= ConversionJson.objectToJson(news.get(1)) ;
-//        System.out.println(a);
-        webSocket.sendMessage(userId,news,newsService.unreadQuantity(userId));
+        String a= ConversionJson.objectToJson(news.get(1)) ;
+        System.out.println(a);
+        webSocket.sendMessage(news,newsService.unreadQuantity(userId));
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
 

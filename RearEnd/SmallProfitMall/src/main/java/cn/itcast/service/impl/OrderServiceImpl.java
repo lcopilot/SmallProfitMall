@@ -3,6 +3,7 @@ package cn.itcast.service.impl;
 import cn.itcast.dao.*;
 import cn.itcast.domain.accountSettings.AccountSettings;
 import cn.itcast.domain.address.Address;
+import cn.itcast.domain.news.News;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
@@ -10,6 +11,8 @@ import cn.itcast.domain.shoppingCar.ShoppingCart;
 import cn.itcast.messageQueue.producer.shopping.ShoppingProducer;
 import cn.itcast.service.*;
 import cn.itcast.util.encryption.AesEncryptUtil;
+import cn.itcast.util.logic.ConversionJson;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -47,7 +51,13 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private FaceRecognitionService faceRecognitionService;
 
-    //会员信息
+    //用于新增消息
+    @Autowired
+    NewsDao newsDao;
+
+    /**
+     * 用于查询用户账户信息（余额）
+     */
     @Autowired
     private MemberDao memberDao;
 
@@ -60,9 +70,17 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private EmailDao emailDao;
 
-    //用于发送邮件
+    /**
+     * 用于发送邮件
+     */
     @Autowired
     ShoppingProducer shoppingProducer;
+
+    /**
+     * 用于推送消息
+     */
+    @Autowired
+    NewsService newsService;
 
     /**
      * 购物车订单
@@ -231,6 +249,7 @@ public class OrderServiceImpl implements OrderService {
             //相减结果
             String difference= balance.subtract(total).setScale(scale, BigDecimal.ROUND_HALF_UP).toString();
             double value = Double.valueOf(difference.toString());
+            //判断用户余额是否充足
             if (value<0){
                 return 2;
             }else {
@@ -242,20 +261,15 @@ public class OrderServiceImpl implements OrderService {
                 order.setOrderState(2);
                 //确认订单
                 orderDao.confirmOrder(order);
-                //添加地址
                 //转换地址
                 Address address = addressService.defaults(order.getOrderAddress());
-                //添加地址
+                //添加订单地址
                 orderDao.addOrdeAddress(order.getOrderId(),address);
-                //发送邮件
-                String email = emailDao.fendByIdEmail(order.getUserId());
 
-                if (email!=null &&! "".equals(email)){
-                    //解密邮箱
-                    email=AesEncryptUtil.desEncrypt(email);
-                    String[] msg = {email,"您已成功购买商品"};
-                    shoppingProducer.sendDeleteCart("shopping",msg);
-                }
+                //邮件通知
+                emailNotification(order.getUserId());
+                //推送消息
+                notificationUser(order);
                 result=1;
             }
             return result;
@@ -290,7 +304,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * 将商品信息添加到订单
+     * 购物车商品信息添加到订单
      * @param initialize 购物车id数组
      * @param orderId 订单id
      * @return
@@ -340,5 +354,64 @@ public class OrderServiceImpl implements OrderService {
             shoppingCartDao.deleteCart(shoppingCartIds);
         }
         return orderNotes;
+    }
+
+    /**
+     * 支付成功用于发送邮件
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    public Integer emailNotification(String userId) throws Exception {
+
+        //发送邮件
+        String email = emailDao.fendByIdEmail(userId);
+        if (email!=null &&! "".equals(email)){
+            //解密邮箱
+            email=AesEncryptUtil.desEncrypt(email);
+            String[] msg = {email,"您已成功购买商品"};
+            shoppingProducer.sendDeleteCart("shopping",msg);
+            return 1;
+        }else {
+            return 2;
+        }
+    }
+
+    /**
+     * 支付成功 推送订单消息
+     * @return
+     * @throws Exception
+     */
+    public Integer notificationUser(Order order) throws Exception {
+
+        String stringOrderJson=JSONObject.toJSONString(order);
+        //推送消息
+        News news = new News();
+        //设置用户id
+        news.setUserId(order.getUserId());
+        //设置消息状态
+        news.setNewsStatus("1");
+        //设置消息发送者 4为订单助手
+        news.setSenderId(4);
+        //设置消息种类
+        news.setNewsType(4);
+        //设置消息发送时间
+        news.setNewsTime(new Date());
+        //消息内容订单对象转StringJson
+        news.setNewsContent(stringOrderJson);
+        //设置消息标题
+        news.setTitle("确认订单消息");
+        //设置消息标志位
+        news.setSign(false);
+        //新增消息
+         newsDao.addNews(news);
+        //查询当前消息
+        News news2 = newsDao.fenNewsById(news.getContentId());
+        List<News> news1 =new ArrayList() ;
+        news1.add(news2);
+        //未读消息数量
+        Integer unreadQuantity =  newsService.unreadQuantity(order.getUserId());
+        Integer results = newsService.pushNews(news1,unreadQuantity);
+        return results;
     }
 }

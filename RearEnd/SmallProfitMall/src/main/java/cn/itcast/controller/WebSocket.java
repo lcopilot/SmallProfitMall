@@ -8,7 +8,7 @@ import cn.itcast.response.connection.QueryResponseResultString;
 import cn.itcast.response.connection.QueryResultString;
 import cn.itcast.response.connection.SocketCommonCode;
 import cn.itcast.util.logic.ConversionJson;
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 import net.sf.json.JSONString;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -117,14 +117,35 @@ public class WebSocket {
         error.printStackTrace();
     }
 
-    //单发消息
-    public void sendMessage(String id, List<News> message,Integer a) throws IOException {
-        Session session = USER_ONLINE_MAP.get(id);
-        QueryResultString queryResultString = new QueryResultString();
-        queryResultString.setNews(message);
-        queryResultString.setUnreadQuantity(a);
+    /**
+     * 单发消息
+     * @param message 消息内容
+     * @param unreadQuantity 未读消息数量
+     * @throws IOException
+     */
+    public Integer sendMessage( List<News> message,Integer unreadQuantity) throws IOException {
+        //返回值
+        Integer redis=0;
+        if(USER_ONLINE_MAP.get(message.get(0).getUserId())!=null){
+            for (int i = 0; i <message.size() ; i++) {
+                //消息对象
+                QueryResultString queryResultString = new QueryResultString();
+                //设置消息信息
+                queryResultString.setNews(message);
+                //未读消息数量
+                queryResultString.setUnreadQuantity(unreadQuantity);
+                //转换消息内容类型
+                com.alibaba.fastjson.JSONObject orderJson = JSONObject.parseObject(message.get(i).getNewsContent());
+                //设置消息内容
+                queryResultString.setNewsContent(orderJson);
+                Session testSession= USER_ONLINE_MAP.get(message.get(i));
+                session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis,queryResultString)));
+            }
+        return redis=1;
+        }else {
+            return redis;
+        }
 
-        session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis,queryResultString)));
         //阻塞式（同步）
         //this.session.getBasicRemote().sendText(message);
         //非阻塞式（异步）

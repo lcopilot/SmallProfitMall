@@ -1,5 +1,6 @@
 package cn.itcast.service.impl;
 
+import cn.itcast.controller.WebSocket;
 import cn.itcast.dao.NewsDao;
 import cn.itcast.domain.news.News;
 import cn.itcast.service.NewsService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -16,6 +18,13 @@ import java.util.List;
  */
 @Service
 public class NewsServiceImpl implements NewsService {
+
+    /**
+     * 用于消息推送
+     */
+    @Autowired
+    private WebSocket webSocket;
+
     /**
      * 查询消息
      * @param userId 用户id
@@ -29,7 +38,6 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public List<News> fendNews(String userId,Integer state,Integer currentPage, Integer pageSize) {
         //开始页
-//        this.totalPage=totalCount%pageSize==0?totalCount/pageSize:totalCount/pageSize+1;
         Integer start=(currentPage-1)*pageSize;
         List<News> news =  newsDao.fendNews(userId,state,start,pageSize);
         return news;
@@ -64,5 +72,17 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public Integer updateNewsStatus(String userId, Integer contentId) {
         return newsDao.updateNewsStatus(userId,contentId);
+    }
+
+    /**
+     * 推送订单消息
+     * @param news 消息内容
+     * @param unreadQuantity 未读消息数量
+     * @return 推送是否成功 1为用户在线 推送成功 2为用户不在线 推送失败
+     * @throws IOException
+     */
+    @Override
+    public Integer pushNews(List<News> news, Integer unreadQuantity) throws IOException {
+        return webSocket.sendMessage(news,unreadQuantity);
     }
 }

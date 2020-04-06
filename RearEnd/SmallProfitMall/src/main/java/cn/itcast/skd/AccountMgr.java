@@ -3,11 +3,7 @@ package cn.itcast.skd;
 /**
     七牛云
  * 账户信息，获取授权认证
-
  * @author yunlingfly
-
- *
-
  */
 
 public class AccountMgr {

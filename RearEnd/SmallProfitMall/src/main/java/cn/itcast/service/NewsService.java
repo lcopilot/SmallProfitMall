@@ -3,6 +3,7 @@ package cn.itcast.service;
 import cn.itcast.domain.news.News;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -43,6 +44,15 @@ public interface NewsService {
      * @return
      */
     public Integer updateNewsStatus(String userId,Integer contentId);
+
+    /**
+     * 推送消息
+     * @param news 消息内容
+     * @param unreadQuantity 消息未读数
+     * @return 推送是否成功
+     * @throws IOException
+     */
+    public Integer pushNews(List<News> news,Integer unreadQuantity) throws IOException;
 
 
 }
