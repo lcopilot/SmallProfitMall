@@ -85,7 +85,7 @@
                     min-width="11%">
                   <template slot-scope="product">
                     ￥<span class="cart_product_price">
-                    {{(((product.row.productPrice)*100)*product.row.quantity)/100}}
+                    {{((((product.row.productPrice)*100)*product.row.quantity)/100).toFixed(2)}}
                     </span>
                   </template>
                 </el-table-column>

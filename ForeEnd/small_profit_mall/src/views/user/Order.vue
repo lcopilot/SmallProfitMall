@@ -246,7 +246,7 @@
           @close="paymentPassword=''"
           width="30%" center>
         <el-input :placeholder="orderData.paymentPassword?'请输入支付密码':'请输入您要设置的支付密码'"
-                  v-model="paymentPassword" maxlength="6" show-password></el-input>
+                  v-model="paymentPassword" maxlength="6" show-password @keyup.enter.native="verifyPaymentPassword()"></el-input>
         <span slot="footer" class="dialog-footer">
                       <el-button type="primary" @click="verifyPaymentPassword()">确 定</el-button>
                     </span>
