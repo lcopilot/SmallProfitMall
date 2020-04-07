@@ -36,33 +36,19 @@ public class Order implements Serializable {
     private String orderNote;
     //订单总计
     private BigDecimal orderTotal;
-
-    public Address orderAddress;
+    //订单地址
+    private Address orderAddress;
+    //是否发货
+    private Boolean submit;
+    //用户是否收货
+    private Boolean receipt;
     //商品信息
     List<ProductContent> productContents;
-
-    public Address getOrderAddress() {
-        return orderAddress;
-    }
-
-    public void setOrderAddress(Address orderAddress) {
-        this.orderAddress = orderAddress;
-    }
 
     /**
      * 订单状态  1代表未支付 2代表已支付
      */
     private Integer orderState;
-
-    public Integer getOrderState() {
-        return orderState;
-    }
-
-    public void setOrderState(Integer orderState) {
-        this.orderState = orderState;
-    }
-
-
 
     public int getId() {
         return id;
@@ -95,7 +81,6 @@ public class Order implements Serializable {
     public void setPaymentWay(Integer paymentWay) {
         this.paymentWay = paymentWay;
     }
-
 
     public Integer getDeliveryWay() {
         return deliveryWay;
@@ -153,6 +138,30 @@ public class Order implements Serializable {
         this.orderTotal = orderTotal;
     }
 
+    public Address getOrderAddress() {
+        return orderAddress;
+    }
+
+    public void setOrderAddress(Address orderAddress) {
+        this.orderAddress = orderAddress;
+    }
+
+    public Boolean getSubmit() {
+        return submit;
+    }
+
+    public void setSubmit(Boolean submit) {
+        this.submit = submit;
+    }
+
+    public Boolean getReceipt() {
+        return receipt;
+    }
+
+    public void setReceipt(Boolean receipt) {
+        this.receipt = receipt;
+    }
+
     public List<ProductContent> getProductContents() {
         return productContents;
     }
@@ -161,4 +170,11 @@ public class Order implements Serializable {
         this.productContents = productContents;
     }
 
+    public Integer getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(Integer orderState) {
+        this.orderState = orderState;
+    }
 }

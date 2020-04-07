@@ -37,7 +37,6 @@ public class ShoppingCartController {
             //添加商品失败 单个商品大于99
             return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
         }
-
         int[] redis =shoppingCartService.addShoppingCar(purchaseInformation);
         if(redis[0]==1){
             //添加成功
@@ -83,7 +82,6 @@ public class ShoppingCartController {
             //查询传入参数为空
             return new QueryResponseResult(CommonCode.FAIL, null);
         }
-
         int redis = shoppingCartService.deleteCart(cartIdList);
         if (redis == 1) {
             //删除购物车成功

@@ -51,4 +51,11 @@ public interface AddressService {
      * @return 转换后地址
      */
     public Address defaults(Address address);
+
+    /**
+     * 转换订单地址格式
+     * @param address 地址对象
+     * @return 修改后的地址对象
+     */
+    public Address ordersDefaults(Address address);
 }

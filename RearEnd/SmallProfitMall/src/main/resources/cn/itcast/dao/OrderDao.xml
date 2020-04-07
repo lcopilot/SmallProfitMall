@@ -17,7 +17,7 @@
         <result property="orderNote" column="orderNote"></result>
         <result property="orderTotal" column="orderTotal"></result>
         <result property="orderState" column="orderState"></result>
-         <!-- 配置角色集合的映射 -->
+         <!-- 配置商品集合的映射 -->
         <collection property="productContents" ofType="cn.itcast.domain.order.ProductContent">
             <id property="id" column="ids"></id>
             <result property="orderId" column="orderId"></result>
@@ -29,6 +29,34 @@
             <result property="productWeight" column="productWeight"></result>
             <result property="evaluate" column="evaluate"></result>
         </collection>
+    </resultMap>
+
+    <resultMap id="allOrderMap" type="cn.itcast.domain.order.Order">
+        <id property="id" column="id"></id>
+        <result property="userId" column="userId"></result>
+        <result property="orderId" column="orderId"></result>
+        <result property="paymentWay" column="paymentWay"></result>
+        <result property="deliveryWay" column="deliveryWay"></result>
+        <result property="orderTime" column="orderTime"></result>
+        <result property="submitTime" column="submitTime"></result>
+        <result property="deliveryTime" column="deliveryTime"></result>
+        <result property="paymentTime" column="paymentTime"></result>
+        <result property="orderNote" column="orderNote"></result>
+        <result property="orderTotal" column="orderTotal"></result>
+        <result property="orderState" column="orderState"></result>
+        <!-- 配置商品集合的映射 -->
+        <collection property="productContents" ofType="cn.itcast.domain.order.ProductContent">
+            <id property="id" column="ids"></id>
+            <result property="orderId" column="orderId"></result>
+            <result property="productName" column="productName"></result>
+            <result property="productImage" column="productImage"></result>
+            <result property="productPrice" column="productPrice"></result>
+            <result property="productConfiguration" column="productConfiguration"></result>
+            <result property="productQuantity" column="productQuantity"></result>
+            <result property="productWeight" column="productWeight"></result>
+            <result property="evaluate" column="evaluate"></result>
+        </collection>
+
     </resultMap>
 
     <!--新增订单-->
@@ -70,6 +98,31 @@
         AND
             uo.orderId=#{orderId}
     </select>
+
+    <!--查询所有订单-->
+    <select id="findDetailedOrder" resultMap="allOrderMap">
+        SELECT
+            uo.*,o.productName,
+            o.id AS ids,uo.orderState,
+            o.productImage,o.productPrice,o.productConfiguration,
+            o.productQuantity,o.productWeight,o.evaluate,
+            oa.orderId AS orderIds,oa.`name`,oa.areas,oa.detailedAddress,oa.phone,oa.email,oa.areaCodes,oa.alias
+        FROM
+            userOrder uo
+        LEFT JOIN
+            orders o
+        ON
+            uo.orderId=o.orderId
+        LEFT JOIN
+            orderAddress oa
+        ON
+            o.orderId=oa.orderId
+        WHERE
+            uo.userId=#{userId}
+        AND
+            uo.orderId=#{orderId}
+    </select>
+
     <!--查询订单商品信息-->
     <select id="fendOrderProduct" parameterType="java.lang.String" resultType="cn.itcast.domain.order.ProductContent">
         SELECT * FROM orders WHERE orderId=#{orderId}
@@ -82,7 +135,7 @@
         SET
              paymentWay=#{paymentWay},deliveryWay=#{deliveryWay},
              deliveryTime=#{deliveryTime},paymentTime=#{paymentTime},
-             submitTime=#{submitTime},orderNote=#{orderNote},orderState=orderState
+             submitTime=#{submitTime},orderNote=#{orderNote},orderState=#{orderState}
         WHERE
             userId=#{userId}
         AND

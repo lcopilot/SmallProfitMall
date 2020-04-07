@@ -158,4 +158,12 @@ public class OrderController {
        }
        return new QueryResponseResult(CommonCode.FAIL,null);
     }
+
+    @RequestMapping(value = "/findDetailedOrder/{userId}/{orderId}",method = RequestMethod.GET)
+    public QueryResponseResult findDetailedOrder(@PathVariable("userId")String userId, @PathVariable("orderId") String orderId){
+        Order order = orderService.findDetailedOrder(userId,orderId);
+        QueryResult queryResult=new QueryResult();
+        queryResult.setList(Arrays.asList(order));
+        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+    }
 }
