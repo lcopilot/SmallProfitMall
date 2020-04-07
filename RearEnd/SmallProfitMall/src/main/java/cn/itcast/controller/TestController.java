@@ -69,7 +69,7 @@ public class TestController {
     @RequestMapping(value = "/email",method = RequestMethod.GET)
     public void email(){
         String[] a = {"2252821162@qq.com","尊敬的微利会员，您关注的商品"};
-        shoppingProducer.sendDeleteCart("arrival",a);
+        shoppingProducer.sendShoppingInformation("arrival",a);
     }
 
 //    @RequestMapping(value = "/wevSocket/{userId}/{msg}",method = RequestMethod.GET)

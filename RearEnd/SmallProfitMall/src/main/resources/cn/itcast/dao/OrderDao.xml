@@ -70,6 +70,7 @@
             <result property="alias" column="alias"></result>
             <result property="phone" column="phone"></result>
             <result property="email" column="email"></result>
+            <result property="areas" column="areas"></result>
             <result property="detailedAddress" column="detailedAddress"></result>
     </resultMap>
 
@@ -113,14 +114,14 @@
             uo.orderId=#{orderId}
     </select>
 
-    <!--查询所有订单-->
+    <!--查询订单详细-->
     <select id="findDetailedOrder" resultMap="allOrderMap">
         SELECT
             uo.*,o.productName,
             o.id AS ids,
             o.productImage,o.productPrice,o.productConfiguration,
             o.productQuantity,o.productWeight,o.evaluate,
-            oa.orderId AS orderIds,oa.name,oa.areas,oa.detailedAddress,oa.phone,oa.email
+            oa.orderId AS orderIds,oa.name,oa.areas,oa.detailedAddress,oa.phone,oa.email,oa.alias
         FROM
             userOrder uo
         LEFT JOIN
