@@ -2,6 +2,7 @@ package cn.itcast.controller;
 
 import cn.itcast.dao.MemberDao;
 import cn.itcast.domain.accountSettings.AccountSettings;
+import cn.itcast.domain.news.News;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.response.CommonCode;
@@ -9,6 +10,8 @@ import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.response.faceRecognition.FaceRecognition;
 import cn.itcast.response.faceRecognition.FaceRecognitionResponse;
+import cn.itcast.response.news.Page;
+import cn.itcast.response.news.QueryResponseNews;
 import cn.itcast.response.queryOrder.QueryOrder;
 import cn.itcast.response.queryOrder.ResultOrder;
 import cn.itcast.service.AccountSettingsService;
@@ -166,10 +169,10 @@ public class OrderController {
      * @return 订单对象
      */
     @RequestMapping(value = "/findDetailedOrder/{userId}/{orderId}",method = RequestMethod.GET)
-    public QueryOrder findDetailedOrder(@PathVariable("userId")String userId, @PathVariable("orderId") String orderId){
+    public QueryResponseNews findDetailedOrder(@PathVariable("userId")String userId, @PathVariable("orderId") String orderId){
         Order order = orderService.findDetailedOrder(userId,orderId);
-        ResultOrder resultOrder=new ResultOrder();
-        resultOrder.setOrder(order);
-        return new QueryOrder(CommonCode.SUCCESS,resultOrder);
+        Page page=new Page();
+        page.setOrder(order);
+        return new QueryResponseNews(CommonCode.SUCCESS,page);
     }
 }

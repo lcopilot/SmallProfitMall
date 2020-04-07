@@ -1,6 +1,7 @@
 package cn.itcast.response.news;
 
 import cn.itcast.domain.news.News;
+import cn.itcast.domain.order.Order;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
@@ -15,12 +16,14 @@ import java.util.List;
 @ToString
 @Component
 public class Page<T> {
-    //消息数据
+    /**消息数据**/
     private List<News> news;
-    //总记录数
+    /**订单消息**/
+    private Order order;
+    /**总记录数**/
     private Integer totalCount;
-    //总页数
+    /**总页数**/
     private Integer totalPage;
-    //未读数量
+    /**未读数量**/
     private Integer unreadQuantity;
 }
