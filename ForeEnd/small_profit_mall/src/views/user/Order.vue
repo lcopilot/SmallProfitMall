@@ -565,6 +565,9 @@
     height: 20px
   }
 
+  .order_address:hover {
+    cursor: pointer;
+  }
 
   .order_pay {
     margin-bottom: 1%;
