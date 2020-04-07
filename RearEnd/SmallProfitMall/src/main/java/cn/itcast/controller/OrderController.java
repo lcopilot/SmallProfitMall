@@ -159,11 +159,17 @@ public class OrderController {
        return new QueryResponseResult(CommonCode.FAIL,null);
     }
 
+    /**
+     * 返回订单详细
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @return 订单对象
+     */
     @RequestMapping(value = "/findDetailedOrder/{userId}/{orderId}",method = RequestMethod.GET)
-    public QueryResponseResult findDetailedOrder(@PathVariable("userId")String userId, @PathVariable("orderId") String orderId){
+    public QueryOrder findDetailedOrder(@PathVariable("userId")String userId, @PathVariable("orderId") String orderId){
         Order order = orderService.findDetailedOrder(userId,orderId);
-        QueryResult queryResult=new QueryResult();
-        queryResult.setList(Arrays.asList(order));
-        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+        ResultOrder resultOrder=new ResultOrder();
+        resultOrder.setOrder(order);
+        return new QueryOrder(CommonCode.SUCCESS,resultOrder);
     }
 }
