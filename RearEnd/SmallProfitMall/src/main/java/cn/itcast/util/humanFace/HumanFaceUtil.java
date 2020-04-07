@@ -85,14 +85,14 @@ public class HumanFaceUtil {
      * @param inputStream 视频流
      * @throws IOException
      */
-    public String  videoValidation(String sessionIds, InputStream inputStream) throws IOException {
+    public JSONObject  videoValidation(String sessionIds, InputStream inputStream) throws IOException {
         // 传入可选参数调用接口
         HashMap<String, String> options = new HashMap<String, String>();
         String sessionId = sessionIds;
         // 参数为二进制数组 视频流
         byte[] file = IOUtils.toByteArray(inputStream);
         JSONObject res = client.videoFaceliveness(sessionId, file, options);
-        return  res.toString(2);
+        return  res;
     }
 
     /**

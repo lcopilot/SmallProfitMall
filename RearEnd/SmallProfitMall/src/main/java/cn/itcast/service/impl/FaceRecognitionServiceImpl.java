@@ -179,24 +179,20 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
             //语言验证id
             String sessionId = humanFaceUtil.voiceDetection();
             //视频活体检测
-            String videoValidation = humanFaceUtil.videoValidation(sessionId, faceVideo);
-            System.out.println("--------活体检测分数---------");
-            System.out.println(videoValidation);
-            System.out.println("--------------------");
-            Map videoValidationMap = (Map) JSON.parse(String.valueOf(videoValidation));
+            JSONObject videoValidation = humanFaceUtil.videoValidation(sessionId, faceVideo);
             //取是否成功属性
-            String videoValidationMapRedis= (String) videoValidationMap.get("error_msg");
+            String videoValidationMapRedis= videoValidation.getString("error_msg");
              //判断是否成功
             if (!videoValidationMapRedis.equals(AERROR_MSG)) {
                 JSONObject videoError = new JSONObject();
-                videoError.put("error_code", videoValidationMap.get("error_code"));
+                videoError.put("error_code", videoValidation.getInt("error_code"));
                 return  videoError.toString(2);
             }else {
                 //视频活体检测可信度值属性
                 String score="score";
-                Map result = (Map) videoValidationMap.get("result");
+                JSONObject result = videoValidation.getJSONObject("result");
                 //活体分值 小于0.88 返回不成功
-                if (Double.parseDouble(result.get(score).toString())<CREDIT){
+                if (result.getInt(score)<CREDIT){
                     JSONObject videoError = new JSONObject();
                     videoError.put("error_code",ERROR_CODE);
                     return videoError.toString();
