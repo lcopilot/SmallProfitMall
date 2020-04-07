@@ -335,6 +335,7 @@ public class OrderServiceImpl implements OrderService {
 
         //将购物车商品新增设置到订单中
         for (Integer shoppingCartIds : shoppingCartIdList){
+            //查询购物车集合
             List<ShoppingCart> shoppingCart= shoppingCartDao.findShoppingCart(null,shoppingCartIds);
             ShoppingCart shoppingCart1 = shoppingCart.get(0);
             PurchaseInformation purchaseInformation1 =  shoppingCartDao.findByPid(shoppingCart1.getProductId());
@@ -388,7 +389,7 @@ public class OrderServiceImpl implements OrderService {
             email=AesEncryptUtil.desEncrypt(email);
             String[] msg = {email,"您已成功购买商品"};
             //消息中间件推送
-            shoppingProducer.sendDeleteCart("shopping",msg);
+            shoppingProducer.sendShoppingInformation("shopping",msg);
             return 1;
         }else {
             return 2;
@@ -402,50 +403,9 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public Integer notificationUser(Order order) throws Exception {
-        //添加商品信息
-        order.setProductContents(orderDao.fendOrderProduct(order.getOrderId()));
-        String stringOrderJson=JSONObject.toJSONString(order);
-        //添加订单消息内容
-        News news = new News();
-        //设置用户id
-        news.setUserId(order.getUserId());
-        //设置消息状态
-        news.setNewsStatus("1");
-        //设置消息发送者 4为订单助手
-        news.setSenderId(4);
-        //设置消息种类
-        news.setNewsType(4);
-        //设置消息发送时间
-        news.setNewsTime(new Date());
-        //消息内容订单对象转StringJson
-        news.setNewsContent(stringOrderJson);
-        //设置消息标题
-        news.setTitle("确认订单消息");
-        //设置消息标志位
-        news.setSign(false);
-        //设置消息简介
-        news.setIntroduction("消息简介");
-        //新增消息
-         newsDao.addNews(news);
-
-
-
-
-        //查询当前消息
-        News orderNews = newsDao.fenNewsById(news.getContentId());
-        List<News> newsList =new ArrayList();
-        newsList.add(orderNews);
-        for (int i = 0; i <newsList.size() ; i++) {
-            //转换消息内容为JSON
-            newsList.get(i).setNewsContentJson(JSONObject.parseObject(newsList.get(i).getNewsContent()));;
-            newsList.get(i).setNewsContent(null);
-        }
-
-        //未读消息数量
-        Integer unreadQuantity =  newsService.unreadQuantity(order.getUserId());
-        //推送消息
-        Integer results = newsService.pushNews(newsList,unreadQuantity);
-        return results;
+        //消息中间件推送
+        shoppingProducer.sendShoppingInformation("news",order);
+        return 1;
     }
 
 

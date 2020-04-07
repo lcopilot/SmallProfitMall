@@ -38,8 +38,6 @@ public class Order implements Serializable {
     private String orderNote;
     //订单总计
     private BigDecimal orderTotal;
-    //用户地址地址
-    private Address Address;
 
 
     //是否发货
@@ -49,12 +47,10 @@ public class Order implements Serializable {
     //商品信息
     List<ProductContent> productContents;
 
-    /**
-     * 订单状态  1代表未支付 2代表已支付
-     */
+    //订单状态  1代表未支付 2代表已支付
     private Integer orderState;
-
     //返回订单地点
     public OrderAddress orderAddress;
-
+    //用户地址地址
+    private Address address;
 }
