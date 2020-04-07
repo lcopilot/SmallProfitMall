@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header>
-      <Header></Header>
+      <Header :key="header"></Header>
     </el-header>
     <el-main>
       <el-row :gutter="20">
@@ -15,10 +15,10 @@
                                placement="bottom-start">
                     <svg-icon name="filtrate" v-show="!isFilter"/>
                     <span v-show="isFilter">
-                      <svg-icon name="close" @click.native="closeFilter"/>
+                      <svg-icon name="close" @click.native="closeFilter()"/>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item @click.native="readOnly(0)">仅已读</el-dropdown-item>
+<!--                      <el-dropdown-item @click.native="readOnly(0)">仅已读</el-dropdown-item>-->
                       <el-dropdown-item @click.native="readOnly(1)">仅未读</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
@@ -29,15 +29,16 @@
                       {{filterContent}}<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item @click.native="readOnly(0)" v-if="filterContent=='仅未读'">
+                      <!--<el-dropdown-item @click.native="readOnly(0)" v-if="filterContent=='仅未读'">
                         仅已读
-                      </el-dropdown-item>
+                      </el-dropdown-item> -->
                       <el-dropdown-item @click.native="readOnly(1)" v-if="filterContent=='仅已读'">
                         仅未读
                       </el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
-                  <div class="message_list_header_div1" title="查看未读消息" v-if="unreadQuantity>0"><span>{{unreadQuantity}}</span>&nbsp;条未读
+                  <div class="message_list_header_div1" title="查看未读消息" v-if="unreadQuantity>0">
+                    <span>{{unreadQuantity}}</span>&nbsp;条未读
                   </div>
                   <div class="message_list_header_div2" v-if="unreadQuantity>0">
                     <el-button type="text" size="mini" @click.native="haveRead(0)">全标已读</el-button>
@@ -60,7 +61,8 @@
                           <el-col :span="14">
                             <div style="text-align: left;">
                               <div>
-                                <div :class="message.newsStatus==1?'message_list_preview_div1_div1':''">
+                                <div
+                                    :class="message.newsStatus==1?'message_list_preview_div1_div1':''">
                                 </div>
                                 <div
                                     :class="message.newsStatus==1?'message_list_preview_div1_div2':''">
@@ -90,36 +92,67 @@
                 </div>
               </el-col>
               <el-col :span="17" class="message_content_div">
+                <div  v-if="productList.length==0">
+                  <svg-icon name="messageBack" style="width: 200px;height: 200px;margin-top: 20%"></svg-icon>
+                </div>
                 <div class="message_list_div message_list" v-if="productList.length!=0">
                   <el-card>
                     <div slot="header">
-                      <div style="text-align: left">确认订单</div>
+                      <div class="message_order_header">尊敬的微利会员, 请您核对订单信息</div>
                     </div>
                     <div>
-                      <div>
-                        <div style="width: 25%;float: left" v-for="product in productList">
+                      <div v-for="product in productList" class="message_order_product">
+                        <el-row :gutter="10">
+                          <el-col :span="8">
+                            <div class="message_order_product_img">
+                              <el-image :src="product.productImage" fit="fill"></el-image>
+                            </div>
+                          </el-col>
+                          <el-col :span="16">
+                            <div class="message_order_product_name">
+                              {{product.productName}}
+                            </div>
+                            <div class="message_order_product_price">
+                              <span>共{{product.productQuantity}}商品; </span>
+                              <span> 合计￥{{((((product.productPrice)*100)*product.productQuantity)/100).toFixed(2)}}</span>
+                            </div>
+                          </el-col>
+                        </el-row>
+                      </div>
+                      <div v-if="productList.length%2==1" style="visibility:hidden;height:105px;"
+                           class="message_order_product">
+                        商品数量是奇数是补上一个
+                      </div>
+                      <div class="message_order_address">
+                        <div>
                           <el-row>
-                            <el-col :span="10">
-                              <el-image :src="product.productImage"></el-image>
-                            </el-col>
-                            <el-col :span="14">
-                              <div class="message_list_preview_div">
-                                {{product.productName}}
-                              </div>
+                            <el-col :span="2"> 姓名:</el-col>
+                            <el-col :span="20"> {{orderAddress.name}}</el-col>
+                          </el-row>
+                        </div>
+                        <div>
+                          <el-row>
+                            <el-col :span="2"> 电话:</el-col>
+                            <el-col :span="20"> {{orderAddress.phone}}</el-col>
+                          </el-row>
+                        </div>
+                        <div>
+                          <el-row>
+                            <el-col :span="2"> 地址:</el-col>
+                            <el-col :span="20">
+                              {{orderAddress.areas+orderAddress.detailedAddress}}
                             </el-col>
                           </el-row>
                         </div>
                       </div>
-                      <div style="text-align: left;margin-right:-5%;float:right;padding: 2%;width: 100%;">
-                        {{orderAddress.name}} {{orderAddress.areas+orderAddress.detailedAddress}} {{orderAddress.phone}}
-                      </div>
-                      <div style="text-align: right;margin-right:5%;float:right;padding: 2%;width: 100%;margin-bottom: 5%">
+                      <div class="message_order_btn">
+                        <el-button round size="mini" plain>修改</el-button>
                         <el-button round size="mini" type="primary">确认</el-button>
-                        <el-button round size="mini" type="primary">转人工</el-button>
                       </div>
                     </div>
                   </el-card>
                 </div>
+                <div></div>
               </el-col>
             </el-row>
           </el-card>
@@ -165,7 +198,9 @@
         //订单商品列表
         productList: [],
         //订单地址
-        orderAddress:{},
+        orderAddress: {},
+        //重载头部组件
+        header: '',
       }
     },
     methods: {
@@ -233,9 +268,7 @@
       },
       //关闭筛选
       closeFilter() {
-        this.messagePaging.state = 2;
-        this.isFilter = false;
-        this.messageList = this.messageArr;
+        this.reload();
       },
       //接收后端消息推送
       receiveMessages(msg) {
@@ -250,8 +283,8 @@
           this.messageList.forEach((message) => {
             message.sign = false;
           });
-          this.productList=this.messageList[index].newsContentJson.productContents;
-          this.orderAddress=this.messageList[index].newsContentJson.orderAddress;
+          this.productList = this.messageList[index].newsContentJson.productContents;
+          this.orderAddress = this.messageList[index].newsContentJson.orderAddress;
           this.messageList[index].sign = true;
           if (this.messageList[index].newsStatus == 1) {
             this.haveRead(this.messageList[index].contentId, index);
@@ -266,9 +299,11 @@
               console.log(contentId);
               this.messageList[index].newsStatus = 0;
               this.unreadQuantity--;
+              sessionStorage.setItem("unreadQuantity", this.unreadQuantity);
+              this.header=new Date();
             } else if (contentId == 0) {
-              sessionStorage.setItem("unreadQuantity", '0');
-              this.reload();
+              sessionStorage.setItem("unreadQuantity", this.unreadQuantity);
+              this.header=new Date();
             }
           }
         })
@@ -284,6 +319,52 @@
 <style scoped>
   .message_filter_dp {
     margin-left: -3%;
+  }
+
+  .message_order_product {
+    width: 48%;
+    float: left;
+    padding: 2%;
+    background-color: #EBEEF5;
+    border-radius: 5px;
+    margin: 1%
+  }
+
+  .message_order_product_img {
+    width: 70%;
+    margin:5% 0 0 15%;
+  }
+
+  .message_order_product_name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    margin-top: 6%
+  }
+
+  .message_order_product_price {
+    font-size: 13px;
+    color: #999999;
+    text-align: left;
+    margin-left: 3%
+  }
+
+  .message_order_address {
+    text-align: left;
+    font-size: 16px;
+    margin-left: 5%;
+    padding: 2%;
+    width: 100%;
+  }
+
+  .message_order_btn {
+    text-align: right;
+    margin-right: 5%;
+    float: right;
+    padding: 2%;
+    width: 100%;
+    margin-bottom: 5%
   }
 
   .message_list_preview_div1_div1 {
@@ -418,6 +499,11 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 100%
+  }
+
+  .message_order_header {
+    text-align: left;
+    font-weight: 600;
   }
 
   .message_list_preview_div2 {
