@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header>
-      <Header :key="header"></Header>
+      <Header ref="header"></Header>
     </el-header>
     <el-main>
       <el-row :gutter="20">
@@ -18,7 +18,7 @@
                       <svg-icon name="close" @click.native="closeFilter()"/>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-<!--                      <el-dropdown-item @click.native="readOnly(0)">仅已读</el-dropdown-item>-->
+                      <!--                      <el-dropdown-item @click.native="readOnly(0)">仅已读</el-dropdown-item>-->
                       <el-dropdown-item @click.native="readOnly(1)">仅未读</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
@@ -92,20 +92,21 @@
                 </div>
               </el-col>
               <el-col :span="17" class="message_content_div">
-                <div  v-if="productList.length==0">
-                  <svg-icon name="messageBack" style="width: 200px;height: 200px;margin-top: 20%"></svg-icon>
+                <div v-if="productList.length==0">
+                  <svg-icon name="messageBack"
+                            style="width: 200px;height: 200px;margin-top: 20%"></svg-icon>
                 </div>
                 <div class="message_list_div message_list" v-if="productList.length!=0">
                   <el-card>
                     <div slot="header">
                       <div class="message_order_header">尊敬的微利会员, 请您核对订单信息</div>
                     </div>
-                    <div>
+                    <div  class="message_order">
                       <div v-for="product in productList" class="message_order_product">
                         <el-row :gutter="10">
                           <el-col :span="8">
                             <div class="message_order_product_img">
-                              <el-image :src="product.productImage" fit="fill"></el-image>
+                              <el-image  :src="product.productImage" fit="fill"></el-image>
                             </div>
                           </el-col>
                           <el-col :span="16">
@@ -146,7 +147,7 @@
                         </div>
                       </div>
                       <div class="message_order_btn">
-                        <el-button round size="mini" plain>修改</el-button>
+                        <el-button round size="mini" plain @click="checkOrder">修改</el-button>
                         <el-button round size="mini" type="primary">确认</el-button>
                       </div>
                     </div>
@@ -199,8 +200,8 @@
         productList: [],
         //订单地址
         orderAddress: {},
-        //重载头部组件
-        header: '',
+        //订单号
+        orderNumber: '',
       }
     },
     methods: {
@@ -237,6 +238,7 @@
             this.messageList = this.messageList.concat(res.page.news); //因为每次后端返回的都是数组，所以这边把数组拼接到一起
             this.messagePaging.totalPage = res.page.totalPage;
             this.unreadQuantity = res.page.unreadQuantity;
+            this.$refs.header.unreadQuantity = this.unreadQuantity;
             if (this.unreadQuantity == 0) {
               sessionStorage.setItem("unreadQuantity", this.unreadQuantity);
             }
@@ -285,6 +287,7 @@
           });
           this.productList = this.messageList[index].newsContentJson.productContents;
           this.orderAddress = this.messageList[index].newsContentJson.orderAddress;
+          this.orderNumber = this.messageList[index].newsContentJson.orderId;
           this.messageList[index].sign = true;
           if (this.messageList[index].newsStatus == 1) {
             this.haveRead(this.messageList[index].contentId, index);
@@ -300,13 +303,23 @@
               this.messageList[index].newsStatus = 0;
               this.unreadQuantity--;
               sessionStorage.setItem("unreadQuantity", this.unreadQuantity);
-              this.header=new Date();
+              this.$refs.header.unreadQuantity = this.unreadQuantity;
             } else if (contentId == 0) {
               sessionStorage.setItem("unreadQuantity", this.unreadQuantity);
-              this.header=new Date();
+              this.reload();
             }
           }
         })
+      },
+      //查看订单
+      checkOrder() {
+        this.$router.push({
+          name: "Order",
+          params: {
+            orderNumber: this.orderNumber,
+            isShow:true,
+          }
+        });
       },
     },
     created() {
@@ -332,7 +345,7 @@
 
   .message_order_product_img {
     width: 70%;
-    margin:5% 0 0 15%;
+    margin: 5% 0 0 15%;
   }
 
   .message_order_product_name {
@@ -366,7 +379,9 @@
     width: 100%;
     margin-bottom: 5%
   }
-
+  .message_order:hover{
+    cursor:pointer;
+  }
   .message_list_preview_div1_div1 {
     width: 10px;
     height: 10px;

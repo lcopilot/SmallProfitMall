@@ -59,7 +59,8 @@
                         </el-col>
                         <el-col :span="2">
                           <div class="orders_address">
-                            <el-tooltip class="item" effect="dark" :content="address.name" placement="top">
+                            <el-tooltip class="item" effect="dark" :content="address.name"
+                                        placement="top">
                               <a>
                                 {{address.name}}
                               </a>
@@ -68,7 +69,9 @@
                         </el-col>
                         <el-col :span="13">
                           <div class="orders_address">
-                            <el-tooltip class="item" effect="dark" :content="address.areas+' '+address.detailedAddress" placement="top">
+                            <el-tooltip class="item" effect="dark"
+                                        :content="address.areas+' '+address.detailedAddress"
+                                        placement="top">
                               <a>
                                 {{address.areas+' '+address.detailedAddress}}
                               </a>
@@ -246,7 +249,8 @@
           @close="paymentPassword=''"
           width="30%" center>
         <el-input :placeholder="orderData.paymentPassword?'请输入支付密码':'请输入您要设置的支付密码'"
-                  v-model="paymentPassword" maxlength="6" show-password @keyup.enter.native="verifyPaymentPassword()"></el-input>
+                  v-model="paymentPassword" maxlength="6" show-password
+                  @keyup.enter.native="verifyPaymentPassword()"></el-input>
         <span slot="footer" class="dialog-footer">
                       <el-button type="primary" @click="verifyPaymentPassword()">确 定</el-button>
                     </span>
@@ -374,14 +378,14 @@
           if (res.success) {
             this.$refs.face.faceAnimation = "http://img.fhxasdsada.xyz/afterRecognition.gif";
             this.$refs.face.stopNavigator();
-            this.$refs.face.collectionPrompt='';
+            this.$refs.face.collectionPrompt = '';
             setTimeout(() => {
-                this.settlementOrder();
+              this.settlementOrder();
               //跳转支付成功页面
             }, 2500)
             // this.settlementOrder();
           } else {
-            if (res.faceRecognition.result.error_code==32000){
+            if (res.faceRecognition.result.error_code == 32000) {
               this.$message({
                 message: "刷脸支付失败",
                 type: "warning"
@@ -389,7 +393,7 @@
               this.$refs.face.stopNavigator();
               return this.$refs.face.faceVisible = false;
             }
-            if (res.faceRecognition.result.error_code==17){
+            if (res.faceRecognition.result.error_code == 17) {
               this.$message({
                 message: "服务器跑路了,请稍后重试!",
                 type: "warning"
@@ -407,7 +411,7 @@
         let order = {
           userId: sessionStorage.getItem("uId"),
           orderId: this.orderNumber,
-          orderAddress: this.orderAddress,
+          address: this.orderAddress,
           orderNote: this.ordersNote,
           deliveryTime: this.deliveryTime,
           paymentWay: this.paymentMethod,
@@ -418,17 +422,17 @@
             this.$router.push({
               path: "/orderComplete"
             });
-          }else {
+          } else {
             if (res.code == 40000) {
               this.$notify({
                 title: '余额不足',
                 message: '您的钱包余额不足,请更换支付方式',
                 type: 'warning',
               });
-              if (this.orderData.faceRecognition){
+              if (this.orderData.faceRecognition) {
                 this.$refs.face.stopNavigator();
                 this.$refs.face.faceVisible = false;
-              }else {
+              } else {
                 this.paymentPasswordVisible = false;
                 this.paymentPassword = '';
               }
@@ -440,12 +444,12 @@
       getAddress(addressList) {
         this.addressList = addressList;
         addressList.forEach((address) => {
-          if (address.defaults) {
+          if (address.defaults && this.orderAddress == {}) {
             return this.orderAddress = address;
           }
         });
-        if (!this.orderAddress.name){
-          this.orderAddress=addressList[0];
+        if (!this.orderAddress.name) {
+          this.orderAddress = addressList[0];
         }
       },
       //模糊处理手机号
@@ -463,17 +467,36 @@
           }
         })
       },
+      //获取结算完成订单数据
+      getOrderComplete() {
+        ordersApi.getOrderComplete(sessionStorage.getItem("uId"), this.orderNumber).then(res => {
+              if (res.success) {
+                console.log(res)
+                this.orderData = res.queryResult.list[0];
+                this.orderAddress=res.queryResult.list[0].orderAddress;
+                this.orderProductList = res.queryResult.list[0].productContents;
+              }
+            }
+        )
+      },
     },
     created() {
       if (this.$route.params.orderNumber != null) {
         sessionStorage.setItem("orderNumber", this.$route.params.orderNumber);
       }
       this.orderNumber = sessionStorage.getItem("orderNumber");
+      if (this.$route.params.isShow) {
+        sessionStorage.setItem("isShow", this.$route.params.isShow);
+      }
+      if (sessionStorage.getItem("isShow")=="true"){
+        return this.getOrderComplete();
+      }
       this.getOrder();
     },
     //页面关闭时销毁
     beforeDestroy() {
       sessionStorage.setItem("orderNumber", '');
+      sessionStorage.setItem("isShow", '');
     }
   }
 </script>

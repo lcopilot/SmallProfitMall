@@ -12,3 +12,7 @@ export const getOrder=(userId,orderNumber)=>{
 export  const settlementOrder=order=>{
   return http.requestPost('apiUrl/OrderController/confirmOrder',order)
 };
+//获取结算完成订单数据
+export  const getOrderComplete=(userId,orderId)=>{
+  return http.requestGet('apiUrl/OrderController/findDetailedOrder/'+userId+'/'+orderId)
+};
