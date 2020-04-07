@@ -63,6 +63,14 @@ public interface OrderService {
      */
     public Integer confirmOrder(Order order) throws Exception;
 
+
+    /**
+     * 查询订单详细
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @return 订单对象
+     */
+    public Order findDetailedOrder(String userId,String orderId);
     /**
      * 生成订单号 时间戳加当天流水号
      * 取当天最后一笔订单的流水号加一

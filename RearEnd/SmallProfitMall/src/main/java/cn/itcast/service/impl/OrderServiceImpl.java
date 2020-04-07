@@ -98,9 +98,9 @@ public class OrderServiceImpl implements OrderService {
         //初始购物车id
         Integer[] initialize=shoppingCartId;
         //将购物车中商品信息添加到订单商品信息 返回总价格
-        BigDecimal orderNotes = addProduct(initialize,orderId);
+        BigDecimal orderTotes = addProduct(initialize,orderId);
         //设置总计
-        order.setOrderTotal(orderNotes);
+        order.setOrderTotal(orderTotes);
         //设置用户id
         order.setUserId(userId);
         //设置订单时间
@@ -160,6 +160,8 @@ public class OrderServiceImpl implements OrderService {
         order.setUserId(purchaseInformation.getUserId());
         //设置订单时间
         order.setOrderTime(new Date());
+        //订单状态 1代表未付款
+        order.setOrderState(1);
         //设置订单号
         order.setOrderId(orderId);
         //数据库新增
@@ -217,7 +219,6 @@ public class OrderServiceImpl implements OrderService {
         }
         //查询用户人脸toke
         AccountSettings accountSettings = accountSettingsDao.findAccountSettings(userId);
-        System.out.println(accountSettings);
         String results = faceRecognitionService.faceCheck(accountSettings.getFaceToken(),image);
         if (!result.equals(results)){
             return results;
@@ -259,10 +260,12 @@ public class OrderServiceImpl implements OrderService {
                 memberDao.updateBalance(order.getUserId(),balances);
                 //修改订单状态 2为确认订单
                 order.setOrderState(2);
+                //设置付款时间
+                order.setPaymentTime(new Date());
                 //确认订单
                 orderDao.confirmOrder(order);
                 //转换地址
-                Address address = addressService.defaults(order.getOrderAddress());
+                Address address = addressService.ordersDefaults(order.getOrderAddress());
                 //添加订单地址
                 orderDao.addOrdeAddress(order.getOrderId(),address);
                 //邮件通知
@@ -275,6 +278,18 @@ public class OrderServiceImpl implements OrderService {
         }
 
        return result;
+    }
+
+    /**
+     * 查询详细订单
+     * @param userId 用户id
+     * @param orderId 订单号
+     * @return 订单对象
+     */
+    @Override
+    public Order findDetailedOrder(String userId, String orderId){
+        Order order = orderDao.findDetailedOrder(userId,orderId);
+        return order;
     }
 
 
@@ -390,7 +405,7 @@ public class OrderServiceImpl implements OrderService {
         //添加商品信息
         order.setProductContents(orderDao.fendOrderProduct(order.getOrderId()));
         String stringOrderJson=JSONObject.toJSONString(order);
-        //推送消息
+        //添加订单消息内容
         News news = new News();
         //设置用户id
         news.setUserId(order.getUserId());
@@ -412,19 +427,26 @@ public class OrderServiceImpl implements OrderService {
         news.setIntroduction("消息简介");
         //新增消息
          newsDao.addNews(news);
+
+
+
+
         //查询当前消息
-        News news2 = newsDao.fenNewsById(news.getContentId());
-        List<News> news1 =new ArrayList();
-        news1.add(news2);
-        for (int i = 0; i <news1.size() ; i++) {
+        News orderNews = newsDao.fenNewsById(news.getContentId());
+        List<News> newsList =new ArrayList();
+        newsList.add(orderNews);
+        for (int i = 0; i <newsList.size() ; i++) {
             //转换消息内容为JSON
-            news1.get(i).setNewsContentJson(JSONObject.parseObject(news1.get(i).getNewsContent()));;
-            news1.get(i).setNewsContent(null);
+            newsList.get(i).setNewsContentJson(JSONObject.parseObject(newsList.get(i).getNewsContent()));;
+            newsList.get(i).setNewsContent(null);
         }
 
         //未读消息数量
         Integer unreadQuantity =  newsService.unreadQuantity(order.getUserId());
-        Integer results = newsService.pushNews(news1,unreadQuantity);
+        //推送消息
+        Integer results = newsService.pushNews(newsList,unreadQuantity);
         return results;
     }
+
+
 }

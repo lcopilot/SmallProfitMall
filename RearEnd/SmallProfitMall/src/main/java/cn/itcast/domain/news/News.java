@@ -39,14 +39,14 @@ public class News  implements Serializable {
     //消息标题
     private String title;
     //消息简介
-    private String Introduction;
+    private String introduction;
 
     public String getIntroduction() {
-        return Introduction;
+        return introduction;
     }
 
     public void setIntroduction(String introduction) {
-        Introduction = introduction;
+        this.introduction = introduction;
     }
 
     public JSONObject getNewsContentJson() {

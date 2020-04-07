@@ -129,4 +129,21 @@ public class AddressServiceImpl implements AddressService {
         address.setAreaCodes(areaCode);
         return address;
     }
+
+    /**
+     * 订单转换地址格式
+     * @param address
+     * @return
+     */
+    @Override
+    public Address ordersDefaults(Address address){
+        //存储区域代码格式转换
+        String[] areaCodes=address.getAreaCode();
+        String areaCode="";
+        for (String s : areaCodes){
+            areaCode = areaCode+s+",";
+        }
+        address.setAreaCodes(areaCode);
+        return address;
+    }
 }

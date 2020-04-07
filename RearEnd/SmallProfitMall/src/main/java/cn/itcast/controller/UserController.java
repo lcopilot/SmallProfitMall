@@ -82,14 +82,17 @@ public class UserController {
 			return new QueryResponseResult(CommonCode.nameError, null);
 		}
 
-
-		if (user == null && user.getPassword() == null) { //判断用户输入是否完整
-			return new QueryResponseResult(CommonCode.FAIL, null); //用户输入信息不完整
+			//判断用户输入是否完整
+		if (user == null && user.getPassword() == null) {
+			//用户输入信息不完整
+			return new QueryResponseResult(CommonCode.FAIL, null);
 		}
 
 		User users= userService.findAccount(user);
-		if (users == null) {  //判断用户是否存在
-			return new QueryResponseResult(CommonCode.FAIL, null); //用户不存在
+		//判断用户是否存在
+		if (users == null) {
+			//用户不存在
+			return new QueryResponseResult(CommonCode.FAIL, null);
 		}
 		String password=AesEncryptUtil.desEncrypt(users.getPassword());
 		if (password.equals(user.getPassword())) {
@@ -97,9 +100,11 @@ public class UserController {
 			Login login=userService.findLogin(users);
 			List<Login> logins = Arrays.asList(login);
 			queryResult.setList(logins);
-			return new QueryResponseResult(CommonCode.SUCCESS, queryResult);   //登录成功
+			//登录成功
+			return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
 		} else {
-			return new QueryResponseResult(CommonCode.FAIL, null);//密码不正确
+			//密码不正确
+			return new QueryResponseResult(CommonCode.FAIL, null);
 		}
 	}
 

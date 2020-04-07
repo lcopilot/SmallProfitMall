@@ -29,6 +29,14 @@ public interface OrderDao {
     public Order findOrder(@Param("userId")String userId , @Param("orderId")String orderId);
 
     /**
+     * 查询指定订单信息详情
+     * @param userId
+     * @param orderId
+     * @return
+     */
+    public Order findDetailedOrder(@Param("userId")String userId , @Param("orderId")String orderId);
+
+    /**
      * 新增订单商品
      * @param productContent
      * @return
