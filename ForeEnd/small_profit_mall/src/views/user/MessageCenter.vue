@@ -286,7 +286,7 @@
             message.sign = false;
           });
           this.productList = this.messageList[index].newsContentJson.productContents;
-          this.orderAddress = this.messageList[index].newsContentJson.orderAddress;
+          this.orderAddress = this.messageList[index].newsContentJson.address;
           this.orderNumber = this.messageList[index].newsContentJson.orderId;
           this.messageList[index].sign = true;
           if (this.messageList[index].newsStatus == 1) {
@@ -379,9 +379,7 @@
     width: 100%;
     margin-bottom: 5%
   }
-  .message_order:hover{
-    cursor:pointer;
-  }
+
   .message_list_preview_div1_div1 {
     width: 10px;
     height: 10px;
