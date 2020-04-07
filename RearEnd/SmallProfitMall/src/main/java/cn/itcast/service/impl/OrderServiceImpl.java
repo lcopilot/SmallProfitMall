@@ -265,7 +265,7 @@ public class OrderServiceImpl implements OrderService {
                 //确认订单
                 orderDao.confirmOrder(order);
                 //转换地址
-                Address address = addressService.ordersDefaults(order.getOrderAddress());
+                Address address = addressService.ordersDefaults(order.getAddress());
                 //添加订单地址
                 orderDao.addOrdeAddress(order.getOrderId(),address);
                 //邮件通知

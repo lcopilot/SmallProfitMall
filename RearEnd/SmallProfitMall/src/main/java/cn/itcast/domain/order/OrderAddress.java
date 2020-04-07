@@ -1,11 +1,13 @@
 package cn.itcast.domain.order;
 
+import java.io.Serializable;
+
 /**
  * 订单对象实体类
  * @author Kite
  * @date 2020/4/7
  */
-public class OrderAddress {
+public class OrderAddress implements Serializable {
     private String userId;
     private String orderId;
     private String name;
