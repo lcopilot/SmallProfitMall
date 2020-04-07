@@ -239,7 +239,7 @@ public class OrderServiceImpl implements OrderService {
         if (order.getPaymentWay().equals(1)){
             //用户余额
             String encryptionBalance =  memberDao.findBalance(order.getUserId());
-            //从session获取订单总计
+            //获取订单总计
             String totals = totals=orderDao.fenOrderTotal(order.getUserId(),order.getOrderId());
             //解密余额
             String decodeBalances = AesEncryptUtil.desEncrypt(encryptionBalance);

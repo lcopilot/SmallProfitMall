@@ -22,7 +22,7 @@
 <!--                <result property="code" column="code"></result>-->
 <!--            </collection>-->
 <!--        </resultMap>-->
-    <!--查询用户消息-->
+    <!--查询历史消息-->
     <select id="fendNews" resultType="cn.itcast.domain.news.News">
         SELECT
             ns.senderName,ns.senderAvatar,nc.*
@@ -66,9 +66,9 @@
     <!--新增消息-->
     <insert id="addNews" parameterType="cn.itcast.domain.news.News" useGeneratedKeys="true" keyProperty="contentId" keyColumn="contentId">
         INSERT INTO
-           newsContent(senderId,userId,newsContent,newsType,sign,title,newsTime,newsStatus)
+           newsContent(senderId,userId,newsContent,newsType,sign,title,newsTime,newsStatus,introduction)
         VALUES
-            (#{senderId},#{userId},#{newsContent},#{newsType},#{sign},#{title},#{newsTime},#{newsStatus})
+            (#{senderId},#{userId},#{newsContent},#{newsType},#{sign},#{title},#{newsTime},#{newsStatus},#{introduction})
     </insert>
     <!--查询指定消息-->
     <select id="fenNewsById" parameterType="java.lang.Integer" resultType="cn.itcast.domain.news.News">

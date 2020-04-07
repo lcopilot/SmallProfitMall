@@ -56,7 +56,6 @@ public class OrderPushNews {
         news.setIntroduction("消息简介");
         //新增消息
         newsDao.addNews(news);
-
         //查询当前消息
         News orderNews = newsDao.fenNewsById(news.getContentId());
         List<News> newsList =new ArrayList();
@@ -66,10 +65,9 @@ public class OrderPushNews {
             newsList.get(i).setNewsContentJson(JSONObject.parseObject(newsList.get(i).getNewsContent()));;
             newsList.get(i).setNewsContent(null);
         }
-
         //未读消息数量
         Integer unreadQuantity =  newsService.unreadQuantity(order.getUserId());
         //推送消息
-        Integer results = newsService.pushNews(newsList,unreadQuantity);
+       newsService.pushNews(newsList,unreadQuantity);
     }
 }

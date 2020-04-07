@@ -63,7 +63,7 @@
 
   <!--监听推送消息队列-->
   <rabbit:listener-container connection-factory="connectionFactory">
-    <rabbit:listener ref="orderPushNews" method="orderPushNews" queue-names="SHOPPING-NOTIFICATION-QUEUE"/>
+    <rabbit:listener ref="orderPushNews" method="orderPushNews" queue-names="SHOPPING-NEWS-QUEUE"/>
   </rabbit:listener-container>
 
   <!-- 声明多个消费者对象 -->
