@@ -44,6 +44,10 @@
         <result property="orderNote" column="orderNote"></result>
         <result property="orderTotal" column="orderTotal"></result>
         <result property="orderState" column="orderState"></result>
+
+        <association property="orderAddress" resultMap="orderAddressMap" javaType="cn.itcast.domain.order.OrderAddress">
+
+        </association>
         <!-- 配置商品集合的映射 -->
         <collection property="productContents" ofType="cn.itcast.domain.order.ProductContent">
             <id property="id" column="ids"></id>
@@ -57,6 +61,16 @@
             <result property="evaluate" column="evaluate"></result>
         </collection>
 
+    </resultMap>
+
+    <resultMap id="orderAddressMap" type="cn.itcast.domain.order.OrderAddress">
+        <!--配置地址一对一映射-->
+            <id property="orderId" column="orderId"></id>
+            <result property="name" column="name"></result>
+            <result property="alias" column="alias"></result>
+            <result property="phone" column="phone"></result>
+            <result property="email" column="email"></result>
+            <result property="detailedAddress" column="detailedAddress"></result>
     </resultMap>
 
     <!--新增订单-->
@@ -103,24 +117,23 @@
     <select id="findDetailedOrder" resultMap="allOrderMap">
         SELECT
             uo.*,o.productName,
-            o.id AS ids,uo.orderState,
+            o.id AS ids,
             o.productImage,o.productPrice,o.productConfiguration,
             o.productQuantity,o.productWeight,o.evaluate,
-            oa.orderId AS orderIds,oa.`name`,oa.areas,oa.detailedAddress,oa.phone,oa.email,oa.areaCodes,oa.alias
+            oa.orderId AS orderIds,oa.name,oa.areas,oa.detailedAddress,oa.phone,oa.email
         FROM
             userOrder uo
         LEFT JOIN
             orders o
         ON
-            uo.orderId=o.orderId
-        LEFT JOIN
+            uo.orderId=o.orderId,
             orderAddress oa
-        ON
-            o.orderId=oa.orderId
         WHERE
             uo.userId=#{userId}
         AND
             uo.orderId=#{orderId}
+        AND
+             o.orderId=oa.orderId
     </select>
 
     <!--查询订单商品信息-->

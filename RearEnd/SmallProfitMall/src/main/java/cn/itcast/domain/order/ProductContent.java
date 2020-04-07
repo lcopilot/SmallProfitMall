@@ -1,10 +1,12 @@
 package cn.itcast.domain.order;
 
+import java.io.Serializable;
+
 /**
  * @author Kite
  * @date 2020/4/3
  */
-public class ProductContent {
+public class ProductContent implements Serializable {
     //id
     private int id;
     //订单id
