@@ -63,11 +63,10 @@
 
     </resultMap>
 
+    <!--配置地址映射-->
     <resultMap id="orderAddressMap" type="cn.itcast.domain.order.OrderAddress">
-        <!--配置地址一对一映射-->
             <id property="orderId" column="orderId"></id>
             <result property="name" column="name"></result>
-            <result property="alias" column="alias"></result>
             <result property="phone" column="phone"></result>
             <result property="email" column="email"></result>
             <result property="areas" column="areas"></result>
