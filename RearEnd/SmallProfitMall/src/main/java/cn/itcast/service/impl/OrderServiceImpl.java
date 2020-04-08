@@ -406,7 +406,10 @@ public class OrderServiceImpl implements OrderService {
     public Integer notificationUser(Order order) throws Exception {
         String orderJson = JSONObject.toJSONString(order);
         JSONObject jsonObject =JSONObject.parseObject(orderJson);
+         //消息中间件推送
+        shoppingProducer.sendShoppingInformation("news",jsonObject);
         Order orders =JSONObject.toJavaObject(jsonObject, Order.class);
+
         //添加商品信息
         orders.setProductContents(orderDao.fendOrderProduct(orders.getOrderId()));
         String stringOrderJson= JSONObject.toJSONString(orders);
@@ -432,7 +435,8 @@ public class OrderServiceImpl implements OrderService {
         news.setIntroduction("消息简介");
         //新增消息
         newsDao.addNews(news);
-
+        //查询订单消息
+        News orderNews = newsDao.fenNewsById(news.getContentId());
 
         News newsConsumptionRecords  = new News();
         //设置用户id
@@ -454,13 +458,20 @@ public class OrderServiceImpl implements OrderService {
 
         //设置支付通知的内容
         ConsumptionRecords consumptionRecords=new ConsumptionRecords();
+
+        //订单id
         consumptionRecords.setOrderId(orders.getOrderId());
+        //用户id
         consumptionRecords.setUserId(orders.getUserId());
+        //订单状态
         consumptionRecords.setPaymentStatus(1);
+        //消息类型
         consumptionRecords.setSenderId("3");
+        //支付时间
         consumptionRecords.setPaymentTime(new Date());
-        consumptionRecords.setProductName("滴滴");
+        //支付金额
         consumptionRecords.setPaymentAmount(orders.getOrderTotal());
+
         memberDao.addConsumptionRecords(consumptionRecords);
         ConsumptionRecords consumptionRecords1 = memberDao.findConsumptionRecords(orders.getUserId(),orders.getOrderId());
         String stringOrderJson1= JSONObject.toJSONString(consumptionRecords1);
@@ -468,8 +479,9 @@ public class OrderServiceImpl implements OrderService {
         newsDao.addNews(newsConsumptionRecords);
         List<News> newsList =new ArrayList();
         //查询订单消息
-        News orderNews = newsDao.fenNewsById(news.getContentId());
+        News consumptionRecordss = newsDao.fenNewsById(news.getContentId());
         newsList.add(orderNews);
+        newsList.add(consumptionRecordss);
         for (int i = 0; i <newsList.size() ; i++) {
             //转换消息内容为JSON
             newsList.get(i).setNewsContentJson(JSONObject.parseObject(newsList.get(i).getNewsContent()));;
@@ -480,8 +492,7 @@ public class OrderServiceImpl implements OrderService {
         //推送消息
         newsService.pushNews(newsList,unreadQuantity);
 
-//        //消息中间件推送
-        shoppingProducer.sendShoppingInformation("news",jsonObject);
+
         return 1;
     }
 

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -75,15 +76,15 @@ public class TestController {
         shoppingProducer.sendShoppingInformation("arrival",a);
     }
     @RequestMapping(value = "/asd",method = RequestMethod.GET)
-    public void asd(){
+    public QueryResponseResult asd(){
         News newsConsumptionRecords  = new News();
         //设置用户id
         newsConsumptionRecords .setUserId("asdas");
         //设置消息状态
         newsConsumptionRecords .setNewsStatus("1");
-        //设置消息发送者 4为订单助手
+        //设置消息发送者 3为零钱金额
         newsConsumptionRecords .setSenderId(3);
-        //设置消息种类
+        //设置消息种类 3
         newsConsumptionRecords .setNewsType(3);
         //设置消息发送时间
         newsConsumptionRecords .setNewsTime(new Date());
@@ -93,23 +94,28 @@ public class TestController {
         newsConsumptionRecords .setSign(false);
         //设置消息简介
         newsConsumptionRecords .setIntroduction("支付通知");
-
         //设置支付通知的内容
         ConsumptionRecords consumptionRecords=new ConsumptionRecords();
-        consumptionRecords.setOrderId("asdas");
-        consumptionRecords.setUserId("asdas");
+        consumptionRecords.setOrderId("133333");
+        consumptionRecords.setUserId("assdad");
         consumptionRecords.setPaymentStatus(1);
         consumptionRecords.setSenderId("3");
+        consumptionRecords.setPaymentAmount(new BigDecimal(10000));
         consumptionRecords.setPaymentTime(new Date());
-        consumptionRecords.setProductName("滴滴");
         memberDao.addConsumptionRecords(consumptionRecords);
-        ConsumptionRecords consumptionRecords1 = memberDao.findConsumptionRecords("asdas","asdas");
+        ConsumptionRecords consumptionRecords1 = memberDao.findConsumptionRecords("assdad","133333");
+        String a =JSONObject.toJSONString(consumptionRecords1);
         String stringOrderJson1= JSONObject.toJSONString(consumptionRecords1);
         newsConsumptionRecords.setNewsContent(stringOrderJson1);
         newsDao.addNews(newsConsumptionRecords);
         News orderNews2 = newsDao.fenNewsById(newsConsumptionRecords.getContentId());
-
+        JSONObject consumptionRecords2 =JSONObject.parseObject(stringOrderJson1);
+        orderNews2.setNewsContentJson(consumptionRecords2);
+        orderNews2.setNewsContent(null);
+        QueryResult queryResult = new QueryResult();
+        queryResult.setList(Arrays.asList(orderNews2));
         System.out.println(orderNews2);
+        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
     }
 
 //    @RequestMapping(value = "/wevSocket/{userId}/{msg}",method = RequestMethod.GET)

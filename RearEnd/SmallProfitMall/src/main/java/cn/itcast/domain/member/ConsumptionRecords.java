@@ -27,8 +27,6 @@ public class ConsumptionRecords implements Serializable {
     private BigDecimal paymentAmount;
     //收款者名字
     private String senderName;
-    //收款者头像
-     private String senderAvatar;
 
     public String getSenderName() {
         return senderName;
@@ -38,13 +36,6 @@ public class ConsumptionRecords implements Serializable {
         this.senderName = senderName;
     }
 
-    public String getSenderAvatar() {
-        return senderAvatar;
-    }
-
-    public void setSenderAvatar(String senderAvatar) {
-        this.senderAvatar = senderAvatar;
-    }
 
     public String getOrderId() {
         return orderId;

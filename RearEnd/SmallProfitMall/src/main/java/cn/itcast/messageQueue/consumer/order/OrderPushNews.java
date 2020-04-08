@@ -37,9 +37,9 @@ public class OrderPushNews {
     @Autowired
     MemberDao memberDao;
 
-    public void orderPushNews(JSONObject orderJson)throws Exception{
+    public void orderPushNews(JSONObject orderJson){
         System.out.println("-------------------------");
-        System.out.println(orderJson.toString());
+        System.out.println(orderJson);
         System.out.println("-------------------------");
 //        Order order =JSONObject.toJavaObject(orderJson, Order.class);
 //
