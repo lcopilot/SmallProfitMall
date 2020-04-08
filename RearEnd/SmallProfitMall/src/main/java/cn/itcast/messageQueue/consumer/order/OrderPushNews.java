@@ -5,6 +5,7 @@ import cn.itcast.dao.OrderDao;
 import cn.itcast.domain.news.News;
 import cn.itcast.domain.order.Order;
 import cn.itcast.service.NewsService;
+import cn.itcast.util.logic.ConversionJson;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,7 +31,9 @@ public class OrderPushNews {
     @Autowired
     NewsService newsService;
 
-    public void orderPushNews(Order order)throws Exception{
+    public void orderPushNews(JSONObject orderJson)throws Exception{
+        Order order =JSONObject.toJavaObject(orderJson, Order.class);
+
         //添加商品信息
         order.setProductContents(orderDao.fendOrderProduct(order.getOrderId()));
         String stringOrderJson= JSONObject.toJSONString(order);
