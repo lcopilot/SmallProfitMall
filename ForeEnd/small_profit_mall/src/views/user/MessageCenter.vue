@@ -73,7 +73,7 @@
                                 {{message.title}}
                               </div>
                               <div class="message_list_preview_div message_list_preview_div3">
-                                {{message.Introduction}}
+                                {{message.introduction}}
                               </div>
                             </div>
                           </el-col>
@@ -92,21 +92,22 @@
                 </div>
               </el-col>
               <el-col :span="17" class="message_content_div">
-                <div v-if="productList.length==0">
+                <div v-if="productList.length==0 && !paymentAssistant.paymentAmount">
                   <svg-icon name="messageBack"
                             style="width: 200px;height: 200px;margin-top: 20%"></svg-icon>
                 </div>
-                <div class="message_list_div message_list" v-if="productList.length!=0">
+                <div class="message_list_div message_list"
+                     v-if="productList.length!=0 && !paymentAssistant.paymentAmount">
                   <el-card>
                     <div slot="header">
                       <div class="message_order_header">尊敬的微利会员, 请您核对订单信息</div>
                     </div>
-                    <div  class="message_order">
+                    <div class="message_order">
                       <div v-for="product in productList" class="message_order_product">
                         <el-row :gutter="10">
                           <el-col :span="8">
                             <div class="message_order_product_img">
-                              <el-image  :src="product.productImage" fit="fill"></el-image>
+                              <el-image :src="product.productImage" fit="fill"></el-image>
                             </div>
                           </el-col>
                           <el-col :span="16">
@@ -153,7 +154,42 @@
                     </div>
                   </el-card>
                 </div>
-                <div></div>
+                <div v-if="paymentAssistant.paymentAmount">
+                  <el-card>
+                    <div slot="header">
+                      <div class="message_order_header">交易提醒</div>
+                    </div>
+                    <div class="message_order_Trn">
+                      <el-form label-position="left" label-width="100px">
+                        <el-form-item>
+                          <div class="message_order_Trn_Am_title">
+                            付款金额
+                          </div>
+                          <div class="message_order_Trn_Am">
+                            ￥{{parseInt(paymentAssistant.paymentAmount).toFixed(2)}}
+                          </div>
+                        </el-form-item>
+                        <el-form-item label="收款方">
+                          微利官方
+                        </el-form-item>
+                        <el-form-item label="交易状态">
+                          {{paymentAssistant.paymentStatus==1?'支付成功':'支付失败'}}
+                        </el-form-item>
+                        <el-form-item label="交易时间">
+                          {{new Date(paymentAssistant.paymentTime).getFullYear()+'年'+(new
+                          Date(paymentAssistant.paymentTime).getMonth()+1)+'月'+new
+                          Date(paymentAssistant.paymentTime).getDate()+'日 '+(new
+                          Date(paymentAssistant.paymentTime).getHours()>18?' 晚上':(new
+                          Date(paymentAssistant.paymentTime).getHours()>12?' 下午':' 上午')) +new
+                          Date(paymentAssistant.paymentTime).getHours()+':'+new
+                          Date(paymentAssistant.paymentTime).getMinutes()+':'+new
+                          Date(paymentAssistant.paymentTime).getSeconds()}}
+                        </el-form-item>
+                      </el-form>
+                    </div>
+
+                  </el-card>
+                </div>
               </el-col>
             </el-row>
           </el-card>
@@ -202,6 +238,9 @@
         orderAddress: {},
         //订单号
         orderNumber: '',
+        //支付助手
+        paymentAssistant: {},
+
       }
     },
     methods: {
@@ -285,9 +324,12 @@
           this.messageList.forEach((message) => {
             message.sign = false;
           });
-          this.productList = this.messageList[index].newsContentJson.productContents;
-          this.orderAddress = this.messageList[index].newsContentJson.address;
-          this.orderNumber = this.messageList[index].newsContentJson.orderId;
+          this.paymentAssistant = this.messageList[index].newsContentJson;
+          if (!this.paymentAssistant.paymentAmount) {
+            this.productList = this.messageList[index].newsContentJson.productContents;
+            this.orderAddress = this.messageList[index].newsContentJson.address;
+            this.orderNumber = this.messageList[index].newsContentJson.orderId;
+          }
           this.messageList[index].sign = true;
 
           if (this.messageList[index].newsStatus == 1) {
@@ -318,7 +360,7 @@
           name: "Order",
           params: {
             orderNumber: this.orderNumber,
-            isShow:true,
+            isShow: true,
           }
         });
       },
@@ -364,6 +406,12 @@
     margin-left: 3%
   }
 
+  .message_order_Trn_Am_title {
+    font-size: 14px;
+    color: #999999;
+    margin-top: 5%
+  }
+
   .message_order_address {
     text-align: left;
     font-size: 16px;
@@ -379,6 +427,11 @@
     padding: 2%;
     width: 100%;
     margin-bottom: 5%
+  }
+
+  .message_order_Trn {
+    width: 50%;
+    margin-left: 20%
   }
 
   .message_list_preview_div1_div1 {
@@ -429,6 +482,11 @@
 
   .message_list_div {
     background-color: Transparent;
+  }
+
+  .message_order_Trn_Am {
+    font-size: 30px;
+    font-weight: 600;
   }
 
   .message_list {

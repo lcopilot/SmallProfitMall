@@ -1,4 +1,6 @@
+const CompressionPlugin = require("compression-webpack-plugin")
 module.exports = {
+  publicPath:'./',    // 公共路径
   devServer: {
     // 设置主机地址
     host: '0.0.0.0',
@@ -22,6 +24,25 @@ module.exports = {
   },
 
   /**
+   * 压缩配置
+   * @param config
+   * @returns {{plugins: [CompressionPlugin]}}
+   */
+  configureWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      return {
+        plugins: [
+          new CompressionPlugin({
+            test: /\.js$|\.html$|\.css/,
+            threshold: 1024,
+            deleteOriginalAssets: false
+          })
+        ]
+      }
+    }
+  },
+
+  /**
    * svg的使用
    * @param config
    */
@@ -30,7 +51,7 @@ module.exports = {
     config.module
     .rule('svg-sprite')
     .use('svgo-loader')
-    .loader('svgo-loader')
+    .loader('svgo-loader');
   },
 
   /**
