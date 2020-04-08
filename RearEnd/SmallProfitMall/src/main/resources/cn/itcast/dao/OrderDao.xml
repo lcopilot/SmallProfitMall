@@ -44,7 +44,6 @@
         <result property="orderNote" column="orderNote"></result>
         <result property="orderTotal" column="orderTotal"></result>
         <result property="orderState" column="orderState"></result>
-
         <association property="orderAddress" resultMap="orderAddressMap" javaType="cn.itcast.domain.order.OrderAddress">
 
         </association>
@@ -90,7 +89,7 @@
 
     </insert>
 
-    <!--添加订单地址-->
+    <!--新增订单地址-->
     <insert id="addOrdeAddress">
     INSERT INTO orderAddress
 		(userId,orderId,name,areas,detailedAddress,phone,email,areaCodes,alias)
@@ -154,8 +153,8 @@
             userId=#{userId}
         AND
             orderId=#{orderId}
-
     </update>
+
 
     <!--查询最后一条记录流水号-->
     <select id="findSerialnumber" resultType="java.lang.String">

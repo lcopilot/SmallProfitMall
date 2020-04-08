@@ -22,5 +22,28 @@
         <insert id="addUser" parameterType="java.lang.String">
         INSERT INTO  userMembe  (userId) VALUES (#{userId})
     </insert>
-        
+
+    <!--新增消费记录-->
+    <insert id="addConsumptionRecords" parameterType="cn.itcast.domain.member.ConsumptionRecords">
+        INSERT INTO
+            userConsumptionRecords
+            (orderId,userId,paymentStatus,productName,senderId,paymentTime,paymentAmount)
+        VALUES
+            (#{orderId},#{userId},#{paymentStatus},#{productName},#{senderId},#{paymentTime},#{paymentAmount})
+    </insert>
+
+    <select id="findConsumptionRecords" parameterType="java.lang.String" resultType="cn.itcast.domain.member.ConsumptionRecords">
+        SELECT
+            ucr.* , ns.senderAvatar,ns.senderName
+        FROM
+            userConsumptionRecords ucr
+        LEFT JOIN
+            newsSender ns
+        ON
+            ucr.senderId=ns.senderId
+        WHERE
+            ucr.orderId=#{orderId}
+        AND
+            userId=#{userId}
+    </select>
 </mapper>

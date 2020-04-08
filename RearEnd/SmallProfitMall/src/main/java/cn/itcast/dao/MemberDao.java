@@ -1,6 +1,8 @@
 package cn.itcast.dao;
 
+import cn.itcast.domain.member.ConsumptionRecords;
 import cn.itcast.domain.member.Member;
+import cn.itcast.domain.webSocket.Connection;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -38,5 +40,20 @@ public interface MemberDao {
      * @return
      */
     public Integer addUser(@Param("userId")String userId);
+
+    /**
+     * 新增消费记录
+     * @param consumptionRecords 消费实体类
+     * @return 影响行数
+     */
+    public Integer addConsumptionRecords(ConsumptionRecords consumptionRecords);
+
+    /**
+     * 查询消费记录
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @return 消费记录对象
+     */
+    public ConsumptionRecords findConsumptionRecords(@Param("userId") String userId ,@Param("orderId") String orderId);
 
 }

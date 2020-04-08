@@ -124,9 +124,11 @@ public class WebSocket {
      * @throws IOException
      */
     public Integer sendMessage( List<News> message,Integer unreadQuantity) throws IOException {
+       String f = USER_ONLINE_MAP.toString();
+       int c = USER_ONLINE_MAP.size();
         //返回值
         Integer redis=0;
-        if(USER_ONLINE_MAP.get(message.get(0).getUserId())!=null){
+        if(true){
             for (int i = 0; i <message.size() ; i++) {
                 //消息对象
                 QueryResultString queryResultString = new QueryResultString();
@@ -134,6 +136,7 @@ public class WebSocket {
                 queryResultString.setNews(message);
                 //未读消息数量
                 queryResultString.setUnreadQuantity(unreadQuantity);
+                String a = message.get(i).getUserId();
                 //设置消息内容
                 Session testSession= USER_ONLINE_MAP.get(message.get(i).getUserId());
                 testSession.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis,queryResultString)));
