@@ -169,10 +169,10 @@ public class OrderController {
      * @return 订单对象
      */
     @RequestMapping(value = "/findDetailedOrder/{userId}/{orderId}",method = RequestMethod.GET)
-    public QueryResponseNews findDetailedOrder(@PathVariable("userId")String userId, @PathVariable("orderId") String orderId){
+    public QueryOrder findDetailedOrder(@PathVariable("userId")String userId, @PathVariable("orderId") String orderId){
         Order order = orderService.findDetailedOrder(userId,orderId);
-        Page page=new Page();
-        page.setOrder(order);
-        return new QueryResponseNews(CommonCode.SUCCESS,page);
+        ResultOrder resultOrder=new ResultOrder();
+        resultOrder.setOrder(order);
+        return new QueryOrder(CommonCode.SUCCESS,resultOrder);
     }
 }

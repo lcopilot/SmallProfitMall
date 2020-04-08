@@ -19,7 +19,7 @@ public class Page<T> {
     /**消息数据**/
     private List<News> news;
     /**订单消息**/
-    private Order order;
+    private List<Order> order;
     /**总记录数**/
     private Integer totalCount;
     /**总页数**/
