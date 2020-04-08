@@ -15,7 +15,6 @@ import java.util.List;
  * @author Kite
  * @date 2020/4/3
  */
-@Data
 public class Order implements Serializable {
     private int id;
     //用户id
@@ -53,4 +52,163 @@ public class Order implements Serializable {
     public OrderAddress orderAddress;
     //用户地址地址
     private Address address;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public Integer getPaymentWay() {
+        return paymentWay;
+    }
+
+    public void setPaymentWay(Integer paymentWay) {
+        this.paymentWay = paymentWay;
+    }
+
+    public Integer getDeliveryWay() {
+        return deliveryWay;
+    }
+
+    public void setDeliveryWay(Integer deliveryWay) {
+        this.deliveryWay = deliveryWay;
+    }
+
+    public Date getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
+    }
+
+    public Date getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(Date deliveryTime) {
+        this.deliveryTime = deliveryTime;
+    }
+
+    public Date getSubmitTime() {
+        return submitTime;
+    }
+
+    public void setSubmitTime(Date submitTime) {
+        this.submitTime = submitTime;
+    }
+
+    public Date getPaymentTime() {
+        return paymentTime;
+    }
+
+    public void setPaymentTime(Date paymentTime) {
+        this.paymentTime = paymentTime;
+    }
+
+    public String getOrderNote() {
+        return orderNote;
+    }
+
+    public void setOrderNote(String orderNote) {
+        this.orderNote = orderNote;
+    }
+
+    public BigDecimal getOrderTotal() {
+        return orderTotal;
+    }
+
+    public void setOrderTotal(BigDecimal orderTotal) {
+        this.orderTotal = orderTotal;
+    }
+
+    public Boolean getSubmit() {
+        return submit;
+    }
+
+    public void setSubmit(Boolean submit) {
+        this.submit = submit;
+    }
+
+    public Boolean getReceipt() {
+        return receipt;
+    }
+
+    public void setReceipt(Boolean receipt) {
+        this.receipt = receipt;
+    }
+
+    public List<ProductContent> getProductContents() {
+        return productContents;
+    }
+
+    public void setProductContents(List<ProductContent> productContents) {
+        this.productContents = productContents;
+    }
+
+    public Integer getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(Integer orderState) {
+        this.orderState = orderState;
+    }
+
+    public OrderAddress getOrderAddress() {
+        return orderAddress;
+    }
+
+    public void setOrderAddress(OrderAddress orderAddress) {
+        this.orderAddress = orderAddress;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", userId='" + userId + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", paymentWay=" + paymentWay +
+                ", deliveryWay=" + deliveryWay +
+                ", orderTime=" + orderTime +
+                ", deliveryTime=" + deliveryTime +
+                ", submitTime=" + submitTime +
+                ", paymentTime=" + paymentTime +
+                ", orderNote='" + orderNote + '\'' +
+                ", orderTotal=" + orderTotal +
+                ", submit=" + submit +
+                ", receipt=" + receipt +
+                ", productContents=" + productContents +
+                ", orderState=" + orderState +
+                ", orderAddress=" + orderAddress +
+                ", address=" + address +
+                '}';
+    }
 }

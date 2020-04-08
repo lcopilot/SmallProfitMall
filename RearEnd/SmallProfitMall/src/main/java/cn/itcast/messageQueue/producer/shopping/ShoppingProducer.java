@@ -1,6 +1,7 @@
 package cn.itcast.messageQueue.producer.shopping;
 
 import cn.itcast.domain.order.Order;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,7 @@ public class ShoppingProducer {
      * @param type 要发送的消息队列
      * @param order 订单对象
      */
-    public void  sendShoppingInformation(String type,Order order){
+    public void  sendShoppingInformation(String type, JSONObject order){
         try {
             shoppingTemplate.convertAndSend("SHOPPING-EXCHANGE", prefix + type, order);
         } catch (Exception e) {
