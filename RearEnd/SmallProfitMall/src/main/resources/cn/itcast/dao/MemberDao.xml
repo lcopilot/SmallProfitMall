@@ -35,7 +35,7 @@
     <!--查询消费记录-->
     <select id="findConsumptionRecords" parameterType="java.lang.String" resultType="cn.itcast.domain.member.ConsumptionRecords">
         SELECT
-            ucr.* ,ns.senderName
+            ucr.* , ns.senderAvatar,ns.senderName
         FROM
             userConsumptionRecords ucr
         LEFT JOIN

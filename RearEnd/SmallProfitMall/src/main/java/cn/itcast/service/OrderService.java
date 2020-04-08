@@ -101,5 +101,5 @@ public interface OrderService {
      * @return
      * @throws Exception
      */
-    public Integer notificationUser(Order order) throws Exception;
+    public Integer notificationUser(Order order,String totals) throws Exception;
 }
