@@ -289,6 +289,7 @@
           this.orderAddress = this.messageList[index].newsContentJson.address;
           this.orderNumber = this.messageList[index].newsContentJson.orderId;
           this.messageList[index].sign = true;
+
           if (this.messageList[index].newsStatus == 1) {
             this.haveRead(this.messageList[index].contentId, index);
           }
