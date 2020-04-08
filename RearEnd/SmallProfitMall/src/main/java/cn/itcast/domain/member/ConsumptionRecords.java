@@ -24,7 +24,7 @@ public class ConsumptionRecords implements Serializable {
     //支付时间
     private Date paymentTime;
     //支付金额
-    private BigDecimal paymentAmount;
+    private String paymentAmount;
     //收款者名字
     private String senderName;
 
@@ -85,12 +85,11 @@ public class ConsumptionRecords implements Serializable {
         this.paymentTime = paymentTime;
     }
 
-
-    public BigDecimal getPaymentAmount() {
+    public String getPaymentAmount() {
         return paymentAmount;
     }
 
-    public void setPaymentAmount(BigDecimal paymentAmount) {
+    public void setPaymentAmount(String paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
 }

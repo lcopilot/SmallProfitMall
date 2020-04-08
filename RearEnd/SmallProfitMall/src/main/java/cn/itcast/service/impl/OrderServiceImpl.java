@@ -272,7 +272,7 @@ public class OrderServiceImpl implements OrderService {
                 //邮件通知
                 emailNotification(order.getUserId());
                 //推送消息
-                notificationUser(order);
+                notificationUser(order,totals);
                 result=1;
             }
             return result;
@@ -403,7 +403,7 @@ public class OrderServiceImpl implements OrderService {
      * @throws Exception
      */
     @Override
-    public Integer notificationUser(Order order) throws Exception {
+    public Integer notificationUser(Order order,String totals) throws Exception {
         String orderJson = JSONObject.toJSONString(order);
         JSONObject jsonObject =JSONObject.parseObject(orderJson);
          //消息中间件推送
@@ -470,7 +470,7 @@ public class OrderServiceImpl implements OrderService {
         //支付时间
         consumptionRecords.setPaymentTime(new Date());
         //支付金额
-        consumptionRecords.setPaymentAmount(orders.getOrderTotal());
+        consumptionRecords.setPaymentAmount(totals);
 
         memberDao.addConsumptionRecords(consumptionRecords);
         ConsumptionRecords consumptionRecords1 = memberDao.findConsumptionRecords(orders.getUserId(),orders.getOrderId());

@@ -100,7 +100,7 @@ public class TestController {
         consumptionRecords.setUserId("assdad");
         consumptionRecords.setPaymentStatus(1);
         consumptionRecords.setSenderId("3");
-        consumptionRecords.setPaymentAmount(new BigDecimal(10000));
+
         consumptionRecords.setPaymentTime(new Date());
         memberDao.addConsumptionRecords(consumptionRecords);
         ConsumptionRecords consumptionRecords1 = memberDao.findConsumptionRecords("assdad","133333");
