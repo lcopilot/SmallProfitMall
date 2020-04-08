@@ -102,16 +102,16 @@
               </div>
               <div style="padding-left: 2%;">
                 <template>
-                  <el-radio v-model="paymentMethod" label="1" class="order_rad" :disabled="orderData.paymentWay" v-if="isShow?orderData.paymentWay==1:true">
+                  <el-radio v-model="paymentMethod" label="1" class="order_rad" :disabled="orderData.order.paymentWay" v-if="isShow?orderData.order.paymentWay==1:true">
                     <svg-icon name="walletPayment" style="width: 25px;margin-bottom: -6%;"/>
                     <div style="float: right;font-size: 12px;margin-left: 4px" >钱包支付</div>
                     <br/>
                     <div style="float: right;font-size: 8px;margin-top: -8px;">Wallet Pay</div>
                   </el-radio>
-                  <el-radio v-model="paymentMethod" label="2" class="order_rad" :disabled="orderData.paymentWay" v-if="isShow?orderData.paymentWay==2:true">
+                  <el-radio v-model="paymentMethod" label="2" class="order_rad" :disabled="orderData.order.paymentWay" v-if="isShow?orderData.order.paymentWay==2:true">
                     <svg-icon name="aliPay" class="order_rad_svg"/>
                   </el-radio>
-                  <el-radio v-model="paymentMethod" label="3" class="order_rad" :disabled="orderData.paymentWay" v-if="isShow?orderData.paymentWay==3:true">
+                  <el-radio v-model="paymentMethod" label="3" class="order_rad" :disabled="orderData.order.paymentWay" v-if="isShow?orderData.order.paymentWay==3:true">
                     <svg-icon name="weChatPay" class="order_rad_svg"/>
                   </el-radio>
                 </template>
@@ -125,11 +125,11 @@
                   <el-col :span="7">
                     <div>
                       <el-radio-group v-model="expressType">
-                        <el-radio label="1" :disabled="orderData.deliveryWay" v-if="isShow?orderData.deliveryWay==1:true">
+                        <el-radio label="1" :disabled="orderData.order.deliveryWay" v-if="isShow?orderData.order.deliveryWay==1:true">
                           <svg-icon name="postal" class="order_express"/>
                           邮政
                         </el-radio>
-                        <el-radio label="2" :disabled="orderData.deliveryWay" v-if="isShow?orderData.deliveryWay==2:true">
+                        <el-radio label="2" :disabled="orderData.order.deliveryWay" v-if="isShow?orderData.order.deliveryWay==2:true">
                           <svg-icon name="FS" class="order_express"/>
                           顺丰
                         </el-radio>
@@ -473,14 +473,14 @@
       getOrderComplete() {
         ordersApi.getOrderComplete(sessionStorage.getItem("uId"), this.orderNumber).then(res => {
               if (res.success) {
-                console.log(res)
-                this.orderData = res.queryResult.list[0];
-                this.orderAddress=res.queryResult.list[0].orderAddress;
-                this.paymentMethod=res.queryResult.list[0].paymentWay.toString();
-                this.expressType=res.queryResult.list[0].deliveryWay.toString();
-                this.deliveryTime=res.queryResult.list[0].deliveryTime;
-                this.ordersNote=res.queryResult.list[0].orderNote;
-                this.orderProductList = res.queryResult.list[0].productContents;
+                console.log(res);
+                this.orderData = res.resultOrder;
+                this.orderAddress=res.resultOrder.order.orderAddress;
+                this.paymentMethod=res.resultOrder.order.paymentWay.toString();
+                this.expressType=res.resultOrder.order.deliveryWay.toString();
+                this.deliveryTime=res.resultOrder.order.deliveryTime;
+                this.ordersNote=res.resultOrder.order.orderNote;
+                this.orderProductList = res.resultOrder.order.productContents;
               }
             }
         )
