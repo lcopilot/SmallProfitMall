@@ -70,6 +70,7 @@
             <result property="phone" column="phone"></result>
             <result property="email" column="email"></result>
             <result property="areas" column="areas"></result>
+            <result property="alias" column="alias"></result>
             <result property="detailedAddress" column="detailedAddress"></result>
     </resultMap>
 

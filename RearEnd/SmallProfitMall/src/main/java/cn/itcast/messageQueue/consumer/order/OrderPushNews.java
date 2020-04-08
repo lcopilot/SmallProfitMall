@@ -69,5 +69,6 @@ public class OrderPushNews {
         Integer unreadQuantity =  newsService.unreadQuantity(order.getUserId());
         //推送消息
        newsService.pushNews(newsList,unreadQuantity);
+        System.out.println("----------消息推送成功---------------------");
     }
 }
