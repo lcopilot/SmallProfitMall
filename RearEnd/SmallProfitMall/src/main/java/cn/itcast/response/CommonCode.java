@@ -23,6 +23,7 @@ public enum CommonCode implements ResultCode{
     SUCCESS(true,10000,"操作成功！"),
     PARTIALLY_SUCCESS(true,11000,"部分成功"),
     FAIL(false,11111,"操作失败！"),
+    ChangeQuantity(false,11101,"该订单已修改过"),
     FALL_USER_REGISTER(false,11211,"用户已存在!"),
     UNAUTHENTICATED(false,10001,"此操作需要登陆系统！"),
     UNAUTHORISE(false,10002,"权限不足，无权操作！"),

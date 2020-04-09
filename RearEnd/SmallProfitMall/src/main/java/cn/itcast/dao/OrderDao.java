@@ -86,6 +86,13 @@ public interface OrderDao {
     public Integer updateOrder(Order order);
 
 
+    /**
+     * 查询修改次数
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @return 修改次数
+     */
+    public Integer findChangeQuantity(@Param("userId")String userId,@Param("orderId")String orderId);
 
 
 }

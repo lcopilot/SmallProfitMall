@@ -509,7 +509,19 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public Integer updateOrder(Order order) {
+        order.setChangeQuantity(1);
         return orderDao.updateOrder(order);
+    }
+
+    /**
+     * 查询订单修改次数
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @return 修改次数
+     */
+    @Override
+    public Integer fenOrderTotal(String userId, String orderId) {
+        return orderDao.findChangeQuantity(userId,orderId);
     }
 
 

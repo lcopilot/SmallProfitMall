@@ -44,6 +44,7 @@
         <result property="orderNote" column="orderNote"></result>
         <result property="orderTotal" column="orderTotal"></result>
         <result property="orderState" column="orderState"></result>
+        <result property="changeQuantity" column="changeQuantity"></result>
         <association property="orderAddress" resultMap="orderAddressMap" javaType="cn.itcast.domain.order.OrderAddress">
 
         </association>
@@ -160,17 +161,21 @@
             userOrder uo , orderAddress oa
         SET
             uo.deliveryTime = #{deliveryTime} ,
-            uo.orderNote=#{orderNote},
+            uo.orderNote=#{orderNote},uo.changeQuantity=#{changeQuantity},
             oa.name = #{address.name},oa.areas=#{address.areas},oa.detailedAddress=#{address.detailedAddress},oa.phone=#{address.phone},
             oa.email=#{address.email},oa.areas=#{address.areas},oa.alias=#{address.alias}
         WHERE
             uo.orderId=#{orderId}
         AND
-            uo.userId=#{orderId}
+            uo.userId=#{userId}
         AND
             uo.orderId = oa.orderId
     </update>
 
+    <!--查询订单修改次数-->
+    <select id="findChangeQuantity" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT changeQuantity FROM userOrder WHERE orderId=#{orderId} AND userId=#{userId}
+    </select>
 
 
     <!--查询最后一条记录流水号-->
