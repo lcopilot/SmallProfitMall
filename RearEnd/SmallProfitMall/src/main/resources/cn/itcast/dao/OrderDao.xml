@@ -154,6 +154,23 @@
         AND
             orderId=#{orderId}
     </update>
+    <!--修改订单-->
+    <update id="updateOrder">
+        UPDATE
+            userOrder uo , orderAddress oa
+        SET
+            uo.deliveryTime = #{deliveryTime} ,
+            uo.orderNote=#{orderNote},
+            oa.name = #{address.name},oa.areas=#{address.areas},oa.detailedAddress=#{address.detailedAddress},oa.phone=#{address.phone},
+            oa.email=#{address.email},oa.areas=#{address.areas},oa.alias=#{address.alias}
+        WHERE
+            uo.orderId=#{orderId}
+        AND
+            uo.userId=#{orderId}
+        AND
+            uo.orderId = oa.orderId
+    </update>
+
 
 
     <!--查询最后一条记录流水号-->

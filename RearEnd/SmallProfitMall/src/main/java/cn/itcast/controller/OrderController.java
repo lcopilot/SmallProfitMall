@@ -2,6 +2,7 @@ package cn.itcast.controller;
 
 import cn.itcast.dao.MemberDao;
 import cn.itcast.domain.accountSettings.AccountSettings;
+import cn.itcast.domain.address.Address;
 import cn.itcast.domain.news.News;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
@@ -174,5 +175,17 @@ public class OrderController {
         ResultOrder resultOrder=new ResultOrder();
         resultOrder.setOrder(order);
         return new QueryOrder(CommonCode.SUCCESS,resultOrder);
+    }
+
+    /**
+     * 修改订单
+     * @param order 订单对象
+     * @return
+     */
+    @RequestMapping(value = "/updateOrder",method = RequestMethod.PUT)
+    public QueryResponseResult updateOrder(@RequestBody Order order){
+        QueryResult queryResult=new QueryResult();
+        orderService.updateOrder(order);
+        return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
 }

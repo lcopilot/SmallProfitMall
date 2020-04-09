@@ -1,8 +1,12 @@
 package cn.itcast.service.impl;
 
 import cn.itcast.controller.WebSocket;
+import cn.itcast.dao.MemberDao;
 import cn.itcast.dao.NewsDao;
+import cn.itcast.dao.OrderDao;
+import cn.itcast.domain.member.ConsumptionRecords;
 import cn.itcast.domain.news.News;
+import cn.itcast.domain.order.Order;
 import cn.itcast.service.NewsService;
 import cn.itcast.util.logic.TotalPages;
 import com.alibaba.fastjson.JSONObject;
@@ -26,25 +30,40 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     private WebSocket webSocket;
 
+    /**用于封装订单消息**/
+    @Autowired
+    public OrderDao orderDao;
+
+    @Autowired
+    MemberDao memberDao;
+    /**消息dao**/
+    @Autowired
+    NewsDao newsDao;
     /**
-     * 查询消息
+     * 查询l历史消息
      * @param userId 用户id
      * @param state 消息状态
      * @param currentPage 当前页
      * @param pageSize 每页查询的数量
      * @return 消息集合
      */
-    @Autowired
-    NewsDao newsDao;
     @Override
     public List<News> fendNews(String userId,Integer state,Integer currentPage, Integer pageSize) {
         //开始页
         Integer start=(currentPage-1)*pageSize;
         List<News> news =  newsDao.fendNews(userId,state,start,pageSize);
         for (int i = 0; i <news.size() ; i++) {
-            //转换消息内容为JSON
-            news.get(i).setNewsContentJson(JSONObject.parseObject(news.get(i).getNewsContent()));;
-            news.get(i).setNewsContent(null);
+            if (news.get(i).getNewsType().equals(4)){
+                Order order=orderDao.findDetailedOrder(userId,news.get(i).getNewsTypeId());
+                String jsonObject = JSONObject.toJSONString(order);
+                news.get(i).setNewsContentJson(JSONObject.parseObject(jsonObject));;
+            }
+            if (news.get(i).getNewsType().equals(3)){
+              ConsumptionRecords consumptionRecords= memberDao.findConsumptionRecords(userId,news.get(i).getNewsTypeId());
+                String jsonObject = JSONObject.toJSONString(consumptionRecords);
+                news.get(i).setNewsContentJson(JSONObject.parseObject(jsonObject));
+            }
+
         }
         return news;
     }

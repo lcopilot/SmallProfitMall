@@ -1,11 +1,14 @@
 package cn.itcast.service;
 
+import cn.itcast.domain.address.Address;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.Path;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -102,4 +105,13 @@ public interface OrderService {
      * @throws Exception
      */
     public Integer notificationUser(Order order,String totals) throws Exception;
+
+    /**
+     * 修改订单
+     * @param order 订单对象
+     * @return
+     */
+    public Integer updateOrder(Order order);
+
+
 }

@@ -63,12 +63,21 @@
             </if>
         </where>
     </update>
+    <!--修改消息内容-->
+    <update id="updateNewsContent">
+        UPDATE
+            newsContent
+        SET
+            newsContent=#{newsContent}
+        and
+            contentId=#{contentId}
+    </update>
     <!--新增消息-->
     <insert id="addNews" parameterType="cn.itcast.domain.news.News" useGeneratedKeys="true" keyProperty="contentId" keyColumn="contentId">
         INSERT INTO
-           newsContent(senderId,userId,newsContent,newsType,sign,title,newsTime,newsStatus,introduction)
+           newsContent(senderId,userId,newsContent,newsType,sign,title,newsTime,newsStatus,introduction,newsTypeId)
         VALUES
-            (#{senderId},#{userId},#{newsContent},#{newsType},#{sign},#{title},#{newsTime},#{newsStatus},#{introduction})
+            (#{senderId},#{userId},#{newsContent},#{newsType},#{sign},#{title},#{newsTime},#{newsStatus},#{introduction},#{newsTypeId})
     </insert>
     <!--查询指定消息-->
     <select id="fenNewsById" parameterType="java.lang.Integer" resultType="cn.itcast.domain.news.News">
