@@ -6,17 +6,13 @@ import cn.itcast.domain.commodity.ProductLowPriceResult;
 import cn.itcast.domain.commodity.Recommend;
 import cn.itcast.domain.commodity.SeckillResult;
 import cn.itcast.service.ProductService;
-import cn.itcast.util.cache.RedisUtil;
-import cn.itcast.util.logic.TimeUtil;
+import cn.itcast.util.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Service("commodityService")

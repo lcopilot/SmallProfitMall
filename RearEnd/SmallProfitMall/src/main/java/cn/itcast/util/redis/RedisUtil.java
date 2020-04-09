@@ -1,4 +1,4 @@
-package cn.itcast.util.cache;
+package cn.itcast.util.redis;
 
 import java.util.List;
 import java.util.Map;

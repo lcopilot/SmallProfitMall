@@ -6,7 +6,7 @@ import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.service.HomepageService;
-import cn.itcast.util.cache.RedisUtil;
+import cn.itcast.util.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
