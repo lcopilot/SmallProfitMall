@@ -113,5 +113,12 @@ public interface OrderService {
      */
     public Integer updateOrder(Order order);
 
+    /**
+     * 查询订单修改次数
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @return 修改次数
+     */
+    public Integer fenOrderTotal(String userId ,String orderId);
 
 }

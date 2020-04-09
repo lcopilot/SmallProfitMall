@@ -180,12 +180,20 @@ public class OrderController {
     /**
      * 修改订单
      * @param order 订单对象
-     * @return
+     * @return 影响行数
      */
     @RequestMapping(value = "/updateOrder",method = RequestMethod.PUT)
     public QueryResponseResult updateOrder(@RequestBody Order order){
-        QueryResult queryResult=new QueryResult();
-        orderService.updateOrder(order);
-        return new QueryResponseResult(CommonCode.SUCCESS,null);
+        Integer changeQuantity = orderService.fenOrderTotal(order.getUserId(),order.getOrderId());
+        if (changeQuantity>0){
+            return new QueryResponseResult(CommonCode.ChangeQuantity,null);
+        }
+        Integer result =  orderService.updateOrder(order);
+        if (result>1){
+            return new QueryResponseResult(CommonCode.SUCCESS,null);
+        }else {
+            return new QueryResponseResult(CommonCode.FAIL,null);
+        }
+
     }
 }
