@@ -92,12 +92,12 @@
                 </div>
               </el-col>
               <el-col :span="17" class="message_content_div">
-                <div v-if="productList.length==0 && !paymentAssistant.paymentAmount">
+                <div v-if="!messageData.newsType">
                   <svg-icon name="messageBack"
                             style="width: 200px;height: 200px;margin-top: 20%"></svg-icon>
                 </div>
                 <div class="message_list_div message_list"
-                     v-if="productList.length!=0 && !paymentAssistant.paymentAmount">
+                     v-if="messageData.newsType==4">
                   <el-card>
                     <div slot="header">
                       <div class="message_order_header">尊敬的微利会员, 请您核对订单信息</div>
@@ -147,14 +147,15 @@
                           </el-row>
                         </div>
                       </div>
-                      <div class="message_order_btn">
+                      <div class="message_order_btn message_order_confirm_btn">
                         <el-button round size="mini" plain @click="checkOrder">修改</el-button>
-                        <el-button round size="mini" type="primary">确认</el-button>
+                        <el-button round size="mini" type="primary">确认
+                        </el-button>
                       </div>
                     </div>
                   </el-card>
                 </div>
-                <div v-if="paymentAssistant.paymentAmount">
+                <div v-if="messageData.newsType==3">
                   <el-card>
                     <div slot="header">
                       <div class="message_order_header">交易提醒</div>
@@ -240,6 +241,8 @@
         orderNumber: '',
         //支付助手
         paymentAssistant: {},
+        //单个消息数据
+        messageData:{},
 
       }
     },
@@ -324,10 +327,11 @@
           this.messageList.forEach((message) => {
             message.sign = false;
           });
+          this.messageData=this.messageList[index];
           this.paymentAssistant = this.messageList[index].newsContentJson;
           if (!this.paymentAssistant.paymentAmount) {
             this.productList = this.messageList[index].newsContentJson.productContents;
-            this.orderAddress = this.messageList[index].newsContentJson.address;
+            this.orderAddress = this.messageList[index].newsContentJson.orderAddress;
             this.orderNumber = this.messageList[index].newsContentJson.orderId;
           }
           this.messageList[index].sign = true;
@@ -432,6 +436,15 @@
   .message_order_Trn {
     width: 50%;
     margin-left: 20%
+  }
+
+  .message_order_confirm_btn /deep/ .el-button--primary {
+    border:none;
+    background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+  }
+  .message_order_confirm_btn /deep/ .el-button--primary:hover {
+    border:none;
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
   }
 
   .message_list_preview_div1_div1 {
