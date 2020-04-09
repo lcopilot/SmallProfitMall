@@ -4,10 +4,9 @@ import cn.itcast.dao.HomepageDao;
 import cn.itcast.domain.commodity.Classify;
 import cn.itcast.domain.homepag.*;
 import cn.itcast.service.HomepageService;
-import cn.itcast.util.cache.RedisUtil;
+import cn.itcast.util.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.ArrayList;

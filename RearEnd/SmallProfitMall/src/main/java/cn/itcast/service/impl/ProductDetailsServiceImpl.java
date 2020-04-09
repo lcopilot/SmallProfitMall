@@ -1,13 +1,11 @@
 package cn.itcast.service.impl;
 
 import cn.itcast.dao.ProductDetailsDao;
-import cn.itcast.domain.ProductDatails.ProductAttributes;
 import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import cn.itcast.service.ProductDetailsService;
-import cn.itcast.util.cache.RedisUtil;
+import cn.itcast.util.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;

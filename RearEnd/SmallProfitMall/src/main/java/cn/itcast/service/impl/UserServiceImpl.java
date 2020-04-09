@@ -6,10 +6,16 @@ import cn.itcast.dao.UserDao;
 import cn.itcast.domain.accountSettings.AccountSettings;
 import cn.itcast.domain.user.Login;
 import cn.itcast.domain.user.User;
+import cn.itcast.response.CommonCode;
+import cn.itcast.response.QueryResponseResult;
 import cn.itcast.service.UserService;
 
 import cn.itcast.util.compressPicture.UploadPicturesUtil;
 import cn.itcast.util.encryption.AesEncryptUtil;
+import cn.itcast.util.logic.GetFourRandom;
+import cn.itcast.util.logic.sessionUtil;
+import cn.itcast.util.redis.RedisUtil;
+import cn.itcast.util.user.SmsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +38,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private AccountSettingsDao accountSettingsDao;
 
+    /**注入缓存工具类**/
+    @Autowired
+    private RedisUtil redisUtil;
     /**
      * 查询所有用户
      * @return
@@ -40,6 +49,68 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return UserDao.findAll();
     }
+
+    /**
+     * 注册短信验证
+     * @param phone 手机号(加密）
+     * @return 验证结果 1为成功 2为手机号不正确 3为发送短信失败 4为手机号已注册
+     */
+    @Override
+    public Integer registerVerify(String phone) throws Exception {
+        Integer result=0;
+        //手机号解密
+        String phones = AesEncryptUtil.desEncrypt(phone);
+        //判断手机号是否正确
+        if (phones.length() != 11) {
+            return  result=2;
+        }
+        //查询该用户是否存在
+        User user_phone =UserDao.findByPhone(phone);
+        //手机尚未注册
+        if (user_phone != null) {
+            return   result=4;
+        }
+        //生成验证码
+        String FR = GetFourRandom.getFourRandom();
+        //发送短信 发送成功返回true
+        boolean flag = SmsUtils.sendRegistSms(phones, FR);
+        if (flag) {
+            System.out.println("验证码为 " + FR);
+            //存入缓存库 验证码key 验证码 过期时间
+            redisUtil.set(phone+"Verify",FR,300);
+            return    result=1;
+        } else {
+            return result=3;
+        }
+    }
+
+    /**
+     * 用户注册
+     * @param user 用户id
+     * @return 1为成功 2为验证码过期或者不正确
+     */
+    @Override
+    public Integer saveAccount(User user) {
+        Integer result=0;
+        if (redisUtil.get(user.getPhone()+"Verify")==null||!user.getVerify().equals(redisUtil.get(user.getPhone()+"Verify"))){
+            return  result=2;
+        }
+        String uuid = UUID.randomUUID().toString().replaceAll("-","");
+        user.setUid(uuid);
+        user.setName("smallProfit");
+        user.setToken("DM");
+        user.setBirthday("0-0-0");
+        user.setImage("http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938");
+        user.setSex("1");
+        //新增用户
+        UserDao.saveAccount(user);
+        //新增用户账户信息
+        accountSettingsDao.addUser(uuid);
+        //新增用户会员信息
+        memberDao.addUser(uuid);
+        return result=1;
+    }
+
 
     /**
      * 查询用户信息
@@ -88,6 +159,8 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
+
+
     /**
      * 查询返回值
      * @param user 用户对象
@@ -104,25 +177,6 @@ public class UserServiceImpl implements UserService {
         return login;
     }
 
-    /**
-     * 用户注册
-     * @param user
-     */
-    @Override
-    public Integer saveAccount(User user) {
-        String uuid = UUID.randomUUID().toString().replaceAll("-","");
-        user.setUid(uuid);
-        user.setName("smallProfit");
-        user.setToken("DM");
-        user.setBirthday("0-0-0");
-        user.setImage("http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938");
-        user.setSex("1");
-        Integer result = 0;
-        result = result +  UserDao.saveAccount(user);
-        result = result +accountSettingsDao.addUser(uuid);
-        result = result + memberDao.addUser(uuid);
-        return result;
-    }
 
     //根据手机号码修改密码
     @Override

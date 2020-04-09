@@ -112,38 +112,26 @@ public class UserController {
 	 * 注册手机验证接口
 	 *
 	 * @param phone
-	 * @return
+	 * @return 验证结果 1为成功 2为手机号不正确 3为发送短信失败 4为手机号已注册
 	 * @throws ClientException
 	 */
 	@RequestMapping(value = "/registerVerify",method = RequestMethod.GET)
-	public QueryResponseResult registerVerify(String phone,
-			HttpSession session) throws Exception {
-		String phones = AesEncryptUtil.desEncrypt(phone);
-		//判断手机号是否正确
-		if (phones.length() != 11) {
+	public QueryResponseResult registerVerify(String phone) throws Exception {
+		Integer result= userService.registerVerify(phone);
+		if (result==1){
+			return new QueryResponseResult(CommonCode.SUCCESS, null);
+		}
+		if (result==2) {
 			return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
 		}
-		//根据手机号查询
-		User user_phone = userService.findByPhone(phone);
-		//手机尚未注册
-		if (user_phone == null) {
-			String FR = GetFourRandom.getFourRandom();
-			boolean flag = SmsUtils.sendRegistSms(phones, FR);
-			if (flag) {
-				System.out.println("验证码为 " + FR);
-				//设置验证码session
-				session.setAttribute("Verify", FR);
-				//设置手机号session
-				session.setAttribute("phone", phone);
-				//倒计时删除session
-				sessionUtil.removeAttrbute(session, "Verify");
-				return new QueryResponseResult(CommonCode.SUCCESS, null);
-			} else {
-				return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
-			}
-		} else {
+		if (result==4) {
 			return new QueryResponseResult(CommonCode.FALL_USER_REGISTER, null);
 		}
+		if (result==3) {
+			return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
+
+		}
+		return new QueryResponseResult(CommonCode.FAIL, null);
 	}
 
 	/**
@@ -155,22 +143,12 @@ public class UserController {
 	 */
 	@RequestMapping("/register")
 	public QueryResponseResult register(@RequestBody User user, HttpSession session) throws Exception {
-		String Verify = (String) session.getAttribute("Verify");
-		String phone = (String) session.getAttribute("phone");
-		if (user.getVerify().equals(Verify) && user.getPhone().equals(phone)) {
-			//存入对象
-			Integer result = userService.saveAccount(user);
-			if (result != 3){
-				//注册失败
-				return new QueryResponseResult(CommonCode.FAIL, null);
-			}
-		} else {
-			//注册失败
-			return new QueryResponseResult(CommonCode.FAIL, null);
+		Integer result = userService.saveAccount(user);
+		if (result==1) {
+			return new QueryResponseResult(CommonCode.SUCCESS,null);
 		}
-		//注册成功
-		session.invalidate();	//销毁session
-		return new QueryResponseResult(CommonCode.SUCCESS,null);
+		//注册失败
+		return new QueryResponseResult(CommonCode.FAIL,null);
 	}
 
 	/**
