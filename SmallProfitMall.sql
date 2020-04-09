@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 08/04/2020 20:36:22
+ Date: 09/04/2020 11:50:31
 */
 
 SET NAMES utf8mb4;
@@ -872,13 +872,23 @@ CREATE TABLE `newsContent`  (
   `newsStatus` int(11) NULL DEFAULT NULL,
   `introduction` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`contentId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 308 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 318 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of newsContent
 -- ----------------------------
 INSERT INTO `newsContent` VALUES (306, 4, '7c9fdfa3177042a08766aed29e7de6cd', '{\"address\":{\"addressId\":164,\"alias\":\"学校\",\"areaCode\":[\"14\",\"1402\",\"140214\",\"140214002\"],\"areaCodes\":\"14,1402,140214,140214002,\",\"areas\":\"山西省 大同市 云冈区 新平旺街道 \",\"defaults\":true,\"detailedAddress\":\"三大法师速度还是大\",\"email\":\"liuxianliangli@foxmail.com\",\"name\":\"速度还是大\",\"phone\":\"15367885410\",\"userId\":\"7c9fdfa3177042a08766aed29e7de6cd\"},\"deliveryTime\":1586606997439,\"deliveryWay\":1,\"id\":0,\"orderId\":\"1586347797232100103\",\"orderNote\":\"\",\"orderState\":2,\"paymentTime\":1586347813254,\"paymentWay\":1,\"productContents\":[{\"evaluate\":false,\"id\":1794,\"orderId\":\"1586347797232100103\",\"productConfiguration\":\"星河银 \",\"productImage\":\"\\r\\nhttp://productdata.fhxasdsada.xyz/971ec333c8ef1de2.jpg\",\"productName\":\"华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机\",\"productPrice\":5399.0,\"productQuantity\":1,\"productWeight\":\"0.54kg\"}],\"userId\":\"7c9fdfa3177042a08766aed29e7de6cd\"}', 4, '0', '确认订单消息', '2020-04-08 20:10:13', 0, '消息简介');
 INSERT INTO `newsContent` VALUES (307, 3, '7c9fdfa3177042a08766aed29e7de6cd', '{\"orderId\":\"1586347797232100103\",\"paymentAmount\":\"5399.0\",\"paymentStatus\":1,\"paymentTime\":1586347813000,\"senderId\":\"3\",\"senderName\":\"微利支付\",\"userId\":\"7c9fdfa3177042a08766aed29e7de6cd\"}', 3, '0', '支付通知', '2020-04-08 20:10:13', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (308, 4, '7c9fdfa3177042a08766aed29e7de6cd', '{\"address\":{\"addressId\":164,\"alias\":\"学校\",\"areaCode\":[\"14\",\"1402\",\"140214\",\"140214002\"],\"areaCodes\":\"14,1402,140214,140214002,\",\"areas\":\"山西省 大同市 云冈区 新平旺街道 \",\"defaults\":true,\"detailedAddress\":\"三大法师速度还是大\",\"email\":\"liuxianliangli@foxmail.com\",\"name\":\"速度还是大\",\"phone\":\"15367885410\",\"userId\":\"7c9fdfa3177042a08766aed29e7de6cd\"},\"deliveryTime\":1586654347103,\"deliveryWay\":1,\"id\":0,\"orderId\":\"1586395146934100001\",\"orderNote\":\"\",\"orderState\":2,\"paymentTime\":1586395156618,\"paymentWay\":1,\"productContents\":[{\"evaluate\":false,\"id\":1795,\"orderId\":\"1586395146934100001\",\"productConfiguration\":\"奶茶味 \",\"productImage\":\"http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg\",\"productName\":\"三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋\",\"productPrice\":20.0,\"productQuantity\":1,\"productWeight\":\"0.15kg\"}],\"userId\":\"7c9fdfa3177042a08766aed29e7de6cd\"}', 4, '0', '确认订单消息', '2020-04-09 09:19:17', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (309, 3, '7c9fdfa3177042a08766aed29e7de6cd', '{\"orderId\":\"1586395146934100001\",\"paymentAmount\":\"20.0\",\"paymentStatus\":1,\"paymentTime\":1586395157000,\"senderId\":\"3\",\"senderName\":\"微利支付\",\"userId\":\"7c9fdfa3177042a08766aed29e7de6cd\"}', 3, '0', '支付通知', '2020-04-09 09:19:17', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (310, 4, '7c9fdfa3177042a08766aed29e7de6cd', '{\"address\":{\"addressId\":164,\"alias\":\"学校\",\"areaCode\":[\"14\",\"1402\",\"140214\",\"140214002\"],\"areaCodes\":\"14,1402,140214,140214002,\",\"areas\":\"山西省 大同市 云冈区 新平旺街道 \",\"defaults\":true,\"detailedAddress\":\"三大法师速度还是大\",\"email\":\"liuxianliangli@foxmail.com\",\"name\":\"速度还是大\",\"phone\":\"15367885410\",\"userId\":\"7c9fdfa3177042a08766aed29e7de6cd\"},\"deliveryTime\":1586654450196,\"deliveryWay\":1,\"id\":0,\"orderId\":\"1586395249241100003\",\"orderNote\":\"\",\"orderState\":2,\"paymentTime\":1586395256723,\"paymentWay\":1,\"productContents\":[{\"evaluate\":false,\"id\":1797,\"orderId\":\"1586395249241100003\",\"productConfiguration\":\"Cellular版64G  \",\"productImage\":\"http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg\",\"productName\":\"Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\\r\\n\",\"productPrice\":7890.0,\"productQuantity\":2,\"productWeight\":\"2.8kg\"},{\"evaluate\":false,\"id\":1798,\"orderId\":\"1586395249241100003\",\"productConfiguration\":\"Cellular版512G  \",\"productImage\":\"http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg\",\"productName\":\"Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\\r\\n\",\"productPrice\":7890.0,\"productQuantity\":1,\"productWeight\":\"2.8kg\"},{\"evaluate\":false,\"id\":1799,\"orderId\":\"1586395249241100003\",\"productConfiguration\":\"Cellular版512G  \",\"productImage\":\"http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg\",\"productName\":\"Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\\r\\n\",\"productPrice\":7890.0,\"productQuantity\":1,\"productWeight\":\"2.8kg\"},{\"evaluate\":false,\"id\":1800,\"orderId\":\"1586395249241100003\",\"productConfiguration\":\"WLAN版512G \",\"productImage\":\"http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg\",\"productName\":\"Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\\r\\n\",\"productPrice\":7890.0,\"productQuantity\":3,\"productWeight\":\"2.8kg\"},{\"evaluate\":false,\"id\":1801,\"orderId\":\"1586395249241100003\",\"productConfiguration\":\"WLAN版512G \",\"productImage\":\"http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg\",\"productName\":\"Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\\r\\n\",\"productPrice\":7890.0,\"productQuantity\":1,\"productWeight\":\"2.8kg\"},{\"evaluate\":false,\"id\":1802,\"orderId\":\"1586395249241100003\",\"productConfiguration\":\"Cellular版256G \",\"productImage\":\"http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg\",\"productName\":\"Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\\r\\n\",\"productPrice\":7890.0,\"productQuantity\":2,\"productWeight\":\"2.8kg\"},{\"evaluate\":false,\"id\":1803,\"orderId\":\"1586395249241100003\",\"productConfiguration\":\"Cellular版1TB \",\"productImage\":\"http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg\",\"productName\":\"Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\\r\\n\",\"productPrice\":7890.0,\"productQuantity\":1,\"productWeight\":\"2.8kg\"},{\"evaluate\":false,\"id\":1804,\"orderId\":\"1586395249241100003\",\"productConfiguration\":\"Cellular版1TB \",\"productImage\":\"http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg\",\"productName\":\"Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\\r\\n\",\"productPrice\":7890.0,\"productQuantity\":1,\"productWeight\":\"2.8kg\"},{\"evaluate\":false,\"id\":1805,\"orderId\":\"1586395249241100003\",\"productConfiguration\":\"WLAN版64G \",\"productImage\":\"http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg\",\"productName\":\"Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\\r\\n\",\"productPrice\":7890.0,\"productQuantity\":3,\"productWeight\":\"2.8kg\"},{\"evaluate\":false,\"id\":1806,\"orderId\":\"1586395249241100003\",\"productConfiguration\":\"翡冷翠 \",\"productImage\":\"\\r\\nhttp://productdata.fhxasdsada.xyz/971ec333c8ef1de2.jpg\",\"productName\":\"华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机\",\"productPrice\":5399.0,\"productQuantity\":3,\"productWeight\":\"0.54kg\"},{\"evaluate\":false,\"id\":1807,\"orderId\":\"1586395249241100003\",\"productConfiguration\":\"星河银 \",\"productImage\":\"\\r\\nhttp://productdata.fhxasdsada.xyz/971ec333c8ef1de2.jpg\",\"productName\":\"华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机\",\"productPrice\":5399.0,\"productQuantity\":1,\"productWeight\":\"0.54kg\"},{\"evaluate\":false,\"id\":1808,\"orderId\":\"1586395249241100003\",\"productConfiguration\":\"星河银 \",\"productImage\":\"\\r\\nhttp://productdata.fhxasdsada.xyz/971ec333c8ef1de2.jpg\",\"productName\":\"华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机\",\"productPrice\":5399.0,\"productQuantity\":2,\"productWeight\":\"0.54kg\"},{\"evaluate\":false,\"id\":1809,\"orderId\":\"1586395249241100003\",\"productConfiguration\":\"奶茶味 \",\"productImage\":\"http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg\",\"productName\":\"三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋\",\"productPrice\":20.0,\"productQuantity\":3,\"productWeight\":\"0.15kg\"}],\"userId\":\"7c9fdfa3177042a08766aed29e7de6cd\"}', 4, '0', '确认订单消息', '2020-04-09 09:20:56', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (311, 3, '7c9fdfa3177042a08766aed29e7de6cd', '{\"orderId\":\"1586395249241100003\",\"paymentAmount\":\"150804.00\",\"paymentStatus\":1,\"paymentTime\":1586395256000,\"senderId\":\"3\",\"senderName\":\"微利支付\",\"userId\":\"7c9fdfa3177042a08766aed29e7de6cd\"}', 3, '0', '支付通知', '2020-04-09 09:20:56', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (312, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', '{\"address\":{\"addressId\":167,\"alias\":\"闺蜜家\",\"areaCode\":[\"13\",\"1302\",\"130202\",\"130202001\"],\"areaCodes\":\"13,1302,130202,130202001,\",\"areas\":\"河北省 唐山市 路南区 学院南路街道 \",\"defaults\":true,\"detailedAddress\":\"dasdas\",\"email\":\"2252821162@qq.com\",\"name\":\"方鸢\",\"phone\":\"18598814121\",\"userId\":\"f92b9f8f372e445fb6564cdd57aa3c3e\"},\"deliveryTime\":1586655392567,\"deliveryWay\":1,\"id\":0,\"orderId\":\"1586396192206100004\",\"orderNote\":\"\",\"orderState\":2,\"paymentTime\":1586396198794,\"paymentWay\":1,\"productContents\":[{\"evaluate\":false,\"id\":1810,\"orderId\":\"1586396192206100004\",\"productConfiguration\":\"\",\"productImage\":\"http://productdata.fhxasdsada.xyz/9bf639975363fbb0.jpg\",\"productName\":\"Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\\r\\n\\r\\n\",\"productPrice\":3350.0,\"productQuantity\":1,\"productWeight\":\"5kg\"}],\"userId\":\"f92b9f8f372e445fb6564cdd57aa3c3e\"}', 4, '0', '确认订单消息', '2020-04-09 09:36:39', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (313, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', '{\"orderId\":\"1586396192206100004\",\"paymentAmount\":\"3350.0\",\"paymentStatus\":1,\"paymentTime\":1586396199000,\"senderId\":\"3\",\"senderName\":\"微利支付\",\"userId\":\"f92b9f8f372e445fb6564cdd57aa3c3e\"}', 3, '0', '支付通知', '2020-04-09 09:36:39', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (314, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', '{\"address\":{\"addressId\":167,\"alias\":\"闺蜜家\",\"areaCode\":[\"13\",\"1302\",\"130202\",\"130202001\"],\"areaCodes\":\"13,1302,130202,130202001,\",\"areas\":\"河北省 唐山市 路南区 学院南路街道 \",\"defaults\":true,\"detailedAddress\":\"dasdas\",\"email\":\"2252821162@qq.com\",\"name\":\"方鸢\",\"phone\":\"18598814121\",\"userId\":\"f92b9f8f372e445fb6564cdd57aa3c3e\"},\"deliveryTime\":1586655498607,\"deliveryWay\":1,\"id\":0,\"orderId\":\"1586396298225100005\",\"orderNote\":\"\",\"orderState\":2,\"paymentTime\":1586396305678,\"paymentWay\":1,\"productContents\":[{\"evaluate\":false,\"id\":1811,\"orderId\":\"1586396298225100005\",\"productConfiguration\":\"黑色 \",\"productImage\":\"http://productdata.fhxasdsada.xyz/2ca45e2fd9758794.jpg\",\"productName\":\" 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\\r\\n\",\"productPrice\":1499.0,\"productQuantity\":1,\"productWeight\":\"0.6kg\"}],\"userId\":\"f92b9f8f372e445fb6564cdd57aa3c3e\"}', 4, '0', '确认订单消息', '2020-04-09 09:38:25', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (315, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', '{\"orderId\":\"1586396298225100005\",\"paymentAmount\":\"1499.0\",\"paymentStatus\":1,\"paymentTime\":1586396306000,\"senderId\":\"3\",\"senderName\":\"微利支付\",\"userId\":\"f92b9f8f372e445fb6564cdd57aa3c3e\"}', 3, '0', '支付通知', '2020-04-09 09:38:26', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (316, 4, '7c9fdfa3177042a08766aed29e7de6cd', '{\"address\":{\"addressId\":164,\"alias\":\"学校\",\"areaCode\":[\"14\",\"1402\",\"140214\",\"140214002\"],\"areaCodes\":\"14,1402,140214,140214002,\",\"areas\":\"山西省 大同市 云冈区 新平旺街道 \",\"defaults\":true,\"detailedAddress\":\"三大法师速度还是大\",\"email\":\"liuxianliangli@foxmail.com\",\"name\":\"速度还是大\",\"phone\":\"15367885410\",\"userId\":\"7c9fdfa3177042a08766aed29e7de6cd\"},\"deliveryTime\":1586655732623,\"deliveryWay\":1,\"id\":0,\"orderId\":\"1586396531886100006\",\"orderNote\":\"\",\"orderState\":2,\"paymentTime\":1586396537814,\"paymentWay\":1,\"productContents\":[{\"evaluate\":false,\"id\":1812,\"orderId\":\"1586396531886100006\",\"productConfiguration\":\"猪年限量版 90周年 \",\"productImage\":\"http://productdata.fhxasdsada.xyz/135638619666091357760161_x.jpg\",\"productName\":\"【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金\",\"productPrice\":773.0,\"productQuantity\":4},{\"evaluate\":false,\"id\":1813,\"orderId\":\"1586396531886100006\",\"productConfiguration\":\" 学院黄 \",\"productImage\":\"http://productdata.fhxasdsada.xyz/135638619666091357760161_x.jpg\",\"productName\":\"【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金\",\"productPrice\":773.0,\"productQuantity\":2},{\"evaluate\":false,\"id\":1814,\"orderId\":\"1586396531886100006\",\"productConfiguration\":\"学院红 \",\"productImage\":\"http://productdata.fhxasdsada.xyz/135638619666091357760161_x.jpg\",\"productName\":\"【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金\",\"productPrice\":773.0,\"productQuantity\":4},{\"evaluate\":false,\"id\":1815,\"orderId\":\"1586396531886100006\",\"productConfiguration\":\"磨砂黑 \",\"productImage\":\"http://productdata.fhxasdsada.xyz/135638619666091357760161_x.jpg\",\"productName\":\"【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金\",\"productPrice\":773.0,\"productQuantity\":3}],\"userId\":\"7c9fdfa3177042a08766aed29e7de6cd\"}', 4, '0', '确认订单消息', '2020-04-09 09:42:17', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (317, 3, '7c9fdfa3177042a08766aed29e7de6cd', '{\"orderId\":\"1586396531886100006\",\"paymentAmount\":\"10049.00\",\"paymentStatus\":1,\"paymentTime\":1586396537000,\"senderId\":\"3\",\"senderName\":\"微利支付\",\"userId\":\"7c9fdfa3177042a08766aed29e7de6cd\"}', 3, '0', '支付通知', '2020-04-09 09:42:17', 0, '支付通知');
 
 -- ----------------------------
 -- Table structure for newsSender
@@ -1135,6 +1145,11 @@ INSERT INTO `orderAddress` VALUES ('f92b9f8f372e445fb6564cdd57aa3c3e', '15863424
 INSERT INTO `orderAddress` VALUES ('f92b9f8f372e445fb6564cdd57aa3c3e', '1586346035358100101', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
 INSERT INTO `orderAddress` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '1586346607917100102', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
 INSERT INTO `orderAddress` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '1586347797232100103', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '1586395146934100001', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '1586395249241100003', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES ('f92b9f8f372e445fb6564cdd57aa3c3e', '1586396192206100004', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES ('f92b9f8f372e445fb6564cdd57aa3c3e', '1586396298225100005', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '1586396531886100006', '小芳', '14,1402,140213,140213001,', '湖南科技职业学院', '18598814121', '2252821162', '14,1402,140214,140214002,', '姐姐家');
 
 -- ----------------------------
 -- Table structure for orders
@@ -1151,7 +1166,7 @@ CREATE TABLE `orders`  (
   `productWeight` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `evaluate` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1795 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1816 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
@@ -1952,6 +1967,27 @@ INSERT INTO `orders` VALUES (1791, '1586342414649100100', '骨伽（COUGAR） �
 INSERT INTO `orders` VALUES (1792, '1586346035358100101', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'WLAN版64G ', '1', 7890, '2.8kg', 0);
 INSERT INTO `orders` VALUES (1793, '1586346607917100102', 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', 'http://productdata.fhxasdsada.xyz/9bf639975363fbb0.jpg', '', '1', 3350, '5kg', 0);
 INSERT INTO `orders` VALUES (1794, '1586347797232100103', '华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机', '\r\nhttp://productdata.fhxasdsada.xyz/971ec333c8ef1de2.jpg', '星河银 ', '1', 5399, '0.54kg', 0);
+INSERT INTO `orders` VALUES (1795, '1586395146934100001', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '1', 20, '0.15kg', 0);
+INSERT INTO `orders` VALUES (1796, '1586395211086100002', '华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机', '\r\nhttp://productdata.fhxasdsada.xyz/971ec333c8ef1de2.jpg', '翡冷翠 ', '1', 5399, '0.54kg', 0);
+INSERT INTO `orders` VALUES (1797, '1586395249241100003', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'Cellular版64G  ', '2', 7890, '2.8kg', 0);
+INSERT INTO `orders` VALUES (1798, '1586395249241100003', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'Cellular版512G  ', '1', 7890, '2.8kg', 0);
+INSERT INTO `orders` VALUES (1799, '1586395249241100003', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'Cellular版512G  ', '1', 7890, '2.8kg', 0);
+INSERT INTO `orders` VALUES (1800, '1586395249241100003', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'WLAN版512G ', '3', 7890, '2.8kg', 0);
+INSERT INTO `orders` VALUES (1801, '1586395249241100003', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'WLAN版512G ', '1', 7890, '2.8kg', 0);
+INSERT INTO `orders` VALUES (1802, '1586395249241100003', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'Cellular版256G ', '2', 7890, '2.8kg', 0);
+INSERT INTO `orders` VALUES (1803, '1586395249241100003', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'Cellular版1TB ', '1', 7890, '2.8kg', 0);
+INSERT INTO `orders` VALUES (1804, '1586395249241100003', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'Cellular版1TB ', '1', 7890, '2.8kg', 0);
+INSERT INTO `orders` VALUES (1805, '1586395249241100003', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'WLAN版64G ', '3', 7890, '2.8kg', 0);
+INSERT INTO `orders` VALUES (1806, '1586395249241100003', '华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机', '\r\nhttp://productdata.fhxasdsada.xyz/971ec333c8ef1de2.jpg', '翡冷翠 ', '3', 5399, '0.54kg', 0);
+INSERT INTO `orders` VALUES (1807, '1586395249241100003', '华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机', '\r\nhttp://productdata.fhxasdsada.xyz/971ec333c8ef1de2.jpg', '星河银 ', '1', 5399, '0.54kg', 0);
+INSERT INTO `orders` VALUES (1808, '1586395249241100003', '华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机', '\r\nhttp://productdata.fhxasdsada.xyz/971ec333c8ef1de2.jpg', '星河银 ', '2', 5399, '0.54kg', 0);
+INSERT INTO `orders` VALUES (1809, '1586395249241100003', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '3', 20, '0.15kg', 0);
+INSERT INTO `orders` VALUES (1810, '1586396192206100004', 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', 'http://productdata.fhxasdsada.xyz/9bf639975363fbb0.jpg', '', '1', 3350, '5kg', 0);
+INSERT INTO `orders` VALUES (1811, '1586396298225100005', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.fhxasdsada.xyz/2ca45e2fd9758794.jpg', '黑色 ', '1', 1499, '0.6kg', 0);
+INSERT INTO `orders` VALUES (1812, '1586396531886100006', '【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金', 'http://productdata.fhxasdsada.xyz/135638619666091357760161_x.jpg', '猪年限量版 90周年 ', '4', 773, NULL, 0);
+INSERT INTO `orders` VALUES (1813, '1586396531886100006', '【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金', 'http://productdata.fhxasdsada.xyz/135638619666091357760161_x.jpg', ' 学院黄 ', '2', 773, NULL, 0);
+INSERT INTO `orders` VALUES (1814, '1586396531886100006', '【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金', 'http://productdata.fhxasdsada.xyz/135638619666091357760161_x.jpg', '学院红 ', '4', 773, NULL, 0);
+INSERT INTO `orders` VALUES (1815, '1586396531886100006', '【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金', 'http://productdata.fhxasdsada.xyz/135638619666091357760161_x.jpg', '磨砂黑 ', '3', 773, NULL, 0);
 
 -- ----------------------------
 -- Table structure for productAttributes
@@ -2033,7 +2069,7 @@ CREATE TABLE `shoppingCart`  (
   `productDeploy` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `quantity` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`shoppingCartId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2645 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2663 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of shoppingCart
@@ -2045,6 +2081,7 @@ INSERT INTO `shoppingCart` VALUES (1330, NULL, 10028, '【新品】小爱音箱 
 INSERT INTO `shoppingCart` VALUES (1331, NULL, 10028, 'Redmi 小爱音箱Play  小爱音箱万能遥控版  ', 2);
 INSERT INTO `shoppingCart` VALUES (1390, '7c9fdfa3177042a08766aed29e7de6cd', 10002, '白色 优惠套餐一 ', 14);
 INSERT INTO `shoppingCart` VALUES (1598, '7c9fdfa3177042a08766aed29e7de6cd', 10026, 'XS ', 6);
+INSERT INTO `shoppingCart` VALUES (2662, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '', 2);
 
 -- ----------------------------
 -- Table structure for user
@@ -2135,6 +2172,11 @@ CREATE TABLE `userConsumptionRecords`  (
 INSERT INTO `userConsumptionRecords` VALUES ('1586346035358100101', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-08 19:40:41', '7890.0');
 INSERT INTO `userConsumptionRecords` VALUES ('1586346607917100102', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-08 19:50:14', '3350.0');
 INSERT INTO `userConsumptionRecords` VALUES ('1586347797232100103', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-08 20:10:13', '5399.0');
+INSERT INTO `userConsumptionRecords` VALUES ('1586395146934100001', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-09 09:19:17', '20.0');
+INSERT INTO `userConsumptionRecords` VALUES ('1586395249241100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-09 09:20:56', '150804.00');
+INSERT INTO `userConsumptionRecords` VALUES ('1586396192206100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-09 09:36:39', '3350.0');
+INSERT INTO `userConsumptionRecords` VALUES ('1586396298225100005', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-09 09:38:26', '1499.0');
+INSERT INTO `userConsumptionRecords` VALUES ('1586396531886100006', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-09 09:42:17', '10049.00');
 
 -- ----------------------------
 -- Table structure for userEvaluation
@@ -2180,31 +2222,31 @@ CREATE TABLE `userFootprint`  (
 -- ----------------------------
 -- Records of userFootprint
 -- ----------------------------
-INSERT INTO `userFootprint` VALUES (10, '7c9fdfa3177042a08766aed29e7de6cd', 10006, '2020-04-08 16:59:11');
+INSERT INTO `userFootprint` VALUES (10, '7c9fdfa3177042a08766aed29e7de6cd', 10006, '2020-04-09 09:38:15');
 INSERT INTO `userFootprint` VALUES (11, '7c9fdfa3177042a08766aed29e7de6cd', 10013, '2020-04-07 13:09:15');
 INSERT INTO `userFootprint` VALUES (12, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '2020-04-07 13:08:12');
 INSERT INTO `userFootprint` VALUES (13, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '2020-04-08 16:52:21');
 INSERT INTO `userFootprint` VALUES (14, '7c9fdfa3177042a08766aed29e7de6cd', 10028, '2020-04-08 15:27:57');
-INSERT INTO `userFootprint` VALUES (15, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '2020-04-08 16:08:18');
+INSERT INTO `userFootprint` VALUES (15, '7c9fdfa3177042a08766aed29e7de6cd', 10027, '2020-04-09 09:41:53');
 INSERT INTO `userFootprint` VALUES (16, '7c9fdfa3177042a08766aed29e7de6cd', 10023, '2020-04-08 16:36:12');
 INSERT INTO `userFootprint` VALUES (17, '7c9fdfa3177042a08766aed29e7de6cd', 10017, '2020-04-07 19:59:26');
 INSERT INTO `userFootprint` VALUES (18, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '2020-04-08 15:28:28');
-INSERT INTO `userFootprint` VALUES (19, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-04-08 18:09:35');
+INSERT INTO `userFootprint` VALUES (19, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-04-09 09:19:01');
 INSERT INTO `userFootprint` VALUES (20, '7c9fdfa3177042a08766aed29e7de6cd', 10019, '2020-04-08 14:54:14');
 INSERT INTO `userFootprint` VALUES (21, '7c9fdfa3177042a08766aed29e7de6cd', 10009, '2020-04-04 10:33:02');
-INSERT INTO `userFootprint` VALUES (22, 'abcd', 10005, '2020-04-08 19:40:32');
+INSERT INTO `userFootprint` VALUES (22, 'abcd', 10005, '2020-04-09 09:20:27');
 INSERT INTO `userFootprint` VALUES (23, 'asdasd', 0, '2020-03-27 09:52:30');
 INSERT INTO `userFootprint` VALUES (24, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-04-08 18:40:12');
 INSERT INTO `userFootprint` VALUES (25, '7c9fdfa3177042a08766aed29e7de6cd', 10021, '2020-04-05 18:13:03');
-INSERT INTO `userFootprint` VALUES (26, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '2020-04-07 20:09:46');
+INSERT INTO `userFootprint` VALUES (26, '7c9fdfa3177042a08766aed29e7de6cd', 10020, '2020-04-09 09:43:06');
 INSERT INTO `userFootprint` VALUES (27, '7c9fdfa3177042a08766aed29e7de6cd', 10026, '2020-04-07 13:11:22');
 INSERT INTO `userFootprint` VALUES (28, '7c9fdfa3177042a08766aed29e7de6cd', 10025, '2020-04-07 13:12:31');
 INSERT INTO `userFootprint` VALUES (29, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '2020-04-08 17:34:10');
 INSERT INTO `userFootprint` VALUES (30, '7c9fdfa3177042a08766aed29e7de6cd', 10004, '2020-04-08 16:59:50');
 INSERT INTO `userFootprint` VALUES (31, '7c9fdfa3177042a08766aed29e7de6cd', 10011, '2020-04-08 17:12:05');
-INSERT INTO `userFootprint` VALUES (32, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '2020-04-08 19:50:05');
+INSERT INTO `userFootprint` VALUES (32, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '2020-04-09 09:36:29');
 INSERT INTO `userFootprint` VALUES (33, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '2020-04-08 18:02:05');
-INSERT INTO `userFootprint` VALUES (34, '7c9fdfa3177042a08766aed29e7de6cd', 10016, '2020-04-08 20:09:53');
+INSERT INTO `userFootprint` VALUES (34, '7c9fdfa3177042a08766aed29e7de6cd', 10016, '2020-04-09 09:20:03');
 INSERT INTO `userFootprint` VALUES (35, '7c9fdfa3177042a08766aed29e7de6cd', 10029, '2020-04-07 15:00:30');
 INSERT INTO `userFootprint` VALUES (36, '7c9fdfa3177042a08766aed29e7de6cd', 10030, '2020-04-07 13:11:01');
 INSERT INTO `userFootprint` VALUES (37, '7c9fdfa3177042a08766aed29e7de6cd', 10008, '2020-04-08 16:26:26');
@@ -2228,10 +2270,10 @@ CREATE TABLE `userMembe`  (
 -- ----------------------------
 -- Records of userMembe
 -- ----------------------------
-INSERT INTO `userMembe` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', 'MggeIQS/pNbNd89sZN2lkQ==', 98000, 5, 2, 1540);
+INSERT INTO `userMembe` VALUES ('7c9fdfa3177042a08766aed29e7de6cd', '3dN5qqhn+WX+IruOnHld/w==', 98000, 5, 2, 1540);
 INSERT INTO `userMembe` VALUES ('0497326c70a447ceb815aa23743daeab', NULL, 0, 0, 0, 0);
 INSERT INTO `userMembe` VALUES ('9c1e482cfabf48f7ab64baee9bd778fd', NULL, 0, 0, 0, 0);
-INSERT INTO `userMembe` VALUES ('f92b9f8f372e445fb6564cdd57aa3c3e', 'uBJgFz2rxo9SNBwh/lVX7A==', 0, 0, 0, 0);
+INSERT INTO `userMembe` VALUES ('f92b9f8f372e445fb6564cdd57aa3c3e', 'eeQL+mwOLyKhcRXGDS0Lng==', 0, 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for userOrder
@@ -2251,7 +2293,7 @@ CREATE TABLE `userOrder`  (
   `orderTotal` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `orderState` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 419 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 425 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userOrder
@@ -2446,6 +2488,12 @@ INSERT INTO `userOrder` VALUES (415, 'f92b9f8f372e445fb6564cdd57aa3c3e', '158634
 INSERT INTO `userOrder` VALUES (416, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1586346035358100101', 1, 1, '2020-04-08 19:40:35', '2020-04-11 19:40:35', '2020-04-08 19:40:40', NULL, '', '7890.0', 2);
 INSERT INTO `userOrder` VALUES (417, '7c9fdfa3177042a08766aed29e7de6cd', '1586346607917100102', 1, 1, '2020-04-08 19:50:08', '2020-04-11 19:50:08', '2020-04-08 19:50:13', NULL, '', '3350.0', 2);
 INSERT INTO `userOrder` VALUES (418, '7c9fdfa3177042a08766aed29e7de6cd', '1586347797232100103', 1, 1, '2020-04-08 20:09:57', '2020-04-11 20:09:57', '2020-04-08 20:10:13', NULL, '', '5399.0', 2);
+INSERT INTO `userOrder` VALUES (419, '7c9fdfa3177042a08766aed29e7de6cd', '1586395146934100001', 1, 1, '2020-04-09 09:19:06', '2020-04-12 09:19:07', '2020-04-09 09:19:16', NULL, '', '20.0', 2);
+INSERT INTO `userOrder` VALUES (420, '7c9fdfa3177042a08766aed29e7de6cd', '1586395211086100002', NULL, NULL, '2020-04-09 09:20:11', NULL, NULL, NULL, NULL, '5399.0', 1);
+INSERT INTO `userOrder` VALUES (421, '7c9fdfa3177042a08766aed29e7de6cd', '1586395249241100003', 1, 1, '2020-04-09 09:20:50', '2020-04-12 09:20:50', '2020-04-09 09:20:56', NULL, '', '150804.00', 2);
+INSERT INTO `userOrder` VALUES (422, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1586396192206100004', 1, 1, '2020-04-09 09:36:32', '2020-04-12 09:36:32', '2020-04-09 09:36:38', NULL, '', '3350.0', 2);
+INSERT INTO `userOrder` VALUES (423, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1586396298225100005', 1, 1, '2020-04-09 09:38:18', '2020-04-12 09:38:18', '2020-04-09 09:38:25', NULL, '', '1499.0', 2);
+INSERT INTO `userOrder` VALUES (424, '7c9fdfa3177042a08766aed29e7de6cd', '1586396531886100006', 1, 1, '2020-04-09 09:42:12', '2020-04-09 20:55:51', '2020-04-09 09:42:17', NULL, '记得早点发货', '10049.00', 2);
 
 -- ----------------------------
 -- Table structure for userPassword
