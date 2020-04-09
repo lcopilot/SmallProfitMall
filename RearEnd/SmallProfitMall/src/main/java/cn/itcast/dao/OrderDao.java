@@ -4,6 +4,7 @@ import cn.itcast.domain.address.Address;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -77,6 +78,13 @@ public interface OrderDao {
      * @return
      */
     public String findSerialnumber();
+
+    /**
+     * 修改订单
+     * @return
+     */
+    public Integer updateOrder(Order order);
+
 
 
 

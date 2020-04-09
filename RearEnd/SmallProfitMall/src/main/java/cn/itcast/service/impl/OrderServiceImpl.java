@@ -425,16 +425,18 @@ public class OrderServiceImpl implements OrderService {
         news.setNewsType(4);
         //设置消息发送时间
         news.setNewsTime(new Date());
-        //消息内容订单对象转StringJson
-        news.setNewsContent(stringOrderJson);
         //设置消息标题
         news.setTitle("确认订单消息");
         //设置消息标志位
         news.setSign(false);
         //设置消息简介
         news.setIntroduction("消息简介");
+        //设置消息类型id
+        news.setNewsTypeId(order.getOrderId());
         //新增消息
         newsDao.addNews(news);
+
+
         //查询订单消息
         News orderNews = newsDao.fenNewsById(news.getContentId());
 
@@ -471,20 +473,24 @@ public class OrderServiceImpl implements OrderService {
         consumptionRecords.setPaymentTime(new Date());
         //支付金额
         consumptionRecords.setPaymentAmount(totals);
+        //设置消息类型id
+        newsConsumptionRecords.setNewsTypeId(order.getOrderId());
 
         memberDao.addConsumptionRecords(consumptionRecords);
         ConsumptionRecords consumptionRecords1 = memberDao.findConsumptionRecords(orders.getUserId(),orders.getOrderId());
         String stringOrderJson1= JSONObject.toJSONString(consumptionRecords1);
-        newsConsumptionRecords.setNewsContent(stringOrderJson1);
         newsDao.addNews(newsConsumptionRecords);
         List<News> newsList =new ArrayList();
-        //查询订单消息
+        //查询支付消息
         News consumptionRecordss = newsDao.fenNewsById(news.getContentId());
         newsList.add(orderNews);
-        newsList.add(consumptionRecordss);
+
+        Order orderss=orderDao.findDetailedOrder(order.getUserId(),order.getOrderId());
+        String jsonObjects = JSONObject.toJSONString(orderss);
+
         for (int i = 0; i <newsList.size() ; i++) {
             //转换消息内容为JSON
-            newsList.get(i).setNewsContentJson(JSONObject.parseObject(newsList.get(i).getNewsContent()));;
+            newsList.get(i).setNewsContentJson(JSONObject.parseObject(jsonObjects));
             newsList.get(i).setNewsContent(null);
         }
         //未读消息数量
@@ -494,6 +500,16 @@ public class OrderServiceImpl implements OrderService {
 
 
         return 1;
+    }
+
+    /**
+     * 修改订单
+     * @param order 订单对象
+     * @return
+     */
+    @Override
+    public Integer updateOrder(Order order) {
+        return orderDao.updateOrder(order);
     }
 
 

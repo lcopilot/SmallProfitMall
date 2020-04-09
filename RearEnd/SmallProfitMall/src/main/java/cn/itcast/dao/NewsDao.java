@@ -2,6 +2,7 @@ package cn.itcast.dao;
 
 import cn.itcast.domain.news.News;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -48,6 +49,15 @@ public interface NewsDao {
      * @return
      */
     public void addNews(News news);
+
+    /**
+     * 修改消息内容
+     * @param newsContent 消息内容
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @return
+     */
+    public Integer updateNewsContent(@Param("newsContent") String newsContent, @Param("userId")String userId, @Param("orderId")String orderId);
 
     /**
      * 查询指定消息

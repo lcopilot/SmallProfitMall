@@ -1,6 +1,9 @@
 package cn.itcast.domain.news;
 
+import cn.itcast.domain.member.ConsumptionRecords;
+import cn.itcast.domain.order.Order;
 import com.alibaba.fastjson.JSONObject;
+import org.aspectj.weaver.ast.Or;
 
 import javax.xml.crypto.Data;
 import java.io.Serializable;
@@ -24,8 +27,10 @@ public class News  implements Serializable {
     private String newsStatus;
     //推送者id
     private Integer senderId;
-    //消息种类
+    //消息类型
     private Integer newsType;
+    //消息类型id
+    public String newsTypeId;
     //消息内容id
     private Integer contentId;
     //消息时间
@@ -40,6 +45,15 @@ public class News  implements Serializable {
     private String title;
     //消息简介
     private String introduction;
+
+
+    public String getNewsTypeId() {
+        return newsTypeId;
+    }
+
+    public void setNewsTypeId(String newsTypeId) {
+        this.newsTypeId = newsTypeId;
+    }
 
     public String getIntroduction() {
         return introduction;

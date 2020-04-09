@@ -37,8 +37,6 @@ public class Order implements Serializable {
     private String orderNote;
     //订单总计
     private BigDecimal orderTotal;
-
-
     //是否发货
     private Boolean submit;
     //用户是否收货
