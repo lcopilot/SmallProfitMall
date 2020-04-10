@@ -12,6 +12,7 @@ import cn.itcast.skd.Vaptcha;
 import cn.itcast.util.encryption.AesEncryptUtil;
 import cn.itcast.util.logic.GetFourRandom;
 import cn.itcast.util.logic.sessionUtil;
+import cn.itcast.util.redis.RedisUtil;
 import cn.itcast.util.user.SmsUtils;
 import cn.itcast.util.verify.IPUtil;
 import cn.itcast.util.verify.TCaptchaVerify;
@@ -43,6 +44,10 @@ public class UserController {
 	@Autowired
 	VerifyUtil verifyUtil;
 
+	/**注入缓存工具类**/
+	@Autowired
+	private RedisUtil redisUtil;
+
 	private Vaptcha vaptcha = Vaptcha.getInstance(Constant.SecretKey, Constant.Vid, Constant.Scene);
 
 	/**
@@ -61,52 +66,29 @@ public class UserController {
 
 	/**
 	 * 用户通过账号，密码登录方法
-	 *
+	 *2为人机验证失败 3为使用初始名登录 4输入空值 5为用户不存在 6参数非法 7密码错误 8 二次验证码失败
 	 * @return
 	 */
 	@RequestMapping("/accountLogin")
 	public QueryResponseResult accountLogin(@RequestBody User user, HttpServletRequest request) throws Exception {
-//		if (!verifyUtil.VaptchaVerify(user.getToken(), request)) {
-//			return new QueryResponseResult(CommonCode.ValidationFails, null); //令牌错误不正确
-//		}
-		int verifyTicket=TCaptchaVerify.verifyTicket(user.getTicket(),user.getRandStr(), IPUtil.getIP(request));
+		Integer result = userService.accountLogin(user,request);
 		//二次验证验证码
-		if (verifyTicket==1){
-			return new QueryResponseResult(CommonCode.SUCCESS,null);
-		}else if (verifyTicket==-1){
+		if (result==8){
 			return new QueryResponseResult(CommonCode.ValidationFails,null);
 		}
-
-		if ("smallProfit".equals(user.getName())) {
+		if (result==1||result==2) {
+			QueryResult queryResult=new QueryResult();
+			Login login = userService.findReturnLogin(user.getName(),result);
+			queryResult.setList(Arrays.asList(login));
+			return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
+		}
+		if (result==3) {
 			//不能使用初始名字登录不
 			return new QueryResponseResult(CommonCode.nameError, null);
 		}
-
-			//判断用户输入是否完整
-		if (user == null && user.getPassword() == null) {
-			//用户输入信息不完整
-			return new QueryResponseResult(CommonCode.FAIL, null);
-		}
-
-		User users= userService.findAccount(user);
-		//判断用户是否存在
-		if (users == null) {
-			//用户不存在
-			return new QueryResponseResult(CommonCode.FAIL, null);
-		}
-		String password=AesEncryptUtil.desEncrypt(users.getPassword());
-		if (password.equals(user.getPassword())) {
-			QueryResult queryResult = new QueryResult();
-			Login login=userService.findLogin(users);
-			List<Login> logins = Arrays.asList(login);
-			queryResult.setList(logins);
-			//登录成功
-			return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
-		} else {
-			//密码不正确
-			return new QueryResponseResult(CommonCode.FAIL, null);
-		}
+		return  new QueryResponseResult(CommonCode.FAIL, null);
 	}
+
 
 	/**
 	 * 注册手机验证接口
@@ -152,37 +134,24 @@ public class UserController {
 	}
 
 	/**
-	 * 短信验证接口(修改登录密码，支付密码）
+	 * 短信验证接口(修改登录密码）
 	 *
 	 * @param phone
-	 * @param session
-	 * @return
+	 * @return 1 发送短信成功  2 发送失败 3用户不存在 4错误
 	 * @throws ClientException
 	 */
 	@RequestMapping("/SmVerify/{phone}")
-	public QueryResponseResult SmVerify(@PathVariable("phone") String phone, HttpSession session)
-			throws Exception {
-		//加密
-		String phones = AesEncryptUtil.encrypt(phone);
-		User users = userService.findByPhone(phones);
-		if (users != null) {
-			String FR = GetFourRandom.getFourRandom();
-			System.out.println("修改验证码为 " + FR);
-			String phoness = AesEncryptUtil.desEncrypt(users.getPhone());
-			boolean flag = SmsUtils.forgetPassword(phoness, FR);
-			if (flag) {
-				//存入验证码session
-				session.setAttribute("passwordVerify", FR);
-				//手机号存入session
-				session.setAttribute("upPasswordPhone", phone);
-				sessionUtil.removeAttrbute(session, "passwordVerify");
+	public QueryResponseResult SmVerify(@PathVariable("phone") String phone) throws Exception {
+		Integer result = userService.smVerify(phone,"updateVerify");
+
+		if (result ==1) {
 				return new QueryResponseResult(CommonCode.SUCCESS, null);
-			} else {
+			}
+		if (result==2){
 				return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
 			}
-		} else {
-			return new QueryResponseResult(CommonCode.FAIL, null);
-		}
+		return new QueryResponseResult(CommonCode.FAIL, null);
+
 	}
 
 	/**
@@ -194,22 +163,11 @@ public class UserController {
 	 */
 	@RequestMapping("/updatePasswordPhone")
 	public QueryResponseResult updatePasswordPhone(@RequestBody User user, HttpSession session) throws Exception {
-		String passwordVerify = (String) session.getAttribute("passwordVerify");
-		String phone = (String) session.getAttribute("upPasswordPhone");
-		String password = user.getPassword();
-
-		if (user.getPhone().equals(phone)) {
-			if (user.getVerify().equals(passwordVerify)) {
-				//加密手机号
-				session.invalidate();	//销毁session
-				String phones = AesEncryptUtil.encrypt(phone);
-				userService.updatePasswordPhone(phones, password);
-				return new QueryResponseResult(CommonCode.SUCCESS, null);
-			} else {
-				return new QueryResponseResult(CommonCode.FAIL, null);
-			}
+		Integer result=	userService.updatePasswordPhone(user);
+		if (result==1){
+			return new QueryResponseResult(CommonCode.SUCCESS, null);
 		} else {
-			return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
+		return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
 		}
 	}
 
@@ -259,7 +217,7 @@ public class UserController {
 		if (birthdays.get(1).equals(0)||birthdays.get(1).equals(0)){
 			user.setBirthday(null);
 		}
-		int result = userService.updateInformation(user);
+		Integer result = userService.updateInformation(user);
 		if (result == 1) {
 			//数据库更新成功
 			return new QueryResponseResult(CommonCode.SUCCESS, null);
@@ -274,47 +232,42 @@ public class UserController {
 	}
 
 	/**
-	 * 修改旧手机号码短信验证
+	 * 旧手机发送验证码
+	 * @param phone 输入的旧手机
+	 * @param userId 用户id
+	 * @return
+	 * @throws Exception
 	 */
 	@RequestMapping(value = "/formerPhoneSMS", method = RequestMethod.POST)
-	public QueryResponseResult formerPhoneSMS(String phone, String userId, HttpSession session)
+	public QueryResponseResult formerPhoneSMS(String phone, String userId)
 			throws Exception {
 		String phones = userService.findByIdPhone(userId);
 		if (phones.equals(phone)) {
-			String verificationCode = GetFourRandom.getFourRandom();
-			System.out.println("修改验证码为 " + verificationCode);
+			//解密手机号
 			String phoness = AesEncryptUtil.desEncrypt(phone);
-			boolean flag = SmsUtils.updatePhone(phoness, verificationCode);
-			//短信发送成功
-			if (flag) {
-				//存入验证码session
-				session.setAttribute("formerPhoneVerify", verificationCode);
-				//手机号存入session
-				session.setAttribute("formerPhone", phone);
-				sessionUtil.removeAttrbute(session, "formerPhoneVerify");
-
+			Integer request = userService.smVerify(phoness,"formerPhoneVerify");
+			if (request==1){
 				return new QueryResponseResult(CommonCode.SUCCESS, null);
-			} else {
+			}
+			if (request==2){
 				return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
 			}
-		} else {
-			return new QueryResponseResult(CommonCode.FAIL, null);
 		}
+		return new QueryResponseResult(CommonCode.FAIL, null);
 	}
 
 	/**
-	 * 验证旧手机是否成功
-	 *
-	 * @param
-	 * @param session
+	 * 验证旧手机结果
+	 * @param verification 验证码
+	 * @param phone 手机号码
 	 * @return
 	 */
 	@RequestMapping(value = "/formerPhone", method = RequestMethod.POST)
-	public QueryResponseResult updateFormerPhone(String verification, String phone, HttpSession session) {
+	public QueryResponseResult updateFormerPhone(String verification, String phone) {
 		QueryResult queryResult = new QueryResult();
-		String formerPhoneVerify = (String) session.getAttribute("formerPhoneVerify");
-		String formerPhone = (String) session.getAttribute("formerPhone");
-		if (verification.equals(formerPhoneVerify) && phone.equals(formerPhone)) {
+		//取缓存库验证码
+		String auth = (String) redisUtil.get("formerPhoneVerify"+phone);
+		if (auth!=null && verification.equals(auth)) {
 			List Phone = new ArrayList();
 			Phone.add(phone);
 			queryResult.setList(Phone);
@@ -328,29 +281,17 @@ public class UserController {
 	 * 验证新手机号码短信验证
 	 */
 	@RequestMapping(value = "/newPhoneSMS", method = RequestMethod.POST)
-	public QueryResponseResult newPhoneSMS(String phone, HttpSession session)
+	public QueryResponseResult newPhoneSMS(String phone)
 			throws Exception {
-		User users = userService.findByPhone(phone);
-		String formerPhone = (String) session.getAttribute("formerPhone");
-		if (phone.equals(formerPhone)) {
-			//验证失败,手机号于原手机号相同
-			return new QueryResponseResult(CommonCode.same, null);
-		}
-		if (users != null) {
+		String  phones = userService.findByIdPhone(phone);
+		if (phones != null) {
 			//验证失败，该手机号已经存在
 			return new QueryResponseResult(CommonCode.FALL_USER_REGISTER, null);
 		}
-		//生成随机验证码
-		String FR = GetFourRandom.getFourRandom();
-		System.out.println("修改验证码为 " + FR);
+		//解密手机号
 		String phoness=AesEncryptUtil.desEncrypt(phone);
-		boolean flag = SmsUtils.updatePhone(phoness, FR);
-		if (flag) {
-			//短信发送成功存入验证码session
-			session.setAttribute("newPhoneVerify", FR);
-			//手机号存入session
-			session.setAttribute("newPhone", phone);
-			sessionUtil.removeAttrbute(session, "passwordVerify");
+		Integer result = userService.smVerify(phoness,"newPhoneVerify");
+		if (result==1){
 			return new QueryResponseResult(CommonCode.SUCCESS, null);
 		} else {
 			return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
@@ -358,18 +299,17 @@ public class UserController {
 	}
 
 	/**
-	 * 修改手机
-	 *
-	 * @param
-	 * @param session
+	 * 修改手机号码
+	 * @param verification 验证码
+	 * @param phone 手机好
+	 * @param userId 用户id
 	 * @return
 	 */
 	@RequestMapping(value = "/updatePhone", method = RequestMethod.POST)
-	public QueryResponseResult updatePhone(String verification, String phone, String userId,
-			HttpSession session) {
-		String newPhoneVerify = (String) session.getAttribute("newPhoneVerify");
-		String newPhone = (String) session.getAttribute("newPhone");
-		if (verification.equals(newPhoneVerify) && phone.equals(newPhone)) {
+	public QueryResponseResult updatePhone(String verification, String phone, String userId) {
+		//取缓存库验证码
+		String auth = (String) redisUtil.get("newPhoneVerify"+phone);
+		if (auth!=null && verification.equals(auth)) {
 			int phones = userService.updatePhone(phone, userId);
 			if (phones == 1) {
 				return new QueryResponseResult(CommonCode.SUCCESS, null);

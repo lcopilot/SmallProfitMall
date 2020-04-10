@@ -21,21 +21,30 @@ public interface UserDao {
      * @param name  用户名
      * @return 用户对象
      */
-    public User findByName(String name);
+    public Integer findByName(@Param("name") String name);
 
     /**
-     * 查询用户信息
+     * 查询用户是否存在
      * @param phone  手机号
-     * @return 用户id
+     * @return 查询结果数量
      */
-    public User findByPhone(String phone);
+    public Integer findByPhone(String phone);
+
+    /**
+     * 查询用户密码
+     * @param account 账户
+     * @param accountType 账户类型  1为账号 2为手机号
+     * @return 用户密码
+     */
+    public String fendUserPassword(@Param("account") String account,@Param("accountType")Integer accountType);
 
     /**
      * 查询用户信息
-     * @param uid 用户id
+     * @param account 账户
+     * @param accountType 账户类型 1为账户 2为手机
      * @return
      */
-    public User findByUid(String uid);
+    public User fendUser(@Param("account")String account,@Param("accountType")Integer accountType);
 
     /**
      * 注册帐户

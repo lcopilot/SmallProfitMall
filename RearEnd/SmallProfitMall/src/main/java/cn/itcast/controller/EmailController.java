@@ -46,7 +46,7 @@ public class EmailController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/relieveEmail",method = RequestMethod.POST )
+    @RequestMapping(value = "/relieveEmail",method = RequestMethod.POST)
     public QueryResponseResult sendEmail(String email,String uId ,HttpSession session) throws Exception {
         //解密邮箱
         String emails = AesEncryptUtil.desEncrypt(email);
