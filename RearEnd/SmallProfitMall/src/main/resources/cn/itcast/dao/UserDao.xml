@@ -8,20 +8,48 @@
         select * from user;
     </select>
 
-    <!-- 根据用户名查询用户信息 -->
-    <select id="findByName" resultType="cn.itcast.domain.user.User">
-         select * from user where name = #{name}
+    <!-- 根据用户名查询用户是否存在 -->
+    <select id="findByName" resultType="java.lang.Integer">
+         select count(*) from user where name = #{name}
     </select>
 
-    <!-- 根据用户手机号码查询用户 -->
-    <select id="findByPhone" resultType="cn.itcast.domain.user.User">
-         select * from user where  phone = #{phone}
+    <!-- 手机号查询用户是否存在 -->
+    <select id="findByPhone" resultType="java.lang.Integer">
+         select count(*) from user where  phone = #{phone}
     </select>
 
-    <!-- 根据用户手机号码查询用户 -->
-    <select id="findByUid" resultType="cn.itcast.domain.user.User">
-         select * from user where  Uid = #{Uid}
+    <!--查询用户密码-->
+    <select id="fendUserPassword" resultType="java.lang.String">
+        SELECT
+            password
+        FROM
+            user
+        <where>
+            <if test="accountType==1">
+                AND name=#{account}
+            </if>
+            <if test="accountType==2">
+                AND phone=#{account}
+            </if>
+        </where>
     </select>
+
+    <!--查询用户登录返回信息-->
+    <select id="fendUser" resultType="cn.itcast.domain.user.User">
+        SELECT
+            name,token,image,uid
+        FROM
+            user
+        <where>
+            <if test="accountType==1">
+                AND name=#{account}
+            </if>
+            <if test="accountType==2">
+                AND phone=#{account}
+            </if>
+        </where>
+    </select>
+
 
 
     <!--注册用户 -->
@@ -54,6 +82,8 @@
     <select id="findByIdPhone" resultType="java.lang.String" parameterType="java.lang.String">
         SELECT phone from user where uid=#{uid}
     </select>
+
+
 
     <!--根据id修改手机号码-->
     <update id="updatePhone" parameterType="java.lang.String">

@@ -3,6 +3,7 @@ package cn.itcast.service;
 import cn.itcast.domain.user.Login;
 import cn.itcast.domain.user.User;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -15,6 +16,14 @@ public interface UserService {
      */
     public List<User> findAll();
 
+
+    /**
+     * 用户登录
+     * @param user 用户对象
+     * @return 登录需要的信息
+     */
+    public Integer accountLogin(User user , HttpServletRequest request) throws Exception;
+
     /**
      * 注册短信验证
      * @param phone 手机号(加密）
@@ -22,42 +31,15 @@ public interface UserService {
      */
     public Integer registerVerify(String phone) throws Exception;
 
-    /**
-     * 用户名查询用户
-     * @param name
-     * @return
-     */
-    public User findByName(String name);
 
     /**
-     * 查询用户信息
-     * @param phone
-     * @return
-     */
-    public User findByPhone(String phone);
-
-    /**
-     * 查询用户信息
-     * @param uid
-     * @return
-     */
-    public User findByUid(String uid);
-
-    /**
-     * 查询用户信息
-     * @param user
+     * 登录成功 返回客户端信息
+     * @param account 账户
+     * @param accountType 账号类型 1为账号 2为手机
      * @return
      * @throws Exception
      */
-    public User findAccount(User user) throws Exception;
-
-    /**
-     * 返回客户端信息
-     * @param user
-     * @return
-     * @throws Exception
-     */
-    public Login findLogin(User user) throws Exception;
+    public Login findReturnLogin(String account , Integer accountType) throws Exception;
 
     /**
      * 保存帐户信息
@@ -67,11 +49,18 @@ public interface UserService {
     public Integer saveAccount(User user);
 
     /**
-     * 根据手机号码修改密码
+     * 修改密码发送短信 , 验证原手机号发送短信
      * @param phone
-     * @param password
+     * @return
      */
-    public void updatePasswordPhone (String phone,String password);
+    public Integer smVerify(String phone,String type) throws Exception;
+
+    /**
+     * 修改密码
+     * @param user 用户对象
+     * @return
+     */
+    public Integer updatePasswordPhone (User user) throws Exception;
 
     /**
      * 修改用户头像
@@ -98,7 +87,7 @@ public interface UserService {
     public int updateInformation( User user);
 
     /**
-     * 根据id查询手机号码
+     * 查询手机号码
      * @param uid
      * @return
      */
