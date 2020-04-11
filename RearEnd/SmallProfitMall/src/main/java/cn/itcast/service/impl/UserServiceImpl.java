@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
         //查询该用户是否存在
         Integer user_phone =userDao.findByPhone(phone);
         //手机尚未注册
-        if (user_phone == 0) {
+        if (user_phone != 0) {
             return   result=4;
         }
         //生成验证码
@@ -101,6 +101,7 @@ public class UserServiceImpl implements UserService {
         if (redisUtil.get("Verify"+user.getPhone())==null||!user.getVerify().equals(redisUtil.get(user.getPhone()+"Verify"))){
             return  result=2;
         }
+        //设置初始值
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
         user.setUid(uuid);
         user.setName("smallProfit");
