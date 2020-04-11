@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer saveAccount(User user) {
         Integer result=0;
-        if (redisUtil.get("Verify"+user.getPhone())==null||!user.getVerify().equals(redisUtil.get(user.getPhone()+"Verify"))){
+        if (redisUtil.get("Verify"+user.getPhone())==null||!user.getVerify().equals(redisUtil.get("Verify"+user.getPhone()))){
             return  result=2;
         }
         //设置初始值
