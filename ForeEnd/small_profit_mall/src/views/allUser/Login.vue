@@ -222,6 +222,9 @@
                 });
                 this.switchLoginRegister(2);
               } else {
+                if(res.code==10003){
+                  return this.$message.error("验证码错误!");
+                }
                 this.$message.error("注册失败,请稍后重试");
               }
             })
@@ -242,12 +245,14 @@
                 type: "success"
               });
             } else {
-              if (res.code == 10003) {
-                this.$message.error(res.message);
+              if (res.code == 11211) {
+                return  this.$message.error("手机号已经被注册或手机号不存在");
               } else {
-                this.$message.error("手机号已经被注册或手机号不存在");
+                this.$message.error(res.message);
               }
             }
+
+
           })
         } else {
           this.$message({

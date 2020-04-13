@@ -17,7 +17,7 @@
                   <el-form label-position="left" label-width="80px" :model="userFrom"
                            :rules="rule" :status-icon="true" ref="userForm">
                     <el-form-item label="昵称" prop="name">
-                      <el-input type="text" v-model="userFrom.name" :maxlength="15"
+                      <el-input type="text" v-model="userFrom.name" :maxlength="10"
                                 :show-word-limit="true" style="max-width: 200px"></el-input>
                       <span class="user_name_span" v-if="userFrom.name!='smallProfit'">
                         可用于登录，请牢记哦~
@@ -239,7 +239,7 @@
           formData.append('file', data);
           formData.append('userId', this.params.userId);
           this.axios({
-            url: '/apiUrl/user/updatePortrait',
+            url: apiUrl+'/user/updatePortrait',
             method: 'post',
             data: formData,
             headers: {'Content-Type': 'multipart/form-data'},

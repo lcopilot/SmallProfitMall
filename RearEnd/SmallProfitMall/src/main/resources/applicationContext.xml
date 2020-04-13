@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd
@@ -13,197 +13,224 @@
 	http://www.springframework.org/schema/tx
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!--开启注解的扫描，希望处理service和dao，controller不需要Spring框架去处理-->
-    <context:component-scan base-package="cn.itcast" >
-        <!--配置哪些注解不扫描-->
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-    </context:component-scan>
+  <!--开启注解的扫描，希望处理service和dao，controller不需要Spring框架去处理-->
+  <context:component-scan base-package="cn.itcast">
+    <!--配置哪些注解不扫描-->
+    <context:exclude-filter type="annotation"
+      expression="org.springframework.stereotype.Controller"/>
+  </context:component-scan>
 
-    <!--Spring整合MyBatis框架-->
-    <!--配置连接池-->
-    <!-- 引入jdbc.properties属性文件 -->
-    <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
-    <context:property-placeholder location="classpath*:rabbitMq.properties" ignore-unresolvable="true"/>
-    <!--邮件配置-->
-    <context:property-placeholder location="classpath:mail.properties" ignore-unresolvable="true"/>
+  <!--Spring整合MyBatis框架-->
+  <!--配置连接池-->
+  <!-- 引入jdbc.properties属性文件 -->
+  <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
+  <context:property-placeholder location="classpath*:rabbitMq.properties"
+    ignore-unresolvable="true"/>
+  <!--邮件配置-->
+  <context:property-placeholder location="classpath:mail.properties" ignore-unresolvable="true"/>
 
-    <!-- 阿里 druid 数据库连接池 配置  -->
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
-        <!-- 数据库基本信息配置 -->
-        <property name="driverClassName" value="${jdbc.driver}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
+  <!-- 阿里 druid 数据库连接池 配置  -->
+  <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+    <!-- 数据库基本信息配置 -->
+    <property name="driverClassName" value="${jdbc.driver}"/>
+    <property name="url" value="${jdbc.url}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
 
-        <property name="filters" value="${jdbc.filters}"/>
+    <property name="filters" value="${jdbc.filters}"/>
 
-        <!-- 最大并发连接数 -->
-        <property name="maxActive" value="${jdbc.maxActive}"/>
+    <!-- 最大并发连接数 -->
+    <property name="maxActive" value="${jdbc.maxActive}"/>
 
-        <!-- 初始化连接数量 -->
-        <property name="initialSize" value="${jdbc.initialSize}"/>
+    <!-- 初始化连接数量 -->
+    <property name="initialSize" value="${jdbc.initialSize}"/>
 
-        <!-- 配置获取连接等待超时的时间 -->
-        <property name="maxWait" value="${jdbc.maxWait}"/>
+    <!-- 配置获取连接等待超时的时间 -->
+    <property name="maxWait" value="${jdbc.maxWait}"/>
 
-        <!-- 最小空闲连接数 -->
-        <property name="minIdle" value="${jdbc.minIdle}"/>
+    <!-- 最小空闲连接数 -->
+    <property name="minIdle" value="${jdbc.minIdle}"/>
 
-        <!-- 最大空闲连接数 -->
-        <property name="maxIdle" value="${jdbc.maxIdle}"/>
+    <!-- 最大空闲连接数 -->
+    <property name="maxIdle" value="${jdbc.maxIdle}"/>
 
-        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>
+    <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+    <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>
 
-        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-        <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
+    <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+    <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
 
-        <property name="validationQuery" value="${jdbc.validationQuery}"/>
-        <property name="testWhileIdle" value="${jdbc.testWhileIdle}"/>
-        <property name="testOnBorrow" value="${jdbc.testOnBorrow}"/>
-        <property name="testOnReturn" value="${jdbc.testOnReturn}"/>
-        <property name="maxOpenPreparedStatements" value="${jdbc.maxOpenPreparedStatements}"/>
+    <property name="validationQuery" value="${jdbc.validationQuery}"/>
+    <property name="testWhileIdle" value="${jdbc.testWhileIdle}"/>
+    <property name="testOnBorrow" value="${jdbc.testOnBorrow}"/>
+    <property name="testOnReturn" value="${jdbc.testOnReturn}"/>
+    <property name="maxOpenPreparedStatements" value="${jdbc.maxOpenPreparedStatements}"/>
 
-        <!-- 超过时间限制是否回收 -->
-        <property name="removeAbandoned" value="${jdbc.removeAbandoned}"/>
+    <!-- 超过时间限制是否回收 -->
+    <property name="removeAbandoned" value="${jdbc.removeAbandoned}"/>
 
-        <!-- 1800 秒，也就是 30 分钟 -->
-        <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}"/>
+    <!-- 1800 秒，也就是 30 分钟 -->
+    <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}"/>
 
-        <!-- 关闭 abanded 连接时输出错误日志 -->
-        <property name="logAbandoned" value="${jdbc.logAbandoned}"/>
-    </bean>
-
-
-    <!--配置SqlSessionFactory工厂-->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-<!--        &lt;!&ndash; mapper扫描 &ndash;&gt;-->
-        <property name="mapperLocations" value="classpath:cn/itcast/dao/*.xml"></property>
-<!--        <property name="typeAliasesPackage" value="com.*.mybatis.model" />-->
-    </bean>
-
-    <!--配置UserDao接口所在包-->
-    <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="cn.itcast.dao"/>
-    </bean>
-
-    <!--配置Spring框架声明式事务管理-->
-    <!-- 配置事务管理器 -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"></property>
-    </bean>
-
-    <!-- 配置事务的通知-->
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <!-- 配置事务的属性
-                isolation：用于指定事务的隔离级别。默认值是DEFAULT，表示使用数据库的默认隔离级别。
-                propagation：用于指定事务的传播行为。默认值是REQUIRED，表示一定会有事务，增删改的选择。查询方法可以选择SUPPORTS。
-                read-only：用于指定事务是否只读。只有查询方法才能设置为true。默认值是false，表示读写。
-                timeout：用于指定事务的超时时间，默认值是-1，表示永不超时。如果指定了数值，以秒为单位。
-                rollback-for：用于指定一个异常，当产生该异常时，事务回滚，产生其他异常时，事务不回滚。没有默认值。表示任何异常都回滚。
-                no-rollback-for：用于指定一个异常，当产生该异常时，事务不回滚，产生其他异常时事务回滚。没有默认值。表示任何异常都回滚。
-        -->
-        <tx:attributes>
-            <tx:method name="*" propagation="REQUIRED" read-only="false"/>
-            <tx:method name="find*" propagation="SUPPORTS" read-only="true"></tx:method>
-        </tx:attributes>
-    </tx:advice>
-
-    <!-- 配置aop-->
-    <aop:config>
-        <!-- 配置切入点表达式-->
-        <aop:pointcut id="pt1" expression="execution(* cn.itcast.service.impl.*.*(..))"></aop:pointcut>
-        <!--建立切入点表达式和事务通知的对应关系 -->
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt1"></aop:advisor>
-    </aop:config>
+    <!-- 关闭 abanded 连接时输出错误日志 -->
+    <property name="logAbandoned" value="${jdbc.logAbandoned}"/>
+  </bean>
 
 
+  <!--配置SqlSessionFactory工厂-->
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <!--        &lt;!&ndash; mapper扫描 &ndash;&gt;-->
+    <property name="mapperLocations" value="classpath:cn/itcast/dao/*.xml"></property>
+    <!--        <property name="typeAliasesPackage" value="com.*.mybatis.model" />-->
+  </bean>
 
-    <context:component-scan base-package="cn.itcast.util"></context:component-scan>
+  <!--配置UserDao接口所在包-->
+  <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="cn.itcast.dao"/>
+  </bean>
 
-    <bean id="annotationPropertyConfigurerRedis"
-      class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="order" value="1" />
-        <property name="ignoreUnresolvablePlaceholders" value="true" />
-        <property name="locations">
-            <list>
-                <value>classpath:redis.properties</value>
-            </list>
-        </property>
-    </bean>
+  <!--配置Spring框架声明式事务管理-->
+  <!-- 配置事务管理器 -->
+  <bean id="transactionManager"
+    class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"></property>
+  </bean>
 
-    <!-- redis数据源 -->
-    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <!-- 最大空闲数 -->
-        <property name="maxIdle" value="${redis.maxIdle}" />
-        <!-- 最大空连接数 -->
-        <property name="maxTotal" value="${redis.maxTotal}" />
-        <!-- 最大等待时间 -->
-        <property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
-        <!-- 返回连接时，检测连接是否成功 -->
-        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
-    </bean>
+  <!-- 配置事务的通知-->
+  <tx:advice id="txAdvice" transaction-manager="transactionManager">
+    <!-- 配置事务的属性
+            isolation：用于指定事务的隔离级别。默认值是DEFAULT，表示使用数据库的默认隔离级别。
+            propagation：用于指定事务的传播行为。默认值是REQUIRED，表示一定会有事务，增删改的选择。查询方法可以选择SUPPORTS。
+            read-only：用于指定事务是否只读。只有查询方法才能设置为true。默认值是false，表示读写。
+            timeout：用于指定事务的超时时间，默认值是-1，表示永不超时。如果指定了数值，以秒为单位。
+            rollback-for：用于指定一个异常，当产生该异常时，事务回滚，产生其他异常时，事务不回滚。没有默认值。表示任何异常都回滚。
+            no-rollback-for：用于指定一个异常，当产生该异常时，事务不回滚，产生其他异常时事务回滚。没有默认值。表示任何异常都回滚。
+    -->
+    <tx:attributes>
+      <tx:method name="*" propagation="REQUIRED" read-only="false"/>
+      <tx:method name="find*" propagation="SUPPORTS" read-only="true"></tx:method>
+    </tx:attributes>
+  </tx:advice>
 
-    <!-- Spring-redis连接池管理工厂 -->
-    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-        <!-- IP地址 -->
-        <property name="hostName" value="${redis.host}" />
-        <!-- 端口号 -->
-        <property name="port" value="${redis.port}" />
-        <!-- 超时时间 默认2000-->
-        <property name="timeout" value="${redis.timeout}" />
-        <!-- 连接池配置引用 -->
-        <property name="poolConfig" ref="poolConfig" />
-        <!-- usePool：是否使用连接池 -->
-        <property name="usePool" value="true"/>
-        <property name="password" value="${redis.password}"/>
-    </bean>
-
-    <!-- redis template definition -->
-    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
-        <property name="connectionFactory" ref="jedisConnectionFactory" />
-        <property name="keySerializer">
-            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
-        </property>
-        <property name="valueSerializer">
-            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
-        </property>
-        <property name="hashKeySerializer">
-            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
-        </property>
-        <property name="hashValueSerializer">
-            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
-        </property>
-        <!--开启事务  -->
-        <property name="enableTransactionSupport" value="true"></property>
-    </bean>
+  <!-- 配置aop-->
+  <aop:config>
+    <!-- 配置切入点表达式-->
+    <aop:pointcut id="pt1" expression="execution(* cn.itcast.service.impl.*.*(..))"></aop:pointcut>
+    <!--建立切入点表达式和事务通知的对应关系 -->
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="pt1"></aop:advisor>
+  </aop:config>
 
 
-    <!--自定义redis工具类,在需要缓存的地方注入此类  -->
-    <bean id="redisService" class="cn.itcast.util.redis.RedisUtil">
-        <constructor-arg ref="redisTemplate"/>
-        <property name="redisTemplate" ref="redisTemplate" />
-    </bean>
+  <context:component-scan base-package="cn.itcast.util"></context:component-scan>
 
-    <!--导入MQ配置文件-->
-    <import resource="classpath:messageQueue.xml" />
+  <bean id="annotationPropertyConfigurerRedis"
+    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="order" value="1"/>
+    <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    <property name="locations">
+      <list>
+        <value>classpath:redis.properties</value>
+      </list>
+    </property>
+  </bean>
 
-    <!--配置邮件接口-->
-    <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="${mail.smtp.host}"/>
-        <property name="username" value="${mail.smtp.username}"/>
-        <property name="password" value="${mail.smtp.password}"/>
-        <property name="defaultEncoding" value="${mail.smtp.defaultEncoding}"/>
-        <property name="javaMailProperties">
-            <props>
-                <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
-                <prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
-            </props>
-        </property>
-    </bean>
+  <!-- Jedis配置 -->
+  <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    <!-- 最大空闲数 -->
+    <property name="maxIdle" value="${redis.maxIdle}" />
+    <!-- 最大空连接数 -->
+    <property name="maxTotal" value="${redis.maxTotal}" />
+    <!-- 最大等待时间 -->
+    <property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
+    <!-- 返回连接时，检测连接是否成功 -->
+    <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+  </bean>
+  <!-- 配置Cluster -->
+  <bean id="redisClusterConfiguration" class="org.springframework.data.redis.connection.RedisClusterConfiguration">
+    <property name="maxRedirects" value="3"></property>
+    <!-- 节点配置 -->
+    <property name="clusterNodes">
+      <set>
+        <bean class="org.springframework.data.redis.connection.RedisClusterNode">
+          <constructor-arg name="host" value="${redis.host1}"></constructor-arg>
+          <constructor-arg name="port" value="${redis.port1}"></constructor-arg>
+        </bean>
+        <bean class="org.springframework.data.redis.connection.RedisClusterNode">
+          <constructor-arg name="host" value="${redis.host2}"></constructor-arg>
+          <constructor-arg name="port" value="${redis.port2}"></constructor-arg>
+        </bean>
+        <bean class="org.springframework.data.redis.connection.RedisClusterNode">
+          <constructor-arg name="host" value="${redis.host3}"></constructor-arg>
+          <constructor-arg name="port" value="${redis.port3}"></constructor-arg>
+        </bean>
+        <bean class="org.springframework.data.redis.connection.RedisClusterNode">
+          <constructor-arg name="host" value="${redis.host4}"></constructor-arg>
+          <constructor-arg name="port" value="${redis.port4}"></constructor-arg>
+        </bean>
+        <bean class="org.springframework.data.redis.connection.RedisClusterNode">
+          <constructor-arg name="host" value="${redis.host5}"></constructor-arg>
+          <constructor-arg name="port" value="${redis.port5}"></constructor-arg>
+        </bean>
+        <bean class="org.springframework.data.redis.connection.RedisClusterNode">
+          <constructor-arg name="host" value="${redis.host6}"></constructor-arg>
+          <constructor-arg name="port" value="${redis.port6}"></constructor-arg>
+        </bean>
+      </set>
+    </property>
+  </bean>
+  <!-- 配置jedis连接工厂 -->
+  <bean id="jeidsConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+    <constructor-arg ref="redisClusterConfiguration"/>
+    <constructor-arg ref="jedisPoolConfig"/>
+    <property name="usePool" value="true"/>
+    <!-- 超时时间 默认2000-->
+    <property name="timeout" value="${redis.timeout}" />
+    <!-- 连接池配置引用 -->
+    <property name="poolConfig" ref="jedisPoolConfig" />
+  </bean>
+  <!-- 配置RedisTemplate -->
+  <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+    <property name="connectionFactory" ref="jeidsConnectionFactory"/>
+    <!-- String -->
+    <property name="keySerializer">
+      <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+    </property>
+    <property name="valueSerializer">
+      <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+    </property>
+    <!-- hash -->
+    <property name="hashKeySerializer">
+      <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+    </property>
+    <property name="hashValueSerializer">
+      <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+    </property>
+  </bean>
 
 
+  <!--自定义redis工具类,在需要缓存的地方注入此类  -->
+  <bean id="redisService" class="cn.itcast.util.redis.RedisUtil">
+    <constructor-arg ref="redisTemplate"/>
+    <property name="redisTemplate" ref="redisTemplate"/>
+  </bean>
+
+  <!--导入MQ配置文件-->
+  <import resource="classpath:messageQueue.xml"/>
+
+  <!--配置邮件接口-->
+  <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="host" value="${mail.smtp.host}"/>
+    <property name="username" value="${mail.smtp.username}"/>
+    <property name="password" value="${mail.smtp.password}"/>
+    <property name="defaultEncoding" value="${mail.smtp.defaultEncoding}"/>
+    <property name="javaMailProperties">
+      <props>
+        <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+        <prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
+      </props>
+    </property>
+  </bean>
 
 
 </beans>
