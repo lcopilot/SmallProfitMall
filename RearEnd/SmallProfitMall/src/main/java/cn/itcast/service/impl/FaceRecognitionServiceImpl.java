@@ -192,7 +192,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
                 String score="score";
                 JSONObject result = videoValidation.getJSONObject("result");
                 //活体分值 小于0.88 返回不成功
-                if (result.getInt(score)<CREDIT){
+                if (result.getInt(score)>CREDIT){
                     JSONObject videoError = new JSONObject();
                     videoError.put("error_code",ERROR_CODE);
                     return videoError.toString();
