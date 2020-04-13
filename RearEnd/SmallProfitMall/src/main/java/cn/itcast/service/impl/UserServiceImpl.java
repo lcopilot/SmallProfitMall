@@ -326,13 +326,14 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int updateInformation(User user) {
-        int redis=0;
-        if(userDao.findByName(user.getName())>0){
-            User users = userDao.findByIdInformation(user.getUid());
+        User users = userDao.findByIdInformation(user.getUid());
+        int redis=userDao.updateInformation(user);
+        int nameQuantity =  userDao.findByName(user.getName());
+        if(nameQuantity>1){
             user.setName(users.getName());
-            redis=1;
+            userDao.updateInformation(user);
+            redis=2;
         }
-        redis =redis + userDao.updateInformation(user);
         return redis;
     }
 
