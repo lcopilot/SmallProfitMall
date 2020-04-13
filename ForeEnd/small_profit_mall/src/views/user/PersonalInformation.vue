@@ -239,7 +239,7 @@
           formData.append('file', data);
           formData.append('userId', this.params.userId);
           this.axios({
-            url: apiUrl+'/user/updatePortrait',
+            url: userApi.uploadAvatar,
             method: 'post',
             data: formData,
             headers: {'Content-Type': 'multipart/form-data'},
@@ -357,6 +357,7 @@
                 });
                 sessionStorage.setItem("username", this.userFrom.name);
               } else {
+
                 this.$message({
                   message: "修改失败!",
                   type: "error",

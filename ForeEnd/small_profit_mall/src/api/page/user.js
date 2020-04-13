@@ -33,7 +33,8 @@ export const get_Phone_Code_FP = phone => {
 /**
  * 用户信息
  */
-
+//头像上传
+export const uploadAvatar=apiUrl+'/user/updatePortrait';
 //获取用户信息
 export const getUserInformation = userId => {
   return http.requestGet(apiUrl+'/user/findByIdInformation/' + userId);
