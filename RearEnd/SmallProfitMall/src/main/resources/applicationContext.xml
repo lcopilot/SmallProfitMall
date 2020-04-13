@@ -145,10 +145,11 @@
     <property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
     <!-- 返回连接时，检测连接是否成功 -->
     <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+
   </bean>
   <!-- 配置Cluster -->
   <bean id="redisClusterConfiguration" class="org.springframework.data.redis.connection.RedisClusterConfiguration">
-    <property name="maxRedirects" value="3"></property>
+    <property name="maxRedirects" value="6"></property>
     <!-- 节点配置 -->
     <property name="clusterNodes">
       <set>

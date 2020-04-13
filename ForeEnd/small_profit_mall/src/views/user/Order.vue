@@ -102,16 +102,22 @@
               </div>
               <div style="padding-left: 2%;">
                 <template>
-                  <el-radio v-model="paymentMethod" label="1" class="order_rad" :disabled="orderData.order.paymentWay" v-if="isShow?orderData.order.paymentWay==1:true">
+                  <el-radio v-model="paymentMethod" label="1" class="order_rad"
+                            :disabled="orderData.order.paymentWay==1"
+                            v-if="isShow?orderData.order.paymentWay==1:true">
                     <svg-icon name="walletPayment" style="width: 25px;margin-bottom: -6%;"/>
-                    <div style="float: right;font-size: 12px;margin-left: 4px" >钱包支付</div>
+                    <div style="float: right;font-size: 12px;margin-left: 4px">钱包支付</div>
                     <br/>
                     <div style="float: right;font-size: 8px;margin-top: -8px;">Wallet Pay</div>
                   </el-radio>
-                  <el-radio v-model="paymentMethod" label="2" class="order_rad" :disabled="orderData.order.paymentWay" v-if="isShow?orderData.order.paymentWay==2:true">
+                  <el-radio v-model="paymentMethod" label="2" class="order_rad"
+                            :disabled="orderData.order.paymentWay==2"
+                            v-if="isShow?orderData.order.paymentWay==2:true">
                     <svg-icon name="aliPay" class="order_rad_svg"/>
                   </el-radio>
-                  <el-radio v-model="paymentMethod" label="3" class="order_rad" :disabled="orderData.order.paymentWay" v-if="isShow?orderData.order.paymentWay==3:true">
+                  <el-radio v-model="paymentMethod" label="3" class="order_rad"
+                            :disabled="orderData.order.paymentWay==3"
+                            v-if="isShow?orderData.order.paymentWay==3:true">
                     <svg-icon name="weChatPay" class="order_rad_svg"/>
                   </el-radio>
                 </template>
@@ -125,11 +131,13 @@
                   <el-col :span="7">
                     <div>
                       <el-radio-group v-model="expressType">
-                        <el-radio label="1" :disabled="orderData.order.deliveryWay" v-if="isShow?orderData.order.deliveryWay==1:true">
+                        <el-radio label="1" :disabled="orderData.order.deliveryWay==1"
+                                  v-if="isShow?orderData.order.deliveryWay==1:true">
                           <svg-icon name="postal" class="order_express"/>
                           邮政
                         </el-radio>
-                        <el-radio label="2" :disabled="orderData.order.deliveryWay" v-if="isShow?orderData.order.deliveryWay==2:true">
+                        <el-radio label="2" :disabled="orderData.order.deliveryWay==2"
+                                  v-if="isShow?orderData.order.deliveryWay==2:true">
                           <svg-icon name="FS" class="order_express"/>
                           顺丰
                         </el-radio>
@@ -233,7 +241,7 @@
                 <div class="cart_settlement1">
                   <a @click="settlement()">
                     <div class="cart_settlement2">
-                      结算
+                      {{isShow?'修改':'结算'}}
                     </div>
                   </a>
                 </div>
@@ -277,7 +285,7 @@
         //支付密码弹出框
         paymentPasswordVisible: false,
         //订单数据
-        orderData: {},
+        orderData: '',
         //支付密码
         paymentPassword: '',
         //订单商品列表
@@ -306,7 +314,7 @@
         //编辑按钮
         editShow: false,
         //是否是展示订单
-        isShow:false,
+        isShow: false,
       }
     },
     methods: {
@@ -320,6 +328,36 @@
       },
       //结算
       settlement() {
+        if (this.isShow) {
+          this.$confirm('确认修改嘛,只能修改一次哦~', '修改订单', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            let order = {
+              userId: sessionStorage.getItem("uId"),
+              orderId: this.orderNumber,
+              address: this.orderAddress,
+              orderNote: this.ordersNote,
+              deliveryTime: this.deliveryTime,
+            };
+            ordersApi.modifyOrder(order).then(res => {
+              if (res.success) {
+                this.$router.push({
+                  name: "OrderComplete",
+                  params: {
+                    isShow: true,
+                  }
+                });
+              }else {
+                this.$message({
+                  message:"修改失败!请稍后重试",
+                  type:"warning",
+                })
+              }
+            })
+          })
+        }else
         if (this.paymentMethod == 1) {
           if (this.orderData.faceRecognition) {
             this.$refs.face.faceVisible = true;
@@ -473,13 +511,12 @@
       getOrderComplete() {
         ordersApi.getOrderComplete(sessionStorage.getItem("uId"), this.orderNumber).then(res => {
               if (res.success) {
-                console.log(res);
                 this.orderData = res.resultOrder;
-                this.orderAddress=res.resultOrder.order.orderAddress;
-                this.paymentMethod=res.resultOrder.order.paymentWay.toString();
-                this.expressType=res.resultOrder.order.deliveryWay.toString();
-                this.deliveryTime=res.resultOrder.order.deliveryTime;
-                this.ordersNote=res.resultOrder.order.orderNote;
+                this.orderAddress = res.resultOrder.order.orderAddress;
+                this.paymentMethod = res.resultOrder.order.paymentWay.toString();
+                this.expressType = res.resultOrder.order.deliveryWay.toString();
+                this.deliveryTime = res.resultOrder.order.deliveryTime;
+                this.ordersNote = res.resultOrder.order.orderNote;
                 this.orderProductList = res.resultOrder.order.productContents;
               }
             }
@@ -494,9 +531,9 @@
       if (this.$route.params.isShow) {
         sessionStorage.setItem("isShow", this.$route.params.isShow);
       }
-      if (sessionStorage.getItem("isShow")=="true"){
-        this.isShow=true;
-        return this.getOrderComplete();
+      if (sessionStorage.getItem("isShow") == "true") {
+        this.isShow = true;
+        return  this.getOrderComplete();
       }
       this.getOrder();
     },

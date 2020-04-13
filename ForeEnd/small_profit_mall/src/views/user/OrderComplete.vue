@@ -8,7 +8,7 @@
         <el-col :span="16" :push="4">
           <el-card>
             <div style="margin-top: 5%">
-              <h1>支付成功,<span style="color: #409EFF">{{time}}</span> 秒后跳转首页</h1>
+              <h1>{{isShow?'修改成功':'支付成功'}},<span style="color: #409EFF">{{time}}</span> 秒后跳转首页</h1>
             </div>
             <div style="padding: 8% 0 3%">
               <el-button type="primary" style="margin-right: 4%" @click="goHome">去首页</el-button>
@@ -32,6 +32,8 @@
       return{
         time:5,
         timer:0,
+        //是否是修改
+        isShow:false,
       }
     },
     methods:{
@@ -47,7 +49,7 @@
         clearTimeout(this.timer);
         this.timer=setInterval(()=>{
           if (this.time==1){
-            this.time=5
+            this.time=5;
             this.goHome();
           }else {
             this.time--;
@@ -56,6 +58,9 @@
       }
     },
     created() {
+      if (this.$route.params.isShow) {
+        this.isShow = true;
+      }
       this.countdown();
     },
     destroyed() {

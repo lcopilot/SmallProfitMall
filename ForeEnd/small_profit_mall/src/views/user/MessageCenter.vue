@@ -148,8 +148,8 @@
                         </div>
                       </div>
                       <div class="message_order_btn message_order_confirm_btn">
-                        <el-button round size="mini" plain @click="checkOrder">修改</el-button>
-                        <el-button round size="mini" type="primary">确认
+                        <el-button round size="small" plain @click="checkOrder" v-if="paymentAssistant.changeQuantity==0">修改</el-button>
+                        <el-button round size="small" type="primary">确认
                         </el-button>
                       </div>
                     </div>
