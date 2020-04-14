@@ -18,6 +18,6 @@ export  const getOrderComplete=(userId,orderId)=>{
   return http.requestGet(apiUrl+'/OrderController/findDetailedOrder/'+userId+'/'+orderId)
 };
 //修改订单
-export const modifyOrder=()=>{
-  return http.requestPut('OrderController/updateOrder')
-}
+export const modifyOrder=order=>{
+  return http.requestPut(apiUrl+'OrderController/updateOrder',order)
+};
