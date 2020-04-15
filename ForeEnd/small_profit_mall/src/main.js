@@ -5,7 +5,6 @@ import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
-import VueAxios from 'vue-axios'
 import SvgIcon from './components/UtilsComponent/SvgIcon'
 import './assets/iconfont/iconfont.js'
 import './assets/iconfont/icon.css'
@@ -41,7 +40,7 @@ Vue.prototype.socketApi = socketApi
 
 //全局注册组件
 Vue.component('SvgIcon', SvgIcon)
-Vue.use(VueAxios,axios);
+Vue.prototype.axios = axios;
 Vue.use(ElementUI)//全局使用ElementUI
 Vue.config.productionTip = false;
 Vue.use(VuePhotoZoomPro);
