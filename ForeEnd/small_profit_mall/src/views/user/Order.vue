@@ -403,7 +403,7 @@
           };
           userApi.verifyPaymentPassword(params).then(res => {
             if (res.success) {
-              if (res.code=40000){
+              if (res.code==40000){
                 this.paymentPasswordVisible = false;
                 this.paymentPassword = '';
                 return this.$notify({
@@ -432,7 +432,7 @@
             this.$refs.face.faceAnimation = "http://img.fhxasdsada.xyz/afterRecognition.gif";
             this.$refs.face.stopNavigator();
             this.$refs.face.collectionPrompt = '';
-            if (res.code=40000){
+            if (res.code==40000){
               this.$refs.face.stopNavigator();
               this.$refs.face.faceVisible = false;
               return this.$notify({
