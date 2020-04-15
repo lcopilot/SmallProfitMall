@@ -398,7 +398,8 @@
         } else {
           let params = {
             userId: sessionStorage.getItem("uId"),
-            faceRecognition: this.paymentPassword
+            paymentPassword: this.paymentPassword,
+            orderId:this.orderNumber,
           };
           userApi.verifyPaymentPassword(params).then(res => {
             if (res.success) {
@@ -423,6 +424,7 @@
         let dataForm = new FormData();
         dataForm.append("userId", sessionStorage.getItem("uId"));
         dataForm.append("image", image);
+        dataForm.append("orderId", this.orderNumber);
         dataForm.append("videoFile", videoFile);
         this.$refs.face.recognitionFailure(20190415);
         ordersApi.facePayment(dataForm).then(res => {
