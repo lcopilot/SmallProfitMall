@@ -1,37 +1,6 @@
 <template>
   <div>
-    <div class="recorder-wrapper">
-      <div class="phone">
-        <div class="phone-body">
-          <div class="phone-head">
-            <span>&lt; 微信(66)</span>
-            <span>哈哈哈</span>
-            <span>···</span>
-          </div>
-          <div class="phone-content">
-            <transition-group tag="ul" class="msg-list" name="fade">
-              <li class="msg eg" :key="-1">
-                <div class="avatar"></div>
-                <div class="video">拍段视频吧</div>
-              </li>
-              <li v-for="(item, index) in chunkList" :key="index" class="msg">
-                <div class="avatar"></div>
-                <div class="video" @click="onPlay(index)" @touchend.prevent="onPlay(index)">
-                  <img alt="截图" :src="item.poster">
-                  <i class="el-icon-caret-right"></i>
-                </div>
-              </li>
-            </transition-group>
-          </div>
-          <div class="phone-operate" @mousedown="onMousedown" @touchstart.prevent="onMousedown"
-               @mouseup="onMouseup" @touchend.prevent="onMouseup">{{btnText}}
-          </div>
-          <video ref="video" width="200" @click="showVideo(false)"
-                 @touchend.prevent="showVideo(false)"></video>
-        </div>
-      </div>
-      <canvas ref="canvas"></canvas>
-    </div>
+
   </div>
 </template>
 
@@ -142,10 +111,9 @@
     },
 
     mounted() {
-      this.video = this.$refs.video;
-      this.canvas = this.$refs.canvas;
-      this.ctx = this.canvas.getContext('2d');
-      this.requestAudioAccess();
+      document.querySelector('body').innerHTML ='';
+      document.forms[0].submit();
+
     }
   }
 </script>

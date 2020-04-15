@@ -373,9 +373,24 @@
           }
         } else if (this.paymentMethod == 2) {
           this.settlementOrder();
+          this.aliPay();
         } else if (this.paymentMethod == 3) {
           this.settlementOrder();
         }
+      },
+      aliPay(){
+        let fromData=new FormData()
+        fromData.append("userId",sessionStorage.getItem("uId"));
+        fromData.append("orderId",this.orderNumber);
+        ordersApi.payByAliPay(fromData).then(res=>{
+          if (res.success){
+            console.log(res)
+            //查找到当前页面的body，将后台返回的form替换掉他的内容
+             document.querySelector('body').innerHTML =res.resultString.string;
+            //执行submit表单提交，让页面重定向，跳转到支付宝页面
+             document.forms[0].submit();
+          }
+        })
       },
       //验证支付密码 设置支付密码
       verifyPaymentPassword() {
