@@ -215,6 +215,7 @@
         },
         //地址列表
         addressList: [],
+        addressListData:'',
         //新增地址表单校验
         rules: {
           name: [
@@ -282,8 +283,7 @@
         this.dialogFormVisible = true;
         this.getAddressData();
         this.addressForm = this.addressList[index];
-        sessionStorage.setItem("addressListIndex", index);
-        sessionStorage.setItem("addressListData", JSON.stringify(this.addressList[index]))
+        this.addressListData=this.Util.deepClone(this.addressList[index]);
       },
       //修改默认时的方法
       changeDefault(index, addressId) {
@@ -324,9 +324,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             if (addressId != null) {
-              let addressList = JSON.parse(sessionStorage.getItem('addressListData'));
-              console.log()
-              let index = sessionStorage.getItem("addressListIndex");
+              let addressList = this.addressListData;
               let addressForm = this.addressForm;
               if (addressList.name == addressForm.name &&
                   addressList.phone == addressForm.phone &&
