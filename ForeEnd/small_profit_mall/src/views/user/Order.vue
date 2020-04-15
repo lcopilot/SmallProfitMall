@@ -357,8 +357,8 @@
               }
             })
           })
-        }else
-        if (this.paymentMethod == 1) {
+        }else if (this.paymentMethod == 1) {
+          this.settlementOrder();
           if (this.orderData.faceRecognition) {
             this.$refs.face.faceVisible = true;
             this.$refs.face.recognitionFailure();
@@ -372,7 +372,7 @@
             this.paymentPasswordVisible = true;
           }
         } else if (this.paymentMethod == 2) {
-
+          this.settlementOrder();
         } else if (this.paymentMethod == 3) {
           this.settlementOrder();
         }
@@ -398,11 +398,23 @@
         } else {
           let params = {
             userId: sessionStorage.getItem("uId"),
-            faceRecognition: this.paymentPassword
+            paymentPassword: this.paymentPassword,
+            orderId:this.orderNumber,
           };
           userApi.verifyPaymentPassword(params).then(res => {
             if (res.success) {
-              this.settlementOrder();
+              if (res.code=40000){
+                this.paymentPasswordVisible = false;
+                this.paymentPassword = '';
+                return this.$notify({
+                  title: '余额不足',
+                  message: '您的钱包余额不足,请更换支付方式',
+                  type: 'warning',
+                });
+              }
+              this.$router.push({
+                path: "/orderComplete"
+              });
             }
           });
         }
@@ -412,6 +424,7 @@
         let dataForm = new FormData();
         dataForm.append("userId", sessionStorage.getItem("uId"));
         dataForm.append("image", image);
+        dataForm.append("orderId", this.orderNumber);
         dataForm.append("videoFile", videoFile);
         this.$refs.face.recognitionFailure(20190415);
         ordersApi.facePayment(dataForm).then(res => {
@@ -419,8 +432,19 @@
             this.$refs.face.faceAnimation = "http://img.fhxasdsada.xyz/afterRecognition.gif";
             this.$refs.face.stopNavigator();
             this.$refs.face.collectionPrompt = '';
+            if (res.code=40000){
+              this.$refs.face.stopNavigator();
+              this.$refs.face.faceVisible = false;
+              return this.$notify({
+                title: '余额不足',
+                message: '您的钱包余额不足,请更换支付方式',
+                type: 'warning',
+              });
+            }
             setTimeout(() => {
-              this.settlementOrder();
+              this.$router.push({
+                path: "/orderComplete"
+              });
               //跳转支付成功页面
             }, 2500)
             // this.settlementOrder();
@@ -446,7 +470,7 @@
           }
         });
       },
-      //支付成功之后传递订单数据
+      //结算提交订单数据
       settlementOrder() {
         let order = {
           userId: sessionStorage.getItem("uId"),
@@ -457,28 +481,7 @@
           paymentWay: this.paymentMethod,
           deliveryWay: this.expressType,
         };
-        ordersApi.settlementOrder(order).then(res => {
-          if (res.success) {
-            this.$router.push({
-              path: "/orderComplete"
-            });
-          } else {
-            if (res.code == 40000) {
-              this.$notify({
-                title: '余额不足',
-                message: '您的钱包余额不足,请更换支付方式',
-                type: 'warning',
-              });
-              if (this.orderData.faceRecognition) {
-                this.$refs.face.stopNavigator();
-                this.$refs.face.faceVisible = false;
-              } else {
-                this.paymentPasswordVisible = false;
-                this.paymentPassword = '';
-              }
-            }
-          }
-        })
+        ordersApi.settlementOrder(order);
       },
       //获取地址数据
       getAddress(addressList) {
