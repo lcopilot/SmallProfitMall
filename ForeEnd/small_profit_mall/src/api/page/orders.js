@@ -1,9 +1,13 @@
 import http from '../util/public';
 import sysConfig from '../util/sysConfig'
 const apiUrl=sysConfig.smApiUrlPre;
-//支付人脸识别
+//人脸识别
 export const facePayment =data=>{
   return http.requestPost(apiUrl+'/OrderController/verificationFace',data)
+};
+//支付宝支付
+export const payByAliPay=data=>{
+  return http.requestPost(apiUrl+'OrderController/alipayPay',data)
 };
 //获取订单数据
 export const getOrder=(userId,orderNumber)=>{
