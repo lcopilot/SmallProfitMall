@@ -14,12 +14,8 @@ import cn.itcast.response.returnString.QueryString;
 import cn.itcast.response.returnString.ResultString;
 import cn.itcast.service.AccountSettingsService;
 import cn.itcast.service.OrderService;
-import cn.itcast.skd.AlipayConfig;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alipay.api.AlipayClient;
-import com.alipay.api.DefaultAlipayClient;
-import com.alipay.api.request.AlipayTradePagePayRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -101,7 +97,7 @@ public class OrderController {
     }
 
     /**
-     * 验证支付密码
+     * 验证支付密码支付
      * @param userId 用户id
      * @param paymentPassword 用户支付密码
      * @return
@@ -124,7 +120,7 @@ public class OrderController {
     }
 
     /**
-     * 人脸验证
+     * 验证人脸支付
      * @param image 用户人图片
      * @param userId 用户id
      * @param videoFile 视频流
@@ -150,6 +146,20 @@ public class OrderController {
     }
 
     /**
+     * 支付宝支付
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @return 支付宝收银台页面 html
+     */
+    @RequestMapping(value = "/alipayPay",method = RequestMethod.POST)
+    public QueryString alipayPay(String userId,String orderId, HttpServletRequest request) throws Exception {
+     String result= orderService.alipayPay(userId,orderId,request);
+     ResultString resultString= new ResultString();
+     resultString.setString(result);
+     return new QueryString(CommonCode.SUCCESS,resultString);
+    }
+
+    /**
      * 提交订单
      * @param order
      * @return
@@ -159,12 +169,10 @@ public class OrderController {
        String result = orderService.confirmOrder(order,request);
        if (result=="1"){
            return new QueryString(CommonCode.SUCCESS,null);
-       }else {
-           ResultString resultString = new ResultString();
-           resultString.setString(result);
-           return new QueryString(CommonCode.SUCCESS,resultString);
        }
+       return new QueryString(CommonCode.FAIL,null);
     }
+
 
     /**
      * 返回订单详细
@@ -200,80 +208,5 @@ public class OrderController {
 
     }
 
-    //支付宝发送
-    public String doPay(String WIDout_trade_no, String WIDtotal_amount, String WIDsubject, String WIDbody, HttpServletRequest request) throws Exception {
 
-        request.setCharacterEncoding("UTF-8");
-        //获得初始化的AlipayClient
-        AlipayClient alipayClient = new DefaultAlipayClient(
-
-                AlipayConfig.gatewayUrl,
-
-                AlipayConfig.app_id,
-
-                AlipayConfig.merchant_private_key, "json",
-
-                AlipayConfig.charset,
-
-                AlipayConfig.alipay_public_key,
-
-                AlipayConfig.sign_type);
-
-        //设置请求参数
-
-        AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
-
-        alipayRequest.setReturnUrl(AlipayConfig.return_url);
-
-        alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
-
-
-        //商户订单号，商户网站订单系统中唯一订单号，必填
-
-        String out_trade_no = new String(request.getParameter("WIDout_trade_no").getBytes("ISO-8859-1"), "UTF-8");
-
-        //付款金额，必填
-
-        String total_amount = new String(request.getParameter("WIDtotal_amount").getBytes("ISO-8859-1"), "UTF-8");
-
-        //订单名称，必填
-
-        String subject = new String(request.getParameter("WIDsubject").getBytes("ISO-8859-1"), "UTF-8");
-
-        //商品描述，可空
-
-        String body = new String(request.getParameter("WIDbody").getBytes("ISO-8859-1"), "UTF-8");
-
-        alipayRequest.setBizContent("{\"out_trade_no\":\"" + out_trade_no + "\","
-
-                + "\"total_amount\":\"" + total_amount + "\","
-
-                + "\"subject\":\"" + subject + "\","
-
-                + "\"body\":\"" + body + "\","
-
-                + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
-
-        //若想给BizContent增加其他可选请求参数，以增加自定义超时时间参数timeout_express来举例说明
-
-        //alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","
-
-        //      + "\"total_amount\":\""+ total_amount +"\","
-
-        //      + "\"subject\":\""+ subject +"\","
-
-        //      + "\"body\":\""+ body +"\","
-
-        //      + "\"timeout_express\":\"10m\","
-
-        //      + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
-
-        //请求参数可查阅【电脑网站支付的API文档-alipay.trade.page.pay-请求参数】章节
-
-        //给支付宝发送请求进行支付操作
-        String result = alipayClient.pageExecute(alipayRequest).getBody();
-
-        return result;
-
-    }
 }
