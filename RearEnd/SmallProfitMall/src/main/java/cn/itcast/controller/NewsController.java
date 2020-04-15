@@ -3,7 +3,6 @@ package cn.itcast.controller;
 import cn.itcast.domain.news.News;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
-import cn.itcast.response.QueryResult;
 import cn.itcast.response.news.Page;
 import cn.itcast.response.news.QueryResponseNews;
 import cn.itcast.service.NewsService;
@@ -69,9 +68,9 @@ public class NewsController {
 
     /**
      * 修改全部已读
-     * @param userId
-     * @param contentId
-     * @return
+     * @param userId 用户id
+     * @param contentId 消息id
+     * @return 成功或者失败
      */
     @RequestMapping(value = "/updateNewsStatus/{userId}/{contentId}",method = RequestMethod.PUT)
     public QueryResponseResult updateNewsStatus(@PathVariable("userId")String userId,@PathVariable("contentId")Integer contentId){
