@@ -1,15 +1,9 @@
 package cn.itcast.service;
 
-import cn.itcast.domain.address.Address;
 import cn.itcast.domain.order.Order;
-import cn.itcast.domain.order.ProductContent;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
-import javax.ws.rs.Path;
-import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.math.BigDecimal;
 
@@ -44,10 +38,10 @@ public interface OrderService {
     /**
      * 验证支付密码
      * @param userId 用户id
-     * @param faceRecognition 用户支付密码
+     * @param paymentPassword 用户支付密码
      * @return 是否正确
      */
-    public Boolean verificationPay(String userId , String faceRecognition) throws Exception;
+    public Integer verificationPay(String userId,String orderId, String paymentPassword) throws Exception;
 
     /**
      * 验证人脸
@@ -56,7 +50,7 @@ public interface OrderService {
      * @param videoFile 人脸视频
      * @return
      */
-    public String verificationFace(String image, String userId, InputStream videoFile) throws Exception;
+    public String verificationFace(String image, String userId, InputStream videoFile,String orderId) throws Exception;
 
 
     /**
@@ -64,8 +58,15 @@ public interface OrderService {
      * @param order 订单对象
      * @return 是否成功
      */
-    public Integer confirmOrder(Order order) throws Exception;
+    public String confirmOrder(Order order, HttpServletRequest request) throws Exception;
 
+    /**
+     * 付款成功 推送消息
+     * @param order
+     * @return
+     * @throws Exception
+     */
+    public Integer updateOrders(Order order) throws Exception;
 
     /**
      * 查询订单详细
@@ -111,7 +112,7 @@ public interface OrderService {
      * @param order 订单对象
      * @return
      */
-    public Integer updateOrder(Order order);
+    public Integer updateOrder(Order order) throws Exception;
 
     /**
      * 查询订单修改次数

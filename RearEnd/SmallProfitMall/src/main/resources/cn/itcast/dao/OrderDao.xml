@@ -129,12 +129,19 @@
         ON
             uo.orderId=o.orderId,
             orderAddress oa
-        WHERE
-            uo.userId=#{userId}
-        AND
+
+        <where>
             uo.orderId=#{orderId}
-        AND
-             o.orderId=oa.orderId
+            <if test="userId!=null">
+                AND   uo.userId=#{userId}
+            </if>
+            AND
+                uo.orderId=#{orderId}
+            AND
+                o.orderId=oa.orderId
+        </where>
+
+
     </select>
 
     <!--查询订单商品信息-->

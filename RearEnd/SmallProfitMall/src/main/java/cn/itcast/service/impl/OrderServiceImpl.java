@@ -11,15 +11,16 @@ import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.domain.shoppingCar.ShoppingCart;
 import cn.itcast.messageQueue.producer.shopping.ShoppingProducer;
 import cn.itcast.service.*;
+import cn.itcast.skd.AlipayConfig;
 import cn.itcast.util.encryption.AesEncryptUtil;
-import cn.itcast.util.logic.ConversionJson;
 import com.alibaba.fastjson.JSONObject;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.request.AlipayTradePagePayRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -182,33 +183,41 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * 验证支付密码
+     * 支付密码支付
      * @param userId 用户id
-     * @param faceRecognition 用户支付密码
+     * @param paymentPassword 用户支付密码
      * @return 是否正确
      */
     @Override
-    public Boolean verificationPay(String userId, String faceRecognition) throws Exception {
+    public Integer verificationPay(String userId,String orderId, String paymentPassword) throws Exception {
         AccountSettings accountSettings =accountSettingsDao.findAccountSettings(userId);
         String password = accountSettings.getPaymentPassword();
         //解密
        String sqlPassword = AesEncryptUtil.desEncrypt(password);
-        if (sqlPassword.equals(faceRecognition)){
-            return true;
+        if (sqlPassword.equals(paymentPassword)){
+            Boolean redis = walletPay(userId,orderId);
+            if (!redis){
+                return  3;
+            }
+            //查询订单信息
+            Order order =  orderDao.findOrder(userId,orderId);
+            //推送消息
+            updateOrders(order);
+            return 1;
         }else {
-            return false;
+            return 2;
         }
     }
 
     /**
-     * 验证人脸
+     * 人脸支付
      * @param image 人脸图片
      * @param userId 用户id
      * @param videoFile 人脸视频
      * @return
      */
     @Override
-    public String verificationFace(String image, String userId, InputStream videoFile) throws Exception {
+    public String verificationFace(String image, String userId, InputStream videoFile,String orderId) throws Exception {
         //解密人脸
         image=AesEncryptUtil.desEncrypt(image);
         //进行人脸检测
@@ -224,62 +233,35 @@ public class OrderServiceImpl implements OrderService {
         if (!result.equals(results)){
             return results;
         }
+        //查询订单信息
+        Order order =  orderDao.findOrder(userId,orderId);
+        //推送消息
+        updateOrders(order);
         return result;
     }
 
     /**
-     * 确认订单
+     * 提交订单
      * @param order 订单对象
      * @return 1为支付成功 2 为余额不足
      */
     @Override
-    public Integer confirmOrder(Order order) throws Exception {
-        //返回结果
-        Integer result=0;
-        //判断用户付款方式 1为钱包支付 2为支付宝支付 3我微信支付
-        if (order.getPaymentWay().equals(1)){
-            //用户余额
-            String encryptionBalance =  memberDao.findBalance(order.getUserId());
-            //获取订单总计
-            String totals = totals=orderDao.fenOrderTotal(order.getUserId(),order.getOrderId());
-            //解密余额
-            String decodeBalances = AesEncryptUtil.desEncrypt(encryptionBalance);
-            BigDecimal balance=new BigDecimal(decodeBalances);
-            BigDecimal total = new BigDecimal(totals);
-            //保留两位小数
-            int scale=2;
-            //相减结果
-            String difference= balance.subtract(total).setScale(scale, BigDecimal.ROUND_HALF_UP).toString();
-            double value = Double.valueOf(difference.toString());
-            //判断用户余额是否充足
-            if (value<0){
-                return 2;
-            }else {
-                //加密剩余余额
-                String balances = AesEncryptUtil.encrypt(difference);
-                //跟新账户余额
-                memberDao.updateBalance(order.getUserId(),balances);
-                //修改订单状态 2为确认订单
-                order.setOrderState(2);
-                //设置付款时间
-                order.setPaymentTime(new Date());
-                //确认订单
-                orderDao.confirmOrder(order);
-                //转换地址
-                Address address = addressService.ordersDefaults(order.getAddress());
-                //添加订单地址
-                orderDao.addOrdeAddress(order.getOrderId(),address);
-                //邮件通知
-                emailNotification(order.getUserId());
-                //推送消息
-                notificationUser(order,totals);
-                result=1;
-            }
-            return result;
+    public String confirmOrder(Order order, HttpServletRequest request) throws Exception {
+        //确认订单
+        orderDao.confirmOrder(order);
+        //转换地址
+        Address address = addressService.ordersDefaults(order.getAddress());
+        //添加订单地址
+        orderDao.addOrdeAddress(order.getOrderId(),address);
+        //查询订单信息
+        Order orders =  orderDao.findOrder(order.getUserId(),order.getOrderId());
+        if (order.getPaymentWay()==2){
+            String pay = doPay(orders.getOrderId() , orders.getOrderTotal().toString() , "cs" ,request);
+            return pay;
         }
-
-       return result;
+        return "1";
     }
+
 
     /**
      * 查询详细订单
@@ -318,6 +300,10 @@ public class OrderServiceImpl implements OrderService {
         String orderId =timeStamp.toString()+orderId1;
         return orderId;
     }
+
+
+
+
 
     /**
      * 购物车商品信息添加到订单
@@ -374,6 +360,24 @@ public class OrderServiceImpl implements OrderService {
         return orderNotes;
     }
 
+    /**
+     * 付款成功 修改订单
+     * @param order 订单对象
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Integer updateOrders(Order order) throws Exception {
+        //修改订单状态 2为确认订单
+        order.setOrderState(2);
+        //设置付款时间
+        order.setPaymentTime(new Date());
+        //邮件通知
+        emailNotification(order.getUserId());
+        //推送消息
+        notificationUser(order,order.getOrderTotal().toString());
+        return 1;
+    }
     /**
      * 支付成功用于发送邮件
      * @param userId
@@ -525,4 +529,89 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
+    public Boolean walletPay(String userId,String orderId) throws Exception {
+        //查询用户余额
+        String encryptionBalance = memberDao.findBalance(userId);
+        //获取订单总计
+        String totals = totals = orderDao.fenOrderTotal(userId, orderId);
+        //解密余额
+        String decodeBalances = AesEncryptUtil.desEncrypt(encryptionBalance);
+        BigDecimal balance = new BigDecimal(decodeBalances);
+        BigDecimal total = new BigDecimal(totals);
+        //保留两位小数
+        int scale = 2;
+        //相减结果
+        String difference = balance.subtract(total).setScale(scale, BigDecimal.ROUND_HALF_UP).toString();
+        double value = Double.valueOf(difference.toString());
+        //判断用户余额是否充足
+        if (value < 0) {
+            return false;
+        } else {
+            //加密剩余余额
+            String balances = AesEncryptUtil.encrypt(difference);
+            //跟新账户余额
+            memberDao.updateBalance(userId, balances);
+            return true;
+        }
+    }
+    //支付宝付款
+    public String doPay(String orderId ,String total , String name ,HttpServletRequest request) throws Exception {
+
+        request.setCharacterEncoding("UTF-8");
+        //获得初始化的AlipayClient
+        AlipayClient alipayClient = new DefaultAlipayClient(
+
+                AlipayConfig.gatewayUrl,
+
+                AlipayConfig.app_id,
+
+                AlipayConfig.merchant_private_key, "json",
+
+                AlipayConfig.charset,
+
+                AlipayConfig.alipay_public_key,
+
+                AlipayConfig.sign_type);
+
+        //设置请求参数
+
+        AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
+
+        alipayRequest.setReturnUrl(AlipayConfig.return_url);
+
+        alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
+
+
+        alipayRequest.setBizContent("{\"out_trade_no\":\"" + orderId + "\","
+
+                + "\"total_amount\":\"" + total + "\","
+
+                + "\"subject\":\"" + name + "\","
+
+                + "\"body\":\"" + "cs" + "\","
+
+                + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
+
+        //若想给BizContent增加其他可选请求参数，以增加自定义超时时间参数timeout_express来举例说明
+
+        //alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","
+
+        //      + "\"total_amount\":\""+ total_amount +"\","
+
+        //      + "\"subject\":\""+ subject +"\","
+
+        //      + "\"body\":\""+ body +"\","
+
+        //      + "\"timeout_express\":\"10m\","
+
+        //      + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
+
+        //请求参数可查阅【电脑网站支付的API文档-alipay.trade.page.pay-请求参数】章节
+
+        //给支付宝发送请求进行支付操作
+        String result = alipayClient.pageExecute(alipayRequest).getBody();
+
+        return result;
+
+    }
 }

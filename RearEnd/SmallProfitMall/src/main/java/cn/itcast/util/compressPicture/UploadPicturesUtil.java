@@ -11,20 +11,28 @@ public class UploadPicturesUtil {
     public static String UploadPicturesUtil(InputStream ins,String uuid) throws IOException {
         SimpleUpload uploading = new SimpleUpload();
         PictureUtilOne pictureUtil = new PictureUtilOne();
-        String outputSize =getImgBasePath()+"\\"+uuid+".JPEG" ;   //输出文件地址
-        String space="mugebl";  //七牛云存储空间
-        String userId=uuid;     //用户id
-        InputStream in =ins ;   //文件流
+        //输出文件地址
+        String outputSize =getImgBasePath()+"\\"+uuid+".JPEG" ;
+        //七牛云存储空间
+        String space="mugebl";
+        //用户id
+        String userId=uuid;
+        //文件流
+        InputStream in =ins ;
         File file = new File(getImgBasePath());
-        if(!file.exists()){ //判断文件夹是否存在
+        //判断文件夹是否存在
+        if(!file.exists()){
             // 创建该文件夹
             file.mkdirs();
         }
-        pictureUtil.pictureUtilOne(in,outputSize);      //压缩图片
-        uploading.overrideUpload(outputSize,userId,space);   //上传文件
-
-        PathUtil.deleteFile(outputSize);                    //根据地址删除文件图片
-        String site =" http://img.fhxasdsada.xyz/"+userId+"?t="+new Date().getTime();//返回图片地址
+        //调用压缩图片
+        pictureUtil.pictureUtilOne(in,outputSize);
+        //上传文件
+        uploading.overrideUpload(outputSize,userId,space);
+        //根据地址删除文件图片
+        PathUtil.deleteFile(outputSize);
+        //返回图片地址
+        String site =" http://img.fhxasdsada.xyz/"+userId+"?t="+new Date().getTime();
         return site;
     }
 

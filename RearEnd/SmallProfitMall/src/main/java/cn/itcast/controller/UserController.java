@@ -1,34 +1,29 @@
 package cn.itcast.controller;
 
-import cn.itcast.skd.Constant;
 import cn.itcast.domain.user.Login;
-import cn.itcast.domain.user.Password;
 import cn.itcast.domain.user.User;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.service.UserService;
+import cn.itcast.skd.Constant;
 import cn.itcast.skd.Vaptcha;
 import cn.itcast.util.encryption.AesEncryptUtil;
-import cn.itcast.util.logic.GetFourRandom;
-import cn.itcast.util.logic.sessionUtil;
 import cn.itcast.util.redis.RedisUtil;
-import cn.itcast.util.user.SmsUtils;
-import cn.itcast.util.verify.IPUtil;
-import cn.itcast.util.verify.TCaptchaVerify;
 import cn.itcast.util.verify.VerifyUtil;
 import com.aliyuncs.exceptions.ClientException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 帐户web
@@ -181,7 +176,9 @@ public class UserController {
 	@RequestMapping(value = "/updatePortrait", method = RequestMethod.POST)
 	public QueryResponseResult updatePortrait(MultipartFile file, String userId)
 			throws IOException {
+		//创建返回对象
 		QueryResult queryResult = new QueryResult();
+
 		InputStream fileInputStream = file.getInputStream();
 		String Image = userService.updatePortrait(fileInputStream, userId);
 		List Images = new ArrayList();
