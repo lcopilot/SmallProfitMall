@@ -11,6 +11,10 @@ import './assets/iconfont/icon.css'
 import './assets/reset.scss'
 import './router/guard'
 import 'vue2-animate/dist/vue2-animate.min.css'
+import * as socketApi from './api/util/socket'
+import * as Util from '../src/util/util'
+
+Vue.prototype.Util=Util;
 //提升事件响应
 import 'default-passive-events'
 //放大镜组件
@@ -35,7 +39,7 @@ Vue.use(animated)
 Vue.use(VideoPlayer)
 
 //引用websocket
-import * as socketApi from './api/util/socket'
+
 Vue.prototype.socketApi = socketApi
 
 //全局注册组件

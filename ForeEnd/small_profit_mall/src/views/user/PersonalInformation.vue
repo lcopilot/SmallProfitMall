@@ -232,7 +232,6 @@
       //头像上传的方法
       uploadImg() {
         this.$refs.cropper.getCropBlob((data) => {
-          console.log(data);
           this.imgCrop = false;
           this.progressFlag = true;
           let formData = new FormData();
