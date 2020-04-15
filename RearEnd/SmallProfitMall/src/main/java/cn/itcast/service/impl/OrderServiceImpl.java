@@ -240,6 +240,14 @@ public class OrderServiceImpl implements OrderService {
         return result;
     }
 
+    @Override
+    public String alipayPay(String userId, String orderId,HttpServletRequest request) throws Exception {
+        //查询订单信息
+        Order orders =  orderDao.findOrder(userId,orderId);
+            String pay = doPay(orders.getOrderId() , orders.getOrderTotal().toString() , "WLSC" ,request);
+            return pay;
+    }
+
     /**
      * 提交订单
      * @param order 订单对象
@@ -253,12 +261,7 @@ public class OrderServiceImpl implements OrderService {
         Address address = addressService.ordersDefaults(order.getAddress());
         //添加订单地址
         orderDao.addOrdeAddress(order.getOrderId(),address);
-        //查询订单信息
-        Order orders =  orderDao.findOrder(order.getUserId(),order.getOrderId());
-        if (order.getPaymentWay()==2){
-            String pay = doPay(orders.getOrderId() , orders.getOrderTotal().toString() , "cs" ,request);
-            return pay;
-        }
+
         return "1";
     }
 

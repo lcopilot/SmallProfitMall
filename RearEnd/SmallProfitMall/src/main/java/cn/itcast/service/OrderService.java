@@ -36,7 +36,7 @@ public interface OrderService {
     public Order findOrder(String userId ,String orderId);
 
     /**
-     * 验证支付密码
+     * 验证支付密码支付
      * @param userId 用户id
      * @param paymentPassword 用户支付密码
      * @return 是否正确
@@ -44,7 +44,7 @@ public interface OrderService {
     public Integer verificationPay(String userId,String orderId, String paymentPassword) throws Exception;
 
     /**
-     * 验证人脸
+     * 验证人脸支付
      * @param image 人脸图片
      * @param userId 用户id
      * @param videoFile 人脸视频
@@ -52,6 +52,14 @@ public interface OrderService {
      */
     public String verificationFace(String image, String userId, InputStream videoFile,String orderId) throws Exception;
 
+
+    /**
+     * 支付宝支付
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @return 支付宝收银台
+     */
+    public String alipayPay(String userId,String orderId, HttpServletRequest request) throws Exception;
 
     /**
      * 确认订单
