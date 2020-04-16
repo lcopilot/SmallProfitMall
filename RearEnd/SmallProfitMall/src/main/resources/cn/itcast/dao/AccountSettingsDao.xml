@@ -19,7 +19,6 @@
         SELECT * FROM `userPassword` WHERE userId=#{userId}
     </select>
     
-    
 
     <!--修改用户登录密码-->
     <update id="updatePassword" parameterType="java.lang.String">

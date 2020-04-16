@@ -140,11 +140,11 @@ public class UserController {
 		Integer result = userService.smVerify(phone,"updateVerify");
 
 		if (result ==1) {
-				return new QueryResponseResult(CommonCode.SUCCESS, null);
-			}
+			return new QueryResponseResult(CommonCode.SUCCESS, null);
+		}
 		if (result==2){
-				return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
-			}
+			return new QueryResponseResult(CommonCode.SERVER_ERROR, null);
+		}
 		return new QueryResponseResult(CommonCode.FAIL, null);
 
 	}
@@ -162,7 +162,7 @@ public class UserController {
 		if (result==1){
 			return new QueryResponseResult(CommonCode.SUCCESS, null);
 		} else {
-		return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
+			return new QueryResponseResult(CommonCode.INVALID_PARAM, null);
 		}
 	}
 
@@ -171,14 +171,12 @@ public class UserController {
 	 * 根据uid修改头像
 	 *
 	 * @param
-	 * @return
+	 * @return 用户头像
 	 */
 	@RequestMapping(value = "/updatePortrait", method = RequestMethod.POST)
 	public QueryResponseResult updatePortrait(MultipartFile file, String userId)
 			throws IOException {
-		//创建返回对象
 		QueryResult queryResult = new QueryResult();
-
 		InputStream fileInputStream = file.getInputStream();
 		String Image = userService.updatePortrait(fileInputStream, userId);
 		List Images = new ArrayList();
