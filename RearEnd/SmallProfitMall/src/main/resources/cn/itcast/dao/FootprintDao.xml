@@ -5,12 +5,12 @@
 <mapper namespace="cn.itcast.dao.FootprintDao">
     <!--添加足迹-->
     <insert id="addFootprint" parameterType="cn.itcast.domain.footprint.Footprint">
-    INSERT
-    INTO
-    userFootprint
-    (userId,productId,footprintTime)
-    VALUES
-    (#{userId},#{productId},#{footprintTime})
+        INSERT
+        INTO
+            userFootprint
+            (userId,productId,footprintTime)
+        VALUES
+            (#{userId},#{productId},#{footprintTime})
     </insert>
 
     <update id="updateTime">

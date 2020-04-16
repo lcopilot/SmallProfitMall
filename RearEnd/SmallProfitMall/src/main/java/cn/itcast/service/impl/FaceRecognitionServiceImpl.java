@@ -3,16 +3,13 @@ import cn.itcast.service.AccountSettingsService;
 import cn.itcast.service.FaceRecognitionService;
 import cn.itcast.util.encryption.AesEncryptUtil;
 import cn.itcast.util.humanFace.HumanFaceUtil;
-import com.alibaba.fastjson.JSON;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * @author Kite
@@ -192,7 +189,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
                 String score="score";
                 JSONObject result = videoValidation.getJSONObject("result");
                 //活体分值 小于0.88 返回不成功
-                if (result.getInt(score)>CREDIT){
+                if (result.getInt(score)<CREDIT){
                     JSONObject videoError = new JSONObject();
                     videoError.put("error_code",ERROR_CODE);
                     return videoError.toString();

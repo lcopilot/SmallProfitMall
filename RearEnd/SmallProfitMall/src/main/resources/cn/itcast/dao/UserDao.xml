@@ -83,8 +83,6 @@
         SELECT phone from user where uid=#{uid}
     </select>
 
-
-
     <!--根据id修改手机号码-->
     <update id="updatePhone" parameterType="java.lang.String">
         update user set phone = #{phone} where uid=#{uid}

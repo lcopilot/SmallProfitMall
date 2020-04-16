@@ -3,24 +3,18 @@ package cn.itcast.service.impl;
 import cn.itcast.dao.AccountSettingsDao;
 import cn.itcast.dao.MemberDao;
 import cn.itcast.dao.UserDao;
-import cn.itcast.domain.accountSettings.AccountSettings;
 import cn.itcast.domain.user.Login;
 import cn.itcast.domain.user.User;
-import cn.itcast.response.CommonCode;
-import cn.itcast.response.QueryResponseResult;
 import cn.itcast.service.UserService;
-
 import cn.itcast.util.compressPicture.UploadPicturesUtil;
 import cn.itcast.util.encryption.AesEncryptUtil;
 import cn.itcast.util.logic.GetFourRandom;
-import cn.itcast.util.logic.sessionUtil;
 import cn.itcast.util.redis.RedisUtil;
 import cn.itcast.util.user.SmsUtils;
 import cn.itcast.util.verify.IPUtil;
 import cn.itcast.util.verify.TCaptchaVerify;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -98,6 +92,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer saveAccount(User user) {
         Integer result=0;
+
         if (redisUtil.get("Verify"+user.getPhone())==null||!user.getVerify().equals(redisUtil.get("Verify"+user.getPhone()))){
             return  result=2;
         }
@@ -115,6 +110,8 @@ public class UserServiceImpl implements UserService {
         accountSettingsDao.addUser(uuid);
         //新增用户会员信息
         memberDao.addUser(uuid);
+        //删除缓存库验证码
+        redisUtil.del("Verify"+user.getPhone());
         return result=1;
     }
 
@@ -171,26 +168,6 @@ public class UserServiceImpl implements UserService {
             String userPassword = AesEncryptUtil.desEncrypt(password);
             Boolean felt=userPassword.equals(user.getPassword());
             System.out.println(felt);
-            if (felt){
-                return 2;
-            }
-            return 7;
-        }
-
-        if (phone==1 && name==1){
-            //查询用户密码
-            String password = userDao.fendUserPassword(user.getName(),1);
-            //解密比对
-            String userPassword = AesEncryptUtil.desEncrypt(password);
-            Boolean felt=userPassword.equals(user.getPassword());
-            if (felt){
-                return 1;
-            }
-            //查询用户密码
-            String passwords = userDao.fendUserPassword(Account,2);
-            //解密比对
-            String userPasswords = AesEncryptUtil.desEncrypt(password);
-            Boolean felts=userPasswords.equals(user.getPassword());
             if (felt){
                 return 2;
             }
@@ -256,9 +233,9 @@ public class UserServiceImpl implements UserService {
         if (flag) {
             //验证码存入缓存
             Boolean fale = redisUtil.set(type+phones,FR,300);
-           return 1;
+            return 1;
         } else {
-           return 2;
+            return 2;
         }
     }
 
@@ -297,7 +274,12 @@ public class UserServiceImpl implements UserService {
         return Image;
     }
 
-    //根据uid查询用户个人信息
+    /**
+     * 查询用户个人信息
+     * @param uid 用户id
+     * @return
+     * @throws Exception
+     */
     @Override
     public User findByIdInformation(String uid) throws Exception {
         User users=userDao.findByIdInformation(uid);
@@ -308,12 +290,12 @@ public class UserServiceImpl implements UserService {
             System.out.println(users.getEmail());
             String emailes=users.getEmail();
             String email = AesEncryptUtil.desEncrypt(users.getEmail());
-             users.setEmail(concealEmail(email));
+            users.setEmail(concealEmail(email));
         }
         //解密邮箱
 
         if (users.getBirthday()!=null){
-           List birthday = Arrays.asList(users.getBirthday().split("-"));
+            List birthday = Arrays.asList(users.getBirthday().split("-"));
             users.setBirthdays(birthday);
         }
         return users;
@@ -326,14 +308,13 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int updateInformation(User user) {
-        User users = userDao.findByIdInformation(user.getUid());
-        int redis=userDao.updateInformation(user);
-        int nameQuantity =  userDao.findByName(user.getName());
-        if(nameQuantity>1){
+        int redis=0;
+        if(userDao.findByName(user.getName())>0){
+            User users = userDao.findByIdInformation(user.getUid());
             user.setName(users.getName());
-            userDao.updateInformation(user);
-            redis=2;
+            redis=1;
         }
+        redis =redis + userDao.updateInformation(user);
         return redis;
     }
 
@@ -349,7 +330,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int updatePhone(String phone, String uid) {
-         return userDao.updatePhone(phone,uid);
+        return userDao.updatePhone(phone,uid);
     }
 
 
