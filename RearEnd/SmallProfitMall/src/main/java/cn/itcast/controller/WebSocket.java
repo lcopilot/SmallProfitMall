@@ -85,14 +85,7 @@ public class WebSocket {
         //解析发送过来的数据,并封装到connection实体类
         Connection connection = (Connection) ConversionJson.JSONToObj(message, Connection.class);
         System.out.println(connection);
-//        //连接正常
-//        if (code.equals(connectionReceive.getMessage().getCode())){
-//            QueryResultString result = new QueryResultString();
-//            result.setCallback(connectionReceive.getCallback().getCallbackName());
-//            return redis = ConversionJson.objectToJson(new QueryResponseResultString(CommonCode.normal,result));
-//        }else{
-//            return redis;
-//        }
+        //心跳包
         if (code.equals(connection.getCode())){
             return redis= ConversionJson.objectToJson(new  QueryResponseResult(SocketCommonCode.normal,null));
         }else {
