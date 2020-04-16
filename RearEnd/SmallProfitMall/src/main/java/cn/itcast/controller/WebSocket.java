@@ -2,14 +2,11 @@ package cn.itcast.controller;
 
 import cn.itcast.domain.news.News;
 import cn.itcast.domain.webSocket.Connection;
-import cn.itcast.domain.webSocket.ConnectionReceive;
-import cn.itcast.response.*;
+import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.connection.QueryResponseResultString;
 import cn.itcast.response.connection.QueryResultString;
 import cn.itcast.response.connection.SocketCommonCode;
 import cn.itcast.util.logic.ConversionJson;
-import com.alibaba.fastjson.JSONObject;
-import net.sf.json.JSONString;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +14,6 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -128,7 +124,7 @@ public class WebSocket {
        int c = USER_ONLINE_MAP.size();
         //返回值
         Integer redis=0;
-        if(true){
+        if(USER_ONLINE_MAP.get(message.get(0).getUserId())!=null){
             for (int i = 0; i <message.size() ; i++) {
                 //消息对象
                 QueryResultString queryResultString = new QueryResultString();
