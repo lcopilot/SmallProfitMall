@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -160,7 +161,7 @@ public class PayController {
 
 
     @RequestMapping("/payNotify")
-    public String payNotify(HttpServletRequest request) throws Exception {
+    public void payNotify(HttpServletRequest request,  HttpServletResponse response) throws Exception {
         // 获取支付宝POST过来反馈信息
         Map<String, String> params = new HashMap<String, String>();
         Map<String, String[]> requestParams = request.getParameterMap();
@@ -184,11 +185,9 @@ public class PayController {
             Order order = orderService.findDetailedOrder(null,orderId);
             Integer integer = orderService.updateOrders(order);
 
-            return integer+"";
+            response.sendRedirect("http://localhost:13000/home");
         } else {
-            // 验证失败
 
-            return "fail";
 
         }
 
