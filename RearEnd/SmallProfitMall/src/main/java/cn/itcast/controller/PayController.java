@@ -185,7 +185,7 @@ public class PayController {
             Order order = orderService.findDetailedOrder(null,orderId);
             Integer integer = orderService.updateOrders(order);
 
-            response.sendRedirect("http://localhost:13000/home");
+            response.sendRedirect("http://localhost:13000/orderComplete");
         } else {
 
 
