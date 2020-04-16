@@ -105,7 +105,6 @@ public class OrderPushNews {
         consumptionRecords.setPaymentAmount(orders.getOrderTotal().toString());
         //设置消息类型id
         newsConsumptionRecords.setNewsTypeId(orders.getOrderId());
-
         memberDao.addConsumptionRecords(consumptionRecords);
         ConsumptionRecords consumptionRecords1 = memberDao.findConsumptionRecords(orders.getUserId(),orders.getOrderId());
         String stringOrderJson1= JSONObject.toJSONString(consumptionRecords1);
@@ -133,8 +132,17 @@ public class OrderPushNews {
                     @SneakyThrows
                     @Override
                     public void run() {
-                        while (true) {
-                            newsService.pushNews(newsList,unreadQuantity);
+                        //尝试次数
+                        Integer  frequency=0;
+                        //最多尝试次数
+                        Integer maximum=3;
+                        Boolean sign=true;
+                        while (sign) {
+                            frequency  = newsService.pushNews(newsList,unreadQuantity);
+                            maximum--;
+                            if (frequency==1||maximum==0){
+                                sign=false;
+                            }
                             try {
                                 Thread.sleep(timeInterval);
                             } catch (InterruptedException e) {

@@ -101,8 +101,9 @@ public class HomepageServiceImpl implements HomepageService {
      */
     @Override
     public List<Classify> findNavigation2() {
-        List<Classify> redis = (List<Classify>) redisUtil.lGet("Classify", 0, -1);
-        if (redis.size() == 0) {
+       // List<Classify> redis = (List<Classify>) redisUtil.lGet("Classify", 0, -1);
+  //      if (redis.size() == 0) {
+
             System.out.println("数据库中取");
             List<Classify> Navigation_2s = homepageDao.findNavigation2();
             //存入缓存
@@ -113,11 +114,11 @@ public class HomepageServiceImpl implements HomepageService {
             List list= Arrays.asList(arrayLists);
             List<Classify>  Classify = list;
             return Classify;
-        } else {
-            System.out.println("缓存中取");
-            //取缓存
-            return redis;
-        }
+//        } else {
+//            System.out.println("缓存中取");
+//            //取缓存
+//            return redis;
+//        }
 
     }
 
