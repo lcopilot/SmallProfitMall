@@ -28,7 +28,7 @@ public interface FootprintDao {
      * @param productId 商品id
      * @return
      */
-    public String findProduct(int productId);
+    public String findFootprintId(int productId);
 
     //删除足迹
 }

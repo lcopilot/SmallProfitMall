@@ -13,11 +13,13 @@
             (#{userId},#{productId},#{footprintTime})
     </insert>
 
+    <!--重复商品 修改浏览时间-->
     <update id="updateTime">
          UPDATE userFootprint SET footprintTime = #{footprintTime} WHERE footprintId = #{footprintId}
     </update>
-    
-    <select id="findProduct" resultType="java.lang.String">
+
+    <!--查询-->
+    <select id="findFootprintId" resultType="java.lang.String">
         select footprintId from userFootprint where productId=#{productId}
     </select>
 

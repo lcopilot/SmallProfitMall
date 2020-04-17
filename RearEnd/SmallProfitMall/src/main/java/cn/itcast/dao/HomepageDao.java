@@ -1,8 +1,10 @@
 package cn.itcast.dao;
 
 import cn.itcast.domain.commodity.Classify;
-import cn.itcast.domain.homepag.*;
-import org.springframework.stereotype.Repository;
+import cn.itcast.domain.homepag.Icon;
+import cn.itcast.domain.homepag.Navigation;
+import cn.itcast.domain.homepag.NavigationClassify;
+import cn.itcast.domain.homepag.RotationChart;
 
 import java.util.List;
 
