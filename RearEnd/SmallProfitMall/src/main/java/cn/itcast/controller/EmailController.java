@@ -46,6 +46,9 @@ public class EmailController {
      **/
     public static final Integer INVALID_PARAM = 20003;
 
+    /**短信发送失败*/
+    public static final Integer SERVER_ERROR=20004;
+
     /**
      * 发送邮箱验证码（绑定邮箱）
      *
@@ -103,7 +106,7 @@ public class EmailController {
         //验证方式为邮箱
         String emailType = "2";
         if (phoneType.equals(verificationType)) {
-            if (SUCCEED.equals(request)) {
+            if (!SERVER_ERROR.equals(request)) {
                 List Phone = new ArrayList();
                 Phone.add(request);
                 queryResult.setList(Phone);

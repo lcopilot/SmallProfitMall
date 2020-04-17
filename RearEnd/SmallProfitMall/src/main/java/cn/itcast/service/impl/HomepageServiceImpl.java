@@ -40,21 +40,21 @@ public class HomepageServiceImpl implements HomepageService {
     @Override
     public List<Navigation> findNavigation() {
         //缓存库查询是否已存入
-        List<Navigation> redis = (List<Navigation>) redisUtil.lGet("Navigation_1",0,-1);
-        if(redis.size() == 0){
+    //    List<Navigation> redis = (List<Navigation>) redisUtil.lGet("Navigation_1",0,-1);
+    //    if(redis.size() == 0){
             System.out.println("数据库中取");
             List<Navigation> Navigation_1s = homepageDao.findNavigation();
-            redisUtil.lSet("Navigation_1",Navigation_1s);
+      //      redisUtil.lSet("Navigation_1",Navigation_1s);
             //转换返回格式
             ArrayList[] arrayLists = {(ArrayList) Navigation_1s};
             //增加一层数组
             List list= Arrays.asList(arrayLists);
             List<Navigation>  Navigation_1 = list;
             return Navigation_1;
-        }else {
-            System.out.println("缓存中获取");
-            return redis;
-        }
+     //   }else {
+     //       System.out.println("缓存中获取");
+     //       return redis;
+    //    }
     }
 
     /**
