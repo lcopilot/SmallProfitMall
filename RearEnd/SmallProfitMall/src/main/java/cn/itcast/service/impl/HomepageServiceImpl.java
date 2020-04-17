@@ -29,8 +29,14 @@ public class HomepageServiceImpl implements HomepageService {
      * @return 轮播图集合
      */
     @Override
-    public List<RotationChart> findRotationChart() {
-        return homepageDao.findRotationChart();
+    public List findRotationChart() {
+//        List<RotationChart> redis = (List<RotationChart>) redisUtil.lGet("findRotationChart",0,-1);
+//        if (redis==null || redis.size()==0){
+            List<RotationChart> findRotationChart = homepageDao.findRotationChart();
+            redisUtil.lSet("findRotationChart",findRotationChart);
+            return findRotationChart;
+//        }
+//     return redis;
     }
 
     /**
@@ -101,24 +107,24 @@ public class HomepageServiceImpl implements HomepageService {
      */
     @Override
     public List<Classify> findNavigation2() {
-       // List<Classify> redis = (List<Classify>) redisUtil.lGet("Classify", 0, -1);
-  //      if (redis.size() == 0) {
-
+    //    List<Classify> redis = (List<Classify>) redisUtil.lGet("Classify", 0, -1);
+//        if (redis==null || redis.size() == 0 ) {
             System.out.println("数据库中取");
-            List<Classify> Navigation_2s = homepageDao.findNavigation2();
+            List<Classify> navigation2 = homepageDao.findNavigation2();
             //存入缓存
-            redisUtil.lSet("Classify", Navigation_2s);
+            redisUtil.lSet("Classify", navigation2);
             //转换返回格式
-            ArrayList[] arrayLists = {(ArrayList) Navigation_2s};
+            ArrayList[] arrayLists = {(ArrayList) navigation2};
             //增加一层数组
             List list= Arrays.asList(arrayLists);
             List<Classify>  Classify = list;
-            return Classify;
-//        } else {
-//            System.out.println("缓存中取");
-//            //取缓存
-//            return redis;
-//        }
+
+            return navigation2;
+ //       } else {
+       //     System.out.println("缓存中取");
+            //取缓存
+       //     return redis;
+     //   }
 
     }
 

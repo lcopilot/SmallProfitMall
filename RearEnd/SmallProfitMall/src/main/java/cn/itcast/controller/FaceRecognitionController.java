@@ -1,17 +1,17 @@
 package cn.itcast.controller;
 
 import cn.itcast.response.CommonCode;
-import cn.itcast.response.QueryResponseResult;
-import cn.itcast.response.ResultCode;
 import cn.itcast.response.faceRecognition.FaceRecognition;
 import cn.itcast.response.faceRecognition.FaceRecognitionResponse;
 import cn.itcast.service.FaceRecognitionService;
-import cn.itcast.util.humanFace.HumanFaceUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
@@ -37,7 +37,7 @@ public class FaceRecognitionController {
      * @param image 用户人图片
      * @param userId 用户id
      * @param videoFile 视频流
-     * @return
+     * @return 验证错误 返回错误代码
      * @throws Exception
      */
     @RequestMapping(value = "/uploading",method = RequestMethod.POST)
@@ -52,6 +52,7 @@ public class FaceRecognitionController {
             return new FaceRecognitionResponse(CommonCode.SUCCESS, null);
         }
         FaceRecognition faceRecognition=new FaceRecognition();
+        //设置错误代码
         faceRecognition.setResult((JSONObject) JSON.parse(result));
         return new FaceRecognitionResponse(CommonCode.FAIL, faceRecognition);
     }
@@ -69,6 +70,7 @@ public class FaceRecognitionController {
             return new FaceRecognitionResponse(CommonCode.SUCCESS, null);
         }
         FaceRecognition faceRecognition=new FaceRecognition();
+        //设置错误代码
         faceRecognition.setResult((JSONObject) JSON.parse(result));
         return new FaceRecognitionResponse(CommonCode.FAIL, faceRecognition);
     }
