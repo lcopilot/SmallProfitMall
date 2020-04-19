@@ -6,8 +6,11 @@ import cn.itcast.domain.homepag.*;
 import java.util.List;
 
 public interface HomepageService {
-    //查询轮播图图片
-    public List<RotationChart> findRotationChart();
+    /**
+     * 查询轮播图图片
+     * @return
+     */
+    public List findRotationChart();
 
     //商品分类导航栏
     public List<Navigation> findNavigation();

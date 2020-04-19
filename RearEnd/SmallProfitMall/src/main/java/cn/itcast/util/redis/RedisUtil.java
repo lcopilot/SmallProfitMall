@@ -1,10 +1,5 @@
 package cn.itcast.util.redis;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.Cursor;
@@ -12,6 +7,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.util.CollectionUtils;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 //缓存工具类
 public class RedisUtil {
 
@@ -461,7 +461,7 @@ public class RedisUtil {
 	 * @param index 索引 index>=0时， 0 表头，1 第二个元素，依次类推；index<0时，-1，表尾，-2倒数第二个元素，依次类推
 	 * @return
 	 */
-	public Object lGetIndex(String key, long index) {
+	public Object 获取list(String key, long index) {
 		try {
 			return redisTemplate.opsForList().index(key, index);
 		} catch (Exception e) {

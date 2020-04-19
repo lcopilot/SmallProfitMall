@@ -12,8 +12,11 @@
     VALUES
         (#{userId},#{productId},#{sign},#{evaluationTime})
     </insert>
+
     <!--查询-->
     <select id="fendEvaluation" resultType="cn.itcast.domain.favorite.Evaluation">
          SELECT * FROM userEvaluation where productId = #{productId} AND userId = #{userId}
     </select>
+
+
 </mapper>
