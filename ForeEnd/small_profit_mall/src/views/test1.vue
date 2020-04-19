@@ -110,6 +110,9 @@
 
     },
 
+
+
+
     mounted() {
       document.querySelector('body').innerHTML ='';
       document.forms[0].submit();
