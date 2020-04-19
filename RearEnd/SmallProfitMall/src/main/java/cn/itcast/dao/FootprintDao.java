@@ -4,6 +4,7 @@ import cn.itcast.domain.footprint.Footprint;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
+import java.util.List;
 
 //足迹
 public interface FootprintDao {
@@ -29,6 +30,17 @@ public interface FootprintDao {
      * @return
      */
     public String findFootprintId(int productId);
+
+    /**
+     *  查询足迹
+     * @param userId 用户id
+     * @param start 查询的开始页
+     * @param pageSize 查询数量
+     * @return
+     */
+    public List<Footprint> fendFootprint(@Param("userId") String userId ,@Param("start")Integer start, @Param("pageSize")Integer pageSize);
+
+    public Integer fendFootprintQuantity(@Param("userId") String userId);
 
     //删除足迹
 }

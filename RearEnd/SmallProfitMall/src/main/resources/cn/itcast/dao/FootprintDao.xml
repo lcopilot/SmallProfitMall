@@ -23,4 +23,36 @@
         select footprintId from userFootprint where productId=#{productId}
     </select>
 
+    <!--查询足迹-->
+    <select id="fendFootprint" resultType="cn.itcast.domain.footprint.Footprint">
+            SELECT
+				uf.*,pb.ProductName,pi.ImageSite,pp.ProductPrice
+			from
+				userFootprint uf
+			LEFT JOIN
+				ProductBasis pb
+			ON
+				uf.productId=pb.ProductId
+			LEFT JOIN
+				ProductImage pi
+				ON
+				uf.productId=pi.ProductId
+			LEFT JOIN
+			    ProductPrice pp
+			ON
+			    uf.productId=pp.ProductId
+			WHERE
+			    uf.userId = #{userId}
+		    AND
+				pi.sign=1
+			order by
+                footprintTime
+            desc limit #{start},#{pageSize}
+    </select>
+    <!--查询足迹数量-->
+    <select id="fendFootprintQuantity" resultType="java.lang.Integer">
+           SELECT count(*) FROM userFootprint WHERE userId=#{userId}
+    </select>
+
+
 </mapper>
