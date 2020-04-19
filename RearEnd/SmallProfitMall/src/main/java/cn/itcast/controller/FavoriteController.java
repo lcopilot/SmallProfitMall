@@ -78,11 +78,12 @@ public class FavoriteController {
      * 删除收藏接口
      * @param userId 用户id
      * @param evaluationId 足迹id
+     * @param deleteAll 是否为删除全部 true为删除全部 false为删除单个
      * @return
      */
     @RequestMapping(value = "/deleteFavorite",method=RequestMethod.DELETE)
-    public ResponsePagination deleteFavorite(String userId,Integer evaluationId){
-        Integer request = evaluationService.deleteFootprint(userId,evaluationId);
+    public ResponsePagination deleteFavorite(String userId,Integer evaluationId,Boolean deleteAll){
+        Integer request = evaluationService.deleteFootprint(userId,evaluationId,deleteAll);
         if (request>0){
             return new ResponsePagination(CommonCode.SUCCESS,null);
         }

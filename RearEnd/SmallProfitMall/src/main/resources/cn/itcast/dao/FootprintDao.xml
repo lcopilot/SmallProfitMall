@@ -23,7 +23,7 @@
         DELETE FROM
             userFootprint
         <where>
-            <if test="footprintId!=null">
+            <if test="footprintId!=null and  deleteAll==false">
                 AND footprintId=#{footprintId}
             </if>
             AND userId=#{userId}

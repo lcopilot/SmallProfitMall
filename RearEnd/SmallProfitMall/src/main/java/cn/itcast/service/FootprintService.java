@@ -29,10 +29,11 @@ public interface FootprintService {
     public  Integer[]  fendTotalPage(String userId,Integer pageSize);
 
     /**
-     * 删除浏览足迹
+     * 删除足迹
      * @param userId 用户id
      * @param footprintId 足迹id
-     * @return 影响行数
+     * @param deleteAll 是否为删除全部 true为删除全部 false为删除单个
+     * @return
      */
-    Integer deleteFootprint(String userId, Integer footprintId);
+    Integer deleteFootprint(String userId, Integer footprintId,Boolean deleteAll);
 }
