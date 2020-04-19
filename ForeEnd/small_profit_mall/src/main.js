@@ -13,7 +13,10 @@ import './router/guard'
 import 'vue2-animate/dist/vue2-animate.min.css'
 import * as socketApi from './api/util/socket'
 import * as Util from '../src/util/util'
+import moment from 'moment'
 
+
+Vue.prototype.moment=moment;
 Vue.prototype.Util=Util;
 //提升事件响应
 import 'default-passive-events'
