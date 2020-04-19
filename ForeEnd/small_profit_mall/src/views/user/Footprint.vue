@@ -52,7 +52,7 @@
                     prop="productPrice"
                     label="价格"
                     sortable
-                    min-width="12">
+                    min-width="12%">
                   <template slot-scope="productPrice">
                     <span>￥{{productPrice.row.productPrice.toFixed(2)}}</span>
                   </template>
@@ -164,8 +164,10 @@
         userApi.deleteFootprint(params).then(res=>{
             if (res.success){
               this.$message({
-                message:"删除成功"
+                message:"删除成功",
+                type:"success"
               })
+              this.getFootprint()
             }
         })
       },
@@ -185,7 +187,8 @@
             } else {
               if (res.code == 11111) {
                 this.$message({
-                  message: "商品已经被收藏,请勿重复收藏"
+                  message: "商品已经被收藏,请勿重复收藏",
+                  type:"success"
                 })
               }
             }
@@ -204,6 +207,9 @@
       },
       //获取足迹
       getFootprint() {
+        if (this.footprintParams.currentPage!=1 && this.footprintParams.currentPage==this.footprintParams.totalPage && (((this.footprintParams.currentPage-1)*this.footprintParams.pageSize)+1)===this.footprintParams.totalCount){
+          this.footprintParams.currentPage--;
+        }
         const params={
           userId:sessionStorage.getItem("uId"),
           currentPage:this.footprintParams.currentPage,
