@@ -130,6 +130,11 @@ export const addFavorite=data=>{
 export const addFootprint=data=>{
   return http.requestPost(apiUrl+'/FootprintController/addShoppingCart',data);
 };
+//获取足迹
+export const getFootprint=params=>{
+  const  queryString=querystring.stringify(params)
+  return http.requestGet(apiUrl+'/FootprintController/fendFootprint?'+queryString)
+}
 
 /**
  * 充值
