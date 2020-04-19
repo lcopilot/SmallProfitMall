@@ -5,7 +5,11 @@ import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import java.util.List;
 
 public interface ProductDetailsService {
-    //根据id查询商品详细
+    /**
+     * 查询商品详细
+     * @param pid 商品id
+     * @return 商品详细数据
+     */
     public List<ProductDetailsResult> findByPid(int pid);
 
 }

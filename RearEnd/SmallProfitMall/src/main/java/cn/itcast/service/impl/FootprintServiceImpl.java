@@ -67,4 +67,15 @@ public class FootprintServiceImpl implements FootprintService {
         return TotalPage;
     }
 
+    /**
+     * 删除足迹
+     * @param userId 用户id
+     * @param footprintId 足迹id
+     * @return
+     */
+    @Override
+    public Integer deleteFootprint(String userId, Integer footprintId) {
+        return footprintDao.deleteFootprint(userId,footprintId);
+    }
+
 }

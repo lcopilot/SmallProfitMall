@@ -12,14 +12,23 @@ public interface HomepageService {
      */
     public List findRotationChart();
 
-    //商品分类导航栏
+    /**
+     * 查询商品分类导航栏
+     * @return
+     */
     public List<Navigation> findNavigation();
 
-    //商品分类导航栏2
+    /**
+     * 查询搜索栏下导航栏
+     * @return
+     */
     public List<Classify> findNavigation2();
 
 
-    //查询图标
+    /**
+     *  查询图标
+     * @return
+     */
     public List<Icon> findIcon();
 
     public List<NavigationClassify> findById(int id);

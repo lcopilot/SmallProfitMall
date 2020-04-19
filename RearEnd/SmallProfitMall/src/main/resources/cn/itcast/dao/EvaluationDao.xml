@@ -13,10 +13,52 @@
         (#{userId},#{productId},#{sign},#{evaluationTime})
     </insert>
 
-    <!--查询-->
+    <!--查询收藏表-->
     <select id="fendEvaluation" resultType="cn.itcast.domain.favorite.Evaluation">
          SELECT * FROM userEvaluation where productId = #{productId} AND userId = #{userId}
     </select>
 
+    <!--查询收藏详细-->
+    <select id="fendFavorite" resultType="cn.itcast.domain.favorite.Evaluation">
+        	SELECT
+        	    ue.*,pb.ProductName,pi.ImageSite,pp.ProductPrice
+			from
+				userEvaluation ue
+			LEFT JOIN
+				ProductBasis pb
+			ON
+				ue.productId=pb.ProductId
+			LEFT JOIN
+				ProductImage pi
+				ON
+				ue.productId=pi.ProductId
+			LEFT JOIN
+			    ProductPrice pp
+			ON
+			    ue.productId=pp.ProductId
+			WHERE
+			    ue.userId = #{userId}
+		    AND
+				pi.sign=1
+			order by
+                evaluationTime
+            desc limit #{start},#{pageSize}
+    </select>
 
+    <!--查询收藏数量-->
+    <select id="fendFavoriteQuantity" resultType="java.lang.Integer">
+           SELECT count(*) FROM userEvaluation WHERE userId=#{userId}
+    </select>
+
+    <!--删除收藏-->
+    <delete id="deleteFavorite">
+        DELETE FROM
+        userEvaluation
+        <where>
+            <if test="evaluationId!=null">
+                AND evaluationId=#{evaluationId}
+            </if>
+            AND userId=#{userId}
+        </where>
+    </delete>
 </mapper>

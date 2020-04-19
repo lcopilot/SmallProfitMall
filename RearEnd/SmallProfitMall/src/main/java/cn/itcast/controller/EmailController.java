@@ -49,6 +49,11 @@ public class EmailController {
     /**短信发送失败*/
     public static final Integer SERVER_ERROR=20004;
 
+    //验证方式为手机
+    public static final String phoneType = "1";
+    //验证方式为邮箱
+    public static final String emailType = "2";
+
     /**
      * 发送邮箱验证码（绑定邮箱）
      *
@@ -94,17 +99,13 @@ public class EmailController {
      *
      * @param userId           用户id
      * @param verificationType 验证码方式
-     * @return
+     * @return 邮箱验证则返回邮箱 手机验证则返回手机号码
      * @throws Exception
      */
     @RequestMapping(value = "/updateEmailPhone", method = RequestMethod.POST)
     public QueryResponseResult updateEmailPhone(String userId, String verificationType) throws Exception {
         QueryResult queryResult = new QueryResult();
         String request = emailService.updateEmailPhone(userId, verificationType, "EmailVerify");
-        //验证方式为手机
-        String phoneType = "1";
-        //验证方式为邮箱
-        String emailType = "2";
         if (phoneType.equals(verificationType)) {
             if (!SERVER_ERROR.equals(request)) {
                 List Phone = new ArrayList();

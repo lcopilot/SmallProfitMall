@@ -6,7 +6,7 @@ import java.util.Date;
 //足迹
 public class Footprint {
     //足迹id
-    private int footprintId;
+    private Integer footprintId;
 
     //商品id
     private int productId;

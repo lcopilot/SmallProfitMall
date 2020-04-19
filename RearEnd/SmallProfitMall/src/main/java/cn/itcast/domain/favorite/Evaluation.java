@@ -12,6 +12,17 @@ public class Evaluation  implements Serializable {
     private int productId;
     //用户id
     private String userId;
+
+    //商品名称
+    private String ProductName;
+
+    //商品价格
+    private  Double ProductPrice;
+
+    //商品图片
+    private String ImageSite;
+
+
     //是否收藏标志
     private String sign;
     //商品id 接收
@@ -65,6 +76,30 @@ public class Evaluation  implements Serializable {
 
     public void setEvaluationTime(Date evaluationTime) {
         this.evaluationTime = evaluationTime;
+    }
+
+    public String getProductName() {
+        return ProductName;
+    }
+
+    public void setProductName(String productName) {
+        ProductName = productName;
+    }
+
+    public Double getProductPrice() {
+        return ProductPrice;
+    }
+
+    public void setProductPrice(Double productPrice) {
+        ProductPrice = productPrice;
+    }
+
+    public String getImageSite() {
+        return ImageSite;
+    }
+
+    public void setImageSite(String imageSite) {
+        ImageSite = imageSite;
     }
 
     @Override

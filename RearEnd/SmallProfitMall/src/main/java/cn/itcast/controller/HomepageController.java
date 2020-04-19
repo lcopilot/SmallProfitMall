@@ -28,7 +28,7 @@ public class HomepageController {
     RedisUtil redisUtil;
 
     /**
-     * 轮播图
+     * 查询轮播图
      * @return
      */
     @RequestMapping("/findRotationChart")
