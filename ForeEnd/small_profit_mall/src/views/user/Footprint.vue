@@ -53,6 +53,9 @@
                     label="价格"
                     sortable
                     min-width="12">
+                  <template slot-scope="productPrice">
+                    <span>￥{{productPrice.row.productPrice.toFixed(2)}}</span>
+                  </template>
                 </el-table-column>
                 <el-table-column
                     prop="frequency"
@@ -61,10 +64,13 @@
                     min-width="11%">
                 </el-table-column>
                 <el-table-column
-                    prop="footprintTime"
                     label="时间"
+                    prop="footprintTime"
                     sortable
                     min-width="11%">
+                  <template slot-scope="footprintTime">
+                    <span>{{moment(footprintTime.row.footprintTime).format('YYYY-MM-DD')}}</span>
+                  </template>
                 </el-table-column>
                 <el-table-column
                     align="right"
@@ -104,7 +110,7 @@
                   @size-change="changeNumber"
                   @current-change="changePage"
                   :current-page="footprintParams.currentPage"
-                  :page-sizes="[6,7, 8, 10, 12,15]"
+                  :page-sizes="[5,7, 8, 10]"
                   :page-size="footprintParams.pageSize"
                   layout="total, sizes, prev, pager, next, jumper"
                   :hide-on-single-page="true"
@@ -134,49 +140,18 @@
         //足迹分页参数
         footprintParams: {
           currentPage: 1,//页码
-          pageSize: 6,//每页显示个数
-          totalCount: 400,//总记录数
+          pageSize: 5,//每页显示个数
+          totalCount: 0,//总记录数
           totalPage: 1,//总页数
         },
         //搜索关键词
         searchKeyword: '',
-        footprintList: [
-          {
-            footprintId:1,
-            productId:10001,
-            imageSite: 'http://productdata.fhxasdsada.xyz/8c0b0a13e48adce3.jpg',
-            productPrice:"982.00",
-            frequency: 2,
-            productName: "fsdfsdfsd水电费水电费上课的痕迹圣诞快乐可能是打飞机SDK人生苦短金黄色的岁的女孩将斯柯达纳税人对话框式登录圣诞快乐黄金时代ds",
-            footprintTime: "2020-9-8",
-          },
-          {
-            imageSite: 'http://productdata.fhxasdsada.xyz/8c0b0a13e48adce3.jpg',
-            productPrice:"152.00",
-            frequency: 10,
-            productName: "fsdfds",
-            footprintTime: "2020-1-8",
-          },
-          {
-            imageSite: 'http://productdata.fhxasdsada.xyz/8c0b0a13e48adce3.jpg',
-            productPrice:"12.00",
-            frequency: 0,
-            productName: "fsdfds",
-            footprintTime: "2020-5-8",
-          },
-          {
-            imageSite: 'http://productdata.fhxasdsada.xyz/8c0b0a13e48adce3.jpg',
-            productPrice:"18.00",
-            frequency: 80,
-            productName: "fsdfds",
-            footprintTime: "2020-9-8",
-          },
-        ],
+        footprintList: []
       }
     },
     methods: {
       //删除足迹
-      removeFootprint(footprintId){
+      removeFootprint(footprintId) {
 
       },
       //添加收藏
@@ -205,11 +180,31 @@
       //切换评论分页时触发
       changePage(currentPage) {
         this.footprintParams.currentPage = currentPage;
+        this.getFootprint();
       },
       //切换每页显示多少条评论时触发
       changeNumber(pageSize) {
         this.footprintParams.pageSize = pageSize;
+        this.getFootprint();
+      },
+      //获取足迹
+      getFootprint() {
+        const params={
+          userId:sessionStorage.getItem("uId"),
+          currentPage:this.footprintParams.currentPage,
+          pageSize:this.footprintParams.pageSize
+        };
+        userApi.getFootprint(params).then(res=>{
+          if (res.success){
+            this.footprintList=res.pagination.list;
+            this.footprintParams.totalPage=res.pagination.totalPage;
+            this.footprintParams.totalCount=res.pagination.totalCount;
+          }
+        })
       }
+    },
+    mounted() {
+      this.getFootprint();
     }
   }
 </script>
