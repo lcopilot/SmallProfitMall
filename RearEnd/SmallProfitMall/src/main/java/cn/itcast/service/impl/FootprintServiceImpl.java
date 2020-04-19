@@ -71,11 +71,12 @@ public class FootprintServiceImpl implements FootprintService {
      * 删除足迹
      * @param userId 用户id
      * @param footprintId 足迹id
+     * @param deleteAll 是否为删除全部 true为删除全部 false为删除单个
      * @return
      */
     @Override
-    public Integer deleteFootprint(String userId, Integer footprintId) {
-        return footprintDao.deleteFootprint(userId,footprintId);
+    public Integer deleteFootprint(String userId, Integer footprintId,Boolean deleteAll) {
+        return footprintDao.deleteFootprint(userId,footprintId,deleteAll);
     }
 
 }

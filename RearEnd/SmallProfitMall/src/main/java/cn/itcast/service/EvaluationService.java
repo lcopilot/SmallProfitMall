@@ -36,5 +36,5 @@ public interface EvaluationService {
      * @param evaluationId 收藏id
      * @return 影响行数
      */
-    public Integer deleteFootprint(String userId, Integer evaluationId);
+    public Integer deleteFootprint(String userId, Integer evaluationId, Boolean deleteAll);
 }

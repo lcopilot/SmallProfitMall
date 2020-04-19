@@ -55,7 +55,7 @@
         DELETE FROM
         userEvaluation
         <where>
-            <if test="evaluationId!=null">
+            <if test="evaluationId!=null and  deleteAll==false">
                 AND evaluationId=#{evaluationId}
             </if>
             AND userId=#{userId}
