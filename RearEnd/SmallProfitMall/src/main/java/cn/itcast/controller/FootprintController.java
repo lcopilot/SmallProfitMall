@@ -49,7 +49,7 @@ public class FootprintController {
      * @param userId 用户id
      * @param currentPage 查询当前页
      * @param pageSize 查询页数
-     * @return
+     * @return TotalPage[0]为总数量 TotalPage[1]为种总页数
      */
     @RequestMapping(value = "/fendFootprint",method = RequestMethod.GET)
     public ResponsePagination fendFootprint(String userId,Integer currentPage , Integer pageSize){
