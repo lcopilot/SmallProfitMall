@@ -11,7 +11,6 @@ import lombok.ToString;
 public class QueryResponseNews extends ResponseResult {
 
     Page page;
-
     public QueryResponseNews(ResultCode resultCode, Page page){
         super(resultCode);
        this.page = page;

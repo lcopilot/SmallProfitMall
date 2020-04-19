@@ -7,10 +7,22 @@ import java.util.Date;
 public class Footprint {
     //足迹id
     private int footprintId;
+
     //商品id
     private int productId;
+
+    //商品名称
+    private String ProductName;
+
+    //商品价格
+    private  Double ProductPrice;
+
+    //商品图片
+    private String ImageSite;
+
     //用户id
     private String userId;
+
     //浏览时间
     private Date footprintTime;
 
@@ -38,6 +50,13 @@ public class Footprint {
         this.userId = userId;
     }
 
+    public String getImageSite() {
+        return ImageSite;
+    }
+
+    public void setImageSite(String imageSite) {
+        ImageSite = imageSite;
+    }
 
     public Date getFootprintTime() {
         return footprintTime;
@@ -45,6 +64,22 @@ public class Footprint {
 
     public void setFootprintTime(Date footprintTime) {
         this.footprintTime = footprintTime;
+    }
+
+    public String getProductName() {
+        return ProductName;
+    }
+
+    public void setProductName(String productName) {
+        ProductName = productName;
+    }
+
+    public Double getProductPrice() {
+        return ProductPrice;
+    }
+
+    public void setProductPrice(Double productPrice) {
+        ProductPrice = productPrice;
     }
 }
 
