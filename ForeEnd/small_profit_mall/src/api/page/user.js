@@ -120,6 +120,16 @@ export const haveRead=(userId,contentId)=>{
 export const addFavorite=data=>{
   return http.requestPost(apiUrl+'/EvaluationController/addEvaluation',data);
 }
+//获取收藏
+export const getFavorite=params=>{
+  const  queryString=querystring.stringify(params)
+  return http.requestGet(apiUrl+'/EvaluationController/fendFavorite?'+queryString)
+}
+//删除收藏
+export const deleteFavorite=params=>{
+  const queryString=querystring.stringify(params)
+  return http.requestDelete(apiUrl+'/EvaluationController/deleteFavorite?'+queryString)
+}
 
 
 /**
@@ -134,6 +144,11 @@ export const addFootprint=data=>{
 export const getFootprint=params=>{
   const  queryString=querystring.stringify(params)
   return http.requestGet(apiUrl+'/FootprintController/fendFootprint?'+queryString)
+}
+//删除足迹
+export const deleteFootprint=params=>{
+  const queryString=querystring.stringify(params)
+  return http.requestDelete(apiUrl+'FootprintController/deleteFootprint?'+queryString)
 }
 
 /**
