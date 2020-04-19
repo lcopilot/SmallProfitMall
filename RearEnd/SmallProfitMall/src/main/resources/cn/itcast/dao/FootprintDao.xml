@@ -18,7 +18,19 @@
          UPDATE userFootprint SET footprintTime = #{footprintTime} WHERE footprintId = #{footprintId}
     </update>
 
-    <!--查询-->
+    <!--删除足迹-->
+    <delete id="deleteFootprint">
+        DELETE FROM
+            userFootprint
+        <where>
+            <if test="footprintId!=null">
+                AND footprintId=#{footprintId}
+            </if>
+            AND userId=#{userId}
+        </where>
+    </delete>
+
+    <!--查询足迹id-->
     <select id="findFootprintId" resultType="java.lang.String">
         select footprintId from userFootprint where productId=#{productId}
     </select>

@@ -1,7 +1,10 @@
 package cn.itcast.dao;
 
 import cn.itcast.domain.favorite.Evaluation;
+import cn.itcast.domain.footprint.Footprint;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 //收藏
 public interface EvaluationDao {
@@ -20,5 +23,28 @@ public interface EvaluationDao {
      */
     public Evaluation fendEvaluation(@Param("userId")String userId ,@Param("productId") int productId);
 
-    //删除收藏
+    /**
+     * 查询用户所有收藏
+     * @param userId 用户id
+     * @param start 开始
+     * @param pageSize  每页查询数量
+     * @return
+     */
+    public List<Evaluation> fendFavorite(@Param("userId")String userId, @Param("start")Integer start,@Param("pageSize") Integer pageSize);
+
+    /**
+     * 查询收藏数量
+     * @param userId
+     * @return
+     */
+    public Integer fendFavoriteQuantity(@Param("userId")String userId);
+
+
+    /**
+     * 删除收藏
+     * @param userId 用户id
+     * @param evaluationId 为空则代表删除所有
+     * @return 影响行数
+     */
+    public Integer deleteFavorite(@Param("userId")String userId, @Param("evaluationId")Integer evaluationId);
 }

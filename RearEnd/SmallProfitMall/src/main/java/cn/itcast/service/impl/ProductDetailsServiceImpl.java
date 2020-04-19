@@ -35,8 +35,8 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
         String transition = String.valueOf(pid);
         String ProductId ="productId_"+transition;
         //从缓存中查询是否存在
-        List<ProductDetailsResult>  redis = (List<ProductDetailsResult>)redisUtil.lGet(ProductId,0,-1);
-        if(redis.size()==0){
+        List<ProductDetailsResult>  redis = (List<ProductDetailsResult>)redisUtil.get(ProductId);
+        if(redis==null){
             //库存价格(转换)
             String inventory = "";
             //商品销量(转换)
@@ -79,12 +79,12 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
             productDetailsResult.setInventory(inventory);
             //设置转换后的销量
             productDetailsResult.setSales(sale);
-            redisUtil.lSet(ProductId,productDetailsResult);
-            System.out.println("数据库中取");
+            System.out.println("数据库中取商品详细数据");
             List<ProductDetailsResult> productDetailsResults= Arrays.asList(productDetailsResult);
+            redisUtil.set(ProductId,productDetailsResults);
             return productDetailsResults;
         }else {
-            System.out.println("缓存中取");
+            System.out.println("缓存中取商品详细数据");
             return redis;
         }
 

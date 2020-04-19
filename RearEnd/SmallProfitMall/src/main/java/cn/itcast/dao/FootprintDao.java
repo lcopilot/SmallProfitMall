@@ -40,7 +40,19 @@ public interface FootprintDao {
      */
     public List<Footprint> fendFootprint(@Param("userId") String userId ,@Param("start")Integer start, @Param("pageSize")Integer pageSize);
 
+    /**
+     * 查询足迹总数量
+     * @param userId
+     * @return
+     */
     public Integer fendFootprintQuantity(@Param("userId") String userId);
 
-    //删除足迹
+    /**
+     * 删除足迹
+     * @param userId 用户id
+     * @param footprintId 为空则代表删除所有
+     * @return 影响行数
+     */
+    public Integer deleteFootprint(@Param("userId")String userId, @Param("footprintId")Integer footprintId);
+
 }
