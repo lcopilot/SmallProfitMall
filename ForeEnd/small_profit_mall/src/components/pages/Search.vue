@@ -159,7 +159,7 @@
       getPagePilot() {
         homeApi.getPagePilot().then(res => {
           if (res.success) {
-            this.PagePilotList = res.queryResult.list[0];
+            this.PagePilotList = res.queryResult.list;
           }
         })
       },
