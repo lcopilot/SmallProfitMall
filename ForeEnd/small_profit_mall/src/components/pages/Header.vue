@@ -33,7 +33,7 @@
                   </router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
-                  <router-link to="/">
+                  <router-link to="/favorite">
                     <svg-icon name="favorite_h" class="icon"></svg-icon>
                     收藏
                   </router-link>

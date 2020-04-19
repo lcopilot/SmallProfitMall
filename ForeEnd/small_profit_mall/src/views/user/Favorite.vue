@@ -58,6 +58,9 @@
                     label="时间"
                     sortable
                     min-width="14%">
+                  <template slot-scope="evaluationTime">
+                    <span>{{moment(evaluationTime.row.evaluationTime).format('YYYY-MM-DD')}}</span>
+                  </template>
                 </el-table-column>
                 <el-table-column
                     align="right"
@@ -86,7 +89,7 @@
                   @size-change="changeNumber"
                   @current-change="changePage"
                   :current-page="favoriteParams.currentPage"
-                  :page-sizes="[6,7, 8, 10, 12,15]"
+                  :page-sizes="[5,7, 8, 10]"
                   :page-size="favoriteParams.pageSize"
                   layout="total, sizes, prev, pager, next, jumper"
                   :hide-on-single-page="true"
@@ -115,8 +118,8 @@
         //收藏分页参数
         favoriteParams: {
           currentPage: 1,//页码
-          pageSize: 6,//每页显示个数
-          totalCount: 400,//总记录数
+          pageSize: 5,//每页显示个数
+          totalCount: 0,//总记录数
           totalPage: 1,//总页数
         },
         //搜索关键词
@@ -148,8 +151,10 @@
         userApi.deleteFavorite(params).then(res=>{
           if (res.success){
             this.$message({
-              message:"已移除收藏"
+              message:"已移除收藏",
+              type:"success"
             })
+            this.getFavorite();
           }
         })
       },
@@ -164,6 +169,9 @@
         this.getFavorite();
       },
       getFavorite() {
+        if (this.favoriteParams.currentPage!=1 && this.favoriteParams.currentPage==this.favoriteParams.totalPage && (((this.favoriteParams.currentPage-1)*this.favoriteParams.pageSize)+1)===this.favoriteParams.totalCount){
+          this.favoriteParams.currentPage--;
+        }
         const params={
           userId:sessionStorage.getItem("uId"),
           currentPage:this.favoriteParams.currentPage,
