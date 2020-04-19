@@ -5,9 +5,7 @@ import cn.itcast.domain.footprint.Footprint;
 import cn.itcast.service.FootprintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 /**
@@ -26,7 +24,7 @@ public class FootprintServiceImpl implements FootprintService {
      */
     @Override
     public int addFootprint(Footprint footprint){
-        String footprintId = footprintDao.findProduct(footprint.getProductId());
+        String footprintId = footprintDao.findFootprintId(footprint.getProductId());
         if (footprintId == null){
             footprint.setFootprintTime(new Date());
             int redis = footprintDao.addFootprint(footprint);

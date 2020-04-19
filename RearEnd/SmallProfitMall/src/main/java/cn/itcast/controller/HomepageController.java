@@ -54,7 +54,7 @@ public class HomepageController {
      }
 
     /**
-     * 商品分类导航栏2
+     * 搜索栏下导航分类
      * @return
      */
     @RequestMapping("/findNavigation2")
@@ -90,7 +90,6 @@ public class HomepageController {
         Classification classification = homepageService.navigationInDetail();
         List<Classification> logins= Arrays.asList(classification);
         result.setList(logins);
-
         return new QueryResponseResult(CommonCode.SUCCESS,result);
     }
 

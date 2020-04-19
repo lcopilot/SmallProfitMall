@@ -237,11 +237,38 @@ public class OrderServiceImpl implements OrderService {
         return result;
     }
 
+    /**
+     * 支付宝支付
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @param request
+     * @return 支付页面
+     * @throws Exception
+     */
     @Override
     public String alipayPay(String userId, String orderId,HttpServletRequest request) throws Exception {
         //查询订单信息
         Order orders =  orderDao.findOrder(userId,orderId);
-            String pay = doPay(orders.getOrderId() , orders.getOrderTotal().toString() , "WLSC" ,request);
+        //订单名称
+        String productName="";
+        for (int i = 0; i <orders.getProductContents().size() ; i++) {
+            String productNames = orders.getProductContents().get(i).getProductName();
+            //省略号
+            String omit="";
+            if (productNames.length()>10){
+                omit="...";
+            }
+
+            //截取字符串前6位
+            productNames = productNames.substring(0,10);
+            //拼接最后名称
+            productName=productName+productNames+omit+" "+" ";
+            if (i>3){
+                break;
+            }
+        }
+            //支付页面
+            String pay = doPay(orders.getOrderId() , orders.getOrderTotal().toString(),productName ,request);
             return pay;
     }
 
