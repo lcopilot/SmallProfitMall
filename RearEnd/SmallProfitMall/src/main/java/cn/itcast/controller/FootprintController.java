@@ -76,14 +76,15 @@ public class FootprintController {
     }
 
     /**
-     * 删除足迹接口
+     * 删除足迹
      * @param userId 用户id
      * @param footprintId 足迹id
+     * @param deleteAll 是否为删除全部 true为删除全部 false为删除单个
      * @return
      */
     @RequestMapping(value = "/deleteFootprint",method=RequestMethod.DELETE)
-    public ResponsePagination deleteFootprint(String userId,Integer footprintId){
-      Integer request = footprintService.deleteFootprint(userId,footprintId);
+    public ResponsePagination deleteFootprint(String userId,Integer footprintId ,Boolean deleteAll){
+      Integer request = footprintService.deleteFootprint(userId,footprintId, deleteAll);
       if (request>0){
           return new ResponsePagination(CommonCode.SUCCESS,null);
       }

@@ -41,10 +41,12 @@ public interface EvaluationDao {
 
 
     /**
-     * 删除收藏
+     *
+     * 删除足迹
      * @param userId 用户id
      * @param evaluationId 为空则代表删除所有
-     * @return 影响行数
+     * @param deleteAll 是否为删除全部 true为删除全部 false为删除单个
+     * @return
      */
-    public Integer deleteFavorite(@Param("userId")String userId, @Param("evaluationId")Integer evaluationId);
+    public Integer deleteFavorite(@Param("userId")String userId, @Param("evaluationId")Integer evaluationId , @Param("deleteAll")Boolean deleteAll);
 }

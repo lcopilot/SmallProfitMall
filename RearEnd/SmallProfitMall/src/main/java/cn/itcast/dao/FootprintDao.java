@@ -51,8 +51,9 @@ public interface FootprintDao {
      * 删除足迹
      * @param userId 用户id
      * @param footprintId 为空则代表删除所有
-     * @return 影响行数
+     * @param deleteAll 是否为删除全部 true为删除全部 false为删除单个
+     * @return
      */
-    public Integer deleteFootprint(@Param("userId")String userId, @Param("footprintId")Integer footprintId);
+    public Integer deleteFootprint(@Param("userId")String userId, @Param("footprintId")Integer footprintId ,@Param("deleteAll") Boolean deleteAll);
 
 }

@@ -86,10 +86,11 @@ public class EvaluationServiceImpl implements cn.itcast.service.EvaluationServic
      * 删除收藏
      * @param userId 用户id
      * @param evaluationId 收藏id
-     * @return
+     * @param deleteAll 是否为删除全部 true为删除全部 false为删除单个
+     * @return 受影响行数
      */
     @Override
-    public Integer deleteFootprint(String userId, Integer evaluationId) {
-        return evaluationDao.deleteFavorite(userId,evaluationId);
+    public Integer deleteFootprint(String userId, Integer evaluationId,Boolean deleteAll) {
+        return evaluationDao.deleteFavorite(userId,evaluationId,deleteAll);
     }
 }
