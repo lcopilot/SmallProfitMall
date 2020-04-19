@@ -152,7 +152,22 @@
     methods: {
       //删除足迹
       removeFootprint(footprintId) {
-
+        const params={
+          userId:sessionStorage.getItem("uId"),
+          footprintId:footprintId,
+          deleteAll:false
+        };
+        if (footprintId==null){
+          params.deleteAll=true
+          params.footprintId=null
+        }
+        userApi.deleteFootprint(params).then(res=>{
+            if (res.success){
+              this.$message({
+                message:"删除成功"
+              })
+            }
+        })
       },
       //添加收藏
       addFavorite() {

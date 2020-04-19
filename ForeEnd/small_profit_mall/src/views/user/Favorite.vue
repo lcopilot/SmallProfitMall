@@ -104,6 +104,7 @@
 </template>
 
 <script>
+  import * as userApi from "../../api/page/user";
   const personalPage = () => import("../../components/admin/PersonalHubPage");
 
   export default {
@@ -134,17 +135,51 @@
     },
     methods: {
       //删除收藏
-      removeFavorite(){
-
+      removeFavorite(evaluationId){
+        const params={
+          userId:sessionStorage.getItem("uId"),
+          evaluationId:evaluationId,
+          deleteAll:false
+        };
+        if (evaluationId==null){
+          params.deleteAll=true
+          params.evaluationId=null
+        }
+        userApi.deleteFavorite(params).then(res=>{
+          if (res.success){
+            this.$message({
+              message:"已移除收藏"
+            })
+          }
+        })
       },
       //切换评论分页时触发
       changePage(currentPage) {
         this.favoriteParams.currentPage = currentPage;
+        this.getFavorite();
       },
       //切换每页显示多少条评论时触发
       changeNumber(pageSize) {
         this.favoriteParams.pageSize = pageSize;
+        this.getFavorite();
+      },
+      getFavorite() {
+        const params={
+          userId:sessionStorage.getItem("uId"),
+          currentPage:this.favoriteParams.currentPage,
+          pageSize:this.favoriteParams.pageSize
+        };
+        userApi.getFavorite(params).then(res=>{
+          if (res.success){
+            this.favoriteList=res.pagination.list;
+            this.favoriteParams.totalPage=res.pagination.totalPage;
+            this.favoriteParams.totalCount=res.pagination.totalCount;
+          }
+        })
       }
+    },
+    mounted() {
+      this.getFavorite();
     }
   }
 </script>
