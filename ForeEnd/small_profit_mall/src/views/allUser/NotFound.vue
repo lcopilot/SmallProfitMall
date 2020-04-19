@@ -1,13 +1,31 @@
 <template>
   <div class="container">
-    <img class="bg" src="http://img.fhxasdsada.xyz/404.png"/>
-    <div class="btn">
-      <a class="goindex" onclick="history.back()">返回上一页面</a>
-      <a class="lx" onclick="history.back()">返回上一页面</a>
-      <div style="clear:both;"></div>
-    </div>
+<!--    <img class="bg" src="http://img.fhxasdsada.xyz/404.png"/>-->
+<!--    <div class="btn">-->
+<!--      <a class="goindex" onclick="history.back()">返回上一页面</a>-->
+<!--      <a class="lx" onclick="history.back()">返回上一页面</a>-->
+<!--      <div style="clear:both;"></div>-->
+<!--    </div>-->
   </div>
 </template>
+<script>
+  export default{
+    mounted() {
+      if (!document.getElementById('publicBenefit')) {  //避免多次引入
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = '//qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js';
+        script.charset="utf-8";
+        script.homePageUrl="http://yoursite.com";
+        script.homePageName="回到首页";
+        script.id = 'publicBenefit';
+        document.body.appendChild(script);
+      }
+    }
+  }
+
+
+</script>
 <style scoped>
 
   * {
