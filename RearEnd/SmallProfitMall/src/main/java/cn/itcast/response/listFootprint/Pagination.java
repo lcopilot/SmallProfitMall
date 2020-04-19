@@ -19,6 +19,9 @@ public class Pagination<T> {
     /**数据集合*/
     private List<?> list;
 
+    /**总数量**/
+    private Long totalCount;
+
     /**总页数**/
     private Integer totalPage;
 
