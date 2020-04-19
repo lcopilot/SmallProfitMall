@@ -63,9 +63,11 @@ public class FootprintController {
         //查询足迹信息
         List<Footprint> footprint = footprintService.fendFootprint(userId,currentPage,pageSize);
         //查询总页数
-        Integer totalPage=footprintService.fendTotalPage(userId,pageSize);
+        Integer[] totalPage=footprintService.fendTotalPage(userId,pageSize);
         pagination.setList(footprint);
-        pagination.setTotalPage(totalPage);
+        pagination.setTotalCount(totalPage[0].longValue());
+        pagination.setTotalPage((int) totalPage[1].longValue());
+
         return new ResponsePagination(CommonCode.SUCCESS,pagination);
     }
 }

@@ -55,13 +55,16 @@ public class FootprintServiceImpl implements FootprintService {
     /**
      * 查询足迹数量
      * @param userId
-     * @return
+     * @return TotalPage[0]为总数量 TotalPage[1]为种总页数
      */
     @Override
-    public Integer fendTotalPage(String userId,Integer pageSize){
+    public Integer[] fendTotalPage(String userId,Integer pageSize){
+        Integer[] TotalPage=new Integer[2];
         Integer quantity = footprintDao.fendFootprintQuantity(userId);
         int totalPage = (quantity % pageSize)  == 0 ? quantity/pageSize : (quantity/pageSize) + 1;
-        return totalPage;
+        TotalPage[0]=quantity;
+        TotalPage[1]=totalPage;
+        return TotalPage;
     }
 
 }

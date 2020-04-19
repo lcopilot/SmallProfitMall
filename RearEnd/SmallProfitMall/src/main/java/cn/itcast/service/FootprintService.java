@@ -26,5 +26,5 @@ public interface FootprintService {
      * @param userId
      * @return
      */
-    public Integer fendTotalPage(String userId,Integer pageSize);
+    public  Integer[]  fendTotalPage(String userId,Integer pageSize);
 }
