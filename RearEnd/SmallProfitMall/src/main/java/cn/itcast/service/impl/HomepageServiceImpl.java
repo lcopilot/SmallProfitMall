@@ -30,13 +30,13 @@ public class HomepageServiceImpl implements HomepageService {
      */
     @Override
     public List findRotationChart() {
-//        List<RotationChart> redis = (List<RotationChart>) redisUtil.lGet("findRotationChart",0,-1);
-//        if (redis==null || redis.size()==0){
+        List<RotationChart> redis = (List<RotationChart>)redisUtil.get("RotationChart");
+        if (redis==null || redis.size()==0){
             List<RotationChart> findRotationChart = homepageDao.findRotationChart();
-            redisUtil.lSet("findRotationChart",findRotationChart);
+            redisUtil.set("RotationChart",findRotationChart);
             return findRotationChart;
-//        }
-//     return redis;
+        }
+     return redis;
     }
 
     /**
@@ -46,21 +46,21 @@ public class HomepageServiceImpl implements HomepageService {
     @Override
     public List<Navigation> findNavigation() {
         //缓存库查询是否已存入
-    //    List<Navigation> redis = (List<Navigation>) redisUtil.lGet("Navigation_1",0,-1);
-    //    if(redis.size() == 0){
+        List<Navigation> redis = (List<Navigation>) redisUtil.lGet("Navigation_1",0,-1);
+        if(redis.size() == 0){
             System.out.println("数据库中取");
             List<Navigation> Navigation_1s = homepageDao.findNavigation();
-      //      redisUtil.lSet("Navigation_1",Navigation_1s);
+            redisUtil.lSet("Navigation_1",Navigation_1s);
             //转换返回格式
             ArrayList[] arrayLists = {(ArrayList) Navigation_1s};
             //增加一层数组
             List list= Arrays.asList(arrayLists);
             List<Navigation>  Navigation_1 = list;
-            return Navigation_1;
-     //   }else {
-     //       System.out.println("缓存中获取");
-     //       return redis;
-    //    }
+            return redis;
+        }else {
+            System.out.println("缓存中获取");
+            return redis;
+        }
     }
 
     /**
@@ -107,25 +107,19 @@ public class HomepageServiceImpl implements HomepageService {
      */
     @Override
     public List<Classify> findNavigation2() {
-    //    List<Classify> redis = (List<Classify>) redisUtil.lGet("Classify", 0, -1);
-//        if (redis==null || redis.size() == 0 ) {
+        List<Classify> redis = (List<Classify>) redisUtil.get("findNavigation2");
+        if (redis==null || redis.size() == 0 ) {
             System.out.println("数据库中取");
             List<Classify> navigation2 = homepageDao.findNavigation2();
             //存入缓存
-            redisUtil.lSet("Classify", navigation2);
-            //转换返回格式
-            ArrayList[] arrayLists = {(ArrayList) navigation2};
-            //增加一层数组
-            List list= Arrays.asList(arrayLists);
-            List<Classify>  Classify = list;
+            redisUtil.set("findNavigation2", navigation2);
 
             return navigation2;
- //       } else {
-       //     System.out.println("缓存中取");
-            //取缓存
-       //     return redis;
-     //   }
-
+        } else {
+            System.out.println("缓存中取");
+           // 取缓存
+            return redis;
+        }
     }
 
     /**
