@@ -6,6 +6,7 @@ import cn.itcast.domain.order.ProductContent;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -95,4 +96,22 @@ public interface OrderDao {
     public Integer findChangeQuantity(@Param("userId")String userId,@Param("orderId")String orderId);
 
 
+    /**
+     * 支付成功 修改支付状态 支付时间
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @param orderState 订单状态
+     * @param paymentTime 订单时间
+     * @return 影响行数
+     */
+    public Integer updateOrderPayState(@Param("userId")String userId,@Param("orderId")String orderId,@Param("orderState")Integer orderState,@Param("paymentTime") Date paymentTime);
+
+    /**
+     * 修改订单状态方法
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @param orderState 订单状态
+     * @return
+     */
+    public Integer updateOrderState(@Param("userId")String userId,@Param("orderId")String orderId,@Param("orderState")Integer orderState);
 }

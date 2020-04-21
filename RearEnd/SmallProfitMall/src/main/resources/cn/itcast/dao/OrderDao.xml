@@ -77,9 +77,9 @@
     <!--新增订单-->
     <insert id="addOrder" parameterType="cn.itcast.domain.order.Order">
         INSERT INTO
-           userOrder(userId,orderId,orderTime,orderTotal,orderState)
+           userOrder(userId,orderId,orderTime,orderTotal)
         VALUES
-            (#{userId},#{orderId},#{orderTime},#{orderTotal},#{orderState})
+            (#{userId},#{orderId},#{orderTime},#{orderTotal})
     </insert>
     <!--新增订单商品内容-->
     <insert id="addProductContent" parameterType="cn.itcast.domain.order.ProductContent">
@@ -156,12 +156,38 @@
         SET
              paymentWay=#{paymentWay},deliveryWay=#{deliveryWay},
              deliveryTime=#{deliveryTime},paymentTime=#{paymentTime},
-             submitTime=#{submitTime},orderNote=#{orderNote},orderState=#{orderState}
+             submitTime=#{submitTime},orderNote=#{orderNote}
         WHERE
             userId=#{userId}
         AND
             orderId=#{orderId}
     </update>
+
+    <!--修改订单状态-->
+    <update id="updateOrderState">
+         UPDATE
+            userOrder
+        SET
+            orderState=#{orderState}
+        WHERE
+            userId=#{userId}
+        AND
+            orderId=#{orderId}
+    </update>
+
+    <!--修改订单状态 支付时间-->
+    <update id="updateOrderPayState">
+         UPDATE
+            userOrder
+        SET
+            orderState=#{orderState},
+            paymentTime=#{paymentTime}
+        WHERE
+            userId=#{userId}
+        AND
+            orderId=#{orderId}
+    </update>
+
     <!--修改订单-->
     <update id="updateOrder">
         UPDATE
