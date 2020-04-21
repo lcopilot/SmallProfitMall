@@ -201,10 +201,8 @@ public class OrderServiceImpl implements OrderService {
             if (!redis){
                 return  3;
             }
-            //查询订单信息
-            Order order =  orderDao.findOrder(userId,orderId);
-            //推送消息
-            updateOrders(order);
+            Order order = findDetailedOrder(null,orderId);
+            Integer integer = updateOrders(order);
             return 1;
         }else {
             return 2;
@@ -263,7 +261,6 @@ public class OrderServiceImpl implements OrderService {
             if (productNames.length()>10){
                 omit="...";
             }
-
             //截取字符串前6位
             productNames = productNames.substring(0,10);
             //拼接最后名称
@@ -393,17 +390,19 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * 付款成功 修改订单
+     * 付款成功订单通知
      * @param order 订单对象
      * @return
      * @throws Exception
      */
     @Override
     public Integer updateOrders(Order order) throws Exception {
-        //修改订单状态 2为确认订单
+        //设置支付状态为已支付状态（2）
         order.setOrderState(2);
-        //设置付款时间
+        //设置当前时间为支付时间
         order.setPaymentTime(new Date());
+        //修改支付状态 支付时间
+        orderDao.updateOrderPayState(order.getUserId(),order.getOrderId(),order.getOrderState(),order.getPaymentTime());
         //邮件通知
         emailNotification(order.getUserId());
         //推送消息
@@ -447,6 +446,7 @@ public class OrderServiceImpl implements OrderService {
         return 1;
     }
 
+
     /**
      * 修改订单
      * @param order 订单对象
@@ -470,6 +470,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
+    /**
+     * 技术用户余额是否充足
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @return 充足返回true 不足返回false
+     * @throws Exception
+     */
     public Boolean walletPay(String userId,String orderId) throws Exception {
         //查询用户余额
         String encryptionBalance = memberDao.findBalance(userId);
@@ -541,6 +548,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
+    /**
+     * 推送消息
+     * @param orders 订单对象
+     * @throws IOException
+     */
     @Override
     public void push(Order orders) throws IOException {
         //添加商品信息
@@ -656,4 +668,5 @@ public class OrderServiceImpl implements OrderService {
 
         }
     }
+
 }

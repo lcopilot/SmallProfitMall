@@ -2,11 +2,13 @@ package cn.itcast.service;
 
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
+import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author Kite
@@ -116,6 +118,8 @@ public interface OrderService {
      */
     public Integer notificationUser(Order order,String totals) throws Exception;
 
+
+
     /**
      * 修改订单
      * @param order 订单对象
@@ -138,4 +142,6 @@ public interface OrderService {
      * @throws IOException
      */
     public void push(Order orders) throws IOException;
+
+
 }
