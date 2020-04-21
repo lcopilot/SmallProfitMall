@@ -24,7 +24,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
     public static final String AERROR_MSG = "SUCCESS";
 
     //人脸检测信用度
-    public static final Double CREDIT = 0.82;
+    public static final Double CREDIT = 0.48;
 
     //人脸比对分数
     public static final Double SIMILARITY=85.00;

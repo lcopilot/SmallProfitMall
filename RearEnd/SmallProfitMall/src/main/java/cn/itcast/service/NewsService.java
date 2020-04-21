@@ -55,4 +55,5 @@ public interface NewsService {
     public Integer pushNews(List<News> news,Integer unreadQuantity) throws IOException;
 
 
+
 }
