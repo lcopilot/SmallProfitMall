@@ -85,7 +85,8 @@ public class NewsServiceImpl implements NewsService {
      */
     @Override
     public Integer unreadQuantity(String userId) {
-        return newsDao.unreadQuantity(userId);
+        Integer a=  newsDao.unreadQuantity(userId);
+        return a;
     }
 
     /**

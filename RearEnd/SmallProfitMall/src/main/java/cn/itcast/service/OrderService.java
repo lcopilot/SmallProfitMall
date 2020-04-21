@@ -4,6 +4,7 @@ import cn.itcast.domain.order.Order;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 
@@ -130,4 +131,11 @@ public interface OrderService {
      */
     public Integer fenOrderTotal(String userId ,String orderId);
 
+
+    /**
+     * 推送消息
+     * @param orders 订单对象
+     * @throws IOException
+     */
+    public void push(Order orders) throws IOException;
 }
