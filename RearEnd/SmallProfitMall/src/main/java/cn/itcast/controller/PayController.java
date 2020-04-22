@@ -4,21 +4,30 @@ package cn.itcast.controller;
 import cn.itcast.domain.order.Order;
 import cn.itcast.service.OrderService;
 import cn.itcast.skd.AlipayConfig;
+import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.domain.OrderItem;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.alipay.api.request.AlipayTradeRefundRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import static com.alipay.api.AlipayConstants.SIGN_TYPE;
 
 /**
  * @author Kite
@@ -72,6 +81,8 @@ public class PayController {
         }
 
     }
+
+
 
 
     @RequestMapping("/payReturn")

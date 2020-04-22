@@ -45,6 +45,7 @@
         <result property="orderTotal" column="orderTotal"></result>
         <result property="orderState" column="orderState"></result>
         <result property="changeQuantity" column="changeQuantity"></result>
+
         <association property="orderAddress" resultMap="orderAddressMap" javaType="cn.itcast.domain.order.OrderAddress">
 
         </association>
@@ -112,6 +113,36 @@
              uo.userId=#{userId}
         AND
             uo.orderId=#{orderId}
+    </select>
+
+    <!--按条件查询订单-->
+    <select id="findAllOrder" resultMap="allOrderMap">
+        SELECT
+            uo.*,o.productName,
+            o.id AS ids,
+            o.productImage,o.productPrice,o.productConfiguration,
+            o.productQuantity,o.productWeight,o.evaluate,
+            oa.orderId AS orderIds,oa.name,oa.areas,oa.detailedAddress,oa.phone,oa.email,oa.alias
+        FROM
+        userOrder uo
+        LEFT JOIN
+        orders o
+        ON
+        uo.orderId=o.orderId,
+        orderAddress oa
+        <where>
+            <if test="userId!=null">
+                AND   uo.userId=#{userId}
+            </if>
+            <if test="orderState!=0">
+                AND uo.orderState=#{orderState}
+            </if>
+            AND
+                o.orderId=oa.orderId
+            order by
+                uo.orderTime
+            desc limit #{start},#{pageSize}
+        </where>
     </select>
 
     <!--查询订单详细-->
@@ -221,5 +252,9 @@
         SELECT orderTotal FROM userOrder WHERE userId=#{userId} AND orderId=#{orderId}
     </select>
 
+    <!--查询收藏数量-->
+    <select id="fendOrderQuantity" resultType="java.lang.Integer">
+           SELECT count(*) FROM userOrder WHERE userId=#{userId}
+    </select>
 
 </mapper>

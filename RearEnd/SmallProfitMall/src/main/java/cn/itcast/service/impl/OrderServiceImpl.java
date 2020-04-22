@@ -3,6 +3,7 @@ package cn.itcast.service.impl;
 import cn.itcast.dao.*;
 import cn.itcast.domain.accountSettings.AccountSettings;
 import cn.itcast.domain.address.Address;
+import cn.itcast.domain.favorite.Evaluation;
 import cn.itcast.domain.member.ConsumptionRecords;
 import cn.itcast.domain.news.News;
 import cn.itcast.domain.order.Order;
@@ -14,21 +15,29 @@ import cn.itcast.service.*;
 import cn.itcast.skd.AlipayConfig;
 import cn.itcast.util.encryption.AesEncryptUtil;
 import com.alibaba.fastjson.JSONObject;
+import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.domain.OrderItem;
 import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.alipay.api.request.AlipayTradeRefundRequest;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import static com.alipay.api.AlipayConstants.SIGN_TYPE;
 
 /**
  * @author Kite
@@ -304,6 +313,21 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
+    /**
+     * 查询指定类型订单
+     * @param userId 用户id
+     * @param orderState 订单状态 0为查所有订单 1为查询待付款订单 2为查询待收货订单 3为待评价订单 4为退货
+     * @return 订单分类集合
+     */
+    @Override
+    public List<Order> findAllOrder(String userId ,Integer orderState,
+                                    Integer currentPage, Integer pageSize) {
+        //开始页
+        Integer start=(currentPage-1)*pageSize;
+        List<Order> orders = orderDao.findAllOrder(userId,orderState,start,pageSize);
+        return orders;
+    }
+
 
     /**
      * 生成订单号 时间戳加当天流水号
@@ -365,9 +389,11 @@ public class OrderServiceImpl implements OrderService {
             Double productPrice = shoppingCart1.getProductPrice();
 
             //单价
-            BigDecimal productPrice1=new BigDecimal(Double.toString(purchaseInformation1.getProductPrice()));
+            String price  = Double.toString(purchaseInformation1.getProductPrice());
+            BigDecimal productPrice1=new BigDecimal(price);
             //数量
             BigDecimal Quantity=new BigDecimal(String.valueOf(shoppingCart1.getQuantity()));
+            //乘法运算
             BigDecimal total =productPrice1.multiply(Quantity);
 
             orderNotes = orderNotes.add(total);
@@ -667,6 +693,65 @@ public class OrderServiceImpl implements OrderService {
             }
 
         }
+    }
+
+
+//    //退款
+//    public String Stringrefunds(HttpServletResponse httpResponse, HttpServletResponse response, HttpSession session, String oid)throws IOException, AlipayApiException {
+//        response.setContentType("text/html;charset=utf-8");
+//        PrintWriter out = response.getWriter();
+//        httpResponse.setCharacterEncoding("UTF-8");
+//        //获得初始化的AlipayClient
+//        AlipayClient alipayClient = new DefaultAlipayClient(
+//
+//                AlipayConfig.gatewayUrl,
+//
+//                AlipayConfig.app_id,
+//
+//                AlipayConfig.merchant_private_key, "json",
+//
+//                AlipayConfig.charset,
+//
+//                AlipayConfig.alipay_public_key,
+//
+//                AlipayConfig.sign_type);
+//        //设置请求参数
+//        AlipayTradeRefundRequest alipayRequest = new AlipayTradeRefundRequest();
+//        Orde r order = orderService.get(Integer.parseInt(oid));
+//        OrderItem orderItem = orderItemService.getOrderItem(order);
+//        //商户订单号，必填
+//        String out_trade_no = new String(order.getOrderCode());
+//        //需要退款的金额，该金额不能大于订单金额，必填
+//        String refund_amount = String.valueOf(orderItem.getNumber() * orderItem.getProduct().getPromotePrice());
+//        //标识一次退款请求，同一笔交易多次退款需要保证唯一，如需部分退款，则此参数必传
+//        String out_request_no = order.getOrderCode();
+//        alipayRequest.setBizContent("{\"out_trade_no\":\"" + out_trade_no + "\","
+//                + "\"trade_no\":\"" + order.getAliCode() + "\","
+//                + "\"refund_amount\":\"" + refund_amount + "\","
+//                + "\"out_request_no\":\"" + out_request_no + "\"}");
+//        //请求
+//        String result = alipayClient.execute(alipayRequest).getBody();
+//        //输出
+//        out.println(result);
+//
+//
+//    }
+
+
+    /**
+     * 查询总页数跟总订单数量
+     * @param userId 用户id
+     * @param pageSize 每页查询数量
+     * @return
+     */
+    @Override
+    public Integer[] fendTotalPage(String userId, Integer pageSize) {
+        Integer[] TotalPage=new Integer[2];
+        Integer quantity = orderDao.fendOrderQuantity(userId);
+        int totalPage = (quantity % pageSize)  == 0 ? quantity/pageSize : (quantity/pageSize) + 1;
+        TotalPage[0]=quantity;
+        TotalPage[1]=totalPage;
+        return TotalPage;
     }
 
 }

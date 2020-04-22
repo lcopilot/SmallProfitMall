@@ -8,6 +8,8 @@ import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.response.faceRecognition.FaceRecognition;
 import cn.itcast.response.faceRecognition.FaceRecognitionResponse;
+import cn.itcast.response.listFootprint.Pagination;
+import cn.itcast.response.listFootprint.ResponsePagination;
 import cn.itcast.response.queryOrder.QueryOrder;
 import cn.itcast.response.queryOrder.ResultOrder;
 import cn.itcast.response.returnString.QueryString;
@@ -25,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Kite
@@ -81,7 +84,7 @@ public class OrderController {
      * 查询订单
      * @param userId 用户id
      * @param orderId 订单id
-     * @return
+     * @return 返回订单信息 账户是否设置支付密码 人脸验证信息
      */
     @RequestMapping(value = "/findOrder/{userId}/{orderId}" , method = RequestMethod.GET)
     public QueryOrder findOrder(@PathVariable("userId") String userId , @PathVariable("orderId") String orderId){
@@ -94,6 +97,32 @@ public class OrderController {
         orderResult.setPaymentPassword(accountSettings.getPaymentPasswordExists());
         orderResult.setOrder(order);
         return new QueryOrder(CommonCode.SUCCESS,orderResult);
+    }
+
+    /**
+     * 查询不同状态订单集合
+     * @param userId 用户id
+     * @param orderState 订单状态 0为查所有订单 1为查询待付款订单 2为查询待收货订单 3为待评价订单 4为退货
+     * @return
+     */
+    @RequestMapping(value ="/findAllOrder" )
+    public ResponsePagination findAllOrder( String userId,Integer orderState,Integer currentPage , Integer pageSize){
+        //判断传入开始页是否为空 为空则默认为第一页
+        if (currentPage==null){
+            currentPage=1;
+        }
+        //判断传入每页显示数量 为空则默认为8条
+        if (pageSize==null){
+            pageSize=8;
+        }
+        Pagination pagination = new Pagination();
+        List<Order> orders = orderService.findAllOrder(userId,orderState,currentPage,pageSize);
+        //查询总数量跟总页数 数组0为总数量 1 为总页数
+        Integer[] totalPage=orderService.fendTotalPage(userId,pageSize);
+        pagination.setList (orders);
+        pagination.setTotalCount(totalPage[0].longValue());
+        pagination.setTotalPage((int) totalPage[1].longValue());
+        return new ResponsePagination(CommonCode.SUCCESS,pagination);
     }
 
     /**
