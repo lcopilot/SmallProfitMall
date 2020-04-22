@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Kite
@@ -86,6 +87,17 @@ public interface OrderService {
      * @return 订单对象
      */
     public Order findDetailedOrder(String userId,String orderId);
+
+
+    /**
+     * 查询订单分类
+     * @param userId 用户id
+     * @param orderState 订单状态 0为查所有订单 1为查询待付款订单 2为查询待收货订单 3为待评价订单 4为退货
+     * @return 订单集合
+     */
+    public List<Order> findAllOrder(String userId ,Integer orderState,
+                                    Integer currentPage, Integer pageSize);
+
     /**
      * 生成订单号 时间戳加当天流水号
      * 取当天最后一笔订单的流水号加一
@@ -143,5 +155,12 @@ public interface OrderService {
      */
     public void push(Order orders) throws IOException;
 
+    /**
+     * 查询订单总页数更总数量
+     * @param userId 用户id
+     * @param pageSize 每页数量
+     * @return 0为订单总数量 1为每页总数量
+     */
+    public Integer[] fendTotalPage(String userId, Integer pageSize);
 
 }

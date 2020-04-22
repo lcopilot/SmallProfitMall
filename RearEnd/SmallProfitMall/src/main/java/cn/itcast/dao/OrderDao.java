@@ -39,6 +39,14 @@ public interface OrderDao {
     public Order findDetailedOrder(@Param("userId")String userId , @Param("orderId")String orderId);
 
     /**
+     * 查询订单分类
+     * @param userId 用户id
+     * @param orderState 订单状态 0为查所有订单 1为查询待付款订单 2为查询待收货订单 3为待评价订单 4为退货
+     * @return
+     */
+    public List<Order> findAllOrder(@Param("userId")String userId , @Param("orderState")Integer orderState,
+                                    @Param("start")Integer start,@Param("pageSize") Integer pageSize);
+    /**
      * 新增订单商品
      * @param productContent
      * @return
@@ -114,4 +122,11 @@ public interface OrderDao {
      * @return
      */
     public Integer updateOrderState(@Param("userId")String userId,@Param("orderId")String orderId,@Param("orderState")Integer orderState);
+
+    /**
+     * 查询订单总数量
+     * @param userId 用户id
+     * @return 订单总数量
+     */
+    public Integer fendOrderQuantity(@Param("userId")String userId);
 }
