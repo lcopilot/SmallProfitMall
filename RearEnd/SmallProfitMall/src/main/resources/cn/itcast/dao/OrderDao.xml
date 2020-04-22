@@ -254,7 +254,7 @@
 
     <!--查询收藏数量-->
     <select id="fendOrderQuantity" resultType="java.lang.Integer">
-           SELECT count(*) FROM userOrder WHERE userId=#{userId}
+           SELECT count(*) FROM userOrder WHERE userId=#{userId} AND orderState=#{orderState}
     </select>
 
 </mapper>

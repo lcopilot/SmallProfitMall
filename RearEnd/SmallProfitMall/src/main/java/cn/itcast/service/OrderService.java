@@ -161,6 +161,6 @@ public interface OrderService {
      * @param pageSize 每页数量
      * @return 0为订单总数量 1为每页总数量
      */
-    public Integer[] fendTotalPage(String userId, Integer pageSize);
+    public Integer[] fendTotalPage(String userId,Integer orderState, Integer pageSize);
 
 }

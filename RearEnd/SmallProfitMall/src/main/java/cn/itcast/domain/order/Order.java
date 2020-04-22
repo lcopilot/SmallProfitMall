@@ -37,18 +37,18 @@ public class Order implements Serializable {
     private String orderNote;
     //订单总计
     private BigDecimal orderTotal;
-    //是否发货
-    private Boolean submit;
-    //用户是否收货
-    private Boolean receipt;
+
     //商品信息
     List<ProductContent> productContents;
-    //订单状态  1代表未支付 2代表已支付
+    /**订单状态  1代表未支付 2代表已支付**/
     private Integer orderState;
+
     //返回订单地点
     public OrderAddress orderAddress;
+
     //用户地址地址
     private Address address;
+
     //订单修改次数
     private Integer changeQuantity;
 
@@ -148,22 +148,6 @@ public class Order implements Serializable {
         this.orderTotal = orderTotal;
     }
 
-    public Boolean getSubmit() {
-        return submit;
-    }
-
-    public void setSubmit(Boolean submit) {
-        this.submit = submit;
-    }
-
-    public Boolean getReceipt() {
-        return receipt;
-    }
-
-    public void setReceipt(Boolean receipt) {
-        this.receipt = receipt;
-    }
-
     public List<ProductContent> getProductContents() {
         return productContents;
     }
@@ -194,28 +178,5 @@ public class Order implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", userId='" + userId + '\'' +
-                ", orderId='" + orderId + '\'' +
-                ", paymentWay=" + paymentWay +
-                ", deliveryWay=" + deliveryWay +
-                ", orderTime=" + orderTime +
-                ", deliveryTime=" + deliveryTime +
-                ", submitTime=" + submitTime +
-                ", paymentTime=" + paymentTime +
-                ", orderNote='" + orderNote + '\'' +
-                ", orderTotal=" + orderTotal +
-                ", submit=" + submit +
-                ", receipt=" + receipt +
-                ", productContents=" + productContents +
-                ", orderState=" + orderState +
-                ", orderAddress=" + orderAddress +
-                ", address=" + address +
-                '}';
     }
 }
