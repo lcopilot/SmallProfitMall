@@ -103,7 +103,7 @@ public class OrderController {
      * 查询不同状态订单集合
      * @param userId 用户id
      * @param orderState 订单状态 0为查所有订单 1为查询待付款订单 2为查询待收货订单 3为待评价订单 4为退货
-     * @return
+     * @return 订单集合
      */
     @RequestMapping(value ="/findAllOrder" )
     public ResponsePagination findAllOrder( String userId,Integer orderState,Integer currentPage , Integer pageSize){
@@ -118,7 +118,7 @@ public class OrderController {
         Pagination pagination = new Pagination();
         List<Order> orders = orderService.findAllOrder(userId,orderState,currentPage,pageSize);
         //查询总数量跟总页数 数组0为总数量 1 为总页数
-        Integer[] totalPage=orderService.fendTotalPage(userId,pageSize);
+        Integer[] totalPage=orderService.fendTotalPage(userId,orderState,pageSize);
         pagination.setList (orders);
         pagination.setTotalCount(totalPage[0].longValue());
         pagination.setTotalPage((int) totalPage[1].longValue());

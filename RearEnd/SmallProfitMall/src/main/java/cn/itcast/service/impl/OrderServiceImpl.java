@@ -739,15 +739,17 @@ public class OrderServiceImpl implements OrderService {
 
 
     /**
+     *
      * 查询总页数跟总订单数量
      * @param userId 用户id
-     * @param pageSize 每页查询数量
+     * @param orderState 订单类型
+     * @param pageSize 每页数量
      * @return
      */
     @Override
-    public Integer[] fendTotalPage(String userId, Integer pageSize) {
+    public Integer[] fendTotalPage(String userId,Integer orderState, Integer pageSize) {
         Integer[] TotalPage=new Integer[2];
-        Integer quantity = orderDao.fendOrderQuantity(userId);
+        Integer quantity = orderDao.fendOrderQuantity(userId,orderState);
         int totalPage = (quantity % pageSize)  == 0 ? quantity/pageSize : (quantity/pageSize) + 1;
         TotalPage[0]=quantity;
         TotalPage[1]=totalPage;

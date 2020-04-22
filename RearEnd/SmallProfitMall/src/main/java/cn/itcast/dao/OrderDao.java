@@ -128,5 +128,5 @@ public interface OrderDao {
      * @param userId 用户id
      * @return 订单总数量
      */
-    public Integer fendOrderQuantity(@Param("userId")String userId);
+    public Integer fendOrderQuantity(@Param("userId")String userId,@Param("orderState")Integer orderState);
 }
