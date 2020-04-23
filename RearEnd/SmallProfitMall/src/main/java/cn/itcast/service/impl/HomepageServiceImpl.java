@@ -52,6 +52,7 @@ public class HomepageServiceImpl implements HomepageService {
             Classification classification = new Classification();
             classification.setNavigationClassify(homepageDao.findNavigationClassify());
             classification.setNavigations(homepageDao.findNavigation());
+            redisUtil.set("findNavigationInDetail",classification);
             return classification;
         }
         return redis;
