@@ -40,18 +40,6 @@ public class HomepageController {
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
     }
 
-    /**
-     * 商品分类导航栏
-     * @return
-     */
-    @RequestMapping("/findNavigation1")
-    public QueryResponseResult findNavigation(){
-        QueryResult result = new QueryResult();
-        // 调用service的方法
-        List<Navigation> list = homepageService.findNavigation();
-        result.setList(list);
-        return  new QueryResponseResult(CommonCode.SUCCESS,result);
-     }
 
     /**
      * 搜索栏下导航分类
@@ -85,9 +73,9 @@ public class HomepageController {
      * @return
      */
     @RequestMapping("/navigationInDetail")
-    public QueryResponseResult cs(){
+    public QueryResponseResult navigationInDetail(){
         QueryResult result = new QueryResult();
-        Classification classification = homepageService.navigationInDetail();
+        Classification classification = homepageService.findNavigationInDetail();
         List<Classification> logins= Arrays.asList(classification);
         result.setList(logins);
         return new QueryResponseResult(CommonCode.SUCCESS,result);

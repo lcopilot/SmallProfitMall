@@ -39,66 +39,23 @@ public class HomepageServiceImpl implements HomepageService {
      return redis;
     }
 
-    /**
-     * 导航栏
-     * @return
-     */
-    @Override
-    public List<Navigation> findNavigation() {
-        //缓存库查询是否已存入
-        List<Navigation> redis = (List<Navigation>) redisUtil.lGet("Navigation_1",0,-1);
-        if(redis.size() == 0){
-            System.out.println("数据库中取");
-            List<Navigation> Navigation_1s = homepageDao.findNavigation();
-            redisUtil.lSet("Navigation_1",Navigation_1s);
-            //转换返回格式
-            ArrayList[] arrayLists = {(ArrayList) Navigation_1s};
-            //增加一层数组
-            List list= Arrays.asList(arrayLists);
-            List<Navigation>  Navigation_1 = list;
-            return redis;
-        }else {
-            System.out.println("缓存中获取");
-            return redis;
-        }
-    }
 
-    /**
-     * 查询所有分类
-     * @return 分类集合
-     */
-    @Override
-    public List<NavigationClassify> findClassification() {
-        //查询缓存中是否存入
-        List<NavigationClassify> redis = (List<NavigationClassify>) redisUtil.lGet("findClassification",0,-1);
-        if(redis.size() == 0){
-            System.out.println("数据库中取分类");
-            List<NavigationClassify> findClassifications = homepageDao.findClassification();
-            //存入缓存
-            redisUtil.lSet("findClassification",findClassifications);
-            //转换返回格式
-            ArrayList[] arrayLists = {(ArrayList) findClassifications};
-            //增加一层数组
-            List list= Arrays.asList(arrayLists);
-            List<NavigationClassify>  findClassification = list;
-            return findClassification;
-        }else {
-            System.out.println("缓存中获取");
-            return redis;
-        }
-
-    }
 
     /**
      * 详细分类
      * @return
      */
     @Override
-    public Classification navigationInDetail(){
-        Classification classification = new Classification();
-        classification.setNavigationClassify(findClassification());
-        classification.setNavigations(findNavigation());
-        return classification;
+    public Classification findNavigationInDetail(){
+        Classification redis = (Classification) redisUtil.get("findNavigationInDetail");
+        if (redis==null){
+            Classification classification = new Classification();
+            classification.setNavigationClassify(homepageDao.findNavigationClassify());
+            classification.setNavigations(homepageDao.findNavigation());
+            return classification;
+        }
+        return redis;
+
     }
 
     /**
@@ -148,15 +105,6 @@ public class HomepageServiceImpl implements HomepageService {
         }
     }
 
-    /**
-     * 查询商品分类详细
-     * @param id 用户id
-     * @return
-     */
-    @Override
-    public List<NavigationClassify> findById(int id) {
-        return homepageDao.findById(id);
-    }
 
 }
 
