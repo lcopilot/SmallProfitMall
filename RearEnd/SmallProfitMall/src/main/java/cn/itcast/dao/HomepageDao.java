@@ -25,15 +25,15 @@ public interface HomepageDao {
      */
     public List<Icon> findIcon();
 
-
     /**
-     * 查询导航标题
+     * 查询导航详细
      * @return
      */
+
     public List<NavigationClassify> findNavigationClassify();
 
     /**
-     * 查询导航详细
+     * 查询导航标题
      * @return
      */
     public List<Navigation> findNavigation();

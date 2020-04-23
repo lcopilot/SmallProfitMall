@@ -20,12 +20,12 @@
         SELECT * from homepageIcon
     </select>
 
-    <!--查询导航标题-->
+    <!--查询导航详细-->
     <select id="findNavigationClassify" resultType="cn.itcast.domain.homepag.NavigationClassify">
-        SELECT * FROM navigation
+        SELECT * FROM classification
     </select>
 
-    <!--查询导航分类详细-->
+    <!--查询导航标题-->
     <select id="findNavigation" resultType="cn.itcast.domain.homepag.Navigation">
         SELECT * FROM navigation
     </select>
