@@ -81,7 +81,7 @@
                 ps.ProductSize,
                 pt.ProductTaste,
                 pv.version,
-
+                pst.Specification
             from
 			    ProductBasis pb
 			LEFT JOIN
