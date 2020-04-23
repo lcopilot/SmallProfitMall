@@ -10,9 +10,6 @@
         SELECT * from RotationChart
     </select>
 
-    <select id="findNavigation" resultType="cn.itcast.domain.homepag.Navigation">
-        SELECT * from navigation
-    </select>
 
     <!--查询所有商品栏下分类-->
     <select id="findNavigation2" resultType="cn.itcast.domain.commodity.Classify">
@@ -23,15 +20,14 @@
         SELECT * from homepageIcon
     </select>
 
-    <!--根据id查询消息分类-->
-    <select id="findById" resultType="cn.itcast.domain.homepag.NavigationClassify">
-        select * from classification where nid = #{nid}
+    <!--查询导航标题-->
+    <select id="findNavigationClassify" resultType="cn.itcast.domain.homepag.NavigationClassify">
+        SELECT * FROM navigation
     </select>
 
-    <!--询所有商品分类-->
-    <select id="findClassification" resultType="cn.itcast.domain.homepag.NavigationClassify">
-        select * from classification
+    <!--查询导航分类详细-->
+    <select id="findNavigation" resultType="cn.itcast.domain.homepag.Navigation">
+        SELECT * FROM navigation
     </select>
-
 
 </mapper>

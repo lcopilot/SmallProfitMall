@@ -3,7 +3,8 @@ package cn.itcast.domain.homepag;
 import java.io.Serializable;
 //侧边导航
 public class Navigation implements Serializable {
-    private int nid;
+    private  Integer cid;
+    private Integer nid;
     private String goodsName_1;
     private String goodsId_1;
     private String goodsName_2;
@@ -85,18 +86,15 @@ public class Navigation implements Serializable {
         this.goodsId_4 = goodsId_4;
     }
 
-    @Override
-    public String toString() {
-        return "Navigation{" +
-                "nid=" + nid +
-                ", goodsName_1='" + goodsName_1 + '\'' +
-                ", goodsId_1='" + goodsId_1 + '\'' +
-                ", goodsName_2='" + goodsName_2 + '\'' +
-                ", goodsId_2='" + goodsId_2 + '\'' +
-                ", goodsName_3='" + goodsName_3 + '\'' +
-                ", goodsId_3='" + goodsId_3 + '\'' +
-                ", goodsName_4='" + goodsName_4 + '\'' +
-                ", goodsId_4='" + goodsId_4 + '\'' +
-                '}';
+    public Integer getCid() {
+        return cid;
+    }
+
+    public void setCid(Integer cid) {
+        this.cid = cid;
+    }
+
+    public void setNid(Integer nid) {
+        this.nid = nid;
     }
 }

@@ -1,10 +1,7 @@
 package cn.itcast.dao;
 
 import cn.itcast.domain.commodity.Classify;
-import cn.itcast.domain.homepag.Icon;
-import cn.itcast.domain.homepag.Navigation;
-import cn.itcast.domain.homepag.NavigationClassify;
-import cn.itcast.domain.homepag.RotationChart;
+import cn.itcast.domain.homepag.*;
 
 import java.util.List;
 
@@ -17,13 +14,7 @@ public interface HomepageDao {
     public List<RotationChart> findRotationChart();
 
     /**
-     * 商品分类导航栏
-     * @return
-     */
-    public List<Navigation> findNavigation();
-
-    /**
-     * 商品分类导航栏2
+     * 搜索栏下导航
      * @return
      */
     public List<Classify> findNavigation2();
@@ -34,13 +25,18 @@ public interface HomepageDao {
      */
     public List<Icon> findIcon();
 
+
     /**
-     * 查询详细分类
-     * @param nid
+     * 查询导航标题
      * @return
      */
-    public List<NavigationClassify> findById(int nid);
+    public List<NavigationClassify> findNavigationClassify();
+
+    /**
+     * 查询导航详细
+     * @return
+     */
+    public List<Navigation> findNavigation();
 
 
-    public List<NavigationClassify> findClassification();
 }

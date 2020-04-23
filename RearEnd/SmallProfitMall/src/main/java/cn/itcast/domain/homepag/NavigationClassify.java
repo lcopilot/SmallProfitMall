@@ -2,9 +2,13 @@ package cn.itcast.domain.homepag;
 
 import java.io.Serializable;
 
+/**
+ * 商品分类详细
+ */
 public class NavigationClassify implements Serializable {
     private int id;
     private int nid;
+    //分类标题
     private String classificationHeader;
     private String classifyName_1;
     private String classifySite_1;
