@@ -115,16 +115,16 @@
       getCategoriesList() {
         homeApi.getCategoriesList().then(res => {
           if (res.success) {
-            this.CategoriesList = res.queryResult.list[0].navigations[0];
+            this.CategoriesList = res.queryResult.list[0].navigations;
             this.CategoriesLists = res.queryResult.list[0];
           }
         })
       },
       enter(nid) {
         this.CategoryDetailsList = [];
-        this.CategoriesLists.navigationClassify[0].forEach((Categories, index) => {
+        this.CategoriesLists.navigationClassify.forEach((Categories, index) => {
           if (Categories.nid == nid) {
-            this.CategoryDetailsList.push(this.CategoriesLists.navigationClassify[0][index]);
+            this.CategoryDetailsList.push(this.CategoriesLists.navigationClassify[index]);
           }
         })
       },
