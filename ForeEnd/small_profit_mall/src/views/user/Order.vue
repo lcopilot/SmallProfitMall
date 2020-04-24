@@ -15,7 +15,7 @@
             <div class="order_div">
               <div class="order_receiver_div">收货人信息
                 <span class="order_add_address">
-                <el-button type="text" class="el-icon-plus" @click="addAddress">新增收货地址</el-button>
+                <el-button type="text" class="el-icon-plus" @click="addAddress" v-if="genre<1">新增收货地址</el-button>
               </span>
               </div>
               <div style="padding-left: 2%">
@@ -47,7 +47,7 @@
                     </el-tag>
                   </el-col>
                 </el-row>
-                <el-collapse class="order_more_address">
+                <el-collapse class="order_more_address" v-if="genre<1">
                   <el-collapse-item title="更多地址">
                     <div v-for="(address,index) in addressList" class="order_address"
                          @click="selectAddress(index)">
@@ -104,7 +104,7 @@
                 <template>
                   <el-radio v-model="paymentMethod" label="1" class="order_rad"
                             :disabled="orderData.order.paymentWay==1"
-                            v-if="isShow?orderData.order.paymentWay==1:true">
+                            v-if="genre>=0?orderData.order.paymentWay==1:true">
                     <svg-icon name="walletPayment" style="width: 25px;margin-bottom: -6%;"/>
                     <div style="float: right;font-size: 12px;margin-left: 4px">钱包支付</div>
                     <br/>
@@ -112,12 +112,12 @@
                   </el-radio>
                   <el-radio v-model="paymentMethod" label="2" class="order_rad"
                             :disabled="orderData.order.paymentWay==2"
-                            v-if="isShow?orderData.order.paymentWay==2:true">
+                            v-if="genre>=0?orderData.order.paymentWay==2:true">
                     <svg-icon name="aliPay" class="order_rad_svg"/>
                   </el-radio>
                   <el-radio v-model="paymentMethod" label="3" class="order_rad"
                             :disabled="orderData.order.paymentWay==3"
-                            v-if="isShow?orderData.order.paymentWay==3:true">
+                            v-if="genre>=0?orderData.order.paymentWay==3:true">
                     <svg-icon name="weChatPay" class="order_rad_svg"/>
                   </el-radio>
                 </template>
@@ -132,12 +132,12 @@
                     <div>
                       <el-radio-group v-model="expressType">
                         <el-radio label="1" :disabled="orderData.order.deliveryWay==1"
-                                  v-if="isShow?orderData.order.deliveryWay==1:true">
+                                  v-if="genre>=0?orderData.order.deliveryWay==1:true">
                           <svg-icon name="postal" class="order_express"/>
                           邮政
                         </el-radio>
                         <el-radio label="2" :disabled="orderData.order.deliveryWay==2"
-                                  v-if="isShow?orderData.order.deliveryWay==2:true">
+                                  v-if="genre>=0?orderData.order.deliveryWay==2:true">
                           <svg-icon name="FS" class="order_express"/>
                           顺丰
                         </el-radio>
@@ -159,7 +159,7 @@
                             :picker-options="timeDate"
                             placeholder="选择日期时间">
                         </el-date-picker>
-                        <el-button slot="reference" type="text">修改</el-button>
+                        <el-button slot="reference" type="text" :disabled="genre>=1">修改</el-button>
                       </el-popover>
                     </div>
                     <div class="order_delivery_prompt">
@@ -177,6 +177,7 @@
                     <div>
                       <div>订单备注(选填):</div>
                       <el-input
+                          :disabled="genre>=1"
                           style="width: 85%;"
                           :show-word-limit="true"
                           type="textarea"
@@ -241,7 +242,7 @@
                 <div class="cart_settlement1">
                   <a @click="settlement()">
                     <div class="cart_settlement2">
-                      {{isShow?'修改':'结算'}}
+                      {{genre>=0?(genre>=1?'返回':'修改'):'结算'}}
                     </div>
                   </a>
                 </div>
@@ -313,8 +314,8 @@
         ordersNote: "",
         //编辑按钮
         editShow: false,
-        //是否是展示订单
-        isShow: false,
+        //查询订单的状态
+        genre: -1,
       }
     },
     methods: {
@@ -328,7 +329,10 @@
       },
       //结算
       settlement() {
-        if (this.isShow) {
+        if (this.genre>=1){
+           return this.$router.replace('/allOrders')
+        }
+        if (this.genre>=0) {
           this.$confirm('确认修改嘛,只能修改一次哦~', '修改订单', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
@@ -343,7 +347,7 @@
             };
             ordersApi.modifyOrder(order).then(res => {
               if (res.success) {
-                this.$router.push({
+                this.$router.replace({
                   name: "OrderComplete",
                   params: {
                     isShow: true,
@@ -378,6 +382,7 @@
           this.settlementOrder();
         }
       },
+      //支付宝支付
       aliPay(){
         let fromData=new FormData()
         fromData.append("userId",sessionStorage.getItem("uId"));
@@ -426,7 +431,7 @@
                   type: 'warning',
                 });
               }
-              this.$router.push({
+              this.$router.replace({
                 path: "/orderComplete"
               });
             }
@@ -456,7 +461,7 @@
               });
             }
             setTimeout(() => {
-              this.$router.push({
+              this.$router.replace({
                 path: "/orderComplete"
               });
               //跳转支付成功页面
@@ -540,16 +545,16 @@
         )
       },
     },
-    created() {
+    mounted() {
       if (this.$route.params.orderNumber != null) {
         sessionStorage.setItem("orderNumber", this.$route.params.orderNumber);
       }
       this.orderNumber = sessionStorage.getItem("orderNumber");
-      if (this.$route.params.isShow) {
-        sessionStorage.setItem("isShow", this.$route.params.isShow);
+      if (this.$route.params.genre!=null) {
+        sessionStorage.setItem("genre",this.$route.params.genre);
       }
-      if (sessionStorage.getItem("isShow") == "true") {
-        this.isShow = true;
+      if (sessionStorage.getItem("genre")) {
+        this.genre = sessionStorage.getItem("genre");
         return  this.getOrderComplete();
       }
       this.getOrder();
@@ -557,13 +562,12 @@
     //页面关闭时销毁
     beforeDestroy() {
       sessionStorage.setItem("orderNumber", '');
-      sessionStorage.setItem("isShow", '');
+      sessionStorage.setItem("genre", '');
     }
   }
 </script>
 
 <style scoped>
-
   /*
   通过 >>>，穿透scoped 修改第三方样式
   有些Sass 之类的预处理器无法正确解析 >>> 可以使用 /deep/ 操作符( >>> 的别名)

@@ -13,8 +13,8 @@
          v-for="order in orderList">
       <div class="order_information" @mouseenter="deleteBtn=true" @mouseleave="deleteBtn=false">
         <el-row>
-          <el-col :span="5" :push="1">时间:{{order.time}}</el-col>
-          <el-col :span="10" :push="1">订单号:{{order.orderNumber}}</el-col>
+          <el-col :span="5" :push="1">时间:{{moment(order.orderTime).format('YYYY-MM-DD HH:mm:ss')}}</el-col>
+          <el-col :span="10" :push="1">订单号:{{order.orderId}}</el-col>
           <el-col :span="2" :push="8" v-if="deleteBtn">
             <li class="el-icon-delete order_delete"></li>
           </el-col>
@@ -24,26 +24,26 @@
         <table border="1" cellspacing="0" style="border-color:#999999;">
           <tr>
             <td style="width: 54%">
-              <div v-for="(product,index) in order.productList"
-                   :style="index==order.productList.length-1?'':'border-bottom: 1px solid #dcdfe6'">
+              <div v-for="(product,index) in order.productContents" :key="index"
+                   :style="index==order.productContents.length-1?'':'border-bottom: 1px solid #dcdfe6'">
                 <el-row>
                   <el-col :span="5">
-                    <router-link :to="{path:'/product',query:{productId:product.productId}}">
+                    <router-link :to="{name:'Order',params:{orderNumber:order.orderId,genre:order.orderState}}">
                       <div class="order_product_img">
-                        <el-image :src="product.img" fit="fill"></el-image>
+                        <el-image :src="product.productImage" fit="fill"></el-image>
                       </div>
                     </router-link>
                   </el-col>
                   <el-col :span="14">
-                    <router-link :to="{path:'/product',query:{productId:product.productId}}">
+                    <router-link :to="{name:'Order',params:{orderNumber:order.orderId,genre:order.orderState}}">
                       <div class="order_product_name">
-                        {{product.name}}sdflsnlskdfs数据库的粉红色拉水电费开始dfjgk发送对接方速度还是大速度还是大法时可能是大家好是尽可能坚实的开发商看纳税人的看法
+                        {{product.productName}}
                       </div>
                     </router-link>
                   </el-col>
                   <el-col :span="5">
                     <div style="margin-top: 19%;font-size: 13px">
-                      x{{product.number}}
+                      x{{product.productQuantity}}
                     </div>
                   </el-col>
                 </el-row>
@@ -51,12 +51,12 @@
             </td>
             <td style="width: 12%">
               <div class="order_recipient">
-                {{order.recipient}}
+                {{order.orderAddress.name}}
               </div>
             </td>
             <td style="width: 12%" class="el_divider">
               <div class="order_recipient">
-                ￥{{order.amount}}
+                ￥{{order.orderTotal}}
               </div>
               <el-divider></el-divider>
               <div style="color: #999999;font-size: 12px">
@@ -65,14 +65,20 @@
             </td>
             <td style="width: 12%">
               <div class="order_recipient">
-                {{order.status=1?'待签收':'待付款'}}
+                {{(order.orderState==1?'待付款':(order.orderState==2?'待签收':'待评价'))}}
               </div>
             </td>
             <td style="width: 10%">
               <div class="order_operate">
-                <el-button type="text" size="mini">去付款</el-button>
-                <el-button type="text" size="mini">申请售后</el-button>
-                <el-button type="text" size="mini" @click="commentVisible=true">评价晒单</el-button>
+                <router-link :to="{name:'Order',params:{orderNumber:order.orderId,genre:''}}">
+                  <el-button type="text" size="mini" v-if="order.orderState==1">去付款</el-button>
+                </router-link>
+                <router-link :to="{name:'Order',params:{orderNumber:order.orderId,genre:0}}">
+                  <el-button type="text" size="mini" v-if="order.orderState==1 && order.changeQuantity==0">去修改</el-button>
+                </router-link>
+                <el-button type="text" size="mini" v-if="order.orderState==2">确认收货</el-button>
+                <el-button type="text" size="mini" v-if="order.orderState==3">申请售后</el-button>
+                <el-button type="text" size="mini" v-if="order.orderState==3" @click="commentVisible=true">评价晒单</el-button>
               </div>
             </td>
           </tr>
@@ -164,6 +170,7 @@
 </template>
 
 <script>
+  import *as orderApi from '../../api/page/orders'
   export default {
     name: "orderContent",
     props: {
@@ -229,83 +236,11 @@
         //订单分页参数
         orderParams: {
           currentPage: 1,//页码
-          pageSize: 6,//每页显示个数
-          totalCount: 400,//总记录数
+          pageSize: 3,//每页显示个数
+          totalCount: 0,//总记录数
           totalPage: 1,//总页数
         },
-        orderList: [
-          {
-            status: 1,
-            orderNumber: '00000',
-            time: '2020-4-1',
-            recipient: '方鸿鑫电话还贷款水电费尽快',
-            amount: '45895898168',
-            productList: [
-              {
-                img: 'http://productdata.fhxasdsada.xyz/19f5df0ae27b218a.jpg',
-                name: 'ssasdas',
-                number: '65'
-              },
-              {
-                img: 'http://productdata.fhxasdsada.xyz/19f5df0ae27b218a.jpg',
-                name: 'ssasdas',
-                number: '65'
-              },
-              {
-                img: 'http://productdata.fhxasdsada.xyz/19f5df0ae27b218a.jpg',
-                name: 'ssasdas',
-                number: '65'
-              },
-              {
-                img: 'http://productdata.fhxasdsada.xyz/19f5df0ae27b218a.jpg',
-                name: 'ssasdas',
-                number: '65'
-              },
-              {
-                img: 'http://productdata.fhxasdsada.xyz/19f5df0ae27b218a.jpg',
-                name: 'ssasdas',
-                number: '65'
-              },
-            ]
-          },
-          {
-            status: 1,
-            orderNumber: '00000',
-            time: '2020-4-1',
-            recipient: '方df',
-            amount: '48',
-            productList: [
-              {
-                img: 'http://productdata.fhxasdsada.xyz/19f5df0ae27b218a.jpg',
-                name: 'ssasdas',
-                number: '65'
-              },
-              {
-                img: 'http://productdata.fhxasdsada.xyz/19f5df0ae27b218a.jpg',
-                name: 'ssasdas',
-                number: '65'
-              },
-              {
-                img: 'http://productdata.fhxasdsada.xyz/19f5df0ae27b218a.jpg',
-                name: 'ssasdas',
-                number: '65'
-              },
-            ]
-          },
-          {
-            status: 1,
-            orderNumber: '00000',
-            time: '2020-4-1',
-            recipient: '方',
-            amount: '4568',
-            productList: [
-              {
-                img: 'http://productdata.fhxasdsada.xyz/19f5df0ae27b218a.jpg',
-                name: 'ssasdas',
-                number: '65'
-              },
-            ]
-          },],
+        orderList: [],
         commentImgUrl: '',
         //评论图片弹出框
         commentImgVisible: false,
@@ -317,6 +252,7 @@
       playerVideoComment() {
         this.commentVideoVisible = true;
       },
+      //清除文件
       clearFiles() {
         this.playerOptions.sources[0].src='';
         const mainImg = this.$refs.upload;
@@ -328,6 +264,7 @@
           });
         }
       },
+      //选择文件
       selectFile(file, fileList) {
         if (!file.raw.type) {
           return this.$message.error('上传的文件必须是JPG/PNG/BMP/MP4格式!');
@@ -357,6 +294,7 @@
       handleRemove(file, fileList) {
         console.log(fileList)
       },
+      //预览
       handlePictureCardPreview(file) {
         this.commentImgUrl = file.url;
         this.commentImgVisible = true;
@@ -364,11 +302,36 @@
       //切换评论分页时触发
       changePage(currentPage) {
         this.orderParams.currentPage = currentPage;
+        this.getOrderList();
       },
       //切换每页显示多少条评论时触发
       changeNumber(pageSize) {
         this.orderParams.pageSize = pageSize;
-      }
+        this.getOrderList();
+      },
+      //获取订单信息
+      getOrderList(){
+        if (this.orderParams.currentPage!=1 && this.orderParams.currentPage==this.orderParams.totalPage && (((this.orderParams.currentPage-1)*this.orderParams.pageSize)+1)===this.orderParams.totalCount){
+          this.orderParams.currentPage--;
+        }
+        const params={
+          orderState:this.genre,
+          userId:sessionStorage.getItem("uId"),
+          currentPage:this.orderParams.currentPage,
+          pageSize:this.orderParams.pageSize
+        };
+        orderApi.getOrderList(params).then(res=>{
+          if (res.success){
+            console.log(res)
+            this.orderList=res.pagination.list
+            this.orderParams.totalPage=res.pagination.totalPage;
+            this.orderParams.totalCount=res.pagination.totalCount;
+          }
+        })
+      },
+    },
+    mounted() {
+      this.getOrderList();
     }
   }
 </script>
@@ -417,10 +380,9 @@
   }
 
   .order_operate {
+    text-align: center;
     margin-top: 3%;
     font-size: 12px;
-    padding-left: 10%;
-    padding-right: 10%;
   }
 
   .order_operate /deep/ .el-button--mini {

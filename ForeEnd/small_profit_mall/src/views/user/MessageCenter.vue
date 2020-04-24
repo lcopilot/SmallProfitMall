@@ -363,7 +363,7 @@
           name: "Order",
           params: {
             orderNumber: this.orderNumber,
-            isShow: true,
+            genre: 0,
           }
         });
       },
