@@ -238,6 +238,12 @@ public class OrderController {
         }
 
     }
+
+    /**
+     * 查询各种类型订单数量
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "/findClassifyOrderQuantity/{userId}",method = RequestMethod.GET)
     public ObjectReturnResponse findClassifyOrderQuantity(@PathVariable("userId")String userId){
         ObjectReturn objectReturn = new ObjectReturn();
