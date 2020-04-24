@@ -51,7 +51,14 @@
             </td>
             <td style="width: 12%">
               <div class="order_recipient">
-                {{order.orderAddress.name}}
+                <el-tooltip placement="right-start">
+                  <div slot="content">
+                    {{order.orderAddress.name}}<br/>
+                    {{order.orderAddress.phone}}<br/>
+                    {{order.orderAddress.areas+''+order.orderAddress.detailedAddress}}
+                  </div>
+                <spa>{{order.orderAddress.name}}</spa>
+                </el-tooltip>
               </div>
             </td>
             <td style="width: 12%" class="el_divider">
