@@ -137,9 +137,6 @@ const routes = [
   {
     path: '/searchShow',
     name: 'SearchShow',
-    meta: {
-      requireAuth: true,
-    },
     component: () => import('@/views/allUser/SearchShow')
   },
   //捕获404

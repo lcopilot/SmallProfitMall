@@ -1,5 +1,6 @@
 import http from '../util/public';
 import sysConfig from '../util/sysConfig'
+import querystring from "querystring";
 const apiUrl=sysConfig.smApiUrlPre;
 //人脸识别
 export const facePayment =data=>{
@@ -25,3 +26,12 @@ export  const getOrderComplete=(userId,orderId)=>{
 export const modifyOrder=order=>{
   return http.requestPut(apiUrl+'OrderController/updateOrder',order)
 };
+//获取全部订单
+export const getOrderList=params=>{
+  const queryString=querystring.stringify(params);
+  return http.requestGet(apiUrl+'OrderController/findAllOrder?'+queryString)
+}
+//获取不同订单的数量
+export const getOrderQuantity=userId=>{
+  return http.requestGet(apiUrl+'OrderController/findClassifyOrderQuantity/'+userId)
+}
