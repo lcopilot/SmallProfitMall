@@ -24,7 +24,6 @@
     <mybatis.version>3.4.5</mybatis.version>
     <lombok.version>1.16.16</lombok.version>
     <jackson-databind.version>2.9.8</jackson-databind.version>
-
   </properties>
 
   <dependencies>
@@ -426,6 +425,39 @@
       <groupId>com.alipay.sdk</groupId>
       <artifactId>alipay-sdk-java</artifactId>
       <version>3.3.49.ALL</version>
+    </dependency>
+
+
+    <!--视频压缩-->
+
+<!--    <dependency>-->
+<!--      <groupId>com.github.dadiyang</groupId>-->
+<!--      <artifactId>jave</artifactId>-->
+<!--      <version>1.0.6</version>-->
+<!--    </dependency>-->
+
+
+
+
+    <dependency>
+      <groupId>org.bytedeco</groupId>
+      <artifactId>javacv</artifactId>
+      <version>1.4.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bytedeco</groupId>
+      <artifactId>javacpp</artifactId>
+      <version>1.4.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bytedeco.javacpp-presets</groupId>
+      <artifactId>opencv-platform</artifactId>
+      <version>3.4.1-1.4.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bytedeco.javacpp-presets</groupId>
+      <artifactId>ffmpeg-platform</artifactId>
+      <version>3.4.2-1.4.1</version>
     </dependency>
 
 

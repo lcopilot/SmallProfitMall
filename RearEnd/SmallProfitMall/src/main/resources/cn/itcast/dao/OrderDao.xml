@@ -124,9 +124,9 @@
             o.productQuantity,o.productWeight,o.evaluate,
             oa.orderId AS orderIds,oa.name,oa.areas,oa.detailedAddress,oa.phone,oa.email,oa.alias
         FROM
-        userOrder uo
+            userOrder uo
         LEFT JOIN
-        orders o
+            orders o
         ON
         uo.orderId=o.orderId,
         orderAddress oa
@@ -141,7 +141,8 @@
                 o.orderId=oa.orderId
             order by
                 uo.orderTime
-            desc limit #{start},#{pageSize}
+            desc
+                limit #{start},#{pageSize}
         </where>
     </select>
 
@@ -252,9 +253,17 @@
         SELECT orderTotal FROM userOrder WHERE userId=#{userId} AND orderId=#{orderId}
     </select>
 
-    <!--查询收藏数量-->
+    <!--查询订单数量-->
     <select id="fendOrderQuantity" resultType="java.lang.Integer">
-           SELECT count(*) FROM userOrder WHERE userId=#{userId} AND orderState=#{orderState}
+
+           SELECT count(*) FROM userOrder
+        <where>
+            userId=#{userId}
+            <if test="orderState!=0">
+                AND orderState=#{orderState}
+            </if>
+        </where>
+
     </select>
 
 </mapper>
