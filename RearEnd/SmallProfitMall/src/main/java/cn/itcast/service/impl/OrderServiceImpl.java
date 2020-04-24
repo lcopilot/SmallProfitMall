@@ -3,10 +3,10 @@ package cn.itcast.service.impl;
 import cn.itcast.dao.*;
 import cn.itcast.domain.accountSettings.AccountSettings;
 import cn.itcast.domain.address.Address;
-import cn.itcast.domain.favorite.Evaluation;
 import cn.itcast.domain.member.ConsumptionRecords;
 import cn.itcast.domain.news.News;
 import cn.itcast.domain.order.Order;
+import cn.itcast.domain.order.OrderQuantity;
 import cn.itcast.domain.order.ProductContent;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.domain.shoppingCar.ShoppingCart;
@@ -15,29 +15,20 @@ import cn.itcast.service.*;
 import cn.itcast.skd.AlipayConfig;
 import cn.itcast.util.encryption.AesEncryptUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
-import com.alipay.api.domain.OrderItem;
 import com.alipay.api.request.AlipayTradePagePayRequest;
-import com.alipay.api.request.AlipayTradeRefundRequest;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import static com.alipay.api.AlipayConstants.SIGN_TYPE;
 
 /**
  * @author Kite
@@ -311,6 +302,22 @@ public class OrderServiceImpl implements OrderService {
     public Order findDetailedOrder(String userId, String orderId){
         Order order = orderDao.findDetailedOrder(userId,orderId);
         return order;
+    }
+
+    /**
+     * 查询不同订单数量
+     * @param userId
+     * @return
+     */
+    @Override
+    public OrderQuantity findClassifyOrderQuantity(String userId) {
+        OrderQuantity quantity = new OrderQuantity();
+        quantity.setOrderAllQuantity(orderDao.fendOrderQuantity(userId,0));
+        quantity.setOrderUnpaidQuantity(orderDao.fendOrderQuantity(userId,1));
+        quantity.setOrderPaidQuantity(orderDao.fendOrderQuantity(userId,2));
+        quantity.setEvaluateQuantity(orderDao.fendOrderQuantity(userId,3));
+        quantity.setSalesReturnQuantity(orderDao.fendOrderQuantity(userId,4));
+        return quantity;
     }
 
     /**

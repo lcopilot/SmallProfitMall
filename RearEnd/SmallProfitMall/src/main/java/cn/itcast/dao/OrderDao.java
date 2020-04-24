@@ -3,6 +3,7 @@ package cn.itcast.dao;
 import cn.itcast.domain.address.Address;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
+import cn.itcast.response.QueryResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -129,4 +130,6 @@ public interface OrderDao {
      * @return 订单总数量
      */
     public Integer fendOrderQuantity(@Param("userId")String userId,@Param("orderState")Integer orderState);
+
+
 }

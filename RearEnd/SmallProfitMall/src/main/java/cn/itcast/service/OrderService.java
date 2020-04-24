@@ -1,6 +1,7 @@
 package cn.itcast.service;
 
 import cn.itcast.domain.order.Order;
+import cn.itcast.domain.order.OrderQuantity;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import org.apache.ibatis.annotations.Param;
 
@@ -87,6 +88,13 @@ public interface OrderService {
      * @return 订单对象
      */
     public Order findDetailedOrder(String userId,String orderId);
+
+    /**
+     * 查询不同订单数量
+     * @param userId
+     * @return
+     */
+    public OrderQuantity findClassifyOrderQuantity(String userId);
 
 
     /**

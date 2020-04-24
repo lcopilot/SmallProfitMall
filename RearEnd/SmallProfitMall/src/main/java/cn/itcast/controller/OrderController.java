@@ -2,6 +2,7 @@ package cn.itcast.controller;
 
 import cn.itcast.domain.accountSettings.AccountSettings;
 import cn.itcast.domain.order.Order;
+import cn.itcast.domain.order.OrderQuantity;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
@@ -10,6 +11,8 @@ import cn.itcast.response.faceRecognition.FaceRecognition;
 import cn.itcast.response.faceRecognition.FaceRecognitionResponse;
 import cn.itcast.response.listFootprint.Pagination;
 import cn.itcast.response.listFootprint.ResponsePagination;
+import cn.itcast.response.objectReturn.ObjectReturn;
+import cn.itcast.response.objectReturn.ObjectReturnResponse;
 import cn.itcast.response.queryOrder.QueryOrder;
 import cn.itcast.response.queryOrder.ResultOrder;
 import cn.itcast.response.returnString.QueryString;
@@ -18,6 +21,7 @@ import cn.itcast.service.AccountSettingsService;
 import cn.itcast.service.OrderService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -234,8 +238,13 @@ public class OrderController {
         }
 
     }
-
-
+    @RequestMapping(value = "/findClassifyOrderQuantity/{userId}",method = RequestMethod.GET)
+    public ObjectReturnResponse findClassifyOrderQuantity(@PathVariable("userId")String userId){
+        ObjectReturn objectReturn = new ObjectReturn();
+        OrderQuantity orderQuantity = orderService.findClassifyOrderQuantity(userId);
+        objectReturn.setObject(orderQuantity);
+        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+    }
 
 
 
