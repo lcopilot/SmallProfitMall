@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
     public List<SeckillResult> findSeckill() throws ParseException {
         SeckillResult seckillResult = new SeckillResult();
         List<SeckillResult> redis = (List<SeckillResult>) redisUtil.lGet("SeckillResult", 0, -1);
-        if (redis.size()==0) {
+        if (redis !=null) {
             ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findSeckill(0,4)),
                     new ArrayList(ProducDao.findSeckill(4,4))};
             seckillResult.setSeckillProduct(arrayLists1);
@@ -54,13 +54,15 @@ public class ProductServiceImpl implements ProductService {
     public  List<ProductLowPriceResult> findProductLowPrice() {
         ProductLowPriceResult productLowPriceResult = new ProductLowPriceResult();
         List<ProductLowPriceResult> redis = (List<ProductLowPriceResult>) redisUtil.lGet("ProductLowPriceResult", 0, -1);
-        if(redis.size()==0){
+        if(redis != null){
             ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findProductLowPrice(0, 6)),
                     new ArrayList(ProducDao.findProductLowPrice(6, 6))
             };
             productLowPriceResult.setProductLowPrice(arrayLists1);
-            redisUtil.lSet("productLowPriceResult", productLowPriceResult);  //存入缓存
-            List list= Arrays.asList(productLowPriceResult);//增加一层数组
+            //存入缓存
+            redisUtil.lSet("productLowPriceResult", productLowPriceResult);
+            //增加一层数组
+            List list= Arrays.asList(productLowPriceResult);
             List<ProductLowPriceResult>  recommend = list;
             System.out.println("存入数据库");
             return recommend;
@@ -76,7 +78,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Ad> findAd() {
         List<Ad> redis = (List<Ad>) redisUtil.lGet("Ad", 0, -1);
-        if (redis.size() == 0) {
+        if (redis != null) {
             System.out.println("数据库中取");
             List<Ad> ads = ProducDao.findAd();
             //存入缓存

@@ -6,8 +6,7 @@ package cn.itcast.Test;
  */
 public class test {
     public static void main(String[] args) {
-       Double strh=6177.84+93448.23;
-        System.out.println(strh);
+
     }
 
 }
