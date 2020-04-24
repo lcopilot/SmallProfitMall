@@ -251,11 +251,10 @@
     <!--查询订单总计-->
     <select id="fenOrderTotal" resultType="java.lang.String" parameterType="java.lang.String">
         SELECT orderTotal FROM userOrder WHERE userId=#{userId} AND orderId=#{orderId}
-    </select>
+</select>
 
     <!--查询订单数量-->
     <select id="fendOrderQuantity" resultType="java.lang.Integer">
-
            SELECT count(*) FROM userOrder
         <where>
             userId=#{userId}
@@ -263,7 +262,6 @@
                 AND orderState=#{orderState}
             </if>
         </where>
-
     </select>
 
 </mapper>
