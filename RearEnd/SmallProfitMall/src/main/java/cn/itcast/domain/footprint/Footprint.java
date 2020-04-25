@@ -9,7 +9,7 @@ public class Footprint {
     private Integer footprintId;
 
     //商品id
-    private int productId;
+    private Integer productId;
 
     //商品名称
     private String ProductName;

@@ -25,7 +25,7 @@ public class FootprintServiceImpl implements FootprintService {
      */
     @Override
     public int addFootprint(Footprint footprint){
-        String footprintId = footprintDao.findFootprintId(footprint.getProductId());
+        String footprintId = footprintDao.findFootprintId(footprint.getProductId() , footprint.getUserId());
         if (footprintId == null){
             footprint.setFootprintTime(new Date());
             int redis = footprintDao.addFootprint(footprint);
