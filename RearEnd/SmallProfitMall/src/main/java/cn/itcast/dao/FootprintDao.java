@@ -25,11 +25,12 @@ public interface FootprintDao {
 
 
     /**
-     * 查询是否浏览过这个商品
+     * 查询商品当天是否被浏览过
      * @param productId 商品id
-     * @return
+     * @param userId 用户id
+     * @return 商品id
      */
-    public String findFootprintId(int productId);
+    public String findFootprintId(@Param("productId") Integer productId ,@Param("userId")  String userId);
 
     /**
      *  查询足迹
