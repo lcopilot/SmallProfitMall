@@ -117,33 +117,45 @@
 
     <!--按条件查询订单-->
     <select id="findAllOrder" resultMap="allOrderMap">
-        SELECT
-            uo.*,o.productName,
-            o.id AS ids,
-            o.productImage,o.productPrice,o.productConfiguration,
-            o.productQuantity,o.productWeight,o.evaluate,
-            oa.orderId AS orderIds,oa.name,oa.areas,oa.detailedAddress,oa.phone,oa.email,oa.alias
-        FROM
-            userOrder uo
-        LEFT JOIN
-            orders o
+       SELECT
+        uo.*,
+        o.productName,
+        o.id AS ids,
+        o.productImage,
+        o.productPrice,
+        o.productConfiguration,
+        o.productQuantity,
+        o.productWeight,
+        o.evaluate ,
+        oa.orderId AS orderIds,
+        oa.name,
+        oa.areas,
+        oa.detailedAddress,
+        oa.phone,
+        oa.email,
+        oa.alias
+    FROM
+        userOrder uo
+        LEFT JOIN orders o
         ON
-        uo.orderId=o.orderId,
-        orderAddress oa
+        uo.orderId = o.orderId
+            LEFT JOIN orderAddress oa
+        ON
+            uo.orderId=oa.orderId
+    WHERE
+        uo.orderId IN (
+        SELECT
+            orderId
+        FROM
+        ( SELECT uos.orderId FROM userOrder uos
         <where>
-            <if test="userId!=null">
-                AND   uo.userId=#{userId}
-            </if>
+            AND uos.userId = #{userId}
             <if test="orderState!=0">
-                AND uo.orderState=#{orderState}
+                AND  uos.orderState=#{orderState}
             </if>
-            AND
-                o.orderId=oa.orderId
-            order by
-                uo.orderTime
-            desc
-                limit #{start},#{pageSize}
         </where>
+         ORDER BY uos.orderTime DESC LIMIT #{start}, #{pageSize} ) AS user_order
+        )
     </select>
 
     <!--查询订单详细-->
