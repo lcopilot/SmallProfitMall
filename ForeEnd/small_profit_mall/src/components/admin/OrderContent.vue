@@ -57,7 +57,7 @@
                     {{order.orderAddress.phone}}<br/>
                     {{order.orderAddress.areas+''+order.orderAddress.detailedAddress}}
                   </div>
-                <spa>{{order.orderAddress.name}}</spa>
+                <span>{{order.orderAddress.name}}</span>
                 </el-tooltip>
               </div>
             </td>
@@ -160,13 +160,13 @@
         </el-dialog>
       </div>
     </div>
-    <div style="text-align: right;padding: 3% 0 1% 0">
+    <div style="text-align: right;padding: 3% 0 1% 0" >
       <el-pagination
           background
           @size-change="changeNumber"
           @current-change="changePage"
           :current-page="orderParams.currentPage"
-          :page-sizes="[6,7, 8, 10, 12,15]"
+          :page-sizes="[3,5,7]"
           :page-size="orderParams.pageSize"
           layout="total, sizes, prev, pager, next, jumper"
           :hide-on-single-page="true"
@@ -190,6 +190,7 @@
     },
     data() {
       return {
+        sss:false,
         playerOptions: {
           //播放速度
           playbackRates: [0.5, 1.0, 1.5, 2.0, 2.5, 3.0],
@@ -244,7 +245,7 @@
         orderParams: {
           currentPage: 1,//页码
           pageSize: 3,//每页显示个数
-          totalCount: 0,//总记录数
+          totalCount: 3,//总记录数
           totalPage: 1,//总页数
         },
         orderList: [],
@@ -329,7 +330,6 @@
         };
         orderApi.getOrderList(params).then(res=>{
           if (res.success){
-            console.log(res)
             this.orderList=res.pagination.list
             this.orderParams.totalPage=res.pagination.totalPage;
             this.orderParams.totalCount=res.pagination.totalCount;
@@ -338,7 +338,10 @@
       },
     },
     mounted() {
-      this.getOrderList();
+      this.$nextTick(()=>{
+        this.getOrderList()
+        }
+      )
     }
   }
 </script>
