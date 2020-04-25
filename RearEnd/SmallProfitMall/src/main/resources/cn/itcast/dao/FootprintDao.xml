@@ -32,7 +32,17 @@
 
     <!--查询足迹id-->
     <select id="findFootprintId" resultType="java.lang.String">
-        select footprintId from userFootprint where productId=#{productId}
+        SELECT
+            footprintId
+        FROM
+            userFootprint
+        WHERE
+            productId = #{productId}
+
+            AND userId = #{userId}
+
+            AND to_days( footprintTime ) = to_days(
+            now())
     </select>
 
     <!--查询足迹-->
@@ -54,12 +64,12 @@
 			ON
 			    uf.productId=pp.ProductId
 			WHERE
-			    uf.userId = #{userId}
-		    AND
-				pi.sign=1
-			order by
-                footprintTime
-            desc limit #{start},#{pageSize}
+                    uf.userId = #{userId}
+                AND
+                    pi.sign=1
+                order by
+                    footprintTime
+                desc limit #{start},#{pageSize}
     </select>
     <!--查询足迹数量-->
     <select id="fendFootprintQuantity" resultType="java.lang.Integer">
