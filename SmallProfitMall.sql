@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 19/04/2020 20:56:24
+ Date: 25/04/2020 19:03:29
 */
 
 SET NAMES utf8mb4;
@@ -833,6 +833,7 @@ INSERT INTO `homepageIcon` VALUES (9, '\r\nhttp://img.fhxasdsada.xyz/l.png', '/'
 -- ----------------------------
 DROP TABLE IF EXISTS `navigation`;
 CREATE TABLE `navigation`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nid` int(15) NULL DEFAULT NULL,
   `goodsName_1` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `goodsId_1` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -841,22 +842,23 @@ CREATE TABLE `navigation`  (
   `goodsName_3` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `goodsId_3` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `goodsName_4` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `goodsId_4` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `goodsId_4` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of navigation
 -- ----------------------------
-INSERT INTO `navigation` VALUES (1, '家用电器', '/', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `navigation` VALUES (2, '手机', '/', '运营商', '/', '数码', '/', NULL, NULL);
-INSERT INTO `navigation` VALUES (3, '电脑', '/', '办公', '/', NULL, NULL, NULL, NULL);
-INSERT INTO `navigation` VALUES (4, '家居', '/', '家具', '/', '家装', '/', '厨具', '/');
-INSERT INTO `navigation` VALUES (5, '男装', '/', '女装', '/', '童装', '/', '内衣', '/');
-INSERT INTO `navigation` VALUES (6, '美装', '/', '个人清洁', '/', '宠物', '/', NULL, NULL);
-INSERT INTO `navigation` VALUES (7, '女鞋', '/', '箱包', '/', '钟表', '/', '珠宝', '/');
-INSERT INTO `navigation` VALUES (8, '男鞋', '/', '运动', '/', '户外', '/', NULL, NULL);
-INSERT INTO `navigation` VALUES (9, '房产', '/', '汽车', '/', '汽车用品', '/', NULL, NULL);
-INSERT INTO `navigation` VALUES (10, '母婴', '/', '玩具', '/', NULL, NULL, NULL, NULL);
+INSERT INTO `navigation` VALUES (1, 1, '家用电器', '/', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `navigation` VALUES (2, 2, '手机', '/', '运营商', '/', '数码', '/', NULL, NULL);
+INSERT INTO `navigation` VALUES (3, 3, '电脑', '/', '办公', '/', NULL, NULL, NULL, NULL);
+INSERT INTO `navigation` VALUES (4, 4, '家居', '/', '家具', '/', '家装', '/', '厨具', '/');
+INSERT INTO `navigation` VALUES (5, 5, '男装', '/', '女装', '/', '童装', '/', '内衣', '/');
+INSERT INTO `navigation` VALUES (6, 6, '美装', '/', '个人清洁', '/', '宠物', '/', NULL, NULL);
+INSERT INTO `navigation` VALUES (7, 7, '女鞋', '/', '箱包', '/', '钟表', '/', '珠宝', '/');
+INSERT INTO `navigation` VALUES (8, 8, '男鞋', '/', '运动', '/', '户外', '/', NULL, NULL);
+INSERT INTO `navigation` VALUES (9, 9, '房产', '/', '汽车', '/', '汽车用品', '/', NULL, NULL);
+INSERT INTO `navigation` VALUES (10, 10, '母婴', '/', '玩具', '/', NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for newsContent
@@ -875,17 +877,33 @@ CREATE TABLE `newsContent`  (
   `newsStatus` int(11) NULL DEFAULT NULL,
   `introduction` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`contentId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3708 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4485 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of newsContent
 -- ----------------------------
-INSERT INTO `newsContent` VALUES (3614, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1587291971075100001', '0', '确认订单消息', '2020-04-19 18:26:16', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (3615, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1587291971075100001', '0', '支付通知', '2020-04-19 18:26:16', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (3666, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1587292127976100003', '0', '确认订单消息', '2020-04-19 18:31:11', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (3667, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1587292127976100003', '0', '支付通知', '2020-04-19 18:31:11', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (3706, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1587292363848100004', '0', '确认订单消息', '2020-04-19 18:34:35', 1, '消息简介');
-INSERT INTO `newsContent` VALUES (3707, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1587292363848100004', '0', '支付通知', '2020-04-19 18:34:40', 1, '支付通知');
+INSERT INTO `newsContent` VALUES (4463, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1587784539826100002', '0', '确认订单消息', '2020-04-25 11:15:46', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4464, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1587784539826100002', '0', '支付通知', '2020-04-25 11:15:46', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4465, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1587784560769100004', '0', '确认订单消息', '2020-04-25 11:16:05', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4466, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1587784560769100004', '0', '支付通知', '2020-04-25 11:16:05', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4467, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1587784575528100005', '0', '确认订单消息', '2020-04-25 11:16:22', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4468, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1587784575528100005', '0', '支付通知', '2020-04-25 11:16:22', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4469, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1587784609020100006', '0', '确认订单消息', '2020-04-25 11:16:56', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4470, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1587784609020100006', '0', '支付通知', '2020-04-25 11:16:56', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4471, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1587785350378100007', '0', '确认订单消息', '2020-04-25 11:29:16', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4472, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1587785350378100007', '0', '支付通知', '2020-04-25 11:29:16', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4473, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1587785378612100008', '0', '确认订单消息', '2020-04-25 11:29:43', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4474, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1587785378612100008', '0', '支付通知', '2020-04-25 11:29:43', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4475, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1587785392295100009', '0', '确认订单消息', '2020-04-25 11:29:58', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4476, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1587785392295100009', '0', '支付通知', '2020-04-25 11:29:58', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4477, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1587785405894100010', '0', '确认订单消息', '2020-04-25 11:30:12', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4478, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1587785405894100010', '0', '支付通知', '2020-04-25 11:30:12', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4479, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1587803459204100014', '0', '确认订单消息', '2020-04-25 16:31:04', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4480, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1587803459204100014', '0', '支付通知', '2020-04-25 16:31:04', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4481, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1587803633452100015', '0', '确认订单消息', '2020-04-25 16:33:59', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4482, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1587803633452100015', '0', '支付通知', '2020-04-25 16:34:00', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4483, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1587806139998100016', '0', '确认订单消息', '2020-04-25 17:16:10', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4484, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1587806139998100016', '0', '支付通知', '2020-04-25 17:16:10', 0, '支付通知');
 
 -- ----------------------------
 -- Table structure for newsSender
@@ -904,8 +922,8 @@ CREATE TABLE `newsSender`  (
 -- ----------------------------
 INSERT INTO `newsSender` VALUES (1, 1, '微利官方', ' http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781');
 INSERT INTO `newsSender` VALUES (2, 2, '微利助手', 'http://img.fhxasdsada.xyz/undraw_happy_music_g6wc.png');
-INSERT INTO `newsSender` VALUES (3, 3, '微利支付', 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938');
-INSERT INTO `newsSender` VALUES (4, 4, '订单助手', 'http://img.fhxasdsada.xyz/undraw_happy_music_g6wc.png');
+INSERT INTO `newsSender` VALUES (3, 3, '微利支付', 'http://img.fhxasdsada.xyz/JE%5B%25FC76MGL0BS787~WXR1O.png');
+INSERT INTO `newsSender` VALUES (4, 4, '订单助手', 'http://img.fhxasdsada.xyz/timg.jpg');
 
 -- ----------------------------
 -- Table structure for orderAddress
@@ -923,15 +941,26 @@ CREATE TABLE `orderAddress`  (
   `areaCodes` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 212 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 307 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orderAddress
 -- ----------------------------
-INSERT INTO `orderAddress` VALUES (208, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587291971075100001', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (209, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587291988367100002', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (210, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587292127976100003', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (211, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587292363848100004', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES (292, '7c9fdfa3177042a08766aed29e7de6cd', '1587784533150100001', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (293, '7c9fdfa3177042a08766aed29e7de6cd', '1587784539826100002', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (294, '7c9fdfa3177042a08766aed29e7de6cd', '1587784554394100003', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (295, '7c9fdfa3177042a08766aed29e7de6cd', '1587784560769100004', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (296, '7c9fdfa3177042a08766aed29e7de6cd', '1587784575528100005', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (297, '7c9fdfa3177042a08766aed29e7de6cd', '1587784609020100006', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (298, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587785350378100007', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES (299, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587785378612100008', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES (300, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587785392295100009', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES (301, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587785405894100010', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES (302, '7c9fdfa3177042a08766aed29e7de6cd', '1587787312630100011', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (303, '7c9fdfa3177042a08766aed29e7de6cd', '1587787322732100013', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (304, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587803459204100014', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES (305, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587803633452100015', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES (306, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587806139998100016', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
 
 -- ----------------------------
 -- Table structure for orders
@@ -948,15 +977,34 @@ CREATE TABLE `orders`  (
   `productWeight` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `evaluate` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2138 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2311 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES (2134, '1587291971075100001', '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080 ', 'http://productdata.fhxasdsada.xyz/1f3f9fd0e759383f.jpg', '华硕PRIME X299-A主板+  ', '1', 11999, '2.08kg', 0);
-INSERT INTO `orders` VALUES (2135, '1587291988367100002', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.fhxasdsada.xyz/2ca45e2fd9758794.jpg', '黑色 ', '1', 1499, '0.6kg', 0);
-INSERT INTO `orders` VALUES (2136, '1587292127976100003', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.fhxasdsada.xyz/2ca45e2fd9758794.jpg', '黑色 ', '1', 1499, '0.6kg', 0);
-INSERT INTO `orders` VALUES (2137, '1587292363848100004', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '1', 2898, '2.8kg', 0);
+INSERT INTO `orders` VALUES (2288, '1587784533150100001', '【良品铺子】综合果仁525g 每日坚果组合混合干果礼盒零食大礼包健康零食', 'http://productdata.fhxasdsada.xyz/FlnxmuE-gh4YKIj4txsLfg.jpg', '750g(30天装) ', '2', 71, '575.5g', 0);
+INSERT INTO `orders` VALUES (2289, '1587784533150100001', '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080 ', 'http://productdata.fhxasdsada.xyz/1f3f9fd0e759383f.jpg', '华硕PRIME X299-A主板+  ', '2', 11999, '2.08kg', 0);
+INSERT INTO `orders` VALUES (2290, '1587784539826100002', '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080 ', 'http://productdata.fhxasdsada.xyz/1f3f9fd0e759383f.jpg', '华硕PRIME X299-A主板+  ', '1', 11999, '2.08kg', 0);
+INSERT INTO `orders` VALUES (2291, '1587784554394100003', 'HHKB Professional BT 蓝牙版黑无刻静电容键盘 程序员码农专用便携迷你键盘 编程适用', 'http://productdata.fhxasdsada.xyz/AD8JQ6Q0jfeySzdxAVglqw.jpg', '蓝牙白无刻  ', '1', 2188, NULL, 0);
+INSERT INTO `orders` VALUES (2292, '1587784554394100003', '【良品铺子】综合果仁525g 每日坚果组合混合干果礼盒零食大礼包健康零食', 'http://productdata.fhxasdsada.xyz/FlnxmuE-gh4YKIj4txsLfg.jpg', '525g(21天装) ', '3', 71, '575.5g', 0);
+INSERT INTO `orders` VALUES (2293, '1587784560769100004', 'HHKB Professional BT 蓝牙版黑无刻静电容键盘 程序员码农专用便携迷你键盘 编程适用', 'http://productdata.fhxasdsada.xyz/AD8JQ6Q0jfeySzdxAVglqw.jpg', '静音白无刻 ', '2', 2188, NULL, 0);
+INSERT INTO `orders` VALUES (2294, '1587784575528100005', 'HHKB Professional BT 蓝牙版黑无刻静电容键盘 程序员码农专用便携迷你键盘 编程适用', 'http://productdata.fhxasdsada.xyz/AD8JQ6Q0jfeySzdxAVglqw.jpg', '标准白有刻  ', '5', 2188, NULL, 0);
+INSERT INTO `orders` VALUES (2295, '1587784575528100005', 'HHKB Professional BT 蓝牙版黑无刻静电容键盘 程序员码农专用便携迷你键盘 编程适用', 'http://productdata.fhxasdsada.xyz/AD8JQ6Q0jfeySzdxAVglqw.jpg', '蓝牙白有刻  ', '2', 2188, NULL, 0);
+INSERT INTO `orders` VALUES (2296, '1587784609020100006', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.fhxasdsada.xyz/2ca45e2fd9758794.jpg', '黑色 ', '1', 1499, '0.6kg', 0);
+INSERT INTO `orders` VALUES (2297, '1587785350378100007', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.fhxasdsada.xyz/2ca45e2fd9758794.jpg', '黑色 ', '1', 1499, '0.6kg', 0);
+INSERT INTO `orders` VALUES (2298, '1587785378612100008', '新款Huawei/华为折叠手机mates xs 5g版大屏双屏全面屏双面屏官方旗舰店对折手机可折叠屏 Mate XS折叠\r\n', 'http://productdata.fhxasdsada.xyz/7a3a192a7fca3c35.png', '星际蓝 ', '1', 30576, '0.24kg', 0);
+INSERT INTO `orders` VALUES (2299, '1587785392295100009', '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.fhxasdsada.xyz/5cd5acfbN24c0ee18.jpg', '028#滋润珊瑚红 ', '1', 1140, '0.4kg', 0);
+INSERT INTO `orders` VALUES (2300, '1587785405894100010', '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.fhxasdsada.xyz/5cd5acfbN24c0ee18.jpg', '028#滋润珊瑚红 ', '1', 1140, '0.4kg', 0);
+INSERT INTO `orders` VALUES (2301, '1587787312630100011', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '1', 20, '0.15kg', 0);
+INSERT INTO `orders` VALUES (2302, '1587787318897100012', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '1', 20, '0.15kg', 0);
+INSERT INTO `orders` VALUES (2303, '1587787322732100013', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '1', 20, '0.15kg', 0);
+INSERT INTO `orders` VALUES (2304, '1587803459204100014', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.fhxasdsada.xyz/2ca45e2fd9758794.jpg', '黑色 ', '1', 1499, '0.6kg', 0);
+INSERT INTO `orders` VALUES (2305, '1587803633452100015', '【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金', 'http://productdata.fhxasdsada.xyz/135638619666091357760161_x.jpg', '磨砂黑 ', '1', 773, NULL, 0);
+INSERT INTO `orders` VALUES (2306, '1587803633452100015', '【二手95新】劳力士 系列:迪通拿系列 型号:116505 材质:18k玫瑰金 镜面:蓝宝石玻璃 未使用', '\r\nhttp://productdata.fhxasdsada.xyz/2-SXJILMjHoQXj66aurkzg.jpg', '玫瑰金 ', '1', 260000, '220克', 0);
+INSERT INTO `orders` VALUES (2307, '1587803633452100015', '新款Huawei/华为折叠手机mates xs 5g版大屏双屏全面屏双面屏官方旗舰店对折手机可折叠屏 Mate XS折叠\r\n', 'http://productdata.fhxasdsada.xyz/7a3a192a7fca3c35.png', '星际蓝 ', '1', 30576, '0.24kg', 0);
+INSERT INTO `orders` VALUES (2308, '1587803633452100015', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.fhxasdsada.xyz/2ca45e2fd9758794.jpg', '黑色 ', '2', 1499, '0.6kg', 0);
+INSERT INTO `orders` VALUES (2309, '1587803633452100015', 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', 'http://productdata.fhxasdsada.xyz/9bf639975363fbb0.jpg', '', '1', 3350, '5kg', 0);
+INSERT INTO `orders` VALUES (2310, '1587806139998100016', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '1', 2898, '2.8kg', 0);
 
 -- ----------------------------
 -- Table structure for productAttributes
@@ -1038,7 +1086,7 @@ CREATE TABLE `shoppingCart`  (
   `productDeploy` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `quantity` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`shoppingCartId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2806 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2900 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of shoppingCart
@@ -1051,6 +1099,9 @@ INSERT INTO `shoppingCart` VALUES (1331, NULL, 10028, 'Redmi 小爱音箱Play  �
 INSERT INTO `shoppingCart` VALUES (1390, '7c9fdfa3177042a08766aed29e7de6cd', 10002, '白色 优惠套餐一 ', 16);
 INSERT INTO `shoppingCart` VALUES (1598, '7c9fdfa3177042a08766aed29e7de6cd', 10026, 'XS ', 6);
 INSERT INTO `shoppingCart` VALUES (2665, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10026, 'XS ', 3);
+INSERT INTO `shoppingCart` VALUES (2885, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '蓝牙黑无刻 ', 2);
+INSERT INTO `shoppingCart` VALUES (2888, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '蓝牙白无刻  ', 1);
+INSERT INTO `shoppingCart` VALUES (2899, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10015, '奶茶味 ', 1);
 
 -- ----------------------------
 -- Table structure for user
@@ -1097,7 +1148,7 @@ CREATE TABLE `userAddress`  (
   `alias` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `isdelete` int(11) NULL DEFAULT 1,
   PRIMARY KEY (`addressId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 168 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 169 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userAddress
@@ -1122,7 +1173,8 @@ INSERT INTO `userAddress` VALUES (163, '7c9fdfa3177042a08766aed29e7de6cd', '速�
 INSERT INTO `userAddress` VALUES (164, '7c9fdfa3177042a08766aed29e7de6cd', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '1', '学校', 1);
 INSERT INTO `userAddress` VALUES (165, '7c9fdfa3177042a08766aed29e7de6cd', '递四方速递水电费', '内蒙古自治区 包头市 石拐区 石拐街道 ', '水电费水电费离开速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '15,1502,150205,150205001,', '0', '公司', 1);
 INSERT INTO `userAddress` VALUES (166, '7c9fdfa3177042a08766aed29e7de6cd', '的发送发送的', '山西省 太原市 杏花岭区 巨轮街道 ', '水电费水电费', '15367885410', 'liuxianliangli@foxmail.com', '14,1401,140107,140107001,', '0', '公司', 1);
-INSERT INTO `userAddress` VALUES (167, 'f92b9f8f372e445fb6564cdd57aa3c3e', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '1', '闺蜜家', 1);
+INSERT INTO `userAddress` VALUES (167, 'f92b9f8f372e445fb6564cdd57aa3c3e', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '0', '闺蜜家', 1);
+INSERT INTO `userAddress` VALUES (168, 'f92b9f8f372e445fb6564cdd57aa3c3e', '小芳', '北京市 市辖区 东城区 东华门街道 ', '湖南科技职业学院', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '1', '家', 1);
 
 -- ----------------------------
 -- Table structure for userConsumptionRecords
@@ -1138,986 +1190,22 @@ CREATE TABLE `userConsumptionRecords`  (
   `paymentTime` datetime(0) NULL DEFAULT NULL,
   `paymentAmount` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`consumptiomId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3163 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3551 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userConsumptionRecords
 -- ----------------------------
-INSERT INTO `userConsumptionRecords` VALUES (2144, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:12:49', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2145, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:12:51', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2146, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:12:52', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2147, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:12:54', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2148, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:12:55', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2149, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:12:56', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2150, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:12:58', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2151, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:12:59', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2152, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:00', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2153, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:02', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2154, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:03', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2155, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:04', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2156, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:06', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2157, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:07', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2158, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:08', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2159, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:10', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2160, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:11', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2161, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:13', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2162, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:14', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2163, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:15', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2164, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:17', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2165, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:18', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2166, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:19', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2167, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:21', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2168, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:22', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2169, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:24', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2170, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:25', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2171, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:27', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2172, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:28', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2173, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:29', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2174, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:31', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2175, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:32', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2176, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:33', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2177, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:35', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2178, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:36', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2179, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:37', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2180, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:13:39', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2181, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:11', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2182, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:12', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2183, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:13', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2184, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:14', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2185, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:16', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2186, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:17', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2187, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:18', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2188, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:20', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2189, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:21', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2190, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:23', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2191, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:24', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2192, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:26', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2193, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:27', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2194, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:28', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2195, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:30', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2196, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:31', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2197, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:33', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2198, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:34', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2199, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:35', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2200, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:37', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2201, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:38', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2202, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:40', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2203, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:41', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2204, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:43', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2205, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:44', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2206, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:45', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2207, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:47', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2208, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:48', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2209, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:50', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2210, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:51', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2211, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:53', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2212, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:54', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2213, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:55', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2214, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:57', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2215, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:18:59', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2216, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:01', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2217, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:02', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2218, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:04', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2219, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:05', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2220, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:07', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2221, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:08', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2222, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:09', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2223, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:11', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2224, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:12', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2225, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:14', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2226, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:15', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2227, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:17', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2228, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:18', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2229, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:19', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2230, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:21', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2231, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:23', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2232, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:24', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2233, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:25', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2234, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:27', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2235, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:28', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2236, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:30', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2237, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:31', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2238, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:33', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2239, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:34', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2240, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:36', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2241, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:37', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2242, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:39', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2243, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:40', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2244, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:41', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2245, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:43', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2246, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:45', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2247, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:46', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2248, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:48', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2249, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:49', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2250, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:51', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2251, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:52', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2252, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:53', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2253, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:55', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2254, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:56', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2255, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:58', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2256, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:19:59', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2257, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:01', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2258, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:03', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2259, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:04', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2260, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:05', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2261, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:07', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2262, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:08', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2263, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:10', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2264, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:11', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2265, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:13', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2266, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:14', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2267, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:16', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2268, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:17', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2269, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:19', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2270, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:20', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2271, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:22', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2272, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:23', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2273, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:25', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2274, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:26', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2275, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:28', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2276, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:29', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2277, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:31', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2278, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:33', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2279, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:34', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2280, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:36', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2281, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:37', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2282, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:39', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2283, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:40', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2284, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:42', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2285, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:45', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2286, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:44', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2287, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:48', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2288, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:46', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2289, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:49', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2290, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:51', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2291, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:54', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2292, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:53', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2293, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:55', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2294, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:57', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2295, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:00', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2296, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:20:59', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2297, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:02', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2298, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:04', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2299, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:04', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2300, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:08', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2301, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:08', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2302, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:11', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2303, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:10', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2304, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:14', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2305, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:14', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2306, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:18', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2307, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:16', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2308, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:21', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2309, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:20', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2310, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:23', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2311, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:23', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2312, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:27', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2313, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:26', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2314, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:29', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2315, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:31', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2316, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:31', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2317, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:35', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2318, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:34', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2319, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:36', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2320, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:40', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2321, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:38', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2322, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:41', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2323, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:44', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2324, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:44', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2325, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:47', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2326, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:47', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2327, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:49', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2328, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:52', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2329, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:52', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2330, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:56', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2331, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:54', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2332, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:21:57', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2333, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:00', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2334, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:00', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2335, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:04', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2336, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:03', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2337, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:07', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2338, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:06', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2339, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:09', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2340, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:11', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2341, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:11', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2342, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:14', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2343, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:15', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2344, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:19', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2345, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:18', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2346, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:21', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2347, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:21', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2348, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:24', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2349, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:24', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2350, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:27', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2351, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:28', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2352, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:30', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2353, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:31', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2354, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:33', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2355, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:35', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2356, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:36', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2357, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:38', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2358, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:40', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2359, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:41', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2360, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:43', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2361, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:45', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2362, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:46', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2363, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:48', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2364, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:49', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2365, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:51', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2366, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:53', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2367, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:54', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2368, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:56', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2369, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:58', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2370, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:22:59', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2371, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:01', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2372, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:02', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2373, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:04', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2374, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:06', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2375, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:08', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2376, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:09', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2377, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:11', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2378, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:13', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2379, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:14', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2380, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:16', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2381, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:17', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2382, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:19', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2383, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:21', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2384, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:23', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2385, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:24', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2386, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:26', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2387, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:28', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2388, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:29', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2389, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:31', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2390, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:32', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2391, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:34', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2392, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:36', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2393, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:37', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2394, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:39', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2395, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:45', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2396, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:44', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2397, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:47', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2398, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:47', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2399, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:51', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2400, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:50', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2401, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:54', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2402, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:54', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2403, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:58', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2404, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:23:57', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2405, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:01', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2406, '1587115429066100003', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-17 17:23:59', '20.0');
-INSERT INTO `userConsumptionRecords` VALUES (2407, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:03', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2408, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:02', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2409, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:06', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2410, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:06', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2411, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:10', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2412, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:09', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2413, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:13', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2414, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:13', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2415, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:17', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2416, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:16', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2417, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:20', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2418, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:20', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2419, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:24', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2420, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:23', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2421, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:27', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2422, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:26', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2423, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:30', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2424, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:30', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2425, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:34', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2426, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:33', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2427, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:37', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2428, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:37', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2429, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:41', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2430, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:40', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2431, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:44', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2432, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:44', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2433, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:48', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2434, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:47', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2435, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:51', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2436, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:51', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2437, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:55', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2438, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:54', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2439, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:58', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2440, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:24:58', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2441, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:02', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2442, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:01', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2443, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:05', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2444, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:05', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2445, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:09', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2446, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:08', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2447, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:12', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2448, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:12', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2449, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:16', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2450, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:15', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2451, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:19', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2452, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:19', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2453, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:23', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2454, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:22', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2455, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:26', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2456, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:26', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2457, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:30', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2458, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:29', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2459, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:33', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2460, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:33', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2461, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:37', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2462, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:36', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2463, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:40', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2464, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:40', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2465, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:42', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2466, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:43', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2467, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:45', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2468, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:47', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2469, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:49', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2470, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:51', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2471, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:53', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2472, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:54', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2473, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:56', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2474, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:58', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2475, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:25:59', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2476, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:26:01', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2477, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:26:03', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2478, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:26:05', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2479, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:26:07', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2480, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:26:45', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2481, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:35:08', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2482, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:36:46', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2483, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:36:48', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2484, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:36:49', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2485, '1587114000360100039', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-17 17:36:51', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2486, '1587260740570100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 09:45:53', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (2487, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:11', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2488, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:12', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2489, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:12', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2490, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:12', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2491, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:12', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2492, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:12', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2493, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:13', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2494, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:13', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2495, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:13', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2496, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:13', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2497, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:14', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2498, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:14', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2499, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:14', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2500, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:14', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2501, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:14', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2502, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:15', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2503, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:15', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2504, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:15', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2505, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:15', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2506, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:15', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2507, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:16', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2508, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:16', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2509, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:16', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2510, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:16', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2511, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:16', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2512, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:17', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2513, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:17', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2514, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:17', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2515, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:17', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2516, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:18', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2517, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:18', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2518, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:18', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2519, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:18', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2520, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:18', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2521, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:19', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2522, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:19', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2523, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:19', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2524, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:19', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2525, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:19', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2526, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:20', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2527, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:20', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2528, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:20', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2529, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:20', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2530, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:21', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2531, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:21', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2532, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:21', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2533, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:21', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2534, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:21', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2535, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2536, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2537, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2538, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2539, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2540, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2541, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2542, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2543, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2544, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2545, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:24', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2546, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:24', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2547, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:24', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2548, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:24', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2549, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2550, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2551, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2552, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2553, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2554, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:26', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2555, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:26', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2556, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:26', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2557, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:26', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2558, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:26', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2559, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:27', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2560, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:27', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2561, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:27', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2562, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:27', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2563, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:27', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2564, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:28', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2565, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:28', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2566, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:28', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2567, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:28', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2568, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:28', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2569, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:29', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2570, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:29', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2571, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:29', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2572, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:29', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2573, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:30', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2574, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:30', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2575, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:30', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2576, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:30', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2577, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:30', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2578, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:31', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2579, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:31', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2580, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:31', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2581, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:31', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2582, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:31', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2583, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:32', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2584, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:32', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2585, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:32', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2586, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:32', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2587, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:33', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2588, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:33', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2589, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:33', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2590, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:33', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2591, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:34', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2592, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:34', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2593, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:34', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2594, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:34', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2595, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:34', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2596, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:35', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2597, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:35', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2598, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:35', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2599, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:35', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2600, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:36', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2601, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:36', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2602, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:36', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2603, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:36', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2604, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:36', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2605, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:37', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2606, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:37', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2607, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:37', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2608, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:37', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2609, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:37', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2610, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:38', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2611, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:38', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2612, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:38', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2613, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:38', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2614, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:38', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2615, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:39', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2616, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:39', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2617, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:39', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2618, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:39', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2619, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:40', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2620, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:40', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2621, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:40', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2622, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:40', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2623, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:40', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2624, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:41', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2625, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:41', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2626, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:41', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2627, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:41', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2628, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:41', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2629, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:42', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2630, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:42', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2631, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:42', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2632, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:42', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2633, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:42', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2634, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:43', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2635, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:43', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2636, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:43', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2637, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:43', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2638, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:44', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2639, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:44', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2640, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:44', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2641, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:44', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2642, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:44', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2643, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:45', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2644, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:45', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2645, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:45', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2646, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:45', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2647, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:46', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2648, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:46', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2649, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:46', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2650, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:47', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2651, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:47', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2652, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:47', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2653, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:47', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2654, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:48', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2655, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:48', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2656, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:48', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2657, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:48', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2658, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:49', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2659, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:49', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2660, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:49', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2661, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:50', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2662, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:50', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2663, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:50', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2664, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:50', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2665, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:51', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2666, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:51', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2667, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:51', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2668, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:51', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2669, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:52', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2670, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:52', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2671, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:52', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2672, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:53', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2673, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:53', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2674, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:53', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2675, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:53', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2676, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:54', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2677, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:54', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2678, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:55', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2679, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:55', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2680, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:55', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2681, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:55', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2682, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:56', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2683, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:56', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2684, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:56', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2685, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:57', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2686, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:57', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2687, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:57', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2688, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:57', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2689, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:58', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2690, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:58', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2691, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:59', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2692, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:59', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2693, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:59', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2694, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:26:59', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2695, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:00', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2696, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:00', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2697, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:01', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2698, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:01', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2699, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:01', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2700, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:01', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2701, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:02', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2702, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:02', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2703, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:02', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2704, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:03', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2705, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:03', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2706, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:03', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2707, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:04', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2708, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:04', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2709, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:04', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2710, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:05', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2711, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:05', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2712, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:06', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2713, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:06', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2714, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:06', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2715, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:06', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2716, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:07', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2717, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:07', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2718, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:08', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2719, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:08', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2720, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:08', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2721, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:09', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2722, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:09', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2723, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:09', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2724, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:10', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2725, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:10', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2726, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:11', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2727, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:11', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2728, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:11', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2729, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:12', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2730, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:12', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2731, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:13', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2732, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:13', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2733, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:13', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2734, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:13', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2735, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:14', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2736, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:14', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2737, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:15', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2738, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:15', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2739, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:16', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2740, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:16', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2741, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:16', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2742, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:17', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2743, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:17', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2744, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:17', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2745, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:18', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2746, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:18', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2747, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:19', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2748, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:19', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2749, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:19', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2750, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:20', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2751, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:20', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2752, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:20', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2753, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:21', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2754, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:21', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2755, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2756, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2757, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2758, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2759, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2760, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:24', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2761, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:24', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2762, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2763, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2764, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2765, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:26', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2766, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:26', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2767, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:27', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2768, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:27', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2769, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:28', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2770, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:28', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2771, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:29', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2772, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:29', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2773, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:29', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2774, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:30', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2775, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:30', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2776, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:27:31', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2777, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:19', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2778, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:20', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2779, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:20', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2780, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:21', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2781, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:21', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2782, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:21', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2783, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2784, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2785, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2786, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2787, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2788, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:24', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2789, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:24', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2790, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2791, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2792, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2793, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:26', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2794, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:26', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2795, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:27', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2796, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:27', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2797, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:28', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2798, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:28', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2799, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:29', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2800, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:29', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2801, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:29', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2802, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:30', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2803, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:31', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2804, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:31', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2805, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:32', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2806, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:32', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2807, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:32', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2808, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:33', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2809, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:33', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2810, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:34', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2811, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:34', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2812, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:35', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2813, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:35', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2814, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:36', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2815, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:36', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2816, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:37', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2817, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:37', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2818, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:38', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2819, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:38', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2820, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:39', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2821, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:39', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2822, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:40', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2823, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:40', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2824, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:41', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2825, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:41', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2826, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:42', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2827, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:42', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2828, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:43', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2829, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:43', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2830, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:44', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2831, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:45', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2832, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:45', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2833, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:46', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2834, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:46', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2835, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:47', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2836, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:47', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2837, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:48', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2838, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:48', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2839, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:49', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2840, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:49', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2841, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:50', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2842, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:50', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2843, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:51', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2844, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:51', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2845, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:51', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2846, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:52', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2847, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:53', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2848, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:53', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2849, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:54', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2850, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:54', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2851, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:55', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2852, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:55', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2853, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:56', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2854, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:56', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2855, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:57', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2856, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:57', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2857, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:58', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2858, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:58', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2859, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:29:59', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2860, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:00', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2861, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:00', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2862, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:01', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2863, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:01', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2864, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:02', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2865, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:02', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2866, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:03', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2867, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:04', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2868, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:04', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2869, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:05', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2870, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:05', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2871, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:06', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2872, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:07', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2873, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:07', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2874, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:08', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2875, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:08', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2876, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:09', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2877, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:09', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2878, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:10', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2879, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:10', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2880, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:11', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2881, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:12', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2882, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:12', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2883, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:13', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2884, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:13', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2885, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:14', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2886, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:15', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2887, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:15', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2888, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:15', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2889, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:16', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2890, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:17', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2891, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:17', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2892, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:18', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2893, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:18', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2894, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:19', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2895, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:20', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2896, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:20', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2897, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:21', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2898, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2899, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2900, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2901, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2902, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:24', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2903, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:24', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2904, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2905, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:26', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2906, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:26', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2907, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:27', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2908, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:27', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2909, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:28', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2910, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:29', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2911, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:29', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2912, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:30', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2913, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:31', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2914, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:31', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2915, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:32', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2916, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:32', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2917, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:33', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2918, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:34', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2919, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:35', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2920, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:35', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2921, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:36', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2922, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:36', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2923, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:37', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2924, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:38', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2925, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:38', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2926, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:39', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2927, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:39', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2928, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:40', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2929, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:41', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2930, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:42', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2931, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:42', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2932, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:43', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2933, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:43', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2934, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:44', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2935, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:45', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2936, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:45', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2937, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:46', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2938, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:47', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2939, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:47', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2940, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:48', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2941, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:49', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2942, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:49', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2943, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:30:50', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2944, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:20', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2945, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:20', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2946, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:21', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2947, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:21', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2948, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2949, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2950, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2951, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:24', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2952, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2953, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2954, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:26', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2955, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:26', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2956, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:27', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2957, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:28', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2958, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:29', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2959, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:29', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2960, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:30', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2961, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:31', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2962, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:31', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2963, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:32', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2964, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:33', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2965, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:33', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2966, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:34', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2967, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:35', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2968, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:35', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2969, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:36', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2970, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:37', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2971, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:38', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2972, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:38', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2973, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:39', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2974, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:40', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2975, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:41', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2976, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:41', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2977, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:42', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2978, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:42', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2979, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:43', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2980, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:44', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2981, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:45', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2982, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:45', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2983, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:46', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2984, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:47', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2985, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:48', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2986, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:48', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2987, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:49', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2988, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:50', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2989, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:50', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2990, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:51', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2991, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:52', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2992, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:53', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2993, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:53', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2994, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:54', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2995, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:55', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2996, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:56', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2997, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:56', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2998, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:57', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (2999, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:58', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3000, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:58', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3001, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:31:59', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3002, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:00', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3003, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:01', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3004, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:02', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3005, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:02', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3006, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:03', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3007, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:04', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3008, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:05', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3009, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:05', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3010, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:06', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3011, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:07', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3012, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:08', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3013, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:09', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3014, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:09', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3015, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:10', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3016, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:11', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3017, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:11', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3018, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:12', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3019, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:13', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3020, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:14', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3021, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:14', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3022, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:15', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3023, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:16', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3024, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:17', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3025, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:18', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3026, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:18', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3027, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:19', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3028, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:20', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3029, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:21', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3030, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3031, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:22', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3032, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:23', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3033, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:24', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3034, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:25', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3035, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:59', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3036, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:32:59', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3037, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:33:00', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3038, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:33:01', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3039, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:33:01', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3040, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:33:02', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3041, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:33:03', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3042, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:33:04', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3043, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:33:04', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3044, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:33:05', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3045, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:33:06', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3046, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:33:07', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3047, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:33:07', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3048, '1587288329210100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-19 17:33:08', '18054.00');
-INSERT INTO `userConsumptionRecords` VALUES (3049, '1587289427174100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:43:54', '1499.0');
-INSERT INTO `userConsumptionRecords` VALUES (3050, '1587289711210100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:49:03', '758.0');
-INSERT INTO `userConsumptionRecords` VALUES (3051, '1587289711210100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:49:33', '758.0');
-INSERT INTO `userConsumptionRecords` VALUES (3052, '1587289711210100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:50:06', '758.0');
-INSERT INTO `userConsumptionRecords` VALUES (3053, '1587289711210100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:51:56', '758.0');
-INSERT INTO `userConsumptionRecords` VALUES (3054, '1587289711210100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:53:05', '758.0');
-INSERT INTO `userConsumptionRecords` VALUES (3055, '1587289711210100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:53:06', '758.0');
-INSERT INTO `userConsumptionRecords` VALUES (3056, '1587289711210100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:53:07', '758.0');
-INSERT INTO `userConsumptionRecords` VALUES (3057, '1587289711210100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:53:08', '758.0');
-INSERT INTO `userConsumptionRecords` VALUES (3058, '1587289711210100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:53:08', '758.0');
-INSERT INTO `userConsumptionRecords` VALUES (3059, '1587289711210100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:53:09', '758.0');
-INSERT INTO `userConsumptionRecords` VALUES (3060, '1587289711210100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:53:10', '758.0');
-INSERT INTO `userConsumptionRecords` VALUES (3061, '1587289711210100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:53:43', '758.0');
-INSERT INTO `userConsumptionRecords` VALUES (3062, '1587290101768100003', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:55:10', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3063, '1587290131436100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:55:45', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3064, '1587290131436100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:55:52', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3065, '1587290131436100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:57:05', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3066, '1587290131436100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:58:43', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3067, '1587290131436100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:58:43', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3068, '1587290131436100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:58:44', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3069, '1587290131436100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:58:45', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3070, '1587290131436100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:58:45', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3071, '1587290131436100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:58:46', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3072, '1587290131436100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:58:47', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3073, '1587290131436100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 17:59:15', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3074, '1587290544954100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:02:36', '1299.0');
-INSERT INTO `userConsumptionRecords` VALUES (3075, '1587290588311100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:03:24', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3076, '1587290588311100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:03:29', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3077, '1587290588311100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:03:36', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3078, '1587290588311100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:04:39', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3079, '1587290588311100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:05:30', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3080, '1587290588311100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:07:22', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3081, '1587290588311100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:07:23', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3082, '1587290588311100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:07:24', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3083, '1587290588311100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:07:24', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3084, '1587290588311100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:07:25', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3085, '1587290588311100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:07:26', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3086, '1587290588311100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:07:26', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3087, '1587290588311100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:07:27', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3088, '1587290588311100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:08:02', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3089, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:30', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3090, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:31', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3091, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:32', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3092, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:32', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3093, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:33', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3094, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:34', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3095, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:34', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3096, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:35', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3097, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:36', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3098, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:36', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3099, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:37', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3100, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:38', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3101, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:38', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3102, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:39', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3103, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:40', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3104, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:40', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3105, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:41', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3106, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:42', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3107, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:42', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3108, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:43', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3109, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:44', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3110, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:44', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3111, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:45', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3112, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:46', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3113, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:46', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3114, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:16:47', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3115, '1587291382963100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:25:02', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3116, '1587291971075100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:26:16', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3142, '1587292127976100003', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:31:11', '1499.0');
-INSERT INTO `userConsumptionRecords` VALUES (3162, '1587292363848100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-19 18:34:46', '2898.0');
+INSERT INTO `userConsumptionRecords` VALUES (3540, '1587784539826100002', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-25 11:15:46', '11999.00');
+INSERT INTO `userConsumptionRecords` VALUES (3541, '1587784560769100004', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-25 11:16:05', '4376.00');
+INSERT INTO `userConsumptionRecords` VALUES (3542, '1587784575528100005', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-25 11:16:22', '15316.00');
+INSERT INTO `userConsumptionRecords` VALUES (3543, '1587784609020100006', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-04-25 11:16:56', '1499.0');
+INSERT INTO `userConsumptionRecords` VALUES (3544, '1587785350378100007', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-25 11:29:16', '1499.0');
+INSERT INTO `userConsumptionRecords` VALUES (3545, '1587785378612100008', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-25 11:29:43', '30576.0');
+INSERT INTO `userConsumptionRecords` VALUES (3546, '1587785392295100009', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-25 11:29:58', '1140.0');
+INSERT INTO `userConsumptionRecords` VALUES (3547, '1587785405894100010', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-25 11:30:12', '1140.0');
+INSERT INTO `userConsumptionRecords` VALUES (3548, '1587803459204100014', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-25 16:31:04', '1499.0');
+INSERT INTO `userConsumptionRecords` VALUES (3549, '1587803633452100015', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-25 16:34:00', '297697.00');
+INSERT INTO `userConsumptionRecords` VALUES (3550, '1587806139998100016', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-04-25 17:16:10', '2898.0');
 
 -- ----------------------------
 -- Table structure for userEvaluation
@@ -2130,12 +1218,14 @@ CREATE TABLE `userEvaluation`  (
   `sign` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `evaluationTime` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`evaluationId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 168 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 170 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userEvaluation
 -- ----------------------------
 INSERT INTO `userEvaluation` VALUES (127, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10026, 'true', '2020-04-19 16:27:11');
+INSERT INTO `userEvaluation` VALUES (168, 'f92b9f8f372e445fb6564cdd57aa3c3e', 0, 'true', '2020-04-22 11:18:44');
+INSERT INTO `userEvaluation` VALUES (169, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10007, 'true', '2020-04-22 11:19:16');
 
 -- ----------------------------
 -- Table structure for userFootprint
@@ -2147,22 +1237,33 @@ CREATE TABLE `userFootprint`  (
   `productId` int(11) NULL DEFAULT NULL,
   `footprintTime` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`footprintId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 127 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 177 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userFootprint
 -- ----------------------------
-INSERT INTO `userFootprint` VALUES (22, 'abcd', 10005, '2020-04-19 16:50:47');
-INSERT INTO `userFootprint` VALUES (23, 'asdasd', 0, '2020-03-27 09:52:30');
-INSERT INTO `userFootprint` VALUES (29, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '2020-04-19 17:48:21');
-INSERT INTO `userFootprint` VALUES (39, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10022, '2020-04-19 16:33:27');
-INSERT INTO `userFootprint` VALUES (40, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10003, '2020-04-19 17:48:27');
-INSERT INTO `userFootprint` VALUES (41, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10007, '2020-04-19 16:49:25');
-INSERT INTO `userFootprint` VALUES (54, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10006, '2020-04-19 18:28:45');
+INSERT INTO `userFootprint` VALUES (22, 'abcd', 10005, '2020-04-24 10:48:21');
+INSERT INTO `userFootprint` VALUES (23, 'asdasd', 0, '2020-04-22 10:55:58');
+INSERT INTO `userFootprint` VALUES (39, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10022, '2020-04-25 16:52:36');
+INSERT INTO `userFootprint` VALUES (40, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10003, '2020-04-25 16:55:28');
+INSERT INTO `userFootprint` VALUES (41, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10007, '2020-04-25 16:55:34');
 INSERT INTO `userFootprint` VALUES (55, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10012, '2020-04-19 16:51:21');
-INSERT INTO `userFootprint` VALUES (124, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, '2020-04-19 18:26:08');
-INSERT INTO `userFootprint` VALUES (125, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10014, '2020-04-19 18:32:40');
-INSERT INTO `userFootprint` VALUES (126, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10023, '2020-04-19 18:02:22');
+INSERT INTO `userFootprint` VALUES (125, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10014, '2020-04-25 17:15:36');
+INSERT INTO `userFootprint` VALUES (126, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10023, '2020-04-25 17:09:32');
+INSERT INTO `userFootprint` VALUES (127, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10018, '2020-04-25 11:30:02');
+INSERT INTO `userFootprint` VALUES (128, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10009, '2020-04-20 10:16:09');
+INSERT INTO `userFootprint` VALUES (130, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10015, '2020-04-25 16:41:47');
+INSERT INTO `userFootprint` VALUES (131, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10029, '2020-04-25 16:51:54');
+INSERT INTO `userFootprint` VALUES (132, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10006, '2020-04-25 16:33:44');
+INSERT INTO `userFootprint` VALUES (133, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10024, '2020-04-25 11:14:15');
+INSERT INTO `userFootprint` VALUES (136, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, '2020-04-25 11:14:35');
+INSERT INTO `userFootprint` VALUES (154, '7c9fdfa3177042a08766aed29e7de6cd', 10004, '2020-04-25 16:56:10');
+INSERT INTO `userFootprint` VALUES (156, '7c9fdfa3177042a08766aed29e7de6cd', 10004, '2020-04-25 16:56:10');
+INSERT INTO `userFootprint` VALUES (157, '7c9fdfa3177042a08766aed29e7de6cd', 10004, '2020-04-25 16:56:10');
+INSERT INTO `userFootprint` VALUES (158, '7c9fdfa3177042a08766aed29e7de6cd', 10004, '2020-04-25 16:56:10');
+INSERT INTO `userFootprint` VALUES (167, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10012, '2020-04-25 17:09:53');
+INSERT INTO `userFootprint` VALUES (175, '7c9fdfa3177042a08766aed29e7de6cd', 10004, '2020-04-25 16:56:10');
+INSERT INTO `userFootprint` VALUES (176, '7c9fdfa3177042a08766aed29e7de6cd', 10004, '2020-04-25 16:56:10');
 
 -- ----------------------------
 -- Table structure for userMembe
@@ -2182,10 +1283,10 @@ CREATE TABLE `userMembe`  (
 -- ----------------------------
 -- Records of userMembe
 -- ----------------------------
-INSERT INTO `userMembe` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', 'lV4dSKdYwk8DdWhNxsiH0Q==', 98000, 5, 2, 1540);
+INSERT INTO `userMembe` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', 'fRbc+IBq2fPr3jlb4fM4Ew==', 98000, 5, 2, 1540);
 INSERT INTO `userMembe` VALUES (2, '0497326c70a447ceb815aa23743daeab', NULL, 0, 0, 0, 0);
 INSERT INTO `userMembe` VALUES (3, '9c1e482cfabf48f7ab64baee9bd778fd', NULL, 0, 0, 0, 0);
-INSERT INTO `userMembe` VALUES (4, 'f92b9f8f372e445fb6564cdd57aa3c3e', 'Bdz6CbMq9viUyX1kDcXCPA==', 0, 0, 0, 0);
+INSERT INTO `userMembe` VALUES (4, 'f92b9f8f372e445fb6564cdd57aa3c3e', 'J5Z2duywc0tr4FSscHwelA==', 0, 0, 0, 0);
 INSERT INTO `userMembe` VALUES (5, '836fa03c4977499a9361f986672dea7f', NULL, 0, 0, 0, 0);
 INSERT INTO `userMembe` VALUES (6, '058656382d454f2cb40340934812d5c4', NULL, 0, 0, 0, 0);
 INSERT INTO `userMembe` VALUES (7, 'fd113e77699c4d21ab50acaf88e7e141', NULL, 0, 0, 0, 0);
@@ -2212,15 +1313,27 @@ CREATE TABLE `userOrder`  (
   `orderState` int(11) NULL DEFAULT 1,
   `changeQuantity` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 617 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 720 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userOrder
 -- ----------------------------
-INSERT INTO `userOrder` VALUES (613, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587291971075100001', 1, 1, '2020-04-19 18:26:11', '2020-04-22 18:26:11', NULL, NULL, '', '11999.0', NULL, 0);
-INSERT INTO `userOrder` VALUES (614, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587291988367100002', 2, 1, '2020-04-19 18:26:28', '2020-04-22 18:26:28', NULL, NULL, '', '1499.0', NULL, 0);
-INSERT INTO `userOrder` VALUES (615, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587292127976100003', 2, 1, '2020-04-19 18:28:48', '2020-04-22 18:28:48', NULL, NULL, '', '1499.0', NULL, 0);
-INSERT INTO `userOrder` VALUES (616, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587292363848100004', 2, 1, '2020-04-19 18:32:44', '2020-04-22 18:32:44', NULL, NULL, '', '2898.0', NULL, 0);
+INSERT INTO `userOrder` VALUES (704, '7c9fdfa3177042a08766aed29e7de6cd', '1587784533150100001', 1, 1, '2020-04-25 11:15:33', '2020-04-28 11:15:33', NULL, NULL, '', '24140.00', 1, 0);
+INSERT INTO `userOrder` VALUES (705, '7c9fdfa3177042a08766aed29e7de6cd', '1587784539826100002', 1, 1, '2020-04-25 11:15:39', '2020-04-28 11:15:39', '2020-04-25 11:15:44', NULL, '', '11999.00', 2, 0);
+INSERT INTO `userOrder` VALUES (706, '7c9fdfa3177042a08766aed29e7de6cd', '1587784554394100003', 1, 1, '2020-04-25 11:15:54', '2020-04-28 11:15:54', NULL, NULL, '', '2401.00', 1, 0);
+INSERT INTO `userOrder` VALUES (707, '7c9fdfa3177042a08766aed29e7de6cd', '1587784560769100004', 1, 1, '2020-04-25 11:16:00', '2020-04-28 11:16:00', '2020-04-25 11:16:05', NULL, '', '4376.00', 2, 0);
+INSERT INTO `userOrder` VALUES (708, '7c9fdfa3177042a08766aed29e7de6cd', '1587784575528100005', 1, 1, '2020-04-25 11:16:15', '2020-04-28 11:16:15', '2020-04-25 11:16:21', NULL, '', '15316.00', 2, 0);
+INSERT INTO `userOrder` VALUES (709, '7c9fdfa3177042a08766aed29e7de6cd', '1587784609020100006', 1, 1, '2020-04-25 11:16:49', '2020-04-28 11:16:49', '2020-04-25 11:16:56', NULL, '', '1499.0', 2, 0);
+INSERT INTO `userOrder` VALUES (710, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587785350378100007', 1, 1, '2020-04-25 11:29:10', '2020-04-28 11:29:10', '2020-04-25 11:29:16', NULL, '', '1499.0', 2, 0);
+INSERT INTO `userOrder` VALUES (711, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587785378612100008', 1, 1, '2020-04-25 11:29:38', '2020-04-28 11:29:38', '2020-04-25 11:29:44', NULL, '', '30576.0', 2, 0);
+INSERT INTO `userOrder` VALUES (712, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587785392295100009', 1, 1, '2020-04-25 11:29:52', '2020-04-28 11:29:52', '2020-04-25 11:29:58', NULL, '', '1140.0', 2, 0);
+INSERT INTO `userOrder` VALUES (713, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587785405894100010', 1, 1, '2020-04-25 11:30:06', '2020-04-28 11:30:06', '2020-04-25 11:30:12', NULL, '', '1140.0', 2, 0);
+INSERT INTO `userOrder` VALUES (714, '7c9fdfa3177042a08766aed29e7de6cd', '1587787312630100011', 1, 1, '2020-04-25 12:01:52', '2020-04-28 12:01:52', NULL, NULL, '', '20.0', 1, 0);
+INSERT INTO `userOrder` VALUES (715, '7c9fdfa3177042a08766aed29e7de6cd', '1587787318897100012', NULL, NULL, '2020-04-25 12:01:58', NULL, NULL, NULL, NULL, '20.0', 1, 0);
+INSERT INTO `userOrder` VALUES (716, '7c9fdfa3177042a08766aed29e7de6cd', '1587787322732100013', 1, 1, '2020-04-25 12:02:02', '2020-04-28 12:02:02', NULL, NULL, '', '20.0', 1, 0);
+INSERT INTO `userOrder` VALUES (717, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587803459204100014', 1, 1, '2020-04-25 16:30:59', '2020-04-28 16:30:59', '2020-04-25 16:31:04', NULL, '', '1499.0', 2, 0);
+INSERT INTO `userOrder` VALUES (718, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587803633452100015', 1, 1, '2020-04-25 16:33:54', '2020-04-28 16:33:54', '2020-04-25 16:33:59', NULL, '', '297697.00', 2, 0);
+INSERT INTO `userOrder` VALUES (719, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1587806139998100016', 1, 1, '2020-04-25 17:15:40', '2020-04-28 17:16:01', '2020-04-25 17:16:11', NULL, '', '2898.0', 2, 0);
 
 -- ----------------------------
 -- Table structure for userPassword
