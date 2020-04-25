@@ -10,9 +10,6 @@
           <li v-if="this.$route.path!='/login' && this.username==null">
             <router-link to="/login">您好,请登录</router-link>
           </li>
-          <li>
-            <div>dsfs</div>
-          </li>
           <li v-if="this.username!=null">
             <el-dropdown trigger="click">
               <el-badge :is-dot="unreadQuantity!=0" class="header_sign">

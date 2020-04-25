@@ -154,6 +154,9 @@
               message:"已移除收藏",
               type:"success"
             })
+            if (this.favoriteParams.currentPage!=1 && this.favoriteParams.currentPage==this.favoriteParams.totalPage && (((this.favoriteParams.currentPage-1)*this.favoriteParams.pageSize)+1)===this.favoriteParams.totalCount){
+              this.favoriteParams.currentPage--;
+            }
             this.getFavorite();
           }
         })
@@ -169,9 +172,6 @@
         this.getFavorite();
       },
       getFavorite() {
-        if (this.favoriteParams.currentPage!=1 && this.favoriteParams.currentPage==this.favoriteParams.totalPage && (((this.favoriteParams.currentPage-1)*this.favoriteParams.pageSize)+1)===this.favoriteParams.totalCount){
-          this.favoriteParams.currentPage--;
-        }
         const params={
           userId:sessionStorage.getItem("uId"),
           currentPage:this.favoriteParams.currentPage,

@@ -167,6 +167,9 @@
                 message:"删除成功",
                 type:"success"
               })
+              if (this.footprintParams.currentPage!=1 && this.footprintParams.currentPage==this.footprintParams.totalPage && (((this.footprintParams.currentPage-1)*this.footprintParams.pageSize)+1)===this.footprintParams.totalCount){
+                this.footprintParams.currentPage--;
+              }
               this.getFootprint()
             }
         })
@@ -207,9 +210,7 @@
       },
       //获取足迹
       getFootprint() {
-        if (this.footprintParams.currentPage!=1 && this.footprintParams.currentPage==this.footprintParams.totalPage && (((this.footprintParams.currentPage-1)*this.footprintParams.pageSize)+1)===this.footprintParams.totalCount){
-          this.footprintParams.currentPage--;
-        }
+
         const params={
           userId:sessionStorage.getItem("uId"),
           currentPage:this.footprintParams.currentPage,

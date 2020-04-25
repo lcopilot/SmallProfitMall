@@ -319,9 +319,9 @@
       },
       //获取订单信息
       getOrderList(){
-        if (this.orderParams.currentPage!=1 && this.orderParams.currentPage==this.orderParams.totalPage && (((this.orderParams.currentPage-1)*this.orderParams.pageSize)+1)===this.orderParams.totalCount){
-          this.orderParams.currentPage--;
-        }
+        // if (this.orderParams.currentPage!=1 && this.orderParams.currentPage==this.orderParams.totalPage && (((this.orderParams.currentPage-1)*this.orderParams.pageSize))===this.orderParams.totalCount){
+        //   this.orderParams.currentPage--;
+        // }
         const params={
           orderState:this.genre,
           userId:sessionStorage.getItem("uId"),
