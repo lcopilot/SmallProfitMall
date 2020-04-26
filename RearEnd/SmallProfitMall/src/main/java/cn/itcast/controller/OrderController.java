@@ -3,6 +3,7 @@ package cn.itcast.controller;
 import cn.itcast.domain.accountSettings.AccountSettings;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.OrderQuantity;
+import cn.itcast.domain.order.ProductContent;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
@@ -30,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -119,9 +121,14 @@ public class OrderController {
         }
         Pagination pagination = new Pagination();
         List<Order> orders = orderService.findAllOrder(userId,orderState,currentPage,pageSize);
+
         //查询总数量跟总页数 数组0为总数量 1 为总页数
         Integer[] totalPage=orderService.fendTotalPage(userId,orderState,pageSize);
-        pagination.setList (orders);
+        if (orderState>=2){
+            pagination.setList(orders.get(0).getProductContents());
+        }else {
+            pagination.setList (orders);
+        }
         pagination.setTotalCount(totalPage[0].longValue());
         pagination.setTotalPage((int) totalPage[1].longValue());
         return new ResponsePagination(CommonCode.SUCCESS,pagination);

@@ -52,6 +52,7 @@ public class Order implements Serializable {
     //订单修改次数
     private Integer changeQuantity;
 
+
     public Integer getChangeQuantity() {
         return changeQuantity;
     }

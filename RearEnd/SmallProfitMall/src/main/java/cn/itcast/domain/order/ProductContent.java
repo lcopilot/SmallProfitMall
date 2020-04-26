@@ -25,6 +25,16 @@ public class ProductContent implements Serializable {
     private String productWeight;
     //是否评价
     private Boolean evaluate;
+    //商品状态 1为未发货 2为已确认收货
+    public Integer productState;
+
+    public Integer getProductState() {
+        return productState;
+    }
+
+    public void setProductState(Integer productState) {
+        this.productState = productState;
+    }
 
     public int getId() {
         return id;

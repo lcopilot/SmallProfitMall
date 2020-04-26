@@ -324,9 +324,9 @@ public class OrderServiceImpl implements OrderService {
         OrderQuantity quantity = new OrderQuantity();
         quantity.setOrderAllQuantity(orderDao.fendOrderQuantity(userId,0));
         quantity.setOrderUnpaidQuantity(orderDao.fendOrderQuantity(userId,1));
-        quantity.setOrderPaidQuantity(orderDao.fendOrderQuantity(userId,2));
-        quantity.setEvaluateQuantity(orderDao.fendOrderQuantity(userId,3));
-        quantity.setSalesReturnQuantity(orderDao.fendOrderQuantity(userId,4));
+        quantity.setOrderPaidQuantity(orderDao.findProductQuantity(userId,2));
+        quantity.setEvaluateQuantity(orderDao.findProductQuantity(userId,3));
+        quantity.setSalesReturnQuantity(orderDao.findProductQuantity(userId,4));
         return quantity;
     }
 
@@ -341,6 +341,15 @@ public class OrderServiceImpl implements OrderService {
                                     Integer currentPage, Integer pageSize) {
         //开始页
         Integer start=(currentPage-1)*pageSize;
+        //查询商品集合 2未查询付款商品
+        if(orderState>=2){
+            List<ProductContent> productContents = orderDao.findOrderProduct(userId,orderState,start,pageSize);
+            List<Order> orders = new ArrayList<>();
+            Order order = new Order();
+            order.setProductContents(productContents);
+            orders.add(order);
+            return orders;
+        }
         List<Order> orders = orderDao.findAllOrder(userId,orderState,start,pageSize);
         return orders;
     }
@@ -766,7 +775,23 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Integer[] fendTotalPage(String userId,Integer orderState, Integer pageSize) {
         Integer[] TotalPage=new Integer[2];
-        Integer quantity = orderDao.fendOrderQuantity(userId,orderState);
+        Integer quantity=0;
+        if (orderState<2){
+            //查询全部订单跟未支付订单数量
+            quantity = orderDao.fendOrderQuantity(userId,orderState);
+        }else if(orderState==2){
+            //查询待收货商品数量
+            quantity = orderDao.findProductQuantity(userId,2);
+
+        }else  if(orderState==3){
+            //查询待评价商品数量
+            quantity = orderDao.findProductQuantity(userId,3);
+        }else {
+            //查询退货商品数量
+            quantity = orderDao.findProductQuantity(userId,4);
+        }
+
+
         int totalPage = (quantity % pageSize)  == 0 ? quantity/pageSize : (quantity/pageSize) + 1;
         TotalPage[0]=quantity;
         TotalPage[1]=totalPage;

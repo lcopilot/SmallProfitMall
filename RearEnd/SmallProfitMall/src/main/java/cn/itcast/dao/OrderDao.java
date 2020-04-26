@@ -40,13 +40,24 @@ public interface OrderDao {
     public Order findDetailedOrder(@Param("userId")String userId , @Param("orderId")String orderId);
 
     /**
-     * 查询订单分类
+     * 查询全部订单跟未支付订单
      * @param userId 用户id
      * @param orderState 订单状态 0为查所有订单 1为查询待付款订单 2为查询待收货订单 3为待评价订单 4为退货
      * @return
      */
     public List<Order> findAllOrder(@Param("userId")String userId , @Param("orderState")Integer orderState,
                                     @Param("start")Integer start,@Param("pageSize") Integer pageSize);
+
+    /**
+     * 查询已待发货 待收货 待评价订单
+     * @param userId 用户id
+     * @param productState  1为查询已付款商品  2为查询确认收货后的商品
+     * @param start 开始查询数
+     * @param pageSize 每页查询数量
+     * @return 1 未待发货 2 待收货 3为已签收
+     */
+    public List<ProductContent> findOrderProduct(@Param("userId")String userId ,@Param("productState")Integer productState, @Param("start")Integer start,@Param("pageSize") Integer pageSize);
+
     /**
      * 新增订单商品
      * @param productContent
@@ -130,6 +141,14 @@ public interface OrderDao {
      * @return 订单总数量
      */
     public Integer fendOrderQuantity(@Param("userId")String userId,@Param("orderState")Integer orderState);
+
+    /**
+     *  查询不同商品状态数量
+     * @param userId 用户id
+     * @param productState 商品状态
+     * @return 数量
+     */
+    public Integer findProductQuantity(@Param("userId")String userId,@Param("productState")Integer productState);
 
 
 }
