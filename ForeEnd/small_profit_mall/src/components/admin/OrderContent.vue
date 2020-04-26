@@ -46,13 +46,13 @@
                       {{product.productConfiguration}}
                     </div>
                   </el-col>
-                  <el-col v-if="order.orderState>1" :span="2">
+                  <el-col v-if="order.orderState>1" :span="3">
                     <div class="order_product_price">
                       ￥ {{product.productPrice.toFixed(2)}}
                     </div>
                   </el-col>
-                  <el-col :span="order.orderState<=1?5:4">
-                    <div :style="order.orderState<=1?'margin-top: 19%;font-size: 13px':'margin-top: 15%;'">
+                  <el-col :span="order.orderState<=1?5:3">
+                    <div :style="order.orderState<=1?'margin-top: 19%;font-size: 13px':'margin-top: 18%;'">
                       x{{product.productQuantity}}
                     </div>
                   </el-col>
@@ -506,7 +506,7 @@
     -webkit-box-orient: vertical;
   }
   .order_product_price{
-    padding-top: 30%;
+    padding-top: 20%;
   }
   .order_product_name:hover {
     color: #409EFF;
