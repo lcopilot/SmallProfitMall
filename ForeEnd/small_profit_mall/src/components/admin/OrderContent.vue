@@ -27,29 +27,46 @@
               <div v-for="(product,index) in order.productContents" :key="index"
                    :style="index==order.productContents.length-1?'':'border-bottom: 1px solid #dcdfe6'">
                 <el-row>
-                  <el-col :span="5">
+                  <el-col :span="order.orderState<=1?5:3">
                     <router-link :to="{name:'Order',params:{orderNumber:order.orderId,genre:order.orderState}}">
                       <div class="order_product_img">
                         <el-image :src="product.productImage" fit="fill"></el-image>
                       </div>
                     </router-link>
                   </el-col>
-                  <el-col :span="14">
+                  <el-col :span="order.orderState<=1?14:6">
                     <router-link :to="{name:'Order',params:{orderNumber:order.orderId,genre:order.orderState}}">
                       <div class="order_product_name">
                         {{product.productName}}
                       </div>
                     </router-link>
                   </el-col>
-                  <el-col :span="5">
-                    <div style="margin-top: 19%;font-size: 13px">
+                  <el-col v-if="order.orderState>1" :span="6">
+                    <div class="order_product_Configuration">
+                      {{product.productConfiguration}}
+                    </div>
+                  </el-col>
+                  <el-col v-if="order.orderState>1" :span="2">
+                    <div class="order_product_price">
+                      ￥ {{product.productPrice.toFixed(2)}}
+                    </div>
+                  </el-col>
+                  <el-col :span="order.orderState<=1?5:4">
+                    <div :style="order.orderState<=1?'margin-top: 19%;font-size: 13px':'margin-top: 15%;'">
                       x{{product.productQuantity}}
+                    </div>
+                  </el-col>
+                  <el-col v-if="order.orderState>1" :span="2">
+                    <div style="padding-top: 30%;height:78px;background-color:white;border-left: 1px solid #dcdfe6">
+                      <el-button type="text" size="mini" v-if="order.orderState==2">确认收货</el-button>
+                      <el-button type="text" size="mini" v-if="order.orderState==3">申请售后</el-button>
+                      <el-button type="text" size="mini" v-if="order.orderState==3" @click="commentVisible=true">评价晒单</el-button>
                     </div>
                   </el-col>
                 </el-row>
               </div>
             </td>
-            <td style="width: 12%">
+            <td v-if="order.orderState<=1" style="width: 12%">
               <div class="order_recipient">
                 <el-tooltip placement="right-start">
                   <div slot="content">
@@ -61,7 +78,7 @@
                 </el-tooltip>
               </div>
             </td>
-            <td style="width: 12%" class="el_divider">
+            <td v-if="order.orderState<=1" style="width: 12%" class="el_divider">
               <div class="order_recipient">
                 ￥{{order.orderTotal}}
               </div>
@@ -70,12 +87,12 @@
                 钱包支付
               </div>
             </td>
-            <td style="width: 12%">
+            <td v-if="order.orderState<=1" style="width: 12%">
               <div class="order_recipient">
                 {{(order.orderState==1?'待付款':(order.orderState==2?'待签收':'待评价'))}}
               </div>
             </td>
-            <td style="width: 10%">
+            <td v-if="order.orderState<=1" style="width: 10%">
               <div class="order_operate">
                 <router-link :to="{name:'Order',params:{orderNumber:order.orderId,genre:''}}">
                   <el-button type="text" size="mini" v-if="order.orderState==1">去付款</el-button>
@@ -83,9 +100,7 @@
                 <router-link :to="{name:'Order',params:{orderNumber:order.orderId,genre:0}}">
                   <el-button type="text" size="mini" v-if="order.orderState==1 && order.changeQuantity==0">去修改</el-button>
                 </router-link>
-                <el-button type="text" size="mini" v-if="order.orderState==2">确认收货</el-button>
-                <el-button type="text" size="mini" v-if="order.orderState==3">申请售后</el-button>
-                <el-button type="text" size="mini" v-if="order.orderState==3" @click="commentVisible=true">评价晒单</el-button>
+
               </div>
             </td>
           </tr>
@@ -479,6 +494,20 @@
     -webkit-box-orient: vertical;
   }
 
+  .order_product_Configuration{
+    margin-top: 4%;
+    padding: 0 6%;
+    text-align: left;
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .order_product_price{
+    padding-top: 30%;
+  }
   .order_product_name:hover {
     color: #409EFF;
   }
