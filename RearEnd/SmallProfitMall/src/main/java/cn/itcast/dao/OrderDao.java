@@ -7,6 +7,8 @@ import cn.itcast.response.QueryResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.sql.Array;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -150,5 +152,23 @@ public interface OrderDao {
      */
     public Integer findProductQuantity(@Param("userId")String userId,@Param("productState")Integer productState);
 
+
+    /**
+     * 删除订单
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @param deleteAll 删除标志位 true为删除全部 false为删除指定订单
+     * @return
+     */
+    public Integer deleteOrder(@Param("userId")String userId, @Param("orderId") String[] orderId, @Param("deleteAll")Boolean deleteAll);
+
+    /**
+     * 删除指定商品
+     * @param userId 用户id
+     * @param id 商品id
+     * @param deleteAll 删除标志位 true为删除全部 false为删除指定订单
+     * @return
+     */
+    public Integer deleteProduct(@Param("userId")String userId, @Param("id")Integer[] id,@Param("deleteAll")Boolean deleteAll);
 
 }

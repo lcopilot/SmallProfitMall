@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.sql.Array;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -105,6 +107,28 @@ public interface OrderService {
      */
     public List<Order> findAllOrder(String userId ,Integer orderState,
                                     Integer currentPage, Integer pageSize);
+
+
+    /**
+     * 删除订单
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @param deleteAll 删除标志位 true为删除全部 false为删除指定订单
+     * @return
+     */
+    public Integer deleteOrder(String userId, String[] orderId, Boolean deleteAll);
+
+    /**
+     * 删除指定商品
+     * @param userId 用户id
+     * @param id 商品id
+     * @param deleteAll 删除标志位 true为删除全部 false为删除指定订单
+     * @return
+     */
+    public Integer deleteProduct(String userId ,Integer[] id, Boolean deleteAll);
+
+
+
 
     /**
      * 生成订单号 时间戳加当天流水号

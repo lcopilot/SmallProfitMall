@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -352,6 +353,30 @@ public class OrderServiceImpl implements OrderService {
         }
         List<Order> orders = orderDao.findAllOrder(userId,orderState,start,pageSize);
         return orders;
+    }
+
+    /**
+     * 删除订单
+     * @param userId 用户id
+     * @param orderId 订单id
+     * @param deleteAll 删除标志位 true为删除全部 false为删除指定订单
+     * @return
+     */
+    @Override
+    public Integer deleteOrder(String userId, String[] orderId, Boolean deleteAll) {
+        return orderDao.deleteOrder(userId,orderId,deleteAll);
+    }
+
+    /**
+     * 删除订单中的商品
+     * @param id 商品id
+     * @param userId 用户id
+     * @param deleteAll 删除标志位 true为删除全部 false为删除指定订单
+     * @return
+     */
+    @Override
+    public Integer deleteProduct(String userId ,Integer[] id, Boolean deleteAll) {
+        return orderDao.deleteProduct(userId,id,deleteAll);
     }
 
 

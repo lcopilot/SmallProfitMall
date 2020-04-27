@@ -190,7 +190,6 @@
                 o.orderId=oa.orderId
         </where>
 
-
     </select>
 
     <!--查询订单商品信息-->
@@ -299,6 +298,7 @@
         <if test="productState==4">
             productState  =  4
         </if>
+
     </select>
 
     <!--查询不同状态商品-->
@@ -323,5 +323,46 @@
         productState  =  4
     </if>
     </select>
+
+
+    <!--删除订单-->
+    <update id="deleteOrder" >
+        UPDATE userOrder
+        SET
+        isDelete=1
+        <where>
+            <if test="orderId!=null and deleteAll!=true">
+                AND orderId IN
+                <foreach collection="orderId" item="orderId" open="(" separator="," close=")">
+                    #{orderId}
+                </foreach>
+            </if>
+            AND userId=#{userId}
+        </where>
+    </update>
+
+    <!--删除商品-->
+    <update id="deleteProduct" >
+        UPDATE  userOrder uo
+        LEFT JOIN
+        orders o
+        ON
+        uo.orderId=o.orderid
+        SET
+        o.isDelete=1
+        <where>
+            <if test="id!=null and deleteAll!=true ">
+                AND o.id in
+                <foreach collection="id" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="id=null and deleteAll==true ">
+                AND o.orderId in (SELECT orderId FROM userOrder WHERE userId = #{userId})
+            </if>
+
+        </where>
+    </update>
+
 
 </mapper>

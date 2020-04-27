@@ -31,7 +31,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -106,7 +108,7 @@ public class OrderController {
     /**
      * 查询不同状态订单集合
      * @param userId 用户id
-     * @param orderState 订单状态 0为查所有订单 1为查询待付款订单 2为查询待收货订单 3为待评价订单 4为退货
+     * @param orderState 订单状态 0为查所有订单 1为查询待付款订单 2为查询待收货商品集合 3为待评价商品集合 4为退货
      * @return 订单集合
      */
     @RequestMapping(value ="/findAllOrder" )
@@ -259,8 +261,31 @@ public class OrderController {
         return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
     }
 
+    /**
+     * 删除商品
+     * @param id 订单id
+     * @param userId 用户id
+     * @param deleteAll 是否删除全部标志位 true为删除全部 false为删除指定订单
+     * @return
+     */
+    @RequestMapping(value = "/deleteProduct",method = RequestMethod.DELETE)
+    public QueryResponseResult deleteProduct(Integer[] id , String userId , Boolean deleteAll){
+        orderService.deleteProduct(userId,id,deleteAll);
+        return new QueryResponseResult(CommonCode.SUCCESS,null);
+    }
 
 
 
-
+    /**
+     * 删除订单
+     * @param orderId 商品id
+     * @param userId 用户id
+     * @param deleteAll 是否删除全部标志位 true为删除全部 false为删除指定订单
+     * @return
+     */
+    @RequestMapping(value = "/deleteOrder",method = RequestMethod.POST)
+    public QueryResponseResult deleteOrder(String[] orderId , String userId , Boolean deleteAll){
+        orderService.deleteOrder(userId,orderId,deleteAll);
+        return new QueryResponseResult(CommonCode.SUCCESS,null);
+    }
 }
