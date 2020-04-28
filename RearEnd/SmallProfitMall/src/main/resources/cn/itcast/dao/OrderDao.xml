@@ -341,7 +341,13 @@
                     #{orderId}
                 </foreach>
             </if>
-            AND userId=#{userId} AND orderState=#{orderState}
+            AND userId=#{userId}
+            <if test="orderState!=0">
+                AND orderState=#{orderState}
+            </if>
+            <if test="orderState==0">
+                AND (orderState=1 or orderState=2)
+            </if>
         </where>
     </update>
 

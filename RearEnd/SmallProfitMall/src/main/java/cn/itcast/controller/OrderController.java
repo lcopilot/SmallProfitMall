@@ -263,6 +263,7 @@ public class OrderController {
 
     /**
      * 删除商品
+     * @param  productState 不同状态商品 1为待收货 2为已收货 3为待评价 4为售后
      * @param id 订单id
      * @param userId 用户id
      * @param deleteAll 是否删除全部标志位 true为删除全部 false为删除指定订单
