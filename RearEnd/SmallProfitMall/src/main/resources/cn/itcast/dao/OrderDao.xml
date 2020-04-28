@@ -153,6 +153,7 @@
                 <if test = "orderState!=0" >
                     AND uos.orderState = #{orderState}
                 </if >
+            AND uos.isDelete=0
          </where >
         ORDER BY
         uos.orderTime DESC
@@ -277,6 +278,7 @@
             <if test="orderState!=0">
                 AND orderState=#{orderState}
             </if>
+            AND isDelete=0
         </where>
     </select>
 
@@ -287,10 +289,11 @@
         FROM
         orders
         WHERE
+
         orderId IN (SELECT orderId FROM (SELECT orderId FROM userOrder WHERE userId = #{userId} ) AS orderId)
         AND
         <if test="productState==2">
-            productState   =  1 or  productState   =  2
+           (productState   =  1 or  productState   =  2)
         </if>
         <if test="productState==3">
             productState  =  3
@@ -298,7 +301,7 @@
         <if test="productState==4">
             productState  =  4
         </if>
-
+        AND     isDelete=0
     </select>
 
     <!--查询不同状态商品-->
@@ -314,7 +317,7 @@
         LIMIT #{start}, #{pageSize} ) AS orderId)
      AND
      <if test="productState==2">
-         s.productState   &lt;  3
+       ( s.productState   =  1 or   s.productState    =  2)
      </if>
     <if test="productState==3">
         s.productState  =  3
@@ -322,6 +325,7 @@
     <if test="productState==4">
         productState  =  4
     </if>
+        AND s.isDelete=0
     </select>
 
 
@@ -337,7 +341,7 @@
                     #{orderId}
                 </foreach>
             </if>
-            AND userId=#{userId}
+            AND userId=#{userId} AND orderState=#{orderState}
         </where>
     </update>
 
@@ -357,8 +361,8 @@
                     #{id}
                 </foreach>
             </if>
-            <if test="id=null and deleteAll==true ">
-                AND o.orderId in (SELECT orderId FROM userOrder WHERE userId = #{userId})
+            <if test="deleteAll==true ">
+                AND o.orderId in (SELECT orderId FROM userOrder WHERE userId = #{userId}) AND productState=#{productState}
             </if>
 
         </where>

@@ -111,21 +111,24 @@ public interface OrderService {
 
     /**
      * 删除订单
+     * @param orderState 订单状态
      * @param userId 用户id
      * @param orderId 订单id
      * @param deleteAll 删除标志位 true为删除全部 false为删除指定订单
      * @return
      */
-    public Integer deleteOrder(String userId, String[] orderId, Boolean deleteAll);
+    public Integer  deleteOrder(Integer orderState ,String userId, String[] orderId, Boolean deleteAll);
 
     /**
-     * 删除指定商品
+     * 删除商品
+     * @param productState 商品状态
+     * @productState userId
      * @param userId 用户id
      * @param id 商品id
      * @param deleteAll 删除标志位 true为删除全部 false为删除指定订单
      * @return
      */
-    public Integer deleteProduct(String userId ,Integer[] id, Boolean deleteAll);
+    public Integer deleteProduct(Integer productState,String userId ,Integer[] id, Boolean deleteAll);
 
 
 
