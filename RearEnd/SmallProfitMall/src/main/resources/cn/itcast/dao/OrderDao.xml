@@ -344,21 +344,10 @@
         UPDATE userOrder
         SET
         isDelete=1
-        <where>
-            <if test="orderId!=null and deleteAll!=true">
-                AND orderId IN
-                <foreach collection="orderId" item="orderId" open="(" separator="," close=")">
-                    #{orderId}
-                </foreach>
-            </if>
-            AND userId=#{userId}
-            <if test="orderState!=0">
-                AND orderState=#{orderState}
-            </if>
-            <if test="orderState==0">
-                AND (orderState=1 or orderState=2)
-            </if>
-        </where>
+        WHERE
+        AND orderId = #{orderId}
+        AND userId=#{userId}
+
     </update>
 
     <!--删除商品-->

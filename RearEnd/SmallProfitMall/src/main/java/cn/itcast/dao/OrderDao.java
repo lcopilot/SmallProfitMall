@@ -162,12 +162,10 @@ public interface OrderDao {
 
     /**
      * 删除订单
-     * @param orderState 订单状态
      * @param userId 用户id
      * @param orderId 订单id
-     * @param deleteAll 删除标志位 true为删除全部 false为删除指定订单
      */
-    public Integer deleteOrder(@Param("orderState")Integer orderState,@Param("userId")String userId, @Param("orderId") String[] orderId, @Param("deleteAll")Boolean deleteAll);
+    public Integer deleteOrder(@Param("userId")String userId, @Param("orderId") String orderId);
 
     /**
      * 删除商品

@@ -273,15 +273,13 @@ public class OrderController {
 
     /**
      *  删除订单
-     * @param orderState 订单状态
      * @param orderId 商品id
      * @param userId 用户id
-     * @param deleteAll 是否删除全部标志位 true为删除全部 false为删除指定订单
      * @return
      */
     @RequestMapping(value = "/deleteOrder",method = RequestMethod.POST)
-    public QueryResponseResult deleteOrder(Integer orderState,String[] orderId , String userId , Boolean deleteAll){
-        orderService.deleteOrder(orderState,userId,orderId,deleteAll);
+    public QueryResponseResult deleteOrder(String orderId , String userId ){
+        orderService.deleteOrder(userId,orderId);
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
 }
