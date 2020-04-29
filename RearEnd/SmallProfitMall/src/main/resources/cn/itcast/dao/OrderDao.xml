@@ -85,10 +85,9 @@
     <!--新增订单商品内容-->
     <insert id="addProductContent" parameterType="cn.itcast.domain.order.ProductContent">
         INSERT INTO
-           orders(orderId,productName,productImage,productConfiguration,productQuantity,productPrice,productWeight,evaluate)
+           orders(orderId,ProductId,productName,productImage,productConfiguration,productQuantity,productPrice,productWeight,evaluate)
         VALUES
-            (#{orderId},#{productName},#{productImage},#{productConfiguration},#{productQuantity},#{productPrice},#{productWeight},#{evaluate})
-
+            (#{orderId},#{productId},#{productName},#{productImage},#{productConfiguration},#{productQuantity},#{productPrice},#{productWeight},#{evaluate})
     </insert>
 
     <!--新增订单地址-->

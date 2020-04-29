@@ -435,7 +435,11 @@
 <!--      <artifactId>jave</artifactId>-->
 <!--      <version>1.0.6</version>-->
 <!--    </dependency>-->
-
+    <dependency>
+      <groupId>it.sauronsoftware</groupId>
+      <artifactId>jave</artifactId>
+      <version>1.0.2</version>
+    </dependency>
 
 
 
@@ -460,6 +464,17 @@
       <version>3.4.2-1.4.1</version>
     </dependency>
 
+    <!--12-->
+    <dependency>
+      <groupId>ws.schild</groupId>
+      <artifactId>jave-core</artifactId>
+      <version>2.7.3</version>
+    </dependency>
+    <dependency>
+      <groupId>ws.schild</groupId>
+      <artifactId>jave-nativebin-osx64</artifactId>
+      <version>2.7.3</version>
+    </dependency>
 
   </dependencies>
 

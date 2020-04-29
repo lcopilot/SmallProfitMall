@@ -6,7 +6,7 @@ import java.io.Serializable;
 @Component
 public class PurchaseInformation implements Serializable {
     private String userId;          //用户id
-    private int productId;
+    private int productId;          //商品id
     private String ProductName;         //商品名字
     private Double ProductPrice;         //商品价格
     private Double ProductInventory;    //商品库存

@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 人脸视频工具类
  * @author Kite
  * @date 2020/3/31
  */

@@ -1,7 +1,6 @@
-package cn.itcast.util.video;
+package cn.itcast.Test.vTest;
 
 import it.sauronsoftware.jave.*;
-
 
 import java.io.File;
 
@@ -27,7 +26,7 @@ public class FfmepgUtil {
             VideoAttributes video = new VideoAttributes();// 视频属性
             video.setCodec(codec);// 视频编码
             video.setBitRate(new Integer(bitRate));// 视频比特率
-            video.setFrameRate(new Integer(60));// 帧率
+            video.setFrameRate(new Integer(30));// 帧率
             EncodingAttributes attrs = new EncodingAttributes();// 转码属性
             attrs.setFormat(format);// 视频格式
             attrs.setAudioAttributes(audio);// 音频属性
@@ -47,8 +46,8 @@ public class FfmepgUtil {
 			ffmepg("D:\\pm.mp4", "D:\\upload\\pm"+i+".mp4", "mpeg4", 15, "mp4");
 		}*/
 
-        ffmepg("C:\\Users\\86185\\Desktop\\ys\\SmallProfit - Google Chrome 2020-04-24 17-50-21.mp4", "C:\\Users\\86185\\Desktop\\ys\\09.mp4", "mpeg4", 15, "mp4");
-//        TranscodingUtil.frameRecord("D:\\upload\\server1UP\\pm35.mp4", "D:\\upload\\solidityUP\\pm35.mp4");
+        ffmepg("C:\\Users\\86185\\Desktop\\视频压缩\\a.mp4", "C:\\Users\\86185\\Desktop\\视频压缩\\16.mp4", "mpeg4", 15, "mp4");
+       // TranscodingUtil.frameRecord("C:\\Users\\86185\\Desktop\\视频压缩\\a.mp4", "C:\\Users\\86185\\Desktop\\视频压缩\\f.mp4", "mpeg4", 15, "mp4"");
     }
 }
 

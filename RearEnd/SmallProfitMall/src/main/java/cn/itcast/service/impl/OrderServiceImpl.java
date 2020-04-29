@@ -98,7 +98,7 @@ public class OrderServiceImpl implements OrderService {
     NewsService newsService;
 
     /**
-     * 购物车订单
+     *添加购物车订单
      * @param userId 用户id
      * @param shoppingCartId 购物车id
      * @return 返回订单号
@@ -152,6 +152,8 @@ public class OrderServiceImpl implements OrderService {
         productContent.setProductPrice(purchaseInformation1.getProductPrice());
         //设置订单id
         productContent.setOrderId(orderId);
+        //设置商品id
+        productContent.setProductId(purchaseInformation.getProductId());
         //设置是否评价
         productContent.setEvaluate(false);
         //商品配置
@@ -459,6 +461,9 @@ public class OrderServiceImpl implements OrderService {
             productContent.setProductWeight(purchaseInformation1.getProductWeight());
             //设置商品购买数量
             productContent.setProductQuantity(shoppingCart1.getQuantity());
+            //设置商品id
+            productContent.setProductId(shoppingCart1.getProductId());
+
             //添加到订单商品信息表
             orderDao.addProductContent(productContent);
             //删除该购物车购物车
