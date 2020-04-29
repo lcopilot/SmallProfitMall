@@ -98,6 +98,17 @@
 	    (#{address.userId},#{orderId},#{address.name},#{address.areas},#{address.detailedAddress},#{address.phone},#{address.email},#{address.areaCodes},#{address.alias})
     </insert>
 
+<!--    &lt;!&ndash;新增批量插入测试&ndash;&gt;-->
+<!--    <insert id="addListProduct">-->
+<!--    INSERT INTO orderAddress-->
+<!--		(userId,orderId,name,areas,detailedAddress,phone,email,areaCodes,alias)-->
+<!--	VALUES-->
+<!--        <foreach collection="list" item="list" index="index" separator=",">-->
+<!--            (#{address.userId},#{orderId},#{address.name},#{address.areas},#{address.detailedAddress},#{address.phone},#{address.email},-->
+<!--            #{address.areaCodes},#{address.alias})-->
+<!--        </foreach>-->
+<!--    </insert>-->
+
     <!--查询订单-->
     <select id="findOrder" resultMap="orderMap">
         SELECT

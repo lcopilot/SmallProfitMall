@@ -67,6 +67,13 @@ public interface OrderDao {
      */
     public Integer addProductContent(ProductContent productContent);
 
+//    /**
+//     * 测试批量添加
+//     * @param productContents
+//     * @return
+//     */
+//    public Integer addListProduct(List<ProductContent> productContents);
+
     /**
      * 确认订单
      * @param order 订单对象

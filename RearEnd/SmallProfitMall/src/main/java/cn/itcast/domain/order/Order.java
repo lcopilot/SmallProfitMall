@@ -52,6 +52,16 @@ public class Order implements Serializable {
     //订单修改次数
     private Integer changeQuantity;
 
+    //是否可删订单
+    private Integer sign;
+
+    public Integer getSign() {
+        return sign;
+    }
+
+    public void setSign(Integer sign) {
+        this.sign = sign;
+    }
 
     public Integer getChangeQuantity() {
         return changeQuantity;

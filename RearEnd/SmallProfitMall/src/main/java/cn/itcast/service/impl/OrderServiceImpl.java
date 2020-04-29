@@ -345,14 +345,6 @@ public class OrderServiceImpl implements OrderService {
         //开始页
         Integer start=(currentPage-1)*pageSize;
         //查询商品集合 2未查询付款商品
-        if(orderState>=2){
-            List<ProductContent> productContents = orderDao.findOrderProduct(userId,orderState,start,pageSize);
-            List<Order> orders = new ArrayList<>();
-            Order order = new Order();
-            order.setProductContents(productContents);
-            orders.add(order);
-            return orders;
-        }
         List<Order> orders = orderDao.findAllOrder(userId,orderState,start,pageSize);
         return orders;
     }
@@ -416,7 +408,7 @@ public class OrderServiceImpl implements OrderService {
      * 购物车商品信息添加到订单
      * @param initialize 购物车id数组
      * @param orderId 订单id
-     * @return
+     * @return 商品总金额
      */
     @Override
     public BigDecimal addProduct (Integer[] initialize , String orderId){
@@ -427,6 +419,7 @@ public class OrderServiceImpl implements OrderService {
         //商品总计
         BigDecimal orderNotes=new BigDecimal("0.00");
 
+        List<ProductContent> productContents=new ArrayList<>();
         //将购物车商品新增设置到订单中
         for (Integer shoppingCartIds : shoppingCartIdList){
             //查询购物车集合
@@ -464,11 +457,13 @@ public class OrderServiceImpl implements OrderService {
             //设置商品id
             productContent.setProductId(shoppingCart1.getProductId());
 
+            productContents.add(productContent);
             //添加到订单商品信息表
             orderDao.addProductContent(productContent);
             //删除该购物车购物车
             shoppingCartDao.deleteCart(shoppingCartIds);
         }
+//        orderDao.addListProduct(productContents);
         return orderNotes;
     }
 
@@ -807,21 +802,8 @@ public class OrderServiceImpl implements OrderService {
     public Integer[] fendTotalPage(String userId,Integer orderState, Integer pageSize) {
         Integer[] TotalPage=new Integer[2];
         Integer quantity=0;
-        if (orderState<2){
-            //查询全部订单跟未支付订单数量
-            quantity = orderDao.fendOrderQuantity(userId,orderState);
-        }else if(orderState==2){
-            //查询待收货商品数量
-            quantity = orderDao.findProductQuantity(userId,2);
-
-        }else  if(orderState==3){
-            //查询待评价商品数量
-            quantity = orderDao.findProductQuantity(userId,3);
-        }else {
-            //查询退货商品数量
-            quantity = orderDao.findProductQuantity(userId,4);
-        }
-
+        //查询全部订单跟未支付订单数量
+        quantity = orderDao.fendOrderQuantity(userId,orderState);
 
         int totalPage = (quantity % pageSize)  == 0 ? quantity/pageSize : (quantity/pageSize) + 1;
         TotalPage[0]=quantity;
