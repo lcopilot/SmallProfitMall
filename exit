@@ -1,0 +1,596 @@
+[33mcommit be67f715316fbf8ef761c6f5ad7aa7947c582199[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: MuGe <liuxianliangli@foxmail.com>
+Date:   Wed Apr 29 18:27:15 2020 +0800
+
+    测试
+
+[33mcommit 409ed07e4a8903e8bb32956096c706164eb314f4[m
+Author: MuGe <MuGe@qq.com>
+Date:   Wed Apr 29 16:40:27 2020 +0800
+
+    确认订单
+
+[33mcommit 787a82ed02c0cdcea08b651c9379d8392908fd11[m
+Author: MuGe <MuGe@qq.com>
+Date:   Wed Apr 29 16:36:33 2020 +0800
+
+    对接删除订单接口
+
+[33mcommit d3342ef52b9d10cecd5deecf51a92cd572a7bfeb[m
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 29 16:33:57 2020 +0800
+
+    修改查询数据缺失问题
+
+[33mcommit 9ac778f215725f1c09fc9f4b7cd2538f89eb06d5[m
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 29 16:18:57 2020 +0800
+
+    修改删除请求方式
+
+[33mcommit e855dadfd1a44a87ff5cf03fa33ea716c68102d3[m
+Merge: 1cfc602 1899065
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 29 16:08:15 2020 +0800
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 1cfc602f19ba516e7fcdbd1ec33a5585b70f98c9[m
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 29 16:08:05 2020 +0800
+
+    修改订单删除逻辑
+
+[33mcommit 18990658ee9f423db0f2d6be6e70ceb1015b23d7[m
+Merge: 3fef351 709368a
+Author: MuGe <MuGe@qq.com>
+Date:   Wed Apr 29 16:05:44 2020 +0800
+
+    Merge branch 'master' of gitee.com:liumuge/SmallProfitMall
+
+[33mcommit 3fef351be666d0995219a33978a34318e0d466b7[m
+Author: MuGe <MuGe@qq.com>
+Date:   Wed Apr 29 16:05:01 2020 +0800
+
+    订单删除接口商品状态
+
+[33mcommit 709368aa4e49c366ee7b105f76d73b14210b3f97[m
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 29 15:59:31 2020 +0800
+
+    修改订单删除逻辑
+
+[33mcommit 314686f6f0b960ff41b798276e2ce30acaab9e17[m
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 29 15:48:05 2020 +0800
+
+    修改订单查询删除逻辑
+
+[33mcommit d77c898dcb13bd2a7f99f480154d528cd0589b09[m
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 29 13:44:57 2020 +0800
+
+    新增商品添加商品id
+
+[33mcommit efd1081faa29ff4f9cef061fefb17af5b175b9f3[m
+Author: FF <fhx210114@163.com>
+Date:   Tue Apr 28 13:43:42 2020 +0800
+
+    优化删除订单删除商品接口
+
+[33mcommit 4900a1660d74a7986eba2f514bb1e5da9dfa1510[m
+Author: FF <fhx210114@163.com>
+Date:   Tue Apr 28 12:03:43 2020 +0800
+
+    优化删除订单删除商品接口
+
+[33mcommit b72283ae17ed4ca13b5de15947e8302ca0d7525f[m
+Author: FF <fhx210114@163.com>
+Date:   Mon Apr 27 13:25:16 2020 +0800
+
+    新增删除订单 删除订单商品
+
+[33mcommit 0de65aac3d3dda3c80bcfa106381121f52e92340[m
+Merge: 4b22f51 9499eda
+Author: FF <fhx210114@163.com>
+Date:   Sun Apr 26 15:55:18 2020 +0800
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 4b22f5194c6a0669e3a0f7b77db7193925cc6c2b[m
+Author: FF <fhx210114@163.com>
+Date:   Sun Apr 26 15:51:41 2020 +0800
+
+    修复商品支付成功后不分开问题
+
+[33mcommit 9499edae273217663e9cab86f0d31083f227983a[m
+Author: MuGe <MuGe@qq.com>
+Date:   Sun Apr 26 10:31:30 2020 +0800
+
+    修复价格样式
+
+[33mcommit 57c0890ef83707ca20a5c195565a409c63228234[m
+Author: MuGe <MuGe@qq.com>
+Date:   Sun Apr 26 10:25:21 2020 +0800
+
+    修改全部订单待评价待收货显示
+
+[33mcommit 12146611f38306b6051b444720fd454a62eb31b1[m
+Author: MuGe <MuGe@qq.com>
+Date:   Sat Apr 25 19:04:36 2020 +0800
+
+    备份数据库
+
+[33mcommit 362c04506b305b5953371d3668870c7c8ed728fd[m
+Merge: 78e12ba 66f3ac7
+Author: MuGe <MuGe@qq.com>
+Date:   Sat Apr 25 17:24:22 2020 +0800
+
+    Merge branch 'master' of gitee.com:liumuge/SmallProfitMall
+
+[33mcommit 78e12ba9b4d160bb67e248ce1028184ee5697511[m
+Author: MuGe <MuGe@qq.com>
+Date:   Sat Apr 25 17:23:32 2020 +0800
+
+    修复分页显示问题
+
+[33mcommit 66f3ac7f52cd6b70f9df8a2b7be92e3bc761c418[m
+Author: FF <fhx210114@163.com>
+Date:   Sat Apr 25 17:08:24 2020 +0800
+
+    修复添加足迹混乱问题
+
+[33mcommit 29a3861ff295ccaca62a4b54d1c203bf70d9e31c[m
+Author: FF <fhx210114@163.com>
+Date:   Sat Apr 25 17:05:16 2020 +0800
+
+    修复分页查询不匹配问题
+
+[33mcommit a9e15c1c0678211404905afb6ea05da50d9f770a[m
+Author: MuGe <MuGe@qq.com>
+Date:   Sat Apr 25 12:05:00 2020 +0800
+
+    修复全部订单分页不显示问题
+
+[33mcommit bb217404005b1c8a07a31b7ff622dcaffbbb6d26[m
+Author: FF <fhx210114@163.com>
+Date:   Sat Apr 25 10:58:36 2020 +0800
+
+    修复分页查询不匹配问题
+
+[33mcommit 493baf1423456987219e8c2cc5ced2021fd60bdb[m
+Author: MuGe <MuGe@qq.com>
+Date:   Fri Apr 24 17:37:40 2020 +0800
+
+    优化全部订单收件人显示
+
+[33mcommit 1b669e67fcd2d3cfa1c8bd8d3ebbe8388ca3062d[m
+Author: MuGe <MuGe@qq.com>
+Date:   Fri Apr 24 17:29:27 2020 +0800
+
+    全部订单查询接入部分
+
+[33mcommit c71edcc6c0ab63218c465588cbf6562d95d9a024[m
+Author: FF <fhx210114@163.com>
+Date:   Fri Apr 24 15:15:52 2020 +0800
+
+    修复查询所有数据不显示问题
+
+[33mcommit 02529c1f2ec43dafcd7981e8038f98aa0923e56c[m
+Author: FF <fhx210114@163.com>
+Date:   Fri Apr 24 12:22:20 2020 +0800
+
+    修复查询所有数据不显示问题
+
+[33mcommit 0ac0811fe8581ae7b67705955022ab997093397b[m
+Author: FF <fhx210114@163.com>
+Date:   Fri Apr 24 11:25:46 2020 +0800
+
+    修复查询所有数据不显示问题
+
+[33mcommit 532f351f7edf0310edd969dc3e3638a1d4944a9f[m
+Author: FF <fhx210114@163.com>
+Date:   Thu Apr 23 12:04:26 2020 +0800
+
+    修复导航栏数据不加载问题
+
+[33mcommit 3772ab19d37415679cf0e5e57d953bcf8837e6bb[m
+Merge: e5c497f 005fbb4
+Author: MuGe <MuGe@qq.com>
+Date:   Thu Apr 23 10:44:43 2020 +0800
+
+    Merge branch 'master' of gitee.com:liumuge/SmallProfitMall
+
+[33mcommit e5c497f627caa648564c3e0df4c6d0931911142b[m
+Author: MuGe <MuGe@qq.com>
+Date:   Thu Apr 23 10:43:21 2020 +0800
+
+    修改商品分类获取
+
+[33mcommit 005fbb4b02cf4df121477f25abd5c7ae5e7a14c8[m
+Author: FF <fhx210114@163.com>
+Date:   Thu Apr 23 10:42:17 2020 +0800
+
+    测试
+
+[33mcommit 80b283cb4039702df8b5c5a4074eb36ac97e6e1e[m
+Author: FF <fhx210114@163.com>
+Date:   Thu Apr 23 10:34:33 2020 +0800
+
+    修改书写错误
+
+[33mcommit f87ece50bddc28bd427f32f6704b28d49e09622c[m
+Author: FF <fhx210114@163.com>
+Date:   Thu Apr 23 10:25:22 2020 +0800
+
+    改变导航商品详细查询逻辑
+
+[33mcommit 4192758714d10520c59855eb56df6d6b3787e9cf[m
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 22 17:54:41 2020 +0800
+
+    修复订单总数数据不符合问题
+
+[33mcommit ac1ed7eb603f64c10d190053aafe64bd2cbb5fb9[m
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 22 17:36:51 2020 +0800
+
+    查询不同状态订单接口
+
+[33mcommit 1f24b70820b172f767fb610b0f46b269dcf00de0[m
+Author: FF <fhx210114@163.com>
+Date:   Tue Apr 21 16:49:00 2020 +0800
+
+    修复订单支付完成不支付问题
+
+[33mcommit 9a360b4d3091d5612989bee723efab0f5516c708[m
+Merge: c3a3adb 514d971
+Author: FF <fhx210114@163.com>
+Date:   Tue Apr 21 14:48:46 2020 +0800
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit c3a3adb48c6ba87c51f56fa3e6bb57f04812bdf6[m
+Author: FF <fhx210114@163.com>
+Date:   Tue Apr 21 14:47:45 2020 +0800
+
+    修复支付完成快速关闭页面推送消息报错问题
+
+[33mcommit 514d971a2095efc116e6cd6aa4e7e684ab36eccd[m
+Author: MuGe <MuGe@qq.com>
+Date:   Sun Apr 19 21:16:59 2020 +0800
+
+    修改moment安装位置
+
+[33mcommit 40953846b08457e498abcb507c48096165ea0b7d[m
+Author: MuGe <MuGe@qq.com>
+Date:   Sun Apr 19 21:01:46 2020 +0800
+
+    删除不晓得啥东西
+
+[33mcommit b64e32c877dcbacd9222722433f1f9e96a2a4a59[m
+Author: MuGe <MuGe@qq.com>
+Date:   Sun Apr 19 20:56:58 2020 +0800
+
+    备份数据库
+
+[33mcommit 973d0b249b8d0c5391fcf4d210477f8b3bfe6c31[m
+Author: MuGe <MuGe@qq.com>
+Date:   Sun Apr 19 17:22:15 2020 +0800
+
+    收藏足迹接口对接完成
+
+[33mcommit 1d8137a49fbea26771ec60b0a98c92b5b87b1429[m
+Merge: 97ffae2 6a555dc
+Author: MuGe <MuGe@qq.com>
+Date:   Sun Apr 19 16:37:21 2020 +0800
+
+    Merge branch 'master' of gitee.com:liumuge/SmallProfitMall
+
+[33mcommit 6a555dc8f1f94cb1b2a9e06d0101b86232ac51ff[m
+Author: FF <fhx210114@163.com>
+Date:   Sun Apr 19 16:35:40 2020 +0800
+
+    收藏足迹删除接口更改参数
+
+[33mcommit 97ffae2205b2b146ea007c8f1a3af93bd6cc19fb[m
+Author: MuGe <MuGe@qq.com>
+Date:   Sun Apr 19 16:25:28 2020 +0800
+
+    收藏足迹接口对接完成
+
+[33mcommit 69d7b6e0132a105c620dbe7d9a03beae76b832d8[m
+Author: FF <fhx210114@163.com>
+Date:   Sun Apr 19 15:41:57 2020 +0800
+
+    查询收藏接口 删除收藏、足迹接口
+
+[33mcommit f55e3630eb2f186664979d8d2a42c461823a131f[m
+Author: MuGe <MuGe@qq.com>
+Date:   Sun Apr 19 12:41:03 2020 +0800
+
+    修改导航页取值
+
+[33mcommit 58f2534b5ebd4ff694531bb9a3f4dc05169fbe7f[m
+Merge: 2f97d7d 0f76f7b
+Author: FF <fhx210114@163.com>
+Date:   Sun Apr 19 12:38:24 2020 +0800
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 2f97d7d1710f3300d1d8e1379f99bdfe0ab3286c[m
+Author: FF <fhx210114@163.com>
+Date:   Sun Apr 19 12:38:11 2020 +0800
+
+    查询足迹接口
+
+[33mcommit 0f76f7b8f9495460e68caf3a7e153e2ab5e499bb[m
+Author: MuGe <MuGe@qq.com>
+Date:   Sun Apr 19 12:37:14 2020 +0800
+
+    足迹查询分页接口对接
+
+[33mcommit d7e05f85c7077b1e80f57f490854580b71d48a16[m
+Author: FF <fhx210114@163.com>
+Date:   Sun Apr 19 12:33:43 2020 +0800
+
+    查询足迹接口
+
+[33mcommit ede3805da025fd36d6d4ec20a7d4a488e902fb4a[m
+Author: FF <fhx210114@163.com>
+Date:   Sun Apr 19 12:25:12 2020 +0800
+
+    查询足迹接口
+
+[33mcommit 2d43f74c2e5c3e7c1d0fcdac08d8671751bd8c15[m
+Author: FF <fhx210114@163.com>
+Date:   Sun Apr 19 11:10:43 2020 +0800
+
+    查询足迹接口
+
+[33mcommit 85b6ce85483da318bda9f1206ed9a7893dbd4458[m
+Merge: 121a879 400bb92
+Author: FF <fhx210114@163.com>
+Date:   Sun Apr 19 09:39:44 2020 +0800
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 121a87933a95aff59b560dc6d6befc78499b3b85[m
+Author: FF <fhx210114@163.com>
+Date:   Sun Apr 19 09:39:13 2020 +0800
+
+    首次提交测试
+
+[33mcommit 400bb92baf589e9c9bb785b3e357151b12241819[m
+Author: muge <5087149+liumuge@user.noreply.gitee.com>
+Date:   Sun Apr 19 09:38:50 2020 +0800
+
+    update README.md.
+
+[33mcommit eac4a8264e2825609f74aadf8986c8fd5714e3e4[m
+Author: muge <5087149+liumuge@user.noreply.gitee.com>
+Date:   Sun Apr 19 09:37:14 2020 +0800
+
+    add README.md.
+
+[33mcommit abc6c0ef14a81af9408396829f5858c88062bba8[m
+Author: MuGe <MuGe@qq.com>
+Date:   Sun Apr 19 09:23:07 2020 +0800
+
+    提交测试
+
+[33mcommit 4a1f7610e24041b2abfc546a6b48ad7b4da90da5[m
+Merge: 9eaf9c5 dd7838b
+Author: MuGe <MuGe@qq.com>
+Date:   Sun Apr 19 09:19:52 2020 +0800
+
+    Merge branch 'master' of github.com:liumuge/SmallProfitMall
+
+[33mcommit 9eaf9c54452a4cdb08d88c7124e08c05b52e5eb6[m
+Author: MuGe <MuGe@qq.com>
+Date:   Sun Apr 19 09:12:31 2020 +0800
+
+    码云提交测试
+
+[33mcommit dd7838bec7e6099a668f2a01a8f86b9a023aa5e8[m
+Author: FF <fhx210114@163.com>
+Date:   Fri Apr 17 17:08:43 2020 +0800
+
+    修复支付宝名字过长页面不启动问题
+
+[33mcommit d304d66c17c2b18cb3e6a4a0f468b509c2e9663d[m
+Author: FF <fhx210114@163.com>
+Date:   Fri Apr 17 10:15:27 2020 +0800
+
+    优化解绑邮箱手机不能发送短信问题
+
+[33mcommit 1b16149b37ffe47eb3ba595cbe6a9702bf61eb8f[m
+Author: FF <fhx210114@163.com>
+Date:   Thu Apr 16 22:09:07 2020 +0800
+
+    修改手机号码邮箱验证码存储方式 从session改为redis
+
+[33mcommit bc005968ca825460b5bbedf8ff8332a0397c7715[m
+Author: FF <fhx210114@163.com>
+Date:   Thu Apr 16 17:19:33 2020 +0800
+
+    缓存初步优化
+
+[33mcommit 016008afd068d2fce6c06d0205d111a145dd26c8[m
+Author: FF <fhx210114@163.com>
+Date:   Thu Apr 16 15:47:56 2020 +0800
+
+    缓存初步优化
+
+[33mcommit f03bb53ba75b1ca063f17c9337ddef5dd0aeade3[m
+Author: FF <fhx210114@163.com>
+Date:   Thu Apr 16 14:04:12 2020 +0800
+
+    优化推送消息
+
+[33mcommit 9f22823d76213b6222a0469d31b73f3a3136ab3a[m
+Author: MuGe <MuGe@qq.com>
+Date:   Wed Apr 15 20:45:50 2020 +0800
+
+    接入支付宝支付
+
+[33mcommit f35ffa8c5ca56abac61504deb35e4224052621ba[m
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 15 20:39:59 2020 +0800
+
+    支付宝支付初步接入测试
+
+[33mcommit 0f3157f9209b6c5c3665a79dba7496f9804f0d2b[m
+Merge: 04ff78d d6ddd8b
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 15 19:23:01 2020 +0800
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 04ff78d4c04ea940cd733d315dde6b70fe59e552[m
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 15 19:22:22 2020 +0800
+
+    支付宝支付初步接入
+
+[33mcommit d6ddd8b9b84f00089fe30ffe6823b3c9e8e1602a[m
+Author: MuGe <MuGe@qq.com>
+Date:   Wed Apr 15 18:40:31 2020 +0800
+
+    修改地址未修改不能提交的校验方式改用深度复制
+
+[33mcommit 68b13242a83275a1938f1e3535f1a7a13a842fff[m
+Merge: 1c90e6f ace4bd8
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 15 13:54:57 2020 +0800
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit ace4bd8af8ddc3e511c09f0e3c940aefef286dbf[m
+Author: MuGe <MuGe@qq.com>
+Date:   Wed Apr 15 13:54:18 2020 +0800
+
+    修改余额不足的情况
+
+[33mcommit 1c90e6f956a42decbf4d34e3e71ce91d5d725a6e[m
+Merge: a80629b ce6751d
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 15 13:38:00 2020 +0800
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit ce6751d99759b4e6ce3d2ac24481dce9c3393b9f[m
+Author: MuGe <MuGe@qq.com>
+Date:   Wed Apr 15 13:14:34 2020 +0800
+
+    修改订单逻辑
+
+[33mcommit 4b9260a060978f031f90645311e58284c104b470[m
+Author: MuGe <MuGe@qq.com>
+Date:   Wed Apr 15 13:05:47 2020 +0800
+
+    修改订单结算逻辑
+
+[33mcommit a80629bd2dc63d9a90765946333ae9d567102b41[m
+Merge: b511840 ede10ad
+Author: FF <fhx210114@163.com>
+Date:   Tue Apr 14 12:29:24 2020 +0800
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit ede10addb98b5f46d8570fa50d23a8e394d1ca5d[m
+Author: MuGe <MuGe@qq.com>
+Date:   Mon Apr 13 21:30:48 2020 +0800
+
+    订单修改接口对接完成
+
+[33mcommit b511840fff934c04433b13f22b73d1cac9315814[m
+Author: FF <fhx210114@163.com>
+Date:   Mon Apr 13 20:32:48 2020 +0800
+
+    修复用户名提交重复问题
+
+[33mcommit 915664aae8c1041e089a49f0e08faf69e5979887[m
+Author: MuGe <MuGe@qq.com>
+Date:   Mon Apr 13 11:21:17 2020 +0800
+
+    redis集群问题测试
+
+[33mcommit 3c19dc8752b9b4240aa59442d349c306be1c366c[m
+Author: FF <fhx210114@163.com>
+Date:   Sat Apr 11 10:17:36 2020 +0800
+
+    注册修改逻辑判断
+
+[33mcommit c2aa9a13d8e5ee13f5c6ff9d2e2fffe9ddb4803f[m
+Author: FF <fhx210114@163.com>
+Date:   Sat Apr 11 10:07:14 2020 +0800
+
+    注册修改逻辑判断
+
+[33mcommit 5849befc0a7fad25d5490e01019370f04c626324[m
+Merge: 60e8028 0b3643b
+Author: FF <fhx210114@163.com>
+Date:   Fri Apr 10 11:08:11 2020 +0800
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 60e80288123f21f19f0f3540b988188d7cd8cff8[m
+Author: FF <fhx210114@163.com>
+Date:   Fri Apr 10 11:07:47 2020 +0800
+
+    重写登录 手机验证
+
+[33mcommit 0b3643bb273778d48b5c66ca543668f47ce4d91d[m
+Author: MuGe <MuGe@qq.com>
+Date:   Thu Apr 9 20:03:32 2020 +0800
+
+    数据库集群环境搭建完成准备明天迁移数据到集群
+
+[33mcommit ea1c9bcc70079e91c97b0ea488631bd8f54f1ae0[m
+Author: FF <fhx210114@163.com>
+Date:   Thu Apr 9 16:49:23 2020 +0800
+
+    重写用户注册
+
+[33mcommit b1ed89cf47d6b87a2f8320fb119887723bebb37c[m
+Author: FF <fhx210114@163.com>
+Date:   Thu Apr 9 15:36:44 2020 +0800
+
+    优化修改订单只能修改一次
+
+[33mcommit 5ba7b5c9ee1551223f71c02a8ee0af44c2f3cef1[m
+Author: FF <fhx210114@163.com>
+Date:   Thu Apr 9 14:09:16 2020 +0800
+
+    新增修改订单
+
+[33mcommit a921f71176944d5d570cd982fdfd7af1e7bf1b16[m
+Author: MuGe <MuGe@qq.com>
+Date:   Thu Apr 9 13:49:47 2020 +0800
+
+    修改订单地址属性名
+
+[33mcommit a530a3d9c6e252213df8fcda47b1003d85a217a5[m
+Author: MuGe <MuGe@qq.com>
+Date:   Wed Apr 8 20:37:34 2020 +0800
+
+    交易提醒页面完成备份数据库
+
+[33mcommit 8e05d99cc82a89f46763cdd5a85cec6f2044d353[m
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 8 19:42:13 2020 +0800
+
+    新增付款金额
+
+[33mcommit 0538dec952e8f248955c4554d52eaeac3c071f31[m
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 8 18:42:02 2020 +0800
+
+    新增付款金额推送消息优化
+
+[33mcommit b9f1f9e86630352ca52831ef774f81be86b185d1[m
+Author: FF <fhx210114@163.com>
+Date:   Wed Apr 8 17:28:13 2020 +0800
+
+    新增付款金额推送消息
