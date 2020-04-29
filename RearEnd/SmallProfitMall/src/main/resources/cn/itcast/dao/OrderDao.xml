@@ -28,11 +28,13 @@
             <result property="productQuantity" column="productQuantity"></result>
             <result property="productWeight" column="productWeight"></result>
             <result property="evaluate" column="evaluate"></result>
+            <result property="productState" column="productState"></result>
         </collection>
     </resultMap>
 
     <resultMap id="allOrderMap" type="cn.itcast.domain.order.Order">
         <id property="id" column="id"></id>
+        <result property="sign" column="sign"></result>
         <result property="userId" column="userId"></result>
         <result property="orderId" column="orderId"></result>
         <result property="paymentWay" column="paymentWay"></result>
@@ -60,6 +62,7 @@
             <result property="productQuantity" column="productQuantity"></result>
             <result property="productWeight" column="productWeight"></result>
             <result property="evaluate" column="evaluate"></result>
+            <result property="productState" column="productState"></result>
         </collection>
 
     </resultMap>
@@ -137,6 +140,7 @@
         o.productQuantity,
         o.productWeight,
         o.evaluate,
+        o.productState,
         oa.orderId AS orderIds,
         oa.NAME,
         oa.areas,
