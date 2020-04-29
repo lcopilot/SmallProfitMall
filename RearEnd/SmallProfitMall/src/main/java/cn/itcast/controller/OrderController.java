@@ -277,8 +277,8 @@ public class OrderController {
      * @param userId 用户id
      * @return
      */
-    @RequestMapping(value = "/deleteOrder",method = RequestMethod.POST)
-    public QueryResponseResult deleteOrder(String orderId , String userId ){
+    @RequestMapping(value = "/deleteOrder/{userId}/{orderId}",method = RequestMethod.DELETE)
+    public QueryResponseResult deleteOrder(@PathVariable("orderId") String orderId , @PathVariable("userId")String userId ){
         orderService.deleteOrder(userId,orderId);
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }

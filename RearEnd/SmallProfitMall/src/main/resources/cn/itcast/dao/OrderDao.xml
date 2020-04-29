@@ -350,7 +350,7 @@
 
     </update>
 
-    <!--删除商品-->
+    <!--删除已购买商品商品-->
     <update id="deleteProduct" >
         UPDATE  userOrder uo
         LEFT JOIN
