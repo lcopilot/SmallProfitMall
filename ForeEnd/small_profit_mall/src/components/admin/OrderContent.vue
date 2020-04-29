@@ -16,7 +16,7 @@
           <el-col :span="5" :push="1">时间:{{moment(order.orderTime).format('YYYY-MM-DD HH:mm:ss')}}</el-col>
           <el-col :span="10" :push="1">订单号:{{order.orderId}}</el-col>
           <el-col :span="2" :push="8" v-if="order.sign==1">
-            <li class="el-icon-delete order_delete"></li>
+            <li class="el-icon-delete order_delete" @click="removeOrder(order.orderId)"></li>
           </el-col>
         </el-row>
       </div>
@@ -348,6 +348,25 @@
           }
         })
       },
+      //删除订单
+      removeOrder(orderId){
+        this.$confirm('此操作将永久删除该订单, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          orderApi.removeOrder(sessionStorage.getItem("uId"),orderId).then(res=>{
+            if (res.success){
+              this.$message({
+                type:'success',
+                message:'删除成功!'
+              })
+              this.getOrderList();
+            }
+          })
+        })
+
+      }
     },
     mounted() {
       this.$nextTick(()=>{

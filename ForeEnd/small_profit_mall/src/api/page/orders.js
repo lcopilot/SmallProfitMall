@@ -35,3 +35,7 @@ export const getOrderList=params=>{
 export const getOrderQuantity=userId=>{
   return http.requestGet(apiUrl+'OrderController/findClassifyOrderQuantity/'+userId)
 }
+//删除订单
+export const removeOrder=(userId,orderId)=>{
+  return http.requestDelete(apiUrl+'OrderController/deleteOrder/'+userId+'/'+orderId)
+}
