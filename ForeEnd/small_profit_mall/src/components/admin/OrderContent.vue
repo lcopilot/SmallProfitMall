@@ -11,11 +11,11 @@
     </div>
     <div style="margin-top: 20px;"
          v-for="order in orderList">
-      <div class="order_information" @mouseenter="deleteBtn=true" @mouseleave="deleteBtn=false">
+      <div class="order_information">
         <el-row>
           <el-col :span="5" :push="1">时间:{{moment(order.orderTime).format('YYYY-MM-DD HH:mm:ss')}}</el-col>
           <el-col :span="10" :push="1">订单号:{{order.orderId}}</el-col>
-          <el-col :span="2" :push="8" v-if="deleteBtn">
+          <el-col :span="2" :push="8" v-if="order.sign==1">
             <li class="el-icon-delete order_delete"></li>
           </el-col>
         </el-row>
@@ -58,9 +58,9 @@
                   </el-col>
                   <el-col v-if="order.orderState>1" :span="2">
                     <div style="padding-top: 30%;height:78px;background-color:white;border-left: 1px solid #dcdfe6">
-                      <el-button type="text" size="mini" v-if="order.orderState==2">确认收货</el-button>
+                      <el-button type="text" size="mini" v-if="order.orderState==2 && product.productStatus==2">确认收货</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==3">申请售后</el-button>
-                      <el-button type="text" size="mini" v-if="order.orderState==3" @click="commentVisible=true">评价晒单</el-button>
+                      <el-button type="text" size="mini" v-if="order.orderState==3 && product.evaluate==false"  @click="commentVisible=true">评价晒单</el-button>
                     </div>
                   </el-col>
                 </el-row>
@@ -205,7 +205,6 @@
     },
     data() {
       return {
-        sss:false,
         playerOptions: {
           //播放速度
           playbackRates: [0.5, 1.0, 1.5, 2.0, 2.5, 3.0],
@@ -254,8 +253,6 @@
           //评论内容
           content: '',
         },
-        //删除按钮
-        deleteBtn: false,
         //订单分页参数
         orderParams: {
           currentPage: 1,//页码
