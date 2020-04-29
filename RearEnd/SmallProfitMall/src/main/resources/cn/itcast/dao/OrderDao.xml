@@ -344,8 +344,8 @@
         UPDATE userOrder
         SET
         isDelete=1
-        WHERE
-        AND orderId = #{orderId}
+       where
+        orderId = #{orderId}
         AND userId=#{userId}
 
     </update>
