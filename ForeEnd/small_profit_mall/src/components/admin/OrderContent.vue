@@ -100,6 +100,7 @@
                 <router-link :to="{name:'Order',params:{orderNumber:order.orderId,genre:0}}">
                   <el-button type="text" size="mini" v-if="order.orderState==1 && order.changeQuantity==0">去修改</el-button>
                 </router-link>
+
               </div>
             </td>
           </tr>

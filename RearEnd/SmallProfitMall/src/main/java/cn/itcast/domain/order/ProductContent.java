@@ -30,22 +30,6 @@ public class ProductContent implements Serializable {
     //商品状态 1为未发货 2为已确认收货
     public Integer productState;
 
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
-
-    public Integer getProductState() {
-        return productState;
-    }
-
-    public void setProductState(Integer productState) {
-        this.productState = productState;
-    }
-
     public int getId() {
         return id;
     }
@@ -54,20 +38,12 @@ public class ProductContent implements Serializable {
         this.id = id;
     }
 
-    public Double getProductPrice() {
-        return productPrice;
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setProductPrice(Double productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public Boolean getEvaluate() {
-        return evaluate;
-    }
-
-    public void setEvaluate(Boolean evaluate) {
-        this.evaluate = evaluate;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public String getOrderId() {
@@ -78,6 +54,14 @@ public class ProductContent implements Serializable {
         this.orderId = orderId;
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
     public String getProductImage() {
         return productImage;
     }
@@ -86,20 +70,20 @@ public class ProductContent implements Serializable {
         this.productImage = productImage;
     }
 
+    public Double getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(Double productPrice) {
+        this.productPrice = productPrice;
+    }
+
     public String getProductConfiguration() {
         return productConfiguration;
     }
 
     public void setProductConfiguration(String productConfiguration) {
         this.productConfiguration = productConfiguration;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
     }
 
     public Integer getProductQuantity() {
@@ -118,16 +102,19 @@ public class ProductContent implements Serializable {
         this.productWeight = productWeight;
     }
 
-    @Override
-    public String toString() {
-        return "ProductContent{" +
-                "orderId=" + orderId +
-                ", productName='" + productName + '\'' +
-                ", productImage='" + productImage + '\'' +
-                ", productPrice=" + productPrice +
-                ", productConfiguration='" + productConfiguration + '\'' +
-                ", productQuantity=" + productQuantity +
-                ", evaluate=" + evaluate +
-                '}';
+    public Boolean getEvaluate() {
+        return evaluate;
+    }
+
+    public void setEvaluate(Boolean evaluate) {
+        this.evaluate = evaluate;
+    }
+
+    public Integer getProductState() {
+        return productState;
+    }
+
+    public void setProductState(Integer productState) {
+        this.productState = productState;
     }
 }

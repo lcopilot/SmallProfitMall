@@ -45,6 +45,13 @@ public interface ShoppingCartDao {
     public Integer deleteCart(@Param("shoppingCartId")Integer shoppingCartId);
 
     /**
+     * 批量删除购物车
+     * @param shoppingCartId 购物车id
+     * @return
+     */
+    public Integer deleteListCart(@Param("shoppingCartId")Integer[] shoppingCartId);
+
+    /**
      * /询购物车商品数量
      * @param userId 用户id
      * @return

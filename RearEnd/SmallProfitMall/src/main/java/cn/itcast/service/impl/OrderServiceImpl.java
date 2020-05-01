@@ -411,8 +411,6 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public BigDecimal addProduct (Integer[] initialize , String orderId){
-        //创建商品详细信息
-        ProductContent productContent = new ProductContent();
         //取出购物车id数组
         List<Integer> shoppingCartIdList = Arrays.asList(initialize) ;
         //商品总计
@@ -421,6 +419,8 @@ public class OrderServiceImpl implements OrderService {
         List<ProductContent> productContents=new ArrayList<>();
         //将购物车商品新增设置到订单中
         for (Integer shoppingCartIds : shoppingCartIdList){
+            //创建商品详细信息
+            ProductContent productContent = new ProductContent();
             //查询购物车集合
             List<ShoppingCart> shoppingCart= shoppingCartDao.findShoppingCart(null,shoppingCartIds);
             ShoppingCart shoppingCart1 = shoppingCart.get(0);
@@ -458,11 +458,14 @@ public class OrderServiceImpl implements OrderService {
 
             productContents.add(productContent);
             //添加到订单商品信息表
-            orderDao.addProductContent(productContent);
+         //   orderDao.addProductContent(productContent);
             //删除该购物车购物车
-            shoppingCartDao.deleteCart(shoppingCartIds);
+          //  shoppingCartDao.deleteCart(shoppingCartIds);
         }
-//        orderDao.addListProduct(productContents);
+        //批量添加商品信息
+        orderDao.addListProduct(productContents);
+        //批量删除购物车
+        shoppingCartDao.deleteListCart(initialize);
         return orderNotes;
     }
 
