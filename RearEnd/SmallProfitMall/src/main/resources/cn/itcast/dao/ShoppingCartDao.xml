@@ -72,7 +72,16 @@
 
     <!--删除购物车-->
     <delete id="deleteCart" parameterType="java.lang.Integer">
+
         DELETE FROM shoppingCart WHERE shoppingCartId = #{shoppingCartId}
+    </delete>
+    <!--删除集合购物车-->
+    <delete id="deleteListCart" parameterType="java.lang.String">
+        DELETE FROM shoppingCart
+        WHERE shoppingCartId IN
+        <foreach collection="shoppingCartId" item="shoppingCartId" open="(" separator="," close=")">
+            #{shoppingCartId}
+        </foreach>
     </delete>
 
     <!--查询购物车数量-->
