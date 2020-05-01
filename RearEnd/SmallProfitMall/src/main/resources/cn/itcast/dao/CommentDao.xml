@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.CommentDao">
+    <!--添加收藏-->
+    <insert id="addComment" parameterType="cn.itcast.domain.ProductDatails.ProductComment">
+    INSERT
+    INTO
+        productComment
+        (commentId,userId,productId,purchaseId,textComment,videoComment,favorability,likeQuantity)
+    VALUES
+        (#{commentId},#{userId},#{productId},#{purchaseId},textComment,videoComment,favorability,likeQuantity)
+        productComment
+        (commentId,commentPicture)
+        VALUES
+        <foreach collection="list" item="commentPicture" index="index" separator=",">
+         #{commentId},#{commentPicture}
+        </foreach>
+    </insert>
+
+</mapper>
