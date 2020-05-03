@@ -168,15 +168,17 @@ public class UserController {
 
 
 	/**
-	 * 根据uid修改头像
-	 *
-	 * @param
-	 * @return 用户头像
+	 * 修改头像
+	 * @param file 图片流
+	 * @param userId 用户id
+	 * @return 用户头像链接
+	 * @throws IOException
 	 */
 	@RequestMapping(value = "/updatePortrait", method = RequestMethod.POST)
 	public QueryResponseResult updatePortrait(MultipartFile file, String userId)
 			throws IOException {
 		QueryResult queryResult = new QueryResult();
+		//转换流类型
 		InputStream fileInputStream = file.getInputStream();
 		String Image = userService.updatePortrait(fileInputStream, userId);
 		List Images = new ArrayList();

@@ -11,7 +11,7 @@ public class ProductComment {
     private Integer commentId;
     /**用户id**/
     private String userId;
-    /**商品idid**/
+    /**商品id**/
     private Integer productId;
     /**购买id**/
     private String purchaseId;
@@ -20,11 +20,12 @@ public class ProductComment {
     /**评论视频**/
     private String videoComment;
     /**好评等级**/
-    private String favorability;
+    private Integer favorability;
     /**点赞数量**/
     private Integer likeQuantity;
     /**评论图片**/
-    private List<String> commentPicture;
+    private String[] commentPicture;
+    /****/
 
     public Integer getCommentId() {
         return commentId;
@@ -74,11 +75,11 @@ public class ProductComment {
         this.videoComment = videoComment;
     }
 
-    public String getFavorability() {
+    public Integer getFavorability() {
         return favorability;
     }
 
-    public void setFavorability(String favorability) {
+    public void setFavorability(Integer favorability) {
         this.favorability = favorability;
     }
 
@@ -90,11 +91,11 @@ public class ProductComment {
         this.likeQuantity = likeQuantity;
     }
 
-    public List<String> getCommentPicture() {
+    public String[] getCommentPicture() {
         return commentPicture;
     }
 
-    public void setCommentPicture(List<String> commentPicture) {
+    public void setCommentPicture(String[] commentPicture) {
         this.commentPicture = commentPicture;
     }
 }

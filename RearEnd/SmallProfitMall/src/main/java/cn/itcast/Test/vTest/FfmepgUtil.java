@@ -47,7 +47,6 @@ public class FfmepgUtil {
 		}*/
 
         ffmepg("C:\\Users\\86185\\Desktop\\视频压缩\\a.mp4", "C:\\Users\\86185\\Desktop\\视频压缩\\16.mp4", "mpeg4", 15, "mp4");
-       // TranscodingUtil.frameRecord("C:\\Users\\86185\\Desktop\\视频压缩\\a.mp4", "C:\\Users\\86185\\Desktop\\视频压缩\\f.mp4", "mpeg4", 15, "mp4"");
     }
 }
 

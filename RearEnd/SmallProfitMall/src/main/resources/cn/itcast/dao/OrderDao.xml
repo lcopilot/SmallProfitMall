@@ -96,7 +96,7 @@
             #{productQuantity},#{productPrice},#{productWeight},#{evaluate})
     </insert>
 
-    <!--新增批量插入测试-->
+    <!--新增批量插入-->
     <insert id="addListProduct">
     INSERT INTO orders
 		(orderId,ProductId,productName,productImage,productConfiguration,productQuantity,productPrice,productWeight,evaluate)

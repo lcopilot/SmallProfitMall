@@ -14,6 +14,7 @@ import com.qiniu.storage.UploadManager;
 
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
+import org.springframework.stereotype.Controller;
 
 
 /**

@@ -6,19 +6,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import static cn.itcast.util.compressPicture.PathUtil.getImgBasePath;
-//修改头像
+
 public class UploadPicturesUtil {
-    public static String UploadPicturesUtil(InputStream ins,String uuid) throws IOException {
-        SimpleUpload uploading = new SimpleUpload();
-        PictureUtilOne pictureUtil = new PictureUtilOne();
+    /**
+     *  压缩图片 上传图片到七牛云
+     * @param space 七牛云上传空间
+     * @param ins 图片InputStream
+     * @param userId 用户id
+     * @return 图片地址
+     * @throws IOException
+     */
+    public static String UploadPicturesUtil(String space,InputStream ins,String userId) throws IOException {
+
+
         //输出文件地址
-        String outputSize =getImgBasePath()+"\\"+uuid+".JPEG" ;
-        //七牛云存储空间
-        String space="mugebl";
-        //用户id
-        String userId=uuid;
-        //文件流
-        InputStream in =ins ;
+        String outputSize =getImgBasePath()+"\\"+userId+".JPEG" ;
         File file = new File(getImgBasePath());
         //判断文件夹是否存在
         if(!file.exists()){
@@ -26,13 +28,15 @@ public class UploadPicturesUtil {
             file.mkdirs();
         }
         //调用压缩图片
-        pictureUtil.pictureUtilOne(in,outputSize);
+        PictureUtilOne.pictureUtilOne(ins,outputSize);
+
         //上传文件
+        SimpleUpload uploading = new SimpleUpload();
         uploading.overrideUpload(outputSize,userId,space);
         //根据地址删除文件图片
         PathUtil.deleteFile(outputSize);
-        //返回图片地址
-        String site =" http://img.fhxasdsada.xyz/"+userId+"?t="+new Date().getTime();
+        //返回图片地址 + 时间戳 用于覆盖上传更新
+        String site =" http://img.fhxasdsada.xyz/"+userId+"?t="+(System.currentTimeMillis() / 1000);
         return site;
     }
 

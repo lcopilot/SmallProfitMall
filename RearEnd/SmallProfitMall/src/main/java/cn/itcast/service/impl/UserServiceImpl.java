@@ -26,6 +26,9 @@ import java.util.UUID;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
+    //七牛云存储空间名称
+    private static final  String space="mugebl";
+
     @Autowired
     private UserDao userDao;
 
@@ -261,15 +264,16 @@ public class UserServiceImpl implements UserService {
 
 
     /**
-     * 根据uid修改用户头像
-     * @param Images
-     * @param uid
-     * @return
+     * 修改用户头像
+     * @param Images 图片流
+     * @param uid 用户id
+     * @return 用户图片
      * @throws IOException
      */
     @Override
     public String updatePortrait(InputStream Images, String uid) throws IOException {
-        String Image = UploadPicturesUtil.UploadPicturesUtil(Images,uid);
+        //压缩图片 上传图片至七牛云 返回图片地址
+        String Image = UploadPicturesUtil.UploadPicturesUtil(space,Images,uid);
         userDao.updatePortrait(Image,uid);
         return Image;
     }

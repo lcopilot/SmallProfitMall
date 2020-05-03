@@ -11,6 +11,9 @@ import cn.itcast.messageQueue.producer.shopping.ShoppingProducer;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
+import cn.itcast.response.ResultCode;
+import cn.itcast.util.video.CompressVideoUtil;
+import cn.itcast.util.video.UploadVideoUtil;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,13 +21,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/TestController")
@@ -44,6 +48,9 @@ public class TestController {
 
     @Autowired
     MemberDao memberDao;
+
+
+
     //测试
     @RequestMapping(value = "/Test/{test}",method = RequestMethod.GET)
     public QueryResponseResult findNavigation(@PathVariable("test")int test){
@@ -61,11 +68,13 @@ public class TestController {
         return  new QueryResponseResult(CommonCode.SUCCESS,queryResult);
     }
 
-    @RequestMapping(value = "/t/{a}/{b}",method = RequestMethod.GET)
-    public QueryResponseResult test(@PathVariable("a")String a,@PathVariable("b") String b){
-        Order order = orderDao.findOrder(a,b);
-        QueryResult queryResult=new QueryResult();
-        queryResult.setList(Arrays.asList(order) );
+    @RequestMapping(value = "/t",method = RequestMethod.GET)
+    public QueryResponseResult test() throws IOException {
+        File file =new File("C:\\Users\\86185\\Desktop\\ys\\c.mp4");
+        InputStream in = CompressVideoUtil.file2InputStream(file);
+        String video = UploadVideoUtil.UploadVideoUtil("mugebl","asdasdasd",in);
+        QueryResult queryResult = new QueryResult();
+        queryResult.setList(Collections.singletonList(video));
         return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
     }
 

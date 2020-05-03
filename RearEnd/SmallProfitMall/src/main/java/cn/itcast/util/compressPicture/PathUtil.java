@@ -23,6 +23,7 @@ public class PathUtil {
         return basePath;
     }
 
+
     // 根据shopId分配不同的上传目录，在ShopServiceImpl中引用
     public static String getShopImagePath(Integer shopId) {
         // 获取当前操作系统的名称

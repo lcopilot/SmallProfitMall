@@ -338,3 +338,14 @@
 2020-04-04 20:44:56,467 1      [           main] DEBUG om.baidu.aip.client.BaseClient  - current state after check priviledge: STATE_TRUE_AIP_USER
 2020-04-04 20:47:37,641 0      [           main] INFO  om.baidu.aip.client.BaseClient  - get access_token success. current state: STATE_AIP_AUTH_OK
 2020-04-04 20:47:37,643 2      [           main] DEBUG om.baidu.aip.client.BaseClient  - current state after check priviledge: STATE_TRUE_AIP_USER
+2020-05-03 18:01:21,557 0      [           main] INFO  cn.itcast.Test.ys.ConvertVideo  - wight:1920,height:1040
+2020-05-03 18:01:21,558 1      [           main] INFO  cn.itcast.Test.ys.ConvertVideo  - video size:24367169
+2020-05-03 18:01:21,558 1      [           main] INFO  cn.itcast.Test.ys.ConvertVideo  - new wight:320,height:174
+2020-05-03 18:02:40,364 0      [           main] INFO  cn.itcast.Test.ys.ConvertVideo  - wight:1920,height:1040
+2020-05-03 18:02:40,368 4      [           main] INFO  cn.itcast.Test.ys.ConvertVideo  - video size:24367169
+2020-05-03 18:02:40,368 4      [           main] INFO  cn.itcast.Test.ys.ConvertVideo  - new wight:320,height:174
+2020-05-03 18:03:48,015 0      [           main] INFO  cn.itcast.Test.ys.ConvertVideo  - wight:1920,height:1040
+2020-05-03 18:05:22,543 0      [           main] INFO  cn.itcast.Test.ys.ConvertVideo  - wight:1364,height:768
+2020-05-03 18:18:27,925 0      [           main] INFO  cn.itcast.Test.ys.ConvertVideo  - wight:1920,height:1040
+2020-05-03 18:20:32,348 0      [           main] INFO  cn.itcast.Test.ys.ConvertVideo  - wight:1920,height:1040
+2020-05-03 18:21:03,168 0      [           main] INFO  cn.itcast.Test.ys.ConvertVideo  - wight:1920,height:1040
