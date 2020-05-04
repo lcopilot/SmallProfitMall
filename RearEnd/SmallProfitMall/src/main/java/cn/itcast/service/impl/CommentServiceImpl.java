@@ -33,9 +33,9 @@ public class CommentServiceImpl implements CommentService {
      * @return
      */
     @Override
-    public Integer addComment(ProductComment productComment,MultipartFile[] files) throws IOException {
+    public Integer addComment(ProductComment productComment) throws IOException {
 
-//        MultipartFile[] files = productComment.getFiles();
+        MultipartFile[] files = productComment.getFiles();
         Integer result =0;
 
         String importFileType="png";

@@ -17,6 +17,6 @@ public interface CommentService {
      * @param productComment 评论对象
      * @return
      */
-    public Integer addComment(ProductComment productComment,MultipartFile[] files) throws IOException;
+    public Integer addComment(ProductComment productComment) throws IOException;
 
 }
