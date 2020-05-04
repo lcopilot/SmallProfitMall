@@ -126,7 +126,7 @@
     <!--查询订单-->
     <select id="findOrder" resultMap="orderMap">
         SELECT
-            uo.userId,uo.id,uo.orderId,uo.orderTotal,o.productName,o.id AS ids,
+            uo.userId,uo.id,uo.orderId,uo.orderTotal,o.productName,o.purchaseId,
             o.productImage,o.productPrice,o.productConfiguration,
             o.productQuantity,o.productWeight,o.evaluate
         FROM
@@ -193,7 +193,7 @@
     <select id="findDetailedOrder" resultMap="allOrderMap">
         SELECT
             uo.*,o.productName,
-            o.id AS ids,
+            o.purchaseId,
             o.productImage,o.productPrice,o.productConfiguration,
             o.productQuantity,o.productWeight,o.evaluate,
             oa.orderId AS orderIds,oa.name,oa.areas,oa.detailedAddress,oa.phone,oa.email,oa.alias
