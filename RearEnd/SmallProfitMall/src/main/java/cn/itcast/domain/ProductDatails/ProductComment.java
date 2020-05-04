@@ -2,6 +2,7 @@ package cn.itcast.domain.ProductDatails;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @author Kite
  * @date 2020/5/1
  */
-public class ProductComment {
+public class ProductComment implements Serializable {
     /**评论id**/
     private Integer commentId;
     /**用户id**/
