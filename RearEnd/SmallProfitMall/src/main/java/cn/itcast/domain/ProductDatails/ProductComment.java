@@ -33,6 +33,17 @@ public class ProductComment {
     /**文件数组 图片 视频**/
     private MultipartFile[] files;
 
+    /**是否匿名**/
+    private Boolean anonymity;
+
+    public Boolean getAnonymity() {
+        return anonymity;
+    }
+
+    public void setAnonymity(Boolean anonymity) {
+        this.anonymity = anonymity;
+    }
+
     public MultipartFile[] getFiles() {
         return files;
     }
