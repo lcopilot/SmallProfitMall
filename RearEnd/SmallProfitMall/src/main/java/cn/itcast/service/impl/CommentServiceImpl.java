@@ -38,13 +38,14 @@ public class CommentServiceImpl implements CommentService {
         MultipartFile[] files = productComment.getFiles();
         Integer result =0;
 
-        String file="png";
+        String importFileType="png";
+        String importFileTypes = "jpg";
 
         if (files==null | files.length!=0){
             Boolean sign = false;
             //判断文件第一个是否是视频
             String fileType=FileTypeUtils.fileType(files[0].getInputStream());
-            if (!file.equals(fileType)){
+            if (!importFileType.equals(fileType) && !importFileTypes.equals(fileType)){
                 sign=true;
                 //压缩视频 且返回视频地址 uuid为视频文件名
                 String uuid = UUID.randomUUID().toString().replaceAll("-","");
