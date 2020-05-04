@@ -20,9 +20,9 @@ import java.io.IOException;
  * @date 2020/5/1
  */
 @Controller
-@RequestMapping("/CommentControtroller")
+@RequestMapping("/CommentController")
 @ResponseBody
-public class CommentControtroller {
+public class CommentController {
 
     /**评论service**/
     @Autowired
