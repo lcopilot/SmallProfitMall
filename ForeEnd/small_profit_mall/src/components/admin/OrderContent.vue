@@ -60,7 +60,7 @@
                     <div style="padding-top: 30%;height:78px;background-color:white;border-left: 1px solid #dcdfe6">
                       <el-button type="text" size="mini" v-if="order.orderState==2 && product.productState==1">确认收货</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==3">申请售后</el-button>
-                      <el-button type="text" size="mini" v-if="order.orderState==3 && product.evaluate==false"  @click="commentVisible=true">评价晒单</el-button>
+                      <el-button type="text" size="mini" v-if="order.orderState==3 && product.evaluate==false"  @click="comment(product.purchaseId,product.productId)">评价晒单</el-button>
                     </div>
                   </el-col>
                 </el-row>
@@ -100,7 +100,6 @@
                 <router-link :to="{name:'Order',params:{orderNumber:order.orderId,genre:0}}">
                   <el-button type="text" size="mini" v-if="order.orderState==1 && order.changeQuantity==0">去修改</el-button>
                 </router-link>
-
               </div>
             </td>
           </tr>
@@ -144,13 +143,15 @@
                   </video-player>
                 </el-dialog>
                 <el-upload
-                    action="https://jsonplaceholder.typicode.com/posts/"
+                    action="#"
+                    :auto-upload="false"
                     list-type="picture-card"
                     :multiple="true"
                     ref="upload"
                     :on-change="selectFile"
+                    :http-request="uploadFile"
                     :on-preview="handlePictureCardPreview"
-                    :on-remove="handleRemove">
+                   >
                   <i class="el-icon-plus"></i>
                 </el-upload>
                 <el-dialog :visible.sync="commentImgVisible" append-to-body>
@@ -170,7 +171,7 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="commentVisible = false">取 消</el-button>
-            <el-button type="primary" @click="">确 定</el-button>
+            <el-button type="primary"  @click="submitComments()">确 定</el-button>
           </div>
         </el-dialog>
       </div>
@@ -193,6 +194,7 @@
 
 <script>
   import *as orderApi from '../../api/page/orders'
+  import *as productApi from '../../api/page/product'
   export default {
     name: "orderContent",
     props: {
@@ -266,14 +268,62 @@
         commentImgVisible: false,
         //评论视频弹出框
         commentVideoVisible: false,
+        //评论视频
+        commentVideo:'',
       }
     },
     methods: {
+      uploadFile(){},
+      //打开评论窗口
+      comment(purchaseId,productId){
+        this.commentVisible=true;
+        sessionStorage.setItem("purchaseId",purchaseId);
+        sessionStorage.setItem("productIdComm",productId);
+      },
+      //提交评论
+      submitComments(){
+        let fileList = [];
+        this.$refs.upload[0].uploadFiles.map((item)=>{
+          fileList.push(item.raw)
+        });
+        if (this.commentVideo){
+          fileList.unshift(this.commentVideo.raw)
+        }
+        this.$refs.upload[0].submit();
+        const comment={
+          productId:sessionStorage.getItem("productIdComm"),
+          purchaseId:sessionStorage.getItem("purchaseId"),
+          favorability:this.commentForm.score,
+          textComment:this.commentForm.content,
+          anonymity:this.commentForm.isAnonymity,
+          files:fileList,
+          userId:sessionStorage.getItem("uId"),
+        };
+
+        let dataForm=new FormData();
+        dataForm.append("productComment",comment);
+        dataForm.append("files",fileList);
+        productApi.addComment(comment).then(res=>{
+          console.log(res);
+          if (res.success){
+            this.$message({
+              type:"success",
+              message:"评论已提交"
+            });
+            this.commentVisible=false;
+            this.playerOptions.sources[0].src="";
+            this.clearFiles();
+          }
+        })
+      },
+      //评论视频播放
       playerVideoComment() {
         this.commentVideoVisible = true;
       },
       //清除文件
       clearFiles() {
+        sessionStorage.removeItem("purchaseId");
+        sessionStorage.removeItem("productIdComm");
         this.playerOptions.sources[0].src='';
         const mainImg = this.$refs.upload;
         if (mainImg && mainImg.length) {
@@ -296,6 +346,7 @@
         const isLt2M = file.size / 1024 / 1024 < 2;
         if (isMP4) {
           this.playerOptions.sources[0].src = file.url;
+          this.commentVideo=file;
           return fileList.pop();
         }
         if (fileList.length>10){
@@ -310,9 +361,6 @@
           fileList.pop();
           return this.$message.error('上传评论图片大小不能超过 2MB!');
         }
-      },
-      handleRemove(file, fileList) {
-        console.log(fileList)
       },
       //预览
       handlePictureCardPreview(file) {

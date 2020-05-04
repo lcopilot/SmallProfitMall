@@ -33,7 +33,8 @@ public class ProductComment implements Serializable {
     /**评论时间**/
     private Date commentTime;
     /**文件数组 图片 视频**/
-    private File[] files;
+    List<MultipartFile> files;
+
 
     /**是否匿名**/
     private Boolean anonymity;
@@ -46,11 +47,11 @@ public class ProductComment implements Serializable {
         this.anonymity = anonymity;
     }
 
-    public File[] getFiles() {
+    public List<MultipartFile> getFiles() {
         return files;
     }
 
-    public void setFiles(File[] files) {
+    public void setFiles(List<MultipartFile> files) {
         this.files = files;
     }
 

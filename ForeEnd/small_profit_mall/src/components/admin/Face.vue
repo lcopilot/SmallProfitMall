@@ -140,7 +140,7 @@
         vm.thisCanvas = this.$refs.canvasCamera;
         vm.thisContext = this.thisCanvas.getContext('2d');
         vm.thisVideo = this.$refs.videoCamera;
-        // 旧版本浏览器可能根本不支持mediaDevices，我们首先设置一个空对象
+        // 旧版本浏览器可能根本不支持mediaDevices，首先设置一个空对象
         if (navigator.mediaDevices === undefined) {
           navigator.mediaDevices = {};
         }

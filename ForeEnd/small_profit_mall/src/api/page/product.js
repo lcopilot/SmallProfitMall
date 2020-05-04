@@ -32,9 +32,13 @@ export const getShoppingCartPreview=(userId,number)=>{
 };
 //购物车结算 立即够买
 export const settlement=data=>{
-  return http.requestPost("apiUrl/OrderController/addOrder",data)
+  return http.requestPost(apiUrl+'/OrderController/addOrder',data)
 };
 //商品页立即够买
 export const buyNow=data=>{
-  return http.requestPost("apiUrl/OrderController/purchaseOrder",data)
+  return http.requestPost(apiUrl+'/OrderController/purchaseOrder',data)
 };
+//商品评论
+export const addComment=data=>{
+  return http.requestPost(apiUrl+'/CommentController/addComment',data)
+}
