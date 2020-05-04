@@ -177,4 +177,13 @@ public interface OrderDao {
      */
     public Integer deleteProduct(@Param("productState") Integer productState ,@Param("userId")String userId, @Param("id")Integer[] id,@Param("deleteAll")Boolean deleteAll);
 
+    /**
+     * 修改商品状态
+     * @param orderId 订单id
+     * @param productState 订单状态
+     * @param purchaseId 购买编号 为空则修改该订单全部状态
+     * @return
+     */
+    Integer updateProductState(@Param("orderId") String orderId ,@Param("productState")Integer productState,@Param("purchaseId")Integer purchaseId);
+
 }

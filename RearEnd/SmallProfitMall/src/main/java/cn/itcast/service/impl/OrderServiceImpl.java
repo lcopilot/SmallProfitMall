@@ -477,6 +477,8 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public Integer updateOrders(Order order) throws Exception {
+        //修改所以商品状态为待发货
+        orderDao.updateProductState(order.getOrderId(),1,null);
         //设置支付状态为已支付状态（2）
         order.setOrderState(2);
         //设置当前时间为支付时间

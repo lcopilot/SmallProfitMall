@@ -1,5 +1,7 @@
 package cn.itcast.domain.ProductDatails;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +30,16 @@ public class ProductComment {
     private String[] commentPicture;
     /**评论时间**/
     private Date commentTime;
+    /**文件数组 图片 视频**/
+    private MultipartFile[] files;
+
+    public MultipartFile[] getFiles() {
+        return files;
+    }
+
+    public void setFiles(MultipartFile[] files) {
+        this.files = files;
+    }
 
     public Date getCommentTime() {
         return commentTime;

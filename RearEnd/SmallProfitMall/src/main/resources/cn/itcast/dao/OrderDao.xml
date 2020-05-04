@@ -5,7 +5,7 @@
 <mapper namespace="cn.itcast.dao.OrderDao">
 
     <resultMap id="orderMap" type="cn.itcast.domain.order.Order">
-        <id property="id" column="id"></id>
+        <id property="purchaseId" column="purchaseId"></id>
         <result property="userId" column="userId"></result>
         <result property="orderId" column="orderId"></result>
         <result property="paymentWay" column="paymentWay"></result>
@@ -33,7 +33,7 @@
     </resultMap>
 
     <resultMap id="allOrderMap" type="cn.itcast.domain.order.Order">
-        <id property="id" column="id"></id>
+        <id property="purchaseId" column="purchaseId"></id>
         <result property="sign" column="sign"></result>
         <result property="userId" column="userId"></result>
         <result property="orderId" column="orderId"></result>
@@ -144,7 +144,7 @@
         SELECT
         uo.*,
         o.productName,
-        o.id AS ids,
+        o.purchaseId,
         o.productImage,
         o.productPrice,
         o.productConfiguration,
@@ -184,7 +184,6 @@
         ORDER BY
         uos.orderTime DESC
         LIMIT #{start}, #{pageSize} ) AS user_order
-
         )
         ORDER BY
         uo.orderTime DESC
@@ -388,6 +387,17 @@
             </if>
 
         </where>
+    </update>
+    
+    <update id="updateProductState">
+        UPDATE orders
+        SET
+        productState=#{productState}
+        Where
+        <if test="purchaseId!=null">
+           ADD purchaseId=#{purchaseId}
+        </if>
+        orderId=#{orderId}
     </update>
 
 

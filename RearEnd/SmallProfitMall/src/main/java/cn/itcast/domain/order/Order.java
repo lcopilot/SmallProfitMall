@@ -16,7 +16,7 @@ import java.util.List;
  * @date 2020/4/3
  */
 public class Order implements Serializable {
-    private int id;
+    private Integer  purchaseId;
     //用户id
     private String userId;
     //订单id
@@ -71,12 +71,12 @@ public class Order implements Serializable {
         this.changeQuantity = changeQuantity;
     }
 
-    public int getId() {
-        return id;
+    public Integer getPurchaseId() {
+        return purchaseId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPurchaseId(Integer purchaseId) {
+        this.purchaseId = purchaseId;
     }
 
     public String getUserId() {
