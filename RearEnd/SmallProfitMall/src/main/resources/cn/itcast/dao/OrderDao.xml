@@ -55,6 +55,7 @@
         <collection property="productContents" ofType="cn.itcast.domain.order.ProductContent">
             <id property="id" column="ids"></id>
             <result property="orderId" column="orderId"></result>
+            <result property="productId" column="ProductId"></result>
             <result property="productName" column="productName"></result>
             <result property="productImage" column="productImage"></result>
             <result property="productPrice" column="productPrice"></result>
@@ -151,6 +152,7 @@
         o.productWeight,
         o.evaluate,
         o.productState,
+        o.ProductId,
         oa.orderId AS orderIds,
         oa.NAME,
         oa.areas,

@@ -38,7 +38,7 @@ public class CommentServiceImpl implements CommentService {
 
         String file="png";
 
-        if (files.length!=0){
+        if (files==null | files.length!=0){
             Boolean sign = false;
             //判断文件第一个是否是视频
             String fileType=FileTypeUtils.fileType(files[0].getInputStream());
@@ -65,7 +65,7 @@ public class CommentServiceImpl implements CommentService {
             if (files.length>0 && sign == false || files.length>1 && sign == true ){
                 ifVideo =true;
             }
-            if (ifVideo ){
+            if (ifVideo){
                 //新增评论图片
                 List<CommentImage> commentImages= new ArrayList();
                 for (int i = begin; i <files.length-subtract ; i++) {
