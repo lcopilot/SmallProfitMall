@@ -5,7 +5,7 @@
 <mapper namespace="cn.itcast.dao.OrderDao">
 
     <resultMap id="orderMap" type="cn.itcast.domain.order.Order">
-        <id property="purchaseId" column="purchaseId"></id>
+        <id property="id" column="id"></id>
         <result property="userId" column="userId"></result>
         <result property="orderId" column="orderId"></result>
         <result property="paymentWay" column="paymentWay"></result>
@@ -19,7 +19,7 @@
         <result property="orderState" column="orderState"></result>
          <!-- 配置商品集合的映射 -->
         <collection property="productContents" ofType="cn.itcast.domain.order.ProductContent">
-            <id property="id" column="ids"></id>
+            <id property="purchaseId" column="purchaseId"></id>
             <result property="orderId" column="orderId"></result>
             <result property="productName" column="productName"></result>
             <result property="productImage" column="productImage"></result>
@@ -33,7 +33,7 @@
     </resultMap>
 
     <resultMap id="allOrderMap" type="cn.itcast.domain.order.Order">
-        <id property="purchaseId" column="purchaseId"></id>
+        <id property="id" column="id"></id>
         <result property="sign" column="sign"></result>
         <result property="userId" column="userId"></result>
         <result property="orderId" column="orderId"></result>
@@ -53,7 +53,7 @@
         </association>
         <!-- 配置商品集合的映射 -->
         <collection property="productContents" ofType="cn.itcast.domain.order.ProductContent">
-            <id property="id" column="ids"></id>
+            <id property="purchaseId" column="purchaseId"></id>
             <result property="orderId" column="orderId"></result>
             <result property="productId" column="ProductId"></result>
             <result property="productName" column="productName"></result>

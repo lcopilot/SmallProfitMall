@@ -53,7 +53,6 @@ public class CommentServiceImpl implements CommentService {
                 //设置视频地址
                 productComment.setVideoComment(video);
             }
-
             //循环起点 有视频从1开始 无视频从0开始
             Integer begin = 0;
             //循环次数 有视频减1 无视频不减

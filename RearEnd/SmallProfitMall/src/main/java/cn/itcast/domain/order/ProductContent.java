@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class ProductContent implements Serializable {
     //id
-    private int id;
+    private Integer purchaseId;
     //商品id
     private Integer productId;
     //订单id
@@ -30,12 +30,12 @@ public class ProductContent implements Serializable {
     //商品状态 1为未发货 2为已确认收货
     public Integer productState;
 
-    public int getId() {
-        return id;
+    public Integer getPurchaseId() {
+        return purchaseId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPurchaseId(Integer purchaseId) {
+        this.purchaseId = purchaseId;
     }
 
     public Integer getProductId() {
