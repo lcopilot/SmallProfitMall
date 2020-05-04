@@ -1,6 +1,7 @@
 package cn.itcast.service;
 
 import cn.itcast.domain.ProductDatails.ProductComment;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -16,6 +17,6 @@ public interface CommentService {
      * @param productComment 评论对象
      * @return
      */
-    public Integer addComment(ProductComment productComment) throws IOException;
+    public Integer addComment(ProductComment productComment, MultipartFile[] files) throws IOException;
 
 }

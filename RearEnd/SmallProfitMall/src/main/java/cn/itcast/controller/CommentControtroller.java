@@ -34,8 +34,8 @@ public class CommentControtroller {
      * @return
      */
     @RequestMapping(value = "/addComment",method = RequestMethod.POST)
-    public QueryResponseResult addComment(@RequestBody ProductComment productComment) throws IOException {
-        Integer result = commentService.addComment(productComment);
+    public QueryResponseResult addComment(@RequestBody ProductComment productComment,MultipartFile[] files) throws IOException {
+        Integer result = commentService.addComment(productComment,files);
         if (result>=1){
             return new QueryResponseResult(CommonCode.SUCCESS,null);
         }

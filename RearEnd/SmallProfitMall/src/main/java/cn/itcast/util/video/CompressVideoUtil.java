@@ -1,6 +1,5 @@
 package cn.itcast.util.video;
 
-import cn.itcast.Test.test;
 import it.sauronsoftware.jave.*;
 
 import java.io.*;
@@ -17,7 +16,7 @@ public class CompressVideoUtil {
      * @param targets 输出地址
      */
     public static void compress(String inputVideo ,InputStream in, String targets) throws IOException {
-        test.writeToLocal(inputVideo,in);
+        CompressVideoUtil.writeToLocal(inputVideo,in);
         File input = new File(inputVideo);
         //输出地址
         File target = new File(targets);

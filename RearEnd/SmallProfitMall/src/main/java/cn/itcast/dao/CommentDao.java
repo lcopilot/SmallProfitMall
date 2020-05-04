@@ -21,11 +21,24 @@ public interface CommentDao {
      */
      void addComment(ProductComment productComment);
 
+     //void addReply(String reply);
+
+
     /**
      * 新增评价图片数组
-     * @param  commentId 评价
-     * @param commentImage 图片数组
+     * @param commentImages 图片对象集合
      * @return
      */
      Integer addCommentImage(@Param("commentImages") List commentImages);
+
+
+
+    /**
+     * 查询商品评论
+     * @param productId 商品id
+     * @param start 查询开始
+     * @param pageSize 每页查询数量
+     * @return
+     */
+     ProductComment findAllComment(@Param("start")Integer productId ,@Param("start")Integer start,@Param("pageSize") Integer pageSize);
 }

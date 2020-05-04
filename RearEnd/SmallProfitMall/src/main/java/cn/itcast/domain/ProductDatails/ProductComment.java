@@ -1,5 +1,6 @@
 package cn.itcast.domain.ProductDatails;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,7 +26,16 @@ public class ProductComment {
     private Integer likeQuantity;
     /**评论图片**/
     private String[] commentPicture;
-    /****/
+    /**评论时间**/
+    private Date commentTime;
+
+    public Date getCommentTime() {
+        return commentTime;
+    }
+
+    public void setCommentTime(Date commentTime) {
+        this.commentTime = commentTime;
+    }
 
     public Integer getCommentId() {
         return commentId;

@@ -1,6 +1,5 @@
 package cn.itcast.util.video;
 
-import cn.itcast.Test.test;
 import cn.itcast.util.compressPicture.PathUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.bytedeco.javacpp.avcodec;
@@ -14,8 +13,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
-
-import static cn.itcast.util.compressPicture.PathUtil.getImgBasePath;
 
 /**
  * 现用压缩视频工具

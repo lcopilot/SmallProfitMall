@@ -8,9 +8,9 @@
     INSERT
     INTO
              productComment
-         (userId,productId,purchaseId,textComment,videoComment,favorability)
+         (userId,productId,purchaseId,textComment,videoComment,favorability,commentTime)
      VALUES
-        (#{userId},#{productId},#{purchaseId},#{textComment},#{videoComment},#{favorability});
+        (#{userId},#{productId},#{purchaseId},#{textComment},#{videoComment},#{favorability},#{commentTime});
 
     </insert>
 
@@ -24,6 +24,27 @@
         <foreach collection="commentImages" item="item" index="index" separator=",">
         (#{item.commentId},#{item.commentPicture})
         </foreach>
-
     </insert>
+
+    <!--查询评论-->
+    <select id="findAllComment" resultType="cn.itcast.domain.ProductDatails.ProductComment">
+    SELECT
+        pc.*,
+        u.Image,
+        u.`name`,
+        ci.commentPicture,
+        o.productConfiguration
+    FROM
+        productComment pc
+        LEFT JOIN orders o ON pc.purchaseId = o.id
+        LEFT JOIN USER u ON pc.userId = u.uid
+        LEFT JOIN commentImage ci ON pc.commentId = ci.commentId
+    WHERE
+        pc.purchaseId IN (
+        SELECT
+            purchaseId
+        FROM
+        ( SELECT purchaseId FROM productComment WHERE ProductId = #{productId} ORDER BY commentTime DESC LIMIT #{start}, #{pageSize} ) AS paging)
+
+    </select>
 </mapper>
