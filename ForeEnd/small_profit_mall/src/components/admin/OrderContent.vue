@@ -195,6 +195,7 @@
 <script>
   import *as orderApi from '../../api/page/orders'
   import *as productApi from '../../api/page/product'
+  import {getBase64} from "../../util/util";
   export default {
     name: "orderContent",
     props: {
@@ -280,14 +281,19 @@
         sessionStorage.setItem("purchaseId",purchaseId);
         sessionStorage.setItem("productIdComm",productId);
       },
+
       //提交评论
       submitComments(){
         let fileList = [];
         this.$refs.upload[0].uploadFiles.map((item)=>{
-          fileList.push(item.raw)
+          getBase64(item.raw,(base64)=>{
+            fileList.push(base64)
+          })
         });
         if (this.commentVideo){
-          fileList.unshift(this.commentVideo.raw)
+          getBase64(this.commentVideo.raw,(bas64)=>{
+            fileList.unshift(bas64)
+          })
         }
         this.$refs.upload[0].submit();
         const comment={
@@ -299,22 +305,24 @@
           files:fileList,
           userId:sessionStorage.getItem("uId"),
         };
-
-        let dataForm=new FormData();
-        dataForm.append("productComment",comment);
-        dataForm.append("files",fileList);
-        productApi.addComment(comment).then(res=>{
-          console.log(res);
-          if (res.success){
-            this.$message({
-              type:"success",
-              message:"评论已提交"
-            });
-            this.commentVisible=false;
-            this.playerOptions.sources[0].src="";
-            this.clearFiles();
+        //定时器等待文件转base64完成
+        const timer=setInterval(()=>{
+          if (this.commentVideo?(fileList.length==this.$refs.upload[0].uploadFiles.length+1):(fileList.length==this.$refs.upload[0].uploadFiles.length)){
+            clearInterval(timer)
+            productApi.addComment(comment).then(res=>{
+              console.log(res);
+              if (res.success){
+                this.$message({
+                  type:"success",
+                  message:"评论已提交"
+                });
+                this.playerOptions.sources[0].src="";
+                this.clearFiles();
+                this.commentVisible=false;
+              }
+            })
           }
-        })
+        },20)
       },
       //评论视频播放
       playerVideoComment() {

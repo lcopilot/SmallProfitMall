@@ -2,7 +2,6 @@ package cn.itcast.domain.ProductDatails;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -32,9 +31,15 @@ public class ProductComment implements Serializable {
     private String[] commentPicture;
     /**评论时间**/
     private Date commentTime;
-    /**文件数组 图片 视频**/
-    List<MultipartFile> files;
+    private String[] files;
 
+    public String[] getFiles() {
+        return files;
+    }
+
+    public void setFiles(String[] files) {
+        this.files = files;
+    }
 
     /**是否匿名**/
     private Boolean anonymity;
@@ -47,13 +52,7 @@ public class ProductComment implements Serializable {
         this.anonymity = anonymity;
     }
 
-    public List<MultipartFile> getFiles() {
-        return files;
-    }
 
-    public void setFiles(List<MultipartFile> files) {
-        this.files = files;
-    }
 
     public Date getCommentTime() {
         return commentTime;
