@@ -310,7 +310,6 @@
           if (this.commentVideo?(fileList.length==this.$refs.upload[0].uploadFiles.length+1):(fileList.length==this.$refs.upload[0].uploadFiles.length)){
             clearInterval(timer)
             productApi.addComment(comment).then(res=>{
-              console.log(res);
               if (res.success){
                 this.$message({
                   type:"success",
