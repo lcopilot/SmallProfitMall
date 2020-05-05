@@ -31,7 +31,11 @@ public class ProductComment implements Serializable {
     private String[] commentPicture;
     /**评论时间**/
     private Date commentTime;
+
     private String[] files;
+
+    /**是否匿名**/
+    private Boolean anonymity;
 
     public String[] getFiles() {
         return files;
@@ -41,8 +45,7 @@ public class ProductComment implements Serializable {
         this.files = files;
     }
 
-    /**是否匿名**/
-    private Boolean anonymity;
+
 
     public Boolean getAnonymity() {
         return anonymity;
