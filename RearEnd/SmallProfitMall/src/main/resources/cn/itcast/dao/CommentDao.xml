@@ -4,10 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.CommentDao">
     <!--添加评论-->
-    <insert id="addComment" parameterType="cn.itcast.domain.ProductDatails.ProductComment">
+    <insert id="addComment"  useGeneratedKeys="true" keyProperty="commentId" parameterType="cn.itcast.domain.ProductDatails.ProductComment">
     INSERT
     INTO
-             productComment
+        productComment
          (userId,productId,purchaseId,textComment,videoComment,favorability,commentTime)
      VALUES
         (#{userId},#{productId},#{purchaseId},#{textComment},#{videoComment},#{favorability},#{commentTime});

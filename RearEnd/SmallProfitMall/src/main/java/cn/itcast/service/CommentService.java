@@ -4,6 +4,7 @@ import cn.itcast.domain.ProductDatails.ProductComment;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * 添加商品评论
@@ -18,5 +19,13 @@ public interface CommentService {
      * @return
      */
     public Integer addComment(ProductComment productComment) throws IOException;
+
+    /**
+     *  base64转InputStream
+     * @param prefix base64
+     * @return InputStream
+     * @throws IOException
+     */
+    public InputStream base64InputStream(String prefix) throws IOException;
 
 }
