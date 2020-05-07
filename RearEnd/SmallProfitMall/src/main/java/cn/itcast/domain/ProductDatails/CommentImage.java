@@ -5,6 +5,9 @@ package cn.itcast.domain.ProductDatails;
  * @date 2020/5/2
  */
 public class CommentImage {
+
+    private Integer id;
+
     /**评图片**/
     private String commentPicture;
     /**评论id**/
@@ -24,5 +27,13 @@ public class CommentImage {
 
     public void setCommentId(Integer commentId) {
         this.commentId = commentId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

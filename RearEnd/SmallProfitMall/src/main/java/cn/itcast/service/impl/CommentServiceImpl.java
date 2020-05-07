@@ -47,33 +47,41 @@ public class CommentServiceImpl implements CommentService {
         //文件数组 0为视频 <0 为图片
         String[] files = productComment.getFiles();
 
-        //前缀 为   data:image/jpeg;base64 则为图片
-        String prefix =  files[0];
+
         //判断文件 [0]为是否有图片 0为没有 1为有 [1]为是否有视频 0为没有 1为有
         Integer[] judgmentFiles = judgmentFiles(files);
-        if (judgmentFiles!=null & judgmentFiles[1]==1){
-            sign=true;
-            String video = updateVideo(prefix);
-            productComment.setVideoComment(video);
-        }
+        if (judgmentFiles!=null ){
+            if(judgmentFiles[1]==1){
+                //前缀 为   data:image/jpeg;base64 则为图片
+                String prefix =  files[0];
+                sign=true;
+                String video = updateVideo(prefix);
+                productComment.setVideoComment(video);
+            }
 
+            //设置当前时间为评论时间
+            productComment.setCommentTime(new Date());
+            //新增评论基本信息
+            commentDao.addComment(productComment);
+
+            //循环起点 有视频从1开始 无视频从0开始
+            Integer begin = 0;
+            //是否有视频
+            if ( sign == true ){
+                begin=1;
+            }
+
+            //判断是否有图片
+            if (judgmentFiles!=null & judgmentFiles[0]==1){
+                List<CommentImage> commentImages =updateImages(files,begin,productComment.getCommentId());
+                commentDao.addCommentImage(commentImages);
+            }
+
+        }
         //设置当前时间为评论时间
         productComment.setCommentTime(new Date());
         //新增评论基本信息
         commentDao.addComment(productComment);
-
-        //循环起点 有视频从1开始 无视频从0开始
-        Integer begin = 0;
-        //是否有视频
-        if ( sign == true ){
-            begin=1;
-        }
-
-        //判断是否有图片
-        if (judgmentFiles!=null & judgmentFiles[0]==1){
-            List<CommentImage> commentImages =updateImages(files,begin,productComment.getCommentId());
-            commentDao.addCommentImage(commentImages);
-        }
 
 
         return 1;
@@ -92,7 +100,7 @@ public class CommentServiceImpl implements CommentService {
         //是否有视频标志位
         Boolean sign = false;
         //判断文件是否为空
-        if (files==null | files.length==0){
+        if (files==null || files.length==0){
             result=null;
             return result;
         }
@@ -104,7 +112,7 @@ public class CommentServiceImpl implements CommentService {
             sign=true;
             result[1]=1;
         }
-        if (files.length>0 && sign == false || files.length>1 && sign == true ){
+        if (files.length>0 && sign == false || files.length>1){
             result[0]=1;
         }
         return result;
