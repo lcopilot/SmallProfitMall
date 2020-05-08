@@ -18,7 +18,7 @@ public class ProductComment implements Serializable {
     /**商品id**/
     private Integer productId;
     /**购买id**/
-    private String purchaseId;
+    private Integer purchaseId;
     /**评论文字内容**/
     private String textComment;
     /**评论视频**/
@@ -100,11 +100,11 @@ public class ProductComment implements Serializable {
         this.productId = productId;
     }
 
-    public String getPurchaseId() {
+    public Integer getPurchaseId() {
         return purchaseId;
     }
 
-    public void setPurchaseId(String purchaseId) {
+    public void setPurchaseId(Integer purchaseId) {
         this.purchaseId = purchaseId;
     }
 

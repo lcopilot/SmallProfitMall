@@ -388,17 +388,33 @@
 
         </where>
     </update>
-    
+
+    <!--修改商品状态-->
     <update id="updateProductState">
         UPDATE orders
         SET
         productState=#{productState}
-        Where
-        <if test="purchaseId!=null">
-           ADD purchaseId=#{purchaseId}
-        </if>
-        orderId=#{orderId}
+        <where>
+            <if test="purchaseId!=null">
+                AND purchaseId=#{purchaseId}
+            </if>
+            <if test="orderId!=null">
+                AND  orderId=#{orderId}
+            </if>
+        </where>
+
+
     </update>
+
+
+<!--    &lt;!&ndash;修改商品状态&ndash;&gt;-->
+<!--    <update id="updateEvaluate">-->
+<!--        UPDATE orders-->
+<!--        SET-->
+<!--        updateEvaluate=#{updateEvaluate}-->
+<!--        Where-->
+<!--         purchaseId=#{purchaseId}-->
+<!--    </update>-->
 
 
 </mapper>

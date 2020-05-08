@@ -1,6 +1,7 @@
 package cn.itcast.service.impl;
 
 import cn.itcast.dao.CommentDao;
+import cn.itcast.dao.OrderDao;
 import cn.itcast.domain.ProductDatails.CommentImage;
 import cn.itcast.domain.ProductDatails.ProductComment;
 import cn.itcast.service.CommentService;
@@ -24,6 +25,10 @@ import java.util.*;
  */
 @Service
 public class CommentServiceImpl implements CommentService {
+
+    /**订单持久层**/
+    @Autowired
+    OrderDao orderDao;
     //七牛云存储空间名称
     private static final  String space="mugebl";
     //base64t图片前缀
@@ -59,10 +64,13 @@ public class CommentServiceImpl implements CommentService {
                 productComment.setVideoComment(video);
             }
 
+
             //设置当前时间为评论时间
             productComment.setCommentTime(new Date());
             //新增评论基本信息
             commentDao.addComment(productComment);
+            //修改评论状态
+            orderDao.updateProductState(null,4,productComment.getPurchaseId());
 
             //循环起点 有视频从1开始 无视频从0开始
             Integer begin = 0;
@@ -77,12 +85,14 @@ public class CommentServiceImpl implements CommentService {
                 commentDao.addCommentImage(commentImages);
             }
 
+        }else {
+            //设置当前时间为评论时间
+            productComment.setCommentTime(new Date());
+            //新增评论基本信息
+            commentDao.addComment(productComment);
+            //修改评论状态
+            orderDao.updateProductState(null,4,productComment.getPurchaseId());
         }
-        //设置当前时间为评论时间
-        productComment.setCommentTime(new Date());
-        //新增评论基本信息
-        commentDao.addComment(productComment);
-
 
         return 1;
     }
