@@ -58,7 +58,7 @@
                   </el-col>
                   <el-col v-if="order.orderState>1" :span="2">
                     <div style="padding-top: 30%;height:78px;background-color:white;border-left: 1px solid #dcdfe6">
-                      <el-button type="text" size="mini" v-if="order.orderState==1 && product.productState==1">提醒发货</el-button>
+                      <el-button type="text" size="mini" v-if="order.orderState==2 && product.productState==1">提醒发货</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==2 && product.productState==2">确认收货</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==3">申请售后</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==3"  @click="comment(product.purchaseId,product.productId)">{{product.productState==3?'评价晒单':'追评'}}</el-button>
