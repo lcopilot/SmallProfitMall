@@ -28,10 +28,19 @@ public class ProductComment implements Serializable {
     /**点赞数量**/
     private Integer likeQuantity;
     /**评论图片**/
-    private String[] commentPicture;
+    private List<String> commentPicture;
     /**评论时间**/
     private Date commentTime;
+
+    /**商品配置**/
+    private String productConfiguration;
+
+    /**文件数组对象**/
     private String[] files;
+
+    /**是否匿名**/
+    private Boolean anonymity;
+
 
     public String[] getFiles() {
         return files;
@@ -41,8 +50,13 @@ public class ProductComment implements Serializable {
         this.files = files;
     }
 
-    /**是否匿名**/
-    private Boolean anonymity;
+    public String getProductConfiguration() {
+        return productConfiguration;
+    }
+
+    public void setProductConfiguration(String productConfiguration) {
+        this.productConfiguration = productConfiguration;
+    }
 
     public Boolean getAnonymity() {
         return anonymity;
@@ -126,11 +140,11 @@ public class ProductComment implements Serializable {
         this.likeQuantity = likeQuantity;
     }
 
-    public String[] getCommentPicture() {
+    public List<String> getCommentPicture() {
         return commentPicture;
     }
 
-    public void setCommentPicture(String[] commentPicture) {
+    public void setCommentPicture(List<String> commentPicture) {
         this.commentPicture = commentPicture;
     }
 }

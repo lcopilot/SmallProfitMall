@@ -3,11 +3,33 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.CommentDao">
+
+    <resultMap id="commentMap" type="cn.itcast.domain.ProductDatails.ProductComment">
+        <id property="commentId" column="commentId"></id>
+        <result property="userId" column="userId"></result>
+        <result property="productId" column="productId"></result>
+        <result property="purchaseId" column="purchaseId"></result>
+        <result property="textComment" column="textComment"></result>
+        <result property="videoComment" column="videoComment"></result>
+        <result property="favorability" column="favorability"></result>
+        <result property="commentTime" column="commentTime"></result>
+        <result property="anonymity" column="anonymity"></result>
+        <result property="productConfiguration" column="productConfiguration"></result>
+        <result property="likeQuantity" column="likeQuantity"></result>
+        <!--映射图片集合-->
+        <collection property="commentPicture" ofType="java.lang.String">
+            <constructor>
+                <arg column="commentPicture"/>
+            </constructor>
+        </collection>
+    </resultMap>
+
+
     <!--添加评论-->
-    <insert id="addComment" parameterType="cn.itcast.domain.ProductDatails.ProductComment">
+    <insert id="addComment"  useGeneratedKeys="true" keyProperty="commentId" parameterType="cn.itcast.domain.ProductDatails.ProductComment">
     INSERT
     INTO
-             productComment
+        productComment
          (userId,productId,purchaseId,textComment,videoComment,favorability,commentTime)
      VALUES
         (#{userId},#{productId},#{purchaseId},#{textComment},#{videoComment},#{favorability},#{commentTime});
@@ -27,24 +49,54 @@
     </insert>
 
     <!--查询评论-->
-    <select id="findAllComment" resultType="cn.itcast.domain.ProductDatails.ProductComment">
+    <select id="findAllComment" resultMap="commentMap">
     SELECT
         pc.*,
         u.Image,
         u.`name`,
         ci.commentPicture,
-        o.productConfiguration
+        o.productConfiguration,
+        ci.id
     FROM
         productComment pc
-        LEFT JOIN orders o ON pc.purchaseId = o.id
-        LEFT JOIN USER u ON pc.userId = u.uid
+        LEFT JOIN orders o ON  pc.purchaseId =  o.purchaseId
+        LEFT JOIN `user` u ON pc.userId = u.uid
         LEFT JOIN commentImage ci ON pc.commentId = ci.commentId
-    WHERE
-        pc.purchaseId IN (
-        SELECT
-            purchaseId
-        FROM
-        ( SELECT purchaseId FROM productComment WHERE ProductId = #{productId} ORDER BY commentTime DESC LIMIT #{start}, #{pageSize} ) AS paging)
-
+    <where>
+        <if test="commentType==0">
+             pc.ProductId = #{productId}
+            ORDER BY pc.commentTime DESC LIMIT #{start}, #{pageSize}
+        </if>
+        <if test="commentType==1">
+            pc.ProductId = #{productId}
+            AND pc.commentId IN
+            (SELECT commentId FROM commentImage)
+            ORDER BY pc.commentTime DESC LIMIT #{start}, #{pageSize}
+        </if>
+        <if test="commentType==2">
+            pc.ProductId = #{productId}
+            AND pc.videoComment IS NOT NULL
+            ORDER BY pc.commentTime DESC LIMIT #{start}, #{pageSize}
+        </if>
+        <if test="commentType==3">
+            pc.ProductId = #{productId}
+            ORDER BY pc.commentTime DESC LIMIT #{start}, #{pageSize}
+        </if>
+        <if test="commentType==4">
+            pc.ProductId = #{productId}
+            AND pc.favorability &gt;3
+            ORDER BY pc.commentTime DESC LIMIT #{start}, #{pageSize}
+        </if>
+        <if test="commentType==5">
+            pc.ProductId = #{productId}
+            AND pc.favorability = 3
+            ORDER BY pc.commentTime DESC LIMIT #{start}, #{pageSize}
+        </if>
+        <if test="commentType==6">
+            pc.ProductId = #{productId}
+            AND pc.favorability  &lt; 3
+            ORDER BY pc.commentTime DESC LIMIT #{start}, #{pageSize}
+        </if>
+    </where>
     </select>
 </mapper>

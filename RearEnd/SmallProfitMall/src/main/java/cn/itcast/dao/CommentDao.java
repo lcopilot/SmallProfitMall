@@ -40,5 +40,5 @@ public interface CommentDao {
      * @param pageSize 每页查询数量
      * @return
      */
-     ProductComment findAllComment(@Param("start")Integer productId ,@Param("start")Integer start,@Param("pageSize") Integer pageSize);
+     List<ProductComment> findAllComment(@Param("productId")Integer productId ,@Param("commentType")Integer commentType,@Param("start")Integer start,@Param("pageSize") Integer pageSize);
 }
