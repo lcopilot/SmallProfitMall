@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.CommentDao">
 
+    <!--评论映射-->
     <resultMap id="commentMap" type="cn.itcast.domain.ProductDatails.ProductComment">
         <id property="commentId" column="commentId"></id>
         <result property="userId" column="userId"></result>
@@ -16,10 +17,34 @@
         <result property="anonymity" column="anonymity"></result>
         <result property="productConfiguration" column="productConfiguration"></result>
         <result property="likeQuantity" column="likeQuantity"></result>
+        <result property="userImage" column="image"></result>
+        <result property="userName" column="name"></result>
+
+        <association property="secondComment" resultMap="secondCommentMap" javaType="cn.itcast.domain.ProductDatails.SecondComment">
+
+        </association>
+
         <!--映射图片集合-->
         <collection property="commentPicture" ofType="java.lang.String">
             <constructor>
                 <arg column="commentPicture"/>
+            </constructor>
+        </collection>
+
+
+    </resultMap>
+
+    <!--追评映射-->
+    <resultMap id="secondCommentMap" type="cn.itcast.domain.ProductDatails.SecondComment">
+        <id property="secondCommentId" column="secondCommentId"></id>
+        <result property="textSecondComment" column="textSecondComment"></result>
+        <result property="videoSecondComment" column="videoSecondComment"></result>
+        <result property="secondCommentTime" column="secondCommentTime"></result>
+
+        <!--映射追评论图片集合-->
+        <collection property="secondCommentPicture" ofType="java.lang.String">
+            <constructor>
+                <arg column="secondCommentPicture"/>
             </constructor>
         </collection>
     </resultMap>
@@ -30,10 +55,20 @@
     INSERT
     INTO
         productComment
-         (userId,productId,purchaseId,textComment,videoComment,favorability,commentTime)
+         (userId,productId,purchaseId,textComment,videoComment,favorability,commentTime,anonymity)
      VALUES
-        (#{userId},#{productId},#{purchaseId},#{textComment},#{videoComment},#{favorability},#{commentTime});
+        (#{userId},#{productId},#{purchaseId},#{textComment},#{videoComment},#{favorability},#{commentTime},#{anonymity});
 
+    </insert>
+
+    <!--新增追评-->
+    <insert id="addSecondSecondComment"  useGeneratedKeys="true" keyProperty="secondCommentId" parameterType="cn.itcast.domain.ProductDatails.SecondComment">
+    INSERT
+    INTO
+        secondComment
+         (commentId,textSecondComment,videoSecondComment,secondCommentTime)
+     VALUES
+        (#{commentId},#{textSecondComment},#{videoSecondComment},#{secondCommentTime});
     </insert>
 
     <!--添加评论图片-->
@@ -48,6 +83,19 @@
         </foreach>
     </insert>
 
+    <!--添加追评图片-->
+    <insert id="addSecondCommentImage">
+        INSERT
+        INTO
+        secondCommentImage
+        (secondCommentId,secondCommentPicture)
+        VALUES
+        <foreach collection="secondCommentImage" item="item" index="index" separator=",">
+            (#{item.secondCommentId},#{item.secondCommentPicture})
+        </foreach>
+    </insert>
+
+
     <!--查询评论-->
     <select id="findAllComment" resultMap="commentMap">
     SELECT
@@ -56,46 +104,72 @@
         u.`name`,
         ci.commentPicture,
         o.productConfiguration,
-        ci.id
+        sc.secondCommentId,
+        sc.textSecondComment,
+        sc.videoSecondComment,
+        sc.secondCommentTime,
+        si.secondCommentPicture
     FROM
         productComment pc
         LEFT JOIN orders o ON  pc.purchaseId =  o.purchaseId
         LEFT JOIN `user` u ON pc.userId = u.uid
         LEFT JOIN commentImage ci ON pc.commentId = ci.commentId
+        LEFT JOIN secondComment sc ON pc.commentId = sc.commentId
+        LEFT JOIN secondCommentImage si ON sc.secondCommentId = si.secondCommentId
     <where>
         <if test="commentType==0">
-             pc.ProductId = #{productId}
-            ORDER BY pc.commentTime DESC LIMIT #{start}, #{pageSize}
+            pc.commentId IN ( SELECT commentId FROM ( SELECT commentId FROM secondComment LIMIT #{start}, #{pageSize}  ORDER BY commentTime DESC ) AS productCommentTemporary )
+
         </if>
         <if test="commentType==1">
             pc.ProductId = #{productId}
-            AND pc.commentId IN
-            (SELECT commentId FROM commentImage)
-            ORDER BY pc.commentTime DESC LIMIT #{start}, #{pageSize}
+            AND pc.commentId IN (
+            SELECT
+            commentId
+            FROM
+            ( SELECT commentId FROM productComment WHERE commentId IN ( SELECT commentId FROM commentImage ) ORDER BY commentTime DESC LIMIT #{start}, #{pageSize} ) AS productCommentTemporary
+            )
         </if>
         <if test="commentType==2">
             pc.ProductId = #{productId}
-            AND pc.videoComment IS NOT NULL
-            ORDER BY pc.commentTime DESC LIMIT #{start}, #{pageSize}
+            AND pc.commentId IN (
+            SELECT
+            commentId
+            FROM
+            ( SELECT commentId FROM productComment WHERE videoComment IS NOT NULL ORDER BY commentTime DESC LIMIT #{start}, #{pageSize} ) AS productCommentTemporary)
         </if>
         <if test="commentType==3">
             pc.ProductId = #{productId}
-            ORDER BY pc.commentTime DESC LIMIT #{start}, #{pageSize}
+            AND pc.commentId IN (
+            SELECT
+            commentId
+            FROM
+            ( SELECT commentId FROM secondComment WHERE commentId IN ( SELECT commentId FROM secondComment ) ORDER BY secondCommentTime DESC LIMIT 0, 1 ) AS productCommentTemporary
+            )
         </if>
         <if test="commentType==4">
             pc.ProductId = #{productId}
-            AND pc.favorability &gt;3
-            ORDER BY pc.commentTime DESC LIMIT #{start}, #{pageSize}
+            AND pc.commentId IN (
+            SELECT
+            commentId
+            FROM
+            ( SELECT commentId FROM productComment WHERE favorability  &gt; 3 ORDER BY commentTime DESC LIMIT #{start}, #{pageSize} ) AS productCommentTemporary)
         </if>
         <if test="commentType==5">
             pc.ProductId = #{productId}
-            AND pc.favorability = 3
-            ORDER BY pc.commentTime DESC LIMIT #{start}, #{pageSize}
+            AND pc.commentId IN (
+            SELECT
+            commentId
+            FROM
+            ( SELECT commentId FROM productComment WHERE favorability  = 3 ORDER BY commentTime DESC LIMIT #{start}, #{pageSize} ) AS productCommentTemporary)
         </if>
         <if test="commentType==6">
             pc.ProductId = #{productId}
-            AND pc.favorability  &lt; 3
-            ORDER BY pc.commentTime DESC LIMIT #{start}, #{pageSize}
+            AND pc.commentId IN (
+            SELECT
+            commentId
+            FROM
+            ( SELECT commentId FROM productComment WHERE favorability  &lt; 3 ORDER BY commentTime DESC LIMIT #{start}, #{pageSize} ) AS productCommentTemporary)
         </if>
     </where>
     </select>

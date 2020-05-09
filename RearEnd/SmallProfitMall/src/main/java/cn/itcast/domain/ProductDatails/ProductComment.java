@@ -15,6 +15,10 @@ public class ProductComment implements Serializable {
     private Integer commentId;
     /**用户id**/
     private String userId;
+    /**用户头像**/
+    private String userImage;
+    /**用户名称**/
+    private String userName;
     /**商品id**/
     private Integer productId;
     /**购买id**/
@@ -41,6 +45,32 @@ public class ProductComment implements Serializable {
     /**是否匿名**/
     private Boolean anonymity;
 
+    /**追评对象**/
+    private SecondComment secondComment;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
+    }
+
+    public SecondComment getSecondComment() {
+        return secondComment;
+    }
+
+    public void setSecondComment(SecondComment secondComment) {
+        this.secondComment = secondComment;
+    }
 
     public String[] getFiles() {
         return files;

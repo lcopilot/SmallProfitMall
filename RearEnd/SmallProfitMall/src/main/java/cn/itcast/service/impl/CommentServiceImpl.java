@@ -4,6 +4,9 @@ import cn.itcast.dao.CommentDao;
 import cn.itcast.dao.OrderDao;
 import cn.itcast.domain.ProductDatails.CommentImage;
 import cn.itcast.domain.ProductDatails.ProductComment;
+import cn.itcast.domain.ProductDatails.SecondComment;
+import cn.itcast.domain.ProductDatails.SecondCommentImage;
+import cn.itcast.domain.footprint.Footprint;
 import cn.itcast.service.CommentService;
 import cn.itcast.util.compressPicture.UploadPicturesUtil;
 import cn.itcast.util.fileType.FileTypeUtils;
@@ -81,7 +84,15 @@ public class CommentServiceImpl implements CommentService {
 
             //判断是否有图片
             if (judgmentFiles!=null & judgmentFiles[0]==1){
-                List<CommentImage> commentImages =updateImages(files,begin,productComment.getCommentId());
+                List<CommentImage> commentImages= new ArrayList<>();
+                String[] images  = updateImages(files,begin);
+
+                for (int i = 0; i <images.length ; i++) {
+                    CommentImage commentImage = new CommentImage();
+                    commentImage.setCommentPicture(images[i]);
+                    commentImage.setCommentId(productComment.getCommentId());
+                    commentImages.add(commentImage);
+                }
                 commentDao.addCommentImage(commentImages);
             }
 
@@ -96,6 +107,95 @@ public class CommentServiceImpl implements CommentService {
 
         return 1;
     }
+
+    /**
+     * 查询商品评论
+     * @param productId 商品id
+     * @param commentType 评论类型
+     * @param currentPage 查询当前页
+     * @param pageSize 每页查询数量
+     * @return 评论对象
+     */
+    @Override
+    public List<ProductComment> findComment(Integer productId, Integer commentType, Integer currentPage, Integer pageSize) {
+        //开始页
+        Integer start=(currentPage-1)*pageSize;
+        List<ProductComment> footprints = commentDao.findAllComment(productId,commentType,start,pageSize);
+        for (int i = 0; i <footprints.size() ; i++) {
+            Boolean fign = footprints.get(i).getAnonymity();
+            if (fign){
+                footprints.get(i).setUserImage("http://img.fhxasdsada.xyz/3%28DI_QB59DDSNU84LSLN%5D0H.png");
+                footprints.get(i).setUserName("该用户不想让你知道");
+            }
+        }
+        return footprints;
+    }
+
+    /**
+     * 添加追评
+     * @param secondComment
+     * @return
+     * @throws IOException
+     */
+    @Override
+    public Integer addSecondComment(SecondComment secondComment) throws IOException {
+        //是否有视频标志位
+        Boolean sign = false;
+
+        //文件数组 0为视频 <0 为图片
+        String[] files = secondComment.getFiles();
+
+
+        //判断文件 [0]为是否有图片 0为没有 1为有 [1]为是否有视频 0为没有 1为有
+        Integer[] judgmentFiles = judgmentFiles(files);
+        if (judgmentFiles!=null ){
+            if(judgmentFiles[1]==1){
+                //前缀 为   data:image/jpeg;base64 则为图片
+                String prefix =  files[0];
+                sign=true;
+                String video = updateVideo(prefix);
+                secondComment.setVideoSecondComment(video);
+            }
+
+
+            //设置当前时间为评论时间
+            secondComment.setSecondCommentTime(new Date());
+            //新增评论基本信息
+            commentDao.addSecondSecondComment(secondComment);
+            //修改评论状态
+            orderDao.updateProductState(null,5,secondComment.getPurchaseId());
+
+            //循环起点 有视频从1开始 无视频从0开始
+            Integer begin = 0;
+            //是否有视频
+            if ( sign == true ){
+                begin=1;
+            }
+
+            //判断是否有图片
+            if (judgmentFiles!=null & judgmentFiles[0]==1){
+                List<SecondCommentImage> secondCommentImages= new ArrayList<>();
+                String[] images  = updateImages(files,begin);
+                for (int i = 0; i <images.length ; i++) {
+                    SecondCommentImage secondCommentImage = new SecondCommentImage();
+                    secondCommentImage.setSecondCommentPicture(images[i]);
+                    secondCommentImage.setSecondCommentId(secondComment.getCommentId());
+                    secondCommentImages.add(secondCommentImage);
+                }
+                commentDao.addSecondCommentImage(secondCommentImages);
+            }
+
+        }else {
+            //设置当前时间为评论时间
+            secondComment.setSecondCommentTime(new Date());
+            //新增评论基本信息
+            commentDao.addSecondSecondComment(secondComment);
+            //修改评论状态
+            orderDao.updateProductState(null,4,secondComment.getPurchaseId());
+        }
+        return 1;
+    }
+
 
     /**
      * 判断是否有视频
@@ -147,25 +247,26 @@ public class CommentServiceImpl implements CommentService {
      *  压缩上传图片
      * @param files base64数组
      * @param begin 循环开始 有视频从1开始 无视频从0开始
-     * @param commentId 购买编号
      * @return 上传成功后图片地址地址 购买编号集合
      * @throws IOException
      */
-    public List updateImages(String[] files,Integer begin,Integer commentId) throws IOException {
+    public String[] updateImages(String[] files,Integer begin) throws IOException {
         //新增评论图片
-        List<CommentImage> commentImages= new ArrayList();
+        String[] images= new String[files.length];
         for (int i = begin; i <files.length ; i++) {
             String uuids = UUID.randomUUID().toString().replaceAll("-","");
             //base64转InputStream
             InputStream inputStream = this.base64InputStream(files[i].substring(0,files[i].length()-base64Prefix.length()));
             //压缩图片 上传图片至七牛云 返回图片地址
             String Image = UploadPicturesUtil.UploadPicturesUtil(space,inputStream,uuids);
-            CommentImage  commentImage=new CommentImage();
-            commentImage.setCommentId(commentId);
-            commentImage.setCommentPicture(Image);
-            commentImages.add(commentImage);
+            if (begin==1){
+                images[i-1]=Image;
+            }else {
+                images[i]=Image;
+            }
+
         }
-        return commentImages;
+        return images;
     }
 
 

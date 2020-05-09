@@ -13,6 +13,8 @@ public class CommentImage {
     /**评论id**/
     private Integer commentId;
 
+
+
     public String getCommentPicture() {
         return commentPicture;
     }

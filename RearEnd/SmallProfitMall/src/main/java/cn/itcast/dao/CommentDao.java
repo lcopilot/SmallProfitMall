@@ -1,6 +1,7 @@
 package cn.itcast.dao;
 
 import cn.itcast.domain.ProductDatails.ProductComment;
+import cn.itcast.domain.ProductDatails.SecondComment;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;
@@ -21,7 +22,12 @@ public interface CommentDao {
      */
      void addComment(ProductComment productComment);
 
-     //void addReply(String reply);
+    /**
+     * 添加追平
+     * @param secondComment
+     */
+    void addSecondSecondComment(SecondComment secondComment);
+
 
 
     /**
@@ -31,7 +37,12 @@ public interface CommentDao {
      */
      Integer addCommentImage(@Param("commentImages") List commentImages);
 
-
+    /**
+     * 新增评价图片数组
+     * @param secondCommentImage 追平图片对象集合
+     * @return
+     */
+    Integer addSecondCommentImage(@Param("secondCommentImage") List secondCommentImage);
 
     /**
      * 查询商品评论

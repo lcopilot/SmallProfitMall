@@ -2,9 +2,12 @@ package cn.itcast.controller;
 
 import cn.itcast.dao.CommentDao;
 import cn.itcast.domain.ProductDatails.ProductComment;
+import cn.itcast.domain.ProductDatails.SecondComment;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
+import cn.itcast.response.listFootprint.Pagination;
+import cn.itcast.response.listFootprint.ResponsePagination;
 import cn.itcast.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * 商品评论控制层
@@ -46,12 +50,31 @@ public class CommentController {
 
     /**
      * 查询商品评论
+     * @param productId 商品id
+     * @param commentType 评论类型 0 为查全部 1查有图 2查有视频 3为查追评 4为好评 5为中评 6为差评
+     * @param currentPage 查询当前页
+     * @param pageSize 每次查询数量
      * @return
      */
-    @RequestMapping(value = "/findComment/{commentType}",method = RequestMethod.GET)
-    public QueryResponseResult findComment(@PathVariable("commentType") Integer commentType){
-        QueryResult queryResult = new QueryResult();
-        queryResult.setList(commentDao.findAllComment(10006,commentType,0,10));
-        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+    @RequestMapping(value = "/findComment",method = RequestMethod.GET)
+    public ResponsePagination findComment(Integer productId, Integer commentType, Integer currentPage , Integer pageSize){
+        Pagination pagination = new Pagination();
+       List<ProductComment> productComments = commentService.findComment(productId,commentType,currentPage,pageSize);
+        pagination.setList(productComments);
+        return new ResponsePagination(CommonCode.SUCCESS,pagination);
+    }
+
+    /**
+     * 商品添加追评
+     * @param secondComment
+     * @return
+     */
+    @RequestMapping(value = "/addSecondComment",method = RequestMethod.POST)
+    public QueryResponseResult addSecondComment(@RequestBody SecondComment secondComment) throws IOException {
+        Integer result = commentService.addSecondComment(secondComment);
+        if (result>=1){
+            return new QueryResponseResult(CommonCode.SUCCESS,null);
+        }
+        return new QueryResponseResult(CommonCode.FAIL,null);
     }
 }
