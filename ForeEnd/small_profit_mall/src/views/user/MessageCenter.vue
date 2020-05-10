@@ -167,7 +167,7 @@
                             付款金额
                           </div>
                           <div class="message_order_Trn_Am">
-                            ￥{{parseInt(paymentAssistant.paymentAmount).toFixed(2)}}
+                            ￥{{paymentAssistant.paymentAmount}}
                           </div>
                         </el-form-item>
                         <el-form-item label="收款方">

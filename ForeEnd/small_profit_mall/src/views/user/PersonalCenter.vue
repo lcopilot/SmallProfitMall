@@ -358,7 +358,7 @@
       //充值
       recharge(){
         const code = /^(0|[1-9]\d*)(\.\d{1,2})?/;
-        if (this.amount.length >8 || !code.test(this.amount)){
+        if (this.amount.length >8 || !code.test(this.amount) || this.amount==0){
           this.$message.warning("请输入正确的格式,小数点支持两位")
         }else {
           let params={
