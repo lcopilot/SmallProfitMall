@@ -62,7 +62,7 @@
                       <el-button type="text" size="mini" v-if="order.orderState==2 && product.productState==2">确认收货</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==3">申请售后</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==3"  @click="comment(product.purchaseId,product.productId)">评价晒单</el-button>
-                      <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==5"  @click="comment(product.purchaseId,product.productId)">追评</el-button>
+                      <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==5"  @click="comment(product.purchaseId,0,true)">追评</el-button>
                     </div>
                   </el-col>
                 </el-row>
@@ -108,7 +108,7 @@
         </table>
         <el-dialog title="商品评论" :visible.sync="commentVisible" @close="clearFiles">
           <el-form :model="commentForm" label-position="right" label-width="120px">
-            <el-form-item label="描述相符">
+            <el-form-item label="描述相符" v-if="!review">
               <div class="order_product_score">
                 <el-rate
                     v-model="commentForm.score"
@@ -164,7 +164,7 @@
                 </div>
               </div>
             </el-form-item>
-            <el-form-item label="匿名评价">
+            <el-form-item label="匿名评价" v-if="!review">
               <div class="order_comment_img">
                 <el-switch v-model="commentForm.isAnonymity" active-text="不公开头像,昵称">
                 </el-switch>
@@ -246,6 +246,8 @@
             fullscreenToggle: true
           }
         },
+        //是否是追评
+        review:false,
         imgList: [],
         //评论对话框
         commentVisible: false,
@@ -283,7 +285,11 @@
         this.fileList=fileList
       },
       //打开评论窗口
-      comment(purchaseId,productId){
+      comment(purchaseId,productId,review){
+        if (review){
+          this.review=true;
+          sessionStorage.setItem('review',review);
+        }
         this.commentVisible=true;
         sessionStorage.setItem("purchaseId",purchaseId);
         sessionStorage.setItem("productIdComm",productId);
@@ -315,17 +321,31 @@
         const timer=setInterval(()=>{
           if (this.commentVideo?(fileList.length==this.fileList.length+1):(fileList.length==this.fileList.length)){
             clearInterval(timer)
-            productApi.addComment(comment).then(res=>{
-              if (res.success){
-                this.$message({
-                  type:"success",
-                  message:"评论已提交"
-                });
-                this.playerOptions.sources[0].src="";
-                this.clearFiles();
-                this.commentVisible=false;
-              }
-            })
+            if (this.review){
+              productApi.addSecondComment(comment).then(res=>{
+                if (res.success){
+                  this.$message({
+                    type:"success",
+                    message:"评论已提交"
+                  });
+                  this.playerOptions.sources[0].src="";
+                  this.clearFiles();
+                  this.commentVisible=false;
+                }
+              })
+            }else {
+              productApi.addComment(comment).then(res=>{
+                if (res.success){
+                  this.$message({
+                    type:"success",
+                    message:"评论已提交"
+                  });
+                  this.playerOptions.sources[0].src="";
+                  this.clearFiles();
+                  this.commentVisible=false;
+                }
+              })
+            }
           }
         },20)
       },
@@ -335,9 +355,11 @@
       },
       //清除文件
       clearFiles() {
+        this.review=false;
         this.fileList=[];
         sessionStorage.removeItem("purchaseId");
         sessionStorage.removeItem("productIdComm");
+        sessionStorage.removeItem("review");
         this.playerOptions.sources[0].src='';
         const mainImg = this.$refs.upload;
         if (mainImg && mainImg.length) {

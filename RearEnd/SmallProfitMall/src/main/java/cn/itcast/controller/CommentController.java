@@ -98,5 +98,4 @@ public class CommentController {
         return new QueryResponseResult(CommonCode.FAIL,null);
     }
 
-
 }
