@@ -118,8 +118,7 @@
         LEFT JOIN secondCommentImage si ON sc.secondCommentId = si.secondCommentId
     <where>
         <if test="commentType==0">
-            pc.commentId IN ( SELECT commentId FROM ( SELECT commentId FROM secondComment LIMIT #{start}, #{pageSize}  ORDER BY commentTime DESC ) AS productCommentTemporary )
-
+              pc.commentId IN ( SELECT commentId FROM ( SELECT commentId FROM productComment WHERE ProductId = #{productId}  ORDER BY commentTime DESC LIMIT #{start}, #{pageSize}) AS productCommentTemporary );
         </if>
         <if test="commentType==1">
             pc.ProductId = #{productId}
@@ -131,12 +130,11 @@
             )
         </if>
         <if test="commentType==2">
-            pc.ProductId = #{productId}
-            AND pc.commentId IN (
+        pc.commentId IN (
             SELECT
             commentId
             FROM
-            ( SELECT commentId FROM productComment WHERE videoComment IS NOT NULL ORDER BY commentTime DESC LIMIT #{start}, #{pageSize} ) AS productCommentTemporary)
+            ( SELECT commentId FROM productComment WHERE videoComment IS NOT NULL AND  ProductId = #{productId}  ORDER BY commentTime DESC LIMIT #{start}, #{pageSize} ) AS productCommentTemporary)
         </if>
         <if test="commentType==3">
             pc.ProductId = #{productId}
@@ -144,7 +142,7 @@
             SELECT
             commentId
             FROM
-            ( SELECT commentId FROM secondComment WHERE commentId IN ( SELECT commentId FROM secondComment ) ORDER BY secondCommentTime DESC LIMIT 0, 1 ) AS productCommentTemporary
+            ( SELECT commentId FROM secondComment WHERE commentId IN ( SELECT commentId FROM secondComment ) ORDER BY secondCommentTime DESC LIMIT #{start}, #{pageSize}  ) AS productCommentTemporary
             )
         </if>
         <if test="commentType==4">
@@ -172,6 +170,68 @@
             ( SELECT commentId FROM productComment WHERE favorability  &lt; 3 ORDER BY commentTime DESC LIMIT #{start}, #{pageSize} ) AS productCommentTemporary)
         </if>
     </where>
+    </select>
+    
+    <!--查询不同评论数量-->
+    <select id="findCommentQuantity" resultType="java.lang.Integer">
+        SELECT
+        count(commentId)
+        FROM
+        productComment pc
+        <where>
+            <if test="commentType==0">
+                pc.commentId IN ( SELECT commentId FROM ( SELECT commentId FROM productComment WHERE ProductId = #{productId}) AS productCommentTemporary );
+            </if>
+            <if test="commentType==1">
+                pc.ProductId = #{productId}
+                AND pc.commentId IN (
+                SELECT
+                commentId
+                FROM
+                ( SELECT commentId FROM productComment WHERE commentId IN ( SELECT commentId FROM commentImage ) ) AS productCommentTemporary
+                )
+            </if>
+            <if test="commentType==2">
+                pc.commentId IN (
+                SELECT
+                commentId
+                FROM
+                ( SELECT commentId FROM productComment WHERE videoComment IS NOT NULL AND  ProductId = #{productId}   ) AS productCommentTemporary)
+            </if>
+            <if test="commentType==3">
+                pc.ProductId = #{productId}
+                AND pc.commentId IN (
+                SELECT
+                commentId
+                FROM
+                ( SELECT commentId FROM secondComment WHERE commentId IN ( SELECT commentId FROM secondComment )) AS productCommentTemporary
+                )
+            </if>
+            <if test="commentType==4">
+                pc.ProductId = #{productId}
+                AND pc.commentId IN (
+                SELECT
+                commentId
+                FROM
+                ( SELECT commentId FROM productComment WHERE favorability  &gt; 3 ) AS productCommentTemporary)
+            </if>
+            <if test="commentType==5">
+                pc.ProductId = #{productId}
+                AND pc.commentId IN (
+                SELECT
+                commentId
+                FROM
+                ( SELECT commentId FROM productComment WHERE favorability  = 3 ) AS productCommentTemporary)
+            </if>
+            <if test="commentType==6">
+                pc.ProductId = #{productId}
+                AND pc.commentId IN (
+                SELECT
+                commentId
+                FROM
+                ( SELECT commentId FROM productComment WHERE favorability  &lt; 3 ) AS productCommentTemporary)
+            </if>
+        </where>
     </select>
 
 

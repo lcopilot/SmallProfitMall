@@ -2,10 +2,7 @@ package cn.itcast.service.impl;
 
 import cn.itcast.dao.CommentDao;
 import cn.itcast.dao.OrderDao;
-import cn.itcast.domain.ProductDatails.CommentImage;
-import cn.itcast.domain.ProductDatails.ProductComment;
-import cn.itcast.domain.ProductDatails.SecondComment;
-import cn.itcast.domain.ProductDatails.SecondCommentImage;
+import cn.itcast.domain.ProductDatails.*;
 import cn.itcast.domain.footprint.Footprint;
 import cn.itcast.service.CommentService;
 import cn.itcast.util.compressPicture.UploadPicturesUtil;
@@ -132,6 +129,25 @@ public class CommentServiceImpl implements CommentService {
     }
 
     /**
+     * 查询不同商品数量
+     * @param productId 商品id
+     * @return
+     */
+    @Override
+    public CommentQuantity findCommentQuantity(Integer productId) {
+        CommentQuantity commentQuantity = new CommentQuantity();
+        commentQuantity.setAllCommentQuantity(commentDao.findCommentQuantity(productId,0));
+        commentQuantity.setImageCommentQuantity(commentDao.findCommentQuantity(productId,1));
+        commentQuantity.setVideoCommentQuantity(commentDao.findCommentQuantity(productId,2));
+        commentQuantity.setSecondCommentQuantity(commentDao.findCommentQuantity(productId,3));
+        commentQuantity.setGoodCommentQuantity(commentDao.findCommentQuantity(productId,4));
+        commentQuantity.setOrdinaryCommentQuantity(commentDao.findCommentQuantity(productId,5));
+        commentQuantity.setDifferenceCommentQuantity(commentDao.findCommentQuantity(productId,6));
+        return commentQuantity;
+    }
+
+
+    /**
      * 添加追评
      * @param secondComment
      * @return
@@ -194,6 +210,22 @@ public class CommentServiceImpl implements CommentService {
             orderDao.updateProductState(null,4,secondComment.getPurchaseId());
         }
         return 1;
+    }
+
+    /**
+     * 查询总页数跟总收藏数量
+     * @param productId 商品Id
+     * @param pageSize 每页查询数量
+     * @return
+     */
+    @Override
+    public Integer[] fendTotalPage(Integer productId, Integer pageSize) {
+        Integer[] TotalPage=new Integer[2];
+        Integer quantity = commentDao.findCommentQuantity(productId,pageSize);
+        int totalPage = (quantity % pageSize)  == 0 ? quantity/pageSize : (quantity/pageSize) + 1;
+        TotalPage[0]=quantity;
+        TotalPage[1]=totalPage;
+        return TotalPage;
     }
 
 

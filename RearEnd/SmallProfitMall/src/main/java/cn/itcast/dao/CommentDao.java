@@ -47,9 +47,18 @@ public interface CommentDao {
     /**
      * 查询商品评论
      * @param productId 商品id
+     * @param commentType 评论类型
      * @param start 查询开始
      * @param pageSize 每页查询数量
      * @return
      */
      List<ProductComment> findAllComment(@Param("productId")Integer productId ,@Param("commentType")Integer commentType,@Param("start")Integer start,@Param("pageSize") Integer pageSize);
+
+    /**
+     * 查询不同评论数量
+     * @param productId 商品id
+     * @param commentType 评论类型
+     * @return 数量
+     */
+     Integer findCommentQuantity(@Param("productId")Integer productId,@Param("commentType")Integer commentType );
 }

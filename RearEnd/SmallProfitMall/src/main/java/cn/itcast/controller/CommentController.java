@@ -1,6 +1,7 @@
 package cn.itcast.controller;
 
 import cn.itcast.dao.CommentDao;
+import cn.itcast.domain.ProductDatails.CommentQuantity;
 import cn.itcast.domain.ProductDatails.ProductComment;
 import cn.itcast.domain.ProductDatails.SecondComment;
 import cn.itcast.response.CommonCode;
@@ -8,6 +9,8 @@ import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.response.listFootprint.Pagination;
 import cn.itcast.response.listFootprint.ResponsePagination;
+import cn.itcast.response.objectReturn.ObjectReturn;
+import cn.itcast.response.objectReturn.ObjectReturnResponse;
 import cn.itcast.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,8 +63,25 @@ public class CommentController {
     public ResponsePagination findComment(Integer productId, Integer commentType, Integer currentPage , Integer pageSize){
         Pagination pagination = new Pagination();
        List<ProductComment> productComments = commentService.findComment(productId,commentType,currentPage,pageSize);
+        //查询总数量跟总页数 数组0为总数量 1 为总页数
+        Integer[] totalPage=commentService.fendTotalPage(productId,pageSize);
+        pagination.setTotalCount(totalPage[0].longValue());
+        pagination.setTotalPage((int) totalPage[1].longValue());
         pagination.setList(productComments);
         return new ResponsePagination(CommonCode.SUCCESS,pagination);
+    }
+
+    /**
+     * 查询评论数量
+     * @param productId
+     * @return
+     */
+    @RequestMapping(value = "findCommentQuantity/{productId}",method = RequestMethod.GET )
+    public ObjectReturnResponse findCommentQuantity(@PathVariable("productId") Integer productId){
+        ObjectReturn objectReturn = new ObjectReturn();
+        CommentQuantity commentQuantity = commentService.findCommentQuantity(productId);
+        objectReturn.setObject(commentQuantity);
+        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
     }
 
     /**
@@ -77,4 +97,6 @@ public class CommentController {
         }
         return new QueryResponseResult(CommonCode.FAIL,null);
     }
+
+
 }

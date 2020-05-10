@@ -1,5 +1,6 @@
 package cn.itcast.service;
 
+import cn.itcast.domain.ProductDatails.CommentQuantity;
 import cn.itcast.domain.ProductDatails.ProductComment;
 import cn.itcast.domain.ProductDatails.SecondComment;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,11 +35,29 @@ public interface CommentService {
     public List<ProductComment> findComment(Integer productId, Integer commentType, Integer currentPage , Integer pageSize);
 
     /**
+     * 查询不同评论数量
+     * @param productId 商品id
+     * @return 数量对象
+     */
+    public CommentQuantity findCommentQuantity(Integer productId);
+
+
+    /**
      * 添加追评
      * @param secondComment
      * @return
      */
     public Integer addSecondComment(SecondComment secondComment) throws IOException;
+
+    /**
+     * 查询分页数量
+     * @param productId
+     * @param pageSize
+     * @return
+     */
+    public Integer[] fendTotalPage(Integer productId, Integer pageSize);
+
+
 
     /**
      *  base64转InputStream
