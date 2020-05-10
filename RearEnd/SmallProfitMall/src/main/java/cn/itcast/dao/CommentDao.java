@@ -61,4 +61,11 @@ public interface CommentDao {
      * @return 数量
      */
      Integer findCommentQuantity(@Param("productId")Integer productId,@Param("commentType")Integer commentType );
+
+    /**
+     * 查询评论id
+     * @param purchaseId 商品购买编号
+     * @return 评论id
+     */
+    Integer findCommentId(@Param("purchaseId")Integer purchaseId);
 }

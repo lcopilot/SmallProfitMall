@@ -5,6 +5,8 @@ import cn.itcast.domain.member.Member;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
+import cn.itcast.response.objectReturn.ObjectReturn;
+import cn.itcast.response.objectReturn.ObjectReturnResponse;
 import cn.itcast.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,12 +53,11 @@ public class MemberController {
      * @return
      */
     @RequestMapping(value = "/findMember/{userId}",method =RequestMethod.GET)
-    public QueryResponseResult findMember(@PathVariable("userId") String userId){
+    public ObjectReturnResponse findMember(@PathVariable("userId") String userId) throws Exception {
         Member members = memberService.findMember(userId);
-        List<Member> redis = Arrays.asList(members);
-        QueryResult result = new QueryResult();
-        result.setList(redis);
-        return new QueryResponseResult(CommonCode.SUCCESS,result);
+        ObjectReturn objectReturn = new ObjectReturn();
+        objectReturn.setObject(members);
+        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
     }
 
 }

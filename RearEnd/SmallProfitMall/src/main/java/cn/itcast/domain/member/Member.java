@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class Member implements Serializable {
     //用户余额
-    private Double balance;
+    private String balance;
     //用户id
     private String userId;
     //会员积分
@@ -20,11 +20,11 @@ public class Member implements Serializable {
     //会员成长值
     private Integer growthValue;
 
-    public Double getBalance() {
+    public String getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(String balance) {
         this.balance = balance;
     }
 
