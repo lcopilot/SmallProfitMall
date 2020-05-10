@@ -210,7 +210,6 @@
       },
       //获取足迹
       getFootprint() {
-
         const params={
           userId:sessionStorage.getItem("uId"),
           currentPage:this.footprintParams.currentPage,

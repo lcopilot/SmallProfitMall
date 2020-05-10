@@ -1,6 +1,7 @@
 import http from '../util/public'
 
 import sysConfig from '../util/sysConfig'
+import querystring from "querystring";
 const apiUrl=sysConfig.smApiUrlPre;
 //获取商品详细数据
 export const getProduct=productId=>{
@@ -43,6 +44,11 @@ export const addComment=data=>{
   return http.requestPost(apiUrl+'/CommentController/addComment',data)
 }
 //获取商品评论
-export const getProductComment=()=>{
-
+export const getProductComment=params=>{
+  const queryString=querystring.stringify(params);
+  return http.requestGet(apiUrl+'/CommentController/findComment?'+queryString)
+}
+//获取各类评论数量
+export const getProductCommentQuantity=productId=>{
+  return http.requestGet(apiUrl+'/CommentController/findCommentQuantity/'+productId)
 }

@@ -434,6 +434,8 @@
               this.$router.replace({
                 path: "/orderComplete"
               });
+            }else {
+              this.$message.error('支付密码错误!')
             }
           });
         }
