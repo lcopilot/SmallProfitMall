@@ -237,7 +237,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Integer[] fendTotalPage(Integer productId, Integer pageSize) {
         Integer[] TotalPage=new Integer[2];
-        Integer quantity = commentDao.findCommentQuantity(productId,pageSize);
+        Integer quantity = commentDao.findCommentQuantity(productId,0);
         int totalPage = (quantity % pageSize)  == 0 ? quantity/pageSize : (quantity/pageSize) + 1;
         TotalPage[0]=quantity;
         TotalPage[1]=totalPage;
