@@ -408,7 +408,7 @@
       getMember(){
         userApi.getMember().then(res=>{
           if (res.success){
-
+            this.member=res.queryResult.list[0]
           }
         })
       },
