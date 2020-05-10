@@ -26,6 +26,14 @@ public class CommentQuantity implements Serializable {
     private Double goodCommentPercentage;
 
 
+    public Double getGoodCommentPercentage() {
+        return goodCommentPercentage;
+    }
+
+    public void setGoodCommentPercentage(Double goodCommentPercentage) {
+        this.goodCommentPercentage = goodCommentPercentage;
+    }
+
     public Integer getAllCommentQuantity() {
         return allCommentQuantity;
     }

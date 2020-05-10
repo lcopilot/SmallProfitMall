@@ -17,6 +17,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.NumberFormat;
 import java.util.*;
 
 /**
@@ -136,14 +137,24 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentQuantity findCommentQuantity(Integer productId) {
         CommentQuantity commentQuantity = new CommentQuantity();
-        commentQuantity.setAllCommentQuantity(commentDao.findCommentQuantity(productId,0));
+        //全部评论数量
+        Integer allCommentQuantity = commentDao.findCommentQuantity(productId,0);
+        //好评数量
+        Integer goodCommentQuantity = commentDao.findCommentQuantity(productId,4);
+        commentQuantity.setAllCommentQuantity(allCommentQuantity);
         commentQuantity.setImageCommentQuantity(commentDao.findCommentQuantity(productId,1));
         commentQuantity.setVideoCommentQuantity(commentDao.findCommentQuantity(productId,2));
         commentQuantity.setSecondCommentQuantity(commentDao.findCommentQuantity(productId,3));
-        commentQuantity.setGoodCommentQuantity(commentDao.findCommentQuantity(productId,4));
+        commentQuantity.setGoodCommentQuantity(goodCommentQuantity);
         commentQuantity.setOrdinaryCommentQuantity(commentDao.findCommentQuantity(productId,5));
         commentQuantity.setDifferenceCommentQuantity(commentDao.findCommentQuantity(productId,6));
 
+        //计算好评度
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        numberFormat.setMaximumFractionDigits(2);
+        String result = numberFormat.format((float)goodCommentQuantity/(float)allCommentQuantity*100);
+        Double goodCommentPercentage = Double.parseDouble(result);
+        commentQuantity.setGoodCommentPercentage(goodCommentPercentage);
 
         return commentQuantity;
     }
