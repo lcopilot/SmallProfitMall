@@ -122,8 +122,8 @@ public class CommentServiceImpl implements CommentService {
         for (int i = 0; i <footprints.size() ; i++) {
             Boolean fign = footprints.get(i).getAnonymity();
             if (fign){
-                footprints.get(i).setUserImage("http://img.fhxasdsada.xyz/3%28DI_QB59DDSNU84LSLN%5D0H.png");
-                footprints.get(i).setUserName("该用户不想让你知道");
+                footprints.get(i).setUserImage("http://img.fhxasdsada.xyz/iduyadfgjdekldjhf.png");
+                footprints.get(i).setUserName("匿名");
             }
         }
         return footprints;
@@ -149,12 +149,15 @@ public class CommentServiceImpl implements CommentService {
         commentQuantity.setOrdinaryCommentQuantity(commentDao.findCommentQuantity(productId,5));
         commentQuantity.setDifferenceCommentQuantity(commentDao.findCommentQuantity(productId,6));
 
-        //计算好评度
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setMaximumFractionDigits(2);
-        String result = numberFormat.format((float)goodCommentQuantity/(float)allCommentQuantity*100);
-        Double goodCommentPercentage = Double.parseDouble(result);
-        commentQuantity.setGoodCommentPercentage(goodCommentPercentage);
+        if(allCommentQuantity!=0){
+            //计算好评度
+            NumberFormat numberFormat = NumberFormat.getInstance();
+            numberFormat.setMaximumFractionDigits(2);
+            String result = numberFormat.format((float)goodCommentQuantity/(float)allCommentQuantity*100);
+            Double goodCommentPercentage = Double.parseDouble(result);
+            commentQuantity.setGoodCommentPercentage(goodCommentPercentage);
+
+        }
 
         return commentQuantity;
     }
