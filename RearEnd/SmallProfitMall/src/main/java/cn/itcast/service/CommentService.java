@@ -51,11 +51,12 @@ public interface CommentService {
 
     /**
      * 查询分页数量
-     * @param productId
-     * @param pageSize
+     * @param productId 商品id
+     * @param commentType  评论类型
+     * @param pageSize 每页查询数量
      * @return
      */
-    public Integer[] fendTotalPage(Integer productId, Integer pageSize);
+    public Integer[] fendTotalPage(Integer productId,Integer commentType ,Integer pageSize);
 
 
 

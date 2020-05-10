@@ -64,7 +64,7 @@ public class CommentController {
         Pagination pagination = new Pagination();
        List<ProductComment> productComments = commentService.findComment(productId,commentType,currentPage,pageSize);
         //查询总数量跟总页数 数组0为总数量 1 为总页数
-        Integer[] totalPage=commentService.fendTotalPage(productId,pageSize);
+        Integer[] totalPage=commentService.fendTotalPage(productId,commentType,pageSize);
         pagination.setTotalCount(totalPage[0].longValue());
         pagination.setTotalPage((int) totalPage[1].longValue());
         pagination.setList(productComments);
