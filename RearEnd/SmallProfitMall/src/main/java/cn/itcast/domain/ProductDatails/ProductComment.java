@@ -35,18 +35,25 @@ public class ProductComment implements Serializable {
     private List<String> commentPicture;
     /**评论时间**/
     private Date commentTime;
-
     /**商品配置**/
     private String productConfiguration;
-
     /**文件数组对象**/
     private String[] files;
-
     /**是否匿名**/
     private Boolean anonymity;
-
     /**追评对象**/
     private SecondComment secondComment;
+    /**视频标志**/
+    private Boolean commentVideoSign;
+
+
+    public Boolean getCommentVideoSign() {
+        return commentVideoSign;
+    }
+
+    public void setCommentVideoSign(Boolean commentVideoSign) {
+        this.commentVideoSign = commentVideoSign;
+    }
 
     public String getUserName() {
         return userName;

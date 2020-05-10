@@ -27,6 +27,17 @@ public class SecondComment implements Serializable {
     /**追评图片**/
     private List<String> secondCommentPicture;
 
+    /**视频标志**/
+    private Boolean secondCommentVideoSign;
+
+    public Boolean getSecondCommentVideoSign() {
+        return secondCommentVideoSign;
+    }
+
+    public void setSecondCommentVideoSign(Boolean secondCommentVideoSign) {
+        this.secondCommentVideoSign = secondCommentVideoSign;
+    }
+
     public List<String> getSecondCommentPicture() {
         return secondCommentPicture;
     }

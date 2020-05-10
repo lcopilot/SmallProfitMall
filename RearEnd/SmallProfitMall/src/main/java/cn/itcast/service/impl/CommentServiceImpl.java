@@ -70,7 +70,7 @@ public class CommentServiceImpl implements CommentService {
             //新增评论基本信息
             commentDao.addComment(productComment);
             //修改评论状态
-            orderDao.updateProductState(null,4,productComment.getPurchaseId());
+            orderDao.updateProductState(null,5,productComment.getPurchaseId());
 
             //循环起点 有视频从1开始 无视频从0开始
             Integer begin = 0;
@@ -99,7 +99,7 @@ public class CommentServiceImpl implements CommentService {
             //新增评论基本信息
             commentDao.addComment(productComment);
             //修改评论状态
-            orderDao.updateProductState(null,4,productComment.getPurchaseId());
+            orderDao.updateProductState(null,5,productComment.getPurchaseId());
         }
 
         return 1;
@@ -143,6 +143,8 @@ public class CommentServiceImpl implements CommentService {
         commentQuantity.setGoodCommentQuantity(commentDao.findCommentQuantity(productId,4));
         commentQuantity.setOrdinaryCommentQuantity(commentDao.findCommentQuantity(productId,5));
         commentQuantity.setDifferenceCommentQuantity(commentDao.findCommentQuantity(productId,6));
+
+
         return commentQuantity;
     }
 
@@ -285,7 +287,7 @@ public class CommentServiceImpl implements CommentService {
     public String[] updateImages(String[] files,Integer begin) throws IOException {
         //新增评论图片
         String[] images= new String[files.length];
-        for (int i = begin; i <files.length ; i++) {
+        for (int i = begin; i <files.length-begin ; i++) {
             String uuids = UUID.randomUUID().toString().replaceAll("-","");
             //base64转InputStream
             InputStream inputStream = this.base64InputStream(files[i].substring(0,files[i].length()-base64Prefix.length()));

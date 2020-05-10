@@ -22,6 +22,9 @@ public class CommentQuantity implements Serializable {
     private Integer ordinaryCommentQuantity;
     /***差评数量*/
     private Integer differenceCommentQuantity;
+    /**好评度**/
+    private Double goodCommentPercentage;
+
 
     public Integer getAllCommentQuantity() {
         return allCommentQuantity;
