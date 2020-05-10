@@ -367,8 +367,9 @@
           };
           userApi.recharge(params).then(res=>{
             if (res.success){
-              this.$message.success("充值成功!")
-              this.rechargeDialogVisible=false
+              this.$message.success("充值成功!");
+              this.rechargeDialogVisible=false;
+              this.getMember();
             }else {
               if (res.code==11111){
                 this.$message({
