@@ -68,7 +68,7 @@
                       </div>
                     </el-col>
                     <el-col :span="6">
-                      <div class="personal_center_wallet1">{{member.balance.toFixed(2)}}</div>
+                      <div class="personal_center_wallet1">{{member.balance}}</div>
                       <div class="personal_center_wallet2">零钱</div>
                       <div class="personal_center_wallet3">
                         <router-link @click.native="rechargeDialogVisible=true" to="" class="personal_center_wallet3_a" >
@@ -318,7 +318,7 @@
         ],
         //会员信息
         member:{
-          balance:2019415.254,
+          balance:2019415,
           integral:2019415,
         }
       }
@@ -406,9 +406,9 @@
       },
       //获取会员信息
       getMember(){
-        userApi.getMember().then(res=>{
+        userApi.getMember(this.user.uId).then(res=>{
           if (res.success){
-            this.member=res.queryResult.list[0]
+            this.member=res.objectReturn.object
           }
         })
       },
@@ -418,6 +418,7 @@
       this.user.name=sessionStorage.getItem("username");
       this.user.uId=sessionStorage.getItem("uId");
       this.getOrderQuantity();
+      this.getMember();
     }
   }
 </script>
