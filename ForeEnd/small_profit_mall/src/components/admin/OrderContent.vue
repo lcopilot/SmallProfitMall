@@ -149,8 +149,8 @@
                     list-type="picture-card"
                     :multiple="true"
                     ref="upload"
+                    :on-remove="removeFile"
                     :on-change="selectFile"
-                    :http-request="uploadFile"
                     :on-preview="handlePictureCardPreview"
                    >
                   <i class="el-icon-plus"></i>
@@ -272,21 +272,25 @@
         commentVideoVisible: false,
         //评论视频
         commentVideo:'',
+        //文件列表
+        fileList:[],
       }
     },
     methods: {
-      uploadFile(){},
+      //删除文件
+      removeFile(file, fileList){
+        this.fileList=fileList
+      },
       //打开评论窗口
       comment(purchaseId,productId){
         this.commentVisible=true;
         sessionStorage.setItem("purchaseId",purchaseId);
         sessionStorage.setItem("productIdComm",productId);
       },
-
       //提交评论
       submitComments(){
         let fileList = [];
-        this.$refs.upload[0].uploadFiles.map((item)=>{
+        this.fileList.map((item)=>{
           getBase64(item.raw,(base64)=>{
             fileList.push(base64)
           })
@@ -308,7 +312,7 @@
         };
         //定时器等待文件转base64完成
         const timer=setInterval(()=>{
-          if (this.commentVideo?(fileList.length==this.$refs.upload[0].uploadFiles.length+1):(fileList.length==this.$refs.upload[0].uploadFiles.length)){
+          if (this.commentVideo?(fileList.length==this.fileList.length+1):(fileList.length==this.fileList.length)){
             clearInterval(timer)
             productApi.addComment(comment).then(res=>{
               if (res.success){
@@ -330,6 +334,7 @@
       },
       //清除文件
       clearFiles() {
+        this.fileList=[];
         sessionStorage.removeItem("purchaseId");
         sessionStorage.removeItem("productIdComm");
         this.playerOptions.sources[0].src='';
@@ -347,6 +352,7 @@
         if (!file.raw.type) {
           return this.$message.error('上传的文件必须是JPG/PNG/BMP/MP4格式!');
         }
+        this.fileList=fileList;
         const isJPG = file.raw.type === 'image/jpeg';
         const isPNG = file.raw.type === 'image/png';
         const isBMP = file.raw.type === 'image/bmp';
@@ -355,18 +361,22 @@
         if (isMP4) {
           this.playerOptions.sources[0].src = file.url;
           this.commentVideo=file;
+          this.fileList.pop();
           return fileList.pop();
         }
         if (fileList.length>10){
           this.$message.error('只能上传10张图片哦~');
+          this.fileList.pop();
           return fileList.pop();
         }
         if (!isJPG && !isPNG && !isBMP) {
           fileList.pop();
+          this.fileList.pop();
           return this.$message.error('上传图片必须是JPG/PNG/BMP 格式!');
         }
         if (!isLt2M) {
           fileList.pop();
+          this.fileList.pop();
           return this.$message.error('上传评论图片大小不能超过 2MB!');
         }
       },

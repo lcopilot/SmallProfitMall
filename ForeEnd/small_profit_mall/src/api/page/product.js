@@ -42,3 +42,7 @@ export const buyNow=data=>{
 export const addComment=data=>{
   return http.requestPost(apiUrl+'/CommentController/addComment',data)
 }
+//获取商品评论
+export const getProductComment=()=>{
+
+}

@@ -134,7 +134,8 @@
       return {
         //评分
         score: 4,
-        avatar: 'http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938',
+        //头像
+        avatar: 'http://img.fhxasdsada.xyz/iduyadfgjdekldjhf.png',
         videoShow: false,
         colors: ['#99A9BF', '#F7BA2A', '#FF9900'],  // 等同于 { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' }],
         //评论图片数组
