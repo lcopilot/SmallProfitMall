@@ -256,7 +256,7 @@
                 </div>
                 <el-row>
                   <el-col :span="5">
-                    <el-progress type="dashboard" :stroke-width="8" :percentage="CommentQuantity.goodCommentPercentage"></el-progress>
+                    <el-progress type="dashboard" :stroke-width="8" :percentage="CommentQuantity.goodCommentPercentage?CommentQuantity.goodCommentPercentage:100"></el-progress>
                     <div style="margin-top: -28px;">
                       <h3>好评度</h3>
                     </div>
