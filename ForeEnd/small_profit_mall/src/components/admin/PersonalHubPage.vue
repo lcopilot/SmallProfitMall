@@ -21,19 +21,19 @@
         <div>
           <div class="personal_page">订单中心</div>
           <div class="personal_page_child">
-            <router-link to="/allOrders">全部订单</router-link>
+            <router-link @click.native="goTo('0')" to="#">全部订单</router-link>
           </div>
           <div class="personal_page_child">
-            <router-link to="/">待付款</router-link>
+            <router-link @click.native="goTo('1')" to="#">待付款</router-link>
           </div>
           <div class="personal_page_child">
-            <router-link to="/">待收货</router-link>
+            <router-link @click.native="goTo('2')" to="#">待收货</router-link>
           </div>
           <div class="personal_page_child">
-            <router-link to="/">待评价</router-link>
+            <router-link @click.native="goTo('3')" to="#">待评价</router-link>
           </div>
           <div class="personal_page_child">
-            <router-link to="/"> 退换/售后</router-link>
+            <router-link @click.native="goTo('4')" to="#"> 退换/售后</router-link>
           </div>
           <el-divider/>
         </div>
@@ -63,7 +63,17 @@
 
 <script>
   export default {
-    name: "personalHubPage"
+    name: "personalHubPage",
+    methods:{
+      goTo(orderType){
+        this.$router.push({
+          name: 'AllOrders',
+          params: {
+            orderType: orderType
+          }
+        })
+      }
+    }
   }
 </script>
 

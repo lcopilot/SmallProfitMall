@@ -158,6 +158,10 @@ export const recharge=params=>{
   let queryString=querystring.stringify(params);
   return http.requestPost(apiUrl+'/MemberController/updateBalance?'+queryString);
 };
+//获取会员信息
+export const getMember=userId=>{
+  return http.requestGet(apiUrl+'/MemberController/findMember/'+userId)
+}
 
 /**
  * 账户设置

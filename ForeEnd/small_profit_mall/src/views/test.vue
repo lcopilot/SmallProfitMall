@@ -161,7 +161,6 @@
   .camera_outer{
     position: relative;
     overflow: hidden;
-    background: url("") no-repeat center;
     background-size: 100%;
     video,canvas,.tx_img{
       -moz-transform:scaleX(-1);

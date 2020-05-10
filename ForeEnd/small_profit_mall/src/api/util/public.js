@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Message } from 'element-ui';
 
 axios.defaults.withCredentials = false //是否支持发送cookie凭证信息的字段(请求携带了验证身份信息时)
-axios.defaults.timeout = 20000
+axios.defaults.timeout = 30000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www=form-urlencoded;charset=UTF-8'
 
 //请求拦截方式1

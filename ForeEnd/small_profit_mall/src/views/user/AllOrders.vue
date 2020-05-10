@@ -94,6 +94,9 @@
       }
     },
     mounted() {
+      if (this.$route.params.orderType){
+        this.orderType=this.$route.params.orderType
+      }
       this.getOrderQuantity();
     }
   }

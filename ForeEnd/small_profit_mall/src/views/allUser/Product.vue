@@ -117,11 +117,11 @@
                   {{product.weight}}
                 </div>
               </el-form-item>
-              <el-form-item label="尺码" v-if="product.size[0]">
+              <el-form-item label="尺码" v-if="product.size!==undefined && product.size.length > 0 ">
                 <div class="form_left">
                   <el-select v-model="productForm.size" filterable placeholder="请选择尺码">
                     <el-option
-                        v-for="size in product.size"
+                        v-for="(size,index) in product.size"
                         :label="size"
                         :value="size"
                         :key="index"
@@ -130,11 +130,11 @@
                   </el-select>
                 </div>
               </el-form-item>
-              <el-form-item label="配置" v-if="product.specification[0]">
+              <el-form-item label="配置" v-if="product.specification!==undefined && product.specification.length > 0 ">
                 <div class="form_left">
                   <el-select v-model="productForm.specification" filterable placeholder="请选择规格">
                     <el-option
-                        v-for="specification in product.specification"
+                        v-for="(specification,index) in product.specification"
                         :label="specification"
                         :value="specification"
                         :key="index"
@@ -143,7 +143,7 @@
                   </el-select>
                 </div>
               </el-form-item>
-              <el-form-item label="颜色" v-if="product.colour[0]">
+              <el-form-item label="颜色" v-if="product.colour!==undefined && product.colour.length > 0 ">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.colour" size="medium">
                     <el-radio-button class="product_radio_btn"
@@ -152,7 +152,7 @@
                   </el-radio-group>
                 </div>
               </el-form-item>
-              <el-form-item label="版本" v-if="product.version[0]">
+              <el-form-item label="版本" v-if="product.version!==undefined && product.version.length > 0 ">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.version" size="medium">
                     <el-radio-button class="product_radio_btn"
@@ -161,7 +161,7 @@
                   </el-radio-group>
                 </div>
               </el-form-item>
-              <el-form-item label="种类" v-if="product.kind[0]">
+              <el-form-item label="种类" v-if="product.kind!==undefined && product.kind.length > 0 ">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.kind" size="medium">
                     <el-radio-button class="product_radio_btn" v-for="(kind,index) in product.kind"
@@ -170,7 +170,7 @@
                   </el-radio-group>
                 </div>
               </el-form-item>
-              <el-form-item label="套餐" v-if="product.combo[0]">
+              <el-form-item label="套餐" v-if="product.combo!==undefined && product.combo.length > 0 ">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.combo" size="medium">
                     <el-radio-button class="product_radio_btn" :label="combo" :value="index"
@@ -179,7 +179,7 @@
                   </el-radio-group>
                 </div>
               </el-form-item>
-              <el-form-item label="口味" v-if="product.taste[0]">
+              <el-form-item label="口味" v-if="product.taste!==undefined && product.taste.length > 0 ">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.taste" size="medium">
                     <el-radio-button class="product_radio_btn" :label="taste" :value="index"
@@ -256,7 +256,7 @@
                 </div>
                 <el-row>
                   <el-col :span="5">
-                    <el-progress type="dashboard" :stroke-width="8" :percentage="98"></el-progress>
+                    <el-progress type="dashboard" :stroke-width="8" :percentage="CommentQuantity.goodCommentPercentage?CommentQuantity.goodCommentPercentage:100"></el-progress>
                     <div style="margin-top: -28px;">
                       <h3>好评度</h3>
                     </div>
@@ -276,25 +276,25 @@
                 <el-row>
                   <el-col :span="22" :push="1">
                     <el-tabs style="margin-top: 20px" v-model="commentType">
-                      <el-tab-pane label="全部评价(600+)" name="1" lazy>
+                      <el-tab-pane :label="'全部评价('+CommentQuantity.allCommentQuantity+')'" name="0" lazy>
                         <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane label="晒图(111)" name="2" lazy>
+                      <el-tab-pane :label="'晒图('+CommentQuantity.imageCommentQuantity+')'" name="1" lazy>
                         <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane label="视频晒单(6)" name="3" lazy>
+                      <el-tab-pane :label="'视频晒单('+CommentQuantity.videoCommentQuantity+')'" name="2" lazy>
                         <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane label="追评(6)" name="4" lazy>
+                      <el-tab-pane :label="'追评('+CommentQuantity.secondCommentQuantity+')'" name="3" lazy>
                         <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane label="好评(9)" name="5" lazy>
+                      <el-tab-pane :label="'好评('+CommentQuantity.goodCommentQuantity+')'" name="4" lazy>
                         <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane label="中评(6)" name="6" lazy>
+                      <el-tab-pane :label="'中评('+CommentQuantity.ordinaryCommentQuantity+')'" name="5" lazy>
                         <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane label="差评(6)" name="7" lazy>
+                      <el-tab-pane :label="'差评('+CommentQuantity.differenceCommentQuantity+')'" name="6" lazy>
                         <commentContent :genre="commentType"/>
                       </el-tab-pane>
                     </el-tabs>
@@ -375,7 +375,7 @@
         //商品Id
         productId: 0,
         //评论类型
-        commentType: "1",
+        commentType: "0",
         bigImg: '',//商品大图
         videoShow: false,
         //商品视频相关的播放参数
@@ -466,6 +466,8 @@
           //种类
           kind: ' ',
         },
+        //评论数量
+        CommentQuantity:{},
 
       }
     },
@@ -639,6 +641,14 @@
           userApi.addFootprint(data);
         }
       },
+      //获取评论数量
+      getProductCommentQuantity(){
+        productApi.getProductCommentQuantity(this.productId).then(res=>{
+          if (res.success){
+            this.CommentQuantity=res.objectReturn.object;
+          }
+        })
+      },
     },
     computed: {
       player() {
@@ -650,6 +660,7 @@
         sessionStorage.setItem("productId", this.$route.query.productId);
       }
       this.productId = sessionStorage.getItem("productId");
+      this.getProductCommentQuantity();
       this.addFootprint();
       this.getProduct(this.productId);
       this.getAddressData();

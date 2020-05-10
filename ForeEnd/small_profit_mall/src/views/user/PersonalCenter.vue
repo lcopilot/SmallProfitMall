@@ -59,7 +59,7 @@
                       </div>
                     </el-col>
                     <el-col :span="6">
-                      <div class="personal_center_wallet1">8469</div>
+                      <div class="personal_center_wallet1">{{member.integral}}</div>
                       <div class="personal_center_wallet2">积分</div>
                       <div class="personal_center_wallet3">
                         <router-link to="/" class="personal_center_wallet3_a">
@@ -68,7 +68,7 @@
                       </div>
                     </el-col>
                     <el-col :span="6">
-                      <div class="personal_center_wallet1">56.23</div>
+                      <div class="personal_center_wallet1">{{member.balance.toFixed(2)}}</div>
                       <div class="personal_center_wallet2">零钱</div>
                       <div class="personal_center_wallet3">
                         <router-link @click.native="rechargeDialogVisible=true" to="" class="personal_center_wallet3_a" >
@@ -129,9 +129,9 @@
                       <el-col :span="5">
                         <div class="personal_center_order_div" @mouseenter="enter_payment()"
                              @mouseleave="leave_payment()">
-                          <router-link to="/">
+                          <router-link @click.native="goTo('1')" to="#">
                             <div>
-                              <el-badge :value="Quantity.payment" :max="99">
+                              <el-badge :value="orderQuantity.orderUnpaidQuantity" :max="99">
                                 <svg-icon name="payment" v-show="icon.payment" v-cloak
                                           class="personal_center_order_icon"/>
                                 <svg-icon name="payment_no" v-show="!icon.payment" v-cloak
@@ -145,9 +145,9 @@
                       <el-col :span="5">
                         <div class="personal_center_order_div" @mouseenter="enter_receipt()"
                              @mouseleave="leave_receipt()">
-                          <router-link to="/">
+                          <router-link @click.native="goTo('2')" to="#">
                             <div>
-                              <el-badge :value="Quantity.receipt" :max="99">
+                              <el-badge :value="orderQuantity.orderPaidQuantity" :max="99">
                                 <svg-icon name="receipt" v-show="icon.receipt" v-cloak
                                           class="personal_center_order_icon"/>
                                 <svg-icon name="receipt_no" v-show="!icon.receipt" v-cloak
@@ -161,9 +161,9 @@
                       <el-col :span="5">
                         <div class="personal_center_order_div" @mouseenter="enter_evaluation()"
                              @mouseleave="leave_evaluation()">
-                          <router-link to="/">
+                          <router-link @click.native="goTo('3')" to="#">
                             <div>
-                              <el-badge :value="Quantity.evaluation" :max="99">
+                              <el-badge :value="orderQuantity.evaluateQuantity" :max="99">
                                 <svg-icon name="evaluation" v-show="icon.evaluation" v-cloak
                                           class="personal_center_order_icon"/>
                                 <svg-icon name="evaluation_no" v-show="!icon.evaluation" v-cloak
@@ -177,9 +177,9 @@
                       <el-col :span="5">
                         <div class="personal_center_order_div" @mouseenter="enter_afterSale()"
                              @mouseleave="leave_afterSale()">
-                          <router-link to="/">
+                          <router-link @click.native="goTo('4')" to="#">
                             <div>
-                              <el-badge :value="Quantity.afterSale" :max="99">
+                              <el-badge :value="orderQuantity.salesReturnQuantity" :max="99">
                                 <svg-icon name="afterSale_pc" v-show="icon.afterSale" v-cloak
                                           class="personal_center_order_icon"/>
                                 <svg-icon name="afterSale_pc_no" v-show="!icon.afterSale" v-cloak
@@ -193,7 +193,7 @@
                       <el-col :span="4">
                         <div class="personal_center_order_div_order" @mouseenter="enter_order()"
                              @mouseleave="leave_order()">
-                          <router-link to="/">
+                          <router-link @click.native="goTo('0')" to="#">
                             <div>
                               <svg-icon name="order" v-show="icon.order" v-cloak
                                         class="personal_center_order_icon"/>
@@ -246,6 +246,8 @@
 </template>
 
 <script>
+  import * as orderApi from "../../api/page/orders";
+
   const personalPage = () => import("../../components/admin/PersonalHubPage");
   import *as userApi from '../../api/page/user';
   import encryption from "../../util/encryption";
@@ -273,18 +275,19 @@
           //全部订单图标切换
           order: true,
         },
-        //订单数量
-        Quantity: {
-          payment: 5,
-          receipt: 6,
-          evaluation: 68,
-          afterSale: 10,
-        },
         //用户信息
         user:{
           name:'',
           avatar:'',
           uId:'',
+        },
+        //订单数量
+        orderQuantity:{
+          orderAllQuantity:0,
+          orderUnpaidQuantity:0,
+          orderPaidQuantity:0,
+          evaluateQuantity:0,
+          salesReturnQuantity:0,
         },
         footprintList: [
           [
@@ -312,7 +315,12 @@
             {"imageSite": "http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg"},
             {"imageSite": "http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg"},
           ],
-        ]
+        ],
+        //会员信息
+        member:{
+          balance:2019415.254,
+          integral:2019415,
+        }
       }
     },
     methods: {
@@ -378,12 +386,38 @@
       //充值框关闭的回调
       shutDown(){
         this.amount='';
-      }
+      },
+      //去订单页面
+      goTo(orderType){
+        this.$router.push({
+          name: 'AllOrders',
+          params: {
+            orderType: orderType
+          }
+        })
+      },
+      //获取不同订单的数量
+      getOrderQuantity(){
+        orderApi.getOrderQuantity(sessionStorage.getItem("uId")).then(res=>{
+          if (res.success){
+            this.orderQuantity=res.objectReturn.object;
+          }
+        })
+      },
+      //获取会员信息
+      getMember(){
+        userApi.getMember().then(res=>{
+          if (res.success){
+
+          }
+        })
+      },
     },
     created() {
       this.avatar=sessionStorage.getItem("avatar");
       this.user.name=sessionStorage.getItem("username");
       this.user.uId=sessionStorage.getItem("uId");
+      this.getOrderQuantity();
     }
   }
 </script>
