@@ -1,6 +1,7 @@
 package cn.itcast.Test;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 /**
  * @author Kite
@@ -8,13 +9,13 @@ import java.text.NumberFormat;
  */
 public class test {
     public static void main(String[] args) {
-        int a=3;
-        int b=2;
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setMaximumFractionDigits(2);
-        String result = numberFormat.format((float)a/(float)b*100);
-        Double s = Double.parseDouble(result);
-        System.out.println(s);
-        System.out.println("a和b的百分比为:" + result + "%");
+        int a = 14;
+        int b = 10;
+
+        System.out.println(a + b);
+        new ArrayList();
+
     }
+
+
 }

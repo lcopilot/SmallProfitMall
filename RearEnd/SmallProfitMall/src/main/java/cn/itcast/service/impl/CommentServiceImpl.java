@@ -174,6 +174,10 @@ public class CommentServiceImpl implements CommentService {
         //是否有视频标志位
         Boolean sign = false;
 
+        //查询评论id
+        Integer commentId = commentDao.findCommentId(secondComment.getPurchaseId());
+        secondComment.setCommentId(commentId);
+
         //文件数组 0为视频 <0 为图片
         String[] files = secondComment.getFiles();
 

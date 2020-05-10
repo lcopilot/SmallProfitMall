@@ -22,6 +22,6 @@ public interface MemberService {
      * @param userId
      * @return
      */
-    public Member findMember ( String userId);
+    public Member findMember ( String userId) throws Exception;
 
 }

@@ -236,6 +236,9 @@
             </if>
         </where>
     </select>
+    <select id="findCommentId" resultType="java.lang.Integer">
+        SELECT commentId FROM productComment WHERE purchaseId = #{purchaseId};
+    </select>
 
 
 </mapper>

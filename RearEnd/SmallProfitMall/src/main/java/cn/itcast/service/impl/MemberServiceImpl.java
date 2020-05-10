@@ -53,8 +53,12 @@ public class MemberServiceImpl implements MemberService {
      * @return
      */
     @Override
-    public Member findMember(String userId) {
-        return memberDao.findMember(userId);
+    public Member findMember(String userId) throws Exception {
+        Member member =  memberDao.findMember(userId);
+        String balance = member.getBalance();
+        String balances =  AesEncryptUtil.desEncrypt(balance);
+        member.setBalance(balances);
+        return member;
     }
 
 }
