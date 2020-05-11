@@ -70,7 +70,7 @@
         secondComment
          (commentId,textSecondComment,videoSecondComment,secondCommentTime)
      VALUES
-        (#{commentId},#{textSecondComment},#{videoSecondComment},#{secondCommentTime});
+        (#{commentId},#{textComment},#{videoSecondComment},#{secondCommentTime});
     </insert>
 
     <!--添加评论图片-->

@@ -21,46 +21,15 @@ public class SecondComment implements Serializable {
     private Integer purchaseId;
     /**追评时间**/
     private Date secondCommentTime;
+    /**接收追加的评论内容 前端暂时无法修改 **/
+    private String textComment;
     /**图片视频base64**/
     String[] files;
-
     /**追评图片**/
     private List<String> secondCommentPicture;
-
     /**视频标志**/
     private Boolean secondCommentVideoSign;
 
-    public Boolean getSecondCommentVideoSign() {
-        return secondCommentVideoSign;
-    }
-
-    public void setSecondCommentVideoSign(Boolean secondCommentVideoSign) {
-        this.secondCommentVideoSign = secondCommentVideoSign;
-    }
-
-    public List<String> getSecondCommentPicture() {
-        return secondCommentPicture;
-    }
-
-    public void setSecondCommentPicture(List<String> secondCommentPicture) {
-        this.secondCommentPicture = secondCommentPicture;
-    }
-
-    public Integer getPurchaseId() {
-        return purchaseId;
-    }
-
-    public void setPurchaseId(Integer purchaseId) {
-        this.purchaseId = purchaseId;
-    }
-
-    public String[] getFiles() {
-        return files;
-    }
-
-    public void setFiles(String[] files) {
-        this.files = files;
-    }
 
     public Integer getSecondCommentId() {
         return secondCommentId;
@@ -94,11 +63,51 @@ public class SecondComment implements Serializable {
         this.videoSecondComment = videoSecondComment;
     }
 
+    public Integer getPurchaseId() {
+        return purchaseId;
+    }
+
+    public void setPurchaseId(Integer purchaseId) {
+        this.purchaseId = purchaseId;
+    }
+
     public Date getSecondCommentTime() {
         return secondCommentTime;
     }
 
     public void setSecondCommentTime(Date secondCommentTime) {
         this.secondCommentTime = secondCommentTime;
+    }
+
+    public String getTextComment() {
+        return textComment;
+    }
+
+    public void setTextComment(String textComment) {
+        this.textComment = textComment;
+    }
+
+    public String[] getFiles() {
+        return files;
+    }
+
+    public void setFiles(String[] files) {
+        this.files = files;
+    }
+
+    public List<String> getSecondCommentPicture() {
+        return secondCommentPicture;
+    }
+
+    public void setSecondCommentPicture(List<String> secondCommentPicture) {
+        this.secondCommentPicture = secondCommentPicture;
+    }
+
+    public Boolean getSecondCommentVideoSign() {
+        return secondCommentVideoSign;
+    }
+
+    public void setSecondCommentVideoSign(Boolean secondCommentVideoSign) {
+        this.secondCommentVideoSign = secondCommentVideoSign;
     }
 }
