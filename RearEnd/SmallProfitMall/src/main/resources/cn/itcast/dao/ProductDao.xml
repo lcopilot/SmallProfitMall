@@ -5,7 +5,7 @@
 <mapper namespace="cn.itcast.dao.ProductDao">
 
     <!--查询所有秒杀商品信息-->
-    <select id="findSeckill" resultType="cn.itcast.domain.commodity.Seckill" parameterType="INT">
+    <select id="findSeckill" resultType="cn.itcast.domain.commodity.Seckill" parameterType="java.lang.Integer">
         SELECT
         sk.ProductId,sk.SeckillId,pp.SpikePrice,pp.ProductPrice,pb.ProductName,pi.ImageSite
         FROM
@@ -19,7 +19,7 @@
     </select>
 
     <!--查询所有低价商品-->
-    <select id="findProductLowPrice" resultType="cn.itcast.domain.commodity.ProductLowPrice" parameterType="INT">
+    <select id="findProductLowPrice" resultType="cn.itcast.domain.commodity.ProductLowPrice" parameterType="java.lang.Integer">
         SELECT
         tl.ProductId,pp.SalesPrice,pp.ProductPrice,pb.ProductName,pi.ImageSite
         FROM

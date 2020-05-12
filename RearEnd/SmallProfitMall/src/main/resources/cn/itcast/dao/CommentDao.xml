@@ -121,7 +121,9 @@
         LEFT JOIN secondCommentImage si ON sc.secondCommentId = si.secondCommentId
     <where>
         <if test="commentType==0">
-              pc.commentId IN ( SELECT commentId FROM ( SELECT commentId FROM productComment WHERE ProductId = #{productId}  ORDER BY commentTime DESC LIMIT #{start}, #{pageSize}) AS productCommentTemporary );
+              pc.commentId IN ( SELECT commentId FROM ( SELECT commentId FROM productComment WHERE ProductId = #{productId}
+            ORDER BY commentTime DESC LIMIT #{start}, #{pageSize}) AS productCommentTemporary )
+            ORDER BY pc.commentTime DESC
         </if>
         <if test="commentType==1">
             pc.ProductId = #{productId}
