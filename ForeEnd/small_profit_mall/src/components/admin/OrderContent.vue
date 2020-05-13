@@ -297,14 +297,6 @@
       //提交评论
       submitComments(){
         let formData=new FormData();
-        this.fileList.map((item)=>{
-          formData.append("files",item.raw)
-          //base64方法
-          // fileList.push()
-          // getBase64(item.raw,(base64)=>{
-          //   fileList.push(base64)
-          // })
-        });
         if (this.commentVideo){
           formData.append("files",this.commentVideo.raw)
           //base64方法
@@ -313,6 +305,14 @@
           //   fileList.unshift(bas64)
           // })
         }
+        this.fileList.map((item)=>{
+          formData.append("files",item.raw)
+          //base64方法
+          // fileList.push()
+          // getBase64(item.raw,(base64)=>{
+          //   fileList.push(base64)
+          // })
+        });
         this.$refs.upload[0].submit();
 
         formData.append("productId", sessionStorage.getItem("productIdComm"))
