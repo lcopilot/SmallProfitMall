@@ -135,7 +135,17 @@
         restaurants: [],
         state1: '',
         state2: '',
-        PagePilotList: [],
+        //导航栏数据
+        PagePilotList: [
+          {"cid": 1, "goodsName_1_c": "秒杀", "goodsId_1_c": "/"},
+          {"cid": 2, "goodsName_1_c": "优惠券", "goodsId_1_c": "/"},
+          {"cid": 3, "goodsName_1_c": "微利会员", "goodsId_1_c": "/"},
+          {"cid": 4, "goodsName_1_c": "品牌闪购", "goodsId_1_c": "/"},
+          {"cid": 5, "goodsName_1_c": "拍卖", "goodsId_1_c": "/"},
+          {"cid": 6, "goodsName_1_c": "微利家电", "goodsId_1_c": "/"},
+          {"cid": 7, "goodsName_1_c": "微利超市", "goodsId_1_c": "/"},
+          {"cid": 8, "goodsName_1_c": "品牌馆", "goodsId_1_c": "/"},
+          {"cid": 9, "goodsName_1_c": "网红必备", "goodsId_1_c": "/"}],
       }
     },
     computed: {
@@ -155,14 +165,6 @@
         "modifyCartSum",
         "getCartSum"
       ]),
-      //获取导航栏数据
-      getPagePilot() {
-        homeApi.getPagePilot().then(res => {
-          if (res.success) {
-            this.PagePilotList = res.queryResult.list;
-          }
-        })
-      },
       //获取购物车预览数据
       getShoppingCartPreview() {
         let userId = sessionStorage.getItem("uId");
@@ -278,19 +280,17 @@
           query: {
             searchContent: this.searchContent
           }
-
         })
       },
     },
     created() {
-      this.getPagePilot();
       this.getShoppingCartPreview();
     },
     mounted() {
       //延迟读取 防止searchContent可能还没存入session
-      setTimeout(()=>{
+      setTimeout(() => {
         this.isCategories = sessionStorage.getItem("searchContent");
-      },100)
+      }, 100)
       this.toke = sessionStorage.getItem('token');
       this.restaurants = this.loadAll();
     }

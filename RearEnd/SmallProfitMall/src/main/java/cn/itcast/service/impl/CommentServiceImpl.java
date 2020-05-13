@@ -51,7 +51,8 @@ public class CommentServiceImpl implements CommentService {
         Boolean sign = false;
 
         //文件数组 0为视频 <0 为图片
-        String[] files = productComment.getFiles();
+//        String[] files = productComment.getFiles();
+        String[] files = new String[]{};
 
 
         //判断文件 [0]为是否有图片 0为没有 1为有 [1]为是否有视频 0为没有 1为有

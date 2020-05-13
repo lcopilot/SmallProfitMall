@@ -49,7 +49,7 @@ axios.interceptors.response.use(
     response => {
       // 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
       // 否则的话抛出错误
-      if (response.status === 200) {
+      if (/^(2|3)\d{2}$/.test(response.status.toString())) {
         return Promise.resolve(response);
       } else {
         return Promise.reject(response);
@@ -58,7 +58,7 @@ axios.interceptors.response.use(
     // 服务器状态码不是2开头的的情况
     error => {
       if (error.response.status) {
-        if (error.response.status == 404) {
+        if (error.response.status === 404) {
           console.log(error.response.status);
           Message({
             message:"网络请求不存在,请稍后重试!",
@@ -123,6 +123,20 @@ export default {
       axios.post(url, data, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',  //请求头添加表单头
+        },
+      }).then(res => {
+        resolve(res.data)
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+  //post请求(文件)
+  requestPostFile (url, data = {}) {
+    return new Promise((resolve, reject) => {
+      axios.post(url, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',  //请求头添加文件上传的表单头
         },
       }).then(res => {
         resolve(res.data)

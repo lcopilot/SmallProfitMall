@@ -42,7 +42,3 @@ export const getLowPriceProductList=()=>{
 export const getProductsFeatured=()=>{
   return http.requestQuickGet(apiUrl+'/CommodityController/Recommend')
 };
-
-export const getPagePilot=()=>{
-  return http.requestQuickGet(apiUrl+'/homepageController/findNavigation2')
-};

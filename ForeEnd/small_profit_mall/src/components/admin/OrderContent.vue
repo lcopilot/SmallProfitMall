@@ -61,7 +61,7 @@
                       <el-button type="text" size="mini" v-if="order.orderState==2 && product.productState==1">提醒发货</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==2 && product.productState==2">确认收货</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==3">申请售后</el-button>
-                      <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==3"  @click="comment(product.purchaseId,product.productId)">评价晒单</el-button>
+                      <el-button type="text" size="mini"  @click="comment(product.purchaseId,product.productId)">评价晒单</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==5"  @click="comment(product.purchaseId,0,true)">追评</el-button>
                     </div>
                   </el-col>
@@ -197,7 +197,7 @@
 <script>
   import *as orderApi from '../../api/page/orders'
   import *as productApi from '../../api/page/product'
-  import {getBase64} from "../../util/util";
+  import {deepClone, getBase64} from "../../util/util";
   export default {
     name: "orderContent",
     props: {
@@ -296,58 +296,58 @@
       },
       //提交评论
       submitComments(){
-        let fileList = [];
+        let formData=new FormData();
         this.fileList.map((item)=>{
-          getBase64(item.raw,(base64)=>{
-            fileList.push(base64)
-          })
+          formData.append("files",item.raw)
+          //base64方法
+          // fileList.push()
+          // getBase64(item.raw,(base64)=>{
+          //   fileList.push(base64)
+          // })
         });
         if (this.commentVideo){
-          getBase64(this.commentVideo.raw,(bas64)=>{
-            fileList.unshift(bas64)
-          })
+          formData.append("files",this.commentVideo.raw)
+          //base64方法
+          // fileList.push(this.commentVideo.raw)
+          // getBase64(this.commentVideo.raw,(bas64)=>{
+          //   fileList.unshift(bas64)
+          // })
         }
         this.$refs.upload[0].submit();
-        const comment={
-          productId:sessionStorage.getItem("productIdComm"),
-          purchaseId:sessionStorage.getItem("purchaseId"),
-          favorability:this.commentForm.score,
-          textComment:this.commentForm.content,
-          anonymity:this.commentForm.isAnonymity,
-          files:fileList,
-          userId:sessionStorage.getItem("uId"),
-        };
-        //定时器等待文件转base64完成
-        const timer=setInterval(()=>{
-          if (this.commentVideo?(fileList.length==this.fileList.length+1):(fileList.length==this.fileList.length)){
-            clearInterval(timer)
-            if (this.review){
-              productApi.addSecondComment(comment).then(res=>{
-                if (res.success){
-                  this.$message({
-                    type:"success",
-                    message:"评论已提交"
-                  });
-                  this.playerOptions.sources[0].src="";
-                  this.clearFiles();
-                  this.commentVisible=false;
-                }
-              })
-            }else {
-              productApi.addComment(comment).then(res=>{
-                if (res.success){
-                  this.$message({
-                    type:"success",
-                    message:"评论已提交"
-                  });
-                  this.playerOptions.sources[0].src="";
-                  this.clearFiles();
-                  this.commentVisible=false;
-                }
-              })
+
+        formData.append("productId", sessionStorage.getItem("productIdComm"))
+        formData.append("purchaseId", sessionStorage.getItem("purchaseId"))
+        formData.append("favorability", this.commentForm.score)
+        formData.append("textComment",this.commentForm.content)
+        formData.append("anonymity",this.commentForm.isAnonymity)
+        formData.append("userId",sessionStorage.getItem("uId"))
+
+        if (this.review){
+          productApi.addSecondComment(formData).then(res=>{
+            if (res.success){
+              this.$message({
+                type:"success",
+                message:"评论已提交"
+              });
+              this.playerOptions.sources[0].src="";
+              this.clearFiles();
+              this.commentVisible=false;
             }
-          }
-        },20)
+          })
+        }else {
+          productApi.addComment(formData).then(res=>{
+            if (res.success){
+              this.$message({
+                type:"success",
+                message:"评论已提交"
+              });
+              this.playerOptions.sources[0].src="";
+              this.clearFiles();
+              this.commentVisible=false;
+            }
+          })
+        }
+
       },
       //评论视频播放
       playerVideoComment() {
@@ -382,26 +382,28 @@
         const isMP4 = file.raw.type === 'video/mp4';
         const isLt2M = file.size / 1024 / 1024 < 2;
         if (isMP4) {
-          this.playerOptions.sources[0].src = file.url;
-          this.commentVideo=file;
-          this.fileList.pop();
-          return fileList.pop();
+          if(file.size/1024/1024<5){
+            this.playerOptions.sources[0].src = file.url;
+            this.commentVideo=file;
+            return fileList.pop();
+          }else {
+            this.$message.error('上传评论视频大小不能超过 5MB!');
+            return fileList.pop();
+          }
         }
-        if (fileList.length>10){
-          this.$message.error('只能上传10张图片哦~');
-          this.fileList.pop();
-          return fileList.pop();
-        }
-        if (!isJPG && !isPNG && !isBMP) {
+        if (!isJPG && !isPNG && !isBMP &&!isMP4) {
           fileList.pop();
-          this.fileList.pop();
-          return this.$message.error('上传图片必须是JPG/PNG/BMP 格式!');
+          return this.$message.error('上传图片视频必须是JPG/PNG/BMP/MP4 格式!');
         }
         if (!isLt2M) {
           fileList.pop();
-          this.fileList.pop();
           return this.$message.error('上传评论图片大小不能超过 2MB!');
         }
+        if (fileList.length>10){
+          this.$message.error('只能上传10张图片哦~');
+          return fileList.pop();
+        }
+
       },
       //预览
       handlePictureCardPreview(file) {

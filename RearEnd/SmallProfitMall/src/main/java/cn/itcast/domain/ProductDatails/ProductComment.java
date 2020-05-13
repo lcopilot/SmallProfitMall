@@ -38,7 +38,7 @@ public class ProductComment implements Serializable {
     /**商品配置**/
     private String productConfiguration;
     /**文件数组对象**/
-    private String[] files;
+    private MultipartFile[] files;
     /**是否匿名**/
     private Boolean anonymity;
     /**追评对象**/
@@ -79,11 +79,11 @@ public class ProductComment implements Serializable {
         this.secondComment = secondComment;
     }
 
-    public String[] getFiles() {
+    public MultipartFile[] getFiles() {
         return files;
     }
 
-    public void setFiles(String[] files) {
+    public void setFiles(MultipartFile[] files) {
         this.files = files;
     }
 

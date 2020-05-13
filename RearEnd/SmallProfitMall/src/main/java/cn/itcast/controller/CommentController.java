@@ -12,6 +12,7 @@ import cn.itcast.response.listFootprint.ResponsePagination;
 import cn.itcast.response.objectReturn.ObjectReturn;
 import cn.itcast.response.objectReturn.ObjectReturnResponse;
 import cn.itcast.service.CommentService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +44,7 @@ public class CommentController {
      * @return
      */
     @RequestMapping(value = "/addComment",method = RequestMethod.POST)
-    public QueryResponseResult addComment(@RequestBody ProductComment productComment) throws IOException {
+    public QueryResponseResult addComment(ProductComment productComment) throws IOException {
         Integer result = commentService.addComment(productComment);
         if (result>=1){
             return new QueryResponseResult(CommonCode.SUCCESS,null);

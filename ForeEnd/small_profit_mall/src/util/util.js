@@ -1,3 +1,4 @@
+//深度烤贝
 export const deepClone =(sourceObj) =>{
   let targetObj = Array.isArray(sourceObj) ? [] : {};
   let copy;
