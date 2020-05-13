@@ -477,10 +477,10 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public Integer updateOrders(Order order) throws Exception {
-        //修改所以商品状态为待发货
-        orderDao.updateProductState(order.getOrderId(),1,null);
-        //设置支付状态为已支付状态（2）
-        order.setOrderState(2);
+        //修改所以商品状态为待发货 1为待发货 2为待收货 3为已收货待评论 4为维修 5为追评论 6为已追评论
+        orderDao.updateProductState(order.getOrderId(),3,null);
+        //设置支付状态为已支付待发货状态（2）(3)已发货状态
+        order.setOrderState(3);
         //设置当前时间为支付时间
         order.setPaymentTime(new Date());
         //修改支付状态 支付时间
@@ -488,7 +488,7 @@ public class OrderServiceImpl implements OrderService {
         //邮件通知
         emailNotification(order.getUserId());
         //推送消息
-        notificationUser(order,order.getOrderTotal().toString());
+        notificationUser(order,order.getOrderTotal().setScale(2, BigDecimal.ROUND_HALF_UP).toString());
         return 1;
     }
     /**
@@ -699,7 +699,7 @@ public class OrderServiceImpl implements OrderService {
         //支付时间
         consumptionRecords.setPaymentTime(new Date());
         //支付金额
-        consumptionRecords.setPaymentAmount(orders.getOrderTotal().toString());
+        consumptionRecords.setPaymentAmount(orders.getOrderTotal().setScale(2, BigDecimal.ROUND_HALF_UP).toString());
         //设置消息类型id
         newsConsumptionRecords.setNewsTypeId(orders.getOrderId());
         memberDao.addConsumptionRecords(consumptionRecords);

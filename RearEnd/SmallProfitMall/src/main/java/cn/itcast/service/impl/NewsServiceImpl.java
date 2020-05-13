@@ -40,7 +40,7 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     NewsDao newsDao;
     /**
-     * 查询l历史消息
+     * 查询历史消息
      * @param userId 用户id
      * @param state 消息状态
      * @param currentPage 当前页

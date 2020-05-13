@@ -200,7 +200,7 @@ public class CommentServiceImpl implements CommentService {
             //新增评论基本信息
             commentDao.addSecondSecondComment(secondComment);
             //修改评论状态
-            orderDao.updateProductState(null,5,secondComment.getPurchaseId());
+            orderDao.updateProductState(null,6,secondComment.getPurchaseId());
 
             //循环起点 有视频从1开始 无视频从0开始
             Integer begin = 0;
@@ -216,7 +216,7 @@ public class CommentServiceImpl implements CommentService {
                 for (int i = 0; i <images.length ; i++) {
                     SecondCommentImage secondCommentImage = new SecondCommentImage();
                     secondCommentImage.setSecondCommentPicture(images[i]);
-                    secondCommentImage.setSecondCommentId(secondComment.getCommentId());
+                    secondCommentImage.setSecondCommentId(secondComment.getSecondCommentId());
                     secondCommentImages.add(secondCommentImage);
                 }
                 commentDao.addSecondCommentImage(secondCommentImages);
@@ -228,13 +228,13 @@ public class CommentServiceImpl implements CommentService {
             //新增评论基本信息
             commentDao.addSecondSecondComment(secondComment);
             //修改评论状态
-            orderDao.updateProductState(null,4,secondComment.getPurchaseId());
+            orderDao.updateProductState(null,6,secondComment.getPurchaseId());
         }
         return 1;
     }
 
     /**
-     * 查询总页数跟总收藏数量
+     * 查询总页数跟评论数量
      * @param productId 商品Id
      * @param commentType 评论类型
      * @param pageSize 每页查询数量
@@ -309,8 +309,9 @@ public class CommentServiceImpl implements CommentService {
         String[] images= new String[files.length];
         for (int i = begin; i <files.length-begin ; i++) {
             String uuids = UUID.randomUUID().toString().replaceAll("-","");
+
             //base64转InputStream
-            InputStream inputStream = this.base64InputStream(files[i].substring(0,files[i].length()-base64Prefix.length()));
+            InputStream inputStream = this.base64InputStream(files[i]);
             //压缩图片 上传图片至七牛云 返回图片地址
             String Image = UploadPicturesUtil.UploadPicturesUtil(space,inputStream,uuids);
             if (begin==1){
