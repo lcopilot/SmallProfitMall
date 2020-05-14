@@ -3,18 +3,14 @@ package cn.itcast.domain.homepag;
 import java.io.Serializable;
 //右侧图标
 public class Icon implements Serializable {
+    /**图标id**/
     private int id;
+    /**图标**/
     private String icon;
+    /**图标链接**/
     private String iconSite;
+    /**图标名字**/
     private String iconName;
-
-    public String getIconName() {
-        return iconName;
-    }
-
-    public void setIconName(String iconName) {
-        this.iconName = iconName;
-    }
 
     public int getId() {
         return id;
@@ -38,5 +34,13 @@ public class Icon implements Serializable {
 
     public void setIconSite(String iconSite) {
         this.iconSite = iconSite;
+    }
+
+    public String getIconName() {
+        return iconName;
+    }
+
+    public void setIconName(String iconName) {
+        this.iconName = iconName;
     }
 }

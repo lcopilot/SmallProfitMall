@@ -14,6 +14,7 @@ public class RotationChart implements Serializable {
     private String RotationChartTwo_3;          //第三张小轮播图图片
     private String RotationChartTwoSite_3;      //第三张小轮播图跳转地址
 
+
     public String getRid() {
         return Rid;
     }

@@ -4,11 +4,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.HomepageDao">
 
+    <resultMap id="findProductCategoryMap" type="cn.itcast.domain.homepag.ProductPrimaryCategory">
+        <id property="product_primary_id" column="product_primary_id"></id>
+        <result property="category_content" column="category_content"></result>
+        <result property="product_content_id" column="product_content_id"></result>
+        <collection property="productSecondaryCategories" resultMap="productSecondaryCategoriesMap">
+        </collection>
+    </resultMap>
+
+    <!--配置二级目录Map-->
+    <resultMap id="productSecondaryCategoriesMap" type="cn.itcast.domain.homepag.ProductSecondaryCategory">
+        <id property="product_secondary_id" column="product_secondary_id"></id>
+        <result property="secondary_content" column="secondary_content"></result>
+       <collection property="productFinalCategories" resultMap="productFinalCategoriesMap">
+       </collection>
+    </resultMap>
+
+    <!--三级目录map-->
+    <resultMap id="productFinalCategoriesMap" type="cn.itcast.domain.homepag.ProductFinalCategory">
+        <id property="product_final_id" column="product_final_id"></id>
+        <result property="final_content" column="final_content"></result>
+    </resultMap>
 
 
-    <select id="findRotationChart" resultType="cn.itcast.domain.homepag.RotationChart">
-        SELECT * from RotationChart
-    </select>
+
 
 
     <!--查询所有商品栏下分类-->
@@ -28,6 +47,16 @@
     <!--查询导航标题-->
     <select id="findNavigation" resultType="cn.itcast.domain.homepag.Navigation">
         SELECT * FROM navigation
+    </select>
+
+    <!--查询商品分类导航栏-->
+    <select id="findProductCategory" resultMap="findProductCategoryMap">
+    SELECT
+	pp.*,pc.product_secondary_id,pc.secondary_content,pf.product_final_id,pf.final_content
+    FROM
+	product_primary_category pp
+	LEFT JOIN product_secondary_category pc ON pp.product_primary_id = pc.product_primary_id
+	LEFT JOIN product_final_category pf ON pc.product_secondary_id = pf.product_secondary_id
     </select>
 
 </mapper>

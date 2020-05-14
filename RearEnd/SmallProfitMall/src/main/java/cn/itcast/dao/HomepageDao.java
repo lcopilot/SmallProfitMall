@@ -39,4 +39,11 @@ public interface HomepageDao {
     public List<Navigation> findNavigation();
 
 
+    /**
+     * 查询商品分类
+     * @return
+     */
+    public List<ProductPrimaryCategory> findProductCategory();
+
+
 }

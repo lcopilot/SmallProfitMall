@@ -210,6 +210,9 @@
   </bean>
 
 
+
+
+
   <!--自定义redis工具类,在需要缓存的地方注入此类  -->
   <bean id="redisService" class="cn.itcast.util.redis.RedisUtil">
     <constructor-arg ref="redisTemplate"/>
