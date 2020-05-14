@@ -44,6 +44,10 @@
         SELECT * FROM classification
     </select>
 
+    <select id="findRotationChart" resultType="cn.itcast.domain.homepag.RotationChart">
+        SELECT * from RotationChart
+    </select>
+
     <!--查询导航标题-->
     <select id="findNavigation" resultType="cn.itcast.domain.homepag.Navigation">
         SELECT * FROM navigation

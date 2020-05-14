@@ -79,7 +79,6 @@ public class HomepageController {
     @RequestMapping("/navigationInDetail")
     public QueryResponseResult navigationInDetail(){
         QueryResult result = new QueryResult();
-        Classification classification = homepageService.findNavigationInDetail();
         List<ProductPrimaryCategory> logins=  homepageDao.findProductCategory();
         result.setList(logins);
         return new QueryResponseResult(CommonCode.SUCCESS,result);
