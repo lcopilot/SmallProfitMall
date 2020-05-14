@@ -59,13 +59,13 @@ public interface CommentService {
     public Integer[] fendTotalPage(Integer productId,Integer commentType ,Integer pageSize);
 
 
-
-    /**
-     *  base64转InputStream
-     * @param prefix base64
-     * @return InputStream
-     * @throws IOException
-     */
-    public InputStream base64InputStream(String prefix) throws IOException;
+//
+//    /**
+//     *  base64转InputStream
+//     * @param prefix base64
+//     * @return InputStream
+//     * @throws IOException
+//     */
+//    public InputStream base64InputStream(String prefix) throws IOException;
 
 }

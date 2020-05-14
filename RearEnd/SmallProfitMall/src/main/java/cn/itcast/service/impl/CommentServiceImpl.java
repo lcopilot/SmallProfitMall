@@ -8,11 +8,14 @@ import cn.itcast.service.CommentService;
 import cn.itcast.util.compressPicture.UploadPicturesUtil;
 import cn.itcast.util.fileType.FileTypeUtils;
 import cn.itcast.util.video.UploadVideoUtil;
+import cn.itcast.util.video.ifImageVideo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import sun.misc.BASE64Decoder;
 
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -32,10 +35,6 @@ public class CommentServiceImpl implements CommentService {
     OrderDao orderDao;
     //七牛云存储空间名称
     private static final  String space="mugebl";
-    //base64t图片前缀
-    private static final String base64Prefix = "data:image/jpg;base64,";
-    //base64视频前缀
-    private static final String base64Vide="data:video/mp4;base64";
 
     @Autowired
     CommentDao commentDao;
@@ -51,8 +50,7 @@ public class CommentServiceImpl implements CommentService {
         Boolean sign = false;
 
         //文件数组 0为视频 <0 为图片
-//        String[] files = productComment.getFiles();
-        String[] files = new String[]{};
+        MultipartFile[] files = productComment.getFiles();
 
 
         //判断文件 [0]为是否有图片 0为没有 1为有 [1]为是否有视频 0为没有 1为有
@@ -60,9 +58,9 @@ public class CommentServiceImpl implements CommentService {
         if (judgmentFiles!=null ){
             if(judgmentFiles[1]==1){
                 //前缀 为   data:image/jpeg;base64 则为图片
-                String prefix =  files[0];
+                MultipartFile prefix =  files[0];
                 sign=true;
-                String video = updateVideo(prefix);
+                String video = updateVideo(prefix.getInputStream());
                 productComment.setVideoComment(video);
             }
 
@@ -180,7 +178,7 @@ public class CommentServiceImpl implements CommentService {
         secondComment.setCommentId(commentId);
 
         //文件数组 0为视频 <0 为图片
-        String[] files = secondComment.getFiles();
+        MultipartFile[] files = secondComment.getFiles();
 
 
         //判断文件 [0]为是否有图片 0为没有 1为有 [1]为是否有视频 0为没有 1为有
@@ -188,9 +186,9 @@ public class CommentServiceImpl implements CommentService {
         if (judgmentFiles!=null ){
             if(judgmentFiles[1]==1){
                 //前缀 为   data:image/jpeg;base64 则为图片
-                String prefix =  files[0];
+                MultipartFile prefix =  files[0];
                 sign=true;
-                String video = updateVideo(prefix);
+                String video = updateVideo(prefix.getInputStream());
                 secondComment.setVideoSecondComment(video);
             }
 
@@ -256,7 +254,7 @@ public class CommentServiceImpl implements CommentService {
      * @param files
      * @return  [0]为是否有图片 0为没有 1为有 [1]为是否有视频 0为没有 1为有
      */
-    public Integer[] judgmentFiles(String[] files ){
+    public Integer[] judgmentFiles(MultipartFile[] files ) throws IOException {
         Integer[] result=new Integer[2];
         result[0]=0;
         result[1]=0;
@@ -268,11 +266,11 @@ public class CommentServiceImpl implements CommentService {
             result=null;
             return result;
         }
-        //前缀 为   data:image/jpeg;base64 则为图片
-        String prefix =  files[0];
-        //判断文件第一个是否是视频
-        String  prefixs=prefix.substring(0,prefix.indexOf(","));
-        if (prefixs.equals(base64Vide)){
+        MultipartFile prefix =  files[0];
+        InputStream inputStream = prefix.getInputStream();
+        //判断文件第一个是否是视频  true为图片 false为视频
+        Boolean  prefixs= ifImageVideo.ifImageVideo(inputStream);
+        if (!prefixs){
             sign=true;
             result[1]=1;
         }
@@ -284,15 +282,13 @@ public class CommentServiceImpl implements CommentService {
 
     /**
      * 压缩上传视频
-     * @param prefix  base64视频
+     * @param inputStream  视频流
      * @return 视频上传成功后的地址
      * @throws IOException
      */
-    public String updateVideo(String prefix) throws IOException {
+    public String updateVideo(InputStream inputStream) throws IOException {
         //压缩视频 且返回视频地址 uuid为视频文件名
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
-        //base64转InputStream
-        InputStream inputStream = this.base64InputStream(prefix);
         String video = UploadVideoUtil.UploadVideoUtil(space,uuid,inputStream);
         return video;
     }
@@ -304,16 +300,13 @@ public class CommentServiceImpl implements CommentService {
      * @return 上传成功后图片地址地址 购买编号集合
      * @throws IOException
      */
-    public String[] updateImages(String[] files,Integer begin) throws IOException {
+    public String[] updateImages(MultipartFile[] files,Integer begin) throws IOException {
         //新增评论图片
         String[] images= new String[files.length];
-        for (int i = begin; i <files.length-begin ; i++) {
+        for (int i = begin; i <files.length ; i++) {
             String uuids = UUID.randomUUID().toString().replaceAll("-","");
-
-            //base64转InputStream
-            InputStream inputStream = this.base64InputStream(files[i]);
             //压缩图片 上传图片至七牛云 返回图片地址
-            String Image = UploadPicturesUtil.UploadPicturesUtil(space,inputStream,uuids);
+            String Image = UploadPicturesUtil.UploadPicturesUtil(space,files[i].getInputStream(),uuids);
             if (begin==1){
                 images[i-1]=Image;
             }else {
@@ -325,22 +318,24 @@ public class CommentServiceImpl implements CommentService {
     }
 
 
-    /**
-     * base64转InputStream
-     * @param prefix base64
-     * @return InputStream
-     * @throws IOException
-     */
-    @Override
-    public InputStream base64InputStream(String prefix) throws IOException {
-        //base64字符串
-        String file = null;
-        int prefixSize =prefix.indexOf(",")+1;
-        file = prefix.substring(prefixSize);
-        //将字符串转换为byte数组
-        byte[] bytes = new BASE64Decoder().decodeBuffer(file.trim());
-        //转化为输入流
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
-        return inputStream;
-    }
+//    /**
+//     * base64转InputStream
+//     * @param prefix base64
+//     * @return InputStream
+//     * @throws IOException
+//     */
+//    @Override
+//    public InputStream base64InputStream(String prefix) throws IOException {
+//        //base64字符串
+//        String file = null;
+//        int prefixSize =prefix.indexOf(",")+1;
+//        file = prefix.substring(prefixSize);
+//        //将字符串转换为byte数组
+//        byte[] bytes = new BASE64Decoder().decodeBuffer(file.trim());
+//        //转化为输入流
+//        ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
+//        return inputStream;
+//    }
+
+
 }

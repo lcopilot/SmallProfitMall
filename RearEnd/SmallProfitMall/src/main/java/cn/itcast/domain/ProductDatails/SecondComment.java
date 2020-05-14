@@ -1,5 +1,7 @@
 package cn.itcast.domain.ProductDatails;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +26,7 @@ public class SecondComment implements Serializable {
     /**接收追加的评论内容 前端暂时无法修改 **/
     private String textComment;
     /**图片视频base64**/
-    String[] files;
+    MultipartFile[] files;
     /**追评图片**/
     private List<String> secondCommentPicture;
     /**视频标志**/
@@ -87,11 +89,11 @@ public class SecondComment implements Serializable {
         this.textComment = textComment;
     }
 
-    public String[] getFiles() {
+    public MultipartFile[] getFiles() {
         return files;
     }
 
-    public void setFiles(String[] files) {
+    public void setFiles(MultipartFile[] files) {
         this.files = files;
     }
 
