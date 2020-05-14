@@ -249,7 +249,6 @@
               if (this.progressPercent === 100) {
                 this.progressFlag = false
                 this.progressPercent = 0
-                console.log('sss')
               }
             }
           }).catch(error => {
