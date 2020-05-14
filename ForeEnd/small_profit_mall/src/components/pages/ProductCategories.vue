@@ -1,98 +1,42 @@
 <template>
+  <div style="text-align: left;padding: 0 .5rem">
     <ul>
       <!-- 商品分类-->
-      <li v-for="Categories in CategoriesList" :key="Categories.nid">
+      <li v-for="(Categories,index) in CategoriesList" :key="Categories.product_primary_id" style="display: inline-block;">
         <el-popover
             placement="right"
             width="840"
             trigger="hover"
-            @mouseenter.native="enter(Categories.nid)">
+            @mouseenter.native="enter(index)">
           <el-table :data="CategoryDetailsList" style="width: 100%;font-size: 11px; "
                     :show-header="false">
-            <el-table-column prop="classificationHeader" width="90">
-            </el-table-column>
             <el-table-column width="90">
               <template slot-scope="Category">
-                <router-link v-if="Category.row.classifySite_1"
-                             :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_1}}">
-                  {{Category.row.classifyName_1}}
-                </router-link>
+                {{Category.row.secondary_content}}
               </template>
             </el-table-column>
-            <el-table-column width="90">
+            <el-table-column width="720">
               <template slot-scope="Category">
-                <router-link v-if="Category.row.classifySite_2"
-                             :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_2}}">
-                  {{Category.row.classifyName_2}}
-                </router-link>
-              </template>
-            </el-table-column>
-            <el-table-column width="90">
-              <template slot-scope="Category">
-                <router-link v-if="Category.row.classifySite_3"
-                             :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_3}}">
-                  {{Category.row.classifyName_3}}
-                </router-link>
-              </template>
-            </el-table-column>
-            <el-table-column width="90">
-              <template slot-scope="Category">
-                <router-link v-if="Category.row.classifySite_4"
-                             :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_4}}">
-                  {{Category.row.classifyName_4}}
-                </router-link>
-              </template>
-            </el-table-column>
-            <el-table-column width="90">
-              <template slot-scope="Category">
-                <router-link v-if="Category.row.classifySite_5"
-                             :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_5}}">
-                  {{Category.row.classifyName_5}}
-                </router-link>
-              </template>
-            </el-table-column>
-            <el-table-column width="90">
-              <template slot-scope="Category">
-                <router-link v-if="Category.row.classifySite_6"
-                             :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_6}}">
-                  {{Category.row.classifyName_6}}
-                </router-link>
-              </template>
-            </el-table-column>
-            <el-table-column width="90">
-              <template slot-scope="Category">
-                <router-link v-if="Category.row.classifySite_7"
-                             :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_7}}">
-                  {{Category.row.classifyName_7}}
-                </router-link>
-              </template>
-            </el-table-column>
-            <el-table-column width="90">
-              <template slot-scope="Category">
-                <router-link v-if="Category.row.classifySite_8"
-                             :to="{path:'/searchShow',query:{searchContent:Category.row.classifyName_8}}">
-                  {{Category.row.classifyName_8}}
+                <router-link v-for="categoryC in Category.row.productFinalCategories"
+                             style="margin: 0 1.2rem"
+                             :to="{path:'/searchShow',query:{searchContent:categoryC.final_content}}">
+                  {{categoryC.final_content}}
                 </router-link>
               </template>
             </el-table-column>
           </el-table>
-          <el-button type="text" size="small" style="font-size: 14px" slot="reference">
-            <router-link to="/" v-if="Categories.goodsName_1!=null">
-              {{Categories.goodsName_1}}
-              <span v-if="Categories.goodsName_2!=null"
-                    style="margin-right: 5px">/</span>
-            </router-link>
-            <router-link to="/" v-if="Categories.goodsName_2!=null">
-              {{Categories.goodsName_2}}
-              <span v-if="Categories.goodsName_3!=null" style="margin-right: 5px">/</span>
-            </router-link>
-            <router-link to="/" v-if="Categories.goodsName_3!=null">
-              {{Categories.goodsName_3}}
+          <el-button type="text" size="small" style="font-size: 14px;" slot="reference">
+            <router-link to="/" @click.native="">
+              {{Categories.category_content}}
+              <span style="margin: 0 .2rem" v-if="(index+1)%3!==0">/</span>
             </router-link>
           </el-button>
         </el-popover>
+        <br  v-if="Categories.sign"/>
       </li>
     </ul>
+  </div>
+
 
 </template>
 
@@ -105,7 +49,6 @@
       return {
         //分类列表
         CategoriesList: [],
-        CategoriesLists: [],
         //分类详细列表
         CategoryDetailsList: [],
       }
@@ -115,17 +58,15 @@
       getCategoriesList() {
         homeApi.getCategoriesList().then(res => {
           if (res.success) {
-            this.CategoriesList = res.queryResult.list[0].navigations;
-            this.CategoriesLists = res.queryResult.list[0];
+            this.CategoriesList= res.queryResult.list;
           }
         })
       },
-      enter(nid) {
-        this.CategoryDetailsList = [];
-        this.CategoriesLists.navigationClassify.forEach((Categories, index) => {
-          if (Categories.nid == nid) {
-            this.CategoryDetailsList.push(this.CategoriesLists.navigationClassify[index]);
-          }
+      enter(index) {
+        this.CategoryDetailsList=[];
+        console.log(this.CategoriesList[index])
+        this.CategoriesList[index].productSecondaryCategories.map(item=>{
+          this.CategoryDetailsList.push(item)
         })
       },
     },
