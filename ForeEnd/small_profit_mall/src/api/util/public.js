@@ -131,13 +131,20 @@ export default {
       })
     })
   },
-  //post请求(文件)
-  requestPostFile (url, data = {}) {
+  /**
+   * post请求(文件)
+   * @param url
+   * @param data
+   * @param uploadProgress function (progress)=>{}获取上传进度   progress.loaded:已上传文件大小  progress.total:被上传文件的总大小
+   * @returns {Promise<unknown>}
+   */
+  requestPostFile (url, data = {},uploadProgress) {
     return new Promise((resolve, reject) => {
       axios.post(url, data, {
         headers: {
           'Content-Type': 'multipart/form-data',  //请求头添加文件上传的表单头
         },
+        onUploadProgress:uploadProgress
       }).then(res => {
         resolve(res.data)
       }).catch(error => {

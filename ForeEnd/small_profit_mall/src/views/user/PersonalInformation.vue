@@ -237,20 +237,14 @@
           let formData = new FormData();
           formData.append('file', data);
           formData.append('userId', this.params.userId);
-          this.axios({
-            url: userApi.uploadAvatar,
-            method: 'post',
-            data: formData,
-            headers: {'Content-Type': 'multipart/form-data'},
-            onUploadProgress: progressEvent => {
-              // progressEvent.loaded:已上传文件大小
-              // progressEvent.total:被上传文件的总大小
-              this.progressPercent = (progressEvent.loaded / progressEvent.total * 100)
-            }
+          userApi.uploadAvatar(formData,progress=>{
+            // progress.loaded:已上传文件大小
+            // progress.total:被上传文件的总大小
+            this.progressPercent = (progress.loaded / progress.total * 100)
           }).then(res => {
-            if (res.data.success) {
-              sessionStorage.setItem("avatar", res.data.queryResult.list[0]);
-              this.imageUrl = res.data.queryResult.list[0];
+            if (res.success) {
+              sessionStorage.setItem("avatar", res.queryResult.list[0]);
+              this.imageUrl = res.queryResult.list[0];
               this.header = new Date().getTime();
               if (this.progressPercent === 100) {
                 this.progressFlag = false

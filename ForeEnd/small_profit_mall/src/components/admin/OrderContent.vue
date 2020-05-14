@@ -61,7 +61,7 @@
                       <el-button type="text" size="mini" v-if="order.orderState==2 && product.productState==1">提醒发货</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==2 && product.productState==2">确认收货</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==3">申请售后</el-button>
-                      <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==3" @click="comment(product.purchaseId,product.productId)">评价晒单</el-button>
+                      <el-button type="text" size="mini"  @click="comment(product.purchaseId,product.productId)">评价晒单</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==5"  @click="comment(product.purchaseId,0,true)">追评</el-button>
                     </div>
                   </el-col>
@@ -307,8 +307,9 @@
         }
         this.fileList.map((item)=>{
           formData.append("files",item.raw)
-          //base64方法
+          //base64方法 异步调用
           // fileList.push()
+          //  console.log(await getBase64(item.raw))
           // getBase64(item.raw,(base64)=>{
           //   fileList.push(base64)
           // })

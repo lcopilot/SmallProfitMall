@@ -19,12 +19,16 @@ export const deepClone =(sourceObj) =>{
   return targetObj;
 };
 /**
- * file图片文件转base64
+ * file图片文件转base64 异步调用
  * @param {*} file file文件或者blob
  * @param {*} callback function (imgurl)通过参数获得base64
  */
-export const getBase64=(file,callback)=> {
-  const reader = new FileReader()
-  reader.addEventListener('load', () => callback(reader.result))
-  reader.readAsDataURL(file)
+export const getBase64= async (file)=>{
+  return  new Promise(resolve => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload=()=>{
+      resolve (reader.result)
+    }
+  })
 }
