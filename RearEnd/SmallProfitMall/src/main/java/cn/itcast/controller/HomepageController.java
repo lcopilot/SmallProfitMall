@@ -1,5 +1,6 @@
 package cn.itcast.controller;
 
+import cn.itcast.dao.HomepageDao;
 import cn.itcast.domain.commodity.Classify;
 import cn.itcast.domain.homepag.*;
 import cn.itcast.response.CommonCode;
@@ -26,6 +27,9 @@ public class HomepageController {
 
     @Autowired
     RedisUtil redisUtil;
+
+    @Autowired
+    HomepageDao homepageDao;
 
     /**
      * 查询轮播图
@@ -76,7 +80,7 @@ public class HomepageController {
     public QueryResponseResult navigationInDetail(){
         QueryResult result = new QueryResult();
         Classification classification = homepageService.findNavigationInDetail();
-        List<Classification> logins= Arrays.asList(classification);
+        List<ProductPrimaryCategory> logins=  homepageDao.findProductCategory();
         result.setList(logins);
         return new QueryResponseResult(CommonCode.SUCCESS,result);
     }
