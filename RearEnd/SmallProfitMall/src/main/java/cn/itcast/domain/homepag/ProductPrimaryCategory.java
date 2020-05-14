@@ -15,9 +15,18 @@ public class ProductPrimaryCategory implements Serializable {
     private Integer product_content_id;
     /**分类内容**/
     private String category_content;
-
+    /**分类换行标志位**/
+    private Boolean sign;
     /**二级商品目录**/
     private List<ProductSecondaryCategory> productSecondaryCategories;
+
+    public Boolean getSign() {
+        return sign;
+    }
+
+    public void setSign(Boolean sign) {
+        this.sign = sign;
+    }
 
     public Integer getProduct_primary_id() {
         return product_primary_id;

@@ -4,15 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.HomepageDao">
 
+    <!--一级商品目录map-->
     <resultMap id="findProductCategoryMap" type="cn.itcast.domain.homepag.ProductPrimaryCategory">
         <id property="product_primary_id" column="product_primary_id"></id>
         <result property="category_content" column="category_content"></result>
         <result property="product_content_id" column="product_content_id"></result>
+        <result property="sign" column="sign"></result>
         <collection property="productSecondaryCategories" resultMap="productSecondaryCategoriesMap">
         </collection>
     </resultMap>
 
-    <!--配置二级目录Map-->
+    <!--二级商品目录Map-->
     <resultMap id="productSecondaryCategoriesMap" type="cn.itcast.domain.homepag.ProductSecondaryCategory">
         <id property="product_secondary_id" column="product_secondary_id"></id>
         <result property="secondary_content" column="secondary_content"></result>
@@ -20,7 +22,7 @@
        </collection>
     </resultMap>
 
-    <!--三级目录map-->
+    <!--三级商品目录map-->
     <resultMap id="productFinalCategoriesMap" type="cn.itcast.domain.homepag.ProductFinalCategory">
         <id property="product_final_id" column="product_final_id"></id>
         <result property="final_content" column="final_content"></result>
