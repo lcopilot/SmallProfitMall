@@ -81,7 +81,7 @@ axios.interceptors.response.use(
 //封装请求方法 此方法耦合度很低 适用于业务中绝大部分
 export default {
   /**
-   * Promise有三种状态
+   * Promise 三种状态
    * pending: 等待中，或者进行中，表示还没有得到结果
    * resolved: 已经完成，表示得到了我们想要的结果，可以继续往下执行
    * rejected: 也表示得到结果，但是由于结果并非我们所愿，因此拒绝执(用catch捕获异常)
