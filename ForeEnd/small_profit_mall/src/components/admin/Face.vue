@@ -208,8 +208,8 @@
       },
       //保存录制的视频
       saveRecordingData() {
-        let blob = new Blob(this.chunks, {'type': 'video/webm'}),
-            videoStream = URL.createObjectURL(blob);
+        let blob = new Blob(this.chunks, {'type': 'video/webm'});
+            // videoStream = URL.createObjectURL(blob);
         // this.chunkList.push({stream: videoStream});
         this.chunks = [];
         let videoFile = new File([blob], 'msr-' + (new Date).toISOString().replace(/:|\./g, '-') + '.webm', {
