@@ -1,7 +1,7 @@
 <template>
-  <div style="padding: 0 .5rem">
+  <div style="padding: 0 .5rem;font-size: 16px">
       <!-- 商品分类-->
-      <span v-for="(Categories,index) in CategoriesList" :key="Categories.product_primary_id">
+      <span v-for="(Categories,index) in CategoriesList" :key="Categories.product_primary_id" >
         <el-popover
             placement="right"
             width="840"
