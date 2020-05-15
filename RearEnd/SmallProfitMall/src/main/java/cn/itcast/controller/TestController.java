@@ -4,7 +4,9 @@ package cn.itcast.controller;
 import cn.itcast.dao.*;
 import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import cn.itcast.domain.homepag.Navigation;
+import cn.itcast.domain.homepag.ProductCategory;
 import cn.itcast.domain.homepag.ProductPrimaryCategory;
+import cn.itcast.domain.homepag.ProductPrimaryCategoryList;
 import cn.itcast.domain.member.ConsumptionRecords;
 import cn.itcast.domain.news.News;
 import cn.itcast.domain.order.Order;
@@ -13,6 +15,7 @@ import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.response.ResultCode;
+import cn.itcast.service.HomepageService;
 import cn.itcast.util.video.CompressVideoUtil;
 import cn.itcast.util.video.UploadVideoUtil;
 import com.alibaba.fastjson.JSONObject;
@@ -51,7 +54,7 @@ public class TestController {
     MemberDao memberDao;
 
     @Autowired
-    HomepageDao homepageDao;
+    HomepageService homepageService;
 
 
 
@@ -160,8 +163,7 @@ public class TestController {
 
         @RequestMapping(value = "/test",method = RequestMethod.GET)
         public QueryResponseResult wevSocket()  {
-        System.out.println(homepageDao.findProductCategory());
-        List<ProductPrimaryCategory> productDetailsResults= homepageDao.findProductCategory();
+        List<ProductCategory> productDetailsResults= homepageService.findProductCategory();
         QueryResult queryResult = new QueryResult();
         queryResult.setList(productDetailsResults);
         return new QueryResponseResult(CommonCode.SUCCESS,queryResult);

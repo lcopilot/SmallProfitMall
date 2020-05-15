@@ -59,6 +59,76 @@ public class HomepageServiceImpl implements HomepageService {
 
     }
 
+    @Override
+    public   List<ProductCategory> findProductCategory() {
+
+        List<ProductPrimaryCategoryList> productPrimaryCategoryLists = new ArrayList<>();
+
+        List<ProductPrimaryCategory> productPrimaryCategory =  homepageDao.findProductCategory();
+
+        List<ProductCategory> productCategories = new   ArrayList();
+
+        if (productPrimaryCategory.size()>0){
+
+                //同一级目录的一级目录对象
+                ProductPrimaryCategoryList productPrimaryCategoryList1 = new ProductPrimaryCategoryList();
+
+                //判断是否同一级 同一级的目录添加到集合
+                List<ProductPrimaryCategory> productPrimaryCategories = new ArrayList<>();
+
+                for (int j = 0; j <productPrimaryCategory.size() ; j++) {
+
+                    //添加一级目录到分类对象集合中
+                    productPrimaryCategories.add(productPrimaryCategory.get(j));
+                    //判断是否是下一行分类 添加到对象
+                    if (productPrimaryCategory.get(j).getSign()){
+                        productPrimaryCategoryList1.setProductPrimaryCategories(productPrimaryCategories);
+                        productPrimaryCategoryLists.add(productPrimaryCategoryList1);
+                        productPrimaryCategories = new ArrayList<>();
+                        productPrimaryCategoryList1= new ProductPrimaryCategoryList();
+                    }
+                }
+            System.out.println(productPrimaryCategoryLists);
+
+
+             //创建返回分类对象
+            ProductCategory productCategory = new ProductCategory();
+            //定义一级目录名称
+            List<String> Category_content = new  ArrayList();
+            //定义二级目录数据
+            List<List<ProductSecondaryCategory>> productSecondaryCategories = new ArrayList<>();
+            for (int i = 0; i <productPrimaryCategoryLists.size() ; i++) {
+                List<ProductPrimaryCategory> productPrimaryCategory1 = productPrimaryCategoryLists.get(i).getProductPrimaryCategories();
+
+                for (int j = 0; j <productPrimaryCategory1.size(); j++) {
+                    Category_content.add(productPrimaryCategory1.get(j).getCategory_content());
+                    productSecondaryCategories.add(productPrimaryCategory1.get(j).getProductSecondaryCategories());
+                }
+                productCategory.setCategory_content(Category_content);
+                productCategory.setProductSecondaryCategories(productSecondaryCategories);
+                productSecondaryCategories =  new ArrayList<>();
+                Category_content= new  ArrayList();
+                productCategories.add(productCategory);
+                productCategory = new ProductCategory();
+            }
+
+//                Integer productCategoriesId = null;
+//                if (i == 1) {
+//                    productCategoriesId = productPrimaryCategory.get(i).getProduct_content_id();
+//                }else {
+//                    productCategoriesId = productPrimaryCategory.get(i-1).getProduct_content_id();
+//                }
+//
+//                if (productPrimaryCategory.get(i).getProduct_content_id().equals(productCategoriesId)){
+//                    productPrimaryCategories.add(productPrimaryCategory.get(i));
+//            }
+
+
+            }
+
+        return productCategories;
+    }
+
     /**
      * 查询搜索栏下导航栏
      * @return

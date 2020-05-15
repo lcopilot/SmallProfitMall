@@ -37,4 +37,13 @@ public interface HomepageService {
      */
     public Classification findNavigationInDetail();
 
+
+    /**
+     *查询商品分类
+     * @return
+     */
+    public    List<ProductCategory>   findProductCategory();
+
+
+
 }

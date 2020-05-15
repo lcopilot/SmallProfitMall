@@ -18,4 +18,5 @@
     <select id="fendEmail" parameterType="java.lang.String" resultType="java.lang.String">
         select email from user where email=#{email}
     </select>
+
 </mapper>
