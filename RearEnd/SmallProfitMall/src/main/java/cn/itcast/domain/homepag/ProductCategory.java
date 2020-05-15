@@ -11,7 +11,7 @@ public class ProductCategory {
     /**一级目录名称**/
     private List<String>category_content;
     /**二级目录**/
-    private List<List<ProductSecondaryCategory>> productSecondaryCategories;
+    private List<ProductSecondaryCategory> productSecondaryCategories;
 
     public List<String> getCategory_content() {
         return category_content;
@@ -21,11 +21,11 @@ public class ProductCategory {
         this.category_content = category_content;
     }
 
-    public List<List<ProductSecondaryCategory>> getProductSecondaryCategories() {
+    public List<ProductSecondaryCategory> getProductSecondaryCategories() {
         return productSecondaryCategories;
     }
 
-    public void setProductSecondaryCategories(List<List<ProductSecondaryCategory>> productSecondaryCategories) {
+    public void setProductSecondaryCategories(List<ProductSecondaryCategory> productSecondaryCategories) {
         this.productSecondaryCategories = productSecondaryCategories;
     }
 }

@@ -59,25 +59,30 @@ public class HomepageServiceImpl implements HomepageService {
 
     }
 
+    /**
+     * 查询所有分类 先分出行的一级目录 再转换返回的分类数据格式
+     * @return
+     */
     @Override
     public   List<ProductCategory> findProductCategory() {
 
+        //定义返回商品分类数据类
+        List<ProductCategory> productCategories = new  ArrayList();
+
+        //定义分类每行的一级目录
         List<ProductPrimaryCategoryList> productPrimaryCategoryLists = new ArrayList<>();
 
+        //查询所有分类数据
         List<ProductPrimaryCategory> productPrimaryCategory =  homepageDao.findProductCategory();
 
-        List<ProductCategory> productCategories = new   ArrayList();
 
         if (productPrimaryCategory.size()>0){
-
                 //同一级目录的一级目录对象
                 ProductPrimaryCategoryList productPrimaryCategoryList1 = new ProductPrimaryCategoryList();
-
                 //判断是否同一级 同一级的目录添加到集合
                 List<ProductPrimaryCategory> productPrimaryCategories = new ArrayList<>();
-
+                //分一级目录
                 for (int j = 0; j <productPrimaryCategory.size() ; j++) {
-
                     //添加一级目录到分类对象集合中
                     productPrimaryCategories.add(productPrimaryCategory.get(j));
                     //判断是否是下一行分类 添加到对象
@@ -88,41 +93,36 @@ public class HomepageServiceImpl implements HomepageService {
                         productPrimaryCategoryList1= new ProductPrimaryCategoryList();
                     }
                 }
-            System.out.println(productPrimaryCategoryLists);
 
 
-             //创建返回分类对象
-            ProductCategory productCategory = new ProductCategory();
-            //定义一级目录名称
-            List<String> Category_content = new  ArrayList();
-            //定义二级目录数据
-            List<List<ProductSecondaryCategory>> productSecondaryCategories = new ArrayList<>();
+
+            //转换分类的返回格式
             for (int i = 0; i <productPrimaryCategoryLists.size() ; i++) {
+                //定义二级目录数据
+                List<ProductSecondaryCategory> productSecondaryCategories = new ArrayList<>();
+
                 List<ProductPrimaryCategory> productPrimaryCategory1 = productPrimaryCategoryLists.get(i).getProductPrimaryCategories();
+                //创建返回分类对象
+                ProductCategory productCategory = new ProductCategory();
+                //定义一级目录名称
+                List<String> Category_content = new  ArrayList();
 
                 for (int j = 0; j <productPrimaryCategory1.size(); j++) {
                     Category_content.add(productPrimaryCategory1.get(j).getCategory_content());
-                    productSecondaryCategories.add(productPrimaryCategory1.get(j).getProductSecondaryCategories());
+
+                    for (int k = 0; k <productPrimaryCategory1.get(j).getProductSecondaryCategories().size() ; k++) {
+                        ProductSecondaryCategory productSecondaryCategory =   productPrimaryCategory1.get(j).getProductSecondaryCategories().get(k);
+                        productSecondaryCategories.add(productSecondaryCategory);
+                    }
+
                 }
+                //设置一级目录名称
                 productCategory.setCategory_content(Category_content);
+                //设置一级目录下的二级目录数据
                 productCategory.setProductSecondaryCategories(productSecondaryCategories);
-                productSecondaryCategories =  new ArrayList<>();
-                Category_content= new  ArrayList();
+
                 productCategories.add(productCategory);
-                productCategory = new ProductCategory();
             }
-
-//                Integer productCategoriesId = null;
-//                if (i == 1) {
-//                    productCategoriesId = productPrimaryCategory.get(i).getProduct_content_id();
-//                }else {
-//                    productCategoriesId = productPrimaryCategory.get(i-1).getProduct_content_id();
-//                }
-//
-//                if (productPrimaryCategory.get(i).getProduct_content_id().equals(productCategoriesId)){
-//                    productPrimaryCategories.add(productPrimaryCategory.get(i));
-//            }
-
 
             }
 
