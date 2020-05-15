@@ -1,8 +1,8 @@
 <template>
-  <div style="text-align: left;padding: 0 .5rem">
+  <div style="padding: 0 .5rem">
     <ul>
       <!-- 商品分类-->
-      <li v-for="(Categories,index) in CategoriesList" :key="Categories.product_primary_id" style="display: inline-block;">
+      <span v-for="(Categories,index) in CategoriesList" :key="Categories.product_primary_id">
         <el-popover
             placement="right"
             width="840"
@@ -28,12 +28,12 @@
           <el-button type="text" size="small" style="font-size: 14px;" slot="reference">
             <router-link to="/" @click.native="">
               {{Categories.category_content}}
-              <span style="margin: 0 .2rem" v-if="(index+1)%3!==0">/</span>
+              <span style="margin: 0 .2rem" v-if="!Categories.sign">/</span>
             </router-link>
           </el-button>
         </el-popover>
-        <br  v-if="Categories.sign"/>
-      </li>
+        <br v-if="Categories.sign"/>
+      </span>
     </ul>
   </div>
 
@@ -64,7 +64,6 @@
       },
       enter(index) {
         this.CategoryDetailsList=[];
-        console.log(this.CategoriesList[index])
         this.CategoriesList[index].productSecondaryCategories.map(item=>{
           this.CategoryDetailsList.push(item)
         })

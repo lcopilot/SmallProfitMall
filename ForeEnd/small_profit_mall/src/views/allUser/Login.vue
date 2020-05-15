@@ -409,7 +409,8 @@
   .login_div {
     height: 100%;
     width: 100%;
-    background: url("http://img.fhxasdsada.xyz/AAVVCCC") no-repeat;
+    /*http://img.fhxasdsada.xyz/AAVVCCC*/
+    background: url("https://api.dujin.org/bing/1920.php") no-repeat;
     -moz-background-size: 100% 100%;
     background-size: 100% 100%;
   }
