@@ -1,6 +1,5 @@
 <template>
   <div style="padding: 0 .5rem">
-    <ul>
       <!-- 商品分类-->
       <span v-for="(Categories,index) in CategoriesList" :key="Categories.product_primary_id">
         <el-popover
@@ -34,7 +33,6 @@
         </el-popover>
         <br v-if="Categories.sign"/>
       </span>
-    </ul>
   </div>
 
 
