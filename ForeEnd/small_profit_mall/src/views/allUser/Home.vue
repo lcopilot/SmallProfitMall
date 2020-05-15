@@ -135,6 +135,7 @@
         spikeProductList: [],
         //低价商品列表
         lowPriceProductList: [],
+
       }
     },
     methods: {
@@ -427,3 +428,4 @@
   }
 
 </style>
+

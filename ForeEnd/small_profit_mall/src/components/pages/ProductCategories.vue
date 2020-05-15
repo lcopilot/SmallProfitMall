@@ -1,7 +1,7 @@
 <template>
-  <div style="padding: 0 .5rem;font-size: 16px">
+  <ul >
       <!-- 商品分类-->
-      <span v-for="(Categories,index) in CategoriesList" :key="Categories.product_primary_id" >
+      <li v-for="(Categories,index) in CategoriesList" :key="Categories.product_primary_id" >
         <el-popover
             placement="right"
             width="840"
@@ -25,15 +25,15 @@
             </el-table-column>
           </el-table>
           <el-button type="text" size="small" style="font-size: 14px;" slot="reference">
-            <router-link to="/" @click.native="">
-              {{Categories.category_content}}
-              <span style="margin: 0 .2rem" v-if="!Categories.sign">/</span>
+            <router-link to="/" @click.native="" v-for="(MCategories,index) in Categories.category_content">
+              {{MCategories}}
+              <span style="margin: 0 .2rem" v-if="index+1!==Categories.category_content.length">/</span>
             </router-link>
           </el-button>
         </el-popover>
         <br v-if="Categories.sign"/>
-      </span>
-  </div>
+      </li>
+  </ul>
 
 
 </template>
