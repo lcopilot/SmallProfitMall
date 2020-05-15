@@ -25,7 +25,7 @@
             </el-table-column>
           </el-table>
           <el-button type="text" size="small" style="font-size: 14px;" slot="reference">
-            <router-link to="/" @click.native="" v-for="(MCategories,index) in Categories.category_content">
+            <router-link  v-for="(MCategories,index) in Categories.category_content" :to="{path:'/searchShow',query:{searchContent:MCategories}}">
               {{MCategories}}
               <span style="margin: 0 .2rem" v-if="index+1!==Categories.category_content.length">/</span>
             </router-link>
