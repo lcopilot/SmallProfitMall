@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 /**
  * 收藏控制层
+ * @author kity
  */
 @Controller
 @RequestMapping("/EvaluationController")

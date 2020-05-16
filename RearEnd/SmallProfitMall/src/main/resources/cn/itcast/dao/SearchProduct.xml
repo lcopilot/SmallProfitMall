@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.SearchProductDao">
+
+
+    <!--收拾一级目录商品-->
+    <select id="findProduct">
+
+    </select>
+
+    <!--收拾一级目录商品-->
+    <select id="findPrimaryProduct" parameterType="java.lang.String"
+            resultType="cn.itcast.domain.searchProduct.SearchProduct">
+        SELECT
+            pp.ProductSales,
+            pp.ProductPrice,
+            pb.ProductName,
+            pb.productId,
+            pi.ImageSite
+        FROM
+            ProductBasis pb
+            LEFT JOIN ProductPrice pp ON pb.ProductId = pp.ProductId
+            LEFT JOIN ProductImage pi ON pp.ProductId = pi.ProductId
+        WHERE
+        <if test="gradePrimary == 1">
+            pb.prodcutPrimaryCategory IN ( SELECT product_primary_id FROM ( SELECT product_primary_id FROM
+            product_primary_category WHERE category_content LIKE concat ( '%', #{productName}, '%' )  LIMIT #{start}, #{pageSize} ) AS a )
+        </if>
+        <if test="gradePrimary == 2">
+            pb.productSecondaryCategory IN ( SELECT product_secondary_id FROM ( SELECT product_secondary_id FROM
+            product_secondary_category WHERE secondary_content LIKE concat ( '%',  #{productName}, '%' )  LIMIT #{start}, #{pageSize} ) AS a )
+        </if>
+        <if test="gradePrimary == 3">
+            pb.productFinalCategory IN ( SELECT product_final_id FROM ( SELECT product_final_id FROM
+             product_final_category WHERE final_content LIKE concat ( '%',  #{productName}, '%' )  LIMIT #{start}, #{pageSize} ) AS a )
+        </if>
+
+            AND pi.sign = 1
+    </select>
+</mapper>

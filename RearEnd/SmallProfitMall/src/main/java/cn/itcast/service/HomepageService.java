@@ -30,19 +30,14 @@ public interface HomepageService {
     public List<Icon> findIcon();
 
 
-    /**
-     * 商品导航详细分类
-     *
-     * @return
-     */
-    public Classification findNavigationInDetail();
+
 
 
     /**
      *查询商品分类
      * @return
      */
-    public    List<ProductCategory>   findProductCategory();
+    public    List<ProductCategory> findProductCategory();
 
 
 

@@ -41,23 +41,7 @@ public class HomepageServiceImpl implements HomepageService {
 
 
 
-    /**
-     * 详细分类
-     * @return
-     */
-    @Override
-    public Classification findNavigationInDetail(){
-        Classification redis = (Classification) redisUtil.get("findNavigationInDetail");
-        if (redis==null){
-            Classification classification = new Classification();
-            classification.setNavigationClassify(homepageDao.findNavigationClassify());
-            classification.setNavigations(homepageDao.findNavigation());
-            redisUtil.set("findNavigationInDetail",classification);
-            return classification;
-        }
-        return redis;
 
-    }
 
     /**
      * 查询所有分类 先分出行的一级目录 再转换返回的分类数据格式
@@ -132,7 +116,7 @@ public class HomepageServiceImpl implements HomepageService {
 
             }
         //存入缓存
-        redisUtil.set("findProductCategory", productCategories);
+       // redisUtil.set("findProductCategory", productCategories);
         return productCategories;
     }
 

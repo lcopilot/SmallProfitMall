@@ -30,8 +30,6 @@
 
 
 
-
-
     <!--查询所有商品栏下分类-->
     <select id="findNavigation2" resultType="cn.itcast.domain.commodity.Classify">
         SELECT * from category
@@ -41,28 +39,21 @@
         SELECT * from homepageIcon
     </select>
 
-    <!--查询导航详细-->
-    <select id="findNavigationClassify" resultType="cn.itcast.domain.homepag.NavigationClassify">
-        SELECT * FROM classification
-    </select>
-
+    <!--查询轮播图图片-->
     <select id="findRotationChart" resultType="cn.itcast.domain.homepag.RotationChart">
         SELECT * from RotationChart
     </select>
 
-    <!--查询导航标题-->
-    <select id="findNavigation" resultType="cn.itcast.domain.homepag.Navigation">
-        SELECT * FROM navigation
-    </select>
-
     <!--查询商品分类导航栏-->
     <select id="findProductCategory" resultMap="findProductCategoryMap">
-    SELECT
-	pp.*,pc.product_secondary_id,pc.secondary_content,pf.product_final_id,pf.final_content
-    FROM
-	product_primary_category pp
-	LEFT JOIN product_secondary_category pc ON pp.product_primary_id = pc.product_primary_id
-	LEFT JOIN product_final_category pf ON pc.product_secondary_id = pf.product_secondary_id
+        SELECT
+        pp.*,pc.product_secondary_id,pc.secondary_content,pf.product_final_id,pf.final_content
+        FROM
+        product_primary_category pp
+        LEFT JOIN product_secondary_category pc ON pp.product_primary_id = pc.product_primary_id
+        LEFT JOIN product_final_category pf ON pc.product_secondary_id = pf.product_secondary_id
+        WHERE
+        pp.show_sign=1 AND pc.show_sign=1 AND pf.show_sign=1
     </select>
 
 </mapper>

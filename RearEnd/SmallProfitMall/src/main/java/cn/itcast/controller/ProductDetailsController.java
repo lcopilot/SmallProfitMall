@@ -14,10 +14,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+/**
+ * @author krty
+ */
 @Controller
 @RequestMapping("/ProductDetails")
 @ResponseBody
 public class ProductDetailsController {
+
+    /**商品消息业务层**/
     @Autowired
     ProductDetailsService productDetailsService;
 

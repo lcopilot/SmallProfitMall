@@ -6,17 +6,14 @@ import cn.itcast.domain.ProductDatails.ProductComment;
 import cn.itcast.domain.ProductDatails.SecondComment;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
-import cn.itcast.response.QueryResult;
 import cn.itcast.response.listFootprint.Pagination;
 import cn.itcast.response.listFootprint.ResponsePagination;
 import cn.itcast.response.objectReturn.ObjectReturn;
 import cn.itcast.response.objectReturn.ObjectReturnResponse;
 import cn.itcast.service.CommentService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -40,7 +37,7 @@ public class CommentController {
 
     /**
      * 商品添加评论
-     * @param productComment
+     * @param productComment 评论对象
      * @return
      */
     @RequestMapping(value = "/addComment",method = RequestMethod.POST)
@@ -74,7 +71,7 @@ public class CommentController {
 
     /**
      * 查询评论数量
-     * @param productId
+     * @param productId 商品id
      * @return
      */
     @RequestMapping(value = "findCommentQuantity/{productId}",method = RequestMethod.GET )
@@ -87,7 +84,7 @@ public class CommentController {
 
     /**
      * 商品添加追评
-     * @param secondComment
+     * @param secondComment 追评对象
      * @return
      */
     @RequestMapping(value = "/addSecondComment",method = RequestMethod.POST)

@@ -2,15 +2,26 @@ package cn.itcast.domain.commodity;
 
 import java.io.Serializable;
 
-//为你推荐
+/**
+ * 为你推荐
+ * @author kity
+ */
 public class Recommend implements Serializable {
-    private int id;
+    /**推荐id**/
+    private Integer id;
+    /**商品id**/
     private String ProductId;
+    /**商品图片**/
     private String ImageSite;
+    /**商品图片**/
     private String ProductName;
+    /**商品价格**/
     private String ProductPrice;
+
     private int Favorite;
+
     private int shoppingTrolley;
+
     private int hot;
 
     public int getId() {

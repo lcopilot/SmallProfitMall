@@ -2,36 +2,21 @@ package cn.itcast.controller;
 
 
 import cn.itcast.dao.*;
-import cn.itcast.domain.ProductDatails.ProductDetailsResult;
-import cn.itcast.domain.homepag.Navigation;
 import cn.itcast.domain.homepag.ProductCategory;
-import cn.itcast.domain.homepag.ProductPrimaryCategory;
-import cn.itcast.domain.homepag.ProductPrimaryCategoryList;
-import cn.itcast.domain.member.ConsumptionRecords;
-import cn.itcast.domain.news.News;
-import cn.itcast.domain.order.Order;
 import cn.itcast.messageQueue.producer.shopping.ShoppingProducer;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
-import cn.itcast.response.ResultCode;
+import cn.itcast.response.objectReturn.ObjectReturn;
+import cn.itcast.response.objectReturn.ObjectReturnResponse;
 import cn.itcast.service.HomepageService;
-import cn.itcast.util.video.CompressVideoUtil;
-import cn.itcast.util.video.UploadVideoUtil;
-import com.alibaba.fastjson.JSONObject;
+import cn.itcast.service.SearchProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.*;
 
 @Controller
@@ -56,6 +41,8 @@ public class TestController {
     @Autowired
     HomepageService homepageService;
 
+    @Autowired
+    SearchProductService searchProductDao;
 
 
 //    //测试
@@ -161,12 +148,12 @@ public class TestController {
 //        System.out.println(  productDetailsDao.fendAttributes(10001));
 //    }
 
-        @RequestMapping(value = "/test",method = RequestMethod.GET)
-        public QueryResponseResult wevSocket()  {
-        List<ProductCategory> productDetailsResults= homepageService.findProductCategory();
-        QueryResult queryResult = new QueryResult();
-        queryResult.setList(productDetailsResults);
-        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
-   }
+//        @RequestMapping(value = "/test",method = RequestMethod.GET)
+//        public ObjectReturnResponse wevSocket(String productName)  {
+//            ObjectReturn objectReturn = new ObjectReturn();
+//            objectReturn.setObject(searchProductDao.findPrimaryProduct(productName));
+//
+//        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+//   }
 
 }

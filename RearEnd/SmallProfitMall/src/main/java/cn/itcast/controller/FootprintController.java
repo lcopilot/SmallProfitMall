@@ -18,11 +18,14 @@ import java.util.List;
 
 /**
  * 足迹控制层
+ * @author kity
  */
 @Controller
 @RequestMapping("/FootprintController")
 @ResponseBody
 public class FootprintController {
+
+    /**足迹业务层**/
     @Autowired
     FootprintService footprintService;
 

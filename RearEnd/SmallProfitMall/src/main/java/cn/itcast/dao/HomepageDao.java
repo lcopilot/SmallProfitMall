@@ -5,7 +5,9 @@ import cn.itcast.domain.homepag.*;
 
 import java.util.List;
 
-//主页
+/**
+ *
+ */
 public interface HomepageDao {
     /**
      * 查询轮播图图片
@@ -24,20 +26,6 @@ public interface HomepageDao {
      * @return
      */
     public List<Icon> findIcon();
-
-    /**
-     * 查询导航详细
-     * @return
-     */
-
-    public List<NavigationClassify> findNavigationClassify();
-
-    /**
-     * 查询导航标题
-     * @return
-     */
-    public List<Navigation> findNavigation();
-
 
     /**
      * 查询商品分类

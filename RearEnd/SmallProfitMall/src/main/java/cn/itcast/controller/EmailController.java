@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 邮件控制层
+ * @author kity
+ */
 @Controller
 @RequestMapping("/EmailController")
 @ResponseBody

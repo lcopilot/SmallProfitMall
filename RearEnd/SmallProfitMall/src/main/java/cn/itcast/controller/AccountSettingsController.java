@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 
 /**
+ * 用户会员信息控制层
  * @author Kite
  * @date 2020/4/1
  */

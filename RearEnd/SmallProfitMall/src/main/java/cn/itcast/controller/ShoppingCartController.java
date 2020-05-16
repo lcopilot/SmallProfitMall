@@ -78,7 +78,7 @@ public class ShoppingCartController {
      */
     @RequestMapping(value = "/deleteCart/{shoppingCartId}",method = RequestMethod.DELETE)
     public QueryResponseResult deleteCart(@PathVariable("shoppingCartId")int[] cartIdList) {
-        if (cartIdList== null) {
+        if (cartIdList == null) {
             //查询传入参数为空
             return new QueryResponseResult(CommonCode.FAIL, null);
         }
