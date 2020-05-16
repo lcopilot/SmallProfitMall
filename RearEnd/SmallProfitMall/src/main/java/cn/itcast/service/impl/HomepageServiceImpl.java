@@ -65,6 +65,10 @@ public class HomepageServiceImpl implements HomepageService {
      */
     @Override
     public   List<ProductCategory> findProductCategory() {
+        List<ProductCategory> findProductCategory = (List<ProductCategory>) redisUtil.get("findProductCategory");
+        if (findProductCategory!=null){
+            return findProductCategory;
+        }
 
         //定义返回商品分类数据类
         List<ProductCategory> productCategories = new  ArrayList();
@@ -74,9 +78,8 @@ public class HomepageServiceImpl implements HomepageService {
 
         //查询所有分类数据
         List<ProductPrimaryCategory> productPrimaryCategory =  homepageDao.findProductCategory();
-
-
         if (productPrimaryCategory.size()>0){
+
                 //同一级目录的一级目录对象
                 ProductPrimaryCategoryList productPrimaryCategoryList1 = new ProductPrimaryCategoryList();
                 //判断是否同一级 同一级的目录添加到集合
@@ -89,20 +92,21 @@ public class HomepageServiceImpl implements HomepageService {
                     if (productPrimaryCategory.get(j).getSign()){
                         productPrimaryCategoryList1.setProductPrimaryCategories(productPrimaryCategories);
                         productPrimaryCategoryLists.add(productPrimaryCategoryList1);
+                        //初始化一级目录
                         productPrimaryCategories = new ArrayList<>();
+                        //初始化一级目录对象
                         productPrimaryCategoryList1= new ProductPrimaryCategoryList();
                     }
                 }
-
-
 
             //转换分类的返回格式
             for (int i = 0; i <productPrimaryCategoryLists.size() ; i++) {
                 //定义二级目录数据
                 List<ProductSecondaryCategory> productSecondaryCategories = new ArrayList<>();
 
+                //定义同一级
                 List<ProductPrimaryCategory> productPrimaryCategory1 = productPrimaryCategoryLists.get(i).getProductPrimaryCategories();
-                //创建返回分类对象
+                //创建一级分类目录对象
                 ProductCategory productCategory = new ProductCategory();
                 //定义一级目录名称
                 List<String> Category_content = new  ArrayList();
@@ -116,16 +120,19 @@ public class HomepageServiceImpl implements HomepageService {
                     }
 
                 }
-                //设置一级目录名称
+                //设置一行一级目录名称集合
                 productCategory.setCategory_content(Category_content);
+
                 //设置一级目录下的二级目录数据
                 productCategory.setProductSecondaryCategories(productSecondaryCategories);
 
+                //添加一行一级目录对象
                 productCategories.add(productCategory);
             }
 
             }
-
+        //存入缓存
+        redisUtil.set("findProductCategory", productCategories);
         return productCategories;
     }
 
