@@ -342,7 +342,7 @@
     text-align: center;
     color: #999;
     font-size: 12px;
-    line-height: 21px;
+    line-height: 22px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     text-decoration: line-through;

@@ -1,8 +1,9 @@
 <template>
   <el-container>
     <el-header height="80px">
-      <div v-if="searchContent" style="text-align: left;font-size: 24px;font-weight: 600;margin:1% 0 0 10%">
-       关键词:'{{searchContent}}'
+      <div v-if="searchContent"
+           style="text-align: left;font-size: 24px;font-weight: 600;margin:1% 0 0 10%">
+        关键词:'{{searchContent}}'
       </div>
       <div v-if="!searchContent">
         ——————
@@ -20,40 +21,38 @@
                      v-for="(productsFeatured ,index) in productsFeaturedList"
                      :key="productsFeatured.id" @mouseenter="enterProduct(index)">
               <div style="position: relative;" @mouseenter="enterProduct(index)">
-                <router-link :to="{path: '/product', query: {productId:productsFeatured.productId}}" :title="productsFeatured.productName">
+                <router-link :to="{path: '/product', query: {productId:productsFeatured.productId}}"
+                             :title="productsFeatured.productName">
                   <el-image fit="fit" :src="productsFeatured.imageSite"
                             :lazy="true"/>
-                  <div class="recommended_products_name" >
+                  <div class="recommended_products_name">
                     <span v-text="productsFeatured.productName"></span>
                     <div>
                       <span
-                          class="recommended_products_price" v-text="'￥'+productsFeatured.productPrice"/>
+                          class="recommended_products_price"
+                          v-text="'￥'+productsFeatured.productPrice"/>
                     </div>
                   </div>
                 </router-link>
                 <a>
-                  <div @mouseenter="enterFavorite(index)" v-show="productsFeatured.favorite==1" v-cloak
+                  <div @mouseenter="enterFavorite(index)" v-show="productsFeatured.favorite==1"
+                       v-cloak
                        class="recommended_products_favorite">
                     <svg-icon name="Uncollected"/>
                   </div>
-                  <div class="recommended_products_favorite" v-show="productsFeatured.favorite==2" v-cloak
+                  <div class="recommended_products_favorite" v-show="productsFeatured.favorite==2"
+                       v-cloak
                        @click="addFavorite(productsFeatured.productId)"
                        @mouseout="shiftOutFavorite(index)">
                     <svg-icon name="Favorite"></svg-icon>
                   </div>
                 </a>
-                <a>
-                  <div @mouseenter="enterShoppingTrolley(index)"
-                       v-show="productsFeatured.shoppingTrolley==1" v-cloak
-                       class="recommended_products_Cart">
-                    <svg-icon name="added"/>
+                <div class="recommended_products_Cart">
+                  <svg-icon name="pageViews"></svg-icon>
+                  <div style="margin:-31px -60px 0 0;">
+                    {{productsFeatured.productPageviews>999?'999+':productsFeatured.productPageviews}}
                   </div>
-                  <div class="recommended_products_Cart" v-show="productsFeatured.shoppingTrolley==2" v-cloak
-                       @click="addCart()"
-                       @mouseout="shiftOutShoppingTrolley(index)">
-                    <svg-icon name="addCart"></svg-icon>
-                  </div>
-                </a>
+                </div>
                 <div class="recommended_products_hot" v-if="productsFeatured.hot==1">
                   <svg-icon name="hot"></svg-icon>
                 </div>
@@ -90,7 +89,7 @@
     data() {
       return {
         show2: false,
-        searchContent:'',
+        searchContent: '',
         productsFeaturedList: [],
         searchParams: {
           currentPage: 1,//页码
@@ -102,7 +101,7 @@
     },
     methods: {
       //图标变换
-      enterProduct(index){
+      enterProduct(index) {
         this.productsFeaturedList[index].favorite = 1;
         this.productsFeaturedList[index].shoppingTrolley = 1;
       },
@@ -113,39 +112,28 @@
       shiftOutFavorite(index) {
         this.productsFeaturedList[index].favorite = 1;
       },
-      enterShoppingTrolley(index) {
-        this.productsFeaturedList[index].favorite = 1;
-        this.productsFeaturedList[index].shoppingTrolley = 2;
-      },
-      shiftOutShoppingTrolley(index) {
-        this.productsFeaturedList[index].shoppingTrolley = 1;
-      },
       //添加收藏
-      addFavorite(productId){
-        if (!sessionStorage.getItem("uId")){
+      addFavorite(productId) {
+        if (!sessionStorage.getItem("uId")) {
           this.$message.warning("还没有登录哦~,请先登录吧")
-        }else{
-          let data={
-            productIds:[],
-            userId:sessionStorage.getItem("uId"),
+        } else {
+          let data = {
+            productIds: [],
+            userId: sessionStorage.getItem("uId"),
           };
           data.productIds.push(productId);
-          userApi.addFavorite(data).then(res=>{
-            if (res.success){
+          userApi.addFavorite(data).then(res => {
+            if (res.success) {
               this.$message.success("收藏成功!")
-            }else {
-              if (res.code==11111){
+            } else {
+              if (res.code == 11111) {
                 this.$message({
-                  message:"商品已经被收藏,请勿重复收藏"
+                  message: "商品已经被收藏,请勿重复收藏"
                 })
               }
             }
           })
         }
-      },
-
-      addCart(ProductId) {
-        console.log("sdfs");
       },
       //获取商品推荐
       getProductsFeatured() {
@@ -166,13 +154,13 @@
       }
     },
     created() {
-      if (!this.$route.query.searchContent){
-        this.searchContent=sessionStorage.getItem("searchContent");
-      }else {
-        this.searchContent=this.$route.query.searchContent;
-        sessionStorage.setItem("searchContent",this.searchContent);
+      if (!this.$route.query.searchContent) {
+        this.searchContent = sessionStorage.getItem("searchContent");
+      } else {
+        this.searchContent = this.$route.query.searchContent;
+        sessionStorage.setItem("searchContent", this.searchContent);
       }
-      if (!this.searchContent){
+      if (!this.searchContent) {
         this.getProductsFeatured();
       }
     }
@@ -221,10 +209,9 @@
   .recommended_products_Cart {
     width: 24px;
     height: 24px;
-    margin-left: -10px;
-    margin-top: -40px;
     position: absolute;
-    right: 0;
+    right: 20px;
+    top:255px
   }
 
   .recommended_products_hot {

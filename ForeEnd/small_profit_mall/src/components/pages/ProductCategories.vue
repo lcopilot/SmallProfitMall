@@ -1,5 +1,5 @@
 <template>
-  <ul >
+  <ul>
       <!-- 商品分类-->
       <li v-for="(Categories,index) in CategoriesList" :key="Categories.product_primary_id" >
         <el-popover
@@ -17,7 +17,7 @@
             <el-table-column width="720">
               <template slot-scope="Category">
                 <router-link v-for="categoryC in Category.row.productFinalCategories"
-                             style="margin: 0 1.2rem"
+                             style="margin: 0 1rem"
                              :to="{path:'/searchShow',query:{searchContent:categoryC.final_content}}">
                   {{categoryC.final_content}}
                 </router-link>
@@ -31,7 +31,6 @@
             </router-link>
           </el-button>
         </el-popover>
-        <br v-if="Categories.sign"/>
       </li>
   </ul>
 

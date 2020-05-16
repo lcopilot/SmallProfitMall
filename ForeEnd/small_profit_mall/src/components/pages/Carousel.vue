@@ -6,12 +6,12 @@
     <el-main>
       <el-row type="flex" justify="center" :gutter="20">
         <el-col :span="4">
-          <el-card style="height: 368px;overflow: hidden">
+          <el-card style="height: 370px">
             <productCategories/>
           </el-card>
         </el-col>
         <el-col :span="10">
-          <el-carousel height="368px">
+          <el-carousel height="370px">
             <el-carousel-item v-for="rotationChart in rotationCharts" :key="rotationChart.rid">
               <a>
                 <el-image @click="goto()" :src="rotationChart.rotationChartOne"/>
@@ -20,7 +20,7 @@
           </el-carousel>
         </el-col>
         <el-col :span="3">
-          <el-carousel height="368px" indicator-position="none" :interval="6500">
+          <el-carousel height="370px" indicator-position="none" :interval="6500">
             <el-carousel-item v-for="rotationChart in rotationCharts" :key="rotationChart.rid">
               <div>
                 <a>
