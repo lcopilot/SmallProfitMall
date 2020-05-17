@@ -229,10 +229,10 @@
       },
       //搜索
       searchProduct() {
-        const searchCh = /\S[a-zA-Z\s\d\u4e00-\u9fa5]/;
-        if (this.searchContent == '' || !searchCh.test(this.searchContent)) {
+        const searchCh = /^[\u4e00-\u9fa50-9a-zA-Z   ]+$/;
+        if (this.searchContent === '' || !searchCh.test(this.searchContent)) {
           return this.$message({
-            message: "请输入正确格式的搜索内容,支持中英文数字",
+            message: "请输入正确格式的搜索内容,支持英文数字,空格",
             type: "warning"
           })
         }
