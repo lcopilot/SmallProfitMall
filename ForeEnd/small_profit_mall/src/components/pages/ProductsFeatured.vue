@@ -93,8 +93,8 @@
         productsFeaturedList: [],
         searchParams: {
           currentPage: 1,//页码
-          pageSize: 6,//每页显示个数
-          totalCount: 400,//总记录数
+          pageSize: 30,//每页显示个数
+          totalCount: 0,//总记录数
           totalPage: 1,//总页数
         },
       }
@@ -147,10 +147,35 @@
       //切换评论分页时触发
       changePage(currentPage) {
         this.searchParams.currentPage = currentPage;
+        this.search();
       },
       //切换每页显示多少条评论时触发
       changeNumber(pageSize) {
         this.searchParams.pageSize = pageSize;
+        this.search();
+      },
+      search(){
+        let searchHistory=JSON.parse(localStorage.getItem("searchHistory"));
+        searchHistory.map((item,index)=>{
+          if (item.value===this.searchContent){
+            return  searchHistory.splice(index,1)
+          }
+        })
+        let searchHistorys=[]
+        searchHistorys.push({value:this.searchContent},...searchHistory)
+        localStorage.setItem("searchHistory",JSON.stringify(searchHistorys))
+        const params={
+          PrimaryContent:this.searchContent,
+          currentPage:this.searchParams.currentPage,
+          pageSize:this.searchParams.pageSize
+        };
+        homeApi.search(params).then(res=>{
+          if (res.success){
+            this.productsFeaturedList = res.pagination.list;
+            this.searchParams.totalPage=res.pagination.totalPage;
+            this.searchParams.totalCount=res.pagination.totalCount;
+          }
+        })
       }
     },
     created() {
@@ -159,9 +184,12 @@
       } else {
         this.searchContent = this.$route.query.searchContent;
         sessionStorage.setItem("searchContent", this.searchContent);
+        this.search();
       }
       if (!this.searchContent) {
         this.getProductsFeatured();
+      }else {
+
       }
     }
   }

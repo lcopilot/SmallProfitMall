@@ -1,5 +1,6 @@
 import http from '../util/public';
 import sysConfig from '../util/sysConfig'
+import querystring from "querystring";
 const apiUrl=sysConfig.smApiUrlPre;
 
 /**
@@ -42,3 +43,9 @@ export const getLowPriceProductList=()=>{
 export const getProductsFeatured=()=>{
   return http.requestQuickGet(apiUrl+'/CommodityController/Recommend')
 };
+
+//搜索商品
+export const search=(params)=>{
+  const queryString=querystring.stringify(params);
+  return http.requestGet(apiUrl+'/PrimaryProductController/fendPrimaryProduct?'+queryString)
+}
