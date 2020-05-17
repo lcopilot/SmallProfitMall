@@ -24,7 +24,7 @@
                 <span>{{item.value}}</span>
                 <span v-if="item.value" @click="removeSearchHistory(item.value)" style="position: absolute;right:0;top:5px;"><svg-icon name="shutdown"></svg-icon></span>
                 <span v-if="item.value===''&&restaurants.length>=2" @click="removeSearchHistory(item.value,true)" style="color: #999999;font-size: 13px;float: right">清空搜索历史</span>
-                <span v-if="item.value===''" style="display:block;text-align:center;color: #999999;font-size: 13px;">您还没有搜索过哦~</span>
+                <span v-if="item.value===''&&restaurants.length==1" style="display:block;text-align:center;color: #999999;font-size: 13px;">您还没有搜索过哦~</span>
               </div>
             </template>
           </el-autocomplete>

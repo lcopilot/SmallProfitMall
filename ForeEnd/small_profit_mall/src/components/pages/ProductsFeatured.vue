@@ -65,7 +65,7 @@
                 @size-change="changeNumber"
                 @current-change="changePage"
                 :current-page="searchParams.currentPage"
-                :page-sizes="[6,7, 8, 10, 12,15]"
+                :page-sizes="[20,25,30,45]"
                 :page-size="searchParams.pageSize"
                 layout="total, sizes, prev, pager, next, jumper"
                 :hide-on-single-page="true"
