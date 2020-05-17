@@ -4,6 +4,7 @@ import cn.itcast.domain.searchProduct.SearchProduct;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Kite
@@ -18,8 +19,8 @@ public interface SearchProductService {
      * @param pageSize 每页查询数量
      * @return
      */
-    public List<SearchProduct> findPrimaryProduct( String productName,Integer currentPage,Integer pageSize);
+    public Map findPrimaryProduct(String productName, Integer currentPage, Integer pageSize);
 
 
-    //public Integer[] fendTotalPage(SPrimaryContent,pageSize)
+    public Integer[] fendTotalPage(String SPrimaryContent,Integer pageSize,Integer PrimaryProduct);
 }
