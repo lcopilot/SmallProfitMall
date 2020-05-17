@@ -157,7 +157,7 @@
       search(){
         let searchHistory=JSON.parse(localStorage.getItem("searchHistory"));
         searchHistory.map((item,index)=>{
-          if (item.value===this.searchContent){
+          if (item.value.trim()===this.searchContent.trim()){
             return  searchHistory.splice(index,1)
           }
         })

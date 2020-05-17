@@ -219,12 +219,17 @@
       },
       createFilter(queryString) {
         return (restaurant) => {
-          return (restaurant.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+          let str=queryString.split('')
+          for (let i=0;i<str.length;i++){
+            if (restaurant.value.toLowerCase().includes(str[i].toLowerCase())){
+              return (restaurant.value.toLowerCase().includes(str[i].toLowerCase()));
+            }
+          }
         };
       },
       //搜索
       searchProduct() {
-        const searchCh = /^[A-Za-z0-9\u4e00-\u9fa5]+$/;
+        const searchCh = /\S[a-zA-Z\s\d\u4e00-\u9fa5]/;
         if (this.searchContent == '' || !searchCh.test(this.searchContent)) {
           return this.$message({
             message: "请输入正确格式的搜索内容,支持中英文数字",
