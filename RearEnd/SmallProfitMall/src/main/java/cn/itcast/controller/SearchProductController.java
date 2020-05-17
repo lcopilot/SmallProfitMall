@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 搜索商品控制层
@@ -35,7 +36,6 @@ public class SearchProductController {
      * @return
      */
     @RequestMapping(value = "/fendPrimaryProduct" ,method = RequestMethod.GET)
-
     public ResponsePagination fendPrimaryProduct(String  PrimaryContent, Integer currentPage , Integer pageSize){
         //判断传入开始页是否为空 为空则默认为第一页
         if (currentPage==null){
@@ -46,18 +46,16 @@ public class SearchProductController {
             pageSize=8;
         }
         Pagination pagination = new Pagination();
-        //查询足迹信息
-        List<SearchProduct> footprint = searchProductService.findPrimaryProduct(PrimaryContent,currentPage,pageSize);
+        Map primaryProductMap = searchProductService.findPrimaryProduct(PrimaryContent,currentPage,pageSize);
+
+        //查询的商品信息
+        List<SearchProduct> primaryProduct = (List<SearchProduct>) primaryProductMap.get("searchProducts");
+        Integer gradePrimary = (Integer) primaryProductMap.get("gradePrimary");
         //查询总数量跟总页数 数组0为总数量 1 为总页数
-       // Integer[] totalPage=searchProductService.fendTotalPage(PrimaryContent,pageSize);
-        pagination.setList(footprint);
-//        pagination.setTotalCount(totalPage[0].longValue());
-//        pagination.setTotalPage((int) totalPage[1].longValue());
-
-                pagination.setTotalCount((long) 10);
-                pagination.setTotalPage(10);
-
-
+        Integer[] totalPage=searchProductService.fendTotalPage(PrimaryContent,pageSize,gradePrimary);
+        pagination.setList(primaryProduct);
+        pagination.setTotalCount(totalPage[0].longValue());
+        pagination.setTotalPage(totalPage[1]);
         return new ResponsePagination(CommonCode.SUCCESS,pagination);
     }
 }

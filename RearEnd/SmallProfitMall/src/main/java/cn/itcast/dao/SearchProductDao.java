@@ -21,9 +21,22 @@ public interface SearchProductDao {
     public void findProduct(String productName);
 
     /**
-     * 查询一级目录是否有商品
-     * @param productName 查询内容
-     * @return 查询出来的集合
+     * 搜索商品
+     * @param productName 搜索商品的名称
+     * @param start 从第三条记录开始查
+     * @param pageSize 每页查询数量
+     * @param gradePrimary 查询的等级 1为查一级商品的一级分类 2为查商品的二级分类 3为查商品三级分类 4为查所有商品名称
+     * @return
      */
-    public List<SearchProduct> findPrimaryProduct(@Param("productName") String productName,@Param("start")Integer start,@Param("pageSize")Integer pageSize,@Param("gradePrimary") Integer gradePrimary);
+    public List<SearchProduct> findPrimaryProduct(@Param("productName") String productName,@Param("start")Integer start,
+                                                  @Param("pageSize")Integer pageSize,@Param("gradePrimary") Integer gradePrimary);
+
+
+    /**
+     * 查询搜索出来的商品数量
+     * @param productName
+     * @param gradePrimary
+     * @return
+     */
+    public Integer findPrimaryProductQuantity(@Param("productName") String productName,@Param("gradePrimary") Integer gradePrimary);
 }

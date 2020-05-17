@@ -11,8 +11,7 @@
     </select>
 
     <!--收拾一级目录商品-->
-    <select id="findPrimaryProduct" parameterType="java.lang.String"
-            resultType="cn.itcast.domain.searchProduct.SearchProduct">
+    <select id="findPrimaryProduct" resultType="cn.itcast.domain.searchProduct.SearchProduct">
         SELECT
             pp.ProductSales,
             pp.ProductPrice,
@@ -43,5 +42,28 @@
 
 
         AND pi.sign = 1
+    </select>
+    <select id="findPrimaryProductQuantity" resultType="java.lang.Integer">
+        SELECT
+        count(pb.productId)
+        FROM
+        ProductBasis pb
+        WHERE
+        <if test="gradePrimary == 1">
+            pb.prodcutPrimaryCategory IN ( SELECT product_primary_id FROM ( SELECT product_primary_id FROM
+            product_primary_category WHERE category_content LIKE concat ( '%', #{productName}, '%' ) ) AS a )
+        </if>
+        <if test="gradePrimary == 2">
+            pb.productSecondaryCategory IN ( SELECT product_secondary_id FROM ( SELECT product_secondary_id FROM
+            product_secondary_category WHERE secondary_content LIKE concat ( '%',  #{productName}, '%' )  ) AS a )
+        </if>
+        <if test="gradePrimary == 3">
+            pb.productFinalCategory IN ( SELECT product_final_id FROM ( SELECT product_final_id FROM
+            product_final_category WHERE final_content LIKE concat ( '%',  #{productName}, '%' )  ) AS a )
+        </if>
+        <if test="gradePrimary == 4">
+            pb.ProductId IN ( SELECT ProductId FROM ( SELECT ProductId FROM
+            ProductBasis WHERE ProductName LIKE concat ( '%',  #{productName}, '%' ) ) AS a )
+        </if>
     </select>
 </mapper>

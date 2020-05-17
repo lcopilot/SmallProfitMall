@@ -34,7 +34,6 @@ import static com.alipay.api.AlipayConstants.SIGN_TYPE;
  * @date 2020/4/14
  */
 
-
 @Controller
 @RequestMapping("/PayController")
 @ResponseBody

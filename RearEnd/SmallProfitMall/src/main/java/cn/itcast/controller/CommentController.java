@@ -60,7 +60,16 @@ public class CommentController {
     @RequestMapping(value = "/findComment",method = RequestMethod.GET)
     public ResponsePagination findComment(Integer productId, Integer commentType, Integer currentPage , Integer pageSize){
         Pagination pagination = new Pagination();
-       List<ProductComment> productComments = commentService.findComment(productId,commentType,currentPage,pageSize);
+
+        if (currentPage==null){
+            currentPage=1;
+        }
+        //判断传入每页显示数量 为空则默认为8条
+        if (pageSize==null){
+            pageSize=8;
+        }
+
+        List<ProductComment> productComments = commentService.findComment(productId,commentType,currentPage,pageSize);
         //查询总数量跟总页数 数组0为总数量 1 为总页数
         Integer[] totalPage=commentService.fendTotalPage(productId,commentType,pageSize);
         pagination.setTotalCount(totalPage[0].longValue());

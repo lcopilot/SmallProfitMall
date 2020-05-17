@@ -13,17 +13,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 购物车控制层
+ * @author 86185
+ */
 @Controller
 @RequestMapping("/ShoppingCartController")
 @ResponseBody
 public class ShoppingCartController {
+
+    /**购物车业务层**/
     @Autowired
     ShoppingCartService shoppingCartService;
-
-
     /**
      * 添加购物车
-     * @param purchaseInformation
+     * @param purchaseInformation 购物车对象
      * @return
      */
     @RequestMapping(value = "/addShoppingCart",method = RequestMethod.POST)
@@ -55,7 +59,7 @@ public class ShoppingCartController {
 
     /**
      * 查询购物车
-     * @param userId
+     * @param userId 用户id
      * @return
      */
     @RequestMapping(value = "/findByUserId/{userId}",method = RequestMethod.GET)
@@ -73,11 +77,11 @@ public class ShoppingCartController {
 
     /**
      * 删除购物车
-     * @param cartIdList
+     * @param cartIdList 购物车id数组
      * @return
      */
     @RequestMapping(value = "/deleteCart/{shoppingCartId}",method = RequestMethod.DELETE)
-    public QueryResponseResult deleteCart(@PathVariable("shoppingCartId")int[] cartIdList) {
+    public QueryResponseResult deleteCart(@PathVariable("shoppingCartId")Integer[] cartIdList) {
         if (cartIdList == null) {
             //查询传入参数为空
             return new QueryResponseResult(CommonCode.FAIL, null);
@@ -92,9 +96,11 @@ public class ShoppingCartController {
         }
     }
 
-
     /**
      * 添加到货通知
+     * @param userId 用户id
+     * @param productId 商品id
+     * @return
      */
     @RequestMapping(value = "/addArrivalNotice/{userId}/{productId}",method = RequestMethod.POST)
     public QueryResponseResult addArrivalNotice(@PathVariable("userId")String userId,@PathVariable("productId") int productId){
@@ -112,10 +118,13 @@ public class ShoppingCartController {
     }
 
     /**
-     *修改商品数量
+     * 修改商品数量
+     * @param quantity 修改的数量
+     * @param shoppingCartId 购物车id
+     * @return
      */
     @RequestMapping(value = "/updateQuantity/{quantity}/{shoppingCartId}",method = RequestMethod.PUT)
-    public QueryResponseResult updateQuantity(@PathVariable("quantity")int quantity,@PathVariable("shoppingCartId") int shoppingCartId){
+    public QueryResponseResult updateQuantity(@PathVariable("quantity")Integer quantity,@PathVariable("shoppingCartId") int shoppingCartId){
         if (quantity == 0 && shoppingCartId == 0){
             //传入参数为空
             return new QueryResponseResult(CommonCode.FAIL, null);
@@ -130,7 +139,10 @@ public class ShoppingCartController {
     }
 
     /**
-     *查询预览商品
+     * 查询预览商品
+     * @param userId 用户id
+     * @param Ends 每页查询多少天
+     * @return
      */
     @RequestMapping(value = "/findPreview/{userId}/{Ends}",method = RequestMethod.GET)
     public QueryResponseResult findPreview(@PathVariable("userId")String userId,@PathVariable("Ends")String Ends){

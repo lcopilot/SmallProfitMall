@@ -16,20 +16,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ *商城主页控制层
+ * @author 86185
+ */
 @Controller
 @RequestMapping("/homepageController")
 @ResponseBody
 public class HomepageController {
 
-
+    /**主页业务层**/
     @Autowired
     HomepageService homepageService;
-
-    @Autowired
-    RedisUtil redisUtil;
-
-    @Autowired
-    HomepageDao homepageDao;
 
     /**
      * 查询轮播图
