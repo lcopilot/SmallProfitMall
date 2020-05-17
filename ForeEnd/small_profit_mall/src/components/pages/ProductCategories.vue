@@ -5,6 +5,7 @@
         <el-popover
             placement="right"
             width="840"
+            :open-delay="400"
             trigger="hover"
             @mouseenter.native="enter(index)">
           <el-table :data="CategoryDetailsList" style="width: 100%;font-size: 11px; "

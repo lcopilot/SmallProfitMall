@@ -287,17 +287,16 @@
       login(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            let vm = this;
             const tencentCode = new TencentCaptcha('2093846053', function (result) {
               if (result.ret === 0) {
-                vm.loginForm.ticket = result.ticket;
-                vm.loginForm.randStr = result.randstr;
-                vm.loginStatus = true;
-                vm.loginBtnContent = '登录中...';
-                userApi.login(vm.loginForm)
+                this.loginForm.ticket = result.ticket;
+                this.loginForm.randStr = result.randstr;
+                this.loginStatus = true;
+                this.loginBtnContent = '登录中...';
+                userApi.login(this.loginForm)
                 .then(res => {
                   if (res.success) {
-                    vm.$message({
+                    this.$message({
                       message: "登录成功",
                       type: "success"
                     });
@@ -305,46 +304,46 @@
                     sessionStorage.setItem("uId", res.queryResult.list[0].uid);
                     sessionStorage.setItem("token", res.queryResult.list[0].tokens);
                     sessionStorage.setItem("avatar", res.queryResult.list[0].image);
-                    vm.$router.push({
+                    this.$router.push({
                       path: "/Home" //跳转的路径
                     });
-
                   } else {
                     if (res.code == 10009) {
-                      vm.loginForm.ticket = '';
-                      vm.loginForm.randStr = '';
-                      vm.login_btn = new Date().getTime();
-                      vm.$refs['loginForm'].resetFields();
-                      vm.$message.error("人机验证二次失败,请稍后重试");
-                      vm.loginStatus = false;
-                      vm.loginBtnContent = '登录';
+                      this.loginForm.ticket = '';
+                      this.loginForm.randStr = '';
+                      this.login_btn = new Date().getTime();
+                      this.$refs['loginForm'].resetFields();
+                      this.$message.error("人机验证二次失败,请稍后重试");
+                      this.loginStatus = false;
+                      this.loginBtnContent = '登录';
                     } else if (res.code == 10008) {
-                      vm.loginForm.ticket = '';
-                      vm.loginForm.randStr = '';
-                      vm.login_btn = new Date().getTime();
-                      vm.$message.warning("此用户名为初始用户名不可用,请更换用户名");
-                      vm.loginStatus = false;
-                      vm.loginBtnContent = '登录';
+                      this.loginForm.ticket = '';
+                      this.loginForm.randStr = '';
+                      this.login_btn = new Date().getTime();
+                      this.$message.warning("此用户名为初始用户名不可用,请更换用户名");
+                      this.loginStatus = false;
+                      this.loginBtnContent = '登录';
                     } else {
-                      vm.loginForm.ticket = '';
-                      vm.loginForm.randStr = '';
-                      vm.login_btn = new Date().getTime();
-                      vm.$message.warning("用户名或密码错误");
-                      vm.loginStatus = false;
-                      vm.loginBtnContent = '登录';
+                      this.loginForm.ticket = '';
+                      this.loginForm.randStr = '';
+                      this.login_btn = new Date().getTime();
+                      this.$message.warning("用户名或密码错误");
+                      this.loginStatus = false;
+                      this.loginBtnContent = '登录';
                     }
                   }
                 })
                 .catch(error => {
-                  vm.loginForm.ticket = '';
-                  vm.loginForm.randStr = '';
-                  vm.login_btn = new Date().getTime();
-                  vm.resetForm('loginForm');
-                  vm.loginStatus = false;
-                  vm.loginBtnContent = '登录';
+                  this.loginForm.ticket = '';
+                  this.loginForm.randStr = '';
+                  this.login_btn = new Date().getTime();
+                  this.resetForm('loginForm');
+                  this.loginStatus = false;
+                  this.loginBtnContent = '登录';
                 });
               }
-            });
+            }.bind(this));
+            // bind() 改变this指向 可以使用箭头函数代替
             tencentCode.show(); // 显示验证码
           }
         });
