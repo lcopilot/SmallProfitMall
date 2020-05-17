@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
+ * 搜索商品控制层
  * @author Kite
  * @date 2020/5/16
  */
@@ -27,7 +28,7 @@ public class SearchProductController {
     @Autowired
     SearchProductService searchProductService;
     /**
-     * 查询用户所有收藏商品
+     * 搜索商品
      * @param PrimaryContent 用户id
      * @param currentPage 当前页
      * @param pageSize 每页查询数量

@@ -31,7 +31,7 @@ public class SearchProductServiceImpl implements SearchProductService {
         //开始页
         Integer start=(currentPage-1)*pageSize;
         List<SearchProduct> searchProducts = null;
-        for (int i = 1; i <4 ; i++) {
+        for (int i = 1; i <5 ; i++) {
              searchProducts = searchProductDao.findPrimaryProduct(productName,start,pageSize,i);
             if (searchProducts.size()>0){
                 break;

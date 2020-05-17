@@ -36,7 +36,12 @@
             pb.productFinalCategory IN ( SELECT product_final_id FROM ( SELECT product_final_id FROM
              product_final_category WHERE final_content LIKE concat ( '%',  #{productName}, '%' )  LIMIT #{start}, #{pageSize} ) AS a )
         </if>
+        <if test="gradePrimary == 4">
+            pb.ProductId IN ( SELECT ProductId FROM ( SELECT ProductId FROM
+            ProductBasis WHERE ProductName LIKE concat ( '%',  #{productName}, '%' )  LIMIT #{start}, #{pageSize} ) AS a )
+        </if>
 
-            AND pi.sign = 1
+
+        AND pi.sign = 1
     </select>
 </mapper>
