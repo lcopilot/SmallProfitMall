@@ -38,6 +38,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * 订单控制层
  * @author Kite
  * @date 2020/3/28
  */
@@ -46,12 +47,15 @@ import java.util.List;
 @ResponseBody
 public class OrderController {
 
+
     @Autowired
     WebSocket webSocket;
 
+    /**订单业务层**/
     @Autowired
     OrderService orderService;
 
+    /**用户支付信息业务层**/
     @Autowired
     AccountSettingsService accountSettingsService;
 
@@ -87,7 +91,7 @@ public class OrderController {
     }
 
     /**
-     * 查询订单
+     * 查询确认的订单
      * @param userId 用户id
      * @param orderId 订单id
      * @return 返回订单信息 账户是否设置支付密码 人脸验证信息

@@ -131,7 +131,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * 直接购买结算订单
+     * 直接购买结算订单结算
      * @param purchaseInformation 商品对象
      * @return
      */

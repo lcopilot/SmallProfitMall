@@ -131,15 +131,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     /**
      * 删除购物车
-     * @param cartIdList
+     * @param cartIdList 购物车数组
      * @return
      */
     @Override
-    public Integer deleteCart(int[] cartIdList) {
-        int redis=0;
-        for (int shoppingCartId : cartIdList){
-           redis = shoppingCartDao.deleteCart(shoppingCartId);
-        }
+    public Integer deleteCart(Integer[] cartIdList) {
+        //批量删除购物车
+        Integer redis = 0;
+        redis = shoppingCartDao.deleteListCart(cartIdList);
         return redis;
     }
 

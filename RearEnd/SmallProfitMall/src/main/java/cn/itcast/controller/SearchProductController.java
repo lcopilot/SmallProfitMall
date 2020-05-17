@@ -36,7 +36,6 @@ public class SearchProductController {
      * @return
      */
     @RequestMapping(value = "/fendPrimaryProduct" ,method = RequestMethod.GET)
-
     public ResponsePagination fendPrimaryProduct(String  PrimaryContent, Integer currentPage , Integer pageSize){
         //判断传入开始页是否为空 为空则默认为第一页
         if (currentPage==null){
@@ -57,7 +56,6 @@ public class SearchProductController {
         pagination.setList(primaryProduct);
         pagination.setTotalCount(totalPage[0].longValue());
         pagination.setTotalPage(totalPage[1]);
-
         return new ResponsePagination(CommonCode.SUCCESS,pagination);
     }
 }

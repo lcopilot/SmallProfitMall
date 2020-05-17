@@ -24,12 +24,15 @@ import java.util.List;
 @ResponseBody
 public class EmailController {
 
+    /**邮件业务层**/
     @Autowired
     EmailService emailService;
 
+    /**发送邮件工具类**/
     @Autowired
     SendEmailUtil sendEmailUtil;
 
+    /**用户业务层**/
     @Autowired
     UserService userService;
 

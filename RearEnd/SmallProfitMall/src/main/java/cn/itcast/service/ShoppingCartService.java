@@ -26,7 +26,7 @@ public interface ShoppingCartService {
      * @param shoppingCartId 购物车id集合
      * @return
      */
-    public Integer deleteCart(int[] shoppingCartId);
+    public Integer deleteCart(Integer[] shoppingCartId);
 
     /**
      *  查询购物车商品数量
