@@ -156,7 +156,7 @@
 
     <!--增加商品浏览量-->
     <update id="updateProductPageviews">
-        UPDATE  ProductBasis SET probuctPageviews  = probuctPageviews+ 1 WHERE ProductId = #{productId}
+       UPDATE  ProductBasis SET productPageviews  = productPageviews+ 1 WHERE ProductId = #{productId}
     </update>
 
 

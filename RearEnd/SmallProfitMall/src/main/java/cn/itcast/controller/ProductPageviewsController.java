@@ -29,9 +29,11 @@ public class ProductPageviewsController {
     ProductPageviewsService productPageviewsService;
 
     @RequestMapping(value = "addProductPageviews",method = RequestMethod.POST)
-    public QueryResponseResult addProductPageviews(@RequestBody PoribuctPageviews poribuctPageviews, HttpServletRequest request){
+    public QueryResponseResult addProductPageviews(Integer productId ,String userId, HttpServletRequest request){
+        PoribuctPageviews poribuctPageviews = new PoribuctPageviews();
         poribuctPageviews.setUserIp(request.getRemoteAddr());
-
+        poribuctPageviews.setProductId(productId);
+        poribuctPageviews.setUserId(userId);
         productPageviewsService.addProductPageviews(poribuctPageviews);
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
