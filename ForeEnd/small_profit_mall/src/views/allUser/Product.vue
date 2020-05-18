@@ -641,6 +641,15 @@
           userApi.addFootprint(data);
         }
       },
+      //增加浏览量
+      addProductView(){
+        let formData=new FormData()
+        formData.append("productId",this.productId)
+        if (sessionStorage.getItem("uId")){
+          formData.append("userId",sessionStorage.getItem("uId"))
+        }
+        productApi.addProductView(formData)
+      },
       //获取评论数量
       getProductCommentQuantity(){
         productApi.getProductCommentQuantity(this.productId).then(res=>{
@@ -662,6 +671,7 @@
       this.productId = sessionStorage.getItem("productId");
       this.getProductCommentQuantity();
       this.addFootprint();
+      this.addProductView();
       this.getProduct(this.productId);
       this.getAddressData();
       this.switchProductImg();

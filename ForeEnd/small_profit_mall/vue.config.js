@@ -18,7 +18,6 @@ module.exports = {
         ws: false,
         //是否跨域
         changeOrigin: true,
-
       }
     }
   },
@@ -33,9 +32,9 @@ module.exports = {
       return {
         plugins: [
           new CompressionPlugin({
-            test: /\.js$|\.html$|\.css/,
-            threshold: 1024,
-            deleteOriginalAssets: false
+            test: /\.js$|\.html$|\.css/, //匹配文件名
+            threshold: 1024, //超过1024字节
+            deleteOriginalAssets: false, //是否压缩后删除原文件
           })
         ]
       }

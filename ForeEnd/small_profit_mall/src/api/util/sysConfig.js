@@ -7,6 +7,7 @@ const sysConfig = {
     imgUrl:'http://img.smallProfit.com/',
     //视频地址
     videoUrl:'http://video.smallProfit.com/',
+    webSocket:'/webSocket',
     //身份验证
     openAuthenticate:true,
     //授权

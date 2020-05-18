@@ -1,3 +1,7 @@
+import sysConfig from "./sysConfig";
+const webSocket=sysConfig.webSocket;
+
+
 let websocket = null;
 let globalCallback = null;
 let websocketStatus=false; //websocket链接状态
@@ -13,7 +17,7 @@ export const initWebSocket = () => { //初始化websocket
     return;
   }
   clearTimeout(checkConnectionTimer);
-  const wsUri =(window.location.protocol == 'http:') ? "ws://localhost:3167/notification/" + sessionStorage.getItem("uId") : "wss://localhost:3167/notification/" + sessionStorage.getItem("uId");
+  const wsUri =(window.location.protocol == 'http:') ?"ws://localhost:3167/notification/" + sessionStorage.getItem("uId") : "wss://localhost:3167/notification/" + sessionStorage.getItem("uId");
   websocket = new WebSocket(wsUri);
   //接收服务器的消息
   websocket.onmessage = function (e) {

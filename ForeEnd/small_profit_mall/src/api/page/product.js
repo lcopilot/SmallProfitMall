@@ -56,3 +56,7 @@ export const getProductComment=params=>{
 export const getProductCommentQuantity=productId=>{
   return http.requestGet(apiUrl+'/CommentController/findCommentQuantity/'+productId)
 }
+//增加浏览量
+export const addProductView=(data)=>{
+  return http.requestPost(apiUrl+'/ProductPageviewsController/addProductPageviews',data)
+}

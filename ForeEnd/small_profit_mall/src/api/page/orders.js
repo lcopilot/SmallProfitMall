@@ -24,18 +24,18 @@ export  const getOrderComplete=(userId,orderId)=>{
 };
 //修改订单
 export const modifyOrder=order=>{
-  return http.requestPut(apiUrl+'OrderController/updateOrder',order)
+  return http.requestPut(apiUrl+'/OrderController/updateOrder',order)
 };
 //获取全部订单
 export const getOrderList=params=>{
   const queryString=querystring.stringify(params);
-  return http.requestGet(apiUrl+'OrderController/findAllOrder?'+queryString)
+  return http.requestGet(apiUrl+'/OrderController/findAllOrder?'+queryString)
 }
 //获取不同订单的数量
 export const getOrderQuantity=userId=>{
-  return http.requestGet(apiUrl+'OrderController/findClassifyOrderQuantity/'+userId)
+  return http.requestGet(apiUrl+'/OrderController/findClassifyOrderQuantity/'+userId)
 }
 //删除订单
 export const removeOrder=(userId,orderId)=>{
-  return http.requestDelete(apiUrl+'OrderController/deleteOrder/'+userId+'/'+orderId)
+  return http.requestDelete(apiUrl+'/OrderController/deleteOrder/'+userId+'/'+orderId)
 }

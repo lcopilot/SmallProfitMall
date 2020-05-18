@@ -343,7 +343,7 @@
                 });
               }
             }.bind(this));
-            // bind() 改变this指向 可以使用箭头函数代替
+            // bind() 改变函数内部的this指向(ES5) 可以使用箭头函数(ES6)代替
             tencentCode.show(); // 显示验证码
           }
         });
