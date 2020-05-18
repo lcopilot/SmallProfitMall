@@ -46,12 +46,12 @@ public class SearchProduct {
         this.productSales = productSales;
     }
 
-    public Integer getProductPageviews() {
+    public Integer getProbuctPageviews() {
         return productPageviews;
     }
 
-    public void setProductPageviews(Integer productPageviews) {
-        this.productPageviews = productPageviews;
+    public void setProbuctPageviews(Integer probuctPageviews) {
+        this.productPageviews = probuctPageviews;
     }
 
     public String getProductId() {

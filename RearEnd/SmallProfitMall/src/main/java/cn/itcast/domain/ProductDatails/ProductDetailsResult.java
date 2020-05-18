@@ -49,7 +49,7 @@ public class ProductDetailsResult implements Serializable {
     /**商品点击量**/
     private int clicks;
     /**商品浏览量**/
-    private Integer probuctPageviews;
+    private Integer productPageviews;
     /**商品价格**/
     private double ProductPrice;
     /**促销价格**/
@@ -61,12 +61,13 @@ public class ProductDetailsResult implements Serializable {
     /**商品库存**/
     private double ProductInventory;
 
-    public Integer getProbuctPageviews() {
-        return probuctPageviews;
+
+    public Integer getProductPageviews() {
+        return productPageviews;
     }
 
-    public void setProbuctPageviews(Integer probuctPageviews) {
-        this.probuctPageviews = probuctPageviews;
+    public void setProductPageviews(Integer productPageviews) {
+        this.productPageviews = productPageviews;
     }
 
     public int getClicks() {
