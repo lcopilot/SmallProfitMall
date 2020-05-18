@@ -47,22 +47,28 @@ import static com.alipay.api.AlipayConstants.SIGN_TYPE;
  */
 @Service
 public class OrderServiceImpl implements OrderService {
+
+    /**订单持久层**/
     @Autowired
     private OrderDao orderDao;
 
+    /**购物车持久层**/
     @Autowired
     private ShoppingCartDao shoppingCartDao;
 
+    /**商品详细业务层**/
     @Autowired
     private ProductDetailsDao productDetailsDao;
 
+    /**购物车业务层**/
     @Autowired
     private ShoppingCartService shoppingCartService;
 
-
+    /**用户账户持久层**/
     @Autowired
     private AccountSettingsDao accountSettingsDao;
 
+    /**人脸识别业务层**/
     @Autowired
     private FaceRecognitionService faceRecognitionService;
 
@@ -76,6 +82,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private MemberDao memberDao;
 
+    /**地址业务层**/
     @Autowired
     public AddressService addressService;
 
@@ -137,6 +144,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public String purchaseOrder(PurchaseInformation purchaseInformation){
+
         Order order= new Order();
         //数据库取商品价格名字
         PurchaseInformation purchaseInformation1 =  shoppingCartDao.findByPid(purchaseInformation.getProductId());
@@ -296,6 +304,7 @@ public class OrderServiceImpl implements OrderService {
     public String confirmOrder(Order order, HttpServletRequest request) throws Exception {
         //确认订单
         orderDao.confirmOrder(order);
+
         //转换地址
         Address address = addressService.ordersDefaults(order.getAddress());
         //添加订单地址
@@ -374,6 +383,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
+
+
+
+
+
     /**
      * 生成订单号 时间戳加当天流水号
      * 取当天最后一笔订单的流水号加一
@@ -399,9 +413,35 @@ public class OrderServiceImpl implements OrderService {
         return orderId;
     }
 
+    /**
+     * 查询商品库存是否充足
+     * @param order
+     * @return
+     */
+    public Boolean findProductInventorys(Order order) {
+        Integer[] productId = new Integer[order.getProductContents().size()];
+        //查询库存是否充足
+        for (int i = 0; i < order.getProductContents().size(); i++) {
+            productId[i] = order.getProductContents().get(i).getProductId();
+        }
+        List<Integer> productInventory = productDetailsDao.findProductInventory(productId);
+        Boolean sign = false;
+        for (Integer productInventorys : productInventory) {
+            if (productInventorys < 1) {
+                sign = true;
+                break;
+            }
+        }
+        if (sign) {
+            return false;
+        } else {
+            for (int i = 0; i < productId.length; i++) {
+                productDetailsDao.updateProductInventory(productId[i], order.getProductContents().get(i).getProductQuantity());
+            }
+            return false;
+        }
 
-
-
+    }
 
     /**
      * 购物车商品信息添加到订单
@@ -752,6 +792,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
+
 //    //退款
 //    public String Stringrefunds(HttpServletResponse httpResponse, HttpServletResponse response, HttpSession session, String oid)throws IOException, AlipayApiException {
 //        response.setContentType("text/html;charset=utf-8");
@@ -814,5 +855,7 @@ public class OrderServiceImpl implements OrderService {
         TotalPage[1]=totalPage;
         return TotalPage;
     }
+
+
 
 }

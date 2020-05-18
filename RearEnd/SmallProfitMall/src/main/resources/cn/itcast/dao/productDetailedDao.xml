@@ -133,8 +133,25 @@
     </select>
     <!--查询商品价格-->
     <select id="findProductPrice" resultType="java.lang.Double">
-        SELECT ProductPrice FROM `ProductPrice` WHERE ProductId=10001
+        SELECT ProductPrice FROM `ProductPrice` WHERE ProductId=#{productId}
     </select>
+
+    <!--查询商品库存-->
+    <select id="findProductInventory" resultType="java.lang.Integer">
+        SELECT ProductInventory FROM `ProductPrice`
+        WHERE ProductId in (${productId})
+    </select>
+
+    <!--修改商品销量-->
+    <update id="updateProductSales">
+        UPDATE ProductPrice SET ProductSales = ProductSales+#{purchaseQuantity}
+    </update>
+
+    <!--修改商品库存-->
+    <update id="updateProductInventory">
+        UPDATE ProductPrice SET ProductInventory = ProductInventory-#{purchaseQuantity}
+    </update>
+
 
 
     <!--增加商品浏览量-->
