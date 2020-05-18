@@ -206,8 +206,11 @@ public class OrderController {
     @RequestMapping(value = "/confirmOrder",method = RequestMethod.POST)
     public QueryString confirmOrder(@RequestBody Order order, HttpServletRequest request) throws Exception {
        String result = orderService.confirmOrder(order,request);
-       if (result=="1"){
+       if (result.equals("1")){
            return new QueryString(CommonCode.SUCCESS,null);
+       }
+       if (request.equals("2")){
+           return new QueryString(CommonCode.FAIL,null);
        }
        return new QueryString(CommonCode.FAIL,null);
     }

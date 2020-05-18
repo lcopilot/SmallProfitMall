@@ -479,8 +479,15 @@
   </dependencies>
 
 
+<<<<<<< HEAD
 <!--  <build>-->
 <!--    <finalName>smallProfit</finalName>-->
+=======
+
+
+<!--  <build>-->
+<!--    <finalName>ssm</finalName>-->
+>>>>>>> f9b879e6937b47cf1e25e694573d5b757b565a44
 <!--    <pluginManagement>&lt;!&ndash; lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) &ndash;&gt;-->
 <!--      <plugins>-->
 <!--        <plugin>-->
