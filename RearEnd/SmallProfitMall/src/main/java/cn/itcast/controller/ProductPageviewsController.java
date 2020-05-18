@@ -28,10 +28,17 @@ public class ProductPageviewsController {
     @Autowired
     ProductPageviewsService productPageviewsService;
 
+    /**
+     * 新增商品浏览
+     * @param productId
+     * @param userId
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "addProductPageviews",method = RequestMethod.POST)
     public QueryResponseResult addProductPageviews(Integer productId ,String userId, HttpServletRequest request){
         PoribuctPageviews poribuctPageviews = new PoribuctPageviews();
-        poribuctPageviews.setUserIp(request.getRemoteAddr());
+        poribuctPageviews.setUserIp(IPUtil.getIP(request));
         poribuctPageviews.setProductId(productId);
         poribuctPageviews.setUserId(userId);
         productPageviewsService.addProductPageviews(poribuctPageviews);

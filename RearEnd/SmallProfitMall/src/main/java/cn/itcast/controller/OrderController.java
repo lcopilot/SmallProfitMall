@@ -209,9 +209,6 @@ public class OrderController {
        if (result.equals("1")){
            return new QueryString(CommonCode.SUCCESS,null);
        }
-       if (request.equals("2")){
-           return new QueryString(CommonCode.FAIL,null);
-       }
        return new QueryString(CommonCode.FAIL,null);
     }
 

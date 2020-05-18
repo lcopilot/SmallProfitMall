@@ -133,6 +133,7 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderState(1);
         //数据库新增
         orderDao.addOrder(order);
+
         return orderId;
 
     }
@@ -191,6 +192,7 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderId(orderId);
         //数据库新增
         orderDao.addOrder(order);
+
         return orderId;
     }
 
@@ -415,14 +417,14 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 查询商品库存是否充足
-     * @param order
+     * @param shoppingCarts 商品详细信息
      * @return
      */
-    public Boolean findProductInventorys(Order order) {
-        Integer[] productId = new Integer[order.getProductContents().size()];
+    public Boolean findProductInventorys( List<ProductContent>  shoppingCarts) {
+        Integer[] productId = new Integer[shoppingCarts.size()];
         //查询库存是否充足
-        for (int i = 0; i < order.getProductContents().size(); i++) {
-            productId[i] = order.getProductContents().get(i).getProductId();
+        for (int i = 0; i <shoppingCarts.size(); i++) {
+            productId[i] = shoppingCarts.get(i).getProductId();
         }
         List<Integer> productInventory = productDetailsDao.findProductInventory(productId);
         Boolean sign = false;
@@ -436,9 +438,9 @@ public class OrderServiceImpl implements OrderService {
             return false;
         } else {
             for (int i = 0; i < productId.length; i++) {
-                productDetailsDao.updateProductInventory(productId[i], order.getProductContents().get(i).getProductQuantity());
+                productDetailsDao.updateProductInventory(productId[i], shoppingCarts.get(i).getProductQuantity());
             }
-            return false;
+            return true;
         }
 
     }
@@ -502,6 +504,8 @@ public class OrderServiceImpl implements OrderService {
             //删除该购物车购物车
           //  shoppingCartDao.deleteCart(shoppingCartIds);
         }
+
+        Boolean result = findProductInventorys(productContents);
         //批量添加商品信息
         orderDao.addListProduct(productContents);
         //批量删除购物车
