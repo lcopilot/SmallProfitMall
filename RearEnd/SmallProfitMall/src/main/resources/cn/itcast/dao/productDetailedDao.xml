@@ -136,4 +136,11 @@
         SELECT ProductPrice FROM `ProductPrice` WHERE ProductId=10001
     </select>
 
+
+    <!--增加商品浏览量-->
+    <update id="updateProductPageviews">
+        UPDATE  ProductBasis SET probuctPageviews  = probuctPageviews+ 1 WHERE ProductId = #{productId}
+    </update>
+
+
 </mapper>

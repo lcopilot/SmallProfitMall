@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 追评对象
  * @author Kite
  * @date 2020/5/9
  */

@@ -5,7 +5,12 @@ import cn.itcast.domain.ProductDatails.ProductAttributes;
 import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import org.apache.ibatis.annotations.Param;
 
-//商品详细
+import java.util.Date;
+
+/**
+ * 商品详细
+ * @author kity
+ */
 public interface ProductDetailsDao {
     /**
      * 查询商品详细信息
@@ -34,5 +39,13 @@ public interface ProductDetailsDao {
      * @return 商品价格
      */
     public Double findProductPrice(@Param("productId")Integer productId);
+
+    /**
+     * 新增商品访问量
+     * @return
+     */
+    public Integer updateProductPageviews(@Param("productId")Integer productId);
+
+
 
 }

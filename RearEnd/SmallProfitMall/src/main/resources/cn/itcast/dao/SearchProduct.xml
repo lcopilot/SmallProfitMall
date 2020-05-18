@@ -10,13 +10,14 @@
 
     </select>
 
-    <!--收拾一级目录商品-->
+    <!--搜索商品-->
     <select id="findPrimaryProduct" resultType="cn.itcast.domain.searchProduct.SearchProduct">
         SELECT
             pp.ProductSales,
             pp.ProductPrice,
             pb.ProductName,
             pb.productId,
+            pb.productPageviews,
             pi.ImageSite
         FROM
             ProductBasis pb
@@ -43,6 +44,8 @@
 
         AND pi.sign = 1
     </select>
+
+    <!--查询搜索出来的商品数量-->
     <select id="findPrimaryProductQuantity" resultType="java.lang.Integer">
         SELECT
         count(pb.productId)

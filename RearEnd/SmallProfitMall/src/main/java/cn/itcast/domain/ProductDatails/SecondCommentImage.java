@@ -3,6 +3,7 @@ package cn.itcast.domain.ProductDatails;
 import java.io.Serializable;
 
 /**
+ * 追平图片对象
  * @author Kite
  * @date 2020/5/9
  */

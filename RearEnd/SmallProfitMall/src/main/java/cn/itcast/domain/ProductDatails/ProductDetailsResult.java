@@ -6,33 +6,68 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-@Component
+/**
+ * 商品返回的详细数据
+ * @author kity
+ */
 public class ProductDetailsResult implements Serializable {
     private int id;
-    private String pid;                 //商品id
-    private String productName;         //商品名字
-    private Double productPrice;         //商品价格
-    private String sales;               //商品销售量
-    private String weight;              //重量
-    private String inventory;       //库存
-    private String freeShipping;    //是否包邮
-    private String video;           //视频
-    private List<String> size;               //尺寸(返回前端）
-    private List<String> colour;              //颜色(返回前端）
-    private List<String> combo;                 //套餐(返回前端）
-    private List<String> specification;         //规格(返回前端）
-    private List<String> imageSite;           //图片（返回前端）
-    private List<String> taste;             //口味(返回前端）
-    private List<String> kind;              //商品种类
-    private List<String> version;           //商品版本
-    private int inventorys;             //库存
-    private int clicks; //商品点击量
+    /**商品id**/
+    private String pid;
+    /**商品名字**/
+    private String productName;
+    /**商品价格**/
+    private Double productPrice;
+    /**商品销售量**/
+    private String sales;
+    /**重量**/
+    private String weight;
+    //库存**/
+    private String inventory;
+    /**是否包邮**/
+    private String freeShipping;
+    /**视频**/
+    private String video;
+    /**尺寸(返回前端）**/
+    private List<String> size;
+    /**颜色(返回前端）**/
+    private List<String> colour;
+    /**套餐(返回前端）**/
+    private List<String> combo;
+    /**规格(返回前端）**/
+    private List<String> specification;
+    /**图片（返回前端）**/
+    private List<String> imageSite;
+    /**口味(返回前端）**/
+    private List<String> taste;
+    /**商品种类**/
+    private List<String> kind;
+    /**商品版本**/
+    private List<String> version;
+    /**库存**/
+    private int inventorys;
+    /**商品点击量**/
+    private int clicks;
+    /**商品浏览量**/
+    private Integer probuctPageviews;
+    /**商品价格**/
+    private double ProductPrice;
+    /**促销价格**/
+    private double SalesPrice;
+    /**秒杀价格**/
+    private double SpikePrice;
+    /**商品销量**/
+    private double ProductSales;
+    /**商品库存**/
+    private double ProductInventory;
 
-    private double ProductPrice;            //商品价格
-    private double SalesPrice;              //促销价格
-    private double SpikePrice;              //秒杀价格
-    private double ProductSales;            //商品销量
-    private double ProductInventory;        //商品库存
+    public Integer getProbuctPageviews() {
+        return probuctPageviews;
+    }
+
+    public void setProbuctPageviews(Integer probuctPageviews) {
+        this.probuctPageviews = probuctPageviews;
+    }
 
     public int getClicks() {
         return clicks;

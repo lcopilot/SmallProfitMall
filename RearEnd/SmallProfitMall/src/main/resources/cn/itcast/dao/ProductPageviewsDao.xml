@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.ProductPageviewsDao">
+
+    <!--新增商品浏览记录-->
+    <insert id="addProductPageviews" parameterType="cn.itcast.domain.poribuctPageviews.PoribuctPageviews">
+        INSERT product_pageviews (product_id,user_ip,user_id,browse_time) VALUES (#{productId},#{userIp},#{userId},#{browseTime})
+    </insert>
+
+    <!--查询3小时内该用户是否访问-->
+    <select id="findProductPageviews" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT
+            count(*)
+        FROM
+            product_pageviews
+        WHERE
+        user_id=#{userIp}
+        AND
+            browse_time > (
+        SELECT
+            date_sub( now(), INTERVAL 2 HOUR ))
+    </select>
+
+    <!--查询一天内该用户访问-->
+    <select id="findTodayProductPageviews" resultType="java.lang.Integer">
+           select count(*) from product_pageviews where to_days(browse_time) = to_days(now());
+    </select>
+
+
+
+</mapper>

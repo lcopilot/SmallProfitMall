@@ -49,7 +49,10 @@ public class ProductServiceImpl implements ProductService {
         return redis;
     }
 
-     //查询低 价商品
+    /**
+     * 查询低 价商品
+     * @return
+     */
     @Override
     public  List<ProductLowPriceResult> findProductLowPrice() {
         ProductLowPriceResult productLowPriceResult = new ProductLowPriceResult();
@@ -97,7 +100,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    //为你推荐商品
+    /**
+     * 为你推荐商品
+     * @return
+     */
     @Override
     public List<Recommend> findRecommend() {
         List<Recommend> redis = (List<Recommend>) redisUtil.lGet("recommend", 0, -1);

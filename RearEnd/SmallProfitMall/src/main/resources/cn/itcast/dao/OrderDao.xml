@@ -363,7 +363,6 @@
        where
         orderId = #{orderId}
         AND userId=#{userId}
-
     </update>
 
     <!--删除已购买商品商品-->

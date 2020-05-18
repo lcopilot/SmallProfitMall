@@ -1,6 +1,7 @@
 package cn.itcast.domain.ProductDatails;
 
 /**
+ * 评论图片对象
  * @author Kite
  * @date 2020/5/2
  */

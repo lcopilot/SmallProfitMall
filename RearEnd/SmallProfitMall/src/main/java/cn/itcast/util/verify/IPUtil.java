@@ -16,23 +16,36 @@ public class IPUtil {
 
     public static String getIP(HttpServletRequest request){
 
-        String ip = request.getRemoteAddr();
 
-        System.out.println("ip:"+ip);
+        String ip = request.getHeader("x-forwarded-for");
 
-        String headerIP = request.getHeader("x-real-ip");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 
-        if(headerIP == null || "".equals(headerIP) || "null".equals(headerIP)){
-
-            headerIP = request.getHeader("x-forwarded-for");
+            ip = request.getHeader("Proxy-Client-IP");
 
         }
 
-        System.out.println("headerIP:"+headerIP);
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 
-        if(headerIP !=null && !"".equals(headerIP) && !"null".equals(headerIP)){
+            ip = request.getHeader("WL-Proxy-Client-IP");
 
-            ip = headerIP;
+        }
+
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+
+            ip = request.getHeader("HTTP_CLIENT_IP");
+
+        }
+
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+
+        }
+
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+
+            ip = request.getRemoteAddr();
 
         }
 
