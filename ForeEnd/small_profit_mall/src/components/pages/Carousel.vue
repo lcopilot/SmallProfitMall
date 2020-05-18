@@ -72,7 +72,7 @@
               </div>
             </div>
             <div style="height: 80px;">
-              快报区域 预留 height=80
+              快报区域 预留
             </div>
             <div style="height: 160px;">
               <div class="CommonFunction"
