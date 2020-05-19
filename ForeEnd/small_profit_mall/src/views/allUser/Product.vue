@@ -247,7 +247,7 @@
                   <svg-icon name="introduction"></svg-icon>
                   商品介绍
                 </div>
-                我的行程
+                <div v-html=""></div>
               </el-tab-pane>
               <el-tab-pane lazy>
                 <div slot="label" style="font-size: 17px">
@@ -306,46 +306,14 @@
                   <svg-icon name="afterSale"></svg-icon>
                   售后保障
                 </div>
-                <div>
-                  厂家服务
-                </div>
-                <div>
-                  微利承诺
-                </div>
-                <div>
-                  正品行货
-                </div>
-                <div>
-                  <div>权利声明：</div>
-                  <div>
-                    京东上的所有商品信息、客户评价、商品咨询、网友讨论等内容，是京东重要的经营资源，未经许可，禁止非法转载使用。
-                  </div>
-                  <div>
-                    注：本站商品信息均来自于合作方，其真实性、准确性和合法性由信息拥有者（合作方）负责。本站不提供任何保证，并不承担任何法律责任。
-                  </div>
-                </div>
-                <div>
-                  <div>
-                    <div>价格说明：</div>
-                    <div>京东价：京东价为商品的销售价，是您最终决定是否购买商品的依据。</div>
-                    <div>
-                      划线价：商品展示的划横线价格为参考价，并非原价，该价格可能是品牌专柜标价、商品吊牌价或由品牌供应商提供的正品零售价（如厂商指导价、建议零售价等）或该商品在京东平台上曾经展示过的销售价；由于地区、时间的差异性和市场行情波动，品牌专柜标价、商品吊牌价等可能会与您购物时展示的不一致，该价格仅供您参考。
-                    </div>
-                    <div>
-                      折扣：如无特殊说明，折扣指销售商在原价、或划线价（如品牌专柜标价、商品吊牌价、厂商指导价、厂商建议零售价）等某一价格基础上计算出的优惠比例或优惠金额；如有疑问，您可在购买前联系销售商进行咨询。
-                    </div>
-                  </div>
-                  <div>
-                    异常问题：商品促销信息以商品详情页“促销”栏中的信息为准；商品的具体售价以订单结算页价格为准；如您发现活动商品售价或促销信息有异常，建议购买前先联系销售商咨询。
-                  </div>
-                </div>
+                <div v-html=""></div>
               </el-tab-pane>
               <el-tab-pane lazy>
                 <div slot="label" style="font-size: 17px">
                   <svg-icon name="parameter"></svg-icon>
                   商品参数
                 </div>
-                hjkhkjhjk
+                <div v-html=""></div>
               </el-tab-pane>
             </el-tabs>
           </el-col>

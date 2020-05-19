@@ -91,9 +91,9 @@
               :open-delay="150"
           >
             打开微信扫一扫
-            <el-image src="http://img.fhxasdsada.xyz/qrcode.jpg"/>
+            <el-image src="http://img.isdfmk.xyz/qrcode.jpg"/>
             <el-image slot="reference" :lazy="true" style="width: 50px; height: 50px"
-                      src="http://img.fhxasdsada.xyz/qrcode.jpg"/>
+                      src="http://img.isdfmk.xyz/qrcode.jpg"/>
           </el-popover>
         </el-col>
       </el-row>

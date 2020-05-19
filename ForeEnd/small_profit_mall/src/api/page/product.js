@@ -45,7 +45,7 @@ export const addComment=data=>{
 }
 //追评
 export const addSecondComment=data=>{
-  return http.requestPostFile(apiUrl+'CommentController/addSecondComment',data)
+  return http.requestPostFile(apiUrl+'/CommentController/addSecondComment',data)
 }
 //获取商品评论
 export const getProductComment=params=>{

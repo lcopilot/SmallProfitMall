@@ -24,10 +24,10 @@
     data() {
       return {
         imageList:[
-          {img:"http://img.fhxasdsada.xyz/20200228180251.png"},
-          {img:"http://img.fhxasdsada.xyz/20200228180257.png"},
-          {img:"http://img.fhxasdsada.xyz/20200228180304.png"},
-          {img:"http://img.fhxasdsada.xyz/20200228180304.png"},
+          {img:"http://img.isdfmk.xyz/20200228180251.png"},
+          {img:"http://img.isdfmk.xyz/20200228180257.png"},
+          {img:"http://img.isdfmk.xyz/20200228180304.png"},
+          {img:"http://img.isdfmk.xyz/20200228180304.png"},
         ],
       }
     },

@@ -26,7 +26,7 @@
             <div class="product_comment_img">
               <el-image
                   v-if="comment.videoComment"
-                  src="http://img.fhxasdsada.xyz/safd20200406141323.png"
+                  src="http://img.isdfmk.xyz/safd20200406141323.png"
                   fit="scale-down"/>
               <div class="product_play" v-if="comment.videoComment">
                 <el-link :underline="false"

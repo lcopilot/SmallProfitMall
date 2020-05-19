@@ -421,7 +421,7 @@
 
 <style>
   .el-loading-spinner {
-    background-image: url('http://img.fhxasdsada.xyz/timgiusdf956dfsa8e52uf.gif');
+    background-image: url('http://img.isdfmk.xyz/timgiusdf956dfsa8e52uf.gif');
     background-size: 20% 30%;
     background-repeat: no-repeat;
     height: 100%;

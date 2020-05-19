@@ -39,3 +39,8 @@ export const getOrderQuantity=userId=>{
 export const removeOrder=(userId,orderId)=>{
   return http.requestDelete(apiUrl+'/OrderController/deleteOrder/'+userId+'/'+orderId)
 }
+//确认收货
+export const confirmReceipt=params=>{
+  const queryString=querystring.stringify(params);
+  return http.requestPut(apiUrl+'/OrderController/updateReceive?'+queryString)
+}

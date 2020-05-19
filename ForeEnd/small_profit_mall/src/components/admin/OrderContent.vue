@@ -59,7 +59,7 @@
                   <el-col v-if="order.orderState>1" :span="2">
                     <div style="padding-top: 30%;height:78px;background-color:white;border-left: 1px solid #dcdfe6">
                       <el-button type="text" size="mini" v-if="order.orderState==2 && product.productState==1">提醒发货</el-button>
-                      <el-button type="text" size="mini" v-if="order.orderState==2 && product.productState==2">确认收货</el-button>
+                      <el-button type="text" size="mini" v-if="order.orderState==2 && product.productState==2" @click="confirmReceipt(product.purchaseId,order.orderId)">确认收货</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==3">申请售后</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==3" @click="comment(product.purchaseId,product.productId)">评价晒单</el-button>
                       <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==5"  @click="comment(product.purchaseId,0,true)">追评</el-button>
@@ -106,7 +106,7 @@
             </td>
           </tr>
         </table>
-        <el-dialog title="商品评论" :visible.sync="commentVisible" @close="clearFiles">
+        <el-dialog :title="!review?'商品评论':'追加商品评论'" :visible.sync="commentVisible" @close="clearFiles">
           <el-form :model="commentForm" label-position="right" label-width="120px">
             <el-form-item label="描述相符" v-if="!review">
               <div class="order_product_score">
@@ -128,7 +128,7 @@
               <div class="order_comment_img">
                 <div class="product_comment_img" v-if="playerOptions.sources[0].src">
                   <el-image
-                      src="http://img.fhxasdsada.xyz/safd20200406141323.png"
+                      src="http://img.isdfmk.xyz/safd20200406141323.png"
                       fit="scale-down"/>
                   <div class="product_play" v-if="true">
                     <el-link :underline="false" @click.native="playerVideoComment()">
@@ -458,7 +458,21 @@
           })
         })
 
-      }
+      },
+      //确认收货
+      confirmReceipt(purchaseId,orderId){
+        const params={
+          userId:sessionStorage.getItem('uId'),
+          purchaseId:purchaseId,
+          orderId:orderId,
+        };
+        orderApi.confirmReceipt(params).then(res=>{
+          if (res.success){
+            this.$message.success('已确认收货');
+            this.getOrderList();
+          }
+        })
+      },
     },
     mounted() {
       this.$nextTick(()=>{

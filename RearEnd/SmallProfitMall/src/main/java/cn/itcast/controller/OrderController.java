@@ -122,7 +122,7 @@ public class OrderController {
      * @param orderState 订单状态 0为查所有订单 1为查询待付款订单 2为查询待收货商品集合 3为待评价商品集合 4为退货
      * @return 订单集合
      */
-    @RequestMapping(value ="/findAllOrder" )
+    @RequestMapping(value ="/findAllOrder")
     public ResponsePagination findAllOrder( String userId,Integer orderState,Integer currentPage , Integer pageSize){
         //判断传入开始页是否为空 为空则默认为第一页
         if (currentPage==null){
@@ -273,7 +273,7 @@ public class OrderController {
      * @param purchaseId 购买编号
      * @return
      */
-    @RequestMapping(value = "/updateReceive",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateReceive",method = RequestMethod.PUT)
     public QueryResponseResult updateReceive(String orderId,Integer purchaseId,String userId){
       Integer result =  orderService.updateReceive(purchaseId,orderId,userId);
       if (result>0){
