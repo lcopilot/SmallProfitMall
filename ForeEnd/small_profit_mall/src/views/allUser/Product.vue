@@ -191,9 +191,9 @@
               <el-form-item size="large">
                 <div class="form_left">
                   <el-input-number v-model="productForm.quantity" style="width: 30%" :min="1"
-                                   :max="99"/>
+                                   :max="product.inventorys>99?99:product.inventorys"/>
                   <el-button type="danger" @click="addCart" style="margin-left: 10px"
-                             icon="el-icon-circle-plus-outline">加入购物车
+                             icon="el-icon-circle-plus-outline">加入购物车{{productForm.quantitys}}
                   </el-button>
                   <el-button type="danger" @click="buyNow()" :disabled="(product.inventorys)<=0">
                     立即购买
