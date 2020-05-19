@@ -3,6 +3,7 @@ package cn.itcast.dao;
 
 import cn.itcast.domain.ProductDatails.ProductAttributes;
 import cn.itcast.domain.ProductDatails.ProductDetailsResult;
+import cn.itcast.domain.order.ProductContent;
 import com.tencentcloudapi.iot.v20180123.models.Product;
 import org.apache.ibatis.annotations.Param;
 
@@ -54,7 +55,7 @@ public interface ProductDetailsDao {
      * @param productId 商品id
      * @return
      */
-    public List<Integer> findProductInventory(@Param("productId")Integer[] productId);
+    public List<ProductContent> findProductInventory(@Param("productId")Integer[] productId);
 
     /**
      * 修改商品销量

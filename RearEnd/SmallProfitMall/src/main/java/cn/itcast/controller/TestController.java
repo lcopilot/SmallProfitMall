@@ -149,13 +149,13 @@ public class TestController {
 //    }
 
 
-        @RequestMapping(value = "/test",method = RequestMethod.GET)
-        public ObjectReturnResponse wevSocket()  {
-            Integer[] productName = new Integer[]{10001, 10002};
-            ObjectReturn objectReturn = new ObjectReturn();
-            objectReturn.setObject(productDetailsDao.findProductInventory(productName));
-
-        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
-   }
+//        @RequestMapping(value = "/test",method = RequestMethod.GET)
+//        public ObjectReturnResponse wevSocket()  {
+//            Integer[] productName = new Integer[]{10001, 10002};
+//            ObjectReturn objectReturn = new ObjectReturn();
+//            objectReturn.setObject(productDetailsDao.findProductInventory(productName));
+//
+//        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+//   }
 
 }

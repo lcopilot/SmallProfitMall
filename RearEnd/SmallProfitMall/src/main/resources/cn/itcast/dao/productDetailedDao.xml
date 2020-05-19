@@ -137,7 +137,7 @@
     </select>
 
     <!--查询商品库存-->
-    <select id="findProductInventory" resultType="java.lang.Integer">
+    <select id="findProductInventory" resultType="cn.itcast.domain.order.ProductContent">
         SELECT ProductInventory FROM `ProductPrice`
         WHERE ProductId in
         <foreach collection="productId" item="productId" open="(" separator="," close=")">

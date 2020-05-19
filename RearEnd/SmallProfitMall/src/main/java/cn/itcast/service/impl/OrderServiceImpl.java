@@ -426,14 +426,11 @@ public class OrderServiceImpl implements OrderService {
         for (int i = 0; i <shoppingCarts.size(); i++) {
             productId[i] = shoppingCarts.get(i).getProductId();
         }
-        List<Integer> productInventory = productDetailsDao.findProductInventory(productId);
+        List<ProductContent> productContents = productDetailsDao.findProductInventory(productId);
         Boolean sign = false;
-        for (Integer productInventorys : productInventory) {
-            if (productInventorys < 1) {
-                sign = true;
-                break;
-            }
-        }
+
+
+
         if (sign) {
             return false;
         } else {
