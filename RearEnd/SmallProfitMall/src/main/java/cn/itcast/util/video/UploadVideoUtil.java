@@ -38,7 +38,7 @@ public class UploadVideoUtil {
         // 删除文件视频
         PathUtil.deleteFile(uploadingSite);
 
-        String site =" http://img.fhxasdsada.xyz/"+kay;
+        String site =" http://img.isdfmk.xyz/"+kay;
         return site;
     }
 }

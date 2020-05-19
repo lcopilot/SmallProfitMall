@@ -36,7 +36,7 @@ public class UploadPicturesUtil {
         //根据地址删除文件图片
         PathUtil.deleteFile(outputSize);
         //返回图片地址 + 时间戳 用于覆盖上传更新
-        String site =" http://img.fhxasdsada.xyz/"+userId+"?t="+(System.currentTimeMillis() / 1000);
+        String site =" http://img.isdfmk.xyz/"+userId+"?t="+(System.currentTimeMillis() / 1000);
         return site;
     }
 
