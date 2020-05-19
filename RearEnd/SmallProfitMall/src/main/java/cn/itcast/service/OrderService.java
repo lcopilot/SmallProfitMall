@@ -2,6 +2,7 @@ package cn.itcast.service;
 
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.OrderQuantity;
+import cn.itcast.domain.order.ProductContent;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,6 +14,7 @@ import java.sql.Array;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Kite
@@ -143,9 +145,16 @@ public interface OrderService {
      * 购物车商品信息添加到订单
      * @param initialize 购物车id数组
      * @param orderId 订单id
-     * @return
+     * @return map  inventorys库存是否充足 true为充足 否则为false , orderNotes为订单总价
      */
-    public BigDecimal addProduct (Integer[] initialize , String orderId);
+    public Map addProduct (Integer[] initialize , String orderId);
+
+    /**
+     * 查询商品库存是否充足
+     * @param shoppingCarts 商品详细信息
+     * @return 库存是否充足  true为充足且减去库存数量
+     */
+    public Boolean findProductInventorys( List<ProductContent>  shoppingCarts);
 
 
     /**

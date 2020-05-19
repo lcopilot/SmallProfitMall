@@ -70,7 +70,11 @@ public class OrderController {
      */
     @RequestMapping(value = "/addOrder" ,method = RequestMethod.POST)
     public QueryResponseResult addOrder(String userId ,Integer[] shoppingCartId) throws IOException {
+
         String result = orderService.addOrder(userId,shoppingCartId);
+        if ("false".equals(result)){
+            return new QueryResponseResult(CommonCode.INVENTORY_FALSE,null);
+        }
         QueryResult queryResult=new QueryResult();
         queryResult.setList(Collections.singletonList(result));
         return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
@@ -85,6 +89,9 @@ public class OrderController {
     @RequestMapping(value = "/purchaseOrder" ,method = RequestMethod.POST)
     public QueryResponseResult purchaseOrder(@RequestBody PurchaseInformation purchaseInformation) throws IOException {
         String result = orderService.purchaseOrder(purchaseInformation);
+        if ("false".equals(result)){
+            return new QueryResponseResult(CommonCode.INVENTORY_FALSE,null);
+        }
         QueryResult queryResult=new QueryResult();
         queryResult.setList(Collections.singletonList(result));
         return new QueryResponseResult(CommonCode.SUCCESS,queryResult);

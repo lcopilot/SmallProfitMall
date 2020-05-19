@@ -34,10 +34,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static com.alipay.api.AlipayConstants.SIGN_TYPE;
 
@@ -119,8 +116,16 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderTime(new Date());
         //初始购物车id
         Integer[] initialize=shoppingCartId;
-        //将购物车中商品信息添加到订单商品信息 返回总价格
-        BigDecimal orderTotes = addProduct(initialize,orderId);
+
+
+        //将购物车中商品信息添加到订单商品信息 返回总价格 返回库存是否充足
+        Map map = addProduct(initialize,orderId);
+        Boolean inventorys= (Boolean) map.get("inventorys");
+        if (!inventorys){
+            return "false";
+        }
+        BigDecimal orderTotes = (BigDecimal) map.get("orderNotes");
+
         //设置总计
         order.setOrderTotal(orderTotes);
         //设置用户id
@@ -192,6 +197,15 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderId(orderId);
         //数据库新增
         orderDao.addOrder(order);
+        //库存减购买数量
+        List<ProductContent> productContents = new ArrayList<>();
+        productContents.add(productContent);
+       Boolean result =  findProductInventorys(productContents);
+        if (!result){
+            return "false";
+        }
+
+
 
         return orderId;
     }
@@ -418,19 +432,26 @@ public class OrderServiceImpl implements OrderService {
     /**
      * 查询商品库存是否充足
      * @param shoppingCarts 商品详细信息
-     * @return
+     * @return 库存是否充足  true为充足且减去库存数量
      */
-    public Boolean findProductInventorys( List<ProductContent>  shoppingCarts) {
+    @Override
+    public Boolean findProductInventorys(List<ProductContent>  shoppingCarts) {
         Integer[] productId = new Integer[shoppingCarts.size()];
+        Integer[] productQuantity = new Integer[shoppingCarts.size()];
         //查询库存是否充足
         for (int i = 0; i <shoppingCarts.size(); i++) {
             productId[i] = shoppingCarts.get(i).getProductId();
+            productQuantity[i] = shoppingCarts.get(i).getProductQuantity();
         }
-        List<ProductContent> productContents = productDetailsDao.findProductInventory(productId);
+        List<Integer> productContents = productDetailsDao.findProductInventory(productId);
         Boolean sign = false;
 
-
-
+        for (int i = 0; i <productContents.size() ; i++) {
+            if (productContents.get(i)<productQuantity[i]){
+                return false;
+            }
+        }
+        //库存充足减去购买的数量
         if (sign) {
             return false;
         } else {
@@ -446,10 +467,10 @@ public class OrderServiceImpl implements OrderService {
      * 购物车商品信息添加到订单
      * @param initialize 购物车id数组
      * @param orderId 订单id
-     * @return 商品总金额
+     * @return inventorys库存是否充足 true为充足 否则为false , orderNotes为订单总价
      */
     @Override
-    public BigDecimal addProduct (Integer[] initialize , String orderId){
+    public Map addProduct (Integer[] initialize , String orderId){
         //取出购物车id数组
         List<Integer> shoppingCartIdList = Arrays.asList(initialize) ;
         //商品总计
@@ -501,13 +522,22 @@ public class OrderServiceImpl implements OrderService {
             //删除该购物车购物车
           //  shoppingCartDao.deleteCart(shoppingCartIds);
         }
-
+        //验证库存 库存充足返回true且减去库存
         Boolean result = findProductInventorys(productContents);
+        Map map = new HashMap();
+        map.put("inventorys",result);
+        map.put("orderNotes",orderNotes);
+        if (!result){
+         return map;
+        }
+
         //批量添加商品信息
         orderDao.addListProduct(productContents);
         //批量删除购物车
         shoppingCartDao.deleteListCart(initialize);
-        return orderNotes;
+
+
+        return map;
     }
 
     /**

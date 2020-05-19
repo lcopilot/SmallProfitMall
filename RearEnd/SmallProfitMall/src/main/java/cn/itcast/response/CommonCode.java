@@ -27,7 +27,8 @@ public enum CommonCode implements ResultCode{
     FALL_USER_REGISTER(false,11211,"用户已存在!"),
     UNAUTHENTICATED(false,10001,"此操作需要登陆系统！"),
     UNAUTHORISE(false,10002,"权限不足，无权操作！"),
-    SERVER_ERROR(false,99999,"抱歉，系统繁忙，请稍后重试！");
+    SERVER_ERROR(false,99999,"抱歉，系统繁忙，请稍后重试！"),
+    INVENTORY_FALSE(false,10021,"库存不足");
 
 
 //   private static ImmutableMap<Integer, CommonCode> codes ;
