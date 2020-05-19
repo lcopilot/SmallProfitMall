@@ -35,7 +35,8 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
         String transition = String.valueOf(pid);
         String ProductId ="productId_"+transition;
         //从缓存中查询是否存在
-        List<ProductDetailsResult>  redis = (List<ProductDetailsResult>)redisUtil.get(ProductId);
+//        List<ProductDetailsResult>  redis = (List<ProductDetailsResult>)redisUtil.get(ProductId);
+        List<ProductDetailsResult>  redis= null;
         if(redis==null){
             //库存价格(转换)
             String inventory = "";
