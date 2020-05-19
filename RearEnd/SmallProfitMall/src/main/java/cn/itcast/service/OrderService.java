@@ -110,6 +110,12 @@ public interface OrderService {
     public List<Order> findAllOrder(String userId ,Integer orderState,
                                     Integer currentPage, Integer pageSize);
 
+    /**
+     * 确认收货
+     * @param purchaseId 购买id
+     * @return
+     */
+    public Integer updateReceive( Integer purchaseId,String orderId,String userId);
 
     /**
      * 删除订单

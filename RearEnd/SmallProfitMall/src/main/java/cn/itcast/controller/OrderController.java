@@ -268,6 +268,21 @@ public class OrderController {
     }
 
     /**
+     * 确认订单
+     * @param orderId 订单id
+     * @param purchaseId 购买编号
+     * @return
+     */
+    @RequestMapping(value = "/updateReceive",method = RequestMethod.POST)
+    public QueryResponseResult updateReceive(String orderId,Integer purchaseId,String userId){
+      Integer result =  orderService.updateReceive(purchaseId,orderId,userId);
+      if (result>0){
+          return new QueryResponseResult(CommonCode.SUCCESS,null);
+      }
+        return new QueryResponseResult(CommonCode.FAIL,null);
+    }
+
+    /**
      * 删除商品
      * @param  productState 不同状态商品 1为待收货 2为已收货 3为待评价 4为售后
      * @param id 订单id
@@ -293,4 +308,7 @@ public class OrderController {
         orderService.deleteOrder(userId,orderId);
         return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
+
+
+
 }

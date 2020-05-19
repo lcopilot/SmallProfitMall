@@ -354,6 +354,11 @@
         AND s.isDelete=0
     </select>
 
+    <!--查询购买商品的id跟数量-->
+    <select id="findPurchase" resultType="cn.itcast.domain.order.ProductContent">
+        SELECT ProductId,productQuantity FROM orders WHERE purchaseId=#{purchaseId}
+    </select>
+
 
     <!--删除订单-->
     <update id="deleteOrder" >

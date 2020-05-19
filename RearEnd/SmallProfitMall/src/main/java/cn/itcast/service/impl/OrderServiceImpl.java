@@ -95,6 +95,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     ShoppingProducer shoppingProducer;
 
+
     /**
      * 用于推送消息
      */
@@ -375,6 +376,24 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
+     * 确认收货
+     * @param purchaseId 购买id
+     * @return
+     */
+    @Override
+    public Integer updateReceive( Integer purchaseId,String orderId,String userId) {
+        //修改订单状态为待评价 1为未支付订单 2为待收货 3为待评论 4为售后
+        orderDao.updateOrderState(userId,orderId,3);
+        //根据购买状态查询商品id跟商品数量
+        ProductContent productContent =  orderDao.findPurchase(purchaseId);
+        //修改订单商品状态为待评价状态 1为待发货 2为待收货 3为已收货待评论 4为维修 5为追评论 6为已追评论
+        orderDao.updateProductState(orderId,3,purchaseId);
+        //修改商品销量
+        productDetailsDao.updateProductSales(productContent.getProductId(),productContent.getProductQuantity());
+        return 1;
+    }
+
+    /**
      * 删除订单
      * @param userId 用户id
      * @param orderId 订单id
@@ -549,9 +568,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Integer updateOrders(Order order) throws Exception {
         //修改所以商品状态为待发货 1为待发货 2为待收货 3为已收货待评论 4为维修 5为追评论 6为已追评论
-        orderDao.updateProductState(order.getOrderId(),3,null);
+        orderDao.updateProductState(order.getOrderId(),2,null);
         //设置支付状态为已支付待发货状态（2）(3)已发货状态
-        order.setOrderState(3);
+        order.setOrderState(2);
         //设置当前时间为支付时间
         order.setPaymentTime(new Date());
         //修改支付状态 支付时间

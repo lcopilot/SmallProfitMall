@@ -186,4 +186,10 @@ public interface OrderDao {
      */
     Integer updateProductState(@Param("orderId") String orderId ,@Param("productState")Integer productState,@Param("purchaseId")Integer purchaseId);
 
+    /**
+     * 查询商品id 跟商品购买数量
+     * @param purchaseId
+     * @return
+     */
+    ProductContent findPurchase(@Param("purchaseId")Integer purchaseId);
 }
