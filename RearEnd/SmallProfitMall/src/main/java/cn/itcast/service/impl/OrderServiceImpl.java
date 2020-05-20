@@ -239,8 +239,10 @@ public class OrderServiceImpl implements OrderService {
             if (!redis){
                 return  3;
             }
+            //查询订单详细内容
             Order order = findDetailedOrder(null,orderId);
-            Integer integer = updateOrders(order);
+            //推送订单消息
+             updateOrders(order);
             return 1;
         }else {
             return 2;
@@ -575,10 +577,21 @@ public class OrderServiceImpl implements OrderService {
         order.setPaymentTime(new Date());
         //修改支付状态 支付时间
         orderDao.updateOrderPayState(order.getUserId(),order.getOrderId(),order.getOrderState(),order.getPaymentTime());
-        //邮件通知
+
+        //添加支付记录
+        addConsumptionRecords(order);
+
+        //邮件消息消息中间件通知
         emailNotification(order.getUserId());
-        //推送消息
-        notificationUser(order,order.getOrderTotal().setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+
+        //订单消息中间件推送消息
+        //转换订单总计类型
+        String  total =  order.getOrderTotal().setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+        //order 订单 total订单总计
+        notificationUser(order,total);
+
+        //直接推送消息
+      //  push(order);
         return 1;
     }
     /**
@@ -597,7 +610,7 @@ public class OrderServiceImpl implements OrderService {
             email=AesEncryptUtil.desEncrypt(email);
             String[] msg = {email,"您已成功购买商品"};
             //消息中间件推送
-            shoppingProducer.sendShoppingInformation("shopping",msg);
+            shoppingProducer.sendShoppingInformation("email",msg);
             return 1;
         }else {
             return 2;
@@ -606,13 +619,15 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 支付成功 推送订单消息
+     * @param order 订单内容
+     * @param totals 订单总计
      * @return
      * @throws Exception
      */
     @Override
     public Integer notificationUser(Order order,String totals) throws Exception {
         String orderJson = JSONObject.toJSONString(order);
-        JSONObject jsonObject =JSONObject.parseObject(orderJson);
+        JSONObject  jsonObject =JSONObject.parseObject(orderJson);
         //推送购买信息
         shoppingProducer.sendShoppingInformation("news",jsonObject);
         return 1;
@@ -729,78 +744,28 @@ public class OrderServiceImpl implements OrderService {
     public void push(Order orders) throws IOException {
         //添加商品信息
         orders.setProductContents(orderDao.fendOrderProduct(orders.getOrderId()));
-        String stringOrderJson= JSONObject.toJSONString(orders);
+
         //添加订单消息内容
-        News news = new News();
-        //设置用户id
-        news.setUserId(orders.getUserId());
-        //设置消息状态
-        news.setNewsStatus("1");
-        //设置消息发送者 4为订单助手
-        news.setSenderId(4);
-        //设置消息种类
-        news.setNewsType(4);
-        //设置消息发送时间
-        news.setNewsTime(new Date());
-        //设置消息标题
-        news.setTitle("确认订单消息");
-        //设置消息标志位
-        news.setSign(false);
-        //设置消息简介
-        news.setIntroduction("消息简介");
-        //设置消息类型id
-        news.setNewsTypeId(orders.getOrderId());
+        News news = setNews(orders.getUserId(),"1",4,
+                4,"确认订单消息","消息简介",orders.getOrderId());
         //新增消息
         newsDao.addNews(news);
 
+        //设置零钱通知
+        News newsConsumptionRecords  = setNews(orders.getUserId(),"1",3,
+                3,"支付通知","支付通知",orders.getOrderId());
+        //将消息零钱内容新增到数据库
+        newsDao.addNews(newsConsumptionRecords);
+
+        //初始化消息对象集合
+        List<News> newsList =new ArrayList();
 
         //查询订单消息
         News orderNews = newsDao.fenNewsById(news.getContentId());
-
-        News newsConsumptionRecords  = new News();
-        //设置用户id
-        newsConsumptionRecords .setUserId(orders.getUserId());
-        //设置消息状态
-        newsConsumptionRecords .setNewsStatus("1");
-        //设置消息发送者 4为订单助手
-        newsConsumptionRecords .setSenderId(3);
-        //设置消息种类
-        newsConsumptionRecords .setNewsType(3);
-        //设置消息发送时间
-        newsConsumptionRecords .setNewsTime(new Date());
-        //设置消息标题
-        newsConsumptionRecords .setTitle("支付通知");
-        //设置消息标志位
-        newsConsumptionRecords .setSign(false);
-        //设置消息简介
-        newsConsumptionRecords .setIntroduction("支付通知");
-
-        //设置支付通知的内容
-        ConsumptionRecords consumptionRecords=new ConsumptionRecords();
-
-        //订单id
-        consumptionRecords.setOrderId(orders.getOrderId());
-        //用户id
-        consumptionRecords.setUserId(orders.getUserId());
-        //订单状态
-        consumptionRecords.setPaymentStatus(1);
-        //消息类型
-        consumptionRecords.setSenderId("3");
-        //支付时间
-        consumptionRecords.setPaymentTime(new Date());
-        //支付金额
-        consumptionRecords.setPaymentAmount(orders.getOrderTotal().setScale(2, BigDecimal.ROUND_HALF_UP).toString());
-        //设置消息类型id
-        newsConsumptionRecords.setNewsTypeId(orders.getOrderId());
-        memberDao.addConsumptionRecords(consumptionRecords);
-//        ConsumptionRecords consumptionRecords1 = memberDao.findConsumptionRecords(orders.getUserId(),orders.getOrderId());
-//        String stringOrderJson1= JSONObject.toJSONString(consumptionRecords1);
-        newsDao.addNews(newsConsumptionRecords);
-        List<News> newsList =new ArrayList();
-        //查询支付消息
-        //  News consumptionRecordss = newsDao.fenNewsById(news.getContentId());
+        //将订单消息添加到集合种
         newsList.add(orderNews);
 
+        //查询订单详细信息 转为json
         Order orderss=orderDao.findDetailedOrder(orders.getUserId(),orders.getOrderId());
         String jsonObjects = JSONObject.toJSONString(orderss);
 
@@ -811,6 +776,7 @@ public class OrderServiceImpl implements OrderService {
         }
         //未读消息数量
         Integer unreadQuantity =  newsService.unreadQuantity(orders.getUserId());
+
         //推送消息 三秒后推送
         Integer result = newsService.pushNews(newsList,unreadQuantity);
         //推送失败 丛连推送
@@ -840,6 +806,65 @@ public class OrderServiceImpl implements OrderService {
 
         }
     }
+
+    /**
+     * 设置消息对象
+     * @param userId 用户id
+     * @param newsStatus 消息状态
+     * @param senderId 发送消息者id
+     * @param newsType 消息类型
+     * @param Title 消息标题
+     * @param Introduction 消息简介
+     * @param orderId 订单id
+     * @return 消息对象
+     */
+    public News setNews(String userId,String newsStatus,Integer senderId,Integer newsType,String Title,String Introduction,String orderId) {
+        //添加消息内容
+        News news = new News();
+        //设置用户id
+        news.setUserId(userId);
+        //设置消息状态
+        news.setNewsStatus(newsStatus);
+        //设置消息发送者id 4为订单助手
+        news.setSenderId(senderId);
+        //设置消息种类
+        news.setNewsType(newsType);
+        //设置消息发送时间
+        news.setNewsTime(new Date());
+        //设置消息标题
+        news.setTitle(Title);
+        //设置消息标志位
+        news.setSign(false);
+        //设置消息简介
+        news.setIntroduction(Introduction);
+        //设置消息类型id
+        news.setNewsTypeId(orderId);
+        return news;
+    }
+
+    /**
+     * 添加支付记录
+     * @param order 订单对象
+     */
+      public Integer addConsumptionRecords(Order order){
+          //设置支付通知的内容
+          ConsumptionRecords consumptionRecords=new ConsumptionRecords();
+          //订单id
+          consumptionRecords.setOrderId(order.getOrderId());
+          //用户id
+          consumptionRecords.setUserId(order.getUserId());
+          //订单状态
+          consumptionRecords.setPaymentStatus(1);
+          //消息类型
+          consumptionRecords.setSenderId("3");
+          //支付时间
+          consumptionRecords.setPaymentTime(new Date());
+          //支付金额
+          consumptionRecords.setPaymentAmount(order.getOrderTotal().setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+          //添加零钱记录
+          Integer result = memberDao.addConsumptionRecords(consumptionRecords);
+          return result;
+      }
 
 
 

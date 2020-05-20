@@ -106,18 +106,13 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public List<Recommend> findRecommend() {
-        List<Recommend> redis = (List<Recommend>) redisUtil.lGet("recommend", 0, -1);
-        if (redis.size() == 0) {
+        List<Recommend> redis = (List<Recommend>) redisUtil.get("recommend");
+        if (redis == null ) {
             System.out.println("数据库中取");
             List<Recommend> recommends = ProducDao.findRecommend();
             //存入缓存
-            redisUtil.lSet("recommend", recommends);
-            //转换返回格式
-            ArrayList[] arrayLists = {(ArrayList) recommends};
-            //增加一层数组
-            List list= Arrays.asList(arrayLists);
-            List<Recommend>  recommend = list;
-            return  recommend;
+            redisUtil.set("recommend", recommends);
+            return  recommends;
         } else {
             System.out.println("缓存中取");
             //取缓存

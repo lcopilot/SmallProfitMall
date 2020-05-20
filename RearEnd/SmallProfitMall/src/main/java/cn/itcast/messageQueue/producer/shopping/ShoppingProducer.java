@@ -36,7 +36,7 @@ public class ShoppingProducer {
      */
     public void  sendShoppingInformation(String type, JSONObject order){
         try {
-            shoppingTemplate.convertAndSend("SHOPPING-EXCHANGE", prefix + type, order);
+            shoppingTemplate.convertAndSend("SHOPPING-EXCHANGE", "user.news", order);
         } catch (Exception e) {
             e.printStackTrace();
         }

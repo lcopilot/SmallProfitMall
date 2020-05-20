@@ -26,8 +26,8 @@ public class SecondComment implements Serializable {
     private Date secondCommentTime;
     /**接收追加的评论内容 前端暂时无法修改 **/
     private String textComment;
-    /**图片视频base64**/
-    MultipartFile[] files;
+    /**图片视频**/
+    private MultipartFile[] files;
     /**追评图片**/
     private List<String> secondCommentPicture;
     /**视频标志**/

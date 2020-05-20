@@ -18,7 +18,6 @@ public class FavoriteProducer {
         try {
             Evaluation msgString = evaluation;
             favoriteTemplate.convertAndSend("FAVORITE-EXCHANGE", prefix + type, msgString);
-            //rabbitTemplate.convertAndSend("EMAIL-EXCHANGE",prefix+key,mag);
         } catch (Exception e) {
             e.printStackTrace();
         }

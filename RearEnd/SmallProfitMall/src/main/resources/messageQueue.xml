@@ -15,13 +15,17 @@
   <!-- 管理消息队列 -->
   <rabbit:admin connection-factory="connectionFactory"/>
 
-  <!-- 定义交换机 自动声明-->
+  <!--分，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，割 -->
+  <!-- 定义购买商品交换机 发送邮件 发送购买成功消息推送 自动声明-->
   <rabbit:direct-exchange name="EMAIL-EXCHANGE" auto-declare="true" durable="true"/>
 
   <!-- 定义MQ消息模板 -->
   <rabbit:template id="rabbitTemplate"
                    connection-factory="connectionFactory" exchange="EMAIL-EXCHANGE"/>
 
+  <!--分，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，割 -->
+
+  <!--分，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，割 -->
   <!-- 定义收藏交换机 自动声明-->
   <rabbit:direct-exchange name="FAVORITE-EXCHANGE" auto-declare="true" durable="true"/>
 
@@ -29,12 +33,18 @@
   <rabbit:template id="favoriteTemplate"
                    connection-factory="connectionFactory" exchange="FAVORITE-EXCHANGE"/>
 
+  <!--分，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，割 -->
+
+
+  <!--分，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，割 -->
   <!--定义商品交换机自动声明-->
   <rabbit:direct-exchange name="SHOPPING-EXCHANGE" auto-declare="true" durable="true"/>
 
   <!-- 定义商品消息模板 -->
   <rabbit:template id="shoppingTemplate"
                    connection-factory="connectionFactory" exchange="SHOPPING-EXCHANGE"/>
+
+  <!--分，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，割 -->
 
   <!-- 监听邮件队列 -->
   <rabbit:listener-container connection-factory="connectionFactory">

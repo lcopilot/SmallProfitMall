@@ -17,6 +17,8 @@ public class Recommend implements Serializable {
     private String ProductName;
     /**商品价格**/
     private String ProductPrice;
+    /**商品浏览量**/
+    private Integer productPageviews;
 
     private int Favorite;
 
@@ -24,11 +26,11 @@ public class Recommend implements Serializable {
 
     private int hot;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -62,6 +64,14 @@ public class Recommend implements Serializable {
 
     public void setProductPrice(String productPrice) {
         ProductPrice = productPrice;
+    }
+
+    public Integer getProductPageviews() {
+        return productPageviews;
+    }
+
+    public void setProductPageviews(Integer productPageviews) {
+        this.productPageviews = productPageviews;
     }
 
     public int getFavorite() {

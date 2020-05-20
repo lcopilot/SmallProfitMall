@@ -21,11 +21,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Autowired
     private ShoppingCartDao shoppingCartDao;
 
-    @Autowired
-    private ProductDetailsDao productDetailsDao;
-
-    @Autowired
-    private ShoppingProducer shoppingProducer;
 
     /**
      * 添加购物车

@@ -19,34 +19,41 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 订单消息消费者
  * @author Kite
  * @date 2020/4/7
  */
 public class OrderPushNews {
-
-    /**注入订单dao**/
-    @Autowired
-    OrderDao orderDao;
-
-    /**注入消息dao**/
-    @Autowired
-    NewsDao newsDao;
-
-    /**注入消息service**/
-    @Autowired
-    NewsService newsService;
 
     /**订单service**/
     @Autowired
     OrderService orderService;
 
 
-    @Autowired
-    MemberDao memberDao;
 
+//    /**
+//     * 推送消息
+//     * @param orderJson 推送内容对象
+//     * @throws IOException
+//     */
+//    public void orderPushNews(JSONObject orderJson) throws IOException {
+//        System.out.println("-------------------------------订单消息推送---------------------------------------");
+////        Order orders = JSONObject.toJavaObject(orderJson, Order.class);
+//
+////                orderService.push(orders);
+//
+//    }
+
+    /**
+     * 推送消息
+     * @param
+     * @throws IOException
+     */
     public void orderPushNews(JSONObject orderJson) throws IOException {
+        System.out.println("-------------------------------订单消息推送---------------------------------------");
+        System.out.println("-------------------------------订单消息推送---------------------------------------");
         Order orders = JSONObject.toJavaObject(orderJson, Order.class);
-                orderService.push(orders);
+        orderService.push(orders);
 
     }
 }

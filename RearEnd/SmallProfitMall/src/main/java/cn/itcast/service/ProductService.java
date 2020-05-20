@@ -18,6 +18,9 @@ public interface ProductService {
     //查询所有广告
     public List<Ad> findAd();
 
-    //查询所有为你推荐
+    /**
+     * 查询所有为你推荐
+     * @return
+     */
     public List<Recommend> findRecommend();
 }
