@@ -4,6 +4,7 @@ import cn.itcast.dao.ProductDao;
 import cn.itcast.dao.ProductDetailsDao;
 import cn.itcast.domain.commodity.Ad;
 import cn.itcast.domain.commodity.Recommend;
+import cn.itcast.domain.footprint.Footprint;
 import cn.itcast.service.ProductService;
 import cn.itcast.util.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
