@@ -16,7 +16,9 @@
         FROM
             product_pageviews
         WHERE
-        user_id=#{userIp}
+            user_ip=#{userIp}
+        AND
+            product_id=#{productId}
         AND
             browse_time > (
         SELECT
@@ -25,7 +27,12 @@
 
     <!--查询一天内该用户访问-->
     <select id="findTodayProductPageviews" resultType="java.lang.Integer">
-           select count(*) from product_pageviews where to_days(browse_time) = to_days(now());
+     SELECT
+        count(*)
+    FROM
+        product_pageviews
+    WHERE
+        user_ip = #{userIp} AND product_id = #{productId} AND to_days(browse_time) = to_days(now())
     </select>
 
 

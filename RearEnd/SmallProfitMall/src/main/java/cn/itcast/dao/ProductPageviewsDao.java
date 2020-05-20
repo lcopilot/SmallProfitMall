@@ -20,16 +20,17 @@ public interface ProductPageviewsDao {
     /**
      * 查询用户三小时是否浏览过
      * @param userIp 用户IP地址
+     * @param productId 商品id
      * @return 是否访问
      */
-    public Integer findProductPageviews(String userIp);
+    public Integer findProductPageviews(@Param("userIp") String userIp,@Param("productId")Integer productId);
 
     /**
      * 查询用户当天是否浏览过
      * @param userIp 用户ip
      * @return
      */
-    public Integer findTodayProductPageviews(String userIp);
+    public Integer findTodayProductPageviews(@Param("userIp") String userIp,@Param("productId")Integer productId);
 
 
 }

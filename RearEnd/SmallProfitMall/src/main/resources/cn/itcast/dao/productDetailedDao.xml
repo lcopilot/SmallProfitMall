@@ -160,8 +160,6 @@
         UPDATE ProductPrice SET ProductInventory = ProductInventory-#{purchaseQuantity}  WHERE ProductId = #{productId}
     </update>
 
-
-
     <!--增加商品浏览量-->
     <update id="updateProductPageviews">
        UPDATE  ProductBasis SET productPageviews  = productPageviews+ 1 WHERE ProductId = #{productId}

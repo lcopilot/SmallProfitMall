@@ -32,9 +32,14 @@ public class ProductPageviewsServiceImpl implements ProductPageviewsService {
     @Override
     public Integer addProductPageviews(PoribuctPageviews poribuctPageviews){
         poribuctPageviews.setBrowseTime(new Date());
-
-       Integer firstPageviews =  productPageviewsDao.findProductPageviews(poribuctPageviews.getUserIp());
-       Integer todayProductPageviews = productPageviewsDao.findTodayProductPageviews(poribuctPageviews.getUserIp());
+        //用户ip
+        String userIp = poribuctPageviews.getUserIp();
+        //商品id
+        Integer productId = poribuctPageviews.getProductId();
+        //查询三小时内是否访问 1则访问过 0 则无
+       Integer firstPageviews =  productPageviewsDao.findProductPageviews(userIp,productId);
+       //查询一天该用户访问该商品访问次数 大于三次则不增加
+       Integer todayProductPageviews = productPageviewsDao.findTodayProductPageviews(userIp,productId);
         if (firstPageviews==0 && todayProductPageviews<3){
             //商品新增浏览记录
             productPageviewsDao.addProductPageviews(poribuctPageviews);
