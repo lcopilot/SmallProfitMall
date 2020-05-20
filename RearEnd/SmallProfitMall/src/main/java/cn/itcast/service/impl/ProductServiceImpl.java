@@ -92,20 +92,15 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public List<Ad> findAd() {
-        List<Ad> redis = (List<Ad>) redisUtil.lGet("Ad", 0, -1);
-        if (redis != null) {
-            System.out.println("数据库中取");
-            List<Ad> ads = ProducDao.findAd();
+        List<Ad> redis = (List<Ad>) redisUtil.get("Ad");
+        if (redis == null) {
+            System.out.println("数据库中取广告数据");
+            List<Ad> ad = ProducDao.findAd();
             //存入缓存
-            redisUtil.lSet("Ad", ads);
-            //转换返回格式
-            ArrayList[] arrayLists = {(ArrayList) ads};
-            //增加一层数组
-            List list= Arrays.asList(arrayLists);
-            List<Ad>  ad = list;
+            redisUtil.lSet("Ad", ad,3600);
             return ad;
         } else {
-            System.out.println("缓存中取");
+            System.out.println("缓存中取广告数据");
             //取缓存
             return redis;
         }
@@ -120,13 +115,13 @@ public class ProductServiceImpl implements ProductService {
     public List<Recommend> findRecommend() {
         List<Recommend> redis = (List<Recommend>) redisUtil.get("recommend");
         if (redis == null ) {
-            System.out.println("数据库中取");
+            System.out.println("数据库中取为你推荐商品数据");
             List<Recommend> recommends = ProducDao.findRecommend();
             //存入缓存
-            redisUtil.set("recommend", recommends);
+            redisUtil.set("recommend", recommends,3600);
             return  recommends;
         } else {
-            System.out.println("缓存中取");
+            System.out.println("缓存中取为你推荐数据");
             //取缓存
             return redis;
         }

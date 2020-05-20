@@ -9,13 +9,23 @@ import java.text.ParseException;
 import java.util.List;
 
 public interface ProductService {
-    //查询秒杀
+    /**
+     * 查询秒杀商品
+     * @return
+     * @throws ParseException
+     */
     public List<SeckillResult> findSeckill() throws ParseException;
 
-    //查询低价商品
+    /**
+     * 查询低价商品
+     * @return
+     */
     public List<ProductLowPriceResult> findProductLowPrice();
 
-    //查询所有广告
+    /**
+     * 查询所有广告
+     * @return
+     */
     public List<Ad> findAd();
 
     /**
