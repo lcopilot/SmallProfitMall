@@ -186,9 +186,7 @@
       getSpikeAdList() {
         homeApi.getSpikeAdList().then(res => {
           if (res.success) {
-            console.log(res)
             this.spikeAdList = res.queryResult.list;
-
           }
         })
       },
@@ -196,7 +194,7 @@
       getSpikeProductList() {
         homeApi.getSpikeProductList().then(res => {
           if (res.success) {
-            this.spikeProductList = res.queryResult.list[0];
+            this.spikeProductList = res.queryResult.list;
           }
         })
       },
@@ -221,7 +219,7 @@
       getLowPriceProductList() {
         homeApi.getLowPriceProductList().then(res => {
           if (res.success) {
-            this.lowPriceProductList = res.queryResult.list[0].productLowPrice;
+            this.lowPriceProductList = res.queryResult.list.productLowPrice;
           }
         })
       },
