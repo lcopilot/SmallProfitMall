@@ -16,6 +16,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 主页业务层
+ * @author 86185
+ */
 @Service("commodityService")
 public class ProductServiceImpl implements ProductService {
 

@@ -73,7 +73,7 @@ public class PayController {
             Order order = orderService.findDetailedOrder(null,orderId);
             Integer integer = orderService.updateOrders(order);
 
-            response.sendRedirect("http://localhost:13000/orderComplete");
+            response.sendRedirect("https://www.smallprofit.fhxasdsada.xyz/orderComplete");
         } else {
 
 
