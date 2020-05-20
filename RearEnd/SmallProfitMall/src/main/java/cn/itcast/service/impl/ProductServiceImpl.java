@@ -1,6 +1,7 @@
 package cn.itcast.service.impl;
 
 import cn.itcast.dao.ProductDao;
+import cn.itcast.dao.ProductDetailsDao;
 import cn.itcast.domain.commodity.Ad;
 import cn.itcast.domain.commodity.ProductLowPriceResult;
 import cn.itcast.domain.commodity.Recommend;
@@ -17,9 +18,16 @@ import java.util.List;
 
 @Service("commodityService")
 public class ProductServiceImpl implements ProductService {
+
+    /**商品持久层**/
     @Autowired
     ProductDao ProducDao;
 
+    /**商品详细持久陈**/
+    @Autowired
+    ProductDetailsDao productDetailsDao;
+
+    /**缓存工具类**/
     @Autowired
     RedisUtil redisUtil;
 

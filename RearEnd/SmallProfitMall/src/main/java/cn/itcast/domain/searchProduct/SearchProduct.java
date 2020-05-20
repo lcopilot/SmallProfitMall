@@ -22,38 +22,6 @@ public class SearchProduct {
     /**是否是热销**/
     private Integer hot;
 
-    public Integer getFavorite() {
-        return favorite;
-    }
-
-    public void setFavorite(Integer favorite) {
-        this.favorite = favorite;
-    }
-
-    public Integer getHot() {
-        return hot;
-    }
-
-    public void setHot(Integer hot) {
-        this.hot = hot;
-    }
-
-    public Integer getProductSales() {
-        return productSales;
-    }
-
-    public void setProductSales(Integer productSales) {
-        this.productSales = productSales;
-    }
-
-    public Integer getProbuctPageviews() {
-        return productPageviews;
-    }
-
-    public void setProbuctPageviews(Integer probuctPageviews) {
-        this.productPageviews = probuctPageviews;
-    }
-
     public String getProductId() {
         return productId;
     }
@@ -84,5 +52,37 @@ public class SearchProduct {
 
     public void setProductPrice(String productPrice) {
         this.productPrice = productPrice;
+    }
+
+    public Integer getProductSales() {
+        return productSales;
+    }
+
+    public void setProductSales(Integer productSales) {
+        this.productSales = productSales;
+    }
+
+    public Integer getProductPageviews() {
+        return productPageviews;
+    }
+
+    public void setProductPageviews(Integer productPageviews) {
+        this.productPageviews = productPageviews;
+    }
+
+    public Integer getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(Integer favorite) {
+        this.favorite = favorite;
+    }
+
+    public Integer getHot() {
+        return hot;
+    }
+
+    public void setHot(Integer hot) {
+        this.hot = hot;
     }
 }

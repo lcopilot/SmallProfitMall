@@ -150,6 +150,11 @@
         UPDATE ProductPrice SET ProductSales = ProductSales+#{purchaseQuantity}
     </update>
 
+    <!--查询商品访问量-->
+    <select id="findProductPageviews" resultType="java.lang.Integer">
+        SELECT ProductPageviews FROM  ProductBasis WHERE ProductId = #{productId}
+    </select>
+
     <!--修改商品库存-->
     <update id="updateProductInventory">
         UPDATE ProductPrice SET ProductInventory = ProductInventory-#{purchaseQuantity}  WHERE ProductId = #{productId}

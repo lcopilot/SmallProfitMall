@@ -66,6 +66,12 @@ public interface ProductDetailsDao {
     public Integer updateProductSales(@Param("productId") Integer productId,@Param("purchaseQuantity")Integer quantity);
 
     /**
+     * 查询商品浏览量
+     * @param productId 商品id
+     * @return 商品浏览量
+     */
+    public Integer findProductPageviews(@Param("productId") Integer productId);
+    /**
      * 修改商品库存
      * @param productId
      * @param quantity
