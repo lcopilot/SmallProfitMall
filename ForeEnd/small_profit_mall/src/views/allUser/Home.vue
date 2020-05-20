@@ -32,7 +32,7 @@
                   <el-carousel :interval="10000" indicator-position="none" arrow="hover"
                                height="260px">
                     <el-carousel-item
-                        v-for="(spikeProducts,index) in spikeProductList.seckillProduct"
+                        v-for="(spikeProducts,index) in spikeProductList"
                         :key="index">
                       <div class="Spike_div" v-for="spikeProduct in spikeProducts"
                            :key="spikeProduct.id">
@@ -194,7 +194,7 @@
       getSpikeProductList() {
         homeApi.getSpikeProductList().then(res => {
           if (res.success) {
-            this.spikeProductList = res.queryResult.list;
+            this.spikeProductList = res.objectReturn.object;
           }
         })
       },
@@ -219,7 +219,7 @@
       getLowPriceProductList() {
         homeApi.getLowPriceProductList().then(res => {
           if (res.success) {
-            this.lowPriceProductList = res.queryResult.list.productLowPrice;
+            this.lowPriceProductList = res.objectReturn.object;
           }
         })
       },
