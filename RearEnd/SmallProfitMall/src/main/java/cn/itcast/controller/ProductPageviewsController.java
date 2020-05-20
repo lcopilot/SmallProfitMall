@@ -4,6 +4,7 @@ import cn.itcast.domain.poribuctPageviews.PoribuctPageviews;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.service.ProductPageviewsService;
+import cn.itcast.util.ip.IpUtil;
 import cn.itcast.util.verify.IPUtil;
 import com.aliyuncs.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class ProductPageviewsController {
     @RequestMapping(value = "addProductPageviews",method = RequestMethod.POST)
     public QueryResponseResult addProductPageviews(Integer productId ,String userId, HttpServletRequest request){
         PoribuctPageviews poribuctPageviews = new PoribuctPageviews();
-        poribuctPageviews.setUserIp(IPUtil.getIP(request));
+        poribuctPageviews.setUserIp(IpUtil.getRealIP(request));
         poribuctPageviews.setProductId(productId);
         poribuctPageviews.setUserId(userId);
         productPageviewsService.addProductPageviews(poribuctPageviews);
