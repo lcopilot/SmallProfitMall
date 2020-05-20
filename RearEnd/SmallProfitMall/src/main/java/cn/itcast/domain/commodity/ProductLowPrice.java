@@ -4,8 +4,10 @@ import java.io.Serializable;
 //低价商品查询
 public class ProductLowPrice implements Serializable {
     private int ProductId;
-    private String ImageSite;    //商品图片
-    private String SalesPrice;       //低价价格
+    //商品图片
+    private String ImageSite;
+    //低价价格
+    private String SalesPrice;
 
 
     public int getProductId() {

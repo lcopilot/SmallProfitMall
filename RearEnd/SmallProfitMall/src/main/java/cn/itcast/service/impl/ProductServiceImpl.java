@@ -3,9 +3,7 @@ package cn.itcast.service.impl;
 import cn.itcast.dao.ProductDao;
 import cn.itcast.dao.ProductDetailsDao;
 import cn.itcast.domain.commodity.Ad;
-import cn.itcast.domain.commodity.ProductLowPriceResult;
 import cn.itcast.domain.commodity.Recommend;
-import cn.itcast.domain.commodity.SeckillResult;
 import cn.itcast.service.ProductService;
 import cn.itcast.util.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -35,27 +32,24 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     RedisUtil redisUtil;
 
-
     /**
      * 秒杀
      * @return
      * @throws ParseException
      */
     @Override
-    public List<SeckillResult> findSeckill() throws ParseException {
-        SeckillResult seckillResult = new SeckillResult();
-        List<SeckillResult> redis = (List<SeckillResult>) redisUtil.lGet("SeckillResult", 0, -1);
-        if (redis !=null) {
-            ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findSeckill(0,4)),
-                    new ArrayList(ProducDao.findSeckill(4,4))};
-            seckillResult.setSeckillProduct(arrayLists1);
-            //存入缓存
-            redisUtil.lSet("SeckillResult", seckillResult);
-            //增加一层数组
-            List list= Arrays.asList(seckillResult);
-            List<SeckillResult>  recommend = list;
+    public ArrayList[]  findSeckill() {
+
+        ArrayList[] redis = ( ArrayList[]) redisUtil.get("seckillResult");
+        if (redis == null) {
             System.out.println("秒杀商品信息从数据库取");
-            return recommend;
+            ArrayList[] arrayLists = {
+                    new ArrayList(ProducDao.findSeckill(0,4)),
+                    new ArrayList(ProducDao.findSeckill(4,4))
+            };
+            //存入缓存
+            redisUtil.set("seckillResult", arrayLists,3600);
+            return arrayLists;
         }
         System.out.println("缓中取");
         return redis;
@@ -66,21 +60,17 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public  List<ProductLowPriceResult> findProductLowPrice() {
-        ProductLowPriceResult productLowPriceResult = new ProductLowPriceResult();
-        List<ProductLowPriceResult> redis = (List<ProductLowPriceResult>) redisUtil.lGet("ProductLowPriceResult", 0, -1);
-        if(redis != null){
-            ArrayList[] arrayLists1 = {new ArrayList(ProducDao.findProductLowPrice(0, 6)),
+    public ArrayList[] findProductLowPrice() {
+        ArrayList[] redis = (ArrayList[]) redisUtil.get("ProductLowPriceResult");
+        if(redis == null){
+            ArrayList[] arrayLists = {
+                    new ArrayList(ProducDao.findProductLowPrice(0, 6)),
                     new ArrayList(ProducDao.findProductLowPrice(6, 6))
             };
-            productLowPriceResult.setProductLowPrice(arrayLists1);
             //存入缓存
-            redisUtil.lSet("productLowPriceResult", productLowPriceResult);
-            //增加一层数组
-            List list= Arrays.asList(productLowPriceResult);
-            List<ProductLowPriceResult>  recommend = list;
-            System.out.println("存入数据库");
-            return recommend;
+            redisUtil.set("productLowPriceResult", arrayLists,3600);
+
+            return arrayLists;
         }
 
         return redis;

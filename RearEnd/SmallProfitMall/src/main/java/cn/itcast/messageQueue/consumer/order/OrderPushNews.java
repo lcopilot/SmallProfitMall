@@ -28,25 +28,10 @@ public class OrderPushNews {
     /**订单service**/
     @Autowired
     OrderService orderService;
-
-
-
-//    /**
-//     * 推送消息
-//     * @param orderJson 推送内容对象
-//     * @throws IOException
-//     */
-//    public void orderPushNews(JSONObject orderJson) throws IOException {
-//        System.out.println("-------------------------------订单消息推送---------------------------------------");
-////        Order orders = JSONObject.toJavaObject(orderJson, Order.class);
-//
-////                orderService.push(orders);
-//
-//    }
-
     /**
      * 推送消息
-     * @param
+     * @param orderJson 推送内容对象
+     * @throws IOException
      * @throws IOException
      */
     public void orderPushNews(JSONObject orderJson) throws IOException {

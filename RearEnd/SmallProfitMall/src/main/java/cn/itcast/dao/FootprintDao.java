@@ -21,7 +21,7 @@ public interface FootprintDao {
      * @param footprintTime
      * @return
      */
-    public int updateTime(@Param("footprintId")int footprintId,@Param("footprintTime")Date footprintTime);
+    public int updateTime(@Param("footprintId")Integer footprintId,@Param("footprintTime")Date footprintTime);
 
 
     /**

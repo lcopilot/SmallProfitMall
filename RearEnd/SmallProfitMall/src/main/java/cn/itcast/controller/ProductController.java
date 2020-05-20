@@ -1,12 +1,12 @@
 package cn.itcast.controller;
 
 import cn.itcast.domain.commodity.Ad;
-import cn.itcast.domain.commodity.ProductLowPriceResult;
 import cn.itcast.domain.commodity.Recommend;
-import cn.itcast.domain.commodity.SeckillResult;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
+import cn.itcast.response.objectReturn.ObjectReturn;
+import cn.itcast.response.objectReturn.ObjectReturnResponse;
 import cn.itcast.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,31 +14,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.ParseException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * 商品展示控制层
+ * @author kity
+ * **/
 @Controller
 @RequestMapping("/CommodityController")
 @ResponseBody
 public class ProductController {
 
+    /**商品展示业务层**/
     @Autowired
     ProductService commodityService;
 
-    @Autowired
-    ProductLowPriceResult productLowPriceResult;
 
     /**
      * 秒杀商品
      * @return
      */
     @RequestMapping("/findSeckill")
-    public QueryResponseResult findSeckill() throws ParseException {
-        QueryResult result = new QueryResult();
-        // 调用service的方法
-        List<SeckillResult> seckillResult = commodityService.findSeckill();
-        result.setList(seckillResult);
-        return  new QueryResponseResult(CommonCode.SUCCESS,result);
+    public ObjectReturnResponse findSeckill() throws ParseException {
+        ObjectReturn result = new ObjectReturn();
+        result.setObject(commodityService.findSeckill());
+        return  new ObjectReturnResponse(CommonCode.SUCCESS,result);
     }
 
     /**
@@ -46,12 +48,12 @@ public class ProductController {
      * @return
      */
     @RequestMapping("/findProductLowPrice")
-    public QueryResponseResult ProductLowPrice() {
-        QueryResult result = new QueryResult();
+    public ObjectReturnResponse ProductLowPrice() {
+        ObjectReturn result = new ObjectReturn();
         // 调用service的方法
-        List<ProductLowPriceResult> productLowPriceResult = commodityService.findProductLowPrice();
-        result.setList(productLowPriceResult);
-        return  new QueryResponseResult(CommonCode.SUCCESS,result);
+        ArrayList[] productLowPriceResult = commodityService.findProductLowPrice();
+        result.setObject(productLowPriceResult);
+        return  new ObjectReturnResponse(CommonCode.SUCCESS,result);
     }
 
     /**

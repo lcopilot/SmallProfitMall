@@ -1,11 +1,10 @@
 package cn.itcast.service;
 
 import cn.itcast.domain.commodity.Ad;
-import cn.itcast.domain.commodity.ProductLowPriceResult;
 import cn.itcast.domain.commodity.Recommend;
-import cn.itcast.domain.commodity.SeckillResult;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ProductService {
@@ -14,13 +13,13 @@ public interface ProductService {
      * @return
      * @throws ParseException
      */
-    public List<SeckillResult> findSeckill() throws ParseException;
+    public ArrayList[]  findSeckill() throws ParseException;
 
     /**
      * 查询低价商品
      * @return
      */
-    public List<ProductLowPriceResult> findProductLowPrice();
+    public ArrayList[] findProductLowPrice();
 
     /**
      * 查询所有广告
