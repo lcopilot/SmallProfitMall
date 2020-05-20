@@ -97,7 +97,7 @@ public class ProductServiceImpl implements ProductService {
             System.out.println("数据库中取广告数据");
             List<Ad> ad = ProducDao.findAd();
             //存入缓存
-            redisUtil.lSet("Ad", ad,3600);
+            redisUtil.set("Ad", ad,3600);
             return ad;
         } else {
             System.out.println("缓存中取广告数据");
