@@ -10,7 +10,7 @@
     </insert>
 
     <!--查询3小时内该用户是否访问-->
-    <select id="findProductPageviews" resultType="java.lang.Integer" parameterType="java.lang.String">
+    <select id="findProductPageviews" resultType="java.lang.Integer">
         SELECT
             count(*)
         FROM
@@ -20,9 +20,7 @@
         AND
             product_id=#{productId}
         AND
-            browse_time > (
-        SELECT
-            date_sub( now(), INTERVAL 2 HOUR ))
+          #{date}   &lt;  browse_time
     </select>
 
     <!--查询一天内该用户访问-->

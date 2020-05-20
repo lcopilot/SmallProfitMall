@@ -19,11 +19,12 @@ public interface ProductPageviewsDao {
 
     /**
      * 查询用户三小时是否浏览过
+     * @param date 当前时间
      * @param userIp 用户IP地址
      * @param productId 商品id
      * @return 是否访问
      */
-    public Integer findProductPageviews(@Param("userIp") String userIp,@Param("productId")Integer productId);
+    public Integer findProductPageviews(@Param("date") Date date,@Param("userIp") String userIp,@Param("productId")Integer productId);
 
     /**
      * 查询用户当天是否浏览过
