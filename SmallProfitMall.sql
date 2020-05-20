@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 19/05/2020 11:31:45
+ Date: 20/05/2020 19:28:12
 */
 
 SET NAMES utf8mb4;
@@ -37,31 +37,31 @@ CREATE TABLE `ProductBasis`  (
 -- ----------------------------
 -- Records of ProductBasis
 -- ----------------------------
-INSERT INTO `ProductBasis` VALUES (1, 10001, 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.isdfmk.xyz/v.f30.mp4', '0.74kg', 104, 1009, '10062', 7);
-INSERT INTO `ProductBasis` VALUES (3, 10002, 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.isdfmk.xyz/v.f30.mp4', '0.24kg', NULL, 1010, '10075', 1);
-INSERT INTO `ProductBasis` VALUES (4, 10010, '阿玛尼（ Emporio Armani）满天星手表 女新款玫瑰金钢制表带镶钻石英轻奢女士腕表礼物 AR11244 ', '\r\nhttp://productdata.isdfmk.xyz/v.f30%20%281%29.mp4', '\r\n0.485kg', 106, 1015, NULL, 9);
-INSERT INTO `ProductBasis` VALUES (5, 10011, 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.isdfmk.xyz/v.f10011.mp4', '0.56kg', 104, 1009, '10062', 2);
-INSERT INTO `ProductBasis` VALUES (6, 10012, '联想(Lenovo)小新Pro13.3英寸全面屏超轻薄笔记本电脑(标压锐龙R5-3550H 16G 512G 2.5K QHD 100%sRGB)银 ', '\r\nhttp://productdata.isdfmk.xyz/10012%5B1%5D.mp4', '2.08kg', 107, 1017, '10126', 2);
-INSERT INTO `ProductBasis` VALUES (7, 10013, '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080 ', 'https://jdvod.300hu.com/4c1f7a6atransbjngwcloud1oss/7d07cd26107144746580840449/v.f30.mp4?dockingId=88290b33-b297-4d55-aa10-3996cc45a4b6&storageSource=3', '2.08kg', 107, 1018, NULL, 1);
-INSERT INTO `ProductBasis` VALUES (8, 10014, '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.isdfmk.xyz/sdfjsdfjmrthnndvisdgsdg.mp4', '2.8kg', 107, 1018, NULL, 3);
-INSERT INTO `ProductBasis` VALUES (9, 10015, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/sdkjj.mp4', '0.15kg', NULL, NULL, NULL, 1);
-INSERT INTO `ProductBasis` VALUES (10, 10016, '华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机', '\r\nhttp://productdata.isdfmk.xyz/v.f30%20%282%29.mp4', '0.54kg', 104, 1009, '10062', 1);
+INSERT INTO `ProductBasis` VALUES (1, 10001, 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.isdfmk.xyz/v.f30.mp4', '0.74kg', 104, 1009, '10062', 12);
+INSERT INTO `ProductBasis` VALUES (3, 10002, 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.isdfmk.xyz/v.f30.mp4', '0.24kg', NULL, 1010, '10075', 3);
+INSERT INTO `ProductBasis` VALUES (4, 10010, '阿玛尼（ Emporio Armani）满天星手表 女新款玫瑰金钢制表带镶钻石英轻奢女士腕表礼物 AR11244 ', '\r\nhttp://productdata.isdfmk.xyz/v.f30%20%281%29.mp4', '\r\n0.485kg', 106, 1015, NULL, 12);
+INSERT INTO `ProductBasis` VALUES (5, 10011, 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.isdfmk.xyz/v.f10011.mp4', '0.56kg', 104, 1009, '10062', 3);
+INSERT INTO `ProductBasis` VALUES (6, 10012, '联想(Lenovo)小新Pro13.3英寸全面屏超轻薄笔记本电脑(标压锐龙R5-3550H 16G 512G 2.5K QHD 100%sRGB)银 ', '\r\nhttp://productdata.isdfmk.xyz/10012%5B1%5D.mp4', '2.08kg', 107, 1017, '10126', 8);
+INSERT INTO `ProductBasis` VALUES (7, 10013, '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080 ', 'https://jdvod.300hu.com/4c1f7a6atransbjngwcloud1oss/7d07cd26107144746580840449/v.f30.mp4?dockingId=88290b33-b297-4d55-aa10-3996cc45a4b6&storageSource=3', '2.08kg', 107, 1018, NULL, 2);
+INSERT INTO `ProductBasis` VALUES (8, 10014, '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.isdfmk.xyz/sdfjsdfjmrthnndvisdgsdg.mp4', '2.8kg', 107, 1018, NULL, 7);
+INSERT INTO `ProductBasis` VALUES (9, 10015, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/sdkjj.mp4', '0.15kg', NULL, NULL, NULL, 2);
+INSERT INTO `ProductBasis` VALUES (10, 10016, '华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机', '\r\nhttp://productdata.isdfmk.xyz/v.f30%20%282%29.mp4', '0.54kg', 104, 1009, '10062', 2);
 INSERT INTO `ProductBasis` VALUES (11, 10017, 'Apple Watch Series 5智能手表（GPS款 40毫米深空灰色铝金属表壳 黑色运动型表带 MWV82CH/A)\r\n', 'http://productdata.isdfmk.xyz/asuashfoeryubvxcmivmdsfomaosaergl.mp4', '0.23kg', 106, 1015, NULL, 1);
-INSERT INTO `ProductBasis` VALUES (12, 10003, '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', NULL, '不计重', NULL, NULL, NULL, 1);
+INSERT INTO `ProductBasis` VALUES (12, 10003, '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', NULL, '不计重', NULL, NULL, NULL, 3);
 INSERT INTO `ProductBasis` VALUES (13, 10004, '新款Huawei/华为折叠手机mates xs 5g版大屏双屏全面屏双面屏官方旗舰店对折手机可折叠屏 Mate XS折叠\r\n', 'http://productdata.isdfmk.xyz/sdfjsdomytupj,nkc.mp4', '0.24kg', 104, 1009, '10066', 1);
 INSERT INTO `ProductBasis` VALUES (14, 10005, 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.isdfmk.xyz/diferwngmopsvm,jaks.mp4', '2.8kg', 106, 1016, '10119', 1);
 INSERT INTO `ProductBasis` VALUES (15, 10006, ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.isdfmk.xyz/iorhmm,wcvihj.mp4', '0.6kg', NULL, 1010, '10075', 1);
 INSERT INTO `ProductBasis` VALUES (16, 10007, 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', NULL, '5kg', NULL, NULL, NULL, 1);
 INSERT INTO `ProductBasis` VALUES (17, 10008, '万代（BANDAI） Megahouse POP 海贼王 路飞9人 模型玩具（无售后！！！） 四档路飞\r\n', NULL, '100kg', NULL, NULL, NULL, 1);
 INSERT INTO `ProductBasis` VALUES (18, 10009, '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n', NULL, '5.6kg', 107, 1017, '10126', 1);
-INSERT INTO `ProductBasis` VALUES (19, 10018, '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.isdfmk.xyz/v.f30%20%284%29.mp4\r\n\r\n', '0.4kg', 113, NULL, NULL, 1);
+INSERT INTO `ProductBasis` VALUES (19, 10018, '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.isdfmk.xyz/v.f30%20%284%29.mp4\r\n\r\n', '0.4kg', 113, NULL, NULL, 2);
 INSERT INTO `ProductBasis` VALUES (10018, 10019, '【二手95新】劳力士 系列:迪通拿系列 型号:116505 材质:18k玫瑰金 镜面:蓝宝石玻璃 未使用', NULL, '220克', 118, 1042, NULL, 1);
-INSERT INTO `ProductBasis` VALUES (10019, 10020, '华硕（ASUS）ROG Strix XG27VQ 27英寸144HZ 1800R Free-Sync旋转升降AURA-RGB电竞显示器（HDMI/DP/DVI）', 'http://productdata.isdfmk.xyz/0a2dn6qco6afmqiL4K2doafhoaGdmaydo6M.mp4', '16.84kg', 101, 1001, NULL, 1);
+INSERT INTO `ProductBasis` VALUES (10019, 10020, '华硕（ASUS）ROG Strix XG27VQ 27英寸144HZ 1800R Free-Sync旋转升降AURA-RGB电竞显示器（HDMI/DP/DVI）', 'http://productdata.isdfmk.xyz/0a2dn6qco6afmqiL4K2doafhoaGdmaydo6M.mp4', '16.84kg', 101, 1001, NULL, 2);
 INSERT INTO `ProductBasis` VALUES (10020, 10021, '长虹（CHANGHONG）D6U 长虹 激光电视 影院 投影仪 激光电视 私人电影院 投影机 长虹 4K画质 3500流明 115%广色域 AI人工智能 语音控制\r\n4K画质，3500流明，115%广色域，AI人工智能，语音控制  ', '', '5.84kg', 101, 1001, '10002', 1);
 INSERT INTO `ProductBasis` VALUES (10021, 10023, '\r\nCOACH PARKER 16 女士山茶花装饰可斜挎双肩包', NULL, NULL, 117, 1039, '10295', 1);
-INSERT INTO `ProductBasis` VALUES (10022, 10024, 'HHKB Professional BT 蓝牙版黑无刻静电容键盘 程序员码农专用便携迷你键盘 编程适用', 'http://productdata.isdfmk.xyz/0a2dn62WqaCdmqiL4K2doafhoaOhnqeZpKc.mp4', NULL, 107, 1019, '10141', 1);
+INSERT INTO `ProductBasis` VALUES (10022, 10024, 'HHKB Professional BT 蓝牙版黑无刻静电容键盘 程序员码农专用便携迷你键盘 编程适用', 'http://productdata.isdfmk.xyz/0a2dn62WqaCdmqiL4K2doafhoaOhnqeZpKc.mp4', NULL, 107, 1019, '10141', 2);
 INSERT INTO `ProductBasis` VALUES (10023, 10025, '【良品铺子】综合果仁525g 每日坚果组合混合干果礼盒零食大礼包健康零食', NULL, '575.5g', NULL, NULL, NULL, 2);
-INSERT INTO `ProductBasis` VALUES (10024, 10022, 'Classic | 40mm Canterbury', NULL, NULL, 118, 1026, '10189', 1);
+INSERT INTO `ProductBasis` VALUES (10024, 10022, 'Classic | 40mm Canterbury', NULL, NULL, 118, 1026, '10189', 2);
 INSERT INTO `ProductBasis` VALUES (10025, 10026, '2019新款翻领磨破短款女士休闲牛仔外套', NULL, NULL, 111, 1026, '1026', 1);
 INSERT INTO `ProductBasis` VALUES (10026, 10027, '【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金', NULL, NULL, NULL, 1010, '10075', 1);
 INSERT INTO `ProductBasis` VALUES (10027, 10028, '小米（MI）小爱智能音箱Pro 无线蓝牙音响 语音控制智能家居 APP远程操控 专业DTS 音效 黑色', NULL, '\r\n1.56kg', 106, 1014, '10106', 1);
@@ -436,36 +436,36 @@ CREATE TABLE `ProductPrice`  (
 -- ----------------------------
 -- Records of ProductPrice
 -- ----------------------------
-INSERT INTO `ProductPrice` VALUES (1, 10001, 5999.00, 4844, 4549.00, 100000.00, 99990.00);
-INSERT INTO `ProductPrice` VALUES (2, 10002, 1999.00, 1899, 15886.00, 15000.00, 8.00);
-INSERT INTO `ProductPrice` VALUES (3, 10010, 3596.00, 2563, 2523.00, 1500.00, 1855.00);
-INSERT INTO `ProductPrice` VALUES (4, 10011, 10398.00, 19888, 9999.00, 18900.00, 15547.00);
-INSERT INTO `ProductPrice` VALUES (5, 10012, 4999.00, 4888, 4760.00, 17666.00, 58658.00);
-INSERT INTO `ProductPrice` VALUES (6, 10013, 11999.00, 18999, 10888.00, 1122222.00, 144447.00);
-INSERT INTO `ProductPrice` VALUES (7, 10014, 2898.00, 2584, 2541.00, 14444.00, 18877.00);
-INSERT INTO `ProductPrice` VALUES (8, 10015, 20.00, 10, 8.80, 88888.00, 74557.00);
-INSERT INTO `ProductPrice` VALUES (9, 10016, 5399.00, 4999, 4988.00, 158555.00, 786317.00);
-INSERT INTO `ProductPrice` VALUES (10, 10017, 3199.00, 2999, 3012.00, 4456.00, 78580.00);
-INSERT INTO `ProductPrice` VALUES (11, 10003, 758.00, 666, 589.00, 18885.00, 5665547.00);
-INSERT INTO `ProductPrice` VALUES (12, 10006, 1499.00, 1399, 1360.00, 156366.00, 4855445.00);
-INSERT INTO `ProductPrice` VALUES (13, 10007, 3350.00, 2899, 1569.00, 156999.00, 145544.00);
-INSERT INTO `ProductPrice` VALUES (14, 10008, 3500.00, 15588, 1585.00, 10002.00, 15247.00);
-INSERT INTO `ProductPrice` VALUES (15, 10009, 47699.00, 4688, 45666.00, 666666.00, 48591.00);
-INSERT INTO `ProductPrice` VALUES (16, 10004, 30576.00, 29999, 28999.00, 10000.00, 158547.00);
-INSERT INTO `ProductPrice` VALUES (17, 10005, 7890.00, 5888, 4585.00, 155555.00, 14557.00);
-INSERT INTO `ProductPrice` VALUES (18, 10018, 1140.00, 1111, 999.00, 1856.00, 15547.00);
-INSERT INTO `ProductPrice` VALUES (19, 10019, 260000.00, 259999, 259999.00, 1.00, -7.00);
-INSERT INTO `ProductPrice` VALUES (20, 10020, 5199.00, 4999, 4855.00, 100.00, 11103.00);
-INSERT INTO `ProductPrice` VALUES (21, 10021, 18599.00, 1855, 1599.00, 1000.00, 5547.00);
-INSERT INTO `ProductPrice` VALUES (22, 10023, 1299.00, 1152, 1258.00, 1000.00, 244.00);
-INSERT INTO `ProductPrice` VALUES (23, 10024, 2188.00, 2088, 1999.00, 1516.00, 4894643.00);
-INSERT INTO `ProductPrice` VALUES (24, 10025, 71.00, 66, 59.90, 161456.00, 156157.00);
-INSERT INTO `ProductPrice` VALUES (25, 10022, 1289.00, 1206, 1126.00, 54615165.00, 465148.00);
-INSERT INTO `ProductPrice` VALUES (26, 10026, 100000.00, 620, 599.00, 15661156.00, -12.00);
-INSERT INTO `ProductPrice` VALUES (27, 10027, 773.00, 666, 689.00, 154854.00, 1658.00);
-INSERT INTO `ProductPrice` VALUES (28, 10028, 265.09, 222, 218.00, 151515.00, 156157.00);
-INSERT INTO `ProductPrice` VALUES (29, 10029, 2920.01, 288, 2999.00, 21261.00, 165153.00);
-INSERT INTO `ProductPrice` VALUES (30, 10030, 128.00, 128, 128.00, 10000.00, 992.00);
+INSERT INTO `ProductPrice` VALUES (1, 10001, 5999.00, 4844, 4549.00, 100017.00, 99979.00);
+INSERT INTO `ProductPrice` VALUES (2, 10002, 1999.00, 1899, 15886.00, 12.00, 0.00);
+INSERT INTO `ProductPrice` VALUES (3, 10010, 3596.00, 2563, 2523.00, 1517.00, 1854.00);
+INSERT INTO `ProductPrice` VALUES (4, 10011, 10398.00, 19888, 9999.00, 18917.00, 15547.00);
+INSERT INTO `ProductPrice` VALUES (5, 10012, 4999.00, 4888, 4760.00, 17683.00, 58658.00);
+INSERT INTO `ProductPrice` VALUES (6, 10013, 11999.00, 18999, 10888.00, 1122239.00, 144444.00);
+INSERT INTO `ProductPrice` VALUES (7, 10014, 2898.00, 2584, 2541.00, 14461.00, 18860.00);
+INSERT INTO `ProductPrice` VALUES (8, 10015, 20.00, 10, 8.80, 88905.00, 74536.00);
+INSERT INTO `ProductPrice` VALUES (9, 10016, 5399.00, 4999, 4988.00, 158572.00, 786317.00);
+INSERT INTO `ProductPrice` VALUES (10, 10017, 3199.00, 2999, 3012.00, 4473.00, 78580.00);
+INSERT INTO `ProductPrice` VALUES (11, 10003, 758.00, 666, 589.00, 18902.00, 5665531.00);
+INSERT INTO `ProductPrice` VALUES (12, 10006, 1499.00, 1399, 1360.00, 156383.00, 4855432.00);
+INSERT INTO `ProductPrice` VALUES (13, 10007, 3350.00, 2899, 1569.00, 157016.00, 145544.00);
+INSERT INTO `ProductPrice` VALUES (14, 10008, 3500.00, 15588, 1585.00, 10019.00, 15247.00);
+INSERT INTO `ProductPrice` VALUES (15, 10009, 47699.00, 4688, 45666.00, 666683.00, 48586.00);
+INSERT INTO `ProductPrice` VALUES (16, 10004, 30576.00, 29999, 28999.00, 10017.00, 158547.00);
+INSERT INTO `ProductPrice` VALUES (17, 10005, 7890.00, 5888, 4585.00, 155572.00, 14556.00);
+INSERT INTO `ProductPrice` VALUES (18, 10018, 1140.00, 1111, 999.00, 1873.00, 15546.00);
+INSERT INTO `ProductPrice` VALUES (19, 10019, 260000.00, 259999, 259999.00, 18.00, -7.00);
+INSERT INTO `ProductPrice` VALUES (20, 10020, 5199.00, 4999, 4855.00, 117.00, 11103.00);
+INSERT INTO `ProductPrice` VALUES (21, 10021, 18599.00, 1855, 1599.00, 1017.00, 5547.00);
+INSERT INTO `ProductPrice` VALUES (22, 10023, 1299.00, 1152, 1258.00, 1017.00, 244.00);
+INSERT INTO `ProductPrice` VALUES (23, 10024, 2188.00, 2088, 1999.00, 1533.00, 4894641.00);
+INSERT INTO `ProductPrice` VALUES (24, 10025, 71.00, 66, 59.90, 161473.00, 156155.00);
+INSERT INTO `ProductPrice` VALUES (25, 10022, 1289.00, 1206, 1126.00, 54615182.00, 465148.00);
+INSERT INTO `ProductPrice` VALUES (26, 10026, 100000.00, 620, 599.00, 15661173.00, -12.00);
+INSERT INTO `ProductPrice` VALUES (27, 10027, 773.00, 666, 689.00, 154871.00, 1658.00);
+INSERT INTO `ProductPrice` VALUES (28, 10028, 265.09, 222, 218.00, 151532.00, 154565.00);
+INSERT INTO `ProductPrice` VALUES (29, 10029, 2920.01, 288, 2999.00, 21278.00, 165138.00);
+INSERT INTO `ProductPrice` VALUES (30, 10030, 128.00, 128, 128.00, 10017.00, 992.00);
 
 -- ----------------------------
 -- Table structure for ProductSize
@@ -721,77 +721,64 @@ CREATE TABLE `commentImage`  (
   `commentPicture` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `fign` int(11) NULL DEFAULT 1,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 98 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 151 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of commentImage
 -- ----------------------------
-INSERT INTO `commentImage` VALUES (17, 101, ' http://img.fhxasdsada.xyz/6c2e48d7987948e29c245c4ddcbb1782?t=1589092310', 1);
-INSERT INTO `commentImage` VALUES (18, 101, ' http://img.fhxasdsada.xyz/6e78f53405a54ff99f5425be4af4707a?t=1589092311', 1);
-INSERT INTO `commentImage` VALUES (19, 101, ' http://img.fhxasdsada.xyz/744894f16bf0473da34dd96229e537f6?t=1589092311', 1);
-INSERT INTO `commentImage` VALUES (20, 101, ' http://img.fhxasdsada.xyz/b5879a6db53d4ca69ad24ae38de5120f?t=1589092312', 1);
-INSERT INTO `commentImage` VALUES (21, 101, ' http://img.fhxasdsada.xyz/e6a936737ffe4160957558eaca3004df?t=1589092312', 1);
-INSERT INTO `commentImage` VALUES (22, 101, ' http://img.fhxasdsada.xyz/b0cf5b8ba0754d8dbeba56727c351508?t=1589092313', 1);
-INSERT INTO `commentImage` VALUES (23, 101, ' http://img.fhxasdsada.xyz/6c2e48d7987948e29c245c4ddcbb1782?t=1589092310', 1);
-INSERT INTO `commentImage` VALUES (25, 102, ' http://img.fhxasdsada.xyz/6c2e48d7987948e29c245c4ddcbb1782?t=1589092310', 1);
-INSERT INTO `commentImage` VALUES (26, 102, ' http://img.fhxasdsada.xyz/b5879a6db53d4ca69ad24ae38de5120f?t=1589092312', 1);
-INSERT INTO `commentImage` VALUES (27, 103, ' http://img.fhxasdsada.xyz/e6a936737ffe4160957558eaca3004df?t=1589092312', 1);
-INSERT INTO `commentImage` VALUES (28, 104, ' http://img.fhxasdsada.xyz/e6a936737ffe4160957558eaca3004df?t=1589092312', 1);
-INSERT INTO `commentImage` VALUES (29, 105, ' http://img.fhxasdsada.xyz/e6a936737ffe4160957558eaca3004df?t=1589092312', 1);
-INSERT INTO `commentImage` VALUES (40, 111, ' http://img.fhxasdsada.xyz/804d5573e3b54061b7ed26127836d651?t=1589098219', 1);
-INSERT INTO `commentImage` VALUES (41, 111, ' http://img.fhxasdsada.xyz/8eb446a4f11949469f48292475395c40?t=1589098219', 1);
-INSERT INTO `commentImage` VALUES (42, 111, ' http://img.fhxasdsada.xyz/80c94b1c7c0d43f18ee5910a89bbfe34?t=1589098220', 1);
-INSERT INTO `commentImage` VALUES (43, 111, ' http://img.fhxasdsada.xyz/7ed948aaa7f946efa69b1ba4d37ea046?t=1589098220', 1);
-INSERT INTO `commentImage` VALUES (44, 111, ' http://img.fhxasdsada.xyz/33a9153d57074a92a69ef890674b1ac0?t=1589098221', 1);
-INSERT INTO `commentImage` VALUES (45, 111, ' http://img.fhxasdsada.xyz/9c48fdd567ad46a8889a78aaabba3750?t=1589098221', 1);
-INSERT INTO `commentImage` VALUES (46, 111, ' http://img.fhxasdsada.xyz/6bcd6748f1c84e5285045eb512aa99d8?t=1589098222', 1);
-INSERT INTO `commentImage` VALUES (47, 111, ' http://img.fhxasdsada.xyz/9cc28622923340e8a83753bba0d266b9?t=1589098224', 1);
-INSERT INTO `commentImage` VALUES (48, 111, ' http://img.fhxasdsada.xyz/5ed43d9f0248453b8f31970893e1d24b?t=1589098227', 1);
-INSERT INTO `commentImage` VALUES (49, 112, ' http://img.fhxasdsada.xyz/9777fb10d0604046b489d08bd5b39806?t=1589105384', 1);
-INSERT INTO `commentImage` VALUES (50, 112, ' http://img.fhxasdsada.xyz/0fdd7763579748319cba62e0aa3c4237?t=1589105384', 1);
-INSERT INTO `commentImage` VALUES (51, 112, ' http://img.fhxasdsada.xyz/a5c206f4871c43f5b295adc4988c6d64?t=1589105384', 1);
-INSERT INTO `commentImage` VALUES (52, 112, ' http://img.fhxasdsada.xyz/7806e16a735046909a68a9c980994e7c?t=1589105385', 1);
-INSERT INTO `commentImage` VALUES (53, 112, ' http://img.fhxasdsada.xyz/2a84b035f56843238acb10549f13ee92?t=1589105387', 1);
-INSERT INTO `commentImage` VALUES (54, 112, ' http://img.fhxasdsada.xyz/96472aa33ca548c087ac7198c0e0a99c?t=1589105389', 1);
-INSERT INTO `commentImage` VALUES (55, 112, ' http://img.fhxasdsada.xyz/fe9fef14d1c14154966ade12a6c6924e?t=1589105390', 1);
-INSERT INTO `commentImage` VALUES (56, 112, ' http://img.fhxasdsada.xyz/8575decd65c842368dea99eb8db392bd?t=1589105390', 1);
-INSERT INTO `commentImage` VALUES (57, 112, ' http://img.fhxasdsada.xyz/9f0ec99a0b954b18a919e07ec9f656d6?t=1589105390', 1);
-INSERT INTO `commentImage` VALUES (60, 113, ' http://img.fhxasdsada.xyz/901fc955c44f4045a23e3069bc8bb37e?t=1589105392', 1);
-INSERT INTO `commentImage` VALUES (61, 113, ' http://img.fhxasdsada.xyz/0dff69263675499eb9cd1189f411fdeb?t=1589105393', 1);
-INSERT INTO `commentImage` VALUES (62, 113, ' http://img.fhxasdsada.xyz/a39c8cec733b4901b1174f67802154d9?t=1589105394', 1);
-INSERT INTO `commentImage` VALUES (63, 113, ' http://img.fhxasdsada.xyz/cb6904e828454f5e892c37d205b1f1d4?t=1589105394', 1);
-INSERT INTO `commentImage` VALUES (64, 113, ' http://img.fhxasdsada.xyz/4191f0e9e126471889ad6aee02db4ebd?t=1589105394', 1);
-INSERT INTO `commentImage` VALUES (65, 113, ' http://img.fhxasdsada.xyz/87365c7129fe489db547d0a5c40a91c2?t=1589105395', 1);
-INSERT INTO `commentImage` VALUES (66, 113, ' http://img.fhxasdsada.xyz/553b3978956042f59c1e7bcae9412ceb?t=1589105395', 1);
-INSERT INTO `commentImage` VALUES (67, 113, ' http://img.fhxasdsada.xyz/2f67120310c44d4386e2f921e0dd00fb?t=1589105396', 1);
-INSERT INTO `commentImage` VALUES (68, 113, ' http://img.fhxasdsada.xyz/4fbe8ccffb664c6ea4520cb448ec3616?t=1589105397', 1);
-INSERT INTO `commentImage` VALUES (71, 114, ' http://img.fhxasdsada.xyz/2f60df74b0dd49969559b8beee535721?t=1589163064', 1);
-INSERT INTO `commentImage` VALUES (72, 116, ' http://img.fhxasdsada.xyz/81afd329c9eb45ebaacb0c5c4856f40f?t=1589165195', 1);
-INSERT INTO `commentImage` VALUES (73, 116, ' http://img.fhxasdsada.xyz/8b647ca4881446f58caabd056f90846d?t=1589165204', 1);
-INSERT INTO `commentImage` VALUES (74, 116, ' http://img.fhxasdsada.xyz/0826d6ad14e44edda14bfee8792258c7?t=1589165206', 1);
-INSERT INTO `commentImage` VALUES (75, 116, ' http://img.fhxasdsada.xyz/f5ed74d738bc417da539a7bfbbd4e1ed?t=1589165207', 1);
-INSERT INTO `commentImage` VALUES (76, 116, ' http://img.fhxasdsada.xyz/01b098ab8330458e89cb2042129fee2d?t=1589165208', 1);
-INSERT INTO `commentImage` VALUES (77, 121, ' http://img.fhxasdsada.xyz/7b7e49a697194ddd90b0b96490081659?t=1589167220', 1);
-INSERT INTO `commentImage` VALUES (78, 122, ' http://img.fhxasdsada.xyz/2b0b81c45a284e828d33dfaf8956c12e?t=1589168123', 1);
-INSERT INTO `commentImage` VALUES (79, 160, ' http://img.fhxasdsada.xyz/4fc90627bf824294b0366fd73d60fca7?t=1589425020', 1);
-INSERT INTO `commentImage` VALUES (80, 162, NULL, 1);
-INSERT INTO `commentImage` VALUES (81, 162, NULL, 1);
-INSERT INTO `commentImage` VALUES (82, 164, NULL, 1);
-INSERT INTO `commentImage` VALUES (83, 164, NULL, 1);
-INSERT INTO `commentImage` VALUES (84, 166, NULL, 1);
-INSERT INTO `commentImage` VALUES (85, 166, NULL, 1);
-INSERT INTO `commentImage` VALUES (86, 168, ' http://img.fhxasdsada.xyz/b9f91da4af9f4c9bbf5a2fde7f9aff0d?t=1589427826', 1);
-INSERT INTO `commentImage` VALUES (87, 169, NULL, 1);
-INSERT INTO `commentImage` VALUES (88, 169, NULL, 1);
-INSERT INTO `commentImage` VALUES (89, 170, ' http://img.fhxasdsada.xyz/162f2795938942309bd2d508e2b8e1e2?t=1589428163', 1);
-INSERT INTO `commentImage` VALUES (90, 170, ' http://img.fhxasdsada.xyz/d4b7611cb2fa4718832353d6e9c6a645?t=1589428163', 1);
-INSERT INTO `commentImage` VALUES (91, 171, ' http://img.fhxasdsada.xyz/67e7477584c541a1815ae439f1e0af68?t=1589428274', 1);
-INSERT INTO `commentImage` VALUES (92, 172, NULL, 1);
-INSERT INTO `commentImage` VALUES (93, 172, NULL, 1);
-INSERT INTO `commentImage` VALUES (94, 173, NULL, 1);
-INSERT INTO `commentImage` VALUES (95, 173, NULL, 1);
-INSERT INTO `commentImage` VALUES (96, 174, ' http://img.fhxasdsada.xyz/06dc35caa5ec466296b125760859c4c7?t=1589428631', 1);
-INSERT INTO `commentImage` VALUES (97, 174, NULL, 1);
+INSERT INTO `commentImage` VALUES (98, 175, ' http://img.isdfmk.xyz/f7beb49c75774b1f8fafb8cb03ac2123?t=1589884732', 1);
+INSERT INTO `commentImage` VALUES (99, 175, ' http://img.isdfmk.xyz/76088a31f50741d9ad882183bbdfb9d2?t=1589884733', 1);
+INSERT INTO `commentImage` VALUES (100, 175, ' http://img.isdfmk.xyz/7058538fbddc46f08247440737a19b0d?t=1589884734', 1);
+INSERT INTO `commentImage` VALUES (101, 175, ' http://img.isdfmk.xyz/22e8291452d14003b8ed65ae71ea1897?t=1589884736', 1);
+INSERT INTO `commentImage` VALUES (102, 175, ' http://img.isdfmk.xyz/7d0786825f4a45eea0b1870fee365e1b?t=1589884736', 1);
+INSERT INTO `commentImage` VALUES (103, 175, NULL, 1);
+INSERT INTO `commentImage` VALUES (104, 176, ' http://img.isdfmk.xyz/d5cd009c90a347a0a8ee1f62cf26ecdf?t=1589888247', 1);
+INSERT INTO `commentImage` VALUES (105, 176, NULL, 1);
+INSERT INTO `commentImage` VALUES (106, 177, ' http://img.isdfmk.xyz/72312c360f9d4790ad9a93c0c55ba60e?t=1589892685', 1);
+INSERT INTO `commentImage` VALUES (107, 177, ' http://img.isdfmk.xyz/13b520de8eea408285a9bb3ffd0ce591?t=1589892687', 1);
+INSERT INTO `commentImage` VALUES (108, 177, ' http://img.isdfmk.xyz/18cc28d764964825b6b83f3f8d51250d?t=1589892688', 1);
+INSERT INTO `commentImage` VALUES (109, 177, ' http://img.isdfmk.xyz/6a35598e8465446183fff33bb1cc1e95?t=1589892688', 1);
+INSERT INTO `commentImage` VALUES (110, 177, ' http://img.isdfmk.xyz/cd1f4687a9e64efdbe81064bc7bfef9c?t=1589892689', 1);
+INSERT INTO `commentImage` VALUES (111, 177, ' http://img.isdfmk.xyz/bb81c84add2d4ec0be99d564c8d74f36?t=1589892689', 1);
+INSERT INTO `commentImage` VALUES (112, 177, ' http://img.isdfmk.xyz/bdd2499a46f340dd8c0c27010ca5298d?t=1589892690', 1);
+INSERT INTO `commentImage` VALUES (113, 177, ' http://img.isdfmk.xyz/e88824410d6b479a90c718c21937131b?t=1589892690', 1);
+INSERT INTO `commentImage` VALUES (114, 177, ' http://img.isdfmk.xyz/8d1de32664274f218bed09abf2733d56?t=1589892691', 1);
+INSERT INTO `commentImage` VALUES (115, 177, ' http://img.isdfmk.xyz/7f987d8063c4490aa102087e380fa4da?t=1589892691', 1);
+INSERT INTO `commentImage` VALUES (116, 177, NULL, 1);
+INSERT INTO `commentImage` VALUES (117, 178, ' http://img.isdfmk.xyz/bad3e625f3144ec7ba746631dfba9bb8?t=1589892702', 1);
+INSERT INTO `commentImage` VALUES (118, 178, ' http://img.isdfmk.xyz/4614d2fce538476b8b3d583357ebad7a?t=1589892704', 1);
+INSERT INTO `commentImage` VALUES (119, 178, ' http://img.isdfmk.xyz/c6e97a5eea174e70b0ebf7de1833f897?t=1589892705', 1);
+INSERT INTO `commentImage` VALUES (120, 178, ' http://img.isdfmk.xyz/e0e71e1d1ea54aedbfd9ee059de7c988?t=1589892706', 1);
+INSERT INTO `commentImage` VALUES (121, 178, ' http://img.isdfmk.xyz/2df20875492d4977bdda804ae0733e49?t=1589892706', 1);
+INSERT INTO `commentImage` VALUES (122, 178, ' http://img.isdfmk.xyz/d6c7d312a48146ec8c869d797a3ba4b7?t=1589892706', 1);
+INSERT INTO `commentImage` VALUES (123, 178, ' http://img.isdfmk.xyz/6ab34c8dc0be43bf94b96b744054c02a?t=1589892707', 1);
+INSERT INTO `commentImage` VALUES (124, 178, ' http://img.isdfmk.xyz/5cd72a024cc94302b5733ca5852b374f?t=1589892707', 1);
+INSERT INTO `commentImage` VALUES (125, 178, ' http://img.isdfmk.xyz/4deafe9029de4547a73bfe5b775a97e1?t=1589892707', 1);
+INSERT INTO `commentImage` VALUES (126, 178, ' http://img.isdfmk.xyz/ab4c5d62dcf14e9ea3b7ebfe231095f8?t=1589892707', 1);
+INSERT INTO `commentImage` VALUES (127, 178, NULL, 1);
+INSERT INTO `commentImage` VALUES (128, 179, ' http://img.isdfmk.xyz/3bddd0baefa84b189cd4e6cdd44f0418?t=1589936467', 1);
+INSERT INTO `commentImage` VALUES (129, 180, ' http://img.isdfmk.xyz/971f759398b54dd48d5eba2d2f5a860b?t=1589962992', 1);
+INSERT INTO `commentImage` VALUES (130, 180, ' http://img.isdfmk.xyz/24f340b6ddf942569d5ebf9a8dc09239?t=1589962994', 1);
+INSERT INTO `commentImage` VALUES (131, 180, ' http://img.isdfmk.xyz/601906fb212541afb69ff3f67353a66b?t=1589962996', 1);
+INSERT INTO `commentImage` VALUES (132, 180, ' http://img.isdfmk.xyz/c31166bc125847259f079244b7bc5c09?t=1589962996', 1);
+INSERT INTO `commentImage` VALUES (133, 180, ' http://img.isdfmk.xyz/e7a885f7f82146fda08599a14130d0b0?t=1589962996', 1);
+INSERT INTO `commentImage` VALUES (134, 180, ' http://img.isdfmk.xyz/b2f1303ec87b40d9bbf90295e5672de0?t=1589962996', 1);
+INSERT INTO `commentImage` VALUES (135, 180, ' http://img.isdfmk.xyz/8abc2647695844018ecf43b3f615ee87?t=1589962997', 1);
+INSERT INTO `commentImage` VALUES (136, 180, ' http://img.isdfmk.xyz/8ac8ebd584e649dab2c4e6c48ba5a857?t=1589962997', 1);
+INSERT INTO `commentImage` VALUES (137, 180, ' http://img.isdfmk.xyz/d6c19e50ae7442d9b38359aa71385aa7?t=1589962997', 1);
+INSERT INTO `commentImage` VALUES (138, 180, ' http://img.isdfmk.xyz/3f9426f137a744e7975a2c59208253d0?t=1589962998', 1);
+INSERT INTO `commentImage` VALUES (139, 180, NULL, 1);
+INSERT INTO `commentImage` VALUES (140, 181, ' http://img.isdfmk.xyz/dfec66a86dbd4ba28d8f82c4b090c2f8?t=1589963000', 1);
+INSERT INTO `commentImage` VALUES (141, 181, ' http://img.isdfmk.xyz/d5f05ed783124cb8b7261d1f3123a407?t=1589963002', 1);
+INSERT INTO `commentImage` VALUES (142, 181, ' http://img.isdfmk.xyz/9555440b94124077a47121a48b0b83f8?t=1589963003', 1);
+INSERT INTO `commentImage` VALUES (143, 181, ' http://img.isdfmk.xyz/2017a4c8978b4bf19479d95e06328e04?t=1589963004', 1);
+INSERT INTO `commentImage` VALUES (144, 181, ' http://img.isdfmk.xyz/0865bd5a77de41aabd42c528f81d802a?t=1589963004', 1);
+INSERT INTO `commentImage` VALUES (145, 181, ' http://img.isdfmk.xyz/fa00e57fb2944bd1978d22384b0a233c?t=1589963005', 1);
+INSERT INTO `commentImage` VALUES (146, 181, ' http://img.isdfmk.xyz/1795915e7d1a43d1bd0c427bb2cc9dbf?t=1589963005', 1);
+INSERT INTO `commentImage` VALUES (147, 181, ' http://img.isdfmk.xyz/89cc8fa54f964e459ce77ae332c2162e?t=1589963005', 1);
+INSERT INTO `commentImage` VALUES (148, 181, ' http://img.isdfmk.xyz/bc882f88d77f43d0a83ecff7669204cc?t=1589963006', 1);
+INSERT INTO `commentImage` VALUES (149, 181, ' http://img.isdfmk.xyz/284c5788404b4ea18895d1f70f530405?t=1589963006', 1);
+INSERT INTO `commentImage` VALUES (150, 181, NULL, 1);
 
 -- ----------------------------
 -- Table structure for homepageIcon
@@ -835,79 +822,39 @@ CREATE TABLE `newsContent`  (
   `newsStatus` int(11) NULL DEFAULT NULL,
   `introduction` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`contentId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4609 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4687 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of newsContent
 -- ----------------------------
-INSERT INTO `newsContent` VALUES (4541, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589015859808100001', '0', '确认订单消息', '2020-05-09 17:17:48', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4542, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589015859808100001', '0', '支付通知', '2020-05-09 17:17:48', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4543, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589017699325100002', '0', '确认订单消息', '2020-05-09 17:48:26', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4544, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589017699325100002', '0', '支付通知', '2020-05-09 17:48:26', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4545, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589017960619100003', '0', '确认订单消息', '2020-05-09 17:53:42', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4546, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589017960619100003', '0', '支付通知', '2020-05-09 17:53:42', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4547, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589084278177100001', '0', '确认订单消息', '2020-05-10 12:18:04', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4548, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589084278177100001', '0', '支付通知', '2020-05-10 12:18:04', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4549, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589084597205100002', '0', '确认订单消息', '2020-05-10 12:23:24', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4550, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589084597205100002', '0', '支付通知', '2020-05-10 12:23:24', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4551, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589089220309100003', '0', '确认订单消息', '2020-05-10 13:40:27', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4552, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589089220309100003', '0', '支付通知', '2020-05-10 13:40:27', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4553, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589089341739100004', '0', '确认订单消息', '2020-05-10 13:42:29', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4554, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589089341739100004', '0', '支付通知', '2020-05-10 13:42:29', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4555, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589092098443100005', '0', '确认订单消息', '2020-05-10 14:28:41', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4556, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589092098443100005', '0', '支付通知', '2020-05-10 14:28:41', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4557, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589098050893100007', '0', '确认订单消息', '2020-05-10 16:07:41', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4558, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589098050893100007', '0', '支付通知', '2020-05-10 16:07:41', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4559, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589100364520100008', '0', '确认订单消息', '2020-05-10 16:46:14', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4560, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589100364520100008', '0', '支付通知', '2020-05-10 16:46:15', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4561, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589105164944100009', '0', '确认订单消息', '2020-05-10 18:06:09', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4562, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589105164944100009', '0', '支付通知', '2020-05-10 18:06:09', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4563, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589106042414100010', '0', '确认订单消息', '2020-05-10 18:21:14', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4564, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589106042414100010', '0', '支付通知', '2020-05-10 18:21:14', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4565, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589106273209100011', '0', '确认订单消息', '2020-05-10 18:24:39', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4566, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589106273209100011', '0', '支付通知', '2020-05-10 18:24:39', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4567, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589106313202100012', '0', '确认订单消息', '2020-05-10 18:25:18', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4568, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589106313202100012', '0', '支付通知', '2020-05-10 18:25:18', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4569, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589107933147100013', '0', '确认订单消息', '2020-05-10 18:52:26', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4570, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589107933147100013', '0', '支付通知', '2020-05-10 18:52:27', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4571, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589161860007100001', '0', '确认订单消息', '2020-05-11 09:51:13', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4572, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589161860007100001', '0', '支付通知', '2020-05-11 09:51:13', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4573, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589166547586100002', '0', '确认订单消息', '2020-05-11 11:09:14', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4574, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589166547586100002', '0', '支付通知', '2020-05-11 11:09:14', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4575, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589168069804100003', '0', '确认订单消息', '2020-05-11 11:34:37', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4576, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589168069804100003', '0', '支付通知', '2020-05-11 11:34:37', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4577, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589288858536100004', '0', '确认订单消息', '2020-05-13 08:40:04', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4578, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589288858536100004', '0', '支付通知', '2020-05-13 08:40:04', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4579, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589369323249100001', '0', '确认订单消息', '2020-05-13 19:29:23', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4580, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589369323249100001', '0', '支付通知', '2020-05-13 19:29:23', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4581, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589423559247100001', '0', '确认订单消息', '2020-05-14 10:32:47', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4582, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589423559247100001', '0', '支付通知', '2020-05-14 10:32:47', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4583, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589428832195100002', '0', '确认订单消息', '2020-05-14 12:00:39', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4584, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589428832195100002', '0', '支付通知', '2020-05-14 12:00:39', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4585, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589616376118100001', '0', '确认订单消息', '2020-05-16 16:06:41', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4586, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589616376118100001', '0', '支付通知', '2020-05-16 16:06:41', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4587, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589616453904100002', '0', '确认订单消息', '2020-05-16 16:07:45', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4588, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589616453904100002', '0', '支付通知', '2020-05-16 16:07:45', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4589, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589616506758100003', '0', '确认订单消息', '2020-05-16 16:08:33', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4590, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589616506758100003', '0', '支付通知', '2020-05-16 16:08:33', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4591, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589703932221100001', '0', '确认订单消息', '2020-05-17 16:26:31', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4592, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589703932221100001', '0', '支付通知', '2020-05-17 16:26:31', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4593, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589777530356100001', '0', '确认订单消息', '2020-05-18 04:52:17', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4594, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589777530356100001', '0', '支付通知', '2020-05-18 04:52:17', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4595, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589779150224100002', '0', '确认订单消息', '2020-05-18 05:19:20', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4596, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589779150224100002', '0', '支付通知', '2020-05-18 05:19:20', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4597, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589779212624100003', '0', '确认订单消息', '2020-05-18 05:20:18', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4598, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589779212624100003', '0', '支付通知', '2020-05-18 05:20:18', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4599, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589782656177100005', '0', '确认订单消息', '2020-05-18 06:17:54', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4600, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589782656177100005', '0', '支付通知', '2020-05-18 06:17:54', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4601, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589782692349100006', '0', '确认订单消息', '2020-05-18 06:18:47', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4602, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589782692349100006', '0', '支付通知', '2020-05-18 06:18:48', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4603, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589784288559100007', '0', '确认订单消息', '2020-05-18 06:45:22', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4604, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589784288559100007', '0', '支付通知', '2020-05-18 06:45:22', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4605, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589853078749100001', '0', '确认订单消息', '2020-05-19 01:51:25', 0, '消息简介');
-INSERT INTO `newsContent` VALUES (4606, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589853078749100001', '0', '支付通知', '2020-05-19 01:51:25', 0, '支付通知');
-INSERT INTO `newsContent` VALUES (4607, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589853251153100002', '0', '确认订单消息', '2020-05-19 01:54:17', 1, '消息简介');
-INSERT INTO `newsContent` VALUES (4608, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589853251153100002', '0', '支付通知', '2020-05-19 01:54:17', 1, '支付通知');
+INSERT INTO `newsContent` VALUES (4659, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589948114618100001', '0', '确认订单消息', '2020-05-20 12:15:29', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4660, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589948114618100001', '0', '支付通知', '2020-05-20 12:15:29', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4661, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589948265055100002', '0', '确认订单消息', '2020-05-20 12:17:50', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4662, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589948265055100002', '0', '支付通知', '2020-05-20 12:17:50', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4663, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589948336801100003', '0', '确认订单消息', '2020-05-20 12:19:05', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4664, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589948336801100003', '0', '支付通知', '2020-05-20 12:19:05', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4665, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589948466459100004', '0', '确认订单消息', '2020-05-20 12:21:13', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4666, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589948466459100004', '0', '支付通知', '2020-05-20 12:21:13', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4667, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1589948556726100005', '0', '确认订单消息', '2020-05-20 12:22:42', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (4668, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1589948556726100005', '0', '支付通知', '2020-05-20 12:22:42', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (4669, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589952921024100006', '0', '确认订单消息', '2020-05-20 13:35:37', 1, '消息简介');
+INSERT INTO `newsContent` VALUES (4670, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589952921024100006', '0', '支付通知', '2020-05-20 13:35:37', 1, '支付通知');
+INSERT INTO `newsContent` VALUES (4671, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589953018592100007', '0', '确认订单消息', '2020-05-20 13:37:46', 1, '消息简介');
+INSERT INTO `newsContent` VALUES (4672, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589953018592100007', '0', '支付通知', '2020-05-20 13:37:47', 1, '支付通知');
+INSERT INTO `newsContent` VALUES (4673, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589953018592100007', '0', '确认订单消息', '2020-05-20 13:38:49', 1, '消息简介');
+INSERT INTO `newsContent` VALUES (4674, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589953018592100007', '0', '支付通知', '2020-05-20 13:38:49', 1, '支付通知');
+INSERT INTO `newsContent` VALUES (4675, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589955922052100007', '0', '确认订单消息', '2020-05-20 14:26:11', 1, '消息简介');
+INSERT INTO `newsContent` VALUES (4676, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589955922052100007', '0', '支付通知', '2020-05-20 14:26:11', 1, '支付通知');
+INSERT INTO `newsContent` VALUES (4677, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589956158884100007', '0', '确认订单消息', '2020-05-20 06:29:54', 1, '消息简介');
+INSERT INTO `newsContent` VALUES (4678, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589956158884100007', '0', '支付通知', '2020-05-20 06:29:54', 1, '支付通知');
+INSERT INTO `newsContent` VALUES (4679, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589956331812100008', '0', '确认订单消息', '2020-05-20 06:32:39', 1, '消息简介');
+INSERT INTO `newsContent` VALUES (4680, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589956331812100008', '0', '支付通知', '2020-05-20 06:32:39', 1, '支付通知');
+INSERT INTO `newsContent` VALUES (4681, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589956494721100008', '0', '确认订单消息', '2020-05-20 06:35:23', 1, '消息简介');
+INSERT INTO `newsContent` VALUES (4682, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589956494721100008', '0', '支付通知', '2020-05-20 06:35:24', 1, '支付通知');
+INSERT INTO `newsContent` VALUES (4683, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589957131873100009', '0', '确认订单消息', '2020-05-20 14:46:16', 1, '消息简介');
+INSERT INTO `newsContent` VALUES (4684, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589957131873100009', '0', '支付通知', '2020-05-20 14:46:16', 1, '支付通知');
+INSERT INTO `newsContent` VALUES (4685, 4, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 4, '1589962956539100009', '0', '确认订单消息', '2020-05-20 16:22:42', 1, '消息简介');
+INSERT INTO `newsContent` VALUES (4686, 3, '7c9fdfa3177042a08766aed29e7de6cd', NULL, 3, '1589962956539100009', '0', '支付通知', '2020-05-20 16:22:42', 1, '支付通知');
 
 -- ----------------------------
 -- Table structure for newsSender
@@ -924,10 +871,10 @@ CREATE TABLE `newsSender`  (
 -- ----------------------------
 -- Records of newsSender
 -- ----------------------------
-INSERT INTO `newsSender` VALUES (1, 1, '微利官方', ' http://img.fhxasdsada.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781');
-INSERT INTO `newsSender` VALUES (2, 2, '微利助手', 'http://img.fhxasdsada.xyz/undraw_happy_music_g6wc.png');
-INSERT INTO `newsSender` VALUES (3, 3, '微利支付', 'http://img.fhxasdsada.xyz/JE%5B%25FC76MGL0BS787~WXR1O.png');
-INSERT INTO `newsSender` VALUES (4, 4, '订单助手', 'http://img.fhxasdsada.xyz/timg.jpg');
+INSERT INTO `newsSender` VALUES (1, 1, '微利官方', ' http://img.isdfmk.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1585021695781');
+INSERT INTO `newsSender` VALUES (2, 2, '微利助手', 'http://img.isdfmk.xyz/undraw_happy_music_g6wc.png');
+INSERT INTO `newsSender` VALUES (3, 3, '微利支付', 'http://img.isdfmk.xyz/JE%5B%25FC76MGL0BS787~WXR1O.png');
+INSERT INTO `newsSender` VALUES (4, 4, '订单助手', 'http://img.isdfmk.xyz/timg.jpg');
 
 -- ----------------------------
 -- Table structure for orderAddress
@@ -945,50 +892,27 @@ CREATE TABLE `orderAddress`  (
   `areaCodes` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 379 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 426 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orderAddress
 -- ----------------------------
-INSERT INTO `orderAddress` VALUES (340, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589015859808100001', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (341, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589017699325100002', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (342, '7c9fdfa3177042a08766aed29e7de6cd', '1589017960619100003', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (343, '7c9fdfa3177042a08766aed29e7de6cd', '1589017960619100003', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (344, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589084278177100001', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (345, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589084597205100002', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (346, '7c9fdfa3177042a08766aed29e7de6cd', '1589089220309100003', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (347, '7c9fdfa3177042a08766aed29e7de6cd', '1589089341739100004', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (348, '7c9fdfa3177042a08766aed29e7de6cd', '1589092098443100005', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (349, '7c9fdfa3177042a08766aed29e7de6cd', '1589092135874100006', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (350, '7c9fdfa3177042a08766aed29e7de6cd', '1589092135874100006', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (351, '7c9fdfa3177042a08766aed29e7de6cd', '1589098050893100007', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (352, '7c9fdfa3177042a08766aed29e7de6cd', '1589100364520100008', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (353, '7c9fdfa3177042a08766aed29e7de6cd', '1589105164944100009', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (354, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589106042414100010', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (355, '7c9fdfa3177042a08766aed29e7de6cd', '1589106273209100011', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (356, '7c9fdfa3177042a08766aed29e7de6cd', '1589106313202100012', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (357, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589107933147100013', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (358, '7c9fdfa3177042a08766aed29e7de6cd', '1589161860007100001', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (359, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589166547586100002', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (360, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589168069804100003', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (361, '7c9fdfa3177042a08766aed29e7de6cd', '1589288858536100004', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (362, '7c9fdfa3177042a08766aed29e7de6cd', '1589369323249100001', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (363, '7c9fdfa3177042a08766aed29e7de6cd', '1589369323249100001', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (364, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589423559247100001', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (365, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589428832195100002', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (366, '7c9fdfa3177042a08766aed29e7de6cd', '1589616376118100001', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (367, '7c9fdfa3177042a08766aed29e7de6cd', '1589616453904100002', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (368, '7c9fdfa3177042a08766aed29e7de6cd', '1589616506758100003', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (369, '7c9fdfa3177042a08766aed29e7de6cd', '1589703932221100001', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (370, '7c9fdfa3177042a08766aed29e7de6cd', '1589703932221100001', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (371, '7c9fdfa3177042a08766aed29e7de6cd', '1589777530356100001', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (372, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589779150224100002', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (373, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589779212624100003', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (374, '7c9fdfa3177042a08766aed29e7de6cd', '1589782656177100005', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (375, '7c9fdfa3177042a08766aed29e7de6cd', '1589782692349100006', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
-INSERT INTO `orderAddress` VALUES (376, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589791488616100011', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (377, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589853078749100001', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
-INSERT INTO `orderAddress` VALUES (378, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589853251153100002', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES (410, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589948114618100001', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES (411, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589948265055100002', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES (412, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589948336801100003', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES (413, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589948466459100004', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES (414, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589948556726100005', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '闺蜜家');
+INSERT INTO `orderAddress` VALUES (415, '7c9fdfa3177042a08766aed29e7de6cd', '1589952921024100006', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (416, '7c9fdfa3177042a08766aed29e7de6cd', '1589953018592100007', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (417, '7c9fdfa3177042a08766aed29e7de6cd', '1589955376786100007', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (418, '7c9fdfa3177042a08766aed29e7de6cd', '1589955376786100007', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (419, '7c9fdfa3177042a08766aed29e7de6cd', '1589955922052100007', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (420, '7c9fdfa3177042a08766aed29e7de6cd', '1589956158884100007', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (421, '7c9fdfa3177042a08766aed29e7de6cd', '1589956331812100008', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (422, '7c9fdfa3177042a08766aed29e7de6cd', '1589956494721100008', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (423, '7c9fdfa3177042a08766aed29e7de6cd', '1589957131873100009', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (424, '7c9fdfa3177042a08766aed29e7de6cd', '1589957131873100009', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
+INSERT INTO `orderAddress` VALUES (425, '7c9fdfa3177042a08766aed29e7de6cd', '1589962956539100009', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '学校');
 
 -- ----------------------------
 -- Table structure for orders
@@ -1008,127 +932,45 @@ CREATE TABLE `orders`  (
   `productState` int(11) NULL DEFAULT 0,
   `isDelete` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`purchaseId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2719 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2838 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES (2603, 10013, '1589015859808100001', '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080 ', 'http://productdata.fhxasdsada.xyz/1f3f9fd0e759383f.jpg', '华硕PRIME X299-A主板+  ', '1', 11999, '2.08kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2604, 10020, '1589017699325100002', '华硕（ASUS）ROG Strix XG27VQ 27英寸144HZ 1800R Free-Sync旋转升降AURA-RGB电竞显示器（HDMI/DP/DVI）', 'http://productdata.fhxasdsada.xyz/0070137366-000000010059586574_3.jpg', '', '1', 5199, '16.84kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2605, 10013, '1589017960619100003', '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080 ', 'http://productdata.fhxasdsada.xyz/1f3f9fd0e759383f.jpg', '华硕PRIME X299-A主板+  ', '1', 11999, '2.08kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2606, 10013, '1589084278177100001', '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080 ', 'http://productdata.fhxasdsada.xyz/1f3f9fd0e759383f.jpg', '华硕PRIME X299-A主板+  ', '1', 11999, '2.08kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2607, 10006, '1589084597205100002', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.fhxasdsada.xyz/2ca45e2fd9758794.jpg', '黑色 ', '1', 1499, '0.6kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2608, 10001, '1589089220309100003', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '1', 5999, '0.74kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2609, 10006, '1589089341739100004', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.fhxasdsada.xyz/2ca45e2fd9758794.jpg', '黑色 ', '2', 1499, '0.6kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2610, 10001, '1589092098443100005', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '1', 5999, '0.74kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2611, 10001, '1589092135874100006', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '1', 5999, '0.74kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2612, 10001, '1589098050893100007', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '1', 5999, '0.74kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2613, 10014, '1589100364520100008', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色+骨伽LLC750全模组电源 ', '1', 2898, '2.8kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2614, 10014, '1589100364520100008', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色+骨伽LLC750全模组电源 ', '1', 2898, '2.8kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2615, 10014, '1589100364520100008', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '2', 2898, '2.8kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2616, 10001, '1589100364520100008', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '1', 5999, '0.74kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2617, 10005, '1589105164944100009', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'WLAN版64G ', '1', 7890, '2.8kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2618, 10029, '1589106042414100010', '美国正品代购阿迪达斯adidas YEEZY BOOST 350 V2 侃爷冰蓝椰子鞋新款男跑步鞋', 'http://productdata.fhxasdsada.xyz/334355456168161240400082_x.jpg', 'BY9611黑灰色 标准46.5/US12  ', '1', 2920.01, '2.5kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2619, 10029, '1589106042414100010', '美国正品代购阿迪达斯adidas YEEZY BOOST 350 V2 侃爷冰蓝椰子鞋新款男跑步鞋', 'http://productdata.fhxasdsada.xyz/334355456168161240400082_x.jpg', 'BB1826灰橙色  标准46.5/US12  ', '1', 2920.01, '2.5kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2620, 10019, '1589106273209100011', '【二手95新】劳力士 系列:迪通拿系列 型号:116505 材质:18k玫瑰金 镜面:蓝宝石玻璃 未使用', '\r\nhttp://productdata.fhxasdsada.xyz/2-SXJILMjHoQXj66aurkzg.jpg', '玫瑰金 ', '99', 260000, '220克', 0, 5, 0);
-INSERT INTO `orders` VALUES (2621, 10005, '1589106273209100011', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'WLAN版64G ', '1', 7890, '2.8kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2622, 10001, '1589106273209100011', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '5', 5999, '0.74kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2623, 10001, '1589106273209100011', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '1', 5999, '0.74kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2624, 10001, '1589106273209100011', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '1', 5999, '0.74kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2625, 10011, '1589106273209100011', 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.fhxasdsada.xyz/04e04ec4954e07bd.jpg', '暗夜绿色 64G+2G ', '1', 10398, '0.56kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2626, 10011, '1589106273209100011', 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.fhxasdsada.xyz/04e04ec4954e07bd.jpg', '暗夜绿色 128G+2G ', '1', 10398, '0.56kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2627, 10011, '1589106273209100011', 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.fhxasdsada.xyz/04e04ec4954e07bd.jpg', '深空灰色 128G+2G ', '1', 10398, '0.56kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2628, 10011, '1589106273209100011', 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.fhxasdsada.xyz/04e04ec4954e07bd.jpg', '银色 128G+2G ', '4', 10398, '0.56kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2629, 10019, '1589106313202100012', '【二手95新】劳力士 系列:迪通拿系列 型号:116505 材质:18k玫瑰金 镜面:蓝宝石玻璃 未使用', '\r\nhttp://productdata.fhxasdsada.xyz/2-SXJILMjHoQXj66aurkzg.jpg', '玫瑰金 ', '99', 260000, '220克', 0, 5, 0);
-INSERT INTO `orders` VALUES (2630, 10005, '1589107933147100013', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'WLAN版64G ', '1', 7890, '2.8kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2631, 10003, '1589161860007100001', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg', '【尝鲜款】帝王蟹礼盒2.8-2.4斤 ', '1', 758, '不计重', 0, 5, 0);
-INSERT INTO `orders` VALUES (2632, 10003, '1589161860007100001', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg', '黄金蟹礼盒1000-800g ', '1', 758, '不计重', 0, 5, 0);
-INSERT INTO `orders` VALUES (2633, 10003, '1589161860007100001', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg', '【大蟹款】帝王蟹礼盒4.0-3.6斤  ', '5', 758, '不计重', 0, 5, 0);
-INSERT INTO `orders` VALUES (2634, 10014, '1589166547586100002', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '1', 2898, '2.8kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2635, 10001, '1589168069804100003', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '1', 5999, '0.74kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2636, 10014, '1589288495428100001', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色+骨伽LLC750全模组电源 ', '1', 2898, '2.8kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2637, 10014, '1589288495428100001', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '1', 2898, '2.8kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2638, 10006, '1589288775551100002', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.fhxasdsada.xyz/2ca45e2fd9758794.jpg', '铂金银 ', '1', 1499, '0.6kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2639, 10006, '1589288775551100002', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.fhxasdsada.xyz/2ca45e2fd9758794.jpg', '铂金银 ', '1', 1499, '0.6kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2640, 10006, '1589288775551100002', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.fhxasdsada.xyz/2ca45e2fd9758794.jpg', '黑色 ', '2', 1499, '0.6kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2641, 10010, '1589288810589100003', '阿玛尼（ Emporio Armani）满天星手表 女新款玫瑰金钢制表带镶钻石英轻奢女士腕表礼物 AR11244 ', '\r\nhttp://productdata.fhxasdsada.xyz/8c0b0a13e48adce3.jpg', '玫瑰金满天星AR11244 ', '1', 3596, '\r\n0.485kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2642, 10010, '1589288810589100003', '阿玛尼（ Emporio Armani）满天星手表 女新款玫瑰金钢制表带镶钻石英轻奢女士腕表礼物 AR11244 ', '\r\nhttp://productdata.fhxasdsada.xyz/8c0b0a13e48adce3.jpg', '玫瑰金满天星AR11244 ', '1', 3596, '\r\n0.485kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2643, 10010, '1589288810589100003', '阿玛尼（ Emporio Armani）满天星手表 女新款玫瑰金钢制表带镶钻石英轻奢女士腕表礼物 AR11244 ', '\r\nhttp://productdata.fhxasdsada.xyz/8c0b0a13e48adce3.jpg', '钢质表带AR11129 ', '2', 3596, '\r\n0.485kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2644, 10010, '1589288810589100003', '阿玛尼（ Emporio Armani）满天星手表 女新款玫瑰金钢制表带镶钻石英轻奢女士腕表礼物 AR11244 ', '\r\nhttp://productdata.fhxasdsada.xyz/8c0b0a13e48adce3.jpg', '圣颜色 ', '1', 3596, '\r\n0.485kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2645, 10015, '1589288858536100004', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '香蕉味 ', '2', 20, '0.15kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2646, 10015, '1589288858536100004', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '2', 20, '0.15kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2647, 10015, '1589369323249100001', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '1', 20, '0.15kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2648, 10013, '1589423559247100001', '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080 ', 'http://productdata.fhxasdsada.xyz/1f3f9fd0e759383f.jpg', '华硕PRIME X299-A主板+  ', '1', 11999, '2.08kg', 0, 5, 0);
-INSERT INTO `orders` VALUES (2649, 10014, '1589428832195100002', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '1', 2898, '2.8kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2650, 10005, '1589616376118100001', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'WLAN版512G ', '1', 7890, '2.8kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2651, 10005, '1589616376118100001', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'Cellular版512G  ', '1', 7890, '2.8kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2652, 10005, '1589616376118100001', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'Cellular版64G  ', '1', 7890, '2.8kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2653, 10005, '1589616376118100001', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', ' WLAN版256G  ', '1', 7890, '2.8kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2654, 10005, '1589616376118100001', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'Cellular版1TB ', '1', 7890, '2.8kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2655, 10005, '1589616376118100001', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'WLAN版64G ', '1', 7890, '2.8kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2656, 10018, '1589616376118100001', '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.fhxasdsada.xyz/5cd5acfbN24c0ee18.jpg', '772#哑光豆沙红 ', '1', 1140, '0.4kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2657, 10018, '1589616376118100001', '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.fhxasdsada.xyz/5cd5acfbN24c0ee18.jpg', '028#滋润珊瑚红 ', '1', 1140, '0.4kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2658, 10018, '1589616376118100001', '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.fhxasdsada.xyz/5cd5acfbN24c0ee18.jpg', '999#滋润传奇正红 ', '1', 1140, '0.4kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2659, 10018, '1589616376118100001', '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.fhxasdsada.xyz/5cd5acfbN24c0ee18.jpg', '[限量版挚爱红管烟花5支装套盒] ', '1', 1140, '0.4kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2660, 10018, '1589616376118100001', '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.fhxasdsada.xyz/5cd5acfbN24c0ee18.jpg', '999+ 520+花漾甜心100ML [口红香水套装] ', '1', 1140, '0.4kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2661, 10018, '1589616376118100001', '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.fhxasdsada.xyz/5cd5acfbN24c0ee18.jpg', '[红弯心动6支套装] [赠视频玫瑰礼盒 ] ', '2', 1140, '0.4kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2662, 10005, '1589616453904100002', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'Cellular版1TB ', '1', 7890, '2.8kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2663, 10005, '1589616453904100002', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.fhxasdsada.xyz/7a77ad4e3100e885.jpg', 'WLAN版64G ', '1', 7890, '2.8kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2664, 10015, '1589616506758100003', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '香蕉味 ', '1', 20, '0.15kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2665, 10015, '1589616506758100003', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '1', 20, '0.15kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2666, 10014, '1589703932221100001', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色+骨伽LLC750全模组电源 ', '2', 2898, '2.8kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2667, 10014, '1589703932221100001', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '2', 2898, '2.8kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2668, 10003, '1589777530356100001', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg', '黄金蟹礼盒1000-800g ', '2', 758, '不计重', 0, 3, 0);
-INSERT INTO `orders` VALUES (2669, 10003, '1589777530356100001', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg', '【尝鲜款】帝王蟹礼盒2.8-2.4斤 ', '2', 758, '不计重', 0, 3, 0);
-INSERT INTO `orders` VALUES (2670, 10003, '1589777530356100001', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg', '【超大款】帝王蟹礼盒4.5-4.0斤  ', '2', 758, '不计重', 0, 3, 0);
-INSERT INTO `orders` VALUES (2671, 10013, '1589779150224100002', '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080 ', 'http://productdata.fhxasdsada.xyz/1f3f9fd0e759383f.jpg', '华硕PRIME X299-A主板+  ', '1', 11999, '2.08kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2672, 10003, '1589779212624100003', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg', '【超大款】帝王蟹礼盒4.5-4.0斤  ', '1', 758, '不计重', 0, 3, 0);
-INSERT INTO `orders` VALUES (2673, 10011, '1589782557623100004', 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.fhxasdsada.xyz/04e04ec4954e07bd.jpg', '暗夜绿色 128G+2G ', '1', 10398, '0.56kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2674, 10011, '1589782557623100004', 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.fhxasdsada.xyz/04e04ec4954e07bd.jpg', '暗夜绿色 128G+2G ', '1', 10398, '0.56kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2675, 10011, '1589782557623100004', 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.fhxasdsada.xyz/04e04ec4954e07bd.jpg', '深空灰色 128G+2G ', '1', 10398, '0.56kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2676, 10011, '1589782557623100004', 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.fhxasdsada.xyz/04e04ec4954e07bd.jpg', '深空灰色 128G+2G ', '1', 10398, '0.56kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2677, 10011, '1589782557623100004', 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.fhxasdsada.xyz/04e04ec4954e07bd.jpg', '银色 128G+2G ', '1', 10398, '0.56kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2678, 10011, '1589782557623100004', 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.fhxasdsada.xyz/04e04ec4954e07bd.jpg', '银色 128G+2G ', '1', 10398, '0.56kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2679, 10014, '1589782557623100004', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色+骨伽LLC750全模组电源 ', '1', 2898, '2.8kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2680, 10014, '1589782557623100004', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色+骨伽LLC750全模组电源 ', '1', 2898, '2.8kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2681, 10014, '1589782557623100004', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.fhxasdsada.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '2', 2898, '2.8kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2682, 10015, '1589782656177100005', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '茉莉味 ', '1', 20, '0.15kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2683, 10015, '1589782656177100005', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '茉莉味 ', '1', 20, '0.15kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2684, 10015, '1589782656177100005', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶油味 ', '1', 20, '0.15kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2685, 10015, '1589782656177100005', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶油味 ', '1', 20, '0.15kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2686, 10015, '1589782656177100005', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '苹果味 ', '1', 20, '0.15kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2687, 10015, '1589782656177100005', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '苹果味 ', '1', 20, '0.15kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2688, 10015, '1589782656177100005', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '香蕉味 ', '1', 20, '0.15kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2689, 10015, '1589782656177100005', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '香蕉味 ', '1', 20, '0.15kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2690, 10015, '1589782656177100005', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '1', 20, '0.15kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2691, 10015, '1589782656177100005', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '1', 20, '0.15kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2692, 10003, '1589782692349100006', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg', '【尝鲜款】帝王蟹礼盒2.8-2.4斤 ', '1', 758, '不计重', 0, 3, 0);
-INSERT INTO `orders` VALUES (2693, 10003, '1589782692349100006', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg', '【尝鲜款】帝王蟹礼盒2.8-2.4斤 ', '1', 758, '不计重', 0, 3, 0);
-INSERT INTO `orders` VALUES (2694, 10003, '1589782692349100006', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg', '【超大款】帝王蟹礼盒4.5-4.0斤  ', '1', 758, '不计重', 0, 3, 0);
-INSERT INTO `orders` VALUES (2695, 10003, '1589782692349100006', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg', '【超大款】帝王蟹礼盒4.5-4.0斤  ', '1', 758, '不计重', 0, 3, 0);
-INSERT INTO `orders` VALUES (2696, 10012, '1589784288559100007', '联想(Lenovo)小新Pro13.3英寸全面屏超轻薄笔记本电脑(标压锐龙R5-3550H 16G 512G 2.5K QHD 100%sRGB)银 ', '\r\nhttp://productdata.fhxasdsada.xyz/2b0744939bd398f0.jpg', '小清新蓝 Pro13|标压R5 16G 512G QHD ', '1', 4999, '2.08kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2697, 10001, '1589784379179100008', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '1', 5999, '0.74kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2698, 10007, '1589784464344100009', 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', 'http://productdata.fhxasdsada.xyz/9bf639975363fbb0.jpg', '', '1', 3350, '5kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2699, 10017, '1589784533701100010', 'Apple Watch Series 5智能手表（GPS款 40毫米深空灰色铝金属表壳 黑色运动型表带 MWV82CH/A)\r\n', 'http://productdata.fhxasdsada.xyz/44c3c5495c1b5145.jpg', '黑色 GPS版 40毫米 ', '1', 3199, '0.23kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2700, 10003, '1589791488616100011', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.fhxasdsada.xyz/212478163d84fcf0.jpg', '【超大款】帝王蟹礼盒4.5-4.0斤  ', '1', 758, '不计重', 0, 0, 0);
-INSERT INTO `orders` VALUES (2701, 10008, '1589793664956100012', '万代（BANDAI） Megahouse POP 海贼王 路飞9人 模型玩具（无售后！！！） 四档路飞\r\n', '\r\nhttp://productdata.fhxasdsada.xyz/5b90958cN736d78c4.jpg', '', '1', 3500, '100kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2702, 10007, '1589793664956100012', 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', 'http://productdata.fhxasdsada.xyz/9bf639975363fbb0.jpg', '', '1', 3350, '5kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2703, 10015, '1589793837777100013', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '苹果味 ', '1', 20, '0.15kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2704, 10015, '1589793837777100013', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.fhxasdsada.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '1', 20, '0.15kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2705, 10002, '1589794398728100014', 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.fhxasdsada.xyz/2b6fc898ee704a36.jpg\r\n', '白色 优惠套餐一 ', '1', 1999, '0.24kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2706, 10002, '1589794426397100015', 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.fhxasdsada.xyz/2b6fc898ee704a36.jpg\r\n', '白色 优惠套餐二 ', '1', 1999, '0.24kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2707, 10002, '1589794426397100015', 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.fhxasdsada.xyz/2b6fc898ee704a36.jpg\r\n', '白色 优惠套餐一 ', '3', 1999, '0.24kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2708, 10002, '1589853078749100001', 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.fhxasdsada.xyz/2b6fc898ee704a36.jpg\r\n', '白色 优惠套餐一 ', '2', 1999, '0.24kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2709, 10002, '1589853251153100002', 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.fhxasdsada.xyz/2b6fc898ee704a36.jpg\r\n', '白色 优惠套餐一 ', '7', 1999, '0.24kg', 0, 3, 0);
-INSERT INTO `orders` VALUES (2710, 10014, '1589857086572100003', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.isdfmk.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '1', 2898, '2.8kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2711, 10026, '1589857101614100004', '2019新款翻领磨破短款女士休闲牛仔外套', 'http://productdata.isdfmk.xyz/a1.jpg', 'XS ', '4', 100000, NULL, 0, 0, 0);
-INSERT INTO `orders` VALUES (2712, 10002, '1589857610514100005', 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.isdfmk.xyz/2b6fc898ee704a36.jpg\r\n', '白色 优惠套餐一 ', '1', 1999, '0.24kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2713, 10002, '1589857622873100006', 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.isdfmk.xyz/2b6fc898ee704a36.jpg\r\n', '白色 优惠套餐一 ', '6', 1999, '0.24kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2714, 10002, '1589857666205100007', 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.isdfmk.xyz/2b6fc898ee704a36.jpg\r\n', '白色 优惠套餐一 ', '1', 1999, '0.24kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2715, 10002, '1589857679781100008', 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.isdfmk.xyz/2b6fc898ee704a36.jpg\r\n', '白色 优惠套餐一 ', '1', 1999, '0.24kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2716, 10002, '1589857994135100009', 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.isdfmk.xyz/2b6fc898ee704a36.jpg\r\n', '白色 优惠套餐一 ', '1', 1999, '0.24kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2717, 10001, '1589858159906100010', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.isdfmk.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '1', 5999, '0.74kg', 0, 0, 0);
-INSERT INTO `orders` VALUES (2718, 10006, '1589858178811100011', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.isdfmk.xyz/2ca45e2fd9758794.jpg', '黑色 ', '1', 1499, '0.6kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (2804, 10001, '1589948114618100001', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.isdfmk.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '1', 5999, '0.74kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2805, 10003, '1589948265055100002', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.isdfmk.xyz/212478163d84fcf0.jpg', '【超大款】帝王蟹礼盒4.5-4.0斤  ', '1', 758, '不计重', 0, 2, 0);
+INSERT INTO `orders` VALUES (2806, 10003, '1589948336801100003', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.isdfmk.xyz/212478163d84fcf0.jpg', '【超大款】帝王蟹礼盒4.5-4.0斤  ', '1', 758, '不计重', 0, 2, 0);
+INSERT INTO `orders` VALUES (2807, 10014, '1589948466459100004', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.isdfmk.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '1', 2898, '2.8kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2808, 10001, '1589948556726100005', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.isdfmk.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '1', 5999, '0.74kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2809, 10009, '1589952921024100006', '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n', 'http://productdata.isdfmk.xyz/0fb1612d25f44013.jpg', ' [鼠标耳机]+i7 512GX2 20700C 白 ', '1', 47699, '5.6kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2810, 10009, '1589952921024100006', '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n', 'http://productdata.isdfmk.xyz/0fb1612d25f44013.jpg', '[鼠标耳机]+i7 512GX2 20700C 黑  ', '1', 47699, '5.6kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2811, 10009, '1589952921024100006', '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n', 'http://productdata.isdfmk.xyz/0fb1612d25f44013.jpg', '[耳机]+9代i7 512GX2 20700C 白 ', '1', 47699, '5.6kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2812, 10009, '1589952921024100006', '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n', 'http://productdata.isdfmk.xyz/0fb1612d25f44013.jpg', '[耳机]+9代i7 512GX2 20700C 黑 ', '1', 47699, '5.6kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2813, 10009, '1589952921024100006', '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n', 'http://productdata.isdfmk.xyz/0fb1612d25f44013.jpg', '[A51M]9代i9 512GX2+1T 2080 144 ', '1', 47699, '5.6kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2814, 10003, '1589953018592100007', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.isdfmk.xyz/212478163d84fcf0.jpg', '【尝鲜款】帝王蟹礼盒2.8-2.4斤 ', '2', 758, '不计重', 0, 3, 0);
+INSERT INTO `orders` VALUES (2815, 10003, '1589953018592100007', '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', 'http://productdata.isdfmk.xyz/212478163d84fcf0.jpg', '【超大款】帝王蟹礼盒4.5-4.0斤  ', '2', 758, '不计重', 0, 3, 0);
+INSERT INTO `orders` VALUES (2816, 10015, '1589955376786100007', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '苹果味 ', '1', 20, '0.15kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (2817, 10015, '1589955376786100007', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '苹果味 ', '1', 20, '0.15kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (2818, 10015, '1589955376786100007', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '香蕉味 ', '1', 20, '0.15kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (2819, 10015, '1589955376786100007', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '香蕉味 ', '1', 20, '0.15kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (2820, 10015, '1589955376786100007', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '2', 20, '0.15kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (2821, 10015, '1589955922052100007', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '苹果味 ', '1', 20, '0.15kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2822, 10015, '1589955922052100007', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '苹果味 ', '1', 20, '0.15kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2823, 10015, '1589955922052100007', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '香蕉味 ', '1', 20, '0.15kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2824, 10015, '1589955922052100007', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '香蕉味 ', '1', 20, '0.15kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2825, 10015, '1589955922052100007', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '2', 20, '0.15kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2826, 10015, '1589955922052100007', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '1', 20, '0.15kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2827, 10014, '1589956158884100007', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.isdfmk.xyz/5b4d4cc8N0bf9c476.jpg', '黑色+骨伽LLC750全模组电源 ', '2', 2898, '2.8kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2828, 10014, '1589956158884100007', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.isdfmk.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '3', 2898, '2.8kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2829, 10014, '1589956331812100008', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.isdfmk.xyz/5b4d4cc8N0bf9c476.jpg', '黑色+骨伽LLC750全模组电源 ', '1', 2898, '2.8kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2830, 10014, '1589956331812100008', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.isdfmk.xyz/5b4d4cc8N0bf9c476.jpg', '黑色+骨伽LLC750全模组电源 ', '1', 2898, '2.8kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2831, 10014, '1589956331812100008', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.isdfmk.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '2', 2898, '2.8kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2832, 10015, '1589956494721100008', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '苹果味 ', '2', 20, '0.15kg', 0, 3, 0);
+INSERT INTO `orders` VALUES (2833, 10015, '1589956494721100008', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '3', 20, '0.15kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2834, 10006, '1589957131873100009', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.isdfmk.xyz/2ca45e2fd9758794.jpg', '铂金银 ', '1', 1499, '0.6kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2835, 10006, '1589957131873100009', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.isdfmk.xyz/2ca45e2fd9758794.jpg', '铂金银 ', '2', 1499, '0.6kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2836, 10006, '1589957131873100009', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.isdfmk.xyz/2ca45e2fd9758794.jpg', '黑色 ', '4', 1499, '0.6kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (2837, 10001, '1589962956539100009', 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.isdfmk.xyz/68836f52ffaaad96.jpg', '黑色 豪华版 256G+8G\r\n ', '1', 5999, '0.74kg', 0, 5, 0);
 
 -- ----------------------------
 -- Table structure for productAttributes
@@ -1169,80 +1011,18 @@ CREATE TABLE `productComment`  (
   `anonymity` int(11) NULL DEFAULT NULL,
   `commentVideoSign` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`commentId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 175 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 182 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of productComment
 -- ----------------------------
-INSERT INTO `productComment` VALUES (101, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 2610, '东西很好', ' http://img.fhxasdsada.xyz/b3a8c1c9eaa24be485215902c6e1d2d3', 3, 0, '2020-05-10 14:31:49', 1, 0);
-INSERT INTO `productComment` VALUES (102, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 2610, '东西很好', ' http://img.fhxasdsada.xyz/b3a8c1c9eaa24be485215902c6e1d2d3', 3, 0, '2020-05-10 14:31:49', 1, 0);
-INSERT INTO `productComment` VALUES (103, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 2610, '东西好烂', NULL, 1, 0, '2020-05-10 14:40:03', 1, 0);
-INSERT INTO `productComment` VALUES (104, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 2610, '东西好烂', NULL, 1, 0, '2020-05-10 14:40:03', 1, 0);
-INSERT INTO `productComment` VALUES (105, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 2610, '东西好烂', NULL, 5, 0, '2020-05-10 14:40:03', 1, 0);
-INSERT INTO `productComment` VALUES (106, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 2610, '大家都喜欢', NULL, 5, 0, '2020-05-10 14:40:03', 1, 0);
-INSERT INTO `productComment` VALUES (107, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 2610, '东西好烂', NULL, 1, 0, '2020-05-10 14:40:03', 1, 0);
-INSERT INTO `productComment` VALUES (108, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 2610, '他们说这个手机很好用', NULL, 5, 0, '2020-05-10 14:40:03', 1, 0);
-INSERT INTO `productComment` VALUES (109, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 2608, '东西很好 ', ' http://img.fhxasdsada.xyz/61d047cffd6048fab81a62798edae708', 5, 0, '2020-05-10 15:20:04', 0, 0);
-INSERT INTO `productComment` VALUES (110, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 2610, '你好', ' http://img.fhxasdsada.xyz/0083c1a0fc914d81a6e16b39b5968c9d', 5, 0, '2020-05-10 15:24:23', 0, 0);
-INSERT INTO `productComment` VALUES (111, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 2612, '小姐姐长的很好看 不 东西好好看', NULL, 5, 0, '2020-05-10 16:10:17', 0, 0);
-INSERT INTO `productComment` VALUES (112, '7c9fdfa3177042a08766aed29e7de6cd', 10005, 2617, '鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可', ' http://img.fhxasdsada.xyz/acf6e4cd5d7748a685f47ef2c0043b2e', 5, 0, '2020-05-10 18:09:43', 1, 0);
-INSERT INTO `productComment` VALUES (113, '7c9fdfa3177042a08766aed29e7de6cd', 10005, 2617, '鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可能是大锅饭克鲁赛德上课了大家好来斯德咖啡鬼地方个的收到货后或或或或或或或或或或或或或或或或或或或或或或或或或或或时间的话傻大姐发上来看可', ' http://img.fhxasdsada.xyz/7ddc96fb2cc14271965d1885726a20e7', 5, 0, '2020-05-10 18:09:50', 1, 0);
-INSERT INTO `productComment` VALUES (114, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10006, 2607, '', NULL, 5, 0, '2020-05-11 10:10:49', 0, 0);
-INSERT INTO `productComment` VALUES (116, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, 2603, '第一次评论', NULL, 5, 0, '2020-05-11 10:46:28', 0, 0);
-INSERT INTO `productComment` VALUES (121, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10014, 2634, '姐姐很好看', NULL, 5, 0, '2020-05-11 11:20:18', 0, 0);
-INSERT INTO `productComment` VALUES (122, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10001, 2635, '最新的最好的品论', NULL, 5, 0, '2020-05-11 11:35:21', 0, 0);
-INSERT INTO `productComment` VALUES (123, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-05-12 20:57:24', NULL, 0);
-INSERT INTO `productComment` VALUES (124, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-05-13 09:02:54', NULL, 0);
-INSERT INTO `productComment` VALUES (125, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-05-13 09:11:36', NULL, 0);
-INSERT INTO `productComment` VALUES (126, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-05-13 09:14:55', NULL, 0);
-INSERT INTO `productComment` VALUES (127, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-05-13 09:16:16', NULL, 0);
-INSERT INTO `productComment` VALUES (128, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-05-13 09:26:21', NULL, 0);
-INSERT INTO `productComment` VALUES (129, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-05-13 09:37:10', NULL, 0);
-INSERT INTO `productComment` VALUES (130, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-05-13 09:37:35', NULL, 0);
-INSERT INTO `productComment` VALUES (131, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2645, '速度还是大', NULL, 5, 0, '2020-05-13 09:37:58', 0, 0);
-INSERT INTO `productComment` VALUES (132, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2645, '速度还是大和v', NULL, 5, 0, '2020-05-13 09:38:18', 0, 0);
-INSERT INTO `productComment` VALUES (133, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2645, '三大法师', NULL, 5, 0, '2020-05-13 09:39:44', 0, 0);
-INSERT INTO `productComment` VALUES (134, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2645, '速度还是大', NULL, 5, 0, '2020-05-13 09:41:05', 0, 0);
-INSERT INTO `productComment` VALUES (135, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2645, '速度还是大', NULL, 5, 0, '2020-05-13 09:42:49', 0, 0);
-INSERT INTO `productComment` VALUES (136, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2645, '', NULL, 5, 0, '2020-05-13 12:38:09', 0, 0);
-INSERT INTO `productComment` VALUES (137, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2645, '', NULL, 5, 0, '2020-05-13 18:14:00', 0, 0);
-INSERT INTO `productComment` VALUES (138, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2645, '', NULL, 5, 0, '2020-05-13 18:15:02', 0, 0);
-INSERT INTO `productComment` VALUES (139, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2645, '', NULL, 5, 0, '2020-05-13 18:16:58', 0, 0);
-INSERT INTO `productComment` VALUES (140, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2645, '', NULL, 5, 0, '2020-05-13 18:25:45', 0, 0);
-INSERT INTO `productComment` VALUES (141, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2645, '', NULL, 5, 0, '2020-05-13 18:26:38', 0, 0);
-INSERT INTO `productComment` VALUES (142, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2645, '', NULL, 5, 0, '2020-05-13 18:26:59', 0, 0);
-INSERT INTO `productComment` VALUES (143, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2647, '', NULL, 5, 0, '2020-05-13 19:43:45', 0, 0);
-INSERT INTO `productComment` VALUES (144, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2647, '', NULL, 5, 0, '2020-05-13 19:48:59', 0, 0);
-INSERT INTO `productComment` VALUES (145, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2647, '', NULL, 5, 0, '2020-05-13 19:49:21', 0, 0);
-INSERT INTO `productComment` VALUES (146, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2647, '', NULL, 5, 0, '2020-05-13 19:50:24', 0, 0);
-INSERT INTO `productComment` VALUES (147, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2645, '', NULL, 5, 0, '2020-05-13 20:04:35', 0, 0);
-INSERT INTO `productComment` VALUES (148, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2647, '', NULL, 5, 0, '2020-05-13 20:05:30', 0, 0);
-INSERT INTO `productComment` VALUES (149, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-05-13 20:16:44', NULL, 0);
-INSERT INTO `productComment` VALUES (150, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2647, '', NULL, 5, 0, '2020-05-13 20:28:45', 0, 0);
-INSERT INTO `productComment` VALUES (151, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2647, '', NULL, 5, 0, '2020-05-13 20:30:45', 0, 0);
-INSERT INTO `productComment` VALUES (152, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2647, '', NULL, 5, 0, '2020-05-13 20:31:38', 0, 0);
-INSERT INTO `productComment` VALUES (153, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2647, '', NULL, 5, 0, '2020-05-13 20:36:38', 0, 0);
-INSERT INTO `productComment` VALUES (154, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2647, '', NULL, 5, 0, '2020-05-13 20:36:56', 0, 0);
-INSERT INTO `productComment` VALUES (155, '7c9fdfa3177042a08766aed29e7de6cd', 10015, 2647, '', NULL, 5, 0, '2020-05-13 20:39:53', 0, 0);
-INSERT INTO `productComment` VALUES (156, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-05-13 20:41:01', NULL, 0);
-INSERT INTO `productComment` VALUES (157, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-05-13 20:41:49', NULL, 0);
-INSERT INTO `productComment` VALUES (158, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, 2648, 'ff', ' http://img.fhxasdsada.xyz/196f7ce66d1543eeb42edc8243fd1414', 5, 0, '2020-05-14 10:33:28', 0, 0);
-INSERT INTO `productComment` VALUES (159, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10029, 2618, 'q', ' http://img.fhxasdsada.xyz/40dd44017dbb49e2be586c339f2dd632', 5, 0, '2020-05-14 10:55:53', 0, 0);
-INSERT INTO `productComment` VALUES (160, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10029, 2618, 'q', NULL, 5, 0, '2020-05-14 10:56:59', 0, 0);
-INSERT INTO `productComment` VALUES (161, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10001, 2635, 'fasdfas', NULL, 5, 0, '2020-05-14 10:57:59', 0, 0);
-INSERT INTO `productComment` VALUES (162, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10001, 2635, 'fasdfas', ' http://img.fhxasdsada.xyz/53d1dfbbbc1645de89a78ff6f94c6410', 5, 0, '2020-05-14 11:04:56', 0, 0);
-INSERT INTO `productComment` VALUES (163, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, 2648, '测试1', ' http://img.fhxasdsada.xyz/06b06391b0974ed69af1a10d7f63b4f9', 5, 0, '2020-05-14 11:06:31', 0, 0);
-INSERT INTO `productComment` VALUES (164, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, 2648, '测试2', ' http://img.fhxasdsada.xyz/ad20870159be46db98760644e87f53f4', 5, 0, '2020-05-14 11:07:22', 0, 0);
-INSERT INTO `productComment` VALUES (165, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, 2648, '测试3', ' http://img.fhxasdsada.xyz/b41e8e5632864ceb9eb0c8fc98a987b9', 5, 0, '2020-05-14 11:14:00', 0, 0);
-INSERT INTO `productComment` VALUES (166, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, 2648, '测试3', ' http://img.fhxasdsada.xyz/cf4daa0af4a04adca0665c6bb1c3c709', 5, 0, '2020-05-14 11:24:37', 0, 0);
-INSERT INTO `productComment` VALUES (167, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, 2648, '测试4', ' http://img.fhxasdsada.xyz/6c7ce9022d2a408cb7dbc137629db957', 5, 0, '2020-05-14 11:39:57', 0, 0);
-INSERT INTO `productComment` VALUES (168, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, 2648, '测试4', NULL, 5, 0, '2020-05-14 11:43:43', 0, 0);
-INSERT INTO `productComment` VALUES (169, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, 2648, '测试图片跟视频', ' http://img.fhxasdsada.xyz/b2ca592ddc9a4dad9b4feb66f4ab4f42', 5, 0, '2020-05-14 11:46:07', 0, 0);
-INSERT INTO `productComment` VALUES (170, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, 2648, '测试多张图片', NULL, 5, 0, '2020-05-14 11:49:21', 0, 0);
-INSERT INTO `productComment` VALUES (171, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10001, 2635, '测试单张图片', NULL, 5, 0, '2020-05-14 11:51:13', 0, 0);
-INSERT INTO `productComment` VALUES (172, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10001, 2635, '测试图片加视频', ' http://img.fhxasdsada.xyz/e3a58c07732b4ba28286d85f6d86311d', 5, 0, '2020-05-14 11:52:26', 0, 0);
-INSERT INTO `productComment` VALUES (173, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10001, 2635, '测试图片加视频', ' http://img.fhxasdsada.xyz/52e7d2039b2746ebb8a45ec60c789ee4', 5, 0, '2020-05-14 11:55:03', 0, 0);
-INSERT INTO `productComment` VALUES (174, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10001, 2635, '测试图片加视频', ' http://img.fhxasdsada.xyz/65a0a795caa1445cbdee447a0846b274', 5, 0, '2020-05-14 11:57:10', 0, 0);
+INSERT INTO `productComment` VALUES (175, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10001, 2770, '这个手机看了好久了 终于决定买了', ' http://img.isdfmk.xyz/ecd7e5d4053a4c97a56da11b8c02fb28', 5, 0, '2020-05-19 18:38:50', 0, 0);
+INSERT INTO `productComment` VALUES (176, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, 2779, '第二次买了 这副耳机太爱了 ', ' http://img.isdfmk.xyz/3c9d41b992754d9e9e3014401d7b4a5b', 5, 0, '2020-05-19 19:36:57', 0, 0);
+INSERT INTO `productComment` VALUES (177, '7c9fdfa3177042a08766aed29e7de6cd', 10003, 2780, '速度还是大', ' http://img.isdfmk.xyz/d357729dac4e47b99aa7844c4790b1b1', 5, 0, '2020-05-19 20:51:24', 0, 0);
+INSERT INTO `productComment` VALUES (178, '7c9fdfa3177042a08766aed29e7de6cd', 10003, 2780, '速度还是大', ' http://img.isdfmk.xyz/0bb3feb42e2c464cb3b752a0f64ab587', 5, 0, '2020-05-19 20:51:42', 0, 0);
+INSERT INTO `productComment` VALUES (179, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, 2786, '520收到爱的礼物了', NULL, 5, 0, '2020-05-20 09:01:05', 0, 0);
+INSERT INTO `productComment` VALUES (180, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 2837, '4556', ' http://img.isdfmk.xyz/6850587ac9e942b39d23607c4cbdcda0', 2, 0, '2020-05-20 16:23:11', 0, 0);
+INSERT INTO `productComment` VALUES (181, '7c9fdfa3177042a08766aed29e7de6cd', 10001, 2837, '4556', ' http://img.isdfmk.xyz/c5b79f75debc46eaaa6dd30bcab8b343', 2, 0, '2020-05-20 16:23:19', 0, 0);
 
 -- ----------------------------
 -- Table structure for product_final_category
@@ -1765,17 +1545,14 @@ CREATE TABLE `product_pageviews`  (
   `user_id` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `browse_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product_pageviews
 -- ----------------------------
-INSERT INTO `product_pageviews` VALUES (27, 10011, '39.101.192.13', '7c9fdfa3177042a08766aed29e7de6cd', '2020-05-18 09:42:01');
-INSERT INTO `product_pageviews` VALUES (28, 10010, '39.101.192.13', '7c9fdfa3177042a08766aed29e7de6cd', '2020-05-18 09:43:13');
-INSERT INTO `product_pageviews` VALUES (29, 10010, '39.101.192.13', '7c9fdfa3177042a08766aed29e7de6cd', '2020-05-18 09:44:15');
-INSERT INTO `product_pageviews` VALUES (30, 10014, '175.8.63.99', '7c9fdfa3177042a08766aed29e7de6cd', '2020-05-19 01:47:18');
-INSERT INTO `product_pageviews` VALUES (31, 10014, '175.8.63.99', '7c9fdfa3177042a08766aed29e7de6cd', '2020-05-19 01:49:17');
-INSERT INTO `product_pageviews` VALUES (32, 10025, '175.8.63.99', '7c9fdfa3177042a08766aed29e7de6cd', '2020-05-19 01:49:27');
+INSERT INTO `product_pageviews` VALUES (60, 10001, '175.8.61.126', NULL, '2020-05-20 11:16:56');
+INSERT INTO `product_pageviews` VALUES (61, 10001, '116.162.2.61', NULL, '2020-05-20 11:17:32');
+INSERT INTO `product_pageviews` VALUES (62, 10014, '116.162.2.61', NULL, '2020-05-20 11:18:56');
 
 -- ----------------------------
 -- Table structure for product_primary_category
@@ -1970,14 +1747,6 @@ CREATE TABLE `secondComment`  (
 -- ----------------------------
 -- Records of secondComment
 -- ----------------------------
-INSERT INTO `secondComment` VALUES (1, 101, '追评论', ' http://img.isdfmk.xyz/61d047cffd6048fab81a62798edae708', '2020-05-09 17:41:42', 0);
-INSERT INTO `secondComment` VALUES (2, 105, '追平 这东西很棒', ' http://img.isdfmk.xyz/0083c1a0fc914d81a6e16b39b5968c9d', '2020-05-09 17:56:20', 0);
-INSERT INTO `secondComment` VALUES (3, 106, '东西嗯好吃', ' http://img.isdfmk.xyz/61d047cffd6048fab81a62798edae708', '2020-05-10 16:14:52', 0);
-INSERT INTO `secondComment` VALUES (7, 114, NULL, NULL, '2020-05-11 10:41:44', 0);
-INSERT INTO `secondComment` VALUES (8, 114, NULL, NULL, '2020-05-11 10:43:52', 0);
-INSERT INTO `secondComment` VALUES (9, 116, NULL, NULL, '2020-05-11 10:48:34', 0);
-INSERT INTO `secondComment` VALUES (10, 116, NULL, NULL, '2020-05-11 10:51:01', 0);
-INSERT INTO `secondComment` VALUES (12, 121, '最佳评论', NULL, '2020-05-11 11:33:07', 0);
 
 -- ----------------------------
 -- Table structure for secondCommentImage
@@ -1991,12 +1760,6 @@ CREATE TABLE `secondCommentImage`  (
 -- ----------------------------
 -- Records of secondCommentImage
 -- ----------------------------
-INSERT INTO `secondCommentImage` VALUES (1, ' http://img.isdfmk.xyz/6e78f53405a54ff99f5425be4af4707a?t=1589092311');
-INSERT INTO `secondCommentImage` VALUES (1, ' http://img.isdfmk.xyz/744894f16bf0473da34dd96229e537f6?t=1589092311');
-INSERT INTO `secondCommentImage` VALUES (2, ' http://img.isdfmk.xyz/b5879a6db53d4ca69ad24ae38de5120f?t=1589092312');
-INSERT INTO `secondCommentImage` VALUES (2, ' http://img.isdfmk.xyz/e6a936737ffe4160957558eaca3004df?t=1589092312');
-INSERT INTO `secondCommentImage` VALUES (12, ' http://img.isdfmk.xyz/20bb0015143e41ae9bc2ebde7b8abb54?t=1589167988');
-INSERT INTO `secondCommentImage` VALUES (12, ' http://img.isdfmk.xyz/1c35c599f5f34ac5941198188331bd6b?t=1589167989');
 
 -- ----------------------------
 -- Table structure for shoppingCart
@@ -2009,15 +1772,15 @@ CREATE TABLE `shoppingCart`  (
   `productDeploy` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `quantity` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`shoppingCartId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3130 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3210 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of shoppingCart
 -- ----------------------------
 INSERT INTO `shoppingCart` VALUES (628, '8b616d638682406f96acd3b54dfbc723', 10001, '白色 ', 99);
 INSERT INTO `shoppingCart` VALUES (701, '8b616d638682406f96acd3b54dfbc723', 10015, '白色 ', 99);
-INSERT INTO `shoppingCart` VALUES (3064, '7c9fdfa3177042a08766aed29e7de6cd', 10002, '白色 优惠套餐一 ', 6);
-INSERT INTO `shoppingCart` VALUES (3125, '7c9fdfa3177042a08766aed29e7de6cd', 10025, '525g(21天装) ', 2);
+INSERT INTO `shoppingCart` VALUES (3174, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '白色 优惠套餐一 ', 3);
+INSERT INTO `shoppingCart` VALUES (3175, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10018, '028#滋润珊瑚红 ', 1);
 
 -- ----------------------------
 -- Table structure for user
@@ -2042,7 +1805,7 @@ CREATE TABLE `user`  (
 -- ----------------------------
 INSERT INTO `user` VALUES (52, 'f92b9f8f372e445fb6564cdd57aa3c3e', '小白i', '7cwP8Rhq61a70gE+gsoW/w==', '1', 't45eesyhFshmLr/zH6A2Dw==', 'AkbKyPZy0QJ0j1YkhIin1STD2hfGcrPgwh81SZwPpoU=', ' http://img.isdfmk.xyz/f92b9f8f372e445fb6564cdd57aa3c3e?t=1589858421', 'DM', '2018-3-1');
 INSERT INTO `user` VALUES (54, '0497326c70a447ceb815aa23743daeab', 'smallProfit', '++OrO3KQIS+TzybCOsQhcw==', '1', 'fedMKLH76FIJ74Tc9t1rkQ==', NULL, 'http://img.isdfmk.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM', '0-0-0');
-INSERT INTO `user` VALUES (55, '7c9fdfa3177042a08766aed29e7de6cd', 'MuGe', '++OrO3KQIS+TzybCOsQhcw==', '1', '7/nilpLOcaBpX6+BnSD+SQ==', 'NOCyNow6lg6D1Wibn5x0WCnRmd72oX+WfuO6bjCodHY=', ' http://img.isdfmk.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1589419537', 'DM', '2019-4-15');
+INSERT INTO `user` VALUES (55, '7c9fdfa3177042a08766aed29e7de6cd', 'MuGe', '++OrO3KQIS+TzybCOsQhcw==', '1', '7/nilpLOcaBpX6+BnSD+SQ==', 'NOCyNow6lg6D1Wibn5x0WCnRmd72oX+WfuO6bjCodHY=', ' http://img.isdfmk.xyz/7c9fdfa3177042a08766aed29e7de6cd?t=1589952718', 'DM', '2019-4-15');
 INSERT INTO `user` VALUES (59, 'd52e8cc4c9a34b839c74a20d1685f04c', 'smallProfit', '++OrO3KQIS+TzybCOsQhcw==', '1', 'Cx1wSRDN2c0lmnkbDmMQyA==', NULL, 'http://img.isdfmk.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM', '0-0-0');
 INSERT INTO `user` VALUES (60, '311e2fca19b944668631da49d5c1dbb2', 'smallProfit', '++OrO3KQIS+TzybCOsQhcw==', '1', 'wha358tH5pru/1cDld3/lA==', NULL, 'http://img.isdfmk.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM', '0-0-0');
 INSERT INTO `user` VALUES (61, '451a7d05126a4e58a74846983282267d', 'smallProfit', '++OrO3KQIS+TzybCOsQhcw==', '1', 'Jbn4oawYdnYGzFUG6EhS1A==', NULL, 'http://img.isdfmk.xyz//000000001312c10c0000000002255f0a?t=1578145613938', 'DM', '0-0-0');
@@ -2089,8 +1852,8 @@ INSERT INTO `userAddress` VALUES (163, '7c9fdfa3177042a08766aed29e7de6cd', '速�
 INSERT INTO `userAddress` VALUES (164, '7c9fdfa3177042a08766aed29e7de6cd', '速度还是大', '山西省 大同市 云冈区 新平旺街道 ', '三大法师速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '14,1402,140214,140214002,', '1', '学校', 1);
 INSERT INTO `userAddress` VALUES (165, '7c9fdfa3177042a08766aed29e7de6cd', '递四方速递水电费', '内蒙古自治区 包头市 石拐区 石拐街道 ', '水电费水电费离开速度还是大', '15367885410', 'liuxianliangli@foxmail.com', '15,1502,150205,150205001,', '0', '公司', 1);
 INSERT INTO `userAddress` VALUES (166, '7c9fdfa3177042a08766aed29e7de6cd', '的发送发送的', '山西省 太原市 杏花岭区 巨轮街道 ', '水电费水电费', '15367885410', 'liuxianliangli@foxmail.com', '14,1401,140107,140107001,', '0', '公司', 1);
-INSERT INTO `userAddress` VALUES (167, 'f92b9f8f372e445fb6564cdd57aa3c3e', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '1', '闺蜜家', 1);
-INSERT INTO `userAddress` VALUES (168, 'f92b9f8f372e445fb6564cdd57aa3c3e', '小芳', '北京市 市辖区 东城区 东华门街道 ', '湖南科技职业学院', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '0', '家', 1);
+INSERT INTO `userAddress` VALUES (167, 'f92b9f8f372e445fb6564cdd57aa3c3e', '方鸢', '河北省 唐山市 路南区 学院南路街道 ', 'dasdas', '18598814121', '2252821162@qq.com', '13,1302,130202,130202001,', '0', '闺蜜家', 1);
+INSERT INTO `userAddress` VALUES (168, 'f92b9f8f372e445fb6564cdd57aa3c3e', '小芳', '北京市 市辖区 东城区 东华门街道 ', '湖南科技职业学院', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '1', '家', 1);
 
 -- ----------------------------
 -- Table structure for userConsumptionRecords
@@ -2106,45 +1869,22 @@ CREATE TABLE `userConsumptionRecords`  (
   `paymentTime` datetime(0) NULL DEFAULT NULL,
   `paymentAmount` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`consumptiomId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3613 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3661 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userConsumptionRecords
 -- ----------------------------
-INSERT INTO `userConsumptionRecords` VALUES (3579, '1589015859808100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-09 17:17:48', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3580, '1589017699325100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-09 17:48:26', '5199.0');
-INSERT INTO `userConsumptionRecords` VALUES (3581, '1589017960619100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-09 17:53:42', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3582, '1589084278177100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-10 12:18:04', '11999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3583, '1589084597205100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-10 12:23:24', '1499.0');
-INSERT INTO `userConsumptionRecords` VALUES (3584, '1589089220309100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-10 13:40:27', '5999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3585, '1589089341739100004', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-10 13:42:29', '2998.00');
-INSERT INTO `userConsumptionRecords` VALUES (3586, '1589092098443100005', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-10 14:28:41', '5999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3587, '1589098050893100007', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-10 16:07:41', '5999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3588, '1589100364520100008', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-10 16:46:15', '17591.00');
-INSERT INTO `userConsumptionRecords` VALUES (3589, '1589105164944100009', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-10 18:06:09', '7890.0');
-INSERT INTO `userConsumptionRecords` VALUES (3590, '1589106042414100010', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-10 18:21:14', '5840.02');
-INSERT INTO `userConsumptionRecords` VALUES (3591, '1589106273209100011', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-10 18:24:39', '25862669.00');
-INSERT INTO `userConsumptionRecords` VALUES (3592, '1589106313202100012', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-10 18:25:18', '25740000.00');
-INSERT INTO `userConsumptionRecords` VALUES (3593, '1589107933147100013', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-10 18:52:27', '7890.0');
-INSERT INTO `userConsumptionRecords` VALUES (3594, '1589161860007100001', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-11 09:51:13', '5306.00');
-INSERT INTO `userConsumptionRecords` VALUES (3595, '1589166547586100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-11 11:09:14', '2898.0');
-INSERT INTO `userConsumptionRecords` VALUES (3596, '1589168069804100003', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-11 11:34:37', '5999.0');
-INSERT INTO `userConsumptionRecords` VALUES (3597, '1589288858536100004', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-13 08:40:04', '80.00');
-INSERT INTO `userConsumptionRecords` VALUES (3598, '1589369323249100001', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-13 19:29:23', '20.0');
-INSERT INTO `userConsumptionRecords` VALUES (3599, '1589423559247100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-14 10:32:47', '11999.00');
-INSERT INTO `userConsumptionRecords` VALUES (3600, '1589428832195100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-14 12:00:39', '2898.00');
-INSERT INTO `userConsumptionRecords` VALUES (3601, '1589616376118100001', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-16 16:06:41', '55320.00');
-INSERT INTO `userConsumptionRecords` VALUES (3602, '1589616453904100002', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-16 16:07:45', '15780.00');
-INSERT INTO `userConsumptionRecords` VALUES (3603, '1589616506758100003', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-16 16:08:33', '40.00');
-INSERT INTO `userConsumptionRecords` VALUES (3604, '1589703932221100001', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-17 16:26:31', '11592.00');
-INSERT INTO `userConsumptionRecords` VALUES (3605, '1589777530356100001', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-18 04:52:17', '4548.00');
-INSERT INTO `userConsumptionRecords` VALUES (3606, '1589779150224100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-18 05:19:20', '11999.00');
-INSERT INTO `userConsumptionRecords` VALUES (3607, '1589779212624100003', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-18 05:20:18', '758.00');
-INSERT INTO `userConsumptionRecords` VALUES (3608, '1589782656177100005', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-18 06:17:54', '200.00');
-INSERT INTO `userConsumptionRecords` VALUES (3609, '1589782692349100006', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-18 06:18:48', '3032.00');
-INSERT INTO `userConsumptionRecords` VALUES (3610, '1589784288559100007', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-18 06:45:22', '4999.00');
-INSERT INTO `userConsumptionRecords` VALUES (3611, '1589853078749100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-19 01:51:25', '3998.00');
-INSERT INTO `userConsumptionRecords` VALUES (3612, '1589853251153100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-19 01:54:17', '13993.00');
+INSERT INTO `userConsumptionRecords` VALUES (3650, '1589948114618100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-20 12:15:21', '5999.00');
+INSERT INTO `userConsumptionRecords` VALUES (3651, '1589948265055100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-20 12:17:50', '758.00');
+INSERT INTO `userConsumptionRecords` VALUES (3652, '1589948336801100003', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-20 12:19:04', '758.00');
+INSERT INTO `userConsumptionRecords` VALUES (3653, '1589948466459100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-20 12:21:13', '2898.00');
+INSERT INTO `userConsumptionRecords` VALUES (3654, '1589948556726100005', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-05-20 12:22:42', '5999.00');
+INSERT INTO `userConsumptionRecords` VALUES (3655, '1589955922052100007', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-20 14:26:10', '140.00');
+INSERT INTO `userConsumptionRecords` VALUES (3656, '1589956158884100007', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-20 14:29:54', '14490.00');
+INSERT INTO `userConsumptionRecords` VALUES (3657, '1589956331812100008', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-20 14:32:40', '11592.00');
+INSERT INTO `userConsumptionRecords` VALUES (3658, '1589956494721100008', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-20 14:35:23', '100.00');
+INSERT INTO `userConsumptionRecords` VALUES (3659, '1589957131873100009', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-20 14:46:15', '10493.00');
+INSERT INTO `userConsumptionRecords` VALUES (3660, '1589962956539100009', '7c9fdfa3177042a08766aed29e7de6cd', 1, NULL, 3, '2020-05-20 16:22:42', '5999.00');
 
 -- ----------------------------
 -- Table structure for userEvaluation
@@ -2177,89 +1917,33 @@ CREATE TABLE `userFootprint`  (
   `productId` int(11) NULL DEFAULT NULL,
   `footprintTime` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`footprintId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 322 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 356 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userFootprint
 -- ----------------------------
-INSERT INTO `userFootprint` VALUES (22, 'abcd', 10005, '2020-04-24 10:48:21');
-INSERT INTO `userFootprint` VALUES (23, 'asdasd', 0, '2020-04-22 10:55:58');
-INSERT INTO `userFootprint` VALUES (177, '7c9fdfa3177042a08766aed29e7de6cd', 10019, '2020-04-26 10:30:12');
-INSERT INTO `userFootprint` VALUES (230, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '2020-05-08 11:50:26');
-INSERT INTO `userFootprint` VALUES (231, '7c9fdfa3177042a08766aed29e7de6cd', 10005, '2020-05-08 11:49:35');
-INSERT INTO `userFootprint` VALUES (232, '7c9fdfa3177042a08766aed29e7de6cd', 10006, '2020-05-08 12:05:24');
-INSERT INTO `userFootprint` VALUES (236, '7c9fdfa3177042a08766aed29e7de6cd', 10013, '2020-05-09 17:52:36');
-INSERT INTO `userFootprint` VALUES (237, '7c9fdfa3177042a08766aed29e7de6cd', 10003, '2020-05-09 18:13:04');
-INSERT INTO `userFootprint` VALUES (241, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '2020-05-10 16:49:37');
-INSERT INTO `userFootprint` VALUES (242, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-05-10 16:46:00');
-INSERT INTO `userFootprint` VALUES (243, '7c9fdfa3177042a08766aed29e7de6cd', 10019, '2020-05-10 18:25:03');
-INSERT INTO `userFootprint` VALUES (244, '7c9fdfa3177042a08766aed29e7de6cd', 10008, '2020-05-10 16:38:34');
-INSERT INTO `userFootprint` VALUES (245, '7c9fdfa3177042a08766aed29e7de6cd', 10024, '2020-05-10 16:38:50');
-INSERT INTO `userFootprint` VALUES (246, '7c9fdfa3177042a08766aed29e7de6cd', 10028, '2020-05-10 16:41:21');
-INSERT INTO `userFootprint` VALUES (247, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '2020-05-10 16:42:44');
-INSERT INTO `userFootprint` VALUES (248, '7c9fdfa3177042a08766aed29e7de6cd', 10011, '2020-05-10 16:48:17');
-INSERT INTO `userFootprint` VALUES (250, '7c9fdfa3177042a08766aed29e7de6cd', 10005, '2020-05-10 18:06:01');
-INSERT INTO `userFootprint` VALUES (252, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-05-10 18:27:34');
-INSERT INTO `userFootprint` VALUES (254, '7c9fdfa3177042a08766aed29e7de6cd', 10003, '2020-05-11 09:50:21');
-INSERT INTO `userFootprint` VALUES (255, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-05-11 09:52:26');
-INSERT INTO `userFootprint` VALUES (256, '7c9fdfa3177042a08766aed29e7de6cd', 10002, '2020-05-11 09:54:08');
-INSERT INTO `userFootprint` VALUES (261, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-05-12 21:00:23');
-INSERT INTO `userFootprint` VALUES (262, '7c9fdfa3177042a08766aed29e7de6cd', 10002, '2020-05-12 21:05:59');
-INSERT INTO `userFootprint` VALUES (263, '7c9fdfa3177042a08766aed29e7de6cd', 10006, '2020-05-12 21:06:05');
-INSERT INTO `userFootprint` VALUES (264, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '2020-05-12 21:06:40');
-INSERT INTO `userFootprint` VALUES (265, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-05-12 21:07:30');
-INSERT INTO `userFootprint` VALUES (266, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-05-13 19:28:42');
-INSERT INTO `userFootprint` VALUES (271, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-05-15 11:15:33');
-INSERT INTO `userFootprint` VALUES (272, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '2020-05-15 11:41:21');
-INSERT INTO `userFootprint` VALUES (273, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '2020-05-15 18:21:36');
-INSERT INTO `userFootprint` VALUES (274, '7c9fdfa3177042a08766aed29e7de6cd', 10028, '2020-05-15 18:00:13');
-INSERT INTO `userFootprint` VALUES (275, '7c9fdfa3177042a08766aed29e7de6cd', 10003, '2020-05-16 15:59:19');
-INSERT INTO `userFootprint` VALUES (276, '7c9fdfa3177042a08766aed29e7de6cd', 10018, '2020-05-16 16:04:15');
-INSERT INTO `userFootprint` VALUES (277, '7c9fdfa3177042a08766aed29e7de6cd', 10005, '2020-05-16 16:07:26');
-INSERT INTO `userFootprint` VALUES (278, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-05-16 16:07:48');
-INSERT INTO `userFootprint` VALUES (279, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-05-17 16:25:25');
-INSERT INTO `userFootprint` VALUES (280, '7c9fdfa3177042a08766aed29e7de6cd', 10029, '2020-05-17 16:29:40');
-INSERT INTO `userFootprint` VALUES (281, '7c9fdfa3177042a08766aed29e7de6cd', 10003, '2020-05-17 16:39:11');
-INSERT INTO `userFootprint` VALUES (282, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, '2020-05-18 14:52:42');
-INSERT INTO `userFootprint` VALUES (283, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10003, '2020-05-18 17:23:52');
-INSERT INTO `userFootprint` VALUES (284, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10006, '2020-05-18 16:00:12');
-INSERT INTO `userFootprint` VALUES (285, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-05-18 10:11:07');
-INSERT INTO `userFootprint` VALUES (286, '7c9fdfa3177042a08766aed29e7de6cd', 10011, '2020-05-18 10:49:51');
-INSERT INTO `userFootprint` VALUES (287, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-05-18 06:54:15');
-INSERT INTO `userFootprint` VALUES (288, '7c9fdfa3177042a08766aed29e7de6cd', 10003, '2020-05-18 09:37:21');
-INSERT INTO `userFootprint` VALUES (289, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10012, '2020-05-18 14:44:46');
-INSERT INTO `userFootprint` VALUES (290, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10001, '2020-05-18 14:46:17');
-INSERT INTO `userFootprint` VALUES (291, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10007, '2020-05-18 16:48:58');
-INSERT INTO `userFootprint` VALUES (292, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10017, '2020-05-18 14:48:51');
-INSERT INTO `userFootprint` VALUES (293, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10016, '2020-05-18 15:44:02');
-INSERT INTO `userFootprint` VALUES (294, '7c9fdfa3177042a08766aed29e7de6cd', 10029, '2020-05-18 07:05:13');
-INSERT INTO `userFootprint` VALUES (295, '7c9fdfa3177042a08766aed29e7de6cd', 10016, '2020-05-18 07:37:05');
-INSERT INTO `userFootprint` VALUES (296, '7c9fdfa3177042a08766aed29e7de6cd', 10013, '2020-05-18 07:37:10');
-INSERT INTO `userFootprint` VALUES (297, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10014, '2020-05-18 15:55:11');
-INSERT INTO `userFootprint` VALUES (298, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10024, '2020-05-18 16:00:58');
-INSERT INTO `userFootprint` VALUES (299, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10030, '2020-05-18 16:01:29');
-INSERT INTO `userFootprint` VALUES (300, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10018, '2020-05-18 08:21:37');
-INSERT INTO `userFootprint` VALUES (301, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10015, '2020-05-18 16:45:57');
-INSERT INTO `userFootprint` VALUES (302, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10008, '2020-05-18 16:55:36');
-INSERT INTO `userFootprint` VALUES (303, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10028, '2020-05-18 17:25:29');
-INSERT INTO `userFootprint` VALUES (304, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '2020-05-18 17:33:27');
-INSERT INTO `userFootprint` VALUES (305, '7c9fdfa3177042a08766aed29e7de6cd', 10010, '2020-05-18 09:44:46');
-INSERT INTO `userFootprint` VALUES (306, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '2020-05-18 10:03:50');
-INSERT INTO `userFootprint` VALUES (307, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-05-19 01:49:17');
-INSERT INTO `userFootprint` VALUES (308, '7c9fdfa3177042a08766aed29e7de6cd', 10025, '2020-05-19 03:04:16');
-INSERT INTO `userFootprint` VALUES (309, '7c9fdfa3177042a08766aed29e7de6cd', 10019, '2020-05-19 01:49:37');
-INSERT INTO `userFootprint` VALUES (310, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-05-19 01:51:00');
-INSERT INTO `userFootprint` VALUES (311, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '2020-05-19 11:13:20');
-INSERT INTO `userFootprint` VALUES (312, '7c9fdfa3177042a08766aed29e7de6cd', 10029, '2020-05-19 02:31:43');
-INSERT INTO `userFootprint` VALUES (313, '7c9fdfa3177042a08766aed29e7de6cd', 10002, '2020-05-19 11:25:30');
-INSERT INTO `userFootprint` VALUES (314, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10003, '2020-05-19 11:23:23');
-INSERT INTO `userFootprint` VALUES (315, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10014, '2020-05-19 10:58:03');
-INSERT INTO `userFootprint` VALUES (316, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '2020-05-19 03:04:03');
-INSERT INTO `userFootprint` VALUES (317, '7c9fdfa3177042a08766aed29e7de6cd', 10006, '2020-05-19 03:04:07');
-INSERT INTO `userFootprint` VALUES (318, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10007, '2020-05-19 11:13:07');
-INSERT INTO `userFootprint` VALUES (319, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10001, '2020-05-19 11:19:22');
-INSERT INTO `userFootprint` VALUES (320, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10006, '2020-05-19 11:16:16');
-INSERT INTO `userFootprint` VALUES (321, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10010, '2020-05-19 11:23:45');
+INSERT INTO `userFootprint` VALUES (334, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10001, '2020-05-19 11:12:33');
+INSERT INTO `userFootprint` VALUES (335, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '2020-05-19 19:38:06');
+INSERT INTO `userFootprint` VALUES (336, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, '2020-05-19 19:04:40');
+INSERT INTO `userFootprint` VALUES (337, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '2020-05-19 20:30:41');
+INSERT INTO `userFootprint` VALUES (338, '7c9fdfa3177042a08766aed29e7de6cd', 10003, '2020-05-19 20:30:55');
+INSERT INTO `userFootprint` VALUES (339, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-05-19 20:56:37');
+INSERT INTO `userFootprint` VALUES (340, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '2020-05-20 12:22:33');
+INSERT INTO `userFootprint` VALUES (341, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10001, '2020-05-20 14:06:38');
+INSERT INTO `userFootprint` VALUES (342, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10014, '2020-05-20 12:21:05');
+INSERT INTO `userFootprint` VALUES (343, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, '2020-05-20 12:06:29');
+INSERT INTO `userFootprint` VALUES (344, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10003, '2020-05-20 12:18:55');
+INSERT INTO `userFootprint` VALUES (345, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10005, '2020-05-20 11:52:45');
+INSERT INTO `userFootprint` VALUES (346, '7c9fdfa3177042a08766aed29e7de6cd', 10009, '2020-05-20 13:34:37');
+INSERT INTO `userFootprint` VALUES (347, '7c9fdfa3177042a08766aed29e7de6cd', 10003, '2020-05-20 05:36:52');
+INSERT INTO `userFootprint` VALUES (348, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10010, '2020-05-20 14:06:52');
+INSERT INTO `userFootprint` VALUES (349, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10016, '2020-05-20 14:07:17');
+INSERT INTO `userFootprint` VALUES (350, '7c9fdfa3177042a08766aed29e7de6cd', 10015, '2020-05-20 14:34:47');
+INSERT INTO `userFootprint` VALUES (351, '7c9fdfa3177042a08766aed29e7de6cd', 10014, '2020-05-20 06:32:05');
+INSERT INTO `userFootprint` VALUES (352, '7c9fdfa3177042a08766aed29e7de6cd', 10006, '2020-05-20 06:45:26');
+INSERT INTO `userFootprint` VALUES (353, '7c9fdfa3177042a08766aed29e7de6cd', 10007, '2020-05-20 06:46:23');
+INSERT INTO `userFootprint` VALUES (354, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '2020-05-20 18:03:13');
+INSERT INTO `userFootprint` VALUES (355, '7c9fdfa3177042a08766aed29e7de6cd', 10002, '2020-05-20 16:27:09');
 
 -- ----------------------------
 -- Table structure for userMembe
@@ -2279,10 +1963,10 @@ CREATE TABLE `userMembe`  (
 -- ----------------------------
 -- Records of userMembe
 -- ----------------------------
-INSERT INTO `userMembe` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', '1nhsgSuFp8AGcW1qNYdWqQ==', 98000, 5, 2, 1540);
+INSERT INTO `userMembe` VALUES (1, '7c9fdfa3177042a08766aed29e7de6cd', 'xrmy8iJ9JWKUvt6kolJuOA==', 98000, 5, 2, 1540);
 INSERT INTO `userMembe` VALUES (2, '0497326c70a447ceb815aa23743daeab', NULL, 0, 0, 0, 0);
 INSERT INTO `userMembe` VALUES (3, '9c1e482cfabf48f7ab64baee9bd778fd', NULL, 0, 0, 0, 0);
-INSERT INTO `userMembe` VALUES (4, 'f92b9f8f372e445fb6564cdd57aa3c3e', 'QvAwtMyx2F1GYIuY4ZB/DA==', 0, 0, 0, 0);
+INSERT INTO `userMembe` VALUES (4, 'f92b9f8f372e445fb6564cdd57aa3c3e', 'sSKeGdO1UfoHDx9bh0qG8w==', 0, 0, 0, 0);
 INSERT INTO `userMembe` VALUES (5, '836fa03c4977499a9361f986672dea7f', NULL, 0, 0, 0, 0);
 INSERT INTO `userMembe` VALUES (6, '058656382d454f2cb40340934812d5c4', NULL, 0, 0, 0, 0);
 INSERT INTO `userMembe` VALUES (7, 'fd113e77699c4d21ab50acaf88e7e141', NULL, 0, 0, 0, 0);
@@ -2311,67 +1995,25 @@ CREATE TABLE `userOrder`  (
   `isDelete` int(11) NULL DEFAULT 0,
   `sign` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 814 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 873 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userOrder
 -- ----------------------------
-INSERT INTO `userOrder` VALUES (758, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589015859808100001', 1, 1, '2020-05-09 17:17:39', '2020-05-12 17:17:40', '2020-05-09 17:17:47', NULL, '', '11999.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (759, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589017699325100002', 1, 1, '2020-05-09 17:48:19', '2020-05-12 17:48:19', '2020-05-09 17:48:25', NULL, '', '5199.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (760, '7c9fdfa3177042a08766aed29e7de6cd', '1589017960619100003', 1, 1, '2020-05-09 17:52:40', '2020-05-12 17:53:32', '2020-05-09 17:53:42', NULL, '', '11999.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (761, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589084278177100001', 1, 1, '2020-05-10 12:17:58', '2020-05-13 12:17:58', '2020-05-10 12:18:04', NULL, '', '11999.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (762, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589084597205100002', 1, 1, '2020-05-10 12:23:17', '2020-05-13 12:23:17', '2020-05-10 12:23:23', NULL, '', '1499.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (763, '7c9fdfa3177042a08766aed29e7de6cd', '1589089220309100003', 1, 1, '2020-05-10 13:40:20', '2020-05-13 13:40:20', '2020-05-10 13:40:25', NULL, '', '5999.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (764, '7c9fdfa3177042a08766aed29e7de6cd', '1589089341739100004', 1, 1, '2020-05-10 13:42:21', '2020-05-13 13:42:21', '2020-05-10 13:42:29', NULL, '', '2998.00', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (765, '7c9fdfa3177042a08766aed29e7de6cd', '1589092098443100005', 1, 1, '2020-05-10 14:28:18', '2020-05-13 14:28:18', '2020-05-10 14:28:41', NULL, '', '5999.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (766, '7c9fdfa3177042a08766aed29e7de6cd', '1589092135874100006', 1, 1, '2020-05-10 14:28:55', '2020-05-13 14:29:07', NULL, NULL, '', '5999.0', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (767, '7c9fdfa3177042a08766aed29e7de6cd', '1589098050893100007', 1, 1, '2020-05-10 16:07:31', '2020-05-13 16:07:31', '2020-05-10 16:07:41', NULL, '', '5999.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (768, '7c9fdfa3177042a08766aed29e7de6cd', '1589100364520100008', 1, 1, '2020-05-10 16:46:04', '2020-05-13 16:46:04', '2020-05-10 16:46:14', NULL, '', '17591.00', 2, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (769, '7c9fdfa3177042a08766aed29e7de6cd', '1589105164944100009', 1, 1, '2020-05-10 18:06:05', '2020-05-13 18:06:05', '2020-05-10 18:06:09', NULL, '', '7890.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (770, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589106042414100010', 1, 1, '2020-05-10 18:20:42', '2020-05-13 18:21:02', '2020-05-10 18:21:13', NULL, '', '5840.02', 2, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (771, '7c9fdfa3177042a08766aed29e7de6cd', '1589106273209100011', 1, 1, '2020-05-10 18:24:33', '2020-05-13 18:24:34', '2020-05-10 18:24:38', NULL, '', '25862669.00', 2, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (772, '7c9fdfa3177042a08766aed29e7de6cd', '1589106313202100012', 1, 1, '2020-05-10 18:25:13', '2020-05-13 18:25:13', '2020-05-10 18:25:18', NULL, '', '25740000.00', 2, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (773, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589107933147100013', 1, 1, '2020-05-10 18:52:13', '2020-05-13 18:52:13', '2020-05-10 18:52:27', NULL, '', '7890.0', 2, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (774, '7c9fdfa3177042a08766aed29e7de6cd', '1589161860007100001', 1, 1, '2020-05-11 09:51:00', '2020-05-14 09:51:00', '2020-05-11 09:51:12', NULL, '', '5306.00', 2, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (775, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589166547586100002', 1, 1, '2020-05-11 11:09:07', '2020-05-14 11:09:08', '2020-05-11 11:09:15', NULL, '', '2898.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (776, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589168069804100003', 1, 1, '2020-05-11 11:34:29', '2020-05-14 11:34:30', '2020-05-11 11:34:37', NULL, '', '5999.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (777, '7c9fdfa3177042a08766aed29e7de6cd', '1589288495428100001', NULL, NULL, '2020-05-12 21:01:35', NULL, NULL, NULL, NULL, '5796.00', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (778, '7c9fdfa3177042a08766aed29e7de6cd', '1589288775551100002', NULL, NULL, '2020-05-12 21:06:15', NULL, NULL, NULL, NULL, '5996.00', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (779, '7c9fdfa3177042a08766aed29e7de6cd', '1589288810589100003', NULL, NULL, '2020-05-12 21:06:50', NULL, NULL, NULL, NULL, '17980.00', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (780, '7c9fdfa3177042a08766aed29e7de6cd', '1589288858536100004', 1, 1, '2020-05-12 21:07:38', '2020-05-16 08:39:54', '2020-05-13 08:40:03', NULL, '', '80.00', 2, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (781, '7c9fdfa3177042a08766aed29e7de6cd', '1589369323249100001', 1, 1, '2020-05-13 19:28:43', '2020-05-16 19:29:12', '2020-05-13 19:29:23', NULL, '', '20.0', 2, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (782, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589423559247100001', 1, 1, '2020-05-14 10:32:39', '2020-05-17 10:32:39', '2020-05-14 10:32:47', NULL, '', '11999.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (783, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589428832195100002', 1, 1, '2020-05-14 12:00:32', '2020-05-17 12:00:32', '2020-05-14 12:00:38', NULL, '', '2898.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (784, '7c9fdfa3177042a08766aed29e7de6cd', '1589616376118100001', 1, 1, '2020-05-16 16:06:16', '2020-05-19 16:06:16', '2020-05-16 16:06:40', NULL, '', '55320.00', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (785, '7c9fdfa3177042a08766aed29e7de6cd', '1589616453904100002', 1, 1, '2020-05-16 16:07:34', '2020-05-19 16:07:34', '2020-05-16 16:07:43', NULL, '', '15780.00', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (786, '7c9fdfa3177042a08766aed29e7de6cd', '1589616506758100003', 1, 1, '2020-05-16 16:08:26', '2020-05-19 16:08:26', '2020-05-16 16:08:33', NULL, '', '40.00', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (787, '7c9fdfa3177042a08766aed29e7de6cd', '1589703932221100001', 1, 1, '2020-05-17 16:25:32', '2020-05-20 16:26:25', '2020-05-17 16:26:31', NULL, '', '11592.00', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (788, '7c9fdfa3177042a08766aed29e7de6cd', '1589777530356100001', 1, 1, '2020-05-18 04:52:10', '2020-05-21 04:52:10', '2020-05-18 04:52:17', NULL, '', '4548.00', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (789, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589779150224100002', 1, 1, '2020-05-18 05:19:10', '2020-05-21 05:19:11', '2020-05-18 05:19:19', NULL, '', '11999.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (790, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589779212624100003', 1, 1, '2020-05-18 05:20:12', '2020-05-21 05:20:14', '2020-05-18 05:20:18', NULL, '', '758.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (791, '7c9fdfa3177042a08766aed29e7de6cd', '1589782557623100004', NULL, NULL, '2020-05-18 06:15:58', NULL, NULL, NULL, NULL, '73980.00', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (792, '7c9fdfa3177042a08766aed29e7de6cd', '1589782656177100005', 1, 1, '2020-05-18 06:17:36', '2020-05-21 06:17:36', '2020-05-18 06:17:53', NULL, '', '200.00', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (793, '7c9fdfa3177042a08766aed29e7de6cd', '1589782692349100006', 1, 1, '2020-05-18 06:18:12', '2020-05-21 06:18:12', '2020-05-18 06:18:47', NULL, '', '3032.00', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (794, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589784288559100007', NULL, NULL, '2020-05-18 14:44:48', NULL, '2020-05-18 14:45:22', NULL, NULL, '4999.0', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (795, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589784379179100008', NULL, NULL, '2020-05-18 14:46:19', NULL, NULL, NULL, NULL, '5999.0', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (796, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589784464344100009', NULL, NULL, '2020-05-18 14:47:44', NULL, NULL, NULL, NULL, '3350.0', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (797, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589784533701100010', NULL, NULL, '2020-05-18 14:48:54', NULL, NULL, NULL, NULL, '3199.0', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (798, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589791488616100011', 1, 1, '2020-05-18 16:44:48', '2020-05-21 16:44:48', NULL, NULL, '', '758.0', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (799, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589793664956100012', NULL, NULL, '2020-05-18 17:22:38', NULL, NULL, NULL, NULL, '6850.00', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (800, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589793837777100013', NULL, NULL, '2020-05-18 17:23:58', NULL, NULL, NULL, NULL, '40.00', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (801, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589794398728100014', NULL, NULL, '2020-05-18 17:33:19', NULL, NULL, NULL, NULL, '1999.0', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (802, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589794426397100015', NULL, NULL, '2020-05-18 17:33:46', NULL, NULL, NULL, NULL, '7996.00', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (803, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589853078749100001', 1, 1, '2020-05-19 09:51:19', '2020-05-22 09:51:19', '2020-05-19 09:51:25', NULL, '', '3998.00', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (804, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589853251153100002', 1, 1, '2020-05-19 09:54:11', '2020-05-22 09:54:11', '2020-05-19 09:54:17', NULL, '', '13993.00', 3, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (805, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589857086572100003', NULL, NULL, '2020-05-19 10:58:06', NULL, NULL, NULL, NULL, '2898.0', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (806, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589857101614100004', NULL, NULL, '2020-05-19 10:58:22', NULL, NULL, NULL, NULL, '400000.00', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (807, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589857610514100005', NULL, NULL, '2020-05-19 11:06:50', NULL, NULL, NULL, NULL, '1999.0', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (808, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589857622873100006', NULL, NULL, '2020-05-19 11:07:03', NULL, NULL, NULL, NULL, '11994.00', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (809, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589857666205100007', NULL, NULL, '2020-05-19 11:07:46', NULL, NULL, NULL, NULL, '1999.00', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (810, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589857679781100008', NULL, NULL, '2020-05-19 11:07:59', NULL, NULL, NULL, NULL, '1999.0', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (811, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589857994135100009', NULL, NULL, '2020-05-19 11:13:14', NULL, NULL, NULL, NULL, '1999.0', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (812, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589858159906100010', NULL, NULL, '2020-05-19 11:16:00', NULL, NULL, NULL, NULL, '5999.0', 1, 0, 0, 0);
-INSERT INTO `userOrder` VALUES (813, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589858178811100011', NULL, NULL, '2020-05-19 11:16:19', NULL, NULL, NULL, NULL, '1499.0', 1, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (859, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589948114618100001', 1, 1, '2020-05-20 12:15:14', '2020-05-23 12:15:15', '2020-05-20 12:15:21', NULL, '', '5999.0', 2, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (860, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589948265055100002', 1, 1, '2020-05-20 12:17:45', '2020-05-23 12:17:45', '2020-05-20 12:17:49', NULL, '', '758.0', 2, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (861, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589948336801100003', 1, 1, '2020-05-20 12:18:56', '2020-05-23 12:18:57', '2020-05-20 12:19:04', NULL, '', '758.0', 2, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (862, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589948466459100004', 1, 1, '2020-05-20 12:21:06', '2020-05-23 12:21:06', '2020-05-20 12:21:13', NULL, '', '2898.0', 2, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (863, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1589948556726100005', 1, 1, '2020-05-20 12:22:36', '2020-05-23 12:22:37', '2020-05-20 12:22:41', NULL, '', '5999.0', 2, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (864, '7c9fdfa3177042a08766aed29e7de6cd', '1589952921024100006', 1, 1, '2020-05-20 13:35:21', '2020-05-23 13:35:21', '2020-05-20 13:35:28', NULL, '', '238495.00', 2, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (865, '7c9fdfa3177042a08766aed29e7de6cd', '1589953018592100007', 1, 1, '2020-05-20 05:36:58', '2020-05-23 05:36:59', '2020-05-20 05:37:05', NULL, '', '3032.00', 3, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (866, '7c9fdfa3177042a08766aed29e7de6cd', '1589955376786100007', 2, 1, '2020-05-20 06:16:17', '2020-05-23 06:16:18', NULL, NULL, '', '120.00', 1, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (867, '7c9fdfa3177042a08766aed29e7de6cd', '1589955922052100007', 2, 1, '2020-05-20 06:25:22', '2020-05-23 06:25:23', '2020-05-20 14:26:10', NULL, '', '140.00', 2, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (868, '7c9fdfa3177042a08766aed29e7de6cd', '1589956158884100007', 2, 1, '2020-05-20 14:29:19', '2020-05-23 14:29:19', '2020-05-20 14:29:54', NULL, '', '14490.00', 2, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (869, '7c9fdfa3177042a08766aed29e7de6cd', '1589956331812100008', 2, 1, '2020-05-20 06:32:12', '2020-05-23 06:32:13', '2020-05-20 14:32:40', NULL, '', '11592.00', 2, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (870, '7c9fdfa3177042a08766aed29e7de6cd', '1589956494721100008', 2, 1, '2020-05-20 14:34:54', '2020-05-23 14:34:55', '2020-05-20 14:35:23', NULL, '', '100.00', 3, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (871, '7c9fdfa3177042a08766aed29e7de6cd', '1589957131873100009', 2, 1, '2020-05-20 06:45:32', '2020-05-23 06:45:33', '2020-05-20 14:46:15', NULL, '', '10493.00', 2, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (872, '7c9fdfa3177042a08766aed29e7de6cd', '1589962956539100009', 1, 1, '2020-05-20 16:22:36', '2020-05-23 16:22:36', '2020-05-20 16:22:42', NULL, '', '5999.0', 3, 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for userPassword
