@@ -49,7 +49,7 @@
                 </a>
                 <div class="recommended_products_Cart">
                   <svg-icon name="pageViews"></svg-icon>
-                  <div style="margin:-31px -60px 0 0;">
+                  <div style="margin:-31px -60px 0 0;color: #999999">
                     {{productsFeatured.productPageviews>999?'999+':productsFeatured.productPageviews}}
                   </div>
                 </div>
@@ -139,7 +139,7 @@
       getProductsFeatured() {
         homeApi.getProductsFeatured().then(res => {
               if (res.success) {
-                this.productsFeaturedList = res.queryResult.list[0];
+                this.productsFeaturedList = res.queryResult.list;
               }
             }
         )

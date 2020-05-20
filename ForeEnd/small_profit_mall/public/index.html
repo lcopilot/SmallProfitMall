@@ -1,32 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=1920,initial-scale=0.2">
-    <link rel="icon" href="<%=BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <!-- 腾讯分析-->
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=66558392" charset="UTF-8"></script>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+<head>
+  <!-- 设置文档字符编码 -->
+  <meta charset="utf-8">
+  <!-- 告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- 指定页面初始缩放比例。-->
+  <meta name="viewport" content="width=1525,initial-scale=0.2">
+  <!-- 定义<head>部分字符集 可提升响应速度 -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <link rel="icon" href="<%=BASE_URL %>favicon.ico">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+
+  <!-- 使用web应用程序的名称(当网站作为一个应用程序的时候)-->
+  <meta name="application-name" content="smallProfit ">
+  <!-- 腾讯分析-->
+  <!--  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=66558392"-->
+  <!--          charset="UTF-8"></script>-->
+  <!-- 百度统计 -->
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js').then(() => {
-        console.log('Service worker registered!');
-      }).catch((error) => {
-        console.log('Error registering service worker: ', error);
-      });
-    } else {
-      console.log('Not supported by browser');
-    }
-    document.write('<script type="text/javascript" color="160,32,240" opacity=\'1\' zIndex="-10" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"><\/script>');
+    var _hmt = _hmt || [];
+    (function () {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7be4bbf667537c8518780818e29a4bc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
   </script>
+
+</head>
+<body>
+<noscript>
+  <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without
+    JavaScript enabled. Please enable it to continue.</strong>
+</noscript>
+<div id="app"></div>
+<!-- built files will be auto injected -->
+</body>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').then(() => {
+      console.log('Service worker registered!');
+    }).catch((error) => {
+      console.log('Error registering service worker: ', error);
+    });
+  } else {
+    console.log('Not supported by browser');
+  }
+  document.write(
+      '<script type="text/javascript" color="160,32,240" opacity=\'1\' zIndex="-10" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"><\/script>');
+</script>
 
 </html>

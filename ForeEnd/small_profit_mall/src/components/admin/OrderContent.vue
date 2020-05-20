@@ -314,7 +314,7 @@
           //   fileList.push(base64)
           // })
         });
-        this.$refs.upload[0].submit();
+
 
         formData.append("productId", sessionStorage.getItem("productIdComm"))
         formData.append("purchaseId", sessionStorage.getItem("purchaseId"))
@@ -330,6 +330,7 @@
                 type:"success",
                 message:"评论已提交"
               });
+              this.$refs.upload[0].submit();
               this.playerOptions.sources[0].src="";
               this.clearFiles();
               this.commentVisible=false;
@@ -342,6 +343,7 @@
                 type:"success",
                 message:"评论已提交"
               });
+              this.$refs.upload[0].submit();
               this.playerOptions.sources[0].src="";
               this.clearFiles();
               this.commentVisible=false;
