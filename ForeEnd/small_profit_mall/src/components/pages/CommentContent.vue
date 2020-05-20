@@ -23,10 +23,9 @@
             {{comment.textComment}}
           </div>
           <div>
-            <div class="product_comment_img">
+            <div class="product_comment_img" v-if="comment.videoComment">
               <el-image
-                  v-if="comment.videoComment"
-                  src="http://img.isdfmk.xyz/safd20200406141323.png"
+                  :src="comment.videoComment+'?vframe/jpg/offset/1/w/300/h/300'"
                   fit="scale-down"/>
               <div class="product_play" v-if="comment.videoComment">
                 <el-link :underline="false"
@@ -115,10 +114,9 @@
               {{comment.secondComment.textSecondComment}}
             </div>
             <div>
-              <div class="product_comment_img">
+              <div class="product_comment_img" v-if="comment.secondComment.videoSecondComment">
                 <el-image
-                    v-if="comment.secondComment.videoSecondComment"
-                    src="http://img.fhxasdsada.xyz/safd20200406141323.png"
+                    :src="comment.secondComment.videoSecondComment+'?vframe/jpg/offset/2/w/300/h/300'"
                     fit="scale-down"/>
                 <div class="product_play" v-if="comment.secondComment.videoSecondComment">
                   <el-link :underline="false"
@@ -311,7 +309,7 @@
     margin-right: 5px;
     margin-bottom: 5px;
     max-width: 58px;
-    max-height: 58px;
+    height: 58px;
     overflow: hidden;
   }
 

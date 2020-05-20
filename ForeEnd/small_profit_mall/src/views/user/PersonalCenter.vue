@@ -291,29 +291,17 @@
         },
         footprintList: [
           [
-            {"imageSite": "http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg"},
-            {"imageSite": "http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg"},
-            {"imageSite": "http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg"},
-          ],
-          [
-            {"imageSite": "http://productdata.fhxasdsada.xyz/43a1962b41270d97.jpg"},
-            {"imageSite": "http://productdata.fhxasdsada.xyz/43a1962b41270d97.jpg"},
-            {"imageSite": "http://productdata.fhxasdsada.xyz/43a1962b41270d97.jpg"},
-          ],
-          [
-            {"imageSite": "http://productdata.fhxasdsada.xyz/ee567a1dea515d38.jpg"},
-            {"imageSite": "http://productdata.fhxasdsada.xyz/ee567a1dea515d38.jpg"},
-            {"imageSite": "http://productdata.fhxasdsada.xyz/ee567a1dea515d38.jpg"},
-          ],
-          [
-            {"imageSite": "http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg"},
-            {"imageSite": "http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg"},
-            {"imageSite": "http://productdata.fhxasdsada.xyz/08fed8837c92433a.jpg"},
-          ],
-          [
-            {"imageSite": "http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg"},
-            {"imageSite": "http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg"},
-            {"imageSite": "http://productdata.fhxasdsada.xyz/001e63e04f967e90.jpg"},
+            {"imageSite": "http://productdata.isdfmk.xyz/68836f52ffaaad96.jpg"},
+            {"imageSite": "http://productdata.isdfmk.xyz/68836f52ffaaad96.jpg"},
+            {"imageSite": "http://productdata.isdfmk.xyz/68836f52ffaaad96.jpg"},
+          ],[
+            {"imageSite": "http://productdata.isdfmk.xyz/68836f52ffaaad96.jpg"},
+            {"imageSite": "http://productdata.isdfmk.xyz/68836f52ffaaad96.jpg"},
+            {"imageSite": "http://productdata.isdfmk.xyz/68836f52ffaaad96.jpg"},
+          ],[
+            {"imageSite": "http://productdata.isdfmk.xyz/68836f52ffaaad96.jpg"},
+            {"imageSite": "http://productdata.isdfmk.xyz/68836f52ffaaad96.jpg"},
+            {"imageSite": "http://productdata.isdfmk.xyz/68836f52ffaaad96.jpg"},
           ],
         ],
         //会员信息

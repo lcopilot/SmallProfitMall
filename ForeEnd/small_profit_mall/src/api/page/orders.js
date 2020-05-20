@@ -8,7 +8,7 @@ export const facePayment =data=>{
 };
 //支付宝支付
 export const payByAliPay=data=>{
-  return http.requestPost(apiUrl+'OrderController/alipayPay',data)
+  return http.requestPost(apiUrl+'/OrderController/alipayPay',data)
 };
 //获取订单数据
 export const getOrder=(userId,orderNumber)=>{

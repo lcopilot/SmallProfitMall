@@ -13,7 +13,8 @@
          v-for="order in orderList">
       <div class="order_information">
         <el-row>
-          <el-col :span="5" :push="1">时间:{{moment(order.orderTime).format('YYYY-MM-DD HH:mm:ss')}}</el-col>
+          <el-col :span="5" :push="1">时间:{{moment(order.orderTime).format('YYYY-MM-DD HH:mm:ss')}}
+          </el-col>
           <el-col :span="10" :push="1">订单号:{{order.orderId}}</el-col>
           <el-col :span="2" :push="8" v-if="order.sign==1">
             <li class="el-icon-delete order_delete" @click="removeOrder(order.orderId)"></li>
@@ -28,14 +29,16 @@
                    :style="index==order.productContents.length-1?'':'border-bottom: 1px solid #dcdfe6'">
                 <el-row>
                   <el-col :span="order.orderState<=1?5:3">
-                    <router-link :to="{name:'Order',params:{orderNumber:order.orderId,genre:order.orderState}}">
+                    <router-link
+                        :to="{name:'Order',params:{orderNumber:order.orderId,genre:order.orderState}}">
                       <div class="order_product_img">
                         <el-image :src="product.productImage" fit="fill"></el-image>
                       </div>
                     </router-link>
                   </el-col>
                   <el-col :span="order.orderState<=1?14:6">
-                    <router-link :to="{name:'Order',params:{orderNumber:order.orderId,genre:order.orderState}}">
+                    <router-link
+                        :to="{name:'Order',params:{orderNumber:order.orderId,genre:order.orderState}}">
                       <div class="order_product_name">
                         {{product.productName}}
                       </div>
@@ -52,17 +55,32 @@
                     </div>
                   </el-col>
                   <el-col :span="order.orderState<=1?5:3">
-                    <div :style="order.orderState<=1?'margin-top: 19%;font-size: 13px':'margin-top: 18%;'">
+                    <div
+                        :style="order.orderState<=1?'margin-top: 19%;font-size: 13px':'margin-top: 18%;'">
                       x{{product.productQuantity}}
                     </div>
                   </el-col>
                   <el-col v-if="order.orderState>1" :span="2">
-                    <div style="padding-top: 30%;height:78px;background-color:white;border-left: 1px solid #dcdfe6">
-                      <el-button type="text" size="mini" v-if="order.orderState==2 && product.productState==1">提醒发货</el-button>
-                      <el-button type="text" size="mini" v-if="order.orderState==2 && product.productState==2" @click="confirmReceipt(product.purchaseId,order.orderId)">确认收货</el-button>
-                      <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==3">申请售后</el-button>
-                      <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==3" @click="comment(product.purchaseId,product.productId)">评价晒单</el-button>
-                      <el-button type="text" size="mini" v-if="order.orderState==3 && product.productState==5"  @click="comment(product.purchaseId,0,true)">追评</el-button>
+                    <div
+                        style="padding-top: 30%;height:78px;background-color:white;border-left: 1px solid #dcdfe6">
+                      <el-button type="text" size="mini"
+                                 v-if="order.orderState==2 && product.productState==1">提醒发货
+                      </el-button>
+                      <el-button type="text" size="mini"
+                                 v-if="order.orderState==2 && product.productState==2"
+                                 @click="confirmReceipt(product.purchaseId,order.orderId)">确认收货
+                      </el-button>
+                      <el-button type="text" size="mini"
+                                 v-if="order.orderState==3 && product.productState==3">申请售后
+                      </el-button>
+                      <el-button type="text" size="mini"
+                                 v-if="order.orderState==3 && product.productState==3"
+                                 @click="comment(product.purchaseId,product.productId)">评价晒单
+                      </el-button>
+                      <el-button type="text" size="mini"
+                                 v-if="order.orderState==3 && product.productState==5"
+                                 @click="comment(product.purchaseId,0,true)">追评
+                      </el-button>
                     </div>
                   </el-col>
                 </el-row>
@@ -100,13 +118,16 @@
                   <el-button type="text" size="mini" v-if="order.orderState==1">去付款</el-button>
                 </router-link>
                 <router-link :to="{name:'Order',params:{orderNumber:order.orderId,genre:0}}">
-                  <el-button type="text" size="mini" v-if="order.orderState==1 && order.changeQuantity==0">去修改</el-button>
+                  <el-button type="text" size="mini"
+                             v-if="order.orderState==1 && order.changeQuantity==0">去修改
+                  </el-button>
                 </router-link>
               </div>
             </td>
           </tr>
         </table>
-        <el-dialog :title="!review?'商品评论':'追加商品评论'" :visible.sync="commentVisible" @close="clearFiles">
+        <el-dialog :title="!review?'商品评论':'追加商品评论'" :visible.sync="commentVisible"
+                   @close="clearFiles">
           <el-form :model="commentForm" label-position="right" label-width="120px">
             <el-form-item label="描述相符" v-if="!review">
               <div class="order_product_score">
@@ -136,7 +157,7 @@
                     </el-link>
                   </div>
                 </div>
-                <el-dialog :visible.sync="commentVideoVisible"  append-to-body>
+                <el-dialog :visible.sync="commentVideoVisible" append-to-body>
                   <video-player v-if="commentVideoVisible" class="video-player vjs-custom-skin"
                                 ref="videoPlayer"
                                 :playsinline="true"
@@ -159,7 +180,8 @@
                 <el-dialog :visible.sync="commentImgVisible" append-to-body>
                   <img width="100%" :src="commentImgUrl" alt="">
                 </el-dialog>
-                <div style="font-size: 12px;color: #999999">注:允许上传10张图片,1个mp4视频,上传图片必须是JPG/PNG/BMP/MP4
+                <div style="font-size: 12px;color: #999999">
+                  注:允许上传10张图片,1个mp4视频,上传图片必须是JPG/PNG/BMP/MP4
                   格式!
                 </div>
               </div>
@@ -173,12 +195,12 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="commentVisible = false">取 消</el-button>
-            <el-button type="primary"  @click="submitComments()">确 定</el-button>
+            <el-button type="primary" @click="submitComments()">确 定</el-button>
           </div>
         </el-dialog>
       </div>
     </div>
-    <div style="text-align: right;padding: 3% 0 1% 0" >
+    <div style="text-align: right;padding: 3% 0 1% 0">
       <el-pagination
           background
           @size-change="changeNumber"
@@ -198,6 +220,7 @@
   import *as orderApi from '../../api/page/orders'
   import *as productApi from '../../api/page/product'
   import {deepClone, getBase64} from "../../util/util";
+
   export default {
     name: "orderContent",
     props: {
@@ -247,14 +270,14 @@
           }
         },
         //是否是追评
-        review:false,
+        review: false,
         imgList: [],
         //评论对话框
         commentVisible: false,
         //评论表单
         commentForm: {
           //匿名评价
-          isAnonymity:false,
+          isAnonymity: false,
           //评分
           score: 5,
           //评论内容
@@ -274,39 +297,39 @@
         //评论视频弹出框
         commentVideoVisible: false,
         //评论视频
-        commentVideo:'',
+        commentVideo: '',
         //文件列表
-        fileList:[],
+        fileList: [],
       }
     },
     methods: {
       //删除文件
-      removeFile(file, fileList){
-        this.fileList=fileList
+      removeFile(file, fileList) {
+        this.fileList = fileList
       },
       //打开评论窗口
-      comment(purchaseId,productId,review){
-        if (review){
-          this.review=true;
-          sessionStorage.setItem('review',review);
+      comment(purchaseId, productId, review) {
+        if (review) {
+          this.review = true;
+          sessionStorage.setItem('review', review);
         }
-        this.commentVisible=true;
-        sessionStorage.setItem("purchaseId",purchaseId);
-        sessionStorage.setItem("productIdComm",productId);
+        this.commentVisible = true;
+        sessionStorage.setItem("purchaseId", purchaseId);
+        sessionStorage.setItem("productIdComm", productId);
       },
       //提交评论
-      submitComments(){
-        let formData=new FormData();
-        if (this.commentVideo){
-          formData.append("files",this.commentVideo.raw)
+      submitComments() {
+        let formData = new FormData();
+        if (this.commentVideo) {
+          formData.append("files", this.commentVideo.raw)
           //base64方法
           // fileList.push(this.commentVideo.raw)
           // getBase64(this.commentVideo.raw,(bas64)=>{
           //   fileList.unshift(bas64)
           // })
         }
-        this.fileList.map((item)=>{
-          formData.append("files",item.raw)
+        this.fileList.map((item) => {
+          formData.append("files", item.raw)
           //base64方法 异步调用
           // fileList.push()
           //  console.log(await getBase64(item.raw))
@@ -315,38 +338,37 @@
           // })
         });
 
-
         formData.append("productId", sessionStorage.getItem("productIdComm"))
         formData.append("purchaseId", sessionStorage.getItem("purchaseId"))
         formData.append("favorability", this.commentForm.score)
-        formData.append("textComment",this.commentForm.content)
-        formData.append("anonymity",this.commentForm.isAnonymity)
-        formData.append("userId",sessionStorage.getItem("uId"))
+        formData.append("textComment", this.commentForm.content)
+        formData.append("anonymity", this.commentForm.isAnonymity)
+        formData.append("userId", sessionStorage.getItem("uId"))
 
-        if (this.review){
-          productApi.addSecondComment(formData).then(res=>{
-            if (res.success){
+        if (this.review) {
+          productApi.addSecondComment(formData).then(res => {
+            if (res.success) {
               this.$message({
-                type:"success",
-                message:"评论已提交"
+                type: "success",
+                message: "评论已提交"
               });
               this.$refs.upload[0].submit();
-              this.playerOptions.sources[0].src="";
+              this.playerOptions.sources[0].src = "";
               this.clearFiles();
-              this.commentVisible=false;
+              this.commentVisible = false;
             }
           })
-        }else {
-          productApi.addComment(formData).then(res=>{
-            if (res.success){
+        } else {
+          productApi.addComment(formData).then(res => {
+            if (res.success) {
               this.$message({
-                type:"success",
-                message:"评论已提交"
+                type: "success",
+                message: "评论已提交"
               });
               this.$refs.upload[0].submit();
-              this.playerOptions.sources[0].src="";
+              this.playerOptions.sources[0].src = "";
               this.clearFiles();
-              this.commentVisible=false;
+              this.commentVisible = false;
             }
           })
         }
@@ -358,12 +380,12 @@
       },
       //清除文件
       clearFiles() {
-        this.review=false;
-        this.fileList=[];
+        this.review = false;
+        this.fileList = [];
         sessionStorage.removeItem("purchaseId");
         sessionStorage.removeItem("productIdComm");
         sessionStorage.removeItem("review");
-        this.playerOptions.sources[0].src='';
+        this.playerOptions.sources[0].src = '';
         const mainImg = this.$refs.upload;
         if (mainImg && mainImg.length) {
           mainImg.forEach(item => {
@@ -378,23 +400,47 @@
         if (!file.raw.type) {
           return this.$message.error('上传的文件必须是JPG/PNG/BMP/MP4格式!');
         }
-        this.fileList=fileList;
+        this.fileList = fileList;
         const isJPG = file.raw.type === 'image/jpeg';
         const isPNG = file.raw.type === 'image/png';
         const isBMP = file.raw.type === 'image/bmp';
         const isMP4 = file.raw.type === 'video/mp4';
         const isLt2M = file.size / 1024 / 1024 < 2;
         if (isMP4) {
-          if(file.size/1024/1024<5){
+          if (file.size / 1024 / 1024 < 5) {
             this.playerOptions.sources[0].src = file.url;
-            this.commentVideo=file;
+            this.commentVideo = file;
+            // 截取视频的第一帧作为预览图 无法使用 可能是新版浏览器原因
+            /*let video = document.createElement("video");
+            video.crossOrigin = "anonymous";
+            video.src = file.url;
+            //第一帧加载完成事件
+            video.onloadeddata = function () {
+             setTimeout(()=>{
+               let scale = 0.5; //缩放
+               let canvas = document.createElement("canvas");
+               canvas.width = video.videoWidth * scale;
+               canvas.height = video.videoHeight * scale;
+               canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+               if (canvas) {
+                 //图片预览
+                 this.ssss = canvas.toDataURL("image/png");
+                 canvas.toBlob((blob)=>{
+                   this.ssss=URL.createObjectURL(blob)
+                   console.log(URL.createObjectURL(blob))
+                 })
+                 console.log(this.ssss)
+               }
+             },100)
+
+            }*/
             return fileList.pop();
-          }else {
+          } else {
             this.$message.error('上传评论视频大小不能超过 5MB!');
             return fileList.pop();
           }
         }
-        if (!isJPG && !isPNG && !isBMP &&!isMP4) {
+        if (!isJPG && !isPNG && !isBMP && !isMP4) {
           fileList.pop();
           return this.$message.error('上传图片视频必须是JPG/PNG/BMP/MP4 格式!');
         }
@@ -402,7 +448,7 @@
           fileList.pop();
           return this.$message.error('上传评论图片大小不能超过 2MB!');
         }
-        if (fileList.length>10){
+        if (fileList.length > 10) {
           this.$message.error('只能上传10张图片哦~');
           return fileList.pop();
         }
@@ -424,36 +470,36 @@
         this.getOrderList();
       },
       //获取订单信息
-      getOrderList(){
+      getOrderList() {
         // if (this.orderParams.currentPage!=1 && this.orderParams.currentPage==this.orderParams.totalPage && (((this.orderParams.currentPage-1)*this.orderParams.pageSize))===this.orderParams.totalCount){
         //   this.orderParams.currentPage--;
         // }
-        const params={
-          orderState:this.genre,
-          userId:sessionStorage.getItem("uId"),
-          currentPage:this.orderParams.currentPage,
-          pageSize:this.orderParams.pageSize
+        const params = {
+          orderState: this.genre,
+          userId: sessionStorage.getItem("uId"),
+          currentPage: this.orderParams.currentPage,
+          pageSize: this.orderParams.pageSize
         };
-        orderApi.getOrderList(params).then(res=>{
-          if (res.success){
-            this.orderList=res.pagination.list
-            this.orderParams.totalPage=res.pagination.totalPage;
-            this.orderParams.totalCount=res.pagination.totalCount;
+        orderApi.getOrderList(params).then(res => {
+          if (res.success) {
+            this.orderList = res.pagination.list
+            this.orderParams.totalPage = res.pagination.totalPage;
+            this.orderParams.totalCount = res.pagination.totalCount;
           }
         })
       },
       //删除订单
-      removeOrder(orderId){
+      removeOrder(orderId) {
         this.$confirm('此操作将永久删除该订单, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          orderApi.removeOrder(sessionStorage.getItem("uId"),orderId).then(res=>{
-            if (res.success){
+          orderApi.removeOrder(sessionStorage.getItem("uId"), orderId).then(res => {
+            if (res.success) {
               this.$message({
-                type:'success',
-                message:'删除成功!'
+                type: 'success',
+                message: '删除成功!'
               })
               this.getOrderList();
             }
@@ -462,14 +508,14 @@
 
       },
       //确认收货
-      confirmReceipt(purchaseId,orderId){
-        const params={
-          userId:sessionStorage.getItem('uId'),
-          purchaseId:purchaseId,
-          orderId:orderId,
+      confirmReceipt(purchaseId, orderId) {
+        const params = {
+          userId: sessionStorage.getItem('uId'),
+          purchaseId: purchaseId,
+          orderId: orderId,
         };
-        orderApi.confirmReceipt(params).then(res=>{
-          if (res.success){
+        orderApi.confirmReceipt(params).then(res => {
+          if (res.success) {
             this.$message.success('已确认收货');
             this.getOrderList();
           }
@@ -477,7 +523,7 @@
       },
     },
     mounted() {
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
             this.getOrderList()
           }
       )
@@ -618,7 +664,7 @@
     -webkit-box-orient: vertical;
   }
 
-  .order_product_Configuration{
+  .order_product_Configuration {
     margin-top: 4%;
     padding: 0 6%;
     text-align: left;
@@ -629,9 +675,11 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
-  .order_product_price{
+
+  .order_product_price {
     padding-top: 20%;
   }
+
   .order_product_name:hover {
     color: #409EFF;
   }

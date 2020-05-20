@@ -186,7 +186,9 @@
       getSpikeAdList() {
         homeApi.getSpikeAdList().then(res => {
           if (res.success) {
-            this.spikeAdList = res.queryResult.list[0];
+            console.log(res)
+            this.spikeAdList = res.queryResult.list;
+
           }
         })
       },
