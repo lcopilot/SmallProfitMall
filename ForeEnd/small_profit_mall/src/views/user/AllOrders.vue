@@ -11,11 +11,11 @@
             <el-tabs v-model="orderType">
               <el-tab-pane name="0">
                 <div slot="label" style="margin-top: 16%">
-                  <el-badge :value="orderQuantity.orderAllQuantity" class="item">
+                  <el-badge @order-Quantity="getOrderQuantity" :value="orderQuantity.orderAllQuantity" class="item">
                     全部订单
                   </el-badge>
                 </div>
-                <orderContent :genre="orderType" v-if="orderType==0"/>
+                <orderContent @order-Quantity="getOrderQuantity" :genre="orderType" v-if="orderType==0"/>
               </el-tab-pane>
               <el-tab-pane name="1">
                 <div slot="label" style="margin-top: 16%">
@@ -23,7 +23,7 @@
                     待付款
                   </el-badge>
                 </div>
-                <orderContent :genre="orderType" v-if="orderType==1"/>
+                <orderContent @order-Quantity="getOrderQuantity" :genre="orderType" v-if="orderType==1"/>
               </el-tab-pane>
               <el-tab-pane name="2">
                 <div slot="label" style="margin-top: 16%">
@@ -31,7 +31,7 @@
                     待收货
                   </el-badge>
                 </div>
-                <orderContent :genre="orderType" v-if="orderType==2"/>
+                <orderContent @order-Quantity="getOrderQuantity" :genre="orderType" v-if="orderType==2"/>
               </el-tab-pane>
               <el-tab-pane name="3">
                 <div slot="label" style="margin-top: 16%">
@@ -39,7 +39,7 @@
                     待评价
                   </el-badge>
                 </div>
-                <orderContent :genre="orderType" v-if="orderType==3"/>
+                <orderContent @order-Quantity="getOrderQuantity" :genre="orderType" v-if="orderType==3"/>
               </el-tab-pane>
               <el-tab-pane name="4">
                 <div slot="label" style="margin-top: 16%">
@@ -47,7 +47,7 @@
                     退换售后
                   </el-badge>
                 </div>
-                <orderContent :genre="orderType" v-if="orderType==4"/>
+                <orderContent @order-Quantity="getOrderQuantity" :genre="orderType" v-if="orderType==4"/>
               </el-tab-pane>
             </el-tabs>
           </el-card>

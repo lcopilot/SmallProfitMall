@@ -320,7 +320,6 @@
         </el-row>
       </el-main>
     </el-main>
-
     <el-footer>
       <Footer/>
     </el-footer>
@@ -332,7 +331,6 @@
   import *as commonApi from '../../api/util/common'
   import *as userApi from '../../api/page/user'
   import {mapActions} from "vuex";
-
   const search = () => import("../../components/pages/Search");
   const commentContent = () => import("../../components/pages/CommentContent");
 

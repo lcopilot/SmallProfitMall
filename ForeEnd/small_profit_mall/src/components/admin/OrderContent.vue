@@ -386,6 +386,7 @@
         sessionStorage.removeItem("productIdComm");
         sessionStorage.removeItem("review");
         this.playerOptions.sources[0].src = '';
+        this.commentForm.content='';
         const mainImg = this.$refs.upload;
         if (mainImg && mainImg.length) {
           mainImg.forEach(item => {
@@ -518,6 +519,7 @@
           if (res.success) {
             this.$message.success('已确认收货');
             this.getOrderList();
+            this.$emit('order-Quantity');
           }
         })
       },

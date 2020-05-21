@@ -216,7 +216,7 @@
           userId: "",
         },
         //头像链接
-        imageUrl: 'http://img.fhxasdsada.xyz/iduyadfgjdekldjhf.png',
+        imageUrl: 'http://img.isdfmk.xyz/iduyadfgjdekldjhf.png',
       };
     },
     methods: {
