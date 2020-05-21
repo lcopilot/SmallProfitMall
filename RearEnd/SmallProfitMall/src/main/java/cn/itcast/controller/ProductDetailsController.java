@@ -33,12 +33,25 @@ public class ProductDetailsController {
      * @return
      */
     @RequestMapping("/productDetailsResult/{productId}")
-    public QueryResponseResult ProductLowPrice(@PathVariable("productId") int productId) {
+    public QueryResponseResult ProductLowPrice(@PathVariable("productId") Integer productId) {
         // 调用service的方法
         List<ProductDetailsResult> productDetails = productDetailsService.findByPid(productId);
         QueryResult<ProductDetailsResult> result = new QueryResult<>();
         result.setList(productDetails);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);
+    }
+
+
+    /**
+     * 推荐商品
+     * @param productId
+     * @return
+     */
+    @RequestMapping("/findRecommend/{productId}")
+    public QueryResponseResult findRecommend(Integer productId){
+        QueryResult queryResult = new QueryResult();
+
+        return new QueryResponseResult(CommonCode.SUCCESS,null);
     }
 
 }

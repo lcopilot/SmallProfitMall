@@ -97,7 +97,7 @@ public class CommentController {
      * @return
      */
     @RequestMapping(value = "/addSecondComment",method = RequestMethod.POST)
-    public QueryResponseResult addSecondComment(@RequestBody SecondComment secondComment) throws IOException {
+    public QueryResponseResult addSecondComment(SecondComment secondComment) throws IOException {
         Integer result = commentService.addSecondComment(secondComment);
         if (result>=1){
             return new QueryResponseResult(CommonCode.SUCCESS,null);

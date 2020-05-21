@@ -155,6 +155,11 @@
         SELECT ProductPageviews FROM  ProductBasis WHERE ProductId = #{productId}
     </select>
 
+    <!--查询商品推荐-->
+    <select id="findRecommend" resultType="cn.itcast.domain.ProductDatails.Recommend">
+        SELECT  FROM ProductImage WHERE ProductId in(SELECT ProductId FROM (SELECT ProductId FROM ))
+    </select>
+
     <!--修改商品库存-->
     <update id="updateProductInventory">
         UPDATE ProductPrice SET ProductInventory = ProductInventory-#{purchaseQuantity}  WHERE ProductId = #{productId}
