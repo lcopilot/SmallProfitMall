@@ -126,9 +126,10 @@
             </td>
           </tr>
         </table>
-        <el-dialog :title="!review?'商品评论':'追加商品评论'" :visible.sync="commentVisible"
-                   @close="clearFiles">
-          <el-form :model="commentForm" label-position="right" label-width="120px">
+        <el-dialog  :title="!review?'商品评论':'追加商品评论'" :visible.sync="commentVisible"
+                   @close="clearFiles" :close-on-click-modal="!commentLoad" :close-on-press-escape="!commentLoad" :show-close="!commentLoad">
+          <el-form v-loading="commentLoad"
+                   element-loading-text="数据提交中,请稍后..." :model="commentForm" label-position="right" label-width="120px">
             <el-form-item label="描述相符" v-if="!review">
               <div class="order_product_score">
                 <el-rate
@@ -194,8 +195,8 @@
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
-            <el-button @click="commentVisible = false">取 消</el-button>
-            <el-button type="primary" @click="submitComments()">确 定</el-button>
+            <el-button @click="commentVisible = false" :disabled="commentLoad">取 消</el-button>
+            <el-button type="primary" @click="submitComments()" :loading="commentLoad">{{commentLoad?'提交中...':'提交'}}</el-button>
           </div>
         </el-dialog>
       </div>
@@ -274,6 +275,8 @@
         imgList: [],
         //评论对话框
         commentVisible: false,
+        //评论提交加载
+        commentLoad:false,
         //评论表单
         commentForm: {
           //匿名评价
@@ -344,7 +347,7 @@
         formData.append("textComment", this.commentForm.content)
         formData.append("anonymity", this.commentForm.isAnonymity)
         formData.append("userId", sessionStorage.getItem("uId"))
-
+        this.commentLoad=true;
         if (this.review) {
           productApi.addSecondComment(formData).then(res => {
             if (res.success) {
@@ -357,6 +360,9 @@
               this.clearFiles();
               this.commentVisible = false;
             }
+          }).catch(error=>{
+            this.clearFiles();
+            this.commentVisible = false
           })
         } else {
           productApi.addComment(formData).then(res => {
@@ -370,9 +376,11 @@
               this.clearFiles();
               this.commentVisible = false;
             }
+          }).catch(error=>{
+            this.clearFiles();
+            this.commentVisible = false
           })
         }
-
       },
       //评论视频播放
       playerVideoComment() {
@@ -380,6 +388,7 @@
       },
       //清除文件
       clearFiles() {
+        this.commentLoad=false;
         this.review = false;
         this.fileList = [];
         sessionStorage.removeItem("purchaseId");
