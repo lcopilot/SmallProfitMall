@@ -1,3 +1,4 @@
+<script src="../../api/util/public.js"></script>
 <template>
   <el-container>
     <el-header height="80px">
@@ -443,6 +444,8 @@
         productAfterSale:'',
         //商品参数
         productParameter:'',
+        //加入购物车定时器 如果点击速度太快，小于200毫秒的话就不会向后台发请求，但是最后总会进行一次请求的。
+        addCartTimer:'',
       }
     },
     components: {search, commentContent},
@@ -533,27 +536,31 @@
         }
         this.productForm.productId = sessionStorage.getItem("productId");
         this.productForm.userId = sessionStorage.getItem("uId");
-        productApi.addCart(this.productForm).then(res => {
-          if (res.success) {
-            this.$message({
-              message: "商品已加入购物车",
-              type: "success"
-            })
-            this.getCartSum(res.queryResult.total);
-          } else {
-            if (res.code == 11111) {
-              return this.$message.warning("购物车已满!");
-            }
-            if (res.code == 10003) {
-              return this.$message.warning("商品同一配置数量已达上限!无法再添加哦~");
-            } else {
+        //如果点击速度太快，小于200毫秒的话就不会向后台发请求，但是最后总会进行一次请求的。
+        clearTimeout(this.addCartTimer);
+        this.addCartTimer=setTimeout(()=>{
+          productApi.addCart(this.productForm).then(res => {
+            if (res.success) {
               this.$message({
-                message: "加入购物车失败,请稍后重试",
-                type: "error"
+                message: "商品已加入购物车",
+                type: "success"
               })
+              this.getCartSum(res.queryResult.total);
+            } else {
+              if (res.code == 11111) {
+                return this.$message.warning("购物车已满!");
+              }
+              if (res.code == 10003) {
+                return this.$message.warning("商品同一配置数量已达上限!无法再添加哦~");
+              } else {
+                this.$message({
+                  message: "加入购物车失败,请稍后重试",
+                  type: "error"
+                })
+              }
             }
-          }
-        })
+          })
+        },200);
       },
       //立即购买
       buyNow() {
