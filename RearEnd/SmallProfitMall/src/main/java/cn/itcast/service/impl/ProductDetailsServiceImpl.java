@@ -105,8 +105,16 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
      */
     @Override
     public ProductDetailsResult findProductDesciption(Integer productId){
-        ProductDetailsResult productDetailsResults = productDetailsDao.findProductDesciption(productId);
-         return productDetailsResults;
+        //查询患者中是否有
+        ProductDetailsResult productDetailsResult = (ProductDetailsResult) redisUtil.get("ProductDetailsResult_"+productId);
+        if (productDetailsResult == null){
+            //数据库中取商品介绍数据
+            ProductDetailsResult productDetailsResults = productDetailsDao.findProductDesciption(productId);
+            redisUtil.set("ProductDetailsResult_"+productId,productDetailsResults);
+            return productDetailsResults;
+        }
+        //缓存中取商品介绍数据
+         return productDetailsResult;
     }
 
 
@@ -143,6 +151,11 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
     }
 
 
+    /**
+     * 商品库存转换
+     * @param productInventory
+     * @return
+     */
     public String findInventory(Double productInventory){
 
         //库存价格(转换)
@@ -166,6 +179,11 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
         return inventory;
     }
 
+    /**
+     * 商品销量转换
+     * @param productSales
+     * @return
+     */
     public String findSale(Double productSales){
         //商品销量(转换)
         String sale = "";
