@@ -82,9 +82,15 @@ public interface ProductDetailsDao {
 
 
     /**
-     * 查询商品推荐商品
+     * 查询商品同类推荐商品
      * @param productId 商品id
+     * @param start 查询开始页
+     * @param pageSize 每页查询数量
      * @return
      */
-    public List<Recommend> findRecommend(@Param("productId") Integer productId);
+    public List<Recommend> findFinalRecommend(@Param("productId") Integer productId,@Param("start")Integer start,
+                                         @Param("pageSize")Integer pageSize,@Param("gradePrimary") Integer gradePrimary);
+
+
+
 }

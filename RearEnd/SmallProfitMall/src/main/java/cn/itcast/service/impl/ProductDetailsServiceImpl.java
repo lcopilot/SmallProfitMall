@@ -2,11 +2,13 @@ package cn.itcast.service.impl;
 
 import cn.itcast.dao.ProductDetailsDao;
 import cn.itcast.domain.ProductDatails.ProductDetailsResult;
+import cn.itcast.domain.ProductDatails.Recommend;
 import cn.itcast.service.ProductDetailsService;
 import cn.itcast.util.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -89,6 +91,39 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
             return redis;
         }
 
+    }
+
+
+    /**
+     *查询商品的推荐
+     * @param productId 商品id
+     * @return
+     */
+    @Override
+    public List<Recommend> findRecommend(Integer productId){
+        //查询页起始点
+        Integer start = 0;
+        //每页查询数量
+        Integer pageSize = 3;
+        List<Recommend> recommends = new ArrayList<>();
+        List<Recommend> recommends1 = productDetailsDao.findFinalRecommend(productId,start,pageSize,1);
+        for(Recommend recommend : recommends1){
+            recommends.add(recommend);
+        }
+
+        for (int i = 2; i <5 ; i++) {
+            if (recommends.size()<3){
+                pageSize=3-recommends.size();
+                List<Recommend> recommends2 = productDetailsDao.findFinalRecommend(productId,start,pageSize,i);
+                for(Recommend recommend : recommends2){
+                    recommends.add(recommend);
+                }
+            }else {
+                break;
+            }
+
+        }
+        return recommends;
     }
 
 }

@@ -7,12 +7,28 @@ import lombok.Data;
  * @author Kite
  * @date 2020/5/21
  */
-@Data
 public class Recommend {
+    /**商品id**/
     private Integer productId;
-    private Integer ImageSite;
+    /**商品图片**/
+    private String ImageSite;
 
 
+    public String getImageSite() {
+        return ImageSite;
+    }
+
+    public void setImageSite(String imageSite) {
+        ImageSite = imageSite;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
 
 
 }
