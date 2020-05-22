@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
         user.setName("smallProfit");
         user.setToken("DM");
         user.setBirthday("0-0-0");
-        user.setImage("http://img.fhxasdsada.xyz//000000001312c10c0000000002255f0a?t=1578145613938");
+        user.setImage("http://img.isdfmk.xyz/iduyadfgjdekldjhf.png");
         user.setSex("1");
         //新增用户
         userDao.saveAccount(user);

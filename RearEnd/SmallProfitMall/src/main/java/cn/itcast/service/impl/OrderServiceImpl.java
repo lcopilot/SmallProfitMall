@@ -464,7 +464,7 @@ public class OrderServiceImpl implements OrderService {
             productId[i] = shoppingCarts.get(i).getProductId();
             productQuantity[i] = shoppingCarts.get(i).getProductQuantity();
         }
-        List<Integer> productContents = productDetailsDao.findProductInventory(productId);
+        List<Double> productContents = productDetailsDao.findProductInventory(productId);
         Boolean sign = false;
 
         for (int i = 0; i <productContents.size() ; i++) {

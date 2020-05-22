@@ -145,8 +145,17 @@
     </select>
 
     <!--查询商品库存-->
-    <select id="findProductInventory" resultType="java.lang.Integer">
+    <select id="findProductInventory" resultType="java.lang.Double">
         SELECT ProductInventory FROM `ProductPrice`
+        WHERE ProductId in
+        <foreach collection="productId" item="productId" open="(" separator="," close=")">
+            #{productId}
+        </foreach>
+    </select>
+
+    <!--查询商品销量-->
+    <select id="findProductSales" resultType="java.lang.Double">
+        SELECT ProductSales FROM `ProductPrice`
         WHERE ProductId in
         <foreach collection="productId" item="productId" open="(" separator="," close=")">
             #{productId}
@@ -212,12 +221,19 @@
     </update>
 
 
-    <!--查询商品介绍，商品保障，商品参数-->
+    <!--查询商品介绍,商品保障,商品参数-->
     <select id="findProductDesciption" resultType="cn.itcast.domain.ProductDatails.ProductDetailsResult">
-    SELECT productId,productDescription, productAfterSale , productParameter
+    SELECT productId,productDescription,
+            productAfterSale,productParameter
      FROM ProductBasis
-
      WHERE ProductId=#{productId};
+    </select>
+
+    <!--查询商品库跟销量-->
+    <select id="findSalesInventory" resultType="cn.itcast.domain.ProductDatails.ProductDetailsResult">
+        SELECT ProductInventory,ProductSales
+         FROM ProductPrice
+         WHERE ProductId=#{productId};
     </select>
 
 

@@ -1,6 +1,7 @@
 package cn.itcast.service.impl;
 
 import cn.itcast.dao.ProductDetailsDao;
+import cn.itcast.domain.ProductDatails.ProductAttributes;
 import cn.itcast.domain.ProductDatails.ProductDetailsResult;
 import cn.itcast.domain.ProductDatails.Recommend;
 import cn.itcast.service.ProductDetailsService;
@@ -30,53 +31,28 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
      */
     @Override
     public ProductDetailsResult findByPid(int pid) {
-        //查询商品有的属性
-      //  ProductAttributes productAttributes = productDetailsDao.fendAttributes(pid);
+//        //查询商品有的属性
+//           ProductAttributes productAttributes = productDetailsDao.fendAttributes(pid);
         //查询商品详细信息
         ProductDetailsResult productDetailsResult = productDetailsDao.fendProduct(pid);
         String transition = String.valueOf(pid);
         String ProductId ="productId_"+transition;
         //从缓存中查询是否存在
-//        List<ProductDetailsResult>  redis = (List<ProductDetailsResult>)redisUtil.get(ProductId);
-        List<ProductDetailsResult>  redis= null;
+        ProductDetailsResult  redis = (ProductDetailsResult)redisUtil.get(ProductId);
         if(redis==null){
             //库存价格(转换)
-            String inventory = "";
+            String inventory =findInventory(productDetailsResult.getProductInventory());
             //商品销量(转换)
-            String sale = "";
-            //库存转换 大于10000转换微1w
-            if (productDetailsResult.getInventorys() > 10000) {
-                //取小数点后一位
-                java.text.DecimalFormat   df=new   java.text.DecimalFormat("#.#");
-                Double inventorys = productDetailsResult.getProductInventory();
-                Double a = inventorys/10000;
-                inventory = df.format(a);
-                //库存过万转换
-                inventory = inventory + "W+";
-            }else {
-                //转为字符串类型
-                inventory=""+productDetailsResult.getProductInventory();
-                //取小数点前数组
-                inventory =inventory.split("\\.")[0];
-            }
-            if (productDetailsResult.getProductSales()>10000){
-                java.text.DecimalFormat   df=new   java.text.DecimalFormat("#.#");
-                Double sales = productDetailsResult.getProductSales();
-                Double a = sales/10000;
-                sale = df.format(a);
-                //销售过完转换
-                sale=sale+"W+";
-            }else {
-                sale=""+productDetailsResult.getProductSales();
-                sale =sale.split("\\.")[0];
+            String sale =findSale(productDetailsResult.getProductSales());
+
+
+            if (productDetailsResult.getProductSales()==0){
+                //如果销量为空 则设置为零
+                productDetailsResult.setSales("0");
             }
             //库存为空 则设置为零
             if (productDetailsResult.getProductInventory()==0) {
                 productDetailsResult.setInventory("0");
-            }
-            if (productDetailsResult.getProductSales()==0){
-                //如果销量为空 则设置为零
-                productDetailsResult.setSales("0");
             }
             //设置转换后的库存
             productDetailsResult.setInventory(inventory);
@@ -88,8 +64,35 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
             redisUtil.set(ProductId,productDetailsResult);
             return productDetailsResult;
         }else {
+            ProductDetailsResult productDetailsResult1 = productDetailsDao.findSalesInventory(pid);
+            //从缓存中取 跟新商品的销量跟库存
+            Integer[] productId= new Integer[]{pid};
+            //查询当前库存
+           double intInventory = productDetailsResult1.getProductInventory();
+            //格式转换
+            String productInventorys = findInventory(intInventory);
+            //设置数字库存
+            redis.setProductInventory(intInventory);
+            //设置转换后的字符串库存
+            redis.setInventory(productInventorys);
+            if (intInventory==0) {
+                redis.setInventory("0");
+            }
+
+            //查询当前销量
+            Double intProductSales = productDetailsResult1.getProductSales();
+            //设置数组销量
+            redis.setProductSales(intProductSales);
+            //格式转换
+            String productSale = findSale(intProductSales);
+            //设置转换格式后的销量
+            redis.setSales(productSale);
+            if (intProductSales==0){
+                //如果销量为空 则设置为零
+                redis.setSales("0");
+            }
             System.out.println("缓存中取商品详细数据");
-            return productDetailsResult;
+            return redis;
         }
 
     }
@@ -137,6 +140,48 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
 
         }
         return recommends;
+    }
+
+
+    public String findInventory(Double productInventory){
+
+        //库存价格(转换)
+        String inventory = "";
+        //库存转换 大于10000转换微1w
+        if (productInventory > 10000) {
+            //取小数点后一位
+            java.text.DecimalFormat   df=new   java.text.DecimalFormat("#.#");
+            Double inventorys = productInventory;
+            Double a = inventorys/10000;
+            inventory = df.format(a);
+            //库存过万转换
+            inventory = inventory + "W+";
+        }else {
+            //转为字符串类型
+            inventory=""+productInventory;
+            //取小数点前数组
+            inventory =inventory.split("\\.")[0];
+        }
+
+        return inventory;
+    }
+
+    public String findSale(Double productSales){
+        //商品销量(转换)
+        String sale = "";
+        if (productSales>10000){
+            java.text.DecimalFormat   df=new   java.text.DecimalFormat("#.#");
+            Double sales = productSales;
+            Double a = sales/10000;
+            sale = df.format(a);
+            //销售过完转换
+            sale=sale+"W+";
+        }else {
+            sale=""+productSales;
+            sale =sale.split("\\.")[0];
+        }
+
+        return sale;
     }
 
 }

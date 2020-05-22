@@ -22,7 +22,7 @@ public class ProductDetailsResult implements Serializable {
     private String sales;
     /**重量**/
     private String weight;
-    //库存**/
+    /**库存**/
     private String inventory;
     /**是否包邮**/
     private String freeShipping;

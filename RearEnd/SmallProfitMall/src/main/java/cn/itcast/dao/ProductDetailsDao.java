@@ -56,7 +56,22 @@ public interface ProductDetailsDao {
      * @param productId 商品id
      * @return
      */
-    public List<Integer> findProductInventory(@Param("productId")Integer[] productId);
+    public List<Double> findProductInventory(@Param("productId")Integer[] productId);
+
+    /**
+     * 查询商品库存
+     * @param productId 商品id
+     * @return
+     */
+    public List<Double> findProductSales(@Param("productId")Integer[] productId);
+
+
+    /**
+     * 查询商品库存跟销量
+     * @param productId 商品id
+     * @return
+     */
+    public ProductDetailsResult  findSalesInventory(@Param("productId")Integer productId);
 
     /**
      * 修改商品销量
