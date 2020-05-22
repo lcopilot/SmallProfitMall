@@ -1,4 +1,3 @@
-<script src="../../api/util/public.js"></script>
 <template>
   <el-container>
     <el-header height="80px">
@@ -332,7 +331,6 @@
   import *as commonApi from '../../api/util/common'
   import *as userApi from '../../api/page/user'
   import {mapActions} from "vuex";
-  import http from "../../api/util/public";
   const search = () => import("../../components/pages/Search");
   const commentContent = () => import("../../components/pages/CommentContent");
 
