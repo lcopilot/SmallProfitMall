@@ -17,7 +17,7 @@ public class PathUtil {
         if(os.toLowerCase().startsWith("win")) {
             basePath = "D:/javaweb";
         }else {
-            basePath = "/home/ftpuser/www/";
+            basePath = "/tmp/smallprofit";
         }
         basePath = basePath.replace("/", separator);
         return basePath;
