@@ -11,7 +11,11 @@ import java.util.List;
 
 public interface ShoppingCartService {
 
-    //添加到购物车
+    /**
+     * 添加到购物车
+     * @param purchaseInformation
+     * @return
+     */
     public int[] addShoppingCar(PurchaseInformation purchaseInformation);
 
     /**

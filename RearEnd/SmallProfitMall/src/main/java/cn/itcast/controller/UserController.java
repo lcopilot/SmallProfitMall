@@ -9,6 +9,7 @@ import cn.itcast.service.UserService;
 import cn.itcast.skd.Constant;
 import cn.itcast.skd.Vaptcha;
 import cn.itcast.util.encryption.AesEncryptUtil;
+import cn.itcast.util.ip.IpUtil;
 import cn.itcast.util.redis.RedisUtil;
 import cn.itcast.util.verify.VerifyUtil;
 import com.aliyuncs.exceptions.ClientException;
@@ -114,12 +115,12 @@ public class UserController {
 	/**
 	 * 注册
 	 * @param user 用户对象
-	 * @param session 传入的验证码消息
+	 * @param request 获取ip
 	 * @return 返回是否成功
 	 * @throws Exception
 	 */
 	@RequestMapping("/register")
-	public QueryResponseResult register(@RequestBody User user, HttpSession session) throws Exception {
+	public QueryResponseResult register(@RequestBody User user,HttpServletRequest request) throws Exception {
 		Integer result = userService.saveAccount(user);
 		if (result==1) {
 			return new QueryResponseResult(CommonCode.SUCCESS,null);
@@ -137,6 +138,8 @@ public class UserController {
 	 */
 	@RequestMapping("/SmVerify/{phone}")
 	public QueryResponseResult SmVerify(@PathVariable("phone") String phone) throws Exception {
+
+
 		Integer result = userService.smVerify(phone,"updateVerify");
 
 		if (result ==1) {

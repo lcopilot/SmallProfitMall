@@ -29,7 +29,7 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
      * @return 商品详细对象
      */
     @Override
-    public List<ProductDetailsResult> findByPid(int pid) {
+    public ProductDetailsResult findByPid(int pid) {
         //查询商品有的属性
       //  ProductAttributes productAttributes = productDetailsDao.fendAttributes(pid);
         //查询商品详细信息
@@ -82,15 +82,28 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
             productDetailsResult.setInventory(inventory);
             //设置转换后的销量
             productDetailsResult.setSales(sale);
+
             System.out.println("数据库中取商品详细数据");
-            List<ProductDetailsResult> productDetailsResults= Arrays.asList(productDetailsResult);
-            redisUtil.set(ProductId,productDetailsResults);
-            return productDetailsResults;
+
+            redisUtil.set(ProductId,productDetailsResult);
+            return productDetailsResult;
         }else {
             System.out.println("缓存中取商品详细数据");
-            return redis;
+            return productDetailsResult;
         }
 
+    }
+
+
+    /**
+     * 商品介绍 商品保障 商品参数
+     * @param productId
+     * @return
+     */
+    @Override
+    public ProductDetailsResult findProductDesciption(Integer productId){
+        ProductDetailsResult productDetailsResults = productDetailsDao.findProductDesciption(productId);
+         return productDetailsResults;
     }
 
 

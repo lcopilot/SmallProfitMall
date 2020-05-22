@@ -11,8 +11,15 @@ public interface ProductDetailsService {
      * @param pid 商品id
      * @return 商品详细数据
      */
-    public List<ProductDetailsResult> findByPid(int pid);
+    public ProductDetailsResult findByPid(int pid);
 
+
+    /**
+     * 商品介绍 商品保障 商品参数
+     * @param productId
+     * @return
+     */
+    public ProductDetailsResult findProductDesciption(Integer productId);
     /**
      * 查询商品详细页推荐商品
      * @param productId 商品id

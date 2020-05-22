@@ -68,7 +68,15 @@
     <!--根据id查询商品-->
     <select id="fendProduct" resultMap="ProductDatailsMap">
            SELECT
-                pb.*,
+                pb.id,
+                pb.ProductId,
+                pb.ProductName,
+                pb.ProductVideo,
+                pb.ProductWeight,
+                pb.prodcutPrimaryCategory,
+                pb.productFinalCategory,
+                pb.productFinalCategory,
+                pb.productPageviews,
                 pp.ProductPrice,
                 pp.SpikePrice,
                 pp.SalesPrice,
@@ -202,6 +210,15 @@
     <update id="updateProductPageviews">
        UPDATE  ProductBasis SET productPageviews  = productPageviews+ 1 WHERE ProductId = #{productId}
     </update>
+
+
+    <!--查询商品介绍，商品保障，商品参数-->
+    <select id="findProductDesciption" resultType="cn.itcast.domain.ProductDatails.ProductDetailsResult">
+    SELECT productId,productDescription, productAfterSale , productParameter
+     FROM ProductBasis
+
+     WHERE ProductId=#{productId};
+    </select>
 
 
 </mapper>

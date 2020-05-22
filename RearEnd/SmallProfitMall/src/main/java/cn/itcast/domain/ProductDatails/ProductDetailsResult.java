@@ -61,6 +61,38 @@ public class ProductDetailsResult implements Serializable {
     /**商品库存**/
     private double ProductInventory;
 
+    /**商品介绍**/
+    private String productDescription;
+
+    /**商品售后**/
+    private String productAfterSale;
+
+    /**商品参数**/
+    private String productParameter;
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
+    }
+
+    public String getProductAfterSale() {
+        return productAfterSale;
+    }
+
+    public void setProductAfterSale(String productAfterSale) {
+        this.productAfterSale = productAfterSale;
+    }
+
+    public String getProductParameter() {
+        return productParameter;
+    }
+
+    public void setProductParameter(String productParameter) {
+        this.productParameter = productParameter;
+    }
 
     public Integer getProductPageviews() {
         return productPageviews;

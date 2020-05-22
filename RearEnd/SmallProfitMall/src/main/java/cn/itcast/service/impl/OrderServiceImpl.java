@@ -588,10 +588,10 @@ public class OrderServiceImpl implements OrderService {
         //转换订单总计类型
         String  total =  order.getOrderTotal().setScale(2, BigDecimal.ROUND_HALF_UP).toString();
         //order 订单 total订单总计
-        notificationUser(order,total);
+      //  notificationUser(order,total);
 
         //直接推送消息
-      //  push(order);
+        push(order);
         return 1;
     }
     /**

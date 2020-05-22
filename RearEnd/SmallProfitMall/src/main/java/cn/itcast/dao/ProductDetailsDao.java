@@ -91,6 +91,12 @@ public interface ProductDetailsDao {
     public List<Recommend> findFinalRecommend(@Param("productId") Integer productId,@Param("start")Integer start,
                                          @Param("pageSize")Integer pageSize,@Param("gradePrimary") Integer gradePrimary);
 
+    /***
+     * 查询商品介绍
+     * @param productId 商品id
+     * @return
+     */
+    public ProductDetailsResult findProductDesciption(@Param("productId") Integer productId);
 
 
 }
