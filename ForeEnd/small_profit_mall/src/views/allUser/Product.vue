@@ -216,12 +216,12 @@
             </el-form>
           </el-col>
           <el-col :span="4">
-            <div>
+            <div style="margin-left: 15px">
               <el-row>
                 <el-col :span="6" style="color: #999999">
                   ———
                 </el-col>
-                <el-col :span="8" style="font-weight: 600;">
+                <el-col :span="8" style="font-weight: 600;margin: 0 10px">
                   看了又看
                 </el-col>
                 <el-col :span="6" style="color: #999999">
@@ -231,7 +231,7 @@
             </div>
             <div v-for="product in productRecommend">
               <router-link :to="{path: '/product', query: {productId:product.productId}}">
-                <el-image style="max-width: 170px;max-height: 170px"
+                <el-image style="max-width: 150px;max-height: 150px"
                           :src="product.imageSite"></el-image>
               </router-link>
             </div>
@@ -331,6 +331,7 @@
   import *as commonApi from '../../api/util/common'
   import *as userApi from '../../api/page/user'
   import {mapActions} from "vuex";
+  import http from "../../api/util/public";
   const search = () => import("../../components/pages/Search");
   const commentContent = () => import("../../components/pages/CommentContent");
 
@@ -517,9 +518,6 @@
                 this.productForm.kind = res.objectReturn.object.kind[0];
                 this.productForm.specification = res.objectReturn.object.specification[0];
                 this.productForm.size = res.objectReturn.object.size[0];
-                this.productDescription=res.objectReturn.object.productDescription;
-                this.productAfterSale=res.objectReturn.object.productAfterSale;
-                this.productParameter=res.objectReturn.object.productParameter;
               }
             }
         )
@@ -639,6 +637,16 @@
             this.productRecommend=res.objectReturn.object
           }
         })
+      },
+      //获取商品介绍,售后,参数
+     getProductDesciption(){
+       productApi.getProductDesciption(this.productId).then(res=>{
+         if (res.success){
+           this.productDescription=res.objectReturn.object.productDescription;
+           this.productAfterSale=res.objectReturn.object.productAfterSale;
+           this.productParameter=res.objectReturn.object.productParameter;
+         }
+       })
       }
     },
     computed: {
@@ -658,6 +666,7 @@
       this.getAddressData();
       this.getProductRecommend();
       this.switchProductImg();
+      this.getProductDesciption();
     }
 
   }

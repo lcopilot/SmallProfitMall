@@ -64,3 +64,7 @@ export const addProductView=(data)=>{
 export const getProductRecommend=productId=>{
   return http.requestGet(apiUrl+'/ProductDetails/findRecommend/'+productId)
 }
+//获取商品介绍,售后,参数
+export const getProductDesciption=productId=>{
+  return http.requestGet(apiUrl+'/ProductDetails/findProductDesciption/'+productId)
+}
