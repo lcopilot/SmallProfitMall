@@ -60,3 +60,7 @@ export const getProductCommentQuantity=productId=>{
 export const addProductView=(data)=>{
   return http.requestPost(apiUrl+'/ProductPageviewsController/addProductPageviews',data)
 }
+//获取商品推荐
+export const getProductRecommend=productId=>{
+  return http.requestGet(apiUrl+'/ProductDetails/findRecommend/'+productId)
+}

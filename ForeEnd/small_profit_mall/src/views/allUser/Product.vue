@@ -229,10 +229,10 @@
                 </el-col>
               </el-row>
             </div>
-            <div v-for="item in 3">
-              <router-link to="/">
+            <div v-for="product in productRecommend">
+              <router-link :to="{path: '/product', query: {productId:product.productId}}">
                 <el-image style="max-width: 170px;max-height: 170px"
-                          src="http://productdata.fhxasdsada.xyz/68836f52ffaaad96.jpg"></el-image>
+                          :src="product.imageSite"></el-image>
               </router-link>
             </div>
           </el-col>
@@ -434,7 +434,8 @@
         },
         //评论数量
         CommentQuantity:{},
-
+        //商品推荐
+        productRecommend:[],
       }
     },
     components: {search, commentContent},
@@ -463,12 +464,10 @@
         clearInterval(this.timer);
       },
       handleChange(value) {
-        console.log(value)
         const checkedNodes = this.$refs['cityAll'].getCheckedNodes()
         checkedNodes[0].pathLabels.forEach((item) => {
           this.address += item + ' ';
         });
-        console.log(this.address);
       },
       getAddressData() {
         if (JSON.parse(sessionStorage.getItem('addressData')) == null) {
@@ -624,6 +623,14 @@
           }
         })
       },
+      //获取商品推荐
+      getProductRecommend(){
+        productApi.getProductRecommend(this.productId).then(res=>{
+          if (res.success){
+            this.productRecommend=res.objectReturn.object
+          }
+        })
+      }
     },
     computed: {
       player() {
@@ -640,6 +647,7 @@
       this.addProductView();
       this.getProduct(this.productId);
       this.getAddressData();
+      this.getProductRecommend();
       this.switchProductImg();
     }
 
