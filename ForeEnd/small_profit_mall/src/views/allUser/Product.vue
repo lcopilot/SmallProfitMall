@@ -247,7 +247,7 @@
                   <svg-icon name="introduction"></svg-icon>
                   商品介绍
                 </div>
-                <div v-html=""></div>
+                <div v-html="productDescription"></div>
               </el-tab-pane>
               <el-tab-pane lazy>
                 <div slot="label" style="font-size: 17px">
@@ -306,14 +306,14 @@
                   <svg-icon name="afterSale"></svg-icon>
                   售后保障
                 </div>
-                <div v-html=""></div>
+                <div v-html="productAfterSale"></div>
               </el-tab-pane>
               <el-tab-pane lazy>
                 <div slot="label" style="font-size: 17px">
                   <svg-icon name="parameter"></svg-icon>
                   商品参数
                 </div>
-                <div v-html=""></div>
+                <div v-html="productParameter"></div>
               </el-tab-pane>
             </el-tabs>
           </el-col>
@@ -436,6 +436,12 @@
         CommentQuantity:{},
         //商品推荐
         productRecommend:[],
+        //商品介绍
+        productDescription:'',
+        //商品售后
+        productAfterSale:'',
+        //商品参数
+        productParameter:'',
       }
     },
     components: {search, commentContent},
@@ -501,16 +507,19 @@
       getProduct(productId) {
         productApi.getProduct(productId).then(res => {
               if (res.success) {
-                this.product = res.queryResult.list[0];
+                this.product = res.objectReturn.object;
                 //设置默认选项
-                this.bigImg = res.queryResult.list[0].imageSite[1];
-                this.productForm.version = res.queryResult.list[0].version[0];
-                this.productForm.colour = res.queryResult.list[0].colour[0];
-                this.productForm.combo = res.queryResult.list[0].combo[0];
-                this.productForm.taste = res.queryResult.list[0].taste[0];
-                this.productForm.kind = res.queryResult.list[0].kind[0];
-                this.productForm.specification = res.queryResult.list[0].specification[0];
-                this.productForm.size = res.queryResult.list[0].size[0];
+                this.bigImg = res.objectReturn.object.imageSite[1];
+                this.productForm.version = res.objectReturn.object.version[0];
+                this.productForm.colour = res.objectReturn.object.colour[0];
+                this.productForm.combo = res.objectReturn.object.combo[0];
+                this.productForm.taste = res.objectReturn.object.taste[0];
+                this.productForm.kind = res.objectReturn.object.kind[0];
+                this.productForm.specification = res.objectReturn.object.specification[0];
+                this.productForm.size = res.objectReturn.object.size[0];
+                this.productDescription=res.objectReturn.object.productDescription;
+                this.productAfterSale=res.objectReturn.object.productAfterSale;
+                this.productParameter=res.objectReturn.object.productParameter;
               }
             }
         )
