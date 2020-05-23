@@ -15,40 +15,34 @@
         <result property="spikePrice" column="SpikePrice"></result>
         <result property="inventorys" column="ProductInventory"></result>
         <!--映射颜色集合-->
-        <collection property="colour" ofType="java.lang.String">
-            <constructor>
-                <arg column="ProductColour"/>
-            </constructor>
+        <collection property="colour" ofType="cn.itcast.domain.ProductDatails.ProductColour">
+            <id property="colourId" column="colourId"></id>
+            <result property="productColour" column="productColour"></result>
         </collection>
         <!--映射尺寸集合-->
-        <collection property="size" ofType="java.lang.String">
-            <constructor>
-                <arg column="ProductSize"/>
-            </constructor>
+        <collection property="size" ofType="cn.itcast.domain.ProductDatails.ProductSize">
+            <id property="sizeId" column="sizeId"></id>
+            <result property="productSize" column="productSize"></result>
         </collection>
         <!--映射版本集合-->
-        <collection property="version" ofType="java.lang.String">
-            <constructor>
-                <arg column="version"/>
-            </constructor>
+        <collection property="version" ofType="cn.itcast.domain.ProductDatails.ProductVersion">
+            <id property="versionId" column="versionId"></id>
+            <result property="version" column="version"></result>
         </collection>
         <!--映射口味集合-->
-        <collection property="taste" ofType="java.lang.String">
-            <constructor>
-                <arg column="ProductTaste"/>
-            </constructor>
+        <collection property="taste" ofType="cn.itcast.domain.ProductDatails.ProductTaste">
+            <id property="tasteId" column="tasteId"></id>
+            <result property="productTaste" column="productTaste"></result>
         </collection>
         <!--映射规格集合-->
-        <collection property="specification" ofType="java.lang.String">
-            <constructor>
-                <arg column="Specification"></arg>
-            </constructor>
+        <collection property="specification" ofType="cn.itcast.domain.ProductDatails.ProductSpecification">
+          <id property="specificationId" column="specificationId"></id>
+            <result property="specification" column="specification"></result>
         </collection>
         <!--映射种类集合-->
-        <collection property="kind" ofType="java.lang.String">
-            <constructor>
-                <arg column="ProductKind"></arg>
-            </constructor>
+        <collection property="kind" ofType="cn.itcast.domain.ProductDatails.ProductKind">
+            <id property="kindId" column="kindId"></id>
+            <result property="productKind" column="productKind"></result>
         </collection>
         <!--映射图片集合-->
         <collection property="imageSite" ofType="java.lang.String">
@@ -57,10 +51,9 @@
             </constructor>
         </collection>
         <!--映射套餐集合-->
-        <collection property="combo" ofType="java.lang.String">
-            <constructor>
-                <arg column="ProductCombo"></arg>
-            </constructor>
+        <collection property="combo" ofType="cn.itcast.domain.ProductDatails.ProductCombo">
+          <id property="comboId" column="comboId"></id>
+            <result property="productCombo" column="productCombo" ></result>
         </collection>
 
     </resultMap>
@@ -84,12 +77,19 @@
                 pp.ProductInventory,
                 pi.ImageSite,
                 pc.ProductColour,
+                pc.colourId,
                 pco.ProductCombo,
+                pco.comboId,
                 pk.ProductKind,
+                pk.kindId,
                 ps.ProductSize,
+                ps.sizeId,
                 pt.ProductTaste,
+                pt.tasteId,
                 pv.version,
-                pst.Specification
+                pv.versionId,
+                pst.Specification,
+                pst.specificationId
             from
 			    ProductBasis pb
 			LEFT JOIN

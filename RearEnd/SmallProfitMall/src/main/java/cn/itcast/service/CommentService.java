@@ -1,13 +1,10 @@
 package cn.itcast.service;
 
-import cn.itcast.domain.ProductDatails.CommentQuantity;
+import cn.itcast.domain.productComment.CommentQuantity;
 import cn.itcast.domain.ProductDatails.ProductComment;
-import cn.itcast.domain.ProductDatails.SecondComment;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.multipart.MultipartFile;
+import cn.itcast.domain.productComment.SecondComment;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 /**

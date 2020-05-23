@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 商品属性是否存在表
+ * 商品属性是否存在表（优化使用 暂时弃用 ）
  * @author Kite
  * @date 2020/3/31
  */

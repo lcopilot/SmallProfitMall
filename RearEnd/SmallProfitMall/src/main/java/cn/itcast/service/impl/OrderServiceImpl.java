@@ -181,13 +181,19 @@ public class OrderServiceImpl implements OrderService {
         productContent.setProductWeight(purchaseInformation1.getProductWeight());
         //添加到订单商品信息表
         orderDao.addProductContent(productContent);
+
+        //计算商品总价-------------------------------------------------------------------
         //单价
+
         BigDecimal productPrice1=new BigDecimal(Double.toString(purchaseInformation1.getProductPrice()));
         //数量
         BigDecimal Quantity=new BigDecimal(String.valueOf(purchaseInformation.getQuantity()));
+        //乘法计算
         BigDecimal total =productPrice1.multiply(Quantity);
         //设置总计
         order.setOrderTotal(total);
+
+        //-------------------------------------------------------------------
         //设置用户id
         order.setUserId(purchaseInformation.getUserId());
         //设置订单时间
@@ -198,10 +204,12 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderId(orderId);
         //数据库新增
         orderDao.addOrder(order);
+
         //库存减购买数量
         List<ProductContent> productContents = new ArrayList<>();
         productContents.add(productContent);
        Boolean result =  findProductInventorys(productContents);
+
         if (!result){
             return "false";
         }

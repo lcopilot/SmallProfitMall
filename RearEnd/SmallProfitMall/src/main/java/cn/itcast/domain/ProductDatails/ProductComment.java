@@ -1,5 +1,6 @@
 package cn.itcast.domain.ProductDatails;
 
+import cn.itcast.domain.productComment.SecondComment;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;

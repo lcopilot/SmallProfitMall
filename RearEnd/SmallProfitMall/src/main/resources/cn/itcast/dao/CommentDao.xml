@@ -21,7 +21,7 @@
         <result property="userName" column="name"></result>
         <result property="commentVideoSign" column="commentVideoSign"></result>
 
-        <association property="secondComment" resultMap="secondCommentMap" javaType="cn.itcast.domain.ProductDatails.SecondComment">
+        <association property="secondComment" resultMap="secondCommentMap" javaType="cn.itcast.domain.productComment.SecondComment">
 
         </association>
 
@@ -36,7 +36,7 @@
     </resultMap>
 
     <!--追评映射-->
-    <resultMap id="secondCommentMap" type="cn.itcast.domain.ProductDatails.SecondComment">
+    <resultMap id="secondCommentMap" type="cn.itcast.domain.productComment.SecondComment">
         <id property="secondCommentId" column="secondCommentId"></id>
         <result property="textSecondComment" column="textSecondComment"></result>
         <result property="videoSecondComment" column="videoSecondComment"></result>
@@ -64,7 +64,7 @@
     </insert>
 
     <!--新增追评-->
-    <insert id="addSecondSecondComment"  useGeneratedKeys="true" keyProperty="secondCommentId" parameterType="cn.itcast.domain.ProductDatails.SecondComment">
+    <insert id="addSecondSecondComment"  useGeneratedKeys="true" keyProperty="secondCommentId" parameterType="cn.itcast.domain.productComment.SecondComment">
     INSERT
     INTO
         secondComment
@@ -74,7 +74,7 @@
     </insert>
 
     <!--添加评论图片-->
-    <insert id="addCommentImage" parameterType="cn.itcast.domain.ProductDatails.CommentImage">
+    <insert id="addCommentImage" parameterType="cn.itcast.domain.productComment.CommentImage">
         INSERT
         INTO
         commentImage

@@ -1,4 +1,4 @@
-package cn.itcast.domain.ProductDatails;
+package cn.itcast.domain.productComment;
 
 /**
  * 评论图片对象

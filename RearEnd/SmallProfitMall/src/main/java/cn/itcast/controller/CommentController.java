@@ -1,9 +1,9 @@
 package cn.itcast.controller;
 
 import cn.itcast.dao.CommentDao;
-import cn.itcast.domain.ProductDatails.CommentQuantity;
+import cn.itcast.domain.productComment.CommentQuantity;
 import cn.itcast.domain.ProductDatails.ProductComment;
-import cn.itcast.domain.ProductDatails.SecondComment;
+import cn.itcast.domain.productComment.SecondComment;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.listFootprint.Pagination;

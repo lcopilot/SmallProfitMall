@@ -136,7 +136,7 @@ public class OrderController {
         List<Order> orders = orderService.findAllOrder(userId,orderState,currentPage,pageSize);
         //查询总数量跟总页数 数组0为总数量 1 为总页数
         Integer[] totalPage=orderService.fendTotalPage(userId,orderState,pageSize);
-            pagination.setList (orders);
+        pagination.setList (orders);
         pagination.setTotalCount(totalPage[0].longValue());
         pagination.setTotalPage((int) totalPage[1].longValue());
         return new ResponsePagination(CommonCode.SUCCESS,pagination);

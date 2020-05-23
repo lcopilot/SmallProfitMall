@@ -29,21 +29,21 @@ public class ProductDetailsResult implements Serializable {
     /**视频**/
     private String video;
     /**尺寸(返回前端）**/
-    private List<String> size;
+    private List<ProductSize> size;
     /**颜色(返回前端）**/
-    private List<String> colour;
+    private List<ProductColour> colour;
     /**套餐(返回前端）**/
-    private List<String> combo;
+    private List<ProductCombo> combo;
     /**规格(返回前端）**/
-    private List<String> specification;
+    private List<ProductSpecification> specification;
     /**图片（返回前端）**/
     private List<String> imageSite;
     /**口味(返回前端）**/
-    private List<String> taste;
+    private List<ProductTaste> taste;
     /**商品种类**/
-    private List<String> kind;
+    private List<ProductKind> kind;
     /**商品版本**/
-    private List<String> version;
+    private List<ProductVersion> version;
     /**库存**/
     private int inventorys;
     /**商品点击量**/
@@ -218,35 +218,35 @@ public class ProductDetailsResult implements Serializable {
         this.video = video;
     }
 
-    public List<String> getSize() {
+    public List<ProductSize> getSize() {
         return size;
     }
 
-    public void setSize(List<String> size) {
+    public void setSize(List<ProductSize> size) {
         this.size = size;
     }
 
-    public List<String> getColour() {
+    public List<ProductColour> getColour() {
         return colour;
     }
 
-    public void setColour(List<String> colour) {
+    public void setColour(List<ProductColour> colour) {
         this.colour = colour;
     }
 
-    public List<String> getCombo() {
+    public List<ProductCombo> getCombo() {
         return combo;
     }
 
-    public void setCombo(List<String> combo) {
+    public void setCombo(List<ProductCombo> combo) {
         this.combo = combo;
     }
 
-    public List<String> getSpecification() {
+    public List<ProductSpecification> getSpecification() {
         return specification;
     }
 
-    public void setSpecification(List<String> specification) {
+    public void setSpecification(List<ProductSpecification> specification) {
         this.specification = specification;
     }
 
@@ -258,27 +258,27 @@ public class ProductDetailsResult implements Serializable {
         this.imageSite = imageSite;
     }
 
-    public List<String> getTaste() {
+    public List<ProductTaste> getTaste() {
         return taste;
     }
 
-    public void setTaste(List<String> taste) {
+    public void setTaste(List<ProductTaste> taste) {
         this.taste = taste;
     }
 
-    public List<String> getKind() {
+    public List<ProductKind> getKind() {
         return kind;
     }
 
-    public void setKind(List<String> kind) {
+    public void setKind(List<ProductKind> kind) {
         this.kind = kind;
     }
 
-    public List<String> getVersion() {
+    public List<ProductVersion> getVersion() {
         return version;
     }
 
-    public void setVersion(List<String> version) {
+    public void setVersion(List<ProductVersion> version) {
         this.version = version;
     }
 

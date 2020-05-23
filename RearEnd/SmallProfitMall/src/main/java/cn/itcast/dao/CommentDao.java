@@ -1,12 +1,10 @@
 package cn.itcast.dao;
 
 import cn.itcast.domain.ProductDatails.ProductComment;
-import cn.itcast.domain.ProductDatails.SecondComment;
+import cn.itcast.domain.productComment.SecondComment;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 商品评论
