@@ -22,8 +22,8 @@ public class UploadPicturesUtil {
         //输出文件地址
         String outputSize =getImgBasePath()+"\\"+userId+".JPEG" ;
         File file = new File(getImgBasePath());
-        String os = System.getProperty("os.name");
 
+        String os = System.getProperty("os.name");
         //3.调用String类的常用成员方法判断并替换
         if(os.toLowerCase().startsWith("win")) {
             //判断文件夹是否存在
@@ -35,8 +35,6 @@ public class UploadPicturesUtil {
             if(!file.exists()){
                 //设置写权限，windows下不用此语句
                 file.setWritable(true, false);
-                file.mkdirs();
-
             }
         }
 
