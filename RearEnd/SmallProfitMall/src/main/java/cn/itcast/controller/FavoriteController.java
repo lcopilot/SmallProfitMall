@@ -1,7 +1,6 @@
 package cn.itcast.controller;
 
 import cn.itcast.domain.favorite.Evaluation;
-import cn.itcast.domain.footprint.Footprint;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.listFootprint.Pagination;

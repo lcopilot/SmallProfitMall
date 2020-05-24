@@ -1,14 +1,11 @@
 package cn.itcast.controller;
 
 import cn.itcast.domain.accountSettings.AccountSettings;
-import cn.itcast.domain.user.Password;
-import cn.itcast.domain.user.User;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
 import cn.itcast.service.AccountSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
