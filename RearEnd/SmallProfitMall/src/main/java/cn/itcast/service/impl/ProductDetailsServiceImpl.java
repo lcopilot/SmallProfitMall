@@ -41,14 +41,19 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
         //从缓存中查询是否存在
         ProductDetailsResult  redis = (ProductDetailsResult)redisUtil.get(ProductId);
         if(redis==null){
-
+            //查询不同配置集合
             List<ProductDistinction> productDistinctions = productDetailsDao.findProductDistinction(productId);
+            for (int i = 0; i <productDistinctions.size() ; i++) {
+                String productInventory = findInventory( productDistinctions.get(i).getProductInventory());
+                productDistinctions.get(i).setProductInventorys(productInventory);
+            }
             productDetailsResult.setProductDistinctions(productDistinctions);
 
             //库存价格(转换)
             String inventory =findInventory(productDetailsResult.getProductInventory());
             //商品销量(转换)
             String sale =findSale(productDetailsResult.getProductSales());
+
 
 
             if (productDetailsResult.getProductSales()==0){
@@ -97,6 +102,10 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
             }
 
             List<ProductDistinction> productDistinctions = productDetailsDao.findProductDistinction(productId);
+            for (int i = 0; i <productDistinctions.size() ; i++) {
+              String productInventory = findInventory( productDistinctions.get(i).getProductInventory());
+                productDistinctions.get(i).setProductInventorys(productInventory);
+            }
             redis.setProductDistinctions(productDistinctions);
 
             System.out.println("缓存中取商品详细数据");
