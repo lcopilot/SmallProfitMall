@@ -20,7 +20,7 @@ public class UploadPicturesUtil {
 
 
         //输出文件地址
-        String outputSize =getImgBasePath()+"\\"+userId+".JPEG" ;
+        String outputSize = getImgBasePath()+"/"+userId+".JPEG" ;
         File file = new File(getImgBasePath());
 
         String os = System.getProperty("os.name");

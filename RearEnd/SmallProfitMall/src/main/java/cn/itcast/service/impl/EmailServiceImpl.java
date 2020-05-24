@@ -12,6 +12,9 @@ import cn.itcast.util.user.SmsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author 86185
+ */
 @Service
 public class EmailServiceImpl implements EmailService {
 
