@@ -214,7 +214,8 @@
                   <el-button type="danger" @click="addCart" style="margin-left: 10px"
                              icon="el-icon-circle-plus-outline">加入购物车
                   </el-button>
-                  <el-button type="danger" @click="buyNow()" :disabled="(productForm.inventorys)<=0">
+                  <el-button type="danger" @click="buyNow()"
+                             :disabled="(productForm.inventorys)<=0">
                     立即购买
                   </el-button>
                 </div>
@@ -438,11 +439,11 @@
         product: [],
         productForm: {
           //库存
-          inventory:'',
+          inventory: '',
           //数字类型的库存
-          inventorys:0,
+          inventorys: 0,
           //价格
-          price:0,
+          price: 0,
           //用户id
           userId: "",
           //商品id
@@ -546,23 +547,23 @@
                 let product = res.objectReturn.object;
                 //设置默认选项
                 this.bigImg = res.objectReturn.object.imageSite[1];
-                this.productForm.price=product.productPrice;
-                this.productForm.inventory=product.inventory;
-                this.productForm.inventorys=product.inventorys;
+                this.productForm.price = product.productPrice;
+                this.productForm.inventory = product.inventory;
+                this.productForm.inventorys = product.inventorys;
                 this.productForm.version = (product.version !== undefined
-                    && product.version.length > 0) ? product.version[0].attributeId : '';
+                    && product.version.length > 0) ? product.version[0].attributeId : 0;
                 this.productForm.colour = (product.colour !== undefined
-                    && product.colour.length > 0) ? product.colour[0].attributeId : '';
+                    && product.colour.length > 0) ? product.colour[0].attributeId : 0;
                 this.productForm.combo = (product.combo !== undefined
-                    && product.combo.length > 0) ? product.combo[0].attributeId : '';
+                    && product.combo.length > 0) ? product.combo[0].attributeId : 0;
                 this.productForm.taste = (product.taste !== undefined
-                    && product.taste.length > 0) ? product.taste[0].attributeId : '';
+                    && product.taste.length > 0) ? product.taste[0].attributeId : 0;
                 this.productForm.kind = (product.kind !== undefined && product.kind.length > 0)
-                    ? product.kind[0].attributeId : '';
+                    ? product.kind[0].attributeId : 0;
                 this.productForm.specification = (product.specification !== undefined
-                    && product.specification.length > 0) ? product.specification[0].attributeId : '';
+                    && product.specification.length > 0) ? product.specification[0].attributeId : 0;
                 this.productForm.size = (product.size !== undefined
-                    && product.size.length > 0) ? product.size[0].attributeId : '';
+                    && product.size.length > 0) ? product.size[0].attributeId : 0;
                 this.attributeChange();
               }
             }
@@ -700,25 +701,26 @@
       },
       //配置改变
       attributeChange() {
-        const isVersion=this.productForm.version!==0;
-        const isColour=this.productForm.colour!==0;
-        const isCombo=this.productForm.combo!==0;
-        const isTaste=this.productForm.taste!==0;
-        const isKind=this.productForm.kind!==0;
-        const isSpecification=this.productForm.specification!==0;
-        const isSize=this.productForm.size!==0;
-        this.product.productDistinctions.some((item)=>{
-          if ((isVersion?item.versionId===this.productForm.version:true)
-              &&(isColour?item.colourId===this.productForm.colour:true)
-              &&(isCombo?item.comboId===this.productForm.combo:true)
-              &&(isTaste?item.tasteId===this.productForm.taste:true)
-              &&(isKind?item.kindId===this.productForm.kind:true)
-              &&(isSpecification?item.specificationId===this.productForm.specification:true)
-              &&(isSize?item.sizeId===this.productForm.size:true)
-          ){
-            this.productForm.price=item.productPrice;
-            this.productForm.inventory=item.inventory;
-            this.productForm.inventorys=item.inventorys;
+        const isVersion = this.productForm.version !== 0 && this.productForm.version !== '';
+        const isColour = this.productForm.colour !== 0 && this.productForm.colour !== '';
+        const isCombo = this.productForm.combo !== 0 && this.productForm.combo !== '';
+        const isTaste = this.productForm.taste !== 0 && this.productForm.taste !== '';
+        const isKind = this.productForm.kind !== 0 && this.productForm.kind !== '';
+        const isSpecification = this.productForm.specification !== 0
+            && this.productForm.specification !== '';
+        const isSize = this.productForm.size !== 0 && this.productForm.size !== '';
+        this.product.productDistinctions.some((item) => {
+          if ((isVersion ? item.versionId === this.productForm.version : true)
+              && (isColour ? item.colourId === this.productForm.colour : true)
+              && (isCombo ? item.comboId === this.productForm.combo : true)
+              && (isTaste ? item.tasteId === this.productForm.taste : true)
+              && (isKind ? item.kindId === this.productForm.kind : true)
+              && (isSpecification ? item.specificationId === this.productForm.specification : true)
+              && (isSize ? item.sizeId === this.productForm.size : true)
+          ) {
+            this.productForm.price = item.productPrice;
+            this.productForm.inventory = item.productInventory;
+            this.productForm.inventorys = item.productInventorys;
             return true;
           }
         })
