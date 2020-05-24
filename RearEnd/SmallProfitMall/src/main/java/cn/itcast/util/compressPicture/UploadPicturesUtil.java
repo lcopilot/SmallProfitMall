@@ -32,9 +32,12 @@ public class UploadPicturesUtil {
                 file.mkdirs();
             }
         }else {
-
+            if(!file.exists()){
+                // 创建该文件夹
+                file.mkdirs();
                 //设置写权限，windows下不用此语句
                 file.setWritable(true, false);
+            }
         }
 
         //调用压缩图片
