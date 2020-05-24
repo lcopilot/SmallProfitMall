@@ -8,10 +8,10 @@ import java.util.List;
 public interface ProductDetailsService {
     /**
      * 查询商品详细
-     * @param pid 商品id
+     * @param productIds 商品id
      * @return 商品详细数据
      */
-    public ProductDetailsResult findByPid(int pid);
+    public ProductDetailsResult findByPid(Integer productIds);
 
 
     /**

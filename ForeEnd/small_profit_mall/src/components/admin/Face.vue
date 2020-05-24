@@ -59,7 +59,7 @@
     data() {
       return {
         //人脸识别动画
-        faceAnimation: "http://img.fhxasdsada.xyz/beforeRecognition.gif",
+        faceAnimation: "http://img.isdfmk.xyz/beforeRecognition.gif",
         //视频大小
         videoWidth: 410,
         videoHeight: 320,

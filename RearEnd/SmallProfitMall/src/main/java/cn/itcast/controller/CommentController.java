@@ -37,7 +37,7 @@ public class CommentController {
 
     /**
      * 商品添加评论
-     * @param productComment 评论对象
+     * @param productComment 评论 对象
      * @return
      */
     @RequestMapping(value = "/addComment",method = RequestMethod.POST)
@@ -52,7 +52,7 @@ public class CommentController {
     /**
      * 查询商品评论
      * @param productId 商品id
-     * @param commentType 评论类型 0 为查全部 1查有图 2查有视频 3为查追评 4为好评 5为中评 6为差评
+     * @param commentType 评论类型 0 为查全部 1查有图 2查有视频 3为查追评 4为好评 5为中评 6为差评，
      * @param currentPage 查询当前页
      * @param pageSize 每次查询数量
      * @return

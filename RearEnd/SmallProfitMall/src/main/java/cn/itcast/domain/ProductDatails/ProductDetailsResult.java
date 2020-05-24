@@ -1,9 +1,6 @@
 package cn.itcast.domain.ProductDatails;
 
-import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,21 +26,21 @@ public class ProductDetailsResult implements Serializable {
     /**视频**/
     private String video;
     /**尺寸(返回前端）**/
-    private List<ProductSize> size;
+    private List<ProductContext> size;
     /**颜色(返回前端）**/
-    private List<ProductColour> colour;
+    private List<ProductContext> colour;
     /**套餐(返回前端）**/
-    private List<ProductCombo> combo;
+    private List<ProductContext> combo;
     /**规格(返回前端）**/
-    private List<ProductSpecification> specification;
+    private List<ProductContext> specification;
     /**图片（返回前端）**/
     private List<String> imageSite;
     /**口味(返回前端）**/
-    private List<ProductTaste> taste;
+    private List<ProductContext> taste;
     /**商品种类**/
-    private List<ProductKind> kind;
+    private List<ProductContext> kind;
     /**商品版本**/
-    private List<ProductVersion> version;
+    private List<ProductContext> version;
     /**库存**/
     private int inventorys;
     /**商品点击量**/
@@ -69,6 +66,17 @@ public class ProductDetailsResult implements Serializable {
 
     /**商品参数**/
     private String productParameter;
+
+    /**商品不同属性**/
+    private List<ProductDistinction> productDistinctions;
+
+    public List<ProductDistinction> getProductDistinctions() {
+        return productDistinctions;
+    }
+
+    public void setProductDistinctions(List<ProductDistinction> productDistinctions) {
+        this.productDistinctions = productDistinctions;
+    }
 
     public String getProductDescription() {
         return productDescription;
@@ -218,35 +226,35 @@ public class ProductDetailsResult implements Serializable {
         this.video = video;
     }
 
-    public List<ProductSize> getSize() {
+    public List<ProductContext> getSize() {
         return size;
     }
 
-    public void setSize(List<ProductSize> size) {
+    public void setSize(List<ProductContext> size) {
         this.size = size;
     }
 
-    public List<ProductColour> getColour() {
+    public List<ProductContext> getColour() {
         return colour;
     }
 
-    public void setColour(List<ProductColour> colour) {
+    public void setColour(List<ProductContext> colour) {
         this.colour = colour;
     }
 
-    public List<ProductCombo> getCombo() {
+    public List<ProductContext> getCombo() {
         return combo;
     }
 
-    public void setCombo(List<ProductCombo> combo) {
+    public void setCombo(List<ProductContext> combo) {
         this.combo = combo;
     }
 
-    public List<ProductSpecification> getSpecification() {
+    public List<ProductContext> getSpecification() {
         return specification;
     }
 
-    public void setSpecification(List<ProductSpecification> specification) {
+    public void setSpecification(List<ProductContext> specification) {
         this.specification = specification;
     }
 
@@ -258,27 +266,27 @@ public class ProductDetailsResult implements Serializable {
         this.imageSite = imageSite;
     }
 
-    public List<ProductTaste> getTaste() {
+    public List<ProductContext> getTaste() {
         return taste;
     }
 
-    public void setTaste(List<ProductTaste> taste) {
+    public void setTaste(List<ProductContext> taste) {
         this.taste = taste;
     }
 
-    public List<ProductKind> getKind() {
+    public List<ProductContext> getKind() {
         return kind;
     }
 
-    public void setKind(List<ProductKind> kind) {
+    public void setKind(List<ProductContext> kind) {
         this.kind = kind;
     }
 
-    public List<ProductVersion> getVersion() {
+    public List<ProductContext> getVersion() {
         return version;
     }
 
-    public void setVersion(List<ProductVersion> version) {
+    public void setVersion(List<ProductContext> version) {
         this.version = version;
     }
 

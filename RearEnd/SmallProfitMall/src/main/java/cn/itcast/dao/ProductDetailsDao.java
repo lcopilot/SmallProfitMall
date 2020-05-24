@@ -3,6 +3,7 @@ package cn.itcast.dao;
 
 import cn.itcast.domain.ProductDatails.ProductAttributes;
 import cn.itcast.domain.ProductDatails.ProductDetailsResult;
+import cn.itcast.domain.ProductDatails.ProductDistinction;
 import cn.itcast.domain.ProductDatails.Recommend;
 import cn.itcast.domain.order.ProductContent;
 import com.tencentcloudapi.iot.v20180123.models.Product;
@@ -18,10 +19,17 @@ import java.util.List;
 public interface ProductDetailsDao {
     /**
      * 查询商品详细信息
-     * @productId productId
+     * @productId productId 商品id
      * @return
      */
     public ProductDetailsResult fendProduct(@Param("productId")Integer productId);
+
+    /**
+     * 查询商品属性
+     * @param productId
+     * @return
+     */
+    public List<ProductDistinction> findProductDistinction(@Param("productId")Integer productId);
 
     /**
      * 查询该商品属性是否存在

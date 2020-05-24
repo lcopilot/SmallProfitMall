@@ -3,6 +3,7 @@ package cn.itcast.service.impl;
 import cn.itcast.dao.ProductDetailsDao;
 import cn.itcast.domain.ProductDatails.ProductAttributes;
 import cn.itcast.domain.ProductDatails.ProductDetailsResult;
+import cn.itcast.domain.ProductDatails.ProductDistinction;
 import cn.itcast.domain.ProductDatails.Recommend;
 import cn.itcast.service.ProductDetailsService;
 import cn.itcast.util.redis.RedisUtil;
@@ -26,20 +27,24 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
 
     /**
      * 商品详细分类
-     * @param pid 商品id
+     * @param productId 商品id
      * @return 商品详细对象
      */
     @Override
-    public ProductDetailsResult findByPid(int pid) {
+    public ProductDetailsResult findByPid(Integer productId) {
 //        //查询商品有的属性
 //           ProductAttributes productAttributes = productDetailsDao.fendAttributes(pid);
         //查询商品详细信息
-        ProductDetailsResult productDetailsResult = productDetailsDao.fendProduct(pid);
-        String transition = String.valueOf(pid);
+        ProductDetailsResult productDetailsResult = productDetailsDao.fendProduct(productId);
+        String transition = String.valueOf(productId);
         String ProductId ="productId_"+transition;
         //从缓存中查询是否存在
         ProductDetailsResult  redis = (ProductDetailsResult)redisUtil.get(ProductId);
         if(redis==null){
+
+            List<ProductDistinction> productDistinctions = productDetailsDao.findProductDistinction(productId);
+            productDetailsResult.setProductDistinctions(productDistinctions);
+
             //库存价格(转换)
             String inventory =findInventory(productDetailsResult.getProductInventory());
             //商品销量(转换)
@@ -64,9 +69,8 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
             redisUtil.set(ProductId,productDetailsResult);
             return productDetailsResult;
         }else {
-            ProductDetailsResult productDetailsResult1 = productDetailsDao.findSalesInventory(pid);
+            ProductDetailsResult productDetailsResult1 = productDetailsDao.findSalesInventory(productId);
             //从缓存中取 跟新商品的销量跟库存
-            Integer[] productId= new Integer[]{pid};
             //查询当前库存
            double intInventory = productDetailsResult1.getProductInventory();
             //格式转换
@@ -91,6 +95,10 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
                 //如果销量为空 则设置为零
                 redis.setSales("0");
             }
+
+            List<ProductDistinction> productDistinctions = productDetailsDao.findProductDistinction(productId);
+            redis.setProductDistinctions(productDistinctions);
+
             System.out.println("缓存中取商品详细数据");
             return redis;
         }

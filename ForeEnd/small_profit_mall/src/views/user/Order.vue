@@ -450,7 +450,7 @@
         this.$refs.face.recognitionFailure(20190415);
         ordersApi.facePayment(dataForm).then(res => {
           if (res.success) {
-            this.$refs.face.faceAnimation = "http://img.fhxasdsada.xyz/afterRecognition.gif";
+            this.$refs.face.faceAnimation = "http://img.isdfmk.xyz/afterRecognition.gif";
             this.$refs.face.stopNavigator();
             this.$refs.face.collectionPrompt = '';
             if (res.code==40000){

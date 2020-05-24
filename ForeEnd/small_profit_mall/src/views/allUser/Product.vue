@@ -121,70 +121,84 @@
                 <div class="form_left">
                   <el-select v-model="productForm.size" filterable placeholder="请选择尺码">
                     <el-option
-                        v-for="(size,index) in product.size"
-                        :label="size"
-                        :value="size"
-                        :key="index"
+                        v-for="size in product.size"
+                        :label="size.attributeContent"
+                        :value="size.attributeId"
+                        :key="size.attributeId"
                     >
                     </el-option>
                   </el-select>
                 </div>
               </el-form-item>
-              <el-form-item label="配置" v-if="product.specification!==undefined && product.specification.length > 0 ">
+              <el-form-item label="配置"
+                            v-if="product.specification!==undefined && product.specification.length > 0 ">
                 <div class="form_left">
-                  <el-select v-model="productForm.specification" filterable placeholder="请选择规格">
+                  <el-select v-model="productForm.specification" filterable placeholder="请选择配置"
+                             @change="specificationChange">
                     <el-option
-                        v-for="(specification,index) in product.specification"
-                        :label="specification"
-                        :value="specification"
-                        :key="index"
+                        v-for="specification in product.specification"
+                        :label="specification.attributeContent"
+                        :value="specification.attributeId"
+                        :key="specification.attributeId"
                     >
                     </el-option>
                   </el-select>
                 </div>
               </el-form-item>
-              <el-form-item label="颜色" v-if="product.colour!==undefined && product.colour.length > 0 ">
+              <el-form-item label="颜色"
+                            v-if="product.colour!==undefined && product.colour.length > 0 ">
                 <div class="form_left">
-                  <el-radio-group v-model="productForm.colour" size="medium">
+                  <el-radio-group v-model="productForm.colour" size="medium"
+                                  @change="specificationChange">
                     <el-radio-button class="product_radio_btn"
-                                     v-for="(colour,index) in product.colour" :key="index"
-                                     :label="colour" :value="index"></el-radio-button>
+                                     v-for="colour in product.colour" :key="colour.attributeId"
+                                     :label="colour.attributeContent"
+                                     :value="colour.attributeId"></el-radio-button>
                   </el-radio-group>
                 </div>
               </el-form-item>
-              <el-form-item label="版本" v-if="product.version!==undefined && product.version.length > 0 ">
+              <el-form-item label="版本"
+                            v-if="product.version!==undefined && product.version.length > 0 ">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.version" size="medium">
                     <el-radio-button class="product_radio_btn"
-                                     v-for="(version,index) in product.version" :key="index"
-                                     :label="version" :value="index"></el-radio-button>
+                                     v-for="version in product.version" :key="version.attributeId"
+                                     :label="version.attributeContent"
+                                     :value="version.attributeId"></el-radio-button>
                   </el-radio-group>
                 </div>
               </el-form-item>
               <el-form-item label="种类" v-if="product.kind!==undefined && product.kind.length > 0 ">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.kind" size="medium">
-                    <el-radio-button class="product_radio_btn" v-for="(kind,index) in product.kind"
-                                     :key="index"
-                                     :label="kind" :value="index"></el-radio-button>
+                    <el-radio-button class="product_radio_btn" v-for="kind in product.kind"
+                                     :key="kind.attributeId"
+                                     :label="kind.attributeContent"
+                                     :value="kind.attributeId"></el-radio-button>
                   </el-radio-group>
                 </div>
               </el-form-item>
-              <el-form-item label="套餐" v-if="product.combo!==undefined && product.combo.length > 0 ">
+              <el-form-item label="套餐"
+                            v-if="product.combo!==undefined && product.combo.length > 0 ">
                 <div class="form_left">
-                  <el-radio-group v-model="productForm.combo" size="medium">
-                    <el-radio-button class="product_radio_btn" :label="combo" :value="index"
-                                     :key="index"
-                                     v-for="(combo,index) in product.combo"></el-radio-button>
+                  <el-radio-group v-model="productForm.combo" size="medium"
+                                  @change="specificationChange">
+                    <el-radio-button class="product_radio_btn" v-for="combo in product.combo"
+                                     :label="combo.attributeContent" :value="combo.attributeId"
+                                     :key="combo.attributeId"
+                    ></el-radio-button>
                   </el-radio-group>
                 </div>
               </el-form-item>
-              <el-form-item label="口味" v-if="product.taste!==undefined && product.taste.length > 0 ">
+              <el-form-item label="口味"
+                            v-if="product.taste!==undefined && product.taste.length > 0 ">
                 <div class="form_left">
                   <el-radio-group v-model="productForm.taste" size="medium">
-                    <el-radio-button class="product_radio_btn" :label="taste" :value="index"
-                                     :key="index"
-                                     v-for="(taste,index) in product.taste"></el-radio-button>
+                    <el-radio-button class="product_radio_btn"
+                                     v-for="taste in product.taste" :label="taste.attributeContent"
+                                     :value="taste.attributeId"
+                                     :key="taste.attributeId"
+                    ></el-radio-button>
                   </el-radio-group>
                 </div>
               </el-form-item>
@@ -256,7 +270,8 @@
                 </div>
                 <el-row>
                   <el-col :span="5">
-                    <el-progress type="dashboard" :stroke-width="8" :percentage="CommentQuantity.goodCommentPercentage?CommentQuantity.goodCommentPercentage:100"></el-progress>
+                    <el-progress type="dashboard" :stroke-width="8"
+                                 :percentage="CommentQuantity.goodCommentPercentage?CommentQuantity.goodCommentPercentage:100"></el-progress>
                     <div style="margin-top: -28px;">
                       <h3>好评度</h3>
                     </div>
@@ -276,25 +291,32 @@
                 <el-row>
                   <el-col :span="22" :push="1">
                     <el-tabs style="margin-top: 20px" v-model="commentType">
-                      <el-tab-pane :label="'全部评价('+CommentQuantity.allCommentQuantity+')'" name="0" lazy>
+                      <el-tab-pane :label="'全部评价('+CommentQuantity.allCommentQuantity+')'" name="0"
+                                   lazy>
                         <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane :label="'晒图('+CommentQuantity.imageCommentQuantity+')'" name="1" lazy>
+                      <el-tab-pane :label="'晒图('+CommentQuantity.imageCommentQuantity+')'" name="1"
+                                   lazy>
                         <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane :label="'视频晒单('+CommentQuantity.videoCommentQuantity+')'" name="2" lazy>
+                      <el-tab-pane :label="'视频晒单('+CommentQuantity.videoCommentQuantity+')'"
+                                   name="2" lazy>
                         <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane :label="'追评('+CommentQuantity.secondCommentQuantity+')'" name="3" lazy>
+                      <el-tab-pane :label="'追评('+CommentQuantity.secondCommentQuantity+')'" name="3"
+                                   lazy>
                         <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane :label="'好评('+CommentQuantity.goodCommentQuantity+')'" name="4" lazy>
+                      <el-tab-pane :label="'好评('+CommentQuantity.goodCommentQuantity+')'" name="4"
+                                   lazy>
                         <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane :label="'中评('+CommentQuantity.ordinaryCommentQuantity+')'" name="5" lazy>
+                      <el-tab-pane :label="'中评('+CommentQuantity.ordinaryCommentQuantity+')'"
+                                   name="5" lazy>
                         <commentContent :genre="commentType"/>
                       </el-tab-pane>
-                      <el-tab-pane :label="'差评('+CommentQuantity.differenceCommentQuantity+')'" name="6" lazy>
+                      <el-tab-pane :label="'差评('+CommentQuantity.differenceCommentQuantity+')'"
+                                   name="6" lazy>
                         <commentContent :genre="commentType"/>
                       </el-tab-pane>
                     </el-tabs>
@@ -331,6 +353,7 @@
   import *as commonApi from '../../api/util/common'
   import *as userApi from '../../api/page/user'
   import {mapActions} from "vuex";
+
   const search = () => import("../../components/pages/Search");
   const commentContent = () => import("../../components/pages/CommentContent");
 
@@ -416,38 +439,37 @@
           //名字
           name: ' ',
           //配置
-          specification: ' ',
+          specification: {},
           //版本
-          version: ' ',
+          version: {},
           //尺码
-          size: ' ',
+          size: {},
           //颜色
-          colour: ' ',
+          colour: {},
           //套餐
-          combo: ' ',
+          combo: {},
           //口味
-          taste: ' ',
+          taste: {},
           //数量
           quantity: 1,
           //种类
-          kind: ' ',
+          kind: {},
         },
         //评论数量
-        CommentQuantity:{},
+        CommentQuantity: {},
         //商品推荐
-        productRecommend:[],
+        productRecommend: [],
         //商品介绍
-        productDescription:'',
+        productDescription: '',
         //商品售后
-        productAfterSale:'',
+        productAfterSale: '',
         //商品参数
-        productParameter:'',
+        productParameter: '',
         //加入购物车定时器 如果点击速度太快，小于200毫秒的话就不会向后台发请求，但是最后总会进行一次请求的。
-        addCartTimer:'',
+        addCartTimer: '',
       }
     },
     components: {search, commentContent},
-
     methods: {
       ...mapActions([
         "modifyCartSum",
@@ -536,7 +558,7 @@
         this.productForm.userId = sessionStorage.getItem("uId");
         //如果点击速度太快，小于200毫秒的话就不会向后台发请求，但是最后总会进行一次请求的。
         clearTimeout(this.addCartTimer);
-        this.addCartTimer=setTimeout(()=>{
+        this.addCartTimer = setTimeout(() => {
           productApi.addCart(this.productForm).then(res => {
             if (res.success) {
               this.$message({
@@ -558,7 +580,7 @@
               }
             }
           })
-        },200);
+        }, 200);
       },
       //立即购买
       buyNow() {
@@ -619,40 +641,44 @@
         }
       },
       //增加浏览量
-      addProductView(){
-        let formData=new FormData()
-        formData.append("productId",this.productId)
-        if (sessionStorage.getItem("uId")){
-          formData.append("userId",sessionStorage.getItem("uId"))
+      addProductView() {
+        let formData = new FormData()
+        formData.append("productId", this.productId)
+        if (sessionStorage.getItem("uId")) {
+          formData.append("userId", sessionStorage.getItem("uId"))
         }
         productApi.addProductView(formData)
       },
       //获取评论数量
-      getProductCommentQuantity(){
-        productApi.getProductCommentQuantity(this.productId).then(res=>{
-          if (res.success){
-            this.CommentQuantity=res.objectReturn.object;
+      getProductCommentQuantity() {
+        productApi.getProductCommentQuantity(this.productId).then(res => {
+          if (res.success) {
+            this.CommentQuantity = res.objectReturn.object;
           }
         })
       },
       //获取商品推荐
-      getProductRecommend(){
-        productApi.getProductRecommend(this.productId).then(res=>{
-          if (res.success){
-            this.productRecommend=res.objectReturn.object
+      getProductRecommend() {
+        productApi.getProductRecommend(this.productId).then(res => {
+          if (res.success) {
+            this.productRecommend = res.objectReturn.object
           }
         })
       },
       //获取商品介绍,售后,参数
-     getProductDesciption(){
-       productApi.getProductDesciption(this.productId).then(res=>{
-         if (res.success){
-           this.productDescription=res.objectReturn.object.productDescription;
-           this.productAfterSale=res.objectReturn.object.productAfterSale;
-           this.productParameter=res.objectReturn.object.productParameter;
-         }
-       })
-      }
+      getProductDesciption() {
+        productApi.getProductDesciption(this.productId).then(res => {
+          if (res.success) {
+            this.productDescription = res.objectReturn.object.productDescription;
+            this.productAfterSale = res.objectReturn.object.productAfterSale;
+            this.productParameter = res.objectReturn.object.productParameter;
+          }
+        })
+      },
+      //配置改变
+      specificationChange(value) {
+        console.log()
+      },
     },
     computed: {
       player() {
