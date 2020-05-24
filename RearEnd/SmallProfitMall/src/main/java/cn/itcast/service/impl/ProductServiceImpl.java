@@ -107,7 +107,7 @@ public class ProductServiceImpl implements ProductService {
         List<Recommend> redis = (List<Recommend>) redisUtil.get("recommend");
         if (redis == null ) {
             System.out.println("数据库中取为你推荐商品数据");
-            List<Recommend> recommends = ProducDao.findRecommend();
+            List<Recommend> recommends = ProducDao.findRecommend(30);
             //存入缓存
             redisUtil.set("recommend", recommends,3600);
             return  recommends;

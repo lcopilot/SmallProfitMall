@@ -39,5 +39,5 @@ public interface ProductDao {
      * 查询所有为你推荐
      * @return
      */
-    public List<Recommend> findRecommend();
+    public List<Recommend> findRecommend(@Param("quantity")Integer quantity);
 }
