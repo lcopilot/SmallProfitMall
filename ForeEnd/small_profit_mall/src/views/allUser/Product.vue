@@ -151,8 +151,8 @@
                 <div class="form_left">
                   <el-radio-group v-model="productForm.colour" size="medium"
                                   @change="attributeChange">
-                    <el-radio-button class="product_radio_btn"
-                                     v-for="colour in product.colour" :key="colour.attributeId"
+                    <el-radio-button :class="index>=1?'product_radio_btn':'product_radio_btn_first'"
+                                     v-for="(colour,index) in product.colour" :key="colour.attributeId"
                                      :label="colour.attributeId">{{colour.attributeContent}}
                     </el-radio-button>
                   </el-radio-group>
@@ -163,8 +163,8 @@
                 <div class="form_left">
                   <el-radio-group v-model="productForm.version" size="medium"
                                   @change="attributeChange">
-                    <el-radio-button class="product_radio_btn"
-                                     v-for="version in product.version" :key="version.attributeId"
+                    <el-radio-button :class="index>=1?'product_radio_btn':'product_radio_btn_first'"
+                                     v-for="(version,index) in product.version" :key="version.attributeId"
                                      :label="version.attributeId">{{version.attributeContent}}
                     </el-radio-button>
                   </el-radio-group>
@@ -174,7 +174,8 @@
                 <div class="form_left">
                   <el-radio-group v-model="productForm.kind" size="medium"
                                   @change="attributeChange">
-                    <el-radio-button class="product_radio_btn" v-for="kind in product.kind"
+                    <el-radio-button :class="index>=1?'product_radio_btn':'product_radio_btn_first'"
+                                     v-for="(kind,index) in product.kind"
                                      :key="kind.attributeId"
                                      :label="kind.attributeId">{{kind.attributeContent}}
                     </el-radio-button>
@@ -186,7 +187,8 @@
                 <div class="form_left">
                   <el-radio-group v-model="productForm.combo" size="medium"
                                   @change="attributeChange">
-                    <el-radio-button class="product_radio_btn" v-for="combo in product.combo"
+                    <el-radio-button :class="index>=1?'product_radio_btn':'product_radio_btn_first'"
+                                     v-for="(combo,index) in product.combo"
                                      :label="combo.attributeId"
                                      :key="combo.attributeId">
                       {{combo.attributeContent}}
@@ -199,8 +201,8 @@
                 <div class="form_left">
                   <el-radio-group v-model="productForm.taste" size="medium"
                                   @change="attributeChange">
-                    <el-radio-button class="product_radio_btn"
-                                     v-for="taste in product.taste" :label="taste.attributeId"
+                    <el-radio-button :class="index>=1?'product_radio_btn':'product_radio_btn_first'"
+                                     v-for="(taste,index) in product.taste" :label="taste.attributeId"
                                      :key="taste.attributeId">
                       {{taste.attributeContent}}
                     </el-radio-button>
@@ -583,7 +585,7 @@
         const product={
           productId:this.productId,
           userId:sessionStorage.getItem("uId"),
-          distinctionId:this.productForm.distinctionId
+          distinctionId:this.productForm.distinctionId,
         }
         //如果点击速度太快，小于200毫秒的话就不会向后台发请求，但是最后总会进行一次请求的。
         clearTimeout(this.addCartTimer);
@@ -763,6 +765,9 @@
 <style scoped>
   .product_radio_btn {
     border-left: 1px solid #dcdfe6;
+    margin: 0 5px 5px 0;
+  }
+  .product_radio_btn_first {
     margin: 0 5px 5px 0;
   }
 
