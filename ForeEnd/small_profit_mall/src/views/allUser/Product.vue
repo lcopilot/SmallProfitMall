@@ -88,7 +88,7 @@
                     <el-row>
                       <el-col :span="4" style="color: #999999"> 微利价:</el-col>
                       <el-col :span="16" class="product_price">
-                        ￥{{product.productPrice?product.productPrice.toFixed(2):''}}
+                        ￥{{productForm.price?productForm.price.toFixed(2):''}}
                       </el-col>
                       <el-col :span="4" style="color: #999999"> 累计销量<span
                           class="product_sales">{{product.sales}}</span></el-col>
@@ -119,7 +119,8 @@
               </el-form-item>
               <el-form-item label="尺码" v-if="product.size!==undefined && product.size.length > 0 ">
                 <div class="form_left">
-                  <el-select v-model="productForm.size" filterable placeholder="请选择尺码" @change="attributeChange">
+                  <el-select v-model="productForm.size" filterable placeholder="请选择尺码"
+                             @change="attributeChange">
                     <el-option
                         v-for="size in product.size"
                         :label="size.attributeContent"
@@ -152,29 +153,31 @@
                                   @change="attributeChange">
                     <el-radio-button class="product_radio_btn"
                                      v-for="colour in product.colour" :key="colour.attributeId"
-                                     :label="colour.attributeContent"
-                                     :value="colour.attributeId"></el-radio-button>
+                                     :label="colour.attributeId">{{colour.attributeContent}}
+                    </el-radio-button>
                   </el-radio-group>
                 </div>
               </el-form-item>
               <el-form-item label="版本"
                             v-if="product.version!==undefined && product.version.length > 0 ">
                 <div class="form_left">
-                  <el-radio-group v-model="productForm.version" size="medium" @change="attributeChange">
+                  <el-radio-group v-model="productForm.version" size="medium"
+                                  @change="attributeChange">
                     <el-radio-button class="product_radio_btn"
                                      v-for="version in product.version" :key="version.attributeId"
-                                     :label="version.attributeContent"
-                                     :value="version.attributeId"></el-radio-button>
+                                     :label="version.attributeId">{{version.attributeContent}}
+                    </el-radio-button>
                   </el-radio-group>
                 </div>
               </el-form-item>
               <el-form-item label="种类" v-if="product.kind!==undefined && product.kind.length > 0 ">
                 <div class="form_left">
-                  <el-radio-group v-model="productForm.kind" size="medium" @change="attributeChange">
+                  <el-radio-group v-model="productForm.kind" size="medium"
+                                  @change="attributeChange">
                     <el-radio-button class="product_radio_btn" v-for="kind in product.kind"
                                      :key="kind.attributeId"
-                                     :label="kind.attributeContent"
-                                     :value="kind.attributeId"></el-radio-button>
+                                     :label="kind.attributeId">{{kind.attributeContent}}
+                    </el-radio-button>
                   </el-radio-group>
                 </div>
               </el-form-item>
@@ -184,37 +187,39 @@
                   <el-radio-group v-model="productForm.combo" size="medium"
                                   @change="attributeChange">
                     <el-radio-button class="product_radio_btn" v-for="combo in product.combo"
-                                     :label="combo.attributeContent" :value="combo.attributeId"
-                                     :key="combo.attributeId"
-                    ></el-radio-button>
+                                     :label="combo.attributeId"
+                                     :key="combo.attributeId">
+                      {{combo.attributeContent}}
+                    </el-radio-button>
                   </el-radio-group>
                 </div>
               </el-form-item>
               <el-form-item label="口味"
                             v-if="product.taste!==undefined && product.taste.length > 0 ">
                 <div class="form_left">
-                  <el-radio-group v-model="productForm.taste" size="medium" @change="attributeChange">
+                  <el-radio-group v-model="productForm.taste" size="medium"
+                                  @change="attributeChange">
                     <el-radio-button class="product_radio_btn"
-                                     v-for="taste in product.taste" :label="taste.attributeContent"
-                                     :value="taste.attributeId"
-                                     :key="taste.attributeId"
-                    ></el-radio-button>
+                                     v-for="taste in product.taste" :label="taste.attributeId"
+                                     :key="taste.attributeId">
+                      {{taste.attributeContent}}
+                    </el-radio-button>
                   </el-radio-group>
                 </div>
               </el-form-item>
               <el-form-item size="large">
                 <div class="form_left">
                   <el-input-number v-model="productForm.quantity" style="width: 30%" :min="1"
-                                   :max="product.inventorys>99?99:product.inventorys"/>
+                                   :max="productForm.inventorys>99?99:productForm.inventorys"/>
                   <el-button type="danger" @click="addCart" style="margin-left: 10px"
-                             icon="el-icon-circle-plus-outline">加入购物车{{productForm.quantitys}}
+                             icon="el-icon-circle-plus-outline">加入购物车
                   </el-button>
-                  <el-button type="danger" @click="buyNow()" :disabled="(product.inventorys)<=0">
+                  <el-button type="danger" @click="buyNow()" :disabled="(productForm.inventorys)<=0">
                     立即购买
                   </el-button>
                 </div>
                 <div class="form_left" style="color:#999999;">
-                  剩余库存 <span class="product_repertory">{{product.inventory}}</span>
+                  剩余库存 <span class="product_repertory">{{productForm.inventory}}</span>
                 </div>
               </el-form-item>
               <el-form-item>
@@ -432,6 +437,12 @@
         address: '',
         product: [],
         productForm: {
+          //库存
+          inventory:'',
+          //数字类型的库存
+          inventorys:0,
+          //价格
+          price:0,
           //用户id
           userId: "",
           //商品id
@@ -439,21 +450,21 @@
           //名字
           name: ' ',
           //配置
-          specification: {},
+          specification: 0,
           //版本
-          version: {},
+          version: 0,
           //尺码
-          size: {},
+          size: 0,
           //颜色
-          colour: {},
+          colour: 0,
           //套餐
-          combo: {},
+          combo: 0,
           //口味
-          taste: {},
+          taste: 0,
           //数量
           quantity: 1,
           //种类
-          kind: {},
+          kind: 0,
         },
         //评论数量
         CommentQuantity: {},
@@ -532,15 +543,27 @@
         productApi.getProduct(productId).then(res => {
               if (res.success) {
                 this.product = res.objectReturn.object;
+                let product = res.objectReturn.object;
                 //设置默认选项
                 this.bigImg = res.objectReturn.object.imageSite[1];
-                this.productForm.version = res.objectReturn.object.version[0];
-                this.productForm.colour = res.objectReturn.object.colour[0];
-                this.productForm.combo = res.objectReturn.object.combo[0];
-                this.productForm.taste = res.objectReturn.object.taste[0];
-                this.productForm.kind = res.objectReturn.object.kind[0];
-                this.productForm.specification = res.objectReturn.object.specification[0];
-                this.productForm.size = res.objectReturn.object.size[0];
+                this.productForm.price=product.productPrice;
+                this.productForm.inventory=product.inventory;
+                this.productForm.inventorys=product.inventorys;
+                this.productForm.version = (product.version !== undefined
+                    && product.version.length > 0) ? product.version[0].attributeId : '';
+                this.productForm.colour = (product.colour !== undefined
+                    && product.colour.length > 0) ? product.colour[0].attributeId : '';
+                this.productForm.combo = (product.combo !== undefined
+                    && product.combo.length > 0) ? product.combo[0].attributeId : '';
+                this.productForm.taste = (product.taste !== undefined
+                    && product.taste.length > 0) ? product.taste[0].attributeId : '';
+                this.productForm.kind = (product.kind !== undefined && product.kind.length > 0)
+                    ? product.kind[0].attributeId : '';
+                this.productForm.specification = (product.specification !== undefined
+                    && product.specification.length > 0) ? product.specification[0].attributeId : '';
+                this.productForm.size = (product.size !== undefined
+                    && product.size.length > 0) ? product.size[0].attributeId : '';
+                this.attributeChange();
               }
             }
         )
@@ -677,7 +700,29 @@
       },
       //配置改变
       attributeChange() {
-        console.log()
+        const isVersion=this.productForm.version!==0;
+        const isColour=this.productForm.colour!==0;
+        const isCombo=this.productForm.combo!==0;
+        const isTaste=this.productForm.taste!==0;
+        const isKind=this.productForm.kind!==0;
+        const isSpecification=this.productForm.specification!==0;
+        const isSize=this.productForm.size!==0;
+        this.product.productDistinctions.some((item)=>{
+          if ((isVersion?item.versionId===this.productForm.version:true)
+              &&(isColour?item.colourId===this.productForm.colour:true)
+              &&(isCombo?item.comboId===this.productForm.combo:true)
+              &&(isTaste?item.tasteId===this.productForm.taste:true)
+              &&(isKind?item.kindId===this.productForm.kind:true)
+              &&(isSpecification?item.specificationId===this.productForm.specification:true)
+              &&(isSize?item.sizeId===this.productForm.size:true)
+          ){
+            this.productForm.price=item.productPrice;
+            this.productForm.inventory=item.productInventory;
+            this.productForm.inventorys=item.inventorys;
+            return true;
+          }
+        })
+
       },
     },
     computed: {
