@@ -13,18 +13,20 @@ public class Recommend implements Serializable {
     private String ProductId;
     /**商品图片**/
     private String ImageSite;
-    /**商品图片**/
+    /**商品名字**/
     private String ProductName;
     /**商品价格**/
     private String ProductPrice;
     /**商品浏览量**/
     private Integer productPageviews;
-
+    /**是否收藏**/
     private int Favorite;
 
     private int shoppingTrolley;
 
+    /**是否是热销**/
     private int hot;
+
 
     public Integer getId() {
         return id;

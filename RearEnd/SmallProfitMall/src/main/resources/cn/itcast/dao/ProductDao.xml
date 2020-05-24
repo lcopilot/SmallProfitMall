@@ -39,13 +39,21 @@
     <!--查询推荐商品-->
     <select id="findRecommend" resultType="cn.itcast.domain.commodity.Recommend">
         SELECT
-            r.*,pp.ProductPrice,pb.ProductName,pi.ImageSite,pb.productPageviews
-        FROM recommend r
-            LEFT JOIN ProductBasis pb ON r.ProductId = pb.ProductId
+            pb.ProductId,
+            pb.ProductName,
+            pb.hot,
+            pb.Favorite,
+            pp.ProductPrice,
+            pi.ImageSite,
+            pb.productPageviews
+        FROM
+            ProductBasis pb
             LEFT JOIN ProductPrice pp ON pb.ProductId = pp.ProductId
-            LEFT JOIN ProductImage pi ON pp.ProductId = pi.ProductId
+            LEFT JOIN ProductImage pi ON pb.ProductId = pi.ProductId
         WHERE
-            pi.sign=1
+            pi.sign = 1
+        ORDER BY
+            pp.ProductSales DESC
     </select>
 
 
