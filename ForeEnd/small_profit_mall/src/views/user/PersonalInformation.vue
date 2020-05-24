@@ -254,10 +254,6 @@
           }).catch(error => {
             this.progressFlag = false
             this.progressPercent = 0
-            this.$message({
-              message: "头像上传失败,请重试",
-              type: "error"
-            });
             console.log(error)
           })
         });

@@ -91,7 +91,7 @@
                         ￥{{productForm.price?productForm.price.toFixed(2):''}}
                       </el-col>
                       <el-col :span="4" style="color: #999999"> 累计销量<span
-                          class="product_sales">{{product.sales}}</span></el-col>
+                          class="product_sales"> {{product.sales}}</span></el-col>
                     </el-row>
                     <div style="color: #999999">促销 会员特价:
                       <router-link to="/login">登录</router-link>
@@ -210,17 +210,17 @@
               <el-form-item size="large">
                 <div class="form_left">
                   <el-input-number v-model="productForm.quantity" style="width: 30%" :min="1"
-                                   :max="productForm.inventorys>99?99:productForm.inventorys"/>
+                                   :max="productForm.inventory>99?99:productForm.inventory"/>
                   <el-button type="danger" @click="addCart" style="margin-left: 10px"
                              icon="el-icon-circle-plus-outline">加入购物车
                   </el-button>
                   <el-button type="danger" @click="buyNow()"
-                             :disabled="(productForm.inventorys)<=0">
+                             :disabled="(productForm.inventory)<=0">
                     立即购买
                   </el-button>
                 </div>
                 <div class="form_left" style="color:#999999;">
-                  剩余库存 <span class="product_repertory">{{productForm.inventory}}</span>
+                  剩余库存 <span class="product_repertory">{{productForm.inventorys}}</span>
                 </div>
               </el-form-item>
               <el-form-item>
@@ -438,10 +438,12 @@
         address: '',
         product: [],
         productForm: {
-          //库存
-          inventory: '',
+          //配置id
+          distinctionId:0,
           //数字类型的库存
-          inventorys: 0,
+          inventory: 0,
+          //字符类型的库存
+          inventorys: '',
           //价格
           price: 0,
           //用户id
@@ -544,12 +546,12 @@
         productApi.getProduct(productId).then(res => {
               if (res.success) {
                 this.product = res.objectReturn.object;
-                let product = res.objectReturn.object;
+                const product = res.objectReturn.object;
                 //设置默认选项
                 this.bigImg = res.objectReturn.object.imageSite[1];
                 this.productForm.price = product.productPrice;
-                this.productForm.inventory = product.inventory;
-                this.productForm.inventorys = product.inventorys;
+                this.productForm.inventory = product.productInventory;
+                this.productForm.inventorys = product.productInventorys;
                 this.productForm.version = (product.version !== undefined
                     && product.version.length > 0) ? product.version[0].attributeId : 0;
                 this.productForm.colour = (product.colour !== undefined
@@ -578,12 +580,15 @@
             type: "warning"
           })
         }
-        this.productForm.productId = sessionStorage.getItem("productId");
-        this.productForm.userId = sessionStorage.getItem("uId");
+        const product={
+          productId:this.productId,
+          userId:sessionStorage.getItem("uId"),
+          distinctionId:this.productForm.distinctionId
+        }
         //如果点击速度太快，小于200毫秒的话就不会向后台发请求，但是最后总会进行一次请求的。
         clearTimeout(this.addCartTimer);
         this.addCartTimer = setTimeout(() => {
-          productApi.addCart(this.productForm).then(res => {
+          productApi.addCart(product).then(res => {
             if (res.success) {
               this.$message({
                 message: "商品已加入购物车",
@@ -615,9 +620,12 @@
             type: "warning"
           })
         }
-        this.productForm.productId = sessionStorage.getItem("productId");
-        this.productForm.userId = sessionStorage.getItem("uId");
-        productApi.buyNow(this.productForm).then(res => {
+        const product={
+          productId:this.productId,
+          userId:sessionStorage.getItem("uId"),
+          distinctionId:this.productForm.distinctionId
+        }
+        productApi.buyNow(product).then(res => {
           if (res.success) {
             this.$router.push({
               name: "Order",
@@ -719,8 +727,10 @@
               && (isSize ? item.sizeId === this.productForm.size : true)
           ) {
             this.productForm.price = item.productPrice;
+            this.productForm.distinctionId = item.distinctionId;
             this.productForm.inventory = item.productInventory;
             this.productForm.inventorys = item.productInventorys;
+            //返回true终止循环 在some 里面 遇到 return true 就是终止遍历 map无法终止
             return true;
           }
         })

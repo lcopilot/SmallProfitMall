@@ -39,6 +39,5 @@ public class OrderPushNews {
         System.out.println("-------------------------------订单消息推送---------------------------------------");
         Order orders = JSONObject.toJavaObject(orderJson, Order.class);
         orderService.push(orders);
-
     }
 }
