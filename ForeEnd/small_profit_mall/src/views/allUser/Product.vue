@@ -717,7 +717,7 @@
               &&(isSize?item.sizeId===this.productForm.size:true)
           ){
             this.productForm.price=item.productPrice;
-            this.productForm.inventory=item.productInventory;
+            this.productForm.inventory=item.inventory;
             this.productForm.inventorys=item.inventorys;
             return true;
           }
