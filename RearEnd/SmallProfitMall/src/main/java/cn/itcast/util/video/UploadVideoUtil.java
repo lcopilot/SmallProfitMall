@@ -22,13 +22,24 @@ public class UploadVideoUtil {
      */
     public static String UploadVideoUtil(String space, String kay,InputStream ins) throws IOException {
         //上传文件地址
-        String fileSite = getImgBasePath()+"\\";
+        String fileSite = getImgBasePath()+"/";
         File file = new File(getImgBasePath());
-        //判断文件夹是否存在
-        if(!file.exists()){
-            // 创建该文件夹
-            file.mkdirs();
+        String os = System.getProperty("os.name");
+        if(os.toLowerCase().startsWith("win")) {
+            //判断文件夹是否存在
+            if(!file.exists()){
+                // 创建该文件夹
+                file.mkdirs();
+            }
+        }else {
+            if(!file.exists()){
+                // 创建该文件夹
+                file.mkdirs();
+                //设置写权限，windows下不用此语句
+                file.setWritable(true, false);
+            }
         }
+
         //调用压缩视频 返回压缩成功后地地址
         String uploadingSite =  ConvertVideo.convert(fileSite,ins);
         //创建上传七牛云对象
