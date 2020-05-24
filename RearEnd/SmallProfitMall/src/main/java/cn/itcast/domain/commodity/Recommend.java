@@ -3,7 +3,7 @@ package cn.itcast.domain.commodity;
 import java.io.Serializable;
 
 /**
- * 为你推荐
+ * 为你推 荐
  * @author kity
  */
 public class Recommend implements Serializable {
@@ -20,13 +20,10 @@ public class Recommend implements Serializable {
     /**商品浏览量**/
     private Integer productPageviews;
     /**是否收藏**/
-    private int Favorite;
-
-    private int shoppingTrolley;
+    private Integer Favorite;
 
     /**是否是热销**/
     private int hot;
-
 
     public Integer getId() {
         return id;
@@ -82,14 +79,6 @@ public class Recommend implements Serializable {
 
     public void setFavorite(int favorite) {
         Favorite = favorite;
-    }
-
-    public int getShoppingTrolley() {
-        return shoppingTrolley;
-    }
-
-    public void setShoppingTrolley(int shoppingTrolley) {
-        this.shoppingTrolley = shoppingTrolley;
     }
 
     public int getHot() {

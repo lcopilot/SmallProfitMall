@@ -31,10 +31,6 @@ public class CommentController {
     /**评论service**/
     @Autowired
     CommentService commentService;
-
-    @Autowired
-    CommentDao commentDao;
-
     /**
      * 商品添加评论
      * @param productComment 评论 对象

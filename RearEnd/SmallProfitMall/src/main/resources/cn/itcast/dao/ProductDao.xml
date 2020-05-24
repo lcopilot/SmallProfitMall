@@ -54,6 +54,7 @@
             pi.sign = 1
         ORDER BY
             pp.ProductSales DESC
+            limit 0 ,#{quantity};
     </select>
 
 
