@@ -109,7 +109,7 @@
              ON pb.ProductId=pv.ProductId
              LEFT JOIN ProductSpecification pst
              ON pb.ProductId=pst.ProductId
-             WHERE pb.ProductId=10001;
+             WHERE pb.ProductId=#{productId};
     </select>
 
     <!--查询商品属性 销量 库存 不同-->
