@@ -181,6 +181,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         return findPreview;
     }
 
+
+
     /**
      * 查询该商品属性
      * @param purchaseInformation 商品对象
