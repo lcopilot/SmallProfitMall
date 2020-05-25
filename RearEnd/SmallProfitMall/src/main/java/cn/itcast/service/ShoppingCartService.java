@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public interface ShoppingCartService {
@@ -67,6 +68,6 @@ public interface ShoppingCartService {
      * @param purchaseInformation 商品对象
      * @return 商品配置拼接
      */
-    public String fenProductDeploy(PurchaseInformation purchaseInformation);
+    public Map fenProductDeploy(PurchaseInformation purchaseInformation);
 
 }

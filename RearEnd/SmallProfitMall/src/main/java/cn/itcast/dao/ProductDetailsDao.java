@@ -121,5 +121,60 @@ public interface ProductDetailsDao {
      */
     public ProductDetailsResult findProductDesciption(@Param("productId") Integer productId);
 
+    /**
+     * 颜色
+     * @param colourId 颜色id
+     * @return
+     */
+    public String findProductColour(Integer colourId);
+
+    /**
+     * 套餐
+     * @param comboId 套餐id
+     * @return
+     */
+    public String findProductCombo(Integer comboId);
+
+    /**
+     * 种类
+     * @param kindId 种类od
+     * @return
+     */
+    public String findProductKind(Integer kindId);
+
+    /**
+     * 尺寸
+     * @param sizeId 尺寸id
+     * @return
+     */
+    public String findProductSize(Integer sizeId);
+
+    /**
+     * 配置
+     * @param specificationId 配置id
+     * @return
+     */
+    public String findProductSpecification(Integer specificationId);
+
+    /**
+     * 口味
+     * @param tasteId 口味id
+     * @return
+     */
+    public String findProductTaste(Integer tasteId);
+
+    /**
+     * 版本id
+     * @param versionId
+     * @return
+     */
+    public String findProductVersion(Integer versionId);
+
+    /**
+     *查询商品配置
+     * @param distinctionId
+     * @return
+     */
+    public ProductDistinction findDistinction(Integer distinctionId);
 
 }

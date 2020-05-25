@@ -2,6 +2,8 @@ package cn.itcast.service.impl;
 
 import cn.itcast.dao.ProductDetailsDao;
 import cn.itcast.dao.ShoppingCartDao;
+import cn.itcast.domain.ProductDatails.ProductDetailsResult;
+import cn.itcast.domain.ProductDatails.ProductDistinction;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.domain.shoppingCar.ShoppingCart;
 
@@ -11,16 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Autowired
     private ShoppingCartDao shoppingCartDao;
-
+    @Autowired
+    private ProductDetailsDao productDetailsDao;
 
     /**
      * 添加购物车
@@ -39,8 +40,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             rediss[1]=shoppingCarts.size();
             return rediss;
         }
+        Map map =  fenProductDeploy(purchaseInformation);
+        Double productPrice = (Double) map.get("productPrice");
+        String productDeploys = (String) map.get("productDeploys");
         //商品配置
-        String productDeploy = fenProductDeploy(purchaseInformation);
+        String productDeploy = productDeploys;
 
         for (ShoppingCart shoppingCartss : shoppingCarts){
             if(purchaseInformation.getProductId()==shoppingCartss.getProductId() && shoppingCartss.getProductDeploy().equals(productDeploy)){
@@ -68,7 +72,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         //设置商品名字
         shoppingCart.setProductName(purchaseInformation1.getProductName());
         //设置商品价格
-        shoppingCart.setProductPrice(purchaseInformation1.getProductPrice());
+        shoppingCart.setProductPrice(productPrice);
         //设置商品重量
         shoppingCart.setProductWeight(purchaseInformation1.getProductWeight());
         //设置库存
@@ -189,7 +193,48 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
      * @return
      */
     @Override
-    public String fenProductDeploy(PurchaseInformation purchaseInformation){
+    public Map fenProductDeploy(PurchaseInformation purchaseInformation){
+        ProductDistinction productDistinctions = productDetailsDao.findDistinction(purchaseInformation.getDistinctionId());
+        //颜色id
+        Integer colourId = productDistinctions.getColourId();
+        //套餐
+        Integer comboId = productDistinctions.getComboId();
+        //种类
+        Integer kindId =  productDistinctions.getKindId();
+         //尺寸
+        Integer sizeId = productDistinctions.getSizeId();
+        //版本
+        Integer versionId = productDistinctions.getVersionId();
+        //口味
+        Integer tasteId = productDistinctions.getTasteId();
+        //规格
+        Integer specificationId = productDistinctions.getSpecificationId();
+
+
+
+        //颜色
+        if (colourId != null) {
+            purchaseInformation.setColour(productDetailsDao.findProductColour(colourId));
+        }
+        if (comboId != null){
+            purchaseInformation.setColour(productDetailsDao.findProductCombo(colourId));
+        }
+        if (comboId != null){
+            purchaseInformation.setKind(productDetailsDao.findProductKind(kindId));
+        }
+        if (comboId != null){
+            purchaseInformation.setSize(productDetailsDao.findProductSize(sizeId));
+        }
+        if (comboId != null){
+            purchaseInformation.setVersion(productDetailsDao.findProductVersion(versionId));
+        }
+        if (comboId != null){
+            purchaseInformation.setTaste(productDetailsDao.findProductCombo(tasteId));
+        }
+        if (comboId != null){
+            purchaseInformation.setSpecification(productDetailsDao.findProductCombo(specificationId));
+        }
+
         String productDeploy = "";
         //颜色
         if (purchaseInformation.getColour()!=null){
@@ -219,7 +264,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         if(purchaseInformation.getSpecification()!=null){
             productDeploy = productDeploy+purchaseInformation.getSpecification()+" ";
         }
-        return productDeploy;
+
+        Map map = new HashMap();
+        String productDeploys = productDeploy;
+        Double productPrice = productDistinctions.getProductPrice();
+        map.put("productDeploys",productDeploys);
+        map.put("productPrice",productPrice);
+
+        return map;
     }
 
 

@@ -163,16 +163,19 @@ public class OrderServiceImpl implements OrderService {
         productContent.setProductName(purchaseInformation1.getProductName());
         //设置商品图片
         productContent.setProductImage(productDetailsDao.findProductImage(purchaseInformation.getProductId()));
-        //设置商品价格
-        productContent.setProductPrice(purchaseInformation1.getProductPrice());
+
         //设置订单id
         productContent.setOrderId(orderId);
         //设置商品id
         productContent.setProductId(purchaseInformation.getProductId());
         //设置是否评价
         productContent.setEvaluate(false);
-        //商品配置
-        String productDeploy = shoppingCartService.fenProductDeploy(purchaseInformation);
+        //商品配置 价格
+        Map map = shoppingCartService.fenProductDeploy(purchaseInformation);
+        String productDeploy = (String) map.get("productDeploys");
+        Double productPrice = (Double) map.get("ProductPrice");
+        //设置商品价格
+        productContent.setProductPrice(productPrice);
         //设置商品配置
         productContent.setProductConfiguration(productDeploy);
         //设置商品购买数量

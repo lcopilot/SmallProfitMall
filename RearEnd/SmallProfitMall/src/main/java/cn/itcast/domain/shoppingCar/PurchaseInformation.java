@@ -5,20 +5,45 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 @Component
 public class PurchaseInformation implements Serializable {
-    private String userId;          //用户id
-    private int productId;          //商品id
-    private String ProductName;         //商品名字
-    private Double ProductPrice;         //商品价格
-    private Double ProductInventory;    //商品库存
-    private String ProductWeight;       //商品重量
-    private String size;                //尺寸(返回前端）
-    private String colour;              //颜色(返回前端）
-    private String combo;               //套餐(返回前端）
-    private String specification;       //规格(返回前端）
-    private String taste;               //口味(返回前端）
-    private String kind;                //商品种类
-    private String version;             //商品版本
-    private Integer quantity;           //购买数量
+    /**用户id**/
+    private String userId;
+    /**商品id**/
+    private Integer productId;
+    /**配置id**/
+    private Integer distinctionId;
+    /**商品名字**/
+    private String ProductName;
+    /**商品价格**/
+    private Double ProductPrice;
+    /**商品库存**/
+    private Double ProductInventory;
+    /**商品重量**/
+    private String ProductWeight;
+    /**尺寸(返回前端）**/
+    private String size;
+    /**颜色(返回前端）**/
+    private String colour;
+    /**套餐(返回前端）**/
+    private String combo;
+    /**规格(返回前端）**/
+    private String specification;
+    /**口味(返回前端）**/
+    private String taste;
+    /**商品种类**/
+    private String kind;
+    /**商品版本**/
+    private String version;
+    /**购买数量**/
+    private Integer quantity;
+
+
+    public Integer getDistinctionId() {
+        return distinctionId;
+    }
+
+    public void setDistinctionId(Integer distinctionId) {
+        this.distinctionId = distinctionId;
+    }
 
     public String getProductWeight() {
         return ProductWeight;

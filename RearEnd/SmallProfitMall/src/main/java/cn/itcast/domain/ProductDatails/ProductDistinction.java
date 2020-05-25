@@ -6,7 +6,7 @@ package cn.itcast.domain.ProductDatails;
  * @date 2020/5/24
  */
 public class ProductDistinction {
-    private Integer productDistinction;
+    private Integer distinctionId;
     /**商品id**/
     private Integer productId;
     /**商品尺寸id**/
@@ -40,12 +40,12 @@ public class ProductDistinction {
         ProductInventorys = productInventorys;
     }
 
-    public Integer getProductDistinction() {
-        return productDistinction;
+    public Integer getDistinctionId() {
+        return distinctionId;
     }
 
-    public void setProductDistinction(Integer productDistinction) {
-        this.productDistinction = productDistinction;
+    public void setDistinctionId(Integer distinctionId) {
+        this.distinctionId = distinctionId;
     }
 
     public Integer getProductId() {
