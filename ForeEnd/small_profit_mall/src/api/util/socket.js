@@ -34,7 +34,7 @@ export const initWebSocket = () => { //初始化websocket
   };
   //连接报错
   websocket.onerror = function () {
-    console.log("WebSocket连接发生错误");
+    console.error("WebSocket连接发生错误");
     //重连
     reconnection();
   };

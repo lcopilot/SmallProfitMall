@@ -59,14 +59,14 @@ axios.interceptors.response.use(
     error => {
       if (error.response.status) {
         if (error.response.status === 404) {
-          console.log(error.response.status);
+          console.error(error.response);
           Message({
             message:"网络请求不存在,请稍后重试!",
             type:"error",
             showClose: true,
           })
         } else {
-          console.log(error.response.status);
+          console.error(error.response);
           Message({
             message:"服务器跑路了~,请稍后重试",
             type:"error",

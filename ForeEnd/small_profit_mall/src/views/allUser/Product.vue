@@ -586,6 +586,7 @@
           productId:this.productId,
           userId:sessionStorage.getItem("uId"),
           distinctionId:this.productForm.distinctionId,
+          quantity:this.productForm.quantity
         }
         //如果点击速度太快，小于200毫秒的话就不会向后台发请求，但是最后总会进行一次请求的。
         clearTimeout(this.addCartTimer);
@@ -625,7 +626,8 @@
         const product={
           productId:this.productId,
           userId:sessionStorage.getItem("uId"),
-          distinctionId:this.productForm.distinctionId
+          distinctionId:this.productForm.distinctionId,
+          quantity:this.productForm.quantity
         }
         productApi.buyNow(product).then(res => {
           if (res.success) {
