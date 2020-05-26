@@ -71,10 +71,10 @@
     <rabbit:listener ref="orderPayment" method="orderPayment" queue-names="SHOPPING-NOTIFICATION-QUEUE"/>
   </rabbit:listener-container>
 
-<!--  &lt;!&ndash;监听推送消息队列&ndash;&gt;-->
-<!--  <rabbit:listener-container connection-factory="connectionFactory">-->
-<!--    <rabbit:listener ref="orderPushNews" method="orderPushNews" queue-names="SHOPPING-NEWS-QUEUE"/>-->
-<!--  </rabbit:listener-container>-->
+  <!--监听推送消息队列-->
+  <rabbit:listener-container connection-factory="connectionFactory">
+    <rabbit:listener ref="orderPushNews" method="orderPushNews" queue-names="SHOPPING-NEWS-QUEUE"/>
+  </rabbit:listener-container>
 
   <!-- 声明多个消费者对象 -->
   <bean id="mQSimpleMsgHandler" class="cn.itcast.util.rabbitMq.MQSimpleMsgHandler"/>
@@ -86,7 +86,7 @@
   <bean id="arrivalNotification" class="cn.itcast.messageQueue.consumer.shopping.ArrivalNotification"></bean>
   <!--订单确认通知-->
   <bean id="orderPayment" class="cn.itcast.messageQueue.consumer.order.OrderPayment"></bean>
-<!--  &lt;!&ndash;订单付款成功消息推送&ndash;&gt;-->
-<!--  <bean id="orderPushNews" class="cn.itcast.messageQueue.consumer.order.OrderPushNews"></bean>-->
+  <!--订单付款成功消息推送-->
+  <bean id="orderPushNews" class="cn.itcast.messageQueue.consumer.order.OrderPushNews"></bean>
 
 </beans>
