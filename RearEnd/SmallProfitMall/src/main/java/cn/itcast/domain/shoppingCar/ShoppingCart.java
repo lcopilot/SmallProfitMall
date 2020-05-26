@@ -8,19 +8,38 @@ import java.io.Serializable;
  */
 @Component
 public class ShoppingCart implements Serializable {
-    private Integer shoppingCartId; //购物车id
-    private String ImageSite;   //商品图片
-    private String ProductName;     //商品名字
-    private String userId;          //用户id
-    private Integer productId;      //商品id
-    private String productDeploy;   //商品配置
-    private Integer distinctionId;  //配置id
-    private Integer quantity;       //购买数量
-    private String productWeight; //商品重量
-    private Double ProductPrice;    //价格
-    private Double ProductInventory;    //商品库存
-    private Boolean evaluation;         //是否收藏
-    private Boolean notice;             //是否有到货通知
+    //购物车id
+    private Integer shoppingCartId;
+    //商品图片
+    private String ImageSite;
+    //商品名字
+    private String ProductName;
+    //用户id
+    private String userId;
+    //商品id
+    private Integer productId;
+    //商品配置
+    private String productDeploy;
+    //配置id
+    private Integer distinctionId;
+    //购买数量
+    private Integer quantity;
+    //商品重量
+    private String productWeight;
+    //价格
+    private Double ProductPrice;
+    //商品库存
+    private Double ProductInventory;
+    //是否收藏
+    private Boolean evaluation;
+    //是否有到货通知
+    private Boolean notice;
+    //该配置库存
+    private Integer productInventory;
+
+    public void setProductInventory(Integer productInventory) {
+        this.productInventory = productInventory;
+    }
 
     public Integer getDistinctionId() {
         return distinctionId;

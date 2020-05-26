@@ -28,7 +28,7 @@
     <!--根据uid查询购物车-->
     <select id="findShoppingCart" resultType="cn.itcast.domain.shoppingCar.ShoppingCart">
         select
-        sc.*,pp.ProductInventory,pi.ImageSite,pb.ProductName
+        sc.*,pi.ImageSite,pb.ProductName,pd.ProductInventory
         from
             shoppingCart sc
         LEFT JOIN
@@ -43,6 +43,10 @@
 		    ProductBasis pb
 		ON
 		    pi.ProductId = pb.ProductId
+		 LEFT JOIN
+            productDistinction pd
+         ON
+            sc.distinctionId = pd.distinctionId
         <where>
             <if test="userId!=null">
                 AND sc.userId=#{userId}

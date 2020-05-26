@@ -110,7 +110,6 @@
     <select id="findFinalRecommend" resultType="cn.itcast.domain.ProductDatails.Recommend">
         SELECT
         ImageSite,ProductId
-
         FROM
         ProductImage
         WHERE
