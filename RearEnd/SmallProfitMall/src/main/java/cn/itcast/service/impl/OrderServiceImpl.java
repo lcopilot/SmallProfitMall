@@ -173,22 +173,25 @@ public class OrderServiceImpl implements OrderService {
         //商品配置 价格
         Map map = shoppingCartService.fenProductDeploy(purchaseInformation);
         String productDeploy = (String) map.get("productDeploys");
-        Double productPrice = (Double) map.get("ProductPrice");
+        Double productPrice = (Double) map.get("productPrice");
         //设置商品价格
         productContent.setProductPrice(productPrice);
         //设置商品配置
         productContent.setProductConfiguration(productDeploy);
+        //设置商品配置id
+        productContent.setDistinctionId(purchaseInformation.getDistinctionId());
         //设置商品购买数量
         productContent.setProductQuantity(purchaseInformation.getQuantity());
         //设置商品重量
         productContent.setProductWeight(purchaseInformation1.getProductWeight());
+
         //添加到订单商品信息表
         orderDao.addProductContent(productContent);
 
         //计算商品总价-------------------------------------------------------------------
         //单价
 
-        BigDecimal productPrice1=new BigDecimal(Double.toString(purchaseInformation1.getProductPrice()));
+        BigDecimal productPrice1=new BigDecimal(Double.toString(productPrice));
         //数量
         BigDecimal Quantity=new BigDecimal(String.valueOf(purchaseInformation.getQuantity()));
         //乘法计算
@@ -468,14 +471,16 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public Boolean findProductInventorys(List<ProductContent>  shoppingCarts) {
-        Integer[] productId = new Integer[shoppingCarts.size()];
+        //配置id
+        Integer[] distinctionId = new Integer[shoppingCarts.size()];
+        //数量
         Integer[] productQuantity = new Integer[shoppingCarts.size()];
         //查询库存是否充足
         for (int i = 0; i <shoppingCarts.size(); i++) {
-            productId[i] = shoppingCarts.get(i).getProductId();
+            distinctionId[i] = shoppingCarts.get(i).getDistinctionId();
             productQuantity[i] = shoppingCarts.get(i).getProductQuantity();
         }
-        List<Double> productContents = productDetailsDao.findProductInventory(productId);
+        List<Double> productContents = productDetailsDao.findProductInventory(distinctionId);
         Boolean sign = false;
 
         for (int i = 0; i <productContents.size() ; i++) {
@@ -487,8 +492,8 @@ public class OrderServiceImpl implements OrderService {
         if (sign) {
             return false;
         } else {
-            for (int i = 0; i < productId.length; i++) {
-                productDetailsDao.updateProductInventory(productId[i], shoppingCarts.get(i).getProductQuantity());
+            for (int i = 0; i < distinctionId.length; i++) {
+                productDetailsDao.updateProductInventory(distinctionId[i], shoppingCarts.get(i).getProductQuantity());
             }
             return true;
         }
@@ -527,7 +532,7 @@ public class OrderServiceImpl implements OrderService {
             Double productPrice = shoppingCart1.getProductPrice();
 
             //单价
-            String price  = Double.toString(purchaseInformation1.getProductPrice());
+            String price  = Double.toString(shoppingCart1.getProductPrice());
             BigDecimal productPrice1=new BigDecimal(price);
             //数量
             BigDecimal Quantity=new BigDecimal(String.valueOf(shoppingCart1.getQuantity()));
@@ -547,8 +552,11 @@ public class OrderServiceImpl implements OrderService {
             productContent.setProductQuantity(shoppingCart1.getQuantity());
             //设置商品id
             productContent.setProductId(shoppingCart1.getProductId());
+            //设置配置id
+            productContent.setDistinctionId(shoppingCart1.getDistinctionId());
 
             productContents.add(productContent);
+
             //添加到订单商品信息表
          //   orderDao.addProductContent(productContent);
             //删除该购物车购物车

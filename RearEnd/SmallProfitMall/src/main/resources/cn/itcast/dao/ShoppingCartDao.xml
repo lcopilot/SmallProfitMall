@@ -6,9 +6,9 @@
     <!--添加购物车-->
     <insert id="addShoppingCar" parameterType="cn.itcast.domain.shoppingCar.ShoppingCart">
         INSERT INTO shoppingCart
-            (userId,productId,productDeploy,quantity,productPrice)
+            (userId,productId,productDeploy,quantity,productPrice,distinctionId)
         VALUES
-            (#{userId},#{productId},#{productDeploy},#{quantity},#{ProductPrice})
+            (#{userId},#{productId},#{productDeploy},#{quantity},#{ProductPrice},#{distinctionId})
     </insert>
 
     <!--根据id查询商品价格名字库存-->

@@ -14,12 +14,21 @@ public class ShoppingCart implements Serializable {
     private String userId;          //用户id
     private Integer productId;      //商品id
     private String productDeploy;   //商品配置
+    private Integer distinctionId;  //配置id
     private Integer quantity;       //购买数量
     private String productWeight; //商品重量
     private Double ProductPrice;    //价格
     private Double ProductInventory;    //商品库存
     private Boolean evaluation;         //是否收藏
     private Boolean notice;             //是否有到货通知
+
+    public Integer getDistinctionId() {
+        return distinctionId;
+    }
+
+    public void setDistinctionId(Integer distinctionId) {
+        this.distinctionId = distinctionId;
+    }
 
     public String getProductWeight() {
         return productWeight;

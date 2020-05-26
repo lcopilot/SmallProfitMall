@@ -15,6 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
+/**
+ * 购物车业务层
+ * @author 86185
+ */
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
@@ -83,9 +87,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         shoppingCart.setQuantity(purchaseInformation.getQuantity());
         //设置用户id
         shoppingCart.setUserId(purchaseInformation.getUserId());
-
-
+        //设置商品配置
         shoppingCart.setProductDeploy(productDeploy);
+        //设置商品配置id
+        shoppingCart.setDistinctionId(purchaseInformation.getDistinctionId());
+        //添加购物车
         int redis = shoppingCartDao.addShoppingCar(shoppingCart);
         int[] rediss = new int[2];
         rediss[0]=redis;

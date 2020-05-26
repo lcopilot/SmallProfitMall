@@ -61,10 +61,11 @@ public interface ProductDetailsDao {
 
     /**
      * 查询商品库存
-     * @param productId 商品id
+     * @param distinctionId 配置id
      * @return
      */
-    public List<Double> findProductInventory(@Param("productId")Integer[] productId);
+    public List<Double> findProductInventory(@Param("distinctionId")Integer[] distinctionId);
+
 
     /**
      * 查询商品库存
@@ -97,11 +98,11 @@ public interface ProductDetailsDao {
     public Integer findProductPageviews(@Param("productId") Integer productId);
     /**
      * 修改商品库存
-     * @param productId
-     * @param quantity
+     * @param productId 商品id
+     * @param quantity 购买数量
      * @return
      */
-    public Integer updateProductInventory(@Param("productId") Integer productId,@Param("purchaseQuantity")Integer quantity);
+    public Integer updateProductInventory(@Param("distinctionId") Integer productId,@Param("purchaseQuantity")Integer quantity);
 
 
     /**

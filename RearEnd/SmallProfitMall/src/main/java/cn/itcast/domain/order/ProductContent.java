@@ -21,6 +21,8 @@ public class ProductContent implements Serializable {
     private Double productPrice;
     //商品配置
     private String productConfiguration;
+    //商品配置id
+    private Integer distinctionId;
     //购买数量
     private Integer productQuantity;
     //商品重量
@@ -29,6 +31,14 @@ public class ProductContent implements Serializable {
     private Boolean evaluate;
     //商品状态 1为未发货 2为已收货 3为确认收货
     public Integer productState;
+
+    public Integer getDistinctionId() {
+        return distinctionId;
+    }
+
+    public void setDistinctionId(Integer distinctionId) {
+        this.distinctionId = distinctionId;
+    }
 
     public Integer getPurchaseId() {
         return purchaseId;

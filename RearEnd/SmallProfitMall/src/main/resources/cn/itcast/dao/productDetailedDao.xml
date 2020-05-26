@@ -80,10 +80,10 @@
 
     <!--查询商品库存-->
     <select id="findProductInventory" resultType="java.lang.Double">
-        SELECT ProductInventory FROM `ProductPrice`
-        WHERE ProductId in
-        <foreach collection="productId" item="productId" open="(" separator="," close=")">
-            #{productId}
+        SELECT ProductInventory FROM `productDistinction`
+        WHERE distinctionId in
+        <foreach collection="distinctionId" item="distinctionId" open="(" separator="," close=")">
+            #{distinctionId}
         </foreach>
     </select>
 
@@ -146,7 +146,7 @@
 
     <!--修改商品库存-->
     <update id="updateProductInventory">
-        UPDATE ProductPrice SET ProductInventory = ProductInventory-#{purchaseQuantity}  WHERE ProductId = #{productId}
+        UPDATE productDistinction SET ProductInventory = ProductInventory-#{purchaseQuantity}  WHERE distinctionId = #{distinctionId}
     </update>
 
     <!--增加商品浏览量-->
