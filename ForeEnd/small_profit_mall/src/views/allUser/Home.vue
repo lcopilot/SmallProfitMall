@@ -57,10 +57,10 @@
                   <el-carousel :interval="4000" arrow="hover" height="280px"
                                indicator-position="none">
                     <el-carousel-item v-for="spikeAd in spikeAdList" :key="spikeAd.id">
-                      <router-link :to="spikeAd.site">
+                      <a href="">
                         <el-image :src="spikeAd.img"
                                   fit="fill"/>
-                      </router-link>
+                      </a>
                     </el-carousel-item>
                   </el-carousel>
                 </div>

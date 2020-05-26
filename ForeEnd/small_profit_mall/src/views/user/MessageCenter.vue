@@ -345,11 +345,10 @@
         userApi.haveRead(sessionStorage.getItem("uId"), contentId).then(res => {
           if (res.success) {
             if (contentId) {
-              console.log(contentId);
               this.messageList[index].newsStatus = 0;
               this.unreadQuantity--;
-              sessionStorage.setItem("unreadQuantity", this.unreadQuantity);
               this.$refs.header.unreadQuantity = this.unreadQuantity;
+              sessionStorage.setItem("unreadQuantity", this.unreadQuantity);
             } else if (contentId == 0) {
               sessionStorage.setItem("unreadQuantity", this.unreadQuantity);
               this.reload();

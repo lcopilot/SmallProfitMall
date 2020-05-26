@@ -19,7 +19,7 @@
           <div style="width: 1208px;position:relative;">
             <el-card shadow="hover" class="recommended_products_card"
                      v-for="(productsFeatured ,index) in productsFeaturedList"
-                     :key="productsFeatured.id" @mouseenter="enterProduct(index)">
+                     :key="productsFeatured.id" @mouseenter="enterProduct(index)" @mouseout="shiftOutFavorite(index)">
               <div style="position: relative;" @mouseenter="enterProduct(index)">
                 <router-link :to="{path: '/product', query: {productId:productsFeatured.productId}}"
                              :title="productsFeatured.productName">
@@ -34,7 +34,6 @@
                     </div>
                   </div>
                 </router-link>
-                <a>
                   <div @mouseenter="enterFavorite(index)" v-show="productsFeatured.favorite==1"
                        v-cloak
                        class="recommended_products_favorite">
@@ -46,7 +45,6 @@
                        @mouseout="shiftOutFavorite(index)">
                     <svg-icon name="Favorite"></svg-icon>
                   </div>
-                </a>
                 <div class="recommended_products_Cart">
                   <svg-icon name="pageViews"></svg-icon>
                   <div style="margin:-31px -60px 0 0;color: #999999">
@@ -88,7 +86,6 @@
     name: "ProductsFeatured",
     data() {
       return {
-        show2: false,
         searchContent: '',
         productsFeaturedList: [],
         searchParams: {
@@ -103,14 +100,16 @@
       //图标变换
       enterProduct(index) {
         this.productsFeaturedList[index].favorite = 1;
-        this.productsFeaturedList[index].shoppingTrolley = 1;
       },
       enterFavorite(index) {
-        this.productsFeaturedList[index].shoppingTrolley = 1;
-        this.productsFeaturedList[index].favorite = 2;
+        setTimeout(()=>{
+          this.productsFeaturedList[index].favorite = 2;
+        },30)
       },
       shiftOutFavorite(index) {
-        this.productsFeaturedList[index].favorite = 1;
+        setTimeout(()=>{
+          this.productsFeaturedList[index].favorite = 1;
+        },30)
       },
       //添加收藏
       addFavorite(productId) {
@@ -226,12 +225,12 @@
   }
 
   .recommended_products_favorite {
-    width: 24px;
-    height: 24px;
-    margin-left: -10px;
-    margin-top: -40px;
+    height: 23px;
+    overflow: hidden;
     position: absolute;
+    top:255px;
     left: 0;
+    cursor:pointer;
   }
 
   .recommended_products_Cart {

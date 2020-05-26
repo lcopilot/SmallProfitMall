@@ -13,8 +13,8 @@
         <el-col :span="10">
           <el-carousel height="370px">
             <el-carousel-item v-for="rotationChart in rotationCharts" :key="rotationChart.rid">
-              <a>
-                <el-image @click="goto()" :src="rotationChart.rotationChartOne"/>
+              <a href="">
+                <el-image  :src="rotationChart.rotationChartOne"/>
               </a>
             </el-carousel-item>
           </el-carousel>
@@ -23,20 +23,20 @@
           <el-carousel height="370px" indicator-position="none" :interval="6500">
             <el-carousel-item v-for="rotationChart in rotationCharts" :key="rotationChart.rid">
               <div>
-                <a>
-                  <el-image fit="scale-down" @click="goto(1)"
+                <a href="">
+                  <el-image fit="scale-down"
                             :src="rotationChart.rotationChartTwo_1"/>
                 </a>
               </div>
               <div>
-                <a>
-                  <el-image fit="scale-down" @click="goto(1)"
+                <a href="">
+                  <el-image fit="scale-down"
                             :src="rotationChart.rotationChartTwo_2"/>
                 </a>
               </div>
               <div>
-                <a>
-                  <el-image fit="scale-down" @click="goto(1)"
+                <a href="">
+                  <el-image fit="scale-down"
                             :src="rotationChart.rotationChartTwo_3"/>
                 </a>
               </div>
@@ -107,21 +107,12 @@
         //用户名
         username: null,
         addressData:[],
-        avatar: 'http://img.fhxasdsada.xyz/iduyadfgjdekldjhf.png',
+        avatar: 'http://img.isdfmk.xyz/iduyadfgjdekldjhf.png',
         CommonFunctionsList: [],
       }
     },
 
     methods: {
-      //轮播图跳转
-      goto() {
-        this.$router.push({
-          name: "Login",
-          params: {
-
-          }
-        });
-      },
       //获取轮播图
       getRotationChart() {
         homeApi.getRotationChart().then(res => {
