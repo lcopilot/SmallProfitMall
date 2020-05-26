@@ -70,6 +70,17 @@ public class ProductDetailsResult implements Serializable {
     /**商品不同属性**/
     private List<ProductDistinction> productDistinctions;
 
+    /**商品属性**/
+    private List<ProductContext> productContexts;
+
+    public List<ProductContext> getProductContexts() {
+        return productContexts;
+    }
+
+    public void setProductContexts(List<ProductContext> productContexts) {
+        this.productContexts = productContexts;
+    }
+
     public List<ProductDistinction> getProductDistinctions() {
         return productDistinctions;
     }

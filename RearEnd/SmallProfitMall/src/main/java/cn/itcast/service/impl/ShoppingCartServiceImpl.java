@@ -195,81 +195,85 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public Map fenProductDeploy(PurchaseInformation purchaseInformation){
         ProductDistinction productDistinctions = productDetailsDao.findDistinction(purchaseInformation.getDistinctionId());
-        //颜色id
-        Integer colourId = productDistinctions.getColourId();
-        //套餐
-        Integer comboId = productDistinctions.getComboId();
-        //种类
-        Integer kindId =  productDistinctions.getKindId();
-         //尺寸
-        Integer sizeId = productDistinctions.getSizeId();
-        //版本
-        Integer versionId = productDistinctions.getVersionId();
-        //口味
-        Integer tasteId = productDistinctions.getTasteId();
-        //规格
-        Integer specificationId = productDistinctions.getSpecificationId();
-
-
-
-        //颜色
-        if (colourId != null) {
-            purchaseInformation.setColour(productDetailsDao.findProductColour(colourId));
-        }
-        if (comboId != null){
-            purchaseInformation.setColour(productDetailsDao.findProductCombo(colourId));
-        }
-        if (comboId != null){
-            purchaseInformation.setKind(productDetailsDao.findProductKind(kindId));
-        }
-        if (comboId != null){
-            purchaseInformation.setSize(productDetailsDao.findProductSize(sizeId));
-        }
-        if (comboId != null){
-            purchaseInformation.setVersion(productDetailsDao.findProductVersion(versionId));
-        }
-        if (comboId != null){
-            purchaseInformation.setTaste(productDetailsDao.findProductCombo(tasteId));
-        }
-        if (comboId != null){
-            purchaseInformation.setSpecification(productDetailsDao.findProductCombo(specificationId));
-        }
-
-        String productDeploy = "";
-        //颜色
-        if (purchaseInformation.getColour()!=null){
-            productDeploy = productDeploy+purchaseInformation.getColour()+" ";
-        }
-        //套餐
-        if (purchaseInformation.getCombo()!=null){
-            productDeploy = productDeploy+purchaseInformation.getCombo()+" ";
-        }
-        //种类
-        if (purchaseInformation.getKind()!=null){
-            productDeploy = productDeploy+purchaseInformation.getKind()+" ";
-        }
-        //尺寸
-        if (purchaseInformation.getSize()!=null){
-            productDeploy = productDeploy+purchaseInformation.getSize()+" ";
-        }
-        //版本
-        if (purchaseInformation.getVersion()!=null){
-            productDeploy = productDeploy+purchaseInformation.getVersion()+" ";
-        }
-        //口味
-        if(purchaseInformation.getTaste()!=null){
-            productDeploy = productDeploy+purchaseInformation.getTaste()+" ";
-        }
-        //规格
-        if(purchaseInformation.getSpecification()!=null){
-            productDeploy = productDeploy+purchaseInformation.getSpecification()+" ";
-        }
-
         Map map = new HashMap();
-        String productDeploys = productDeploy;
-        Double productPrice = productDistinctions.getProductPrice();
-        map.put("productDeploys",productDeploys);
-        map.put("productPrice",productPrice);
+     if(productDistinctions!=null){
+         //颜色id
+         Integer colourId = productDistinctions.getColourId();
+         //套餐
+         Integer comboId = productDistinctions.getComboId();
+         //种类
+         Integer kindId =  productDistinctions.getKindId();
+         //尺寸
+         Integer sizeId = productDistinctions.getSizeId();
+         //版本
+         Integer versionId = productDistinctions.getVersionId();
+         //口味
+         Integer tasteId = productDistinctions.getTasteId();
+         //规格
+         Integer specificationId = productDistinctions.getSpecificationId();
+
+
+
+         //颜色
+         if (colourId != null) {
+             purchaseInformation.setColour(productDetailsDao.findProperty(colourId));
+         }
+         if (comboId != null){
+             purchaseInformation.setCombo(productDetailsDao.findProperty(colourId));
+         }
+         if (kindId != null){
+             purchaseInformation.setKind(productDetailsDao.findProperty(kindId));
+         }
+         if (sizeId != null){
+             purchaseInformation.setSize(productDetailsDao.findProperty(sizeId));
+         }
+         if (versionId != null){
+             purchaseInformation.setVersion(productDetailsDao.findProperty(versionId));
+         }
+         if (tasteId != null){
+             purchaseInformation.setTaste(productDetailsDao.findProperty(tasteId));
+         }
+         if (specificationId != null){
+             purchaseInformation.setSpecification(productDetailsDao.findProperty(specificationId));
+         }
+
+         String productDeploy = "";
+         //颜色
+         if (purchaseInformation.getColour()!=null){
+             productDeploy = productDeploy+purchaseInformation.getColour()+" ";
+         }
+         //套餐
+         if (purchaseInformation.getCombo()!=null){
+             productDeploy = productDeploy+purchaseInformation.getCombo()+" ";
+         }
+         //种类
+         if (purchaseInformation.getKind()!=null){
+             productDeploy = productDeploy+purchaseInformation.getKind()+" ";
+         }
+         //尺寸
+         if (purchaseInformation.getSize()!=null){
+             productDeploy = productDeploy+purchaseInformation.getSize()+" ";
+         }
+         //版本
+         if (purchaseInformation.getVersion()!=null){
+             productDeploy = productDeploy+purchaseInformation.getVersion()+" ";
+         }
+         //口味
+         if(purchaseInformation.getTaste()!=null){
+             productDeploy = productDeploy+purchaseInformation.getTaste()+" ";
+         }
+         //规格
+         if(purchaseInformation.getSpecification()!=null){
+             productDeploy = productDeploy+purchaseInformation.getSpecification()+" ";
+         }
+
+
+         String productDeploys = productDeploy;
+         Double productPrice = productDistinctions.getProductPrice();
+         map.put("productDeploys",productDeploys);
+         map.put("productPrice",productPrice);
+     }
+
 
         return map;
     }

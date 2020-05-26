@@ -1,10 +1,7 @@
 package cn.itcast.service.impl;
 
 import cn.itcast.dao.ProductDetailsDao;
-import cn.itcast.domain.ProductDatails.ProductAttributes;
-import cn.itcast.domain.ProductDatails.ProductDetailsResult;
-import cn.itcast.domain.ProductDatails.ProductDistinction;
-import cn.itcast.domain.ProductDatails.Recommend;
+import cn.itcast.domain.ProductDatails.*;
 import cn.itcast.service.ProductDetailsService;
 import cn.itcast.util.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +33,75 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
 //           ProductAttributes productAttributes = productDetailsDao.fendAttributes(pid);
         //查询商品详细信息
         ProductDetailsResult productDetailsResult = productDetailsDao.fendProduct(productId);
+        List<ProductContext> productContexts = productDetailsResult.getProductContexts();
+
+        if (productContexts!=null){
+//        if (true){
+            //颜色集合
+            List<ProductContext> colourList = new  ArrayList();
+            //版本集合
+            List<ProductContext> versionList = new ArrayList<>();
+            //规格集合
+            List<ProductContext> specificationList = new ArrayList<>();
+            //种类
+            List<ProductContext> kindList = new ArrayList<>();
+            //尺码
+            List<ProductContext> sizeList = new ArrayList<>();
+            //口味
+            List<ProductContext> tasteList = new ArrayList<>();
+            //套餐
+            List<ProductContext> comboList = new ArrayList<>();
+            //设置为空
+            productDetailsResult.setColour(colourList);
+            productDetailsResult.setVersion(versionList);
+            productDetailsResult.setSpecification(specificationList);
+            productDetailsResult.setKind(kindList);
+            productDetailsResult.setSize(sizeList);
+            productDetailsResult.setTaste(tasteList);
+            productDetailsResult.setCombo(comboList);
+
+            for (int i = 0; i <productContexts.size() ; i++) {
+                //该商品属性类型
+                String type = productContexts.get(i).getAttributeType();
+                //当前属性
+                ProductContext productContext = productContexts.get(i);
+                productContext.setAttributeType(null);
+
+                switch(type){
+                    case "颜色" :
+                        colourList.add(productContext);
+                        productDetailsResult.setColour(colourList)
+                        ;break;
+                    case "版本" :
+                        versionList.add(productContext);
+                        productDetailsResult.setVersion(versionList)
+                        ;break;
+                    case "规格" :
+                        specificationList.add(productContext);
+                        productDetailsResult.setSpecification(specificationList)
+                        ;break;
+                    case "尺寸" :
+                        sizeList.add(productContext);
+                        productDetailsResult.setSize(sizeList);
+                        ;break;
+                    case "种类" :
+                        kindList.add(productContext);
+                        productDetailsResult.setKind(kindList);
+                        ;break;
+                    case "口味" :
+                        tasteList.add(productContext);
+                        productDetailsResult.setTaste(tasteList);
+                        ;break;
+                    case "套餐" :
+                        comboList.add(productContext);
+                        productDetailsResult.setColour(comboList);
+                        ;break;
+                    default:System.out.println("遇到老王变了心");break;
+                }
+            }
+        }
+        productDetailsResult.setProductContexts(null);
+
         String transition = String.valueOf(productId);
         String ProductId ="productId_"+transition;
         //从缓存中查询是否存在
@@ -71,7 +137,7 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
 
             System.out.println("数据库中取商品详细数据");
 
-            redisUtil.set(ProductId,productDetailsResult);
+       //     redisUtil.set(ProductId,productDetailsResult);
             return productDetailsResult;
         }else {
             ProductDetailsResult productDetailsResult1 = productDetailsDao.findSalesInventory(productId);

@@ -9,6 +9,16 @@ public class ProductContext {
     private Integer attributeId;
     /**配置名称**/
     private String attributeContent;
+    /**商品类型**/
+    private String attributeType;
+
+    public String getAttributeType() {
+        return attributeType;
+    }
+
+    public void setAttributeType(String attributeType) {
+        this.attributeType = attributeType;
+    }
 
     public Integer getAttributeId() {
         return attributeId;

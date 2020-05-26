@@ -15,101 +15,49 @@
         <result property="spikePrice" column="SpikePrice"></result>
         <result property="inventorys" column="ProductInventory"></result>
         <!--映射颜色集合-->
-        <collection property="colour" ofType="cn.itcast.domain.ProductDatails.ProductContext">
-            <id property="attributeId" column="colourId"></id>
-            <result property="attributeContent" column="ProductColour"></result>
+        <collection property="productContexts" ofType="cn.itcast.domain.ProductDatails.ProductContext">
+            <id property="attributeId" column="attributeId"></id>
+            <result property="attributeContent" column="attributeContent"></result>
+            <result property="attributeType" column="attributeType"></result>
         </collection>
-        <!--映射尺寸集合-->
-        <collection property="size" ofType="cn.itcast.domain.ProductDatails.ProductContext">
-            <id property="attributeId" column="sizeId"></id>
-            <result property="attributeContent" column="ProductSize"></result>
-        </collection>
-        <!--映射版本集合-->
-        <collection property="version" ofType="cn.itcast.domain.ProductDatails.ProductContext">
-            <id property="attributeId" column="versionId"></id>
-            <result property="attributeContent" column="productVersion"></result>
-        </collection>
-        <!--映射口味集合-->
-        <collection property="taste" ofType="cn.itcast.domain.ProductDatails.ProductContext">
-            <id property="attributeId" column="tasteId"></id>
-            <result property="attributeContent" column="ProductTaste"></result>
-        </collection>
-        <!--映射规格集合-->
-        <collection property="specification" ofType="cn.itcast.domain.ProductDatails.ProductContext">
-            <id property="attributeId" column="specificationId"></id>
-            <result property="attributeContent" column="productSpecification"></result>
-        </collection>
-        <!--映射种类集合-->
-        <collection property="kind" ofType="cn.itcast.domain.ProductDatails.ProductContext">
-            <id property="attributeId" column="kindId"></id>
-            <result property="attributeContent" column="ProductKind"></result>
-        </collection>
+
         <!--映射图片集合-->
         <collection property="imageSite" ofType="java.lang.String">
             <constructor>
                 <arg column="ImageSite"></arg>
             </constructor>
         </collection>
-        <!--映射套餐集合-->
-        <collection property="combo" ofType="cn.itcast.domain.ProductDatails.ProductContext">
-            <id property="attributeId" column="comboId"></id>
-            <result property="attributeContent" column="ProductCombo"></result>
-        </collection>
-
     </resultMap>
 
     <!--根据id查询商品-->
     <select id="fendProduct" resultMap="ProductDatailsMap">
-            SELECT
-                pb.id,
-                pb.ProductId,
-                pb.ProductName,
-                pb.ProductVideo,
-                pb.ProductWeight,
-                pb.prodcutPrimaryCategory,
-                pb.productFinalCategory,
-                pb.productFinalCategory,
-                pb.productPageviews,
-                pp.ProductPrice,
-                pp.SpikePrice,
-                pp.SalesPrice,
-                pp.ProductSales,
-                pp.ProductInventory,
-                pi.ImageSite,
-                pc.ProductColour,
-                pc.colourId,
-                pco.ProductCombo,
-                pco.comboId,
-                pk.ProductKind,
-                pk.kindId,
-                ps.ProductSize,
-                ps.sizeId,
-                pt.ProductTaste,
-                pt.tasteId,
-                pv.productVersion,
-                pv.versionId,
-                pst.productSpecification,
-                pst.specificationId
-             FROM ProductBasis pb
-             LEFT JOIN ProductPrice pp
-             ON pb.ProductId = pp.ProductId
-             LEFT JOIN ProductImage pi
-             ON pb.ProductId=pi.ProductId
-             LEFT JOIN ProductColour pc
-             ON pb.ProductId=pc.ProductId
-             LEFT JOIN ProductCombo pco
-             ON pb.ProductId=pco.ProductId
-             LEFT JOIN ProductKind pk
-             ON pb.ProductId=pk.ProductId
-             LEFT JOIN ProductSize ps
-             ON pb.ProductId = ps.ProductId
-             LEFT JOIN ProductTaste pt
-             ON pb.ProductId=pt.ProductId
-             LEFT JOIN ProductVersion pv
-             ON pb.ProductId=pv.ProductId
-             LEFT JOIN ProductSpecification pst
-             ON pb.ProductId=pst.ProductId
-             WHERE pb.ProductId=#{productId};
+        SELECT
+            pb.id,
+            pb.ProductId,
+            pb.ProductName,
+            pb.ProductVideo,
+            pb.ProductWeight,
+            pb.prodcutPrimaryCategory,
+            pb.productFinalCategory,
+            pb.productFinalCategory,
+            pb.productPageviews,
+            pp.ProductPrice,
+            pp.SpikePrice,
+            pp.SalesPrice,
+            pp.ProductSales,
+            pp.ProductInventory,
+            pi.ImageSite,
+            pa.attributeContent,
+            pa.attributeId,
+            pa.attributeType
+
+        FROM
+            ProductBasis pb
+            LEFT JOIN ProductPrice pp ON pb.ProductId = pp.ProductId
+            LEFT JOIN ProductImage pi ON pb.ProductId = pi.ProductId
+            LEFT JOIN productAttribute pa ON pb.ProductId = pa.ProductId
+        WHERE
+            pb.ProductId =#{productId};
     </select>
 
     <!--查询商品属性 销量 库存 不同-->
@@ -222,6 +170,10 @@
          WHERE ProductId=#{productId};
     </select>
     
+    
+    <select id="findProperty" resultType="java.lang.String" parameterType="java.lang.Integer">
+         SELECT attributeContent FROM productAttribute WHERE attributeId = #{attributeId}
+    </select>
 
     <!--颜色-->
     <select id="findProductColour" resultType="java.lang.String" parameterType="java.lang.Integer">

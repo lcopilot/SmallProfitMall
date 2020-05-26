@@ -121,6 +121,13 @@ public interface ProductDetailsDao {
      */
     public ProductDetailsResult findProductDesciption(@Param("productId") Integer productId);
 
+
+    /**
+     * 查询商品属性
+     * @param attributeId
+     * @return
+     */
+    public String findProperty(@Param("attributeId") Integer attributeId);
     /**
      * 颜色
      * @param colourId 颜色id

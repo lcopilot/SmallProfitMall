@@ -15,15 +15,19 @@ import java.util.Iterator;
  */
 public class test {
     public static void main(String[] args) throws IOException {
-        String filePath = "C:\\Users\\86185\\Desktop\\ys\\mmexport1586163224574.jpg";
-        File file = new File(filePath);
-        ImageInputStream iis = ImageIO.createImageInputStream(file);
-        Iterator iter = ImageIO.getImageReaders(iis);
-        if (!iter.hasNext()) {//文件不是图片
-            System.out.println("此文件不为图片文件");
-        }else {
-            System.out.println("是");
+
+        String week = "7";//表示周五
+        switch(week){
+            case "1" :System.out.println("爱学习");break;
+            case "2" :System.out.println("学习使我感到快乐");break;
+            case "3" :System.out.println("学习从来没有这么快乐过");break;
+            case "4" :System.out.println("遇到志同道合的刘耀文");break;
+            case "5" :System.out.println("在一起");break;
+            case "6" :System.out.println("洗澡睡觉");break;
+            case "7" :System.out.println("一起走向幸福人生:巅峰");break;
+            default:System.out.println("遇到老王变了心");break;
         }
+
     }
 
 
