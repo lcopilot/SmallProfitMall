@@ -358,6 +358,10 @@
     <select id="findPurchase" resultType="cn.itcast.domain.order.ProductContent">
         SELECT ProductId,productQuantity FROM orders WHERE purchaseId=#{purchaseId}
     </select>
+    <!--查询待收货数量-->
+    <select id="findOrderTakeQuantity" resultType="java.lang.Integer">
+        SELECT count(*) FROM orders WHERE orderId=#{orderId} AND productState &lt; 3
+    </select>
 
 
     <!--删除订单-->

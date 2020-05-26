@@ -192,4 +192,11 @@ public interface OrderDao {
      * @return
      */
     ProductContent findPurchase(@Param("purchaseId")Integer purchaseId);
+
+    /**
+     * 查询待收货的数量
+     * @param orderId 订单id
+     * @return
+     */
+    public Integer findOrderTakeQuantity(@Param("orderId")String orderId);
 }
