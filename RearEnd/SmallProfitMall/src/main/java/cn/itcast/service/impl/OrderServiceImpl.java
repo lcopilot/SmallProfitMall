@@ -219,9 +219,6 @@ public class OrderServiceImpl implements OrderService {
         if (!result){
             return "false";
         }
-
-
-
         return orderId;
     }
 
@@ -398,8 +395,12 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public Integer updateReceive( Integer purchaseId,String orderId,String userId) {
-        //修改订单状态为待评价 1为未支付订单 2为待收货 3为待评论 4为售后
-        orderDao.updateOrderState(userId,orderId,3);
+        int quantity = orderDao.findOrderTakeQuantity(orderId);
+        if (quantity==1){
+            //修改订单状态为待评价 1为未支付订单 2为待收货 3为待评论 4为售后
+            orderDao.updateOrderState(userId,orderId,3);
+        }
+
         //根据购买状态查询商品id跟商品数量
         ProductContent productContent =  orderDao.findPurchase(purchaseId);
         //修改订单商品状态为待评价状态 1为待发货 2为待收货 3为已收货待评论 4为维修 5为追评论 6为已追评论

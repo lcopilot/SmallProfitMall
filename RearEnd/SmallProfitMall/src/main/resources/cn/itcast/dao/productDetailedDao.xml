@@ -64,7 +64,7 @@
     <select id="findProductDistinction" resultType="cn.itcast.domain.ProductDatails.ProductDistinction">
         SELECT * from productDistinction WHERE productId = #{productId}
     </select>
-    
+
 
     <select id="fendAttributes" parameterType="java.lang.Integer" resultType="cn.itcast.domain.ProductDatails.ProductAttributes">
         SELECT * FROM productAttributes where productId = #{productId}
@@ -122,23 +122,23 @@
         WHERE
         <if test="gradePrimary==1">
             productFinalCategory = ( SELECT pb.productFinalCategory FROM ProductBasis pb JOIN ProductPrice pp ON pb.ProductId=pp.ProductId WHERE pb.ProductId = #{productId}  order by pp.ProductSales  )
-            )
+            ) and ProductId <![CDATA[!= ]]> #{productId}
         </if>
         <if test="gradePrimary==2">
             productSecondaryCategory = ( SELECT pb.productSecondaryCategory FROM ProductBasis pb JOIN ProductPrice pp ON pb.ProductId=pp.ProductId WHERE pb.ProductId = #{productId} order by pp.ProductSales)
-            )
+            )and ProductId <![CDATA[!= ]]> #{productId}
         </if>
         <if test="gradePrimary==3">
             prodcutPrimaryCategory = ( SELECT pb.prodcutPrimaryCategory FROM ProductBasis pb JOIN ProductPrice pp ON pb.ProductId=pp.ProductId WHERE pb.ProductId = #{productId} order by pp.ProductSales )
-            )
+            )and ProductId <![CDATA[!= ]]> #{productId}
         </if>
         <if test="gradePrimary==4">
-            pb.productId = (SELECT
+            pb.productId in (SELECT
             ProductId
             FROM
             ProductPrice
-            order by ProductSales   )
-            )
+            order by ProductSales )
+            )and ProductId <![CDATA[!= ]]> #{productId}
         </if>
         and  sign = 1 	 LIMIT #{start}, #{pageSize}
     </select>
@@ -168,8 +168,8 @@
          FROM ProductPrice
          WHERE ProductId=#{productId};
     </select>
-    
-    
+
+
     <select id="findProperty" resultType="java.lang.String" parameterType="java.lang.Integer">
          SELECT attributeContent FROM productAttribute WHERE attributeId = #{attributeId}
     </select>
