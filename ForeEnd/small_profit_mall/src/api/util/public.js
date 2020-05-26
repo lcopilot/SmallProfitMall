@@ -72,8 +72,16 @@ axios.interceptors.response.use(
             type:"error",
             showClose: true,
           })
+          
         }
         return Promise.reject(error.response);
+      }else {
+        console.error(error.response);
+        Message({
+          message:"服务器跑路了~,请稍后重试",
+          type:"error",
+          showClose: true,
+        })
       }
     }
 )

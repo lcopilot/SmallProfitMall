@@ -76,7 +76,7 @@
                     min-width="13%">
                   <template slot-scope="product">
                     <el-input-number v-model="product.row.quantity" size="mini" :min="1"
-                                     :max="99"
+                                     :max="product.productInventory>99?99:product.productInventory"
                                      @change="quantityChange(product.row.quantity,product.row.shoppingCartId)"/>
                   </template>
                 </el-table-column>
@@ -392,6 +392,9 @@
                 orderNumber: res.queryResult.list[0],
               }
             });
+          }else if (res.code===10021) {
+              this.settlementLoading.close();
+              this.$message.warning("库存不足,请重试!")
           }
         })
       },

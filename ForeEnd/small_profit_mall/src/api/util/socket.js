@@ -86,7 +86,7 @@ function websocketOnMessage(e) {
   if (e!=null){
     stopHeartbeat();
     if (JSON.parse(e.data).code){
-      if (JSON.parse(e.data).code!=81000){
+      if (JSON.parse(e.data).code!==81000){
         globalCallback=callbackNameMap.get(80000);
         globalCallback(JSON.parse(e.data));
       }

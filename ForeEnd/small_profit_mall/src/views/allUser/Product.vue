@@ -90,8 +90,8 @@
                       <el-col :span="16" class="product_price">
                         ￥{{productForm.price?productForm.price.toFixed(2):''}}
                       </el-col>
-                      <el-col :span="4" style="color: #999999"> 累计销量<span
-                          class="product_sales"> {{product.sales}}</span></el-col>
+                      <el-col :span="4" style="color: #999999"> 累计销量<br/>
+                        <span class="product_sales"> {{product.sales}}</span></el-col>
                     </el-row>
                     <div style="color: #999999">促销 会员特价:
                       <router-link to="/login">登录</router-link>
@@ -212,7 +212,7 @@
               <el-form-item size="large">
                 <div class="form_left">
                   <el-input-number v-model="productForm.quantity" style="width: 30%" :min="1"
-                                   :max="productForm.inventory>99?99:productForm.inventory"/>
+                                   :max="99"/>
                   <el-button type="danger" @click="addCart" style="margin-left: 10px"
                              icon="el-icon-circle-plus-outline">加入购物车
                   </el-button>
@@ -496,6 +496,10 @@
         this.stopSwitchProductImg();
         this.bigImg = this.product.imageSite[index];
       },
+      //停止商品图片切换
+      stopSwitchProductImg(){
+        clearInterval(this.timer);
+      },
       //每隔三秒切换商品图片
       switchProductImg() {
         this.timer = setInterval(() => {
@@ -505,9 +509,6 @@
           this.bigImg = this.product.imageSite[this.item];
           this.item += 1;
         }, 3000);
-      },
-      stopSwitchProductImg() {
-        clearInterval(this.timer);
       },
       handleChange(value) {
         const checkedNodes = this.$refs['cityAll'].getCheckedNodes()
