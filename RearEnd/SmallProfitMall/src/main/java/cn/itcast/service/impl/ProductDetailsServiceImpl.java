@@ -223,7 +223,6 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
                 pageSize=3-recommends.size();
                 List<Recommend> recommends2 = productDetailsDao.findFinalRecommend(productId,start,pageSize,i);
                 for(Recommend recommend : recommends2){
-
                     recommends.add(recommend);
                 }
             }else {
