@@ -56,4 +56,15 @@
         pp.show_sign=1 AND pc.show_sign=1 AND pf.show_sign=1
     </select>
 
+    <select id="findSlideshow" parameterType="java.lang.Integer" resultType="cn.itcast.domain.homepag.Slideshow">
+    SELECT
+        image,
+        site,
+        imageType
+    FROM
+        slideshow
+    WHERE
+        imageType = #{imageType}
+    </select>
+
 </mapper>

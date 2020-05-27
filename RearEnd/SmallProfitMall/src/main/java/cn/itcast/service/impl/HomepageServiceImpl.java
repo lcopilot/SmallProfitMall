@@ -15,14 +15,16 @@ import java.util.List;
 
 
 /**
- * @author 86185
+ * @author kite
  */
 @Service("homepageService")
 public class HomepageServiceImpl implements HomepageService {
 
+    /**主页持久层**/
     @Autowired
     private HomepageDao homepageDao;
 
+    /**缓存工具类**/
     @Autowired
     RedisUtil redisUtil;
 
@@ -35,9 +37,40 @@ public class HomepageServiceImpl implements HomepageService {
     public List findRotationChart() {
         List<RotationChart> redis = (List<RotationChart>)redisUtil.get("RotationChart");
         if (redis==null || redis.size()==0){
-            List<RotationChart> findRotationChart = homepageDao.findRotationChart();
-            redisUtil.set("RotationChart",findRotationChart);
-            return findRotationChart;
+            List<RotationChart> rotationCharts = new ArrayList<>();
+            //查询大轮播图
+            List<Slideshow> bigRotationChart = homepageDao.findSlideshow(1);
+            //查询小轮播图
+            List<Slideshow> smallRotationChart = homepageDao.findSlideshow(2);
+
+            for (int i = 0; i <bigRotationChart.size() ; i++) {
+                //创建轮播图对象
+                RotationChart rotationCharts1 = new RotationChart();
+                //创建图片对象
+                List<Slideshow> slideshow = new ArrayList<>();
+                //大轮播图图片
+                String image =  bigRotationChart.get(i).getImage();
+                //链接
+                String site = bigRotationChart.get(i).getSite();
+                //设置对象
+                rotationCharts1.setBigRotationChart(image);
+                rotationCharts1.setSite(site);
+                for (int j = 0; j <3 ; j++) {
+                    Slideshow slideshow1 = new Slideshow();
+                    //小轮播图图片
+                    String images = smallRotationChart.get(i*3).getImage();
+                    //小轮播图地址
+                    String sites = smallRotationChart.get(i*3).getSite();
+                    slideshow1.setImage(images);
+                    slideshow1.setSite(sites);
+                    slideshow.add(slideshow1);
+                    rotationCharts1.setSmallRotationChart(slideshow);
+                }
+                rotationCharts.add(rotationCharts1);
+            }
+
+            redisUtil.set("RotationChart",rotationCharts);
+            return rotationCharts;
         }
      return redis;
     }
@@ -119,7 +152,7 @@ public class HomepageServiceImpl implements HomepageService {
 
             }
         //存入缓存
-       // redisUtil.set("findProductCategory", productCategories);
+        redisUtil.set("findProductCategory", productCategories);
         return productCategories;
     }
 

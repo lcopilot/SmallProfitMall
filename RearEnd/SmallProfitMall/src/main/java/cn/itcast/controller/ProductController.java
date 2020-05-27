@@ -2,6 +2,7 @@ package cn.itcast.controller;
 
 import cn.itcast.domain.commodity.Ad;
 import cn.itcast.domain.commodity.Recommend;
+import cn.itcast.domain.homepag.Slideshow;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
 import cn.itcast.response.QueryResult;
@@ -66,7 +67,7 @@ public class ProductController {
     public QueryResponseResult findAd() {
         QueryResult result = new QueryResult();
         // 调用service的方法
-        List<Ad> list = commodityService.findAd();
+        List<Slideshow> list = commodityService.findAd();
         result.setTotal(list.size());
         result.setList(list);
         return  new QueryResponseResult(CommonCode.SUCCESS,result);

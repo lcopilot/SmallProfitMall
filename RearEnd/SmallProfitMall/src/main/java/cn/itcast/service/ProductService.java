@@ -2,6 +2,7 @@ package cn.itcast.service;
 
 import cn.itcast.domain.commodity.Ad;
 import cn.itcast.domain.commodity.Recommend;
+import cn.itcast.domain.homepag.Slideshow;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public interface ProductService {
      * 查询所有广告
      * @return
      */
-    public List<Ad> findAd();
+    public List<Slideshow> findAd();
 
     /**
      * 查询所有为你推荐

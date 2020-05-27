@@ -36,7 +36,6 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
         List<ProductContext> productContexts = productDetailsResult.getProductContexts();
 
         if (productContexts!=null){
-//        if (true){
             //颜色集合
             List<ProductContext> colourList = new  ArrayList();
             //版本集合

@@ -16,6 +16,12 @@ public interface HomepageDao {
     public List<RotationChart> findRotationChart();
 
     /**
+     * 查询轮播图 最新
+     * @param imageType 查询图片的类型
+     * @return
+     */
+    public List<Slideshow> findSlideshow(Integer imageType);
+    /**
      * 搜索栏下导航
      * @return
      */

@@ -1,10 +1,12 @@
 package cn.itcast.service.impl;
 
+import cn.itcast.dao.HomepageDao;
 import cn.itcast.dao.ProductDao;
 import cn.itcast.dao.ProductDetailsDao;
 import cn.itcast.domain.commodity.Ad;
 import cn.itcast.domain.commodity.Recommend;
 import cn.itcast.domain.footprint.Footprint;
+import cn.itcast.domain.homepag.Slideshow;
 import cn.itcast.service.ProductService;
 import cn.itcast.util.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,16 @@ import java.util.List;
 @Service("commodityService")
 public class ProductServiceImpl implements ProductService {
 
+
+    /**主页持久层**/
+    @Autowired
+    private HomepageDao homepageDao;
+
     /**商品持久层**/
     @Autowired
     ProductDao ProducDao;
 
-    /**商品详细持久陈**/
+    /**商品详细持久层**/
     @Autowired
     ProductDetailsDao productDetailsDao;
 
@@ -82,11 +89,11 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public List<Ad> findAd() {
-        List<Ad> redis = (List<Ad>) redisUtil.get("Ad");
+    public List<Slideshow> findAd() {
+        List<Slideshow> redis = (List<Slideshow>) redisUtil.get("Ad");
         if (redis == null) {
             System.out.println("数据库中取广告数据");
-            List<Ad> ad = ProducDao.findAd();
+            List<Slideshow> ad = homepageDao.findSlideshow(3);
             //存入缓存
             redisUtil.set("Ad", ad,3600);
             return ad;
