@@ -313,9 +313,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateInformation(User user) {
         int redis=0;
-        if(userDao.findByName(user.getName())>0){
-            User users = userDao.findByIdInformation(user.getUid());
-            user.setName(users.getName());
+        Integer nameQuantity = userDao.findNameQuantity(user.getName(),user.getUid());
+        /**查询是否有重名 有重名则改回原有名字**/
+        if(nameQuantity>0){
+            String name = userDao.findUserName(user.getUid());
+            user.setName(name);
             redis=1;
         }
         redis =redis + userDao.updateInformation(user);

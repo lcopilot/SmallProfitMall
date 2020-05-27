@@ -23,6 +23,15 @@ public interface UserDao {
      */
     public Integer findByName(@Param("name") String name);
 
+
+    /**
+     * 查询该用户名除自身数量
+     * @param name
+     * @param userId
+     * @return
+     */
+    public Integer findNameQuantity(@Param("name") String name , @Param("userId") String userId);
+
     /**
      * 查询用户是否存在
      * @param phone  手机号
@@ -73,6 +82,13 @@ public interface UserDao {
      * @return 用户对象
      */
     public User findByIdInformation(@Param("uid") String uid);
+
+    /**
+     * 查询用户名
+     * @param userId 用户id
+     * @return
+     */
+    public String findUserName(String userId);
 
     /**
      * 修改用户资料

@@ -82,6 +82,14 @@
     <select id="findByIdPhone" resultType="java.lang.String" parameterType="java.lang.String">
         SELECT phone from user where uid=#{uid}
     </select>
+    <!--查询修改的用户名使用数量-->
+    <select id="findNameQuantity" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(*) FROM user WHERE name = #{name} AND uid <![CDATA[!= ]]> #{userId}
+    </select>
+    <!--查询用户名-->
+    <select id="findUserName" resultType="java.lang.String">
+        SELECT name FROM user WHERE uid = #{userId}
+    </select>
 
     <!--根据id修改手机号码-->
     <update id="updatePhone" parameterType="java.lang.String">
