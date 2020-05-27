@@ -57,6 +57,7 @@
         homeApi.getCategoriesList().then(res => {
           if (res.success) {
             this.CategoriesList= res.queryResult.list;
+            sessionStorage.setItem('CATEGORIES_LIST',JSON.stringify(res.queryResult.list))
           }
         })
       },
@@ -68,7 +69,11 @@
       },
     },
     beforeMount() {
+      if (sessionStorage.getItem('CATEGORIES_LIST')){
+        this.CategoriesList= JSON.parse(sessionStorage.getItem('CATEGORIES_LIST'))
+      }else {
         this.getCategoriesList();
+      }
     }
   }
 </script>
