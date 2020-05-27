@@ -217,6 +217,8 @@
         },
         //头像链接
         imageUrl: 'http://img.isdfmk.xyz/iduyadfgjdekldjhf.png',
+        //用户信息提交定时器
+        timer:'',
       };
     },
     methods: {
@@ -294,7 +296,7 @@
             this.birthdays.year = this.birthday[0];
             this.birthdays.month = this.birthday[1];
             this.birthdays.day = this.birthday[2];
-          }, 200)
+          }, 10)
         })
         .catch(error => {
           console.log(error);
@@ -315,7 +317,7 @@
               == sessionStorage.getItem("userSex") && this.birthday[0] == this.birthdays.year
               && this.birthday[1] == this.birthdays.month && this.birthday[2]
               == this.birthdays.day) {
-            this.$message({
+           return  this.$message({
               message: "您还没有修改哦~",
               type: "warning",
             })
@@ -329,29 +331,31 @@
                 + 1) + '-' + new Date().getDate()) {
               this.userFrom.birthday = '';
             }
-            userApi.modifyUser(this.userFrom).then(res => {
-              if (res.success) {
-                if (res.code === 11000) {
+            clearTimeout(this.timer);
+            this.timer=setTimeout(()=>{
+              userApi.modifyUser(this.userFrom).then(res => {
+                if (res.success) {
+                  if (res.code === 11000) {
+                    this.$message({
+                      message: "用户名修改失败,用户名重复",
+                      type: "warning",
+                    });
+                    return this.getUser();
+                  }
+                  this.getUser();
                   this.$message({
-                    message: "用户名修改失败,用户名重复",
-                    type: "warning",
+                    message: "修改成功!",
+                    type: "success",
                   });
-                  return this.getUser();
+                  sessionStorage.setItem("username", this.userFrom.name);
+                } else {
+                  this.$message({
+                    message: "修改失败!",
+                    type: "error",
+                  })
                 }
-                this.getUser();
-                this.$message({
-                  message: "修改成功!",
-                  type: "success",
-                });
-                sessionStorage.setItem("username", this.userFrom.name);
-              } else {
-
-                this.$message({
-                  message: "修改失败!",
-                  type: "error",
-                })
-              }
-            })
+              })
+            },200)
           } else {
             this.$message({
               message: "请输入正确的用户名哦~",
