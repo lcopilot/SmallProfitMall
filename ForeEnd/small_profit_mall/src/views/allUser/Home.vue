@@ -56,9 +56,9 @@
                 <div class="spike_product_ad">
                   <el-carousel :interval="4000" arrow="hover" height="280px"
                                indicator-position="none">
-                    <el-carousel-item v-for="spikeAd in spikeAdList" :key="spikeAd.id">
-                      <a href="">
-                        <el-image :src="spikeAd.img"
+                    <el-carousel-item v-for="(spikeAd,index) in spikeAdList" :key="index">
+                      <a :href="spikeAd.site">
+                        <el-image :src="spikeAd.image"
                                   fit="fill"/>
                       </a>
                     </el-carousel-item>

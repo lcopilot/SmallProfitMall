@@ -12,32 +12,20 @@
         </el-col>
         <el-col :span="10">
           <el-carousel height="370px">
-            <el-carousel-item v-for="rotationChart in rotationCharts" :key="rotationChart.rid">
-              <a href="">
-                <el-image  :src="rotationChart.rotationChartOne"/>
+            <el-carousel-item v-for="(rotationChart,index) in rotationCharts" :key="index">
+              <a :href="rotationChart.site">
+                <el-image fit="scale-down" :src="rotationChart.bigRotationChart"/>
               </a>
             </el-carousel-item>
           </el-carousel>
         </el-col>
         <el-col :span="3">
           <el-carousel height="370px" indicator-position="none" :interval="6500">
-            <el-carousel-item v-for="rotationChart in rotationCharts" :key="rotationChart.rid">
-              <div>
-                <a href="">
+            <el-carousel-item v-for="(rotationChart,index) in rotationCharts" :key="index">
+              <div v-for="(smallRotationChart,index) in rotationChart.smallRotationChart" :key="index">
+                <a :href="smallRotationChart.site">
                   <el-image fit="scale-down"
-                            :src="rotationChart.rotationChartTwo_1"/>
-                </a>
-              </div>
-              <div>
-                <a href="">
-                  <el-image fit="scale-down"
-                            :src="rotationChart.rotationChartTwo_2"/>
-                </a>
-              </div>
-              <div>
-                <a href="">
-                  <el-image fit="scale-down"
-                            :src="rotationChart.rotationChartTwo_3"/>
+                            :src="smallRotationChart.image"/>
                 </a>
               </div>
             </el-carousel-item>
