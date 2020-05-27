@@ -76,8 +76,8 @@
                     min-width="13%">
                   <template slot-scope="product">
                     <el-input-number v-model="product.row.quantity" size="mini" :min="1"
-                                     :max="product.productInventory>99?99:product.productInventory"
-                                     @change="quantityChange(product.row.quantity,product.row.shoppingCartId)"/>
+                                     :max="product.row.productInventory>99?99:product.row.productInventory"
+                                     @change="quantityChange(product.row.quantity,product.row.shoppingCartId,product.row.productInventory)"/>
                   </template>
                 </el-table-column>
                 <el-table-column
@@ -247,7 +247,10 @@
         })
       },
       //商品数量改变时触发
-      quantityChange(productNumber, shoppingCartId) {
+      quantityChange(productNumber, shoppingCartId, productInventory) {
+        if (productNumber === productInventory) {
+          this.$message.warning("商品数量已达剩余库存量!")
+        }
         productApi.modifyProductNumber(productNumber, shoppingCartId).then(res => {
           if (res.success) {
             this.select(this.$refs.cartTable.selection);
@@ -392,9 +395,9 @@
                 orderNumber: res.queryResult.list[0],
               }
             });
-          }else if (res.code===10021) {
-              this.settlementLoading.close();
-              this.$message.warning("库存不足,请重试!")
+          } else if (res.code === 10021) {
+            this.settlementLoading.close();
+            this.$message.warning("库存不足,请重试!")
           }
         })
       },

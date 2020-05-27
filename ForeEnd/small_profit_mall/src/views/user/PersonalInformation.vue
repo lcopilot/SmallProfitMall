@@ -329,10 +329,9 @@
                 + 1) + '-' + new Date().getDate()) {
               this.userFrom.birthday = '';
             }
-
             userApi.modifyUser(this.userFrom).then(res => {
               if (res.success) {
-                if (res.code == 11000) {
+                if (res.code === 11000) {
                   this.$message({
                     message: "用户名修改失败,用户名重复",
                     type: "warning",

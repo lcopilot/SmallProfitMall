@@ -1,0 +1,73 @@
+.header {
+  height: 6.4rem;
+  padding: 0;
+  background-color: #ffffff;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  box-shadow: 0 1px .8rem rgba(0, 21, 41, .08);
+  .anticon {
+    padding: 0 1.6rem ;
+    font-size: 2.24rem;
+    cursor: pointer;
+    transition: all .3s, padding 0s;
+  }
+  .header-index-right {
+    display: flex;
+    float: right;
+    margin-left: auto;
+    align-items: center;
+    margin-right: 3.2rem;
+    overflow: hidden;
+    .header-index-user {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 .64rem;
+      cursor: pointer;
+      transition: all .3s;
+      span{
+        margin-right: 1.28rem;
+      }
+    }
+    .header-weather{
+      padding: 0 1.6rem;
+      span{
+        padding: 0 .8rem 0 0;
+      }
+    }
+  }
+
+}
+.header-message{
+  text-align: center;
+  width: 33.6rem;
+}
+.header-message-icon{
+  padding: 0 1.6rem;
+}
+
+.ant-layout-header {
+  align-items: center;
+}
+.header-drawer{
+  .ant-drawer-header{
+    display: none;
+  }
+  .ant-drawer-body{
+    padding: 0;
+  }
+}
+@media screen and (max-width: 700px){
+  .header-nowDate{
+    display: none;
+  }
+  .header-weather{
+    display: none;
+  }
+  .header-message{
+    width: 21rem;
+  }
+}
