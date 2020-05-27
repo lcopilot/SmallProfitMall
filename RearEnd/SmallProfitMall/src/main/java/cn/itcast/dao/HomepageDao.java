@@ -9,11 +9,7 @@ import java.util.List;
  *
  */
 public interface HomepageDao {
-    /**
-     * 查询轮播图图片
-     * @return
-     */
-    public List<RotationChart> findRotationChart();
+
 
     /**
      * 查询轮播图 最新

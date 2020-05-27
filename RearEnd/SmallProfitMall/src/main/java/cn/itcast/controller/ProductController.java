@@ -1,6 +1,5 @@
 package cn.itcast.controller;
 
-import cn.itcast.domain.commodity.Ad;
 import cn.itcast.domain.commodity.Recommend;
 import cn.itcast.domain.homepag.Slideshow;
 import cn.itcast.response.CommonCode;

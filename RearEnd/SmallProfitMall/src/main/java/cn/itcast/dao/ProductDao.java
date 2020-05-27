@@ -1,11 +1,9 @@
 package cn.itcast.dao;
 
-import cn.itcast.domain.commodity.Ad;
 import cn.itcast.domain.commodity.ProductLowPrice;
 import cn.itcast.domain.commodity.Recommend;
 import cn.itcast.domain.commodity.Seckill;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -29,11 +27,7 @@ public interface ProductDao {
      */
     public List<ProductLowPrice> findProductLowPrice(@Param("StartingValue")Integer StartingValue , @Param("Quantity") int Quantity);
 
-    /**
-     * 广告
-     * @return
-     */
-    public List<Ad> findAd();
+
 
     /**
      * 查询所有为你推荐

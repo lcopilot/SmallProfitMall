@@ -174,34 +174,7 @@
          SELECT attributeContent FROM productAttribute WHERE attributeId = #{attributeId}
     </select>
 
-    <!--颜色-->
-    <select id="findProductColour" resultType="java.lang.String" parameterType="java.lang.Integer">
-        SELECT ProductColour FROM ProductColour WHERE colourId = #{colourId}
-    </select>
-    <!--套餐-->
-    <select id="findProductCombo" resultType="java.lang.String" parameterType="java.lang.Integer">
-        SELECT ProductCombo FROM ProductCombo WHERE comboId = #{comboId}
-    </select>
-    <!--种类-->
-    <select id="findProductKind" resultType="java.lang.String" parameterType="java.lang.Integer">
-        SELECT ProductKind FROM ProductKind WHERE kindId = #{kindId}
-    </select>
-    <!--尺寸-->
-    <select id="findProductSize" resultType="java.lang.String" parameterType="java.lang.Integer">
-        SELECT ProductSize FROM ProductSize WHERE sizeId = #{sizeId}
-    </select>
-    <!--配置-->
-    <select id="findProductSpecification" resultType="java.lang.String" parameterType="java.lang.Integer">
-        SELECT productSpecification FROM Specification WHERE specificationId = #{specificationId}
-    </select>
-    <!--口味-->
-    <select id="findProductTaste" resultType="java.lang.String" parameterType="java.lang.Integer">
-        SELECT ProductTaste FROM ProductTaste WHERE tasteId = #{tasteId}
-    </select>
-    <!--版本-->
-    <select id="findProductVersion" resultType="java.lang.String" parameterType="java.lang.Integer">
-        SELECT productVersion FROM ProductVersion WHERE versionId = #{versionId}
-    </select>
+
 
     <select id="findDistinction" resultType="cn.itcast.domain.ProductDatails.ProductDistinction">
         SELECT  * FROM productDistinction WHERE distinctionId = #{distinctionId}
