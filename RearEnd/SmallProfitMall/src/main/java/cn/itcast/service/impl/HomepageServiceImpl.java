@@ -55,12 +55,12 @@ public class HomepageServiceImpl implements HomepageService {
                 //设置对象
                 rotationCharts1.setBigRotationChart(image);
                 rotationCharts1.setSite(site);
-                for (int j = 0; j <3 ; j++) {
+                for (int j = i*3; j <i*3+3 ; j++) {
                     Slideshow slideshow1 = new Slideshow();
                     //小轮播图图片
-                    String images = smallRotationChart.get(i*3).getImage();
+                    String images = smallRotationChart.get(j).getImage();
                     //小轮播图地址
-                    String sites = smallRotationChart.get(i*3).getSite();
+                    String sites = smallRotationChart.get(j).getSite();
                     slideshow1.setImage(images);
                     slideshow1.setSite(sites);
                     slideshow.add(slideshow1);

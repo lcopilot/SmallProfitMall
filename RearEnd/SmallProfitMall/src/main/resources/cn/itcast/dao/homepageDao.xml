@@ -39,11 +39,6 @@
         SELECT * from homepageIcon
     </select>
 
-    <!--查询轮播图图片-->
-    <select id="findRotationChart" resultType="cn.itcast.domain.homepag.RotationChart">
-        SELECT * from RotationChart
-    </select>
-
     <!--查询商品分类导航栏-->
     <select id="findProductCategory" resultMap="findProductCategoryMap">
         SELECT
@@ -56,6 +51,7 @@
         pp.show_sign=1 AND pc.show_sign=1 AND pf.show_sign=1
     </select>
 
+    <!--查询不同类型图片-->
     <select id="findSlideshow" parameterType="java.lang.Integer" resultType="cn.itcast.domain.homepag.Slideshow">
     SELECT
         image,
