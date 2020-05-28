@@ -11,7 +11,7 @@
           <el-col :span="6">
             <div style="position: relative;" v-if="!videoShow">
               <vue-photo-zoom-pro style="width: 355px;" type="circle"
-                                  :url="bigImg" :scale="2"
+                                  :url="bigImg" :scale="2.5"
                                   @mouseenter="stopSwitchProductImg()"
                                   @mouseleave="switchProductImg()"/>
               <div class="product_play" v-if="product.video">
