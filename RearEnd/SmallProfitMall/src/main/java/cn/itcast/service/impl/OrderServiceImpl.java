@@ -609,10 +609,10 @@ public class OrderServiceImpl implements OrderService {
         String  total =  order.getOrderTotal().setScale(2, BigDecimal.ROUND_HALF_UP).toString();
         //order 订单 total订单总计
         //订单消息中间件推送消息
-        notificationUser(order,total);
+//        notificationUser(order,total);
 
         //直接推送消息
-       // push(order);
+        push(order);
         return 1;
     }
     /**
@@ -810,7 +810,13 @@ public class OrderServiceImpl implements OrderService {
         Integer unreadQuantity =  newsService.unreadQuantity(orders.getUserId());
 
         //推送消息 三秒后推送
-        Integer result = newsService.pushNews(newsList,unreadQuantity);
+        try {
+            Integer result = newsService.pushNews(newsList,unreadQuantity);
+        } catch (IOException e) {
+            System.out.println("捕获异常");
+        }catch (NullPointerException e){
+
+        }
 //        //推送失败 丛连推送
 //        if (result!=1) {
 //            //尝试次数
