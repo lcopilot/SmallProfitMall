@@ -98,7 +98,7 @@ public class OrderController {
     }
 
     /**
-     * 查询确认的订单
+     * 查询确认的订单----------------------
      * @param userId 用户id
      * @param orderId 订单id
      * @return 返回订单信息 账户是否设置支付密码 人脸验证信息
@@ -143,7 +143,7 @@ public class OrderController {
     }
 
     /**
-     * 验证支付密码支付
+     * 验证支付密码支付----------------------------支付--------------------------------------------------------------
      * @param userId 用户id
      * @param paymentPassword 用户支付密码
      * @return
@@ -206,7 +206,7 @@ public class OrderController {
     }
 
     /**
-     * 提交订单
+     * 提交订单--------------------------------订单确认----------------------------------------------
      * @param order
      * @return
      */

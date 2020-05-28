@@ -33,7 +33,7 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
 //           ProductAttributes productAttributes = productDetailsDao.fendAttributes(pid);
         //查询商品详细信息
         ProductDetailsResult productDetailsResult = productDetailsDao.fendProduct(productId);
-        List<ProductContext> productContexts = productDetailsResult.getProductContexts();
+            List<ProductContext> productContexts = productDetailsResult.getProductContexts();
 
         if (productContexts!=null){
             //颜色集合

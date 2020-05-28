@@ -169,13 +169,13 @@
          WHERE ProductId=#{productId};
     </select>
 
-
+    <!--查询商品属性-->
     <select id="findProperty" resultType="java.lang.String" parameterType="java.lang.Integer">
          SELECT attributeContent FROM productAttribute WHERE attributeId = #{attributeId}
     </select>
 
 
-
+    <!--查询商品配置-->
     <select id="findDistinction" resultType="cn.itcast.domain.ProductDatails.ProductDistinction">
         SELECT  * FROM productDistinction WHERE distinctionId = #{distinctionId}
     </select>

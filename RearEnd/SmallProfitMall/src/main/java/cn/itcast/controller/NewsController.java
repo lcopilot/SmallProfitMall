@@ -83,19 +83,7 @@ public class NewsController {
         }
     }
 
-    /**
-     * 发送消息测试
-     * @param userId
-     * @param msg
-     * @throws IOException
-     */
-    @RequestMapping(value = "/close/{userId}/{msg}",method = RequestMethod.POST)
-    public QueryResponseResult close(@PathVariable("userId")String userId,@PathVariable("msg")String msg) throws IOException {
-        List<News> news = newsService.fendNews(userId,2,1,5);
-        String a= ConversionJson.objectToJson(news.get(1)) ;
-        webSocket.sendMessage(news,newsService.unreadQuantity(userId));
-        return new QueryResponseResult(CommonCode.SUCCESS,null);
-    }
+
 
 
 }

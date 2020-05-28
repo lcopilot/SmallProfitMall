@@ -781,51 +781,62 @@ public class OrderServiceImpl implements OrderService {
         //初始化消息对象集合
         List<News> newsList =new ArrayList();
 
-        //查询订单消息
+        //查询订单消息-------------------------------------------
         News orderNews = newsDao.fenNewsById(news.getContentId());
-        //将订单消息添加到集合种
-        newsList.add(orderNews);
 
         //查询订单详细信息 转为json
         Order orderss=orderDao.findDetailedOrder(orders.getUserId(),orders.getOrderId());
         String jsonObjects = JSONObject.toJSONString(orderss);
 
-        for (int i = 0; i <newsList.size() ; i++) {
-            //转换消息内容为JSON
-            newsList.get(i).setNewsContentJson(JSONObject.parseObject(jsonObjects));
-            newsList.get(i).setNewsContent(null);
-        }
+        orderNews.setNewsContentJson(JSONObject.parseObject(jsonObjects));
+        orderNews.setNewsContent(null);
+        //将订单消息添加到集合种
+        newsList.add(orderNews);
+
+        //----------------------------------------------
+
+        //查询零钱消息-------------------------------------------
+        News consumptionRecordss = newsDao.fenNewsById(newsConsumptionRecords.getContentId());
+
+        //查询零钱详细 装为json
+        ConsumptionRecords consumptionRecords= memberDao.findConsumptionRecords(orders.getUserId(),orders.getOrderId());
+        String jsonConsumptionRecords = JSONObject.toJSONString(consumptionRecords);
+
+        consumptionRecordss.setNewsContentJson(JSONObject.parseObject(jsonConsumptionRecords));
+        consumptionRecordss.setNewsContent(null);
+        newsList.add(consumptionRecordss);
+
         //未读消息数量
         Integer unreadQuantity =  newsService.unreadQuantity(orders.getUserId());
 
         //推送消息 三秒后推送
         Integer result = newsService.pushNews(newsList,unreadQuantity);
-        //推送失败 丛连推送
-        if (result!=1) {
-            //尝试次数
-            Integer frequency = 0;
-            //最多尝试次数
-            Integer maximum = 3;
-            Boolean sign = true;
-            while (sign) {
-            try
-            {
-                Thread.sleep(5000);
-                frequency = frequency++;
-                System.out.println("正在进行第"+frequency+"次推送");
-                result = newsService.pushNews(newsList,unreadQuantity);
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-                maximum--;
-                if (result == 1 || maximum == 0) {
-                    sign = false;
-                }
-            }
+//        //推送失败 丛连推送
+//        if (result!=1) {
+//            //尝试次数
+//            Integer frequency = 0;
+//            //最多尝试次数
+//            Integer maximum = 3;
+//            Boolean sign = true;
+//            while (sign) {
+//            try
+//            {
+//                Thread.sleep(5000);
+//                frequency = frequency++;
+//                System.out.println("正在进行第"+frequency+"次推送");
+//                result = newsService.pushNews(newsList,unreadQuantity);
+//            }
+//            catch (InterruptedException e)
+//            {
+//                e.printStackTrace();
+//            }
+//                maximum--;
+//                if (result == 1 || maximum == 0) {
+//                    sign = false;
+//                }
+//            }
 
-        }
+   //     }
     }
 
     /**

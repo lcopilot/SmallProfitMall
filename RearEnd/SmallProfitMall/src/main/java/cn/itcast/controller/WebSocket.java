@@ -134,8 +134,9 @@ public class WebSocket {
                 String a = message.get(i).getUserId();
                 //设置消息内容
                 WebSocket testSession = USER_ONLINE_MAP.get(message.get(i).getUserId());
-
-                testSession.session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis, queryResultString)));
+                if ( socket!=null){
+                    testSession.session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis, queryResultString)));
+                }
             }
             return redis = 1;
         }
