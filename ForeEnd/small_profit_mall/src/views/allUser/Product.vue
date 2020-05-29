@@ -568,7 +568,9 @@
                     && product.specification.length > 0) ? product.specification[0].attributeId : 0;
                 this.productForm.size = (product.size !== undefined
                     && product.size.length > 0) ? product.size[0].attributeId : 0;
-                this.attributeChange();
+                if (this.product.productDistinctions){
+                  this.attributeChange();
+                }
               }
             }
         )
@@ -704,7 +706,7 @@
       //获取商品介绍,售后,参数
       getProductDesciption() {
         productApi.getProductDesciption(this.productId).then(res => {
-          if (res.success) {
+          if (res.success && res.objectReturn.object) {
             this.productDescription = res.objectReturn.object.productDescription;
             this.productAfterSale = res.objectReturn.object.productAfterSale;
             this.productParameter = res.objectReturn.object.productParameter;
