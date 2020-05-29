@@ -804,41 +804,39 @@ public class OrderServiceImpl implements OrderService {
 
         //未读消息数量
         Integer unreadQuantity =  newsService.unreadQuantity(orders.getUserId());
-
         //推送消息 三秒后推送
         try {
-
             Integer result = newsService.pushNews(newsList,orders.getUserId(),unreadQuantity);
+        //推送失败 丛连推送
+        if (result!=1) {
+            //尝试次数
+            Integer frequency = 0;
+            //最多尝试次数
+            Integer maximum = 3;
+            Boolean sign = true;
+            while (sign) {
+            try
+            {
+                Thread.sleep(5000);
+                frequency = ++frequency;
+                System.out.println("正在进行第"+frequency+"次推送");
+                result = newsService.pushNews(newsList,orders.getUserId(),unreadQuantity);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+                maximum--;
+                if (result == 1 || maximum == 0) {
+                    sign = false;
+                }
+            }
+        }
         } catch (IOException e) {
             System.out.println("捕获异常");
         }catch (NullPointerException e){
 
         }
-//        //推送失败 丛连推送
-//        if (result!=1) {
-//            //尝试次数
-//            Integer frequency = 0;
-//            //最多尝试次数
-//            Integer maximum = 3;
-//            Boolean sign = true;
-//            while (sign) {
-//            try
-//            {
-//                Thread.sleep(5000);
-//                frequency = frequency++;
-//                System.out.println("正在进行第"+frequency+"次推送");
-//                result = newsService.pushNews(newsList,unreadQuantity);
-//            }
-//            catch (InterruptedException e)
-//            {
-//                e.printStackTrace();
-//            }
-//                maximum--;
-//                if (result == 1 || maximum == 0) {
-//                    sign = false;
-//                }
-//            }
-   //     }
     }
 
     /**
