@@ -34,9 +34,9 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
         //查询商品详细信息
 
         String transition = String.valueOf(productId);
-        String ProductId ="productId_"+transition;
+        String productIds ="productId_"+transition;
         //从缓存中查询是否存在
-        ProductDetailsResult  redis = (ProductDetailsResult)redisUtil.get(ProductId);
+        ProductDetailsResult  redis = (ProductDetailsResult)redisUtil.get(productIds);
         if(redis==null){
             ProductDetailsResult productDetailsResult = productDetailsDao.fendProduct(productId);
             List<ProductContext> productContexts = productDetailsResult.getProductContexts();
@@ -136,7 +136,7 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
 
             System.out.println("数据库中取商品详细数据");
 
-            redisUtil.set(ProductId,productDetailsResult);
+            redisUtil.set(productIds,productDetailsResult);
             return productDetailsResult;
         }else {
             ProductDetailsResult productDetailsResult1 = productDetailsDao.findSalesInventory(productId);

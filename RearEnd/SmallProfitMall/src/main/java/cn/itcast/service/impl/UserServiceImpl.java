@@ -4,8 +4,10 @@ import cn.itcast.dao.AccountSettingsDao;
 import cn.itcast.dao.MemberDao;
 import cn.itcast.dao.NewsDao;
 import cn.itcast.dao.UserDao;
+import cn.itcast.domain.news.News;
 import cn.itcast.domain.user.Login;
 import cn.itcast.domain.user.User;
+import cn.itcast.service.NewsService;
 import cn.itcast.service.UserService;
 import cn.itcast.util.compressPicture.UploadPicturesUtil;
 import cn.itcast.util.encryption.AesEncryptUtil;
@@ -14,17 +16,21 @@ import cn.itcast.util.redis.RedisUtil;
 import cn.itcast.util.user.SmsUtils;
 import cn.itcast.util.verify.IPUtil;
 import cn.itcast.util.verify.TCaptchaVerify;
+import lombok.SneakyThrows;
+import org.apache.commons.mail.Email;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-@Service("userService")
+@Service
 public class UserServiceImpl implements UserService {
 
     //七牛云存储空间名称
@@ -45,7 +51,8 @@ public class UserServiceImpl implements UserService {
     private NewsDao newsDao;
 
     /**推送消息**/
-    NewsServiceImpl newsService;
+    @Autowired
+    NewsService newsService;
 
     /**注入缓存工具类**/
     @Autowired
@@ -209,7 +216,7 @@ public class UserServiceImpl implements UserService {
         login.setImage(user.getImage());
         login.setToken(user.getToken());
         login.setName(user.getName());
-       // this.pushNews(user.getUid());
+        this.pushNews(user.getUid());
         return login;
     }
 
@@ -222,9 +229,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public void pushNews(String userId) throws IOException {
        Integer  quantity = newsDao.unreadQuantity(userId);
-
-        newsService.pushNews(null,userId,quantity);
-
+        Thread thread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(10000);
+                    List<News> news = new ArrayList<>();
+                    newsService.pushNews(news,userId,quantity);
+                    System.out.println("-----------------------sdfsdfsdfsdfdsf------------------------");
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    Thread.currentThread().interrupt();
+                    e.printStackTrace();
+                } catch (NullPointerException e){
+                    Thread.currentThread().interrupt();
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
 
     }
 

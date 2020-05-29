@@ -66,6 +66,10 @@
     <url-pattern>/druid/*</url-pattern>
   </servlet-mapping>
 
+
+
+
+
   <!-- 加载log4j配置文件 -->
 <!--  <context-param>-->
 <!--    <param-name>log4jConfigLocation</param-name>-->

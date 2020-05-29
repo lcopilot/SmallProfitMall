@@ -111,8 +111,8 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public Integer pushNews(List<News> news,String userId, Integer unreadQuantity) throws IOException {
         try {
-
-            return webSocket.sendMessage(news,userId,unreadQuantity);
+           Integer result = webSocket.sendMessage(news,userId,unreadQuantity);
+            return result;
         }catch (NullPointerException| IOException e){
 
         }catch (Exception e){

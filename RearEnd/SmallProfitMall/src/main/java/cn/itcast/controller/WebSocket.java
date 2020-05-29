@@ -128,11 +128,14 @@ public class WebSocket {
         if (socket.session != null) {
                 //消息对象
                 QueryResultString queryResultString = new QueryResultString();
-                //设置消息信息
-                queryResultString.setNews(message);
+                if (message != null){
+                    //设置消息信息
+                    queryResultString.setNews(message);
+                }
+
                 //未读消息数量
                 queryResultString.setUnreadQuantity(unreadQuantity);
-                WebSocket testSession = USER_ONLINE_MAP.get(message.get(0).getUserId());
+                WebSocket testSession = USER_ONLINE_MAP.get(userId);
                 testSession.session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis, queryResultString)));
             return redis = 1;
         }
