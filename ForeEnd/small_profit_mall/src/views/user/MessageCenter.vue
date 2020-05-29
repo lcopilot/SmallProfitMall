@@ -281,6 +281,12 @@
             this.messagePaging.totalPage = res.page.totalPage;
             this.unreadQuantity = res.page.unreadQuantity;
             this.$refs.header.unreadQuantity = this.unreadQuantity;
+            try {
+              this.$refs.header.unreadQuantity = this.unreadQuantity;
+            }catch (e) {
+                //  Cannot set property 'unreadQuantity' of undefined
+                //莫名其妙的异常 不晓得怎么处理😀
+            }
             if (this.unreadQuantity == 0) {
               sessionStorage.setItem("unreadQuantity", this.unreadQuantity);
             }

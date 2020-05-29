@@ -135,7 +135,7 @@ const User = (props) => {
         </Col>
         <Col xs={24} sm={15} md={9} lg={9} xl={9}>
           <Search
-              placeholder="查询用户"
+              placeholder="请输入用户名"
               onSearch={value => console.log(value)}
           />
         </Col>
