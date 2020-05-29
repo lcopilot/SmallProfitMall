@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header>
-      <Header ref="header"></Header>
+      <Header></Header>
     </el-header>
     <el-main>
       <el-row :gutter="20">
@@ -148,7 +148,9 @@
                         </div>
                       </div>
                       <div class="message_order_btn message_order_confirm_btn">
-                        <el-button round size="small" plain @click="checkOrder" v-if="paymentAssistant.changeQuantity==0">修改</el-button>
+                        <el-button round size="small" plain @click="checkOrder"
+                                   v-if="paymentAssistant.changeQuantity==0">修改
+                        </el-button>
                         <el-button round size="small" type="primary">确认
                         </el-button>
                       </div>
@@ -205,6 +207,7 @@
 
 <script>
   import *as userApi from '../../api/page/user';
+  import {mapActions} from "vuex";
 
   const personalPage = () => import("../../components/admin/PersonalHubPage");
   export default {
@@ -242,11 +245,14 @@
         //支付助手
         paymentAssistant: {},
         //单个消息数据
-        messageData:{},
+        messageData: {},
 
       }
     },
     methods: {
+      ...mapActions([
+        "modifyUnreadQuantity"
+      ]),
       //消息时间算法
       messageTime(time) {
         let mTime = new Date(time);
@@ -280,16 +286,8 @@
             this.messageList = this.messageList.concat(res.page.news); //因为每次后端返回的都是数组，所以这边把数组拼接到一起
             this.messagePaging.totalPage = res.page.totalPage;
             this.unreadQuantity = res.page.unreadQuantity;
-            this.$refs.header.unreadQuantity = this.unreadQuantity;
-            try {
-              this.$refs.header.unreadQuantity = this.unreadQuantity;
-            }catch (e) {
-                //  Cannot set property 'unreadQuantity' of undefined
-                //莫名其妙的异常 不晓得怎么处理😀
-            }
-            if (this.unreadQuantity == 0) {
-              sessionStorage.setItem("unreadQuantity", this.unreadQuantity);
-            }
+            this.modifyUnreadQuantity(this.unreadQuantity);
+            sessionStorage.setItem("unreadQuantity", JSON.stringify(this.unreadQuantity));
             this.messageArr = this.messageList;
           }
         });
@@ -333,7 +331,7 @@
           this.messageList.forEach((message) => {
             message.sign = false;
           });
-          this.messageData=this.messageList[index];
+          this.messageData = this.messageList[index];
           this.paymentAssistant = this.messageList[index].newsContentJson;
           if (!this.paymentAssistant.paymentAmount) {
             this.productList = this.messageList[index].newsContentJson.productContents;
@@ -353,10 +351,10 @@
             if (contentId) {
               this.messageList[index].newsStatus = 0;
               this.unreadQuantity--;
-              this.$refs.header.unreadQuantity = this.unreadQuantity;
-              sessionStorage.setItem("unreadQuantity", this.unreadQuantity);
+              this.modifyUnreadQuantity(this.unreadQuantity);
+              sessionStorage.setItem("unreadQuantity", JSON.stringify(this.unreadQuantity));
             } else if (contentId == 0) {
-              sessionStorage.setItem("unreadQuantity", this.unreadQuantity);
+              sessionStorage.setItem("unreadQuantity", JSON.stringify(this.unreadQuantity));
               this.reload();
             }
           }
@@ -443,11 +441,12 @@
   }
 
   .message_order_confirm_btn /deep/ .el-button--primary {
-    border:none;
+    border: none;
     background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
   }
+
   .message_order_confirm_btn /deep/ .el-button--primary:hover {
-    border:none;
+    border: none;
     background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
   }
 

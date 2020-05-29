@@ -6,13 +6,12 @@
       </h1>
       <nav class="header-nav">
         <ul style="margin-right: -15rem">
-
           <li v-if="this.$route.path!='/login' && this.username==null">
             <router-link to="/login">您好,请登录</router-link>
           </li>
           <li v-if="this.username!=null">
             <el-dropdown trigger="click">
-              <el-badge :is-dot="unreadQuantity!=0" class="header_sign">
+              <el-badge :is-dot="unreadQuantity!==0" class="header_sign">
                 <span class="el-dropdown-link">
                   <img :src="avatar" style="width: 35px; border-radius: 10%;margin-top: 6%">
                         您好,{{username}}
@@ -40,7 +39,7 @@
                 </el-dropdown-item>
                 <el-dropdown-item>
                   <router-link to="/messageCenter">
-                    <el-badge :value="unreadQuantity==0?'':unreadQuantity" :max="99">
+                    <el-badge :value="unreadQuantity===0?'':unreadQuantity" :max="99">
                       <svg-icon name="message" class="icon"></svg-icon>
                       消息中心
                     </el-badge>
@@ -69,8 +68,6 @@
       return {
         username: null,
         avatar: 'http://img.isdfmk.xyz/iduyadfgjdekldjhf.png',
-        //消息未读数
-        unreadQuantity:0,
       };
     },
     computed: {
@@ -78,10 +75,19 @@
       websocketStatus() {
         return this.$store.state.websocketStatus;
       },
+      unreadQuantity:{
+        get(){
+          return this.$store.state.unreadQuantity;
+        },
+        set(){
+
+        }
+      },
     },
     methods: {
       ...mapActions([
-        "modifyWebsocketStatus"
+        "modifyWebsocketStatus",
+        "modifyUnreadQuantity"
       ]),
       //退出
       exit() {
@@ -91,8 +97,8 @@
       },
       //新消息消息
       newMessage(msg){
-        this.unreadQuantity=msg.queryResultString.unreadQuantity;
-        sessionStorage.setItem("unreadQuantity",this.unreadQuantity);
+        this.modifyUnreadQuantity(msg.queryResultString.unreadQuantity);
+        sessionStorage.setItem("unreadQuantity",JSON.stringify(msg.queryResultString.unreadQuantity));
       }
     },
     created() {
@@ -103,7 +109,7 @@
       this.avatar = sessionStorage.getItem("avatar");
       this.username = sessionStorage.getItem("username");
       if (sessionStorage.getItem("unreadQuantity")){
-        this.unreadQuantity=sessionStorage.getItem("unreadQuantity");
+        this.modifyUnreadQuantity(JSON.parse(sessionStorage.getItem("unreadQuantity")));
       }
       //接收新消息
       this.socketApi.depositMethod(80000, this.newMessage);

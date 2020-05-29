@@ -166,28 +166,27 @@
       },
     },
     methods: {
+      ...mapActions([
+        "modifyCartSum",
+      ]),
       //进入购物车页面
       EnterCart() {
         this.$router.push({
           path: "/shoppingCart" //跳转的路径
         });
       },
-      ...mapActions([
-        "modifyCartSum",
-        "getCartSum"
-      ]),
       //获取购物车预览数据
       getShoppingCartPreview() {
         let userId = sessionStorage.getItem("uId");
         if (userId != null) {
           productApi.getShoppingCartPreview(userId, 4).then(res => {
             if (res.success) {
-              this.getCartSum(res.queryResult.total);
+              this.modifyCartSum(res.queryResult.total);
               this.cartList = res.queryResult.list;
             }
           })
         } else {
-          this.getCartSum(0);
+          this.modifyCartSum(0);
         }
       },
       //删除商品
