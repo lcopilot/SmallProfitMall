@@ -20,6 +20,7 @@ import lombok.SneakyThrows;
 import org.apache.commons.mail.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +33,9 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private ThreadPoolTaskExecutor poolTaskExecutor;
 
     //七牛云存储空间名称
     private static final  String space="mugebl";
@@ -229,27 +233,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public void pushNews(String userId) throws IOException {
        Integer  quantity = newsDao.unreadQuantity(userId);
-        Thread thread=new Thread(new Runnable() {
+        poolTaskExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(2000);
                     List<News> news = new ArrayList<>();
                     newsService.pushNews(news,userId,quantity);
-                    System.out.println("-----------------------sdfsdfsdfsdfdsf------------------------");
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    e.printStackTrace();
-                } catch (IOException e) {
+                } catch (InterruptedException | IOException e) {
                     Thread.currentThread().interrupt();
                     e.printStackTrace();
                 } catch (NullPointerException e){
                     Thread.currentThread().interrupt();
                     e.printStackTrace();
                 }
+
             }
         });
-        thread.start();
 
     }
 
