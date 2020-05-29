@@ -489,7 +489,6 @@
     methods: {
       ...mapActions([
         "modifyCartSum",
-        "getCartSum"
       ]),
       //鼠标切换商品图片
       enter(index) {
@@ -569,7 +568,9 @@
                     && product.specification.length > 0) ? product.specification[0].attributeId : 0;
                 this.productForm.size = (product.size !== undefined
                     && product.size.length > 0) ? product.size[0].attributeId : 0;
-                this.attributeChange();
+                if (this.product.productDistinctions){
+                  this.attributeChange();
+                }
               }
             }
         )
@@ -598,12 +599,12 @@
                 message: "商品已加入购物车",
                 type: "success"
               })
-              this.getCartSum(res.queryResult.total);
+              this.modifyCartSum(res.queryResult.total);
             } else {
-              if (res.code == 11111) {
+              if (res.code ===11111) {
                 return this.$message.warning("购物车已满!");
               }
-              if (res.code == 10003) {
+              if (res.code === 10003) {
                 return this.$message.warning("商品同一配置数量已达上限!无法再添加哦~");
               } else {
                 this.$message({
@@ -705,7 +706,7 @@
       //获取商品介绍,售后,参数
       getProductDesciption() {
         productApi.getProductDesciption(this.productId).then(res => {
-          if (res.success) {
+          if (res.success && res.objectReturn.object) {
             this.productDescription = res.objectReturn.object.productDescription;
             this.productAfterSale = res.objectReturn.object.productAfterSale;
             this.productParameter = res.objectReturn.object.productParameter;

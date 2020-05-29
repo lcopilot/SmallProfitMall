@@ -9,6 +9,7 @@ export default new Vuex.Store({
     startTime: new Date().getTime(), //剩余开始时间
     endTime: new Date(), //剩余结束时间
     websocketStatus: false,
+    unreadQuantity:0,
   },
   getters: {
     endTime: state => {
@@ -28,28 +29,31 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    getCartSum(state, sum) {
-      state.CartSum = sum
-    },
     modifyCartSum(state, sum) {
-      state.CartSum += sum
+      state.CartSum = sum
     },
     modifyWebsocketStatus(state, websocketStatus) {
       state.websocketStatus = websocketStatus
     },
-
+    getUnreadQuantity(state, unreadQuantity) {
+      state.unreadQuantity = unreadQuantity
+    },
+    modifyUnreadQuantity(state, unreadQuantity) {
+      state.unreadQuantity = unreadQuantity
+    },
   },
   actions: {
-    //获取购物车的数量
-    getCartSum: (context, sum) => {
-      context.commit('getCartSum', sum);
-    },
     //修改购物车的数量
     modifyCartSum: (context, sum) => {
       context.commit('modifyCartSum', sum);
-    },//修改购物车的数量
+    },
+    //修改websocket链接状态
     modifyWebsocketStatus: (context, websocketStatus) => {
       context.commit('modifyWebsocketStatus', websocketStatus);
+    },
+    //修改未读消息的数量
+    modifyUnreadQuantity: (context, unreadQuantity) => {
+      context.commit('modifyUnreadQuantity', unreadQuantity);
     },
   }
   ,
