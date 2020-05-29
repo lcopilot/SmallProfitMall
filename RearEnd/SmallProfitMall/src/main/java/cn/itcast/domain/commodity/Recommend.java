@@ -3,7 +3,7 @@ package cn.itcast.domain.commodity;
 import java.io.Serializable;
 
 /**
- * 为你推 荐
+ * 为你推荐
  * @author kity
  */
 public class Recommend implements Serializable {

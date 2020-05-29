@@ -1,5 +1,6 @@
 package cn.itcast.domain.homepag;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @author Kite
  * @date 2020/5/14
  */
-public class ProductSecondaryCategory {
+public class ProductSecondaryCategory implements Serializable {
     /**二级分类id**/
     private Integer product_secondary_id;
     /**二级分类内容**/

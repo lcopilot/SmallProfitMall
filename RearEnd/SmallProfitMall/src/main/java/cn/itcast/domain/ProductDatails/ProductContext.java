@@ -1,10 +1,12 @@
 package cn.itcast.domain.ProductDatails;
 
+import java.io.Serializable;
+
 /**
  * @author Kite
  * @date 2020/5/24
  */
-public class ProductContext {
+public class ProductContext implements Serializable {
     /**配置id**/
     private Integer attributeId;
     /**配置名称**/

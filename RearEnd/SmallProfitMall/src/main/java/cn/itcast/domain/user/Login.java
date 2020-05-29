@@ -2,9 +2,12 @@ package cn.itcast.domain.user;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+
+import java.io.Serializable;
+
 //登录
 @Component("login")
-public class Login {
+public class Login implements Serializable {
 
     private String name;
     private String tokens;

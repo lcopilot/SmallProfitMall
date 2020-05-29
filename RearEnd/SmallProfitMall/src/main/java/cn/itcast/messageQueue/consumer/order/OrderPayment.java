@@ -3,6 +3,8 @@ package cn.itcast.messageQueue.consumer.order;
 import cn.itcast.util.Emiail.SendEmailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.Serializable;
+
 /**
  * 购买商品确认订单邮件
  * @author Kite

@@ -1,5 +1,6 @@
 package cn.itcast.domain.homepag;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @author Kite
  * @date 2020/5/27
  */
-public class Slideshow {
+public class Slideshow  implements Serializable {
     /**图片**/
     private String image;
     /**图片地址**/

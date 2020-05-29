@@ -1,11 +1,13 @@
 package cn.itcast.domain.productComment;
 
+import java.io.Serializable;
+
 /**
  * 评论图片对象
  * @author Kite
  * @date 2020/5/2
  */
-public class CommentImage {
+public class CommentImage implements Serializable {
 
     private Integer id;
 

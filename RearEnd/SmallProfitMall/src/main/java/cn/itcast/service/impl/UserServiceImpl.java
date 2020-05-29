@@ -7,6 +7,7 @@ import cn.itcast.dao.UserDao;
 import cn.itcast.domain.news.News;
 import cn.itcast.domain.user.Login;
 import cn.itcast.domain.user.User;
+import cn.itcast.messageQueue.producer.shopping.ShoppingProducer;
 import cn.itcast.service.NewsService;
 import cn.itcast.service.UserService;
 import cn.itcast.util.compressPicture.UploadPicturesUtil;
@@ -43,6 +44,10 @@ public class UserServiceImpl implements UserService {
     /**用户持久层**/
     @Autowired
     private UserDao userDao;
+
+    /**消息中间件推送**/
+    @Autowired
+    ShoppingProducer shoppingProducer;
 
     @Autowired
     private MemberDao memberDao;
@@ -220,7 +225,7 @@ public class UserServiceImpl implements UserService {
         login.setImage(user.getImage());
         login.setToken(user.getToken());
         login.setName(user.getName());
-        this.pushNews(user.getUid());
+        shoppingProducer.sendNewsQuantity("news_quantity",user.getUid());
         return login;
     }
 

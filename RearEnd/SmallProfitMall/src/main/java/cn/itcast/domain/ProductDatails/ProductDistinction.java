@@ -1,11 +1,13 @@
 package cn.itcast.domain.ProductDatails;
 
+import java.io.Serializable;
+
 /**
  * 商品不同配置不库存销量
  * @author Kite
  * @date 2020/5/24
  */
-public class ProductDistinction {
+public class ProductDistinction implements Serializable {
     private Integer distinctionId;
     /**商品id**/
     private Integer productId;

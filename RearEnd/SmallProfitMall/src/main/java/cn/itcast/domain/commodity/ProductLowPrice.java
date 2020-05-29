@@ -1,7 +1,10 @@
 package cn.itcast.domain.commodity;
 
 import java.io.Serializable;
-//低价商品查询
+
+/**
+ * 低价商品
+ */
 public class ProductLowPrice implements Serializable {
     private int ProductId;
     //商品图片

@@ -27,16 +27,16 @@ public class HomepageServiceImpl implements HomepageService {
     /**缓存工具类**/
     @Autowired
     RedisUtil redisUtil;
-
-
     /**
      * 轮播图
      * @return 轮播图集合
      */
     @Override
     public List findRotationChart() {
-        List<RotationChart> redis = (List<RotationChart>)redisUtil.get("RotationChart");
-        if (redis==null || redis.size()==0){
+        List<RotationChart> redis = (List<RotationChart>)redisUtil.get("rotationChart");
+        if (redis != null){
+             return redis;
+        }
             List<RotationChart> rotationCharts = new ArrayList<>();
             //查询大轮播图
             List<Slideshow> bigRotationChart = homepageDao.findSlideshow(1);
@@ -68,11 +68,10 @@ public class HomepageServiceImpl implements HomepageService {
                 }
                 rotationCharts.add(rotationCharts1);
             }
-
-            redisUtil.set("RotationChart",rotationCharts);
+           Boolean a =  redisUtil.set("rotationChart",rotationCharts);
+        System.out.println(a);
             return rotationCharts;
-        }
-     return redis;
+
     }
 
 

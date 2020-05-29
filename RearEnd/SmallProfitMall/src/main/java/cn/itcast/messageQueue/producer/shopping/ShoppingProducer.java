@@ -30,13 +30,22 @@ public class ShoppingProducer {
     }
 
     /**
-     * 用于推送消息
+     * 用于推送购买成功消息
      * @param type 要发送的消息队列
      * @param order 订单对象
      */
     public void  sendShoppingInformation(String type, JSONObject order){
         try {
-            shoppingTemplate.convertAndSend("SHOPPING-EXCHANGE", "user.news", order);
+            shoppingTemplate.convertAndSend("SHOPPING-EXCHANGE", prefix + type, order);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void sendNewsQuantity(String type , String userId){
+        try {
+            shoppingTemplate.convertAndSend("SHOPPING-EXCHANGE", prefix + type, userId);
         } catch (Exception e) {
             e.printStackTrace();
         }

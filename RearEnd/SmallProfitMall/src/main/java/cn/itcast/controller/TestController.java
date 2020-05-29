@@ -11,8 +11,11 @@ import cn.itcast.response.objectReturn.ObjectReturn;
 import cn.itcast.response.objectReturn.ObjectReturnResponse;
 import cn.itcast.service.HomepageService;
 import cn.itcast.service.SearchProductService;
+import cn.itcast.util.redis.RedisUtil;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,6 +47,17 @@ public class TestController {
     @Autowired
     SearchProductService searchProductDao;
 
+//    @Autowired
+//    RedisUtil redisUtil;
+//    @RequestMapping(value = "/Test/{test}",method = RequestMethod.GET)
+//    public void setRedisUtil(@PathVariable("test") String test){
+//        List list = new ArrayList();
+//        list.add("a");
+//        list.add("b");
+//
+//        redisUtil.set("s",list);
+//        System.out.println("|165555555555555555555555555555555555555555555555555"+redisUtil.get("s")+"15555555555555555555555555555555555555555554");
+//    }
 
 //    //测试
 //    @RequestMapping(value = "/Test/{test}",method = RequestMethod.GET)

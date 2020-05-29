@@ -1,5 +1,6 @@
 package cn.itcast.domain.poribuctPageviews;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  * @author Kite
  * @date 2020/5/17
  */
-public class PoribuctPageviews {
+public class PoribuctPageviews implements Serializable {
     /**商品id**/
     private Integer productId ;
     /**用户ip**/

@@ -1,10 +1,12 @@
 package cn.itcast.domain.searchProduct;
 
+import java.io.Serializable;
+
 /**
  * @author Kite
  * @date 2020/5/16
  */
-public class SearchProduct {
+public class SearchProduct implements Serializable {
     /**商品id**/
     private String productId;
     /**商品图片**/
