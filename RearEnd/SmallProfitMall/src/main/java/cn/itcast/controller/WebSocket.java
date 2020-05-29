@@ -20,6 +20,9 @@ import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author kite
+ */
 @ServerEndpoint("/notification/{userId}")
 @Component
 public class WebSocket {
@@ -115,8 +118,7 @@ public class WebSocket {
      * @throws IOException
      */
     @ExceptionHandler(Exception.class)
-    public Integer sendMessage(List<News> message, Integer unreadQuantity) throws IOException {
-        String userId = message.get(0).getUserId();
+    public Integer sendMessage(List<News> message,String userId, Integer unreadQuantity) throws IOException {
         //返回值
         Integer redis = 0;
         WebSocket socket = USER_ONLINE_MAP.get(userId);

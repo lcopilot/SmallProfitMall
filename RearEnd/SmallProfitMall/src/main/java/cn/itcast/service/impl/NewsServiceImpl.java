@@ -109,13 +109,14 @@ public class NewsServiceImpl implements NewsService {
      * @throws IOException
      */
     @Override
-    public Integer pushNews(List<News> news, Integer unreadQuantity) throws IOException {
+    public Integer pushNews(List<News> news,String userId, Integer unreadQuantity) throws IOException {
         try {
-            return webSocket.sendMessage(news,unreadQuantity);
+
+            return webSocket.sendMessage(news,userId,unreadQuantity);
         }catch (NullPointerException| IOException e){
-            System.out.println("ggggggggggggggggg");
+
         }catch (Exception e){
-            System.out.println("dddddddddddddd");
+
         }
         return 10;
     }

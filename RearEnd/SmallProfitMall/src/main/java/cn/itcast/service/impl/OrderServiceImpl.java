@@ -811,7 +811,8 @@ public class OrderServiceImpl implements OrderService {
 
         //推送消息 三秒后推送
         try {
-            Integer result = newsService.pushNews(newsList,unreadQuantity);
+
+            Integer result = newsService.pushNews(newsList,orders.getUserId(),unreadQuantity);
         } catch (IOException e) {
             System.out.println("捕获异常");
         }catch (NullPointerException e){

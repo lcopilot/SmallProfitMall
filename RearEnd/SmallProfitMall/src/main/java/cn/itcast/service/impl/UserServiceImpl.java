@@ -2,6 +2,7 @@ package cn.itcast.service.impl;
 
 import cn.itcast.dao.AccountSettingsDao;
 import cn.itcast.dao.MemberDao;
+import cn.itcast.dao.NewsDao;
 import cn.itcast.dao.UserDao;
 import cn.itcast.domain.user.Login;
 import cn.itcast.domain.user.User;
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
     //七牛云存储空间名称
     private static final  String space="mugebl";
 
+    /**用户持久层**/
     @Autowired
     private UserDao userDao;
 
@@ -37,6 +39,13 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private AccountSettingsDao accountSettingsDao;
+
+    /**消息持久层**/
+    @Autowired
+    private NewsDao newsDao;
+
+    /**推送消息**/
+    NewsServiceImpl newsService;
 
     /**注入缓存工具类**/
     @Autowired
@@ -200,9 +209,24 @@ public class UserServiceImpl implements UserService {
         login.setImage(user.getImage());
         login.setToken(user.getToken());
         login.setName(user.getName());
+       // this.pushNews(user.getUid());
         return login;
     }
 
+
+    /**
+     * 推送消息数量
+     * @param userId 用户id
+     * @throws IOException
+     */
+    @Override
+    public void pushNews(String userId) throws IOException {
+       Integer  quantity = newsDao.unreadQuantity(userId);
+
+        newsService.pushNews(null,userId,quantity);
+
+
+    }
 
     /**
      * 修改密码发送短信验证,验证手机发送短信新手机发送短信

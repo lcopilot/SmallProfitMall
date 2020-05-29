@@ -52,7 +52,7 @@ public interface NewsService {
      * @return 推送是否成功
      * @throws IOException
      */
-    public Integer pushNews(List<News> news,Integer unreadQuantity) throws IOException;
+    public Integer pushNews(List<News> news,String userId,Integer unreadQuantity) throws IOException;
 
 
 

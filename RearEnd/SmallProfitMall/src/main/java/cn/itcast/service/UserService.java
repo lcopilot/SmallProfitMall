@@ -41,6 +41,13 @@ public interface UserService {
      */
     public Login findReturnLogin(String account , Integer accountType) throws Exception;
 
+
+    /**
+     * 推送消息数量
+     * @param userId
+     */
+    public void pushNews(String userId) throws IOException;
+
     /**
      * 保存帐户信息
      * @param user

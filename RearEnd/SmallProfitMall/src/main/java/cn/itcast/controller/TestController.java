@@ -149,12 +149,5 @@ public class TestController {
 //    }
 
 
-        @RequestMapping(value = "/test",method = RequestMethod.GET)
-        public ObjectReturnResponse wevSocket()  {
-            ObjectReturn objectReturn = new ObjectReturn();
-            objectReturn.setObject(productDetailsDao.findProductDistinction(10001));
-
-        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
-   }
 
 }
