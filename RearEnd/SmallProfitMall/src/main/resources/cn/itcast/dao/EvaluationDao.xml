@@ -10,7 +10,10 @@
         userEvaluation
         (userId,productId,sign,evaluationTime)
     VALUES
-        (#{userId},#{productId},#{sign},#{evaluationTime})
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.userId},#{item.productId},#{item.sign},#{item.evaluationTime})
+        </foreach>
+
     </insert>
 
     <!--查询收藏表-->

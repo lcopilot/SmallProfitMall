@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,24 +27,23 @@ public class EvaluationServiceImpl implements cn.itcast.service.EvaluationServic
      */
     @Override
     public int addEvaluation(Evaluation evaluation) {
-        FavoriteProducer favoriteProducer = new FavoriteProducer();
         int redis=0;
-        //大于3 发送到消息队列
-        if (evaluation.getProductIds().length>=3){
-            favoriteProducer.sendFavorite("addFavorite",evaluation);
-             return 1;
-        }
-
+        //设置收藏集合
+        List<Evaluation> evaluationList = new ArrayList<>();
         for (int i = 0; i <evaluation.getProductIds().length ; i++) {
-            evaluation.setSign("true");
-            evaluation.setEvaluationTime(new Date());
             Evaluation evaluation1 = evaluationDao.fendEvaluation(evaluation.getUserId(),evaluation.getProductIds()[i]);
-            evaluation.setProductId(evaluation.getProductIds()[i]);
             if (evaluation1!=null){
-                return 0;
+                break;
             }
-            redis=redis+evaluationDao.addEvaluation(evaluation);
+            Evaluation  evaluations = new Evaluation();
+            evaluations.setUserId(evaluation.getUserId());
+            evaluations.setSign("true");
+            evaluations.setEvaluationTime(new Date());
+            evaluations.setProductId(evaluation.getProductIds()[i]);
+            /**查询该商品是否收藏 收藏则不添加到收藏集合**/
+            evaluationList.add(evaluations);
         }
+        redis=redis+evaluationDao.addEvaluation(evaluationList);
         if (redis==evaluation.getProductIds().length){
             return 1;
         }else {

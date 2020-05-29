@@ -597,22 +597,18 @@ public class OrderServiceImpl implements OrderService {
         order.setPaymentTime(new Date());
         //修改支付状态 支付时间
         orderDao.updateOrderPayState(order.getUserId(),order.getOrderId(),order.getOrderState(),order.getPaymentTime());
-
         //添加支付记录
         addConsumptionRecords(order);
-
         //邮件消息消息中间件通知
         emailNotification(order.getUserId());
-
-
         //转换订单总计类型
         String  total =  order.getOrderTotal().setScale(2, BigDecimal.ROUND_HALF_UP).toString();
         //order 订单 total订单总计
         //订单消息中间件推送消息
-//        notificationUser(order,total);
+        notificationUser(order,total);
 
         //直接推送消息
-        push(order);
+        //push(order);
         return 1;
     }
     /**

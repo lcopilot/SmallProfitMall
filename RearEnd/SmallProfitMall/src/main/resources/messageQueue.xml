@@ -15,78 +15,25 @@
   <!-- 管理消息队列 -->
   <rabbit:admin connection-factory="connectionFactory"/>
 
-  <!--分，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，割 -->
-  <!-- 定义购买商品交换机 发送邮件 发送购买成功消息推送 自动声明-->
-  <rabbit:direct-exchange name="EMAIL-EXCHANGE" auto-declare="true" durable="true"/>
-
-  <!-- 定义MQ消息模板 -->
-  <rabbit:template id="rabbitTemplate"
-                   connection-factory="connectionFactory" exchange="EMAIL-EXCHANGE"/>
-
-  <!--分，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，割 -->
-
-  <!--分，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，割 -->
-  <!-- 定义收藏交换机 自动声明-->
-  <rabbit:direct-exchange name="FAVORITE-EXCHANGE" auto-declare="true" durable="true"/>
-
-  <!-- 定义收藏MQ消息模板 -->
-  <rabbit:template id="favoriteTemplate"
-                   connection-factory="connectionFactory" exchange="FAVORITE-EXCHANGE"/>
-
-  <!--分，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，割 -->
-
-
-  <!--分，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，割 -->
-  <!--定义商品交换机自动声明-->
+  <!--定义购买商品交换机自动声明-->
   <rabbit:direct-exchange name="SHOPPING-EXCHANGE" auto-declare="true" durable="true"/>
-
-  <!-- 定义商品消息模板 -->
+  <!-- 定义购买商品消息模板 -->
   <rabbit:template id="shoppingTemplate"
                    connection-factory="connectionFactory" exchange="SHOPPING-EXCHANGE"/>
 
-  <!--分，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，割 -->
-
-  <!-- 监听邮件队列 -->
-  <rabbit:listener-container connection-factory="connectionFactory">
-    <rabbit:listener ref="mQSimpleMsgHandler" method="execute" queue-names="EMAIL-QUEUE"/>
-  </rabbit:listener-container>
-
-  <!--监听队列 （测试）-->
-  <rabbit:listener-container connection-factory="connectionFactory">
-    <rabbit:listener ref="sms" method="sms" queue-names="SMS-QUEUE"/>
-  </rabbit:listener-container>
-
-  <!--监听收藏队列-->
-  <rabbit:listener-container connection-factory="connectionFactory">
-    <rabbit:listener ref="favorite" method="addEvaluation" queue-names="FAVORITE-QUEUE"/>
-  </rabbit:listener-container>
-
-  <!--监听到货通知队列-->
-  <rabbit:listener-container connection-factory="connectionFactory">
-    <rabbit:listener ref="arrivalNotification" method="arrivalNotification" queue-names="ARRIVAL-NOTIFICATION-QUEUE"/>
-  </rabbit:listener-container>
-
-  <!--监听确认订单队列-->
+  <!--监听购买成功邮件队列-->
   <rabbit:listener-container connection-factory="connectionFactory">
     <rabbit:listener ref="orderPayment" method="orderPayment" queue-names="SHOPPING-NOTIFICATION-QUEUE"/>
   </rabbit:listener-container>
 
-  <!--监听推送消息队列-->
+  <!--监听购买成功消息推送队列-->
   <rabbit:listener-container connection-factory="connectionFactory">
     <rabbit:listener ref="orderPushNews" method="orderPushNews" queue-names="SHOPPING-NEWS-QUEUE"/>
   </rabbit:listener-container>
 
-  <!-- 声明多个消费者对象 -->
-  <bean id="mQSimpleMsgHandler" class="cn.itcast.util.rabbitMq.MQSimpleMsgHandler"/>
-  <!--测试-->
-  <bean id="sms" class="cn.itcast.Test.mq.sms"/>
-  <!--声明收藏消费者-->
-  <bean id="favorite" class="cn.itcast.messageQueue.consumer.favorite.FavoriteConsumer"></bean>
-  <!--声明商品到货通知消费者-->
-  <bean id="arrivalNotification" class="cn.itcast.messageQueue.consumer.shopping.ArrivalNotification"></bean>
-  <!--订单确认通知-->
+  <!--订单邮件-->
   <bean id="orderPayment" class="cn.itcast.messageQueue.consumer.order.OrderPayment"></bean>
-  <!--订单付款成功消息推送-->
+  <!--订单信息-->
   <bean id="orderPushNews" class="cn.itcast.messageQueue.consumer.order.OrderPushNews"></bean>
 
 </beans>

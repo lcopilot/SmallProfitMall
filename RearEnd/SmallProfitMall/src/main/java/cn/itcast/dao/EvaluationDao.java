@@ -13,7 +13,7 @@ public interface EvaluationDao {
      * @param evaluation 收藏对象
      * @return
      */
-    public int addEvaluation(Evaluation evaluation);
+    public Integer addEvaluation(List<Evaluation> evaluation);
 
     /**
      * 查询收藏
