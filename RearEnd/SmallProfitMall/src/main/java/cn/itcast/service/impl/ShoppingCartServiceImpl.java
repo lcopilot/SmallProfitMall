@@ -225,7 +225,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
              purchaseInformation.setColour(productDetailsDao.findProperty(colourId));
          }
          if (comboId != null){
-             purchaseInformation.setCombo(productDetailsDao.findProperty(colourId));
+             purchaseInformation.setCombo(productDetailsDao.findProperty(comboId));
          }
          if (kindId != null){
              purchaseInformation.setKind(productDetailsDao.findProperty(kindId));
