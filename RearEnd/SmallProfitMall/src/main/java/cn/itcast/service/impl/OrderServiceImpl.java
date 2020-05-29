@@ -812,12 +812,12 @@ public class OrderServiceImpl implements OrderService {
             //尝试次数
             Integer frequency = 0;
             //最多尝试次数
-            Integer maximum = 3;
+            Integer maximum = 5;
             Boolean sign = true;
             while (sign) {
             try
             {
-                Thread.sleep(5000);
+                Thread.sleep(50);
                 frequency = ++frequency;
                 System.out.println("正在进行第"+frequency+"次推送");
                 result = newsService.pushNews(newsList,orders.getUserId(),unreadQuantity);
