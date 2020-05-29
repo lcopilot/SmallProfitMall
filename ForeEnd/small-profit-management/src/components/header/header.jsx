@@ -72,14 +72,12 @@ const HeaderNav = (props) => {
   };
   //获取天气
   const getWeather = () => {
-    (async () => {
       commApi.getWeather().then(res => {
         if (res.result.HeWeather5[0].status === 'ok') {
           storageUtils.saveWeather(res.result.HeWeather5[0]);
-          setWeather(storageUtils.getWeather())
+          setWeather(res.result.HeWeather5[0])
         }
-      });
-    })();
+      })
   }
   //天气计时器
   const startWeather = () => {
