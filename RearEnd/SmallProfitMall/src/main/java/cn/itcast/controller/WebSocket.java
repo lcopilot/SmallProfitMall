@@ -20,6 +20,9 @@ import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author kite
+ */
 @ServerEndpoint("/notification/{userId}")
 @Component
 public class WebSocket {
@@ -115,8 +118,7 @@ public class WebSocket {
      * @throws IOException
      */
     @ExceptionHandler(Exception.class)
-    public Integer sendMessage(List<News> message, Integer unreadQuantity) throws IOException {
-        String userId = message.get(0).getUserId();
+    public Integer sendMessage(List<News> message,String userId, Integer unreadQuantity) throws IOException {
         //返回值
         Integer redis = 0;
         WebSocket socket = USER_ONLINE_MAP.get(userId);
@@ -124,20 +126,14 @@ public class WebSocket {
             return redis;
         }
         if (socket.session != null) {
-            for (int i = 0; i < message.size(); i++) {
                 //消息对象
                 QueryResultString queryResultString = new QueryResultString();
                 //设置消息信息
                 queryResultString.setNews(message);
                 //未读消息数量
                 queryResultString.setUnreadQuantity(unreadQuantity);
-                String a = message.get(i).getUserId();
-                //设置消息内容
-                WebSocket testSession = USER_ONLINE_MAP.get(message.get(i).getUserId());
-                if ( socket!=null){
-                    testSession.session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis, queryResultString)));
-                }
-            }
+                WebSocket testSession = USER_ONLINE_MAP.get(message.get(0).getUserId());
+                testSession.session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis, queryResultString)));
             return redis = 1;
         }
         return redis;

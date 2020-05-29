@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -108,7 +109,15 @@ public class NewsServiceImpl implements NewsService {
      * @throws IOException
      */
     @Override
-    public Integer pushNews(List<News> news, Integer unreadQuantity) throws IOException {
-        return webSocket.sendMessage(news,unreadQuantity);
+    public Integer pushNews(List<News> news,String userId, Integer unreadQuantity) throws IOException {
+        try {
+
+            return webSocket.sendMessage(news,userId,unreadQuantity);
+        }catch (NullPointerException| IOException e){
+
+        }catch (Exception e){
+
+        }
+        return 10;
     }
 }
