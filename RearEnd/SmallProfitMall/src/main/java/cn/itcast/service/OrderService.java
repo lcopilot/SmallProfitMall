@@ -27,7 +27,7 @@ public interface OrderService {
      * @param shoppingCartId 购物车id
      * @return
      */
-    public String addOrder(String userId, Integer[] shoppingCartId);
+    public Map addOrder(String userId, Integer[] shoppingCartId);
 
     /**
      * 直接购买订单结算
@@ -160,7 +160,7 @@ public interface OrderService {
      * @param shoppingCarts 商品详细信息
      * @return 库存是否充足  true为充足且减去库存数量
      */
-    public Boolean findProductInventorys( List<ProductContent>  shoppingCarts);
+    public Map findProductInventorys( List<ProductContent>  shoppingCarts);
 
 
     /**

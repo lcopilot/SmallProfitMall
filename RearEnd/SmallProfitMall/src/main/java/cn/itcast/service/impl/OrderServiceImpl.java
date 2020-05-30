@@ -9,6 +9,7 @@ import cn.itcast.domain.news.News;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.OrderQuantity;
 import cn.itcast.domain.order.ProductContent;
+import cn.itcast.domain.shoppingCar.ProductInventoryType;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.domain.shoppingCar.ShoppingCart;
 import cn.itcast.messageQueue.producer.shopping.ShoppingProducer;
@@ -109,7 +110,9 @@ public class OrderServiceImpl implements OrderService {
      * @return 返回订单号
      */
     @Override
-    public String addOrder(String userId, Integer[] shoppingCartId) {
+    public Map addOrder(String userId, Integer[] shoppingCartId) {
+        Map map =new HashMap();
+
         Order order= new Order();
 
         //生成订单id
@@ -118,12 +121,14 @@ public class OrderServiceImpl implements OrderService {
         //初始购物车id
         Integer[] initialize=shoppingCartId;
 
-
         //将购物车中商品信息添加到订单商品信息 返回总价格 返回库存是否充足
-        Map map = addProduct(initialize,orderId);
-        Boolean inventorys= (Boolean) map.get("inventorys");
+        Map maps = addProduct(initialize,orderId);
+        Boolean inventorys= (Boolean) maps.get("inventorys");
+        //库存不充足返回不充足商品信息
         if (!inventorys){
-            return "false";
+            List<ProductInventoryType> productInventoryTypes= (List<ProductInventoryType>) maps.get("productInventoryTypeList");
+            map.put("productInventoryTypes",productInventoryTypes);
+            return map;
         }
         BigDecimal orderTotes = (BigDecimal) map.get("orderNotes");
 
@@ -139,8 +144,8 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderState(1);
         //数据库新增
         orderDao.addOrder(order);
-
-        return orderId;
+        map.put("orderId" ,orderId);
+        return map;
 
     }
 
@@ -214,8 +219,8 @@ public class OrderServiceImpl implements OrderService {
         //库存减购买数量
         List<ProductContent> productContents = new ArrayList<>();
         productContents.add(productContent);
-       Boolean result =  findProductInventorys(productContents);
-
+        Map map1 = findProductInventorys(productContents);
+       Boolean result = (Boolean) map1.get("sign");
         if (!result){
             return "false";
         }
@@ -471,32 +476,50 @@ public class OrderServiceImpl implements OrderService {
      * @return 库存是否充足  true为充足且减去库存数量
      */
     @Override
-    public Boolean findProductInventorys(List<ProductContent>  shoppingCarts) {
+    public Map findProductInventorys(List<ProductContent>  shoppingCarts) {
+
+
+        //集合数量
+        Integer ListQuantity = shoppingCarts.size();
         //配置id
-        Integer[] distinctionId = new Integer[shoppingCarts.size()];
+        Integer[] distinctionId = new Integer[ListQuantity];
         //数量
-        Integer[] productQuantity = new Integer[shoppingCarts.size()];
+        Integer[] productQuantity = new Integer[ListQuantity];
+        //商品名称
+        String [] productName = new String[ListQuantity];
         //查询库存是否充足
         for (int i = 0; i <shoppingCarts.size(); i++) {
             distinctionId[i] = shoppingCarts.get(i).getDistinctionId();
+            productName[i] = shoppingCarts.get(i).getProductName();
             productQuantity[i] = shoppingCarts.get(i).getProductQuantity();
         }
         List<Double> productContents = productDetailsDao.findProductInventory(distinctionId);
-        Boolean sign = false;
-
+        Boolean sign = true;
+        List<ProductInventoryType> productInventoryTypeList = new ArrayList<>();
+        Map map = new HashMap();
+        //库存不足 添加库存不足商品到集合
         for (int i = 0; i <productContents.size() ; i++) {
             if (productContents.get(i)<productQuantity[i]){
-                return false;
+                ProductInventoryType productInventoryType = new ProductInventoryType();
+                productInventoryType.setProductId(distinctionId[i]);
+                productInventoryType.setProductName(productName[i]);
+                productInventoryType.setProductInventory(new Double(productContents.get(i)).intValue());
+                productInventoryTypeList.add(productInventoryType);
+                sign=false;
             }
         }
         //库存充足减去购买的数量
-        if (sign) {
-            return false;
+        if (!sign) {
+            map.put("sign",sign);
+            map.put("productInventoryTypeList",productInventoryTypeList);
+            return map;
         } else {
             for (int i = 0; i < distinctionId.length; i++) {
                 productDetailsDao.updateProductInventory(distinctionId[i], shoppingCarts.get(i).getProductQuantity());
             }
-            return true;
+            map.put("sign",sign);
+            map.put("productInventoryTypeList",productInventoryTypeList);
+            return map;
         }
 
     }
@@ -564,8 +587,11 @@ public class OrderServiceImpl implements OrderService {
           //  shoppingCartDao.deleteCart(shoppingCartIds);
         }
         //验证库存 库存充足返回true且减去库存
-        Boolean result = findProductInventorys(productContents);
+        Map findProductInventoryMap = findProductInventorys(productContents);
+        Boolean result = (Boolean) findProductInventoryMap.get("sign");
+        List<ProductInventoryType> productInventoryTypes= (List<ProductInventoryType>) findProductInventoryMap.get("productInventoryTypeList");
         Map map = new HashMap();
+        map.put("productInventoryTypeList",productInventoryTypes);
         map.put("inventorys",result);
         map.put("orderNotes",orderNotes);
         if (!result){

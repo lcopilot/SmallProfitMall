@@ -225,7 +225,10 @@ public class UserServiceImpl implements UserService {
         login.setImage(user.getImage());
         login.setToken(user.getToken());
         login.setName(user.getName());
-        shoppingProducer.sendNewsQuantity("news_quantity",user.getUid());
+        Integer  quantity = newsDao.unreadQuantity(user.getUid());
+        if (quantity>0){
+            shoppingProducer.sendNewsQuantity("news_quantity",user.getUid());
+        }
         return login;
     }
 
@@ -242,7 +245,7 @@ public class UserServiceImpl implements UserService {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(500);
                     List<News> news = new ArrayList<>();
                     newsService.pushNews(news,userId,quantity);
                 } catch (InterruptedException | IOException e) {

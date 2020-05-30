@@ -4,6 +4,7 @@ import cn.itcast.domain.accountSettings.AccountSettings;
 import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.OrderQuantity;
 import cn.itcast.domain.order.ProductContent;
+import cn.itcast.domain.shoppingCar.ProductInventoryType;
 import cn.itcast.domain.shoppingCar.PurchaseInformation;
 import cn.itcast.response.CommonCode;
 import cn.itcast.response.QueryResponseResult;
@@ -32,10 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 订单控制层
@@ -69,15 +67,17 @@ public class OrderController {
      * @throws IOException
      */
     @RequestMapping(value = "/addOrder" ,method = RequestMethod.POST)
-    public QueryResponseResult addOrder(String userId ,Integer[] shoppingCartId) throws IOException {
-
-        String result = orderService.addOrder(userId,shoppingCartId);
-        if ("false".equals(result)){
-            return new QueryResponseResult(CommonCode.INVENTORY_FALSE,null);
+    public ObjectReturnResponse addOrder(String userId ,Integer[] shoppingCartId) throws IOException {
+        ObjectReturn queryResult=new ObjectReturn();
+        Map map = orderService.addOrder(userId,shoppingCartId);
+        String result = (String) map.get("orderId");
+        if (result == null){
+            List<ProductInventoryType> productInventoryTypes= (List<ProductInventoryType>) map.get("productInventoryTypes");
+            queryResult.setObject(productInventoryTypes);
+            return new ObjectReturnResponse(CommonCode.INVENTORY_FALSE,queryResult);
         }
-        QueryResult queryResult=new QueryResult();
-        queryResult.setList(Collections.singletonList(result));
-        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+        queryResult.setObject(result);
+        return new ObjectReturnResponse(CommonCode.SUCCESS,queryResult);
     }
 
     /**
