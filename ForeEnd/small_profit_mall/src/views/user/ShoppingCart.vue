@@ -239,7 +239,7 @@
         this.cartFrom.totalPrice = 0;
         this.cartFrom.productList = selection;
         this.productNumber = selection.length;
-        if (selection.length !== JSON.parse(sessionStorage.getItem("cartListUsableNumber"))) {
+        if (selection.length !== JSON.parse(sessionStorage.getItem("cartListUsableNumber")) && selection.length===0) {
           this.selectAll = false;
         } else {
           this.selectAll = true;
