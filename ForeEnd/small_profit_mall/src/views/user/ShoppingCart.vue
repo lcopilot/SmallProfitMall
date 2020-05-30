@@ -399,7 +399,7 @@
             });
           } else if (res.code === 10021) {
             this.settlementLoading.close();
-            objectReturn.object.map((product)=>{
+            res.objectReturn.object.map((product)=>{
               setTimeout(()=>{
                 this.$notify({
                   title: '商品库存不足',
