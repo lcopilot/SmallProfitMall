@@ -226,7 +226,7 @@
       },
       //全选时触发
       select_all(selection) {
-        if (selection.length == 0) {
+        if (selection.length === 0) {
           this.selectAll = false;
         } else {
           this.selectAll = true;
@@ -238,7 +238,7 @@
         this.cartFrom.totalPrice = 0;
         this.cartFrom.productList = selection;
         this.productNumber = selection.length;
-        if (selection.length !== sessionStorage.getItem("cartListUsableNumber")) {
+        if (selection.length !== JSON.parse(sessionStorage.getItem("cartListUsableNumber"))) {
           this.selectAll = false;
         } else {
           this.selectAll = true;
@@ -269,12 +269,12 @@
       },
       //可购买商品数量
       availableProduct() {
-        this.cartList.forEach((product) => {
-          if (product.productInventory != 0) {
+        this.cartList.map((product) => {
+          if (product.productInventory !== 0) {
             this.cartListUsableNumber += 1;
-            sessionStorage.setItem("cartListUsableNumber", this.cartListUsableNumber);
           }
         })
+        sessionStorage.setItem("cartListUsableNumber",JSON.stringify(this.cartListUsableNumber));
       },
       //添加收藏
       addFavorite(productId) {
@@ -379,7 +379,7 @@
               type: "warning"
             })
           }
-          this.$refs.cartTable.selection.forEach((shoppingCart) => {
+          this.$refs.cartTable.selection.map((shoppingCart) => {
             cartProductIdList.push(shoppingCart.shoppingCartId);
           });
         }
@@ -422,11 +422,11 @@
         if (row.productInventory !== 0) {
           row.flag = !row.flag;
           this.$refs.cartTable.toggleRowSelection(row,row.flag);
+          this.select(this.$refs.cartTable.selection);
         }
       }
     },
     created() {
-
       this.getShoppingCart();
     }
 
