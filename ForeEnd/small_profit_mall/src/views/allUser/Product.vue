@@ -636,7 +636,7 @@
             this.$router.push({
               name: "Order",
               params: {
-                orderNumber: res.objectReturn.object,
+                orderNumber: res.queryResult.list[0],
               }
             });
           }else if (res.code === 10021) {

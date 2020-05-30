@@ -79,7 +79,9 @@
                     <el-input-number v-model="product.row.quantity" size="mini" :min="1"
                                      :max="product.row.productInventory>99?99:product.row.productInventory"
                                      @change="quantityChange(product.row.quantity,product.row.shoppingCartId,product.row.productInventory)"/>
-                    <div class="cart_stockOut">剩余库存 {{product.row.productInventory>99?'99+':product.row.productInventory}}</div>
+                    <div class="cart_stockOut">剩余库存
+                      {{product.row.productInventory>99?'99+':product.row.productInventory}}
+                    </div>
                   </template>
                 </el-table-column>
                 <el-table-column
@@ -239,7 +241,8 @@
         this.cartFrom.totalPrice = 0;
         this.cartFrom.productList = selection;
         this.productNumber = selection.length;
-        if (selection.length !== JSON.parse(sessionStorage.getItem("cartListUsableNumber")) && selection.length===0) {
+        if (selection.length !== JSON.parse(sessionStorage.getItem("cartListUsableNumber"))
+            || selection.length === 0) {
           this.selectAll = false;
         } else {
           this.selectAll = true;
@@ -275,7 +278,7 @@
             this.cartListUsableNumber += 1;
           }
         })
-        sessionStorage.setItem("cartListUsableNumber",JSON.stringify(this.cartListUsableNumber));
+        sessionStorage.setItem("cartListUsableNumber", JSON.stringify(this.cartListUsableNumber));
       },
       //添加收藏
       addFavorite(productId) {
@@ -399,15 +402,15 @@
             });
           } else if (res.code === 10021) {
             this.settlementLoading.close();
-            res.objectReturn.object.map((product)=>{
-              setTimeout(()=>{
+            res.objectReturn.object.map((product) => {
+              setTimeout(() => {
                 this.$notify({
                   title: '商品库存不足',
                   dangerouslyUseHTMLString: true,
-                  message: "<div>"+product.productName+"</div>",
+                  message: "<div>" + product.productName + "</div>",
                   type: 'warning',
                 });
-              },1)
+              }, 1)
             })
             this.getShoppingCart();
           }
@@ -429,10 +432,10 @@
         });
       },
       //点击行改变选中状态
-      changeState(row){
+      changeState(row) {
         if (row.productInventory !== 0) {
           row.flag = !row.flag;
-          this.$refs.cartTable.toggleRowSelection(row,row.flag);
+          this.$refs.cartTable.toggleRowSelection(row, row.flag);
           this.select(this.$refs.cartTable.selection);
         }
       },
