@@ -23,7 +23,7 @@
                   @select-all="select_all">
                 <el-table-column
                     type="selection"
-                    @selectable='changeStateC'>
+                    :selectable='changeStateC'>
                 </el-table-column>
                 <el-table-column
                     label="商品"
@@ -216,7 +216,7 @@
       ]),
       //购物车初始化的选择框状态判断 无库存时处于禁用状态
       changeStateC(row, index) {
-        if (row.productInventory != 0) {
+        if (row.productInventory !== 0) {
           //不禁用
           return 1;
         } else {
@@ -419,8 +419,10 @@
       },
       //点击行改变选中状态
       changeState(row){
-        row.flag = !row.flag;
-        this.$refs.cartTable.toggleRowSelection(row,row.flag);
+        if (row.productInventory !== 0) {
+          row.flag = !row.flag;
+          this.$refs.cartTable.toggleRowSelection(row,row.flag);
+        }
       }
     },
     created() {
