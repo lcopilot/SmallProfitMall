@@ -17,12 +17,13 @@
                   ref="cartTable"
                   :data="cartList"
                   tooltip-effect="dark"
+                  @row-click="changeState"
                   style="width: 100%"
                   @select="select"
                   @select-all="select_all">
                 <el-table-column
                     type="selection"
-                    :selectable='changeStateC'>
+                    @selectable='changeStateC'>
                 </el-table-column>
                 <el-table-column
                     label="商品"
@@ -237,7 +238,7 @@
         this.cartFrom.totalPrice = 0;
         this.cartFrom.productList = selection;
         this.productNumber = selection.length;
-        if (selection.length != sessionStorage.getItem("cartListUsableNumber")) {
+        if (selection.length !== sessionStorage.getItem("cartListUsableNumber")) {
           this.selectAll = false;
         } else {
           this.selectAll = true;
@@ -249,7 +250,7 @@
       //商品数量改变时触发
       quantityChange(productNumber, shoppingCartId, productInventory) {
         if (productNumber === productInventory) {
-          this.$message.warning("商品数量已达剩余库存量!")
+         return this.$message.warning("商品数量已达剩余库存量!")
         }
         productApi.modifyProductNumber(productNumber, shoppingCartId).then(res => {
           if (res.success) {
@@ -324,7 +325,7 @@
             this.$message({
               message: "已添加到货通知,商品已经在快马加鞭赶来的路上~",
               type: "success",
-            })
+            });
             this.getShoppingCart();
           }
         })
@@ -415,6 +416,11 @@
         this.settlementLoading = this.$loading({
           lock: true,
         });
+      },
+      //点击行改变选中状态
+      changeState(row){
+        row.flag = !row.flag;
+        this.$refs.cartTable.toggleRowSelection(row,row.flag);
       }
     },
     created() {
