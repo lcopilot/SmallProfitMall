@@ -130,7 +130,7 @@ public class OrderServiceImpl implements OrderService {
             map.put("productInventoryTypes",productInventoryTypes);
             return map;
         }
-        BigDecimal orderTotes = (BigDecimal) map.get("orderNotes");
+        BigDecimal orderTotes = (BigDecimal) maps.get("orderNotes");
 
         //设置总计
         order.setOrderTotal(orderTotes);
