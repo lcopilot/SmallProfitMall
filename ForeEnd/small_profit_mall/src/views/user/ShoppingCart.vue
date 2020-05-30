@@ -17,6 +17,7 @@
                   ref="cartTable"
                   :data="cartList"
                   tooltip-effect="dark"
+                  @row-click="changeState"
                   style="width: 100%"
                   @select="select"
                   @select-all="select_all">
@@ -215,7 +216,7 @@
       ]),
       //购物车初始化的选择框状态判断 无库存时处于禁用状态
       changeStateC(row, index) {
-        if (row.productInventory != 0) {
+        if (row.productInventory !== 0) {
           //不禁用
           return 1;
         } else {
@@ -225,7 +226,7 @@
       },
       //全选时触发
       select_all(selection) {
-        if (selection.length == 0) {
+        if (selection.length === 0) {
           this.selectAll = false;
         } else {
           this.selectAll = true;
@@ -237,7 +238,7 @@
         this.cartFrom.totalPrice = 0;
         this.cartFrom.productList = selection;
         this.productNumber = selection.length;
-        if (selection.length != sessionStorage.getItem("cartListUsableNumber")) {
+        if (selection.length !== JSON.parse(sessionStorage.getItem("cartListUsableNumber"))) {
           this.selectAll = false;
         } else {
           this.selectAll = true;
@@ -249,7 +250,7 @@
       //商品数量改变时触发
       quantityChange(productNumber, shoppingCartId, productInventory) {
         if (productNumber === productInventory) {
-          this.$message.warning("商品数量已达剩余库存量!")
+         return this.$message.warning("商品数量已达剩余库存量!")
         }
         productApi.modifyProductNumber(productNumber, shoppingCartId).then(res => {
           if (res.success) {
@@ -268,12 +269,12 @@
       },
       //可购买商品数量
       availableProduct() {
-        this.cartList.forEach((product) => {
-          if (product.productInventory != 0) {
+        this.cartList.map((product) => {
+          if (product.productInventory !== 0) {
             this.cartListUsableNumber += 1;
-            sessionStorage.setItem("cartListUsableNumber", this.cartListUsableNumber);
           }
         })
+        sessionStorage.setItem("cartListUsableNumber",JSON.stringify(this.cartListUsableNumber));
       },
       //添加收藏
       addFavorite(productId) {
@@ -324,7 +325,7 @@
             this.$message({
               message: "已添加到货通知,商品已经在快马加鞭赶来的路上~",
               type: "success",
-            })
+            });
             this.getShoppingCart();
           }
         })
@@ -378,7 +379,7 @@
               type: "warning"
             })
           }
-          this.$refs.cartTable.selection.forEach((shoppingCart) => {
+          this.$refs.cartTable.selection.map((shoppingCart) => {
             cartProductIdList.push(shoppingCart.shoppingCartId);
           });
         }
@@ -398,6 +399,7 @@
           } else if (res.code === 10021) {
             this.settlementLoading.close();
             this.$message.warning("库存不足,请重试!")
+            this.getShoppingCart();
           }
         })
       },
@@ -415,10 +417,17 @@
         this.settlementLoading = this.$loading({
           lock: true,
         });
+      },
+      //点击行改变选中状态
+      changeState(row){
+        if (row.productInventory !== 0) {
+          row.flag = !row.flag;
+          this.$refs.cartTable.toggleRowSelection(row,row.flag);
+          this.select(this.$refs.cartTable.selection);
+        }
       }
     },
     created() {
-
       this.getShoppingCart();
     }
 
