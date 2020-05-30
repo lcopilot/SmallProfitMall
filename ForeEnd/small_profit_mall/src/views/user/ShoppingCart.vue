@@ -27,7 +27,7 @@
                 </el-table-column>
                 <el-table-column
                     label="商品"
-                    min-width="47%">
+                    min-width="46%">
                   <template slot-scope="product">
                     <el-row :gutter="20">
                       <el-col :span="5">
@@ -74,11 +74,12 @@
                 </el-table-column>
                 <el-table-column
                     label="数量"
-                    min-width="13%">
+                    min-width="14%">
                   <template slot-scope="product">
                     <el-input-number v-model="product.row.quantity" size="mini" :min="1"
                                      :max="product.row.productInventory>99?99:product.row.productInventory"
                                      @change="quantityChange(product.row.quantity,product.row.shoppingCartId,product.row.productInventory)"/>
+                    <div class="cart_stockOut">剩余库存 {{product.row.productInventory>99?'99+':product.row.productInventory}}</div>
                   </template>
                 </el-table-column>
                 <el-table-column
@@ -393,12 +394,18 @@
             this.$router.push({
               name: "Order",
               params: {
-                orderNumber: res.queryResult.list[0],
+                orderNumber: res.objectReturn.object,
               }
             });
           } else if (res.code === 10021) {
             this.settlementLoading.close();
-            this.$message.warning("库存不足,请重试!")
+            this.$notify({
+              title: '商品库存不足',
+              dangerouslyUseHTMLString: true,
+              message: '<div v-for="product in objectReturn.object" :key="product.productId">{{product.productName}}</div>',
+              type: 'warning',
+              offset: 100
+            });
             this.getShoppingCart();
           }
         })

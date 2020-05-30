@@ -636,9 +636,11 @@
             this.$router.push({
               name: "Order",
               params: {
-                orderNumber: res.queryResult.list[0],
+                orderNumber: res.objectReturn.object,
               }
             });
+          }else if (res.code === 10021) {
+            this.$message.warning("库存不足,请重试!")
           }
         })
       },
