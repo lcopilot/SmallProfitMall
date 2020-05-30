@@ -399,6 +399,7 @@
           } else if (res.code === 10021) {
             this.settlementLoading.close();
             this.$message.warning("库存不足,请重试!")
+            this.getShoppingCart();
           }
         })
       },
