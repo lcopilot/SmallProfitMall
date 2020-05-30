@@ -399,13 +399,16 @@
             });
           } else if (res.code === 10021) {
             this.settlementLoading.close();
-            this.$notify({
-              title: '商品库存不足',
-              dangerouslyUseHTMLString: true,
-              message: '<div v-for="product in objectReturn.object" :key="product.productId">{{product.productName}}</div>',
-              type: 'warning',
-              offset: 100
-            });
+            objectReturn.object.map((product)=>{
+              setTimeout(()=>{
+                this.$notify({
+                  title: '商品库存不足',
+                  dangerouslyUseHTMLString: true,
+                  message: "<div>"+product.productName+"</div>",
+                  type: 'warning',
+                });
+              },1)
+            })
             this.getShoppingCart();
           }
         })
@@ -432,7 +435,7 @@
           this.$refs.cartTable.toggleRowSelection(row,row.flag);
           this.select(this.$refs.cartTable.selection);
         }
-      }
+      },
     },
     created() {
       this.getShoppingCart();
