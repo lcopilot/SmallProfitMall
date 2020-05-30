@@ -249,8 +249,8 @@
       },
       //商品数量改变时触发
       quantityChange(productNumber, shoppingCartId, productInventory) {
-        if (productNumber === productInventory) {
-         return this.$message.warning("商品数量已达剩余库存量!")
+        if (productNumber >= productInventory) {
+          this.$message.warning("商品数量已达剩余库存量!")
         }
         productApi.modifyProductNumber(productNumber, shoppingCartId).then(res => {
           if (res.success) {
