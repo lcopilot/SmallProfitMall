@@ -120,7 +120,7 @@ public class WebSocket {
         Integer redis = 0;
         WebSocket socket = USER_ONLINE_MAP.get(userId);
         if (socket == null) {
-            return redis;
+            return redis=0;
         }
         if (socket.session != null) {
                 //消息对象
@@ -129,12 +129,18 @@ public class WebSocket {
                     //设置消息信息
                     queryResultString.setNews(message);
                 }
-
                 //未读消息数量
                 queryResultString.setUnreadQuantity(unreadQuantity);
                 WebSocket testSession = USER_ONLINE_MAP.get(userId);
+            try {
                 testSession.session.getAsyncRemote().sendText(ConversionJson.objectToJson(new QueryResponseResultString(SocketCommonCode.redis, queryResultString)));
-            return redis = 1;
+            }catch (NullPointerException| IOException e){
+                return redis;
+            }catch (Exception e){
+                return redis;
+            }
+            redis = 1;
+            return redis;
         }
         return redis;
         //阻塞式（同步）

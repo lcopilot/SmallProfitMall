@@ -817,7 +817,6 @@ public class OrderServiceImpl implements OrderService {
         //将订单消息添加到集合种
         newsList.add(orderNews);
 
-
         //----------------------------------------------
 
         //查询零钱消息-------------------------------------------
