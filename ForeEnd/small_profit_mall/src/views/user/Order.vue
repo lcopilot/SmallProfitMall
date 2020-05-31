@@ -24,7 +24,7 @@
                 </div>
                 <el-row :gutter="10" v-if="addressList.length!=0">
                   <el-col :span="3">
-                    <el-tag type="success" :style="!orderAddress.alias?'visibility:hidden':''" size="mini" effect="dark">
+                    <el-tag type="success"  size="mini" effect="dark">
                       {{orderAddress.alias}}
                     </el-tag>
                   </el-col>
@@ -49,12 +49,12 @@
                 </el-row>
                 <el-collapse class="order_more_address" v-if="genre<1">
                   <el-collapse-item title="更多地址">
-                    <div v-for="(address,index) in addressList" class="order_address"
+                    <div v-for="(address,index) in addressList" :key="index" class="order_address"
                          @click="selectAddress(index)">
                       <el-row :gutter="10">
                         <el-col :span="3">
-                          <el-tag type="success" :style="!orderAddress.alias?'visibility:hidden':''" size="mini" effect="dark">
-                            {{address.alias}}
+                          <el-tag type="success" size="mini" effect="dark">
+                            {{orderAddress.alias}}
                           </el-tag>
                         </el-col>
                         <el-col :span="2">
@@ -425,7 +425,11 @@
           };
           userApi.verifyPaymentPassword(params).then(res => {
             if (res.success) {
-              if (res.code == 40000) {
+              this.$router.replace({
+                path: "/orderComplete"
+              });
+            } else {
+              if (res.code === 40000) {
                 this.paymentPasswordVisible = false;
                 this.paymentPassword = '';
                 return this.$notify({
@@ -434,10 +438,6 @@
                   type: 'warning',
                 });
               }
-              this.$router.replace({
-                path: "/orderComplete"
-              });
-            } else {
               this.$message.error('支付密码错误!')
             }
           });
