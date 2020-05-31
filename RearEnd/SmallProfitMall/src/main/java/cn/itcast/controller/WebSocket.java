@@ -63,7 +63,6 @@ public class WebSocket {
     @OnClose
     public void onClose() {
         USER_ONLINE_MAP.remove(this.userId);
-        System.out.println("关闭连接");
         try {
             if (session != null) {
                 session.close();
@@ -87,7 +86,6 @@ public class WebSocket {
 
         //解析发送过来的数据,并封装到connection实体类
         Connection connection = (Connection) ConversionJson.JSONToObj(message, Connection.class);
-        System.out.println(connection);
         //心跳包
         if (code.equals(connection.getCode())) {
             return redis = ConversionJson.objectToJson(new QueryResponseResult(SocketCommonCode.normal, null));
