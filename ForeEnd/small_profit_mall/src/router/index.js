@@ -27,16 +27,6 @@ const routes = [
     component: () => import('@/views/allUser/ForgetPassword'), //路由懒加载
   },
   {
-    path: '/test',
-    name: 'test',
-    component: () => import('@/views/test'), //路由懒加载
-  },
-  {
-    path: '/test1',
-    name: 'test1',
-    component: () => import('@/views/test1'), //路由懒加载
-  },
-  {
     path: '/login',
     name: "Login",
     component: () => import('@/views/allUser/Login')

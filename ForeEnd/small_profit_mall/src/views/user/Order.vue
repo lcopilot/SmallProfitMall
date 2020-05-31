@@ -24,7 +24,7 @@
                 </div>
                 <el-row :gutter="10" v-if="addressList.length!=0">
                   <el-col :span="3">
-                    <el-tag type="success" size="mini" effect="dark">
+                    <el-tag type="success"  size="mini" effect="dark">
                       {{orderAddress.alias}}
                     </el-tag>
                   </el-col>
@@ -49,12 +49,12 @@
                 </el-row>
                 <el-collapse class="order_more_address" v-if="genre<1">
                   <el-collapse-item title="更多地址">
-                    <div v-for="(address,index) in addressList" class="order_address"
+                    <div v-for="(address,index) in addressList" :key="index" class="order_address"
                          @click="selectAddress(index)">
                       <el-row :gutter="10">
                         <el-col :span="3">
                           <el-tag type="success" size="mini" effect="dark">
-                            {{address.alias}}
+                            {{orderAddress.alias}}
                           </el-tag>
                         </el-col>
                         <el-col :span="2">
@@ -329,10 +329,13 @@
       },
       //结算
       settlement() {
-        if (this.genre>=1){
-           return this.$router.replace('/allOrders')
+        if (!this.orderAddress) {
+          return this.$message.warning("你还没选择地址哦~请选择地址")
         }
-        if (this.genre>=0) {
+        if (this.genre >= 1) {
+          return this.$router.replace('/allOrders')
+        }
+        if (this.genre >= 0) {
           this.$confirm('确认修改嘛,只能修改一次哦~', '修改订单', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
@@ -353,15 +356,15 @@
                     isShow: true,
                   }
                 });
-              }else {
+              } else {
                 this.$message({
-                  message:"修改失败!请稍后重试",
-                  type:"warning",
+                  message: "修改失败!请稍后重试",
+                  type: "warning",
                 })
               }
             })
           })
-        }else if (this.paymentMethod == 1) {
+        } else if (this.paymentMethod == 1) {
           this.settlementOrder();
           if (this.orderData.faceRecognition) {
             this.$refs.face.faceVisible = true;
@@ -383,14 +386,14 @@
         }
       },
       //支付宝支付
-      aliPay(){
-        let fromData=new FormData()
-        fromData.append("userId",sessionStorage.getItem("uId"));
-        fromData.append("orderId",this.orderNumber);
-        ordersApi.payByAliPay(fromData).then(res=>{
-          if (res.success){
+      aliPay() {
+        let fromData = new FormData()
+        fromData.append("userId", sessionStorage.getItem("uId"));
+        fromData.append("orderId", this.orderNumber);
+        ordersApi.payByAliPay(fromData).then(res => {
+          if (res.success) {
             //查找到当前页面的body，将后台返回的form替换掉他的内容
-            document.querySelector('body').innerHTML =res.resultString.string;
+            document.querySelector('body').innerHTML = res.resultString.string;
             //执行submit表单提交，让页面重定向，跳转到支付宝页面
             document.forms[0].submit();
           }
@@ -418,11 +421,15 @@
           let params = {
             userId: sessionStorage.getItem("uId"),
             paymentPassword: this.paymentPassword,
-            orderId:this.orderNumber,
+            orderId: this.orderNumber,
           };
           userApi.verifyPaymentPassword(params).then(res => {
             if (res.success) {
-              if (res.code==40000){
+              this.$router.replace({
+                path: "/orderComplete"
+              });
+            } else {
+              if (res.code === 40000) {
                 this.paymentPasswordVisible = false;
                 this.paymentPassword = '';
                 return this.$notify({
@@ -431,10 +438,6 @@
                   type: 'warning',
                 });
               }
-              this.$router.replace({
-                path: "/orderComplete"
-              });
-            }else {
               this.$message.error('支付密码错误!')
             }
           });
@@ -453,7 +456,7 @@
             this.$refs.face.faceAnimation = "http://img.isdfmk.xyz/afterRecognition.gif";
             this.$refs.face.stopNavigator();
             this.$refs.face.collectionPrompt = '';
-            if (res.code==40000){
+            if (res.code == 40000) {
               this.$refs.face.stopNavigator();
               this.$refs.face.faceVisible = false;
               return this.$notify({
@@ -502,6 +505,9 @@
           paymentWay: this.paymentMethod,
           deliveryWay: this.expressType,
         };
+        if (!this.orderAddress) {
+          return this.$message.warning("你还没选择地址哦~请选择地址")
+        }
         ordersApi.settlementOrder(order);
       },
       //获取地址数据
@@ -552,12 +558,12 @@
         sessionStorage.setItem("orderNumber", this.$route.params.orderNumber);
       }
       this.orderNumber = sessionStorage.getItem("orderNumber");
-      if (this.$route.params.genre!=null) {
-        sessionStorage.setItem("genre",this.$route.params.genre);
+      if (this.$route.params.genre != null) {
+        sessionStorage.setItem("genre", this.$route.params.genre);
       }
       if (sessionStorage.getItem("genre")) {
         this.genre = sessionStorage.getItem("genre");
-        return  this.getOrderComplete();
+        return this.getOrderComplete();
       }
       this.getOrder();
     },
