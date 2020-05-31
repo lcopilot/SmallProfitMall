@@ -64,7 +64,6 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
             productDetailsResult.setInventory(inventory);
             //设置转换后的销量
             productDetailsResult.setSales(sale);
-            System.out.println("数据库中取商品详细数据");
             redisUtil.set(productIds,productDetailsResult);
             return productDetailsResult;
         }else {

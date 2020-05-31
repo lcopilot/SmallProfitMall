@@ -48,7 +48,6 @@ public class ProductServiceImpl implements ProductService {
 
         ArrayList[] redis = ( ArrayList[]) redisUtil.get("seckillResult");
         if (redis == null) {
-            System.out.println("秒杀商品信息从数据库取");
             ArrayList[] arrayLists = {
                     new ArrayList(ProducDao.findSeckill(0,4)),
                     new ArrayList(ProducDao.findSeckill(4,4))
@@ -57,7 +56,6 @@ public class ProductServiceImpl implements ProductService {
             redisUtil.set("seckillResult", arrayLists,3600);
             return arrayLists;
         }
-        System.out.println("缓中取");
         return redis;
     }
 
@@ -75,10 +73,8 @@ public class ProductServiceImpl implements ProductService {
             };
             //存入缓存
             redisUtil.set("productLowPriceResult", arrayLists,3600);
-
             return arrayLists;
         }
-
         return redis;
     }
 
@@ -90,13 +86,11 @@ public class ProductServiceImpl implements ProductService {
     public List<Slideshow> findAd() {
         List<Slideshow> redis = (List<Slideshow>) redisUtil.get("Ad");
         if (redis == null) {
-            System.out.println("数据库中取广告数据");
             List<Slideshow> ad = homepageDao.findSlideshow(3);
             //存入缓存
             redisUtil.set("Ad", ad,3600);
             return ad;
         } else {
-            System.out.println("缓存中取广告数据");
             //取缓存
             return redis;
         }
@@ -111,13 +105,11 @@ public class ProductServiceImpl implements ProductService {
     public List<Recommend> findRecommend() {
         List<Recommend> redis = (List<Recommend>) redisUtil.get("recommend");
         if (redis == null ) {
-            System.out.println("数据库中取为你推荐商品数据");
             List<Recommend> recommends = ProducDao.findRecommend(30);
             //存入缓存
             redisUtil.set("recommend", recommends,3600);
             return  recommends;
         } else {
-            System.out.println("缓存中取为你推荐数据");
             //取缓存
             return redis;
         }

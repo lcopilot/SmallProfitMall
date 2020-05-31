@@ -163,14 +163,12 @@ public class HomepageServiceImpl implements HomepageService {
     public List<Classify> findNavigation2() {
         List<Classify> redis = (List<Classify>) redisUtil.get("findNavigation2");
         if (redis==null || redis.size() == 0 ) {
-            System.out.println("数据库中取");
             List<Classify> navigation2 = homepageDao.findNavigation2();
             //存入缓存
             redisUtil.set("findNavigation2", navigation2);
 
             return navigation2;
         } else {
-            System.out.println("缓存中取");
            // 取缓存
             return redis;
         }
@@ -185,7 +183,6 @@ public class HomepageServiceImpl implements HomepageService {
         List<Icon> redisIcon = (List<Icon>) redisUtil.lGet("Icon", 0, -1);
         System.out.println(redisIcon);
         if (redisIcon.size() == 0) {
-            System.out.println("数据库中取");
             List<Icon> Icons = homepageDao.findIcon();
             //存入缓存
             redisUtil.lSet("Icon", Icons);
@@ -196,7 +193,6 @@ public class HomepageServiceImpl implements HomepageService {
             List<Icon>  Icon = list;
             return Icon;
         } else {
-            System.out.println("缓存中取");
             //取缓存
             return redisIcon;
         }

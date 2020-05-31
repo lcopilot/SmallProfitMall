@@ -103,7 +103,6 @@ public class UserServiceImpl implements UserService {
         //发送短信 发送成功返回true
         boolean flag = SmsUtils.sendRegistSms(phones, FR);
         if (flag) {
-            System.out.println("验证码为 " + FR);
             //存入缓存库 验证码key 验证码 过期时间
             redisUtil.set("Verify"+phone,FR,300);
             return    result=1;
@@ -276,7 +275,6 @@ public class UserServiceImpl implements UserService {
         }
         //生成随机码
         String FR = GetFourRandom.getFourRandom();
-        System.out.println("验证码为 " + FR);
         boolean flag=false;
         //修改密码
         if (type.equals("updateVerify")){
