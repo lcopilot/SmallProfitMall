@@ -76,9 +76,7 @@ public class PayController {
             response.sendRedirect("https://www.smallprofit.fhxasdsada.xyz/orderComplete");
         } else {
 
-
         }
-
     }
 
 

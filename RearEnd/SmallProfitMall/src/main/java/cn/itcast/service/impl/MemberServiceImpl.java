@@ -4,6 +4,7 @@ import cn.itcast.dao.MemberDao;
 import cn.itcast.domain.member.Member;
 import cn.itcast.service.MemberService;
 import cn.itcast.util.encryption.AesEncryptUtil;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,7 +56,10 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member findMember(String userId) throws Exception {
         Member member =  memberDao.findMember(userId);
-        String balance = member.getBalance();
+        String  balance= member.getBalance();
+        if (balance==null){
+            balance = "nUOli9QRvUPflIt/kg9mOQ==";
+        }
         String balances =  AesEncryptUtil.desEncrypt(balance);
         member.setBalance(balances);
         return member;

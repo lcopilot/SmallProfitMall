@@ -206,12 +206,16 @@ public class OrderController {
     }
 
     /**
-     * 提交订单--------------------------------订单确认----------------------------------------------
-     * @param order
+     * 提交订单结算--------------------------------订单确认----------------------------------------------
+     * @param order 订单对象 收货地址 用户id  订单号 支付时间
      * @return
      */
     @RequestMapping(value = "/confirmOrder",method = RequestMethod.POST)
     public QueryString confirmOrder(@RequestBody Order order, HttpServletRequest request) throws Exception {
+        //是否有支付密码
+        if(order.getAddress()==null){
+            return new QueryString(CommonCode.NoAddress,null);
+        }
        String result = orderService.confirmOrder(order,request);
        if (result.equals("1")){
            return new QueryString(CommonCode.SUCCESS,null);

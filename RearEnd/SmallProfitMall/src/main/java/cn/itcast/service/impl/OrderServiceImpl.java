@@ -239,7 +239,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * 支付密码支付
+     * 支付密码支付 ------------------------------------支付---------------------------
      * @param userId 用户id
      * @param paymentPassword 用户支付密码
      * @return 是否正确
@@ -331,7 +331,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * 提交订单
+     * 提交订单 结算 --------------------------------------------------
      * @param order 订单对象
      * @return 1为支付成功 2 为余额不足
      */
@@ -339,7 +339,6 @@ public class OrderServiceImpl implements OrderService {
     public String confirmOrder(Order order, HttpServletRequest request) throws Exception {
         //确认订单
         orderDao.confirmOrder(order);
-
         //转换地址
         Address address = addressService.ordersDefaults(order.getAddress());
         //添加订单地址
@@ -710,6 +709,9 @@ public class OrderServiceImpl implements OrderService {
     public Boolean walletPay(String userId,String orderId) throws Exception {
         //查询用户余额
         String encryptionBalance = memberDao.findBalance(userId);
+        if (encryptionBalance==null){
+            encryptionBalance = "nUOli9QRvUPflIt/kg9mOQ==";
+        }
         //获取订单总计
         String totals = totals = orderDao.fenOrderTotal(userId, orderId);
         //解密余额
