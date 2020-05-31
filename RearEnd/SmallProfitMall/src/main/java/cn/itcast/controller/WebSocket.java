@@ -120,7 +120,7 @@ public class WebSocket {
         Integer redis = 0;
         WebSocket socket = USER_ONLINE_MAP.get(userId);
         if (socket == null) {
-            return redis=0;
+            return redis;
         }
         if (socket.session != null) {
                 //消息对象
