@@ -29,7 +29,6 @@ public class SnCal {
         String tempStr = URLEncoder.encode(wholeStr, "UTF-8");
 
         // 调用下面的MD5方法得到最后的sn签名7de5a22212ffaa9e326444c75a58f9a0
-        System.out.println(snCal.MD5(tempStr));
     }
 
     // 对Map内所有value作utf8编码，拼接返回结果

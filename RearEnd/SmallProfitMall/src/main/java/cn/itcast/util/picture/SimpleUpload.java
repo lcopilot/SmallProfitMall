@@ -75,19 +75,7 @@ public class SimpleUpload {
             Response r = e.response;
 
             // 请求失败时打印的异常的信息
-
-
-            try {
-
-                // 响应的文本信息
-
-                System.out.println(r.bodyString());
-
-            } catch (QiniuException qe) {
-
-                // ignore
-
-            }
+            
 
         }
 
@@ -116,7 +104,6 @@ public class SimpleUpload {
 
             // 打印返回的信息
 
-            System.out.println(res.bodyString());
 
         } catch (QiniuException e) {
 
@@ -124,19 +111,6 @@ public class SimpleUpload {
 
             // 请求失败时打印的异常的信息
 
-            System.out.println(r.toString());
-
-            try {
-
-                // 响应的文本信息
-
-                System.out.println(r.bodyString());
-
-            } catch (QiniuException qe) {
-
-                // ignore
-
-            }
 
         }
 
@@ -170,7 +144,7 @@ public class SimpleUpload {
 
         } catch (QiniuException e) {
 
-            System.out.println(e.response.statusCode);
+            e.printStackTrace();
 
             e.printStackTrace();
 
