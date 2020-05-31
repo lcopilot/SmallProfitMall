@@ -1,11 +1,13 @@
 package cn.itcast.domain.homepag;
 
+import java.io.Serializable;
+
 /**
  * 三级商品分类
  * @author Kite
  * @date 2020/5/14
  */
-public class ProductFinalCategory {
+public class ProductFinalCategory implements Serializable {
     /**三级商品分类id**/
     private Integer product_final_id;
     /**三级商品分类内容**/
