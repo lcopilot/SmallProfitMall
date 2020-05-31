@@ -122,7 +122,7 @@ public class WebSocket {
         if (socket == null) {
             return redis;
         }
-        if (socket.session != null) {
+    //    if (socket.session != null) {
                 //消息对象
                 QueryResultString queryResultString = new QueryResultString();
                 if (message != null){
@@ -141,8 +141,8 @@ public class WebSocket {
             }
             redis = 1;
             return redis;
-        }
-        return redis;
+     //   }
+     //   return redis;
         //阻塞式（同步）
         //this.session.getBasicRemote().sendText(message);
         //非阻塞式（异步）

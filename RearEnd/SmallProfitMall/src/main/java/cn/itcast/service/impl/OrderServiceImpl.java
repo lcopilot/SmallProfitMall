@@ -833,33 +833,33 @@ public class OrderServiceImpl implements OrderService {
         //未读消息数量
         Integer unreadQuantity =  newsService.unreadQuantity(orders.getUserId());
         //推送消息 三秒后推送
-        try {
+//        try {
             Integer result = 0;
-        //推送失败 丛连推送
-        if (result!=1) {
-            //最多尝试次数
-            Integer maximum = 6;
-            Boolean sign = true;
-            while (sign) {
-            try
-            {
-                Thread.sleep(50);
+//        //推送失败 丛连推送
+//        if (result!=1) {
+//            //最多尝试次数
+//            Integer maximum = 6;
+//            Boolean sign = true;
+//            while (sign) {
+//            try
+//            {
+//                Thread.sleep(50);
                 result = newsService.pushNews(newsList,orders.getUserId(),unreadQuantity);
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-                maximum--;
-                if (result == 1 || maximum == 0) {
-                    sign = false;
-                }
-            }
-        }
-        } catch (IOException e) {
-        }catch (NullPointerException e){
-
-        }
+//            }
+//            catch (InterruptedException e)
+//            {
+//                e.printStackTrace();
+//            }
+//                maximum--;
+//                if (result == 1 || maximum == 0) {
+//                    sign = false;
+//                }
+//            }
+//        }
+//        } catch (IOException e) {
+//        }catch (NullPointerException e){
+//
+//        }
     }
 
     /**
