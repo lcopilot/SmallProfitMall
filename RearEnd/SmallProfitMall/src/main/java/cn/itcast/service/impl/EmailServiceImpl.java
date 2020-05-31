@@ -120,7 +120,6 @@ public class EmailServiceImpl implements EmailService {
         String emailType="2";
         //随机验证码
         String FR = GetFourRandom.getFourRandom();
-        System.out.println(FR);
         //手机号码方式
         if (phoneType.equals(verificationType)){
             //查询需要修改的手机号

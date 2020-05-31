@@ -53,7 +53,6 @@ public class PayController {
         // 获取支付宝POST过来反馈信息
         Map<String, String> params = new HashMap<String, String>();
         Map<String, String[]> requestParams = request.getParameterMap();
-        System.out.println(requestParams.toString());
         for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
             String name = (String) iter.next();
             String[] values = (String[]) requestParams.get(name);
@@ -123,7 +122,6 @@ public class PayController {
 
             String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
 
-            System.out.println("商户订单号---------------------------" + out_trade_no);
 
             // 支付宝交易号
 

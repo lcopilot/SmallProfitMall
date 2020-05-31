@@ -30,6 +30,5 @@ public class MQSimpleMsgHandler {
         String content = (String)map.get("content");
         String currentDate =(String) map.get("currentDate");
         sendEmailUtil.sendEmailUtil(theme,sendEmail,userEmail,content);//发送邮件
-        System.out.println("------------------发送邮件---------------------------------");
     }
 }

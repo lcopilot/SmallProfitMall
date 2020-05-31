@@ -11,7 +11,6 @@ public class ArithmeticUtils {
 
     public static void main(String[] args) {
 
-        System.out.println( ArithmeticUtils.add("0.0009","0.0009",2));
     }
     //默认除法运算精度
     private static final int DEF_DIV_SCALE = 10;

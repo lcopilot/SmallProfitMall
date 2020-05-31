@@ -70,15 +70,12 @@ public class SimpleUpload {
 
             // 打印返回的信息
 
-            System.out.println(res.bodyString());
-
         } catch (QiniuException e) {
 
             Response r = e.response;
 
             // 请求失败时打印的异常的信息
 
-            System.out.println(r.toString());
 
             try {
 
@@ -160,21 +157,16 @@ public class SimpleUpload {
      *            空间名
 
      * @param key
-
      *            文件名
-
      */
-
     public void overrideUpload(String path, String key, String bucketName) {
 
         try {
 
             String token = getUpToken(bucketName, key);//获取 token
-            System.out.println("token:"+token);
 
             Response response = uploadManager.put(path, key, token);//执行上传，通过token来识别 该上传是“覆盖上传”
 
-            System.out.println(response.toString());
 
         } catch (QiniuException e) {
 

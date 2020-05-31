@@ -87,7 +87,6 @@ public class ConvertVideo {
                 try {
                     captured_frame = frameGrabber.grabFrame();
                     if (captured_frame == null) {
-                        System.out.println("!!! end cvQueryFrame");
                         break;
                     }
                     recorder.setTimestamp(frameGrabber.getTimestamp());

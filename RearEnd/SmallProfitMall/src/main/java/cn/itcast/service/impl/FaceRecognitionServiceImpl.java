@@ -132,7 +132,6 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         JSONObject faceDetectionRes = humanFaceUtil.faceDetection(image);
         //人脸检测结果
         String faceDetectionRedis =faceDetectionRes.getString("error_msg");
-        System.out.println(faceDetectionRes.toString(2));
         if (!AERROR_MSG.equals(faceDetectionRedis)){
             JSONObject faceError = new JSONObject();
             faceError.put("error_code", faceDetectionRes.getInt("error_code"));

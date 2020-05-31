@@ -194,7 +194,6 @@ public class UserServiceImpl implements UserService {
             //解密比对
             String userPassword = AesEncryptUtil.desEncrypt(password);
             Boolean felt=userPassword.equals(user.getPassword());
-            System.out.println(felt);
             if (felt){
                 return 2;
             }
@@ -346,7 +345,6 @@ public class UserServiceImpl implements UserService {
         String phone=AesEncryptUtil.desEncrypt(users.getPhone());
         users.setPhone(concealPhone(phone));
         if (users.getEmail()!=null){
-            System.out.println(users.getEmail());
             String emailes=users.getEmail();
             String email = AesEncryptUtil.desEncrypt(users.getEmail());
             users.setEmail(concealEmail(email));

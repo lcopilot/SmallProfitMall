@@ -29,9 +29,7 @@ public class IP {
         HttpResponse response = client.execute(post);// 用http连接去执行get请求并且获得http响应
         HttpEntity entity = response.getEntity();// 从response中取到响实体
         String html = EntityUtils.toString(entity);// 把响应实体转成文本
-        System.out.println(html);
 
         String a="\u5317\u4eac\u5e02";
-        System.out.println(a);
     }
 }

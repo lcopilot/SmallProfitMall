@@ -69,7 +69,6 @@ public class HomepageServiceImpl implements HomepageService {
                 rotationCharts.add(rotationCharts1);
             }
            Boolean a =  redisUtil.set("rotationChart",rotationCharts);
-        System.out.println(a);
             return rotationCharts;
 
     }
@@ -181,7 +180,6 @@ public class HomepageServiceImpl implements HomepageService {
     @Override
     public List<Icon> findIcon() {
         List<Icon> redisIcon = (List<Icon>) redisUtil.lGet("Icon", 0, -1);
-        System.out.println(redisIcon);
         if (redisIcon.size() == 0) {
             List<Icon> Icons = homepageDao.findIcon();
             //存入缓存

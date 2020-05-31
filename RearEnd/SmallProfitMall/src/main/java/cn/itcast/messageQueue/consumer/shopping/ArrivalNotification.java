@@ -14,6 +14,5 @@
 //        String userEmail=strings[0];
 //        String content = strings[1];
 //        sendEmailUtil.sendEmailUtil(theme,sendEmail,userEmail,content);
-//        System.out.println("-----商品有货发送邮件成功-------");
 //    }
 //}

@@ -34,7 +34,6 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
         String productIds ="productId_"+transition;
         //从缓存中查询是否存在
         ProductDetailsResult  redis = (ProductDetailsResult)redisUtil.get(productIds);
-        System.out.println(redis);
         if(redis==null){
             //设置商品配置信息
            ProductDetailsResult productDetailsResult = setProductConfiguration(productId);

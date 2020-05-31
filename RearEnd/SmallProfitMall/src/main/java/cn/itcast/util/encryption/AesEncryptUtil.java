@@ -119,9 +119,7 @@ public class AesEncryptUtil {
         String test1 = "0.00";
         String key = KEY;
         String iv = IV;
-        System.out.println(encrypt(test1));
 
-        System.out.println(desEncrypt("nUOli9QRvUPflIt/kg9mOQ=="));
 
     }
 }

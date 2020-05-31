@@ -817,6 +817,7 @@ public class OrderServiceImpl implements OrderService {
         //将订单消息添加到集合种
         newsList.add(orderNews);
 
+
         //----------------------------------------------
 
         //查询零钱消息-------------------------------------------
@@ -834,20 +835,16 @@ public class OrderServiceImpl implements OrderService {
         Integer unreadQuantity =  newsService.unreadQuantity(orders.getUserId());
         //推送消息 三秒后推送
         try {
-            Integer result = newsService.pushNews(newsList,orders.getUserId(),unreadQuantity);
+            Integer result = 0;
         //推送失败 丛连推送
         if (result!=1) {
-            //尝试次数
-            Integer frequency = 0;
             //最多尝试次数
-            Integer maximum = 5;
+            Integer maximum = 6;
             Boolean sign = true;
             while (sign) {
             try
             {
                 Thread.sleep(50);
-                frequency = ++frequency;
-
                 result = newsService.pushNews(newsList,orders.getUserId(),unreadQuantity);
             }
             catch (InterruptedException e)

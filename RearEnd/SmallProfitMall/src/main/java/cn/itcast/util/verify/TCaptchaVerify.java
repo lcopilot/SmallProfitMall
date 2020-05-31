@@ -33,7 +33,6 @@ public class TCaptchaVerify {
             HttpEntity entity = response.getEntity();
             if (entity != null) {
                 String res = EntityUtils.toString(entity);
-                System.out.println(res); // 临时输出
 
                 JSONObject result = JSON.parseObject(res);
                 // 返回码

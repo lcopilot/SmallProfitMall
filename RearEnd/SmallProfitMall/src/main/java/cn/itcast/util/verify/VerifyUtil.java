@@ -18,7 +18,6 @@ public class VerifyUtil {
     public  Boolean VaptchaVerify(String tokens, HttpServletRequest request) {
 
         String token = tokens;
-        System.out.println();
         SecondVerify result = vaptcha.Verify(request, token);
         if (result.getSuccess() == Constant.VerifySuccess) {
             // 二次验证成功

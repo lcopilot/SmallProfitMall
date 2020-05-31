@@ -86,7 +86,6 @@ public class SmsUtils {
 
     public static void main(String[] args) throws ClientException {
        Boolean b = sendLoginSms("18598814121","7845");
-        System.out.println(b);
     }
 
     /**
@@ -125,7 +124,6 @@ public class SmsUtils {
         SendSmsResponse sendSmsResponse = null;
         try {
             sendSmsResponse = client.getAcsResponse(request);
-            System.out.println(sendSmsResponse.getMessage());
             //短信发送状态
             if ("OK".equalsIgnoreCase(sendSmsResponse.getCode())) {
                 return true;
