@@ -118,7 +118,7 @@ public class RedisUtil {
 			redisTemplate.opsForValue().set(key, value);
 			return true;
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 			log.error("redis error: ", e);
 			return false;
 		}
