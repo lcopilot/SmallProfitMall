@@ -2,6 +2,7 @@ package cn.itcast.dao;
 
 import cn.itcast.domain.poribuctPageviews.PoribuctPageviews;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 
@@ -9,6 +10,7 @@ import java.util.Date;
  * @author Kite
  * @date 2020/5/17
  */
+@Repository
 public interface ProductPageviewsDao {
     /**
      * 新增商品浏览量

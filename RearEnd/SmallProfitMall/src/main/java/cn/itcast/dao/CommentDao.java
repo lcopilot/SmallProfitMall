@@ -3,6 +3,7 @@ package cn.itcast.dao;
 import cn.itcast.domain.ProductDatails.ProductComment;
 import cn.itcast.domain.productComment.SecondComment;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @author Kite
  * @date 2020/5/1
  */
+@Repository
 public interface CommentDao {
 
     /**

@@ -2,11 +2,13 @@ package cn.itcast.dao;
 
 import cn.itcast.domain.footprint.Footprint;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
 
 //足迹
+@Repository
 public interface FootprintDao {
     /**
      * 添加足迹

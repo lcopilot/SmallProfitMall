@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //收货地址
-
+@Repository
 public interface AddressDao {
     /**
      * 查询用户地址

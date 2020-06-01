@@ -3,10 +3,12 @@ package cn.itcast.dao;
 import cn.itcast.domain.favorite.Evaluation;
 import cn.itcast.domain.footprint.Footprint;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 //收藏
+@Repository
 public interface EvaluationDao {
     /**
      * 添加收藏

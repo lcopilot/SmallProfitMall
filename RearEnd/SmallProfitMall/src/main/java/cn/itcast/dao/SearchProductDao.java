@@ -2,6 +2,7 @@ package cn.itcast.dao;
 
 import cn.itcast.domain.searchProduct.SearchProduct;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.ws.rs.Path;
@@ -12,6 +13,7 @@ import java.util.List;
  * @author Kite
  * @date 2020/5/16
  */
+@Repository
 public interface SearchProductDao {
 
     /**

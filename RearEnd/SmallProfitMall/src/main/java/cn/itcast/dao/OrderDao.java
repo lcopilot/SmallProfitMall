@@ -5,6 +5,7 @@ import cn.itcast.domain.order.Order;
 import cn.itcast.domain.order.ProductContent;
 import cn.itcast.response.QueryResult;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.sql.Array;
@@ -17,6 +18,7 @@ import java.util.List;
  * @author Kite
  * @date 2020/4/2
  */
+@Repository
 public interface OrderDao {
     /**
      * 新增订单

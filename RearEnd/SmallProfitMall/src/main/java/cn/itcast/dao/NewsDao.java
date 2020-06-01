@@ -2,6 +2,7 @@ package cn.itcast.dao;
 
 import cn.itcast.domain.news.News;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  * @author Kite
  * @date 2020/3/28
  */
+@Repository
 public interface NewsDao {
     /**
      * 查询消息

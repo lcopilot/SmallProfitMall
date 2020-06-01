@@ -2,12 +2,14 @@ package cn.itcast.dao;
 
 import cn.itcast.domain.accountSettings.AccountSettings;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  * 账户设置
  * @author Kite
  * @date 2020/4/1
  */
+@Repository
 public interface AccountSettingsDao {
     /**
      * 修改支付密码

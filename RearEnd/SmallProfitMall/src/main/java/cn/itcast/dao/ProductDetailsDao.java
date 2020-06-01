@@ -8,6 +8,7 @@ import cn.itcast.domain.ProductDatails.Recommend;
 import cn.itcast.domain.order.ProductContent;
 import com.tencentcloudapi.iot.v20180123.models.Product;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * 商品详细
  * @author kity
  */
+@Repository
 public interface ProductDetailsDao {
     /**
      * 查询商品详细信息

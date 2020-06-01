@@ -4,6 +4,7 @@ import cn.itcast.domain.member.ConsumptionRecords;
 import cn.itcast.domain.member.Member;
 import cn.itcast.domain.webSocket.Connection;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author Kite
  * @date 2020/3/30
  */
+@Repository
 public interface MemberDao {
     /**
      * 修改账户余额
