@@ -589,7 +589,7 @@
 
   .order_more_address /deep/ .el-collapse-item__header {
     color: #409eff !important;
-    border: 0 !important;
+    border: 0 !important ;
     display: flow-root !important;
   }
 
