@@ -191,7 +191,7 @@ const HeaderNav = (props) => {
             <div className="header-index-user">
               <Avatar size="small"
                       src="http://img.isdfmk.xyz/iduyadfgjdekldjhf.png"/>
-              <span>{user.username}</span>
+              <span>{user.userName}</span>
             </div>
           </Dropdown>
         </div>

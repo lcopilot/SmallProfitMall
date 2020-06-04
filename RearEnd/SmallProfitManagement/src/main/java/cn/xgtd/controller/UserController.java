@@ -22,24 +22,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ResponseBody
 public class UserController {
 
-    @Autowired
-    UserService userService;
+	@Autowired
+	UserService userService;
 
-    /**
-     * 管理用户登录
-     * @param userName 用户账户
-     * @param password 用户密码
-     * @return
-     */
-    @RequestMapping(value = "/userLogin" , method = RequestMethod.POST)
-    public ObjectReturnResponse userLogin(String userName,String password){
-        User responseUserUser = userService.userLogin(userName , password);
-        if (responseUserUser == null){
-            return new ObjectReturnResponse(CommonCode.FAIL,null);
-        }
-        ObjectReturn objectReturn = new ObjectReturn();
-        objectReturn.setObject(responseUserUser);
-        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
-    }
+	/**
+	 * 管理用户登录
+	 *
+	 * @param userName 用户账户
+	 * @param password 用户密码
+	 * @return
+	 */
+	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+	public ObjectReturnResponse userLogin(String userName, String password) {
+		User responseUserUser = userService.userLogin(userName, password);
+		if (responseUserUser == null) {
+			return new ObjectReturnResponse(CommonCode.FAIL, null);
+		}
+		ObjectReturn objectReturn = new ObjectReturn();
+		objectReturn.setObject(responseUserUser);
+		return new ObjectReturnResponse(CommonCode.SUCCESS, objectReturn);
+	}
 
 }

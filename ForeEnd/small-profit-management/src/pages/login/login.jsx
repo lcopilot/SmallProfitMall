@@ -31,20 +31,27 @@ const Login = (props) => {
   const login = (form) => {
     setLoading({loading: true, loadingContent: '登录中 . . . '})
     const {username, password} = form
-    let dataForm=new FormData();
-    dataForm.append("userName",username)
-    dataForm.append("password",password)
-    userApi.login(dataForm).then(res=>{
-      if (res.status===0){
+    let data={
+      userName:username,
+      password:password,
+    }
+    userApi.login(data).then(res=>{
+      if (res.success){
         message.success("登录成功!")
-        const user=res.data
+        const user=res.objectReturn.object
+        user.role.menus=user.role.menus===null?[]:user.role.menus;
         setUser(user)
         storageUtils.saveUser(user)
         history.replace("/");
       }else {
-        message.error(res.msg)
+        message.error("账户或密码错误!")
         setLoading({loading: false, loadingContent: '登录'})
       }
+    }).catch(error=>{
+      setLoading({
+        loading: false,
+        loadingContent: '登录',
+      })
     })
   };
 
