@@ -92,13 +92,10 @@ function websocketOnMessage(e) {
         globalCallback = callbackNameMap.get(80000);
         globalCallback(JSON.parse(e.data));
       }
-      try {
+      if (callbackNameMap.get(JSON.parse(e.data).code)){
         globalCallback = callbackNameMap.get(JSON.parse(e.data).code);
         globalCallback(JSON.parse(e.data));
-      } catch (e) {
-
       }
-      console.log(JSON.parse(e.data))
     }
     //开启心跳
     startHeartbeat();
