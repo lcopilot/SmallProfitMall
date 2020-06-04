@@ -12,12 +12,6 @@ import java.util.List;
 public interface UserService {
 
     /**
-     * 查询用户集合测试
-     * @return
-     */
-    public List<User> findUser();
-
-    /**
      * 管理用户登录
      * @param userName 用户账户
      * @param password 用户密码
