@@ -20,7 +20,7 @@ import java.util.List;
  * @date 2020/6/3
  */
 @Controller
-@RequestMapping("RoleController")
+@RequestMapping("/RoleController")
 @ResponseBody
 public class RoleController {
 
@@ -33,7 +33,7 @@ public class RoleController {
      * @param rId 角色id
      * @return
      */
-    @RequestMapping(value = "findRole",method = RequestMethod.GET)
+    @RequestMapping(value = "/findRole",method = RequestMethod.GET)
     public ResponsePagination findRole(Integer rId,Integer currentPage , Integer pageSize){
         if (rId == null){
             return new ResponsePagination(CommonCode.INVALID_PARAM,null);
