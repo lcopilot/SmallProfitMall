@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date 2020/6/1
  */
 @Controller
-@RequestMapping("userController")
+@RequestMapping("/userController")
 @ResponseBody
 public class UserController {
 
