@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.xgtd.dao.RoleDao">
+
+   <!--查询所有子节点角色-->
+   <select id="findRole"  resultType="cn.xgtd.domain.user.Role">
+        SELECT
+            *
+        FROM
+            management_role
+        WHERE
+            r_id IN (
+            SELECT
+                descendant_id
+            FROM
+            ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{rId} )) AND descendant_id <![CDATA[!= ]]> #{rId} LIMIT #{start} , #{pageSize} ) AS role_relationship
+            )
+    </select>
+
+
+</mapper>
