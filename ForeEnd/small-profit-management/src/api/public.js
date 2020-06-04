@@ -100,6 +100,17 @@ export default {
       })
     })
   },
+  //get
+  requestGetFormUr (url,params={}) {
+    return new Promise((resolve, reject) => {
+      let queryString=querystring.stringify(params);
+      axios.get(url+"?"+queryString).then(res => {
+        resolve(res.data) //res是axios封装的对象，res.data才是服务端返回的信息
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
   //post请求
   requestPost (url, data = {}) {
     return new Promise((resolve, reject) => {
@@ -111,12 +122,12 @@ export default {
     })
   },
   //post请求 (x-www-form-urlencoded)
-  requestPostForm (url, data = {}) {
+  requestPostFormUr(url, data = {}) {
     return new Promise((resolve, reject) => {
-      let queryString=querystring.stringify(data);
+      const queryString=querystring.stringify(data);
       axios.post(url, queryString, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',  //请求头添加
+          'Content-Type': 'application/x-www-form-urlencoded',  //请求头
         },
       }).then(res => {
         resolve(res.data)
