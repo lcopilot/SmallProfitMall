@@ -22,7 +22,6 @@
 
 <resultMap id="roleMap" type="cn.xgtd.domain.user.Role">
         <id property="rId" column="r_id"></id>
-        <result property="menus" column="menus"></result>
         <result property="name" column="name"></result>
         <result property="createTime" column="mr_create_time"></result>
         <result property="createAuthor" column="create_author"></result>
@@ -31,10 +30,6 @@
         <result property="lastAuthor" column="mr_last_author"></result>
 </resultMap>
 
-    <!-- 查询所有 -->
-    <select id="findUser" resultType="cn.xgtd.domain.user.User">
-        select * from management_user where u_id = 1;
-    </select>
 
     <!--查询管理用户密码-->
     <select id="findPassword" parameterType="java.lang.String" resultType="java.lang.String">
@@ -53,7 +48,6 @@
         mu.last_time AS mu_last_time,
         mu.last_author AS mu_last_author,
         mr.r_id,
-        mr.menus,
         mr.NAME,
         mr.create_time AS mr_create_time,
         mr.create_author,
