@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 角色管理
@@ -14,7 +15,7 @@ public class Role implements Serializable {
     /**角色id**/
     private Integer rId;
     /**管理范围**/
-    private String menus;
+    private List menus;
     /**角色名称**/
     private String name;
     /**创建时间**/
@@ -36,11 +37,11 @@ public class Role implements Serializable {
         this.rId = rId;
     }
 
-    public String getMenus() {
+    public List getMenus() {
         return menus;
     }
 
-    public void setMenus(String menus) {
+    public void setMenus(List menus) {
         this.menus = menus;
     }
 
