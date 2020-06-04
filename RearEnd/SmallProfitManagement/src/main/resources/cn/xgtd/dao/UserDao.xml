@@ -8,7 +8,6 @@
     <resultMap id="findUserRoleMap" type="cn.xgtd.domain.user.User">
         <id property="uId" column="u_id"></id>
         <result property="userName" column="user_name"></result>
-        <result property="password" column="password"></result>
         <result property="createTime" column="mu_create_time"></result>
         <result property="roleId" column="role_id"></result>
         <result property="email" column="email"></result>
@@ -46,7 +45,6 @@
        SELECT
         mu.u_id,
         mu.user_name,
-        mu.PASSWORD,
         mu.create_time AS mu_create_time,
         mu.role_id,
         mu.email,

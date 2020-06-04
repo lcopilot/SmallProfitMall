@@ -15,12 +15,6 @@ import java.util.List;
  */
 @Repository
 public interface UserDao {
-    /**
-     * 查询用户测试
-     * @return
-     */
-    public User findUser();
-
 
     /**
      * 查询用户密码

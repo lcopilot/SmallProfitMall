@@ -23,16 +23,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
-    @Override
-
-    public List<User> findUser() {
-        List<User> users = new ArrayList<>();
-       User users1 = userDao.findUser();
-        System.out.println(users1);
-        System.out.println("测试用户业务层");
-        return users;
-    }
-
     /**
      * 用户登录
      * @param userName
