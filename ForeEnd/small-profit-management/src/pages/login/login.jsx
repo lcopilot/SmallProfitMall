@@ -31,7 +31,10 @@ const Login = (props) => {
   const login = (form) => {
     setLoading({loading: true, loadingContent: '登录中 . . . '})
     const {username, password} = form
-    userApi.login(username,password).then(res=>{
+    let dataForm=new FormData();
+    dataForm.append("userName",username)
+    dataForm.append("password",password)
+    userApi.login(dataForm).then(res=>{
       if (res.status===0){
         message.success("登录成功!")
         const user=res.data

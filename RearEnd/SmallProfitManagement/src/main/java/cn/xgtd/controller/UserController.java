@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ResponseBody
 public class UserController {
 
-
     @Autowired
     UserService userService;
 
@@ -32,7 +31,7 @@ public class UserController {
      * @param password 用户密码
      * @return
      */
-    @RequestMapping(value = "userLogin" , method = RequestMethod.POST)
+    @RequestMapping(value = "/userLogin" , method = RequestMethod.POST)
     public ObjectReturnResponse userLogin(String userName,String password){
         User responseUserUser = userService.userLogin(userName , password);
         if (responseUserUser == null){
@@ -42,6 +41,5 @@ public class UserController {
         objectReturn.setObject(responseUserUser);
         return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
     }
-
 
 }
