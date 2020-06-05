@@ -46,7 +46,7 @@ public class UserController {
 
 	/**
 	 * 新增用户
-	 * @param user 用户
+	 * @param user  用户
 	 * @return
 	 */
 	public QueryResponseResult addUser(User user){
