@@ -25,6 +25,6 @@ public interface UserService {
      * @param user
      * @return
      */
-    public QueryResponseResult addUser(User user);
+    public Integer addUser(User user);
 
 }

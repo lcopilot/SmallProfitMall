@@ -9,5 +9,8 @@
         <module name="SmallProfit" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SmallProfit" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
