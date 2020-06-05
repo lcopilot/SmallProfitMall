@@ -32,8 +32,18 @@ public class User implements Serializable {
     private Date lastTime;
     /**上次修改人**/
     private String lastAuthor;
+    /**修改人名称**/
+    private String lastAuthorName;
     /**用户角色**/
     private Role role;
+
+    public String getLastAuthorName() {
+        return lastAuthorName;
+    }
+
+    public void setLastAuthorName(String lastAuthorName) {
+        this.lastAuthorName = lastAuthorName;
+    }
 
     public Integer getuId() {
         return uId;

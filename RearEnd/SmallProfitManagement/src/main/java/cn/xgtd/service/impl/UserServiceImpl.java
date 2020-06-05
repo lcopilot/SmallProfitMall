@@ -1,6 +1,7 @@
 package cn.xgtd.service.impl;
 
 import cn.xgtd.dao.UserDao;
+import cn.xgtd.domain.user.Role;
 import cn.xgtd.domain.user.User;
 import cn.xgtd.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,11 @@ public class UserServiceImpl implements UserService {
         String userPassword = userDao.findPassword(userName);
         if (password.equals(userPassword)){
             User responseUser = userDao.findUserRole(userName);
+            Role role = responseUser.getRole();
+            if (role.getMenus()==null){
+                role.setMenus( new ArrayList<>());
+            }
+            responseUser.setRole(role);
             log.info("用户登录:"+responseUser.getUserName());
 
             return responseUser;

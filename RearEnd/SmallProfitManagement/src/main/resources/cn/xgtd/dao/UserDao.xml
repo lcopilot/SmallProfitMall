@@ -15,6 +15,7 @@
         <result property="creator" column="creator"></result>
         <result property="lastTime" column="mu_last_time"></result>
         <result property="lastAuthor" column="mu_last_author"></result>
+        <result property="lastAuthorName" column="ms_last_name"></result>
      <association property="role" resultMap="roleMap">
      </association>
 
@@ -37,7 +38,7 @@
     </select>
     <!--询用户以用户角色-->
     <select id="findUserRole" parameterType="java.lang.String" resultMap="findUserRoleMap">
-       SELECT
+    SELECT
         mu.u_id,
         mu.user_name,
         mu.create_time AS mu_create_time,
@@ -53,12 +54,18 @@
         mr.create_author,
         mr.create_author_id,
         mr.last_time AS mr_last_time,
-        mr.last_author AS mr_last_author
-    FROM
+        mr.last_author AS mr_last_author,
+		ms.user_name AS ms_last_name
+        FROM
         management_user mu
-        LEFT JOIN management_role mr ON mu.role_id = mr.r_id
-    WHERE
-        mu.user_name = #{userName}
+		LEFT JOIN
+		 management_user ms
+		ON mu.last_author = ms.u_id
+        LEFT JOIN
+        management_role mr
+        ON mu.role_id = mr.r_id
+        WHERE
+         mu.user_name =  #{userName}
      </select>
 
 </mapper>
