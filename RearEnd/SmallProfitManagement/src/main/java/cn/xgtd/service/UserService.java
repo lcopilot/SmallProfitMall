@@ -1,6 +1,7 @@
 package cn.xgtd.service;
 
 import cn.xgtd.domain.user.User;
+import cn.xgtd.response.list.QueryResponseResult;
 
 import java.util.List;
 
@@ -18,4 +19,12 @@ public interface UserService {
      * @return
      */
     public User userLogin(String userName,String password);
+
+    /**
+     * 创建用户
+     * @param user
+     * @return
+     */
+    public QueryResponseResult addUser(User user);
+
 }

@@ -29,7 +29,7 @@ public class RoleController {
     RoleService roleService;
 
     /**
-     * 查询当前角色下子角色
+     * 查询当前用户下的角色
      * @param uId 用户id
      * @return
      */

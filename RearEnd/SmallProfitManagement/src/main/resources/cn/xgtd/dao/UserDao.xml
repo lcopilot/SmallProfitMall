@@ -66,6 +66,11 @@
         ON mu.role_id = mr.r_id
         WHERE
          mu.user_name =  #{userName}
+
      </select>
+
+     <insert id="addUser">
+        insert into management_user () values
+       </insert>
 
 </mapper>

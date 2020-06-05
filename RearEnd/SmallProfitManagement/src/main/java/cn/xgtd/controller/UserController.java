@@ -2,6 +2,7 @@ package cn.xgtd.controller;
 
 import cn.xgtd.domain.user.User;
 import cn.xgtd.response.CommonCode;
+import cn.xgtd.response.list.QueryResponseResult;
 import cn.xgtd.response.objectReturn.ObjectReturn;
 import cn.xgtd.response.objectReturn.ObjectReturnResponse;
 import cn.xgtd.service.UserService;
@@ -42,5 +43,16 @@ public class UserController {
 		objectReturn.setObject(responseUserUser);
 		return new ObjectReturnResponse(CommonCode.SUCCESS, objectReturn);
 	}
+
+	/**
+	 * 新增用户
+	 * @param user 用户
+	 * @return
+	 */
+	public QueryResponseResult addUser(User user){
+		return null;
+	}
+
+
 
 }

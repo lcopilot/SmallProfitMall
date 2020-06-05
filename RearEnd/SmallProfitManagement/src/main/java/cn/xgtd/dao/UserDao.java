@@ -2,6 +2,7 @@ package cn.xgtd.dao;
 
 import cn.xgtd.domain.user.Role;
 import cn.xgtd.domain.user.User;
+import cn.xgtd.response.list.QueryResponseResult;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +25,13 @@ public interface UserDao {
     public String findPassword(String userName);
 
     /**
-     * 查询用户级用户角色
+     * 查询用户及用户角色
      * @param userName
      * @return
      */
     public User findUserRole(String userName);
 
 
+    public QueryResponseResult addUser(User user);
 
 }

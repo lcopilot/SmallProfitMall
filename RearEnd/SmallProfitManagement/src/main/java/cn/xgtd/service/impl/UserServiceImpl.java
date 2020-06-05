@@ -3,6 +3,7 @@ package cn.xgtd.service.impl;
 import cn.xgtd.dao.UserDao;
 import cn.xgtd.domain.user.Role;
 import cn.xgtd.domain.user.User;
+import cn.xgtd.response.list.QueryResponseResult;
 import cn.xgtd.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,16 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    /**
+     * 创建角色
+     * @param user
+     * @return
+     */
+    @Override
+    public QueryResponseResult addUser(User user) {
+        return null;
+    }
+
 
 }
