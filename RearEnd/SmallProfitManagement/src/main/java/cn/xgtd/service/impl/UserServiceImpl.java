@@ -38,8 +38,10 @@ public class UserServiceImpl implements UserService {
         if (password.equals(userPassword)){
             User responseUser = userDao.findUserRole(userName);
             Role role = responseUser.getRole();
-            if (role.getMenus()==null){
-                role.setMenus( new ArrayList<>());
+            if (role!=null){
+                String[] menus = role.getDatabaseMenus().split(",");
+                role.setDatabaseMenus(null);
+                role.setMenus(menus);
             }
             responseUser.setRole(role);
             log.info("用户登录:"+responseUser.getUserName());
