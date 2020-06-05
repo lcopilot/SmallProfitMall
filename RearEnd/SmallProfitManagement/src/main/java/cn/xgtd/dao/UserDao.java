@@ -30,8 +30,19 @@ public interface UserDao {
      * @return
      */
     public User findUserRole(String userName);
+    /**
+     * 查询用户名是否重复
+     * @param userName 需要创建的用户名
+     * @return
+     */
+    public Integer findUserRepeat(String userName);
 
 
-    public QueryResponseResult addUser(User user);
+    /**
+     * 创建用户
+     * @param user 用户对象
+     * @return
+     */
+    public Integer addUser(User user);
 
 }

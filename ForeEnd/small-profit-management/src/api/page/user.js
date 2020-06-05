@@ -4,5 +4,5 @@ import querystring from "querystring";
 const apiUrl=sysConfig.smApiUrlPre;
 
 export const login=(data)=>{
-  return http.requestPostForm(apiUrl+'/userController/userLogin',data)
+  return http.requestPostFormUr(apiUrl+'/userController/userLogin',data)
 }

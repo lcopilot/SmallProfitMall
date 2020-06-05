@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ResponseBody
 public class UserController {
 
+
 	@Autowired
 	UserService userService;
 
@@ -50,6 +51,12 @@ public class UserController {
 	 * @return
 	 */
 	public QueryResponseResult addUser(User user){
+		//用户名重复
+		Integer repetition = 10001;
+		Integer result = userService.addUser(user);
+		if (result.equals(repetition)){
+			return new QueryResponseResult(CommonCode.FALL_USER_REGISTER,null);
+		}
 		return null;
 	}
 

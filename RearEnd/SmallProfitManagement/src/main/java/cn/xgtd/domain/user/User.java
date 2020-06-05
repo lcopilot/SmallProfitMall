@@ -10,7 +10,6 @@ import java.util.Date;
  * @author Kite
  * @date 2020/5/31
  */
-@Data
 public class User implements Serializable {
     /**用户id**/
     private Integer uId ;

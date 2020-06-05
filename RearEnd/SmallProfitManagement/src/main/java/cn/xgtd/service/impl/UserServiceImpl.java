@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,8 +55,14 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public QueryResponseResult addUser(User user) {
-        return null;
+    public Integer addUser(User user) {
+       Integer quantity = userDao.findUserRepeat(user.getUserName());
+       if (quantity>0){
+           return 10002;
+       }
+        user.setCreateTime(new Date());
+        Integer result = userDao.addUser(user);
+        return result;
     }
 
 

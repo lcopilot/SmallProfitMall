@@ -6,7 +6,6 @@ import {
   HomeOutlined, LineChartOutlined, ShoppingOutlined, UserOutlined
 } from "@ant-design/icons";
 import React from "react";
-
 const menuList = [
   {
     title: '首页', // 菜单标题名称
