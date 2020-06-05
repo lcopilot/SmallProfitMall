@@ -1,11 +1,13 @@
 package cn.xgtd.service.impl;
 
 import cn.xgtd.dao.RoleDao;
+import cn.xgtd.dao.UserDao;
 import cn.xgtd.domain.user.Role;
 import cn.xgtd.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,8 +19,27 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService {
 
 
+    /**角色持久层**/
     @Autowired
     RoleDao roleDao;
+
+    /**用户持久层**/
+    @Autowired
+    UserDao userDao;
+
+    @Override
+    public Integer addRole(Role role) {
+        //设置创建时间
+        role.setCreateTime(new Date());
+        //添加角色
+        roleDao.addRole(role);
+        //用户关联角色
+        userDao.updateRoleRelationship(role.getuId(),role.getCreateAuthorId());
+        //添加角色关系
+        roleDao.addRoleRelationship(role.getCreateAuthorId(),role.getuId());
+
+        return 1;
+    }
 
     /**
      * 查询所有当前角色下子节点
@@ -26,9 +47,9 @@ public class RoleServiceImpl implements RoleService {
      * @return
      */
     @Override
-    public List<Role> findRole(Integer uId,Integer currentPage , Integer pageSize) {
-        Integer start=(currentPage-1)*pageSize;
-       List<Role> roles =  roleDao.findRole(uId,start , pageSize);
+    public List<Role> findRole(Integer uId) {
+
+       List<Role> roles =  roleDao.findRole(uId);
         return roles;
     }
 }

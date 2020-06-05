@@ -5,6 +5,21 @@
 
 <mapper namespace="cn.xgtd.dao.RoleDao">
 
+
+    <!--添加角色-->
+    <insert id="addRole" parameterType="cn.xgtd.domain.user.Role" useGeneratedKeys="true" keyProperty="rId" keyColumn="r_id">
+     insert into management_role (menus,name,create_time,create_author,create_author_id)
+        values(#{databaseMenus},#{name},#{createTime},#{createAuthor},#{createAuthorId})
+    </insert>
+
+     <!--添加用户关系-->
+    <insert id="addRoleRelationship" parameterType="java.lang.Integer">
+     insert into management_role_relationship (descendant_id,father_id)
+        values(#{addedUserId},#{createAuthorId})
+    </insert>
+
+
+
    <!--查询所有子节点角色-->
    <select id="findRole"  resultType="cn.xgtd.domain.user.Role">
         SELECT
@@ -22,10 +37,9 @@
                 SELECT
                     descendant_id
                 FROM
-                    ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} )) AND descendant_id != #{uId} LIMIT #{start}, #{pageSize} ) AS role_relationship
+                    ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} )) AND descendant_id != #{uId} ) AS role_relationship
                 )
             )
     </select>
-
 
 </mapper>

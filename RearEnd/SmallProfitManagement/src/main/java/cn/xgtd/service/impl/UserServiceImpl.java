@@ -27,6 +27,22 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
 
     /**
+     * 创建用户
+     * @param user
+     * @return
+     */
+    @Override
+    public Integer addUser(User user) {
+        Integer quantity = userDao.findUserRepeat(user.getUserName());
+        if (quantity>0){
+            return 10002;
+        }
+        user.setCreateTime(new Date());
+        Integer result = userDao.addUser(user);
+        return result;
+    }
+
+    /**
      * 用户登录
      * @param userName
      * @param password
@@ -51,21 +67,7 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    /**
-     * 创建角色
-     * @param user
-     * @return
-     */
-    @Override
-    public Integer addUser(User user) {
-       Integer quantity = userDao.findUserRepeat(user.getUserName());
-       if (quantity>0){
-           return 10002;
-       }
-        user.setCreateTime(new Date());
-        Integer result = userDao.addUser(user);
-        return result;
-    }
+
 
 
 }

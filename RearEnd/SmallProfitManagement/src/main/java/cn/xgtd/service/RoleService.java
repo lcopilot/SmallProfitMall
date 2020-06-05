@@ -13,11 +13,20 @@ import java.util.List;
  * @date 2020/6/3
  */
 public interface RoleService {
+
+
     /**
-     * 查询所有当前角色下子节点
+     * 添加角色
+     * @param role 角色对象
+     * @return
+     */
+    public Integer addRole(Role role);
+
+    /**
+     * 查询所有当前角色下子用户
      * @param rId 角色id
      * @return 角色集合
      */
-    public List<Role> findRole(Integer rId,Integer currentPage , Integer pageSize);
+    public List<Role> findRole(Integer rId);
 
 }

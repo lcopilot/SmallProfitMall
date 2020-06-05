@@ -3,6 +3,7 @@ package cn.xgtd.dao;
 import cn.xgtd.domain.user.Role;
 import cn.xgtd.domain.user.User;
 import cn.xgtd.response.list.QueryResponseResult;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,5 +45,21 @@ public interface UserDao {
      * @return
      */
     public Integer addUser(User user);
+
+    /**
+     * 修改角色关系
+     * @param uId 用户id
+     * @param rId 角色id
+     * @return
+     */
+    public Integer updateRoleRelationship(@Param("uId") Integer uId ,@Param("rId") Integer rId);
+
+
+    /**
+     * 查询创建的用户以及子用户
+     * @param uId 用户id
+     * @return
+     */
+    public UserDao findUser(Integer uId);
 
 }

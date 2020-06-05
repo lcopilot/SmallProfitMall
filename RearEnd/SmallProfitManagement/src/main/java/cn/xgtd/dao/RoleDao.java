@@ -14,12 +14,27 @@ import java.util.List;
 @Repository
 public interface RoleDao {
 
+
+    /**
+     * 添加角色
+     * @param role 角色对象
+     * @return
+     */
+    public Integer addRole(Role role);
+
+
+    /**
+     * 新增关系
+     * @param createAuthorId 创建人id
+     * @param addedUserId 新增人用户id
+     * @return
+     */
+    public Integer addRoleRelationship(@Param("createAuthorId") Integer createAuthorId,@Param("addedUserId") Integer addedUserId );
+
     /**
      * 查询所有当前角色下子用户
      * @param uId 用户id
-     * @param start 开始页
-     * @param pageSize 每页查询数量
      * @return
      */
-    public List<Role> findRole(@Param("uId") Integer uId, @Param("start") Integer start , @Param("pageSize")  Integer pageSize);
+    public List<Role> findRole(@Param("uId") Integer uId);
 }

@@ -73,14 +73,25 @@
 
      <!--查询用户名是否重复-->
        <select id="findUserRepeat" resultType="java.lang.Integer">
-        SELECT count(user_name) FROM management_user WHERE user_name = #{userName}
+            select count(user_name) FROM management_user WHERE user_name = #{userName}
         </select>
 
       <!--新增用户-->
      <insert id="addUser">
-        insert into management_user (user_name,password,create_time,email,phone,creator)
-        values(#{userName},#{password},#{createTime},#{email},#{phone},#{creator})
+            insert into management_user (user_name,password,create_time,email,phone,creator)
+            values(#{userName},#{password},#{createTime},#{email},#{phone},#{creator})
        </insert>
+
+       <!--修改角色关系-->
+       <update id="updateRoleRelationship">
+            update management_user set role_id = #{rId} where u_id = #{uId}
+
+       </update>
+
+       <!--查询创建的用户以及子用户-->
+       <select id="findUser" resultType="cn.xgtd.dao.UserDao">
+
+       </select>
 
 
 

@@ -28,8 +28,26 @@ public class UserController {
 	UserService userService;
 
 	/**
+	 * 新增用户
+	 * @param user 用户
+	 * @return
+	 */
+	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
+	public QueryResponseResult addUser(@RequestBody User user){
+		//用户名重复
+		Integer repetition = 10001;
+		Integer result = userService.addUser(user);
+		if (result.equals(repetition)){
+			return new QueryResponseResult(CommonCode.FALL_USER_REGISTER,null);
+		}
+		if (result == 1 ){
+			return new QueryResponseResult(CommonCode.SUCCESS,null);
+		}
+		return new QueryResponseResult(CommonCode.FAIL,null);
+	}
+
+	/**
 	 * 管理用户登录
-	 *
 	 * @param userName 用户账户
 	 * @param password 用户密码
 	 * @return
@@ -45,20 +63,7 @@ public class UserController {
 		return new ObjectReturnResponse(CommonCode.SUCCESS, objectReturn);
 	}
 
-	/**
-	 * 新增用户
-	 * @param user 用户
-	 * @return
-	 */
-	public QueryResponseResult addUser(User user){
-		//用户名重复
-		Integer repetition = 10001;
-		Integer result = userService.addUser(user);
-		if (result.equals(repetition)){
-			return new QueryResponseResult(CommonCode.FALL_USER_REGISTER,null);
-		}
-		return null;
-	}
+
 
 
 
