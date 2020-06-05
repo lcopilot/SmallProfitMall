@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { message } from 'antd';
+import querystring from "querystring";
 
 axios.defaults.withCredentials = false //是否支持发送cookie凭证信息的字段(请求携带了验证身份信息时)
 axios.defaults.timeout = 20000
@@ -99,6 +100,17 @@ export default {
       })
     })
   },
+  //get
+  requestGetFormUr (url,params={}) {
+    return new Promise((resolve, reject) => {
+      let queryString=querystring.stringify(params);
+      axios.get(url+"?"+queryString).then(res => {
+        resolve(res.data) //res是axios封装的对象，res.data才是服务端返回的信息
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
   //post请求
   requestPost (url, data = {}) {
     return new Promise((resolve, reject) => {
@@ -109,12 +121,13 @@ export default {
       })
     })
   },
-  //post请求(表单)
-  requestPostForm (url, data = {}) {
+  //post请求 (x-www-form-urlencoded)
+  requestPostFormUr(url, data = {}) {
     return new Promise((resolve, reject) => {
-      axios.post(url, data, {
+      const queryString=querystring.stringify(data);
+      axios.post(url, queryString, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',  //请求头添加表单头
+          'Content-Type': 'application/x-www-form-urlencoded',  //请求头
         },
       }).then(res => {
         resolve(res.data)

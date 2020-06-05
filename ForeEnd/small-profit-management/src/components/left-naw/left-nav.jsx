@@ -106,7 +106,7 @@ const LeftNav = (props) => {
   const hasAuth = (item) => {
     const key = item.key
     const menus=user.role.menus
-    const username=user.username
+    const username=user.userName
     if(menus.indexOf(key)!==-1 || username==='admin' || item.isPublic){
       return true
     }

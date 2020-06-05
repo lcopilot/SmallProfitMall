@@ -22,7 +22,7 @@ const Admin = (props) => {
   const history = useHistory()
   let {user} = props
 
-  if (!user || !user._id) {
+  if (!user || !user.uId) {
     history.replace("/login")
   }
   const [collapsed, setCollapsed] = useState(false)
@@ -42,7 +42,7 @@ const Admin = (props) => {
         <Switch> {/*只匹配其中一个*/}
           {
             menuList.map(item=>{
-              if (menus.indexOf(item.path)!==-1 || user.username==='admin' || item.isPublic){
+              if (menus.indexOf(item.path)!==-1 || user.userName==='admin' || item.isPublic){
                 return (
                       <Route path={item.path}>
                         {item.component}
