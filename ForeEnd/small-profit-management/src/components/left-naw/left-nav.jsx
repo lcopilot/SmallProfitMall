@@ -105,7 +105,7 @@ const LeftNav = (props) => {
   //判断当前用户是否有对item的权限
   const hasAuth = (item) => {
     const key = item.key
-    const menus=user.role.menus
+    const menus=typeof(user)===undefined?user.role.menus:[];
     const username=user.userName
     if(menus.indexOf(key)!==-1 || username==='admin' || item.isPublic){
       return true

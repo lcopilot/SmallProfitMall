@@ -37,7 +37,7 @@ const Admin = (props) => {
   }
 
   const routerAuth=(menuList)=>{
-    const menus=user.role.menus
+    const menus=typeof(user)===undefined?user.role.menus:[];
     return (
         <Switch> {/*只匹配其中一个*/}
           {
