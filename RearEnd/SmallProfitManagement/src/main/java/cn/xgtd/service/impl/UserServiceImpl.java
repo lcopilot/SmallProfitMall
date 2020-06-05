@@ -60,14 +60,27 @@ public class UserServiceImpl implements UserService {
                 role.setMenus(menus);
             }
             responseUser.setRole(role);
-            log.info("用户登录:"+responseUser.getUserName());
 
             return responseUser;
         }
         return null;
     }
 
-
-
-
+    /**
+     * 查询创建的用户及子用户
+     * @param uId 用户id
+     * @return
+     */
+    @Override
+    public List<User> findUser(Integer uId) {
+        List<User> users = userDao.findUser(uId);
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getRole() != null) {
+                String[] menus = users.get(i).getRole().getDatabaseMenus().split(",");
+                users.get(i).getRole().setDatabaseMenus(null);
+                users.get(i).getRole().setMenus(menus);
+            }
+    }
+        return users;
+    }
 }

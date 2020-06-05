@@ -21,6 +21,15 @@ public interface UserService {
     public User userLogin(String userName,String password);
 
     /**
+     * 查询创建的用户以及子用户
+     * @param uId 用户id
+     * @return
+     */
+    public List<User> findUser(Integer uId);
+
+
+
+    /**
      * 创建用户
      * @param user
      * @return

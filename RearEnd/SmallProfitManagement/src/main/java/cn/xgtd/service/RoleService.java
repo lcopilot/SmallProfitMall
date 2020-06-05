@@ -2,6 +2,7 @@ package cn.xgtd.service;
 
 import cn.xgtd.dao.RoleDao;
 import cn.xgtd.domain.user.Role;
+import cn.xgtd.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public interface RoleService {
      * @return
      */
     public Integer addRole(Role role);
+
 
     /**
      * 查询所有当前角色下子用户

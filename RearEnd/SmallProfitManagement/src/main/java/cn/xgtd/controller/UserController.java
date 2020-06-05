@@ -9,10 +9,9 @@ import cn.xgtd.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author Kite
@@ -61,6 +60,20 @@ public class UserController {
 		ObjectReturn objectReturn = new ObjectReturn();
 		objectReturn.setObject(responseUserUser);
 		return new ObjectReturnResponse(CommonCode.SUCCESS, objectReturn);
+	}
+
+
+	/**
+	 * 查询用户以及用户下的子用户
+	 * @param uId 用户id
+	 * @return
+	 */
+	@RequestMapping(value = "/findUser/{uId}", method = RequestMethod.GET)
+	public ObjectReturnResponse findUser(@PathVariable("uId") Integer uId){
+		List<User> userList = userService.findUser(uId);
+		ObjectReturn objectReturn = new ObjectReturn();
+		objectReturn.setObject(userList);
+		return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
 	}
 
 

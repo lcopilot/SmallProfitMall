@@ -3,6 +3,7 @@ package cn.xgtd.service.impl;
 import cn.xgtd.dao.RoleDao;
 import cn.xgtd.dao.UserDao;
 import cn.xgtd.domain.user.Role;
+import cn.xgtd.domain.user.User;
 import cn.xgtd.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,8 @@ public class RoleServiceImpl implements RoleService {
 
         return 1;
     }
+
+
 
     /**
      * 查询所有当前角色下子节点
