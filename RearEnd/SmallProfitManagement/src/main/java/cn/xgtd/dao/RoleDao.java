@@ -15,9 +15,11 @@ import java.util.List;
 public interface RoleDao {
 
     /**
-     * 查询所有当前角色下子节点
-     * @param rId 角色id
-     * @return 角色集合
+     * 查询所有当前角色下子用户
+     * @param uId 用户id
+     * @param start 开始页
+     * @param pageSize 每页查询数量
+     * @return
      */
-    public List<Role> findRole(@Param("rId") Integer rId, @Param("start") Integer start , @Param("pageSize")  Integer pageSize);
+    public List<Role> findRole(@Param("uId") Integer uId, @Param("start") Integer start , @Param("pageSize")  Integer pageSize);
 }

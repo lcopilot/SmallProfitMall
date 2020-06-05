@@ -30,12 +30,12 @@ public class RoleController {
 
     /**
      * 查询当前角色下子角色
-     * @param rId 角色id
+     * @param uId 用户id
      * @return
      */
     @RequestMapping(value = "/findRole",method = RequestMethod.GET)
-    public ResponsePagination findRole(Integer rId,Integer currentPage , Integer pageSize){
-        if (rId == null){
+    public ResponsePagination findRole(Integer uId,Integer currentPage , Integer pageSize){
+        if (uId == null){
             return new ResponsePagination(CommonCode.INVALID_PARAM,null);
         }
         if (currentPage == null){
@@ -44,7 +44,7 @@ public class RoleController {
         if (pageSize == null ){
             pageSize = 3;
         }
-        List<Role> roles = roleService.findRole(rId,currentPage,pageSize);
+        List<Role> roles = roleService.findRole(uId,currentPage,pageSize);
         //总数量
         Integer quantity= roles.size();
         //计算总页数

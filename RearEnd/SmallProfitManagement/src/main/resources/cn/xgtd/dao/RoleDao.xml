@@ -14,9 +14,16 @@
         WHERE
             r_id IN (
             SELECT
-                descendant_id
+                role_id
             FROM
-            ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{rId} )) AND descendant_id <![CDATA[!= ]]> #{rId} LIMIT #{start} , #{pageSize} ) AS role_relationship
+                management_user
+            WHERE
+                u_id IN (
+                SELECT
+                    descendant_id
+                FROM
+                    ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} )) AND descendant_id != #{uId} LIMIT #{start}, #{pageSize} ) AS role_relationship
+                )
             )
     </select>
 

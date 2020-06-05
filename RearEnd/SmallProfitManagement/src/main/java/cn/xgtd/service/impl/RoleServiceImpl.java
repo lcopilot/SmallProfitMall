@@ -22,13 +22,13 @@ public class RoleServiceImpl implements RoleService {
 
     /**
      * 查询所有当前角色下子节点
-     * @param rId 角色id
+     * @param uId 用户id
      * @return
      */
     @Override
-    public List<Role> findRole(Integer rId,Integer currentPage , Integer pageSize) {
+    public List<Role> findRole(Integer uId,Integer currentPage , Integer pageSize) {
         Integer start=(currentPage-1)*pageSize;
-       List<Role> roles =  roleDao.findRole(rId,start , pageSize);
+       List<Role> roles =  roleDao.findRole(uId,start , pageSize);
         return roles;
     }
 }
