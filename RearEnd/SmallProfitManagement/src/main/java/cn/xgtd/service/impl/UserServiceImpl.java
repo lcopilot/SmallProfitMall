@@ -48,7 +48,18 @@ public class UserServiceImpl implements UserService {
         userDao.addUser(user);
         //添加角色关系
         roleDao.addRoleRelationship(user.getCreatorId(),user.getuId());
-        return  userDao.findUser(user.getuId());
+       User users = userDao.findUser(user.getuId());
+       Role role = users.getRole();
+        if (role.getDatabaseMenus()==null){
+            String [] menus= {};
+            role.setMenus(menus);
+        }else {
+            String[] menus = role.getDatabaseMenus().split(",");
+            role.setDatabaseMenus(null);
+            role.setMenus(menus);
+            users.setRole(role);
+        }
+        return  users;
     }
 
 
