@@ -88,7 +88,7 @@
        </update>
 
        <!--查询创建的用户以及子用户-->
-       <select id="findUser" resultMap="findUserRoleMap">
+       <select id="findUserList" resultMap="findUserRoleMap">
             SELECT
             mu.u_id,
             mu.user_name,
@@ -123,6 +123,40 @@
                 FROM
                 ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} )) ) AS role_relationship
                 )
+       </select>
+
+       <!--查询指定用户-->
+       <select id="findUser" resultMap="findUserRoleMap">
+                 SELECT
+            mu.u_id,
+            mu.user_name,
+            mu.create_time AS mu_create_time,
+            mu.role_id,
+             mu.password,
+            mu.email,
+            mu.phone,
+            mu.creator_id,
+            mu.last_time AS mu_last_time,
+            mr.r_id,
+            mr.menus,
+            mr.NAME,
+            mr.create_time AS mr_create_time,
+            mr.create_author_id,
+            mr.last_time AS mr_last_time,
+            ms.user_name AS ms_last_name,
+            ma.user_name AS ma_creator_name,
+            mrc.user_name AS mrc_creator_name,
+            mrl.user_name AS mrl_last_name
+            FROM
+                management_user mu
+                LEFT JOIN management_user ms ON mu.last_author_id = ms.u_id
+                LEFT JOIN management_user ma ON mu.creator_id = ma.u_id
+                LEFT JOIN management_role mr ON mu.role_id = mr.r_id
+                LEFT JOIN management_user mrc ON mrc.u_id = mr.create_author_id
+                LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
+            WHERE
+                mu.u_id = #{uId}
+
        </select>
 
 

@@ -24,6 +24,21 @@ public interface RoleDao {
 
 
     /**
+     * 查询指定角色
+     * @param role
+     * @return
+     */
+    public Role findRole(Integer role);
+
+    /**
+     * 查询当前角色名称数量
+     * @param name 角色名称
+     * @return
+     */
+    public Integer findUserRepeat(String name);
+
+
+    /**
      * 新增关系
      * @param createAuthorId 创建人id
      * @param addedUserId 新增人用户id
@@ -36,5 +51,5 @@ public interface RoleDao {
      * @param uId 用户id
      * @return
      */
-    public List<Role> findRole(@Param("uId") Integer uId);
+    public List<Role> findRoleList(@Param("uId") Integer uId);
 }

@@ -33,20 +33,22 @@ public class UserServiceImpl implements UserService {
     /**
      * 创建用户
      * @param user
-     * @return
+     * @return 新创建的用户
      */
     @Override
-    public Integer addUser(User user) {
+    public User addUser(User user) {
         Integer quantity = userDao.findUserRepeat(user.getUserName());
         if (quantity>0){
-            return 10002;
+            return null;
         }
         user.setCreateTime(new Date());
-        Integer result = userDao.addUser(user);
+        //新增用户
+        userDao.addUser(user);
         //添加角色关系
         roleDao.addRoleRelationship(user.getCreatorId(),user.getuId());
-        return result;
+        return  userDao.findUser(user.getuId());
     }
+
 
     /**
      * 用户登录
@@ -83,8 +85,8 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public List<User> findUser(Integer uId) {
-        List<User> users = userDao.findUser(uId);
+    public List<User> findUserList(Integer uId) {
+        List<User> users = userDao.findUserList(uId);
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getRole() != null) {
                 String[] menus = users.get(i).getRole().getDatabaseMenus().split(",");

@@ -19,9 +19,9 @@ public interface RoleService {
     /**
      * 添加角色
      * @param role 角色对象
-     * @return
+     * @return 当前创建的角色
      */
-    public Integer addRole(Role role);
+    public Role addRole(Role role);
 
 
     /**
@@ -29,6 +29,6 @@ public interface RoleService {
      * @param rId 角色id
      * @return 角色集合
      */
-    public List<Role> findRole(Integer rId);
+    public List<Role> findRoleList(Integer rId);
 
 }

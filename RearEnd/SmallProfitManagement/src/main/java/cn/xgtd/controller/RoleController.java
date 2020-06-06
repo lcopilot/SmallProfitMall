@@ -35,12 +35,16 @@ public class RoleController {
      * @return
      */
     @RequestMapping(value = "/addRole",method = RequestMethod.POST)
-    public QueryResponseResult addRole(@RequestBody Role role){
-       Integer result = roleService.addRole(role);
-       if (result == 1){
-          return new QueryResponseResult(CommonCode.SUCCESS,null);
+    public ObjectReturnResponse addRole(@RequestBody Role role){
+       Role result = roleService.addRole(role);
+       if (result == null ){
+          return new ObjectReturnResponse(CommonCode.FAIL,null);
+       }else {
+           ObjectReturn objectReturn = new ObjectReturn();
+           objectReturn.setObject(result);
+           return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
        }
-       return new QueryResponseResult(CommonCode.FAIL,null);
+
     }
 
 
@@ -54,7 +58,7 @@ public class RoleController {
         if (uId == null){
             return new ObjectReturnResponse(CommonCode.INVALID_PARAM,null);
         }
-        List<Role> roles = roleService.findRole(uId);
+        List<Role> roles = roleService.findRoleList(uId);
         ObjectReturn objectReturn = new ObjectReturn();
         objectReturn.setObject(roles);
         return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);

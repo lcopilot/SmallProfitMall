@@ -25,7 +25,7 @@ public interface UserService {
      * @param uId 用户id
      * @return
      */
-    public List<User> findUser(Integer uId);
+    public List<User> findUserList(Integer uId);
 
 
 
@@ -34,6 +34,8 @@ public interface UserService {
      * @param user
      * @return
      */
-    public Integer addUser(User user);
+    public User addUser(User user);
+
+
 
 }

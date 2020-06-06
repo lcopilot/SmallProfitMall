@@ -28,14 +28,25 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     UserDao userDao;
 
+
+    /**
+     * 创建角色
+     * @param role 角色对象
+     * @return 当前创建的角色
+     */
     @Override
-    public Integer addRole(Role role) {
+    public Role addRole(Role role) {
+        //判断当前角色是否存在
+        Integer result = roleDao.findUserRepeat(role.getName());
+        if (result>0){
+            return null;
+        }
         //设置创建时间
         role.setCreateTime(new Date());
         //添加角色
         roleDao.addRole(role);
 
-        return 1;
+        return roleDao.findRole(role.getrId());
     }
 
 
@@ -46,8 +57,8 @@ public class RoleServiceImpl implements RoleService {
      * @return
      */
     @Override
-    public List<Role> findRole(Integer uId) {
-       List<Role> roles =  roleDao.findRole(uId);
+    public List<Role> findRoleList(Integer uId) {
+       List<Role> roles =  roleDao.findRoleList(uId);
         for (int i = 0; i <roles.size() ; i++) {
             if (roles.get(i).getDatabaseMenus() == null){
                 String [] menus= {};

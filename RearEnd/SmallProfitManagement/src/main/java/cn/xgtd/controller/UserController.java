@@ -3,6 +3,7 @@ package cn.xgtd.controller;
 import cn.xgtd.domain.user.User;
 import cn.xgtd.response.CommonCode;
 import cn.xgtd.response.list.QueryResponseResult;
+import cn.xgtd.response.list.QueryResult;
 import cn.xgtd.response.objectReturn.ObjectReturn;
 import cn.xgtd.response.objectReturn.ObjectReturnResponse;
 import cn.xgtd.service.UserService;
@@ -32,17 +33,17 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public QueryResponseResult addUser(@RequestBody User user){
-		//用户名重复
-		Integer repetition = 10001;
-		Integer result = userService.addUser(user);
-		if (result.equals(repetition)){
-			return new QueryResponseResult(CommonCode.FALL_USER_REGISTER,null);
+	public ObjectReturnResponse addUser(@RequestBody User user){
+		User addUser = userService.addUser(user);
+		/**用户名重复**/
+		if (addUser == null){
+			return new ObjectReturnResponse(CommonCode.FAIL,null);
+		}else {
+			ObjectReturn objectReturn = new ObjectReturn<>();
+			objectReturn.setObject(addUser);
+			return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
 		}
-		if (result == 1 ){
-			return new QueryResponseResult(CommonCode.SUCCESS,null);
-		}
-		return new QueryResponseResult(CommonCode.FAIL,null);
+
 	}
 
 	/**
@@ -70,7 +71,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/findUser/{uId}", method = RequestMethod.GET)
 	public ObjectReturnResponse findUser(@PathVariable("uId") Integer uId){
-		List<User> userList = userService.findUser(uId);
+		List<User> userList = userService.findUserList(uId);
 		ObjectReturn objectReturn = new ObjectReturn();
 		objectReturn.setObject(userList);
 		return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);

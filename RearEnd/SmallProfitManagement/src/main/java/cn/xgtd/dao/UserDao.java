@@ -60,6 +60,13 @@ public interface UserDao {
      * @param uId 用户id
      * @return
      */
-    public List<User> findUser(Integer uId);
+    public List<User> findUserList(Integer uId);
+
+    /**
+     * 查询指定用户
+     * @param uId 用户id
+     * @return
+     */
+    public User findUser(Integer uId);
 
 }
