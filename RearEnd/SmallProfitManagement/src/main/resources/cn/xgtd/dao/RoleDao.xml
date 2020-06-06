@@ -19,8 +19,8 @@
 
     <!--添加角色-->
     <insert id="addRole" parameterType="cn.xgtd.domain.user.Role" useGeneratedKeys="true" keyProperty="rId" keyColumn="r_id">
-     insert into management_role (menus,name,create_time,create_author_id)
-        values(#{databaseMenus},#{name},#{createTime},#{createAuthorId})
+     insert into management_role (menus,name,create_time,create_author_id,last_time,last_author_id)
+        values(#{databaseMenus},#{name},#{createTime},#{createAuthorId},#{lastTime},#{lastAuthorId})
     </insert>
 
      <!--添加用户关系-->

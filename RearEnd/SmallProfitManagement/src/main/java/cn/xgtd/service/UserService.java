@@ -36,19 +36,19 @@ public interface UserService {
      */
     public User addUser(User user);
 
-//    /**
-//     * 删除用户
-//     * @param userId 用户id
-//     * @return
-//     */
-//    public Integer deleteUser(Integer userId);
-//
-//    /**
-//     * 修改用户
-//     * @param user 用户对象
-//     * @return
-//     */
-//    public Integer updateUser(User user);
+    /**
+     * 删除用户
+     * @param userId 用户id
+     * @return
+     */
+    public Integer deleteUser(Integer userId);
+
+    /**
+     * 修改用户
+     * @param user 用户对象
+     * @return
+     */
+    public Integer updateUser(User user);
 
 
 
