@@ -5,11 +5,22 @@
 
 <mapper namespace="cn.xgtd.dao.RoleDao">
 
+<resultMap id="roleMap" type="cn.xgtd.domain.user.Role">
+        <id property="rId" column="r_id"></id>
+        <result property="databaseMenus" column="menus"></result>
+        <result property="name" column="name"></result>
+        <result property="createTime" column="mr_create_time"></result>
+        <result property="createAuthorName" column="mrc_creator_name"></result>
+        <result property="createAuthorId" column="create_author_id"></result>
+        <result property="lastTime" column="mr_last_time"></result>
+        <result property="lastAuthorName" column="mrl_last_name"></result>
+</resultMap>
+
 
     <!--添加角色-->
     <insert id="addRole" parameterType="cn.xgtd.domain.user.Role" useGeneratedKeys="true" keyProperty="rId" keyColumn="r_id">
-     insert into management_role (menus,name,create_time,create_author,create_author_id)
-        values(#{databaseMenus},#{name},#{createTime},#{createAuthor},#{createAuthorId})
+     insert into management_role (menus,name,create_time,create_author_id,create_author_id)
+        values(#{databaseMenus},#{name},#{createTime},#{createAuthorId},#{createAuthorId})
     </insert>
 
      <!--添加用户关系-->
@@ -21,11 +32,20 @@
 
 
    <!--查询所有子节点角色-->
-   <select id="findRole"  resultType="cn.xgtd.domain.user.Role">
+   <select id="findRole"  resultMap="roleMap">
         SELECT
-            *
+            mr.r_id,
+            mr.menus,
+            mr.NAME,
+            mr.create_time AS mr_create_time,
+            mr.create_author_id,
+            mr.last_time AS mr_last_time,
+            mrc.user_name AS mrc_creator_name,
+            mrl.user_name AS mrl_last_name
         FROM
-            management_role
+            management_role  mr
+            LEFT JOIN management_user mrc ON mrc.u_id = mr.create_author_id
+            LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
         WHERE
             r_id IN (
             SELECT

@@ -27,22 +27,16 @@ public class User implements Serializable {
     private String phone;
     /**创建Id**/
     private Integer creatorId;
+    /**创建者名字**/
+    private String creatorName;
     /**上次修改时间**/
     private Date lastTime;
-    /**上次修改人**/
-    private String lastAuthor;
+    /**上次修改人Id**/
+    private String lastAuthorId;
     /**修改人名称**/
     private String lastAuthorName;
     /**用户角色**/
     private Role role;
-
-    public String getLastAuthorName() {
-        return lastAuthorName;
-    }
-
-    public void setLastAuthorName(String lastAuthorName) {
-        this.lastAuthorName = lastAuthorName;
-    }
 
     public Integer getuId() {
         return uId;
@@ -108,6 +102,14 @@ public class User implements Serializable {
         this.creatorId = creatorId;
     }
 
+    public String getCreatorName() {
+        return creatorName;
+    }
+
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
+    }
+
     public Date getLastTime() {
         return lastTime;
     }
@@ -116,12 +118,20 @@ public class User implements Serializable {
         this.lastTime = lastTime;
     }
 
-    public String getLastAuthor() {
-        return lastAuthor;
+    public String getLastAuthorId() {
+        return lastAuthorId;
     }
 
-    public void setLastAuthor(String lastAuthor) {
-        this.lastAuthor = lastAuthor;
+    public void setLastAuthorId(String lastAuthorId) {
+        this.lastAuthorId = lastAuthorId;
+    }
+
+    public String getLastAuthorName() {
+        return lastAuthorName;
+    }
+
+    public void setLastAuthorName(String lastAuthorName) {
+        this.lastAuthorName = lastAuthorName;
     }
 
     public Role getRole() {

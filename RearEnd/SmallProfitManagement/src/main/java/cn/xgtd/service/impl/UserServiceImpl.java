@@ -60,12 +60,17 @@ public class UserServiceImpl implements UserService {
         if (password.equals(userPassword)){
             User responseUser = userDao.findUserRole(userName);
             Role role = responseUser.getRole();
-            if (role!=null){
+            if (role.getDatabaseMenus()==null){
+                String [] menus= {};
+                role.setMenus(menus);
+            }else {
                 String[] menus = role.getDatabaseMenus().split(",");
                 role.setDatabaseMenus(null);
                 role.setMenus(menus);
+                responseUser.setRole(role);
             }
-            responseUser.setRole(role);
+
+
 
             return responseUser;
         }

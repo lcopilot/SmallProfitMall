@@ -47,8 +47,18 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public List<Role> findRole(Integer uId) {
-
        List<Role> roles =  roleDao.findRole(uId);
+        for (int i = 0; i <roles.size() ; i++) {
+            if (roles.get(i).getDatabaseMenus() == null){
+                String [] menus= {};
+                roles.get(i).setMenus(menus);
+            }else {
+                String[] menus = roles.get(i).getDatabaseMenus().split(",");
+                roles.get(i).setDatabaseMenus(null);
+                roles.get(i).setMenus(menus);
+            }
+
+        }
         return roles;
     }
 }

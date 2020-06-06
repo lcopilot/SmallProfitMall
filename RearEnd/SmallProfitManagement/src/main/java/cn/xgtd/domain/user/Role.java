@@ -22,14 +22,16 @@ public class Role implements Serializable {
     private String name;
     /**创建时间**/
     private Date createTime;
-    /**创建人**/
-    private String createAuthor;
-    /**创建者id**/
+    /**创建人Id**/
     private Integer createAuthorId;
+    /**修改人名字**/
+    private String createAuthorName;
     /**上次修改时间**/
     private Date lastTime;
     /**上次修改人**/
-    private String lastAuthor;
+    private String lastAuthorId;
+    /**修改人名字**/
+    private String lastAuthorName;
 
     public Integer getrId() {
         return rId;
@@ -38,7 +40,6 @@ public class Role implements Serializable {
     public void setrId(Integer rId) {
         this.rId = rId;
     }
-
 
     public String[] getMenus() {
         return menus;
@@ -72,20 +73,20 @@ public class Role implements Serializable {
         this.createTime = createTime;
     }
 
-    public String getCreateAuthor() {
-        return createAuthor;
-    }
-
-    public void setCreateAuthor(String createAuthor) {
-        this.createAuthor = createAuthor;
-    }
-
     public Integer getCreateAuthorId() {
         return createAuthorId;
     }
 
     public void setCreateAuthorId(Integer createAuthorId) {
         this.createAuthorId = createAuthorId;
+    }
+
+    public String getCreateAuthorName() {
+        return createAuthorName;
+    }
+
+    public void setCreateAuthorName(String createAuthorName) {
+        this.createAuthorName = createAuthorName;
     }
 
     public Date getLastTime() {
@@ -96,11 +97,19 @@ public class Role implements Serializable {
         this.lastTime = lastTime;
     }
 
-    public String getLastAuthor() {
-        return lastAuthor;
+    public String getLastAuthorId() {
+        return lastAuthorId;
     }
 
-    public void setLastAuthor(String lastAuthor) {
-        this.lastAuthor = lastAuthor;
+    public void setLastAuthorId(String lastAuthorId) {
+        this.lastAuthorId = lastAuthorId;
+    }
+
+    public String getLastAuthorName() {
+        return lastAuthorName;
+    }
+
+    public void setLastAuthorName(String lastAuthorName) {
+        this.lastAuthorName = lastAuthorName;
     }
 }
