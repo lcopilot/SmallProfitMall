@@ -97,7 +97,7 @@ public class UserController {
 	 * @param user 用户对象
 	 * @return
 	 */
-	@RequestMapping(value = "/updateUser/{uId}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/updateUser", method = RequestMethod.PUT)
 	public ObjectReturnResponse updateUser(@RequestBody User user){
 		Integer result = userService.updateUser(user);
 		if (result != null){

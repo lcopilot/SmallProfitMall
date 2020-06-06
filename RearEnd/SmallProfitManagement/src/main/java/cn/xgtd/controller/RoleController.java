@@ -85,7 +85,7 @@ public class RoleController {
      * @param role 角色
      * @return
      */
-    @RequestMapping(value = "/updateUser/{role}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateUser", method = RequestMethod.PUT)
     public ObjectReturnResponse updateUser(@RequestBody Role role){
         Integer result = roleService.updateRole(role);
         if (result != null){

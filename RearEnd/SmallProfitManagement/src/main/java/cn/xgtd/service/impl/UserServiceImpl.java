@@ -71,9 +71,6 @@ public class UserServiceImpl implements UserService {
                 role.setMenus(menus);
                 responseUser.setRole(role);
             }
-
-
-
             return responseUser;
         }
         return null;
