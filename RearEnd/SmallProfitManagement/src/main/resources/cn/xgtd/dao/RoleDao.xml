@@ -78,7 +78,7 @@
             LEFT JOIN management_user mrc ON mrc.u_id = mr.create_author_id
             LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
         WHERE
-            r_id = #{role} AND sign = 0
+            r_id = #{role}
     </select>
 
     <!--查询指定角色名数量-->

@@ -47,12 +47,20 @@ public class RoleServiceImpl implements RoleService {
         //设置授权时间
         role.setLastTime(new Date());
         role.setLastAuthorId(role.getCreateAuthorId());
-        String databaseMenus = role.getMenus().toString();
+        String databaseMenus = String.join(",", role.getMenus());
         role.setDatabaseMenus(databaseMenus);
         //添加角色
         roleDao.addRole(role);
-
-        return roleDao.findRole(role.getrId());
+        Role roles = roleDao.findRole(role.getrId());
+        if (roles.getDatabaseMenus() == null){
+            String [] menus= {};
+            roles.setMenus(menus);
+        }else {
+            String[] menus = roles.getDatabaseMenus().split(",");
+            roles.setDatabaseMenus(null);
+            roles.setMenus(menus);
+        }
+        return roles;
     }
 
     /**
