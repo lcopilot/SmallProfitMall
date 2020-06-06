@@ -117,7 +117,7 @@
                 SELECT
                     descendant_id
                 FROM
-                ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} )) AND descendant_id != 10001 ) AS role_relationship
+                ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} )) ) AS role_relationship
                 )
        </select>
 

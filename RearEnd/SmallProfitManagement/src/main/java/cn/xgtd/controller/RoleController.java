@@ -10,10 +10,7 @@ import cn.xgtd.response.pagination.ResponsePagination;
 import cn.xgtd.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -52,8 +49,8 @@ public class RoleController {
      * @param uId 用户id
      * @return
      */
-    @RequestMapping(value = "/findRole",method = RequestMethod.GET)
-    public ObjectReturnResponse findRole(Integer uId){
+    @RequestMapping(value = "/findRole/{uId}",method = RequestMethod.GET)
+    public ObjectReturnResponse findRole(@PathVariable("uId") Integer uId){
         if (uId == null){
             return new ObjectReturnResponse(CommonCode.INVALID_PARAM,null);
         }
