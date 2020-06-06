@@ -32,7 +32,7 @@ public class User implements Serializable {
     /**上次修改时间**/
     private Date lastTime;
     /**上次修改人Id**/
-    private String lastAuthorId;
+    private Integer lastAuthorId;
     /**修改人名称**/
     private String lastAuthorName;
     /**用户角色**/
@@ -118,11 +118,11 @@ public class User implements Serializable {
         this.lastTime = lastTime;
     }
 
-    public String getLastAuthorId() {
+    public Integer getLastAuthorId() {
         return lastAuthorId;
     }
 
-    public void setLastAuthorId(String lastAuthorId) {
+    public void setLastAuthorId(Integer lastAuthorId) {
         this.lastAuthorId = lastAuthorId;
     }
 

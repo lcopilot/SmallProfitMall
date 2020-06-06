@@ -29,7 +29,7 @@ public class Role implements Serializable {
     /**上次修改时间**/
     private Date lastTime;
     /**上次修改人**/
-    private String lastAuthorId;
+    private Integer lastAuthorId;
     /**修改人名字**/
     private String lastAuthorName;
 
@@ -97,11 +97,11 @@ public class Role implements Serializable {
         this.lastTime = lastTime;
     }
 
-    public String getLastAuthorId() {
+    public Integer getLastAuthorId() {
         return lastAuthorId;
     }
 
-    public void setLastAuthorId(String lastAuthorId) {
+    public void setLastAuthorId(Integer lastAuthorId) {
         this.lastAuthorId = lastAuthorId;
     }
 

@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setCreateTime(new Date());
         user.setLastTime(new Date());
+        user.setLastAuthorId(user.getCreatorId());
         //新增用户
         userDao.addUser(user);
         //添加角色关系

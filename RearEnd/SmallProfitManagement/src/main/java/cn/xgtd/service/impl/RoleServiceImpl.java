@@ -46,6 +46,7 @@ public class RoleServiceImpl implements RoleService {
         role.setCreateTime(new Date());
         //设置授权时间
         role.setLastTime(new Date());
+        role.setLastAuthorId(role.getCreateAuthorId());
         String databaseMenus = role.getMenus().toString();
         role.setDatabaseMenus(databaseMenus);
         //添加角色
