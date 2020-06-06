@@ -13,7 +13,7 @@
         <result property="roleId" column="role_id"></result>
         <result property="email" column="email"></result>
         <result property="phone" column="phone"></result>
-        <result property="creatorId" column="creator_id"></result>
+        <result property="createAuthorId" column="creator_id"></result>
         <result property="creatorName" column="ma_creator_name"></result>
         <result property="lastTime" column="mu_last_time"></result>
         <result property="lastAuthorName" column="ms_last_name"></result>
@@ -79,7 +79,7 @@
       <!--新增用户-->
      <insert id="addUser" useGeneratedKeys="true" keyProperty="uId" keyColumn="u_id">
             insert into management_user (user_name,password,role_id,create_time,email,phone,creator_id,last_time,last_author_id)
-            values(#{userName},#{password},#{roleId},#{createTime},#{email},#{phone},#{creatorId},#{lastTime},#{lastAuthorId})
+            values(#{userName},#{password},#{roleId},#{createTime},#{email},#{phone},#{createAuthorId},#{lastTime},#{lastAuthorId})
        </insert>
 
        <!--修改角色关系-->
@@ -94,7 +94,7 @@
             mu.user_name,
             mu.create_time AS mu_create_time,
             mu.role_id,
-             mu.password,
+            mu.password,
             mu.email,
             mu.phone,
             mu.creator_id,
@@ -127,7 +127,7 @@
 
        <!--查询指定用户-->
        <select id="findUser" resultMap="findUserRoleMap">
-                 SELECT
+        SELECT
             mu.u_id,
             mu.user_name,
             mu.create_time AS mu_create_time,

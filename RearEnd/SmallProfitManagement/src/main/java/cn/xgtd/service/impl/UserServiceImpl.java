@@ -43,13 +43,14 @@ public class UserServiceImpl implements UserService {
         }
         user.setCreateTime(new Date());
         user.setLastTime(new Date());
-        user.setLastAuthorId(user.getCreatorId());
+        user.setLastAuthorId(user.getCreateAuthorId());
+        user.setLastAuthorId(user.getCreateAuthorId());
         //新增用户
         userDao.addUser(user);
         //添加角色关系
-        roleDao.addRoleRelationship(user.getCreatorId(),user.getuId());
-       User users = userDao.findUser(user.getuId());
-       Role role = users.getRole();
+        roleDao.addRoleRelationship(user.getCreateAuthorId(),user.getuId());
+        User users = userDao.findUser(user.getuId());
+        Role role = users.getRole();
         if (role.getDatabaseMenus()==null){
             String [] menus= {};
             role.setMenus(menus);

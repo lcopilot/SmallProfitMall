@@ -26,7 +26,7 @@ public class User implements Serializable {
     /**手机号码**/
     private String phone;
     /**创建Id**/
-    private Integer creatorId;
+    private Integer createAuthorId;
     /**创建者名字**/
     private String creatorName;
     /**上次修改时间**/
@@ -94,12 +94,12 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public Integer getCreatorId() {
-        return creatorId;
+    public Integer getCreateAuthorId() {
+        return createAuthorId;
     }
 
-    public void setCreatorId(Integer creatorId) {
-        this.creatorId = creatorId;
+    public void setCreateAuthorId(Integer createAuthorId) {
+        this.createAuthorId = createAuthorId;
     }
 
     public String getCreatorName() {
