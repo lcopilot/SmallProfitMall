@@ -1,9 +1,9 @@
-import React, { useState} from "react";
+import React, {useState} from "react";
 import {Form, Input, Button, message} from "antd";
 import './login.less'
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import *as userApi from '../../api/page/user'
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import storageUtils from "../../utils/storageUtils";
 import {connect} from 'react-redux'
 import *as ActionCreators from '../../store/actionCreators'
@@ -18,8 +18,8 @@ import *as ActionCreators from '../../store/actionCreators'
 const Login = (props) => {
   let history = useHistory();
   //如果用户已登录
-  let {user,setUser}=props
-  if(user && user._id){
+  let {user, setUser} = props
+  if (user && user._id) {
     history.replace("/")
   }
 
@@ -31,23 +31,23 @@ const Login = (props) => {
   const login = (form) => {
     setLoading({loading: true, loadingContent: '登录中 . . . '})
     const {username, password} = form
-    let data={
-      userName:username,
-      password:password,
+    let data = {
+      userName: username,
+      password: password,
     }
-    userApi.login(data).then(res=>{
-      if (res.success){
+    userApi.login(data).then(res => {
+      if (res.success) {
         message.success("登录成功!")
-        const user=res.objectReturn.object
-        user.role.menus=user.role.menus===null?[]:user.role.menus;
+        const user = res.objectReturn.object
+        user.role.menus = user.role.menus === null ? [] : user.role.menus;
         setUser(user)
         storageUtils.saveUser(user)
         history.replace("/");
-      }else {
+      } else {
         message.error("账户或密码错误!")
         setLoading({loading: false, loadingContent: '登录'})
       }
-    }).catch(error=>{
+    }).catch(error => {
       setLoading({
         loading: false,
         loadingContent: '登录',
@@ -66,7 +66,13 @@ const Login = (props) => {
           >
             <Form.Item
                 name="username"
-                rules={[{required: true, whitespace: true, message: '请输入用户名 4-12位',min: 4,max: 12},
+                rules={[{
+                  required: true,
+                  whitespace: true,
+                  message: '请输入用户名 3-12位',
+                  min: 3,
+                  max: 12
+                },
                   {pattern: /^[a-zA-Z0-9_]+$/, message: '用户名必须是英文、数字或下划线组成'},]}
             >
               <Input allowClear={true}
@@ -76,7 +82,13 @@ const Login = (props) => {
 
             <Form.Item
                 name="password"
-                rules={[{required: true, whitespace: true, message: '请输入密码 4-12位',min: 4,max: 12},
+                rules={[{
+                  required: true,
+                  whitespace: true,
+                  message: '请输入密码 4-12位',
+                  min: 4,
+                  max: 12
+                },
                   {pattern: /^[a-zA-Z0-9_]+$/, message: '密码必须是英文、数字或下划线组成'},]}
             >
               <Input.Password
@@ -99,19 +111,18 @@ const Login = (props) => {
   )
 }
 
-const stateToProps=(state)=>{
+const stateToProps = (state) => {
   return {
-    user:state.user,
+    user: state.user,
   }
 }
 
-const dispatchToProps=(dispatch)=>{
-  return{
-    setUser(data){
+const dispatchToProps = (dispatch) => {
+  return {
+    setUser(data) {
       dispatch(ActionCreators.setUser(data))
     }
   }
 }
 
-
-export default connect(stateToProps,dispatchToProps)(Login);
+export default connect(stateToProps, dispatchToProps)(Login);

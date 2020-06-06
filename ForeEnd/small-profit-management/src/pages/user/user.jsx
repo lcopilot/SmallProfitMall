@@ -8,7 +8,7 @@ import {
   Col,
   Table,
   Modal,
-  Tree, Form, Menu, Select
+  Tree, Form, Menu, Select, message
 } from "antd";
 import *as indexAPI from '../../api/page/index'
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
@@ -31,6 +31,7 @@ const {Option} = Select;
 const User = (props) => {
   let {user} = props
   const [roles, setRoles] = useState([])
+  const [userList, setUserList] = useState([])
   const [userVisible, setUserVisible] = useState(false)
   const [userInput, setUserInput] = useState(false)
   const [form] = Form.useForm();
@@ -38,41 +39,40 @@ const User = (props) => {
   const columns = [
     {
       title: '用户名称',
-      dataIndex: 'name'
+      dataIndex: 'userName'
     }, {
       title: '邮箱',
-      dataIndex: 'name'
+      dataIndex: 'email'
     }, {
       title: '电话',
-      dataIndex: 'name'
+      dataIndex: 'phone'
     }, {
       title: '创建时间',
-      dataIndex: 'create_time',
-      render: (create_time) => moment(create_time).format(
-          TIME_FORMAT)
+      dataIndex: 'createTime',
+      render: (createTime) => moment(createTime).format(TIME_FORMAT)
     }, {
       title: '创建人',
-      dataIndex: 'auth_name'
+      dataIndex: 'creatorName'
     }, {
       title: '上次修改时间',
-      dataIndex: 'auth_time',
-      render: (auth_time) => moment(auth_time).format(TIME_FORMAT)
+      dataIndex: 'lastTime',
+      render: (lastTime) => moment(lastTime).format(TIME_FORMAT)
     }, {
       title: '上次修改人',
-      dataIndex: 'auth_name'
+      dataIndex: 'lastAuthorName'
     },
     {
       title: '操作',
       fixed: 'right',
       width: 100,
-      render: (role) => {
+      render: (user) => {
         return (
             <>
               <a onClick={() => {
-                editAuthority(role)
+                editAuthority(user)
               }}>编辑用户</a>
               <a onClick={() => {
-                deleteUser(role)
+                deleteUser(user)
               }}>删除</a>
             </>
         )
@@ -80,19 +80,21 @@ const User = (props) => {
     },
   ]
 
-  const editAuthority = (role) => {
-    const {name, _id} = role
+  //编辑用户
+  const editAuthority = (user) => {
+    const {userName, password, email, phone, roleId} = user
     form.setFieldsValue({
-      userName: name,
-      password: name,
-      email: name,
-      phone: name,
-      role: _id,
+      userName: userName,
+      password: password,
+      email: email,
+      phone: phone,
+      roleId: roleId.toString(),
     })
     setUserInput(true)
     setUserVisible(true)
   }
-  const deleteUser = (role) => {
+  //删除用户
+  const deleteUser = (user) => {
 
   }
 
@@ -100,29 +102,51 @@ const User = (props) => {
   const getRoleOption = () => {
     const roleOption = []
     roles.map(item => {
-      roleOption.push((<Option key={item._id}>{item.name}</Option>));
+      roleOption.push((<Option key={item.rId} disabled={item.name
+      === "超级管理员"}>{item.name}</Option>));
     })
     return roleOption
   }
 
   //获取角色
   const getRoles = () => {
-    indexAPI.getRoles().then(res => {
-      if (res.status === 0) {
-        setRoles(res.data)
+    indexAPI.getRoles(user.uId).then(res => {
+      if (res.success) {
+        setRoles(res.objectReturn.object)
       }
     })
   }
-  //添加角色
+  //获取用户
+  const getUser = () => {
+    indexAPI.getUsers(user.uId).then(res => {
+      if (res.success) {
+        setUserList(res.objectReturn.object)
+      }
+    })
+  }
+
+  //添加用户
   const addUser = () => {
     form.validateFields().then(values => {
-      console.log(values)
-      form.resetFields();
+      values.roleId = parseInt(values.roleId);
+      values.createAuthorId = user.uId
+      indexAPI.addUser(values).then(res => {
+        if (res.success) {
+          setUserList([res.objectReturn.object, ...userList]);
+          setUserVisible(false);
+          setUserInput(false)
+          form.resetFields();
+        } else {
+          message.warn("用户已存在!")
+        }
+      })
+
     })
   }
 
   useEffect(() => {
     getRoles();
+    getUser();
     getRoleOption();
     return () => {
     }
@@ -152,11 +176,11 @@ const User = (props) => {
           <Table
               bordered
               rowKey={(item) => item._id}
-              dataSource={roles}
+              dataSource={userList}
               columns={columns}
               pagination={{
                 defaultPageSize: PAGINATION.PAGE_SIZE,
-                total: roles.length,
+                total: userList.length,
                 showTotal: PAGINATION.SHOW_TOTAL,
                 showSizeChanger: true,
                 showQuickJumper: true,
@@ -182,15 +206,15 @@ const User = (props) => {
               <Form.Item
                   name="userName"
                   rules={[{
-                    required: true, //是否必需输入
-                    whitespace: true, //是否允许空格
-                    message: '请输入角色名 1-12位',
-                    min: 1,
+                    required: true,
+                    whitespace: true,
+                    message: '请输入用户名 3-12位',
+                    min: 3,
                     max: 12
                   },
                     {
-                      pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/, //正则
-                      message: '角色名必须是中英文、数字或下划线组成'
+                      pattern: /^[a-zA-Z0-9_]+$/,
+                      message: '用户名必须是英文、数字或下划线组成'
                     },]}
               >
                 <Input allowClear={true}
@@ -219,7 +243,7 @@ const User = (props) => {
               <Form.Item
                   name="email"
                   rules={[{
-                    required: true,
+                    required: false,
                     whitespace: true,
                     message: '请输入电子邮件'
                   }, {type: 'email', message: '请输入正确的邮件格式',}]}
@@ -241,15 +265,16 @@ const User = (props) => {
                        maxLength={11} placeholder="请输入手机号"/>
               </Form.Item>
               <Form.Item
-                  name="role"
+                  name="roleId"
                   rules={[{required: true, whitespace: true, message: '请选择角色'}]}
               >
                 <Select showSearch
                         menuItemSelectedIcon={<UserOutlined/>}
                         placeholder="请选择角色"
                         filterOption={(input, option) =>
-                          option.children.toLowerCase().indexOf(input.toLowerCase())
-                          !== -1
+                            option.children.toLowerCase().indexOf(
+                                input.toLowerCase())
+                            !== -1
                         }
                 >
                   {getRoleOption()}
