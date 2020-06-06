@@ -67,7 +67,7 @@
             LEFT JOIN management_user mrc ON mrc.u_id = mr.create_author_id
             LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
         WHERE
-            mu.user_name = #{userName} AND sign = 0
+            mu.user_name = #{userName} AND mu.sign = 0
 
      </select>
 
