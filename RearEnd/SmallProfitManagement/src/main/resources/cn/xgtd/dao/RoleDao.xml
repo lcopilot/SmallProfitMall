@@ -8,7 +8,7 @@
 <resultMap id="roleMap" type="cn.xgtd.domain.user.Role">
         <id property="rId" column="r_id"></id>
         <result property="databaseMenus" column="menus"></result>
-        <result property="name" column="name"></result>
+        <result property="name" column="NAME"></result>
         <result property="createTime" column="mr_create_time"></result>
         <result property="createAuthorName" column="mrc_creator_name"></result>
         <result property="createAuthorId" column="create_author_id"></result>
@@ -19,8 +19,8 @@
 
     <!--添加角色-->
     <insert id="addRole" parameterType="cn.xgtd.domain.user.Role" useGeneratedKeys="true" keyProperty="rId" keyColumn="r_id">
-     insert into management_role (menus,name,create_time,create_author_id,create_author_id)
-        values(#{databaseMenus},#{name},#{createTime},#{createAuthorId},#{createAuthorId})
+     insert into management_role (menus,name,create_time,create_author_id)
+        values(#{databaseMenus},#{name},#{createTime},#{createAuthorId})
     </insert>
 
      <!--添加用户关系-->
