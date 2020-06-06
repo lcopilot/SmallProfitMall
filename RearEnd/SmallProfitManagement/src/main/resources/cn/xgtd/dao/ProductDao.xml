@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.xgtd.dao.ProductDao">
+
+    <resultMap id="findProductListMap" type="cn.xgtd.domain.product.Product">
+    <id column="productId" property="productId"></id>
+    <result property="productName" column="productName"></result>
+    <result property="productPrice" column="ProductPrice"></result>
+    <result property="productClassify" column="final_content"></result>
+    </resultMap>
+
+    <!--查询所有商品基本信息-->
+    <select id="findProductList" resultMap="findProductListMap">
+       SELECT
+            pb.productId,
+            pb.productName,
+            pp.ProductPrice,
+            pfc.final_content
+        FROM
+            ProductBasis pb
+        LEFT JOIN
+            ProductPrice pp
+            ON
+            pb.ProductId = pp.ProductId
+        LEFT JOIN
+            product_final_category  pfc
+            ON
+            pfc.product_final_id = pb.productFinalCategory
+
+
+    </select>
+
+</mapper>

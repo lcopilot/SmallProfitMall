@@ -52,4 +52,19 @@ public interface RoleDao {
      * @return
      */
     public List<Role> findRoleList(@Param("uId") Integer uId);
+
+    /**
+     * 删除角色
+     * @param rId 角色id
+     * @return
+     */
+    public Integer deleteRole(Integer rId);
+
+
+    /**
+     * 修改角色
+     * @param role 角色对象
+     * @return
+     */
+    public Integer updateRole(Role role);
 }

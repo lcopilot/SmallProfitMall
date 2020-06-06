@@ -47,7 +47,7 @@ public class UserController {
 	}
 
 	/**
-	 * 管理用户登录
+	 * 用户登录
 	 * @param userName 用户账户
 	 * @param password 用户密码
 	 * @return
@@ -78,6 +78,33 @@ public class UserController {
 	}
 
 
+	/**
+	 * 删除用户
+	 * @param userId 用户id
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteUser/{uId}", method = RequestMethod.DELETE)
+	public ObjectReturnResponse deleteUser(@PathVariable("uId") Integer userId){
+		Integer result = userService.deleteUser(userId);
+		if (result != null){
+			return new ObjectReturnResponse(CommonCode.SUCCESS,null);
+		}
+		return new ObjectReturnResponse(CommonCode.FAIL,null);
+	}
+
+	/**
+	 * 修改用户
+	 * @param user 用户对象
+	 * @return
+	 */
+	@RequestMapping(value = "/updateUser/{uId}", method = RequestMethod.PUT)
+	public ObjectReturnResponse updateUser(@RequestBody User user){
+		Integer result = userService.updateUser(user);
+		if (result != null){
+			return new ObjectReturnResponse(CommonCode.SUCCESS,null);
+		}
+		return new ObjectReturnResponse(CommonCode.FAIL,null);
+	}
 
 
 

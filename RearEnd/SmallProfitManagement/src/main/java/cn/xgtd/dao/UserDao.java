@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 /**
- *
+ *用户持久层
  * @author Kite
  * @date 2020/5/31
  */
@@ -68,5 +68,20 @@ public interface UserDao {
      * @return
      */
     public User findUser(Integer uId);
+
+
+    /**
+     * 删除用户
+     * @param userId 用户id
+     * @return
+     */
+    public Integer deleteUser(Integer userId);
+
+    /**
+     * 修改用户
+     * @param user 用户对象
+     * @return
+     */
+    public Integer updateUser(User user);
 
 }

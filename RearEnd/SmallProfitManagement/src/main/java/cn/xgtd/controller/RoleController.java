@@ -1,6 +1,7 @@
 package cn.xgtd.controller;
 
 import cn.xgtd.domain.user.Role;
+import cn.xgtd.domain.user.User;
 import cn.xgtd.response.CommonCode;
 import cn.xgtd.response.list.QueryResponseResult;
 import cn.xgtd.response.objectReturn.ObjectReturn;
@@ -32,7 +33,7 @@ public class RoleController {
     /**
      * 新增角色
      * @param role 角色对象
-     * @return
+     * @return 新增角色信息
      */
     @RequestMapping(value = "/addRole",method = RequestMethod.POST)
     public ObjectReturnResponse addRole(@RequestBody Role role){
@@ -65,5 +66,32 @@ public class RoleController {
     }
 
 
+    /**
+     * 删除用户
+     * @param rId 角色id
+     * @return
+     */
+    @RequestMapping(value = "/deleteRole/{rId}", method = RequestMethod.DELETE)
+    public ObjectReturnResponse deleteRole(@PathVariable("rId") Integer rId){
+        Integer result = roleService.deleteRole(rId);
+        if (result != null){
+            return new ObjectReturnResponse(CommonCode.SUCCESS,null);
+        }
+        return new ObjectReturnResponse(CommonCode.FAIL,null);
+    }
+
+    /**
+     * 修改角色
+     * @param role 角色
+     * @return
+     */
+    @RequestMapping(value = "/updateUser/{role}", method = RequestMethod.PUT)
+    public ObjectReturnResponse updateUser(@RequestBody Role role){
+        Integer result = roleService.updateRole(role);
+        if (result != null){
+            return new ObjectReturnResponse(CommonCode.SUCCESS,null);
+        }
+        return new ObjectReturnResponse(CommonCode.FAIL,null);
+    }
 
 }

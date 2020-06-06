@@ -78,12 +78,23 @@
             LEFT JOIN management_user mrc ON mrc.u_id = mr.create_author_id
             LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
         WHERE
-            r_id = #{role}
+            r_id = #{role} AND sign = 0
     </select>
 
     <!--查询指定角色名数量-->
     <select id="findUserRepeat" resultType="java.lang.Integer">
         select count(name) FROM management_role WHERE name = #{name}
     </select>
+
+      <!--逻辑删除用户-->
+       <update id="deleteRole">
+            update management_role set sign = 1 where u_id = #{rId}
+       </update>
+
+            <!--修改用户-->
+        <update id="updateRole" parameterType="cn.xgtd.domain.user.Role">
+            update management_role set menus = #{menus},name = #{name},last_time = #{lastTime},last_author_id = #{lastAuthorId} where  r_id =#{rId}
+        </update>
+
 
 </mapper>

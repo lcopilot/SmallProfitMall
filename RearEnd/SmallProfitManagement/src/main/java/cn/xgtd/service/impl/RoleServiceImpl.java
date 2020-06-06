@@ -36,6 +36,8 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public Role addRole(Role role) {
+
+
         //判断当前角色是否存在
         Integer result = roleDao.findUserRepeat(role.getName());
         if (result>0){
@@ -48,8 +50,6 @@ public class RoleServiceImpl implements RoleService {
 
         return roleDao.findRole(role.getrId());
     }
-
-
 
     /**
      * 查询所有当前角色下子节点
@@ -72,4 +72,35 @@ public class RoleServiceImpl implements RoleService {
         }
         return roles;
     }
+
+    /**
+     * 删除角色
+     * @param rId 角色id
+     * @return
+     */
+    @Override
+    public Integer deleteRole(Integer rId) {
+        return roleDao.deleteRole(rId);
+    }
+
+    /**
+     * 修改角色
+     * @param role 角色对象
+     * @return
+     */
+    @Override
+    public Integer updateRole(Role role) {
+
+        //判断当前角色是否存在
+        Integer result = roleDao.findUserRepeat(role.getName());
+        if (result>0){
+            return null;
+        }
+
+        role.setLastTime(new Date());
+        Integer results = roleDao.updateRole(role);
+        return results;
+    }
+
+
 }

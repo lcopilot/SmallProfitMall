@@ -67,7 +67,7 @@
             LEFT JOIN management_user mrc ON mrc.u_id = mr.create_author_id
             LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
         WHERE
-            mu.user_name = #{userName}
+            mu.user_name = #{userName} AND sign = 0
 
      </select>
 
@@ -122,7 +122,7 @@
                     descendant_id
                 FROM
                 ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} )) ) AS role_relationship
-                )
+                ) AND sign = 0
        </select>
 
        <!--查询指定用户-->
@@ -158,6 +158,16 @@
                 mu.u_id = #{uId}
 
        </select>
+
+       <!--逻辑删除用户-->
+       <update id="deleteUser">
+            update management_user set sign = 1 where u_id = #{userId}
+       </update>
+
+        <!--修改用户-->
+        <update id="updateUser" parameterType="cn.xgtd.domain.user.User">
+            update management_user set user_name = #{userName} , email = #{email} , phone = #{phone},last_time = #{lastTime},last_author_id = #{lastAuthorId} where u_id = #{uId}
+        </update>
 
 
 
