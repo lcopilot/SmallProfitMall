@@ -1,6 +1,7 @@
 package cn.xgtd.service;
 
 import cn.xgtd.domain.product.Product;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

@@ -66,32 +66,32 @@ public class RoleController {
     }
 
 
-    /**
-     * 删除用户
-     * @param rId 角色id
-     * @return
-     */
-    @RequestMapping(value = "/deleteRole/{rId}", method = RequestMethod.DELETE)
-    public ObjectReturnResponse deleteRole(@PathVariable("rId") Integer rId){
-        Integer result = roleService.deleteRole(rId);
-        if (result != null){
-            return new ObjectReturnResponse(CommonCode.SUCCESS,null);
-        }
-        return new ObjectReturnResponse(CommonCode.FAIL,null);
-    }
-
-    /**
-     * 修改角色
-     * @param role 角色
-     * @return
-     */
-    @RequestMapping(value = "/updateUser", method = RequestMethod.PUT)
-    public ObjectReturnResponse updateUser(@RequestBody Role role){
-        Integer result = roleService.updateRole(role);
-        if (result != null){
-            return new ObjectReturnResponse(CommonCode.SUCCESS,null);
-        }
-        return new ObjectReturnResponse(CommonCode.FAIL,null);
-    }
+//    /**
+//     * 删除用户
+//     * @param rId 角色id
+//     * @return
+//     */
+//    @RequestMapping(value = "/deleteRole/{rId}", method = RequestMethod.DELETE)
+//    public ObjectReturnResponse deleteRole(@PathVariable("rId") Integer rId){
+//        Integer result = roleService.deleteRole(rId);
+//        if (result != null){
+//            return new ObjectReturnResponse(CommonCode.SUCCESS,null);
+//        }
+//        return new ObjectReturnResponse(CommonCode.FAIL,null);
+//    }
+//
+//    /**
+//     * 修改角色
+//     * @param role 角色
+//     * @return
+//     */
+//    @RequestMapping(value = "/updateRole", method = RequestMethod.PUT)
+//    public ObjectReturnResponse updateRole(@RequestBody Role role){
+//        Integer result = roleService.updateRole(role);
+//        if (result != null){
+//            return new ObjectReturnResponse(CommonCode.SUCCESS,null);
+//        }
+//        return new ObjectReturnResponse(CommonCode.FAIL,null);
+//    }
 
 }

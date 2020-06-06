@@ -95,29 +95,29 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    /**
-     * 删除用户
-     * @param userId 用户id
-     * @return
-     */
-    @Override
-    public Integer deleteUser(Integer userId) {
-        return null;
-    }
-
-    /**
-     * 修改对象
-     * @param user 用户对象
-     * @return
-     */
-    @Override
-    public Integer updateUser(User user) {
-        Integer quantity = userDao.findUserRepeat(user.getUserName());
-        if (quantity>0){
-            return null;
-        }
-        user.setLastTime(new Date());
-        return userDao.updateUser(user);
-    }
+//    /**
+//     * 删除用户
+//     * @param userId 用户id
+//     * @return
+//     */
+//    @Override
+//    public Integer deleteUser(Integer userId) {
+//        return null;
+//    }
+//
+//    /**
+//     * 修改对象
+//     * @param user 用户对象
+//     * @return
+//     */
+//    @Override
+//    public Integer updateUser(User user) {
+//        Integer quantity = userDao.findUserRepeat(user.getUserName());
+//        if (quantity>0){
+//            return null;
+//        }
+//        user.setLastTime(new Date());
+//        return userDao.updateUser(user);
+//    }
 
 }

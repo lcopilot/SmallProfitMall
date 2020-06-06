@@ -73,34 +73,34 @@ public class RoleServiceImpl implements RoleService {
         return roles;
     }
 
-    /**
-     * 删除角色
-     * @param rId 角色id
-     * @return
-     */
-    @Override
-    public Integer deleteRole(Integer rId) {
-        return roleDao.deleteRole(rId);
-    }
-
-    /**
-     * 修改角色
-     * @param role 角色对象
-     * @return
-     */
-    @Override
-    public Integer updateRole(Role role) {
-
-        //判断当前角色是否存在
-        Integer result = roleDao.findUserRepeat(role.getName());
-        if (result>0){
-            return null;
-        }
-
-        role.setLastTime(new Date());
-        Integer results = roleDao.updateRole(role);
-        return results;
-    }
+//    /**
+//     * 删除角色
+//     * @param rId 角色id
+//     * @return
+//     */
+//    @Override
+//    public Integer deleteRole(Integer rId) {
+//        return roleDao.deleteRole(rId);
+//    }
+//
+//    /**
+//     * 修改角色
+//     * @param role 角色对象
+//     * @return
+//     */
+//    @Override
+//    public Integer updateRole(Role role) {
+//
+//        //判断当前角色是否存在
+//        Integer result = roleDao.findUserRepeat(role.getName());
+//        if (result>0){
+//            return null;
+//        }
+//
+//        role.setLastTime(new Date());
+//        Integer results = roleDao.updateRole(role);
+//        return results;
+//    }
 
 
 }

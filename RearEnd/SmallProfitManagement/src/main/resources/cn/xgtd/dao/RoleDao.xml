@@ -86,15 +86,16 @@
         select count(name) FROM management_role WHERE name = #{name}
     </select>
 
-      <!--逻辑删除用户-->
+      <!--逻辑删除角色-->
        <update id="deleteRole">
-            update management_role set sign = 1 where u_id = #{rId}
+            update management_role set sign = 1 where r_id = #{rId}
        </update>
 
-            <!--修改用户-->
-        <update id="updateRole" parameterType="cn.xgtd.domain.user.Role">
-            update management_role set menus = #{menus},name = #{name},last_time = #{lastTime},last_author_id = #{lastAuthorId} where  r_id =#{rId}
-        </update>
+       <update id="updateRole" parameterType="cn.xgtd.domain.user.Role">
+            update management_role set menus = #{databaseMenus},last_time = #{lastTime},last_author_id = #{lastAuthorId} where  r_id =#{rId}
+       </update>
+
+
 
 
 </mapper>
