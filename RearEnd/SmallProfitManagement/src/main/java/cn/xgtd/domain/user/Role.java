@@ -14,8 +14,6 @@ import java.util.List;
 public class Role implements Serializable {
     /**角色id**/
     private Integer rId;
-    /**用户id**/
-    private Integer uId;
     /**管理范围，返回前端**/
     private String[] menus;
     /**管理范围，数据库数据**/
@@ -41,13 +39,6 @@ public class Role implements Serializable {
         this.rId = rId;
     }
 
-    public Integer getuId() {
-        return uId;
-    }
-
-    public void setuId(Integer uId) {
-        this.uId = uId;
-    }
 
     public String[] getMenus() {
         return menus;

@@ -34,10 +34,6 @@ public class RoleServiceImpl implements RoleService {
         role.setCreateTime(new Date());
         //添加角色
         roleDao.addRole(role);
-        //用户关联角色
-        userDao.updateRoleRelationship(role.getuId(),role.getrId());
-        //添加角色关系
-        roleDao.addRoleRelationship(role.getCreateAuthorId(),role.getuId());
 
         return 1;
     }

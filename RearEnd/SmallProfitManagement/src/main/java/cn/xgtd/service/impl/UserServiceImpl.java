@@ -1,5 +1,6 @@
 package cn.xgtd.service.impl;
 
+import cn.xgtd.dao.RoleDao;
 import cn.xgtd.dao.UserDao;
 import cn.xgtd.domain.user.Role;
 import cn.xgtd.domain.user.User;
@@ -26,6 +27,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    RoleDao roleDao;
+
     /**
      * 创建用户
      * @param user
@@ -39,6 +43,8 @@ public class UserServiceImpl implements UserService {
         }
         user.setCreateTime(new Date());
         Integer result = userDao.addUser(user);
+        //添加角色关系
+        roleDao.addRoleRelationship(user.getCreatorId(),user.getuId());
         return result;
     }
 

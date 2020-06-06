@@ -77,9 +77,9 @@
         </select>
 
       <!--新增用户-->
-     <insert id="addUser">
-            insert into management_user (user_name,password,create_time,email,phone,creator)
-            values(#{userName},#{password},#{createTime},#{email},#{phone},#{creator})
+     <insert id="addUser" useGeneratedKeys="true" keyProperty="uId" keyColumn="u_id">
+            insert into management_user (user_name,password,role_id,create_time,email,phone,creator_id)
+            values(#{userName},#{password},#{roleId},#{createTime},#{email},#{phone},#{creatorId})
        </insert>
 
        <!--修改角色关系-->
