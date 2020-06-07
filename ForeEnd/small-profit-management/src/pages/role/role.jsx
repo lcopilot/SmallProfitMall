@@ -8,7 +8,7 @@ import {
   Col,
   Table,
   Modal,
-  Tree, Form, Menu
+  Tree, Form, Menu, message, Select
 } from "antd";
 import './role.less'
 import *as indexAPI from '../../api/page/index'
@@ -24,40 +24,48 @@ import {
 } from "../../config/sysConfig";
 
 const {Search} = Input;
+const {Option} = Select;
 
 const Role = (props) => {
-  let {user,userAuth,setUserAuth} = props
-  const [roles, setRoles] = useState([])
+  let {user, userAuth, setUserAuth} = props
+  const [rolesList, setRolesList] = useState([])
   const [roleVisible, setRoleVisible] = useState(false)
   const [roleInput, setRoleInput] = useState(false)
   const [form] = Form.useForm();
   const [checkedKeys, setCheckedKeys] = useState([]);
   const [checkedKeysResult, setCheckedKeysResult] = useState([]);
+  const [rolesShow, setRolesShow] = useState(false);
 
   const onCheck = (checkedKeys, info) => {
+    if (checkedKeys.includes('/user')) {
+      setRolesShow(true)
+    } else {
+      setRolesShow(false)
+    }
     setCheckedKeys(checkedKeys);
     setCheckedKeysResult([...checkedKeys, ...info.halfCheckedKeys]);
   };
 
+  //角色表格对应的列
   const columns = [
     {
       title: '角色名称',
       dataIndex: 'name'
     }, {
       title: '创建时间',
-      dataIndex: 'create_time',
-      render: (create_time) => moment(create_time).format(
+      dataIndex: 'createTime',
+      render: (createTime) => moment(createTime).format(
           TIME_FORMAT)
     }, {
       title: '创建人',
-      dataIndex: 'auth_name'
+      dataIndex: 'createAuthorName'
     }, {
       title: '上次授权时间',
-      dataIndex: 'auth_time',
-      render: (auth_time) => moment(auth_time).format(TIME_FORMAT)
+      dataIndex: 'lastTime',
+      render: (lastTime) => moment(lastTime).format(TIME_FORMAT)
     }, {
       title: '上次授权人',
-      dataIndex: 'auth_name'
+      dataIndex: 'lastAuthorName'
     },
     {
       title: '操作',
@@ -78,6 +86,7 @@ const Role = (props) => {
     },
   ]
 
+  //编辑角色
   const editAuthority = (role) => {
     const {menus, name} = role
     form.setFieldsValue({
@@ -87,46 +96,72 @@ const Role = (props) => {
     setRoleVisible(true)
     setCheckedKeys(menus)
   }
+
   const deleteRole = (role) => {
 
   }
 
+  //获取角色
   const getRoles = () => {
-    indexAPI.getRoles().then(res => {
-      if (res.status === 0) {
-        setRoles(res.data)
+    indexAPI.getRoles(user.uId).then(res => {
+      if (res.success) {
+        setRolesList(res.objectReturn.object)
       }
     })
   }
-//添加角色
+  //添加角色
   const addRole = () => {
-    console.log(checkedKeysResult)
     form.validateFields().then(values => {
-      console.log(values)
-      form.resetFields();
+      const roles = {
+        createAuthorId: user.uId,
+        name: values.roleName,
+        menus: checkedKeysResult
+      }
+      indexAPI.addRoles(roles).then(res => {
+            if (res.success) {
+              setRolesList([res.objectReturn.object, ...rolesList])
+              setRoleVisible(false);
+              setRoleInput(false);
+              form.resetFields();
+            } else {
+              message.warn("角色已存在!")
+            }
+          }
+      )
     })
   }
   //获取用户所拥有的权限
   const getUserAuth = (menuList) => {
     const menus = user.role.menus
-    const username=user.username
-    let checkedKeyList=[];
+    const username = user.username
+    let checkedKeyList = [];
     return menuList.reduce((pre, item) => {
-      if (menus.indexOf(item.key) !== -1 || username==='admin' || item.isPublic) {
-        if (item.isPublic && item.disabled){
+      if (menus.indexOf(item.key) !== -1 || username === 'admin'
+          || item.isPublic) {
+        if (item.isPublic && item.disabled) {
           checkedKeyList.push(item.key)
         }
         if (!item.children) {
           pre.push(item)
         } else {
           pre.push(item)
-          item.children=getUserAuth(item.children)
+          item.children = getUserAuth(item.children)
         }
       }
       setCheckedKeys(checkedKeyList)
       return pre
     }, [])
 
+  }
+
+  //渲染用户角色列表
+  const getRoleOption = () => {
+    const roleOption = []
+    rolesList.map(item => {
+      roleOption.push((<Option key={item.rId} disabled={item.rId
+      === user.roleId}>{item.name}</Option>));
+    })
+    return roleOption
   }
 
   useEffect(() => {
@@ -160,9 +195,16 @@ const Role = (props) => {
           <Table
               bordered
               rowKey={(item) => item._id}
-              dataSource={roles}
+              dataSource={rolesList}
               columns={columns}
-              pagination={{defaultPageSize: PAGINATION.PAGE_SIZE,total:roles.length,showTotal:PAGINATION.SHOW_TOTAL,showSizeChanger:true,showQuickJumper:true,pageSizeOptions:PAGINATION.PAGE_SIZE_OPTIONS}}
+              pagination={{
+                defaultPageSize: PAGINATION.PAGE_SIZE,
+                total: rolesList.length,
+                showTotal: PAGINATION.SHOW_TOTAL,
+                showSizeChanger: true,
+                showQuickJumper: true,
+                pageSizeOptions: PAGINATION.PAGE_SIZE_OPTIONS
+              }}
           />
           <Modal
               getContainer={false}
@@ -209,6 +251,32 @@ const Role = (props) => {
                     treeData={userAuth}
                 />
               </Form.Item>
+              {
+                rolesShow ? <Form.Item label='选择授权角色' name="roleList">
+                  <Select
+                      showSearch
+                      menuItemSelectedIcon={<UserOutlined/>}
+                      mode="multiple"
+                      placeholder="请选择用户能授权的角色"
+                      filterOption={(input, option) => {
+                        let str = input.toLowerCase().split('')
+                        let isMatch = false;
+                        str.some((item) => {
+                          if (option.children.toLowerCase().split('').includes(
+                              item)) {
+                            isMatch = true
+                            return true;
+                          }
+                        })
+                        return isMatch;
+                      }
+                      }
+                  >
+                    {getRoleOption()}
+                  </Select>,
+                </Form.Item> : ''
+              }
+
             </Form>
           </Modal>
         </Card>
@@ -219,7 +287,7 @@ const Role = (props) => {
 const stateToProps = (state) => {
   return {
     user: state.user,
-    userAuth:state.userAuth,
+    userAuth: state.userAuth,
   }
 }
 const dispatchToProps = (dispatch) => {
