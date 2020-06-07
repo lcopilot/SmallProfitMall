@@ -110,7 +110,7 @@ const User = (props) => {
 
   //获取角色
   const getRoles = () => {
-    indexAPI.getUserRoles(user.roleId).then(res => {
+    indexAPI.getUserRoles(user.uId).then(res => {
       if (res.success) {
         setRoles(res.objectReturn.object)
       }
