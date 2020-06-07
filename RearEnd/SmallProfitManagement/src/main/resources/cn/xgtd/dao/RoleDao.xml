@@ -126,7 +126,7 @@
 
         <!--查询可创建的角色id-->
        <select id="findRoleIds" resultType="java.lang.String">
-            SELECT role_ids FROM  management_role WHERE  r_id = #{rId}
+            SELECT mr.role_ids FROM management_user mu  LEFT JOIN  management_role mr ON mu.role_id = mr.r_id WHERE  mu.u_id = #{uId}
        </select>
 
 

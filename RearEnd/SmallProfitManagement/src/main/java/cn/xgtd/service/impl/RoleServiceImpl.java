@@ -51,6 +51,7 @@ public class RoleServiceImpl implements RoleService {
         role.setLastAuthorId(role.getCreateAuthorId());
         String databaseMenus = String.join(",", role.getMenus());
         role.setDatabaseMenus(databaseMenus);
+
         if (role.getRoleIds()!=null){
             String roleId = String.join(",", role.getRoleIds());
             role.setRoleBasicsId(roleId);
@@ -76,9 +77,11 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public List<Role> findRoleList(Integer uId) {
+
+
        List<Role> roles =  roleDao.findRoleList(uId);
         for (int i = 0; i <roles.size() ; i++) {
-            if (roles.get(i).getDatabaseMenus() == null){
+            if (roles.get(i).getDatabaseMenus() == null ){
                 String [] menus= {};
                 roles.get(i).setMenus(menus);
             }else {
@@ -86,8 +89,22 @@ public class RoleServiceImpl implements RoleService {
                 roles.get(i).setDatabaseMenus(null);
                 roles.get(i).setMenus(menus);
             }
-
         }
+        String rIds = roleDao.findRoleIds(uId);
+        List<Role> basicRole = new ArrayList<>();
+
+        if (rIds!=null && !"" .equals(rIds)){
+            String[] result = result=rIds.split(",");
+            int[] rIdArray = Arrays.stream(result).mapToInt(Integer::parseInt).toArray();
+            basicRole = roleDao.findBasicRole(rIdArray);
+        }
+
+        for (int i = 0; i <basicRole.size() ; i++) {
+            if (roles!=basicRole.get(i)){
+                roles.add(basicRole.get(i));
+            }
+        }
+
         return roles;
     }
 

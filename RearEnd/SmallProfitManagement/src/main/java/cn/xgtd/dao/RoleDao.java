@@ -78,9 +78,9 @@ public interface RoleDao {
 
     /**
      * 查询该角色可创建的角色id
-     * @param rId 角色id
+     * @param uId 用户id
      * @return
      */
-    public String findRoleIds(Integer rId);
+    public String findRoleIds(Integer uId);
 
 }
