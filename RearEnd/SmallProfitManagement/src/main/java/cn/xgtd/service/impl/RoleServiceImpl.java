@@ -8,6 +8,7 @@ import cn.xgtd.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -127,9 +128,12 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<Role> findBasicsRole(Integer rId) {
         String rIds = roleDao.findRoleIds(rId);
-        String[] result=rIds.split(",");
-        int[] rIdArray = Arrays.stream(result).mapToInt(Integer::parseInt).toArray();
-        List<Role> roles = roleDao.findBasicRole(rIdArray);
+        List<Role> roles = new ArrayList<>();
+        if (rIds!=null){
+            String[] result=rIds.split(",");
+            int[] rIdArray = Arrays.stream(result).mapToInt(Integer::parseInt).toArray();
+             roles = roleDao.findBasicRole(rIdArray);
+        }
         return roles;
     }
 
