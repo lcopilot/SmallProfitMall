@@ -63,7 +63,8 @@
         WHERE
         u_id IN ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} ) ) )
         )
-
+      ORDER BY
+	mr.last_time DESC
     </select>
 
     <!--查询指定角色-->
@@ -120,7 +121,7 @@
                     #{roleIds}
                 </foreach>
 
-
+         ORDER BY mr.last_time DESC
 
        </select>
 

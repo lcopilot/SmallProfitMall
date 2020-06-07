@@ -68,7 +68,7 @@
             LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
         WHERE
             mu.user_name = #{userName} AND mu.sign = 0
-
+        ORDER BY mu.last_time DESC
      </select>
 
      <!--查询用户名是否重复-->
@@ -123,6 +123,7 @@
                 FROM
                 ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} )) ) AS role_relationship
                 ) AND mu.sign = 0
+                ORDER BY mu.last_time DESC
        </select>
 
        <!--查询指定用户-->
