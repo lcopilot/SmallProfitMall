@@ -171,7 +171,7 @@
 
         <!--修改用户-->
         <update id="updateUser" parameterType="cn.xgtd.domain.user.User">
-            update management_user set user_name = #{userName} , password = #{password} ,email = #{email} , phone = #{phone},last_time = #{lastTime},last_author_id = #{lastAuthorId} where u_id = #{uId}
+            update management_user set user_name = #{userName} ,role_id=#{roleId},password = #{password} ,email = #{email} , phone = #{phone},last_time = #{lastTime},last_author_id = #{lastAuthorId} where u_id = #{uId}
         </update>
 
 
