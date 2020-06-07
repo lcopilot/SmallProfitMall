@@ -53,7 +53,7 @@
         FROM
             management_role
         WHERE
-            create_author_id IN ( SELECT descendant_id FROM ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} ) ) LIMIT 0,9999999 ) AS descendant_id )
+            create_author_id IN ( SELECT descendant_id FROM ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} ) ) ) AS descendant_id )
         )
         OR mr.r_id IN (
         SELECT
