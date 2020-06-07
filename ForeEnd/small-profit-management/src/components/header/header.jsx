@@ -38,8 +38,7 @@ const HeaderNav = (props) => {
   const {collapsed, setCollapsed} = useContext(CountContext);
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [bell, setBell] = useState({notice: 10, message: 5, commission: 9})
-  const [weather, setWeather] = useState(
-      {
+  const [weather, setWeather] = useState({
         now: {cond: {txt: "晴"}, tmp: "20"},
         basic: {city: '长沙', update: {loc: ''}}
       })

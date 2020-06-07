@@ -21,12 +21,14 @@ import {
   PAGINATION,
   TIME_FORMAT
 } from "../../config/sysConfig";
-import {LockOutlined} from "@ant-design/icons";
+import {ExclamationCircleOutlined, LockOutlined} from "@ant-design/icons";
 import MailOutlined from "@ant-design/icons/lib/icons/MailOutlined";
 import TabletOutlined from "@ant-design/icons/lib/icons/TabletOutlined";
+import storageUtils from "../../utils/storageUtils";
 
 const {Search} = Input;
 const {Option} = Select;
+const {confirm} = Modal;
 
 const User = (props) => {
   let {user} = props
@@ -34,6 +36,8 @@ const User = (props) => {
   const [userList, setUserList] = useState([])
   const [userVisible, setUserVisible] = useState(false)
   const [userInput, setUserInput] = useState(false)
+  const [isEdit, setIsEdit] = useState(false)
+  const [userTable, setUserTable] = useState({})
   const [form] = Form.useForm();
 
   const columns = [
@@ -65,14 +69,14 @@ const User = (props) => {
       title: '操作',
       fixed: 'right',
       width: 100,
-      render: (user) => {
+      render: (user,record,index) => {
         return (
             <>
               <a onClick={() => {
-                editAuthority(user)
+                editAuthority(user,index)
               }}>编辑用户</a>
               <a onClick={() => {
-                deleteUser(user)
+                deleteUser(user,index)
               }}>删除</a>
             </>
         )
@@ -81,8 +85,9 @@ const User = (props) => {
   ]
 
   //编辑用户
-  const editAuthority = (user) => {
-    const {userName, password, email, phone, roleId} = user
+  const editAuthority = (users,index) => {
+    const {userName, password, email, phone, roleId,uId} = users
+    setUserTable({index,user:users})
     form.setFieldsValue({
       userName: userName,
       password: password,
@@ -90,12 +95,29 @@ const User = (props) => {
       phone: phone,
       roleId: roleId.toString(),
     })
-    setUserInput(true)
+    setUserInput(uId===user.uId)
+    setIsEdit(true)
     setUserVisible(true)
   }
   //删除用户
-  const deleteUser = (user) => {
-
+  const deleteUser = (user,index) => {
+    confirm({
+      title: '删除用户',
+      icon: <ExclamationCircleOutlined/>,
+      content: `你确定删除- ${user.userName} -用户吗? 删除后无法恢复`,
+      cancelText: '取消',
+      okText: '确定',
+      onOk() {
+        indexAPI.deleteUser(user.uId).then(res=>{
+          if (res.success){
+            message.success("用户删除成功!")
+            let data=JSON.parse(JSON.stringify(userList))
+            data.splice(index,1);
+            setUserList(data);
+          }
+        })
+      },
+    });
   }
 
   //渲染用户角色列表
@@ -126,24 +148,41 @@ const User = (props) => {
   }
 
   //添加用户
-  const addUser = () => {
+  const addEditUser = () => {
     form.validateFields().then(values => {
       values.roleId = parseInt(values.roleId);
       values.createAuthorId = user.uId
-      indexAPI.addUser(values).then(res => {
-        if (res.success) {
-          setUserList([res.objectReturn.object, ...userList]);
-          setUserVisible(false);
-          setUserInput(false)
-          form.resetFields();
-        } else {
-          message.warn("用户已存在!")
-        }
-      })
-
+      values.lastAuthorId = user.uId
+      if (isEdit){
+        values.uId=userTable.user.uId
+        indexAPI.editUser(values).then(res=>{
+          if (res.success){
+            let data=JSON.parse(JSON.stringify(userList))
+            data[userTable.index]=res.objectReturn.object
+            setUserList(data)
+            message.success("用户修改成功!")
+            shutDown();
+          }
+        })
+      }else {
+        indexAPI.addUser(values).then(res => {
+          if (res.success) {
+            setUserList([res.objectReturn.object, ...userList]);
+            shutDown();
+          } else {
+            message.warn("用户已存在!")
+          }
+        })
+      }
     })
   }
 
+  const shutDown=()=>{
+    setIsEdit(false)
+    setUserVisible(false);
+    setUserInput(false)
+    form.resetFields();
+  }
   useEffect(() => {
     getRoles();
     getUser();
@@ -189,14 +228,10 @@ const User = (props) => {
           />
           <Modal
               getContainer={false}
-              title="创建角色"
+              title="创建用户"
               visible={userVisible}
-              onOk={addUser}
-              onCancel={() => {
-                setUserVisible(false);
-                setUserInput(false)
-                form.resetFields();
-              }}
+              onOk={addEditUser}
+              onCancel={shutDown}
           >
             <Form
                 form={form}

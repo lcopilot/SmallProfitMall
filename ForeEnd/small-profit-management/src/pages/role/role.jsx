@@ -22,9 +22,11 @@ import {
   PAGINATION,
   TIME_FORMAT
 } from "../../config/sysConfig";
+import {ExclamationCircleOutlined} from "@ant-design/icons";
 
 const {Search} = Input;
 const {Option} = Select;
+const {confirm} = Modal;
 
 const Role = (props) => {
   let {user, userAuth, setUserAuth} = props
@@ -71,14 +73,14 @@ const Role = (props) => {
       title: '操作',
       fixed: 'right',
       width: 100,
-      render: (role) => {
+      render: (role,record,index) => {
         return (
             <>
               <a onClick={() => {
-                editAuthority(role)
+                editAuthority(role,index)
               }}>编辑权限</a>
               <a onClick={() => {
-                deleteRole(role)
+                deleteRole(role,index)
               }}>删除</a>
             </>
         )
@@ -88,17 +90,35 @@ const Role = (props) => {
 
   //编辑角色
   const editAuthority = (role) => {
-    const {menus, name} = role
+    const {menus, name,roleIds} = role
     form.setFieldsValue({
-      roleName: name
+      roleName: name,
+      roleList:roleIds?roleIds:[]
     })
+    setRolesShow(!!roleIds)
     setRoleInput(true)
     setRoleVisible(true)
     setCheckedKeys(menus)
   }
 
-  const deleteRole = (role) => {
-
+  const deleteRole = (role,index) => {
+    confirm({
+      title: '删除角色',
+      icon: <ExclamationCircleOutlined/>,
+      content: `你确定删除- ${role.name} -角色吗? 删除后无法恢复`,
+      cancelText: '取消',
+      okText: '确定',
+      onOk() {
+        indexAPI.deleteRoles(role.rId).then(res=>{
+          if (res.success){
+            message.success("角色删除成功!")
+            let data=JSON.parse(JSON.stringify(rolesList))
+            data.splice(index,1);
+            setRolesList(data);
+          }
+        })
+      },
+    });
   }
 
   //获取角色

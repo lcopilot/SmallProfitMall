@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {
+  Link,
   useHistory
 } from 'react-router-dom'
 import {
@@ -19,8 +20,7 @@ import {PAGINATION, TIME_FORMAT} from "../../config/sysConfig";
 const {Search} = Input;
 
 const Product = () => {
-  const history = useHistory();
-  const [ss,setSS]=useState(false)
+  const history= useHistory();
   const columns = [
     {
       title: '商品 ID',
@@ -70,7 +70,7 @@ const Product = () => {
         </Col>
         <Col xs={24} sm={24} md={9} lg={9} xl={11}>
           <Button type='primary' onClick={() => {
-            history.push({pathname: `/products/product/addProduct`})
+            history.push({pathname:`/products/product/addProduct`,state:{productId:5}})
           }}>添加商品</Button>
         </Col>
       </Row>

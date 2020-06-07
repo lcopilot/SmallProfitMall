@@ -22,3 +22,15 @@ export const addRoles=(data)=>{
 export const addUser=(data)=>{
   return http.requestPost(apiUrl+'/userController/addUser',data)
 }
+//修改用户
+export const editUser=(data)=>{
+  return http.requestPut(apiUrl+'/userController/updateUser',data)
+}
+//删除用户
+export const deleteUser=(userId)=>{
+  return http.requestDelete(apiUrl+`/userController/deleteUser/${userId}`)
+}
+//删除角色
+export const deleteRoles=(userId)=>{
+  return http.requestDelete(apiUrl+`/userController/deleteUser/${userId}`)
+}

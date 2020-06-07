@@ -8,6 +8,7 @@ import Analysis from "../pages/dashboard/analysis";
 import Monitor from "../pages/dashboard/monitor";
 import Order from "../pages/order/order";
 import React from "react";
+import ProductDetail from "../pages/product/ProductDetail";
 
 const routerList = [
   {
@@ -24,6 +25,9 @@ const routerList = [
   },{
     path: '/products/product/addProduct',
     component: <AddProduct/>,
+  },{
+    path: '/products/product/productDetail',
+    component: <ProductDetail/>,
   }, {
     path: '/role',
     component: <Role/>,
