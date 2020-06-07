@@ -33,7 +33,7 @@
 
    <!--查询所有子节点角色-->
    <select id="findRoleList"  resultMap="roleMap">
-      SELECT
+    SELECT
         mr.r_id,
         mr.menus,
         mr.NAME,
@@ -47,10 +47,23 @@
         LEFT JOIN management_user mrc ON mrc.u_id = mr.create_author_id
         LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
     WHERE
-        mr.r_id IN ( SELECT r_id FROM management_role WHERE create_author_id IN ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} ) ) ) )
-        OR mr.r_id IN (
-        SELECT role_id FROM management_user WHERE u_id IN ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} ) ) )
+        mr.r_id IN (
+        SELECT
+            r_id
+        FROM
+            management_role
+        WHERE
+            create_author_id IN ( SELECT descendant_id FROM ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} ) ) LIMIT 0,9999999 ) AS descendant_id )
         )
+        OR mr.r_id IN (
+        SELECT
+            role_id
+        FROM
+            management_user
+        WHERE
+        u_id IN ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} ) ) )
+        )
+
     </select>
 
     <!--查询指定角色-->
