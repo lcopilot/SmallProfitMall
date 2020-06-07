@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User addUser(User user) {
-        Integer quantity = userDao.findUserRepeat(user.getUserName());
+        Integer quantity = userDao.findUserRepeat(user.getUserName(),user.getuId());
         if (quantity>0){
             return null;
         }
@@ -126,7 +126,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Integer updateUser(User user) {
-        Integer quantity = userDao.findUserRepeat(user.getUserName());
+        Integer quantity = userDao.findUserRepeat(user.getUserName(),user.getuId());
         if (quantity>0){
             return null;
         }

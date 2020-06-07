@@ -36,7 +36,7 @@ public interface UserDao {
      * @param userName 需要创建的用户名
      * @return
      */
-    public Integer findUserRepeat(String userName);
+    public Integer findUserRepeat(@Param("userName") String userName,@Param("userId") Integer userId);
 
 
     /**

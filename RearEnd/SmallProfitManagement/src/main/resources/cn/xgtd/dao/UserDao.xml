@@ -74,6 +74,10 @@
      <!--查询用户名是否重复-->
        <select id="findUserRepeat" resultType="java.lang.Integer">
             select count(user_name) FROM management_user WHERE user_name = #{userName}
+            <if test="userId!=null ">
+                AND u_id <![CDATA[!= ]]> #{userId}
+            </if>
+
         </select>
 
       <!--新增用户-->
@@ -167,7 +171,7 @@
 
         <!--修改用户-->
         <update id="updateUser" parameterType="cn.xgtd.domain.user.User">
-            update management_user set user_name = #{userName} , email = #{email} , phone = #{phone},last_time = #{lastTime},last_author_id = #{lastAuthorId} where u_id = #{uId}
+            update management_user set user_name = #{userName} , password = #{password} ,email = #{email} , phone = #{phone},last_time = #{lastTime},last_author_id = #{lastAuthorId} where u_id = #{uId}
         </update>
 
 
