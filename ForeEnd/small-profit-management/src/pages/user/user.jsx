@@ -102,8 +102,8 @@ const User = (props) => {
   const getRoleOption = () => {
     const roleOption = []
     roles.map(item => {
-      roleOption.push((<Option key={item.rId} disabled={item.name
-      === "超级管理员"}>{item.name}</Option>));
+      roleOption.push((<Option key={item.rId} disabled={item.rId
+      === user.roleId}>{item.name}</Option>));
     })
     return roleOption
   }
@@ -271,10 +271,19 @@ const User = (props) => {
                 <Select showSearch
                         menuItemSelectedIcon={<UserOutlined/>}
                         placeholder="请选择角色"
-                        filterOption={(input, option) =>
-                            option.children.toLowerCase().indexOf(
-                                input.toLowerCase())
-                            !== -1
+                        filterOption={(input, option) => {
+                          let str = input.toLowerCase().split('')
+                          let isMatch = false;
+                          str.some((item) => {
+                            if (option.children.toLowerCase().split(
+                                '').includes(
+                                item)) {
+                              isMatch = true
+                              return true;
+                            }
+                          })
+                          return isMatch;
+                        }
                         }
                 >
                   {getRoleOption()}

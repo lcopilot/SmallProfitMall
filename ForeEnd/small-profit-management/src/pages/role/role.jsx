@@ -8,7 +8,7 @@ import {
   Col,
   Table,
   Modal,
-  Tree, Form, Menu, message
+  Tree, Form, Menu, message, Select
 } from "antd";
 import './role.less'
 import *as indexAPI from '../../api/page/index'
@@ -24,6 +24,7 @@ import {
 } from "../../config/sysConfig";
 
 const {Search} = Input;
+const {Option} = Select;
 
 const Role = (props) => {
   let {user, userAuth, setUserAuth} = props
@@ -33,8 +34,14 @@ const Role = (props) => {
   const [form] = Form.useForm();
   const [checkedKeys, setCheckedKeys] = useState([]);
   const [checkedKeysResult, setCheckedKeysResult] = useState([]);
+  const [rolesShow, setRolesShow] = useState(false);
 
   const onCheck = (checkedKeys, info) => {
+    if (checkedKeys.includes('/user')) {
+      setRolesShow(true)
+    } else {
+      setRolesShow(false)
+    }
     setCheckedKeys(checkedKeys);
     setCheckedKeysResult([...checkedKeys, ...info.halfCheckedKeys]);
   };
@@ -112,11 +119,11 @@ const Role = (props) => {
       }
       indexAPI.addRoles(roles).then(res => {
             if (res.success) {
-              setRolesList([res.objectReturn.object,...rolesList])
+              setRolesList([res.objectReturn.object, ...rolesList])
               setRoleVisible(false);
               setRoleInput(false);
               form.resetFields();
-            }else {
+            } else {
               message.warn("角色已存在!")
             }
           }
@@ -145,6 +152,16 @@ const Role = (props) => {
       return pre
     }, [])
 
+  }
+
+  //渲染用户角色列表
+  const getRoleOption = () => {
+    const roleOption = []
+    rolesList.map(item => {
+      roleOption.push((<Option key={item.rId} disabled={item.rId
+      === user.roleId}>{item.name}</Option>));
+    })
+    return roleOption
   }
 
   useEffect(() => {
@@ -234,6 +251,32 @@ const Role = (props) => {
                     treeData={userAuth}
                 />
               </Form.Item>
+              {
+                rolesShow ? <Form.Item label='选择授权角色' name="roleList">
+                  <Select
+                      showSearch
+                      menuItemSelectedIcon={<UserOutlined/>}
+                      mode="multiple"
+                      placeholder="请选择用户能授权的角色"
+                      filterOption={(input, option) => {
+                        let str = input.toLowerCase().split('')
+                        let isMatch = false;
+                        str.some((item) => {
+                          if (option.children.toLowerCase().split('').includes(
+                              item)) {
+                            isMatch = true
+                            return true;
+                          }
+                        })
+                        return isMatch;
+                      }
+                      }
+                  >
+                    {getRoleOption()}
+                  </Select>,
+                </Form.Item> : ''
+              }
+
             </Form>
           </Modal>
         </Card>
