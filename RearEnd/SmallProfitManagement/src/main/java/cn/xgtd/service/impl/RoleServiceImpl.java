@@ -8,6 +8,7 @@ import cn.xgtd.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +50,10 @@ public class RoleServiceImpl implements RoleService {
         role.setLastAuthorId(role.getCreateAuthorId());
         String databaseMenus = String.join(",", role.getMenus());
         role.setDatabaseMenus(databaseMenus);
+        if (role.getRoleIds()!=null){
+            String roleId = String.join(",", role.getMenus());
+            role.setRoleBasicsId(roleId);
+        }
         //添加角色
         roleDao.addRole(role);
         Role roles = roleDao.findRole(role.getrId());
@@ -112,6 +117,20 @@ public class RoleServiceImpl implements RoleService {
         role.setLastTime(new Date());
         Integer results = roleDao.updateRole(role);
         return results;
+    }
+
+    /**
+     * 查询无权限创建角色角色可赋予用户的角色
+     * @param rId 角色id
+     * @return
+     */
+    @Override
+    public List<Role> findBasicsRole(Integer rId) {
+        String rIds = roleDao.findRoleIds(rId);
+        String[] result=rIds.split(",");
+        int[] rIdArray = Arrays.stream(result).mapToInt(Integer::parseInt).toArray();
+        List<Role> roles = roleDao.findBasicRole(rIdArray);
+        return roles;
     }
 
 

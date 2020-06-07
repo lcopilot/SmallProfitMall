@@ -67,4 +67,20 @@ public interface RoleDao {
      * @return
      */
     public Integer updateRole(Role role);
+
+
+    /**
+     * 查询多个指定角色
+     * @param roleIds
+     * @return
+     */
+    public List<Role> findBasicRole( @Param("roleIds")int[] roleIds);
+
+    /**
+     * 查询该角色可创建的角色id
+     * @param rId 角色id
+     * @return
+     */
+    public String findRoleIds(Integer rId);
+
 }

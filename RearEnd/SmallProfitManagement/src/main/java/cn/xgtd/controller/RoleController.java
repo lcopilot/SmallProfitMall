@@ -94,4 +94,17 @@ public class RoleController {
         return new ObjectReturnResponse(CommonCode.FAIL,null);
     }
 
+    /**
+     * 查询无创建角色权限角色可赋予用户的角色
+     * @param rId 角色id
+     * @return
+     */
+    @RequestMapping(value = "/findBasicsRole/{rId}",method = RequestMethod.GET)
+    public ObjectReturnResponse findBasicsRole(@PathVariable("rId") Integer rId){
+        ObjectReturn objectReturn = new ObjectReturn();
+        List<Role> role = roleService.findBasicsRole(rId);
+        objectReturn.setObject(role);
+        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+    }
+
 }

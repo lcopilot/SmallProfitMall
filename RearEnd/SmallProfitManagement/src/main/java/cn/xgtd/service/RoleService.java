@@ -46,4 +46,11 @@ public interface RoleService {
      */
     public Integer updateRole(Role role);
 
+    /**
+     * 查询无权限创建角色角色可赋予用户的角色
+     * @param rId 角色id
+     * @return
+     */
+    public List<Role> findBasicsRole(Integer rId);
+
 }

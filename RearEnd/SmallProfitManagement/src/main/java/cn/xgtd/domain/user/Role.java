@@ -32,6 +32,26 @@ public class Role implements Serializable {
     private Integer lastAuthorId;
     /**修改人名字**/
     private String lastAuthorName;
+    /**基本可选择角色 前端传入**/
+    private String[] roleIds;
+    /**基本可选择角色 传入数据库**/
+    private String roleBasicsId;
+
+    public String getRoleBasicsId() {
+        return roleBasicsId;
+    }
+
+    public void setRoleBasicsId(String roleBasicsId) {
+        this.roleBasicsId = roleBasicsId;
+    }
+
+    public String[] getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(String[] roleIds) {
+        this.roleIds = roleIds;
+    }
 
     public Integer getrId() {
         return rId;

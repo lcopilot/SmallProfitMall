@@ -19,8 +19,8 @@
 
     <!--添加角色-->
     <insert id="addRole" parameterType="cn.xgtd.domain.user.Role" useGeneratedKeys="true" keyProperty="rId" keyColumn="r_id">
-     insert into management_role (menus,name,create_time,create_author_id,last_time,last_author_id)
-        values(#{databaseMenus},#{name},#{createTime},#{createAuthorId},#{lastTime},#{lastAuthorId})
+     insert into management_role (menus,name,create_time,create_author_id,last_time,last_author_id,role_ids)
+        values(#{databaseMenus},#{name},#{createTime},#{createAuthorId},#{lastTime},#{lastAuthorId},#{roleBasicsId})
     </insert>
 
      <!--添加用户关系-->
@@ -98,6 +98,36 @@
        <update id="updateRole" parameterType="cn.xgtd.domain.user.Role">
             update management_role set menus = #{databaseMenus},last_time = #{lastTime},last_author_id = #{lastAuthorId} where  r_id =#{rId}
        </update>
+
+       <!--查询基本可创建的角色-->
+       <select id="findBasicRole"  resultMap="roleMap">
+        SELECT
+            mr.r_id,
+            mr.menus,
+            mr.NAME,
+            mr.create_time AS mr_create_time,
+            mr.create_author_id,
+            mr.last_time AS mr_last_time,
+            mrc.user_name AS mrc_creator_name,
+            mrl.user_name AS mrl_last_name
+        FROM
+            management_role  mr
+            LEFT JOIN management_user mrc ON mrc.u_id = mr.create_author_id
+            LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
+        WHERE
+            mr.r_id in
+             <foreach collection="roleIds" item="roleIds" open="(" separator="," close=")">
+                    #{roleIds}
+                </foreach>
+
+
+
+       </select>
+
+        <!--查询可创建的角色id-->
+       <select id="findRoleIds" resultType="java.lang.String">
+            SELECT role_ids FROM  management_role WHERE  r_id = #{rId}
+       </select>
 
 
 
