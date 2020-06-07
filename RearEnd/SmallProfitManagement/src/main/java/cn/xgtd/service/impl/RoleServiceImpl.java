@@ -52,7 +52,7 @@ public class RoleServiceImpl implements RoleService {
         String databaseMenus = String.join(",", role.getMenus());
         role.setDatabaseMenus(databaseMenus);
         if (role.getRoleIds()!=null){
-            String roleId = String.join(",", role.getMenus());
+            String roleId = String.join(",", role.getRoleIds());
             role.setRoleBasicsId(roleId);
         }
         //添加角色
