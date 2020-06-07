@@ -90,20 +90,6 @@ public class RoleServiceImpl implements RoleService {
                 roles.get(i).setMenus(menus);
             }
         }
-        String rIds = roleDao.findRoleIds(uId);
-        List<Role> basicRole = new ArrayList<>();
-
-        if (rIds!=null && !"" .equals(rIds)){
-            String[] result = result=rIds.split(",");
-            int[] rIdArray = Arrays.stream(result).mapToInt(Integer::parseInt).toArray();
-            basicRole = roleDao.findBasicRole(rIdArray);
-        }
-
-        for (int i = 0; i <basicRole.size() ; i++) {
-            if (roles!=basicRole.get(i)){
-                roles.add(basicRole.get(i));
-            }
-        }
 
         return roles;
     }
@@ -139,20 +125,41 @@ public class RoleServiceImpl implements RoleService {
 
     /**
      * 查询无权限创建角色角色可赋予用户的角色
-     * @param rId 角色id
+     * @param uId 角色id
      * @return
      */
     @Override
-    public List<Role> findBasicsRole(Integer rId) {
-        String rIds = roleDao.findRoleIds(rId);
-        List<Role> roles = new ArrayList<>();
-        if (rIds!=null){
-            String[] result=rIds.split(",");
-            int[] rIdArray = Arrays.stream(result).mapToInt(Integer::parseInt).toArray();
-             roles = roleDao.findBasicRole(rIdArray);
+    public List<Role> findBasicsRole(Integer uId) {
+
+
+        List<Role> roles = roleDao.findRoleList(uId);
+        for (int i = 0; i < roles.size(); i++) {
+            if (roles.get(i).getDatabaseMenus() == null) {
+                String[] menus = {};
+                roles.get(i).setMenus(menus);
+            } else {
+                String[] menus = roles.get(i).getDatabaseMenus().split(",");
+                roles.get(i).setDatabaseMenus(null);
+                roles.get(i).setMenus(menus);
+            }
         }
+
+        //查询基本可可选角色
+        String rIds = roleDao.findRoleIds(uId);
+        List<Role> basicRole = new ArrayList<>();
+
+        if (rIds != null && !"".equals(rIds)) {
+            String[] result = result = rIds.split(",");
+            int[] rIdArray = Arrays.stream(result).mapToInt(Integer::parseInt).toArray();
+            basicRole = roleDao.findBasicRole(rIdArray);
+        }
+
+        for (int i = 0; i < basicRole.size(); i++) {
+            if (roles != basicRole.get(i)) {
+                roles.add(basicRole.get(i));
+            }
+        }
+
         return roles;
     }
-
-
 }
