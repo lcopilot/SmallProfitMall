@@ -99,9 +99,11 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/updateUser", method = RequestMethod.PUT)
 	public ObjectReturnResponse updateUser(@RequestBody User user){
-		Integer result = userService.updateUser(user);
+		ObjectReturn objectReturn = new ObjectReturn();
+		User result = userService.updateUser(user);
+		objectReturn.setObject(result);
 		if (result != null){
-			return new ObjectReturnResponse(CommonCode.SUCCESS,null);
+			return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
 		}
 		return new ObjectReturnResponse(CommonCode.FAIL,null);
 	}

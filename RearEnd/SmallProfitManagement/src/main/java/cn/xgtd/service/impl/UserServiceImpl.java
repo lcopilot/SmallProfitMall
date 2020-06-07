@@ -116,7 +116,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Integer deleteUser(Integer userId) {
-        return null;
+        Integer result = userDao.deleteUser(userId);
+        return result;
     }
 
     /**
@@ -125,13 +126,28 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public Integer updateUser(User user) {
+    public User updateUser(User user) {
+
         Integer quantity = userDao.findUserRepeat(user.getUserName(),user.getuId());
         if (quantity>0){
             return null;
         }
         user.setLastTime(new Date());
-        return userDao.updateUser(user);
+        userDao.updateUser(user);
+
+        User users = userDao.findUser(user.getuId());
+        Role role = users.getRole();
+        if (role.getDatabaseMenus()==null){
+            String [] menus= {};
+            role.setMenus(menus);
+        }else {
+            String[] menus = role.getDatabaseMenus().split(",");
+            role.setDatabaseMenus(null);
+            role.setMenus(menus);
+            users.setRole(role);
+        }
+
+        return users;
     }
 
 }

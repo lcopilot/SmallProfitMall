@@ -48,7 +48,7 @@ public interface UserService {
      * @param user 用户对象
      * @return
      */
-    public Integer updateUser(User user);
+    public User updateUser(User user);
 
 
 
