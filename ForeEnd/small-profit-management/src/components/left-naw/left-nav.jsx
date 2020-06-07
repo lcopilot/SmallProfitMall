@@ -11,7 +11,7 @@ import storageUtils from "../../utils/storageUtils";
 const {SubMenu} = Menu;
 const LeftNav = (props) => {
   const location = useLocation();
-  let {user,collapsed} = props
+  let {user, collapsed} = props
   const [openKey, setOpenKey] = useState('')
   // let [menuNodes,setMenuNodes]=useState()
   /*
@@ -76,8 +76,8 @@ const LeftNav = (props) => {
         } else {
           let cItem
           if (!openKey) {
-            cItem = item.children.find(
-                cItem => location.pathname.indexOf(cItem.key) === 0)
+            //获取当前用户的请求路径
+            cItem = item.children.find(cItem => location.pathname.indexOf(cItem.key) === 0)
           }
           // 如果存在, 说明当前item的子列表需要打开
           if (!openKey && cItem) {
@@ -102,12 +102,13 @@ const LeftNav = (props) => {
       return pre
     }, [])
   }
+
   //判断当前用户是否有对item的权限
   const hasAuth = (item) => {
     const key = item.key
-    const menus=JSON.stringify(user)==="{}"?[]:user.role.menus;
-    const username=user.userName
-    if(menus.indexOf(key)!==-1 || username==='admin' || item.isPublic){
+    const menus = JSON.stringify(user) === "{}" ? [] : user.role.menus;
+    const username = user.userName
+    if (menus.indexOf(key) !== -1 || username === 'admin' || item.isPublic) {
       return true
     }
     return false
@@ -115,9 +116,12 @@ const LeftNav = (props) => {
   // useEffect(()=>{
   //
   // })
-
+  let path=location.pathname;
   const menuNodes = getMenuNodes(menuList)
-
+  let route=path.split('/');
+  if (route.length>3){
+    path=`/${route[1]}/${route[2]}`
+  }
   return (
       <div className="left-nav">
         <Link to="/" className="logo">
@@ -126,7 +130,7 @@ const LeftNav = (props) => {
         </Link>
         <Menu
             defaultOpenKeys={[`${openKey}`]}
-            selectedKeys={[`${location.pathname}`]}
+            selectedKeys={[`${path}`]}
             mode="inline"
             theme="dark"
         >

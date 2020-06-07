@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {
+  useHistory
+} from 'react-router-dom'
+import {
   Button,
   Card,
   Col,
@@ -15,13 +18,14 @@ import {PAGINATION, TIME_FORMAT} from "../../config/sysConfig";
 
 const {Search} = Input;
 
-const Product=()=>{
-
+const Product = () => {
+  const history = useHistory();
+  const [ss,setSS]=useState(false)
   const columns = [
     {
       title: '商品 ID',
       dataIndex: 'id'
-    },{
+    }, {
       title: '商品名称',
       dataIndex: 'name'
     }, {
@@ -66,7 +70,7 @@ const Product=()=>{
         </Col>
         <Col xs={24} sm={24} md={9} lg={9} xl={11}>
           <Button type='primary' onClick={() => {
-
+            history.push({pathname: `/products/product/addProduct`})
           }}>添加商品</Button>
         </Col>
       </Row>

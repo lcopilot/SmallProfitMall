@@ -1,6 +1,7 @@
 import Home from "../pages/home/home";
 import Category from "../pages/category/category";
 import Product from "../pages/product/product";
+import AddProduct from "../pages/product/addProduct";
 import Role from "../pages/role/role";
 import User from "../pages/user/user";
 import Analysis from "../pages/dashboard/analysis";
@@ -17,7 +18,12 @@ const routerList = [
     component: <Category/>,
   }, {
     path: '/products/product',
+    //精确匹配
+    exact:true,
     component: <Product/>,
+  },{
+    path: '/products/product/addProduct',
+    component: <AddProduct/>,
   }, {
     path: '/role',
     component: <Role/>,

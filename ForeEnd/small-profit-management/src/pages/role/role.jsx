@@ -115,7 +115,8 @@ const Role = (props) => {
       const roles = {
         createAuthorId: user.uId,
         name: values.roleName,
-        menus: checkedKeysResult
+        menus: checkedKeysResult,
+        roleIds:values.roleList,
       }
       indexAPI.addRoles(roles).then(res => {
             if (res.success) {
@@ -194,7 +195,7 @@ const Role = (props) => {
         <Card title={title}>
           <Table
               bordered
-              rowKey={(item) => item._id}
+              rowKey={(item) => item.rId}
               dataSource={rolesList}
               columns={columns}
               pagination={{
@@ -251,9 +252,9 @@ const Role = (props) => {
                     treeData={userAuth}
                 />
               </Form.Item>
-              {
-                rolesShow ? <Form.Item label='选择授权角色' name="roleList">
-                  <Select
+              <Form.Item  name="roleList">
+                {
+                  rolesShow ? <Select
                       showSearch
                       menuItemSelectedIcon={<UserOutlined/>}
                       mode="multiple"
@@ -273,9 +274,9 @@ const Role = (props) => {
                       }
                   >
                     {getRoleOption()}
-                  </Select>,
-                </Form.Item> : ''
-              }
+                  </Select>: ''
+                }
+              </Form.Item>
 
             </Form>
           </Modal>

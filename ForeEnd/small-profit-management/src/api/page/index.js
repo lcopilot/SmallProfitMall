@@ -6,6 +6,10 @@ const apiUrl=sysConfig.smApiUrlPre;
 export const getRoles=(userId)=>{
   return http.requestGet(apiUrl+'/RoleController/findRole/'+userId)
 }
+//获取用户角色列表
+export const getUserRoles=(rolesId)=>{
+  return http.requestGet(apiUrl+'/RoleController/findBasicsRole/'+rolesId)
+}
 //获取用户列表
 export const getUsers=(userId)=>{
   return http.requestGet(apiUrl+'/userController/findUser/'+userId)

@@ -14,7 +14,6 @@ import routerList from '../../config/routerConfig'
 
 import {connect} from 'react-redux'
 
-
 export const CountContext = createContext();
 const {Footer, Sider, Content} = Layout;
 
@@ -41,10 +40,10 @@ const Admin = (props) => {
     return (
         <Switch> {/*只匹配其中一个*/}
           {
-            menuList.map(item=>{
+            menuList.map((item,index)=>{
               if (menus.indexOf(item.path)!==-1 || user.userName==='admin' || item.isPublic){
                 return (
-                      <Route path={item.path}>
+                      <Route path={item.path} key={index} exact={item.exact}>
                         {item.component}
                       </Route>
                 )

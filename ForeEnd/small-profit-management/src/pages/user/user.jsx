@@ -110,7 +110,7 @@ const User = (props) => {
 
   //获取角色
   const getRoles = () => {
-    indexAPI.getRoles(user.uId).then(res => {
+    indexAPI.getUserRoles(user.roleId).then(res => {
       if (res.success) {
         setRoles(res.objectReturn.object)
       }
@@ -175,7 +175,7 @@ const User = (props) => {
         <Card title={title}>
           <Table
               bordered
-              rowKey={(item) => item._id}
+              rowKey={(item) => item.uId}
               dataSource={userList}
               columns={columns}
               pagination={{
