@@ -103,7 +103,7 @@
 
         <!--编辑角色-->
        <update id="updateRole" parameterType="cn.xgtd.domain.user.Role">
-            update management_role set menus = #{databaseMenus},last_time = #{lastTime},last_author_id = #{lastAuthorId} ,role_ids = #{roleBasicsId} where  r_id =#{rId}
+            update management_role set name = #{name} , menus = #{databaseMenus},last_time = #{lastTime},last_author_id = #{lastAuthorId} ,role_ids = #{roleBasicsId} where  r_id =#{rId}
        </update>
 
        <!--查询基本可创建的角色-->

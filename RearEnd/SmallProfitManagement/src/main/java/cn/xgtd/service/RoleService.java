@@ -38,6 +38,7 @@ public interface RoleService {
      */
     public  List<String> deleteRole(Integer rId);
 
+    public Integer deleteRoleUser(Integer rId);
 
     /**
      * 修改角色

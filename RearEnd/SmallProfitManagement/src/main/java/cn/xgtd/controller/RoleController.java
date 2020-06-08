@@ -67,9 +67,9 @@ public class RoleController {
 
 
     /**
-     * 删除用户
+     * 删除角色
      * @param rId 角色id
-     * @return
+     * @return 该角色有绑定的用户返回用户名
      */
     @RequestMapping(value = "/deleteRole/{rId}", method = RequestMethod.DELETE)
     public ObjectReturnResponse deleteRole(@PathVariable("rId") Integer rId){
@@ -77,10 +77,25 @@ public class RoleController {
         if (result != null){
             ObjectReturn objectReturn = new ObjectReturn();
             objectReturn.setObject(result);
-            return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+            return new ObjectReturnResponse(CommonCode.FAIL,objectReturn);
+        }
+        return new ObjectReturnResponse(CommonCode.SUCCESS,null);
+    }
+
+    /**
+     * 确认删除角色且删除用户
+     * @param rId 角色id
+     * @return
+     */
+    @RequestMapping(value = "/deleteRoleUser/{rId}", method = RequestMethod.DELETE)
+    public ObjectReturnResponse deleteRoleUser(@PathVariable("rId") Integer rId){
+        Integer result = roleService.deleteRoleUser(rId);
+        if (result > 0){
+            return new ObjectReturnResponse(CommonCode.SUCCESS,null);
         }
         return new ObjectReturnResponse(CommonCode.FAIL,null);
     }
+
 
     /**
      * 修改角色

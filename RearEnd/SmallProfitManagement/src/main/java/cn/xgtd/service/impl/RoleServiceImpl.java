@@ -87,8 +87,23 @@ public class RoleServiceImpl implements RoleService {
         if (userName!=null){
             return userName;
         }
+        roleDao.deleteRole(rId);
         return userName;
 
+    }
+
+    /**
+     * 删除角色
+     * @param rId
+     * @return
+     */
+    @Override
+    public Integer deleteRoleUser(Integer rId) {
+        Integer result = 0;
+        //删除用户
+        result += userDao.deleteUser(null,rId);
+        result += roleDao.deleteRole(rId);
+        return result;
     }
 
     /**

@@ -167,8 +167,14 @@
        </select>
 
        <!--逻辑删除用户-->
-       <update id="deleteUser">
-            update management_user set sign = 1 where u_id = #{userId}
+       <update id="deleteUser" parameterType="java.lang.Integer">
+            update management_user set sign = 1 where
+            <if test="userId!=null ">
+              u_id = #{userId}
+            </if>
+            <if test="rId != null ">
+                role_id = #{rId}
+            </if>
        </update>
 
         <!--修改用户-->
