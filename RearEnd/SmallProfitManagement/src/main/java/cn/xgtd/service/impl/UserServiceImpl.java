@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User userLogin(String userName,String password) {
         String userPassword = userDao.findPassword(userName);
-        if (password.equals(userPassword)){
+        if (userPassword!=null && password.equals(userPassword)){
             User responseUser = userDao.findUserRole(userName);
             Role role = updateRole(responseUser.getRole());
             responseUser.setRole(role);
@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService {
         user.setLastTime(new Date());
         userDao.updateUser(user);
 
-        User users = userDao.findUser(10050);
+        User users = userDao.findUser(user.getuId());
         Role role = updateRole(users.getRole());
         users.setRole(role);
 

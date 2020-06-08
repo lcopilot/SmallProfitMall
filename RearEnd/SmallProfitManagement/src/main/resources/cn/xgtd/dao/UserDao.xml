@@ -37,7 +37,7 @@
 
     <!--查询管理用户密码-->
     <select id="findPassword" parameterType="java.lang.String" resultType="java.lang.String">
-        SELECT `password` FROM  management_user WHERE user_name = #{userName}
+        SELECT `password` FROM  management_user WHERE user_name = #{userName} AND sign = 0
     </select>
     <!--询用户以用户角色-->
     <select id="findUserRole" parameterType="java.lang.String" resultMap="findUserRoleMap">
@@ -162,7 +162,7 @@
                 LEFT JOIN management_user mrc ON mrc.u_id = mr.create_author_id
                 LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
             WHERE
-                mu.u_id = #{uId}
+                mu.u_id = #{uId} AND mu.sign = 0
 
        </select>
 
