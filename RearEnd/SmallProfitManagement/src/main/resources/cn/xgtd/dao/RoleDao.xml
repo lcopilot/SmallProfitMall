@@ -14,6 +14,7 @@
         <result property="createAuthorId" column="create_author_id"></result>
         <result property="lastTime" column="mr_last_time"></result>
         <result property="lastAuthorName" column="mrl_last_name"></result>
+        <result property="roleBasicsId" column="role_ids"></result>
 </resultMap>
 
 
@@ -37,6 +38,7 @@
         mr.r_id,
         mr.menus,
         mr.NAME,
+        mr.role_ids,
         mr.create_time AS mr_create_time,
         mr.create_author_id,
         mr.last_time AS mr_last_time,
@@ -96,6 +98,7 @@
             update management_role set sign = 1 where r_id = #{rId}
        </update>
 
+        <!--编辑角色-->
        <update id="updateRole" parameterType="cn.xgtd.domain.user.Role">
             update management_role set menus = #{databaseMenus},last_time = #{lastTime},last_author_id = #{lastAuthorId} where  r_id =#{rId}
        </update>
