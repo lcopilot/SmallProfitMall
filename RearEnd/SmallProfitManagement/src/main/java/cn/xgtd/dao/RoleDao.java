@@ -53,6 +53,7 @@ public interface RoleDao {
      */
     public List<Role> findRoleList(@Param("uId") Integer uId);
 
+
     /**
      * 删除角色
      * @param rId 角色id

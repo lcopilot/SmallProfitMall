@@ -176,6 +176,11 @@
             update management_user set user_name = #{userName} ,role_id=#{roleId},password = #{password} ,email = #{email} , phone = #{phone},last_time = #{lastTime},last_author_id = #{lastAuthorId} where u_id = #{uId}
         </update>
 
+        <!--查询角色绑定的用户-->
+        <select id="findRoleBinding" resultType="java.lang.String">
+            SELECT user_name FROM management_user WHERE  role_id = #{rId}
+        </select>
+
 
 
 </mapper>

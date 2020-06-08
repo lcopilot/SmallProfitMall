@@ -31,6 +31,14 @@ public interface UserDao {
      * @return
      */
     public User findUserRole(String userName);
+
+
+    /**
+     * 查询角色绑定的用户
+     * @param rId 角色id
+     * @return 用户名
+     */
+    public List<String> findRoleBinding(Integer rId);
     /**
      * 查询用户名是否重复
      * @param userName 需要创建的用户名

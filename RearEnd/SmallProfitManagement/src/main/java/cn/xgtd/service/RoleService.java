@@ -36,7 +36,7 @@ public interface RoleService {
      * @param rId 角色id
      * @return
      */
-    public Integer deleteRole(Integer rId);
+    public  List<String> deleteRole(Integer rId);
 
 
     /**

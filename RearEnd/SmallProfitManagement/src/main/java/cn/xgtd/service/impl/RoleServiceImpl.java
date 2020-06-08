@@ -69,8 +69,6 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public List<Role> findRoleList(Integer uId) {
-
-
        List<Role> roles =  roleDao.findRoleList(uId);
         roles = updateRoleFormat(roles);
 
@@ -84,8 +82,13 @@ public class RoleServiceImpl implements RoleService {
      * @return
      */
     @Override
-    public Integer deleteRole(Integer rId) {
-        return roleDao.deleteRole(rId);
+    public List<String> deleteRole(Integer rId) {
+        List<String> userName = userDao.findRoleBinding(rId);
+        if (userName!=null){
+            return userName;
+        }
+        return userName;
+
     }
 
     /**

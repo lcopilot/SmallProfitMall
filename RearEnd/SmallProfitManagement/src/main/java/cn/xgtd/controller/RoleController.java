@@ -73,9 +73,11 @@ public class RoleController {
      */
     @RequestMapping(value = "/deleteRole/{rId}", method = RequestMethod.DELETE)
     public ObjectReturnResponse deleteRole(@PathVariable("rId") Integer rId){
-        Integer result = roleService.deleteRole(rId);
+        List<String> result = roleService.deleteRole(rId);
         if (result != null){
-            return new ObjectReturnResponse(CommonCode.SUCCESS,null);
+            ObjectReturn objectReturn = new ObjectReturn();
+            objectReturn.setObject(result);
+            return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
         }
         return new ObjectReturnResponse(CommonCode.FAIL,null);
     }
