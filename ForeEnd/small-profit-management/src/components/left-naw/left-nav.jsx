@@ -138,7 +138,6 @@ const LeftNav = (props) => {
             menuNodes
           }
         </Menu>
-
       </div>
   )
 }

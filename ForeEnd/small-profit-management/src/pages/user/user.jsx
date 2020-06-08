@@ -8,7 +8,7 @@ import {
   Col,
   Table,
   Modal,
-  Tree, Form, Menu, Select, message
+  Tree, Form, Menu, Select, message, Skeleton
 } from "antd";
 import *as indexAPI from '../../api/page/index'
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
@@ -24,7 +24,6 @@ import {
 import {ExclamationCircleOutlined, LockOutlined} from "@ant-design/icons";
 import MailOutlined from "@ant-design/icons/lib/icons/MailOutlined";
 import TabletOutlined from "@ant-design/icons/lib/icons/TabletOutlined";
-import storageUtils from "../../utils/storageUtils";
 
 const {Search} = Input;
 const {Option} = Select;
@@ -38,6 +37,7 @@ const User = (props) => {
   const [userInput, setUserInput] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
   const [userTable, setUserTable] = useState({})
+  const [skeletonLoad, setSkeletonLoad] = useState(true)
   const [form] = Form.useForm();
 
   const columns = [
@@ -142,12 +142,13 @@ const User = (props) => {
   const getUser = () => {
     indexAPI.getUsers(user.uId).then(res => {
       if (res.success) {
+        setSkeletonLoad(false);
         setUserList(res.objectReturn.object)
       }
     })
   }
 
-  //添加用户
+  //添加修改用户
   const addEditUser = () => {
     form.validateFields().then(values => {
       values.roleId = parseInt(values.roleId);
@@ -192,140 +193,145 @@ const User = (props) => {
   }, [])
 
   const title = (
-      <Row gutter={16}>
-        <Col xs={24} sm={9} md={6} lg={6} xl={4}>
-          <DatePicker.RangePicker/>
-        </Col>
-        <Col xs={24} sm={15} md={9} lg={9} xl={9}>
-          <Search
-              placeholder="请输入用户名"
-              onSearch={value => console.log(value)}
-          />
-        </Col>
-        <Col xs={24} sm={24} md={9} lg={9} xl={11}>
-          <Button type='primary' onClick={() => {
-            setUserVisible(true)
-          }}>创建用户</Button>
-        </Col>
-      </Row>
+      <Skeleton  active loading={skeletonLoad}>
+        <Row gutter={16}>
+          <Col xs={24} sm={9} md={6} lg={6} xl={4}>
+            <DatePicker.RangePicker/>
+          </Col>
+          <Col xs={24} sm={15} md={9} lg={9} xl={9}>
+            <Search
+                placeholder="请输入用户名"
+                onSearch={value => console.log(value)}
+            />
+          </Col>
+          <Col xs={24} sm={24} md={9} lg={9} xl={11}>
+            <Button type='primary' onClick={() => {
+              setUserVisible(true)
+            }}>创建用户</Button>
+          </Col>
+        </Row>
+      </Skeleton>
   )
   return (
       <>
         <Card title={title}>
-          <Table
-              bordered
-              rowKey={(item) => item.uId}
-              dataSource={userList}
-              columns={columns}
-              pagination={{
-                defaultPageSize: PAGINATION.PAGE_SIZE,
-                total: userList.length,
-                showTotal: PAGINATION.SHOW_TOTAL,
-                showSizeChanger: true,
-                showQuickJumper: true,
-                pageSizeOptions: PAGINATION.PAGE_SIZE_OPTIONS
-              }}
-          />
-          <Modal
-              getContainer={false}
-              title="创建用户"
-              visible={userVisible}
-              onOk={addEditUser}
-              onCancel={shutDown}
-          >
-            <Form
-                form={form}
-                name="normal_login"
-                initialValues={{remember: true}}
+          <Skeleton  active loading={skeletonLoad}>
+            <Table
+                bordered
+                rowKey={(item) => item.uId}
+                dataSource={userList}
+                columns={columns}
+                pagination={{
+                  defaultPageSize: PAGINATION.PAGE_SIZE,
+                  total: userList.length,
+                  showTotal: PAGINATION.SHOW_TOTAL,
+                  showSizeChanger: true,
+                  showQuickJumper: true,
+                  pageSizeOptions: PAGINATION.PAGE_SIZE_OPTIONS
+                }}
+            />
+            <Modal
+                getContainer={false}
+                title="创建用户"
+                visible={userVisible}
+                onOk={addEditUser}
+                onCancel={shutDown}
             >
-              <Form.Item
-                  name="userName"
-                  rules={[{
-                    required: true,
-                    whitespace: true,
-                    message: '请输入用户名 3-12位',
-                    min: 3,
-                    max: 12
-                  },
-                    {
-                      pattern: /^[a-zA-Z0-9_]+$/,
-                      message: '用户名必须是英文、数字或下划线组成'
-                    },]}
+              <Form
+                  form={form}
+                  name="normal_login"
+                  initialValues={{remember: true}}
               >
-                <Input allowClear={true}
-                       disabled={userInput}
-                       prefix={<UserOutlined/>}
-                       maxLength={12} placeholder="请输入用户名"/>
-              </Form.Item>
-              <Form.Item
-                  name="password"
-                  rules={[{
-                    required: true,
-                    whitespace: true,
-                    message: '请输入密码 4-12位',
-                    min: 4,
-                    max: 12
-                  },
-                    {pattern: /^[a-zA-Z0-9_]+$/, message: '密码必须是英文、数字或下划线组成'},]}
-              >
-                <Input.Password
-                    prefix={<LockOutlined/>}
-                    placeholder="请输入密码"
-                    allowClear={true}
-                    maxLength={12}
-                />
-              </Form.Item>
-              <Form.Item
-                  name="email"
-                  rules={[{
-                    required: false,
-                    whitespace: true,
-                    message: '请输入电子邮件'
-                  }, {type: 'email', message: '请输入正确的邮件格式',}]}
-              >
-                <Input allowClear={true}
-                       prefix={<MailOutlined/>}
-                       maxLength={40} placeholder="请输入电子邮件"/>
-              </Form.Item>
-              <Form.Item
-                  name="phone"
-                  rules={[{required: true, whitespace: true, message: '请输入手机号'},
-                    {
-                      pattern: /^((13[0-9])|(14[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))\d{8}$/,
-                      message: '请输入正确的手机号'
-                    },]}
-              >
-                <Input allowClear={true}
-                       prefix={<TabletOutlined/>}
-                       maxLength={11} placeholder="请输入手机号"/>
-              </Form.Item>
-              <Form.Item
-                  name="roleId"
-                  rules={[{required: true, whitespace: true, message: '请选择角色'}]}
-              >
-                <Select showSearch
-                        menuItemSelectedIcon={<UserOutlined/>}
-                        placeholder="请选择角色"
-                        filterOption={(input, option) => {
-                          let str = input.toLowerCase().split('')
-                          let isMatch = false;
-                          str.some((item) => {
-                            if (option.children.toLowerCase().split(
-                                '').includes(
-                                item)) {
-                              isMatch = true
-                              return true;
-                            }
-                          })
-                          return isMatch;
-                        }
-                        }
+                <Form.Item
+                    name="userName"
+                    rules={[{
+                      required: true,
+                      whitespace: true,
+                      message: '请输入用户名 3-12位',
+                      min: 3,
+                      max: 12
+                    },
+                      {
+                        pattern: /^[a-zA-Z0-9_]+$/,
+                        message: '用户名必须是英文、数字或下划线组成'
+                      },]}
                 >
-                  {getRoleOption()}
-                </Select>
-              </Form.Item>
-            </Form>
-          </Modal>
+                  <Input allowClear={true}
+                         disabled={userInput}
+                         prefix={<UserOutlined/>}
+                         maxLength={12} placeholder="请输入用户名"/>
+                </Form.Item>
+                <Form.Item
+                    name="password"
+                    rules={[{
+                      required: true,
+                      whitespace: true,
+                      message: '请输入密码 4-12位',
+                      min: 4,
+                      max: 12
+                    },
+                      {pattern: /^[a-zA-Z0-9_]+$/, message: '密码必须是英文、数字或下划线组成'},]}
+                >
+                  <Input.Password
+                      prefix={<LockOutlined/>}
+                      placeholder="请输入密码"
+                      allowClear={true}
+                      maxLength={12}
+                  />
+                </Form.Item>
+                <Form.Item
+                    name="email"
+                    rules={[{
+                      required: false,
+                      whitespace: true,
+                      message: '请输入电子邮件'
+                    }, {type: 'email', message: '请输入正确的邮件格式',}]}
+                >
+                  <Input allowClear={true}
+                         prefix={<MailOutlined/>}
+                         maxLength={40} placeholder="请输入电子邮件"/>
+                </Form.Item>
+                <Form.Item
+                    name="phone"
+                    rules={[{required: true, whitespace: true, message: '请输入手机号'},
+                      {
+                        pattern: /^((13[0-9])|(14[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))\d{8}$/,
+                        message: '请输入正确的手机号'
+                      },]}
+                >
+                  <Input allowClear={true}
+                         prefix={<TabletOutlined/>}
+                         maxLength={11} placeholder="请输入手机号"/>
+                </Form.Item>
+                <Form.Item
+                    name="roleId"
+                    rules={[{required: true, whitespace: true, message: '请选择角色'}]}
+                >
+                  <Select showSearch
+                          menuItemSelectedIcon={<UserOutlined/>}
+                          placeholder="请选择角色"
+                          filterOption={(input, option) => {
+                            let str = input.toLowerCase().split('')
+                            let isMatch = false;
+                            str.some((item) => {
+                              if (option.children.toLowerCase().split(
+                                  '').includes(
+                                  item)) {
+                                isMatch = true
+                                return true;
+                              }
+                            })
+                            return isMatch;
+                          }
+                          }
+                  >
+                    {getRoleOption()}
+                  </Select>
+                </Form.Item>
+              </Form>
+            </Modal>
+          </Skeleton>
+
         </Card>
       </>
   )
