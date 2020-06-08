@@ -39,7 +39,7 @@ public class RoleServiceImpl implements RoleService {
     public Role addRole(Role role) {
 
         //判断当前角色是否存在
-        Integer result = roleDao.findUserRepeat(role.getName());
+        Integer result = roleDao.findUserRepeat(role.getName(),role.getrId());
         if (result>0){
             return null;
         }
@@ -58,8 +58,8 @@ public class RoleServiceImpl implements RoleService {
         //添加角色
         roleDao.addRole(role);
         Role roles = roleDao.findRole(role.getrId());
-        Role roles1 = updateRoleFormat(roles);
-        return roles1;
+        roles = updateRoleFormat(roles);
+        return roles;
     }
 
     /**
@@ -94,17 +94,27 @@ public class RoleServiceImpl implements RoleService {
      * @return
      */
     @Override
-    public Integer updateRole(Role role) {
+    public Role updateRole(Role role) {
 
         //判断当前角色是否存在
-        Integer result = roleDao.findUserRepeat(role.getName());
+        Integer result = roleDao.findUserRepeat(role.getName(),role.getrId());
         if (result>0){
             return null;
         }
+        //修改权限格式
+        String databaseMenus = String.join(",", role.getMenus());
+        role.setDatabaseMenus(databaseMenus);
 
+        if (role.getRoleIds()!=null){
+            String roleId = String.join(",", role.getRoleIds());
+            role.setRoleBasicsId(roleId);
+        }
         role.setLastTime(new Date());
-        Integer results = roleDao.updateRole(role);
-        return results;
+        roleDao.updateRole(role);
+
+        Role roles = roleDao.findRole(role.getrId());
+        roles = updateRoleFormat(roles);
+        return roles;
     }
 
     /**
@@ -124,7 +134,7 @@ public class RoleServiceImpl implements RoleService {
         List<Role> basicRole = new ArrayList<>();
 
         if (rIds != null && !"".equals(rIds)) {
-            String[] result = result = rIds.split(",");
+            String[] result = rIds.split(",");
             int[] rIdArray = Arrays.stream(result).mapToInt(Integer::parseInt).toArray();
             basicRole = roleDao.findBasicRole(rIdArray);
         }
@@ -157,6 +167,7 @@ public class RoleServiceImpl implements RoleService {
         if (role.getRoleBasicsId()!=null){
             String[] roleIds = role.getRoleBasicsId().split(",");
             role.setRoleIds(roleIds);
+            role.setRoleBasicsId(null);
         }
         return role;
     }
@@ -181,6 +192,7 @@ public class RoleServiceImpl implements RoleService {
             if (role.get(i).getRoleBasicsId()!=null){
                 String[] roleIds = role.get(i).getRoleBasicsId().split(",");
                 role.get(i).setRoleIds(roleIds);
+                role.get(i).setRoleBasicsId(null);
             }
         }
 

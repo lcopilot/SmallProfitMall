@@ -49,6 +49,7 @@
         LEFT JOIN management_user mrc ON mrc.u_id = mr.create_author_id
         LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
     WHERE
+        mr.sign = 0 AND(
         mr.r_id IN (
         SELECT
             r_id
@@ -65,6 +66,7 @@
         WHERE
         u_id IN ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} ) ) )
         )
+    )
       ORDER BY
 	mr.last_time DESC
     </select>
@@ -75,6 +77,7 @@
             mr.r_id,
             mr.menus,
             mr.NAME,
+            mr.role_ids,
             mr.create_time AS mr_create_time,
             mr.create_author_id,
             mr.last_time AS mr_last_time,
@@ -90,7 +93,7 @@
 
     <!--查询指定角色名数量-->
     <select id="findUserRepeat" resultType="java.lang.Integer">
-        select count(name) FROM management_role WHERE name = #{name}
+        select count(name) FROM management_role WHERE name = #{name} AND r_id <![CDATA[!= ]]> #{rId}
     </select>
 
       <!--逻辑删除角色-->
@@ -100,7 +103,7 @@
 
         <!--编辑角色-->
        <update id="updateRole" parameterType="cn.xgtd.domain.user.Role">
-            update management_role set menus = #{databaseMenus},last_time = #{lastTime},last_author_id = #{lastAuthorId} where  r_id =#{rId}
+            update management_role set menus = #{databaseMenus},last_time = #{lastTime},last_author_id = #{lastAuthorId} ,role_ids = #{roleBasicsId} where  r_id =#{rId}
        </update>
 
        <!--查询基本可创建的角色-->

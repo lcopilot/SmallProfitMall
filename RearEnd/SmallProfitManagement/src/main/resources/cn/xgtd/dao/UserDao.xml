@@ -78,7 +78,7 @@
             <if test="userId!=null ">
                 AND u_id <![CDATA[!= ]]> #{userId}
             </if>
-
+            AND sign = 0;
         </select>
 
       <!--新增用户-->

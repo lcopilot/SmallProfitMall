@@ -35,7 +35,7 @@ public interface RoleDao {
      * @param name 角色名称
      * @return
      */
-    public Integer findUserRepeat(String name);
+    public Integer findUserRepeat(@Param("name") String name,@Param("rId") Integer rId);
 
 
     /**

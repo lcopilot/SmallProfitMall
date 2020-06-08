@@ -44,7 +44,7 @@ public interface RoleService {
      * @param role 角色对象
      * @return
      */
-    public Integer updateRole(Role role);
+    public Role updateRole(Role role);
 
     /**
      * 查询无权限创建角色角色可赋予用户的角色
