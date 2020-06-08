@@ -58,6 +58,7 @@ const Admin = (props) => {
   }
 
   useEffect(() => {
+    collapsedNav();
     window.addEventListener('resize', collapsedNav)
     return () => {
       window.removeEventListener('resize', collapsedNav)

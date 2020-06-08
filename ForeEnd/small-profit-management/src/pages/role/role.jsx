@@ -8,7 +8,7 @@ import {
   Col,
   Table,
   Modal,
-  Tree, Form, Menu, message, Select
+  Tree, Form, Menu, message, Select, Skeleton
 } from "antd";
 import './role.less'
 import *as indexAPI from '../../api/page/index'
@@ -37,6 +37,9 @@ const Role = (props) => {
   const [checkedKeys, setCheckedKeys] = useState([]);
   const [checkedKeysResult, setCheckedKeysResult] = useState([]);
   const [rolesShow, setRolesShow] = useState(false);
+  const [isEdit, setIsEdit] = useState(false)
+  const [rolesTable, setRolesTable] = useState({})
+  const [skeletonLoad, setSkeletonLoad] = useState(true)
 
   const onCheck = (checkedKeys, info) => {
     if (checkedKeys.includes('/user')) {
@@ -73,14 +76,14 @@ const Role = (props) => {
       title: '操作',
       fixed: 'right',
       width: 100,
-      render: (role,record,index) => {
+      render: (role, record, index) => {
         return (
             <>
               <a onClick={() => {
-                editAuthority(role,index)
+                editAuthority(role, index)
               }}>编辑权限</a>
               <a onClick={() => {
-                deleteRole(role,index)
+                deleteRole(role, index)
               }}>删除</a>
             </>
         )
@@ -89,31 +92,33 @@ const Role = (props) => {
   ]
 
   //编辑角色
-  const editAuthority = (role) => {
-    const {menus, name,roleIds} = role
+  const editAuthority = (roles,index) => {
+    const {menus, name, roleIds} = roles
+    setRolesTable({index,roles});
     form.setFieldsValue({
       roleName: name,
-      roleList:roleIds?roleIds:[]
+      roleList: roleIds ? roleIds : []
     })
     setRolesShow(!!roleIds)
+    setIsEdit(true)
     setRoleInput(true)
     setRoleVisible(true)
     setCheckedKeys(menus)
   }
 
-  const deleteRole = (role,index) => {
+  const deleteRole = (roles, index) => {
     confirm({
       title: '删除角色',
       icon: <ExclamationCircleOutlined/>,
-      content: `你确定删除- ${role.name} -角色吗? 删除后无法恢复`,
+      content: `你确定删除- ${roles.name} -角色吗? 删除后无法恢复`,
       cancelText: '取消',
       okText: '确定',
       onOk() {
-        indexAPI.deleteRoles(role.rId).then(res=>{
-          if (res.success){
+        indexAPI.deleteRoles(roles.rId).then(res => {
+          if (res.success) {
             message.success("角色删除成功!")
-            let data=JSON.parse(JSON.stringify(rolesList))
-            data.splice(index,1);
+            let data = JSON.parse(JSON.stringify(rolesList))
+            data.splice(index, 1);
             setRolesList(data);
           }
         })
@@ -125,30 +130,47 @@ const Role = (props) => {
   const getRoles = () => {
     indexAPI.getRoles(user.uId).then(res => {
       if (res.success) {
+        setSkeletonLoad(false);
         setRolesList(res.objectReturn.object)
       }
     })
   }
-  //添加角色
-  const addRole = () => {
+  //添加修改角色
+  const addEditRole = () => {
     form.validateFields().then(values => {
       const roles = {
         createAuthorId: user.uId,
         name: values.roleName,
         menus: checkedKeysResult,
-        roleIds:values.roleList,
+        roleIds: values.roleList,
       }
-      indexAPI.addRoles(roles).then(res => {
-            if (res.success) {
-              setRolesList([res.objectReturn.object, ...rolesList])
-              setRoleVisible(false);
-              setRoleInput(false);
-              form.resetFields();
-            } else {
-              message.warn("角色已存在!")
-            }
+      if (isEdit) {
+        roles.menus = checkedKeysResult.length===0?rolesTable.roles.menus:checkedKeysResult;
+        roles.lastAuthorId = user.uId
+        roles.rId = rolesTable.roles.rId
+        indexAPI.editRoles(roles).then(res => {
+          if (res.success){
+            let data=JSON.parse(JSON.stringify(rolesList))
+            data[rolesTable.index]=res.objectReturn.object
+            setRolesList(data)
+            message.warn("角色修改成功!")
+            shutDown();
+          }else {
+            message.error("修改失败,请稍后重试!")
+            shutDown();
           }
-      )
+        })
+      } else {
+        indexAPI.addRoles(roles).then(res => {
+              if (res.success) {
+                setRolesList([res.objectReturn.object, ...rolesList])
+                shutDown();
+              } else {
+                message.warn("角色已存在!")
+              }
+            }
+        )
+      }
     })
   }
   //获取用户所拥有的权限
@@ -185,6 +207,13 @@ const Role = (props) => {
     return roleOption
   }
 
+  const shutDown = () => {
+    setIsEdit(false)
+    setRoleVisible(false);
+    setRoleInput(false);
+    form.resetFields();
+  }
+
   useEffect(() => {
     setUserAuth(getUserAuth(menuList))
     getRoles();
@@ -193,113 +222,113 @@ const Role = (props) => {
   }, [])
 
   const title = (
-      <Row gutter={16}>
-        <Col xs={24} sm={9} md={6} lg={6} xl={4}>
-          <DatePicker.RangePicker/>
-        </Col>
-        <Col xs={24} sm={15} md={9} lg={9} xl={9}>
-          <Search
-              placeholder="查询角色"
-              onSearch={value => console.log(value)}
-          />
-        </Col>
-        <Col xs={24} sm={24} md={9} lg={9} xl={11}>
-          <Button type='primary' onClick={() => {
-            setRoleVisible(true)
-          }}>创建角色</Button>
-        </Col>
-      </Row>
+      <Skeleton  active loading={skeletonLoad}>
+        <Row gutter={16}>
+          <Col xs={24} sm={9} md={6} lg={6} xl={4}>
+            <DatePicker.RangePicker/>
+          </Col>
+          <Col xs={24} sm={15} md={9} lg={9} xl={9}>
+            <Search
+                placeholder="查询角色"
+                onSearch={value => console.log(value)}
+            />
+          </Col>
+          <Col xs={24} sm={24} md={9} lg={9} xl={11}>
+            <Button type='primary' onClick={() => {
+              setRoleVisible(true)
+            }}>创建角色</Button>
+          </Col>
+        </Row>
+      </Skeleton>
+
   )
   return (
       <>
         <Card title={title}>
-          <Table
-              bordered
-              rowKey={(item) => item.rId}
-              dataSource={rolesList}
-              columns={columns}
-              pagination={{
-                defaultPageSize: PAGINATION.PAGE_SIZE,
-                total: rolesList.length,
-                showTotal: PAGINATION.SHOW_TOTAL,
-                showSizeChanger: true,
-                showQuickJumper: true,
-                pageSizeOptions: PAGINATION.PAGE_SIZE_OPTIONS
-              }}
-          />
-          <Modal
-              getContainer={false}
-              title="创建角色"
-              visible={roleVisible}
-              onOk={addRole}
-              onCancel={() => {
-                setRoleVisible(false);
-                setRoleInput(false)
-                form.resetFields();
-              }}
-          >
-            <Form
-                form={form}
-                name="normal_login"
-                initialValues={{remember: true}}
+          <Skeleton  active loading={skeletonLoad}>
+            <Table
+                bordered
+                rowKey={(item) => item.rId}
+                dataSource={rolesList}
+                columns={columns}
+                pagination={{
+                  defaultPageSize: PAGINATION.PAGE_SIZE,
+                  total: rolesList.length,
+                  showTotal: PAGINATION.SHOW_TOTAL,
+                  showSizeChanger: true,
+                  showQuickJumper: true,
+                  pageSizeOptions: PAGINATION.PAGE_SIZE_OPTIONS
+                }}
+            />
+            <Modal
+                getContainer={false}
+                title="创建角色"
+                visible={roleVisible}
+                onOk={addEditRole}
+                onCancel={shutDown}
             >
-              <Form.Item
-                  name="roleName"
-                  rules={[{
-                    required: true,
-                    whitespace: true,
-                    message: '请输入角色名 1-12位',
-                    min: 1,
-                    max: 12
-                  },
-                    {
-                      pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/,
-                      message: '角色名必须是中英文、数字或下划线组成'
-                    },]}
+              <Form
+                  form={form}
+                  name="normal_login"
+                  initialValues={{remember: true}}
               >
-                <Input allowClear={true}
-                       disabled={roleInput}
-                       prefix={<UserOutlined className="site-form-item-icon"/>}
-                       maxLength={12} placeholder="请输入角色名"/>
-              </Form.Item>
-              <Form.Item label='设置权限'>
-                <Tree
-                    checkable
-                    defaultExpandAll
-                    onCheck={onCheck}
-                    checkedKeys={checkedKeys}
-                    showIcon
-                    treeData={userAuth}
-                />
-              </Form.Item>
-              <Form.Item  name="roleList">
-                {
-                  rolesShow ? <Select
-                      showSearch
-                      menuItemSelectedIcon={<UserOutlined/>}
-                      mode="multiple"
-                      placeholder="请选择用户能授权的角色"
-                      filterOption={(input, option) => {
-                        let str = input.toLowerCase().split('')
-                        let isMatch = false;
-                        str.some((item) => {
-                          if (option.children.toLowerCase().split('').includes(
-                              item)) {
-                            isMatch = true
-                            return true;
-                          }
-                        })
-                        return isMatch;
-                      }
-                      }
-                  >
-                    {getRoleOption()}
-                  </Select>: ''
-                }
-              </Form.Item>
-
-            </Form>
-          </Modal>
+                <Form.Item
+                    name="roleName"
+                    rules={[{
+                      required: true,
+                      whitespace: true,
+                      message: '请输入角色名 1-12位',
+                      min: 1,
+                      max: 12
+                    },
+                      {
+                        pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/,
+                        message: '角色名必须是中英文、数字或下划线组成'
+                      },]}
+                >
+                  <Input allowClear={true}
+                         disabled={roleInput}
+                         prefix={<UserOutlined className="site-form-item-icon"/>}
+                         maxLength={12} placeholder="请输入角色名"/>
+                </Form.Item>
+                <Form.Item label='设置权限'>
+                  <Tree
+                      checkable
+                      defaultExpandAll
+                      onCheck={onCheck}
+                      checkedKeys={checkedKeys}
+                      showIcon
+                      treeData={userAuth}
+                  />
+                </Form.Item>
+                <Form.Item name="roleList">
+                  {
+                    rolesShow ? <Select
+                        showSearch
+                        menuItemSelectedIcon={<UserOutlined/>}
+                        mode="multiple"
+                        placeholder="请选择用户能授权的角色"
+                        filterOption={(input, option) => {
+                          let str = input.toLowerCase().split('')
+                          let isMatch = false;
+                          str.some((item) => {
+                            if (option.children.toLowerCase().split('').includes(
+                                item)) {
+                              isMatch = true
+                              return true;
+                            }
+                          })
+                          return isMatch;
+                        }
+                        }
+                    >
+                      {getRoleOption()}
+                    </Select> : ''
+                  }
+                </Form.Item>
+              </Form>
+            </Modal>
+          </Skeleton>
         </Card>
       </>
   )

@@ -30,7 +30,11 @@ export const editUser=(data)=>{
 export const deleteUser=(userId)=>{
   return http.requestDelete(apiUrl+`/userController/deleteUser/${userId}`)
 }
+//修改角色
+export const editRoles=(data)=>{
+  return http.requestPut(apiUrl+'/RoleController/updateRole',data)
+}
 //删除角色
-export const deleteRoles=(userId)=>{
-  return http.requestDelete(apiUrl+`/userController/deleteUser/${userId}`)
+export const deleteRoles=(rolesId)=>{
+  return http.requestDelete(apiUrl+`/RoleController/findBasicsRole/${rolesId}`)
 }
