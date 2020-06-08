@@ -31,6 +31,7 @@
         <result property="createAuthorId" column="create_author_id"></result>
         <result property="lastTime" column="mr_last_time"></result>
         <result property="lastAuthorName" column="mrl_last_name"></result>
+        <result property="roleBasicsId" column="role_ids"></result>
 </resultMap>
 
 
@@ -148,6 +149,7 @@
             mr.create_time AS mr_create_time,
             mr.create_author_id,
             mr.last_time AS mr_last_time,
+            mr.role_ids,
             ms.user_name AS ms_last_name,
             ma.user_name AS ma_creator_name,
             mrc.user_name AS mrc_creator_name,

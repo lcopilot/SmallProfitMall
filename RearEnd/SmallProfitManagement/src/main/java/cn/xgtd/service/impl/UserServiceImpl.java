@@ -50,16 +50,8 @@ public class UserServiceImpl implements UserService {
         //添加角色关系
         roleDao.addRoleRelationship(user.getCreateAuthorId(),user.getuId());
         User users = userDao.findUser(user.getuId());
-        Role role = users.getRole();
-        if (role.getDatabaseMenus()==null){
-            String [] menus= {};
-            role.setMenus(menus);
-        }else {
-            String[] menus = role.getDatabaseMenus().split(",");
-            role.setDatabaseMenus(null);
-            role.setMenus(menus);
-            users.setRole(role);
-        }
+        Role role = updateRole(users.getRole());
+        users.setRole(role);
         return  users;
     }
 
@@ -75,16 +67,8 @@ public class UserServiceImpl implements UserService {
         String userPassword = userDao.findPassword(userName);
         if (password.equals(userPassword)){
             User responseUser = userDao.findUserRole(userName);
-            Role role = responseUser.getRole();
-            if (role.getDatabaseMenus()==null){
-                String [] menus= {};
-                role.setMenus(menus);
-            }else {
-                String[] menus = role.getDatabaseMenus().split(",");
-                role.setDatabaseMenus(null);
-                role.setMenus(menus);
-                responseUser.setRole(role);
-            }
+            Role role = updateRole(responseUser.getRole());
+            responseUser.setRole(role);
             return responseUser;
         }
         return null;
@@ -135,8 +119,21 @@ public class UserServiceImpl implements UserService {
         user.setLastTime(new Date());
         userDao.updateUser(user);
 
-        User users = userDao.findUser(user.getuId());
-        Role role = users.getRole();
+        User users = userDao.findUser(10050);
+        Role role = updateRole(users.getRole());
+        users.setRole(role);
+
+
+        return users;
+    }
+
+
+    /**
+     * 修改角色权限格式
+     * @param role
+     * @return
+     */
+    public Role updateRole(Role role){
         if (role.getDatabaseMenus()==null){
             String [] menus= {};
             role.setMenus(menus);
@@ -144,10 +141,13 @@ public class UserServiceImpl implements UserService {
             String[] menus = role.getDatabaseMenus().split(",");
             role.setDatabaseMenus(null);
             role.setMenus(menus);
-            users.setRole(role);
         }
 
-        return users;
+        if (role.getRoleBasicsId()!=null){
+            String[] roleIds = role.getRoleBasicsId().split(",");
+            role.setRoleIds(roleIds);
+        }
+        return role;
     }
 
 }

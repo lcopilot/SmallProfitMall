@@ -3,7 +3,6 @@ package cn.xgtd.service.impl;
 import cn.xgtd.dao.RoleDao;
 import cn.xgtd.dao.UserDao;
 import cn.xgtd.domain.user.Role;
-import cn.xgtd.domain.user.User;
 import cn.xgtd.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,15 +58,8 @@ public class RoleServiceImpl implements RoleService {
         //添加角色
         roleDao.addRole(role);
         Role roles = roleDao.findRole(role.getrId());
-        if (roles.getDatabaseMenus() == null){
-            String [] menus= {};
-            roles.setMenus(menus);
-        }else {
-            String[] menus = roles.getDatabaseMenus().split(",");
-            roles.setDatabaseMenus(null);
-            roles.setMenus(menus);
-        }
-        return roles;
+        Role roles1 = updateRoleFormat(roles);
+        return roles1;
     }
 
     /**
@@ -80,16 +72,8 @@ public class RoleServiceImpl implements RoleService {
 
 
        List<Role> roles =  roleDao.findRoleList(uId);
-        for (int i = 0; i <roles.size() ; i++) {
-            if (roles.get(i).getDatabaseMenus() == null ){
-                String [] menus= {};
-                roles.get(i).setMenus(menus);
-            }else {
-                String[] menus = roles.get(i).getDatabaseMenus().split(",");
-                roles.get(i).setDatabaseMenus(null);
-                roles.get(i).setMenus(menus);
-            }
-        }
+        roles = updateRoleFormat(roles);
+
 
         return roles;
     }
@@ -133,16 +117,7 @@ public class RoleServiceImpl implements RoleService {
 
 
         List<Role> roles = roleDao.findRoleList(uId);
-        for (int i = 0; i < roles.size(); i++) {
-            if (roles.get(i).getDatabaseMenus() == null) {
-                String[] menus = {};
-                roles.get(i).setMenus(menus);
-            } else {
-                String[] menus = roles.get(i).getDatabaseMenus().split(",");
-                roles.get(i).setDatabaseMenus(null);
-                roles.get(i).setMenus(menus);
-            }
-        }
+        roles = updateRoleFormat(roles);
 
         //查询基本可可选角色
         String rIds = roleDao.findRoleIds(uId);
@@ -161,5 +136,54 @@ public class RoleServiceImpl implements RoleService {
         }
 
         return roles;
+    }
+
+
+    /**
+     * 修改角色权限格式
+     * @param role
+     * @return
+     */
+    public Role updateRoleFormat(Role role){
+        if (role.getDatabaseMenus()==null){
+            String [] menus= {};
+            role.setMenus(menus);
+        }else {
+            String[] menus = role.getDatabaseMenus().split(",");
+            role.setDatabaseMenus(null);
+            role.setMenus(menus);
+        }
+
+        if (role.getRoleBasicsId()!=null){
+            String[] roleIds = role.getRoleBasicsId().split(",");
+            role.setRoleIds(roleIds);
+        }
+        return role;
+    }
+
+
+    /**
+     * 修改角色权限格式
+     * @param role
+     * @return
+     */
+    public List<Role> updateRoleFormat(List<Role> role){
+        for (int i = 0; i <role.size() ; i++) {
+            if (role.get(i).getDatabaseMenus()==null){
+                String [] menus= {};
+                role.get(i).setMenus(menus);
+            }else {
+                String[] menus = role.get(i).getDatabaseMenus().split(",");
+                role.get(i).setDatabaseMenus(null);
+                role.get(i).setMenus(menus);
+            }
+
+            if (role.get(i).getRoleBasicsId()!=null){
+                String[] roleIds = role.get(i).getRoleBasicsId().split(",");
+                role.get(i).setRoleIds(roleIds);
+            }
+        }
+
+        return role;
     }
 }
