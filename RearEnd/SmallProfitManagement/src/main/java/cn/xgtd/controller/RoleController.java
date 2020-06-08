@@ -9,6 +9,8 @@ import cn.xgtd.response.objectReturn.ObjectReturnResponse;
 import cn.xgtd.response.pagination.Pagination;
 import cn.xgtd.response.pagination.ResponsePagination;
 import cn.xgtd.service.RoleService;
+import cn.xgtd.util.redis.RedisUtil;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,8 @@ import java.util.List;
 @ResponseBody
 public class RoleController {
 
+    @Autowired
+    RedisUtil redisUtil ;
 
     @Autowired
     RoleService roleService;
@@ -56,6 +60,7 @@ public class RoleController {
      */
     @RequestMapping(value = "/findRole/{uId}",method = RequestMethod.GET)
     public ObjectReturnResponse findRole(@PathVariable("uId") Integer uId){
+
         if (uId == null){
             return new ObjectReturnResponse(CommonCode.INVALID_PARAM,null);
         }
