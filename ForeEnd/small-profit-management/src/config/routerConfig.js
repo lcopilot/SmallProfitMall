@@ -8,7 +8,7 @@ import Analysis from "../pages/dashboard/analysis";
 import Monitor from "../pages/dashboard/monitor";
 import Order from "../pages/order/order";
 import React from "react";
-import ProductDetail from "../pages/product/ProductDetail";
+import ProductDetail from "../pages/product/productDetail";
 
 const routerList = [
   {

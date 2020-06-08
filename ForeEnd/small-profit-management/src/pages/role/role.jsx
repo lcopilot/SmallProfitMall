@@ -93,7 +93,7 @@ const Role = (props) => {
 
   //编辑角色
   const editAuthority = (roles,index) => {
-    const {menus, name, roleIds} = roles
+    const {menus, name, roleIds,rId} = roles
     setRolesTable({index,roles});
     form.setFieldsValue({
       roleName: name,
@@ -101,7 +101,7 @@ const Role = (props) => {
     })
     setRolesShow(!!roleIds)
     setIsEdit(true)
-    setRoleInput(true)
+    setRoleInput(rId===user.roleId)
     setRoleVisible(true)
     setCheckedKeys(menus)
   }
@@ -153,7 +153,7 @@ const Role = (props) => {
             let data=JSON.parse(JSON.stringify(rolesList))
             data[rolesTable.index]=res.objectReturn.object
             setRolesList(data)
-            message.warn("角色修改成功!")
+            message.success("角色修改成功!")
             shutDown();
           }else {
             message.error("修改失败,请稍后重试!")
