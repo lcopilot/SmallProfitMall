@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Integer deleteUser(Integer userId) {
-        Integer result = userDao.deleteUser(userId);
+        Integer result = userDao.deleteUser(userId,null);
         return result;
     }
 
