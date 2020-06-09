@@ -249,12 +249,12 @@ const Role = (props) => {
             <DatePicker showTime placeholder="开始日期"  onChange={(date)=>{
               setQueryDate({
                 beforeTime:queryDate.beforeTime,
-                laterTime:moment(date).format("YYYY-MM-DD HH:mm:ss"),
+                laterTime:date?moment(date).format("YYYY-MM-DD HH:mm:ss"):null,
               })
             }}/>
             <DatePicker showTime placeholder="结束日期" onChange={(date)=>{
               setQueryDate({
-                beforeTime:moment(date).format("YYYY-MM-DD HH:mm:ss"),
+                beforeTime:date?moment(date).format("YYYY-MM-DD HH:mm:ss"):null,
                 laterTime:queryDate.laterTime,
               })
             }}/>
