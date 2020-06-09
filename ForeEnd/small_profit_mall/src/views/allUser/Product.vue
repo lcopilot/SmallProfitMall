@@ -152,7 +152,8 @@
                   <el-radio-group v-model="productForm.colour" size="medium"
                                   @change="attributeChange">
                     <el-radio-button :class="index>=1?'product_radio_btn':'product_radio_btn_first'"
-                                     v-for="(colour,index) in product.colour" :key="colour.attributeId"
+                                     v-for="(colour,index) in product.colour"
+                                     :key="colour.attributeId"
                                      :label="colour.attributeId">{{colour.attributeContent}}
                     </el-radio-button>
                   </el-radio-group>
@@ -164,7 +165,8 @@
                   <el-radio-group v-model="productForm.version" size="medium"
                                   @change="attributeChange">
                     <el-radio-button :class="index>=1?'product_radio_btn':'product_radio_btn_first'"
-                                     v-for="(version,index) in product.version" :key="version.attributeId"
+                                     v-for="(version,index) in product.version"
+                                     :key="version.attributeId"
                                      :label="version.attributeId">{{version.attributeContent}}
                     </el-radio-button>
                   </el-radio-group>
@@ -202,7 +204,8 @@
                   <el-radio-group v-model="productForm.taste" size="medium"
                                   @change="attributeChange">
                     <el-radio-button :class="index>=1?'product_radio_btn':'product_radio_btn_first'"
-                                     v-for="(taste,index) in product.taste" :label="taste.attributeId"
+                                     v-for="(taste,index) in product.taste"
+                                     :label="taste.attributeId"
                                      :key="taste.attributeId">
                       {{taste.attributeContent}}
                     </el-radio-button>
@@ -228,9 +231,19 @@
               <el-form-item>
                 <el-collapse @change="handleChange">
                   <el-collapse-item title="服务承诺" name="1">
-                    <div>支持七天与理由</div>
-                    <div>
-                      过敏包退 破损包退 正品保障 进口保税 赠运费险
+                    <div style="text-align: left">产品品质--全球遴选 品牌合作</div>
+                    <div style="text-align: left">我们与全球品牌厂商、顶级经销商直接合作，并不断遴选全球范围最新时尚美妆，为消费者提供正品、优质、低价的化妆品网购服务。
+                    </div>
+                    <br/>
+                    <div style="text-align: left">服务水平--货到付款 七日退换</div>
+                    <div style="text-align: left"> 我们与顶尖物流公司合作，为您送货上门，货到付款，在您签收快递七日内，不满意即可申请退换货，让您购物后顾无忧。
+                    </div>
+                    <br/>
+                    <div style="text-align: left">
+                      价格优势--100%正品 100%低价
+                    </div>
+                    <div style="text-align: left">
+                      我们与品牌直接合作，没有中间渠道环节，将利润让利给消费者，并保证：无论是专柜还是进口产品，100%正品，100%低价。唯一商城将为大家竭诚服务。
                     </div>
                   </el-collapse-item>
                 </el-collapse>
@@ -441,7 +454,7 @@
         product: [],
         productForm: {
           //配置id
-          distinctionId:0,
+          distinctionId: 0,
           //数字类型的库存
           inventory: 0,
           //字符类型的库存
@@ -496,7 +509,7 @@
         this.bigImg = this.product.imageSite[index];
       },
       //停止商品图片切换
-      stopSwitchProductImg(){
+      stopSwitchProductImg() {
         clearInterval(this.timer);
       },
       //每隔三秒切换商品图片
@@ -568,7 +581,7 @@
                     && product.specification.length > 0) ? product.specification[0].attributeId : 0;
                 this.productForm.size = (product.size !== undefined
                     && product.size.length > 0) ? product.size[0].attributeId : 0;
-                if (this.product.productDistinctions){
+                if (this.product.productDistinctions) {
                   this.attributeChange();
                 }
               }
@@ -584,11 +597,11 @@
             type: "warning"
           })
         }
-        const product={
-          productId:this.productId,
-          userId:sessionStorage.getItem("uId"),
-          distinctionId:this.productForm.distinctionId,
-          quantity:this.productForm.quantity
+        const product = {
+          productId: this.productId,
+          userId: sessionStorage.getItem("uId"),
+          distinctionId: this.productForm.distinctionId,
+          quantity: this.productForm.quantity
         }
         //如果点击速度太快，小于200毫秒的话就不会向后台发请求，但是最后总会进行一次请求的。
         clearTimeout(this.addCartTimer);
@@ -601,7 +614,7 @@
               })
               this.modifyCartSum(res.queryResult.total);
             } else {
-              if (res.code ===11111) {
+              if (res.code === 11111) {
                 return this.$message.warning("购物车已满!");
               }
               if (res.code === 10003) {
@@ -625,11 +638,11 @@
             type: "warning"
           })
         }
-        const product={
-          productId:this.productId,
-          userId:sessionStorage.getItem("uId"),
-          distinctionId:this.productForm.distinctionId,
-          quantity:this.productForm.quantity
+        const product = {
+          productId: this.productId,
+          userId: sessionStorage.getItem("uId"),
+          distinctionId: this.productForm.distinctionId,
+          quantity: this.productForm.quantity
         }
         productApi.buyNow(product).then(res => {
           if (res.success) {
@@ -639,7 +652,7 @@
                 orderNumber: res.queryResult.list[0],
               }
             });
-          }else if (res.code === 10021) {
+          } else if (res.code === 10021) {
             this.$message.warning("库存不足,请重试!")
           }
         })
@@ -773,6 +786,7 @@
     border-left: 1px solid #dcdfe6;
     margin: 0 5px 5px 0;
   }
+
   .product_radio_btn_first {
     margin: 0 5px 5px 0;
   }
