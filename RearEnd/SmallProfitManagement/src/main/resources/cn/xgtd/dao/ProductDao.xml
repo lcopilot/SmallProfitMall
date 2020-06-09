@@ -5,32 +5,41 @@
 
 <mapper namespace="cn.xgtd.dao.ProductDao">
 
-    <resultMap id="findProductListMap" type="cn.xgtd.domain.product.Product">
-    <id column="productId" property="productId"></id>
-    <result property="productName" column="productName"></result>
+<!--商品基本信息map-->
+<resultMap id="fendBasicProductMap" type="cn.xgtd.domain.product.BasicProduct">
+    <id property="productId" column="productId"></id>
     <result property="productPrice" column="ProductPrice"></result>
+    <result property="productName" column="productName"></result>
     <result property="productClassify" column="final_content"></result>
-    </resultMap>
+    <result property="productPicture" column="ImageSite"></result>
+    <result property="classifyId" column="product_final_id"></result>
+</resultMap>
 
-    <!--查询所有商品基本信息-->
-    <select id="findProductList" resultMap="findProductListMap">
-       SELECT
-            pb.productId,
-            pb.productName,
-            pp.ProductPrice,
-            pfc.final_content
+    <!--查询基本商品信息-->
+    <select id="fendBasicProduct" resultMap="fendBasicProductMap">
+    SELECT
+        pb.productId,
+        pb.productName,
+        pfc.final_content,
+        pfc.product_final_id,
+        pp.ProductPrice,
+        pi.ImageSite
+
         FROM
-            ProductBasis pb
-        LEFT JOIN
-            ProductPrice pp
-            ON
-            pb.ProductId = pp.ProductId
-        LEFT JOIN
-            product_final_category  pfc
-            ON
-            pfc.product_final_id = pb.productFinalCategory
-
-
+        ProductBasis pb
+        LEFT JOIN ProductPrice pp ON pb.productId = pp.ProductId
+        LEFT JOIN ProductImage pi ON pb.productId = pi.ProductId
+        LEFT JOIN product_final_category pfc ON pb.productFinalCategory = pfc.product_final_id
+        WHERE pi.sign = 1   LIMIT #{start}, #{pageSize}
     </select>
+
+
+    <!--查询商品总数量-->
+    <select id="findFavoriteQuantity" resultType="java.lang.Integer">
+        SELECT count(productId) FROM ProductBasis
+    </select>
+
+
+
 
 </mapper>

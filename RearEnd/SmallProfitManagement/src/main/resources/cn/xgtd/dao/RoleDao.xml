@@ -112,6 +112,7 @@
             mr.r_id,
             mr.menus,
             mr.NAME,
+            mr.role_ids,
             mr.create_time AS mr_create_time,
             mr.create_author_id,
             mr.last_time AS mr_last_time,

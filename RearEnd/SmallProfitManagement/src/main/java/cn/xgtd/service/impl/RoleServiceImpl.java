@@ -7,10 +7,7 @@ import cn.xgtd.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * 角色管理业务层
@@ -63,7 +60,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     /**
-     * 查询所有当前角色下子节点
+     * 查询所有当前角色以及下级创建的角色
      * @param uId 用户id
      * @return
      */
@@ -71,8 +68,6 @@ public class RoleServiceImpl implements RoleService {
     public List<Role> findRoleList(Integer uId) {
        List<Role> roles =  roleDao.findRoleList(uId);
         roles = updateRoleFormat(roles);
-
-
         return roles;
     }
 
@@ -143,24 +138,24 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<Role> findBasicsRole(Integer uId) {
 
-
-        List<Role> roles = roleDao.findRoleList(uId);
-        roles = updateRoleFormat(roles);
-
         //查询基本可可选角色
         String rIds = roleDao.findRoleIds(uId);
         List<Role> basicRole = new ArrayList<>();
-
+        //不可选
+        String[] result = null;
         if (rIds != null && !"".equals(rIds)) {
-            String[] result = rIds.split(",");
+            result = rIds.split(",");
             int[] rIdArray = Arrays.stream(result).mapToInt(Integer::parseInt).toArray();
             basicRole = roleDao.findBasicRole(rIdArray);
         }
 
-        for (int i = 0; i < basicRole.size(); i++) {
-            if (roles != basicRole.get(i)) {
-                roles.add(basicRole.get(i));
-            }
+
+        List<Role> roles = roleDao.findRoleList(uId);
+        roles = updateRoleFormat(roles);
+
+        basicRole = updateRoleFormat(basicRole);
+        for (int i = 0; i <basicRole.size(); i++) {
+            roles.add(basicRole.get(i));
         }
 
         return roles;
@@ -215,5 +210,13 @@ public class RoleServiceImpl implements RoleService {
         }
 
         return role;
+    }
+
+    //去重
+    public static List removeDuplicate(List list) {
+        HashSet h = new HashSet(list);
+        list.clear();
+        list.addAll(h);
+        return list;
     }
 }
