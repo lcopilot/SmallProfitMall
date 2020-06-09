@@ -133,7 +133,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public List<User> findUserSearch(String content, Date laterTime, Date beforeTime) {
+    public List<User> findUserSearch(String content, String laterTime, String beforeTime) {
         List<User> users = userDao.findUserSearch(content,laterTime,beforeTime);
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getRole() != null) {

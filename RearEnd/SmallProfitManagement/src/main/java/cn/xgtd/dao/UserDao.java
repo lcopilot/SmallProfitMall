@@ -101,6 +101,6 @@ public interface UserDao {
      * @param beforeTime 什么时间之后
      * @return
      */
-    public List<User> findUserSearch(@Param("content") String content, @Param("laterTime") Date laterTime , @Param("beforeTime")Date beforeTime);
+    public List<User> findUserSearch(@Param("content") String content, @Param("laterTime") String laterTime , @Param("beforeTime")String beforeTime);
 
 }

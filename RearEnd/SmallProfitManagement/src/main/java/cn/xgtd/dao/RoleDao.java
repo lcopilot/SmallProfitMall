@@ -102,7 +102,7 @@ public interface RoleDao {
      * @param beforeTime 之前
      * @return
      */
-    public List<Role> findRoleSearch(@Param("content") String content,@Param("laterTime") Date laterTime ,@Param("beforeTime") Date beforeTime);
+    public List<Role> findRoleSearch(@Param("content") String content,@Param("laterTime") String laterTime ,@Param("beforeTime") String beforeTime);
 
 
 }

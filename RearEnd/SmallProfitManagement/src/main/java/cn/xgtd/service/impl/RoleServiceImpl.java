@@ -169,7 +169,7 @@ public class RoleServiceImpl implements RoleService {
      * @return
      */
     @Override
-    public List<Role> findRoleSearch(String content, Date laterTime, Date beforeTime) {
+    public List<Role> findRoleSearch(String content, String laterTime, String beforeTime) {
         List<Role> roles = roleDao.findRoleSearch(content,laterTime,beforeTime);
         //转换格式
         roles = updateRoleFormat(roles);

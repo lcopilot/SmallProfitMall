@@ -64,7 +64,7 @@ public interface RoleService {
      * @param beforeTime 之前
      * @return
      */
-    public List<Role> findRoleSearch( String content, Date laterTime ,Date beforeTime);
+    public List<Role> findRoleSearch( String content, String laterTime ,String beforeTime);
 
 
 

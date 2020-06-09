@@ -60,7 +60,7 @@ public interface UserService {
      * @param beforeTime 什么时间之后
      * @return
      */
-    public List<User> findUserSearch(String content,  Date laterTime , Date beforeTime);
+    public List<User> findUserSearch(String content,  String laterTime , String beforeTime);
 
 
 }
