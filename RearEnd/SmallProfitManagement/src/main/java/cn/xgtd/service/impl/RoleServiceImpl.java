@@ -161,6 +161,21 @@ public class RoleServiceImpl implements RoleService {
         return roles;
     }
 
+    /**
+     * 查询角色
+     * @param content 查询内容
+     * @param laterTime 之后
+     * @param beforeTime 之前
+     * @return
+     */
+    @Override
+    public List<Role> findRoleSearch(String content, Date laterTime, Date beforeTime) {
+        List<Role> roles = roleDao.findRoleSearch(content,laterTime,beforeTime);
+        //转换格式
+        roles = updateRoleFormat(roles);
+        return roles;
+    }
+
 
     /**
      * 修改角色权限格式
@@ -211,6 +226,7 @@ public class RoleServiceImpl implements RoleService {
 
         return role;
     }
+
 
     //去重
     public static List removeDuplicate(List list) {

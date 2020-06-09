@@ -1,5 +1,6 @@
 package cn.xgtd.controller;
 
+import cn.xgtd.domain.user.Role;
 import cn.xgtd.domain.user.User;
 import cn.xgtd.response.CommonCode;
 import cn.xgtd.response.list.QueryResponseResult;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -108,6 +110,20 @@ public class UserController {
 		return new ObjectReturnResponse(CommonCode.FAIL,null);
 	}
 
+	/**
+	 * 搜索用户
+	 * @param content 查询内容
+	 * @param laterTime 之后
+	 * @param beforeTime 之前
+	 * @return
+	 */
+	@RequestMapping(value = "/findUserSearch",method = RequestMethod.GET)
+	public ObjectReturnResponse findUserSearch(String content, Date laterTime, Date beforeTime){
+		List<User> users = userService.findUserSearch(content,laterTime,beforeTime);
+		ObjectReturn objectReturn = new ObjectReturn();
+		objectReturn.setObject(users);
+		return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+	}
 
 
 }

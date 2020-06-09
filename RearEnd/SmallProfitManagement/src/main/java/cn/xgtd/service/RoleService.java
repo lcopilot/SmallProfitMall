@@ -3,9 +3,11 @@ package cn.xgtd.service;
 import cn.xgtd.dao.RoleDao;
 import cn.xgtd.domain.user.Role;
 import cn.xgtd.domain.user.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,5 +55,17 @@ public interface RoleService {
      * @return
      */
     public List<Role> findBasicsRole(Integer uId);
+
+
+    /**
+     * 查询时间
+     * @param content 查询内容
+     * @param laterTime 之后
+     * @param beforeTime 之前
+     * @return
+     */
+    public List<Role> findRoleSearch( String content, Date laterTime ,Date beforeTime);
+
+
 
 }

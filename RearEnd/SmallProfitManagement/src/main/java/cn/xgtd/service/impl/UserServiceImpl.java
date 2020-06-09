@@ -84,9 +84,7 @@ public class UserServiceImpl implements UserService {
         List<User> users = userDao.findUserList(uId);
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getRole() != null) {
-                String[] menus = users.get(i).getRole().getDatabaseMenus().split(",");
-                users.get(i).getRole().setDatabaseMenus(null);
-                users.get(i).getRole().setMenus(menus);
+                users.get(i).setRole(updateRole(users.get(i).getRole()));
             }
     }
         return users;
@@ -124,6 +122,24 @@ public class UserServiceImpl implements UserService {
         users.setRole(role);
 
 
+        return users;
+    }
+
+    /**
+     * 搜索用户
+     * @param content 搜索内容
+     * @param laterTime 什么时间之前
+     * @param beforeTime 什么时间之后
+     * @return
+     */
+    @Override
+    public List<User> findUserSearch(String content, Date laterTime, Date beforeTime) {
+        List<User> users = userDao.findUserSearch(content,laterTime,beforeTime);
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getRole() != null) {
+                users.get(i).setRole(updateRole(users.get(i).getRole()));
+            }
+        }
         return users;
     }
 

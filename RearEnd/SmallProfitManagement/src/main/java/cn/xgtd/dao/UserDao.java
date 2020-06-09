@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -92,5 +93,14 @@ public interface UserDao {
      * @return
      */
     public Integer updateUser(User user);
+
+    /**
+     * 查询用户
+     * @param content 搜索内容
+     * @param laterTime 什么时间之前
+     * @param beforeTime 什么时间之后
+     * @return
+     */
+    public List<User> findUserSearch(@Param("content") String content, @Param("laterTime") Date laterTime , @Param("beforeTime")Date beforeTime);
 
 }

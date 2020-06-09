@@ -28,4 +28,5 @@ public interface ProductService {
      * @return
      */
     public Integer[] fendTotalPage(Integer pageSize);
+
 }

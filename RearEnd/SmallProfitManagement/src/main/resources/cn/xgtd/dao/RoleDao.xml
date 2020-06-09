@@ -137,7 +137,34 @@
             SELECT mr.role_ids FROM management_user mu  LEFT JOIN  management_role mr ON mu.role_id = mr.r_id WHERE  mu.u_id = #{uId}
        </select>
 
-
+       <!--搜索角色-->
+       <select id="findRoleSearch" resultMap="roleMap">
+            SELECT
+                mr.r_id,
+                mr.menus,
+                mr.NAME,
+                mr.role_ids,
+                mr.create_time AS mr_create_time,
+                mr.create_author_id,
+                mr.last_time AS mr_last_time,
+                mrc.user_name AS mrc_creator_name,
+                mrl.user_name AS mrl_last_name
+            FROM
+                management_role mr
+                LEFT JOIN management_user mrc ON mrc.u_id = mr.create_author_id
+                LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
+            WHERE
+                CONCAT( mr.name ) LIKE concat ( '%', #{content}, '%' )
+              <if test="laterTime != null">
+                 AND mr.create_time &gt; #{laterTime}
+              </if>
+                  <if test="beforeTime !=null">
+                 AND mr.create_time   &lt; #{beforeTime}
+              </if>
+                AND mr.sign = 0
+            ORDER BY
+                mr.last_time DESC
+        </select>
 
 
 </mapper>

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -128,6 +129,22 @@ public class RoleController {
         ObjectReturn objectReturn = new ObjectReturn();
         List<Role> role = roleService.findBasicsRole(uId);
         objectReturn.setObject(role);
+        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+    }
+
+
+    /**
+     * 搜索角色
+     * @param content 查询内容
+     * @param laterTime 之后
+     * @param beforeTime 之前
+     * @return
+     */
+    @RequestMapping(value = "/findRoleSearch",method = RequestMethod.GET)
+    public ObjectReturnResponse findRoleSearch(String content, Date laterTime, Date beforeTime){
+        List<Role> roles = roleService.findRoleSearch(content,laterTime,beforeTime);
+        ObjectReturn objectReturn = new ObjectReturn();
+        objectReturn.setObject(roles);
         return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
     }
 

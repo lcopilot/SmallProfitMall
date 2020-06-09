@@ -2,7 +2,9 @@ package cn.xgtd.service;
 
 import cn.xgtd.domain.user.User;
 import cn.xgtd.response.list.QueryResponseResult;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,6 +53,14 @@ public interface UserService {
     public User updateUser(User user);
 
 
+    /**
+     * 查询用户
+     * @param content 搜索内容
+     * @param laterTime 什么时间之前
+     * @param beforeTime 什么时间之后
+     * @return
+     */
+    public List<User> findUserSearch(String content,  Date laterTime , Date beforeTime);
 
 
 }
