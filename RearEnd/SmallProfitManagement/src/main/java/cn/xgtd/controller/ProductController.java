@@ -38,8 +38,8 @@ public class ProductController {
      * @param pageSize 每页查询数量
      * @return
      */
-    @RequestMapping(value = "/findProductList/{currentPage}/{pageSize}",method = RequestMethod.GET)
-    public ResponsePagination findProductList(@PathVariable("currentPage") Integer currentPage,@PathVariable("pageSize") Integer pageSize){
+    @RequestMapping(value = "/findProductList",method = RequestMethod.GET)
+    public ResponsePagination findProductList( Integer currentPage,Integer pageSize){
         if (currentPage==null){
             currentPage=1;
         }
