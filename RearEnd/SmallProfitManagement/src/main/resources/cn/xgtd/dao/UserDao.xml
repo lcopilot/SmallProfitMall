@@ -214,7 +214,7 @@
             LEFT JOIN management_role mr ON mu.role_id = mr.r_id
             LEFT JOIN management_user mrc ON mrc.u_id = mr.create_author_id
             LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
-        WHERE
+        <where>
          CONCAT( mu.user_name , mu.email , mu.phone) LIKE concat ( '%', #{content}, '%' )
           <if test="laterTime != null">
              AND mr.create_time &gt; #{laterTime}
@@ -225,6 +225,7 @@
             AND mu.sign = 0
             ORDER BY
                 mu.last_time DESC
+        </where>
         </select>
 
 
