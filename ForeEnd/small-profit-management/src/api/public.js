@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { message } from 'antd';
 import querystring from "querystring";
+import storageUtils from "../utils/storageUtils";
+import {useHistory} from "react-router-dom";
 
 axios.defaults.withCredentials = false //是否支持发送cookie凭证信息的字段(请求携带了验证身份信息时)
 axios.defaults.timeout = 20000
@@ -30,20 +32,20 @@ axios.interceptors.request.use(config => {
  */
 
 // 请求拦截器方式2(方式1的简化版)
-/*
 axios.interceptors.request.use(
 config => {
   // 每次发送请求之前判断vuex中是否存在token
   // 如果存在，则统一在http请求的header都加上token，这样后台根据token判断你的登录情况
   // 即使本地存在token，也有可能token是过期的，所以在响应拦截器中要对返回状态进行判断
-  const token = store.state.token;
-  token && (config.headers.Authorization = token);
+  // const token = store.state.token;
+  // token && (config.headers.Authorization = token);
+  //检查登录是否过期
+  storageUtils.getUser()
   return config;
 },
     error => {
       return Promise.error(error);
     })
-*/
 
 // 响应拦截器
 axios.interceptors.response.use(

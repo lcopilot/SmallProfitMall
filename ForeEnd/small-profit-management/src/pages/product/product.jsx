@@ -12,41 +12,70 @@ import {
   Input,
   Modal,
   Row,
-  Select,
+  Select, Skeleton,
   Table
 } from "antd";
 import {PAGINATION, TIME_FORMAT} from "../../config/sysConfig";
+import './product.less'
+import *as indexAPI from '../../api/page/index'
+import moment from "moment";
+import storageUtils from "../../utils/storageUtils";
 
 const {Search} = Input;
 
 const Product = () => {
   const history= useHistory();
+  const [productList, setProductList] = useState([])
+  const [productPagination, setProductPagination] = useState({
+    currentPage:1,
+    pageSize:PAGINATION.PAGE_SIZE
+  })
+  const [skeletonLoad, setSkeletonLoad] = useState(true)
+
   const columns = [
     {
       title: '商品 ID',
-      dataIndex: 'id'
+      dataIndex: 'productId',
+      width:'10rem'
     }, {
       title: '商品名称',
-      dataIndex: 'name'
+      dataIndex: 'productName'
     }, {
       title: '所属分类',
-      dataIndex: 'name'
+      width:'12rem',
+      render: (product,record,index) => {
+        return (
+            <span className="product-table-classify" onClick={()=>{
+              history.push({pathname:`/products/category`,state:{classifyId:product.classifyId}})
+            }}>{product.productClassify}</span>
+        )
+      }
     }, {
       title: '价格',
-      dataIndex: 'name'
+      dataIndex: 'productPrice',
+      render: (productPrice) => {
+        return (
+            productPrice.toFixed(2)
+        )
+      },
     }, {
       title: '预览',
-      dataIndex: 'auth_name'
+      dataIndex: 'productPicture',
+      render: (img) => {
+        return (
+              <img src={img} className="product-table-img" />
+        )
+      },
     },
     {
       title: '操作',
       fixed: 'right',
-      width: 100,
-      render: (role) => {
+      width: '10rem',
+      render: (product,record,index) => {
         return (
             <>
               <a onClick={() => {
-
+                history.push({pathname:`/products/product/addProduct`,state:{productId:product.productId}})
               }}>编辑商品</a>
               <a onClick={() => {
 
@@ -57,7 +86,32 @@ const Product = () => {
     },
   ]
 
+  //获取商品
+  const getProductList=(currentPage,pageSize)=>{
+    if (!currentPage && !pageSize){
+      const pagination=storageUtils.getProductPagination()
+      currentPage=pagination?pagination.current:1
+      pageSize=pagination?pagination.pageSize:PAGINATION.PAGE_SIZE
+    }
+    setProductPagination({
+      currentPage:currentPage,
+      pageSize:pageSize,
+    })
+    indexAPI.getProductList(currentPage,pageSize).then(res=>{
+      if (res.success){
+        setProductList(res.pagination)
+        setSkeletonLoad(false)
+      }
+    })
+  }
+
+  useEffect(()=>{
+    getProductList()
+    return ()=>{}
+  },[])
+
   const title = (
+      <Skeleton  active loading={skeletonLoad}>
       <Row gutter={16}>
         <Col xs={24} sm={9} md={6} lg={6} xl={4}>
           <DatePicker.RangePicker/>
@@ -74,25 +128,36 @@ const Product = () => {
           }}>添加商品</Button>
         </Col>
       </Row>
+      </Skeleton>
   )
 
   return (
       <>
         <Card title={title}>
+         <Skeleton  active loading={skeletonLoad}>
           <Table
               bordered
-              rowKey={(item) => item._id}
-              // dataSource={}
+              rowKey={(item) => item.productId}
+              dataSource={productList.list}
               columns={columns}
               pagination={{
-                defaultPageSize: PAGINATION.PAGE_SIZE,
-                total: 4,
-                showTotal: PAGINATION.SHOW_TOTAL,
-                showSizeChanger: true,
-                showQuickJumper: true,
-                pageSizeOptions: PAGINATION.PAGE_SIZE_OPTIONS
+                onShowSizeChange:(page,pageSize)=>{
+                  storageUtils.setProductPagination(page,pageSize);
+                  setSkeletonLoad(true)
+                  getProductList(page,pageSize)
+                },
+                onChange:(current,size)=>{
+                  storageUtils.setProductPagination(current,size);
+                  setSkeletonLoad(true)
+                  getProductList(current,size)
+                },
+                current:productPagination.currentPage,
+                pageSize: productPagination.pageSize,
+                total: productList.totalCount,
+                ...PAGINATION
               }}
           />
+         </Skeleton>
         </Card>
       </>
   )
