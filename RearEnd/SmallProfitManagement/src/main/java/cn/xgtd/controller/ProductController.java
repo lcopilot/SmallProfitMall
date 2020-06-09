@@ -39,7 +39,7 @@ public class ProductController {
      * @return
      */
     @RequestMapping(value = "/findProductList",method = RequestMethod.GET)
-    public ResponsePagination findProductList( Integer currentPage,Integer pageSize){
+    public ResponsePagination findProductList(Integer currentPage,Integer pageSize){
         if (currentPage==null || currentPage==0){
             currentPage=1;
         }

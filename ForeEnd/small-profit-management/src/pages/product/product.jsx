@@ -27,8 +27,8 @@ const Product = () => {
   const history= useHistory();
   const [productList, setProductList] = useState([])
   const [productPagination, setProductPagination] = useState({
-    currentPage:1,
-    pageSize:PAGINATION.PAGE_SIZE
+    currentPage:PAGINATION.defaultCurrent,
+    pageSize:PAGINATION.defaultPageSize,
   })
   const [skeletonLoad, setSkeletonLoad] = useState(true)
 
@@ -36,13 +36,13 @@ const Product = () => {
     {
       title: '商品 ID',
       dataIndex: 'productId',
-      width:'10rem'
+      width:100
     }, {
       title: '商品名称',
       dataIndex: 'productName'
     }, {
       title: '所属分类',
-      width:'12rem',
+      width:110,
       render: (product,record,index) => {
         return (
             <span className="product-table-classify" onClick={()=>{
@@ -90,14 +90,14 @@ const Product = () => {
   const getProductList=(currentPage,pageSize)=>{
     if (!currentPage && !pageSize){
       const pagination=storageUtils.getProductPagination()
-      currentPage=pagination?pagination.current:1
-      pageSize=pagination?pagination.pageSize:PAGINATION.PAGE_SIZE
+      currentPage=pagination?pagination.current:PAGINATION.defaultCurrent
+      pageSize=pagination?pagination.pageSize:PAGINATION.defaultPageSize
     }
     setProductPagination({
       currentPage:currentPage,
       pageSize:pageSize,
     })
-    indexAPI.getProductList(currentPage,pageSize).then(res=>{
+    indexAPI.getProductList(productPagination).then(res=>{
       if (res.success){
         setProductList(res.pagination)
         setSkeletonLoad(false)

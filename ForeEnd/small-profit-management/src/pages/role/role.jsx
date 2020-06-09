@@ -40,6 +40,10 @@ const Role = (props) => {
   const [isEdit, setIsEdit] = useState(false)
   const [rolesTable, setRolesTable] = useState({})
   const [skeletonLoad, setSkeletonLoad] = useState(true)
+  const [queryDate, setQueryDate] = useState({
+    beforeTime:null,
+    laterTime:null,
+  })
 
   const onCheck = (checkedKeys, info) => {
     if (checkedKeys.includes('/user')) {
@@ -106,6 +110,7 @@ const Role = (props) => {
     setCheckedKeys(menus)
   }
 
+  //删除角色
   const deleteRole = (roles, index) => {
     confirm({
       title: '删除角色',
@@ -207,11 +212,27 @@ const Role = (props) => {
     return roleOption
   }
 
+  //对话框关闭
   const shutDown = () => {
     setIsEdit(false)
     setRoleVisible(false);
     setRoleInput(false);
     form.resetFields();
+  }
+
+  //搜索角色
+  const searchRoles=(searchContent)=>{
+    let data={
+      content:searchContent,
+      ...queryDate
+    }
+    if(data.content||data.beforeTime||data.laterTime){
+      indexAPI.searchRoles(data).then(res=>{
+        if (res.success){
+          setRolesList(res.objectReturn.object)
+        }
+      })
+    }
   }
 
   useEffect(() => {
@@ -224,16 +245,28 @@ const Role = (props) => {
   const title = (
       <Skeleton  active loading={skeletonLoad}>
         <Row gutter={16}>
-          <Col xs={24} sm={9} md={6} lg={6} xl={4}>
-            <DatePicker.RangePicker/>
+          <Col xs={24} sm={24} md={12} lg={12} xl={8}>
+            <DatePicker showTime placeholder="开始日期"  onChange={(date)=>{
+              setQueryDate({
+                beforeTime:moment(date).format("YYYY-HH-DD HH:mm:ss"),
+                laterTime:queryDate.laterTime,
+              })
+            }}/>
+            <DatePicker showTime placeholder="结束日期" onChange={(date)=>{
+              setQueryDate({
+                beforeTime:queryDate.beforeTime,
+                laterTime:moment(date).format("YYYY-HH-DD HH:mm:ss"),
+              })
+            }}/>
           </Col>
-          <Col xs={24} sm={15} md={9} lg={9} xl={9}>
+          <Col xs={24} sm={24} md={12} lg={12} xl={8}>
             <Search
-                placeholder="查询角色"
-                onSearch={value => console.log(value)}
+                enterButton
+                placeholder="请输入角色名"
+                onSearch={searchContent => searchRoles(searchContent)}
             />
           </Col>
-          <Col xs={24} sm={24} md={9} lg={9} xl={11}>
+          <Col xs={24} sm={24} md={24} lg={24} xl={8}>
             <Button type='primary' onClick={() => {
               setRoleVisible(true)
             }}>创建角色</Button>
@@ -265,7 +298,6 @@ const Role = (props) => {
             >
               <Form
                   form={form}
-                  initialValues={{remember: true}}
               >
                 <Form.Item
                     name="roleName"
@@ -318,7 +350,7 @@ const Role = (props) => {
                         }
                     >
                       {getRoleOption()}
-                    </Select> : ''
+                    </Select> : <></>
                   }
                 </Form.Item>
               </Form>

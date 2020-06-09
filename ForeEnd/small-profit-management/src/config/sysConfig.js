@@ -2,6 +2,7 @@
 export const TIME_FORMAT='YYYY-MM-DD HH:mm:ss'
 //分页相关参数
 export const PAGINATION={
+  defaultCurrent:1,
   defaultPageSize:6,
   pageSizeOptions:['6', '10', '15', '30'],
   showTotal:(total)=>{

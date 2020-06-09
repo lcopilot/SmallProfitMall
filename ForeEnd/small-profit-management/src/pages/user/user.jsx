@@ -36,6 +36,10 @@ const User = (props) => {
   const [isEdit, setIsEdit] = useState(false)
   const [userTable, setUserTable] = useState({})
   const [skeletonLoad, setSkeletonLoad] = useState(true)
+  const [queryDate, setQueryDate] = useState({
+    beforeTime:null,
+    laterTime:null,
+  })
   const [form] = Form.useForm();
 
   const columns = [
@@ -176,12 +180,29 @@ const User = (props) => {
     })
   }
 
+  //对话框关闭
   const shutDown=()=>{
     setIsEdit(false)
     setUserVisible(false);
     setUserInput(false)
     form.resetFields();
   }
+
+  //搜索用户
+  const searchUsers=(searchContent)=>{
+    let data={
+      content:searchContent,
+      ...queryDate
+    }
+    if(data.content||data.beforeTime||data.laterTime){
+      indexAPI.searchUser(data).then(res=>{
+        if (res.success){
+          setUserList(res.objectReturn.object)
+        }
+      })
+    }
+  }
+
   useEffect(() => {
     getRoles();
     getUser();
@@ -193,16 +214,27 @@ const User = (props) => {
   const title = (
       <Skeleton  active loading={skeletonLoad}>
         <Row gutter={16}>
-          <Col xs={24} sm={9} md={6} lg={6} xl={4}>
-            <DatePicker.RangePicker/>
+          <Col xs={24} sm={24} md={12} lg={12} xl={8}>
+            <DatePicker showTime placeholder="开始日期"  onChange={(date)=>{
+              setQueryDate({
+                beforeTime:moment(date).format("YYYY-HH-DD HH:mm:ss"),
+                laterTime:queryDate.laterTime,
+              })
+            }}/>
+            <DatePicker showTime placeholder="结束日期" onChange={(date)=>{
+              setQueryDate({
+                beforeTime:queryDate.beforeTime,
+                laterTime:moment(date).format("YYYY-HH-DD HH:mm:ss"),
+              })
+            }}/>
           </Col>
-          <Col xs={24} sm={15} md={9} lg={9} xl={9}>
-            <Search
-                placeholder="请输入用户名"
-                onSearch={value => console.log(value)}
+          <Col xs={24} sm={24} md={12} lg={12} xl={8}>
+            <Search placeholder="请输入用户名"
+                    enterButton
+                onSearch={searchContent => searchUsers(searchContent)}
             />
           </Col>
-          <Col xs={24} sm={24} md={9} lg={9} xl={11}>
+          <Col xs={24} sm={24} md={24} lg={24} xl={8}>
             <Button type='primary' onClick={() => {
               setUserVisible(true)
             }}>创建用户</Button>
@@ -231,11 +263,7 @@ const User = (props) => {
                 onOk={addEditUser}
                 onCancel={shutDown}
             >
-              <Form
-                  form={form}
-                  name="normal_login"
-                  initialValues={{remember: true}}
-              >
+              <Form form={form}>
                 <Form.Item
                     name="userName"
                     rules={[{
