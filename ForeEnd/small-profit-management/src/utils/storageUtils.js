@@ -8,8 +8,8 @@ const WEATHER_KEY = 'WEATHER_KEY'
 const LOGIN_EXPIRED='LOGIN_EXPIRED'
 const PRODUCT_CURRENT_PAGE='PRODUCT_CURRENT_PAGE'
 
-//过期时间 3天后
-const EXPIRATION_TIME=moment(new Date()).add(2, 'days');
+//过期时间 1天后
+const EXPIRATION_TIME=moment(new Date()).add(1, 'days').format('YYYY-MM-DD HH:mm:ss SSS');
 
 export default {
 
@@ -27,7 +27,7 @@ export default {
     const user=store.get(USER_KEY) || {}
     if(moment(user.expirationTime)<moment(new Date())){
       sessionStorage.setItem(LOGIN_EXPIRED,JSON.stringify(true));
-      window.location.replace('/login')
+      window.location.replace('/login');
       this.removeUser();
       return {}
     }

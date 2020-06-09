@@ -118,6 +118,7 @@ const Product = () => {
         </Col>
         <Col xs={24} sm={15} md={9} lg={9} xl={9}>
           <Search
+              enterButton
               placeholder="请输入商品名"
               onSearch={value => console.log(value)}
           />

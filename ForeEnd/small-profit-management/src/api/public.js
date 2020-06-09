@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { message } from 'antd';
+import {message} from 'antd';
 import querystring from "querystring";
 import storageUtils from "../utils/storageUtils";
 import {useHistory} from "react-router-dom";
@@ -33,19 +33,20 @@ axios.interceptors.request.use(config => {
 
 // 请求拦截器方式2(方式1的简化版)
 axios.interceptors.request.use(
-config => {
-  // 每次发送请求之前判断vuex中是否存在token
-  // 如果存在，则统一在http请求的header都加上token，这样后台根据token判断你的登录情况
-  // 即使本地存在token，也有可能token是过期的，所以在响应拦截器中要对返回状态进行判断
-  // const token = store.state.token;
-  // token && (config.headers.Authorization = token);
-  //检查登录是否过期
-  storageUtils.getUser()
-  return config;
-},
+    config => {
+      // 每次发送请求之前判断vuex中是否存在token
+      // 如果存在，则统一在http请求的header都加上token，这样后台根据token判断你的登录情况
+      // 即使本地存在token，也有可能token是过期的，所以在响应拦截器中要对返回状态进行判断
+      // const token = store.state.token;
+      // token && (config.headers.Authorization = token);
+      //检查登录是否过期
+      storageUtils.saveUser(storageUtils.getUser())
+      return config;
+    },
     error => {
       return Promise.error(error);
-    })
+    }
+)
 
 // 响应拦截器
 axios.interceptors.response.use(
@@ -83,7 +84,7 @@ export default {
    */
 
   //get请求
-  requestGet (url, params = {}) {
+  requestGet(url, params = {}) {
     return new Promise((resolve, reject) => {
       axios.get(url, params).then(res => {
         resolve(res.data)
@@ -93,7 +94,7 @@ export default {
     })
   },
   //get请求不带参数
-  requestQuickGet (url) {
+  requestQuickGet(url) {
     return new Promise((resolve, reject) => {
       axios.get(url).then(res => {
         resolve(res.data) //res是axios封装的对象，res.data才是服务端返回的信息
@@ -103,10 +104,10 @@ export default {
     })
   },
   //get
-  requestGetFormUr (url,params={}) {
+  requestGetFormUr(url, params = {}) {
     return new Promise((resolve, reject) => {
-      let queryString=querystring.stringify(params);
-      axios.get(url+"?"+queryString).then(res => {
+      let queryString = querystring.stringify(params);
+      axios.get(url + "?" + queryString).then(res => {
         resolve(res.data) //res是axios封装的对象，res.data才是服务端返回的信息
       }).catch(error => {
         reject(error)
@@ -114,7 +115,7 @@ export default {
     })
   },
   //post请求
-  requestPost (url, data = {}) {
+  requestPost(url, data = {}) {
     return new Promise((resolve, reject) => {
       axios.post(url, data).then(res => {
         resolve(res.data)
@@ -126,7 +127,7 @@ export default {
   //post请求 (x-www-form-urlencoded)
   requestPostFormUr(url, data = {}) {
     return new Promise((resolve, reject) => {
-      const queryString=querystring.stringify(data);
+      const queryString = querystring.stringify(data);
       axios.post(url, queryString, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',  //请求头
@@ -145,13 +146,13 @@ export default {
    * @param uploadProgress function (progress)=>{}获取上传进度   progress.loaded:已上传文件大小  progress.total:被上传文件的总大小
    * @returns {Promise<unknown>}
    */
-  requestPostFile (url, data = {},uploadProgress) {
+  requestPostFile(url, data = {}, uploadProgress) {
     return new Promise((resolve, reject) => {
       axios.post(url, data, {
         headers: {
           'Content-Type': 'multipart/form-data',  //请求头添加文件上传的表单头
         },
-        onUploadProgress:uploadProgress
+        onUploadProgress: uploadProgress
       }).then(res => {
         resolve(res.data)
       }).catch(error => {
@@ -160,7 +161,7 @@ export default {
     })
   },
   //put请求
-  requestPut (url, data = {}) {
+  requestPut(url, data = {}) {
     return new Promise((resolve, reject) => {
       axios.put(url, data).then(res => {
         resolve(res.data)
@@ -170,7 +171,7 @@ export default {
     })
   },
   //delete请求
-  requestDelete (url, data = {}) {
+  requestDelete(url, data = {}) {
     return new Promise((resolve, reject) => {
       axios.delete(url, data).then(res => {
         resolve(res.data)

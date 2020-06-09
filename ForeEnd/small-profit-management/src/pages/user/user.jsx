@@ -217,14 +217,15 @@ const User = (props) => {
           <Col xs={24} sm={24} md={12} lg={12} xl={8}>
             <DatePicker showTime placeholder="开始日期"  onChange={(date)=>{
               setQueryDate({
-                beforeTime:moment(date).format("YYYY-HH-DD HH:mm:ss"),
-                laterTime:queryDate.laterTime,
+                beforeTime:queryDate.beforeTime,
+                laterTime:moment(date).format("YYYY-HH-DD HH:mm:ss"),
+
               })
             }}/>
             <DatePicker showTime placeholder="结束日期" onChange={(date)=>{
               setQueryDate({
-                beforeTime:queryDate.beforeTime,
-                laterTime:moment(date).format("YYYY-HH-DD HH:mm:ss"),
+                beforeTime:moment(date).format("YYYY-HH-DD HH:mm:ss"),
+                laterTime:queryDate.laterTime,
               })
             }}/>
           </Col>
