@@ -40,11 +40,11 @@ public class ProductController {
      */
     @RequestMapping(value = "/findProductList",method = RequestMethod.GET)
     public ResponsePagination findProductList( Integer currentPage,Integer pageSize){
-        if (currentPage==null){
+        if (currentPage==null || currentPage==0){
             currentPage=1;
         }
         //判断传入每页显示数量 为空则默认为8条
-        if (pageSize==null){
+        if (pageSize==null || pageSize == 0){
             pageSize=8;
         }
         Pagination pagination = new Pagination();
