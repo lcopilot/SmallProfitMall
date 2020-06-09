@@ -54,6 +54,7 @@ const AddProduct = () => {
     zoom: true, //	启用图片缩放
     rotate: true,//启用图片旋转
   };
+
   const options = [
     {
       value: '1',

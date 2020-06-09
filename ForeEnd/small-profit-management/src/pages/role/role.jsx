@@ -252,12 +252,8 @@ const Role = (props) => {
                 dataSource={rolesList}
                 columns={columns}
                 pagination={{
-                  defaultPageSize: PAGINATION.PAGE_SIZE,
                   total: rolesList.length,
-                  showTotal: PAGINATION.SHOW_TOTAL,
-                  showSizeChanger: true,
-                  showQuickJumper: true,
-                  pageSizeOptions: PAGINATION.PAGE_SIZE_OPTIONS
+                  ...PAGINATION
                 }}
             />
             <Modal
@@ -269,7 +265,6 @@ const Role = (props) => {
             >
               <Form
                   form={form}
-                  name="normal_login"
                   initialValues={{remember: true}}
               >
                 <Form.Item

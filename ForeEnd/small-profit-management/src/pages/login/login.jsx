@@ -4,7 +4,7 @@ import './login.less'
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import *as userApi from '../../api/page/user'
 import {useHistory} from "react-router-dom";
-import storageUtils from "../../utils/storageUtils";
+import storageUtils, {LOGIN_EXPIRED} from "../../utils/storageUtils";
 import {connect} from 'react-redux'
 import *as ActionCreators from '../../store/actionCreators'
 
@@ -19,7 +19,10 @@ const Login = (props) => {
   let history = useHistory();
   //如果用户已登录
   let {user, setUser} = props
-  if (user && user._id) {
+  if (storageUtils.getLoginExpired()) {
+    message.warn("登录过期,请重新登录!")
+  }
+  if (user && user.uId) {
     history.replace("/")
   }
 

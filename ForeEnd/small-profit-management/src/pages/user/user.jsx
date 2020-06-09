@@ -12,10 +12,8 @@ import {
 } from "antd";
 import *as indexAPI from '../../api/page/index'
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
-import menuList from "../../config/menuConfig";
 import moment from "moment";
 import {connect} from "react-redux";
-
 import * as ActionCreators from "../../store/actionCreators";
 import {
   PAGINATION,
@@ -222,12 +220,8 @@ const User = (props) => {
                 dataSource={userList}
                 columns={columns}
                 pagination={{
-                  defaultPageSize: PAGINATION.PAGE_SIZE,
                   total: userList.length,
-                  showTotal: PAGINATION.SHOW_TOTAL,
-                  showSizeChanger: true,
-                  showQuickJumper: true,
-                  pageSizeOptions: PAGINATION.PAGE_SIZE_OPTIONS
+                  ...PAGINATION
                 }}
             />
             <Modal

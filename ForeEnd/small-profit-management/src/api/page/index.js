@@ -38,3 +38,7 @@ export const editRoles=(data)=>{
 export const deleteRoles=(rolesId)=>{
   return http.requestDelete(apiUrl+`/RoleController/findBasicsRole/${rolesId}`)
 }
+//获取商品数据
+export const getProductList=(currentPage,pageSize)=>{
+  return http.requestGet(apiUrl+`/ProductController/findProductList/${currentPage}/${pageSize}`)
+}

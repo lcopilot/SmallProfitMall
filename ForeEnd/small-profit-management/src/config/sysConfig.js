@@ -2,11 +2,15 @@
 export const TIME_FORMAT='YYYY-MM-DD HH:mm:ss'
 //分页相关参数
 export const PAGINATION={
-  PAGE_SIZE:6,
-  PAGE_SIZE_OPTIONS:['6', '10', '15', '30'],
-  SHOW_TOTAL:(total)=>{
+  defaultPageSize:6,
+  pageSizeOptions:['6', '10', '15', '30'],
+  showTotal:(total)=>{
     return `共 ${total} 条 `
   },
+  //是否展示 pageSize 切换器
+  showSizeChanger:true,
+  //是否可以快速跳转至某页
+  showQuickJumper:true,
 }
 //商品属性
 export const PRODUCT_ATTRIBUTES=[
