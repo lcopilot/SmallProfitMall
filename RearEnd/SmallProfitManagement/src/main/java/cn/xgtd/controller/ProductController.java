@@ -38,13 +38,13 @@ public class ProductController {
      * @param pageSize 每页查询数量
      * @return
      */
-    @RequestMapping(value = "/findProductList/{currentPage}/{pageSize}",method = RequestMethod.GET)
-    public ResponsePagination findProductList(@PathVariable("currentPage") Integer currentPage,@PathVariable("pageSize") Integer pageSize){
-        if (currentPage==null){
+    @RequestMapping(value = "/findProductList",method = RequestMethod.GET)
+    public ResponsePagination findProductList( Integer currentPage,Integer pageSize){
+        if (currentPage==null || currentPage==0){
             currentPage=1;
         }
         //判断传入每页显示数量 为空则默认为8条
-        if (pageSize==null){
+        if (pageSize==null || pageSize == 0){
             pageSize=8;
         }
         Pagination pagination = new Pagination();
