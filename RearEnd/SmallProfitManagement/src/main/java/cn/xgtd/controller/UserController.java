@@ -119,6 +119,12 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/findUserSearch",method = RequestMethod.GET)
 	public ObjectReturnResponse findUserSearch(String content, String laterTime, String beforeTime){
+		if (laterTime.equals("")){
+			laterTime = null;
+		}
+		if (beforeTime.equals("")){
+			beforeTime = null;
+		}
 		List<User> users = userService.findUserSearch(content,laterTime,beforeTime);
 		ObjectReturn objectReturn = new ObjectReturn();
 		objectReturn.setObject(users);

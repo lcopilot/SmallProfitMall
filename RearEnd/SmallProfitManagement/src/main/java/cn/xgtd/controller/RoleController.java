@@ -142,6 +142,12 @@ public class RoleController {
      */
     @RequestMapping(value = "/findRoleSearch",method = RequestMethod.GET)
     public ObjectReturnResponse findRoleSearch(String content, String laterTime, String beforeTime){
+         if (laterTime.equals("")){
+            laterTime = null;
+        }
+        if (beforeTime.equals("")){
+            beforeTime = null;
+        }
         List<Role> roles = roleService.findRoleSearch(content,laterTime,beforeTime);
         ObjectReturn objectReturn = new ObjectReturn();
         objectReturn.setObject(roles);

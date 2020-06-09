@@ -1,17 +1,12 @@
 package cn.xgtd.controller;
 
 import cn.xgtd.domain.product.BasicProduct;
-import cn.xgtd.domain.product.Product;
 import cn.xgtd.response.CommonCode;
-import cn.xgtd.response.list.QueryResponseResult;
-import cn.xgtd.response.objectReturn.ObjectReturn;
-import cn.xgtd.response.objectReturn.ObjectReturnResponse;
 import cn.xgtd.response.pagination.Pagination;
 import cn.xgtd.response.pagination.ResponsePagination;
 import cn.xgtd.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;

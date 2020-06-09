@@ -5,15 +5,15 @@
 
 <mapper namespace="cn.xgtd.dao.ProductDao">
 
-<!--商品基本信息map-->
-<resultMap id="fendBasicProductMap" type="cn.xgtd.domain.product.BasicProduct">
-    <id property="productId" column="productId"></id>
-    <result property="productPrice" column="ProductPrice"></result>
-    <result property="productName" column="productName"></result>
-    <result property="productClassify" column="final_content"></result>
-    <result property="productPicture" column="ImageSite"></result>
-    <result property="classifyId" column="product_final_id"></result>
-</resultMap>
+    <!--商品基本信息map-->
+    <resultMap id="fendBasicProductMap" type="cn.xgtd.domain.product.BasicProduct">
+        <id property="productId" column="productId"></id>
+        <result property="productPrice" column="ProductPrice"></result>
+        <result property="productName" column="productName"></result>
+        <result property="productClassify" column="final_content"></result>
+        <result property="productPicture" column="ImageSite"></result>
+        <result property="classifyId" column="product_final_id"></result>
+    </resultMap>
 
     <!--查询基本商品信息-->
     <select id="fendBasicProduct" resultMap="fendBasicProductMap">
@@ -32,7 +32,6 @@
         LEFT JOIN product_final_category pfc ON pb.productFinalCategory = pfc.product_final_id
         WHERE pi.sign = 1   LIMIT #{start}, #{pageSize}
     </select>
-
 
     <!--查询商品总数量-->
     <select id="findFavoriteQuantity" resultType="java.lang.Integer">

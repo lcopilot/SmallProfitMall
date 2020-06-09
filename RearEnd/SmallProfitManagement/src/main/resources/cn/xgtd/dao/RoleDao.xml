@@ -156,10 +156,10 @@
             <where>
                 CONCAT( mr.name ) LIKE concat ( '%', #{content}, '%' )
               <if test="laterTime != null">
-                 AND mr.create_time &gt; #{laterTime}
+                 AND mr.create_time  &gt; #{laterTime}
               </if>
                   <if test="beforeTime !=null">
-                 AND mr.create_time   &lt; #{beforeTime}
+                 AND mr.create_time   &lt;  #{beforeTime}
               </if>
                 AND mr.sign = 0
             ORDER BY
