@@ -16,25 +16,25 @@ export const PAGINATION={
 //商品属性
 export const PRODUCT_ATTRIBUTES=[
   {
-    value:1,
+    value:'version',
     title:'版本'
   }, {
-    value:2,
+    value:'kind',
     title:'种类'
   },{
-    value:3,
+    value:'size',
     title:'尺码'
   },{
-    value:4,
+    value:'specification',
     title:'配置'
   },{
-    value:5,
+    value:'colour',
     title:'颜色'
   },{
-    value:6,
+    value:'combo',
     title:'套餐'
   },{
-    value:7,
+    value:'taste',
     title:'口味'
   },
 ]

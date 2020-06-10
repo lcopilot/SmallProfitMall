@@ -7,19 +7,19 @@ import {
   Button,
   Card,
   Col,
-  DatePicker,
+  DatePicker, Dropdown,
   Form,
-  Input,
+  Input, Menu,
   Modal,
   Row,
   Select, Skeleton,
   Table
 } from "antd";
-import {PAGINATION, TIME_FORMAT} from "../../config/sysConfig";
+import {PAGINATION} from "../../config/sysConfig";
 import './product.less'
 import *as indexAPI from '../../api/page/index'
-import moment from "moment";
 import storageUtils from "../../utils/storageUtils";
+import DownOutlined from "@ant-design/icons/lib/icons/DownOutlined";
 
 const {Search} = Input;
 
@@ -47,7 +47,7 @@ const Product = () => {
         return (
             <span className="product-table-classify" onClick={()=>{
               history.push({pathname:`/products/category`,state:{classifyId:product.classifyId}})
-            }}>{product.productClassify}</span>
+            }}>{product.productClassify.finalContent}</span>
         )
       }
     }, {
@@ -60,10 +60,10 @@ const Product = () => {
       },
     }, {
       title: '预览',
-      dataIndex: 'productPicture',
+      dataIndex: 'imageSite',
       render: (img) => {
         return (
-              <img src={img} className="product-table-img" />
+              <img src={img[0]} className="product-table-img" />
         )
       },
     },
@@ -72,14 +72,36 @@ const Product = () => {
       fixed: 'right',
       width: '10rem',
       render: (product,record,index) => {
+        const menu = (
+            <Menu>
+              <Menu.Item>
+                <a  onClick={() => {
+                  history.push({pathname:`/products/product/addProduct`,state:{productDetail:product}})
+                }}>
+                  编辑基本信息
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                <a onClick={() => {
+                  history.push({pathname:`/products/product/addProduct`,state:{productDetail:product}})
+                }}>
+                  下架
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                <a onClick={() => {
+                  history.push({pathname:`/products/product/addProduct`,state:{productDetail:product}})
+                }}>
+                  编辑配置库存
+                </a>
+              </Menu.Item>
+            </Menu>
+        );
         return (
             <>
-              <a onClick={() => {
-                history.push({pathname:`/products/product/addProduct`,state:{productId:product.productId}})
-              }}>编辑商品</a>
-              <a onClick={() => {
-
-              }}>下架</a>
+              <Dropdown overlay={menu} placement="bottomLeft">
+                <Button>编辑<DownOutlined /></Button>
+              </Dropdown>
             </>
         )
       },

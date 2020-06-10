@@ -21,7 +21,7 @@ import {
 import {CountContext} from '../../pages/admin/admin'
 import {useHistory} from "react-router-dom";
 import storageUtils from "../../utils/storageUtils";
-import NowDate from "../../utils/dateUtils";
+import NowDate from "./nowDate";
 import *as commApi from '../../api/page/comm'
 import moment from "moment";
 import {connect} from 'react-redux'

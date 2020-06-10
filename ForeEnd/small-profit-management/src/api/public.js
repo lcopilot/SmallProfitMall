@@ -19,21 +19,20 @@ axios.defaults.headers['Authorization'] = ''
 请求之前拦截
 
 axios.interceptors.request.use(config => {
-  判断token
+  //判断token
   if (localStorage.token) {
     config.headers.Authorization = 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjEwODA4ODYsInVzZXJfbmFtZSI6IjEyMyIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iLCJST0xFX1VTRVIiXSwianRpIjoiYTNiM2RiYjgtODJkYS00YWI2LWIwZjEtMWMyZDI5ZjM3MjExIiwiY2xpZW50X2lkIjoibWFuYWdlciIsInNjb3BlIjpbIm1hbmFnZXIiXX0.YivH7foaYfSJs9nPBR40TbJ7T0sGXBGaZV2g8Ivktiatdv0Sjkl4PbS3tsjSBtbyqLekYDLoWSojiDLyvgMy5qskeRLefVk4FYpEMzpxfb5JtaxoIRH0o-Re1MC2quq-J7kxRKAL1DUEmr-_GEEmB8zswYJNwYn3vZK0FMQlbsIty4LCfgIwXfH9XnPcUhojUUIBRUDT2W3s8j-qZQ-iKk1y2kesrXloiOtPEL5CljmlOyZ3GED_HNude5b41TqCQyv2VS1baE9DEPo-P0Hb33rSCMILk3rZg-hO7zuDMGfbGWKMQRgY6Fb2uUtqokYa5aLtXyEwW67FKAi2mK2cPA'
   }
   return config
 },error =>{
-  alert("参数错误", 'fail')
+  console.log("参数错误", 'fail')
   return Promise.reject(error)
 })
 
  */
 
 // 请求拦截器方式2(方式1的简化版)
-axios.interceptors.request.use(
-    config => {
+axios.interceptors.request.use(config => {
       // 每次发送请求之前判断vuex中是否存在token
       // 如果存在，则统一在http请求的header都加上token，这样后台根据token判断你的登录情况
       // 即使本地存在token，也有可能token是过期的，所以在响应拦截器中要对返回状态进行判断
@@ -139,6 +138,7 @@ export default {
       })
     })
   },
+
   /**
    * post请求(文件)
    * @param url
@@ -160,6 +160,23 @@ export default {
       })
     })
   },
+  /**
+   * 文件并发上传
+   * @param url
+   * @param data
+   * @param uploadProgress
+   * @returns {Promise<unknown>}
+   */
+  requestFileAll(url, partList = []) {
+    return new Promise((resolve, reject) => {
+      axios.all(partList).then(axios.spread((...result)=> {
+        resolve(...result)
+      }).catch((...error) => {
+        reject(...error)
+      }))
+    })
+  },
+
   //put请求
   requestPut(url, data = {}) {
     return new Promise((resolve, reject) => {

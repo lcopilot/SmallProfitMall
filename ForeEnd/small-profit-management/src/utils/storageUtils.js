@@ -1,15 +1,11 @@
 import store from 'store'
 import moment from "moment";
-import {message} from "antd";
-
 
 const USER_KEY = 'USER_KEY'
 const WEATHER_KEY = 'WEATHER_KEY'
 const LOGIN_EXPIRED='LOGIN_EXPIRED'
 const PRODUCT_CURRENT_PAGE='PRODUCT_CURRENT_PAGE'
 
-//过期时间 1天后
-const EXPIRATION_TIME=moment(new Date()).add(1, 'days').format('YYYY-MM-DD HH:mm:ss SSS');
 
 export default {
 
@@ -20,7 +16,9 @@ export default {
     return store.get(WEATHER_KEY) || ''
   },
   saveUser(user) {
-    user.expirationTime=EXPIRATION_TIME
+    //过期时间 1天后
+    user.expirationTime=moment(new Date()).add(1, 'days').format(
+        'YYYY-MM-DD HH:mm:ss SSS');
     store.set(USER_KEY,user)
   },
   getUser() {
