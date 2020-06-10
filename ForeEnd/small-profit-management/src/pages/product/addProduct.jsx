@@ -201,7 +201,7 @@ const AddProduct = () => {
                   {
                     pattern: /^[\u4e00-\u9fa50-9a-zA-Z   ]+$/,
                     message: '商品名必须是中,英文数字或空格组成'
-                  },]}
+                  }]}
             >
               <Input allowClear={true}
                      prefix={<AccountBookOutlined/>}
@@ -225,7 +225,7 @@ const AddProduct = () => {
               <Input
                   type="number"
                   prefix="￥" suffix="元"
-                  placeholder="请输入价格 "
+                  placeholder="请输入价格  ( 在商品属性无价格时生效 )"
                   allowClear={true}
                   maxLength={6}
               />
