@@ -10,13 +10,15 @@ import java.util.List;
 public class ProductDetails implements Serializable {
     private int id;
     /**商品id**/
-    private String productId;
+    private Integer productId;
     /**商品名字**/
     private String productName;
     /**商品价格**/
     private Double productPrice;
     /**重量**/
     private String weight;
+    /**int重量**/
+    private Double weights;
     /**是否包邮**/
     private String freeShipping;
     /**视频**/
@@ -75,11 +77,11 @@ public class ProductDetails implements Serializable {
         this.id = id;
     }
 
-    public String getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 
@@ -297,5 +299,13 @@ public class ProductDetails implements Serializable {
 
     public void setProductClassify(ProductClassify productClassify) {
         this.productClassify = productClassify;
+    }
+
+    public Double getWeights() {
+        return weights;
+    }
+
+    public void setWeights(Double weights) {
+        this.weights = weights;
     }
 }

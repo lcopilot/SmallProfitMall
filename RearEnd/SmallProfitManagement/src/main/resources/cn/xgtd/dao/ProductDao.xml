@@ -141,9 +141,7 @@
             LEFT JOIN product_primary_category ppc ON pb.prodcutPrimaryCategory = ppc.product_primary_id
             LEFT JOIN product_secondary_category psc ON pb.productSecondaryCategory = psc.product_secondary_id
             LEFT JOIN product_final_category pfc ON pb.productFinalCategory = pfc.product_final_id
-            
-        WHERE
-            pb.ProductId =#{productId};
+
     </select>
 
     <!--查询商品属性 销量 库存 不同-->

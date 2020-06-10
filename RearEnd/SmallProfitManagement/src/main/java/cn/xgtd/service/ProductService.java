@@ -34,10 +34,9 @@ public interface ProductService {
 
     /**
      * 查询商品详细
-     * @param productIds 商品id
      * @return 商品详细数据
      */
-    public ProductDetails findDetails(Integer productIds);
+    public List<ProductDetails> findDetails();
 
 
     /**

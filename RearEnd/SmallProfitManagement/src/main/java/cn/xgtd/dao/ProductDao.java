@@ -30,10 +30,9 @@ public interface ProductDao {
 
     /**
      * 查询商品详细信息
-     * @productId productId 商品id
      * @return
      */
-    public ProductDetails fendProduct(@Param("productId")Integer productId);
+    public List<ProductDetails> fendProduct();
 
 
     /**

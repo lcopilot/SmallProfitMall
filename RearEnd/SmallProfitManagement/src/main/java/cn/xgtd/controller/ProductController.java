@@ -58,10 +58,14 @@ public class ProductController {
         return new ResponsePagination(CommonCode.SUCCESS,pagination);
     }
 
-    @RequestMapping(value = "/findDetails/{productId}",method = RequestMethod.GET)
-    public ObjectReturnResponse findDetails(@PathVariable("productId") Integer productId){
+    /**
+     *查询所有商品详细信息
+     * @return
+     */
+    @RequestMapping(value = "/findDetails",method = RequestMethod.GET)
+    public ObjectReturnResponse findDetails(){
         ObjectReturn objectReturn = new ObjectReturn();
-        ProductDetails productDistinction = productService.findDetails(productId);
+        List<ProductDetails> productDistinction = productService.findDetails();
         objectReturn.setObject(productDistinction);
         return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
     }

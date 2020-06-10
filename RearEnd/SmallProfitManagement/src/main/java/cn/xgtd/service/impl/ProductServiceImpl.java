@@ -51,35 +51,39 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      *查询商品详细信息
-     * @param productId 商品id
      * @return
      */
     @Override
-    public ProductDetails findDetails(Integer productId) {
-        //设置缓存id
-        String transition = String.valueOf(productId);
-        String productIds ="productDetails_"+transition;
+    public List<ProductDetails> findDetails() {
+        String productIds ="productDetails";
         //从缓存中查询是否存在
-        ProductDetails  redis = (ProductDetails)redisUtil.get(productIds);
-        if(redis==null){
-            //设置商品配置信息
-            ProductDetails productDetailsResult = setProductConfiguration(productId);
-            productDetailsResult.setProductContexts(null);
-            //查询不同配置集合 库存 价格
-            List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productId);
-            productDetailsResult.setProductDistinctions(productDistinctions);
-
-            redisUtil.set(productIds,productDetailsResult);
-            return productDetailsResult;
-        }else {
-            //查询商品配置
-            List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productId);
-            redis.setProductDistinctions(productDistinctions);
-            //设置商品库存
-            ProductDetails findInventorys = productDao.findSalesInventory(productId);
-            redis.setInventorys(findInventorys.getInventorys());
+        List<ProductDetails>  redis = (List<ProductDetails>)redisUtil.get(productIds);
+        if(redis!=null){
             return redis;
         }
+        //设置商品配置信息
+        List<ProductDetails> productDetailsResult = setProductConfiguration();
+        for (int i = 0; i <productDetailsResult.size() ; i++) {
+            productDetailsResult.get(i).setProductContexts(null);
+            String weight = productDetailsResult.get(i).getWeight();
+            if (weight!=null){
+                Double weights=null;
+                if (!weight.equals("不计重")){
+                    weight = weight.split("k")[0];
+                    weights=Double.valueOf(weight);
+                }else {
+                    weights=00.00;
+                }
+                productDetailsResult.get(i).setWeights(weights);
+            }
+
+            //查询不同配置集合 库存 价格
+            List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productDetailsResult.get(i).getProductId());
+            productDetailsResult.get(i).setProductDistinctions(productDistinctions);
+        }
+        redisUtil.set(productIds,productDetailsResult);
+        return productDetailsResult;
+
     }
 
     @Override
@@ -103,75 +107,77 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 设置商品配置
-     * @param productId 商品id
      * @return 商品对象
      */
-    public ProductDetails setProductConfiguration(Integer productId){
-        ProductDetails productDetailsResult = productDao.fendProduct(productId);
-        List<ProductContext> productContexts = productDetailsResult.getProductContexts();
+    public List<ProductDetails> setProductConfiguration(){
+        List<ProductDetails> productDetailsResult = productDao.fendProduct();
+        for (int i = 0; i <productDetailsResult.size() ; i++) {
+            List<ProductContext> productContexts = productDetailsResult.get(i).getProductContexts();
 
-        if (productContexts!=null){
-            //颜色集合
-            List<ProductContext> colourList = new  ArrayList();
-            //版本集合
-            List<ProductContext> versionList = new ArrayList<>();
-            //规格集合
-            List<ProductContext> specificationList = new ArrayList<>();
-            //种类
-            List<ProductContext> kindList = new ArrayList<>();
-            //尺码
-            List<ProductContext> sizeList = new ArrayList<>();
-            //口味
-            List<ProductContext> tasteList = new ArrayList<>();
-            //套餐
-            List<ProductContext> comboList = new ArrayList<>();
-            //设置为空
-            productDetailsResult.setColour(colourList);
-            productDetailsResult.setVersion(versionList);
-            productDetailsResult.setSpecification(specificationList);
-            productDetailsResult.setKind(kindList);
-            productDetailsResult.setSize(sizeList);
-            productDetailsResult.setTaste(tasteList);
-            productDetailsResult.setCombo(comboList);
+            if (productContexts!=null){
+                //颜色集合
+                List<ProductContext> colourList = new  ArrayList();
+                //版本集合
+                List<ProductContext> versionList = new ArrayList<>();
+                //规格集合
+                List<ProductContext> specificationList = new ArrayList<>();
+                //种类
+                List<ProductContext> kindList = new ArrayList<>();
+                //尺码
+                List<ProductContext> sizeList = new ArrayList<>();
+                //口味
+                List<ProductContext> tasteList = new ArrayList<>();
+                //套餐
+                List<ProductContext> comboList = new ArrayList<>();
+                //设置为空
+                productDetailsResult.get(i).setColour(colourList);
+                productDetailsResult.get(i).setVersion(versionList);
+                productDetailsResult.get(i).setSpecification(specificationList);
+                productDetailsResult.get(i).setKind(kindList);
+                productDetailsResult.get(i).setSize(sizeList);
+                productDetailsResult.get(i).setTaste(tasteList);
+                productDetailsResult.get(i).setCombo(comboList);
 
-            for (int i = 0; i <productContexts.size() ; i++) {
-                //该商品属性类型
-                String type = productContexts.get(i).getAttributeType();
-                //当前属性
-                ProductContext productContext = productContexts.get(i);
+                for (int j = 0; j <productContexts.size() ; j++) {
+                    //该商品属性类型
+                    String type = productContexts.get(j).getAttributeType();
+                    //当前属性
+                    ProductContext productContext = productContexts.get(j);
 
-                switch(type){
-                    case "颜色" :
-                        colourList.add(productContext);
-                        productDetailsResult.setColour(colourList)
-                        ;break;
-                    case "版本" :
-                        versionList.add(productContext);
-                        productDetailsResult.setVersion(versionList)
-                        ;break;
-                    case "规格" :
-                        specificationList.add(productContext);
-                        productDetailsResult.setSpecification(specificationList)
-                        ;break;
-                    case "尺寸" :
-                        sizeList.add(productContext);
-                        productDetailsResult.setSize(sizeList);
-                        ;break;
-                    case "种类" :
-                        kindList.add(productContext);
-                        productDetailsResult.setKind(kindList);
-                        ;break;
-                    case "口味" :
-                        tasteList.add(productContext);
-                        productDetailsResult.setTaste(tasteList);
-                        ;break;
-                    case "套餐" :
-                        comboList.add(productContext);
-                        productDetailsResult.setCombo(comboList);
-                        ;break;
+                    switch(type){
+                        case "颜色" :
+                            colourList.add(productContext);
+                            productDetailsResult.get(j).setColour(colourList)
+                            ;break;
+                        case "版本" :
+                            versionList.add(productContext);
+                            productDetailsResult.get(j).setVersion(versionList)
+                            ;break;
+                        case "规格" :
+                            specificationList.add(productContext);
+                            productDetailsResult.get(j).setSpecification(specificationList)
+                            ;break;
+                        case "尺寸" :
+                            sizeList.add(productContext);
+                            productDetailsResult.get(j).setSize(sizeList);
+                            ;break;
+                        case "种类" :
+                            kindList.add(productContext);
+                            productDetailsResult.get(j).setKind(kindList);
+                            ;break;
+                        case "口味" :
+                            tasteList.add(productContext);
+                            productDetailsResult.get(j).setTaste(tasteList);
+                            ;break;
+                        case "套餐" :
+                            comboList.add(productContext);
+                            productDetailsResult.get(j).setCombo(comboList);
+                            ;break;
+                    }
                 }
             }
         }
+
         return productDetailsResult;
     }
 }
