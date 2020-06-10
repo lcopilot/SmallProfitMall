@@ -110,7 +110,8 @@ public class ProductServiceImpl implements ProductService {
      * @return 商品对象
      */
     public List<ProductDetails> setProductConfiguration(Integer currentPage,Integer pageSize){
-        List<ProductDetails> productDetailsResult = productDao.fendProduct(currentPage, pageSize);
+        Integer start=(currentPage-1)*pageSize;
+        List<ProductDetails> productDetailsResult = productDao.fendProduct(start, pageSize);
         for (int i = 0; i <productDetailsResult.size() ; i++) {
             List<ProductContext> productContexts = productDetailsResult.get(i).getProductContexts();
 

@@ -70,7 +70,7 @@ public class ProductController {
             pageSize=8;
         }
         Pagination pagination = new Pagination();
-        List<BasicProduct> basicProducts = productService.fendBasicProduct(currentPage,pageSize);
+        List<ProductDetails> basicProducts = productService.findDetails(currentPage,pageSize);
         //查询总数量跟总页数 数组0为总数量 1 为总页数
         Integer[] totalPage=productService.fendTotalPage(pageSize);
         pagination.setTotalCount(totalPage[0].longValue());
