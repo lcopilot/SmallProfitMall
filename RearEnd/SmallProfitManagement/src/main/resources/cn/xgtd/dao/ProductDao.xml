@@ -105,7 +105,7 @@
 
     <!--查询商品详细信息-->
     <select id="fendProduct" resultMap="ProductDatailsMap">
-        SELECT
+         SELECT
             pb.id,
             pb.ProductId,
             pb.ProductName,
@@ -141,7 +141,8 @@
             LEFT JOIN product_primary_category ppc ON pb.prodcutPrimaryCategory = ppc.product_primary_id
             LEFT JOIN product_secondary_category psc ON pb.productSecondaryCategory = psc.product_secondary_id
             LEFT JOIN product_final_category pfc ON pb.productFinalCategory = pfc.product_final_id
-        LIMIT #{start}, #{pageSize}
+        WHERE
+            pb.ProductId IN ( SELECT productId FROM ( SELECT productId FROM ProductBasis LIMIT #{start}, #{pageSize} ) AS productId )
     </select>
 
     <!--查询商品属性 销量 库存 不同-->
