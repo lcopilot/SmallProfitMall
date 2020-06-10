@@ -49,8 +49,6 @@
             </constructor>
         </collection>
 
-
-
     </resultMap>
 
     <!--商品分类map-->
@@ -61,6 +59,20 @@
         <result property="secondaryContent" column="secondary_content"></result>
         <result property="productFinalId" column="product_final_id"></result>
         <result property="finalContent" column="final_content"></result>
+    </resultMap>
+
+      <!--一级分类-->
+    <resultMap id="findCategoryPrimaryMap" type="cn.xgtd.domain.product.ProductCategory" >
+        <result property="categoryId" column="product_primary_id"></result>
+        <result property="categoryContent" column="category_content"></result>
+        <collection property="children" ofType="cn.xgtd.domain.product.ProductCategory">
+          <result property="categoryId" column="product_secondary_id"></result>
+          <result property="categoryContent" column="secondary_content"></result>
+            <collection property="children" ofType="cn.xgtd.domain.product.ProductCategory">
+                <result property="categoryId" column="product_final_id"></result>
+                <result property="categoryContent" column="final_content"></result>
+            </collection>
+        </collection>
     </resultMap>
 
     <!--查询基本商品信息-->
@@ -81,10 +93,13 @@
         WHERE pi.sign = 1   LIMIT #{start}, #{pageSize}
     </select>
 
+
+
     <!--查询商品总数量-->
     <select id="findFavoriteQuantity" resultType="java.lang.Integer">
         SELECT count(productId) FROM ProductBasis
     </select>
+
 
 
 
@@ -126,6 +141,7 @@
             LEFT JOIN product_primary_category ppc ON pb.prodcutPrimaryCategory = ppc.product_primary_id
             LEFT JOIN product_secondary_category psc ON pb.productSecondaryCategory = psc.product_secondary_id
             LEFT JOIN product_final_category pfc ON pb.productFinalCategory = pfc.product_final_id
+            
         WHERE
             pb.ProductId =#{productId};
     </select>
@@ -141,5 +157,21 @@
          FROM ProductPrice
          WHERE ProductId=#{productId};
     </select>
+    
+    
+    <!--查询商品分类-->
+    <select id="findCategory" resultMap="findCategoryPrimaryMap">
+      SELECT
+        ppc.product_primary_id,
+        ppc.category_content,
+        psc.product_secondary_id,
+        psc.secondary_content,
+        pfc.product_final_id,
+        pfc.final_content
+    FROM
+	product_primary_category ppc
+	LEFT JOIN product_secondary_category psc ON ppc.product_primary_id = psc.product_primary_id
+	LEFT JOIN product_final_category pfc ON psc.product_secondary_id = pfc.product_secondary_id
+</select>
 
 </mapper>

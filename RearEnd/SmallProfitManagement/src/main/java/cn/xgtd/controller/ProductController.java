@@ -1,6 +1,7 @@
 package cn.xgtd.controller;
 
 import cn.xgtd.domain.product.BasicProduct;
+import cn.xgtd.domain.product.ProductCategory;
 import cn.xgtd.domain.product.ProductDetails;
 import cn.xgtd.domain.product.ProductDistinction;
 import cn.xgtd.response.CommonCode;
@@ -61,6 +62,14 @@ public class ProductController {
     public ObjectReturnResponse findDetails(@PathVariable("productId") Integer productId){
         ObjectReturn objectReturn = new ObjectReturn();
         ProductDetails productDistinction = productService.findDetails(productId);
+        objectReturn.setObject(productDistinction);
+        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+    }
+
+    @RequestMapping(value = "/findCategory",method = RequestMethod.GET)
+    public ObjectReturnResponse findCategory() {
+        ObjectReturn objectReturn = new ObjectReturn();
+        List<ProductCategory> productDistinction = productService.findCategory();
         objectReturn.setObject(productDistinction);
         return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
     }

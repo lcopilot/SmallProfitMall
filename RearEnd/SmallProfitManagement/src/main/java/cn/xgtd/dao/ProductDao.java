@@ -1,9 +1,6 @@
 package cn.xgtd.dao;
 
-import cn.xgtd.domain.product.BasicProduct;
-import cn.xgtd.domain.product.Product;
-import cn.xgtd.domain.product.ProductDetails;
-import cn.xgtd.domain.product.ProductDistinction;
+import cn.xgtd.domain.product.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -52,4 +49,10 @@ public interface ProductDao {
      * @return
      */
     public ProductDetails findSalesInventory(@Param("productId")Integer productId);
+
+    /**
+     * 查询商品分类
+     * @return
+     */
+    public List<ProductCategory> findCategory();
 }

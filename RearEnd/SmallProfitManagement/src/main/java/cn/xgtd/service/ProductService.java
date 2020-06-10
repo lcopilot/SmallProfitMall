@@ -2,6 +2,7 @@ package cn.xgtd.service;
 
 import cn.xgtd.domain.product.BasicProduct;
 import cn.xgtd.domain.product.Product;
+import cn.xgtd.domain.product.ProductCategory;
 import cn.xgtd.domain.product.ProductDetails;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,11 @@ public interface ProductService {
      * @return
      */
     public ProductDetails findProductDesciption(Integer productId);
+
+    /**
+     * 查询商品分类
+     * @return
+     */
+    public List<ProductCategory> findCategory();
 
 }

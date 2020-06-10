@@ -58,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductDetails findDetails(Integer productId) {
         //设置缓存id
         String transition = String.valueOf(productId);
-        String productIds ="productIdDetails_"+transition;
+        String productIds ="productDetails_"+transition;
         //从缓存中查询是否存在
         ProductDetails  redis = (ProductDetails)redisUtil.get(productIds);
         if(redis==null){
@@ -85,6 +85,20 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDetails findProductDesciption(Integer productId) {
         return null;
+    }
+
+    /**
+     * 查询商品分类
+     * @return
+     */
+    @Override
+    public List<ProductCategory> findCategory() {
+        List<ProductCategory> productCategories = (List<ProductCategory>) redisUtil.get("productCategory");
+        if (productCategories==null){
+            productCategories = productDao.findCategory();
+            redisUtil.set("productCategory",productCategories,259200000);
+        }
+        return productCategories;
     }
 
     /**
