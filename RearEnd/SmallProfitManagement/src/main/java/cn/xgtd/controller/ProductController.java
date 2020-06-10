@@ -62,7 +62,7 @@ public class ProductController {
      *查询所有商品详细信息
      * @return
      */
-    @RequestMapping(value = "/findDetails",method = RequestMethod.GET)
+    @RequestMapping(value = "/findDetailsList",method = RequestMethod.GET)
     public ObjectReturnResponse findDetails(){
         ObjectReturn objectReturn = new ObjectReturn();
         List<ProductDetails> productDistinction = productService.findDetails();
