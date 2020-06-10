@@ -29,18 +29,9 @@ public class ProductDistinction implements Serializable {
     private Double productPrice;
     /**商品库存**/
     private Double ProductInventory;
-    /**商品字符串库存**/
-    private String ProductInventorys;
     /**商品销量**/
     private Double ProductSales;
 
-    public String getProductInventorys() {
-        return ProductInventorys;
-    }
-
-    public void setProductInventorys(String productInventorys) {
-        ProductInventorys = productInventorys;
-    }
 
     public Integer getDistinctionId() {
         return distinctionId;

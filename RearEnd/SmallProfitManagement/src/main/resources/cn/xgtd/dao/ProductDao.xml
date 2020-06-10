@@ -15,6 +15,54 @@
         <result property="classifyId" column="product_final_id"></result>
     </resultMap>
 
+    <!--商品详详细map-->
+    <resultMap id="ProductDatailsMap" type="cn.xgtd.domain.product.ProductDetails">
+        <id property="pid" column="ProductId"></id>
+        <result property="productName" column="ProductName"></result>
+        <result property="productSales" column="ProductSales"></result>
+        <result property="weight" column="ProductWeight"></result>
+        <result property="video" column="ProductVideo"></result>
+        <result property="salesPrice" column="SalesPrice"></result>
+        <result property="productPrice" column="ProductPrice"></result>
+        <result property="productInventory" column="ProductInventory"></result>
+        <result property="spikePrice" column="SpikePrice"></result>
+        <result property="inventorys" column="ProductInventory"></result>
+        <result property="productDescription" column="productDescription"></result>
+        <result property="productAfterSale" column="productAfterSale"></result>
+        <result property="productParameter" column="productParameter"></result>
+
+        <association property="productClassify" javaType="cn.xgtd.domain.product.ProductClassify" resultMap="productClassifyMap">
+         </association>
+
+        <!--映射配置集合-->
+        <collection property="productContexts" ofType="cn.xgtd.domain.product.ProductContext">
+            <id property="attributeId" column="attributeId"></id>
+            <result property="attributeContent" column="attributeContent"></result>
+            <result property="attributeType" column="attributeType"></result>
+        </collection>
+
+
+        <!--映射图片集合-->
+        <collection property="imageSite" ofType="java.lang.String">
+            <constructor>
+                <arg column="ImageSite"></arg>
+            </constructor>
+        </collection>
+
+
+
+    </resultMap>
+
+    <!--商品分类map-->
+    <resultMap id="productClassifyMap" type="cn.xgtd.domain.product.ProductClassify">
+        <result property="productPrimaryId" column="product_primary_id"></result>
+        <result property="primaryContent" column="category_content"></result>
+        <result property="productSecondaryId" column="product_secondary_id"></result>
+        <result property="secondaryContent" column="secondary_content"></result>
+        <result property="productFinalId" column="product_final_id"></result>
+        <result property="finalContent" column="final_content"></result>
+    </resultMap>
+
     <!--查询基本商品信息-->
     <select id="fendBasicProduct" resultMap="fendBasicProductMap">
     SELECT
@@ -40,5 +88,58 @@
 
 
 
+    <!--查询商品详细信息-->
+    <select id="fendProduct" resultMap="ProductDatailsMap">
+        SELECT
+            pb.id,
+            pb.ProductId,
+            pb.ProductName,
+            pb.ProductVideo,
+            pb.ProductWeight,
+            pb.prodcutPrimaryCategory,
+            pb.productFinalCategory,
+            pb.productFinalCategory,
+            pb.productPageviews,
+            pb.productDescription,
+            pb.productAfterSale,
+            pb.productParameter,
+            pp.ProductPrice,
+            pp.SpikePrice,
+            pp.SalesPrice,
+            pp.ProductSales,
+            pp.ProductInventory,
+            pi.ImageSite,
+            pa.attributeContent,
+            pa.attributeId,
+            pa.attributeType,
+            ppc.product_primary_id,
+            ppc.category_content,
+            psc.product_secondary_id,
+            psc.secondary_content,
+            pfc.product_final_id,
+            pfc.final_content
+        FROM
+            ProductBasis pb
+            LEFT JOIN ProductPrice pp ON pb.ProductId = pp.ProductId
+            LEFT JOIN ProductImage pi ON pb.ProductId = pi.ProductId
+            LEFT JOIN productAttribute pa ON pb.ProductId = pa.ProductId
+            LEFT JOIN product_primary_category ppc ON pb.prodcutPrimaryCategory = ppc.product_primary_id
+            LEFT JOIN product_secondary_category psc ON pb.productSecondaryCategory = psc.product_secondary_id
+            LEFT JOIN product_final_category pfc ON pb.productFinalCategory = pfc.product_final_id
+        WHERE
+            pb.ProductId =#{productId};
+    </select>
+
+    <!--查询商品属性 销量 库存 不同-->
+    <select id="findProductDistinction" resultType="cn.xgtd.domain.product.ProductDistinction">
+        SELECT * from productDistinction WHERE productId = #{productId}
+    </select>
+
+    <!--查询商品库跟销量-->
+    <select id="findSalesInventory" resultType="cn.xgtd.domain.product.ProductDetails">
+        SELECT ProductInventory,ProductSales
+         FROM ProductPrice
+         WHERE ProductId=#{productId};
+    </select>
 
 </mapper>

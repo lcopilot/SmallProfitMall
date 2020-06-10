@@ -1,15 +1,13 @@
 package cn.xgtd.domain.product;
 
-import javax.xml.crypto.Data;
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * 商品实体类
- * @author Kite
- * @date 2020/6/6
+ * 商品返回的详细数据
+ * @author kity
  */
-public class Product implements Serializable {
+public class ProductDetails implements Serializable {
     private int id;
     /**商品id**/
     private String pid;
@@ -17,12 +15,8 @@ public class Product implements Serializable {
     private String productName;
     /**商品价格**/
     private Double productPrice;
-    /**商品销售量**/
-    private String sales;
     /**重量**/
     private String weight;
-    /**库存**/
-    private String inventory;
     /**是否包邮**/
     private String freeShipping;
     /**视频**/
@@ -56,24 +50,22 @@ public class Product implements Serializable {
     /**秒杀价格**/
     private double spikePrice;
     /**商品销量**/
-    private double ProductSales;
+    private double productSales;
     /**商品库存**/
     private double productInventory;
-
     /**商品介绍**/
     private String productDescription;
-
     /**商品售后**/
     private String productAfterSale;
-
     /**商品参数**/
     private String productParameter;
-
-    /**商品不同属性**/
+    /**商品不同属性详细信息**/
     private List<ProductDistinction> productDistinctions;
-
     /**商品属性**/
     private List<ProductContext> productContexts;
+    /**商品所属分类**/
+    private ProductClassify productClassify;
+
 
     public int getId() {
         return id;
@@ -107,28 +99,12 @@ public class Product implements Serializable {
         this.productPrice = productPrice;
     }
 
-    public String getSales() {
-        return sales;
-    }
-
-    public void setSales(String sales) {
-        this.sales = sales;
-    }
-
     public String getWeight() {
         return weight;
     }
 
     public void setWeight(String weight) {
         this.weight = weight;
-    }
-
-    public String getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(String inventory) {
-        this.inventory = inventory;
     }
 
     public String getFreeShipping() {
@@ -260,11 +236,11 @@ public class Product implements Serializable {
     }
 
     public double getProductSales() {
-        return ProductSales;
+        return productSales;
     }
 
     public void setProductSales(double productSales) {
-        ProductSales = productSales;
+        this.productSales = productSales;
     }
 
     public double getProductInventory() {
@@ -313,5 +289,13 @@ public class Product implements Serializable {
 
     public void setProductContexts(List<ProductContext> productContexts) {
         this.productContexts = productContexts;
+    }
+
+    public ProductClassify getProductClassify() {
+        return productClassify;
+    }
+
+    public void setProductClassify(ProductClassify productClassify) {
+        this.productClassify = productClassify;
     }
 }

@@ -2,6 +2,7 @@ package cn.xgtd.dao;
 
 import cn.xgtd.domain.product.BasicProduct;
 import cn.xgtd.domain.product.Product;
+import cn.xgtd.domain.product.ProductDetails;
 import cn.xgtd.domain.product.ProductDistinction;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -29,4 +30,26 @@ public interface ProductDao {
      * @return
      */
     public Integer findFavoriteQuantity();
+
+    /**
+     * 查询商品详细信息
+     * @productId productId 商品id
+     * @return
+     */
+    public ProductDetails fendProduct(@Param("productId")Integer productId);
+
+
+    /**
+     * 查询商品属性
+     * @param productId
+     * @return
+     */
+    public List<ProductDistinction> findProductDistinction(@Param("productId")Integer productId);
+
+    /**
+     * 查询商品库存跟销量
+     * @param productId 商品id
+     * @return
+     */
+    public ProductDetails findSalesInventory(@Param("productId")Integer productId);
 }

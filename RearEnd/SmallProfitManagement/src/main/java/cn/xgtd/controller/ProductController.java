@@ -1,12 +1,17 @@
 package cn.xgtd.controller;
 
 import cn.xgtd.domain.product.BasicProduct;
+import cn.xgtd.domain.product.ProductDetails;
+import cn.xgtd.domain.product.ProductDistinction;
 import cn.xgtd.response.CommonCode;
+import cn.xgtd.response.objectReturn.ObjectReturn;
+import cn.xgtd.response.objectReturn.ObjectReturnResponse;
 import cn.xgtd.response.pagination.Pagination;
 import cn.xgtd.response.pagination.ResponsePagination;
 import cn.xgtd.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,5 +57,11 @@ public class ProductController {
         return new ResponsePagination(CommonCode.SUCCESS,pagination);
     }
 
-
+    @RequestMapping(value = "/findDetails/{productId}",method = RequestMethod.GET)
+    public ObjectReturnResponse findDetails(@PathVariable("productId") Integer productId){
+        ObjectReturn objectReturn = new ObjectReturn();
+        ProductDetails productDistinction = productService.findDetails(productId);
+        objectReturn.setObject(productDistinction);
+        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+    }
 }

@@ -1,10 +1,12 @@
 package cn.xgtd.domain.product;
 
+import java.io.Serializable;
+
 /**
  * @author Kite
  * @date 2020/6/9
  */
-public class BasicProduct {
+public class BasicProduct implements Serializable {
     /**商品Id**/
     private Integer productId;
     /**商品名称**/

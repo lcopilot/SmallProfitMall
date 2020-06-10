@@ -3,6 +3,7 @@ package cn.xgtd.domain.product;
 import java.io.Serializable;
 
 /**
+ * 配置详细信息
  * @author Kite
  * @date 2020/5/24
  */
