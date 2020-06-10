@@ -10,7 +10,7 @@ import java.util.List;
 public class ProductDetails implements Serializable {
     private int id;
     /**商品id**/
-    private String pid;
+    private String productId;
     /**商品名字**/
     private String productName;
     /**商品价格**/
@@ -75,12 +75,12 @@ public class ProductDetails implements Serializable {
         this.id = id;
     }
 
-    public String getPid() {
-        return pid;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setPid(String pid) {
-        this.pid = pid;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getProductName() {

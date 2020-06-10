@@ -17,7 +17,7 @@
 
     <!--商品详详细map-->
     <resultMap id="ProductDatailsMap" type="cn.xgtd.domain.product.ProductDetails">
-        <id property="pid" column="ProductId"></id>
+        <id property="productId" column="ProductId"></id>
         <result property="productName" column="ProductName"></result>
         <result property="productSales" column="ProductSales"></result>
         <result property="weight" column="ProductWeight"></result>
