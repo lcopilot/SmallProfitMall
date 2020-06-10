@@ -54,15 +54,15 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public List<ProductDetails> findDetails() {
-        String productIds ="productDetails";
-        //从缓存中查询是否存在
-        List<ProductDetails>  redis = (List<ProductDetails>)redisUtil.get(productIds);
-        if(redis!=null){
-            return redis;
-        }
-        //设置商品配置信息
-        List<ProductDetails> productDetailsResult = setProductConfiguration();
+    public List<ProductDetails> findDetails(Integer currentPage,Integer pageSize) {
+//        String productIds ="productDetails";
+//        //从缓存中查询是否存在
+//        List<ProductDetails>  redis = (List<ProductDetails>)redisUtil.get(productIds);
+//        if(redis!=null){
+//            return redis;
+//        }
+        //设置商品详细以及配置信息
+        List<ProductDetails> productDetailsResult = setProductConfiguration(currentPage, pageSize);
         for (int i = 0; i <productDetailsResult.size() ; i++) {
             productDetailsResult.get(i).setProductContexts(null);
             String weight = productDetailsResult.get(i).getWeight();
@@ -81,7 +81,7 @@ public class ProductServiceImpl implements ProductService {
             List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productDetailsResult.get(i).getProductId());
             productDetailsResult.get(i).setProductDistinctions(productDistinctions);
         }
-        redisUtil.set(productIds,productDetailsResult);
+//        redisUtil.set(productIds,productDetailsResult);
         return productDetailsResult;
 
     }
@@ -109,8 +109,8 @@ public class ProductServiceImpl implements ProductService {
      * 设置商品配置
      * @return 商品对象
      */
-    public List<ProductDetails> setProductConfiguration(){
-        List<ProductDetails> productDetailsResult = productDao.fendProduct();
+    public List<ProductDetails> setProductConfiguration(Integer currentPage,Integer pageSize){
+        List<ProductDetails> productDetailsResult = productDao.fendProduct(currentPage, pageSize);
         for (int i = 0; i <productDetailsResult.size() ; i++) {
             List<ProductContext> productContexts = productDetailsResult.get(i).getProductContexts();
 

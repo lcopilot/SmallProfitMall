@@ -32,7 +32,7 @@ public interface ProductDao {
      * 查询商品详细信息
      * @return
      */
-    public List<ProductDetails> fendProduct();
+    public List<ProductDetails> fendProduct(@Param("currentPage") Integer currentPage,@Param("pageSize") Integer pageSize);
 
 
     /**
