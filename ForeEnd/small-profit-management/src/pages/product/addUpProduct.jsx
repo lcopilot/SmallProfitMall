@@ -222,7 +222,7 @@ const AddUpProduct = () => {
   }
 
   const fileUpload = (file) => {
-    Utils.fileUpload(file).then(res =>console.log(res));
+    Utils.fileUpload(file).then(res =>{console.log()});
     // console.log(file)
   }
 

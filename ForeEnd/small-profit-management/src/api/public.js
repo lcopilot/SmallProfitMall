@@ -60,15 +60,22 @@ axios.interceptors.response.use(
     },
     // 服务器状态码不是2开头的的情况
     error => {
+      if (!error.response){
+        console.error(error);
+        message.error("服务器跑路了~,请稍后重试")
+        return Promise.reject(error);
+      }
       if (error.response.status) {
-        if (error.response.status === 404) {
-          console.log(error.response.status);
-          message.error("网络请求不存在,请稍后重试!")
-        } else {
-          console.log(error.response.status);
-          message.error("服务器跑路了~,请稍后重试")
+        switch (error.response.status) {
+          case 404:
+              console.error(error.response.status)
+             message.error("网络请求不存在,请稍后重试!");
+          case 500:
+            console.error(error.response.status);
+            message.error("服务器跑路了~,请稍后重试")
+          default:
+            return Promise.reject(error.response);
         }
-        return Promise.reject(error.response);
       }
     }
 )
@@ -169,10 +176,12 @@ export default {
    */
   requestFileAll(url, partList = []) {
     return new Promise((resolve, reject) => {
-      axios.all(partList).then(axios.spread((...result)=> {
-        resolve(...result)
-      })).catch((...error) => {
-        reject(...error)
+      axios.all(partList).then(
+          axios.spread((...res) =>{
+            resolve(...res)
+          })
+      ).catch((error) => {
+        reject(error)
       })
     })
   },

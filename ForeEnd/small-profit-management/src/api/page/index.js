@@ -81,7 +81,3 @@ export const getFileName=()=>{
 export const uploadFiles=(data)=>{
   return http.requestPostFile(apiUrl+`/filesController/filesUpload`,data)
 }
-//文件上传并发
-export const uploadFilesAll=(partList)=>{
-  return http.requestFileAll(partList)
-}

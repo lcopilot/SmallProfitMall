@@ -16,6 +16,7 @@
     "customize-cra": "^0.9.1",
     "draft-js": "^0.11.6",
     "draftjs-to-html": "^0.9.1",
+    "griffith": "^1.5.3",
     "html-to-draftjs": "^1.5.0",
     "http-proxy-middleware": "^1.0.3",
     "immutability-helper": "^3.0.2",
