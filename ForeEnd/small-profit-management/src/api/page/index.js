@@ -75,11 +75,11 @@ export const getProductCategory=()=>{
  */
 //获取文件唯一标识(文件名)
 export const getFileName=()=>{
-  return http.requestGet(apiUrl+``)
+  return http.requestGet(apiUrl+`/filesController/getFileName`)
 }
 //文件上传
 export const uploadFiles=(data)=>{
-  return http.requestPostFile(apiUrl+``,data)
+  return http.requestPostFile(apiUrl+`/filesController/filesUpload`,data)
 }
 //文件上传并发
 export const uploadFilesAll=(partList)=>{

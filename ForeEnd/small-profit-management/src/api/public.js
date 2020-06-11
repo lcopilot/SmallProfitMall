@@ -171,9 +171,9 @@ export default {
     return new Promise((resolve, reject) => {
       axios.all(partList).then(axios.spread((...result)=> {
         resolve(...result)
-      }).catch((...error) => {
+      })).catch((...error) => {
         reject(...error)
-      }))
+      })
     })
   },
 

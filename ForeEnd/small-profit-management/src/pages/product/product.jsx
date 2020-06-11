@@ -76,9 +76,16 @@ const Product = () => {
             <Menu>
               <Menu.Item>
                 <a  onClick={() => {
-                  history.push({pathname:`/products/product/addProduct`,state:{productDetail:product}})
+                  history.push({pathname:`/products/product/addUpProduct`,state:{productDetail:product}})
                 }}>
                   编辑基本信息
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                <a onClick={() => {
+                  history.push({pathname:`/products/product/productAttributes`,state:{productDetail:product}})
+                }}>
+                  编辑配置库存
                 </a>
               </Menu.Item>
               <Menu.Item>
@@ -92,7 +99,7 @@ const Product = () => {
                 <a onClick={() => {
                   history.push({pathname:`/products/product/addProduct`,state:{productDetail:product}})
                 }}>
-                  编辑配置库存
+                  删除
                 </a>
               </Menu.Item>
             </Menu>
@@ -147,7 +154,7 @@ const Product = () => {
         </Col>
         <Col xs={24} sm={24} md={9} lg={9} xl={11}>
           <Button type='primary' onClick={() => {
-            history.push({pathname:`/products/product/addProduct`,state:{productId:5}})
+            history.push({pathname:`/products/product/addUpProduct`,state:{productId:5}})
           }}>添加商品</Button>
         </Col>
       </Row>

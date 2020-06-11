@@ -1,14 +1,14 @@
 import Home from "../pages/home/home";
 import Category from "../pages/category/category";
 import Product from "../pages/product/product";
-import AddProduct from "../pages/product/addProduct";
+import AddUpProduct from "../pages/product/addUpProduct";
 import Role from "../pages/role/role";
 import User from "../pages/user/user";
 import Analysis from "../pages/dashboard/analysis";
 import Monitor from "../pages/dashboard/monitor";
 import Order from "../pages/order/order";
 import React from "react";
-import ProductDetail from "../pages/product/productDetail";
+import ProductAttributes from "../pages/product/productAttributes";
 
 const routerList = [
   {
@@ -23,11 +23,11 @@ const routerList = [
     exact:true,
     component: <Product/>,
   },{
-    path: '/products/product/addProduct',
-    component: <AddProduct/>,
+    path: '/products/product/addUpProduct',
+    component: <AddUpProduct/>,
   },{
-    path: '/products/product/productDetail',
-    component: <ProductDetail/>,
+    path: '/products/product/productAttributes',
+    component: <ProductAttributes/>,
   }, {
     path: '/role',
     component: <Role/>,

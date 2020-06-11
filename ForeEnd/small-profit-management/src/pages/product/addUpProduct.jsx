@@ -10,14 +10,15 @@ import {
   Table, Upload
 } from "antd";
 import {PRODUCT_ATTRIBUTES} from "../../config/sysConfig";
-import {useHistory, useParams, useLocation} from "react-router-dom";
+import Player from 'griffith'
+import {useHistory, useLocation} from "react-router-dom";
 import {
   MinusCircleOutlined,
   AccountBookOutlined,
   PlusOutlined
 } from '@ant-design/icons'
 import * as indexAPI from "../../api/page";
-import './addProduct.less'
+import './addUpProduct.less'
 import ImgCrop from 'antd-img-crop';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import 'antd/es/modal/style';
@@ -29,7 +30,7 @@ import *as Utils from '../../utils/utils'
 const {Option} = Select;
 const {Step} = Steps;
 
-const AddProduct = () => {
+const AddUpProduct = () => {
   const history = useHistory()
   //获取路由传过来的值
   let {productDetail} = useLocation().state
@@ -50,7 +51,41 @@ const AddProduct = () => {
   const productIntRef = useRef()
   const productAftRef = useRef()
   const productParRef = useRef()
+  const productFileUpload = useRef()
 
+  //视频播放器参数
+  const propsPlayer = {
+    //https://github.com/zhihu/griffith/blob/master/packages/griffith/README-zh-Hans.md
+    //自动播放
+    autoplay:true,
+    //播放器实例唯一标识
+    id: "1",
+    //初始视频时长。在视频元数据载入后使用实际值
+    duration: 123456789,
+    //是否启用 standalone 模式
+    standalone:false,
+    //视频封面图片 URL
+    cover: `${imgPreview.imageSrc}?vframe/jpg/offset/2/w/300/h/300`,
+    //是否启用 MSE
+    useMSE:false,
+    sources: {
+      hd: {
+        // duration:`${imgPreview.imageSrc}?avinfo`.format.duration,
+        // format:`${imgPreview.imageSrc}?avinfo`.format.format_name,
+        // size:`${imgPreview.imageSrc}?avinfo`.format.size,
+        // width:`${imgPreview.imageSrc}?avinfo`.streams[0].width,
+        // height:`${imgPreview.imageSrc}?avinfo`.streams[0].height,
+        // play_url: imgPreview.imageSrc
+        bitrate:40,
+        duration:40,
+        format:'mp4',
+        size:123,
+        width:500,
+        height:500,
+        play_url: imgPreview.imageSrc
+      },
+    }
+  }
   //图片裁剪参数
   const propsCrop = {
     aspect: 500 / 500, //	裁切区域宽高比，width / height
@@ -88,25 +123,12 @@ const AddProduct = () => {
   }
   //添加商品
   const addProduct = () => {
-    /* form.setFieldsValue({
-       productAttributes: [
-         {
-           detailed: ["sdfsd", "sdfsdf", "aaaaaa"],
-           name: "1"
-         }, {
-           detailed: ["速度还是大", "dsfsd", "sssssss"],
-           name: "4"
-         }, {
-           detailed: ["sdfsd", "速度还是大", "fffff"],
-           name: "5"
-         }
-       ],
-       productCategory: ["1", "hangzhou", "xihu"]
-     })*/
+    if (proFromBtn.isAtt){
+      history.push('/products/product/productAttributes')
+    }
     form.validateFields().then(values => {
       // console.log(productIntRef.current.getDetailHtml())
       console.log(values)
-
     })
   }
   //获取商品详情
@@ -118,89 +140,77 @@ const AddProduct = () => {
     })
   }
   //回显商品基本信息
-  const setProduct=()=>{
-    if (!productDetail){
-     return  productDetail={
-        productDescription:null,
-        productAfterSale:null,
-        productParameter:null
-      }
+  const setProduct = () => {
+    if (!productDetail) {
+      return null
     }
-    // productAttributes: [
-    //   {
-    //     detailed: ["sdfsd", "sdfsdf", "aaaaaa"],
-    //     name: "1"
-    //   }, {
-    //     detailed: ["速度还是大", "dsfsd", "sssssss"],
-    //     name: "4"
-    //   }, {
-    //     detailed: ["sdfsd", "速度还是大", "fffff"],
-    //     name: "5"
-    //   }
-    // ],
-    const productAttList=[];
-    Object.keys(productDetail).map((item)=>{
-      PRODUCT_ATTRIBUTES.some((att)=>{
-        if (att.value===item){
-           const attConList=[]
-          productDetail[item].map((content)=>{
-            attConList.push(content.attributeContent)
+    const productAttList = [];
+    Object.keys(productDetail).some((item) => {
+      PRODUCT_ATTRIBUTES.some((att) => {
+        if (att.value === item && productDetail[item].length > 0) {
+          const attConList = []
+          productDetail[item].map((attributes) => {
+            attConList.push(attributes.attributeContent)
           })
-          console.log(attConList)
-          const Att={
-            name:item,
-            detailed:attConList
+          const Att = {
+            name: item,
+            detailed: attConList
           }
           productAttList.push(Att)
           return true;
         }
       })
+      return productAttList.length === 7;
     })
-    const imgList=[];
-    productDetail.imageSite.map((item,index)=>{
-      let img={
+    const imgList = [];
+    productDetail.imageSite.map((item, index) => {
+      let img = {
         uid: index,
         name: 'image.png',
         status: 'done',
-        url: item,
+        url: item.trim(),
       }
       imgList.push(img)
     })
     setImgFileList(imgList);
-    const prodCatList=[]
+    const prodCatList = []
     prodCatList.push(productDetail.productClassify.productPrimaryId)
     prodCatList.push(productDetail.productClassify.productSecondaryId)
     prodCatList.push(productDetail.productClassify.productFinalId)
-    setVideoFileList([{
-      uid: '-1',
-      name: 'image.png',
-      status: 'done',
-      url: productDetail.video,
-    }])
+    if (productDetail.video) {
+      setVideoFileList([{
+        uid: '-1',
+        name: productDetail.video.split('/')[3],
+        status: 'done',
+        url: productDetail.video,
+      }])
+    }
     form.setFieldsValue({
-      productAttributes:productAttList,
-      productCategory:prodCatList,
-      productName:productDetail.productName,
-      productPrice:productDetail.productPrice,
-      productWeight:productDetail.weights,
+      productAttributes: productAttList,
+      productCategory: prodCatList,
+      productName: productDetail.productName,
+      productPrice: productDetail.productPrice,
+      productWeight: productDetail.weights,
     })
   }
-
+  //上传图片改变
   const onChangeImg = ({fileList: newFileList}) => {
-    console.log(newFileList)
     setImgFileList(newFileList);
   };
+  //上传视频改变
   const onChangeVideo = ({fileList: newFileList}) => {
     console.log(newFileList)
     setVideoFileList(newFileList);
   };
 
   //商品图片预览
-  const onPreview = async file => {
+  const onPreview = (file, isVideo) => {
     setImgPreview({
+      isVideo: isVideo,
       title: file.name,
       visible: true,
-      imageSrc: URL.createObjectURL(file.originFileObj)
+      imageSrc: productDetail ? file.url : URL.createObjectURL(
+          file.originFileObj),
     })
   };
 
@@ -212,8 +222,7 @@ const AddProduct = () => {
   }
 
   const fileUpload = (file) => {
-    return true;
-    // Utils.fileUpload(file).then(res =>console.log(res));
+    Utils.fileUpload(file).then(res =>console.log(res));
     // console.log(file)
   }
 
@@ -301,7 +310,7 @@ const AddProduct = () => {
                   {
                     pattern: /((^[1-9]\d*)|^0)(\.\d{0,2}){0,1}$/,
                     message: '请输入正确格式的重量'
-                  },]}
+                  }]}
             >
               <Input
                   type="number"
@@ -319,7 +328,11 @@ const AddProduct = () => {
                   message: '请选择商品分类'
                 }]}
             >
-              <Cascader options={productCategory} fieldNames={{ label: 'categoryContent', value: 'categoryId', children: 'children' }} showSearch={{filterCategory}}
+              <Cascader options={productCategory} fieldNames={{
+                label: 'categoryContent',
+                value: 'categoryId',
+                children: 'children'
+              }} showSearch={{filterCategory}}
                         placeholder="请选择分类"/>
             </Form.Item>
             <Form.List name="productAttributes">
@@ -363,10 +376,10 @@ const AddProduct = () => {
                                     onClick={() => {
                                       remove(field.name);
                                       if (fields.length === 1) {
-                                        setIsSteps(false)
+                                        setIsSteps(false);
                                         setProFromBtn({
                                           content: '确定',
-                                          isAtt: false,
+                                          isAtt: !!productDetail,
                                         })
                                       }
                                     }}
@@ -381,10 +394,10 @@ const AddProduct = () => {
                             <Button
                                 type="dashed"
                                 onClick={() => {
-                                  setIsSteps(true);
+                                  setIsSteps(!productDetail);
                                   setProFromBtn({
-                                    content: '下一步',
-                                    isAtt: true,
+                                    content: productDetail ? '确定' : '下一步',
+                                    isAtt: !productDetail,
                                   })
                                   add();
                                 }}
@@ -401,10 +414,11 @@ const AddProduct = () => {
             <Form.Item label="商品图片">
               <ImgCrop {...propsCrop}>
                 <Upload
-                    // customRequest={(file) => {
-                    //   // fileUpload(file.file);
-                    // }}
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    customRequest={(file) => {
+                      fileUpload(file.file);
+                    }}
+                    ref={productFileUpload}
+                    // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                     progress={{
                       strokeWidth: 2,
                       showInfo: false,
@@ -414,7 +428,9 @@ const AddProduct = () => {
                     accept="image/png,image/jpeg"
                     listType="picture-card"
                     fileList={imgFileList}
-                    onPreview={onPreview}
+                    onPreview={(file) => {
+                      onPreview(file, false)
+                    }}
                     onChange={onChangeImg}
                 >
                   {imgFileList.length < 5 && '+ 选择图片'}
@@ -432,21 +448,17 @@ const AddProduct = () => {
                     })
                   }}
               >
-                <img className="product-preview-img" src={imgPreview.imageSrc}/>
+                {imgPreview.isVideo ? <Player{...propsPlayer}/> :
+                    <img className="product-preview-img" src={imgPreview.imageSrc}/>}
               </Modal>
             </Form.Item>
             <Form.Item label="商品视频" labelCol={{span: 4}}
                        wrapperCol={{span: 8}}>
               <Upload.Dragger
-                  progress={
-                    <Progress
-                        strokeColor={{
-                          '0%': '#108ee9',
-                          '100%': '#87d068',
-                        }}
-                        percent={99.9}
-                    />
-                  }
+                  onPreview={(file) => {
+                    onPreview(file, true)
+                  }}
+                  // onPreview={onPreviewVideo}
                   listType="picture"
                   fileList={videoFileList}
                   onChange={onChangeVideo}
@@ -461,19 +473,22 @@ const AddProduct = () => {
             <Form.Item name="productIntroduction" labelCol={{span: 4}}
                        wrapperCol={{span: 14}} label="商品介绍">
               <ProductEditor ref={productIntRef}
-                             detailHtml={productDetail.productDescription}
+                             detailHtml={productDetail
+                                 ? productDetail.productDescription : null}
               />
             </Form.Item>
             <Form.Item name="productAfterSale" labelCol={{span: 4}}
-                       wrapperCol={{span: 14}} label="售后保障" >
+                       wrapperCol={{span: 14}} label="售后保障">
               <ProductEditor ref={productAftRef}
-                             detailHtml={productDetail.productAfterSale}
+                             detailHtml={productDetail
+                                 ? productDetail.productAfterSale : null}
               />
             </Form.Item>
             <Form.Item name="productParameter" labelCol={{span: 4}}
                        wrapperCol={{span: 14}} label="商品参数">
               <ProductEditor ref={productParRef}
-                             detailHtml={productDetail.productParameter}
+                             detailHtml={productDetail
+                                 ? productDetail.productParameter : null}
               />
             </Form.Item>
             <Form.Item  {...formItemLayoutWithOutLabel}>
@@ -489,4 +504,4 @@ const AddProduct = () => {
   )
 }
 
-export default AddProduct
+export default AddUpProduct

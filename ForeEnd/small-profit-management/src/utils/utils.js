@@ -5,13 +5,14 @@ const SLICE_QUANTITY=5;
 export const fileUpload=async (file)=>{
   let partSize = file.size / SLICE_QUANTITY,
       start = 0,
-      end=0,
+      end=file.size / SLICE_QUANTITY,
       i = 0,
       partList = []; //文件分片集合
   const suffix=file.name.split('.')[1];
   let fileName='';
   try {
-     fileName=await indexApi.getFileName();
+    let res=await indexApi.getFileName();
+    fileName=res.objectReturn.object
   } catch (e) {
     console.error('文件唯一标识获取错误')
   }
@@ -27,8 +28,8 @@ export const fileUpload=async (file)=>{
   //并发切片请求
   partList = partList.map(item => {
     let formData = new FormData();
-    formData.append('chunk', item.chunk);
-    formData.append('filename', item.filename);
+    formData.append('file', item.chunk);
+    formData.append('fileName', item.filename);
     return indexApi.uploadFiles(formData)
   });
   const results=await indexApi.uploadFilesAll(partList)
