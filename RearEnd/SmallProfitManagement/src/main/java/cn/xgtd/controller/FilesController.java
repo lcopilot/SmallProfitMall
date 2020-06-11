@@ -26,11 +26,29 @@ public class FilesController {
     @Autowired
     FilesService filesService;
 
-    @RequestMapping(value = "/filesUpload",method = RequestMethod.POST)
-    public ObjectReturnResponse filesUpload(MultipartFile file) throws IOException {
+
+    /**
+     * 生成文件名
+     * @return
+     */
+    @RequestMapping(value = "/getFileName",method = RequestMethod.GET)
+    public ObjectReturnResponse getFileName() {
         ObjectReturn objectReturn = new ObjectReturn();
-        String fileUtil = filesService.filesUpload(file);
+        String fileUtil = filesService.getFileName();
         objectReturn.setObject(fileUtil);
         return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+    }
+
+    /**
+     * 文件上传
+     * @param fileName 文件名
+     * @param file 文件
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "/filesUpload",method = RequestMethod.POST)
+    public ObjectReturnResponse filesUpload(String fileName ,MultipartFile file) throws IOException {
+        filesService.filesUpload(fileName,file);
+        return new ObjectReturnResponse(CommonCode.SUCCESS,null);
     }
 }

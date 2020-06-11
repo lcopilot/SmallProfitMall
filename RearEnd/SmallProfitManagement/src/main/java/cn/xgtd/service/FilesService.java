@@ -11,9 +11,18 @@ import java.io.IOException;
 public interface FilesService {
 
     /**
+     * 生成文件名
+     * @return
+     */
+    public String getFileName();
+
+    /**
      * 文件上传
-     * @param file 文件
+     * @param  fileName 文件名
+     * @param files 文件
      * @return 返回地址
      */
-    public String filesUpload(MultipartFile file) throws IOException;
+    public String filesUpload(String fileName , MultipartFile files) throws IOException;
+
+
 }

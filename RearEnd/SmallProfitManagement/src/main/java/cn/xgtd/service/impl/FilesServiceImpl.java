@@ -19,20 +19,30 @@ import java.util.UUID;
 @Service
 public class FilesServiceImpl implements FilesService {
 
-
     /**
-     * 文件上传
-     * @param files 文件
-     * @return 返回地址
+     * 生成文件名
+     * @return
      */
     @Override
-    public String filesUpload(MultipartFile files) throws IOException {
-
-        //文件地址
+    public String getFileName() {
+        //uuid
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         //时间戳
         long time = System.currentTimeMillis();
         String fileName = uuid+time;
+        return fileName;
+    }
+
+    /**
+     * 文件上传
+     * @param  fileName 文件名
+     * @param files 文件
+     * @return 返回地址
+     */
+    @Override
+    public String filesUpload(String fileName , MultipartFile files) throws IOException {
+
+        //文件地址
         String fileUrl = PathUtil.getImgBasePath()+fileName;
         File file = new File(fileUrl);
         String os = System.getProperty("os.name");
@@ -55,4 +65,5 @@ public class FilesServiceImpl implements FilesService {
         files.transferTo(file);
         return fileUrl;
     }
+
 }
