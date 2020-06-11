@@ -75,6 +75,31 @@
         </collection>
     </resultMap>
 
+    <!--商品配置map-->
+    <resultMap id="ProductDistinctionMap" type="cn.xgtd.domain.product.ProductDistinction">
+        <result property="sizeId" column="sizeId"></result>
+        <result property="sizeContent" column="ps_attributeContent"></result>
+        <result property="colourId" column="colourId"></result>
+        <result property="colourContent" column="pc_attributeContent"></result>
+        <result property="comboId" column="comboId"></result>
+        <result property="comboContent" column="pcb_attributeContent"></result>
+        <result property="specificationId" column="specificationId"></result>
+        <result property="specificationContent" column="psp_attributeContent"></result>
+        <result property="tasteId" column="tasteId"></result>
+        <result property="tasteContent" column="pt_attributeContent"></result>
+        <result property="kindId" column="kindId"></result>
+        <result property="kindContent" column="pk_attributeContent"></result>
+        <result property="versionId" column="versionId"></result>
+        <result property="versionContent" column="pv_attributeContent"></result>
+        <result property="colourId" column="colourId"></result>
+        <result property="productPrice" column="productPrice"></result>
+        <result property="productInventory" column="productInventory"></result>
+        <result property="productSales" column="productSales"></result>
+
+
+
+    </resultMap>
+
     <!--查询基本商品信息-->
     <select id="fendBasicProduct" resultMap="fendBasicProductMap">
     SELECT
@@ -146,8 +171,27 @@
     </select>
 
     <!--查询商品属性 销量 库存 不同-->
-    <select id="findProductDistinction" resultType="cn.xgtd.domain.product.ProductDistinction">
-        SELECT * from productDistinction WHERE productId = #{productId}
+    <select id="findProductDistinction" resultMap="ProductDistinctionMap">
+         SELECT
+            pd.*,
+            ps.attributeContent AS ps_attributeContent,
+            pc.attributeContent AS pc_attributeContent,
+            pcb.attributeContent AS pcb_attributeContent,
+            psp.attributeContent AS psp_attributeContent,
+            pt.attributeContent AS pt_attributeContent,
+            pk.attributeContent AS pk_attributeContent,
+            pv.attributeContent AS pv_attributeContent
+        FROM
+            productDistinction pd
+            LEFT JOIN productAttribute ps ON pd.sizeId = ps.attributeId
+            LEFT JOIN productAttribute pc ON pd.colourId = pc.attributeId
+            LEFT JOIN productAttribute pcb ON pd.comboId = pcb.attributeId
+            LEFT JOIN productAttribute psp ON pd.specificationId = psp.attributeId
+            LEFT JOIN productAttribute pt ON pd.tasteId = pt.attributeId
+            LEFT JOIN productAttribute pk ON pd.kindId = pk.attributeId
+            LEFT JOIN productAttribute pv ON pd.versionId = pv.attributeId
+        WHERE
+            pd.productId = #{productId}
     </select>
 
     <!--查询商品库跟销量-->
