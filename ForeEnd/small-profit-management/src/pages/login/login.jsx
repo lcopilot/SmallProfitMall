@@ -4,7 +4,7 @@ import './login.less'
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import *as userApi from '../../api/page/user'
 import {useHistory} from "react-router-dom";
-import storageUtils, {LOGIN_EXPIRED} from "../../utils/storageUtils";
+import storageUtils from "../../utils/storageUtils";
 import {connect} from 'react-redux'
 import *as ActionCreators from '../../store/actionCreators'
 

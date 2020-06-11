@@ -61,5 +61,27 @@ export const searchUser=(data)=>{
  */
 //获取商品数据
 export const getProductList=(data)=>{
-  return http.requestGetFormUr(apiUrl+`/ProductController/findProductList`,data)
+  return http.requestGetFormUr(apiUrl+`/ProductController/findDetailsList`,data)
+}
+//获取商品详情
+export const getProductCategory=()=>{
+  return http.requestGet(apiUrl+`/ProductController/findCategory`)
+}
+
+
+
+/**
+ * 文件上传模块
+ */
+//获取文件唯一标识(文件名)
+export const getFileName=()=>{
+  return http.requestGet(apiUrl+``)
+}
+//文件上传
+export const uploadFiles=(data)=>{
+  return http.requestPostFile(apiUrl+``,data)
+}
+//文件上传并发
+export const uploadFilesAll=(partList)=>{
+  return http.requestFileAll(partList)
 }
