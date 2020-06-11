@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * 文件上传控制层
@@ -50,5 +51,21 @@ public class FilesController {
     public ObjectReturnResponse filesUpload(String fileName ,MultipartFile file) throws IOException {
         filesService.filesUpload(fileName,file);
         return new ObjectReturnResponse(CommonCode.SUCCESS,null);
+    }
+
+    /**
+     * 文件合成
+     * @param fileName 文件碎片名
+     * @param fileQuantity 文件碎片数量
+     * @param fileType 文件类型
+     * @param richText 是否是富文本
+     * @return 新文件名
+     */
+    @RequestMapping(value = "/compositeFile",method = RequestMethod.POST)
+    public ObjectReturnResponse compositeFile(String fileName , Integer fileQuantity ,String  fileType , Boolean richText){
+        ObjectReturn objectReturn = new ObjectReturn();
+        String fileNames = filesService.compositeFile(fileName,fileQuantity,fileType,richText);
+        objectReturn.setObject(fileNames);
+        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
     }
 }

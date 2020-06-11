@@ -3,6 +3,7 @@ package cn.xgtd.service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Kite
@@ -23,6 +24,13 @@ public interface FilesService {
      * @return 返回地址
      */
     public String filesUpload(String fileName , MultipartFile files) throws IOException;
+
+    /**
+     * 文件合并
+     * @param fileName 文件名碎片
+     * @return 合成的文件名
+     */
+    public String compositeFile(String fileName , Integer fileQuantity ,String  fileType , Boolean richText);
 
 
 }

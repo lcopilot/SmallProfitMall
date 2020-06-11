@@ -2,14 +2,19 @@ package cn.xgtd.service.impl;
 
 import cn.xgtd.service.FilesService;
 import cn.xgtd.util.file.PathUtil;
+import cn.xgtd.util.file.SplitAndMergeFile;
+import cn.xgtd.util.redis.RedisUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.core.util.UuidUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -19,17 +24,23 @@ import java.util.UUID;
 @Service
 public class FilesServiceImpl implements FilesService {
 
+    @Autowired
+    RedisUtil redisUtil;
     /**
      * 生成文件名
      * @return
      */
     @Override
     public String getFileName() {
-        //uuid
-        String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
-        //时间戳
-        long time = System.currentTimeMillis();
-        String fileName = uuid+time;
+        String fileName = null;
+        do {
+            //uuid
+            String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+            //时间戳
+            long time = System.currentTimeMillis();
+            fileName = uuid+"_"+time;
+        }while (redisUtil.get(fileName)!=null);
+        redisUtil.set(fileName,fileName);
         return fileName;
     }
 
@@ -64,6 +75,28 @@ public class FilesServiceImpl implements FilesService {
         }
         files.transferTo(file);
         return fileUrl;
+    }
+
+    /**
+     * 文件合成
+     * @param fileName 文件名碎片
+     * @return
+     */
+    @Override
+    public String compositeFile(String fileName , Integer fileQuantity ,String  fileType , Boolean richText) {
+        //合成后文件名
+        String compositeFileName = fileName+"."+fileType;
+        //文件地址
+       String fileUrl =  PathUtil.getImgBasePath();
+        //碎片文件名
+        List<String> fileNames = new ArrayList<>();
+        for (int i = 0; i <fileQuantity ; i++) {
+            fileNames.add(fileUrl+"/"+fileName+"-"+i+"."+fileType) ;
+        }
+        SplitAndMergeFile splitAndMergeFile = new SplitAndMergeFile();
+
+        splitAndMergeFile.merge(fileNames,fileUrl,compositeFileName);
+        return compositeFileName;
     }
 
 }
