@@ -43,7 +43,7 @@ public class FilesServiceImpl implements FilesService {
     public String filesUpload(String fileName , MultipartFile files) throws IOException {
 
         //文件地址
-        String fileUrl = PathUtil.getImgBasePath()+fileName;
+        String fileUrl = PathUtil.getImgBasePath()+"/"+fileName;
         File file = new File(fileUrl);
         String os = System.getProperty("os.name");
         //3.调用String类的常用成员方法判断并替换
