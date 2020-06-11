@@ -140,42 +140,43 @@ public class ProductServiceImpl implements ProductService {
                 productDetailsResult.get(i).setCombo(comboList);
 
                 for (int j = 0; j <productContexts.size() ; j++) {
+
                     //该商品属性类型
                     String type = productContexts.get(j).getAttributeType();
                     //当前属性
                     ProductContext productContext = productContexts.get(j);
-
                     switch(type){
                         case "颜色" :
                             colourList.add(productContext);
-                            productDetailsResult.get(j).setColour(colourList)
-                            ;break;
+                            break;
                         case "版本" :
                             versionList.add(productContext);
-                            productDetailsResult.get(j).setVersion(versionList)
-                            ;break;
+                            break;
                         case "规格" :
                             specificationList.add(productContext);
-                            productDetailsResult.get(j).setSpecification(specificationList)
                             ;break;
                         case "尺寸" :
                             sizeList.add(productContext);
-                            productDetailsResult.get(j).setSize(sizeList);
-                            ;break;
+                            break;
                         case "种类" :
                             kindList.add(productContext);
-                            productDetailsResult.get(j).setKind(kindList);
                             ;break;
                         case "口味" :
                             tasteList.add(productContext);
-                            productDetailsResult.get(j).setTaste(tasteList);
                             ;break;
                         case "套餐" :
                             comboList.add(productContext);
-                            productDetailsResult.get(j).setCombo(comboList);
                             ;break;
                     }
+
                 }
+                productDetailsResult.get(i).setColour(colourList);
+                productDetailsResult.get(i).setVersion(versionList);
+                productDetailsResult.get(i).setSpecification(specificationList);
+                productDetailsResult.get(i).setSize(sizeList);
+                productDetailsResult.get(i).setKind(kindList);
+                productDetailsResult.get(i).setTaste(tasteList);
+                productDetailsResult.get(i).setCombo(comboList);
             }
         }
 
