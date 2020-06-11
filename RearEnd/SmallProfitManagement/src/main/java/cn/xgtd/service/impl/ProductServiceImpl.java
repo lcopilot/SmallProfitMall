@@ -26,29 +26,6 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     RedisUtil redisUtil;
 
-
-    @Override
-    public List<BasicProduct> fendBasicProduct(Integer currentPage, Integer pageSize) {
-        Integer start=(currentPage-1)*pageSize;
-        List<BasicProduct> products =   productDao.fendBasicProduct(start,pageSize);
-        return products;
-    }
-
-    /**
-     * 查询总页数跟总数量
-     * @param pageSize 每页查询数量
-     * @return
-     */
-    @Override
-    public Integer[] fendTotalPage(Integer pageSize) {
-        Integer[] TotalPage=new Integer[2];
-        Integer quantity = productDao.findFavoriteQuantity();
-        int totalPage = (quantity % pageSize)  == 0 ? quantity/pageSize : (quantity/pageSize) + 1;
-        TotalPage[0]=quantity;
-        TotalPage[1]=totalPage;
-        return TotalPage;
-    }
-
     /**
      *查询商品详细信息
      * @return
@@ -104,6 +81,8 @@ public class ProductServiceImpl implements ProductService {
         }
         return productCategories;
     }
+
+
 
     /**
      * 设置商品配置
@@ -181,5 +160,20 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return productDetailsResult;
+    }
+
+    /**
+     * 查询总页数跟总数量
+     * @param pageSize 每页查询数量
+     * @return
+     */
+    @Override
+    public Integer[] fendTotalPage(Integer pageSize) {
+        Integer[] TotalPage=new Integer[2];
+        Integer quantity = productDao.findFavoriteQuantity();
+        int totalPage = (quantity % pageSize)  == 0 ? quantity/pageSize : (quantity/pageSize) + 1;
+        TotalPage[0]=quantity;
+        TotalPage[1]=totalPage;
+        return TotalPage;
     }
 }

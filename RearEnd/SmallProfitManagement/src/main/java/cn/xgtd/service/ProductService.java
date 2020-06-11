@@ -15,14 +15,6 @@ import java.util.List;
  */
 public interface ProductService {
 
-    /**
-     * 查询商品
-     * @param currentPage 当前页
-     * @param pageSize 每页查询数量
-     * @return
-     */
-    public List<BasicProduct> fendBasicProduct( Integer currentPage , Integer pageSize);
-
 
     /**
      * 查询商品总数量跟页数

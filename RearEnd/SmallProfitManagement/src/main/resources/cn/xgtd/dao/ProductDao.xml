@@ -5,16 +5,6 @@
 
 <mapper namespace="cn.xgtd.dao.ProductDao">
 
-    <!--商品基本信息map-->
-    <resultMap id="fendBasicProductMap" type="cn.xgtd.domain.product.BasicProduct">
-        <id property="productId" column="productId"></id>
-        <result property="productPrice" column="ProductPrice"></result>
-        <result property="productName" column="productName"></result>
-        <result property="productClassify" column="final_content"></result>
-        <result property="productPicture" column="ImageSite"></result>
-        <result property="classifyId" column="product_final_id"></result>
-    </resultMap>
-
     <!--商品详详细map-->
     <resultMap id="ProductDatailsMap" type="cn.xgtd.domain.product.ProductDetails">
         <id property="productId" column="ProductId"></id>
@@ -100,23 +90,7 @@
 
     </resultMap>
 
-    <!--查询基本商品信息-->
-    <select id="fendBasicProduct" resultMap="fendBasicProductMap">
-    SELECT
-        pb.productId,
-        pb.productName,
-        pfc.final_content,
-        pfc.product_final_id,
-        pp.ProductPrice,
-        pi.ImageSite
 
-        FROM
-        ProductBasis pb
-        LEFT JOIN ProductPrice pp ON pb.productId = pp.ProductId
-        LEFT JOIN ProductImage pi ON pb.productId = pi.ProductId
-        LEFT JOIN product_final_category pfc ON pb.productFinalCategory = pfc.product_final_id
-        WHERE pi.sign = 1   LIMIT #{start}, #{pageSize}
-    </select>
 
 
 

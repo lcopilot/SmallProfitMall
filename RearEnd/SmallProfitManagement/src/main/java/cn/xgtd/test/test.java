@@ -1,8 +1,6 @@
 package cn.xgtd.test;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Kite
@@ -11,31 +9,11 @@ import java.util.List;
 public class test {
 
     public static void main(String[] args) {
-
-        ArrayList<String> list = new ArrayList<>();
-
-        list.add("a");
-
-        list.add("b");
-
-        list.add("b");
-
-        list.add("c");
-
-        list.add("c");
-
-        list.add("d");
-
-        list.add("d");
-
-        System.out.println(list);
-        System.out.println(removeDuplicate(list));
-
-    }
-    public static List removeDuplicate(List list) {
-        HashSet h = new HashSet(list);
-        list.clear();
-        list.addAll(h);
-        return list;
+        //文件地址
+        String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+        //时间戳
+        long time = new Date().getTime();
+        String fileName = uuid+time;
+        System.out.println(fileName);
     }
 }

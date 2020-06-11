@@ -14,13 +14,6 @@ import java.util.List;
 @Mapper
 public interface ProductDao {
 
-    /**
-     * 查询商品
-     * @param start 开始点
-     * @param pageSize 每页查询数量
-     * @return
-     */
-    public List<BasicProduct> fendBasicProduct(@Param("start") Integer start ,@Param("pageSize") Integer pageSize);
 
     /**
      * 查询商品总数量
