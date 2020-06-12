@@ -85,7 +85,9 @@ public class FilesServiceImpl implements FilesService {
     @Override
     public String compositeFile(String fileName , Integer fileQuantity ,String  fileType , Boolean richText) {
        String[] fileTypes = fileType.split("/");
-        fileType=fileTypes[1];
+       if (fileTypes.length>1){
+           fileType=fileTypes[1];
+       }
         //合成后文件名
         String compositeFileName = fileName+"."+fileType;
         //文件地址
