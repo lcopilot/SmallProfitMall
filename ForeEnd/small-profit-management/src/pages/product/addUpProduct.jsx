@@ -27,11 +27,13 @@ import ProductEditor from "./productEditor";
 import InboxOutlined from "@ant-design/icons/lib/icons/InboxOutlined";
 import *as Utils from '../../utils/utils'
 import axios from "axios";
+import {connect} from "react-redux";
 
 const {Option} = Select;
 const {Step} = Steps;
 
-const AddUpProduct = () => {
+const AddUpProduct = (props) => {
+  let {user} = props
   const history = useHistory()
   //获取路由传过来的值
   let {productDetail} = useLocation().state
@@ -231,7 +233,7 @@ const AddUpProduct = () => {
   }
   //文件上传
   const fileUpload = (file) => {
-    Utils.fileUpload(file,false).then(res =>{console.log()});
+    Utils.fileUpload(file,user.uId,false).then(res =>{console.log()});
     // console.log(file)
   }
 
@@ -505,5 +507,11 @@ const AddUpProduct = () => {
       </>
   )
 }
+const stateToProps = (state) => {
+  return {
+    user: state.user,
+    userAuth: state.userAuth,
+  }
+}
 
-export default AddUpProduct
+export default connect(stateToProps, null)(AddUpProduct)

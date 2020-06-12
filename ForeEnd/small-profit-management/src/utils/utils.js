@@ -2,13 +2,13 @@ import * as indexApi from "../api/page";
 import Md5 from 'blueimp-md5'
 const SLICE_QUANTITY = 5;
 
-export const fileUpload = async (file,isEditor) => {
-  let partSize = file.size / SLICE_QUANTITY,
+export const fileUpload = async (file,userId,isEditor) => {
+  let partSize = file.size / SLICE_QUANTITY, //分片大小
       start = 0,
       end = partSize,
       i = 0,
       partList = []; //文件分片集合
-  let fileName = Md5(file.name.split('.')[0]);
+  let fileName = Md5(`${file.name}-${userId}`);
   // try {
   //   let res = await indexApi.getFileName(fileName);
   //   fileName = res.objectReturn.object
@@ -18,7 +18,7 @@ export const fileUpload = async (file,isEditor) => {
   while (i < SLICE_QUANTITY) {
     partList.push({
       chunk: file.slice(start, end),
-      filename: `${fileName}-${i}`
+      filename: `${fileName}-${i}`,
     });
     start += partSize;
     end = start + partSize;
@@ -41,7 +41,7 @@ export const fileUpload = async (file,isEditor) => {
     const data={
       fileName:fileName,
       fileQuantity:SLICE_QUANTITY,
-      fileType:file.type.split('/')[1],
+      fileType:file.type,
       richText:isEditor,
     }
     indexApi.fileSynthesis(data).then(res=>{
