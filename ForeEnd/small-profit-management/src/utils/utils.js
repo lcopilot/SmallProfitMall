@@ -4,12 +4,13 @@ import SparkMD5 from 'spark-md5/spark-md5'
 const SLICE_QUANTITY = 5;
 
 export const fileUpload = async (file, userId, isEditor) => {
-  let partSize = file.size / SLICE_QUANTITY, //分片大小
+  let partSize = Math.ceil(file.size / SLICE_QUANTITY), //分片大小
       start = 0,
       end = partSize,
       i = 0,
       partList = []; //文件分片集合
   let fileName =await Md5(file)
+
   console.log(fileName)
   // try {
   //   let res = await indexApi.getFileName(fileName);
@@ -23,7 +24,7 @@ export const fileUpload = async (file, userId, isEditor) => {
       filename: `${fileName}-${i}`,
     });
     start += partSize;
-    end = start + partSize;
+    end=i===SLICE_QUANTITY-2?file.size+1:start + partSize;
     i++;
   }
   //并发切片请求
