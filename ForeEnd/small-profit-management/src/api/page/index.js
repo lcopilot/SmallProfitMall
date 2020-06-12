@@ -74,10 +74,14 @@ export const getProductCategory=()=>{
  * 文件上传模块
  */
 //获取文件唯一标识(文件名)
-export const getFileName=()=>{
-  return http.requestGet(apiUrl+`/filesController/getFileName`)
+export const getFileName=(fileName)=>{
+  return http.requestPostFormUr(apiUrl+`/filesController/getFileName`,fileName)
 }
 //文件上传
 export const uploadFiles=(data)=>{
   return http.requestPostFile(apiUrl+`/filesController/filesUpload`,data)
+}
+//文件合成
+export const fileSynthesis=(data)=>{
+  return http.requestPostFormUr(apiUrl+`/filesController/compositeFile`,data)
 }
