@@ -28,6 +28,7 @@ import InboxOutlined from "@ant-design/icons/lib/icons/InboxOutlined";
 import *as Utils from '../../utils/utils'
 import axios from "axios";
 import {connect} from "react-redux";
+import {RcCustomRequestOptions} from "antd/lib/upload/interface";
 
 const {Option} = Select;
 const {Step} = Steps;
@@ -232,9 +233,17 @@ const AddUpProduct = (props) => {
     return false
   }
   //文件上传
-  const fileUpload = (file) => {
-    Utils.fileUpload(file,user.uId,false).then(res =>{console.log()});
-    // console.log(file)
+  const fileUpload =async (file) => {
+   const res=await Utils.fileUpload(file,user.uId,false);
+   if (res){
+     let img = {
+       uid: res,
+       name: file.name,
+       status: 'done',
+       url: URL.createObjectURL(file),
+     }
+     setImgFileList([...imgFileList,img]);
+   }
   }
 
   useEffect(() => {
@@ -425,8 +434,8 @@ const AddUpProduct = (props) => {
             <Form.Item label="商品图片">
               <ImgCrop {...propsCrop} beforeCrop={(file)=>{return  beforeUpload(file)}}>
                 <Upload
-                    customRequest={(file) => {
-                     return fileUpload(file.file);
+                    customRequest={(options) => {
+                     return fileUpload(options.file);
                     }}
                     ref={productFileUpload}
                     accept="image/png,image/jpeg"
