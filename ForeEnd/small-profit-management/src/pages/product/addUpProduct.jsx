@@ -26,6 +26,7 @@ import 'antd/es/slider/style';
 import ProductEditor from "./productEditor";
 import InboxOutlined from "@ant-design/icons/lib/icons/InboxOutlined";
 import *as Utils from '../../utils/utils'
+import axios from "axios";
 
 const {Option} = Select;
 const {Step} = Steps;
@@ -220,7 +221,15 @@ const AddUpProduct = () => {
         option => option.label.toLowerCase().indexOf(inputValue.toLowerCase())
             > -1);
   }
-
+  //文件上传之前
+  const beforeUpload=(file)=>{
+    if (file.type.split('/')[0]==='image') {
+      return true
+    }
+    message.error("请选择图片");
+    return false
+  }
+  //文件上传
   const fileUpload = (file) => {
     Utils.fileUpload(file,false).then(res =>{console.log()});
     // console.log(file)
@@ -412,19 +421,12 @@ const AddUpProduct = () => {
               }}
             </Form.List>
             <Form.Item label="商品图片">
-              <ImgCrop {...propsCrop}>
+              <ImgCrop {...propsCrop} beforeCrop={(file)=>{return  beforeUpload(file)}}>
                 <Upload
                     customRequest={(file) => {
-                      fileUpload(file.file);
+                     return fileUpload(file.file);
                     }}
                     ref={productFileUpload}
-                    // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    progress={{
-                      strokeWidth: 2,
-                      showInfo: false,
-                      percent: 99.9,
-                      strokeColor: {'0%': '#108ee9', '100%': '#87d068',}
-                    }}
                     accept="image/png,image/jpeg"
                     listType="picture-card"
                     fileList={imgFileList}

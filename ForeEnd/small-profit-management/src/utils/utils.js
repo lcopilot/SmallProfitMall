@@ -8,7 +8,6 @@ export const fileUpload = async (file,isEditor) => {
       end = partSize,
       i = 0,
       partList = []; //文件分片集合
-  const suffix = file.name.split('.')[1];
   let fileName = Md5(file.name.split('.')[0]);
   // try {
   //   let res = await indexApi.getFileName(fileName);
@@ -19,7 +18,7 @@ export const fileUpload = async (file,isEditor) => {
   while (i < SLICE_QUANTITY) {
     partList.push({
       chunk: file.slice(start, end),
-      filename: `${fileName}-${i}.${suffix}`
+      filename: `${fileName}-${i}`
     });
     start += partSize;
     end = start + partSize;
@@ -42,7 +41,7 @@ export const fileUpload = async (file,isEditor) => {
     const data={
       fileName:fileName,
       fileQuantity:SLICE_QUANTITY,
-      fileType:file.type,
+      fileType:file.type.split('/')[1],
       richText:isEditor,
     }
     indexApi.fileSynthesis(data).then(res=>{
