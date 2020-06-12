@@ -84,6 +84,10 @@ public class FilesServiceImpl implements FilesService {
      */
     @Override
     public String compositeFile(String fileName , Integer fileQuantity ,String  fileType , Boolean richText) {
+       String[] fileTypes = fileType.split("/");
+       if (fileTypes.length>1){
+           fileType=fileTypes[1];
+       }
         //合成后文件名
         String compositeFileName = fileName+"."+fileType;
         //文件地址
@@ -91,7 +95,7 @@ public class FilesServiceImpl implements FilesService {
         //碎片文件名
         List<String> fileNames = new ArrayList<>();
         for (int i = 0; i <fileQuantity ; i++) {
-            fileNames.add(fileUrl+"/"+fileName+"-"+i+"."+fileType) ;
+            fileNames.add(fileUrl+"/"+fileName+"-"+i) ;
         }
         SplitAndMergeFile splitAndMergeFile = new SplitAndMergeFile();
 
