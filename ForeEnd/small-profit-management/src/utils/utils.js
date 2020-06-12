@@ -10,15 +10,13 @@ const SLICE_QUANTITY = 5;
  * @param onProgress 上传进度
  * @returns {Promise<unknown>}
  */
-export const fileUpload = async (file, isEditor, onProgress) => {
+export const fileUpload = async (file={}, isEditor, onProgress=()=>{}) => {
   let partSize = Math.ceil(file.size / SLICE_QUANTITY), //分片大小 向上取整
       start = 0,
       end = partSize,
       i = 0,
       partList = []; //文件分片集合
   let fileName = await Md5(file)
-
-  console.log(fileName)
 
   //文件切片
   while (i < SLICE_QUANTITY) {

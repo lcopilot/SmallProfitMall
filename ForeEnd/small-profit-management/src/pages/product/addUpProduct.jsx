@@ -59,6 +59,70 @@ const AddUpProduct = (props) => {
   const productAftRef = useRef()
   const productParRef = useRef()
 
+  //商品图片上传参数
+  const imgUpProps = {
+    //进度条
+    progress: {
+      strokeColor: {
+        '0%': '#108ee9',
+        '100%': '#87d068',
+      },
+      strokeWidth: 3,
+      format: percent => `${parseFloat(percent.toFixed(2))}%`,
+    },
+    //覆盖上传
+    customRequest: (options) => {
+      return fileUpload(options, false);
+    },
+    //允许的文件类型
+    accept: "image/png,image/jpeg",
+    //上传列表的内建样式，支持三种基本样式 text, picture 和 picture-card
+    listType: "picture-card",
+    //已经上传的文件列表（受控）
+    fileList: imgFileList,
+    //点击文件链接或预览图标时的回调
+    onPreview: (file) => {
+      onPreview(file, false)
+    },
+    //点击移除文件时的回调，返回值为 false 时不移除。支持返回一个 Promise 对象，Promise 对象 resolve(false) 或 reject 时不移除。
+    onRemove: (file) => {
+      fileRemove(file, false)
+    },
+    //上传文件改变时的状态
+    onChange: (file)=>{onChangeImg(file)},
+  }
+  const videoUpProps = {
+    //进度条
+    progress: {
+      strokeColor: {
+        '0%': '#108ee9',
+        '100%': '#87d068',
+      },
+      strokeWidth: 3,
+      format: percent => `${parseFloat(percent.toFixed(2))}%`,
+    },
+    //覆盖上传
+    customRequest: (options) => {
+      return fileUpload(options, true);
+    },
+    //允许的文件类型
+    accept: "video/mp4",
+    //上传列表的内建样式，支持三种基本样式 text, picture 和 picture-card
+    listType: "picture",
+    //已经上传的文件列表（受控）
+    fileList: videoFileList,
+    //点击文件链接或预览图标时的回调
+    onPreview: (file) => {
+      onPreview(file, true)
+    },
+    //点击移除文件时的回调，返回值为 false 时不移除。支持返回一个 Promise 对象，Promise 对象 resolve(false) 或 reject 时不移除。
+    onRemove: (file) => {
+      fileRemove(file, true)
+    },
+    //上传文件改变时的状态
+    onChange: (file)=>{onChangeVideo(file)},
+  }
+
   //视频播放器参数
   const propsPlayer = {
     //https://github.com/zhihu/griffith/blob/master/packages/griffith/README-zh-Hans.md
@@ -208,7 +272,7 @@ const AddUpProduct = (props) => {
     setVideoFileList(newFileList);
   };
 
-  //商品图片预览
+  //商品图片视频预览
   const onPreview = (file, isVideo) => {
     setImgPreview({
       isVideo: isVideo,
@@ -227,10 +291,15 @@ const AddUpProduct = (props) => {
   }
   //文件上传之前
   const beforeUpload = (file, isVideo) => {
+    const FILE_SIZE = file.size / 1024 / 1024;
     if (isVideo) {
       return new Promise((resolve, reject) => {
         if (file.type.split('/')[0] !== 'video') {
           message.warn("请选择mp4视频!")
+          reject(false)
+        }
+        if (FILE_SIZE > 20) {
+          message.warn("请上传20MB以下的视频!")
           reject(false)
         }
         if (videoFileList.length >= 1) {
@@ -240,11 +309,15 @@ const AddUpProduct = (props) => {
         resolve(true);
       });
     }
-    if (file.type.split('/')[0] === 'image') {
-      return true
+    if (FILE_SIZE > 8) {
+      message.warn("请上传8MB以下的图片!")
+      return false
     }
-    message.warn("请选择图片");
-    return false
+    if (file.type.split('/')[0] !== 'image') {
+      message.warn("请选择图片");
+      return false
+    }
+    return true
   }
   //文件上传
   const fileUpload = async (options, isVideo) => {
@@ -279,6 +352,7 @@ const AddUpProduct = (props) => {
       }
     })
   }
+
   useEffect(() => {
     setProduct();
     getProductCategory();
@@ -469,19 +543,7 @@ const AddUpProduct = (props) => {
                 return beforeUpload(file, false)
               }}>
                 <Upload
-                    customRequest={(options) => {
-                      return fileUpload(options, false);
-                    }}
-                    accept="image/png,image/jpeg"
-                    listType="picture-card"
-                    fileList={imgFileList}
-                    onPreview={(file) => {
-                      onPreview(file, false)
-                    }}
-                    onRemove={(file) => {
-                      fileRemove(file, false)
-                    }}
-                    onChange={onChangeImg}
+                    {...imgUpProps}
                 >
                   {imgFileList.length < 5 && '+ 选择图片'}
                 </Upload>
@@ -506,22 +568,7 @@ const AddUpProduct = (props) => {
             <Form.Item label="商品视频" labelCol={{span: 4}}
                        wrapperCol={{span: 8}}>
               <Upload.Dragger
-                  accept="video/mp4"
-                  onRemove={(file) => {
-                    fileRemove(file, true)
-                  }}
-                  beforeUpload={(file) => {
-                    return beforeUpload(file, true)
-                  }}
-                  customRequest={(options) => {
-                    return fileUpload(options, true);
-                  }}
-                  onPreview={(file) => {
-                    onPreview(file, true)
-                  }}
-                  listType="picture"
-                  fileList={videoFileList}
-                  onChange={onChangeVideo}
+                  {...videoUpProps}
               >
                 <p className="ant-upload-drag-icon">
                   <InboxOutlined/>
