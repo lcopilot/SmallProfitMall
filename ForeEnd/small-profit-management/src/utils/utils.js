@@ -3,29 +3,38 @@ import SparkMD5 from 'spark-md5/spark-md5'
 
 const SLICE_QUANTITY = 5;
 
-export const fileUpload = async (file, userId, isEditor) => {
-  let partSize = Math.ceil(file.size / SLICE_QUANTITY), //分片大小
+/**
+ * 文件分片上传
+ * @param file 文件
+ * @param isEditor 是否是富文本编辑器
+ * @param onProgress 上传进度
+ * @returns {Promise<unknown>}
+ */
+export const fileUpload = async (file, isEditor, onProgress) => {
+  let partSize = Math.ceil(file.size / SLICE_QUANTITY), //分片大小 向上取整
       start = 0,
       end = partSize,
       i = 0,
       partList = []; //文件分片集合
-  let fileName =await Md5(file)
+  let fileName = await Md5(file)
 
   console.log(fileName)
-  // try {
-  //   let res = await indexApi.getFileName(fileName);
-  //   fileName = res.objectReturn.object
-  // } catch (e) {
-  //   console.error('文件唯一标识获取错误')
-  // }
+
+  //文件切片
   while (i < SLICE_QUANTITY) {
     partList.push({
       chunk: file.slice(start, end),
       filename: `${fileName}-${i}`,
     });
     start += partSize;
-    end=i===SLICE_QUANTITY-2?file.size+1:start + partSize;
+    end = i === SLICE_QUANTITY - 2 ? file.size + 1 : start + partSize;
     i++;
+  }
+  //上传进度
+  const uploadProgress = (loaded,total) => {
+    onProgress({
+      percent: Math.round(loaded / total * 100).toFixed(2)
+    }, file);
   }
   //并发切片请求
   partList = partList.map(item => {
@@ -37,7 +46,13 @@ export const fileUpload = async (file, userId, isEditor) => {
   let results = await Promise.all(partList)
   let isSuccess = true;
   results.some((item) => {
+    //是否上传成功
     isSuccess = item.success ? item.success : false;
+    if (isSuccess){
+      //增加上传进度
+      start += partSize;
+    }
+    uploadProgress(start,file.size)
     return !isSuccess
   })
   if (isSuccess) {
@@ -47,7 +62,8 @@ export const fileUpload = async (file, userId, isEditor) => {
       fileType: file.type,
       richText: isEditor,
     }
-    return indexApi.fileSynthesis(data).then(res => {
+    //合成文件
+    return indexApi.fileMerge(data).then(res => {
       if (res.success) {
         return res.objectReturn.object
       }
@@ -57,6 +73,7 @@ export const fileUpload = async (file, userId, isEditor) => {
   }
 }
 
+//文件md5
 const Md5 = async (file) => {
   return new Promise(resolve => {
     const fileReader = new FileReader();

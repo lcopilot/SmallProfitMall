@@ -26,9 +26,8 @@ import 'antd/es/slider/style';
 import ProductEditor from "./productEditor";
 import InboxOutlined from "@ant-design/icons/lib/icons/InboxOutlined";
 import *as Utils from '../../utils/utils'
-import axios from "axios";
 import {connect} from "react-redux";
-import {RcCustomRequestOptions} from "antd/lib/upload/interface";
+import UpCircleOutlined from "@ant-design/icons/lib/icons/UpCircleOutlined";
 
 const {Option} = Select;
 const {Step} = Steps;
@@ -40,38 +39,41 @@ const AddUpProduct = (props) => {
   let {productDetail} = useLocation().state
   const [isSteps, setIsSteps] = useState(false);
   const [imgFileList, setImgFileList] = useState([]);
+  const [imgNameList, setImgNameList] = useState([]);
   const [videoFileList, setVideoFileList] = useState([]);
+  const [videoName, setVideoName] = useState(null);
   const [proFromBtn, setProFromBtn] = useState({
     content: '确定',
     isAtt: false
   });
+  //图片视频预览
   const [imgPreview, setImgPreview] = useState({
     visible: false,
     title: '',
     imageSrc: null,
   });
+  //商品分类
   const [productCategory, setProductCategory] = useState([]);
   const [form] = Form.useForm();
   const productIntRef = useRef()
   const productAftRef = useRef()
   const productParRef = useRef()
-  const productFileUpload = useRef()
 
   //视频播放器参数
   const propsPlayer = {
     //https://github.com/zhihu/griffith/blob/master/packages/griffith/README-zh-Hans.md
     //自动播放
-    autoplay:true,
+    autoplay: true,
     //播放器实例唯一标识
     id: "1",
     //初始视频时长。在视频元数据载入后使用实际值
     duration: 123456789,
     //是否启用 standalone 模式
-    standalone:false,
+    standalone: false,
     //视频封面图片 URL
     cover: `${imgPreview.imageSrc}?vframe/jpg/offset/2/w/300/h/300`,
     //是否启用 MSE
-    useMSE:false,
+    useMSE: false,
     sources: {
       hd: {
         // duration:`${imgPreview.imageSrc}?avinfo`.format.duration,
@@ -80,12 +82,12 @@ const AddUpProduct = (props) => {
         // width:`${imgPreview.imageSrc}?avinfo`.streams[0].width,
         // height:`${imgPreview.imageSrc}?avinfo`.streams[0].height,
         // play_url: imgPreview.imageSrc
-        bitrate:40,
-        duration:40,
-        format:'mp4',
-        size:123,
-        width:500,
-        height:500,
+        bitrate: 40,
+        duration: 40,
+        format: 'mp4',
+        size: 123,
+        width: 500,
+        height: 500,
         play_url: imgPreview.imageSrc
       },
     }
@@ -127,7 +129,7 @@ const AddUpProduct = (props) => {
   }
   //添加商品
   const addProduct = () => {
-    if (proFromBtn.isAtt){
+    if (proFromBtn.isAtt) {
       history.push('/products/product/productAttributes')
     }
     form.validateFields().then(values => {
@@ -203,7 +205,6 @@ const AddUpProduct = (props) => {
   };
   //上传视频改变
   const onChangeVideo = ({fileList: newFileList}) => {
-    console.log(newFileList)
     setVideoFileList(newFileList);
   };
 
@@ -213,7 +214,7 @@ const AddUpProduct = (props) => {
       isVideo: isVideo,
       title: file.name,
       visible: true,
-      imageSrc: productDetail ? file.url : URL.createObjectURL(
+      imageSrc: file.url ? file.url : URL.createObjectURL(
           file.originFileObj),
     })
   };
@@ -225,27 +226,59 @@ const AddUpProduct = (props) => {
             > -1);
   }
   //文件上传之前
-  const beforeUpload=(file)=>{
-    if (file.type.split('/')[0]==='image') {
+  const beforeUpload = (file, isVideo) => {
+    if (isVideo) {
+      return new Promise((resolve, reject) => {
+        if (file.type.split('/')[0] !== 'video') {
+          message.warn("请选择mp4视频!")
+          reject(false)
+        }
+        if (videoFileList.length >= 1) {
+          message.warn("只能上传一个视频!")
+          reject(false)
+        }
+        resolve(true);
+      });
+    }
+    if (file.type.split('/')[0] === 'image') {
       return true
     }
-    message.error("请选择图片");
+    message.warn("请选择图片");
     return false
   }
   //文件上传
-  const fileUpload =async (file) => {
-   const res=await Utils.fileUpload(file,user.uId,false);
-   if (res){
-     let img = {
-       uid: res,
-       name: file.name,
-       status: 'done',
-       url: URL.createObjectURL(file),
-     }
-     setImgFileList([...imgFileList,img]);
-   }
+  const fileUpload = async (options, isVideo) => {
+    const res = await Utils.fileUpload(options.file, false, options.onProgress);
+    if (res) {
+      let img = {
+        uid: new Date().getTime(),
+        name: res,
+        status: 'done',
+        url: URL.createObjectURL(options.file),
+      }
+      isVideo ? setVideoFileList([...videoFileList, img]) : setImgFileList(
+          [...imgFileList, img]);
+      isVideo ? setVideoName(res) : setImgNameList([...imgNameList, res]);
+    }
   }
-
+  //文件删除
+  const fileRemove = (file, isVideo) => {
+    if (isVideo) {
+      setVideoFileList([])
+      setVideoName(null)
+    }
+    imgFileList.some((item, index) => {
+      if (item.uid === file.uid) {
+        const imgList = JSON.parse(JSON.stringify(imgFileList))
+        const imgNaList = JSON.parse(JSON.stringify([...imgNameList]))
+        imgList.splice(index, 1)
+        setImgFileList(imgList)
+        imgNaList.splice(imgNameList.indexOf(item.name), 1)
+        setImgNameList(imgNaList)
+        return true
+      }
+    })
+  }
   useEffect(() => {
     setProduct();
     getProductCategory();
@@ -432,17 +465,21 @@ const AddUpProduct = (props) => {
               }}
             </Form.List>
             <Form.Item label="商品图片">
-              <ImgCrop {...propsCrop} beforeCrop={(file)=>{return  beforeUpload(file)}}>
+              <ImgCrop {...propsCrop} beforeCrop={(file) => {
+                return beforeUpload(file, false)
+              }}>
                 <Upload
                     customRequest={(options) => {
-                     return fileUpload(options.file);
+                      return fileUpload(options, false);
                     }}
-                    ref={productFileUpload}
                     accept="image/png,image/jpeg"
                     listType="picture-card"
                     fileList={imgFileList}
                     onPreview={(file) => {
                       onPreview(file, false)
+                    }}
+                    onRemove={(file) => {
+                      fileRemove(file, false)
                     }}
                     onChange={onChangeImg}
                 >
@@ -462,16 +499,26 @@ const AddUpProduct = (props) => {
                   }}
               >
                 {imgPreview.isVideo ? <Player{...propsPlayer}/> :
-                    <img className="product-preview-img" src={imgPreview.imageSrc}/>}
+                    <img className="product-preview-img"
+                         src={imgPreview.imageSrc}/>}
               </Modal>
             </Form.Item>
             <Form.Item label="商品视频" labelCol={{span: 4}}
                        wrapperCol={{span: 8}}>
               <Upload.Dragger
+                  accept="video/mp4"
+                  onRemove={(file) => {
+                    fileRemove(file, true)
+                  }}
+                  beforeUpload={(file) => {
+                    return beforeUpload(file, true)
+                  }}
+                  customRequest={(options) => {
+                    return fileUpload(options, true);
+                  }}
                   onPreview={(file) => {
                     onPreview(file, true)
                   }}
-                  // onPreview={onPreviewVideo}
                   listType="picture"
                   fileList={videoFileList}
                   onChange={onChangeVideo}

@@ -82,6 +82,6 @@ export const uploadFiles=(data)=>{
   return http.requestPostFile(apiUrl+`/filesController/filesUpload`,data)
 }
 //文件合成
-export const fileSynthesis=(data)=>{
+export const fileMerge=(data)=>{
   return http.requestPostFormUr(apiUrl+`/filesController/compositeFile`,data)
 }
