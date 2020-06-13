@@ -335,7 +335,7 @@ const AddUpProduct = (props) => {
           [...imgFileList, img]);
       isVideo ? setVideoName(res) : setImgNameList([...imgNameList, res]);
     }else {
-      message.warn("上传失败!请稍后重试")
+      message.error("上传失败!请稍后重试")
       isVideo ? setVideoFileList([...videoFileList]) : setImgFileList(
           [...imgFileList]);
     }
