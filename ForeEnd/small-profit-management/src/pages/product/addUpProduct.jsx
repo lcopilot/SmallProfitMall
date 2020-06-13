@@ -68,7 +68,7 @@ const AddUpProduct = (props) => {
         '100%': '#87d068',
       },
       strokeWidth: 3,
-      format: percent => `${parseFloat(percent.toFixed(2))}%`,
+      format: percent => `${percent}%`,
     },
     //覆盖上传
     customRequest: (options) => {
@@ -91,6 +91,7 @@ const AddUpProduct = (props) => {
     //上传文件改变时的状态
     onChange: (file)=>{onChangeImg(file)},
   }
+  //视频上传参数
   const videoUpProps = {
     //进度条
     progress: {
@@ -99,7 +100,8 @@ const AddUpProduct = (props) => {
         '100%': '#87d068',
       },
       strokeWidth: 3,
-      format: percent => `${parseFloat(percent.toFixed(2))}%`,
+      // parseFloat(percent.toFixed(2)) 之前使用
+      format: percent => `${percent}%`,
     },
     //覆盖上传
     customRequest: (options) => {
@@ -309,8 +311,8 @@ const AddUpProduct = (props) => {
         resolve(true);
       });
     }
-    if (FILE_SIZE > 8) {
-      message.warn("请上传8MB以下的图片!")
+    if (FILE_SIZE > 20) {
+      message.warn("请上传20MB以下的图片!")
       return false
     }
     if (file.type.split('/')[0] !== 'image') {
@@ -332,6 +334,10 @@ const AddUpProduct = (props) => {
       isVideo ? setVideoFileList([...videoFileList, img]) : setImgFileList(
           [...imgFileList, img]);
       isVideo ? setVideoName(res) : setImgNameList([...imgNameList, res]);
+    }else {
+      message.warn("上传失败!请稍后重试")
+      isVideo ? setVideoFileList([...videoFileList]) : setImgFileList(
+          [...imgFileList]);
     }
   }
   //文件删除
