@@ -5,8 +5,11 @@ import storageUtils from "../utils/storageUtils";
 import {useHistory} from "react-router-dom";
 
 axios.defaults.withCredentials = false //是否支持发送cookie凭证信息的字段(请求携带了验证身份信息时)
-axios.defaults.timeout = 20000
-axios.defaults.headers.post['Content-Type'] = 'application/x-www=form-urlencoded;charset=UTF-8'
+axios.defaults.timeout = 30000 //超时时间
+// 默认请求头
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www=form-urlencoded;charset=UTF-8'
+//响应拦截器防抖定时器
+let timerRP = 0
 
 //请求拦截方式1
 /*
@@ -60,23 +63,26 @@ axios.interceptors.response.use(
     },
     // 服务器状态码不是2开头的的情况
     error => {
-      if (!error.response){
-        console.error(error);
-        message.error("服务器跑路了~,请稍后重试")
-        return Promise.reject(error);
-      }
-      if (error.response.status) {
-        switch (error.response.status) {
-          case 404:
-              console.error(error.response.status)
-             message.error("网络请求不存在,请稍后重试!");
-          case 500:
-            console.error(error.response.status);
-            message.error("服务器跑路了~,请稍后重试")
-          default:
-            return Promise.reject(error.response);
+      clearTimeout(timerRP);
+      timerRP = setTimeout(() => {
+        if (!error.response) {
+          console.error(error);
+          message.error("服务器跑路了~,请稍后重试")
+          return Promise.reject(error);
         }
-      }
+        if (error.response.status) {
+          switch (error.response.status) {
+            case 404:
+              console.error(error.response.status)
+              message.error("网络请求不存在,请稍后重试!");
+            case 500:
+              console.error(error.response.status);
+              message.error("服务器跑路了~,请稍后重试")
+            default:
+              return Promise.reject(error.response);
+          }
+        }
+      }, 200)
     }
 )
 
@@ -177,7 +183,7 @@ export default {
   requestFileAll(url, partList = []) {
     return new Promise((resolve, reject) => {
       axios.all(partList).then(
-          axios.spread((...res) =>{
+          axios.spread((...res) => {
             resolve(...res)
           })
       ).catch((error) => {

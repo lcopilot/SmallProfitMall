@@ -78,10 +78,10 @@ export const getFileName=(fileName)=>{
   return http.requestPostFormUr(apiUrl+`/filesController/getFileName`,fileName)
 }
 //文件上传
-export const uploadFiles=(data)=>{
-  return http.requestPostFile(apiUrl+`/filesController/filesUpload`,data)
+export const uploadFiles=(data,uploadProgress)=>{
+  return http.requestPostFile(apiUrl+`/filesController/filesUpload`,data,uploadProgress)
 }
 //文件合成
-export const fileSynthesis=(data)=>{
+export const fileMerge=(data)=>{
   return http.requestPostFormUr(apiUrl+`/filesController/compositeFile`,data)
 }

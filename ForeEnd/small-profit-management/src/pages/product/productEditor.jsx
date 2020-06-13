@@ -8,18 +8,22 @@ import React, {
 import {EditorState, convertToRaw, ContentState} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
+import * as Utils from "../../utils/utils";
 
 // props子组件中需要接受ref
-let ProductEditor = (props,ref) => {
-  let {detailHtml}=props
-  const [editorState, setEditorState] = useState(()=>{if (detailHtml) { // 如果有值, 根据html格式字符串创建一个对应的编辑对象
+let ProductEditor = (props, ref) => {
+  let {detailHtml} = props
+  const [editorState, setEditorState] = useState(() => {
+    if (detailHtml) { // 如果有值, 根据html格式字符串创建一个对应的编辑对象
       const contentBlock = htmlToDraft(detailHtml)
-      const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+      const contentState = ContentState.createFromBlockArray(
+          contentBlock.contentBlocks);
       const editorState = EditorState.createWithContent(contentState)
       return editorState;
-    }else {
+    } else {
       return EditorState.createEmpty()
-    }});
+    }
+  });
 
   // 此处注意useImperativeHandle方法的的第一个参数是目标元素的ref引用
   useImperativeHandle(ref, () => ({
@@ -29,7 +33,17 @@ let ProductEditor = (props,ref) => {
     }
   }));
 
-
+  const uploadImageCallBack = (file) => {
+    return new Promise(async (resolve, reject) => {
+          const res =await Utils.fileUpload(file, true);
+          if (res) {
+            resolve({data: {link: res}})
+          } else {
+            reject(false)
+          }
+        }
+    )
+  }
 
   return (
       <Editor
@@ -43,7 +57,7 @@ let ProductEditor = (props,ref) => {
           }}
           toolbar={{
             image: {
-              uploadCallback:()=>{},
+              uploadCallback: uploadImageCallBack,
               alt: {present: true, mandatory: true}
             },
           }}
