@@ -159,12 +159,10 @@ public class SplitAndMergeFile {
         SplitAndMergeFile splitAndMergeFile=new SplitAndMergeFile();
 
         //文件分割
-        List<String> splitList = splitAndMergeFile.split(new File("mat.png"), "splitSmallFilesDir", 1024);
+        List<String> splitList = splitAndMergeFile.split(new File("C:\\Users\\86185\\Desktop\\ys\\3a3b70188a3a470cbd33d88ae1b7c5d8.jpeg"), "C:3a3b70188a3a470cbd33d88ae1b7c5d8.jpeg", 257);
         System.out.println(splitList);
 
-        //文件合并
-        String newMergeFile = splitAndMergeFile.merge(splitList, "mergeFileDir", "matMerge.png");
-        System.out.println(newMergeFile);
+
 
 
     }

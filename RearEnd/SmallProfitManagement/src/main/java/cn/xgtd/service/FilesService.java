@@ -1,9 +1,11 @@
 package cn.xgtd.service;
 
+import cn.xgtd.domain.file.BreakpointFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Kite
@@ -18,12 +20,30 @@ public interface FilesService {
     public String getFileName();
 
     /**
+     * 查询断点文件
+     * @param fileName 文件名
+     * @param fileQuantity 文件碎片数量
+     * @return
+     */
+    public Map findBreakpointFile(String fileName , Integer fileQuantity);
+
+    /**
      * 文件上传
      * @param  fileName 文件名
      * @param files 文件
      * @return 返回地址
      */
-    public String filesUpload(String fileName , MultipartFile files) throws IOException;
+    public Integer filesUpload(String fileName , MultipartFile files) throws IOException;
+
+    /**
+     * 断点续传
+     * @param fileName 文件名
+     * @param position 断点位置
+     * @return
+     */
+    public Integer filesBreakpointUpload(String fileName , MultipartFile files,Integer position) throws IOException;
+
+
 
     /**
      * 文件合并
