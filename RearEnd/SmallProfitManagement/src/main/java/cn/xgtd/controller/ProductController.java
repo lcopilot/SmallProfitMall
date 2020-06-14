@@ -1,11 +1,10 @@
 package cn.xgtd.controller;
 
-import cn.xgtd.domain.product.BasicProduct;
 import cn.xgtd.domain.product.ProductCategory;
 import cn.xgtd.domain.product.ProductDetails;
 import cn.xgtd.response.CommonCode;
-import cn.xgtd.response.objectReturn.ObjectReturn;
-import cn.xgtd.response.objectReturn.ObjectReturnResponse;
+import cn.xgtd.response.objectReturn.Results;
+import cn.xgtd.response.objectReturn.ResultContent;
 import cn.xgtd.response.pagination.Pagination;
 import cn.xgtd.response.pagination.ResponsePagination;
 import cn.xgtd.service.ProductService;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -61,11 +59,11 @@ public class ProductController {
      * @return
      */
     @RequestMapping(value = "/findCategory",method = RequestMethod.GET)
-    public ObjectReturnResponse findCategory() {
-        ObjectReturn objectReturn = new ObjectReturn();
+    public ResultContent findCategory() {
+        Results results = new Results();
         List<ProductCategory> productDistinction = productService.findCategory();
-        objectReturn.setObject(productDistinction);
-        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+        results.setData(productDistinction);
+        return new ResultContent(CommonCode.SUCCESS,results);
     }
 
 

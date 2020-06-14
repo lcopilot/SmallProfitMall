@@ -1,22 +1,16 @@
 package cn.xgtd.controller;
 
 import cn.xgtd.domain.user.Role;
-import cn.xgtd.domain.user.User;
 import cn.xgtd.response.CommonCode;
-import cn.xgtd.response.list.QueryResponseResult;
-import cn.xgtd.response.objectReturn.ObjectReturn;
-import cn.xgtd.response.objectReturn.ObjectReturnResponse;
-import cn.xgtd.response.pagination.Pagination;
-import cn.xgtd.response.pagination.ResponsePagination;
+import cn.xgtd.response.objectReturn.Results;
+import cn.xgtd.response.objectReturn.ResultContent;
 import cn.xgtd.service.RoleService;
 import cn.xgtd.util.redis.RedisUtil;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,14 +35,14 @@ public class RoleController {
      * @return 新增角色信息
      */
     @RequestMapping(value = "/addRole",method = RequestMethod.POST)
-    public ObjectReturnResponse addRole(@RequestBody Role role){
+    public ResultContent addRole(@RequestBody Role role){
        Role result = roleService.addRole(role);
        if (result == null ){
-          return new ObjectReturnResponse(CommonCode.FAIL,null);
+          return new ResultContent(CommonCode.FAIL,null);
        }else {
-           ObjectReturn objectReturn = new ObjectReturn();
-           objectReturn.setObject(result);
-           return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+           Results results = new Results();
+           results.setData(result);
+           return new ResultContent(CommonCode.SUCCESS,results);
        }
 
     }
@@ -60,15 +54,15 @@ public class RoleController {
      * @return
      */
     @RequestMapping(value = "/findRole/{uId}",method = RequestMethod.GET)
-    public ObjectReturnResponse findRole(@PathVariable("uId") Integer uId){
+    public ResultContent findRole(@PathVariable("uId") Integer uId){
 
         if (uId == null){
-            return new ObjectReturnResponse(CommonCode.INVALID_PARAM,null);
+            return new ResultContent(CommonCode.INVALID_PARAM,null);
         }
         List<Role> roles = roleService.findRoleList(uId);
-        ObjectReturn objectReturn = new ObjectReturn();
-        objectReturn.setObject(roles);
-        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+        Results results = new Results();
+        results.setData(roles);
+        return new ResultContent(CommonCode.SUCCESS,results);
     }
 
 
@@ -78,14 +72,14 @@ public class RoleController {
      * @return 该角色有绑定的用户返回用户名
      */
     @RequestMapping(value = "/deleteRole/{rId}", method = RequestMethod.DELETE)
-    public ObjectReturnResponse deleteRole(@PathVariable("rId") Integer rId){
+    public ResultContent deleteRole(@PathVariable("rId") Integer rId){
         List<String> result = roleService.deleteRole(rId);
         if (result != null){
-            ObjectReturn objectReturn = new ObjectReturn();
-            objectReturn.setObject(result);
-            return new ObjectReturnResponse(CommonCode.FAIL,objectReturn);
+            Results results = new Results();
+            results.setData(result);
+            return new ResultContent(CommonCode.FAIL,results);
         }
-        return new ObjectReturnResponse(CommonCode.SUCCESS,null);
+        return new ResultContent(CommonCode.SUCCESS,null);
     }
 
     /**
@@ -94,12 +88,12 @@ public class RoleController {
      * @return
      */
     @RequestMapping(value = "/deleteRoleUser/{rId}", method = RequestMethod.DELETE)
-    public ObjectReturnResponse deleteRoleUser(@PathVariable("rId") Integer rId){
+    public ResultContent deleteRoleUser(@PathVariable("rId") Integer rId){
         Integer result = roleService.deleteRoleUser(rId);
         if (result > 0){
-            return new ObjectReturnResponse(CommonCode.SUCCESS,null);
+            return new ResultContent(CommonCode.SUCCESS,null);
         }
-        return new ObjectReturnResponse(CommonCode.FAIL,null);
+        return new ResultContent(CommonCode.FAIL,null);
     }
 
 
@@ -109,14 +103,14 @@ public class RoleController {
      * @return
      */
     @RequestMapping(value = "/updateRole", method = RequestMethod.PUT)
-    public ObjectReturnResponse updateRole(@RequestBody Role role){
+    public ResultContent updateRole(@RequestBody Role role){
         Role result = roleService.updateRole(role);
         if (result != null){
-            ObjectReturn objectReturn = new ObjectReturn();
-            objectReturn.setObject(result);
-            return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+            Results results = new Results();
+            results.setData(result);
+            return new ResultContent(CommonCode.SUCCESS,results);
         }
-        return new ObjectReturnResponse(CommonCode.FAIL,null);
+        return new ResultContent(CommonCode.FAIL,null);
     }
 
     /**
@@ -125,11 +119,11 @@ public class RoleController {
      * @return
      */
     @RequestMapping(value = "/findBasicsRole/{uId}",method = RequestMethod.GET)
-    public ObjectReturnResponse findBasicsRole(@PathVariable("uId") Integer uId){
-        ObjectReturn objectReturn = new ObjectReturn();
+    public ResultContent findBasicsRole(@PathVariable("uId") Integer uId){
+        Results results = new Results();
         List<Role> role = roleService.findBasicsRole(uId);
-        objectReturn.setObject(role);
-        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+        results.setData(role);
+        return new ResultContent(CommonCode.SUCCESS,results);
     }
 
 
@@ -141,7 +135,7 @@ public class RoleController {
      * @return
      */
     @RequestMapping(value = "/findRoleSearch",method = RequestMethod.GET)
-    public ObjectReturnResponse findRoleSearch(String content, String laterTime, String beforeTime){
+    public ResultContent findRoleSearch(String content, String laterTime, String beforeTime){
          if (laterTime.equals("")){
             laterTime = null;
         }
@@ -149,9 +143,9 @@ public class RoleController {
             beforeTime = null;
         }
         List<Role> roles = roleService.findRoleSearch(content,laterTime,beforeTime);
-        ObjectReturn objectReturn = new ObjectReturn();
-        objectReturn.setObject(roles);
-        return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+        Results results = new Results();
+        results.setData(roles);
+        return new ResultContent(CommonCode.SUCCESS,results);
     }
 
 }

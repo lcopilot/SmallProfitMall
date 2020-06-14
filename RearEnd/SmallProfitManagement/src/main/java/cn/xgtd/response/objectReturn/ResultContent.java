@@ -12,11 +12,11 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class ObjectReturnResponse extends ResponseResult {
-    ObjectReturn objectReturn;
+public class ResultContent extends ResponseResult {
+    Results results;
 
-    public ObjectReturnResponse(ResultCode resultCode, ObjectReturn objectReturn){
+    public ResultContent(ResultCode resultCode, Results results){
         super(resultCode);
-        this.objectReturn = objectReturn;
+        this.results = results;
     }
 }

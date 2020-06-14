@@ -16,6 +16,7 @@ public enum CommonCode implements ResultCode {
     INVALID_PARAM(false,10003,"参数非法"),
     SUCCESS(true,10000,"操作成功！"),
     FAIL(false,11111,"操作失败！"),
+    FILE_INEXISTENCE(false,20001,"文件不存在"),
     FALL_USER_REGISTER(false,11211,"用户已存在!"),
     UNAUTHENTICATED(false,10001,"此操作需要登陆系统！"),
     UNAUTHORISE(false,10002,"权限不足，无权操作！"),

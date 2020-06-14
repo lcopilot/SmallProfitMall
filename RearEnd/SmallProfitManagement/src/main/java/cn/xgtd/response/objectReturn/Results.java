@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Data
 @ToString
 @Component
-public class ObjectReturn<T> {
+public class Results<T> {
 
-    private Object object;
+    private Object data;
 }

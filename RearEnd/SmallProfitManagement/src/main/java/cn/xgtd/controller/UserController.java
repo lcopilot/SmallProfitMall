@@ -1,19 +1,14 @@
 package cn.xgtd.controller;
 
-import cn.xgtd.domain.user.Role;
 import cn.xgtd.domain.user.User;
 import cn.xgtd.response.CommonCode;
-import cn.xgtd.response.list.QueryResponseResult;
-import cn.xgtd.response.list.QueryResult;
-import cn.xgtd.response.objectReturn.ObjectReturn;
-import cn.xgtd.response.objectReturn.ObjectReturnResponse;
+import cn.xgtd.response.objectReturn.Results;
+import cn.xgtd.response.objectReturn.ResultContent;
 import cn.xgtd.service.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,15 +30,15 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public ObjectReturnResponse addUser(@RequestBody User user){
+	public ResultContent addUser(@RequestBody User user){
 		User addUser = userService.addUser(user);
 		/**用户名重复**/
 		if (addUser == null){
-			return new ObjectReturnResponse(CommonCode.FAIL,null);
+			return new ResultContent(CommonCode.FAIL,null);
 		}else {
-			ObjectReturn objectReturn = new ObjectReturn<>();
-			objectReturn.setObject(addUser);
-			return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+			Results results = new Results<>();
+			results.setData(addUser);
+			return new ResultContent(CommonCode.SUCCESS,results);
 		}
 
 	}
@@ -55,14 +50,14 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-	public ObjectReturnResponse userLogin(String userName, String password) {
+	public ResultContent userLogin(String userName, String password) {
 		User responseUserUser = userService.userLogin(userName, password);
 		if (responseUserUser == null) {
-			return new ObjectReturnResponse(CommonCode.FAIL, null);
+			return new ResultContent(CommonCode.FAIL, null);
 		}
-		ObjectReturn objectReturn = new ObjectReturn();
-		objectReturn.setObject(responseUserUser);
-		return new ObjectReturnResponse(CommonCode.SUCCESS, objectReturn);
+		Results results = new Results();
+		results.setData(responseUserUser);
+		return new ResultContent(CommonCode.SUCCESS, results);
 	}
 
 
@@ -72,11 +67,11 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/findUser/{uId}", method = RequestMethod.GET)
-	public ObjectReturnResponse findUser(@PathVariable("uId") Integer uId){
+	public ResultContent findUser(@PathVariable("uId") Integer uId){
 		List<User> userList = userService.findUserList(uId);
-		ObjectReturn objectReturn = new ObjectReturn();
-		objectReturn.setObject(userList);
-		return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+		Results results = new Results();
+		results.setData(userList);
+		return new ResultContent(CommonCode.SUCCESS,results);
 	}
 
 
@@ -86,12 +81,12 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/deleteUser/{uId}", method = RequestMethod.DELETE)
-	public ObjectReturnResponse deleteUser(@PathVariable("uId") Integer userId){
+	public ResultContent deleteUser(@PathVariable("uId") Integer userId){
 		Integer result = userService.deleteUser(userId);
 		if (result != null){
-			return new ObjectReturnResponse(CommonCode.SUCCESS,null);
+			return new ResultContent(CommonCode.SUCCESS,null);
 		}
-		return new ObjectReturnResponse(CommonCode.FAIL,null);
+		return new ResultContent(CommonCode.FAIL,null);
 	}
 
 	/**
@@ -100,14 +95,14 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/updateUser", method = RequestMethod.PUT)
-	public ObjectReturnResponse updateUser(@RequestBody User user){
-		ObjectReturn objectReturn = new ObjectReturn();
+	public ResultContent updateUser(@RequestBody User user){
+		Results results = new Results();
 		User result = userService.updateUser(user);
-		objectReturn.setObject(result);
+		results.setData(result);
 		if (result != null){
-			return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+			return new ResultContent(CommonCode.SUCCESS,results);
 		}
-		return new ObjectReturnResponse(CommonCode.FAIL,null);
+		return new ResultContent(CommonCode.FAIL,null);
 	}
 
 	/**
@@ -118,7 +113,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/findUserSearch",method = RequestMethod.GET)
-	public ObjectReturnResponse findUserSearch(String content, String laterTime, String beforeTime){
+	public ResultContent findUserSearch(String content, String laterTime, String beforeTime){
 		if (laterTime.equals("")){
 			laterTime = null;
 		}
@@ -126,9 +121,9 @@ public class UserController {
 			beforeTime = null;
 		}
 		List<User> users = userService.findUserSearch(content,laterTime,beforeTime);
-		ObjectReturn objectReturn = new ObjectReturn();
-		objectReturn.setObject(users);
-		return new ObjectReturnResponse(CommonCode.SUCCESS,objectReturn);
+		Results results = new Results();
+		results.setData(users);
+		return new ResultContent(CommonCode.SUCCESS,results);
 	}
 
 
