@@ -83,13 +83,13 @@ public class FilesController {
             String fileNames = (String) map.get("fileNameComposite");
             breakpoint.setFileName(fileNames);
             results.setData(breakpoint);
-            return new ResultContent(CommonCode.SUCCESS,results);
+            return new ResultContent(CommonCode.FILE_COMPOSITE,results);
         }else{
             //完整但未合成
             BreakpointFile breakpoint = new BreakpointFile();
             breakpoint.setComposite(composite);
             results.setData(breakpoint);
-            return new ResultContent(CommonCode.SUCCESS,results);
+            return new ResultContent(CommonCode.NO_FILE_COMPOSITE,results);
         }
     }
     /**

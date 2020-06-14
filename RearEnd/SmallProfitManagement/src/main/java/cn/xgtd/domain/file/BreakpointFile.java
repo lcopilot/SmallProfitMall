@@ -8,6 +8,8 @@ package cn.xgtd.domain.file;
 public class BreakpointFile {
     /**文件名**/
     private String fileName;
+    /**文件序号**/
+    private Integer fileSerialNumber;
     /**文件断点**/
     private Integer breakpoint;
     /**文件是否合成**/
@@ -15,6 +17,14 @@ public class BreakpointFile {
     /**分片是否完整**/
     private Boolean breakpointFull;
 
+
+    public Integer getFileSerialNumber() {
+        return fileSerialNumber;
+    }
+
+    public void setFileSerialNumber(Integer fileSerialNumber) {
+        this.fileSerialNumber = fileSerialNumber;
+    }
 
     public Boolean getBreakpointFull() {
         return breakpointFull;

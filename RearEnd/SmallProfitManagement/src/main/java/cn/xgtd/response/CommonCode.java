@@ -15,6 +15,8 @@ public enum CommonCode implements ResultCode {
 
     INVALID_PARAM(false,10003,"参数非法"),
     SUCCESS(true,10000,"操作成功！"),
+    FILE_COMPOSITE(true,10100,"文件以合成"),
+    NO_FILE_COMPOSITE(true,10101,"文件未合成"),
     PORTION_SUCCESS(true,10002,"部分成功"),
     FAIL(false,11111,"操作失败！"),
     FILE_INEXISTENCE(false,20001,"文件不存在"),

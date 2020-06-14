@@ -35,10 +35,10 @@ public class FilesUpload {
             while ((numberRead = fis.read(buf)) != -1) {
                 fos.write(buf, 0, numberRead);
                 fos.flush();
-//                // 当目标文件长度写到三的时候，抛出异常，终端传输
-//                if (targetFile.length() > 10240) {
-//                    throw new Exception();
-//                }
+                // 当目标文件长度写到三的时候，抛出异常，终端传输
+                if (targetFile.length() > 10240) {
+                    throw new Exception();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

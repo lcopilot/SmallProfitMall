@@ -82,7 +82,10 @@ public class FilesServiceImpl implements FilesService {
             if (findFileSucceed!=null){
                 breakpointFile.setBreakpointFull(findFileSucceed);
                 Integer  breakpointFileSize = (Integer) redisUtil.get(fileNames+"Size");
-                fileSizes+=breakpointFileSize;
+                if (breakpointFileSize!=null){
+                    fileSizes+=breakpointFileSize;
+                }
+
             }
            //文件断点
             Integer  breakpoint = (Integer) redisUtil.get(fileNames+"Position");
@@ -90,6 +93,7 @@ public class FilesServiceImpl implements FilesService {
             if (breakpoint!=null){
                 breakpointFile.setBreakpointFull(findFileSucceed);
                 breakpointFile.setFileName(fileNames);
+                breakpointFile.setFileSerialNumber(i);
                 breakpointFile.setComposite(false);
                 breakpointFile.setBreakpoint(breakpoint);
                 breakpointFileList.add(breakpointFile);
@@ -110,7 +114,6 @@ public class FilesServiceImpl implements FilesService {
         if (fileNameComposite!=null){
             composite = true;
         }
-
 
 
         //文件是否存在
