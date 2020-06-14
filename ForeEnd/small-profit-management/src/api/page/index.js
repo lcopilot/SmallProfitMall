@@ -74,8 +74,8 @@ export const getProductCategory=()=>{
  * 文件上传模块
  */
 //查看文件是否存在
-export const getFileVerify=(fileName,chunk)=>{
-  return http.requestGet(apiUrl+`/filesController/findBreakpointFile/${fileName}/${chunk}`)
+export const getFileVerify=(fileName,chunk,fileSize)=>{
+  return http.requestGet(apiUrl+`/filesController/findBreakpointFile/${fileName}/${chunk}/${fileSize}`)
 }
 //文件上传
 export const uploadFiles=(data,uploadProgress)=>{

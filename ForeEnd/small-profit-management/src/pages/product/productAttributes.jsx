@@ -191,7 +191,7 @@ const ProductAttributes=()=>{
             <Form.Item  {...formItemLayoutWith}>
               <Button className="add-product-from-btn" onClick={()=>{form.validateFields().then(values => {
                 // console.log(productIntRef.current.getDetailHtml())
-                console.log(values)
+                // console.log(values)
               })}}
                       type="primary">修改</Button>
               <Button className="add-product-from-btn"

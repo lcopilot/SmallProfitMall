@@ -11,34 +11,50 @@ const SLICE_QUANTITY = 5;
  * @param onProgress 上传进度
  * @returns {Promise<boolean>}
  */
-export const fileUpload = async (file = {}, isEditor, onProgress = () => {}) => {
+export const fileUpload = async (file = {}, isEditor, onProgress = () => {
+}) => {
   let partSize = Math.ceil(file.size / SLICE_QUANTITY), //分片大小 向上取整
+      suffix = file.name.split('.')[file.name.split('.').length - 1], //后缀
       start = 0,
-      loaded=0,  //已上传的大小
-      results =[],  //并发结果
+      loaded = 0,  //已上传的大小
+      results = [],  //并发结果
       end = partSize,
       i = 0,
       partList = []; //文件分片集合
-
+  //文件内容 md5
   const fileName = await Md5(file)
-
   //验证文件是否存在
-  const verifyRes=await indexApi.getFileVerify(fileName,SLICE_QUANTITY)
-  if(verifyRes.success){
+  const verifyRes = await indexApi.getFileVerify(fileName, SLICE_QUANTITY,
+      file.size)
+  if (verifyRes.success) {
     //文件已经存在并已合成
-    if (verifyRes.results.data.composite){
+    if (verifyRes.code === 10100) {
       onProgress({
         percent: Math.round(file.size / file.size * 100).toFixed(2)
       }, file);
       return verifyRes.results.data.fileName
-    }else{
+    } else if (verifyRes.code === 10101) {
       //文件未合成
       onProgress({
         percent: Math.round(file.size / file.size * 100).toFixed(2)
       }, file);
-      return await fileMerge(fileName,file,isEditor);
+      return await fileMerge(fileName, file, isEditor);
+    } else {
+      //文件切片
+      while (i < verifyRes.results.data.length) {
+        const data = verifyRes.results.data
+        //修改上传进度
+        loaded += data[i].breakpoint
+        partList.push({
+          chunk: file.slice(data[i].breakpoint,
+              data[i].fileSerialNumber === 0 ? partSize
+                  : data[i].fileSerialNumber * partSize),
+          filename: `${fileName}-${data[i].fileSerialNumber}`,
+        });
+        i++;
+      }
     }
-  }else {
+  } else {
     //文件切片
     while (i < SLICE_QUANTITY) {
       partList.push({
@@ -56,8 +72,8 @@ export const fileUpload = async (file = {}, isEditor, onProgress = () => {}) => 
     let formData = new FormData();
     formData.append('file', item.chunk);
     formData.append('fileName', item.filename);
-    return indexApi.uploadFiles(formData,(progress)=>{
-      loaded+=progress.loaded;
+    return indexApi.uploadFiles(formData, (progress) => {
+      loaded += progress.loaded;
       // loaded 已上传的大小 file.size 总大小
       onProgress({
         percent: (loaded / file.size * 100).toFixed(2)
@@ -65,19 +81,19 @@ export const fileUpload = async (file = {}, isEditor, onProgress = () => {}) => 
     })
   });
 
-  try{
-      results =await Promise.all(partList)
-  }catch (e) {
-      return false
+  try {
+    results = await Promise.all(partList)
+  } catch (e) {
+    return false
   }
 
-  if (results.length>0) {
-    return await fileMerge(fileName,file,isEditor);
+  if (results.length > 0) {
+    return await fileMerge(fileName, suffix, file, isEditor);
   }
 }
 
 //文件合成
-const fileMerge=async (fileName,file,isEditor)=>{
+const fileMerge = async (fileName, suffix, file, isEditor) => {
   const data = {
     fileName: fileName,
     fileQuantity: SLICE_QUANTITY,
@@ -96,20 +112,21 @@ const fileMerge=async (fileName,file,isEditor)=>{
 //文件md5
 const Md5 = async (file) => {
   return new Promise(resolve => {
-    const fileReader = new FileReader();
-    let spark = new SparkMD5(); //创建md5对象（基于SparkMD5）
-    if (file.size > 1024 * 1024 * 10) {
-      let chunk = file.slice(0, 1024 * 1024 * 10); //将文件进行分块 file.slice(start,end)
-      fileReader.readAsBinaryString(chunk); //将文件读取为二进制码
-    } else {
-      fileReader.readAsBinaryString(file);
-    }
-    fileReader.onload = function (e) {
-      spark.appendBinary(e.target.result);
-      let md5 = spark.end()
-      resolve(md5)
-    }
-  })
+        const fileReader = new FileReader();
+        let spark = new SparkMD5(); //创建md5对象（基于SparkMD5）
+        if (file.size > 1024 * 1024 * 10) {
+          let chunk = file.slice(0, 1024 * 1024 * 10); //将文件进行分块 file.slice(start,end)
+          fileReader.readAsBinaryString(chunk); //将文件读取为二进制码
+        } else {
+          fileReader.readAsBinaryString(file);
+        }
+        fileReader.onload = (e) => {
+          spark.appendBinary(e.target.result);
+          let md5 = spark.end()
+          resolve(md5)
+        }
+      }
+  )
 }
 
 /**
@@ -119,7 +136,8 @@ const Md5 = async (file) => {
  * @param fileName 文件名
  * @param suffix 文件后缀
  */
-export const exportExcel = (headers, data, fileName = new Date().getTime(), suffix = '.xlsx') => {
+export const exportExcel = (headers, data, fileName = new Date().getTime(),
+    suffix = '.xlsx') => {
   /*
 const initColumn = [{
   title: '姓名',
@@ -212,7 +230,7 @@ let attendanceInfoList = [
     }
    */
   const ref = `${outputPos[0]}:${outputPos[outputPos.length - 1]}`;
-  const merges=[]
+  const merges = []
 
   //单元合并
   merges.push({ //如果不为空push 为空 = 赋值

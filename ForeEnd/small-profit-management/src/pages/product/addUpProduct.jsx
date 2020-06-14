@@ -59,6 +59,7 @@ const AddUpProduct = (props) => {
   const productAftRef = useRef()
   const productParRef = useRef()
 
+
   //商品图片上传参数
   const imgUpProps = {
     //进度条
@@ -89,7 +90,9 @@ const AddUpProduct = (props) => {
       fileRemove(file, false)
     },
     //上传文件改变时的状态
-    onChange: (file)=>{onChangeImg(file)},
+    onChange: (file) => {
+      onChangeImg(file)
+    },
   }
   //视频上传参数
   const videoUpProps = {
@@ -108,7 +111,7 @@ const AddUpProduct = (props) => {
       return fileUpload(options, true);
     },
     //允许的文件类型
-    accept: "video/mp4",
+    accept: "video/mp4,video/x-matroska,.flv,video/avi",
     //上传列表的内建样式，支持三种基本样式 text, picture 和 picture-card
     listType: "picture",
     //已经上传的文件列表（受控）
@@ -122,9 +125,14 @@ const AddUpProduct = (props) => {
       fileRemove(file, true)
     },
     //上传文件改变时的状态
-    onChange: (file)=>{onChangeVideo(file)},
+    onChange: (file) => {
+      onChangeVideo(file)
+    },
+    //上传文件之前
+    beforeUpload: (file) => {
+      return beforeUpload(file, true)
+    }
   }
-
   //视频播放器参数
   const propsPlayer = {
     //https://github.com/zhihu/griffith/blob/master/packages/griffith/README-zh-Hans.md
@@ -296,12 +304,12 @@ const AddUpProduct = (props) => {
     const FILE_SIZE = file.size / 1024 / 1024;
     if (isVideo) {
       return new Promise((resolve, reject) => {
-        if (file.type.split('/')[0] !== 'video') {
-          message.warn("请选择mp4视频!")
+        if (file.type.split('/')[0] !== 'video'&& file.name.split('.')[file.name.split('.').length-1]!=='flv') {
+          message.warn("请选择视频!")
           reject(false)
         }
-        if (FILE_SIZE > 20) {
-          message.warn("请上传20MB以下的视频!")
+        if (FILE_SIZE > 200) {
+          message.warn("请上传30MB以下的视频!")
           reject(false)
         }
         if (videoFileList.length >= 1) {
@@ -334,7 +342,7 @@ const AddUpProduct = (props) => {
       isVideo ? setVideoFileList([...videoFileList, img]) : setImgFileList(
           [...imgFileList, img]);
       isVideo ? setVideoName(res) : setImgNameList([...imgNameList, res]);
-    }else {
+    } else {
       isVideo ? setVideoFileList([...videoFileList]) : setImgFileList(
           [...imgFileList]);
     }

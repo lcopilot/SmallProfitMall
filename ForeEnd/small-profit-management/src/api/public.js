@@ -80,7 +80,7 @@ axios.interceptors.response.use(
               message.error("服务器跑路了~,请稍后重试")
           }
         }
-      }, 200)
+      }, 300)
       return Promise.reject(error.response);
     }
 )
