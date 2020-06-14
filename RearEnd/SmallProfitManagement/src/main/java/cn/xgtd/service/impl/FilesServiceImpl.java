@@ -68,14 +68,25 @@ public class FilesServiceImpl implements FilesService {
             if (breakpoint!=null){
                 BreakpointFile breakpointFile = new BreakpointFile();
                 breakpointFile.setFileName(fileNames);
+                breakpointFile.setComposite(false);
                 breakpointFile.setBreakpoint(breakpoint);
                 breakpointFileList.add(breakpointFile);
                 existQuantitys+=breakpoint;
             }
         }
+        Boolean composite = false;
+        String fileNameComposite = (String) redisUtil.get(fileName);
+        if (fileNameComposite!=null){
+            composite = true;
+        }
+        //文件上传成功
         sign = existQuantitys == existQuantity;
         map.put("breakpointFileList",breakpointFileList);
         map.put("sign",sign);
+        //文件合成 合成的文件名
+        map.put("fileNameComposite",fileNameComposite);
+        //文件是否合成
+        map.put("composite",composite);
         return map;
     }
 
@@ -161,8 +172,8 @@ public class FilesServiceImpl implements FilesService {
             fileNames.add(fileUrl+"/"+fileName+"-"+i) ;
         }
         SplitAndMergeFile splitAndMergeFile = new SplitAndMergeFile();
-
         splitAndMergeFile.merge(fileNames,fileUrl,compositeFileName);
+        redisUtil.set(fileName,compositeFileName,259200000);
         return compositeFileName;
     }
 

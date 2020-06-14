@@ -10,6 +10,17 @@ public class BreakpointFile {
     private String fileName;
     /**文件断点**/
     private Integer breakpoint;
+    /**文件是否合成**/
+    private Boolean composite;
+
+
+    public Boolean getComposite() {
+        return composite;
+    }
+
+    public void setComposite(Boolean composite) {
+        this.composite = composite;
+    }
 
     public String getFileName() {
         return fileName;

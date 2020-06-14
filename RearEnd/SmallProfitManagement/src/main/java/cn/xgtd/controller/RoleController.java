@@ -2,8 +2,8 @@ package cn.xgtd.controller;
 
 import cn.xgtd.domain.user.Role;
 import cn.xgtd.response.CommonCode;
-import cn.xgtd.response.objectReturn.Results;
-import cn.xgtd.response.objectReturn.ResultContent;
+import cn.xgtd.response.Return.Results;
+import cn.xgtd.response.Return.ResultContent;
 import cn.xgtd.service.RoleService;
 import cn.xgtd.util.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;

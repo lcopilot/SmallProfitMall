@@ -2,8 +2,8 @@ package cn.xgtd.controller;
 
 import cn.xgtd.domain.file.BreakpointFile;
 import cn.xgtd.response.CommonCode;
-import cn.xgtd.response.objectReturn.Results;
-import cn.xgtd.response.objectReturn.ResultContent;
+import cn.xgtd.response.Return.Results;
+import cn.xgtd.response.Return.ResultContent;
 import cn.xgtd.service.FilesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,13 +54,25 @@ public class FilesController {
         Results results = new Results();
         Map map = filesService.findBreakpointFile(fileName,fileQuantity);
         Boolean sign = (Boolean) map.get("sign");
+        Boolean composite = (Boolean) map.get("composite");
         if(!sign){
             List<BreakpointFile> breakpointFileList = (List<BreakpointFile>) map.get("breakpointFileList");
             results.setData(breakpointFileList);
-        }else {
-            return new ResultContent(CommonCode.FILE_INEXISTENCE,null);
+        }else if (composite){
+            //上传成功 且合成
+            BreakpointFile breakpointFileList = new BreakpointFile();
+            breakpointFileList.setComposite(composite);
+            String fileNames = (String) map.get("fileNameComposite");
+            breakpointFileList.setFileName(fileNames);
+            return new ResultContent(CommonCode.SUCCESS,results);
+        }else{
+            //上传成功 单未合成
+            BreakpointFile breakpointFileList = new BreakpointFile();
+            breakpointFileList.setComposite(composite);
+            results.setData(breakpointFileList);
+            return new ResultContent(CommonCode.SUCCESS,results);
         }
-        return new ResultContent(CommonCode.FAIL,null);
+        return new ResultContent(CommonCode.FILE_INEXISTENCE,null);
     }
     /**
      * 文件上传

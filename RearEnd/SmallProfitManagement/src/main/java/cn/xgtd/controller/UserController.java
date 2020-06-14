@@ -2,8 +2,8 @@ package cn.xgtd.controller;
 
 import cn.xgtd.domain.user.User;
 import cn.xgtd.response.CommonCode;
-import cn.xgtd.response.objectReturn.Results;
-import cn.xgtd.response.objectReturn.ResultContent;
+import cn.xgtd.response.Return.Results;
+import cn.xgtd.response.Return.ResultContent;
 import cn.xgtd.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
