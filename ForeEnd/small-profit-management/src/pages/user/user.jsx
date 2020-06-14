@@ -136,7 +136,7 @@ const User = (props) => {
   const getRoles = () => {
     indexAPI.getUserRoles(user.uId).then(res => {
       if (res.success) {
-        setRoles(res.objectReturn.object)
+        setRoles(res.results.data)
       }
     })
   }
@@ -145,7 +145,7 @@ const User = (props) => {
     indexAPI.getUsers(user.uId).then(res => {
       if (res.success) {
         setSkeletonLoad(false);
-        setUserList(res.objectReturn.object)
+        setUserList(res.results.data)
       }
     })
   }
@@ -161,7 +161,7 @@ const User = (props) => {
         indexAPI.editUser(values).then(res=>{
           if (res.success){
             let data=JSON.parse(JSON.stringify(userList))
-            data[userTable.index]=res.objectReturn.object
+            data[userTable.index]=res.results.data
             setUserList(data)
             message.success("用户修改成功!")
             shutDown();
@@ -170,7 +170,7 @@ const User = (props) => {
       }else {
         indexAPI.addUser(values).then(res => {
           if (res.success) {
-            setUserList([res.objectReturn.object, ...userList]);
+            setUserList([res.results.data, ...userList]);
             shutDown();
           } else {
             message.warn("用户已存在!")
@@ -197,7 +197,7 @@ const User = (props) => {
     if(data.content||data.beforeTime||data.laterTime){
       indexAPI.searchUser(data).then(res=>{
         if (res.success){
-          setUserList(res.objectReturn.object)
+          setUserList(res.results.data)
         }
       })
     }

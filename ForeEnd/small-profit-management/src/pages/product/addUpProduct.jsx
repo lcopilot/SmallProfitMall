@@ -200,14 +200,14 @@ const AddUpProduct = (props) => {
     }
     form.validateFields().then(values => {
       // console.log(productIntRef.current.getDetailHtml())
-      console.log(values)
+      // console.log(values)
     })
   }
   //获取商品详情
   const getProductCategory = () => {
     indexAPI.getProductCategory().then(res => {
       if (res.success) {
-        setProductCategory(res.objectReturn.object)
+        setProductCategory(res.results.data)
       }
     })
   }
@@ -335,7 +335,6 @@ const AddUpProduct = (props) => {
           [...imgFileList, img]);
       isVideo ? setVideoName(res) : setImgNameList([...imgNameList, res]);
     }else {
-      message.error("上传失败!请稍后重试")
       isVideo ? setVideoFileList([...videoFileList]) : setImgFileList(
           [...imgFileList]);
     }

@@ -12,12 +12,17 @@ const SLICE_QUANTITY = 5;
  * @returns {Promise<boolean>}
  */
 export const fileUpload = async (file = {}, isEditor, onProgress = () => {}) => {
+  //已上传的大小
+  let loaded=0
+  //并发结果
+  let results =[]
+
   let partSize = Math.ceil(file.size / SLICE_QUANTITY), //分片大小 向上取整
       start = 0,
       end = partSize,
       i = 0,
       partList = []; //文件分片集合
-  let fileName = await Md5(file)
+  const fileName = await Md5(file)
 
   //文件切片
   while (i < SLICE_QUANTITY) {
@@ -29,14 +34,21 @@ export const fileUpload = async (file = {}, isEditor, onProgress = () => {}) => 
     end = i === SLICE_QUANTITY - 2 ? file.size + 1 : start + partSize;
     i++;
   }
-  //上传进度
-  const uploadProgress = (loaded, total) => {
-    onProgress({
-      percent: Math.round(loaded / total * 100).toFixed(2)
-    }, file);
+  const verifyRes=await indexApi.getFileVerify(fileName,SLICE_QUANTITY)
+  // console.log(verifyRes)
+  if(verifyRes.success){
+    if (verifyRes.results.data.composite){
+      onProgress({
+        percent: Math.round(file.size / file.size * 100).toFixed(2)
+      }, file);
+      return verifyRes.results.data.fileName
+    }else {
+
+    }
+  }else {
+
   }
-  //已上传的大小
-  let loaded=0
+
   //并发切片请求
   partList = partList.map(item => {
     let formData = new FormData();
@@ -44,10 +56,13 @@ export const fileUpload = async (file = {}, isEditor, onProgress = () => {}) => 
     formData.append('fileName', item.filename);
     return indexApi.uploadFiles(formData,(progress)=>{
       loaded+=progress.loaded;
-      uploadProgress(loaded, file.size)
+      // loaded 已上传的大小 file.size 总大小
+      onProgress({
+        percent: (loaded / file.size * 100).toFixed(2)
+      }, file);
     })
   });
-  let results =[]
+
   try{
       results =await Promise.all(partList)
   }catch (e) {
@@ -64,7 +79,7 @@ export const fileUpload = async (file = {}, isEditor, onProgress = () => {}) => 
     //合成文件
     return indexApi.fileMerge(data).then(res => {
       if (res.success) {
-        return res.objectReturn.object
+        return res.results.data
       }
     }).catch(error => {
       return false

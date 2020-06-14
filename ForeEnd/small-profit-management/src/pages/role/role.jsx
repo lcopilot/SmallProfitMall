@@ -136,7 +136,7 @@ const Role = (props) => {
     indexAPI.getRoles(user.uId).then(res => {
       if (res.success) {
         setSkeletonLoad(false);
-        setRolesList(res.objectReturn.object)
+        setRolesList(res.results.data)
       }
     })
   }
@@ -156,7 +156,7 @@ const Role = (props) => {
         indexAPI.editRoles(roles).then(res => {
           if (res.success){
             let data=JSON.parse(JSON.stringify(rolesList))
-            data[rolesTable.index]=res.objectReturn.object
+            data[rolesTable.index]=res.results.data
             setRolesList(data)
             message.success("角色修改成功!")
             shutDown();
@@ -168,7 +168,7 @@ const Role = (props) => {
       } else {
         indexAPI.addRoles(roles).then(res => {
               if (res.success) {
-                setRolesList([res.objectReturn.object, ...rolesList])
+                setRolesList([res.results.data, ...rolesList])
                 shutDown();
               } else {
                 message.warn("角色已存在!")
@@ -229,7 +229,7 @@ const Role = (props) => {
     if(data.content||data.beforeTime||data.laterTime){
       indexAPI.searchRoles(data).then(res=>{
         if (res.success){
-          setRolesList(res.objectReturn.object)
+          setRolesList(res.results.data)
         }
       })
     }

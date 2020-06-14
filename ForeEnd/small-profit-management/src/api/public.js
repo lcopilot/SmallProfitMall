@@ -78,11 +78,10 @@ axios.interceptors.response.use(
             case 500:
               console.error(error.response.status);
               message.error("服务器跑路了~,请稍后重试")
-            default:
-              return Promise.reject(error.response);
           }
         }
       }, 200)
+      return Promise.reject(error.response);
     }
 )
 

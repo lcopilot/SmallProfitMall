@@ -73,9 +73,9 @@ export const getProductCategory=()=>{
 /**
  * 文件上传模块
  */
-//获取文件唯一标识(文件名)
-export const getFileName=(fileName)=>{
-  return http.requestPostFormUr(apiUrl+`/filesController/getFileName`,fileName)
+//查看文件是否存在
+export const getFileVerify=(fileName,chunk)=>{
+  return http.requestGet(apiUrl+`/filesController/findBreakpointFile/${fileName}/${chunk}`)
 }
 //文件上传
 export const uploadFiles=(data,uploadProgress)=>{

@@ -41,7 +41,7 @@ const Login = (props) => {
     userApi.login(data).then(res => {
       if (res.success) {
         message.success("登录成功!")
-        const user = res.objectReturn.object
+        const user = res.results.data
         user.role.menus = user.role.menus === null ? [] : user.role.menus;
         setUser(user)
         storageUtils.saveUser(user)
