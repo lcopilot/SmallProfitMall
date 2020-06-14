@@ -12,41 +12,43 @@ const SLICE_QUANTITY = 5;
  * @returns {Promise<boolean>}
  */
 export const fileUpload = async (file = {}, isEditor, onProgress = () => {}) => {
-  //已上传的大小
-  let loaded=0
-  //并发结果
-  let results =[]
-
   let partSize = Math.ceil(file.size / SLICE_QUANTITY), //分片大小 向上取整
       start = 0,
+      loaded=0,  //已上传的大小
+      results =[],  //并发结果
       end = partSize,
       i = 0,
       partList = []; //文件分片集合
+
   const fileName = await Md5(file)
 
-  //文件切片
-  while (i < SLICE_QUANTITY) {
-    partList.push({
-      chunk: file.slice(start, end),
-      filename: `${fileName}-${i}`,
-    });
-    start += partSize;
-    end = i === SLICE_QUANTITY - 2 ? file.size + 1 : start + partSize;
-    i++;
-  }
+  //验证文件是否存在
   const verifyRes=await indexApi.getFileVerify(fileName,SLICE_QUANTITY)
-  // console.log(verifyRes)
   if(verifyRes.success){
+    //文件已经存在并已合成
     if (verifyRes.results.data.composite){
       onProgress({
         percent: Math.round(file.size / file.size * 100).toFixed(2)
       }, file);
       return verifyRes.results.data.fileName
-    }else {
-
+    }else{
+      //文件未合成
+      onProgress({
+        percent: Math.round(file.size / file.size * 100).toFixed(2)
+      }, file);
+      return await fileMerge(fileName,file,isEditor);
     }
   }else {
-
+    //文件切片
+    while (i < SLICE_QUANTITY) {
+      partList.push({
+        chunk: file.slice(start, end),
+        filename: `${fileName}-${i}`,
+      });
+      start += partSize;
+      end = i === SLICE_QUANTITY - 2 ? file.size + 1 : start + partSize;
+      i++;
+    }
   }
 
   //并发切片请求
@@ -70,23 +72,27 @@ export const fileUpload = async (file = {}, isEditor, onProgress = () => {}) => 
   }
 
   if (results.length>0) {
-    const data = {
-      fileName: fileName,
-      fileQuantity: SLICE_QUANTITY,
-      fileType: file.type,
-      richText: isEditor,
-    }
-    //合成文件
-    return indexApi.fileMerge(data).then(res => {
-      if (res.success) {
-        return res.results.data
-      }
-    }).catch(error => {
-      return false
-    })
+    return await fileMerge(fileName,file,isEditor);
   }
 }
 
+//文件合成
+const fileMerge=async (fileName,file,isEditor)=>{
+  const data = {
+    fileName: fileName,
+    fileQuantity: SLICE_QUANTITY,
+    fileType: file.type,
+    richText: isEditor,
+  }
+  //合成文件
+  return indexApi.fileMerge(data).then(res => {
+    if (res.success) {
+      return res.results.data
+    }
+  }).catch(error => {
+    return false
+  })
+}
 //文件md5
 const Md5 = async (file) => {
   return new Promise(resolve => {
