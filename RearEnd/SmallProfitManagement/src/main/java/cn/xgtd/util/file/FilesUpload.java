@@ -4,6 +4,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.nio.ByteBuffer;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 文件上传 断点续传
@@ -15,9 +17,11 @@ public class FilesUpload {
      * 文件上传
      * @param sourFiles 文件输入流
      * @param targetFilePath 输出文件地址
-     * @return 文件上传异常 返回断点 成功 返回-1
+     * @return 文件上传异常 返回断点 成功 返回文件大小
      */
-    public static int breakTrans(FileInputStream sourFiles, String targetFilePath) {
+    public static Map breakTrans(FileInputStream sourFiles, String targetFilePath) {
+        Map map = new HashMap();
+        Boolean succeed = false;
         //断点 -1为完全上传
         int position = -1;
         File targetFile = new File(targetFilePath);
@@ -31,15 +35,14 @@ public class FilesUpload {
             while ((numberRead = fis.read(buf)) != -1) {
                 fos.write(buf, 0, numberRead);
                 fos.flush();
-                // 当目标文件长度写到三的时候，抛出异常，终端传输
-                if (targetFile.length() == 1024) {
-                    throw new Exception();
-                }
+//                // 当目标文件长度写到三的时候，抛出异常，终端传输
+//                if (targetFile.length() > 10240) {
+//                    throw new Exception();
+//                }
             }
         } catch (Exception e) {
             e.printStackTrace();
             position = Integer.parseInt(String.valueOf(targetFile.length()));
-            return position;
         } finally {
             try {
                 if (fis != null) {
@@ -53,7 +56,18 @@ public class FilesUpload {
                 e.printStackTrace();
             }
         }
-        return position;
+        //文件上传成功
+        if (position == -1){
+            Integer fileSize = Integer.parseInt(String.valueOf(targetFile.length()));
+            succeed = true;
+            map.put("succeed",succeed);
+            map.put("fileSize",fileSize);
+            return map;
+        }
+        //失败
+        map.put("succeed",succeed);
+        map.put("position",position);
+        return map;
     }
 
 

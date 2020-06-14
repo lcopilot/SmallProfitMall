@@ -50,38 +50,74 @@ public class FilesServiceImpl implements FilesService {
     }
 
     /**
-     * 查询该文件是否服务器存在
+     * 查询文件是否存在
      * @param fileName 文件名
+     * @param fileQuantity 文件碎片数量
+     * @param fileSize 文件总大小
      * @return
      */
     @Override
-    public Map findBreakpointFile(String fileName , Integer fileQuantity) {
+    public Map findBreakpointFile(String fileName , Integer fileQuantity , Integer fileSize) {
         Map map = new HashMap();
+
+        //文件断点集合
         List<BreakpointFile> breakpointFileList = new ArrayList<>();
+        //文件是上传成功 成功  失败返回断点标志
         Boolean sign = true;
-        //分片存在数量
-        int existQuantity =-fileQuantity;
-        int existQuantitys = 0;
+
+        //判断文件是否合成
+        Boolean composite = false;
+
+        //文件是否存在
+        Boolean fileExist = false;
+
+        //文件总大小
+        Integer fileSizes = 0;
+
         for (int i = 0; i <fileQuantity ; i++) {
            String  fileNames = fileName+"-"+i;
-            Integer  breakpoint = (Integer) redisUtil.get(fileNames);
+           //文件是否上传成功
+            Boolean findFileSucceed = (Boolean) redisUtil.get(fileNames+"Succeed");
+            BreakpointFile breakpointFile = new BreakpointFile();
+            if (findFileSucceed!=null){
+                breakpointFile.setBreakpointFull(findFileSucceed);
+                Integer  breakpointFileSize = (Integer) redisUtil.get(fileNames+"Size");
+                fileSizes+=breakpointFileSize;
+            }
+           //文件断点
+            Integer  breakpoint = (Integer) redisUtil.get(fileNames+"Position");
+            //文件是否存在断点
             if (breakpoint!=null){
-                BreakpointFile breakpointFile = new BreakpointFile();
+                breakpointFile.setBreakpointFull(findFileSucceed);
                 breakpointFile.setFileName(fileNames);
                 breakpointFile.setComposite(false);
                 breakpointFile.setBreakpoint(breakpoint);
                 breakpointFileList.add(breakpointFile);
-                existQuantitys+=breakpoint;
             }
         }
-        Boolean composite = false;
-        String fileNameComposite = (String) redisUtil.get(fileName);
+
+        //判断文件是否存在断点 或者文件是否有大小
+        if (breakpointFileList.size()>0 || fileSizes!=0){
+            fileExist = true;
+            //判断分片数据是否完整
+            if (breakpointFileList.size() == 0){
+                sign = fileSizes.equals(fileSize);
+            }
+        }
+
+        //查询文件是否合成
+        String fileNameComposite = (String) redisUtil.get(fileName+"Composite");
         if (fileNameComposite!=null){
             composite = true;
         }
-        //文件上传成功
-        sign = existQuantitys == existQuantity;
+
+
+
+        //文件是否存在
+        map.put("fileExist",fileExist);
+        //断点对象
         map.put("breakpointFileList",breakpointFileList);
+        //文件是否完整标志
         map.put("sign",sign);
         //文件合成 合成的文件名
         map.put("fileNameComposite",fileNameComposite);
@@ -98,7 +134,7 @@ public class FilesServiceImpl implements FilesService {
      * @return 返回地址
      */
     @Override
-    public Integer filesUpload(String fileName , MultipartFile files) throws IOException {
+    public Boolean filesUpload(String fileName , MultipartFile files) throws IOException {
         //文件地址
         String fileUrl = PathUtil.getImgBasePath()+"/"+fileName;
         File file = new File(PathUtil.getImgBasePath());
@@ -120,11 +156,19 @@ public class FilesServiceImpl implements FilesService {
         }
         //转为文件输入流
         InputStream fileInputStream =  files.getInputStream();
-        FileInputStream fileInputStream1 = (FileInputStream) fileInputStream;
-        //文件上传 上传成功返回-1 上传失败返回失败数量
-        Integer position = FilesUpload.breakTrans(fileInputStream1,fileUrl);
-        redisUtil.set(fileName,position,259200000);
-        return position;
+        FileInputStream  fileInputStream1 = (FileInputStream) fileInputStream;
+        //文件上传 上传成功返回文件大小 上传失败返回失败
+
+        Map map = FilesUpload.breakTrans(fileInputStream1,fileUrl);
+        Boolean succeed = (Boolean) map.get("succeed");
+        redisUtil.set(fileName+"Succeed",succeed,259200000);
+       if (succeed){
+           Integer fileSize = (Integer) map.get("fileSize");
+           redisUtil.set(fileName+"Size",fileSize,259200000);
+       }
+        Integer position = (Integer) map.get("position");
+        redisUtil.set(fileName+"Position",position,259200000);
+        return succeed;
     }
 
     /**
@@ -173,7 +217,7 @@ public class FilesServiceImpl implements FilesService {
         }
         SplitAndMergeFile splitAndMergeFile = new SplitAndMergeFile();
         splitAndMergeFile.merge(fileNames,fileUrl,compositeFileName);
-        redisUtil.set(fileName,compositeFileName,259200000);
+        redisUtil.set(fileName+"Composite",compositeFileName,259200000);
         return compositeFileName;
     }
 

@@ -49,30 +49,48 @@ public class FilesController {
      * @param fileQuantity 文件碎片数量
      * @return
      */
-    @RequestMapping(value = "/findBreakpointFile/{fileName}/{fileQuantity}",method = RequestMethod.GET)
-    public ResultContent findBreakpointFile(@PathVariable("fileName") String fileName , @PathVariable("fileQuantity") Integer fileQuantity){
+    @RequestMapping(value = "/findBreakpointFile/{fileName}/{fileQuantity}/{fileSize}",method = RequestMethod.GET)
+    public ResultContent findBreakpointFile(@PathVariable("fileName") String fileName , @PathVariable("fileQuantity") Integer fileQuantity ,@PathVariable("fileSize")Integer fileSize){
         Results results = new Results();
-        Map map = filesService.findBreakpointFile(fileName,fileQuantity);
+        Map map = filesService.findBreakpointFile(fileName,fileQuantity,fileSize);
+        //文件是否存在
+        Boolean fileExist =  (Boolean) map.get("fileExist");
+        //文件是否完整
         Boolean sign = (Boolean) map.get("sign");
+        //文件是否合成
         Boolean composite = (Boolean) map.get("composite");
-        if(!sign){
-            List<BreakpointFile> breakpointFileList = (List<BreakpointFile>) map.get("breakpointFileList");
+        //文件是否存在断点
+        List<BreakpointFile> breakpointFileList = (List<BreakpointFile>) map.get("breakpointFileList");
+
+        //判断文件是否存在
+        if (!fileExist){
+            return new ResultContent(CommonCode.FILE_INEXISTENCE,null);
+        }
+        //分片数据是否正确
+        if (!sign){
+            return new ResultContent(CommonCode.FILE_ERROR,null);
+        }
+        //文件存在断点
+        if(breakpointFileList.size()>0){
             results.setData(breakpointFileList);
-        }else if (composite){
-            //上传成功 且合成
-            BreakpointFile breakpointFileList = new BreakpointFile();
-            breakpointFileList.setComposite(composite);
+            return new ResultContent(CommonCode.PORTION_SUCCESS,results);
+        }
+        //文件是否合成
+        if (composite){
+            //文件完整 且合成
+            BreakpointFile breakpoint = new BreakpointFile();
+            breakpoint.setComposite(composite);
             String fileNames = (String) map.get("fileNameComposite");
-            breakpointFileList.setFileName(fileNames);
+            breakpoint.setFileName(fileNames);
+            results.setData(breakpoint);
             return new ResultContent(CommonCode.SUCCESS,results);
         }else{
-            //上传成功 单未合成
-            BreakpointFile breakpointFileList = new BreakpointFile();
-            breakpointFileList.setComposite(composite);
-            results.setData(breakpointFileList);
+            //完整但未合成
+            BreakpointFile breakpoint = new BreakpointFile();
+            breakpoint.setComposite(composite);
+            results.setData(breakpoint);
             return new ResultContent(CommonCode.SUCCESS,results);
         }
-        return new ResultContent(CommonCode.FILE_INEXISTENCE,null);
     }
     /**
      * 文件上传
@@ -83,13 +101,11 @@ public class FilesController {
      */
     @RequestMapping(value = "/filesUpload",method = RequestMethod.POST)
     public ResultContent filesUpload(String fileName , MultipartFile file) throws IOException {
-        Integer position = filesService.filesUpload(fileName,file);
-        if (position <0){
-            Results results = new Results();
-            results.setData(position);
-            return new ResultContent(CommonCode.SUCCESS,results);
+        Boolean  result = filesService.filesUpload(fileName,file);
+        if (result){
+            return new ResultContent(CommonCode.SUCCESS,null);
         }
-        return new ResultContent(CommonCode.SUCCESS,null);
+        return new ResultContent(CommonCode.FAIL,null);
     }
 
     /**

@@ -12,7 +12,17 @@ public class BreakpointFile {
     private Integer breakpoint;
     /**文件是否合成**/
     private Boolean composite;
+    /**分片是否完整**/
+    private Boolean breakpointFull;
 
+
+    public Boolean getBreakpointFull() {
+        return breakpointFull;
+    }
+
+    public void setBreakpointFull(Boolean breakpointFull) {
+        this.breakpointFull = breakpointFull;
+    }
 
     public Boolean getComposite() {
         return composite;

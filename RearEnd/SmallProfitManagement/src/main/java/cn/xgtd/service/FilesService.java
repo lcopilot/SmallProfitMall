@@ -25,7 +25,7 @@ public interface FilesService {
      * @param fileQuantity 文件碎片数量
      * @return
      */
-    public Map findBreakpointFile(String fileName , Integer fileQuantity);
+    public Map findBreakpointFile(String fileName , Integer fileQuantity , Integer fileSize);
 
     /**
      * 文件上传
@@ -33,7 +33,7 @@ public interface FilesService {
      * @param files 文件
      * @return 返回地址
      */
-    public Integer filesUpload(String fileName , MultipartFile files) throws IOException;
+    public Boolean filesUpload(String fileName , MultipartFile files) throws IOException;
 
     /**
      * 断点续传
