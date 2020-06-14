@@ -85,7 +85,6 @@ public class FilesServiceImpl implements FilesService {
                 if (breakpointFileSize!=null){
                     fileSizes+=breakpointFileSize;
                 }
-
             }
            //文件断点
             Integer  breakpoint = (Integer) redisUtil.get(fileNames+"Position");
