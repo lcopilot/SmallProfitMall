@@ -152,7 +152,6 @@ public class FilesServiceImpl implements FilesService {
         //转为文件输入流
         InputStream fileInputStream =  files.getInputStream();
 
-//        FileInputStream fin = (FileInputStream) fileInputStream;
         //文件上传 上传成功返回文件大小 上传失败返回失败
 
         Map map = FilesUpload.breakTrans(fileInputStream,fileUrl);
@@ -197,7 +196,7 @@ public class FilesServiceImpl implements FilesService {
      * @return
      */
     @Override
-    public String compositeFile(String fileName , Integer fileQuantity ,String  fileType , Boolean video) {
+    public String compositeFile(String fileName , Integer fileQuantity ,String  fileType ,Boolean richText, Boolean video) {
         //合成后文件名
         String compositeFileName = fileName+"."+fileType;
         //文件地址
