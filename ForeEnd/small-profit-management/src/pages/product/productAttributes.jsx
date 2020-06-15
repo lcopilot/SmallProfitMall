@@ -8,7 +8,7 @@ import {
   Input,
   Modal, PageHeader,
   Row,
-  Select,
+  Select, Steps,
   Table, Upload
 } from "antd";
 import {useHistory, useLocation} from "react-router-dom";
@@ -16,12 +16,18 @@ import {useHistory, useLocation} from "react-router-dom";
 
 
 const {Option} = Select;
+const {Step} = Steps;
 
 const ProductAttributes=()=>{
   const history = useHistory()
   //获取路由传过来的值
-  let {productDetail} = useLocation().state
+  let {isSteps,productDetail} = useLocation().state
+  const [proFromBtn, setProFromBtn] = useState({
+    content: '提交',
+    load:false,
+  });
   const [form] = Form.useForm();
+
   //表单布局
   const formItemLayout = {
     labelCol: {
@@ -70,10 +76,25 @@ const ProductAttributes=()=>{
     return roleOption
   }
 
-  useEffect(()=>{
-    form.setFieldsValue({
-      productAttributes: productDetail.productDistinctions,
+  //回显商品属性配置
+  const setProductAtt=()=>{
+    if (productDetail){
+      form.setFieldsValue({
+        productAttributes: productDetail.productDistinctions,
+      })
+    }
+  }
+
+  //添加修改商品配置
+  const editProductAtt=()=>{
+    form.validateFields().then(values => {
+      // console.log(productIntRef.current.getDetailHtml())
+      // console.log(values)
     })
+  }
+
+  useEffect(()=>{
+    setProductAtt();
     return ()=>{}
   },[])
 
@@ -85,6 +106,15 @@ const ProductAttributes=()=>{
             title="商品属性价格库存"
         />
         <Card>
+          {isSteps ? (<Row justify="center" gutter={[0, 30]}>
+            <Col xs={24} sm={24} md={14} lg={14} xl={14}>
+              <Steps className="add-product-steps" current={1}>
+                <Step title="基本信息" description="填写商品基本信息"/>
+                <Step title="商品属性" description="设置商品属性之间的价格库存"/>
+              </Steps>
+            </Col>
+          </Row>) : null
+          }
           <Form
               form={form}
               {...formItemLayout}
@@ -177,7 +207,7 @@ const ProductAttributes=()=>{
                                   name={[field.name, 'productInventory']}
                                   noStyle
                               >
-                                <Input type="number" suffix="kg" style={{width: '15%'}} placeholder="库存"/>
+                                <Input type="number" style={{width: '15%'}} placeholder="库存"/>
                               </Form.Item>
                             </Input.Group>
                           </Form.Item>
@@ -189,11 +219,8 @@ const ProductAttributes=()=>{
 
             </Form.List>
             <Form.Item  {...formItemLayoutWith}>
-              <Button className="add-product-from-btn" onClick={()=>{form.validateFields().then(values => {
-                // console.log(productIntRef.current.getDetailHtml())
-                // console.log(values)
-              })}}
-                      type="primary">修改</Button>
+              <Button className="add-product-from-btn" onClick={editProductAtt}
+                 loading={proFromBtn.load}     type="primary">{proFromBtn.content}</Button>
               <Button className="add-product-from-btn"
                       onClick={() => history.push(
                           '/products/product')}>返回</Button>

@@ -32,7 +32,7 @@ const Admin = (props) => {
     if (width <= 1200) {
       return setCollapsed(true)
     }
-    setCollapsed(false)
+
   }
 
   const routerAuth=(menuList)=>{

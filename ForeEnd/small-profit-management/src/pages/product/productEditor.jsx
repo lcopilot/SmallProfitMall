@@ -9,6 +9,7 @@ import {EditorState, convertToRaw, ContentState} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import * as Utils from "../../utils/utils";
+import {message} from "antd";
 
 // props子组件中需要接受ref
 let ProductEditor = (props, ref) => {
@@ -34,8 +35,17 @@ let ProductEditor = (props, ref) => {
   }));
 
   const uploadImageCallBack = (file) => {
+    const FILE_SIZE = file.size / 1024 / 1024;
     return new Promise(async (resolve, reject) => {
-          const res =await Utils.fileUpload(file, true);
+          if (FILE_SIZE > 20) {
+            message.warn("请上传20MB以下的图片!")
+            return reject(false)
+          }
+          if (file.type.split('/')[0] !== 'image') {
+            message.warn("请选择图片");
+            return reject(false)
+          }
+          const res = await Utils.fileUpload(file, true,()=>{},false);
           if (res) {
             resolve({data: {link: res}})
           } else {
@@ -58,7 +68,7 @@ let ProductEditor = (props, ref) => {
           toolbar={{
             image: {
               uploadCallback: uploadImageCallBack,
-              alt: {present: true, mandatory: true}
+              alt: {present: true, mandatory: false}
             },
           }}
       />

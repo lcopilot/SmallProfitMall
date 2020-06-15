@@ -154,7 +154,7 @@ const Product = () => {
         </Col>
         <Col xs={24} sm={24} md={9} lg={9} xl={11}>
           <Button type='primary' onClick={() => {
-            history.push({pathname:`/products/product/addUpProduct`,state:{productId:5}})
+            history.push({pathname:`/products/product/addUpProduct`,state:{}})
           }}>添加商品</Button>
         </Col>
       </Row>
