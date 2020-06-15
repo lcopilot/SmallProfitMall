@@ -16,7 +16,7 @@ import java.util.*;
 
 /**
  * @author Kite
- * @date 2020/6/11
+ * @date 2020/6/15
  */
 @Service
 public class FilesServiceImpl implements FilesService {
@@ -198,7 +198,6 @@ public class FilesServiceImpl implements FilesService {
      */
     @Override
     public String compositeFile(String fileName , Integer fileQuantity ,String  fileType ,Boolean richText, Boolean video) throws IOException {
-
         //合成后文件名
         String compositeFileName = fileName+"."+fileType;
         //文件地址
@@ -210,7 +209,7 @@ public class FilesServiceImpl implements FilesService {
         }
         SplitAndMergeFile splitAndMergeFile = new SplitAndMergeFile();
         splitAndMergeFile.merge(fileNames,fileUrl,compositeFileName);
-        redisUtil.set(fileName+"Composite",compositeFileName,259200000);
+
 
         String compositeFileUrl = fileUrl+"\\"+compositeFileName;
         if(!video){
@@ -225,7 +224,10 @@ public class FilesServiceImpl implements FilesService {
             //返回图片地址
             String site =" http://productdata.isdfmk.xyz/"+fileKey;
             compositeFileName = site;
+
         }
+        redisUtil.set(fileName+"Composite",compositeFileName,259200000);
+
         return compositeFileName;
     }
 
