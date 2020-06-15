@@ -331,7 +331,7 @@ const AddUpProduct = (props) => {
   }
   //文件上传
   const fileUpload = async (options, isVideo) => {
-    const res = await Utils.fileUpload(options.file, false, options.onProgress);
+    const res = await Utils.fileUpload(options.file, false, options.onProgress,isVideo);
     if (res) {
       let img = {
         uid: new Date().getTime(),

@@ -7,7 +7,7 @@ import {useHistory} from "react-router-dom";
 axios.defaults.withCredentials = false //是否支持发送cookie凭证信息的字段(请求携带了验证身份信息时)
 axios.defaults.timeout = 30000 //超时时间
 // 默认请求头
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www=form-urlencoded;charset=UTF-8'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www=form-urlencoded;charset=UTF-8';
 //响应拦截器防抖定时器
 let timerRP = 0
 

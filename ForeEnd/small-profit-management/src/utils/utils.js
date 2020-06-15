@@ -11,8 +11,7 @@ const SLICE_QUANTITY = 5;
  * @param onProgress 上传进度
  * @returns {Promise<boolean>}
  */
-export const fileUpload = async (file = {}, isEditor, onProgress = () => {
-}) => {
+export const fileUpload = async (file = {}, isEditor, onProgress = () => {},isVideo) => {
   let partSize = Math.ceil(file.size / SLICE_QUANTITY), //分片大小 向上取整
       suffix = file.name.split('.')[file.name.split('.').length - 1], //后缀
       start = 0,
@@ -88,16 +87,17 @@ export const fileUpload = async (file = {}, isEditor, onProgress = () => {
   }
 
   if (results.length > 0) {
-    return await fileMerge(fileName, suffix, file, isEditor);
+    return await fileMerge(fileName, suffix, file, isEditor,isVideo);
   }
 }
 
 //文件合成
-const fileMerge = async (fileName, suffix, file, isEditor) => {
+const fileMerge = async (fileName, suffix, file, isEditor,isVideo) => {
   const data = {
     fileName: fileName,
     fileQuantity: SLICE_QUANTITY,
-    fileType: file.type,
+    video:isVideo,
+    fileType: suffix,
     richText: isEditor,
   }
   //合成文件
