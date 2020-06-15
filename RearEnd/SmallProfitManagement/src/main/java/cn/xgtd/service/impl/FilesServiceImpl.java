@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.tools.Tool;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -149,12 +150,14 @@ public class FilesServiceImpl implements FilesService {
                 file.setWritable(true, false);
             }
         }
+
         //转为文件输入流
         InputStream fileInputStream =  files.getInputStream();
+        FileInputStream fileInputStream1 = (FileInputStream) fileInputStream;
 
         //文件上传 上传成功返回文件大小 上传失败返回失败
 
-        Map map = FilesUpload.breakTrans(fileInputStream,fileUrl);
+        Map map = FilesUpload.breakTrans(fileInputStream1,fileUrl);
         Boolean succeed = (Boolean) map.get("succeed");
         redisUtil.set(fileName+"Succeed",succeed,259200000);
        if (succeed){
@@ -213,5 +216,25 @@ public class FilesServiceImpl implements FilesService {
     }
 
 
+    /**
+     * 将流中的内容转换为字符串，主要用于提取request请求的中requestBody
+     * @param in
+     * @param encoding
+     * @return
+     */
+    public static String streamToString(InputStream in, String encoding){
+        // 将流转换为字符串
+        try {
+            StringBuffer sb = new StringBuffer();
+            byte[] b = new byte[1024];
+            for (int n; (n = in.read(b)) != -1;) {
+                sb.append(new String(b, 0, n, encoding));
+            }
+            return sb.toString();
+        }  catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("提取 requestBody 异常", e);
+        }
 
+    }
 }

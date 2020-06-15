@@ -19,23 +19,20 @@ public class FilesUpload {
      * @param targetFilePath 输出文件地址
      * @return 文件上传异常 返回断点 成功 返回文件大小
      */
-    public static Map breakTrans(InputStream sourFiles, String targetFilePath) {
+    public static Map breakTrans(FileInputStream sourFiles, String targetFilePath) {
         Map map = new HashMap();
         Boolean succeed = false;
         //断点 -1为完全上传
         int position = -1;
         File targetFile = new File(targetFilePath);
-        InputStream fis = null;
+        FileInputStream fis = null;
         FileOutputStream fos = null;
-        char []cha = new char[1024];
+        byte[] buf = new byte[1024*10];
         try {
             fis = sourFiles;
-            //读取
-            InputStreamReader in = new InputStreamReader(fis,"UTF-8");
-            Writer out = new FileWriter(targetFile);
             int numberRead = 0;
-            while ((numberRead = in.read(cha)) != -1) {
-                out.write(cha,0,numberRead);
+            while ((numberRead = fis.read(buf)) != -1) {
+                fos.write(buf,0,numberRead);
                 fos.flush();
                 // 当目标文件长度写到三的时候，抛出异常，终端传输
 //                if (targetFile.length() > 10240) {
@@ -80,23 +77,21 @@ public class FilesUpload {
      * @param position 断点
      * @throws IOException
      */
-    public static Integer continueTrans(InputStream sourceFilePath, String targetFilePath, int position) {
+    public static Integer continueTrans(FileInputStream sourceFilePath, String targetFilePath, int position) {
         //断点 -1为完全上传
         int positions = -1;
         File targetFile = new File(targetFilePath);
-        InputStream read = sourceFilePath;
+        FileInputStream read = sourceFilePath;
         RandomAccessFile write = null;
-        char []cha = new char[1024];
+        byte[] buf = new byte[1024*10];
         try {
             write = new RandomAccessFile(targetFile, "rw");
             // 关键，找到位置
             int numberRead = 0;
             write.seek(position);
-            InputStreamReader in = new InputStreamReader(read,"UTF-8");
-            Writer out = new FileWriter(targetFile);
-            while ((numberRead = in.read(cha)) != -1) {
+            while ((numberRead = write.read(buf)) != -1) {
                 System.out.println("write dataing ...".toUpperCase());
-                out.write(cha,0, numberRead);
+                write.write(buf,0, numberRead);
             }
         } catch (Exception e) {
             e.printStackTrace();
