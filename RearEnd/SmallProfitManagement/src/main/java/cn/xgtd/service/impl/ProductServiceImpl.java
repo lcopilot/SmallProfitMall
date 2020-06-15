@@ -3,10 +3,12 @@ package cn.xgtd.service.impl;
 import cn.xgtd.dao.ProductDao;
 import cn.xgtd.domain.product.*;
 import cn.xgtd.service.ProductService;
+import cn.xgtd.util.img.UploadFileUtil;
 import cn.xgtd.util.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,10 +65,7 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
-    @Override
-    public ProductDetails findProductDesciption(Integer productId) {
-        return null;
-    }
+
 
     /**
      * 查询商品分类
@@ -82,6 +81,54 @@ public class ProductServiceImpl implements ProductService {
         return productCategories;
     }
 
+    /**
+     * 添加商品
+     * @param productDetails 商品对象
+     * @return
+     */
+    @Override
+    public Integer addProduct(ProductDetails productDetails) throws IOException {
+        //七牛云储存空间
+        String space = "productdataf";
+        //文件名字
+
+        //上传视频
+        String videoFileName = productDetails.getVideo();
+        if (videoFileName!=null && videoFileName.equals("")){
+            String video = UploadFileUtil.uploadFileUtil(space,videoFileName,videoFileName);
+            productDetails.setVideo(video);
+        }
+
+
+        productDao.addProduct(productDetails);
+        List<ProductImage> imageSiteList = new ArrayList<>();
+        if (imageSiteList.size()>0){
+            //上传商品图片
+            List<String> imageSite = productDetails.getImageSite();
+            for (int i = 0; i <imageSite.size() ; i++) {
+                ProductImage productImage = new ProductImage();
+                String  imageSites = UploadFileUtil.uploadFileUtil(space,productDetails.getProductId().toString(),imageSite.get(i));
+                productImage.setImageSite(imageSites);
+                productImage.setProductId(productDetails.getProductId());
+                imageSiteList.add(productImage);
+            }
+            productDao.addProductImage(imageSiteList);
+        }
+
+        //添加商品配置
+        productDao.addProductContext(productDetails.getProductContexts());
+        return null;
+    }
+
+    /**
+     * 查询所有商品种类
+     * @return
+     */
+    @Override
+    public List<AttributeType> findAttributeType() {
+        List<AttributeType>  attributeTypes =  productDao.findAttributeType();
+        return attributeTypes;
+    }
 
 
     /**

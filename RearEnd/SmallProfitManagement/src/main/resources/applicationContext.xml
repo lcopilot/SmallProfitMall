@@ -113,8 +113,6 @@
     </aop:config>
 
 
-
-
     <!--redis缓存-->
     <context:component-scan base-package="cn.xgtd.util"></context:component-scan>
 

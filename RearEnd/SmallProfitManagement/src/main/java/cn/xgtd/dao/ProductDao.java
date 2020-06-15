@@ -47,4 +47,31 @@ public interface ProductDao {
      * @return
      */
     public List<ProductCategory> findCategory();
+
+    /**
+     * 添加商品信息
+     * @param productDetails 商品对象
+     * @return
+     */
+    public Integer addProduct(ProductDetails productDetails);
+
+    /**
+     * 添加商品图片
+     * @param productImage 图片集合
+     * @return
+     */
+    public Integer addProductImage(@Param("productImage") List<ProductImage> productImage);
+
+    /**
+     * 添加商品属性
+     * @param productContexts 商品属性对象
+     * @return
+     */
+    public Integer addProductContext(@Param("productContexts") List<ProductContext> productContexts);
+
+    /**
+     * 查询所有商品属性种类
+     * @return
+     */
+    public List<AttributeType> findAttributeType();
 }

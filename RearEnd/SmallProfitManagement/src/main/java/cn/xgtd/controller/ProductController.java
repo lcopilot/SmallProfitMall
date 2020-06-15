@@ -1,5 +1,6 @@
 package cn.xgtd.controller;
 
+import cn.xgtd.domain.product.AttributeType;
 import cn.xgtd.domain.product.ProductCategory;
 import cn.xgtd.domain.product.ProductDetails;
 import cn.xgtd.response.CommonCode;
@@ -10,10 +11,12 @@ import cn.xgtd.response.pagination.ResponsePagination;
 import cn.xgtd.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -67,5 +70,30 @@ public class ProductController {
     }
 
 
+    /**
+     * 添加商品
+     * @param productDetails 商品类
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "addProduct",method = RequestMethod.POST)
+    public ResultContent addProduct(@RequestBody ProductDetails productDetails) throws IOException {
+        Results results = new Results();
+
+//        productService.addProduct(productDetails);
+        return new ResultContent(CommonCode.SUCCESS,results);
+    }
+
+    /**
+     * 查询所有商品属性种类
+     * @return
+     */
+    @RequestMapping(value = "findAttributeType",method = RequestMethod.GET)
+    public ResultContent findAttributeType(){
+        Results results = new Results();
+        List<AttributeType> attributeTypes = productService.findAttributeType();
+        results.setData(attributeTypes);
+        return new ResultContent(CommonCode.SUCCESS,results);
+    }
 
 }

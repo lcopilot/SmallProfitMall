@@ -85,22 +85,12 @@
         <result property="productPrice" column="productPrice"></result>
         <result property="productInventory" column="productInventory"></result>
         <result property="productSales" column="productSales"></result>
-
-
-
     </resultMap>
-
-
-
-
 
     <!--查询商品总数量-->
     <select id="findFavoriteQuantity" resultType="java.lang.Integer">
         SELECT count(productId) FROM ProductBasis
     </select>
-
-
-
 
     <!--查询商品详细信息-->
     <select id="fendProduct" resultMap="ProductDatailsMap">
@@ -178,17 +168,55 @@
     
     <!--查询商品分类-->
     <select id="findCategory" resultMap="findCategoryPrimaryMap">
-      SELECT
-        ppc.product_primary_id,
-        ppc.category_content,
-        psc.product_secondary_id,
-        psc.secondary_content,
-        pfc.product_final_id,
-        pfc.final_content
-    FROM
-	product_primary_category ppc
-	LEFT JOIN product_secondary_category psc ON ppc.product_primary_id = psc.product_primary_id
-	LEFT JOIN product_final_category pfc ON psc.product_secondary_id = pfc.product_secondary_id
-</select>
+          SELECT
+            ppc.product_primary_id,
+            ppc.category_content,
+            psc.product_secondary_id,
+            psc.secondary_content,
+            pfc.product_final_id,
+            pfc.final_content
+        FROM
+        product_primary_category ppc
+        LEFT JOIN product_secondary_category psc ON ppc.product_primary_id = psc.product_primary_id
+        LEFT JOIN product_final_category pfc ON psc.product_secondary_id = pfc.product_secondary_id
+    </select>
+
+    <!--添加商品基本信息-->
+    <insert id="addProduct" parameterType="cn.xgtd.domain.product.ProductDetails" useGeneratedKeys="true" keyProperty="productId" keyColumn="productId">
+        insert into ProductBasis
+             (ProductName,ProductVideo,ProductWeight,prodcutPrimaryCategory,productSecondaryCategory,
+                productFinalCategory,productDescription,productAfterSale,productParameter)
+        VALUES
+            (#{productName},#{video},#{weight},#{productClassify.productPrimaryId},#{productClassify.productSecondaryId},#{productClassify.productFinalId},
+                 #{productDescription},#{productAfterSale},#{productParameter}) 
+    </insert>
+    
+    <!--添加商品图片-->
+     <insert id="addProductImage">
+        INSERT INTO ProductImage
+            (ProductId,ImageSite,sign)
+        VALUES
+         <foreach collection="productImage" item="item" index="index" separator=",">
+            (#{item.productId},
+            #{item.imageSite},
+            #{item.sign}
+        </foreach>
+     </insert>
+
+    <!--添加商品-->
+     <insert id="addProductContext">
+        INSERT INTO productAttribute
+            (attributeContent,attributeType)
+        VALUES
+         <foreach collection="productContexts" item="item" index="index" separator=",">
+            (#{item.attributeContent},
+            #{item.attributeType}
+        </foreach>
+     </insert>
+     
+     <!--查询商品属性种类-->
+     <select id="findAttributeType" resultType="cn.xgtd.domain.product.AttributeType">
+        SELECT * FROM attributeType
+     </select>
 
 </mapper>

@@ -1,12 +1,10 @@
 package cn.xgtd.service;
 
-import cn.xgtd.domain.product.BasicProduct;
-import cn.xgtd.domain.product.Product;
-import cn.xgtd.domain.product.ProductCategory;
-import cn.xgtd.domain.product.ProductDetails;
+import cn.xgtd.domain.product.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -32,16 +30,22 @@ public interface ProductService {
 
 
     /**
-     * 商品介绍 商品保障 商品参数
-     * @param productId
-     * @return
-     */
-    public ProductDetails findProductDesciption(Integer productId);
-
-    /**
      * 查询商品分类
      * @return
      */
     public List<ProductCategory> findCategory();
+
+    /**
+     * 添加商品
+     * @param productDetails 商品对象
+     * @return
+     */
+    public Integer addProduct(ProductDetails productDetails) throws IOException;
+
+    /**
+     * 查询所有商品属性种类
+     * @return
+     */
+    public List<AttributeType> findAttributeType();
 
 }

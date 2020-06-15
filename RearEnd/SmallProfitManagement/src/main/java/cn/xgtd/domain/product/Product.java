@@ -23,6 +23,8 @@ public class Product implements Serializable {
     private String weight;
     /**库存**/
     private String inventory;
+    /**图片（返回前端）**/
+    private List<String> imageSite;
     /**是否包邮**/
     private String freeShipping;
     /**视频**/
@@ -35,8 +37,6 @@ public class Product implements Serializable {
     private List<ProductContext> combo;
     /**规格(返回前端）**/
     private List<ProductContext> specification;
-    /**图片（返回前端）**/
-    private List<String> imageSite;
     /**口味(返回前端）**/
     private List<ProductContext> taste;
     /**商品种类**/
