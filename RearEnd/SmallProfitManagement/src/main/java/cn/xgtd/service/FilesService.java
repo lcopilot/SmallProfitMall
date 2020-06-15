@@ -33,7 +33,7 @@ public interface FilesService {
      * @param files 文件
      * @return 返回地址
      */
-    public Boolean filesUpload(String fileName , MultipartFile files) throws IOException;
+    public Boolean filesUpload(String fileName , MultipartFile files) throws Exception;
 
     /**
      * 断点续传
@@ -50,7 +50,7 @@ public interface FilesService {
      * @param fileName 文件名碎片
      * @return 合成的文件名
      */
-    public String compositeFile(String fileName , Integer fileQuantity ,String  fileType , Boolean richText);
+    public String compositeFile(String fileName , Integer fileQuantity ,String  fileType , Boolean video);
 
 
 }

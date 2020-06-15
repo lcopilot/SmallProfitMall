@@ -6,20 +6,13 @@ import cn.xgtd.util.file.FilesUpload;
 import cn.xgtd.util.file.PathUtil;
 import cn.xgtd.util.file.SplitAndMergeFile;
 import cn.xgtd.util.redis.RedisUtil;
-import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.core.util.UuidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 
 /**
@@ -136,7 +129,7 @@ public class FilesServiceImpl implements FilesService {
      * @return 返回地址
      */
     @Override
-    public Boolean filesUpload(String fileName , MultipartFile files) throws IOException {
+    public Boolean filesUpload(String fileName , MultipartFile files) throws Exception {
         //文件地址
         String fileUrl = PathUtil.getImgBasePath()+"/"+fileName;
         File file = new File(PathUtil.getImgBasePath());
@@ -158,10 +151,11 @@ public class FilesServiceImpl implements FilesService {
         }
         //转为文件输入流
         InputStream fileInputStream =  files.getInputStream();
-        FileInputStream  fileInputStream1 = (FileInputStream) fileInputStream;
+
+//        FileInputStream fin = (FileInputStream) fileInputStream;
         //文件上传 上传成功返回文件大小 上传失败返回失败
 
-        Map map = FilesUpload.breakTrans(fileInputStream1,fileUrl);
+        Map map = FilesUpload.breakTrans(fileInputStream,fileUrl);
         Boolean succeed = (Boolean) map.get("succeed");
         redisUtil.set(fileName+"Succeed",succeed,259200000);
        if (succeed){
@@ -189,7 +183,7 @@ public class FilesServiceImpl implements FilesService {
         //文件续传断点
         Integer positions = FilesUpload.continueTrans(fileInputStream1,fileUrl,position);
         if (positions!=-1){
-            redisUtil.set(fileName,positions,259200000);
+            redisUtil.set(fileName+"Composite",positions,259200000);
         }
 
 
@@ -203,11 +197,7 @@ public class FilesServiceImpl implements FilesService {
      * @return
      */
     @Override
-    public String compositeFile(String fileName , Integer fileQuantity ,String  fileType , Boolean richText) {
-       String[] fileTypes = fileType.split("/");
-       if (fileTypes.length>1){
-           fileType=fileTypes[1];
-       }
+    public String compositeFile(String fileName , Integer fileQuantity ,String  fileType , Boolean video) {
         //合成后文件名
         String compositeFileName = fileName+"."+fileType;
         //文件地址
