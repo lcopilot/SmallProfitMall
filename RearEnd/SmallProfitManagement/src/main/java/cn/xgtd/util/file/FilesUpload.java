@@ -30,6 +30,7 @@ public class FilesUpload {
         byte[] buf = new byte[1024*10];
         try {
             fis = sourFiles;
+            fos = new FileOutputStream(targetFile);
             int numberRead = 0;
             while ((numberRead = fis.read(buf)) != -1) {
                 fos.write(buf,0,numberRead);

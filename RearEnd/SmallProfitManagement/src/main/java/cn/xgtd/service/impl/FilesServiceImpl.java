@@ -150,13 +150,12 @@ public class FilesServiceImpl implements FilesService {
                 file.setWritable(true, false);
             }
         }
-
         //转为文件输入流
         InputStream fileInputStream =  files.getInputStream();
         FileInputStream fileInputStream1 = (FileInputStream) fileInputStream;
 
-        //文件上传 上传成功返回文件大小 上传失败返回失败
 
+        //文件上传 上传成功返回文件大小 上传失败返回失败
         Map map = FilesUpload.breakTrans(fileInputStream1,fileUrl);
         Boolean succeed = (Boolean) map.get("succeed");
         redisUtil.set(fileName+"Succeed",succeed,259200000);
