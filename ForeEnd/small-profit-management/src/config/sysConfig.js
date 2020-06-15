@@ -17,7 +17,7 @@ export const PAGINATION={
 export const PRODUCT_ATTRIBUTES=[
   {
     value:'version',
-    title:'版本'
+    title:'版本',
   }, {
     value:'kind',
     title:'种类'

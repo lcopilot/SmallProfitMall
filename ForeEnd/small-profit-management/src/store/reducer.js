@@ -20,6 +20,12 @@ export default (state=defaultState,action)=>{
                    $set:action.data
                 }
             })
+        case actionTypes.SET_PRODUCT_ATTRIBUTES:
+            return update(state, {
+                productAttributes:{
+                   $set:action.data
+                }
+            })
         default:
             return state
     }
