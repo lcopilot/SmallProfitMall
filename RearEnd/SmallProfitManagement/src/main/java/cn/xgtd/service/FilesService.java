@@ -50,7 +50,7 @@ public interface FilesService {
      * @param fileName 文件名碎片
      * @return 合成的文件名
      */
-    public String compositeFile(String fileName , Integer fileQuantity ,String  fileType ,Boolean richText, Boolean video);
+    public String compositeFile(String fileName , Integer fileQuantity ,String  fileType ,Boolean richText, Boolean video) throws IOException;
 
 
 }

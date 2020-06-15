@@ -135,9 +135,10 @@ public class FilesController {
      * @return 新文件名
      */
     @RequestMapping(value = "/compositeFile",method = RequestMethod.POST)
-    public ResultContent compositeFile(String fileName , Integer fileQuantity , String  fileType ,Boolean richText , Boolean video){
+    public ResultContent compositeFile(String fileName , Integer fileQuantity , String  fileType ,Boolean richText , Boolean video) throws IOException {
         Results results = new Results();
         String fileNames = filesService.compositeFile(fileName,fileQuantity,fileType, richText, video);
+
         results.setData(fileNames);
         return new ResultContent(CommonCode.SUCCESS,results);
     }

@@ -5,15 +5,13 @@ import cn.xgtd.service.FilesService;
 import cn.xgtd.util.file.FilesUpload;
 import cn.xgtd.util.file.PathUtil;
 import cn.xgtd.util.file.SplitAndMergeFile;
+import cn.xgtd.util.img.PictureUtilOne;
+import cn.xgtd.util.qiNiuYun.SimpleUpload;
 import cn.xgtd.util.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.tools.Tool;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.*;
 
 /**
@@ -150,6 +148,7 @@ public class FilesServiceImpl implements FilesService {
                 file.setWritable(true, false);
             }
         }
+
         //转为文件输入流
         InputStream fileInputStream =  files.getInputStream();
         FileInputStream fileInputStream1 = (FileInputStream) fileInputStream;
@@ -177,7 +176,7 @@ public class FilesServiceImpl implements FilesService {
     @Override
     public Integer filesBreakpointUpload(String fileName , MultipartFile files, Integer position) throws IOException {
 
-        String fileUrl = PathUtil.getImgBasePath()+"//"+fileName;
+        String fileUrl = PathUtil.getImgBasePath()+"/"+fileName;
         //转为文件输入流
         InputStream fileInputStream =  files.getInputStream();
         FileInputStream fileInputStream1 = (FileInputStream) fileInputStream;
@@ -198,7 +197,8 @@ public class FilesServiceImpl implements FilesService {
      * @return
      */
     @Override
-    public String compositeFile(String fileName , Integer fileQuantity ,String  fileType ,Boolean richText, Boolean video) {
+    public String compositeFile(String fileName , Integer fileQuantity ,String  fileType ,Boolean richText, Boolean video) throws IOException {
+
         //合成后文件名
         String compositeFileName = fileName+"."+fileType;
         //文件地址
@@ -211,29 +211,22 @@ public class FilesServiceImpl implements FilesService {
         SplitAndMergeFile splitAndMergeFile = new SplitAndMergeFile();
         splitAndMergeFile.merge(fileNames,fileUrl,compositeFileName);
         redisUtil.set(fileName+"Composite",compositeFileName,259200000);
+
+        String compositeFileUrl = fileUrl+"\\"+compositeFileName;
+        if(!video){
+            PictureUtilOne.pictureUtilOne(compositeFileUrl,compositeFileUrl);
+        }
+        if (richText){
+            SimpleUpload simpleUpload = new SimpleUpload();
+            //时间戳
+            long time = System.currentTimeMillis();
+            String fileKey = fileName+time;
+            simpleUpload.upload(compositeFileUrl,fileKey,"productdataf");
+            //返回图片地址
+            String site =" http://productdata.isdfmk.xyz/"+fileName+time;
+            compositeFileName = site;
+        }
         return compositeFileName;
     }
 
-
-    /**
-     * 将流中的内容转换为字符串，主要用于提取request请求的中requestBody
-     * @param in
-     * @param encoding
-     * @return
-     */
-    public static String streamToString(InputStream in, String encoding){
-        // 将流转换为字符串
-        try {
-            StringBuffer sb = new StringBuffer();
-            byte[] b = new byte[1024];
-            for (int n; (n = in.read(b)) != -1;) {
-                sb.append(new String(b, 0, n, encoding));
-            }
-            return sb.toString();
-        }  catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("提取 requestBody 异常", e);
-        }
-
-    }
 }

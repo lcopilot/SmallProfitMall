@@ -1,7 +1,7 @@
 package cn.xgtd.test;
 
 import cn.xgtd.util.file.FilesUpload;
-import org.junit.Test;
+
 
 import java.io.*;
 import java.nio.ByteBuffer;
