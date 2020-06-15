@@ -223,7 +223,7 @@ public class FilesServiceImpl implements FilesService {
             String fileKey = fileName+time;
             simpleUpload.upload(compositeFileUrl,fileKey,"productdataf");
             //返回图片地址
-            String site =" http://productdata.isdfmk.xyz/"+fileName+time;
+            String site =" http://productdata.isdfmk.xyz/"+fileKey;
             compositeFileName = site;
         }
         return compositeFileName;
