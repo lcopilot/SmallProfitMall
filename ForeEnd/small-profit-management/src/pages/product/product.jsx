@@ -20,10 +20,13 @@ import './product.less'
 import *as indexAPI from '../../api/page/index'
 import storageUtils from "../../utils/storageUtils";
 import DownOutlined from "@ant-design/icons/lib/icons/DownOutlined";
+import * as ActionCreators from "../../store/actionCreators";
+import {connect} from "react-redux";
 
 const {Search} = Input;
 
-const Product = () => {
+const Product = (props) => {
+  let {setProductAttributes} = props
   const history= useHistory();
   const [productList, setProductList] = useState([])
   const [productPagination, setProductPagination] = useState({
@@ -115,6 +118,14 @@ const Product = () => {
     },
   ]
 
+  //获取商品属性列表
+  const getProductAttributes=()=>{
+    indexAPI.getProductAttributes().then(res=>{
+      if (res.success){
+        setProductAttributes(res.results.data)
+      }
+    })
+  }
   //获取商品
   const getProductList=(currentPage,pageSize)=>{
     if (!currentPage && !pageSize){
@@ -136,6 +147,7 @@ const Product = () => {
 
   useEffect(()=>{
     getProductList()
+    getProductAttributes();
     return ()=>{}
   },[])
 
@@ -192,5 +204,11 @@ const Product = () => {
       </>
   )
 }
-
-export default Product
+const dispatchToProps = (dispatch) => {
+  return {
+    setProductAttributes(data) {
+      dispatch(ActionCreators.setProductAttributes(data))
+    }
+  }
+}
+export default connect(null, dispatchToProps)(Product)

@@ -32,7 +32,7 @@ const {Option} = Select;
 const {Step} = Steps;
 
 const AddUpProduct = (props) => {
-  let {productAttributesList,setProductAttributes} = props
+  let {productAttributesList} = props
   const history = useHistory()
   //获取路由传过来的值
   let {productDetail} = useLocation().state
@@ -202,14 +202,7 @@ const AddUpProduct = (props) => {
     },
   };
 
-  //获取商品属性列表
-  const getProductAttributes=()=>{
-      indexAPI.getProductAttributes().then(res=>{
-        if (res.success){
-        setProductAttributes(res.results.data)
-        }
-      })
-  }
+
   //渲染商品属性列表
   const getProductAttOption = () => {
     const roleOption = []
@@ -294,6 +287,7 @@ const AddUpProduct = (props) => {
         if (att.value === item && productDetail[item].length > 0) {
           const attConList = []
           productDetail[item].map((attributes) => {
+            console.log(attributes)
             attConList.push(attributes.attributeContent)
           })
           const Att = {
@@ -431,7 +425,6 @@ const AddUpProduct = (props) => {
   }
 
   useEffect(() => {
-    getProductAttributes();
     setProduct();
     getProductCategory();
     return () => {
@@ -691,12 +684,6 @@ const stateToProps = (state) => {
     productAttributesList: state.productAttributes,
   }
 }
-const dispatchToProps = (dispatch) => {
-  return {
-    setProductAttributes(data) {
-      dispatch(ActionCreators.setProductAttributes(data))
-    }
-  }
-}
 
-export default connect(stateToProps, dispatchToProps)(AddUpProduct)
+
+export default connect(stateToProps, null)(AddUpProduct)

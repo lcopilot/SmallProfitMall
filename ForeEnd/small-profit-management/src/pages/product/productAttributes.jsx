@@ -89,7 +89,7 @@ const ProductAttributes=()=>{
   const editProductAtt=()=>{
     form.validateFields().then(values => {
       // console.log(productIntRef.current.getDetailHtml())
-      // console.log(values)
+      console.log(values)
     })
   }
 
