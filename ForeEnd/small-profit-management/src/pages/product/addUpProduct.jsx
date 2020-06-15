@@ -43,8 +43,9 @@ const AddUpProduct = (props) => {
   const [videoFileList, setVideoFileList] = useState([]);
   const [videoName, setVideoName] = useState(null);
   const [proFromBtn, setProFromBtn] = useState({
-    content: '确定',
-    isAtt: false
+    content: '提交',
+    isAtt: false,
+    load: false,
   });
   //图片视频预览
   const [imgPreview, setImgPreview] = useState({
@@ -54,11 +55,19 @@ const AddUpProduct = (props) => {
   });
   //商品分类
   const [productCategory, setProductCategory] = useState([]);
+  const [optionDisabled, setOptionDisabled] = useState({
+    version: false,
+    kind: false,
+    size: false,
+    specification: false,
+    colour: false,
+    combo: false,
+    taste: false,
+  });
   const [form] = Form.useForm();
   const productIntRef = useRef()
   const productAftRef = useRef()
   const productParRef = useRef()
-
 
   //商品图片上传参数
   const imgUpProps = {
@@ -197,18 +206,65 @@ const AddUpProduct = (props) => {
   const getProductAttOption = () => {
     const roleOption = []
     PRODUCT_ATTRIBUTES.map(item => {
-      roleOption.push((<Option key={item.value}>{item.title}</Option>));
+      roleOption.push((<Option key={item.value}
+                               disabled={optionDisabled[item.value]}>{item.title}</Option>));
     })
     return roleOption
   }
+  //商品属性列表变化
+  const onProductAttChange = () => {
+    const attList = form.getFieldValue('productAttributes')
+    let att = {
+      version: false,
+      kind: false,
+      size: false,
+      specification: false,
+      colour: false,
+      combo: false,
+      taste: false,
+    }
+    attList.map((item) => {
+      att[item.name] = true
+    })
+    setOptionDisabled(att)
+  }
+  //动态添加表单项
+  const addFromItem=(add=()=>{})=>{
+    const attList = form.getFieldValue(
+        'productAttributes')
+    if (attList instanceof Array){
+      //attList 判断是否是第一个动态表单 第二个为数组
+      // attList 有 undefined 会报错
+      let flag=false
+      attList.some((item) => {
+        if (typeof(item)== 'undefined') {
+          return flag=true
+        }
+      })
+      if (flag){
+        return message.warn("请有序设置商品属性!")
+      }
+    }
+    setIsSteps(!productDetail);
+    setProFromBtn({
+      content: productDetail ? '提交' : '下一步',
+      isAtt: !productDetail,
+    })
+    add();
+  }
   //添加商品
   const addProduct = () => {
-    if (proFromBtn.isAtt) {
-      history.push('/products/product/productAttributes')
-    }
+    // if (proFromBtn.isAtt) {
+    //   setProFromBtn({
+    //     content: '提交中 . . .',
+    //     isAtt: proFromBtn.isAtt,
+    //     load:true,
+    //   });
+    //   history.push({pathname:'/products/product/productAttributes',state:{isSteps}})
+    // }
     form.validateFields().then(values => {
       // console.log(productIntRef.current.getDetailHtml())
-      // console.log(values)
+      console.log(values)
     })
   }
   //获取商品详情
@@ -304,7 +360,8 @@ const AddUpProduct = (props) => {
     const FILE_SIZE = file.size / 1024 / 1024;
     if (isVideo) {
       return new Promise((resolve, reject) => {
-        if (file.type.split('/')[0] !== 'video'&& file.name.split('.')[file.name.split('.').length-1]!=='flv') {
+        if (file.type.split('/')[0] !== 'video' && file.name.split(
+            '.')[file.name.split('.').length - 1] !== 'flv') {
           message.warn("请选择视频!")
           reject(false)
         }
@@ -331,7 +388,8 @@ const AddUpProduct = (props) => {
   }
   //文件上传
   const fileUpload = async (options, isVideo) => {
-    const res = await Utils.fileUpload(options.file, false, options.onProgress,isVideo);
+    const res = await Utils.fileUpload(options.file, false, options.onProgress,
+        isVideo);
     if (res) {
       let img = {
         uid: new Date().getTime(),
@@ -497,6 +555,7 @@ const AddUpProduct = (props) => {
                                   }]}
                               >
                                 <Select placeholder="请选择商品属性"
+                                        onChange={onProductAttChange}
                                         style={{width: '25%'}}>
                                   {getProductAttOption()}
                                 </Select>
@@ -534,13 +593,8 @@ const AddUpProduct = (props) => {
                             <Button
                                 type="dashed"
                                 onClick={() => {
-                                  setIsSteps(!productDetail);
-                                  setProFromBtn({
-                                    content: productDetail ? '确定' : '下一步',
-                                    isAtt: !productDetail,
-                                  })
-                                  add();
-                                }}
+                                  addFromItem(add);
+                                  }}
                                 className="add-product-Att-button"
                             >
                               <PlusOutlined/> 添加商品属性
@@ -613,6 +667,7 @@ const AddUpProduct = (props) => {
             </Form.Item>
             <Form.Item  {...formItemLayoutWithOutLabel}>
               <Button className="add-product-from-btn" onClick={addProduct}
+                      loading={proFromBtn.load}
                       type="primary">{proFromBtn.content}</Button>
               <Button className="add-product-from-btn"
                       onClick={() => history.push(

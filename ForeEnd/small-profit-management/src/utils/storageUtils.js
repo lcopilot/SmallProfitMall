@@ -5,6 +5,7 @@ const USER_KEY = 'USER_KEY'
 const WEATHER_KEY = 'WEATHER_KEY'
 const LOGIN_EXPIRED='LOGIN_EXPIRED'
 const PRODUCT_CURRENT_PAGE='PRODUCT_CURRENT_PAGE'
+const ORDER_CURRENT_PAGE='ORDER_CURRENT_PAGE'
 
 
 export default {
@@ -50,7 +51,18 @@ export default {
     }
     store.set(PRODUCT_CURRENT_PAGE,pagination)
   },
-  getProductPagination(current,pageSize){
+
+  getProductPagination(){
     return store.get(PRODUCT_CURRENT_PAGE)
-  }
+  },
+  setOrderPagination(current,pageSize){
+    const pagination={
+      current:current,
+      pageSize:pageSize,
+    }
+    store.set(ORDER_CURRENT_PAGE,pagination)
+  },
+  getOrderPagination(){
+    return store.get(ORDER_CURRENT_PAGE)
+  },
 }

@@ -9,6 +9,7 @@ const SLICE_QUANTITY = 5;
  * @param file 文件
  * @param isEditor 是否是富文本编辑器
  * @param onProgress 上传进度
+ * @param isVideo
  * @returns {Promise<boolean>}
  */
 export const fileUpload = async (file = {}, isEditor, onProgress = () => {},isVideo) => {
@@ -58,8 +59,7 @@ export const fileUpload = async (file = {}, isEditor, onProgress = () => {},isVi
     while (i < SLICE_QUANTITY) {
       partList.push({
         chunk: file.slice(start, end),
-        filename: `${fileName}-${i}`,
-      });
+        filename: `${fileName}-${i}`});
       start += partSize;
       end = i === SLICE_QUANTITY - 2 ? file.size + 1 : start + partSize;
       i++;
