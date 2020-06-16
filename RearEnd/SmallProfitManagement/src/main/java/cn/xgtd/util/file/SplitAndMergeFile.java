@@ -142,6 +142,10 @@ public class SplitAndMergeFile {
             outputStream.close();
             sequenceInputStream.close();
 
+            //删除碎片
+            for (int i = 0; i <splitSmallFileList.size() ; i++) {
+                PathUtil.deleteFile(mergeFileDir+splitSmallFileList.get(i));
+            }
             //返回新合成的文件
             return newMergeFile;
 

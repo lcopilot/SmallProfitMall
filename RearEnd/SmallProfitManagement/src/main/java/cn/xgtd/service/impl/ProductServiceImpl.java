@@ -40,8 +40,16 @@ public class ProductServiceImpl implements ProductService {
 //        if(redis!=null){
 //            return redis;
 //        }
-        //设置商品详细以及配置信息
-        List<ProductDetails> productDetailsResult = setProductConfiguration(currentPage, pageSize);
+        Integer start=(currentPage-1)*pageSize;
+        List<ProductDetails> productDetailsResult = productDao.fendProduct(start, pageSize);
+        List<ProductDetails> productDetailsList = new ArrayList<>();
+        for (int i = 0; i <productDetailsResult.size() ; i++) {
+            ProductDetails productDetails = new ProductDetails();
+            //设置商品详细以及配置信息
+            productDetails=setProductConfiguration(productDetailsResult.get(i));
+            productDetailsList.add(productDetails);
+        }
+
         for (int i = 0; i <productDetailsResult.size() ; i++) {
             productDetailsResult.get(i).setProductContexts(null);
             String weight = productDetailsResult.get(i).getWeight();
@@ -87,10 +95,11 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public List<ProductContext>  addProduct(ProductDetails productDetails) throws IOException {
+    public ProductDetails  addProduct(ProductDetails productDetails) throws IOException {
+
+
         //七牛云储存空间
         String space = "productdataf";
-        //文件名字
 
         //上传视频
         String videoFileName = productDetails.getVideo();
@@ -99,11 +108,37 @@ public class ProductServiceImpl implements ProductService {
             productDetails.setVideo(video);
         }
 
+        ProductClassify productClassify = new ProductClassify();
+        //商品分类转换
+        List<Integer> productClassifyList = productDetails.getProductClassifyList();
+        if (productClassifyList.size()==3){
+            productClassify.setProductPrimaryId(productClassifyList.get(0));
+            productClassify.setProductSecondaryId(productClassifyList.get(1));
+            productClassify.setProductFinalId((productClassifyList.get(2)));
+        }
 
         productDao.addProduct(productDetails);
-        List<ProductImage> imageSiteList = new ArrayList<>();
 
-        List<ProductImage> imageList = productDetails.getProductImages();
+
+        //商品图片转换
+        List<ProductImage> imageSiteList = new ArrayList<>();
+        List<ProductImage> imageList = new ArrayList<>();
+        List<String> imageString =  productDetails.getImageSite();
+        if (imageString!=null){
+            for (int i = 0; i <imageString.size() ; i++) {
+                ProductImage productImage = new ProductImage();
+                if (i==0){
+                    productImage.setSign(true);
+                    productImage.setImageSite(imageString.get(i));
+                }else {
+                    productImage.setSign(false);
+                    productImage.setImageSite(imageString.get(i));
+                }
+                imageList.add(productImage);
+            }
+        }
+
+
         if (imageList!=null){
             if (imageList.size()>0 && !videoFileName.equals("") ){
                 //上传商品图片
@@ -127,8 +162,12 @@ public class ProductServiceImpl implements ProductService {
         productDao.addProductContext(productContexts);
 
 
-        List<ProductContext>  productContexts1 = productDao.findProductAttribute(productDetails.getProductId());
-        return productContexts1;
+        ProductDetails productDetails1 = new ProductDetails();
+        List<ProductContext>  productContextsList = productDao.findProductAttribute(productDetails.getProductId());
+        productDetails1.setProductContexts(productContextsList);
+        productDetails1 = setProductConfiguration(productDetails1);
+        productDetails1.setProductId(productDetails.getProductId());
+        return productDetails1;
     }
 
     /**
@@ -146,11 +185,9 @@ public class ProductServiceImpl implements ProductService {
      * 设置商品配置
      * @return 商品对象
      */
-    public List<ProductDetails> setProductConfiguration(Integer currentPage,Integer pageSize){
-        Integer start=(currentPage-1)*pageSize;
-        List<ProductDetails> productDetailsResult = productDao.fendProduct(start, pageSize);
-        for (int i = 0; i <productDetailsResult.size() ; i++) {
-            List<ProductContext> productContexts = productDetailsResult.get(i).getProductContexts();
+    public ProductDetails setProductConfiguration(ProductDetails productDetailsResult){
+
+            List<ProductContext> productContexts = productDetailsResult.getProductContexts();
 
             if (productContexts!=null){
                 //颜色集合
@@ -168,13 +205,13 @@ public class ProductServiceImpl implements ProductService {
                 //套餐
                 List<ProductContext> comboList = new ArrayList<>();
                 //设置为空
-                productDetailsResult.get(i).setColour(colourList);
-                productDetailsResult.get(i).setVersion(versionList);
-                productDetailsResult.get(i).setSpecification(specificationList);
-                productDetailsResult.get(i).setKind(kindList);
-                productDetailsResult.get(i).setSize(sizeList);
-                productDetailsResult.get(i).setTaste(tasteList);
-                productDetailsResult.get(i).setCombo(comboList);
+                productDetailsResult.setColour(colourList);
+                productDetailsResult.setVersion(versionList);
+                productDetailsResult.setSpecification(specificationList);
+                productDetailsResult.setKind(kindList);
+                productDetailsResult.setSize(sizeList);
+                productDetailsResult.setTaste(tasteList);
+                productDetailsResult.setCombo(comboList);
 
                 for (int j = 0; j <productContexts.size() ; j++) {
                     //该商品属性类型
@@ -205,16 +242,15 @@ public class ProductServiceImpl implements ProductService {
                             ;break;
                     }
                 }
-                productDetailsResult.get(i).setColour(colourList);
-                productDetailsResult.get(i).setVersion(versionList);
-                productDetailsResult.get(i).setSpecification(specificationList);
-                productDetailsResult.get(i).setSize(sizeList);
-                productDetailsResult.get(i).setKind(kindList);
-                productDetailsResult.get(i).setTaste(tasteList);
-                productDetailsResult.get(i).setCombo(comboList);
+                productDetailsResult.setColour(colourList);
+                productDetailsResult.setVersion(versionList);
+                productDetailsResult.setSpecification(specificationList);
+                productDetailsResult.setSize(sizeList);
+                productDetailsResult.setKind(kindList);
+                productDetailsResult.setTaste(tasteList);
+                productDetailsResult.setCombo(comboList);
             }
-        }
-
+        productDetailsResult.setProductContexts(null);
         return productDetailsResult;
     }
 

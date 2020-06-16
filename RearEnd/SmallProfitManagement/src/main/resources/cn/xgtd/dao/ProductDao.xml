@@ -22,14 +22,9 @@
         <result property="productParameter" column="productParameter"></result>
 
         <association property="productClassify" javaType="cn.xgtd.domain.product.ProductClassify" resultMap="productClassifyMap">
-         </association>
-
+        </association>
         <!--映射配置集合-->
-        <collection property="productContexts" ofType="cn.xgtd.domain.product.ProductContext">
-            <id property="attributeId" column="attributeId"></id>
-            <result property="attributeContent" column="attributeContent"></result>
-            <result property="attributeType" column="title"></result>
-            <result property="titleId" column="attributeType"></result>
+        <collection property="productContexts" resultMap="productContextMap">
         </collection>
 
 
@@ -40,6 +35,13 @@
             </constructor>
         </collection>
 
+    </resultMap>
+
+    <resultMap id="productContextMap" type="cn.xgtd.domain.product.ProductContext">
+     <id property="attributeId" column="attributeId"></id>
+            <result property="attributeContent" column="attributeContent"></result>
+            <result property="attributeType" column="title"></result>
+            <result property="titleId" column="attributeType"></result>
     </resultMap>
 
     <!--商品分类map-->
@@ -226,7 +228,7 @@
      
      
      <!--查询商品配置-->
-     <select id="findProductAttribute" resultType="cn.xgtd.domain.product.ProductContext">
+     <select id="findProductAttribute" resultMap="productContextMap">
         SELECT * FROM productAttribute WHERE productId = #{productId}
 </select>
 

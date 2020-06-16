@@ -210,11 +210,12 @@ public class FilesServiceImpl implements FilesService {
         SplitAndMergeFile splitAndMergeFile = new SplitAndMergeFile();
         splitAndMergeFile.merge(fileNames,fileUrl,compositeFileName);
 
-
         String compositeFileUrl = fileUrl+"\\"+compositeFileName;
+        //视频
         if(!video){
             PictureUtilOne.pictureUtilOne(compositeFileUrl,compositeFileUrl);
         }
+        //富文本
         if (richText){
             SimpleUpload simpleUpload = new SimpleUpload();
             //时间戳
