@@ -9,7 +9,6 @@ import {
   Select, Space, Steps,
   Table, Upload
 } from "antd";
-import {PRODUCT_ATTRIBUTES} from "../../config/sysConfig";
 import Player from 'griffith'
 import {useHistory, useLocation} from "react-router-dom";
 import {
@@ -27,13 +26,13 @@ import ProductEditor from "./productEditor";
 import InboxOutlined from "@ant-design/icons/lib/icons/InboxOutlined";
 import *as Utils from '../../utils/utils'
 import {connect} from "react-redux";
-import UpCircleOutlined from "@ant-design/icons/lib/icons/UpCircleOutlined";
+import * as ActionCreators from "../../store/actionCreators";
 
 const {Option} = Select;
 const {Step} = Steps;
 
 const AddUpProduct = (props) => {
-  let {user} = props
+  let {productAttributesList} = props
   const history = useHistory()
   //获取路由传过来的值
   let {productDetail} = useLocation().state
@@ -202,10 +201,12 @@ const AddUpProduct = (props) => {
       sm: {span: 12, offset: 4},
     },
   };
+
+
   //渲染商品属性列表
   const getProductAttOption = () => {
     const roleOption = []
-    PRODUCT_ATTRIBUTES.map(item => {
+    productAttributesList.map(item => {
       roleOption.push((<Option key={item.value}
                                disabled={optionDisabled[item.value]}>{item.title}</Option>));
     })
@@ -282,10 +283,11 @@ const AddUpProduct = (props) => {
     }
     const productAttList = [];
     Object.keys(productDetail).some((item) => {
-      PRODUCT_ATTRIBUTES.some((att) => {
+      productAttributesList.some((att) => {
         if (att.value === item && productDetail[item].length > 0) {
           const attConList = []
           productDetail[item].map((attributes) => {
+            console.log(attributes)
             attConList.push(attributes.attributeContent)
           })
           const Att = {
@@ -337,7 +339,6 @@ const AddUpProduct = (props) => {
   const onChangeVideo = ({fileList: newFileList}) => {
     setVideoFileList(newFileList);
   };
-
   //商品图片视频预览
   const onPreview = (file, isVideo) => {
     setImgPreview({
@@ -348,7 +349,6 @@ const AddUpProduct = (props) => {
           file.originFileObj),
     })
   };
-
   //商品分类搜索
   const filterCategory = (inputValue, path) => {
     return path.some(
@@ -565,7 +565,8 @@ const AddUpProduct = (props) => {
                                   noStyle
                               >
                                 <Select mode="tags" style={{width: '68%'}}
-                                        placeholder="请输入商品具体属性 (可多选)">
+                                        placeholder="请输入商品具体属性 (可多选)"
+                                        >
 
                                 </Select>
                               </Form.Item>
@@ -680,9 +681,9 @@ const AddUpProduct = (props) => {
 }
 const stateToProps = (state) => {
   return {
-    user: state.user,
-    userAuth: state.userAuth,
+    productAttributesList: state.productAttributes,
   }
 }
+
 
 export default connect(stateToProps, null)(AddUpProduct)

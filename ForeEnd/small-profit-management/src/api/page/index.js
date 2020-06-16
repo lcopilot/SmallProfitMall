@@ -67,7 +67,10 @@ export const getProductList=(data)=>{
 export const getProductCategory=()=>{
   return http.requestGet(apiUrl+`/ProductController/findCategory`)
 }
-
+//获取商品属性列表
+export const getProductAttributes=()=>{
+  return http.requestGet(apiUrl+`/ProductController/findAttributeType`)
+}
 
 
 /**
