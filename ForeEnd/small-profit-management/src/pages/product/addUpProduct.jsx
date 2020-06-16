@@ -206,10 +206,6 @@ const AddUpProduct = (props) => {
   //渲染商品属性列表
   const getProductAttOption = () => {
     const roleOption = []
-    console.log(productAttributesList)
-    if(!productAttributesList){
-      history.push('/products/product')
-    }
     productAttributesList.map(item => {
       roleOption.push((<Option key={item.value}
                                disabled={optionDisabled[item.value]}>{item.title}</Option>));
