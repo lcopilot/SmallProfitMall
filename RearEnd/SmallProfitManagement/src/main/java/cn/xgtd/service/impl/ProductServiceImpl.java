@@ -96,11 +96,8 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public ProductDetails  addProduct(ProductDetails productDetails) throws IOException {
-
-
         //七牛云储存空间
         String space = "productdataf";
-
         //上传视频
         String videoFileName = productDetails.getVideo();
         if (videoFileName!=null && !videoFileName.equals("")){
@@ -166,9 +163,11 @@ public class ProductServiceImpl implements ProductService {
 
         ProductDetails productDetails1 = new ProductDetails();
         List<ProductContext>  productContextsList = productDao.findProductAttribute(productDetails.getProductId());
-        productDetails1.setProductContexts(productContextsList);
-        productDetails1 = setProductConfiguration(productDetails1);
-        productDetails1.setProductId(productDetails.getProductId());
+        if (productContextsList!=null){
+            productDetails1.setProductContexts(productContextsList);
+            productDetails1 = setProductConfiguration(productDetails1);
+            productDetails1.setProductId(productDetails.getProductId());
+        }
         return productDetails1;
     }
 
