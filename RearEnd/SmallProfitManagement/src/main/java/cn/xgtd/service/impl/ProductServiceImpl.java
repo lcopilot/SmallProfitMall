@@ -167,7 +167,10 @@ public class ProductServiceImpl implements ProductService {
             productDetails1.setProductContexts(productContextsList);
             productDetails1 = setProductConfiguration(productDetails1);
             productDetails1.setProductId(productDetails.getProductId());
+        }else {
+            productContextsList = null;
         }
+
         return productDetails1;
     }
 
