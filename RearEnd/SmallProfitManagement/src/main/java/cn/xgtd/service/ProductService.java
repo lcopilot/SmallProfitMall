@@ -40,7 +40,7 @@ public interface ProductService {
      * @param productDetails 商品对象
      * @return
      */
-    public Integer addProduct(ProductDetails productDetails) throws IOException;
+    public List<ProductContext>  addProduct(ProductDetails productDetails) throws IOException;
 
     /**
      * 查询所有商品属性种类

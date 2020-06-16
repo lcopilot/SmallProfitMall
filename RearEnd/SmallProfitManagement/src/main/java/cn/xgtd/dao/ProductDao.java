@@ -60,18 +60,26 @@ public interface ProductDao {
      * @param productImage 图片集合
      * @return
      */
-    public Integer addProductImage(@Param("productImage") List<ProductImage> productImage);
+    public Integer addProductImage(List<ProductImage> productImage);
 
     /**
      * 添加商品属性
      * @param productContexts 商品属性对象
      * @return
      */
-    public Integer addProductContext(@Param("productContexts") List<ProductContext> productContexts);
+    public Integer addProductContext(List<ProductContext> productContexts);
 
     /**
      * 查询所有商品属性种类
      * @return
      */
     public List<AttributeType> findAttributeType();
+
+
+    /**
+     * 查询添加商品的配置
+      * @param productId 商品id
+     * @return
+     */
+    public List<ProductContext> findProductAttribute(Integer productId);
 }

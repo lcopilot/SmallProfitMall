@@ -28,7 +28,8 @@
         <collection property="productContexts" ofType="cn.xgtd.domain.product.ProductContext">
             <id property="attributeId" column="attributeId"></id>
             <result property="attributeContent" column="attributeContent"></result>
-            <result property="attributeType" column="attributeType"></result>
+            <result property="attributeType" column="title"></result>
+            <result property="titleId" column="attributeType"></result>
         </collection>
 
 
@@ -115,6 +116,7 @@
             pi.ImageSite,
             pa.attributeContent,
             pa.attributeId,
+            pat.title,
             pa.attributeType,
             ppc.product_primary_id,
             ppc.category_content,
@@ -127,6 +129,7 @@
             LEFT JOIN ProductPrice pp ON pb.ProductId = pp.ProductId
             LEFT JOIN ProductImage pi ON pb.ProductId = pi.ProductId
             LEFT JOIN productAttribute pa ON pb.ProductId = pa.ProductId
+            LEFT JOIN attributeType pat ON pa.attributeType = pat.attributeTypeId
             LEFT JOIN product_primary_category ppc ON pb.prodcutPrimaryCategory = ppc.product_primary_id
             LEFT JOIN product_secondary_category psc ON pb.productSecondaryCategory = psc.product_secondary_id
             LEFT JOIN product_final_category pfc ON pb.productFinalCategory = pfc.product_final_id
@@ -182,13 +185,14 @@
     </select>
 
     <!--添加商品基本信息-->
-    <insert id="addProduct" parameterType="cn.xgtd.domain.product.ProductDetails" useGeneratedKeys="true" keyProperty="productId" keyColumn="productId">
+    <insert id="addProduct" parameterType="cn.xgtd.domain.product.ProductDetails" useGeneratedKeys="true" keyProperty="productId" keyColumn="ProductId">
         insert into ProductBasis
              (ProductName,ProductVideo,ProductWeight,prodcutPrimaryCategory,productSecondaryCategory,
                 productFinalCategory,productDescription,productAfterSale,productParameter)
         VALUES
-            (#{productName},#{video},#{weight},#{productClassify.productPrimaryId},#{productClassify.productSecondaryId},#{productClassify.productFinalId},
-                 #{productDescription},#{productAfterSale},#{productParameter}) 
+            (#{productName},#{video},#{weight},#{productClassify.productPrimaryId},
+            #{productClassify.productSecondaryId},#{productClassify.productFinalId},
+             #{productDescription},#{productAfterSale},#{productParameter})
     </insert>
     
     <!--添加商品图片-->
@@ -196,21 +200,22 @@
         INSERT INTO ProductImage
             (ProductId,ImageSite,sign)
         VALUES
-         <foreach collection="productImage" item="item" index="index" separator=",">
+         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.productId},
             #{item.imageSite},
-            #{item.sign}
+            #{item.sign})
         </foreach>
      </insert>
 
     <!--添加商品-->
      <insert id="addProductContext">
         INSERT INTO productAttribute
-            (attributeContent,attributeType)
+            (attributeContent,attributeType,productId)
         VALUES
-         <foreach collection="productContexts" item="item" index="index" separator=",">
+         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.attributeContent},
-            #{item.attributeType}
+            #{item.attributeType},
+            #{item.productId})
         </foreach>
      </insert>
      
@@ -218,5 +223,11 @@
      <select id="findAttributeType" resultType="cn.xgtd.domain.product.AttributeType">
         SELECT * FROM attributeType
      </select>
+     
+     
+     <!--查询商品配置-->
+     <select id="findProductAttribute" resultType="cn.xgtd.domain.product.ProductContext">
+        SELECT * FROM productAttribute WHERE productId = #{productId}
+</select>
 
 </mapper>

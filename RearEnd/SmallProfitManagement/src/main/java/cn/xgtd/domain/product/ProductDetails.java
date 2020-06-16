@@ -67,7 +67,17 @@ public class ProductDetails implements Serializable {
     private List<ProductContext> productContexts;
     /**商品所属分类**/
     private ProductClassify productClassify;
+    /**商品图片传入集合**/
+    private List<ProductImage> productImages;
 
+
+    public List<ProductImage> getProductImages() {
+        return productImages;
+    }
+
+    public void setProductImages(List<ProductImage> productImages) {
+        this.productImages = productImages;
+    }
 
     public int getId() {
         return id;

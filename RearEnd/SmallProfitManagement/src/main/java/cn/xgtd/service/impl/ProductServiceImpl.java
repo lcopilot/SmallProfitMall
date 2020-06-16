@@ -87,14 +87,14 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public Integer addProduct(ProductDetails productDetails) throws IOException {
+    public List<ProductContext>  addProduct(ProductDetails productDetails) throws IOException {
         //七牛云储存空间
         String space = "productdataf";
         //文件名字
 
         //上传视频
         String videoFileName = productDetails.getVideo();
-        if (videoFileName!=null && videoFileName.equals("")){
+        if (videoFileName!=null && !videoFileName.equals("")){
             String video = UploadFileUtil.uploadFileUtil(space,videoFileName,videoFileName);
             productDetails.setVideo(video);
         }
@@ -102,22 +102,33 @@ public class ProductServiceImpl implements ProductService {
 
         productDao.addProduct(productDetails);
         List<ProductImage> imageSiteList = new ArrayList<>();
-        if (imageSiteList.size()>0){
-            //上传商品图片
-            List<String> imageSite = productDetails.getImageSite();
-            for (int i = 0; i <imageSite.size() ; i++) {
-                ProductImage productImage = new ProductImage();
-                String  imageSites = UploadFileUtil.uploadFileUtil(space,productDetails.getProductId().toString(),imageSite.get(i));
-                productImage.setImageSite(imageSites);
-                productImage.setProductId(productDetails.getProductId());
-                imageSiteList.add(productImage);
+
+        List<ProductImage> imageList = productDetails.getProductImages();
+        if (imageList!=null){
+            if (imageList.size()>0 && !videoFileName.equals("") ){
+                //上传商品图片
+                for (int i = 0; i <imageList.size() ; i++) {
+                    ProductImage productImage = new ProductImage();
+                    String  imageSites = UploadFileUtil.uploadFileUtil(space,productDetails.getProductId().toString(),imageList.get(i).getImageSite());
+                    productImage.setImageSite(imageSites);
+                    productImage.setSign(imageList.get(i).getSign());
+                    productImage.setProductId(productDetails.getProductId());
+                    imageSiteList.add(productImage);
+                }
+                productDao.addProductImage(imageSiteList);
             }
-            productDao.addProductImage(imageSiteList);
         }
 
         //添加商品配置
-        productDao.addProductContext(productDetails.getProductContexts());
-        return null;
+        List<ProductContext> productContexts = productDetails.getProductContexts();
+        for (int i = 0; i <productContexts.size() ; i++) {
+            productContexts.get(i).setProductId(productDetails.getProductId());
+        }
+        productDao.addProductContext(productContexts);
+
+
+        List<ProductContext>  productContexts1 = productDao.findProductAttribute(productDetails.getProductId());
+        return productContexts1;
     }
 
     /**
@@ -166,35 +177,33 @@ public class ProductServiceImpl implements ProductService {
                 productDetailsResult.get(i).setCombo(comboList);
 
                 for (int j = 0; j <productContexts.size() ; j++) {
-
                     //该商品属性类型
-                    String type = productContexts.get(j).getAttributeType();
+                    Integer type = productContexts.get(j).getTitleId();
                     //当前属性
                     ProductContext productContext = productContexts.get(j);
                     switch(type){
-                        case "颜色" :
+                        case 11 :
                             colourList.add(productContext);
                             break;
-                        case "版本" :
+                        case 16 :
                             versionList.add(productContext);
                             break;
-                        case "规格" :
+                        case 13 :
                             specificationList.add(productContext);
                             ;break;
-                        case "尺寸" :
+                        case 10 :
                             sizeList.add(productContext);
                             break;
-                        case "种类" :
+                        case 15 :
                             kindList.add(productContext);
                             ;break;
-                        case "口味" :
+                        case 14 :
                             tasteList.add(productContext);
                             ;break;
-                        case "套餐" :
+                        case 12 :
                             comboList.add(productContext);
                             ;break;
                     }
-
                 }
                 productDetailsResult.get(i).setColour(colourList);
                 productDetailsResult.get(i).setVersion(versionList);

@@ -10,10 +10,31 @@ import java.io.Serializable;
 public class ProductContext implements Serializable {
     /**配置id**/
     private Integer attributeId;
+    /**商品id**/
+    private Integer productId;
     /**配置名称**/
     private String attributeContent;
     /**商品类型**/
     private String attributeType;
+    /**商品类型id**/
+    private Integer titleId;
+
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    public Integer getTitleId() {
+        return titleId;
+    }
+
+    public void setTitleId(Integer titleId) {
+        this.titleId = titleId;
+    }
 
     public String getAttributeType() {
         return attributeType;
