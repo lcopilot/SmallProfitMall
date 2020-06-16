@@ -13,6 +13,16 @@ public class ProductContext implements Serializable {
     private String attributeContent;
     /**商品类型**/
     private String attributeType;
+    /**商品类型id**/
+    private Integer titleId;
+
+    public Integer getTitleId() {
+        return titleId;
+    }
+
+    public void setTitleId(Integer titleId) {
+        this.titleId = titleId;
+    }
 
     public String getAttributeType() {
         return attributeType;

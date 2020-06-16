@@ -193,41 +193,35 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
 
             for (int i = 0; i <productContexts.size() ; i++) {
                 //该商品属性类型
-                String type = productContexts.get(i).getAttributeType();
+                Integer type = productContexts.get(i).getTitleId();
                 //当前属性
                 ProductContext productContext = productContexts.get(i);
                 productContext.setAttributeType(null);
 
                 switch(type){
-                    case "颜色" :
+                    case 11 :
                         colourList.add(productContext);
-                        productDetailsResult.setColour(colourList)
-                        ;break;
-                    case "版本" :
+                        break;
+                    case 16 :
                         versionList.add(productContext);
-                        productDetailsResult.setVersion(versionList)
-                        ;break;
-                    case "规格" :
+                        break;
+                    case 13 :
                         specificationList.add(productContext);
-                        productDetailsResult.setSpecification(specificationList)
                         ;break;
-                    case "尺寸" :
+                    case 10 :
                         sizeList.add(productContext);
-                        productDetailsResult.setSize(sizeList);
-                        ;break;
-                    case "种类" :
+                        break;
+                    case 15 :
                         kindList.add(productContext);
-                        productDetailsResult.setKind(kindList);
                         ;break;
-                    case "口味" :
+                    case 14 :
                         tasteList.add(productContext);
-                        productDetailsResult.setTaste(tasteList);
                         ;break;
-                    case "套餐" :
+                    case 12 :
                         comboList.add(productContext);
-                        productDetailsResult.setCombo(comboList);
                         ;break;
                 }
+
             }
         }
         return productDetailsResult;
