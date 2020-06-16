@@ -202,7 +202,6 @@ const AddUpProduct = (props) => {
     },
   };
 
-
   //渲染商品属性列表
   const getProductAttOption = () => {
     const roleOption = []
@@ -230,19 +229,20 @@ const AddUpProduct = (props) => {
     setOptionDisabled(att)
   }
   //动态添加表单项
-  const addFromItem=(add=()=>{})=>{
+  const addFromItem = (add = () => {
+  }) => {
     const attList = form.getFieldValue(
         'productAttributes')
-    if (attList instanceof Array){
+    if (attList instanceof Array) {
       //attList 判断是否是第一个动态表单 第二个为数组
       // attList 有 undefined 会报错
-      let flag=false
+      let flag = false
       attList.some((item) => {
-        if (typeof(item)== 'undefined') {
-          return flag=true
+        if (typeof (item) == 'undefined') {
+          return flag = true
         }
       })
-      if (flag){
+      if (flag) {
         return message.warn("请有序设置商品属性!")
       }
     }
@@ -256,44 +256,51 @@ const AddUpProduct = (props) => {
   //添加商品
   const addProductBasic = () => {
     form.validateFields().then(values => {
-      const productAttList=[]
-      values.productAttributes.map((item)=>{
-        productAttributesList.some((att)=>{
-          if(att.value===item.name){
-            item.detailed.map((content)=>{
-              const attributes={
-                attributeType:att.attributeTypeId,
-                attributeContent:content
+      const productAttList = []
+      values.productAttributes.map((item) => {
+        productAttributesList.some((att) => {
+          if (att.value === item.name) {
+            item.detailed.map((content) => {
+              const attributes = {
+                attributeType: att.attributeTypeId,
+                attributeContent: content
               }
               productAttList.push(attributes)
             })
-            return att.value===item.name
+            return att.value === item.name
           }
         })
       })
-      const product={
-        productName:values.productName,
-        productPrice:values.productPrice,
-        weight:`${values.productWeight}kg`,
-        video:videoName,
-        imageSite:imgNameList,
-        productClassifyList:values.productCategory,
-        productContexts:productAttList,
-        productDescription:productIntRef.current.getDetailHtml(),
-        productAfterSale:productAftRef.current.getDetailHtml(),
-        productParameter:productParRef.current.getDetailHtml(),
+      const product = {
+        productName: values.productName,
+        productPrice: values.productPrice,
+        weight: `${values.productWeight}kg`,
+        video: videoName,
+        imageSite: imgNameList,
+        productClassifyList: values.productCategory,
+        productContexts: productAttList,
+        productDescription: productIntRef.current.getDetailHtml(),
+        productAfterSale: productAftRef.current.getDetailHtml(),
+        productParameter: productParRef.current.getDetailHtml(),
       }
       setProFromBtn({
         content: '提交中 . . .',
         isAtt: proFromBtn.isAtt,
-        load:true,
+        load: true,
       });
-      indexAPI.addProductBasic(product).then(res=>{
-        console.log(res)
+      indexAPI.addProductBasic(product).then(res => {
+        if (res.success) {
+          if (proFromBtn.isAtt) {
+            history.push({
+              pathname: '/products/product/productAttributes',
+              state: {isSteps,productDetail:res.results.data}
+            })
+          } else {
+            history.push('/products/product')
+          }
+        }
       })
-      // if (proFromBtn.isAtt) {
-      //   history.push({pathname:'/products/product/productAttributes',state:{isSteps}})
-      // }
+
     })
   }
   //获取商品详情
@@ -594,7 +601,7 @@ const AddUpProduct = (props) => {
                               >
                                 <Select mode="tags" style={{width: '68%'}}
                                         placeholder="请输入商品具体属性 (可多选)"
-                                        >
+                                >
 
                                 </Select>
                               </Form.Item>
@@ -623,7 +630,7 @@ const AddUpProduct = (props) => {
                                 type="dashed"
                                 onClick={() => {
                                   addFromItem(add);
-                                  }}
+                                }}
                                 className="add-product-Att-button"
                             >
                               <PlusOutlined/> 添加商品属性
@@ -712,6 +719,5 @@ const stateToProps = (state) => {
     productAttributesList: state.productAttributes,
   }
 }
-
 
 export default connect(stateToProps, null)(AddUpProduct)

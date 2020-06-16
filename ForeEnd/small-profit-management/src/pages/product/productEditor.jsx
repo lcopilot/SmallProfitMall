@@ -1,7 +1,6 @@
 import {Editor} from "react-draft-wysiwyg";
 import React, {
   forwardRef,
-  useEffect,
   useImperativeHandle,
   useState
 } from "react";
@@ -10,6 +9,7 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import * as Utils from "../../utils/utils";
 import {message} from "antd";
+import './addUpProduct.less'
 
 // props子组件中需要接受ref
 let ProductEditor = (props, ref) => {

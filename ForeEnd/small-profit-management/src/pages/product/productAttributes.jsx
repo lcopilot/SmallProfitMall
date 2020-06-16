@@ -71,11 +71,8 @@ const ProductAttributes=()=>{
     productAttList.map(item => {
       roleOption.push((<Option key={item.id}  value={item.id}>{item.content}</Option>));
     })
-    //利用ES6 Set去重（ES6中最常用）
-    // Array.from(new Set(roleOption))
     return roleOption
   }
-
   //回显商品属性配置
   const setProductAtt=()=>{
     if (productDetail){
@@ -84,14 +81,35 @@ const ProductAttributes=()=>{
       })
     }
   }
-
   //添加修改商品配置
   const editProductAtt=()=>{
     form.validateFields().then(values => {
-      // console.log(productIntRef.current.getDetailHtml())
       console.log(values)
     })
   }
+  //计算全排列
+  const getCombination=(...array)=>{
+    let resultArr =[];
+    array.map((arrItem) => {
+      if (resultArr.length === 0) {
+        let firstItem = [];
+        arrItem.map(item => {
+          firstItem.push([item]);
+        })
+        resultArr = firstItem
+      } else {
+        const emptyArray = [];
+        resultArr.map((item) => {
+          arrItem.map((value) => {
+            emptyArray.push([...item, value])
+          })
+        })
+        resultArr = emptyArray
+      }
+    });
+    return resultArr;
+  }
+  // console.log(getCombination(['a','b','c'],['d','e','f','g'],['h','i'],[5552,555,8,'asdahsj']))
 
   useEffect(()=>{
     setProductAtt();
@@ -126,6 +144,7 @@ const ProductAttributes=()=>{
                     <>
                       {fields.map((field, index) => (
                           <Form.Item
+                              className="add-product-attributes"
                               key={index}
                               {...(formItemLayoutWithOutLabel)}
                           >
@@ -135,7 +154,7 @@ const ProductAttributes=()=>{
                                     name={[field.name, 'versionId']}
                                     noStyle
                                 >
-                                  <Select  placeholder="版本">
+                                  <Select  placeholder="版本" disabled>
                                     {getProductAttOption('version')}
                                   </Select>
                                 </Form.Item>:<></>
@@ -145,7 +164,7 @@ const ProductAttributes=()=>{
                                     name={[field.name, 'kindId']}
                                     noStyle
                                 >
-                                  <Select  placeholder="种类">
+                                  <Select  placeholder="种类" disabled>
                                     {getProductAttOption('kind')}
                                   </Select>
                                 </Form.Item>:<></>
@@ -155,7 +174,7 @@ const ProductAttributes=()=>{
                                     name={[field.name, 'tasteId']}
                                     noStyle
                                 >
-                                  <Select   placeholder="口味">
+                                  <Select   placeholder="口味" disabled>
                                     {getProductAttOption('taste')}
                                   </Select>
                                 </Form.Item>:<></>
@@ -164,7 +183,7 @@ const ProductAttributes=()=>{
                                     name={[field.name, 'specificationId']}
                                     noStyle
                                 >
-                                  <Select   placeholder="配置">
+                                  <Select   placeholder="配置" disabled>
                                     {getProductAttOption('specification')}
                                   </Select>
                                 </Form.Item>:<></>
@@ -173,7 +192,7 @@ const ProductAttributes=()=>{
                                     name={[field.name, 'comboId']}
                                     noStyle
                                 >
-                                  <Select  placeholder="套餐">
+                                  <Select  placeholder="套餐" disabled>
                                     {getProductAttOption('combo')}
                                   </Select>
                                 </Form.Item>:<></>
@@ -182,7 +201,7 @@ const ProductAttributes=()=>{
                                     name={[field.name, 'colourId']}
                                     noStyle
                                 >
-                                  <Select   placeholder="颜色">
+                                  <Select   placeholder="颜色" disabled>
                                     {getProductAttOption('colour')}
                                   </Select>
                                 </Form.Item>:<></>
@@ -191,7 +210,7 @@ const ProductAttributes=()=>{
                                     name={[field.name, 'sizeId']}
                                     noStyle
                                 >
-                                  <Select   placeholder="尺寸">
+                                  <Select   placeholder="尺寸" disabled>
                                     {getProductAttOption('size')}
                                   </Select>
                                 </Form.Item>:<></>
