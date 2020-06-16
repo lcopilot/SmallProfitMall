@@ -13,28 +13,3 @@ export const PAGINATION={
   //是否可以快速跳转至某页
   showQuickJumper:true,
 }
-//商品属性
-export const PRODUCT_ATTRIBUTES=[
-  {
-    value:'version',
-    title:'版本',
-  }, {
-    value:'kind',
-    title:'种类'
-  },{
-    value:'size',
-    title:'尺码'
-  },{
-    value:'specification',
-    title:'配置'
-  },{
-    value:'colour',
-    title:'颜色'
-  },{
-    value:'combo',
-    title:'套餐'
-  },{
-    value:'taste',
-    title:'口味'
-  },
-]

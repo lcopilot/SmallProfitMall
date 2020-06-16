@@ -75,9 +75,13 @@ axios.interceptors.response.use(
             case 404:
               console.error(error.response.status)
               message.error("网络请求不存在,请稍后重试!");
+              break;
             case 500:
+            case 502:
+            case 504:
               console.error(error.response.status);
               message.error("服务器跑路了~,请稍后重试")
+              break;
           }
         }
       }, 300)

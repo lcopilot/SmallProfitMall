@@ -69,7 +69,7 @@ const ProductAttributes=()=>{
     })
     const roleOption = []
     productAttList.map(item => {
-      roleOption.push((<Option key={item.id}>{item.content}</Option>));
+      roleOption.push((<Option key={item.id}  value={item.id}>{item.content}</Option>));
     })
     //利用ES6 Set去重（ES6中最常用）
     // Array.from(new Set(roleOption))
@@ -131,8 +131,8 @@ const ProductAttributes=()=>{
                           >
                             <Input.Group compact>
                               {
-                                productDetail.productDistinctions[0].versionContent?<Form.Item
-                                    name={[field.name, 'versionContent']}
+                                productDetail.productDistinctions[0].versionId?<Form.Item
+                                    name={[field.name, 'versionId']}
                                     noStyle
                                 >
                                   <Select  placeholder="版本">
@@ -141,8 +141,8 @@ const ProductAttributes=()=>{
                                 </Form.Item>:<></>
                               }
                               {
-                                productDetail.productDistinctions[0].kindContent?<Form.Item
-                                    name={[field.name, 'kindContent']}
+                                productDetail.productDistinctions[0].kindId?<Form.Item
+                                    name={[field.name, 'kindId']}
                                     noStyle
                                 >
                                   <Select  placeholder="种类">
@@ -151,8 +151,8 @@ const ProductAttributes=()=>{
                                 </Form.Item>:<></>
                               }
                               {
-                                productDetail.productDistinctions[0].tasteContent?<Form.Item
-                                    name={[field.name, 'tasteContent']}
+                                productDetail.productDistinctions[0].tasteId?<Form.Item
+                                    name={[field.name, 'tasteId']}
                                     noStyle
                                 >
                                   <Select   placeholder="口味">
@@ -160,8 +160,8 @@ const ProductAttributes=()=>{
                                   </Select>
                                 </Form.Item>:<></>
                               } {
-                                productDetail.productDistinctions[0].specificationContent? <Form.Item
-                                    name={[field.name, 'specificationContent']}
+                                productDetail.productDistinctions[0].specificationId? <Form.Item
+                                    name={[field.name, 'specificationId']}
                                     noStyle
                                 >
                                   <Select   placeholder="配置">
@@ -169,8 +169,8 @@ const ProductAttributes=()=>{
                                   </Select>
                                 </Form.Item>:<></>
                               } {
-                                productDetail.productDistinctions[0].comboContent? <Form.Item
-                                    name={[field.name, 'comboContent']}
+                                productDetail.productDistinctions[0].comboId? <Form.Item
+                                    name={[field.name, 'comboId']}
                                     noStyle
                                 >
                                   <Select  placeholder="套餐">
@@ -178,8 +178,8 @@ const ProductAttributes=()=>{
                                   </Select>
                                 </Form.Item>:<></>
                               }{
-                                productDetail.productDistinctions[0].colourContent?<Form.Item
-                                    name={[field.name, 'colourContent']}
+                                productDetail.productDistinctions[0].colourId?<Form.Item
+                                    name={[field.name, 'colourId']}
                                     noStyle
                                 >
                                   <Select   placeholder="颜色">
@@ -187,8 +187,8 @@ const ProductAttributes=()=>{
                                   </Select>
                                 </Form.Item>:<></>
                               }{
-                                productDetail.productDistinctions[0].sizeContent?<Form.Item
-                                    name={[field.name, 'sizeContent']}
+                                productDetail.productDistinctions[0].sizeId?<Form.Item
+                                    name={[field.name, 'sizeId']}
                                     noStyle
                                 >
                                   <Select   placeholder="尺寸">

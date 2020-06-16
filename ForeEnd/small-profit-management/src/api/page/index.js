@@ -71,6 +71,10 @@ export const getProductCategory=()=>{
 export const getProductAttributes=()=>{
   return http.requestGet(apiUrl+`/ProductController/findAttributeType`)
 }
+//添加商品基础信息
+export const addProductBasic=(data)=>{
+  return http.requestPost(apiUrl+`/ProductController/addProduct`,data)
+}
 
 
 /**

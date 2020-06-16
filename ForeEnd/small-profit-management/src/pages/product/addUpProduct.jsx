@@ -206,6 +206,10 @@ const AddUpProduct = (props) => {
   //渲染商品属性列表
   const getProductAttOption = () => {
     const roleOption = []
+    console.log(productAttributesList)
+    if(!productAttributesList){
+      history.push('/products/product')
+    }
     productAttributesList.map(item => {
       roleOption.push((<Option key={item.value}
                                disabled={optionDisabled[item.value]}>{item.title}</Option>));
@@ -254,18 +258,46 @@ const AddUpProduct = (props) => {
     add();
   }
   //添加商品
-  const addProduct = () => {
-    // if (proFromBtn.isAtt) {
-    //   setProFromBtn({
-    //     content: '提交中 . . .',
-    //     isAtt: proFromBtn.isAtt,
-    //     load:true,
-    //   });
-    //   history.push({pathname:'/products/product/productAttributes',state:{isSteps}})
-    // }
+  const addProductBasic = () => {
     form.validateFields().then(values => {
-      // console.log(productIntRef.current.getDetailHtml())
-      console.log(values)
+      const productAttList=[]
+      values.productAttributes.map((item)=>{
+        productAttributesList.some((att)=>{
+          if(att.value===item.name){
+            item.detailed.map((content)=>{
+              const attributes={
+                attributeType:att.attributeTypeId,
+                attributeContent:content
+              }
+              productAttList.push(attributes)
+            })
+            return att.value===item.name
+          }
+        })
+      })
+      const product={
+        productName:values.productName,
+        productPrice:values.productPrice,
+        weight:`${values.productWeight}kg`,
+        video:videoName,
+        imageSite:imgNameList,
+        productClassifyList:values.productCategory,
+        productContexts:productAttList,
+        productDescription:productIntRef.current.getDetailHtml(),
+        productAfterSale:productAftRef.current.getDetailHtml(),
+        productParameter:productParRef.current.getDetailHtml(),
+      }
+      setProFromBtn({
+        content: '提交中 . . .',
+        isAtt: proFromBtn.isAtt,
+        load:true,
+      });
+      indexAPI.addProductBasic(product).then(res=>{
+        console.log(res)
+      })
+      // if (proFromBtn.isAtt) {
+      //   history.push({pathname:'/products/product/productAttributes',state:{isSteps}})
+      // }
     })
   }
   //获取商品详情
@@ -667,7 +699,7 @@ const AddUpProduct = (props) => {
               />
             </Form.Item>
             <Form.Item  {...formItemLayoutWithOutLabel}>
-              <Button className="add-product-from-btn" onClick={addProduct}
+              <Button className="add-product-from-btn" onClick={addProductBasic}
                       loading={proFromBtn.load}
                       type="primary">{proFromBtn.content}</Button>
               <Button className="add-product-from-btn"
