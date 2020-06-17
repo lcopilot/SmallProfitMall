@@ -7,7 +7,7 @@ import {
   Modal, PageHeader, Progress,
   Row,
   Select, Space, Steps,
-  Table, Upload
+  Table, Tag, Upload
 } from "antd";
 import Player from 'griffith'
 import {useHistory, useLocation} from "react-router-dom";
@@ -210,6 +210,7 @@ const AddUpProduct = (props) => {
     })
     return roleOption
   }
+
   //商品属性列表变化
   const onProductAttChange = () => {
     const attList = form.getFieldValue('productAttributes')
@@ -326,7 +327,6 @@ const AddUpProduct = (props) => {
         if (att.value === item && productDetail[item].length > 0) {
           const attConList = []
           productDetail[item].map((attributes) => {
-            console.log(attributes)
             attConList.push(attributes.attributeContent)
           })
           const Att = {
@@ -343,18 +343,20 @@ const AddUpProduct = (props) => {
     productDetail.imageSite.map((item, index) => {
       let img = {
         uid: index,
-        name: 'image.png',
+        name: item.trim().split('/')[3],
         status: 'done',
         url: item.trim(),
       }
       imgList.push(img)
     })
+    setImgNameList([...productDetail.imageSite])
     setImgFileList(imgList);
     const prodCatList = []
     prodCatList.push(productDetail.productClassify.productPrimaryId)
     prodCatList.push(productDetail.productClassify.productSecondaryId)
     prodCatList.push(productDetail.productClassify.productFinalId)
     if (productDetail.video) {
+      setVideoName(productDetail.video)
       setVideoFileList([{
         uid: '-1',
         name: productDetail.video.split('/')[3],
@@ -366,8 +368,8 @@ const AddUpProduct = (props) => {
       productAttributes: productAttList,
       productCategory: prodCatList,
       productName: productDetail.productName,
-      productPrice: productDetail.productPrice,
-      productWeight: productDetail.weights,
+      productPrice: productDetail.productPrice.toString(),
+      productWeight: productDetail.weights.toString(),
     })
   }
   //上传图片改变
@@ -504,12 +506,8 @@ const AddUpProduct = (props) => {
                   whitespace: true,
                   message: '请输入商品名 3-30位',
                   min: 3,
-                  max: 30
-                },
-                  {
-                    pattern: /^[\u4e00-\u9fa50-9a-zA-Z   ]+$/,
-                    message: '商品名必须是中,英文数字或空格组成'
-                  }]}
+                  max: 50
+                }]}
             >
               <Input allowClear={true}
                      prefix={<AccountBookOutlined/>}
@@ -535,7 +533,7 @@ const AddUpProduct = (props) => {
                   prefix="￥" suffix="元"
                   placeholder="请输入价格  ( 在商品属性无价格时生效 )"
                   allowClear={true}
-                  maxLength={6}
+                  maxLength={8}
               />
             </Form.Item>
             <Form.Item
@@ -610,7 +608,6 @@ const AddUpProduct = (props) => {
                                 <Select mode="tags" style={{width: '68%'}}
                                         placeholder="请输入商品具体属性 (可多选)"
                                 >
-
                                 </Select>
                               </Form.Item>
                               <Form.Item noStyle>
