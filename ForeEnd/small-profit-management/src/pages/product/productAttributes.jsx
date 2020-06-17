@@ -87,6 +87,7 @@ const ProductAttributes=()=>{
       console.log(values)
     })
   }
+
   //计算全排列
   const getCombination=(...array)=>{
     //getCombination(['a','b','c'],['d','e','f','g'],['h','i'],[5552,555,8,'asdahsj'])
