@@ -89,6 +89,7 @@ const ProductAttributes=()=>{
   }
   //计算全排列
   const getCombination=(...array)=>{
+    //getCombination(['a','b','c'],['d','e','f','g'],['h','i'],[5552,555,8,'asdahsj'])
     let resultArr =[];
     array.map((arrItem) => {
       if (resultArr.length === 0) {
@@ -109,7 +110,6 @@ const ProductAttributes=()=>{
     });
     return resultArr;
   }
-  // console.log(getCombination(['a','b','c'],['d','e','f','g'],['h','i'],[5552,555,8,'asdahsj']))
 
   useEffect(()=>{
     setProductAtt();

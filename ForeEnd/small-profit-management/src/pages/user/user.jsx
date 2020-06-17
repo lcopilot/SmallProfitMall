@@ -22,6 +22,7 @@ import {
 import {ExclamationCircleOutlined, LockOutlined} from "@ant-design/icons";
 import MailOutlined from "@ant-design/icons/lib/icons/MailOutlined";
 import TabletOutlined from "@ant-design/icons/lib/icons/TabletOutlined";
+import FieldTimeOutlined from "@ant-design/icons/lib/icons/FieldTimeOutlined";
 
 const {Search} = Input;
 const {Option} = Select;
@@ -55,14 +56,14 @@ const User = (props) => {
     }, {
       title: '创建时间',
       dataIndex: 'createTime',
-      render: (createTime) => moment(createTime).format(TIME_FORMAT)
+      render: (createTime) =><><FieldTimeOutlined /> {moment(createTime).format(TIME_FORMAT)}</>
     }, {
       title: '创建人',
       dataIndex: 'creatorName'
     }, {
       title: '上次修改时间',
       dataIndex: 'lastTime',
-      render: (lastTime) => moment(lastTime).format(TIME_FORMAT)
+      render: (lastTime) =><><FieldTimeOutlined /> {moment(lastTime).format(TIME_FORMAT)}</>
     }, {
       title: '上次修改人',
       dataIndex: 'lastAuthorName'

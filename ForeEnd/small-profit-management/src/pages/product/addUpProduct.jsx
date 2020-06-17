@@ -26,7 +26,6 @@ import ProductEditor from "./productEditor";
 import InboxOutlined from "@ant-design/icons/lib/icons/InboxOutlined";
 import *as Utils from '../../utils/utils'
 import {connect} from "react-redux";
-import * as ActionCreators from "../../store/actionCreators";
 
 const {Option} = Select;
 const {Step} = Steps;
@@ -255,22 +254,27 @@ const AddUpProduct = (props) => {
   }
   //添加商品
   const addProductBasic = () => {
+    if (imgNameList.length === 0) {
+      return message.warn("请上传商品图片!")
+    }
     form.validateFields().then(values => {
       const productAttList = []
-      values.productAttributes.map((item) => {
-        productAttributesList.some((att) => {
-          if (att.value === item.name) {
-            item.detailed.map((content) => {
-              const attributes = {
-                attributeType: att.attributeTypeId,
-                attributeContent: content
-              }
-              productAttList.push(attributes)
-            })
-            return att.value === item.name
-          }
+      if (proFromBtn.isAtt) {
+        values.productAttributes.map((item) => {
+          productAttributesList.some((att) => {
+            if (att.value === item.name) {
+              item.detailed.map((content) => {
+                const attributes = {
+                  attributeType: att.attributeTypeId,
+                  attributeContent: content
+                }
+                productAttList.push(attributes)
+              })
+              return att.value === item.name
+            }
+          })
         })
-      })
+      }
       const product = {
         productName: values.productName,
         productPrice: values.productPrice,
@@ -293,7 +297,7 @@ const AddUpProduct = (props) => {
           if (proFromBtn.isAtt) {
             history.push({
               pathname: '/products/product/productAttributes',
-              state: {isSteps,productDetail:res.results.data}
+              state: {isSteps, productDetail: res.results.data}
             })
           } else {
             history.push('/products/product')
@@ -454,6 +458,10 @@ const AddUpProduct = (props) => {
         setImgFileList(imgList)
         imgNaList.splice(imgNameList.indexOf(item.name), 1)
         setImgNameList(imgNaList)
+        //设置商品视频
+        form.setFieldsValue({
+          productImgList: imgNaList,
+        })
         return true
       }
     })

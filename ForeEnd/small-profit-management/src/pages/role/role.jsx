@@ -23,6 +23,7 @@ import {
   TIME_FORMAT
 } from "../../config/sysConfig";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
+import FieldTimeOutlined from "@ant-design/icons/lib/icons/FieldTimeOutlined";
 
 const {Search} = Input;
 const {Option} = Select;
@@ -63,15 +64,14 @@ const Role = (props) => {
     }, {
       title: '创建时间',
       dataIndex: 'createTime',
-      render: (createTime) => moment(createTime).format(
-          TIME_FORMAT)
+      render: (createTime) => <><FieldTimeOutlined /> {moment(createTime).format(TIME_FORMAT)}</>
     }, {
       title: '创建人',
       dataIndex: 'createAuthorName'
     }, {
       title: '上次授权时间',
       dataIndex: 'lastTime',
-      render: (lastTime) => moment(lastTime).format(TIME_FORMAT)
+      render: (lastTime) =><><FieldTimeOutlined /> {moment(lastTime).format(TIME_FORMAT)}</>
     }, {
       title: '上次授权人',
       dataIndex: 'lastAuthorName'
@@ -130,6 +130,8 @@ const Role = (props) => {
       },
     });
   }
+
+
 
   //获取角色
   const getRoles = () => {

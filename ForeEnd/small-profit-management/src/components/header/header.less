@@ -44,6 +44,19 @@
 .header-message{
   text-align: center;
   width: 33.6rem;
+  .ant-tabs-nav-wrap{
+    display: flex;
+    flex: auto;
+    //align-self 属性定义flex子项单独在侧轴（纵轴）方向上的对齐方式。
+    align-self: stretch;
+    //溢出隐藏
+    overflow: hidden;
+    //段落中的文本不进行换行
+    white-space: nowrap;
+    .ant-tabs-nav-list{
+      margin: auto;
+    }
+  }
 }
 .header-message-icon{
   padding: 0 1.6rem;
