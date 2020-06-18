@@ -289,4 +289,22 @@
 
        </insert>
 
+          <!--添加配置-->
+       <update id="updateDetails" parameterType="java.util.List">
+       <foreach collection="list" item="item" index="index" separator=";">
+            UPDATE  productDistinction
+           <set>
+                <if test="item.productPrice != null">
+                    productPrice = #{item.productPrice},
+                </if>
+                <if test="item.productInventory != null">
+                    ProductInventory = #{item.productInventory},
+                </if>
+            </set>
+            WHERE distinctionId = #{item.distinctionId}
+      </foreach>
+       </update>
+
+
+
 </mapper>

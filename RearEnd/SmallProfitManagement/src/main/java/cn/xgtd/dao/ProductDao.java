@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * 商品持久层
+ *
  * @author Kite
  * @date 2020/6/6
  */
@@ -17,39 +18,45 @@ public interface ProductDao {
 
     /**
      * 查询商品总数量
+     *
      * @return
      */
     public Integer findFavoriteQuantity();
 
     /**
      * 查询商品详细信息
+     *
      * @return
      */
-    public List<ProductDetails> fendProduct(@Param("start") Integer start,@Param("pageSize") Integer pageSize);
+    public List<ProductDetails> fendProduct(@Param("start") Integer start, @Param("pageSize") Integer pageSize);
 
 
     /**
      * 查询商品属性
+     *
      * @param productId
      * @return
      */
-    public List<ProductDistinction> findProductDistinction(@Param("productId")Integer productId);
+    public List<ProductDistinction> findProductDistinction(@Param("productId") Integer productId);
 
     /**
      * 查询商品库存跟销量
+     *
      * @param productId 商品id
      * @return
      */
-    public ProductDetails findSalesInventory(@Param("productId")Integer productId);
+    public ProductDetails findSalesInventory(@Param("productId") Integer productId);
 
     /**
      * 查询商品分类
+     *
      * @return
      */
     public List<ProductCategory> findCategory();
 
     /**
      * 添加商品信息
+     *
      * @param productDetails 商品对象
      * @return
      */
@@ -57,6 +64,7 @@ public interface ProductDao {
 
     /**
      * 添加商品图片
+     *
      * @param productImage 图片集合
      * @return
      */
@@ -64,6 +72,7 @@ public interface ProductDao {
 
     /**
      * 添加商品属性
+     *
      * @param productContexts 商品属性对象
      * @return
      */
@@ -71,6 +80,7 @@ public interface ProductDao {
 
     /**
      * 查询所有商品属性种类
+     *
      * @return
      */
     public List<AttributeType> findAttributeType();
@@ -78,22 +88,25 @@ public interface ProductDao {
 
     /**
      * 查询添加商品的配置
-      * @param productId 商品id
+     *
+     * @param productId 商品id
      * @return
      */
     public List<ProductContext> findProductAttribute(Integer productId);
 
     /**
      * 添加商品配置组合
+     *
      * @param distinctions 配置对象
      * @return
      */
     public Integer addDistinction(List<Distinction> distinctions);
 
-//    /**
-//     * 查询商品配置
-//     * @param productId
-//     * @return
-//     */
-//    public ProductDistinction findDistinction(Integer productId);
+    /**
+     * 修改商品配置
+     *
+     * @param distinctions 配置集合
+     * @return
+     */
+    public Integer updateDetails(List<ProductDistinction>  distinctions);
 }

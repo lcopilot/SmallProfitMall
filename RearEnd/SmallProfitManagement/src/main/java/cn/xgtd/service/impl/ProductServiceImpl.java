@@ -27,6 +27,7 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductDao productDao;
 
+    /**缓存工具类**/
     @Autowired
     RedisUtil redisUtil;
 
@@ -234,8 +235,15 @@ public class ProductServiceImpl implements ProductService {
         return details;
     }
 
+    /**
+     * 修改商品库存
+     * @param details 商品配置详细
+     * @return
+     */
     @Override
-    public Integer updateProductContext(ProductDetails productDetails) {
+    public Integer updateDetails(Details details) {
+        List<ProductDistinction>  productDistinctions = details.getProductDistinctions();
+        productDao.updateDetails(productDistinctions);
         return null;
     }
 
@@ -268,7 +276,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     /**
-     *
+     *设置配置类型id跟配置id
      * @param productContexts
      * @return
      */
@@ -281,6 +289,11 @@ public class ProductServiceImpl implements ProductService {
         return productContext;
     }
 
+    /**
+     * 商品配置分类
+     * @param productContexts
+     * @return
+     */
     public List<Distinction> addProductDetails( List<List<ProductContext>> productContexts){
         List<Distinction> contexts = new ArrayList<>();
         for (int i = 0; i <productContexts.size() ; i++) {

@@ -82,10 +82,16 @@ public class ProductController {
         return new ResultContent(CommonCode.SUCCESS,results);
     }
 
-
-//    public ResultContent updateProductContext(ProductDetails productDetails){
-//
-//    }
+    /**
+     * 修改商品库存 价格
+     * @param details
+     * @return
+     */
+    @RequestMapping(value = "updateProductContext",method = RequestMethod.PUT)
+    public ResultContent updateProductContext(@RequestBody Details details){
+        productService.updateDetails(details);
+        return new ResultContent(CommonCode.SUCCESS,null);
+    }
 
     /**
      * 查询所有商品属性种类
