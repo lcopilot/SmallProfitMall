@@ -393,8 +393,7 @@ const AddUpProduct = (props) => {
   //商品分类搜索
   const filterCategory = (inputValue, path) => {
     return path.some(
-        option => option.label.toLowerCase().indexOf(inputValue.toLowerCase())
-            > -1);
+        option => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1);
   }
   //文件上传之前
   const beforeUpload = (file, isVideo) => {
@@ -606,8 +605,7 @@ const AddUpProduct = (props) => {
                                   noStyle
                               >
                                 <Select mode="tags" style={{width: '68%'}}
-                                        placeholder="请输入商品具体属性 (可多选)"
-                                >
+                                        placeholder="请输入商品具体属性 (可多选)">
                                 </Select>
                               </Form.Item>
                               <Form.Item noStyle>

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import './left-nav.less'
 import {Menu} from "antd";
 import {Link} from 'react-router-dom'
-import logo from '../../pages/login/images/logo-1.png'
+import logo from '../../assets/images/logo-1.png'
 import {useLocation} from "react-router-dom";
 import menuList from "../../config/menuConfig";
 import {connect} from "react-redux";

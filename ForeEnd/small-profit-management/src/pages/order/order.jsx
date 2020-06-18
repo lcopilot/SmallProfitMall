@@ -61,14 +61,6 @@ const Order=()=>{
             productPrice.toFixed(2)
         )
       },
-    }, {
-      title: '状态',
-      dataIndex: 'productPrice',
-      render: (productPrice) => {
-        return (
-            productPrice.toFixed(2)
-        )
-      },
     },
     {
       title: '操作',
@@ -96,7 +88,7 @@ const Order=()=>{
         return (
             <>
               <Dropdown overlay={menu} placement="bottomLeft">
-                <Button>编辑<DownOutlined /></Button>
+                <Button>操作<DownOutlined /></Button>
               </Dropdown>
             </>
         )

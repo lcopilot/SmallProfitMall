@@ -5,14 +5,14 @@ import {
   Col,
   DatePicker,
   Form,
-  Input,
+  Input, InputNumber, message,
   Modal, PageHeader,
   Row,
   Select, Steps,
-  Table, Upload
+  Table, Tooltip, Upload
 } from "antd";
 import {useHistory, useLocation} from "react-router-dom";
-
+import * as indexAPI from "../../api/page";
 
 
 const {Option} = Select;
@@ -84,7 +84,16 @@ const ProductAttributes=()=>{
   //添加修改商品配置
   const editProductAtt=()=>{
     form.validateFields().then(values => {
-      console.log(values)
+      values.productAttributes.some((item)=>{
+        if (item.productPrice===0 || item.productPrice==null){
+          message.warn("配置价格不能为空!")
+          return true
+        }
+      })
+      indexAPI.editProductAttributes(values.productAttributes).then(res=>{
+        console.log(res)
+        history.push(`/products/product`)
+      })
     })
   }
 
@@ -155,9 +164,9 @@ const ProductAttributes=()=>{
                                     name={[field.name, 'versionId']}
                                     noStyle
                                 >
-                                  <Select  placeholder="版本" disabled>
-                                    {getProductAttOption('version')}
-                                  </Select>
+                                    <Select  placeholder="版本" disabled>
+                                      {getProductAttOption('version')}
+                                    </Select>
                                 </Form.Item>:<></>
                               }
                               {
@@ -220,14 +229,14 @@ const ProductAttributes=()=>{
                                   name={[field.name, 'productPrice']}
                                   noStyle
                               >
-                                <Input prefix="￥" suffix="元" type="number" style={{width: '15%'}} placeholder="价格"/>
+                                <InputNumber defaultValue={0} formatter={value => `￥ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} min={0} max={99999} precision={2} style={{width: '15%'}}/>
 
                               </Form.Item>
                               <Form.Item
                                   name={[field.name, 'productInventory']}
                                   noStyle
                               >
-                                <Input type="number" style={{width: '15%'}} placeholder="库存"/>
+                                <InputNumber defaultValue={0} formatter={value => ` ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} min={0} max={9999} precision={0} style={{width: '15%'}}/>
                               </Form.Item>
                             </Input.Group>
                           </Form.Item>
@@ -240,7 +249,7 @@ const ProductAttributes=()=>{
             </Form.List>
             <Form.Item  {...formItemLayoutWith}>
               <Button className="add-product-from-btn" onClick={editProductAtt}
-                 loading={proFromBtn.load}     type="primary">{proFromBtn.content}</Button>
+                 loading={proFromBtn.load}   type="primary">{proFromBtn.content}</Button>
               <Button className="add-product-from-btn"
                       onClick={() => history.push(
                           '/products/product')}>返回</Button>

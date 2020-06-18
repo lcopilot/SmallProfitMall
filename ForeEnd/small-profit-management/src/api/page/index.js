@@ -75,7 +75,10 @@ export const getProductAttributes=()=>{
 export const addProductBasic=(data)=>{
   return http.requestPost(apiUrl+`/ProductController/addProduct`,data)
 }
-
+//修改商品配置库存
+export const editProductAttributes=(data)=>{
+  return http.requestPut(apiUrl+`/ProductController/updateProductContext`,data)
+}
 
 /**
  * 文件上传模块
