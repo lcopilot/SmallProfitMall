@@ -100,7 +100,7 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public ProductDetails  addProduct(ProductDetails productDetails) throws IOException {
+    public Details  addProduct(ProductDetails productDetails) throws IOException {
         //七牛云储存空间
         String space = "productdataf";
         //上传视频
@@ -227,8 +227,11 @@ public class ProductServiceImpl implements ProductService {
         }
         //查询不同配置集合 库存 价格
         List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productDetails.getProductId());
-        productDetails1.setProductDistinctions(productDistinctions);
-        return productDetails1;
+
+        Details details = new Details();
+        details.setProductId(productDetails.getProductId());
+        details.setProductDistinctions(productDistinctions);
+        return details;
     }
 
     @Override

@@ -1,9 +1,6 @@
 package cn.xgtd.controller;
 
-import cn.xgtd.domain.product.AttributeType;
-import cn.xgtd.domain.product.ProductCategory;
-import cn.xgtd.domain.product.ProductContext;
-import cn.xgtd.domain.product.ProductDetails;
+import cn.xgtd.domain.product.*;
 import cn.xgtd.response.CommonCode;
 import cn.xgtd.response.Return.Results;
 import cn.xgtd.response.Return.ResultContent;
@@ -80,7 +77,7 @@ public class ProductController {
     @RequestMapping(value = "addProduct",method = RequestMethod.POST)
     public ResultContent addProduct(@RequestBody ProductDetails productDetails) throws IOException {
         Results results = new Results();
-        ProductDetails  productContexts = productService.addProduct(productDetails);
+        Details productContexts = productService.addProduct(productDetails);
         results.setData(productContexts);
         return new ResultContent(CommonCode.SUCCESS,results);
     }
