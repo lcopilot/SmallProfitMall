@@ -36,7 +36,7 @@
     <mysql.version>5.1.6</mysql.version>
     <mybatis.version>3.4.5</mybatis.version>
     <lombok.version>1.16.16</lombok.version>
-    <jackson-databind.version>2.9.8</jackson-databind.version>
+    <jackson-databind.version>2.10.0.pr1</jackson-databind.version>
   </properties>
 
   <dependencies>
