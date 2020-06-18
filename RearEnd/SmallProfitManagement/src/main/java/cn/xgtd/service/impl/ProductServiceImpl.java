@@ -140,11 +140,9 @@ public class ProductServiceImpl implements ProductService {
                 imageList.add(productImage);
             }
         }
-
-
+        //上传商品图片
         if (imageList!=null){
             if (imageList.size()>0 && !imageList.equals("") ){
-                //上传商品图片
                 for (int i = 0; i <imageList.size() ; i++) {
                     ProductImage productImage = new ProductImage();
                     String  imageSites = UploadFileUtil.uploadFileUtil(space,productDetails.getProductId().toString(),imageList.get(i).getImageSite());
@@ -227,13 +225,15 @@ public class ProductServiceImpl implements ProductService {
             //添加商品配置
             productDao.addDistinction(distinctions);
         }
-        ProductDistinction productDistinction = new ProductDistinction();
-
         //查询不同配置集合 库存 价格
-
         List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productDetails.getProductId());
         productDetails1.setProductDistinctions(productDistinctions);
         return productDetails1;
+    }
+
+    @Override
+    public Integer updateProductContext(ProductDetails productDetails) {
+        return null;
     }
 
     /**

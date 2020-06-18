@@ -85,6 +85,11 @@ public class ProductController {
         return new ResultContent(CommonCode.SUCCESS,results);
     }
 
+
+//    public ResultContent updateProductContext(ProductDetails productDetails){
+//
+//    }
+
     /**
      * 查询所有商品属性种类
      * @return
