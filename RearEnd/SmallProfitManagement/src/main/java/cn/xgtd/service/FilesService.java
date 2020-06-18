@@ -20,10 +20,11 @@ public interface FilesService {
     public String getFileName();
 
     /**
-     * 查询断点文件
+     * 查询文件否存在
      * @param fileName 文件名
      * @param fileQuantity 文件碎片数量
-     * @return
+     * @param fileSize 文件总大小
+     * @return 是否存在 是否存在断点 断点位置 是否合成
      */
     public Map findBreakpointFile(String fileName , Integer fileQuantity , Integer fileSize);
 
@@ -31,7 +32,7 @@ public interface FilesService {
      * 文件上传
      * @param  fileName 文件名
      * @param files 文件
-     * @return 返回地址
+     * @return
      */
     public Boolean filesUpload(String fileName , MultipartFile files) throws Exception;
 
@@ -44,11 +45,15 @@ public interface FilesService {
     public Integer filesBreakpointUpload(String fileName , MultipartFile files,Integer position) throws IOException;
 
 
-
     /**
-     * 文件合并
-     * @param fileName 文件名碎片
-     * @return 合成的文件名
+     * 文件合成
+     * @param fileName 文件名
+     * @param fileQuantity 文件碎片数量
+     * @param fileType 文件类型
+     * @param richText 是否富文本
+     * @param video 是否视频
+     * @return
+     * @throws IOException
      */
     public String compositeFile(String fileName , Integer fileQuantity ,String  fileType ,Boolean richText, Boolean video) throws IOException;
 

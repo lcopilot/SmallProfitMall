@@ -189,12 +189,25 @@
     <!--添加商品基本信息-->
     <insert id="addProduct" parameterType="cn.xgtd.domain.product.ProductDetails" useGeneratedKeys="true" keyProperty="productId" keyColumn="ProductId">
         insert into ProductBasis
-             (ProductName,ProductVideo,ProductWeight,prodcutPrimaryCategory,productSecondaryCategory,
-                productFinalCategory,productDescription,productAfterSale,productParameter)
+         <trim prefix="(" suffix=")" suffixOverrides=",">
+            ProductName,
+            ProductVideo,
+            ProductWeight,
+            prodcutPrimaryCategory,
+            productSecondaryCategory,
+            productFinalCategory,
+            <if test="productDescription!=null ">productDescription,</if>
+            <if test="productAfterSale!=null">productAfterSale,</if>
+            <if test="productParameter!=null ">productParameter</if>
+         </trim>
         VALUES
-            (#{productName},#{video},#{weight},#{productClassify.productPrimaryId},
-            #{productClassify.productSecondaryId},#{productClassify.productFinalId},
-             #{productDescription},#{productAfterSale},#{productParameter})
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{productName},#{video},#{weight},#{productClassify.productPrimaryId},
+                #{productClassify.productSecondaryId},#{productClassify.productFinalId},
+                <if test="productDescription!=null ">#{productDescription},</if>
+                <if test="productAfterSale!=null">#{productAfterSale},</if>
+                <if test="productParameter!=null ">#{productParameter}</if>
+            </trim>
     </insert>
     
     <!--添加商品图片-->
@@ -230,6 +243,50 @@
      <!--查询商品配置-->
      <select id="findProductAttribute" resultMap="productContextMap">
         SELECT * FROM productAttribute WHERE productId = #{productId}
-</select>
+      </select>
+
+      <!--新增商品配置组合-->
+      <insert id="addDistinction" parameterType="cn.xgtd.domain.product.Distinction">
+
+          INSERT INTO productDistinction
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                    productId,
+                    <if test="list[0].sizeId != null">sizeId,</if>
+                    <if test="list[0].colourId != null">colourId,</if>
+                    <if test="list[0].comboId != null">comboId,</if>
+                    <if test="list[0].specificationId != null">specificationId,</if>
+                    <if test="list[0].tasteId != null">tasteId,</if>
+                    <if test="list[0].kindId != null">kindId,</if>
+                    <if test="list[0].versionIfId != null">versionId</if>
+                </trim>
+            values
+       <foreach collection="list" item="item" index="index" separator=",">
+                  <trim prefix=" (" suffix=")" suffixOverrides=",">
+                        #{item.productId},
+                        <if test="item.sizeId != null">
+                             #{item.sizeId},
+                        </if>
+                        <if test="item.colourId != null">
+                            #{item.colourId},
+                         </if>
+                        <if test="item.comboId != null">
+                            #{item.comboId},
+                        </if>
+                        <if test="item.specificationId != null">
+                             #{item.specificationId},</if>
+                        <if test="item.tasteId != null">
+                            #{item.tasteId},
+                        </if>
+                        <if test="item.kindId != null">
+                                #{item.kindId},
+                         </if>
+                        <if test="item.versionIfId != null">
+                                #{item.versionIfId},
+                        </if>
+                    </trim>
+      </foreach>
+
+
+       </insert>
 
 </mapper>

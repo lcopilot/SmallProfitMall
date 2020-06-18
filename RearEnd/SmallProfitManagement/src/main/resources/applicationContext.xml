@@ -93,6 +93,7 @@
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
+
     </bean>
 
     <!-- 配置事务的通知-->
@@ -206,6 +207,8 @@
         <constructor-arg ref="redisTemplate"/>
         <property name="redisTemplate" ref="redisTemplate"/>
     </bean>
+
+
 
 
 </beans>

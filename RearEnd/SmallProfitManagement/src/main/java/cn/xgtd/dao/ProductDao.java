@@ -82,4 +82,18 @@ public interface ProductDao {
      * @return
      */
     public List<ProductContext> findProductAttribute(Integer productId);
+
+    /**
+     * 添加商品配置组合
+     * @param distinctions 配置对象
+     * @return
+     */
+    public Integer addDistinction(List<Distinction> distinctions);
+
+//    /**
+//     * 查询商品配置
+//     * @param productId
+//     * @return
+//     */
+//    public ProductDistinction findDistinction(Integer productId);
 }

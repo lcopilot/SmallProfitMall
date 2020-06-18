@@ -5,11 +5,13 @@ import cn.xgtd.domain.product.*;
 import cn.xgtd.service.ProductService;
 import cn.xgtd.util.img.UploadFileUtil;
 import cn.xgtd.util.redis.RedisUtil;
+import com.sun.tools.javac.code.Attribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,6 +29,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     RedisUtil redisUtil;
+
+
+    List<String> objects = new ArrayList<>();
 
     /**
      *查询商品详细信息
@@ -163,14 +168,71 @@ public class ProductServiceImpl implements ProductService {
 
         ProductDetails productDetails1 = new ProductDetails();
         List<ProductContext>  productContextsList = productDao.findProductAttribute(productDetails.getProductId());
+
+
         if (productContextsList!=null){
             productDetails1.setProductContexts(productContextsList);
             productDetails1 = setProductConfiguration(productDetails1);
             productDetails1.setProductId(productDetails.getProductId());
         }else {
-            productContextsList = null;
+            productDetails1 = null;
         }
 
+        //获取商品种类
+       List<List<String>> list = getProductConfiguration(productDetails1);
+
+        if (list.size()>0){
+            //定义配置二维数组
+            String[][] array = new String[list.size()][];
+            for (int i = 0; i <list.size() ; i++) {
+                array[i]= new String[list.get(i).size()];
+                for (int j = 0; j <list.get(i).size() ; j++) {
+                    array[i][j]= list.get(i).get(j);
+                }
+            }
+            String[] num = new String [array.length];
+            objects = new ArrayList<>();
+            sort(array,array.length, 0, num);
+
+            List arrayList = objects;
+
+            List<String[]> stringArray = new ArrayList<>();
+            for (int i = 0; i < arrayList.size(); i++) {
+                String listString = (String) arrayList.get(i);
+                listString = listString.substring(0,listString.length()-1);   //截掉
+                listString = listString.replace("[","");
+                String[] type = listString.split(", ");
+                stringArray.add(type);
+            }
+            //商品配置信息
+            List<List<ProductContext>> productContextslist = new ArrayList<>();
+            for (int i = 0; i <stringArray.size() ; i++) {
+
+                String[] typeId = (String[]) stringArray.get(i);
+                List<ProductContext> productContextList = new ArrayList<>();
+                for (int j = 0; j <typeId.length ; j++) {
+                    ProductContext productContext = new ProductContext();
+                    String[] type = typeId[j].split("/");
+                    productContext.setTitleId(Integer.parseInt(type[0]));
+                    productContext.setAttributeId(Integer.parseInt(type[1]));
+                    productContextList.add(productContext);
+                }
+                productContextslist.add(productContextList);
+            }
+           List<Distinction> distinctions =  addProductDetails(productContextslist);
+
+            for (int i = 0; i <distinctions.size() ; i++) {
+                distinctions.get(i).setProductId(productDetails.getProductId());
+            }
+            //添加商品配置
+            productDao.addDistinction(distinctions);
+        }
+        ProductDistinction productDistinction = new ProductDistinction();
+
+        //查询不同配置集合 库存 价格
+
+        List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productDetails.getProductId());
+        productDetails1.setProductDistinctions(productDistinctions);
         return productDetails1;
     }
 
@@ -182,6 +244,75 @@ public class ProductServiceImpl implements ProductService {
     public List<AttributeType> findAttributeType() {
         List<AttributeType>  attributeTypes =  productDao.findAttributeType();
         return attributeTypes;
+    }
+
+
+    /**
+     * 查询总页数跟总数量
+     * @param pageSize 每页查询数量
+     * @return
+     */
+    @Override
+    public Integer[] fendTotalPage(Integer pageSize) {
+        Integer[] TotalPage=new Integer[2];
+        Integer quantity = productDao.findFavoriteQuantity();
+        int totalPage = (quantity % pageSize)  == 0 ? quantity/pageSize : (quantity/pageSize) + 1;
+        TotalPage[0]=quantity;
+        TotalPage[1]=totalPage;
+        return TotalPage;
+    }
+
+
+
+    /**
+     *
+     * @param productContexts
+     * @return
+     */
+    public List<String> findContext(List<ProductContext> productContexts){
+        List<String> productContext = new ArrayList<>();
+        for (int i = 0; i <productContexts.size() ; i++) {
+           String product = productContexts.get(i).getTitleId()+"/"+productContexts.get(i).getAttributeId();
+            productContext.add(product);
+        }
+        return productContext;
+    }
+
+    public List<Distinction> addProductDetails( List<List<ProductContext>> productContexts){
+        List<Distinction> contexts = new ArrayList<>();
+        for (int i = 0; i <productContexts.size() ; i++) {
+            Distinction context =new Distinction();
+            for (int j = 0; j <productContexts.get(i).size() ; j++) {
+                Integer type =  productContexts.get(i).get(j).getTitleId();
+                Integer attributeId = productContexts.get(i).get(j).getAttributeId();
+                switch(type){
+                    case 11 :
+                        context.setColourId(attributeId);
+                        break;
+                    case 16 :
+                        context.setVersionIfId(attributeId);
+                        break;
+                    case 13 :
+                        context.setSpecificationId(attributeId);
+                        ;break;
+                    case 10 :
+                        context.setSizeId(attributeId);
+                        break;
+                    case 15 :
+                        context.setKindId(attributeId);
+                        ;break;
+                    case 14 :
+                        context.setKindId(attributeId);
+                        ;break;
+                    case 12 :
+                        context.setComboId(attributeId);
+                        ;break;
+                }
+            }
+            contexts.add(context);
+            }
+          return contexts;
+
     }
 
 
@@ -259,17 +390,62 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * 查询总页数跟总数量
-     * @param pageSize 每页查询数量
+     * 获取商品配置
      * @return
      */
-    @Override
-    public Integer[] fendTotalPage(Integer pageSize) {
-        Integer[] TotalPage=new Integer[2];
-        Integer quantity = productDao.findFavoriteQuantity();
-        int totalPage = (quantity % pageSize)  == 0 ? quantity/pageSize : (quantity/pageSize) + 1;
-        TotalPage[0]=quantity;
-        TotalPage[1]=totalPage;
-        return TotalPage;
+    public List<List<String>> getProductConfiguration(ProductDetails productDetails){
+        List<List<String>> list = new ArrayList();
+        if (productDetails.getSize().size()>0){
+            List<String> context = findContext(productDetails.getSize());
+            list.add(context);
+        }
+        if (productDetails.getColour().size()>0){
+            List<String> context = findContext(productDetails.getColour());
+            list.add(context);
+        }
+        if (productDetails.getCombo().size()>0){
+            List<String> context = findContext(productDetails.getCombo());
+            list.add(context);
+        }
+        if (productDetails.getSpecification().size()>0){
+            List<String> context = findContext(productDetails.getSpecification());
+            list.add(context);
+        }
+        if (productDetails.getTaste().size()>0){
+            List<String> context = findContext(productDetails.getTaste());
+            list.add(context);
+        }
+        if (productDetails.getKind().size()>0){
+            List<String> context = findContext(productDetails.getKind());
+            list.add(context);
+        }
+        if (productDetails.getVersion().size()>0){
+            List<String> context = findContext(productDetails.getVersion());
+            list.add(context);
+        }
+        return list;
+    }
+
+
+    /**
+     * 递归
+     * @param array
+     * @param length
+     * @param index
+     * @param num
+     */
+
+    public  void sort(String[][] array, int length, int index, String[] num) {
+        if (index == length ) {
+
+
+            objects.add(Arrays.toString(num));
+            return;
+        }
+
+        for (int j = 0; j < array[index].length; j++) {//数组中的每一位遍历一次
+            num[index] = array[index][j];
+            sort(array,length, index+1,num);
+        }
     }
 }
