@@ -487,7 +487,7 @@ const AddUpProduct = (props) => {
             <Col xs={24} sm={24} md={14} lg={14} xl={14}>
               <Steps className="add-product-steps">
                 <Step title="基本信息" description="填写商品基本信息"/>
-                <Step title="商品属性" description="设置商品属性之间的价格库存"/>
+                <Step title="设置商品属性" description="设置商品属性价格库存"/>
               </Steps>
             </Col>
           </Row>) : null

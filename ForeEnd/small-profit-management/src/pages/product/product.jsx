@@ -175,8 +175,7 @@ const Product = (props) => {
 
   return (
       <>
-        <Card title={title}>
-         <Skeleton  active loading={skeletonLoad}>
+        <Card title={title} loading={skeletonLoad}>
           <Table
               bordered
               rowKey={(item) => item.productId}
@@ -199,7 +198,6 @@ const Product = (props) => {
                 ...PAGINATION
               }}
           />
-         </Skeleton>
         </Card>
       </>
   )

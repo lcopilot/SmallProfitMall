@@ -279,8 +279,7 @@ const Role = (props) => {
   )
   return (
       <>
-        <Card title={title}>
-          <Skeleton  active loading={skeletonLoad}>
+        <Card title={title} loading={skeletonLoad}>
             <Table
                 bordered
                 rowKey={(item) => item.rId}
@@ -357,7 +356,6 @@ const Role = (props) => {
                 </Form.Item>
               </Form>
             </Modal>
-          </Skeleton>
         </Card>
       </>
   )
