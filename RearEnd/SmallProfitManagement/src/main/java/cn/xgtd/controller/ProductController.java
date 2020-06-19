@@ -77,7 +77,7 @@ public class ProductController {
     @RequestMapping(value = "addProduct",method = RequestMethod.POST)
     public ResultContent addProduct(@RequestBody ProductDetails productDetails) throws IOException {
         Results results = new Results();
-        Details productContexts = productService.addProduct(productDetails);
+        ProductDetails productContexts = productService.addProduct(productDetails);
         results.setData(productContexts);
         return new ResultContent(CommonCode.SUCCESS,results);
     }

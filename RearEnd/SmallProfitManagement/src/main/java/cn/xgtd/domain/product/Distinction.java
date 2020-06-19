@@ -7,7 +7,6 @@ package cn.xgtd.domain.product;
 public class Distinction {
     /**商品id**/
     private Integer productId;
-
     /**尺寸id**/
     private Integer sizeId;
     /**颜色id**/

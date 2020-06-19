@@ -101,7 +101,7 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public Details  addProduct(ProductDetails productDetails) throws IOException {
+    public ProductDetails  addProduct(ProductDetails productDetails) throws IOException {
         //七牛云储存空间
         String space = "productdataf";
         //上传视频
@@ -156,23 +156,23 @@ public class ProductServiceImpl implements ProductService {
                 productDao.addProductImage(imageSiteList);
             }
         }
-
+        Integer productId = productDetails.getProductId();
         //添加商品配置
         List<ProductContext> productContexts = productDetails.getProductContexts();
         for (int i = 0; i <productContexts.size() ; i++) {
-            productContexts.get(i).setProductId(productDetails.getProductId());
+            productContexts.get(i).setProductId(productId);
         }
         productDao.addProductContext(productContexts);
 
 
         ProductDetails productDetails1 = new ProductDetails();
-        List<ProductContext>  productContextsList = productDao.findProductAttribute(productDetails.getProductId());
+        List<ProductContext>  productContextsList = productDao.findProductAttribute(productId);
 
 
         if (productContextsList!=null){
             productDetails1.setProductContexts(productContextsList);
             productDetails1 = setProductConfiguration(productDetails1);
-            productDetails1.setProductId(productDetails.getProductId());
+            productDetails1.setProductId(productId);
         }else {
             productDetails1 = null;
         }
@@ -220,18 +220,16 @@ public class ProductServiceImpl implements ProductService {
            List<Distinction> distinctions =  addProductDetails(productContextslist);
 
             for (int i = 0; i <distinctions.size() ; i++) {
-                distinctions.get(i).setProductId(productDetails.getProductId());
+                distinctions.get(i).setProductId(productId);
             }
             //添加商品配置
             productDao.addDistinction(distinctions);
         }
         //查询不同配置集合 库存 价格
-        List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productDetails.getProductId());
+        List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productId);
+        productDetails1.setProductDistinctions(productDistinctions);
 
-        Details details = new Details();
-        details.setProductId(productDetails.getProductId());
-        details.setProductDistinctions(productDistinctions);
-        return details;
+        return productDetails1;
     }
 
     /**
