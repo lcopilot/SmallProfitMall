@@ -44,10 +44,10 @@ public interface ProductService {
 
     /**
      * 修改商品价格 销量
-      * @param details 商品配置详细
+      * @param productDetails 商品配置详细
      * @return
      */
-    public Integer updateDetails(Details details);
+    public Integer updateDetails(ProductDetails productDetails);
     /**
      * 查询所有商品属性种类
      * @return
