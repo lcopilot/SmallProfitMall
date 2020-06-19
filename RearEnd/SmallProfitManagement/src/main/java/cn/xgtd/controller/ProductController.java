@@ -84,12 +84,12 @@ public class ProductController {
 
     /**
      * 修改商品库存 价格
-     * @param productDetails
+     * @param productDistinctions
      * @return
      */
     @RequestMapping(value = "updateProductContext",method = RequestMethod.PUT)
-    public ResultContent updateProductContext(@RequestBody ProductDetails productDetails){
-        productService.updateDetails(productDetails);
+    public ResultContent updateProductContext(@RequestBody  List<ProductDistinction> productDistinctions){
+        productService.updateDetails(productDistinctions);
         return new ResultContent(CommonCode.SUCCESS,null);
     }
 

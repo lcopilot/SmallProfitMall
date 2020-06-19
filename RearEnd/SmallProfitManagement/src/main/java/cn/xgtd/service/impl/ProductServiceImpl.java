@@ -234,12 +234,12 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 修改商品库存
-     * @param productDetails 商品配置详细
+     * @param productDistinctions 商品配置详细
      * @return
      */
     @Override
-    public Integer updateDetails(ProductDetails productDetails) {
-        List<ProductDistinction>  productDistinctions = productDetails.getProductDistinctions();
+    public Integer updateDetails( List<ProductDistinction> productDistinctions) {
+
         productDao.updateDetails(productDistinctions);
         return null;
     }
