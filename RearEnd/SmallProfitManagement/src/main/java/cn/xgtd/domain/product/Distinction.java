@@ -8,20 +8,6 @@ public class Distinction {
     /**商品id**/
     private Integer productId;
 
-    @Override
-    public String toString() {
-        return "Distinction{" +
-                "productId=" + productId +
-                ", sizeId=" + sizeId +
-                ", colourId=" + colourId +
-                ", comboId=" + comboId +
-                ", specificationId=" + specificationId +
-                ", tasteId=" + tasteId +
-                ", kindId=" + kindId +
-                ", versionIfId=" + versionIfId +
-                '}';
-    }
-
     /**尺寸id**/
     private Integer sizeId;
     /**颜色id**/

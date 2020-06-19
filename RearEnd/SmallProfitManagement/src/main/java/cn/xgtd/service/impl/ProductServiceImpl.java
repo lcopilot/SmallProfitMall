@@ -120,9 +120,8 @@ public class ProductServiceImpl implements ProductService {
             productClassify.setProductSecondaryId(productClassifyList.get(1));
             productClassify.setProductFinalId((productClassifyList.get(2)));
         }
-
         productDao.addProduct(productDetails);
-
+        productDao.addProductPrice(productDetails.getProductId(),productDetails.getProductPrice());
 
         //商品图片转换
         List<ProductImage> imageSiteList = new ArrayList<>();
@@ -151,6 +150,7 @@ public class ProductServiceImpl implements ProductService {
                     productImage.setSign(imageList.get(i).getSign());
                     productImage.setProductId(productDetails.getProductId());
                     imageSiteList.add(productImage);
+                    //删除缓存
                     redisUtil.del(imageList.get(i).getImageSite()+"Succeed");
                 }
                 productDao.addProductImage(imageSiteList);
@@ -194,7 +194,6 @@ public class ProductServiceImpl implements ProductService {
             sort(array,array.length, 0, num);
 
             List arrayList = objects;
-
             List<String[]> stringArray = new ArrayList<>();
             for (int i = 0; i < arrayList.size(); i++) {
                 String listString = (String) arrayList.get(i);
@@ -450,11 +449,8 @@ public class ProductServiceImpl implements ProductService {
      * @param index
      * @param num
      */
-
     public  void sort(String[][] array, int length, int index, String[] num) {
         if (index == length ) {
-
-
             objects.add(Arrays.toString(num));
             return;
         }

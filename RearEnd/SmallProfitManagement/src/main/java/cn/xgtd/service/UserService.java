@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * 用户业务层接口
  * @author Kite
- * @date 2020/5/31
  */
 public interface UserService {
 

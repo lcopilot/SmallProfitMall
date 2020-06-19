@@ -188,7 +188,7 @@
 
     <!--添加商品基本信息-->
     <insert id="addProduct" parameterType="cn.xgtd.domain.product.ProductDetails" useGeneratedKeys="true" keyProperty="productId" keyColumn="ProductId">
-        insert into ProductBasis
+        INSERT INTO ProductBasis
          <trim prefix="(" suffix=")" suffixOverrides=",">
             ProductName,
             ProductVideo,
@@ -209,7 +209,11 @@
                 <if test="productParameter!=null ">#{productParameter}</if>
             </trim>
     </insert>
-    
+     <!--添加商品默认价格-->
+    <insert id="addProductPrice">
+        INSERT INTO ProductPrice (productId ,ProductPrice)  VALUES (#{productId} , #{productPrice})
+    </insert>
+
     <!--添加商品图片-->
      <insert id="addProductImage">
         INSERT INTO ProductImage

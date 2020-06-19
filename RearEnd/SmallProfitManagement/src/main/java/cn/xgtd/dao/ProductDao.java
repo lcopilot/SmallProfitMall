@@ -63,6 +63,14 @@ public interface ProductDao {
     public Integer addProduct(ProductDetails productDetails);
 
     /**
+     * 添加商品展示价格
+     * @param productId 商品id
+     * @param productPrice 商品价格
+     * @return
+     */
+    public Integer addProductPrice(@Param("productId") Integer productId ,@Param("productPrice") Double productPrice);
+
+    /**
      * 添加商品图片
      *
      * @param productImage 图片集合
@@ -96,14 +104,13 @@ public interface ProductDao {
 
     /**
      * 添加商品配置组合
-     *
      * @param distinctions 配置对象
      * @return
      */
     public Integer addDistinction(List<Distinction> distinctions);
 
     /**
-     * 修改商品配置
+     * 修改商品配置信息
      *
      * @param distinctions 配置集合
      * @return
