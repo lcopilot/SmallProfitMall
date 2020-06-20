@@ -236,7 +236,11 @@ public class FilesServiceImpl implements FilesService {
 
         }
         redisUtil.set(fileName+"Composite",compositeFileName,259200000);
-
+        //删除缓存
+        for (int j = 0; j <fileQuantity ; j++) {
+            redisUtil.del(fileName+"-"+j+"Succeed");
+            redisUtil.del(fileName+"-"+j+"Size");
+        }
         return compositeFileName;
     }
 

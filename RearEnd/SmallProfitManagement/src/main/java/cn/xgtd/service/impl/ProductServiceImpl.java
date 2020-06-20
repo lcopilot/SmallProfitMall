@@ -111,8 +111,7 @@ public class ProductServiceImpl implements ProductService {
         String videoFileName = productDetails.getVideo();
         if (videoFileName!=null && !videoFileName.equals("")){
             String video = UploadFileUtil.uploadFileUtil(space,videoFileName,videoFileName);
-            redisUtil.del(videoFileName+"Succeed");
-            redisUtil.del(videoFileName+"Size");
+            redisUtil.del(videoFileName.substring(0, videoFileName.indexOf("."))+"Composite");
             productDetails.setVideo(video);
         }
 
@@ -268,9 +267,8 @@ public class ProductServiceImpl implements ProductService {
                     productImage.setSign(imageList.get(i).getSign());
                     productImage.setProductId(productId);
                     imageSiteList.add(productImage);
-                    //删除缓存
-                    redisUtil.del(imageList.get(i).getImageSite()+"Succeed");
-                    redisUtil.del(imageList.get(i).getImageSite()+"Size");
+                    redisUtil.del(imageList.get(i).getImageSite().substring(0, imageList.get(i).getImageSite().indexOf("."))+"Composite");
+
                 }
             }
         }
