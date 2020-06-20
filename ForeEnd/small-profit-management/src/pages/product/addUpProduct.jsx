@@ -294,11 +294,15 @@ const AddUpProduct = (props) => {
         load: true,
       });
       if (productDetail){
+        product.productId=productDetail.productId
         product.video=product.video===productDetail.video.trim()?null:product.video
         product.productName=product.productName===productDetail.productName?null:product.productName
         product.productPrice=product.productPrice===productDetail.productPrice.toString()?null:product.productPrice
         product.weight=product.weight===productDetail.weight.trim()?null:product.weight
         indexAPI.editProductBasic(product).then(res=>{
+          if (res.success){
+
+          }
           console.log(res)
         })
       }else {
