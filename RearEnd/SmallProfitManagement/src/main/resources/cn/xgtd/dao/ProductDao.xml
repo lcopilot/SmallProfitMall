@@ -302,11 +302,12 @@
             <if test="video!=null"> ProductVideo = #{video} ,</if>
             <if test="weight!=null"> ProductWeight = #{weight}, </if>
             prodcutPrimaryCategory = #{productClassify.productPrimaryId},
-            productSecondaryCategory = #{productClassify.productSecondaryId}
+            productSecondaryCategory = #{productClassify.productSecondaryId},
             productFinalCategory = #{productClassify.productFinalId},
             productDescription = #{productDescription},
-            productAfterSale#{productAfterSale},
-            productParameter #{productParameter}
+            productAfterSale = #{productAfterSale},
+            productParameter = #{productParameter}
+            WHERE ProductId = #{productId}
      </update>
 
     <!--查询商品指定配置内容-->

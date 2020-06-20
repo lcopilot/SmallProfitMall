@@ -129,9 +129,9 @@ public class ProductServiceImpl implements ProductService {
         Integer productId = productDetails.getProductId();
         //添加商品图片
         if (productDetails.getImageSite()!=null){
-            List<ProductImage> productImages = uploadingImage(productDetails.getImageSite(),productId);
-            if (productImages!=null){
-                productDao.addProductImage(productImages);
+            List<ProductImage> productList = uploadingImage(productDetails.getImageSite(),productId);
+            if (productList!=null){
+                productDao.addProductImage(productList);
             }
         }
 
@@ -140,7 +140,10 @@ public class ProductServiceImpl implements ProductService {
         for (int i = 0; i <productContexts.size() ; i++) {
             productContexts.get(i).setProductId(productId);
         }
-        productDao.addProductContext(productContexts);
+        if (productContexts.size()>0){
+            productDao.addProductContext(productContexts);
+        }
+
 
         //查询添加的商品配置
         ProductDetails productDetailss = new ProductDetails();
@@ -233,8 +236,7 @@ public class ProductServiceImpl implements ProductService {
      * @throws IOException
      */
     public List<ProductImage>  uploadingImage(List<String> imageStrings ,Integer productId) throws IOException {
-        //商品图片转换
-        List<ProductImage> imageSiteList = new ArrayList<>();
+
         List<ProductImage> imageList = new ArrayList<>();
         List<String> imageString = imageStrings;
         if (imageString!=null){
@@ -250,6 +252,8 @@ public class ProductServiceImpl implements ProductService {
                 imageList.add(productImage);
             }
         }
+        //商品图片转换
+        List<ProductImage> imageSiteList = new ArrayList<>();
         //上传商品图片
         if (imageList!=null){
             if (imageList.size()>0 && !imageList.equals("") ){
@@ -265,7 +269,7 @@ public class ProductServiceImpl implements ProductService {
                 }
             }
         }
-        return imageList;
+        return imageSiteList;
     }
 
 

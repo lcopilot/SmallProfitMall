@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
 
 /**
@@ -27,10 +28,11 @@ public class UploadFileUtil {
      * @throws IOException
      */
     public static String uploadFileUtil(String space,String productId,String imageName) throws IOException {
-
+        //时间戳
+        long time = System.currentTimeMillis();
         //上传文件地址
         String fileSite = PathUtil.getImgBasePath()+"/"+imageName;
-        String key = imageName+"_"+productId;
+        String key = imageName+"_"+productId+time;
         //上传文件到七牛云
         SimpleUpload uploading = new SimpleUpload();
         uploading.upload(fileSite,key,space);

@@ -149,22 +149,30 @@ public class FilesServiceImpl implements FilesService {
             }
         }
 
-        //转为文件输入流
-        InputStream fileInputStream =  files.getInputStream();
-        FileInputStream fileInputStream1 = (FileInputStream) fileInputStream;
-
-
-        //文件上传 上传成功返回文件大小 上传失败返回失败
-        Map map = FilesUpload.breakTrans(fileInputStream1,fileUrl);
-        Boolean succeed = (Boolean) map.get("succeed");
-        redisUtil.set(fileName+"Succeed",succeed,259200000);
-       if (succeed){
-           Integer fileSize = (Integer) map.get("fileSize");
-           redisUtil.set(fileName+"Size",fileSize,259200000);
-       }
-        Integer position = (Integer) map.get("position");
-        redisUtil.set(fileName+"Position",position,259200000);
-        return succeed;
+        if (true){
+            File file1 = new File(fileUrl);
+            files.transferTo(file1);
+            redisUtil.set(fileName+"Succeed",true,259200000);
+            redisUtil.set(fileName+"Size",files.getSize(),259200000);
+            return true;
+        }
+        if (false) {
+            //转为文件输入流
+            InputStream fileInputStream = files.getInputStream();
+            FileInputStream fileInputStream1 = (FileInputStream) fileInputStream;
+            //文件上传 上传成功返回文件大小 上传失败返回失败
+            Map map = FilesUpload.breakTrans(fileInputStream1, fileUrl);
+            Boolean succeed = (Boolean) map.get("succeed");
+            redisUtil.set(fileName + "Succeed", succeed, 259200000);
+            if (succeed) {
+                Integer fileSize = (Integer) map.get("fileSize");
+                redisUtil.set(fileName + "Size", fileSize, 259200000);
+            }
+            Integer position = (Integer) map.get("position");
+            redisUtil.set(fileName + "Position", position, 259200000);
+            return succeed;
+        }
+        return true;
     }
 
     /**
