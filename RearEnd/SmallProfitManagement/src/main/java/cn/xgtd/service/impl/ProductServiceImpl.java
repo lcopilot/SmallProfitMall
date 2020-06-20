@@ -215,7 +215,7 @@ public class ProductServiceImpl implements ProductService {
             productClassify.setProductSecondaryId(productClassifyList.get(1));
             productClassify.setProductFinalId((productClassifyList.get(2)));
         }
-
+        productDetails.setProductClassify(productClassify);
         productDao.updateProduct(productDetails);
 
         //修改商品配置
