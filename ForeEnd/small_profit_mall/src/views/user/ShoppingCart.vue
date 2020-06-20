@@ -104,8 +104,8 @@
                         @click="settlement(product.row.shoppingCartId)">
                       立即购买
                     </el-button>
-                    <span v-if="product.row.productInventory==0" class="cart_stockOut">暂时缺货</span>
-                    <br/><span v-if="product.row.notice" class="cart_stockOut">到货通知已添加</span>
+                    <span v-if="product.row.productInventory===0 && !product.row.sign" class="cart_stockOut">暂时缺货</span>
+                    <br/><span v-if="product.row.notice && !product.row.sign" class="cart_stockOut">到货通知已添加</span>
                   </template>
                 </el-table-column>
                 <el-table-column
