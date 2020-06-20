@@ -260,7 +260,7 @@ const AddUpProduct = (props) => {
     }
     form.validateFields().then(values => {
       const productAttList = []
-      if (proFromBtn.isAtt) {
+      if (values.productAttributes.length!==0) {
         values.productAttributes.map((item) => {
           productAttributesList.some((att) => {
             if (att.value === item.name) {
@@ -293,18 +293,28 @@ const AddUpProduct = (props) => {
         isAtt: proFromBtn.isAtt,
         load: true,
       });
-      indexAPI.addProductBasic(product).then(res => {
-        if (res.success) {
-          if (proFromBtn.isAtt) {
-            history.push({
-              pathname: '/products/product/productAttributes',
-              state: {isSteps, productDetail: res.results.data}
-            })
-          } else {
-            history.push('/products/product')
+      if (productDetail){
+        product.video=product.video===productDetail.video.trim()?null:product.video
+        product.productName=product.productName===productDetail.productName?null:product.productName
+        product.productPrice=product.productPrice===productDetail.productPrice.toString()?null:product.productPrice
+        product.weight=product.weight===productDetail.weight.trim()?null:product.weight
+        indexAPI.editProductBasic(product).then(res=>{
+          console.log(res)
+        })
+      }else {
+        indexAPI.addProductBasic(product).then(res => {
+          if (res.success) {
+            if (proFromBtn.isAtt) {
+              history.push({
+                pathname: '/products/product/productAttributes',
+                state: {isSteps, productDetail: res.results.data}
+              })
+            } else {
+              history.push('/products/product')
+            }
           }
-        }
-      })
+        })
+      }
 
     })
   }
