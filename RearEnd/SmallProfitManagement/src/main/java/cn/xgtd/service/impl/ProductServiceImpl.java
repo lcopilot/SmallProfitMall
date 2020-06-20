@@ -207,6 +207,15 @@ public class ProductServiceImpl implements ProductService {
             productDetails.setVideo(video);
             productDetails.setVideo(videoFileName);
         }
+        ProductClassify productClassify = new ProductClassify();
+        //商品分类转换
+        List<Integer> productClassifyList = productDetails.getProductClassifyList();
+        if (productClassifyList.size()==3){
+            productClassify.setProductPrimaryId(productClassifyList.get(0));
+            productClassify.setProductSecondaryId(productClassifyList.get(1));
+            productClassify.setProductFinalId((productClassifyList.get(2)));
+        }
+
         productDao.updateProduct(productDetails);
 
         //修改商品配置
