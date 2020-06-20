@@ -17,7 +17,7 @@
                   ref="cartTable"
                   :data="cartList"
                   tooltip-effect="dark"
-                  @row-click="changeState"
+
                   style="width: 100%"
                   @select="select"
                   @select-all="select_all">
@@ -76,12 +76,13 @@
                     label="数量"
                     min-width="14%">
                   <template slot-scope="product">
-                    <el-input-number v-model="product.row.quantity" size="mini" :min="1"
+                    <el-input-number v-if="!product.row.sign" v-model="product.row.quantity" size="mini" :min="1"
                                      :max="product.row.productInventory>99?99:product.row.productInventory"
                                      @change="quantityChange(product.row.quantity,product.row.shoppingCartId,product.row.productInventory)"/>
-                    <div class="cart_stockOut">剩余库存
+                    <div class="cart_stockOut" v-if="!product.row.sign">剩余库存
                       {{product.row.productInventory>99?'99+':product.row.productInventory}}
                     </div>
+                    <span v-if="product.row.sign" class="cart_stockOut">该配置已下架</span>
                   </template>
                 </el-table-column>
                 <el-table-column
@@ -99,7 +100,7 @@
                   <template slot-scope="product">
                     <el-button
                         type="danger"
-                        v-if="product.row.productInventory!=0"
+                        v-if="product.row.productInventory!==0 && !product.row.sign"
                         @click="settlement(product.row.shoppingCartId)">
                       立即购买
                     </el-button>
@@ -113,7 +114,7 @@
                     <div style="padding-top: 30%">
                       <!-- 已收藏就不显示 待完成-->
                       <div v-if="!product.row.evaluation">
-                        <el-link :underline="false" @click="addFavorite(product.row.productId)"
+                        <el-link v-if="!product.row.sign" :underline="false" @click="addFavorite(product.row.productId)"
                                  style="font-size: 13px">
                           收藏
                         </el-link>
@@ -219,7 +220,7 @@
       ]),
       //购物车初始化的选择框状态判断 无库存时处于禁用状态
       changeStateC(row, index) {
-        if (row.productInventory !== 0) {
+        if (row.productInventory !== 0 && !row.sign) {
           //不禁用
           return 1;
         } else {
