@@ -112,6 +112,7 @@ public class ProductServiceImpl implements ProductService {
         if (videoFileName!=null && !videoFileName.equals("")){
             String video = UploadFileUtil.uploadFileUtil(space,videoFileName,videoFileName);
             redisUtil.del(videoFileName+"Succeed");
+            redisUtil.del(videoFileName+"Size");
             productDetails.setVideo(video);
         }
 
@@ -129,9 +130,9 @@ public class ProductServiceImpl implements ProductService {
         Integer productId = productDetails.getProductId();
         //添加商品图片
         if (productDetails.getImageSite()!=null){
-            List<ProductImage> productList = uploadingImage(productDetails.getImageSite(),productId);
-            if (productList!=null){
-                productDao.addProductImage(productList);
+            List<ProductImage> prodnuctList = uploadingImage(productDetails.getImageSite(),productId);
+            if (prodnuctList!=null){
+                productDao.addProductImage(prodnuctList);
             }
         }
 
@@ -156,9 +157,12 @@ public class ProductServiceImpl implements ProductService {
         }else {
             productDetailss = null;
         }
-        //获取不同配置排列组合
-        List<Distinction> distinctions =distinctions(productDetailss,productId);
-        productDao.addDistinction(distinctions);
+        if(productContextsList.size()>0){
+            //获取不同配置排列组合
+            List<Distinction> distinctions =distinctions(productDetailss,productId);
+            productDao.addDistinction(distinctions);
+        }
+
 
         //查询不同配置集合 库存 价格
         List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productId);
@@ -266,6 +270,7 @@ public class ProductServiceImpl implements ProductService {
                     imageSiteList.add(productImage);
                     //删除缓存
                     redisUtil.del(imageList.get(i).getImageSite()+"Succeed");
+                    redisUtil.del(imageList.get(i).getImageSite()+"Size");
                 }
             }
         }
