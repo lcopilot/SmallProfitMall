@@ -25,10 +25,10 @@
             pb.ProductId=#{productId}
     </select>
 
-    <!--根据uid查询购物车-->
+    <!--查询购物车-->
     <select id="findShoppingCart" resultType="cn.itcast.domain.shoppingCar.ShoppingCart">
         select
-        sc.*,pi.ImageSite,pb.ProductName,pd.ProductInventory
+        sc.*,pi.ImageSite,pb.ProductName,pd.ProductInventory , pd.sign
         from
             shoppingCart sc
         LEFT JOIN
@@ -122,18 +122,21 @@
     <!--查询预览商品-->
     <select id="findPreview" resultType="cn.itcast.domain.shoppingCar.ShoppingCart">
         SELECT
-            sc.shoppingCartId,sc.productId,sc.quantity ,pb.ProductName,pi.ImageSite
+            sc.shoppingCartId,sc.productId,sc.quantity ,pb.ProductName,pi.ImageSite , pd.sign
         FROM
             shoppingCart sc
-        JOIN
+        LEFT JOIN
             ProductBasis pb
         ON
             sc.productId=pb.ProductId
-        JOIN
+        LEFT JOIN
             ProductImage pi
         ON
             pb.ProductId=pi.ProductId
-
+        LEFT JOIN
+            productDistinction pd
+         ON
+            sc.distinctionId = pd.distinctionId
         WHERE
             pi.sign=1
         AND

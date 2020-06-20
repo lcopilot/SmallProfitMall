@@ -36,6 +36,16 @@ public class ShoppingCart implements Serializable {
     private Boolean notice;
     //该配置库存
     private Integer productInventory;
+    //配置是否存在
+    public Boolean sign;
+
+    public Boolean getSign() {
+        return sign;
+    }
+
+    public void setSign(Boolean sign) {
+        this.sign = sign;
+    }
 
     public void setProductInventory(Integer productInventory) {
         this.productInventory = productInventory;
