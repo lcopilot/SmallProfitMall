@@ -56,9 +56,10 @@ const Product = (props) => {
     }, {
       title: '价格',
       dataIndex: 'productPrice',
-      render: (productPrice) => {
+      width:130,
+      render: (price) => {
         return (
-            productPrice.toFixed(2)
+            `￥ ${price.toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
         )
       },
     }, {

@@ -23,7 +23,7 @@ export default {
     store.set(USER_KEY,user)
   },
   getUser() {
-    const user=store.get(USER_KEY) || {}
+    const user=store.get(USER_KEY) || {role:{menus:[]}}
     if(moment(user.expirationTime)<moment(new Date())){
       sessionStorage.setItem(LOGIN_EXPIRED,JSON.stringify(true));
       window.location.replace('/login');

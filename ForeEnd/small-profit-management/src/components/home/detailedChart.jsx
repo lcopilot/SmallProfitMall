@@ -9,8 +9,8 @@ import {
   Skeleton,
   Tabs
 } from "antd";
-import React, {useState} from "react";
-import {Axis, Chart, Geom, Tooltip as BTooltip} from "bizcharts";
+import React, { useState } from "react";
+import { Axis, Chart, Geom, Tooltip as BTooltip } from "bizcharts";
 import DataSet from "@antv/data-set";
 import './detailedChart.less'
 import moment from 'moment';
@@ -19,8 +19,8 @@ import DetailedChart from "../../components/home/detailedChart";
 
 moment.locale('zh-cn');
 
-const {TabPane} = Tabs
-const {RangePicker} = DatePicker;
+const { TabPane } = Tabs
+const { RangePicker } = DatePicker;
 
 const Detailed = () => {
 
@@ -49,42 +49,42 @@ const Detailed = () => {
   }
 
   const timeSelection = (
-      <>
-        <Row>
-          <Col xs={0} sm={0} md={0} lg={3} xl={3}>
-            <Button type="dashed" onClick={() => {
-              setTime(1)
-            }}>
-              今天
+    <>
+      <Row>
+        <Col xs={0} sm={0} md={0} lg={3} xl={3}>
+          <Button type="dashed" onClick={() => {
+            setTime(1)
+          }}>
+            今天
             </Button>
-          </Col>
-          <Col xs={0} sm={0} md={0} lg={3} xl={3}>
-            <Button type="dashed" onClick={() => {
-              setTime(2)
-            }}>
-              本周
+        </Col>
+        <Col xs={0} sm={0} md={0} lg={3} xl={3}>
+          <Button type="dashed" onClick={() => {
+            setTime(2)
+          }}>
+            本周
             </Button>
-          </Col>
-          <Col xs={0} sm={0} md={0} lg={3} xl={3}>
-            <Button type="dashed" onClick={() => {
-              setTime(3)
-            }}>
-              本月
+        </Col>
+        <Col xs={0} sm={0} md={0} lg={3} xl={3}>
+          <Button type="dashed" onClick={() => {
+            setTime(3)
+          }}>
+            本月
             </Button>
-          </Col>
-          <Col xs={0} sm={0} md={0} lg={3} xl={3}>
-            <Button type="dashed" onClick={() => {
-              setTime(4)
-            }}>
-              本年
+        </Col>
+        <Col xs={0} sm={0} md={0} lg={3} xl={3}>
+          <Button type="dashed" onClick={() => {
+            setTime(4)
+          }}>
+            本年
             </Button>
-          </Col>
-          <Col xs={0} sm={24} md={24} lg={12} xl={12}>
-            <RangePicker onChange={timeChange}
-                         value={[moment(startTime), moment(endTime)]}/>
-          </Col>
-        </Row>
-      </>
+        </Col>
+        <Col xs={0} sm={24} md={24} lg={12} xl={12}>
+          <RangePicker onChange={timeChange}
+            value={[moment(startTime), moment(endTime)]} />
+        </Col>
+      </Row>
+    </>
   );
 
   const DetailedChart = () => {
@@ -151,57 +151,57 @@ const Detailed = () => {
     ];
 
     return (
-        <Row justify="center">
-          <Col xs={24} sm={24} md={24} lg={16} xl={16}>
-            <div className="detailed-chart-columnar">
-              <h4>销售趋势</h4>
-              <Chart height={254} forceFit={true}
-                     padding={"auto"} data={payFig} scale={cols}>
-                <Axis name="year"/>
-                <BTooltip/>
-                <Geom type="interval" position="year*sales"/>
-              </Chart>
-            </div>
-          </Col>
-          <Col xs={24} sm={24} md={24} lg={8} xl={8}>
-            <div className="detailed-list">
-              <List
-                  header={<div>销量排行</div>}
-                  dataSource={data}
-                  renderItem={(item, index) => (
-                      <List.Item>
-                        <Badge count={index + 1}
-                               style={index < 3 ? {backgroundColor: '#314659'}
-                                   : {
-                                     backgroundColor: 'transparent',
-                                     color: '#314659'
-                                   }}/>
-                        {item}
-                      </List.Item>
-                  )}
-              />
-            </div>
-          </Col>
-        </Row>
+      <Row justify="center">
+        <Col xs={24} sm={24} md={24} lg={16} xl={16}>
+          <div className="detailed-chart-columnar">
+            <h4>销售趋势</h4>
+            <Chart height={254} forceFit={true}
+              padding={"auto"} data={payFig} scale={cols}>
+              <Axis name="year" />
+              <BTooltip />
+              <Geom type="interval" position="year*sales" />
+            </Chart>
+          </div>
+        </Col>
+        <Col xs={24} sm={24} md={24} lg={8} xl={8}>
+          <div className="detailed-list">
+            <List
+              header={<div>销量排行</div>}
+              dataSource={data}
+              renderItem={(item, index) => (
+                <List.Item>
+                  <Badge count={index + 1}
+                    style={index < 3 ? { backgroundColor: '#314659' }
+                      : {
+                        backgroundColor: 'transparent',
+                        color: '#314659'
+                      }} />
+                  {item}
+                </List.Item>
+              )}
+            />
+          </div>
+        </Col>
+      </Row>
     )
   }
 
   return (
-      <div className="detailed-chart">
-        <Card>
-          <Skeleton active loading={false} paragraph={{rows: 8}}>
-            <Tabs defaultActiveKey="1"
-                  tabBarExtraContent={timeSelection}>
-              <TabPane tab="销售额" key="1">
-                <DetailedChart/>
-              </TabPane>
-              <TabPane tab="访问量" key="2">
-                <DetailedChart/>
-              </TabPane>
-            </Tabs>
-          </Skeleton>
-        </Card>
-      </div>
+    <div className="detailed-chart">
+      <Card>
+        <Skeleton active loading={false} paragraph={{ rows: 8 }}>
+          <Tabs defaultActiveKey="1"
+            tabBarExtraContent={timeSelection}>
+            <TabPane tab="销售额" key="1">
+              <DetailedChart />
+            </TabPane>
+            <TabPane tab="访问量" key="2">
+              <DetailedChart />
+            </TabPane>
+          </Tabs>
+        </Skeleton>
+      </Card>
+    </div>
   )
 }
 
