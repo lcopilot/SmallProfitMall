@@ -36,7 +36,7 @@ public interface RoleDao {
 
     /**
      * 查询当前角色名称数量
-     *
+     * @param rId 角色id
      * @param name 角色名称
      * @return
      */
@@ -54,7 +54,6 @@ public interface RoleDao {
 
     /**
      * 查询所有当前角色下子用户
-     *
      * @param uId 用户id
      * @return
      */

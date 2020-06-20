@@ -31,6 +31,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     RedisUtil redisUtil;
 
+    //七牛云储存空间
+    String space = "productdataf";
+
 
     List<String> objects = new ArrayList<>();
 
@@ -102,8 +105,7 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public ProductDetails  addProduct(ProductDetails productDetails) throws IOException {
-        //七牛云储存空间
-        String space = "productdataf";
+
         //上传视频
         String videoFileName = productDetails.getVideo();
         if (videoFileName!=null && !videoFileName.equals("")){
@@ -122,11 +124,313 @@ public class ProductServiceImpl implements ProductService {
         }
         productDao.addProduct(productDetails);
         productDao.addProductPrice(productDetails.getProductId(),productDetails.getProductPrice());
+        //获取添加商品的返回id
+        Integer productId = productDetails.getProductId();
+        //添加商品图片
+        if (productDetails.getImageSite()!=null){
+            List<ProductImage> productImages = uploadingImage(productDetails.getImageSite(),productId);
+            if (productImages!=null){
+                productDao.addProductImage(productImages);
+            }
+        }
 
+        //添加商品配置
+        List<ProductContext> productContexts = productDetails.getProductContexts();
+        for (int i = 0; i <productContexts.size() ; i++) {
+            productContexts.get(i).setProductId(productId);
+        }
+        productDao.addProductContext(productContexts);
+
+        //查询添加的商品配置
+        ProductDetails productDetailss = new ProductDetails();
+        List<ProductContext>  productContextsList = productDao.findProductAttribute(productId);
+        //设置商品配置
+        if (productContextsList!=null){
+            productDetailss.setProductContexts(productContextsList);
+            productDetailss = setProductConfiguration(productDetailss);
+            productDetailss.setProductId(productId);
+        }else {
+            productDetailss = null;
+        }
+        //获取不同配置排列组合
+        List<Distinction> distinctions =distinctions(productDetailss,productId);
+        productDao.addDistinction(distinctions);
+
+        //查询不同配置集合 库存 价格
+        List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productId);
+        productDetailss.setProductDistinctions(productDistinctions);
+
+        return productDetailss;
+    }
+
+    /**
+     * 修改商品库存
+     * @param productDistinctions 商品配置详细
+     * @return
+     */
+    @Override
+    public Integer updateDetails( List<ProductDistinction> productDistinctions) {
+        Integer result = productDao.updateDetails(productDistinctions);
+        return result;
+    }
+
+    /**
+     * 查询所有商品种类
+     * @return
+     */
+    @Override
+    public List<AttributeType> findAttributeType() {
+        List<AttributeType>  attributeTypes =  productDao.findAttributeType();
+        return attributeTypes;
+    }
+
+    /**
+     * 修改商品
+     * @param productDetails 商品对象
+     * @return
+     */
+    @Override
+    public Integer updateProduct(ProductDetails productDetails) throws IOException {
+        Integer productId = productDetails.getProductId();
+
+        List<ProductContext> productContexts= productDetails.getProductContexts();
+        Integer size = 0;
+        List<ProductContext> productContextList = productDao.findProductContext(productId);
+        size= productContextList.size();
+
+        //已存在的配置
+        List<ProductContext> productContextExist = new ArrayList<>();
+        //不存在的配置
+        List<ProductContext> inexistence = new ArrayList<>();
+        //需要删除的配置
+        List<ProductContext> deleteContext= productContextList;
+
+        //是否删除了全部
+        Boolean delete = false;
+        if (productContexts.size()>0){
+            for (int i = 0; i <productContexts.size() ; i++) {
+                //是否出现新配置
+                Boolean flag = true;
+                //是否为新属性
+                Boolean signs = true;
+                for (int j = 0; j <productContextList.size() ; j++) {
+                    //判断是否是新属性
+                    int productContextsType =  Integer.parseInt(productContexts.get(i).getAttributeType());
+                    int productContextListType =productContextList.get(j).getTitleId() ;
+                    Boolean addType =  productContextsType == productContextListType;
+                    if (addType){
+                        flag = false;
+                    }
+                    Boolean sign = productContexts.get(i).getAttributeContent().equals(productContextList.get(j).getAttributeContent())
+                            && addType;
+
+                    if (sign){
+                        signs=false;
+                        productContextExist.add(productContextList.get(j));
+                        deleteContext.remove(j);
+                    }
+
+                }
+                //出现新属性 删除所有配置 组合
+                if (flag){
+                    //删除组合
+                    productDao.deleteDistinction(null,productId);
+                    delete = true;
+                }
+                //无匹配的值
+                if (signs){
+                    inexistence.add(productContexts.get(i));
+                }
+            }
+        }
+
+        //删除被删除配置
+        if (deleteContext!=null){
+            if (deleteContext.size()>0){
+                //删除配置
+                productDao.deleteContext(deleteContext,null);
+                //删除组合
+                productDao.deleteDistinction(deleteContext,null);
+            }
+        }
+
+        if (inexistence!=null && inexistence.size()>0) {
+
+
+            //添加商品配置
+            for (int i = 0; i < inexistence.size(); i++) {
+                inexistence.get(i).setProductId(productId);
+            }
+            productDao.addProductContext(inexistence);
+
+            List<ProductContext> contextList = productDao.findProductContext(productId);
+            if (size < 1 || delete) {
+                ProductDetails productDetailsProperty = new ProductDetails();
+                productDetailsProperty.setProductContexts(contextList);
+                productDetailsProperty = setProductConfiguration(productDetailsProperty);
+                List<Distinction> distinctions = distinctions(productDetailsProperty,productId);
+                productDao.addDistinction(distinctions);
+            }else {
+                //需要新增的配置集合
+                List<ProductContext> addContextList = new ArrayList<>();
+                for (int i = 0; i < inexistence.size(); i++) {
+                    for (int j = 0; j < contextList.size(); j++) {
+                        Boolean sign = contextList.get(j).getAttributeContent().equals(inexistence.get(i).getAttributeContent());
+                        if (sign) {
+                            addContextList.add(contextList.get(j));
+                        }
+                    }
+                }
+                if (contextList!=null & contextList.size()>0){
+                    //需要新增的配置
+                    ProductDetails detailsInexistence = new ProductDetails();
+                    detailsInexistence.setProductContexts(addContextList);
+                    ProductDetails addDetails = setProductConfiguration(detailsInexistence);
+
+                    //需要新增的配置
+                    List<Distinction> distinctionArrayList = new ArrayList<>();
+
+
+                    if (addDetails.getColour().size()>0){
+                        ProductDetails productDetailsProperty = new ProductDetails();
+                        //原有的商品配置
+                        productDetailsProperty.setProductContexts(contextList);
+                        productDetailsProperty = setProductConfiguration(productDetailsProperty);
+
+                        productDetailsProperty.setColour(addDetails.getColour());
+                        List<Distinction> distinctions = distinctions(productDetailsProperty,productId);
+                        for (int i = 0; i <distinctions.size() ; i++) {
+                            distinctionArrayList.add(distinctions.get(i));
+                        }
+                    }
+
+                    if (addDetails.getCombo().size()>0){
+                        ProductDetails productDetailsProperty = new ProductDetails();
+                        //原有的商品配置
+                        productDetailsProperty.setProductContexts(contextList);
+                        productDetailsProperty = setProductConfiguration(productDetailsProperty);
+
+                        productDetailsProperty.setCombo(addDetails.getCombo());
+                        List<Distinction> distinctions = distinctions(productDetailsProperty,productId);
+                        for (int i = 0; i <distinctions.size() ; i++) {
+                            distinctionArrayList.add(distinctions.get(i));
+                        }
+                    }
+                    if (addDetails.getKind().size()>0){
+                        ProductDetails productDetailsProperty = new ProductDetails();
+                        //原有的商品配置
+                        productDetailsProperty.setProductContexts(contextList);
+                        productDetailsProperty = setProductConfiguration(productDetailsProperty);
+
+                        productDetailsProperty.setKind(addDetails.getKind());
+                        List<Distinction> distinctions = distinctions(productDetailsProperty,productId);
+                        for (int i = 0; i <distinctions.size() ; i++) {
+                            distinctionArrayList.add(distinctions.get(i));
+                        }
+                    }
+                    if (addDetails.getTaste().size()>0){
+                        ProductDetails productDetailsProperty = new ProductDetails();
+                        //原有的商品配置
+                        productDetailsProperty.setProductContexts(contextList);
+                        productDetailsProperty = setProductConfiguration(productDetailsProperty);
+
+                        productDetailsProperty.setTaste(addDetails.getTaste());
+                        List<Distinction> distinctions = distinctions(productDetailsProperty,productId);
+                        for (int i = 0; i <distinctions.size() ; i++) {
+                            distinctionArrayList.add(distinctions.get(i));
+                        }
+                    }
+                    if (addDetails.getVersion().size()>0){
+                        ProductDetails productDetailsProperty = new ProductDetails();
+                        //原有的商品配置
+                        productDetailsProperty.setProductContexts(contextList);
+                        productDetailsProperty = setProductConfiguration(productDetailsProperty);
+
+                        productDetailsProperty.setVersion(addDetails.getVersion());
+                        List<Distinction> distinctions = distinctions(productDetailsProperty,productId);
+                        for (int i = 0; i <distinctions.size() ; i++) {
+                            distinctionArrayList.add(distinctions.get(i));
+                        }
+                    }
+                    if (addDetails.getSpecification().size()>0){
+                        ProductDetails productDetailsProperty = new ProductDetails();
+                        //原有的商品配置
+                        productDetailsProperty.setProductContexts(contextList);
+                        productDetailsProperty = setProductConfiguration(productDetailsProperty);
+
+                        productDetailsProperty.setSpecification(addDetails.getSpecification());
+                        List<Distinction> distinctions = distinctions(productDetailsProperty,productId);
+                        for (int i = 0; i <distinctions.size() ; i++) {
+                            distinctionArrayList.add(distinctions.get(i));
+                        }
+                    }
+                    if (addDetails.getSize().size()>0){
+                        ProductDetails productDetailsProperty = new ProductDetails();
+                        //原有的商品配置
+                        productDetailsProperty.setProductContexts(contextList);
+                        productDetailsProperty = setProductConfiguration(productDetailsProperty);
+
+                        productDetailsProperty.setSize(addDetails.getSize());
+                        List<Distinction> distinctions = distinctions(productDetailsProperty,productId);
+                        for (int i = 0; i <distinctions.size() ; i++) {
+                            distinctionArrayList.add(distinctions.get(i));
+                        }
+                    }
+
+                    productDao.addDistinction(distinctionArrayList);
+            }
+        }
+
+        }
+
+
+//        //上传视频
+//        String videoFileName = productDetails.getVideo();
+//        if (videoFileName!=null && !videoFileName.equals("")){
+//            String video = UploadFileUtil.uploadFileUtil(space,videoFileName,videoFileName);
+//            redisUtil.del(videoFileName+"Succeed");
+//            productDetails.setVideo(video);
+//        }
+//        productDao.updateProduct(productDetails);
+//        //添加商品图片
+//        if (productDetails.getImageSite()!=null){
+//            List<ProductImage> productImages = uploadingImage(productDetails.getImageSite(),productDetails.getProductId());
+//            if (productImages!=null){
+//                productDao.addProductImage(productImages);
+//            }
+//        }
+        return 1;
+    }
+
+
+    /**
+     * 查询总页数跟总数量
+     * @param pageSize 每页查询数量
+     * @return
+     */
+    @Override
+    public Integer[] fendTotalPage(Integer pageSize) {
+        Integer[] TotalPage=new Integer[2];
+        Integer quantity = productDao.findFavoriteQuantity();
+        int totalPage = (quantity % pageSize)  == 0 ? quantity/pageSize : (quantity/pageSize) + 1;
+        TotalPage[0]=quantity;
+        TotalPage[1]=totalPage;
+        return TotalPage;
+    }
+
+
+    /**
+     * 图片上传至七牛云
+     * @param imageStrings 图片集合
+     * @param productId 商品id
+     * @return 七牛云地址集合
+     * @throws IOException
+     */
+    public List<ProductImage>  uploadingImage(List<String> imageStrings ,Integer productId) throws IOException {
         //商品图片转换
         List<ProductImage> imageSiteList = new ArrayList<>();
         List<ProductImage> imageList = new ArrayList<>();
-        List<String> imageString =  productDetails.getImageSite();
+        List<String> imageString = imageStrings;
         if (imageString!=null){
             for (int i = 0; i <imageString.size() ; i++) {
                 ProductImage productImage = new ProductImage();
@@ -145,41 +449,29 @@ public class ProductServiceImpl implements ProductService {
             if (imageList.size()>0 && !imageList.equals("") ){
                 for (int i = 0; i <imageList.size() ; i++) {
                     ProductImage productImage = new ProductImage();
-                    String  imageSites = UploadFileUtil.uploadFileUtil(space,productDetails.getProductId().toString(),imageList.get(i).getImageSite());
+                    String  imageSites = UploadFileUtil.uploadFileUtil(space,productId.toString(),imageList.get(i).getImageSite());
                     productImage.setImageSite(imageSites);
                     productImage.setSign(imageList.get(i).getSign());
-                    productImage.setProductId(productDetails.getProductId());
+                    productImage.setProductId(productId);
                     imageSiteList.add(productImage);
                     //删除缓存
                     redisUtil.del(imageList.get(i).getImageSite()+"Succeed");
                 }
-                productDao.addProductImage(imageSiteList);
             }
         }
-        Integer productId = productDetails.getProductId();
-        //添加商品配置
-        List<ProductContext> productContexts = productDetails.getProductContexts();
-        for (int i = 0; i <productContexts.size() ; i++) {
-            productContexts.get(i).setProductId(productId);
-        }
-        productDao.addProductContext(productContexts);
+        return imageList;
+    }
 
 
-        ProductDetails productDetails1 = new ProductDetails();
-        List<ProductContext>  productContextsList = productDao.findProductAttribute(productId);
-
-
-        if (productContextsList!=null){
-            productDetails1.setProductContexts(productContextsList);
-            productDetails1 = setProductConfiguration(productDetails1);
-            productDetails1.setProductId(productId);
-        }else {
-            productDetails1 = null;
-        }
+    /**
+     * 获取配置的排列组合
+     * @param productDetails 商品对象
+     * @return
+     */
+    public  List<Distinction> distinctions(ProductDetails productDetails , Integer productId){
 
         //获取商品种类
-       List<List<String>> list = getProductConfiguration(productDetails1);
-
+        List<List<String>> list = getProductConfiguration(productDetails);
         if (list.size()>0){
             //定义配置二维数组
             String[][] array = new String[list.size()][];
@@ -217,59 +509,16 @@ public class ProductServiceImpl implements ProductService {
                 }
                 productContextslist.add(productContextList);
             }
-           List<Distinction> distinctions =  addProductDetails(productContextslist);
+            List<Distinction> distinctions =  addProductDetails(productContextslist);
 
             for (int i = 0; i <distinctions.size() ; i++) {
                 distinctions.get(i).setProductId(productId);
             }
             //添加商品配置
-            productDao.addDistinction(distinctions);
+            return distinctions;
         }
-        //查询不同配置集合 库存 价格
-        List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productId);
-        productDetails1.setProductDistinctions(productDistinctions);
-
-        return productDetails1;
+       return null;
     }
-
-    /**
-     * 修改商品库存
-     * @param productDistinctions 商品配置详细
-     * @return
-     */
-    @Override
-    public Integer updateDetails( List<ProductDistinction> productDistinctions) {
-
-        productDao.updateDetails(productDistinctions);
-        return null;
-    }
-
-    /**
-     * 查询所有商品种类
-     * @return
-     */
-    @Override
-    public List<AttributeType> findAttributeType() {
-        List<AttributeType>  attributeTypes =  productDao.findAttributeType();
-        return attributeTypes;
-    }
-
-
-    /**
-     * 查询总页数跟总数量
-     * @param pageSize 每页查询数量
-     * @return
-     */
-    @Override
-    public Integer[] fendTotalPage(Integer pageSize) {
-        Integer[] TotalPage=new Integer[2];
-        Integer quantity = productDao.findFavoriteQuantity();
-        int totalPage = (quantity % pageSize)  == 0 ? quantity/pageSize : (quantity/pageSize) + 1;
-        TotalPage[0]=quantity;
-        TotalPage[1]=totalPage;
-        return TotalPage;
-    }
-
 
 
     /**
@@ -280,11 +529,14 @@ public class ProductServiceImpl implements ProductService {
     public List<String> findContext(List<ProductContext> productContexts){
         List<String> productContext = new ArrayList<>();
         for (int i = 0; i <productContexts.size() ; i++) {
-           String product = productContexts.get(i).getTitleId()+"/"+productContexts.get(i).getAttributeId();
+            String product = productContexts.get(i).getTitleId()+"/"+productContexts.get(i).getAttributeId();
             productContext.add(product);
         }
         return productContext;
     }
+
+
+
 
     /**
      * 商品配置分类
@@ -297,6 +549,9 @@ public class ProductServiceImpl implements ProductService {
             Distinction context =new Distinction();
             for (int j = 0; j <productContexts.get(i).size() ; j++) {
                 Integer type =  productContexts.get(i).get(j).getTitleId();
+                if (type==null){
+                    type = productContexts.get(i).get(j).getAttributeId();
+                }
                 Integer attributeId = productContexts.get(i).get(j).getAttributeId();
                 switch(type){
                     case 11 :
@@ -364,6 +619,9 @@ public class ProductServiceImpl implements ProductService {
                 for (int j = 0; j <productContexts.size() ; j++) {
                     //该商品属性类型
                     Integer type = productContexts.get(j).getTitleId();
+                    if (type==null){
+                        type = Integer.parseInt(productContexts.get(j).getAttributeType());
+                    }
                     //当前属性
                     ProductContext productContext = productContexts.get(j);
                     switch(type){

@@ -142,38 +142,38 @@
     <!--按条件查询订单-->
     <select id="findAllOrder" resultMap="allOrderMap">
         SELECT
-        uo.*,
-        o.productName,
-        o.purchaseId,
-        o.productImage,
-        o.productPrice,
-        o.productConfiguration,
-        o.productQuantity,
-        o.productWeight,
-        o.evaluate,
-        o.productState,
-        o.ProductId,
-        oa.orderId AS orderIds,
-        oa.NAME,
-        oa.areas,
-        oa.detailedAddress,
-        oa.phone,
-        oa.email,
-        oa.alias
-        FROM
-        userOrder uo
-        LEFT JOIN orders o ON uo.orderId = o.orderId
-        LEFT JOIN orderAddress oa ON uo.orderId = oa.orderId
-        WHERE
-        uo.orderId IN (
+            uo.*,
+            o.productName,
+            o.purchaseId,
+            o.productImage,
+            o.productPrice,
+            o.productConfiguration,
+            o.productQuantity,
+            o.productWeight,
+            o.evaluate,
+            o.productState,
+            o.ProductId,
+            oa.orderId AS orderIds,
+            oa.NAME,
+            oa.areas,
+            oa.detailedAddress,
+            oa.phone,
+            oa.email,
+            oa.alias
+            FROM
+            userOrder uo
+            LEFT JOIN orders o ON uo.orderId = o.orderId
+            LEFT JOIN orderAddress oa ON uo.orderId = oa.orderId
+         WHERE
+            uo.orderId IN (
         SELECT
-        orderId
+            orderId
         FROM
-        (
-        SELECT
-        uos.orderId
+            (
+            SELECT
+            uos.orderId
         FROM
-        userOrder uos
+            userOrder uos
         <where>
             AND uos.userId = #{userId}
                 <if test = "orderState!=0" >
@@ -310,12 +310,10 @@
     <!--查询商品不同状态数量-->
     <select id="findProductQuantity" resultType="java.lang.Integer">
         SELECT
-        count(*)
+            count(*)
         FROM
-        orders
-
+            orders
         WHERE
-
         orderId IN (SELECT orderId FROM (SELECT orderId FROM userOrder WHERE userId = #{userId} AND isDelete = 0) AS orderId)
         AND
         <if test="productState==2">
@@ -332,26 +330,26 @@
 
     <!--查询不同状态商品-->
     <select id="findOrderProduct" resultType="cn.itcast.domain.order.ProductContent">
-    SELECT
-        s.* ,uo.paymentTime
-    FROM
-        orders s
-        LEFT JOIN userOrder uo ON s.orderId = uo.orderId
-    WHERE
-        s.orderId IN (SELECT orderId FROM (SELECT orderId FROM userOrder WHERE userId = #{userId}  ORDER BY
-        paymentWay DESC
-        LIMIT #{start}, #{pageSize} ) AS orderId)
-     AND
-     <if test="productState==2">
-       ( s.productState   =  1 or   s.productState    =  2)
-     </if>
-    <if test="productState==3">
-        s.productState  =  3
-    </if>
-    <if test="productState==4">
-        productState  =  4
-    </if>
-        AND s.isDelete=0
+        SELECT
+            s.* ,uo.paymentTime
+        FROM
+            orders s
+            LEFT JOIN userOrder uo ON s.orderId = uo.orderId
+        WHERE
+            s.orderId IN (SELECT orderId FROM (SELECT orderId FROM userOrder WHERE userId = #{userId}  ORDER BY
+            paymentWay DESC
+            LIMIT #{start}, #{pageSize} ) AS orderId)
+         AND
+         <if test="productState==2">
+           ( s.productState   =  1 or   s.productState    =  2)
+         </if>
+        <if test="productState==3">
+            s.productState  =  3
+        </if>
+        <if test="productState==4">
+            productState  =  4
+        </if>
+            AND s.isDelete=0
     </select>
 
     <!--查询购买商品的id跟数量-->

@@ -67,7 +67,6 @@ public class ProductController {
         return new ResultContent(CommonCode.SUCCESS,results);
     }
 
-
     /**
      * 添加商品
      * @param productDetails 商品类
@@ -89,8 +88,11 @@ public class ProductController {
      */
     @RequestMapping(value = "updateProductContext",method = RequestMethod.PUT)
     public ResultContent updateProductContext(@RequestBody  List<ProductDistinction> productDistinctions){
-        productService.updateDetails(productDistinctions);
-        return new ResultContent(CommonCode.SUCCESS,null);
+        Integer result = productService.updateDetails(productDistinctions);
+        if (result>0){
+            return new ResultContent(CommonCode.SUCCESS,null);
+        }
+            return new ResultContent(CommonCode.FAIL,null);
     }
 
     /**
@@ -104,5 +106,19 @@ public class ProductController {
         results.setData(attributeTypes);
         return new ResultContent(CommonCode.SUCCESS,results);
     }
+    /**
+     * 修改商品
+     * @param productDetails
+     * @return
+     */
+    @RequestMapping(value = "updateProduct",method = RequestMethod.POST)
+    public ResultContent updateProduct(@RequestBody ProductDetails productDetails) throws IOException {
+        Integer result = productService.updateProduct(productDetails);
+        if (result>0){
+            return new ResultContent(CommonCode.SUCCESS,null);
+        }
+        return new ResultContent(CommonCode.FAIL,null);
+    }
+
 
 }

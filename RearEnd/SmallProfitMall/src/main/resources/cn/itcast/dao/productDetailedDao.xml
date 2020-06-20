@@ -114,16 +114,15 @@
     <!--查询同类型的商品推荐-->
     <select id="findFinalRecommend" resultType="cn.itcast.domain.ProductDatails.Recommend">
         SELECT
-        ImageSite,ProductId
+            ImageSite,ProductId
         FROM
-        ProductImage
+            ProductImage
         WHERE
-        ProductId IN (
+            ProductId IN (
         SELECT
-        ProductId
+            ProductId
         FROM
-        ProductBasis pb
-
+            ProductBasis pb
         WHERE
         <if test="gradePrimary==1">
             productFinalCategory = ( SELECT pb.productFinalCategory FROM ProductBasis pb JOIN ProductPrice pp ON pb.ProductId=pp.ProductId WHERE pb.ProductId = #{productId}  order by pp.ProductSales  )

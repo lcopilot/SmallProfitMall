@@ -54,4 +54,11 @@ public interface ProductService {
      */
     public List<AttributeType> findAttributeType();
 
+    /**
+     * 编辑商品
+     * @param productDetails 商品对象
+     * @return
+     */
+    public Integer updateProduct(ProductDetails productDetails) throws IOException;
+
 }

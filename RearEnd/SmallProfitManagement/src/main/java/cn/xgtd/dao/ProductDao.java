@@ -93,7 +93,6 @@ public interface ProductDao {
      */
     public List<AttributeType> findAttributeType();
 
-
     /**
      * 查询添加商品的配置
      *
@@ -116,4 +115,30 @@ public interface ProductDao {
      * @return
      */
     public Integer updateDetails(List<ProductDistinction>  distinctions);
+
+    /**
+     * 修改商品基本信息信息
+     * @param productDetails 商品对象
+     * @return
+     */
+    public Integer updateProduct(ProductDetails productDetails);
+
+    /**
+     * 查询商品配置信息
+     * @param productId 商品id
+     * @return
+     */
+    public List<ProductContext> findProductContext(Integer productId);
+
+    /**
+     *删除商品配置
+     * @return
+     */
+    public Integer deleteContext(@Param("list") List<ProductContext> productContexts,@Param("productId") Integer productId);
+    /**
+     * 删除商品配置
+     * @param productContexts 配置集合
+     * @return
+     */
+    public Integer deleteDistinction(@Param("list") List<ProductContext> productContexts,@Param("productId") Integer productId);
 }

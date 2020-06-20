@@ -37,6 +37,7 @@
 
     </resultMap>
 
+    <!--商品配置map-->
     <resultMap id="productContextMap" type="cn.xgtd.domain.product.ProductContext">
      <id property="attributeId" column="attributeId"></id>
             <result property="attributeContent" column="attributeContent"></result>
@@ -251,7 +252,6 @@
 
       <!--新增商品配置组合-->
       <insert id="addDistinction" parameterType="cn.xgtd.domain.product.Distinction">
-
           INSERT INTO productDistinction
             <trim prefix="(" suffix=")" suffixOverrides=",">
                     productId,
@@ -267,47 +267,82 @@
        <foreach collection="list" item="item" index="index" separator=",">
                   <trim prefix=" (" suffix=")" suffixOverrides=",">
                         #{item.productId},
-                        <if test="item.sizeId != null">
-                             #{item.sizeId},
-                        </if>
-                        <if test="item.colourId != null">
-                            #{item.colourId},
-                         </if>
-                        <if test="item.comboId != null">
-                            #{item.comboId},
-                        </if>
-                        <if test="item.specificationId != null">
-                             #{item.specificationId},</if>
-                        <if test="item.tasteId != null">
-                            #{item.tasteId},
-                        </if>
-                        <if test="item.kindId != null">
-                                #{item.kindId},
-                         </if>
-                        <if test="item.versionIfId != null">
-                                #{item.versionIfId},
-                        </if>
+                        <if test="item.sizeId != null"> #{item.sizeId},</if>
+                        <if test="item.colourId != null">#{item.colourId},</if>
+                        <if test="item.comboId != null"> #{item.comboId},</if>
+                        <if test="item.specificationId != null"> #{item.specificationId},</if>
+                        <if test="item.tasteId != null">#{item.tasteId},</if>
+                        <if test="item.kindId != null">#{item.kindId},</if>
+                        <if test="item.versionIfId != null">#{item.versionIfId},</if>
                     </trim>
       </foreach>
-
-
        </insert>
 
           <!--添加配置-->
        <update id="updateDetails" parameterType="java.util.List">
-       <foreach collection="list" item="item" index="index" separator=";">
-            UPDATE  productDistinction
-           <set>
-                <if test="item.productPrice != null">
-                    productPrice = #{item.productPrice},
-                </if>
-                <if test="item.productInventory != null">
-                    ProductInventory = #{item.productInventory},
-                </if>
-            </set>
-            WHERE distinctionId = #{item.distinctionId}
-      </foreach>
+           <foreach collection="list" item="item" index="index" separator=";">
+                UPDATE  productDistinction
+               <set>
+                    <if test="item.productPrice != null">
+                        productPrice = #{item.productPrice},
+                    </if>
+                    <if test="item.productInventory != null">
+                        ProductInventory = #{item.productInventory},
+                    </if>
+                </set>
+                WHERE distinctionId = #{item.distinctionId}
+          </foreach>
        </update>
+
+     <!--修改商品基本信息-->
+     <update id="updateProduct" parameterType="cn.xgtd.domain.product.ProductDetails">
+          UPDATE  ProductBasis SET
+            ProductName = #{productName} , ProductVideo = #{productName} , ProductWeight = #{weight} ,
+            prodcutPrimaryCategory = #{productClassify.productPrimaryId},productSecondaryCategory = #{productClassify.productSecondaryId}
+            productFinalCategory = #{productClassify.productFinalId},productDescription = #{productDescription},productAfterSale#{productAfterSale}
+            ,productParameter#{productParameter}
+     </update>
+
+    <!--查询商品指定配置内容-->
+     <select id="findProductContext" parameterType="java.lang.Integer" resultMap="productContextMap">
+        SELECT * FROM productAttribute WHERE productId = #{productId}
+     </select>
+
+    <!--删除商品配置-->
+    <delete id="deleteContext">
+        <if test="list != null">
+              <foreach collection="list" item="item" index="index" separator=";">
+                DELETE FROM  productAttribute
+                WHERE attributeId = #{item.attributeId}
+
+              </foreach>
+          </if>
+          <if test="productId!=null ">
+                DELETE FROM  productAttribute   WHERE productId = #{productId}
+          </if>
+    </delete>
+
+     <!--删除商品配置组合-->
+     <update id="deleteDistinction">
+        <if test="list != null">
+           <foreach collection="list" item="item" index="index" separator=";">
+                UPDATE productDistinction
+                 SET
+                   sign = 1
+                where
+                    sizeId = #{item.attributeId}
+                    OR colourId = #{item.attributeId}
+                    OR comboId = #{item.attributeId}
+                    OR specificationId = #{item.attributeId}
+                    OR tasteId = #{item.attributeId}
+                    OR kindId = #{item.attributeId}
+                    OR versionId = #{item.attributeId}
+          </foreach>
+      </if>
+      <if test="productId!=null ">
+               UPDATE productDistinction SET sign = 1  WHERE productId = #{productId}
+          </if>
+     </update>
 
 
 

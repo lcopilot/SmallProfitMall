@@ -34,12 +34,17 @@ public interface RoleService {
     public List<Role> findRoleList(Integer rId);
 
     /**
-     * 删除角色
+     * 删除角色提示
      * @param rId 角色id
-     * @return
+     * @return  返回管理用户
      */
     public  List<String> deleteRole(Integer rId);
 
+    /**
+     * 删除角色
+     * @param rId
+     * @return
+     */
     public Integer deleteRoleUser(Integer rId);
 
     /**
