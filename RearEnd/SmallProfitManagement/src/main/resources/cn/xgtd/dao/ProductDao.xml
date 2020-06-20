@@ -37,7 +37,7 @@
 
     </resultMap>
 
-    <!--商品配置map-->
+    <!--商品配置-->
     <resultMap id="productContextMap" type="cn.xgtd.domain.product.ProductContext">
      <id property="attributeId" column="attributeId"></id>
             <result property="attributeContent" column="attributeContent"></result>
@@ -45,7 +45,7 @@
             <result property="titleId" column="attributeType"></result>
     </resultMap>
 
-    <!--商品分类map-->
+    <!--商品分类-->
     <resultMap id="productClassifyMap" type="cn.xgtd.domain.product.ProductClassify">
         <result property="productPrimaryId" column="product_primary_id"></result>
         <result property="primaryContent" column="category_content"></result>
@@ -69,7 +69,7 @@
         </collection>
     </resultMap>
 
-    <!--商品配置map-->
+    <!--商品配置-->
     <resultMap id="ProductDistinctionMap" type="cn.xgtd.domain.product.ProductDistinction">
         <result property="sizeId" column="sizeId"></result>
         <result property="sizeContent" column="ps_attributeContent"></result>
@@ -296,11 +296,17 @@
 
      <!--修改商品基本信息-->
      <update id="updateProduct" parameterType="cn.xgtd.domain.product.ProductDetails">
-          UPDATE  ProductBasis SET
-            ProductName = #{productName} , ProductVideo = #{productName} , ProductWeight = #{weight} ,
-            prodcutPrimaryCategory = #{productClassify.productPrimaryId},productSecondaryCategory = #{productClassify.productSecondaryId}
-            productFinalCategory = #{productClassify.productFinalId},productDescription = #{productDescription},productAfterSale#{productAfterSale}
-            ,productParameter#{productParameter}
+         UPDATE ProductBasis
+            SET
+            <if test="productName!=null"> ProductName = #{productName}, </if>
+            <if test="video!=null"> ProductVideo = #{video} ,</if>
+            <if test="weight!=null"> ProductWeight = #{weight}, </if>
+            prodcutPrimaryCategory = #{productClassify.productPrimaryId},
+            productSecondaryCategory = #{productClassify.productSecondaryId}
+            productFinalCategory = #{productClassify.productFinalId},
+            productDescription = #{productDescription},
+            productAfterSale#{productAfterSale},
+            productParameter #{productParameter}
      </update>
 
     <!--查询商品指定配置内容-->
@@ -343,6 +349,11 @@
                UPDATE productDistinction SET sign = 1  WHERE productId = #{productId}
           </if>
      </update>
+
+      <!--查询商品图片-->
+     <select id="findProductImage" parameterType="java.lang.Integer" resultType="cn.xgtd.domain.product.ProductImage">
+        SELECT ImageSite FROM WHERE ProductId = #{productId}
+     </select>
 
 
 

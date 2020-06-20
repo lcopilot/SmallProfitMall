@@ -85,7 +85,7 @@ public interface UserDao {
      * @param rId 角色id
      * @return
      */
-    public Integer deleteUser(Integer userId,Integer rId);
+    public Integer deleteUser(@Param("userId") Integer userId,@Param("rId") Integer rId);
 
     /**
      * 修改用户

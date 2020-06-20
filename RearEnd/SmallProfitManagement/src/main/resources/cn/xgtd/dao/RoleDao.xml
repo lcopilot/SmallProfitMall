@@ -34,41 +34,41 @@
 
    <!--查询所有子节点角色-->
    <select id="findRoleList"  resultMap="roleMap">
-    SELECT
-        mr.r_id,
-        mr.menus,
-        mr.NAME,
-        mr.role_ids,
-        mr.create_time AS mr_create_time,
-        mr.create_author_id,
-        mr.last_time AS mr_last_time,
-        mrc.user_name AS mrc_creator_name,
-        mrl.user_name AS mrl_last_name
-    FROM
-        management_role mr
-        LEFT JOIN management_user mrc ON mrc.u_id = mr.create_author_id
-        LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
-    WHERE
-        mr.sign = 0 AND(
-        mr.r_id IN (
         SELECT
-            r_id
+            mr.r_id,
+            mr.menus,
+            mr.NAME,
+            mr.role_ids,
+            mr.create_time AS mr_create_time,
+            mr.create_author_id,
+            mr.last_time AS mr_last_time,
+            mrc.user_name AS mrc_creator_name,
+            mrl.user_name AS mrl_last_name
         FROM
-            management_role
+            management_role mr
+            LEFT JOIN management_user mrc ON mrc.u_id = mr.create_author_id
+            LEFT JOIN management_user mrl ON mrl.u_id = mr.last_author_id
         WHERE
-            create_author_id IN ( SELECT descendant_id FROM ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} ) ) ) AS descendant_id )
+            mr.sign = 0 AND(
+            mr.r_id IN (
+            SELECT
+                r_id
+            FROM
+                management_role
+            WHERE
+                create_author_id IN ( SELECT descendant_id FROM ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} ) ) ) AS descendant_id )
+            )
+            OR mr.r_id IN (
+            SELECT
+                role_id
+            FROM
+                management_user
+            WHERE
+            u_id IN ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} ) ) )
+            )
         )
-        OR mr.r_id IN (
-        SELECT
-            role_id
-        FROM
-            management_user
-        WHERE
-        u_id IN ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} ) ) )
-        )
-    )
-      ORDER BY
-	mr.last_time DESC
+          ORDER BY
+        mr.last_time DESC
     </select>
 
     <!--查询指定角色-->

@@ -1,5 +1,6 @@
 package cn.xgtd.domain.product;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @author Kite
  * @date 2020/6/18
  */
-public class Details {
+public class Details implements Serializable {
 
     /**
      * 商品id

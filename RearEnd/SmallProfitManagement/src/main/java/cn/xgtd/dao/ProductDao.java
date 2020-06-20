@@ -141,4 +141,11 @@ public interface ProductDao {
      * @return
      */
     public Integer deleteDistinction(@Param("list") List<ProductContext> productContexts,@Param("productId") Integer productId);
+
+    /**
+     *查询商品图片
+     * @param productId
+     * @return
+     */
+    public List<ProductImage> findProductImage(Integer productId);
 }

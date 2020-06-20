@@ -61,4 +61,11 @@ public interface ProductService {
      */
     public Integer updateProduct(ProductDetails productDetails) throws IOException;
 
+    /**
+     * 修改商品配置
+     * @param productId 商品id
+     * @param productDetails 配置信息
+     */
+    public void updateProductContexts(Integer productId ,List<ProductContext>  productDetails);
+
 }

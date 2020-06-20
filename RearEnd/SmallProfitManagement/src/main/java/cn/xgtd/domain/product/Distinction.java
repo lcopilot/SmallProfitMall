@@ -1,10 +1,12 @@
 package cn.xgtd.domain.product;
 
+import java.io.Serializable;
+
 /**
  * @author Kite
  * @date 2020/6/18
  */
-public class Distinction {
+public class Distinction implements Serializable {
     /**商品id**/
     private Integer productId;
     /**尺寸id**/

@@ -1,11 +1,13 @@
 package cn.xgtd.domain.product;
 
+import java.io.Serializable;
+
 /**
  * 商品属性种类
  * @author Kite
  * @date 2020/6/15
  */
-public class AttributeType {
+public class AttributeType implements Serializable {
     /**属性种类id**/
     private Integer attributeTypeId;
     /**属性值**/
