@@ -162,4 +162,6 @@ public interface ProductDao {
      * @return
      */
     public Integer updateImageSige(Integer id);
+
+
 }

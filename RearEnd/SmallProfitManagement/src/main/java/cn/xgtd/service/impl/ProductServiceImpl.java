@@ -205,9 +205,8 @@ public class ProductServiceImpl implements ProductService {
         //转种类集合为对象
         ProductClassify productClassify = updateProductClassify(productDetails.getProductClassifyList());
         productDetails.setProductClassify(productClassify);
-        //修改商品
+        //修改商品基本信息
         productDao.updateProduct(productDetails);
-
         //商品图片上传
         List<ProductImage> productImages= new ArrayList<>();
         productImages = productDao.findProductImage(productId);

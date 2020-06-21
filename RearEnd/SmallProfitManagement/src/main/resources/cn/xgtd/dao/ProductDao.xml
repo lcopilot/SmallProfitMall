@@ -161,7 +161,7 @@
             LEFT JOIN productAttribute pk ON pd.kindId = pk.attributeId
             LEFT JOIN productAttribute pv ON pd.versionId = pv.attributeId
         WHERE
-            pd.productId = #{productId}
+            pd.productId = #{productId} AND pd.sign<![CDATA[!= ]]> 1
     </select>
 
     <!--查询商品库跟销量-->
@@ -308,6 +308,8 @@
             productAfterSale = #{productAfterSale},
             productParameter = #{productParameter}
             WHERE ProductId = #{productId}
+
+       ; UPDATE ProductPrice SET ProductPrice = #{productPrice} WHERE productId = #{productId}
      </update>
 
     <!--查询商品指定配置内容-->
@@ -366,9 +368,12 @@
           </if>
       </delete>
 
+        <!--修改商品图片-->
       <update id="updateImageSige" parameterType="java.lang.Integer">
         UPDATE ProductImage SET sign = 1  WHERE id = #{id}
       </update>
+
+
 
 
 
