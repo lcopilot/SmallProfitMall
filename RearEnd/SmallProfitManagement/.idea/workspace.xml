@@ -7,9 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5b2d03f-bf2b-4795-a9c5-70ed651f908b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/controller/PayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/controller/PayController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/service/impl/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/domain/product/ProductDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/domain/product/ProductDetails.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ProductDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ProductDao.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -62,7 +63,7 @@
   <component name="ProjectId" id="1dTCAhoxSM2TUTBSnX8uVfNKnyR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="MyBatisLogPluginindexNum" value="316" />
+    <property name="MyBatisLogPluginindexNum" value="353" />
     <property name="MyBatisLogPluginparameters" value="Parameters:" />
     <property name="MyBatisLogPluginpreparing" value="Preparing:" />
     <property name="MyBatisLogPluginrunning" value="true" />
@@ -227,7 +228,7 @@
       <workItem from="1592643607175" duration="963000" />
       <workItem from="1592644735552" duration="5293000" />
       <workItem from="1592700216451" duration="8210000" />
-      <workItem from="1592721453497" duration="5451000" />
+      <workItem from="1592721453497" duration="5941000" />
     </task>
     <task id="LOCAL-00001" summary="添加商品信息">
       <created>1592447861744</created>
@@ -355,7 +356,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592724113638</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="修复编辑商品价格不修改问题">
+      <created>1592728514049</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1592728514049</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

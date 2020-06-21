@@ -71,7 +71,16 @@ public class ProductDetails implements Serializable {
     private List<Integer> productClassifyList;
     /**商品图片传入集合**/
     private List<ProductImage> productImages;
+    /**商品状态 1为上级 0为下价**/
+    private Boolean productState;
 
+    public Boolean getProductState() {
+        return productState;
+    }
+
+    public void setProductState(Boolean productState) {
+        this.productState = productState;
+    }
 
     public List<Integer> getProductClassifyList() {
         return productClassifyList;

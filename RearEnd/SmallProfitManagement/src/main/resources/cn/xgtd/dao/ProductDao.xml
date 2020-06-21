@@ -111,6 +111,7 @@
             pb.productDescription,
             pb.productAfterSale,
             pb.productParameter,
+            pb.productState,
             pp.ProductPrice,
             pp.SpikePrice,
             pp.SalesPrice,
