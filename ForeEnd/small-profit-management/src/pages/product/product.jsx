@@ -129,16 +129,14 @@ const Product = (props) => {
   }
   //获取商品
   const getProductList=(currentPage,pageSize)=>{
-    if (!currentPage && !pageSize){
-      const pagination=storageUtils.getProductPagination()
-      currentPage=pagination?pagination.current:PAGINATION.defaultCurrent
-      pageSize=pagination?pagination.pageSize:PAGINATION.defaultPageSize
-    }
+    const pagination=storageUtils.getProductPagination()
+    currentPage=pagination?pagination.current:PAGINATION.defaultCurrent
+    pageSize=pagination?pagination.pageSize:PAGINATION.defaultPageSize
     setProductPagination({
       currentPage:currentPage,
       pageSize:pageSize,
     })
-    indexAPI.getProductList(productPagination).then(res=>{
+    indexAPI.getProductList(pagination?pagination:productPagination).then(res=>{
       if (res.success){
         setProductList(res.pagination)
         setSkeletonLoad(false)
@@ -149,7 +147,8 @@ const Product = (props) => {
   useEffect(()=>{
     getProductList()
     getProductAttributes();
-    return ()=>{}
+    return ()=>{
+    }
   },[])
 
   const title = (
