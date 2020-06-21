@@ -145,7 +145,7 @@ const Product = (props) => {
   //获取商品
   const getProductList=(currentPage,pageSize)=>{
     const pagination=storageUtils.getProductPagination()
-    currentPage=pagination?pagination.current:PAGINATION.defaultCurrent
+    currentPage=pagination?pagination.currentPage:PAGINATION.defaultCurrent
     pageSize=pagination?pagination.pageSize:PAGINATION.defaultPageSize
     setProductPagination({
       currentPage:currentPage,
