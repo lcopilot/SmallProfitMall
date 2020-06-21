@@ -342,7 +342,6 @@ const AddUpProduct = (props) => {
     if (!productDetail) {
       return null
     }
-    console.log(productDetail)
     const productAttList = [];
     Object.keys(productDetail).some((item) => {
       productAttributesList.some((att) => {
