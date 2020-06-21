@@ -195,18 +195,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDetails updateProduct(ProductDetails productDetails) throws IOException {
         Integer productId = productDetails.getProductId();
-//        //设置视频
-//        String videoFileName = productDetails.getVideo();
-//        if (videoFileName!=null && !videoFileName.equals("")){
-//            String videoUrl = uploadingVideo(videoFileName);
-//            productDetails.setVideo(videoUrl);
-//        }
-//
-//        //转种类集合为对象
-//        ProductClassify productClassify = updateProductClassify(productDetails.getProductClassifyList());
-//        productDetails.setProductClassify(productClassify);
-//        //修改商品
-//        productDao.updateProduct(productDetails);
+        //设置视频
+        String videoFileName = productDetails.getVideo();
+        if (videoFileName!=null && !videoFileName.equals("")){
+            String videoUrl = uploadingVideo(videoFileName);
+            productDetails.setVideo(videoUrl);
+        }
+
+        //转种类集合为对象
+        ProductClassify productClassify = updateProductClassify(productDetails.getProductClassifyList());
+        productDetails.setProductClassify(productClassify);
+        //修改商品
+        productDao.updateProduct(productDetails);
 
         //商品图片上传
         List<ProductImage> productImages= new ArrayList<>();
@@ -265,9 +265,9 @@ public class ProductServiceImpl implements ProductService {
                 productDao.addProductImage(prodnuctList);
             }
         }
-//
-//        //修改商品配置
-//        updateProductContexts(productId, productDetails.getProductContexts());
+
+        //修改商品配置
+        updateProductContexts(productId, productDetails.getProductContexts());
         ProductDetails productDetailss = new ProductDetails();
         //查询不同配置集合 库存 价格
         List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productId);
