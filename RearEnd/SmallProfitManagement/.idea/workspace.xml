@@ -6,20 +6,14 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5b2d03f-bf2b-4795-a9c5-70ed651f908b" name="Default Changelist" comment="删除图片上传">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/dao/ProductDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/test/test3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/test/test3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ProductDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ProductDao.xml" afterDir="false" />
-    </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="eae82df3-1fdb-4762-8762-9feadf423edd" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -35,16 +29,11 @@
     <expand />
     <select />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="JRebelWorkspace">
+    <option name="jrebelEnabledAutocompile" value="true" />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -54,70 +43,62 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="localRepository" value="D:\maven_repository\maven_repository" />
-        <option name="mavenHome" value="D:/apache-maven-3.5.2-bin/apache-maven-3.5.2" />
-        <option name="userSettingsFile" value="D:\apache-maven-3.5.2-bin\apache-maven-3.5.2\conf\settings.xml" />
-      </MavenGeneralSettings>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectId" id="1dTCAhoxSM2TUTBSnX8uVfNKnyR" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1ctOPN0itE9xFS3Xp7wZT22rswV" />
+  <component name="ProjectViewState">
+    <option name="abbreviatePackageNames" value="true" />
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="MyBatisLogPluginindexNum" value="32" />
-    <property name="MyBatisLogPluginparameters" value="Parameters:" />
-    <property name="MyBatisLogPluginpreparing" value="Preparing:" />
-    <property name="MyBatisLogPluginrunning" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.14151925" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\SmallProfitMall\RearEnd\SmallProfitManagement\src\main\resources" />
-      <recent name="D:\SmallProfitMall\RearEnd\SmallProfitManagement\src\main\resources\cn\xgtd\dao" />
-    </key>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
+  </component>
+  <component name="RestServicesNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="Found 17 services " type="fcff1e1b:RestServiceStructure$RootNode" />
+        </path>
+        <path>
+          <item name="Found 17 services " type="fcff1e1b:RestServiceStructure$RootNode" />
+          <item name="SmallProfit" type="c588b436:RestServiceStructure$ProjectNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
   </component>
   <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
+    <option name="excludedTypes">
+      <set>
+        <option value="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" />
+      </set>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.17">
-    <configuration name="test3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cn.xgtd.test.test3" />
-      <module name="SmallProfit" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.xgtd.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Tomcat 9.0.17" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.17" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="Tomcat 9.0.22" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.22" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER" value="false" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
@@ -128,9 +109,9 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="Unnamed_SmallProfit_9" />
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_SmallProfit_3" />
         <option name="HTTP_PORT" value="5000" />
-        <option name="JNDI_PORT" value="1090" />
+        <option name="JNDI_PORT" value="1093" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -138,7 +119,10 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="57934" />
+        <option name="DEBUG_PORT" value="13654" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JRebel Debug">
+        <option name="DEBUG_PORT" value="13655" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -156,6 +140,36 @@
         </SHUTDOWN>
       </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Executor">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
@@ -192,155 +206,72 @@
         </option>
       </method>
     </configuration>
-    <recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
       <list>
-        <item itemvalue="Application.test3" />
+        <serviceView>
+          <option name="contentProportion" value="0.15437159" />
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
       </list>
-    </recent_temporary>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f5b2d03f-bf2b-4795-a9c5-70ed651f908b" name="Default Changelist" comment="" />
-      <created>1592439553859</created>
+      <changelist id="eae82df3-1fdb-4762-8762-9feadf423edd" name="Default Changelist" comment="" />
+      <created>1591344397166</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1592439553859</updated>
-      <workItem from="1592439555307" duration="2211000" />
-      <workItem from="1592442469257" duration="78000" />
-      <workItem from="1592442762956" duration="14207000" />
-      <workItem from="1592469964972" duration="155000" />
-      <workItem from="1592470156937" duration="40000" />
-      <workItem from="1592470218154" duration="5797000" />
-      <workItem from="1592525912485" duration="330000" />
-      <workItem from="1592526263057" duration="100000" />
-      <workItem from="1592526564318" duration="7778000" />
-      <workItem from="1592534993886" duration="21594000" />
-      <workItem from="1592563772656" duration="851000" />
-      <workItem from="1592567081177" duration="702000" />
-      <workItem from="1592567999063" duration="5357000" />
-      <workItem from="1592588621454" duration="13056000" />
-      <workItem from="1592618961898" duration="4699000" />
-      <workItem from="1592623690498" duration="3111000" />
-      <workItem from="1592626863983" duration="12753000" />
-      <workItem from="1592642980568" duration="278000" />
-      <workItem from="1592643282494" duration="302000" />
-      <workItem from="1592643607175" duration="963000" />
-      <workItem from="1592644735552" duration="5293000" />
-      <workItem from="1592700216451" duration="7087000" />
+      <updated>1591344397166</updated>
+      <workItem from="1591344398655" duration="1734000" />
+      <workItem from="1591404082518" duration="13463000" />
+      <workItem from="1591490104316" duration="7967000" />
+      <workItem from="1591578374341" duration="5741000" />
+      <workItem from="1591619684931" duration="280000" />
+      <workItem from="1591667733522" duration="10428000" />
+      <workItem from="1591750687503" duration="5935000" />
+      <workItem from="1591833361866" duration="6188000" />
+      <workItem from="1591866933399" duration="4557000" />
+      <workItem from="1591923566467" duration="6135000" />
+      <workItem from="1592007646134" duration="1781000" />
+      <workItem from="1592039150654" duration="620000" />
+      <workItem from="1592053415657" duration="617000" />
+      <workItem from="1592098622458" duration="1002000" />
+      <workItem from="1592099690274" duration="361000" />
+      <workItem from="1592100100947" duration="6943000" />
+      <workItem from="1592181445671" duration="8793000" />
+      <workItem from="1592199221814" duration="150000" />
+      <workItem from="1592199402613" duration="4466000" />
+      <workItem from="1592227033951" duration="678000" />
+      <workItem from="1592272101961" duration="3265000" />
+      <workItem from="1592279133572" duration="5244000" />
+      <workItem from="1592354380348" duration="5450000" />
+      <workItem from="1592443411405" duration="6003000" />
+      <workItem from="1592529642561" duration="8734000" />
+      <workItem from="1592639946246" duration="3675000" />
+      <workItem from="1592705551017" duration="775000" />
     </task>
-    <task id="LOCAL-00001" summary="添加商品信息">
-      <created>1592447861744</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1592447861744</updated>
-    </task>
-    <task id="LOCAL-00002" summary="添加商品信息">
-      <created>1592450590797</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1592450590797</updated>
-    </task>
-    <task id="LOCAL-00003" summary="添加商品返回">
-      <created>1592451578783</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1592451578783</updated>
-    </task>
-    <task id="LOCAL-00004" summary="添加商品配置信息">
-      <created>1592469465912</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1592469465912</updated>
-    </task>
-    <task id="LOCAL-00005" summary="添加商品价格">
-      <created>1592528483794</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1592528483794</updated>
-    </task>
-    <task id="LOCAL-00006" summary="修改添加商品">
-      <created>1592532353636</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1592532353636</updated>
-    </task>
-    <task id="LOCAL-00007" summary="添加商品价格">
-      <created>1592533333319</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1592533333319</updated>
-    </task>
-    <task id="LOCAL-00008" summary="添加商品价格">
-      <created>1592533732271</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1592533732271</updated>
-    </task>
-    <task id="LOCAL-00009" summary="商品配置编辑">
-      <created>1592630937291</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1592630937291</updated>
-    </task>
-    <task id="LOCAL-00010" summary="编辑商品配置 商品基本信息">
-      <created>1592637270016</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1592637270016</updated>
-    </task>
-    <task id="LOCAL-00011" summary="商品上传图片无法显示问题">
-      <created>1592640585210</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1592640585210</updated>
-    </task>
-    <task id="LOCAL-00012" summary="添加商品价格">
-      <created>1592646102009</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1592646102009</updated>
-    </task>
-    <task id="LOCAL-00013" summary="删除图片上传缓存">
-      <created>1592648037142</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1592648037142</updated>
-    </task>
-    <task id="LOCAL-00014" summary="修改编辑接口">
-      <created>1592648801969</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1592648801969</updated>
-    </task>
-    <task id="LOCAL-00015" summary="修复编辑商品种类为空">
-      <created>1592650712827</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1592650712827</updated>
-    </task>
-    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -355,64 +286,178 @@
       </map>
     </option>
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="添加商品信息" />
-    <MESSAGE value="添加商品返回" />
-    <MESSAGE value="添加商品配置信息" />
-    <MESSAGE value="修改添加商品" />
-    <MESSAGE value="商品配置编辑" />
-    <MESSAGE value="编辑商品配置 商品基本信息" />
-    <MESSAGE value="商品上传图片无法显示问题" />
-    <MESSAGE value="添加商品价格" />
-    <MESSAGE value="删除图片上传缓存" />
-    <MESSAGE value="修改编辑接口" />
-    <MESSAGE value="修复编辑商品种类为空" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复编辑商品种类为空" />
+  <component name="WindowStateProjectService">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592556120109">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1592556120109" />
+    <state x="407" y="336" key="#com.intellij.javaee.module.view.common.J2EE.J2EEDeploymentDescriptorLocationPanel.changeDDPath" timestamp="1592556355733">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="407" y="336" key="#com.intellij.javaee.module.view.common.J2EE.J2EEDeploymentDescriptorLocationPanel.changeDDPath/0.0.1536.824@0.0.1536.824" timestamp="1592556355733" />
+    <state x="578" y="319" key="#com.intellij.javaee.module.view.web.EditWebRootDialog" timestamp="1592556373005">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="578" y="319" key="#com.intellij.javaee.module.view.web.EditWebRootDialog/0.0.1536.824@0.0.1536.824" timestamp="1592556373005" />
+    <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1592309460449">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592309460449" />
+    <state width="1493" height="299" key="GridCell.Tab.0.bottom" timestamp="1592707651361">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="299" key="GridCell.Tab.0.bottom/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592707651361" />
+    <state width="1493" height="299" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592658012827" />
+    <state width="1493" height="299" key="GridCell.Tab.0.center" timestamp="1592707651361">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="299" key="GridCell.Tab.0.center/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592707651361" />
+    <state width="1493" height="299" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592658012827" />
+    <state width="1493" height="299" key="GridCell.Tab.0.left" timestamp="1592707651360">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="299" key="GridCell.Tab.0.left/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592707651360" />
+    <state width="1493" height="299" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592658012827" />
+    <state width="1493" height="299" key="GridCell.Tab.0.right" timestamp="1592707651361">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="299" key="GridCell.Tab.0.right/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592707651361" />
+    <state width="1493" height="299" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592658012827" />
+    <state width="1493" height="299" key="GridCell.Tab.1.bottom" timestamp="1592707651362">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="299" key="GridCell.Tab.1.bottom/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592707651362" />
+    <state width="1493" height="299" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592658012827" />
+    <state width="1493" height="299" key="GridCell.Tab.1.center" timestamp="1592707651361">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="299" key="GridCell.Tab.1.center/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592707651361" />
+    <state width="1493" height="299" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1592658012827" />
+    <state width="1493" height="299" key="GridCell.Tab.1.left" timestamp="1592707651361">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="299" key="GridCell.Tab.1.left/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592707651361" />
+    <state width="1493" height="299" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1592658012827" />
+    <state width="1493" height="299" key="GridCell.Tab.1.right" timestamp="1592707651361">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="299" key="GridCell.Tab.1.right/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592707651361" />
+    <state width="1493" height="299" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1592658012827" />
+    <state width="1493" height="299" key="GridCell.Tab.2.bottom" timestamp="1592707651362">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="299" key="GridCell.Tab.2.bottom/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592707651362" />
+    <state width="1493" height="299" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592658012828" />
+    <state width="1493" height="299" key="GridCell.Tab.2.center" timestamp="1592707651362">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="299" key="GridCell.Tab.2.center/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592707651362" />
+    <state width="1493" height="299" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1592658012827" />
+    <state width="1493" height="299" key="GridCell.Tab.2.left" timestamp="1592707651362">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="299" key="GridCell.Tab.2.left/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592707651362" />
+    <state width="1493" height="299" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1592658012827" />
+    <state width="1493" height="299" key="GridCell.Tab.2.right" timestamp="1592707651362">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="299" key="GridCell.Tab.2.right/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592707651362" />
+    <state width="1493" height="299" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1592658012828" />
+    <state width="1493" height="338" key="GridCell.Tab.3.bottom" timestamp="1592199110496">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="338" key="GridCell.Tab.3.bottom/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592188286444" />
+    <state width="1493" height="338" key="GridCell.Tab.3.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592199110496" />
+    <state width="1493" height="338" key="GridCell.Tab.3.center" timestamp="1592199110496">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="338" key="GridCell.Tab.3.center/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592188286444" />
+    <state width="1493" height="338" key="GridCell.Tab.3.center/0.0.1536.824@0.0.1536.824" timestamp="1592199110496" />
+    <state width="1493" height="338" key="GridCell.Tab.3.left" timestamp="1592199110496">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="338" key="GridCell.Tab.3.left/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592188286444" />
+    <state width="1493" height="338" key="GridCell.Tab.3.left/0.0.1536.824@0.0.1536.824" timestamp="1592199110496" />
+    <state width="1493" height="338" key="GridCell.Tab.3.right" timestamp="1592199110496">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="338" key="GridCell.Tab.3.right/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592188286444" />
+    <state width="1493" height="338" key="GridCell.Tab.3.right/0.0.1536.824@0.0.1536.824" timestamp="1592199110496" />
+    <state width="1493" height="338" key="GridCell.Tab.8.bottom" timestamp="1591926990681">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="338" key="GridCell.Tab.8.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591926990681" />
+    <state width="1493" height="338" key="GridCell.Tab.8.center" timestamp="1591926990681">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="338" key="GridCell.Tab.8.center/0.0.1536.824@0.0.1536.824" timestamp="1591926990681" />
+    <state width="1493" height="338" key="GridCell.Tab.8.left" timestamp="1591926990681">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="338" key="GridCell.Tab.8.left/0.0.1536.824@0.0.1536.824" timestamp="1591926990681" />
+    <state width="1493" height="338" key="GridCell.Tab.8.right" timestamp="1591926990681">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="338" key="GridCell.Tab.8.right/0.0.1536.824@0.0.1536.824" timestamp="1591926990681" />
+    <state x="349" y="147" key="IDE.errors.dialog" timestamp="1592184013961">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="349" y="147" key="IDE.errors.dialog/0.0.1536.824@0.0.1536.824" timestamp="1592184013961" />
+    <state x="270" y="0" key="SettingsEditor" timestamp="1592557094726">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="270" y="54" key="SettingsEditor/0.0.1536.824/-1600.0.1600.860@0.0.1536.824" timestamp="1592273608891" />
+    <state x="270" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592557094726" />
+    <state x="447" y="150" width="642" height="524" key="find.popup" timestamp="1592199007876">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="447" y="150" width="642" height="524" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1592199007876" />
+    <state x="178" y="107" key="new project wizard" timestamp="1592309480418">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="178" y="107" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1592309480418" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>455</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/util/img/UploadFileUtil.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>332</line>
-          <option name="timeStamp" value="70" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/FilesServiceImpl.java</url>
-          <line>132</line>
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>237</line>
-          <option name="timeStamp" value="77" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>224</line>
-          <option name="timeStamp" value="80" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>243</line>
-          <option name="timeStamp" value="83" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>213</line>
-          <option name="timeStamp" value="84" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="ideajad">
+    <property name="annotate" value="false" />
+    <property name="annotateFully" value="false" />
+    <property name="braces" value="false" />
+    <property name="clear" value="false" />
+    <property name="confirmNavigationTriggeredDecompile" value="true" />
+    <property name="dead" value="true" />
+    <property name="defaultInitializers" value="false" />
+    <property name="dissassemblerOnly" value="false" />
+    <property name="fieldsFirst" value="true" />
+    <property name="fileExtension" value="java" />
+    <property name="fullyQualifiedNames" value="false" />
+    <property name="indentation" value="4" />
+    <property name="intRadix" value="10" />
+    <property name="lineNumbersAsComments" value="true" />
+    <property name="longRadix" value="10" />
+    <property name="maxStringLength" value="64" />
+    <property name="nocast" value="false" />
+    <property name="noclass" value="false" />
+    <property name="nocode" value="false" />
+    <property name="noconv" value="false" />
+    <property name="noctor" value="false" />
+    <property name="nodos" value="false" />
+    <property name="nofd" value="false" />
+    <property name="noinner" value="false" />
+    <property name="nolvt" value="false" />
+    <property name="nonlb" value="false" />
+    <property name="outputDirectory" value="" />
+    <property name="packFields" value="3" />
+    <property name="packImports" value="7" />
+    <property name="prefixNumericalClasses" value="_cls" />
+    <property name="prefixNumericalFields" value="_fld" />
+    <property name="prefixNumericalLocals" value="_lcl" />
+    <property name="prefixNumericalMethods" value="_mth" />
+    <property name="prefixNumericalParameters" value="_prm" />
+    <property name="prefixUnusedExceptions" value="_ex" />
+    <property name="readonly" value="false" />
+    <property name="safe" value="false" />
+    <property name="sort" value="false" />
+    <property name="spaceAfterKeyword" value="false" />
+    <property name="splitStringsAtNewline" value="false" />
+    <property name="useTabs" value="false" />
   </component>
 </project>

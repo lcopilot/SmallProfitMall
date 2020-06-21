@@ -295,15 +295,22 @@ const AddUpProduct = (props) => {
       });
       if (productDetail){
         product.productId=productDetail.productId
-        product.video=product.video===productDetail.video.trim()?null:product.video
+        product.video=product.video===productDetail.video?null:product.video
         product.productName=product.productName===productDetail.productName?null:product.productName
         product.productPrice=product.productPrice===productDetail.productPrice.toString()?null:product.productPrice
         product.weight=product.weight===productDetail.weight.trim()?null:product.weight
         indexAPI.editProductBasic(product).then(res=>{
           if (res.success){
-
+            if(res.results.data.productDistinctions.length!==0){
+              history.push({
+                pathname: '/products/product/productAttributes',
+                state: {isSteps, productDetail: res.results.data}
+              })
+            }else {
+              message.success("修改成功!")
+              history.push('/products/product')
+            }
           }
-          console.log(res)
         })
       }else {
         indexAPI.addProductBasic(product).then(res => {
@@ -335,6 +342,7 @@ const AddUpProduct = (props) => {
     if (!productDetail) {
       return null
     }
+    console.log(productDetail)
     const productAttList = [];
     Object.keys(productDetail).some((item) => {
       productAttributesList.some((att) => {
@@ -381,7 +389,7 @@ const AddUpProduct = (props) => {
     form.setFieldsValue({
       productAttributes: productAttList,
       productCategory: prodCatList,
-      productName: productDetail.productName,
+      productName: productDetail.productName.trim(),
       productPrice: productDetail.productPrice.toString(),
       productWeight: productDetail.weights.toString(),
     })
@@ -517,14 +525,14 @@ const AddUpProduct = (props) => {
                 rules={[{
                   required: true,
                   whitespace: true,
-                  message: '请输入商品名 3-30位',
+                  message: '请输入商品名 3-50位',
                   min: 3,
                   max: 50
                 }]}
             >
               <Input allowClear={true}
                      prefix={<AccountBookOutlined/>}
-                     maxLength={30} placeholder="请输入商品名称"/>
+                     maxLength={50} placeholder="请输入商品名称"/>
             </Form.Item>
             <Form.Item
                 name="productPrice"
