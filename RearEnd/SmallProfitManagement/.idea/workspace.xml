@@ -9,9 +9,7 @@
     <list default="true" id="f5b2d03f-bf2b-4795-a9c5-70ed651f908b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/controller/PayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/controller/PayController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/service/impl/OrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/domain/product/ProductDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/domain/product/ProductDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ProductDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ProductDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +61,7 @@
   <component name="ProjectId" id="1dTCAhoxSM2TUTBSnX8uVfNKnyR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="MyBatisLogPluginindexNum" value="353" />
+    <property name="MyBatisLogPluginindexNum" value="371" />
     <property name="MyBatisLogPluginparameters" value="Parameters:" />
     <property name="MyBatisLogPluginpreparing" value="Preparing:" />
     <property name="MyBatisLogPluginrunning" value="true" />
@@ -228,7 +226,7 @@
       <workItem from="1592643607175" duration="963000" />
       <workItem from="1592644735552" duration="5293000" />
       <workItem from="1592700216451" duration="8210000" />
-      <workItem from="1592721453497" duration="5941000" />
+      <workItem from="1592721453497" duration="6439000" />
     </task>
     <task id="LOCAL-00001" summary="添加商品信息">
       <created>1592447861744</created>
@@ -363,7 +361,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592728514049</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="修复编辑商品价格不修改问题">
+      <created>1592729149111</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1592729149111</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -404,7 +409,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>454</line>
+          <line>456</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -414,7 +419,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>331</line>
+          <line>333</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -439,7 +444,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>273</line>
+          <line>275</line>
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

@@ -271,6 +271,8 @@ public class ProductServiceImpl implements ProductService {
         //查询不同配置集合 库存 价格
         List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productId);
         productDetailss.setProductDistinctions(productDistinctions);
+        //删除原有缓存
+        redisUtil.del("productId_"+productId);
         return productDetailss;
     }
 
