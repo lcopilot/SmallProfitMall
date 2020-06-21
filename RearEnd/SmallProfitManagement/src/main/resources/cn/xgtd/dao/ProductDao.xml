@@ -308,8 +308,10 @@
             productAfterSale = #{productAfterSale},
             productParameter = #{productParameter}
             WHERE ProductId = #{productId}
+        <if test="productPrice!=null ">
+            ; UPDATE ProductPrice SET ProductPrice = #{productPrice} WHERE productId = #{productId}
+        </if>
 
-       ; UPDATE ProductPrice SET ProductPrice = #{productPrice} WHERE productId = #{productId}
      </update>
 
     <!--查询商品指定配置内容-->
