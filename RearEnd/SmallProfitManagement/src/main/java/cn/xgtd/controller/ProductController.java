@@ -113,9 +113,11 @@ public class ProductController {
      */
     @RequestMapping(value = "updateProduct",method = RequestMethod.POST)
     public ResultContent updateProduct(@RequestBody ProductDetails productDetails) throws IOException {
-        Integer result = productService.updateProduct(productDetails);
-        if (result>0){
-            return new ResultContent(CommonCode.SUCCESS,null);
+        ProductDetails result = productService.updateProduct(productDetails);
+        if (result!=null){
+            Results results = new Results();
+            results.setData(result);
+            return new ResultContent(CommonCode.SUCCESS,results);
         }
         return new ResultContent(CommonCode.FAIL,null);
     }

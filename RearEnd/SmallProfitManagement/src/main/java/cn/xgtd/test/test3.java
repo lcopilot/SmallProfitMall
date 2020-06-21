@@ -6,9 +6,14 @@ package cn.xgtd.test;
  */
 public class test3 {
     public static void main(String[] args) {
-        String str = "http.flv";
+        String image = "http:productdata.isdfmk.xyz0a2dn62WqaCdmqiL4K2doafhoaOhnqeZpKc.mp4";
 
-        String str3=str.substring(0, str.indexOf("."));
-        System.out.println(str3);
+        String str = null;
+        try {
+            str = image.substring(0, image.indexOf("/"));
+        } catch (Exception e) {
+            System.out.println(str);
+        }
+
     }
 }

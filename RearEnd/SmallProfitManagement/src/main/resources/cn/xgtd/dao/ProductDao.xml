@@ -353,8 +353,22 @@
 
       <!--查询商品图片-->
      <select id="findProductImage" parameterType="java.lang.Integer" resultType="cn.xgtd.domain.product.ProductImage">
-        SELECT ImageSite FROM WHERE ProductId = #{productId}
+        SELECT * FROM ProductImage WHERE ProductId = #{productId}
      </select>
+
+     <!--删除图片-->
+     <delete id="deleteProductImage">
+      <if test="list != null">
+              <foreach collection="list" item="item" index="index" separator=";">
+                DELETE FROM  ProductImage
+                WHERE id = #{item.id}
+              </foreach>
+          </if>
+      </delete>
+
+      <update id="updateImageSige" parameterType="java.lang.Integer">
+        UPDATE ProductImage SET sign = 1  WHERE id = #{id}
+      </update>
 
 
 

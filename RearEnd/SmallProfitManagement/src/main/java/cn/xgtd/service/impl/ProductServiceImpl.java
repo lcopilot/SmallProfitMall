@@ -107,29 +107,25 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDetails  addProduct(ProductDetails productDetails) throws IOException {
 
-        //上传视频
+        //设置视频
         String videoFileName = productDetails.getVideo();
         if (videoFileName!=null && !videoFileName.equals("")){
-            String video = UploadFileUtil.uploadFileUtil(space,videoFileName,videoFileName);
-            redisUtil.del(videoFileName.substring(0, videoFileName.indexOf("."))+"Composite");
-            productDetails.setVideo(video);
+            String videoUrl = uploadingVideo(videoFileName);
+            productDetails.setVideo(videoUrl);
         }
 
-        ProductClassify productClassify = new ProductClassify();
-        //商品分类转换
-        List<Integer> productClassifyList = productDetails.getProductClassifyList();
-        if (productClassifyList.size()==3){
-            productClassify.setProductPrimaryId(productClassifyList.get(0));
-            productClassify.setProductSecondaryId(productClassifyList.get(1));
-            productClassify.setProductFinalId((productClassifyList.get(2)));
-        }
+        //转种类集合为对象
+        ProductClassify productClassify = updateProductClassify(productDetails.getProductClassifyList());
+        productDetails.setProductClassify(productClassify);
+        //添加商品
         productDao.addProduct(productDetails);
+        //添加商品价格
         productDao.addProductPrice(productDetails.getProductId(),productDetails.getProductPrice());
         //获取添加商品的返回id
         Integer productId = productDetails.getProductId();
         //添加商品图片
         if (productDetails.getImageSite()!=null){
-            List<ProductImage> prodnuctList = uploadingImage(productDetails.getImageSite(),productId);
+            List<ProductImage> prodnuctList = uploadingImage(productDetails.getImageSite(),productId,true);
             if (prodnuctList!=null){
                 productDao.addProductImage(prodnuctList);
             }
@@ -197,30 +193,86 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public Integer updateProduct(ProductDetails productDetails) throws IOException {
+    public ProductDetails updateProduct(ProductDetails productDetails) throws IOException {
         Integer productId = productDetails.getProductId();
-        //上传视频
-        String videoFileName = productDetails.getVideo();
-        if (videoFileName!=null && !videoFileName.equals("")){
-            String video = UploadFileUtil.uploadFileUtil(space,videoFileName,videoFileName);
-            redisUtil.del(videoFileName+"Succeed");
-            productDetails.setVideo(video);
-            productDetails.setVideo(videoFileName);
-        }
-        ProductClassify productClassify = new ProductClassify();
-        //商品分类转换
-        List<Integer> productClassifyList = productDetails.getProductClassifyList();
-        if (productClassifyList.size()==3){
-            productClassify.setProductPrimaryId(productClassifyList.get(0));
-            productClassify.setProductSecondaryId(productClassifyList.get(1));
-            productClassify.setProductFinalId((productClassifyList.get(2)));
-        }
-        productDetails.setProductClassify(productClassify);
-        productDao.updateProduct(productDetails);
+//        //设置视频
+//        String videoFileName = productDetails.getVideo();
+//        if (videoFileName!=null && !videoFileName.equals("")){
+//            String videoUrl = uploadingVideo(videoFileName);
+//            productDetails.setVideo(videoUrl);
+//        }
+//
+//        //转种类集合为对象
+//        ProductClassify productClassify = updateProductClassify(productDetails.getProductClassifyList());
+//        productDetails.setProductClassify(productClassify);
+//        //修改商品
+//        productDao.updateProduct(productDetails);
 
-        //修改商品配置
-        updateProductContexts(productId, productDetails.getProductContexts());
-        return 1;
+        //商品图片上传
+        List<ProductImage> productImages= new ArrayList<>();
+        productImages = productDao.findProductImage(productId);
+        List<String> imageList = productDetails.getImageSite();
+        //需要上传的图片
+        List<String> images = new ArrayList<>();
+        for (int i = 0; i <imageList.size() ; i++) {
+            String image = imageList.get(i);
+            String str = null;
+            try {
+                str = image.substring(0, image.indexOf("/"));
+            } catch (Exception e) {
+            }
+            //是否是视频链接
+            if (str!=null && "http:".equals(str)){
+                for (int j = 0; j <productImages.size() ; j++) {
+                    //数据库是否有匹配的 有匹配的 移除
+                    String sqlImage = productImages.get(j).getImageSite();
+                  if (image.equals(sqlImage)) {
+                      productImages.remove(j);
+                  }
+                }
+            }else {
+                images.add(imageList.get(i));
+            }
+        }
+        //是否删除了主图片
+        Boolean imageSign = false;
+        //删除不使用图片
+        if (productImages.size()>0){
+            List<ProductImage> deleteImageList = new ArrayList<>();
+            for (int i = 0; i <productImages.size() ; i++) {
+                deleteImageList.add( productImages.get(i));
+                if (productImages.get(i).getSign()){
+                    imageSign = true;
+                }
+            }
+        if (deleteImageList.size()>0){
+            productDao.deleteProductImage(deleteImageList);
+        }
+
+        if (images.size()<1 && imageSign){
+           List<ProductImage> productImage = productDao.findProductImage(productId);
+           if (productImage.size()>0){
+               productDao.updateImageSige(productImage.get(0).getId());
+           }
+
+        }
+        }
+
+        //上传图片
+        if (images.size()>0){
+            List<ProductImage> prodnuctList = uploadingImage(images,productId,imageSign);
+            if (prodnuctList!=null){
+                productDao.addProductImage(prodnuctList);
+            }
+        }
+//
+//        //修改商品配置
+//        updateProductContexts(productId, productDetails.getProductContexts());
+        ProductDetails productDetailss = new ProductDetails();
+        //查询不同配置集合 库存 价格
+        List<ProductDistinction> productDistinctions = productDao.findProductDistinction(productId);
+        productDetailss.setProductDistinctions(productDistinctions);
+        return productDetailss;
     }
 
 
@@ -239,22 +291,50 @@ public class ProductServiceImpl implements ProductService {
         return TotalPage;
     }
 
+    /**
+     * 上传视频
+     * @param videoFileName 视频名
+     * @return 视频上传成功地址
+     */
+    public String uploadingVideo(String videoFileName) throws IOException {
+            String video = UploadFileUtil.uploadFileUtil(space,videoFileName,videoFileName);
+            redisUtil.del(videoFileName+"Succeed");
+            return video;
+
+    }
+
+    /**
+     * 转换商品种类集合为对象
+     * @param productClassifyList 集合
+     * @return 种类对象
+     */
+    public ProductClassify updateProductClassify(List<Integer> productClassifyList){
+        ProductClassify productClassify = new ProductClassify();
+        if (productClassifyList.size()==3){
+            productClassify.setProductPrimaryId(productClassifyList.get(0));
+            productClassify.setProductSecondaryId(productClassifyList.get(1));
+            productClassify.setProductFinalId((productClassifyList.get(2)));
+        }
+        return productClassify;
+    }
 
     /**
      * 图片上传至七牛云
      * @param imageStrings 图片集合
      * @param productId 商品id
      * @return 七牛云地址集合
+     * @param sign 是否要设置主图
+     * @return
      * @throws IOException
      */
-    public List<ProductImage>  uploadingImage(List<String> imageStrings ,Integer productId) throws IOException {
+    public List<ProductImage>  uploadingImage(List<String> imageStrings ,Integer productId,Boolean sign) throws IOException {
 
         List<ProductImage> imageList = new ArrayList<>();
         List<String> imageString = imageStrings;
         if (imageString!=null){
             for (int i = 0; i <imageString.size() ; i++) {
                 ProductImage productImage = new ProductImage();
-                if (i==0){
+                if (sign && i==0){
                     productImage.setSign(true);
                     productImage.setImageSite(imageString.get(i));
                 }else {

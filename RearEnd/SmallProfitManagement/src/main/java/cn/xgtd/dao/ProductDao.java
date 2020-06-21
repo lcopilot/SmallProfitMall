@@ -148,4 +148,18 @@ public interface ProductDao {
      * @return
      */
     public List<ProductImage> findProductImage(Integer productId);
+
+    /**
+     * 删除商品图片图片
+     * @param imageId 图片id
+     * @return
+     */
+    public Integer deleteProductImage(List<ProductImage> imageId);
+
+    /**
+     * 修改商品图片主图
+     * @param id 图片id
+     * @return
+     */
+    public Integer updateImageSige(Integer id);
 }

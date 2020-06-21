@@ -59,7 +59,7 @@ public interface ProductService {
      * @param productDetails 商品对象
      * @return
      */
-    public Integer updateProduct(ProductDetails productDetails) throws IOException;
+    public ProductDetails updateProduct(ProductDetails productDetails) throws IOException;
 
     /**
      * 修改商品配置
