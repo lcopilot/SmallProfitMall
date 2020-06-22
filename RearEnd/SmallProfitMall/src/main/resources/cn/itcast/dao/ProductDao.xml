@@ -48,7 +48,7 @@
             LEFT JOIN ProductPrice pp ON pb.ProductId = pp.ProductId
             LEFT JOIN ProductImage pi ON pb.ProductId = pi.ProductId
         WHERE
-            pi.sign = 1
+            pi.sign = 1 AND pb.productState =1
         ORDER BY
             pp.ProductSales DESC
             limit 0 ,#{quantity};

@@ -68,7 +68,6 @@ public class PayController {
                 AlipayConfig.sign_type);
         // 验证成功
         if (signVerified) {
-
             response.sendRedirect("https://www.smallprofit.fhxasdsada.xyz/orderComplete");
         } else {
         }

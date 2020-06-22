@@ -44,9 +44,10 @@ public interface ShoppingCartService {
      * 添加到货通知
      * @param userId    用户id
      * @param productId 商品id
+     * @param distinctionId 配置id
      * @return
      */
-    public int addArrivalNotice(String userId,int productId);
+    public int addArrivalNotice(String userId,int productId ,Integer distinctionId);
 
     /**
      * 修改购物车商品数量

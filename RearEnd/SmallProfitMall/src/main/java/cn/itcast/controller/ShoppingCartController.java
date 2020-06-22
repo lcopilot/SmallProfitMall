@@ -100,15 +100,16 @@ public class ShoppingCartController {
      * 添加到货通知
      * @param userId 用户id
      * @param productId 商品id
+     * @param distinctionId 配置id
      * @return
      */
     @RequestMapping(value = "/addArrivalNotice/{userId}/{productId}",method = RequestMethod.POST)
-    public QueryResponseResult addArrivalNotice(@PathVariable("userId")String userId,@PathVariable("productId") int productId){
+    public QueryResponseResult addArrivalNotice(@PathVariable("userId")String userId,@PathVariable("productId") Integer productId ,Integer distinctionId){
         if (userId ==null && productId ==0){
             //传入参数为空
             return new QueryResponseResult(CommonCode.FAIL, null);
         }
-        int redis = shoppingCartService.addArrivalNotice(userId,productId);
+        int redis = shoppingCartService.addArrivalNotice(userId,productId , distinctionId);
         QueryResult queryResult = new QueryResult();
         if (redis==1){
             return  new QueryResponseResult(CommonCode.SUCCESS, queryResult);

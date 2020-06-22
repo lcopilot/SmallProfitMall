@@ -21,6 +21,12 @@ public interface SearchProductService {
      */
     public Map findPrimaryProduct(String productName, Integer currentPage, Integer pageSize);
 
-
+    /**
+     * 查询查询出来的商品数量以及计算出多少页数
+     * @param SPrimaryContent 搜索的内容
+     * @param pageSize 每页多少数量
+     * @param PrimaryProduct 查询到的分类等级
+     * @return
+     */
     public Integer[] fendTotalPage(String SPrimaryContent,Integer pageSize,Integer PrimaryProduct);
 }

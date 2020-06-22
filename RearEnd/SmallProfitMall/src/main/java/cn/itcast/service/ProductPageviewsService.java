@@ -4,7 +4,6 @@ import cn.itcast.domain.poribuctPageviews.PoribuctPageviews;
 
 /**
  * @author Kite
- * @date 2020/5/17
  */
 public interface ProductPageviewsService {
 

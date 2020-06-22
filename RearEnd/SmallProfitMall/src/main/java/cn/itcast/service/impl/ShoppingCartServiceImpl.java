@@ -161,11 +161,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
      * 添加到货通知
      * @param userId    用户id
      * @param productId 商品id
+     * @param distinctionId 配置id
      * @return
      */
     @Override
-    public int addArrivalNotice(String userId, int productId) {
-        return shoppingCartDao.addArrivalNotice(userId,productId);
+    public int addArrivalNotice(String userId, int productId , Integer distinctionId) {
+        return shoppingCartDao.addArrivalNotice(userId,productId,distinctionId);
     }
 
     /**

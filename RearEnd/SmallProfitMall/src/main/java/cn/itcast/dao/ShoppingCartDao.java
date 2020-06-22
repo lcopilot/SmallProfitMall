@@ -78,11 +78,12 @@ public interface ShoppingCartDao {
 
     /**
      * 添加到货通知
-     * @param userId
-     * @param productId
+     * @param userId 用户id
+     * @param productId 商品id
+     * @param distinctionId 配置id
      * @return
      */
-    public int addArrivalNotice(@Param("userId")String userId,@Param("productId")int productId);
+    public int addArrivalNotice(@Param("userId")String userId,@Param("productId")int productId ,@Param("distinctionId") Integer distinctionId);
 
 
     /**

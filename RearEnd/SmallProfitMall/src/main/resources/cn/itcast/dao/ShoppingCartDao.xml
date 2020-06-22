@@ -110,13 +110,13 @@
             productId = #{productId}
     </select>
 
-    <!--修改购物车单个商品数量-->
+    <!--添加到货通知-->
     <insert id="addArrivalNotice">
         INSERT
         INTO
-            arrivalNotice (userId,productId)
+            arrivalNotice (userId,productId,distinctionId)
         VALUES
-            (#{userId},#{productId})
+            (#{userId},#{productId},#{distinctionId})
     </insert>
 
     <!--查询预览商品-->
