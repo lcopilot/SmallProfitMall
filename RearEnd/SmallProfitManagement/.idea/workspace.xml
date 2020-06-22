@@ -7,8 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5b2d03f-bf2b-4795-a9c5-70ed651f908b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/controller/PayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/controller/PayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/skd/AlipayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/skd/AlipayConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/dao/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/domain/product/ProductDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/domain/product/ProductDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ProductDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ProductDao.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -234,6 +238,13 @@
       <workItem from="1592793073375" duration="1740000" />
       <workItem from="1592795539410" duration="64000" />
       <workItem from="1592795662699" duration="422000" />
+      <workItem from="1592796855842" duration="13000" />
+      <workItem from="1592796894628" duration="63000" />
+      <workItem from="1592797048159" duration="12000" />
+      <workItem from="1592805920899" duration="5000" />
+      <workItem from="1592806027297" duration="108000" />
+      <workItem from="1592807024976" duration="563000" />
+      <workItem from="1592808102116" duration="264000" />
     </task>
     <task id="LOCAL-00001" summary="添加商品信息">
       <created>1592447861744</created>
@@ -423,7 +434,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>469</line>
+          <line>476</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -433,7 +444,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>345</line>
+          <line>352</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -443,27 +454,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>232</line>
+          <line>239</line>
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>221</line>
+          <line>228</line>
           <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>247</line>
+          <line>254</line>
           <option name="timeStamp" value="87" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>284</line>
+          <line>291</line>
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>207</line>
+          <line>214</line>
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

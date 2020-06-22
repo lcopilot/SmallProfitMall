@@ -73,6 +73,16 @@ public class ProductDetails implements Serializable {
     private List<ProductImage> productImages;
     /**商品状态 1为上级 0为下价**/
     private Boolean productState;
+    /**是否可上架**/
+    private Boolean shelves;
+
+    public Boolean getShelves() {
+        return shelves;
+    }
+
+    public void setShelves(Boolean shelves) {
+        this.shelves = shelves;
+    }
 
     public Boolean getProductState() {
         return productState;
