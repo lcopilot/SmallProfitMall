@@ -68,10 +68,7 @@ public class PayController {
                 AlipayConfig.sign_type);
         // 验证成功
         if (signVerified) {
-            // 商户订单号
-            String orderId = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
-            Order order = orderService.findDetailedOrder(null,orderId);
-            Integer integer = orderService.updateOrders(order);
+
             response.sendRedirect("https://www.smallprofit.fhxasdsada.xyz/orderComplete");
         } else {
         }

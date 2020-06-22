@@ -258,7 +258,7 @@ public class OrderServiceImpl implements OrderService {
             //查询订单详细内容
             Order order = findDetailedOrder(null,orderId);
             //推送订单消息
-             updateOrders(order);
+            updateOrderType(order);
             return 1;
         }else {
             return 2;
@@ -292,7 +292,7 @@ public class OrderServiceImpl implements OrderService {
         //查询订单信息
         Order order =  orderDao.findOrder(userId,orderId);
         //推送消息
-        updateOrders(order);
+        updateOrderType(order);
         return result;
     }
 
@@ -604,17 +604,6 @@ public class OrderServiceImpl implements OrderService {
 
 
         return map;
-    }
-
-    /**
-     * 同步回调成功
-     * @param order 订单对象
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public Integer updateOrders(Order order) throws Exception {
-        return 1;
     }
 
 

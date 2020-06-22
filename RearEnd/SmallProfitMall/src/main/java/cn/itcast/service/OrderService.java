@@ -77,14 +77,6 @@ public interface OrderService {
      */
     public String confirmOrder(Order order, HttpServletRequest request) throws Exception;
 
-    /**
-     * 付款成功
-     * @param order
-     * @return
-     * @throws Exception
-     */
-    public Integer updateOrders(Order order) throws Exception;
-
 
     /**
      * 异步回调付款成功
