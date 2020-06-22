@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 17/06/2020 17:44:37
+ Date: 21/06/2020 21:48:35
 */
 
 SET NAMES utf8mb4;
@@ -53,47 +53,41 @@ CREATE TABLE `ProductBasis`  (
   `hot` int(11) NULL DEFAULT 1,
   `Favorite` int(11) NULL DEFAULT 1,
   PRIMARY KEY (`ProductId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10065 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10078 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductBasis
 -- ----------------------------
-INSERT INTO `ProductBasis` VALUES (1, 10001, 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待 ', 'http://productdata.isdfmk.xyz/v.f30.mp4', '0.74kg', 104, 1009, 10062, 61, '<p>Hey this <strong>editor</strong> rocks </p>', '<p>Hey this <strong>editor</strong> rocks </p>', '<p>Hey this <strong>editor</strong> rocks </p>', 1, 1, 1);
-INSERT INTO `ProductBasis` VALUES (3, 10002, 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.isdfmk.xyz/v.f30.mp4', '0.24kg', 104, 1010, 10075, 24, NULL, NULL, NULL, 1, 1, 1);
-INSERT INTO `ProductBasis` VALUES (12, 10003, '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', NULL, '不计重', 132, 1068, 10495, 22, NULL, NULL, NULL, 1, 1, 1);
+INSERT INTO `ProductBasis` VALUES (1, 10001, 'Apple iPhone 11 (A2223) 128GB 黑色 移动联通电信4G手机 双卡双待', 'http://productdata.isdfmk.xyz/v.f30.mp4', '0.74kg', 104, 1009, 10062, 64, '<p>Hey this <strong>editor</strong> rocks&nbsp;</p>\n', '<p>Hey this <strong>editor</strong> rocks&nbsp;</p>\n', '<p>Hey this <strong>editor</strong> rocks&nbsp;</p>\n', 1, 1, 1);
+INSERT INTO `ProductBasis` VALUES (3, 10002, 'Apple AirPods Pro 主动降噪无线蓝牙耳机', '\r\nhttp://productdata.isdfmk.xyz/v.f30.mp4', '0.24kg', 104, 1010, 10075, 26, '<p></p>\n', '<p></p>\n', '<p></p>\n', 1, 1, 1);
+INSERT INTO `ProductBasis` VALUES (12, 10003, '星农联合 智利帝王蟹5.5-5.0斤 熟冻大螃蟹 进口海鲜礼盒', NULL, '0kg', 132, 1068, 10495, 23, '<p></p>\n', '<p></p>\n', '<p></p>\n', 1, 1, 1);
 INSERT INTO `ProductBasis` VALUES (13, 10004, '新款Huawei/华为折叠手机mates xs 5g版大屏双屏全面屏双面屏官方旗舰店对折手机可折叠屏 Mate XS折叠\r\n', 'http://productdata.isdfmk.xyz/sdfjsdomytupj,nkc.mp4', '0.24kg', 104, 1009, 10066, 15, NULL, NULL, NULL, 1, 2, 1);
-INSERT INTO `ProductBasis` VALUES (14, 10005, 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.isdfmk.xyz/diferwngmopsvm,jaks.mp4', '2.8kg', 106, 1016, 10119, 16, NULL, NULL, NULL, 1, 2, 1);
-INSERT INTO `ProductBasis` VALUES (15, 10006, ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.isdfmk.xyz/iorhmm,wcvihj.mp4', '0.6kg', 106, 1010, 10075, 25, NULL, NULL, NULL, 1, 2, 1);
-INSERT INTO `ProductBasis` VALUES (16, 10007, 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版\r\n\r\n', NULL, '5kg', 132, 1068, 10495, 17, NULL, NULL, NULL, 1, 2, 1);
+INSERT INTO `ProductBasis` VALUES (14, 10005, 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.isdfmk.xyz/diferwngmopsvm,jaks.mp4', '2.8kg', 106, 1016, 10119, 17, NULL, NULL, NULL, 1, 2, 1);
+INSERT INTO `ProductBasis` VALUES (15, 10006, ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.isdfmk.xyz/iorhmm,wcvihj.mp4', '0.6kg', 106, 1010, 10075, 27, NULL, NULL, NULL, 1, 2, 1);
+INSERT INTO `ProductBasis` VALUES (16, 10007, 'Hot Toys 复仇者联盟3 无限战争 HOTTOYS 钢铁侠 模型玩具礼物 MK7 普通版', NULL, '5kg', 132, 1068, 10495, 19, '<p></p>\n', '<p></p>\n', '<p></p>\n', 1, 2, 1);
 INSERT INTO `ProductBasis` VALUES (17, 10008, '万代（BANDAI） Megahouse POP 海贼王 路飞9人 模型玩具（无售后！！！） 四档路飞\r\n', NULL, '100kg', 132, 1068, 10495, 11, NULL, NULL, NULL, 1, 2, 1);
-INSERT INTO `ProductBasis` VALUES (18, 10009, '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n', NULL, '5.6kg', 107, 1017, 10126, 15, NULL, NULL, NULL, 1, 1, 1);
+INSERT INTO `ProductBasis` VALUES (18, 10009, '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n', NULL, '5.6kg', 107, 1017, 10126, 16, NULL, NULL, NULL, 1, 1, 1);
 INSERT INTO `ProductBasis` VALUES (4, 10010, '阿玛尼（ Emporio Armani）满天星手表 女新款玫瑰金钢制表带镶钻石英轻奢女士腕表礼物 AR11244 ', '\r\nhttp://productdata.isdfmk.xyz/v.f30%20%281%29.mp4', '\r\n0.485kg', 106, 1015, 10495, 17, NULL, NULL, NULL, 1, 1, 1);
-INSERT INTO `ProductBasis` VALUES (5, 10011, 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.isdfmk.xyz/v.f10011.mp4', '0.56kg', 104, 1009, 10062, 23, NULL, NULL, NULL, 1, 1, 1);
+INSERT INTO `ProductBasis` VALUES (5, 10011, 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.isdfmk.xyz/v.f10011.mp4', '0.56kg', 104, 1009, 10062, 24, NULL, NULL, NULL, 1, 1, 1);
 INSERT INTO `ProductBasis` VALUES (6, 10012, '联想(Lenovo)小新Pro13.3英寸全面屏超轻薄笔记本电脑(标压锐龙R5-3550H 16G 512G 2.5K QHD 100%sRGB)银 ', '\r\nhttp://productdata.isdfmk.xyz/10012%5B1%5D.mp4', '2.08kg', 107, 1017, 10126, 14, NULL, NULL, NULL, 1, 2, 1);
-INSERT INTO `ProductBasis` VALUES (7, 10013, '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080 ', 'https://jdvod.300hu.com/4c1f7a6atransbjngwcloud1oss/7d07cd26107144746580840449/v.f30.mp4?dockingId=88290b33-b297-4d55-aa10-3996cc45a4b6&storageSource=3', '2.08kg', 107, 1018, 10128, 12, NULL, NULL, NULL, 1, 1, 1);
+INSERT INTO `ProductBasis` VALUES (7, 10013, '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080', 'https://jdvod.300hu.com/4c1f7a6atransbjngwcloud1oss/7d07cd26107144746580840449/v.f30.mp4?dockingId=88290b33-b297-4d55-aa10-3996cc45a4b6&storageSource=3', '2.08kg', 107, 1018, 10128, 15, '<p></p>\n', '<p></p>\n', '<p></p>\n', 1, 1, 1);
 INSERT INTO `ProductBasis` VALUES (8, 10014, '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.isdfmk.xyz/sdfjsdfjmrthnndvisdgsdg.mp4', '2.8kg', 107, 1018, 10129, 16, NULL, NULL, NULL, 1, 2, 1);
 INSERT INTO `ProductBasis` VALUES (9, 10015, '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/sdkjj.mp4', '0.15kg', 132, 1068, 10495, 13, NULL, NULL, NULL, 1, 1, 1);
-INSERT INTO `ProductBasis` VALUES (10, 10016, '华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机', '\r\nhttp://productdata.isdfmk.xyz/v.f30%20%282%29.mp4', '0.54kg', 104, 1009, 10062, 9, NULL, NULL, NULL, 1, 2, 1);
+INSERT INTO `ProductBasis` VALUES (10, 10016, '华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机', '\r\nhttp://productdata.isdfmk.xyz/v.f30%20%282%29.mp4', '0.54kg', 104, 1009, 10062, 10, NULL, NULL, NULL, 1, 2, 1);
 INSERT INTO `ProductBasis` VALUES (11, 10017, 'Apple Watch Series 5智能手表（GPS款 40毫米深空灰色铝金属表壳 黑色运动型表带 MWV82CH/A)\r\n', 'http://productdata.isdfmk.xyz/asuashfoeryubvxcmivmdsfomaosaergl.mp4', '0.23kg', 106, 1015, 10113, 4, NULL, NULL, NULL, 1, 1, 1);
 INSERT INTO `ProductBasis` VALUES (19, 10018, '【专柜正品】Dior迪奥口红烈艳蓝金女士唇膏999口红套装送女友生日礼物 送老婆情人节礼物 【情人节星星限量版五只装套盒】', '\r\nhttp://productdata.isdfmk.xyz/v.f30%20%284%29.mp4\r\n\r\n', '0.4kg', 113, 1032, 10240, 11, NULL, NULL, NULL, 1, 2, 1);
 INSERT INTO `ProductBasis` VALUES (10018, 10019, '【二手95新】劳力士 系列:迪通拿系列 型号:116505 材质:18k玫瑰金 镜面:蓝宝石玻璃 未使用', NULL, '0.22kg', 118, 1042, 10497, 8, NULL, NULL, NULL, 1, 2, 1);
 INSERT INTO `ProductBasis` VALUES (10019, 10020, '华硕（ASUS）ROG Strix XG27VQ 27英寸144HZ 1800R Free-Sync旋转升降AURA-RGB电竞显示器（HDMI/DP/DVI）', 'http://productdata.isdfmk.xyz/0a2dn6qco6afmqiL4K2doafhoaGdmaydo6M.mp4', '16.84kg', 101, 1001, 10496, 8, NULL, NULL, NULL, 1, 2, 1);
 INSERT INTO `ProductBasis` VALUES (10020, 10021, '长虹（CHANGHONG）D6U 长虹 激光电视 影院 投影仪 激光电视 私人电影院 投影机 长虹 4K画质 3500流明 115%广色域 AI人工智能 语音控制\r\n4K画质，3500流明，115%广色域，AI人工智能，语音控制  ', '', '5.84kg', 101, 1001, 10002, 6, NULL, NULL, NULL, 1, 2, 1);
-INSERT INTO `ProductBasis` VALUES (10024, 10022, 'Classic | 40mm Canterbury', NULL, NULL, 118, 1026, 10189, 20, NULL, NULL, NULL, 1, 1, 1);
+INSERT INTO `ProductBasis` VALUES (10024, 10022, 'Classic | 40mm Canterbury', NULL, NULL, 118, 1026, 10189, 21, NULL, NULL, NULL, 1, 1, 1);
 INSERT INTO `ProductBasis` VALUES (10021, 10023, '\r\nCOACH PARKER 16 女士山茶花装饰可斜挎双肩包', NULL, NULL, 117, 1039, 10295, 12, NULL, NULL, NULL, 1, 1, 1);
 INSERT INTO `ProductBasis` VALUES (10022, 10024, 'HHKB Professional BT 蓝牙版黑无刻静电容键盘 程序员码农专用便携迷你键盘 编程适用', 'http://productdata.isdfmk.xyz/0a2dn62WqaCdmqiL4K2doafhoaOhnqeZpKc.mp4', NULL, 107, 1019, 10141, 12, NULL, NULL, NULL, 1, 1, 1);
 INSERT INTO `ProductBasis` VALUES (10023, 10025, '【良品铺子】综合果仁525g 每日坚果组合混合干果礼盒零食大礼包健康零食', NULL, '575.5kg', 132, 1068, 10495, 12, NULL, NULL, NULL, 1, 1, 1);
-INSERT INTO `ProductBasis` VALUES (10025, 10026, '2019新款翻领磨破短款女士休闲牛仔外套', NULL, NULL, 111, 1026, 10362, 12, NULL, NULL, NULL, 1, 1, 1);
+INSERT INTO `ProductBasis` VALUES (10025, 10026, '2019新款翻领磨破短款女士休闲牛仔外套', NULL, NULL, 111, 1026, 10362, 13, NULL, NULL, NULL, 1, 1, 1);
 INSERT INTO `ProductBasis` VALUES (10026, 10027, '【假一赔十】beats solo3wireless 蓝牙耳机头戴式 米奇 游戏手机耳机 折叠式重低音 运动 玫瑰金', NULL, NULL, 104, 1010, 10075, 22, NULL, NULL, NULL, 1, 2, 1);
 INSERT INTO `ProductBasis` VALUES (10027, 10028, '小米（MI）小爱智能音箱Pro 无线蓝牙音响 语音控制智能家居 APP远程操控 专业DTS 音效 黑色', NULL, '\r\n1.56kg', 106, 1014, 10106, 8, NULL, NULL, NULL, 1, 2, 1);
 INSERT INTO `ProductBasis` VALUES (10028, 10029, '美国正品代购阿迪达斯adidas YEEZY BOOST 350 V2 侃爷冰蓝椰子鞋新款男跑步鞋', NULL, '2.5kg', 119, 1043, 10320, 16, NULL, NULL, NULL, 1, 2, 1);
-INSERT INTO `ProductBasis` VALUES (10029, 10030, '夹克男工装外套男士韩版宽松潮流上衣服2019秋季新款男装潮牌连帽夹克衫男学生', 'http://productdata.isdfmk.xyz/0a2dn62WqaCdmqiL4K2doafhoaOhnqeZpKc.mp4', '0.1kg', 110, 1025, 10182, 10, NULL, NULL, NULL, 1, 2, 1);
-INSERT INTO `ProductBasis` VALUES (0, 10055, '测试商品添加', 'http://productdata.isdfmk.xyz/ccc.flv_ccc.flv', '100kg', NULL, NULL, NULL, 0, 'ce', 'productAfterSale', 'productParameter', 1, 1, 1);
-INSERT INTO `ProductBasis` VALUES (0, 10056, '测试商品添加', 'http://productdata.isdfmk.xyz/ccc.flv_ccc.flv', '100kg', NULL, NULL, NULL, 0, 'ce', 'productAfterSale', 'productParameter', 1, 1, 1);
-INSERT INTO `ProductBasis` VALUES (0, 10057, '测试商品添加', 'http://productdata.isdfmk.xyz/ccc.flv_ccc.flv', '100kg', NULL, NULL, NULL, 0, 'ce', 'productAfterSale', 'productParameter', 1, 1, 1);
-INSERT INTO `ProductBasis` VALUES (0, 10058, '测试1', 'http://productdata.isdfmk.xyz/4c9164995cd67e2f5038f9ee450f4d88.flv_4c9164995cd67e2f5038f9ee450f4d88.flv', '10kg', NULL, NULL, NULL, 0, '<p>a</p>\n', '<p>a</p>\n', '<p>a</p>\n', 1, 1, 1);
-INSERT INTO `ProductBasis` VALUES (0, 10059, '测试1', NULL, '10kg', NULL, NULL, NULL, 0, '<p></p>\n', '<p></p>\n<img src=\" http://productdata.isdfmk.xyz/3a3b70188a3a470cbd33d88ae1b7c5d81592295572071\" alt=\"\" style=\"height: auto;width: auto\"/>\n<p></p>\n', '<p>s</p>\n', 1, 1, 1);
-INSERT INTO `ProductBasis` VALUES (0, 10060, '测试4452', 'http://productdata.isdfmk.xyz/21940338f8a8577d0f65974dfe68475e.mp4_21940338f8a8577d0f65974dfe68475e.mp4', '85.02kg', NULL, NULL, NULL, 0, '<p>gfsdfsd</p>\n<img src=\" http://productdata.isdfmk.xyz/4bc8594177df93036d88a7a5b7fc39e31592296938600\" alt=\"\" style=\"height: auto;width: auto\"/>\n<p></p>\n', '<p></p>\n', '<p></p>\n', 1, 1, 1);
+INSERT INTO `ProductBasis` VALUES (10029, 10030, '夹克男工装外套男士韩版宽松潮流上衣服2019秋季新款男装潮牌连帽夹克衫男学生', 'http://productdata.isdfmk.xyz/0a2dn62WqaCdmqiL4K2doafhoaOhnqeZpKc.mp4', '0.1kg', 110, 1025, 10182, 11, '<p></p>\n', '<p></p>\n', '<p></p>\n', 1, 2, 1);
 
 -- ----------------------------
 -- Table structure for ProductImage
@@ -105,173 +99,159 @@ CREATE TABLE `ProductImage`  (
   `ImageSite` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `sign` int(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 281 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductImage
 -- ----------------------------
 INSERT INTO `ProductImage` VALUES (1, 10001, 'http://productdata.isdfmk.xyz/68836f52ffaaad96.jpg', 1);
-INSERT INTO `ProductImage` VALUES (2, 10001, 'http://productdata.isdfmk.xyz/43a1962b41270d97.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (3, 10001, 'http://productdata.isdfmk.xyz/ee567a1dea515d38.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (4, 10001, 'http://productdata.isdfmk.xyz/08fed8837c92433a.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (5, 10001, 'http://productdata.isdfmk.xyz/001e63e04f967e90.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (6, 10002, '\r\nhttp://productdata.isdfmk.xyz/2b6fc898ee704a36.jpg\r\n', 1);
-INSERT INTO `ProductImage` VALUES (7, 10002, '\r\nhttp://productdata.isdfmk.xyz/6a155195eb3285c9.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (8, 10002, 'http://productdata.isdfmk.xyz/7193b42ba13929fd.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (9, 10002, '\r\nhttp://productdata.isdfmk.xyz/8786efc04f001e50.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (11, 10002, 'http://productdata.isdfmk.xyz/8786efc04f001e50.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (2, 10001, 'http://productdata.isdfmk.xyz/43a1962b41270d97.jpg', 0);
+INSERT INTO `ProductImage` VALUES (3, 10001, 'http://productdata.isdfmk.xyz/ee567a1dea515d38.jpg', 0);
+INSERT INTO `ProductImage` VALUES (4, 10001, 'http://productdata.isdfmk.xyz/08fed8837c92433a.jpg', 0);
+INSERT INTO `ProductImage` VALUES (5, 10001, 'http://productdata.isdfmk.xyz/001e63e04f967e90.jpg', 0);
+INSERT INTO `ProductImage` VALUES (8, 10002, 'http://productdata.isdfmk.xyz/7193b42ba13929fd.jpg', 0);
+INSERT INTO `ProductImage` VALUES (11, 10002, 'http://productdata.isdfmk.xyz/8786efc04f001e50.jpg', 0);
 INSERT INTO `ProductImage` VALUES (13, 10010, '\r\nhttp://productdata.isdfmk.xyz/8c0b0a13e48adce3.jpg', 1);
-INSERT INTO `ProductImage` VALUES (14, 10010, '\r\nhttp://productdata.isdfmk.xyz/19f5df0ae27b218a.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (15, 10010, '\r\nhttp://productdata.isdfmk.xyz/48f8745314110ddd.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (16, 10010, '\r\nhttp://productdata.isdfmk.xyz/220f4a39216bc62b.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (14, 10010, '\r\nhttp://productdata.isdfmk.xyz/19f5df0ae27b218a.jpg', 0);
+INSERT INTO `ProductImage` VALUES (15, 10010, '\r\nhttp://productdata.isdfmk.xyz/48f8745314110ddd.jpg', 0);
+INSERT INTO `ProductImage` VALUES (16, 10010, '\r\nhttp://productdata.isdfmk.xyz/220f4a39216bc62b.jpg', 0);
 INSERT INTO `ProductImage` VALUES (17, 10011, '\r\nhttp://productdata.isdfmk.xyz/04e04ec4954e07bd.jpg', 1);
-INSERT INTO `ProductImage` VALUES (18, 10011, '\r\nhttp://productdata.isdfmk.xyz/3957b8e1cce2b048.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (19, 10011, '\r\nhttp://productdata.isdfmk.xyz/394596a8af6149cf.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (20, 10011, '\r\nhttp://productdata.isdfmk.xyz/da0eb4c6670eab20.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (21, 10011, '\r\nhttp://productdata.isdfmk.xyz/e54ca7b1b222a83b.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (18, 10011, '\r\nhttp://productdata.isdfmk.xyz/3957b8e1cce2b048.jpg', 0);
+INSERT INTO `ProductImage` VALUES (19, 10011, '\r\nhttp://productdata.isdfmk.xyz/394596a8af6149cf.jpg', 0);
+INSERT INTO `ProductImage` VALUES (20, 10011, '\r\nhttp://productdata.isdfmk.xyz/da0eb4c6670eab20.jpg', 0);
+INSERT INTO `ProductImage` VALUES (21, 10011, '\r\nhttp://productdata.isdfmk.xyz/e54ca7b1b222a83b.jpg', 0);
 INSERT INTO `ProductImage` VALUES (22, 10012, '\r\nhttp://productdata.isdfmk.xyz/2b0744939bd398f0.jpg', 1);
-INSERT INTO `ProductImage` VALUES (23, 10012, '\r\nhttp://productdata.isdfmk.xyz/5ce4b1fcNc14ca9c7.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (24, 10012, '\r\nhttp://productdata.isdfmk.xyz/6522a53a673ee61d.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (25, 10012, '\r\nhttp://productdata.isdfmk.xyz/c15786ad5136e74f.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (26, 10012, '\r\nhttp://productdata.isdfmk.xyz/caa1b677b914cb5f.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (23, 10012, '\r\nhttp://productdata.isdfmk.xyz/5ce4b1fcNc14ca9c7.jpg', 0);
+INSERT INTO `ProductImage` VALUES (24, 10012, '\r\nhttp://productdata.isdfmk.xyz/6522a53a673ee61d.jpg', 0);
+INSERT INTO `ProductImage` VALUES (25, 10012, '\r\nhttp://productdata.isdfmk.xyz/c15786ad5136e74f.jpg', 0);
+INSERT INTO `ProductImage` VALUES (26, 10012, '\r\nhttp://productdata.isdfmk.xyz/caa1b677b914cb5f.jpg', 0);
 INSERT INTO `ProductImage` VALUES (27, 10013, 'http://productdata.isdfmk.xyz/1f3f9fd0e759383f.jpg', 1);
-INSERT INTO `ProductImage` VALUES (28, 10013, 'http://productdata.isdfmk.xyz/4fc927901b1aae32.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (29, 10013, 'http://productdata.isdfmk.xyz/5bc47ce4Ne79570db.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (30, 10013, 'http://productdata.isdfmk.xyz/3480e2930d6e9a25.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (31, 10013, 'http://productdata.isdfmk.xyz/562d20d464bb56ac.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (28, 10013, 'http://productdata.isdfmk.xyz/4fc927901b1aae32.jpg', 0);
+INSERT INTO `ProductImage` VALUES (29, 10013, 'http://productdata.isdfmk.xyz/5bc47ce4Ne79570db.jpg', 0);
+INSERT INTO `ProductImage` VALUES (30, 10013, 'http://productdata.isdfmk.xyz/3480e2930d6e9a25.jpg', 0);
+INSERT INTO `ProductImage` VALUES (31, 10013, 'http://productdata.isdfmk.xyz/562d20d464bb56ac.jpg', 0);
 INSERT INTO `ProductImage` VALUES (32, 10014, 'http://productdata.isdfmk.xyz/5b4d4cc8N0bf9c476.jpg', 1);
-INSERT INTO `ProductImage` VALUES (33, 10014, 'http://productdata.isdfmk.xyz/5b2473c4Nea457f92.png', NULL);
-INSERT INTO `ProductImage` VALUES (34, 10014, 'http://productdata.isdfmk.xyz/5b2473e0Ne5d2fed8.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (35, 10014, 'http://productdata.isdfmk.xyz/5b2473e3Nc422faf9.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (36, 10014, 'http://productdata.isdfmk.xyz/e8a8c0ac848fd663.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (33, 10014, 'http://productdata.isdfmk.xyz/5b2473c4Nea457f92.png', 0);
+INSERT INTO `ProductImage` VALUES (34, 10014, 'http://productdata.isdfmk.xyz/5b2473e0Ne5d2fed8.jpg', 0);
+INSERT INTO `ProductImage` VALUES (35, 10014, 'http://productdata.isdfmk.xyz/5b2473e3Nc422faf9.jpg', 0);
+INSERT INTO `ProductImage` VALUES (36, 10014, 'http://productdata.isdfmk.xyz/e8a8c0ac848fd663.jpg', 0);
 INSERT INTO `ProductImage` VALUES (37, 10015, 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', 1);
-INSERT INTO `ProductImage` VALUES (38, 10015, 'http://productdata.isdfmk.xyz/65d595ccc0df91701a30c5b9af96662c_2_3_photo.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (39, 10015, 'http://productdata.isdfmk.xyz/6ad6e5468f3c79afd9e2aaac6235b643_2_3_photo.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (40, 10015, 'http://productdata.isdfmk.xyz/a6bd598ec1911c7cd8f850f3e88e7ba5_2_3_photo.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (41, 10015, 'http://productdata.isdfmk.xyz/a6bd598ec1911c7cd8f850f3e88e7ba5_2_3_photo.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (38, 10015, 'http://productdata.isdfmk.xyz/65d595ccc0df91701a30c5b9af96662c_2_3_photo.jpg', 0);
+INSERT INTO `ProductImage` VALUES (39, 10015, 'http://productdata.isdfmk.xyz/6ad6e5468f3c79afd9e2aaac6235b643_2_3_photo.jpg', 0);
+INSERT INTO `ProductImage` VALUES (40, 10015, 'http://productdata.isdfmk.xyz/a6bd598ec1911c7cd8f850f3e88e7ba5_2_3_photo.jpg', 0);
+INSERT INTO `ProductImage` VALUES (41, 10015, 'http://productdata.isdfmk.xyz/a6bd598ec1911c7cd8f850f3e88e7ba5_2_3_photo.jpg', 0);
 INSERT INTO `ProductImage` VALUES (42, 10016, '\r\nhttp://productdata.isdfmk.xyz/971ec333c8ef1de2.jpg', 1);
-INSERT INTO `ProductImage` VALUES (43, 10016, '\r\nhttp://productdata.isdfmk.xyz/8053c011fc5f3f37.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (44, 10016, '\r\nhttp://productdata.isdfmk.xyz/66447aca06daf84d.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (45, 10016, '\r\nhttp://productdata.isdfmk.xyz/b13aea126799a8f7.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (46, 10016, '\r\nhttp://productdata.isdfmk.xyz/fb8e44067242df88.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (43, 10016, '\r\nhttp://productdata.isdfmk.xyz/8053c011fc5f3f37.jpg', 0);
+INSERT INTO `ProductImage` VALUES (44, 10016, '\r\nhttp://productdata.isdfmk.xyz/66447aca06daf84d.jpg', 0);
+INSERT INTO `ProductImage` VALUES (45, 10016, '\r\nhttp://productdata.isdfmk.xyz/b13aea126799a8f7.jpg', 0);
+INSERT INTO `ProductImage` VALUES (46, 10016, '\r\nhttp://productdata.isdfmk.xyz/fb8e44067242df88.jpg', 0);
 INSERT INTO `ProductImage` VALUES (47, 10017, 'http://productdata.isdfmk.xyz/44c3c5495c1b5145.jpg', 1);
-INSERT INTO `ProductImage` VALUES (48, 10017, 'http://productdata.isdfmk.xyz/2501bf3e7f96c1fb.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (49, 10017, 'http://productdata.isdfmk.xyz/38043e785531d4f5.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (50, 10017, 'http://productdata.isdfmk.xyz/bb905838dcde3ccd.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (51, 10017, 'http://productdata.isdfmk.xyz/cc8e307f5aeccb49.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (48, 10017, 'http://productdata.isdfmk.xyz/2501bf3e7f96c1fb.jpg', 0);
+INSERT INTO `ProductImage` VALUES (49, 10017, 'http://productdata.isdfmk.xyz/38043e785531d4f5.jpg', 0);
+INSERT INTO `ProductImage` VALUES (50, 10017, 'http://productdata.isdfmk.xyz/bb905838dcde3ccd.jpg', 0);
+INSERT INTO `ProductImage` VALUES (51, 10017, 'http://productdata.isdfmk.xyz/cc8e307f5aeccb49.jpg', 0);
 INSERT INTO `ProductImage` VALUES (52, 10003, 'http://productdata.isdfmk.xyz/212478163d84fcf0.jpg', 1);
-INSERT INTO `ProductImage` VALUES (53, 10003, 'http://productdata.isdfmk.xyz/212478163d84fcf0.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (54, 10003, 'http://productdata.isdfmk.xyz/7e885a6364ff7b21.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (55, 10003, 'http://productdata.isdfmk.xyz/ad914e4c1ac2e465.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (56, 10003, 'http://productdata.isdfmk.xyz/d094f60a2c15d012.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (54, 10003, 'http://productdata.isdfmk.xyz/7e885a6364ff7b21.jpg', 0);
+INSERT INTO `ProductImage` VALUES (55, 10003, 'http://productdata.isdfmk.xyz/ad914e4c1ac2e465.jpg', 0);
+INSERT INTO `ProductImage` VALUES (56, 10003, 'http://productdata.isdfmk.xyz/d094f60a2c15d012.jpg', 0);
 INSERT INTO `ProductImage` VALUES (57, 10004, 'http://productdata.isdfmk.xyz/7a3a192a7fca3c35.png', 1);
-INSERT INTO `ProductImage` VALUES (58, 10004, 'http://productdata.isdfmk.xyz/9c03f65ed857d88a.png', NULL);
-INSERT INTO `ProductImage` VALUES (59, 10004, 'http://productdata.isdfmk.xyz/4686681b97deebb2.png', NULL);
-INSERT INTO `ProductImage` VALUES (60, 10004, 'http://productdata.isdfmk.xyz/b0d64ec97f4d8f0d.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (61, 10004, 'http://productdata.isdfmk.xyz/f88f82bdd98d9a68.png', NULL);
+INSERT INTO `ProductImage` VALUES (58, 10004, 'http://productdata.isdfmk.xyz/9c03f65ed857d88a.png', 0);
+INSERT INTO `ProductImage` VALUES (59, 10004, 'http://productdata.isdfmk.xyz/4686681b97deebb2.png', 0);
+INSERT INTO `ProductImage` VALUES (60, 10004, 'http://productdata.isdfmk.xyz/b0d64ec97f4d8f0d.jpg', 0);
+INSERT INTO `ProductImage` VALUES (61, 10004, 'http://productdata.isdfmk.xyz/f88f82bdd98d9a68.png', 0);
 INSERT INTO `ProductImage` VALUES (62, 10006, 'http://productdata.isdfmk.xyz/2ca45e2fd9758794.jpg', 1);
-INSERT INTO `ProductImage` VALUES (63, 10006, 'http://productdata.isdfmk.xyz/223e72e6bb404498.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (64, 10006, 'http://productdata.isdfmk.xyz/a2ba77e3e7b4a561.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (65, 10006, 'http://productdata.isdfmk.xyz/a673d6639eecfb31.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (66, 10006, 'http://productdata.isdfmk.xyz/b452b971225f3837.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (63, 10006, 'http://productdata.isdfmk.xyz/223e72e6bb404498.jpg', 0);
+INSERT INTO `ProductImage` VALUES (64, 10006, 'http://productdata.isdfmk.xyz/a2ba77e3e7b4a561.jpg', 0);
+INSERT INTO `ProductImage` VALUES (65, 10006, 'http://productdata.isdfmk.xyz/a673d6639eecfb31.jpg', 0);
+INSERT INTO `ProductImage` VALUES (66, 10006, 'http://productdata.isdfmk.xyz/b452b971225f3837.jpg', 0);
 INSERT INTO `ProductImage` VALUES (67, 10007, 'http://productdata.isdfmk.xyz/9bf639975363fbb0.jpg', 1);
-INSERT INTO `ProductImage` VALUES (68, 10007, 'http://productdata.isdfmk.xyz/15ae759577a35aa9.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (69, 10007, 'http://productdata.isdfmk.xyz/9153db93fc57f0c4.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (70, 10007, 'http://productdata.isdfmk.xyz/9153db93fc57f0c4.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (71, 10007, 'http://productdata.isdfmk.xyz/e7dacfdfe765ab9c.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (68, 10007, 'http://productdata.isdfmk.xyz/15ae759577a35aa9.jpg', 0);
+INSERT INTO `ProductImage` VALUES (69, 10007, 'http://productdata.isdfmk.xyz/9153db93fc57f0c4.jpg', 0);
+INSERT INTO `ProductImage` VALUES (71, 10007, 'http://productdata.isdfmk.xyz/e7dacfdfe765ab9c.jpg', 0);
 INSERT INTO `ProductImage` VALUES (72, 10008, '\r\nhttp://productdata.isdfmk.xyz/5b90958cN736d78c4.jpg', 1);
-INSERT INTO `ProductImage` VALUES (73, 10008, 'http://productdata.isdfmk.xyz/5b90958dN5fb23f95.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (74, 10008, 'http://productdata.isdfmk.xyz/6c7fafb8a6841a8c.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (75, 10008, 'http://productdata.isdfmk.xyz/9a92c2762bb5c57b.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (76, 10008, 'http://productdata.isdfmk.xyz/59fed11aN25bcc727.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (73, 10008, 'http://productdata.isdfmk.xyz/5b90958dN5fb23f95.jpg', 0);
+INSERT INTO `ProductImage` VALUES (74, 10008, 'http://productdata.isdfmk.xyz/6c7fafb8a6841a8c.jpg', 0);
+INSERT INTO `ProductImage` VALUES (75, 10008, 'http://productdata.isdfmk.xyz/9a92c2762bb5c57b.jpg', 0);
+INSERT INTO `ProductImage` VALUES (76, 10008, 'http://productdata.isdfmk.xyz/59fed11aN25bcc727.jpg', 0);
 INSERT INTO `ProductImage` VALUES (77, 10009, 'http://productdata.isdfmk.xyz/0fb1612d25f44013.jpg', 1);
-INSERT INTO `ProductImage` VALUES (78, 10009, 'http://productdata.isdfmk.xyz/4cc5b3d55b1d5695.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (79, 10009, 'http://productdata.isdfmk.xyz/82805185280bf7fe.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (80, 10009, 'http://productdata.isdfmk.xyz/a83b14d7249e7b35.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (81, 10009, 'http://productdata.isdfmk.xyz/b081f2d2c95ed76d.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (78, 10009, 'http://productdata.isdfmk.xyz/4cc5b3d55b1d5695.jpg', 0);
+INSERT INTO `ProductImage` VALUES (79, 10009, 'http://productdata.isdfmk.xyz/82805185280bf7fe.jpg', 0);
+INSERT INTO `ProductImage` VALUES (80, 10009, 'http://productdata.isdfmk.xyz/a83b14d7249e7b35.jpg', 0);
+INSERT INTO `ProductImage` VALUES (81, 10009, 'http://productdata.isdfmk.xyz/b081f2d2c95ed76d.jpg', 0);
 INSERT INTO `ProductImage` VALUES (82, 10005, 'http://productdata.isdfmk.xyz/7a77ad4e3100e885.jpg', 1);
-INSERT INTO `ProductImage` VALUES (83, 10005, 'http://productdata.isdfmk.xyz/7112412352ada3c6.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (84, 10005, 'http://productdata.isdfmk.xyz/a2e58b389d88d1d9.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (85, 10005, 'http://productdata.isdfmk.xyz/b4c0df48e4bbcc4a.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (86, 10005, 'http://productdata.isdfmk.xyz/d695e3db95cf66cb.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (83, 10005, 'http://productdata.isdfmk.xyz/7112412352ada3c6.jpg', 0);
+INSERT INTO `ProductImage` VALUES (84, 10005, 'http://productdata.isdfmk.xyz/a2e58b389d88d1d9.jpg', 0);
+INSERT INTO `ProductImage` VALUES (85, 10005, 'http://productdata.isdfmk.xyz/b4c0df48e4bbcc4a.jpg', 0);
+INSERT INTO `ProductImage` VALUES (86, 10005, 'http://productdata.isdfmk.xyz/d695e3db95cf66cb.jpg', 0);
 INSERT INTO `ProductImage` VALUES (87, 10018, '\r\nhttp://productdata.isdfmk.xyz/5cd5acfbN24c0ee18.jpg', 1);
-INSERT INTO `ProductImage` VALUES (88, 10018, '\r\nhttp://productdata.isdfmk.xyz/5ce44b68N134a0ce4.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (89, 10018, '\r\nhttp://productdata.isdfmk.xyz/5ce44b70N7a533656.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (90, 10018, '\r\nhttp://productdata.isdfmk.xyz/12d9fdefc091d9e7.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (91, 10018, '\r\nhttp://productdata.isdfmk.xyz/0938b8c9db25d916.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (88, 10018, '\r\nhttp://productdata.isdfmk.xyz/5ce44b68N134a0ce4.jpg', 0);
+INSERT INTO `ProductImage` VALUES (89, 10018, '\r\nhttp://productdata.isdfmk.xyz/5ce44b70N7a533656.jpg', 0);
+INSERT INTO `ProductImage` VALUES (90, 10018, '\r\nhttp://productdata.isdfmk.xyz/12d9fdefc091d9e7.jpg', 0);
+INSERT INTO `ProductImage` VALUES (91, 10018, '\r\nhttp://productdata.isdfmk.xyz/0938b8c9db25d916.jpg', 0);
 INSERT INTO `ProductImage` VALUES (92, 10019, '\r\nhttp://productdata.isdfmk.xyz/2-SXJILMjHoQXj66aurkzg.jpg', 1);
-INSERT INTO `ProductImage` VALUES (93, 10019, '\r\nhttp://productdata.isdfmk.xyz/bHr9HgsqtllBbPtMov6jww.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (94, 10019, '\r\nhttp://productdata.isdfmk.xyz/ca9NrNg1kMP-VoP8tOYNxg.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (95, 10019, '\r\nhttp://productdata.isdfmk.xyz/jg1eWej2dz72FeRkl0C_8w.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (96, 10019, '\r\nhttp://productdata.isdfmk.xyz/xranhinAPpnEuaarT7JhRw.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (93, 10019, '\r\nhttp://productdata.isdfmk.xyz/bHr9HgsqtllBbPtMov6jww.jpg', 0);
+INSERT INTO `ProductImage` VALUES (94, 10019, '\r\nhttp://productdata.isdfmk.xyz/ca9NrNg1kMP-VoP8tOYNxg.jpg', 0);
+INSERT INTO `ProductImage` VALUES (95, 10019, '\r\nhttp://productdata.isdfmk.xyz/jg1eWej2dz72FeRkl0C_8w.jpg', 0);
+INSERT INTO `ProductImage` VALUES (96, 10019, '\r\nhttp://productdata.isdfmk.xyz/xranhinAPpnEuaarT7JhRw.jpg', 0);
 INSERT INTO `ProductImage` VALUES (97, 10020, 'http://productdata.isdfmk.xyz/0070137366-000000010059586574_3.jpg', 1);
-INSERT INTO `ProductImage` VALUES (98, 10020, 'http://productdata.isdfmk.xyz/0070137366-000000010059586574_4.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (99, 10020, 'http://productdata.isdfmk.xyz/0070137366-000000010059586574_5.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (100, 10020, 'http://productdata.isdfmk.xyz/225731782139609909464061_x.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (101, 10020, 'http://productdata.isdfmk.xyz/367000235486258003552709_x.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (98, 10020, 'http://productdata.isdfmk.xyz/0070137366-000000010059586574_4.jpg', 0);
+INSERT INTO `ProductImage` VALUES (99, 10020, 'http://productdata.isdfmk.xyz/0070137366-000000010059586574_5.jpg', 0);
+INSERT INTO `ProductImage` VALUES (100, 10020, 'http://productdata.isdfmk.xyz/225731782139609909464061_x.jpg', 0);
+INSERT INTO `ProductImage` VALUES (101, 10020, 'http://productdata.isdfmk.xyz/367000235486258003552709_x.jpg', 0);
 INSERT INTO `ProductImage` VALUES (102, 10021, 'http://productdata.isdfmk.xyz/dbBltniJF2LoPk9QQ3YWaw.jpg', 1);
-INSERT INTO `ProductImage` VALUES (103, 10021, 'http://productdata.isdfmk.xyz/DjtdSBwAWuSxHs6yAAc3Yw.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (104, 10021, 'http://productdata.isdfmk.xyz/iLSvW0r_-YDo4L7iUT7xkw.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (105, 10021, 'http://productdata.isdfmk.xyz/N_lvVexzFxRREgxewSkOxA.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (106, 10021, 'http://productdata.isdfmk.xyz/vqMAvTS5sJGYjfaD_qEVWA.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (103, 10021, 'http://productdata.isdfmk.xyz/DjtdSBwAWuSxHs6yAAc3Yw.jpg', 0);
+INSERT INTO `ProductImage` VALUES (104, 10021, 'http://productdata.isdfmk.xyz/iLSvW0r_-YDo4L7iUT7xkw.jpg', 0);
+INSERT INTO `ProductImage` VALUES (105, 10021, 'http://productdata.isdfmk.xyz/N_lvVexzFxRREgxewSkOxA.jpg', 0);
+INSERT INTO `ProductImage` VALUES (106, 10021, 'http://productdata.isdfmk.xyz/vqMAvTS5sJGYjfaD_qEVWA.jpg', 0);
 INSERT INTO `ProductImage` VALUES (107, 10022, '\r\nhttp://productdata.isdfmk.xyz/adadas3e.jpg', 1);
-INSERT INTO `ProductImage` VALUES (108, 10022, '\r\nhttp://productdata.isdfmk.xyz/Bjxu9RqIzP3Ee5QkFP6d1A.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (109, 10022, '\r\nhttp://productdata.isdfmk.xyz/aIcBs8oaW7BK7O_XjKnyDw.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (110, 10022, '\r\nhttp://productdata.isdfmk.xyz/RUbeN8NHFbwRkkH4-AuKbQ.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (111, 10022, '\r\nhttp://productdata.isdfmk.xyz/x-0NQEGxSXEpg4GUBE7gkQ.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (108, 10022, '\r\nhttp://productdata.isdfmk.xyz/Bjxu9RqIzP3Ee5QkFP6d1A.jpg', 0);
+INSERT INTO `ProductImage` VALUES (109, 10022, '\r\nhttp://productdata.isdfmk.xyz/aIcBs8oaW7BK7O_XjKnyDw.jpg', 0);
+INSERT INTO `ProductImage` VALUES (110, 10022, '\r\nhttp://productdata.isdfmk.xyz/RUbeN8NHFbwRkkH4-AuKbQ.jpg', 0);
+INSERT INTO `ProductImage` VALUES (111, 10022, '\r\nhttp://productdata.isdfmk.xyz/x-0NQEGxSXEpg4GUBE7gkQ.jpg', 0);
 INSERT INTO `ProductImage` VALUES (112, 10023, '\r\nhttp://productdata.isdfmk.xyz/tuhaokuai_1583977278.jpg', 1);
-INSERT INTO `ProductImage` VALUES (113, 10023, '\r\nhttp://productdata.isdfmk.xyz/tuhaokuai_1583977330.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (114, 10023, '\r\nhttp://productdata.isdfmk.xyz/tuhaokuai_1583977307.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (115, 10023, '\r\nhttp://productdata.isdfmk.xyz/tuhaokuai_1583977378.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (116, 10023, 'http://productdata.isdfmk.xyz/tuhaokuai_1583977378.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (113, 10023, '\r\nhttp://productdata.isdfmk.xyz/tuhaokuai_1583977330.jpg', 0);
+INSERT INTO `ProductImage` VALUES (114, 10023, '\r\nhttp://productdata.isdfmk.xyz/tuhaokuai_1583977307.jpg', 0);
+INSERT INTO `ProductImage` VALUES (115, 10023, '\r\nhttp://productdata.isdfmk.xyz/tuhaokuai_1583977378.jpg', 0);
+INSERT INTO `ProductImage` VALUES (116, 10023, 'http://productdata.isdfmk.xyz/tuhaokuai_1583977378.jpg', 0);
 INSERT INTO `ProductImage` VALUES (117, 10024, 'http://productdata.isdfmk.xyz/AD8JQ6Q0jfeySzdxAVglqw.jpg', 1);
-INSERT INTO `ProductImage` VALUES (118, 10024, 'http://productdata.isdfmk.xyz/1k7IJMBhmkX97QGmsBnJmA.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (119, 10024, 'http://productdata.isdfmk.xyz/QlCRL5Qc2PQ1Ds9msLQ0aw.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (120, 10024, 'http://productdata.isdfmk.xyz/vGYPFoIyeYmz5oRZzvZdgQ.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (121, 10024, 'http://productdata.isdfmk.xyz/YZNbG7O6_BbGM7S33OAZxQ.jpg\r\n', NULL);
+INSERT INTO `ProductImage` VALUES (118, 10024, 'http://productdata.isdfmk.xyz/1k7IJMBhmkX97QGmsBnJmA.jpg', 0);
+INSERT INTO `ProductImage` VALUES (119, 10024, 'http://productdata.isdfmk.xyz/QlCRL5Qc2PQ1Ds9msLQ0aw.jpg', 0);
+INSERT INTO `ProductImage` VALUES (120, 10024, 'http://productdata.isdfmk.xyz/vGYPFoIyeYmz5oRZzvZdgQ.jpg', 0);
+INSERT INTO `ProductImage` VALUES (121, 10024, 'http://productdata.isdfmk.xyz/YZNbG7O6_BbGM7S33OAZxQ.jpg\r\n', 0);
 INSERT INTO `ProductImage` VALUES (122, 10025, 'http://productdata.isdfmk.xyz/FlnxmuE-gh4YKIj4txsLfg.jpg', 1);
-INSERT INTO `ProductImage` VALUES (123, 10025, 'http://productdata.isdfmk.xyz/NL-OSHZUQGs6vGjGsmI__w.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (124, 10025, 'http://productdata.isdfmk.xyz/CZ5siXML-q9UXRnuqpww0g.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (125, 10025, 'http://productdata.isdfmk.xyz/GVEWb_biyayx8a3dNgKA2g.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (126, 10025, 'http://productdata.isdfmk.xyz/i7kQ4Pf_DtOVDPRC-HazMg.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (123, 10025, 'http://productdata.isdfmk.xyz/NL-OSHZUQGs6vGjGsmI__w.jpg', 0);
+INSERT INTO `ProductImage` VALUES (124, 10025, 'http://productdata.isdfmk.xyz/CZ5siXML-q9UXRnuqpww0g.jpg', 0);
+INSERT INTO `ProductImage` VALUES (125, 10025, 'http://productdata.isdfmk.xyz/GVEWb_biyayx8a3dNgKA2g.jpg', 0);
+INSERT INTO `ProductImage` VALUES (126, 10025, 'http://productdata.isdfmk.xyz/i7kQ4Pf_DtOVDPRC-HazMg.jpg', 0);
 INSERT INTO `ProductImage` VALUES (127, 10026, 'http://productdata.isdfmk.xyz/a1.jpg', 1);
-INSERT INTO `ProductImage` VALUES (128, 10026, 'http://productdata.isdfmk.xyz/a2.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (129, 10026, 'http://productdata.isdfmk.xyz/b1.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (130, 10026, 'http://productdata.isdfmk.xyz/b2.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (131, 10026, 'http://productdata.isdfmk.xyz/b3.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (128, 10026, 'http://productdata.isdfmk.xyz/a2.jpg', 0);
+INSERT INTO `ProductImage` VALUES (129, 10026, 'http://productdata.isdfmk.xyz/b1.jpg', 0);
+INSERT INTO `ProductImage` VALUES (130, 10026, 'http://productdata.isdfmk.xyz/b2.jpg', 0);
+INSERT INTO `ProductImage` VALUES (131, 10026, 'http://productdata.isdfmk.xyz/b3.jpg', 0);
 INSERT INTO `ProductImage` VALUES (132, 10027, 'http://productdata.isdfmk.xyz/135638619666091357760161_x.jpg', 1);
-INSERT INTO `ProductImage` VALUES (133, 10027, 'http://productdata.isdfmk.xyz/147494239513439282291194_x.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (134, 10027, 'http://productdata.isdfmk.xyz/194496895094406041420196_x.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (135, 10027, 'http://productdata.isdfmk.xyz/216693731079825961722732_x.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (136, 10027, 'http://productdata.isdfmk.xyz/HtNyjfPMAhzQjw1RPlMUoA.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (133, 10027, 'http://productdata.isdfmk.xyz/147494239513439282291194_x.jpg', 0);
+INSERT INTO `ProductImage` VALUES (134, 10027, 'http://productdata.isdfmk.xyz/194496895094406041420196_x.jpg', 0);
+INSERT INTO `ProductImage` VALUES (135, 10027, 'http://productdata.isdfmk.xyz/216693731079825961722732_x.jpg', 0);
+INSERT INTO `ProductImage` VALUES (136, 10027, 'http://productdata.isdfmk.xyz/HtNyjfPMAhzQjw1RPlMUoA.jpg', 0);
 INSERT INTO `ProductImage` VALUES (137, 10028, 'http://productdata.isdfmk.xyz/5JR1uDh09y-dhv8RSstl9g.jpg', 1);
-INSERT INTO `ProductImage` VALUES (138, 10028, 'http://productdata.isdfmk.xyz/jU8rPyTxL3Siw6dLEUHhDQ.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (139, 10028, 'http://productdata.isdfmk.xyz/MUak68zcW1wihVXkpQ3rIQ.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (140, 10028, 'http://productdata.isdfmk.xyz/nV358PZUk4icX1T7fBcc_Q.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (141, 10028, 'http://productdata.isdfmk.xyz/XJSBumEOLmp8H7P3GX2ASw.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (142, 10029, '\r\nhttp://productdata.isdfmk.xyz/317865394161552203721050_x.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (138, 10028, 'http://productdata.isdfmk.xyz/jU8rPyTxL3Siw6dLEUHhDQ.jpg', 0);
+INSERT INTO `ProductImage` VALUES (139, 10028, 'http://productdata.isdfmk.xyz/MUak68zcW1wihVXkpQ3rIQ.jpg', 0);
+INSERT INTO `ProductImage` VALUES (140, 10028, 'http://productdata.isdfmk.xyz/nV358PZUk4icX1T7fBcc_Q.jpg', 0);
+INSERT INTO `ProductImage` VALUES (141, 10028, 'http://productdata.isdfmk.xyz/XJSBumEOLmp8H7P3GX2ASw.jpg', 0);
+INSERT INTO `ProductImage` VALUES (142, 10029, '\r\nhttp://productdata.isdfmk.xyz/317865394161552203721050_x.jpg', 0);
 INSERT INTO `ProductImage` VALUES (143, 10029, 'http://productdata.isdfmk.xyz/334355456168161240400082_x.jpg', 1);
-INSERT INTO `ProductImage` VALUES (144, 10029, 'http://productdata.isdfmk.xyz/619597484920156642971000_x.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (145, 10029, 'http://productdata.isdfmk.xyz/907405909774268174160400_x.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (146, 10029, 'http://productdata.isdfmk.xyz/hfQeM5SNL7aIQsnz4m2MwA.jpg', NULL);
+INSERT INTO `ProductImage` VALUES (144, 10029, 'http://productdata.isdfmk.xyz/619597484920156642971000_x.jpg', 0);
+INSERT INTO `ProductImage` VALUES (145, 10029, 'http://productdata.isdfmk.xyz/907405909774268174160400_x.jpg', 0);
+INSERT INTO `ProductImage` VALUES (146, 10029, 'http://productdata.isdfmk.xyz/hfQeM5SNL7aIQsnz4m2MwA.jpg', 0);
 INSERT INTO `ProductImage` VALUES (147, 10030, 'http://productdata.isdfmk.xyz/5Bl2awngovDrpx-B7yhitw.jpg', 1);
-INSERT INTO `ProductImage` VALUES (148, 10030, 'http://productdata.isdfmk.xyz/EPgdZq3WD1ibfSP8znHfFQ.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (149, 10030, 'http://productdata.isdfmk.xyz/hlkkdGdo-SSYb77-pYqpmw.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (150, 10030, 'http://productdata.isdfmk.xyz/mvkEwjIBeMqinZ51RBJt6A.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (151, 10030, 'http://productdata.isdfmk.xyz/o3M12fplwwBGg6zbJm69hA.jpg', NULL);
-INSERT INTO `ProductImage` VALUES (185, 10055, 'http://productdata.isdfmk.xyz/mmexport1586163224574.jpg_10055', 1);
-INSERT INTO `ProductImage` VALUES (186, 10055, 'http://productdata.isdfmk.xyz/mmexport1586163230309.jpeg_10055', 0);
-INSERT INTO `ProductImage` VALUES (187, 10055, 'http://productdata.isdfmk.xyz/mmexport1586163263481.jpeg_10055', 0);
-INSERT INTO `ProductImage` VALUES (188, 10056, 'http://productdata.isdfmk.xyz/mmexport1586163224574.jpg_10056', 1);
-INSERT INTO `ProductImage` VALUES (189, 10056, 'http://productdata.isdfmk.xyz/mmexport1586163230309.jpeg_10056', 0);
-INSERT INTO `ProductImage` VALUES (190, 10056, 'http://productdata.isdfmk.xyz/mmexport1586163263481.jpeg_10056', 0);
-INSERT INTO `ProductImage` VALUES (191, 10057, 'http://productdata.isdfmk.xyz/mmexport1586163224574.jpg_10057', 1);
-INSERT INTO `ProductImage` VALUES (192, 10057, 'http://productdata.isdfmk.xyz/mmexport1586163230309.jpeg_10057', 0);
-INSERT INTO `ProductImage` VALUES (193, 10057, 'http://productdata.isdfmk.xyz/mmexport1586163263481.jpeg_10057', 0);
-INSERT INTO `ProductImage` VALUES (194, 10058, 'http://productdata.isdfmk.xyz/2c92ab7ec4e1b4d5efad643ac02242ef.jpeg_10058', 1);
-INSERT INTO `ProductImage` VALUES (195, 10059, 'http://productdata.isdfmk.xyz/9fbfaf452df073f44d9223f7ff0e6838.jpeg_10059', 1);
-INSERT INTO `ProductImage` VALUES (196, 10060, 'http://productdata.isdfmk.xyz/c0d8367a441f9f7c93222b2aede2f70a.JPG_10060', 1);
-INSERT INTO `ProductImage` VALUES (197, 10060, 'http://productdata.isdfmk.xyz/c0d8367a441f9f7c93222b2aede2f70a.JPG_10060', 0);
+INSERT INTO `ProductImage` VALUES (148, 10030, 'http://productdata.isdfmk.xyz/EPgdZq3WD1ibfSP8znHfFQ.jpg', 0);
+INSERT INTO `ProductImage` VALUES (149, 10030, 'http://productdata.isdfmk.xyz/hlkkdGdo-SSYb77-pYqpmw.jpg', 0);
+INSERT INTO `ProductImage` VALUES (150, 10030, 'http://productdata.isdfmk.xyz/mvkEwjIBeMqinZ51RBJt6A.jpg', 0);
+INSERT INTO `ProductImage` VALUES (273, 10030, 'http://productdata.isdfmk.xyz/58e93764062b27867e53f1ca35660cec.jpeg_100301592722393171', 0);
+INSERT INTO `ProductImage` VALUES (277, 10007, 'http://productdata.isdfmk.xyz/46a38b07d9db03e28a5795058bbf564f.jpg_100071592725181433', 0);
+INSERT INTO `ProductImage` VALUES (278, 10002, 'http://productdata.isdfmk.xyz/3201246f8bc8b066434092eb5865e533.jpeg_100021592729359004', 1);
+INSERT INTO `ProductImage` VALUES (279, 10002, 'http://productdata.isdfmk.xyz/36e1afbfc55303502fe9d46c46ddbd85.jpg_100021592729360263', 0);
+INSERT INTO `ProductImage` VALUES (280, 10002, 'http://productdata.isdfmk.xyz/58e93764062b27867e53f1ca35660cec.jpeg_100021592729360830', 0);
 
 -- ----------------------------
 -- Table structure for ProductLowPrice
@@ -309,15 +289,15 @@ CREATE TABLE `ProductPrice`  (
   `ProductPrice` decimal(10, 2) NULL DEFAULT NULL,
   `SalesPrice` decimal(10, 0) NULL DEFAULT NULL,
   `SpikePrice` decimal(10, 2) NULL DEFAULT NULL,
-  `ProductSales` decimal(10, 2) NULL DEFAULT NULL,
-  `ProductInventory` decimal(10, 2) NULL DEFAULT NULL,
+  `ProductSales` double(10, 2) NULL DEFAULT 0.00,
+  `ProductInventory` double(10, 2) NULL DEFAULT 0.00,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ProductPrice
 -- ----------------------------
-INSERT INTO `ProductPrice` VALUES (1, 10001, 5999.00, 4844, 4549.00, 1.00, 0.00);
+INSERT INTO `ProductPrice` VALUES (1, 10001, 599955.00, 4844, 4549.00, 1.00, 0.00);
 INSERT INTO `ProductPrice` VALUES (2, 10002, 1999.00, 1899, 15886.00, 76.00, 99.00);
 INSERT INTO `ProductPrice` VALUES (3, 10010, 3596.00, 2563, 2523.00, 1581.00, 1853.00);
 INSERT INTO `ProductPrice` VALUES (4, 10011, 10398.00, 19888, 9999.00, 18981.00, 15547.00);
@@ -327,9 +307,9 @@ INSERT INTO `ProductPrice` VALUES (7, 10014, 2898.00, 2584, 2541.00, 14525.00, 1
 INSERT INTO `ProductPrice` VALUES (8, 10015, 20.00, 10, 8.80, 88969.00, 74536.00);
 INSERT INTO `ProductPrice` VALUES (9, 10016, 5399.00, 4999, 4988.00, 158636.00, 786317.00);
 INSERT INTO `ProductPrice` VALUES (10, 10017, 3199.00, 2999, 3012.00, 4537.00, 78580.00);
-INSERT INTO `ProductPrice` VALUES (11, 10003, 758.00, 666, 589.00, 18966.00, 5665526.00);
+INSERT INTO `ProductPrice` VALUES (11, 10003, 88.00, 666, 589.00, 18966.00, 5665526.00);
 INSERT INTO `ProductPrice` VALUES (12, 10006, 1499.00, 1399, 1360.00, 156447.00, 4855431.00);
-INSERT INTO `ProductPrice` VALUES (13, 10007, 3350.00, 2899, 1569.00, 157080.00, 145544.00);
+INSERT INTO `ProductPrice` VALUES (13, 10007, 2899.00, 2899, 1569.00, 157080.00, 145544.00);
 INSERT INTO `ProductPrice` VALUES (14, 10008, 3500.00, 15588, 1585.00, 10083.00, 15247.00);
 INSERT INTO `ProductPrice` VALUES (15, 10009, 47699.00, 4688, 45666.00, 666747.00, 48586.00);
 INSERT INTO `ProductPrice` VALUES (16, 10004, 30576.00, 29999, 28999.00, 10081.00, 158547.00);
@@ -681,7 +661,7 @@ CREATE TABLE `newsContent`  (
   `newsStatus` int(11) NULL DEFAULT NULL,
   `introduction` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`contentId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5592869 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6815175 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of newsContent
@@ -698,6 +678,10 @@ INSERT INTO `newsContent` VALUES (4678773, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e'
 INSERT INTO `newsContent` VALUES (4678774, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1592198179386100001', '0', '支付通知', '2020-06-15 05:16:46', 0, '支付通知');
 INSERT INTO `newsContent` VALUES (4692815, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1592201143597100002', '0', '确认订单消息', '2020-06-15 06:06:05', 0, '消息简介');
 INSERT INTO `newsContent` VALUES (4692816, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1592201143597100002', '0', '支付通知', '2020-06-15 06:06:05', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (6815171, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1592720376237100004', '0', '确认订单消息', '2020-06-21 06:21:56', 0, '消息简介');
+INSERT INTO `newsContent` VALUES (6815172, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1592720376237100004', '0', '支付通知', '2020-06-21 06:21:56', 0, '支付通知');
+INSERT INTO `newsContent` VALUES (6815173, 4, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 4, '1592733331815100011', '0', '确认订单消息', '2020-06-21 09:56:07', 1, '消息简介');
+INSERT INTO `newsContent` VALUES (6815174, 3, 'f92b9f8f372e445fb6564cdd57aa3c3e', NULL, 3, '1592733331815100011', '0', '支付通知', '2020-06-21 09:56:07', 1, '支付通知');
 
 -- ----------------------------
 -- Table structure for newsSender
@@ -735,7 +719,7 @@ CREATE TABLE `orderAddress`  (
   `areaCodes` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 754 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 769 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orderAddress
@@ -849,6 +833,43 @@ INSERT INTO `orderAddress` VALUES (750, 'f92b9f8f372e445fb6564cdd57aa3c3e', '159
 INSERT INTO `orderAddress` VALUES (751, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592198179386100001', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
 INSERT INTO `orderAddress` VALUES (752, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592198179386100001', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
 INSERT INTO `orderAddress` VALUES (753, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592201143597100002', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (754, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592713282803100001', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (755, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592720296500100003', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (756, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592720296500100003', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (757, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592720376237100004', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (758, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592720376237100004', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (759, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592720450436100005', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (760, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592720376237100004', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (761, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592720594896100006', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (762, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592730170372100007', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (763, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592730540160100008', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (764, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592730653251100009', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (765, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592730653251100009', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (766, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592732849879100010', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (767, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592733331815100011', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+INSERT INTO `orderAddress` VALUES (768, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592733438424100012', '2252821162@qq.com', '北京市 市辖区 东城区 东华门街道 ', '2252821162@qq.com', '18598814121', '2252821162@qq.com', '11,1101,110101,110101001,', '2');
+
+-- ----------------------------
+-- Table structure for orderAddress_copy1
+-- ----------------------------
+DROP TABLE IF EXISTS `orderAddress_copy1`;
+CREATE TABLE `orderAddress_copy1`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `orderId` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `areas` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `detailedAddress` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `phone` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `areaCodes` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 754 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orderAddress_copy1
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for orders
@@ -868,7 +889,7 @@ CREATE TABLE `orders`  (
   `productState` int(11) NULL DEFAULT 0,
   `isDelete` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`purchaseId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3421 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3434 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
@@ -1001,6 +1022,19 @@ INSERT INTO `orders` VALUES (3417, 10005, '1592198179386100001', 'Apple iPad Pro
 INSERT INTO `orders` VALUES (3418, 10014, '1592201143597100002', '骨伽（COUGAR） 电脑主机箱 台式机中塔式侧透征服者游戏定制水冷机箱 黑色\r\n', 'http://productdata.isdfmk.xyz/5b4d4cc8N0bf9c476.jpg', '黑色 ', '1', 2898, '2.8kg', 0, 2, 0);
 INSERT INTO `orders` VALUES (3419, 10015, '1592203784754100003', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶油味 ', '3', 20, '0.15kg', 0, 0, 0);
 INSERT INTO `orders` VALUES (3420, 10015, '1592204359482100004', '三只松鼠芒果干 蜜饯果干芒果片休闲零食办公室小吃果脯水果干116g/袋', 'http://productdata.isdfmk.xyz/3531d2420f91d48177112641833bc7aa_2_3_photo.jpg', '奶茶味 ', '1', 20, '0.15kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (3421, 10006, '1592713282803100001', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.isdfmk.xyz/2ca45e2fd9758794.jpg', '黑色 ', '1', 1499, '0.6kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (3422, 10011, '1592713565109100002', 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.isdfmk.xyz/04e04ec4954e07bd.jpg', '银色 128G+2G ', '1', 10398, '0.56kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (3423, 10011, '1592713565109100002', 'Apple iPhone 11 Pro Max (A2220) 64GB 金色 移动联通电信4G手机 双卡双待 ', '\r\nhttp://productdata.isdfmk.xyz/04e04ec4954e07bd.jpg', '暗夜绿色 128G+2G ', '35', 10398, '0.56kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (3424, 10006, '1592720296500100003', ' 索尼（SONY）WF-1000XM3 真无线蓝牙降噪耳机 智能降噪 触控面板 苹果/安卓手机适用 黑色\r\n', 'http://productdata.isdfmk.xyz/2ca45e2fd9758794.jpg', '黑色 ', '1', 1499, '0.6kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (3425, 10016, '1592720376237100004', '华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机', '\r\nhttp://productdata.isdfmk.xyz/971ec333c8ef1de2.jpg', '星河银 ', '1', 5399, '0.54kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (3426, 10013, '1592720450436100005', '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080', 'http://productdata.isdfmk.xyz/1f3f9fd0e759383f.jpg', '华硕PRIME X299-A主板+  ', '1', 11999, '2.08kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (3427, 10013, '1592720594896100006', '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080', 'http://productdata.isdfmk.xyz/1f3f9fd0e759383f.jpg', '华硕PRIME X299-A主板+  ', '1', 11999, '2.08kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (3428, 10009, '1592730170372100007', '外星人Alienware area-51m 17.3英寸游戏笔记本电脑(i9-9900K 32G 512GX2 1T RTX2080 8G 144Hz 低蓝光屏)黑\r\n', 'http://productdata.isdfmk.xyz/0fb1612d25f44013.jpg', '[A51M]9代i9 2080 低蓝光屏 黑  ', '1', 47699, '5.6kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (3429, 10013, '1592730540160100008', '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080', 'http://productdata.isdfmk.xyz/1f3f9fd0e759383f.jpg', '华硕PRIME X299-A主板+  ', '1', 11999, '2.08kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (3430, 10005, '1592730653251100009', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.isdfmk.xyz/7a77ad4e3100e885.jpg', 'WLAN版512G ', '1', 7890, '2.8kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (3431, 10013, '1592732849879100010', '华硕（ASUS）猛禽ROG-STRIX-GeForce RTX 2080', 'http://productdata.isdfmk.xyz/1f3f9fd0e759383f.jpg', '华硕PRIME X299-A主板+  ', '1', 11999, '2.08kg', 0, 0, 0);
+INSERT INTO `orders` VALUES (3432, 10005, '1592733331815100011', 'Apple iPad Pro 12.9英寸平板电脑 2018款(64G WLAN版/全面屏/A12X/FaceID MTEL2CH/A)深空灰\r\n', 'http://productdata.isdfmk.xyz/7a77ad4e3100e885.jpg', 'Cellular版1TB ', '1', 7490, '2.8kg', 0, 2, 0);
+INSERT INTO `orders` VALUES (3433, 10016, '1592733438424100012', '华为 HUAWEI Mate 30 Pro 麒麟990旗舰芯片OLED环幕屏双4000万徕卡电影四摄手机', '\r\nhttp://productdata.isdfmk.xyz/971ec333c8ef1de2.jpg', '星河银 ', '1', 5399, '0.54kg', 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for productAttribute
@@ -1012,7 +1046,7 @@ CREATE TABLE `productAttribute`  (
   `attributeContent` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `attributeType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`attributeId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 194 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 619 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of productAttribute
@@ -1030,8 +1064,6 @@ INSERT INTO `productAttribute` VALUES (10, 10003, '【超大款】帝王蟹礼�
 INSERT INTO `productAttribute` VALUES (11, 10003, '【大蟹款】帝王蟹礼盒4.0-3.6斤 ', '15');
 INSERT INTO `productAttribute` VALUES (12, 10003, '【尊享款】帝王蟹礼盒5.5-5.0斤\r\n', '15');
 INSERT INTO `productAttribute` VALUES (13, 10003, '【尝鲜款】帝王蟹礼盒2.8-2.4斤', '15');
-INSERT INTO `productAttribute` VALUES (14, 10003, '黄金蟹礼盒1000-800g', '15');
-INSERT INTO `productAttribute` VALUES (15, 10003, '黄金蟹礼盒800-600g', '15');
 INSERT INTO `productAttribute` VALUES (16, 10004, '星际蓝', '11');
 INSERT INTO `productAttribute` VALUES (17, 10004, '华为mate Xs星际蓝(新款)', '11');
 INSERT INTO `productAttribute` VALUES (18, 10005, 'WLAN版512G', '16');
@@ -1166,26 +1198,20 @@ INSERT INTO `productAttribute` VALUES (146, 10030, '黑色', '11');
 INSERT INTO `productAttribute` VALUES (147, 10030, 'L', '10');
 INSERT INTO `productAttribute` VALUES (148, 10030, 'M', '10');
 INSERT INTO `productAttribute` VALUES (149, 10030, 'X', '10');
-INSERT INTO `productAttribute` VALUES (164, 10048, '红色', '11');
-INSERT INTO `productAttribute` VALUES (165, 10048, 'S', '10');
-INSERT INTO `productAttribute` VALUES (176, 10054, '红色', '11');
-INSERT INTO `productAttribute` VALUES (177, 10054, 'S', '10');
-INSERT INTO `productAttribute` VALUES (178, 10055, '红色', '11');
-INSERT INTO `productAttribute` VALUES (179, 10055, 'S', '10');
-INSERT INTO `productAttribute` VALUES (180, 10056, '红色', '11');
-INSERT INTO `productAttribute` VALUES (181, 10056, 'S', '10');
-INSERT INTO `productAttribute` VALUES (182, 10057, '红色', '11');
-INSERT INTO `productAttribute` VALUES (183, 10057, 'S', '10');
-INSERT INTO `productAttribute` VALUES (184, 10058, '套餐', '12');
-INSERT INTO `productAttribute` VALUES (185, 10058, '颜色', '11');
-INSERT INTO `productAttribute` VALUES (186, 10059, 's', '10');
-INSERT INTO `productAttribute` VALUES (187, 10059, '好吃', '14');
-INSERT INTO `productAttribute` VALUES (188, 10060, '是多喝点水', '14');
-INSERT INTO `productAttribute` VALUES (189, 10060, '23455', '14');
-INSERT INTO `productAttribute` VALUES (190, 10060, '5645', '14');
-INSERT INTO `productAttribute` VALUES (191, 10060, 'UR合同法哥', '14');
-INSERT INTO `productAttribute` VALUES (192, 10060, '的换个地方', '13');
-INSERT INTO `productAttribute` VALUES (193, 10060, 'sdfsd', '13');
+INSERT INTO `productAttribute` VALUES (605, 10073, '口味好吃', '15');
+INSERT INTO `productAttribute` VALUES (606, 10073, ' 今天', '15');
+INSERT INTO `productAttribute` VALUES (607, 10073, '版本 ', '16');
+INSERT INTO `productAttribute` VALUES (608, 10075, '好吃', '15');
+INSERT INTO `productAttribute` VALUES (609, 10077, 'S', '10');
+INSERT INTO `productAttribute` VALUES (610, 10077, 'M', '10');
+INSERT INTO `productAttribute` VALUES (611, 10077, 'F', '12');
+INSERT INTO `productAttribute` VALUES (612, 10077, 'W', '12');
+INSERT INTO `productAttribute` VALUES (613, 10001, '31231', '11');
+INSERT INTO `productAttribute` VALUES (614, 10001, '12231', '11');
+INSERT INTO `productAttribute` VALUES (615, 10001, '212312', '11');
+INSERT INTO `productAttribute` VALUES (616, 10013, '21123412', '13');
+INSERT INTO `productAttribute` VALUES (617, 10030, '套餐一', '12');
+INSERT INTO `productAttribute` VALUES (618, 10030, '套餐二', '12');
 
 -- ----------------------------
 -- Table structure for productAttributes
@@ -1260,186 +1286,258 @@ CREATE TABLE `productDistinction`  (
   `tasteId` int(11) NULL DEFAULT NULL,
   `kindId` int(11) NULL DEFAULT NULL,
   `versionId` int(11) NULL DEFAULT NULL,
-  `productPrice` double(10, 2) NULL DEFAULT NULL,
+  `productPrice` double(10, 2) NULL DEFAULT 0.00,
   `priceSpikePrice` decimal(10, 2) NULL DEFAULT NULL,
   `priceDiscount` decimal(10, 2) NULL DEFAULT NULL,
-  `ProductInventory` double(10, 2) NULL DEFAULT NULL,
-  `ProductSales` double(10, 2) NULL DEFAULT NULL,
+  `ProductInventory` double(10, 2) NULL DEFAULT 0.00,
+  `ProductSales` double(10, 2) NULL DEFAULT 0.00,
+  `sign` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`distinctionId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 174 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1431 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of productDistinction
 -- ----------------------------
-INSERT INTO `productDistinction` VALUES (1, 10001, NULL, 1, NULL, 6, NULL, NULL, 3, 5899.00, 4888.00, 4999.00, 0.00, 1.00);
-INSERT INTO `productDistinction` VALUES (2, 10001, NULL, 1, NULL, 6, NULL, NULL, 4, 6900.00, 4888.00, 4999.00, 0.00, 2.00);
-INSERT INTO `productDistinction` VALUES (3, 10001, NULL, 1, NULL, 5, NULL, NULL, 3, 5741.00, 4888.00, 4999.00, 0.00, 3.00);
-INSERT INTO `productDistinction` VALUES (4, 10001, NULL, 1, NULL, 5, NULL, NULL, 4, 5845.00, 4888.00, 4999.00, 0.00, 4.00);
-INSERT INTO `productDistinction` VALUES (5, 10001, NULL, 2, NULL, 6, NULL, NULL, 3, 5854.00, 4888.00, 4999.00, 0.00, 5.00);
-INSERT INTO `productDistinction` VALUES (6, 10001, NULL, 2, NULL, 6, NULL, NULL, 4, 1525.00, 4888.00, 4999.00, 0.00, 6.00);
-INSERT INTO `productDistinction` VALUES (7, 10001, NULL, 2, NULL, 5, NULL, NULL, 3, 5899.00, 4888.00, 4999.00, 0.00, 1.00);
-INSERT INTO `productDistinction` VALUES (8, 10001, NULL, 2, NULL, 5, NULL, NULL, 4, 6900.00, 4888.00, 4999.00, 0.00, 2.00);
-INSERT INTO `productDistinction` VALUES (13, 10002, NULL, 7, 8, NULL, NULL, NULL, NULL, 1899.00, 1799.00, 1699.00, 995.00, 100.00);
-INSERT INTO `productDistinction` VALUES (14, 10002, NULL, 7, 9, NULL, NULL, NULL, NULL, 1899.00, 1799.00, 1699.00, 45.00, 52.00);
-INSERT INTO `productDistinction` VALUES (15, 10003, NULL, NULL, NULL, NULL, NULL, 10, NULL, 888.00, 877.00, 888.00, 119.00, 8.00);
-INSERT INTO `productDistinction` VALUES (16, 10003, NULL, NULL, NULL, NULL, NULL, 11, NULL, 758.00, 768.00, 738.00, 1000.00, 7.00);
-INSERT INTO `productDistinction` VALUES (17, 10003, NULL, NULL, NULL, NULL, NULL, 12, NULL, 685.00, 585.00, 565.00, 848.00, 6.00);
-INSERT INTO `productDistinction` VALUES (18, 10003, NULL, NULL, NULL, NULL, NULL, 13, NULL, 566.00, 466.00, 463.00, 1000.00, 8.00);
-INSERT INTO `productDistinction` VALUES (19, 10003, NULL, NULL, NULL, NULL, NULL, 14, NULL, 433.00, 333.00, 362.00, 29.00, 5.00);
-INSERT INTO `productDistinction` VALUES (20, 10003, NULL, NULL, NULL, NULL, NULL, 15, NULL, 366.00, 266.00, 285.00, 1000.00, 6.00);
-INSERT INTO `productDistinction` VALUES (21, 10004, NULL, 16, NULL, NULL, NULL, NULL, NULL, 30576.00, 28999.00, 29999.00, 89.00, 852.00);
-INSERT INTO `productDistinction` VALUES (22, 10004, NULL, 17, NULL, NULL, NULL, NULL, NULL, 31676.00, 29999.00, 29999.00, 77.00, 520.00);
-INSERT INTO `productDistinction` VALUES (23, 10005, NULL, NULL, NULL, NULL, NULL, NULL, 18, 7890.00, 4585.00, 5388.00, 831.00, 8.00);
-INSERT INTO `productDistinction` VALUES (24, 10005, NULL, NULL, NULL, NULL, NULL, NULL, 19, 7890.00, 4585.00, 5888.00, 562.00, 8.00);
-INSERT INTO `productDistinction` VALUES (25, 10005, NULL, NULL, NULL, NULL, NULL, NULL, 20, 7830.00, 4585.00, 5878.00, 34.00, 1.00);
-INSERT INTO `productDistinction` VALUES (26, 10005, NULL, NULL, NULL, NULL, NULL, NULL, 21, 7690.00, 4585.00, 5488.00, 43.00, 2.00);
-INSERT INTO `productDistinction` VALUES (27, 10005, NULL, NULL, NULL, NULL, NULL, NULL, 22, 7890.00, 4995.00, 4888.00, 998.00, 8.00);
-INSERT INTO `productDistinction` VALUES (28, 10005, NULL, NULL, NULL, NULL, NULL, NULL, 23, 7490.00, 4584.00, 4888.00, 27.00, 5.00);
-INSERT INTO `productDistinction` VALUES (29, 10006, NULL, 24, NULL, NULL, NULL, NULL, NULL, 1499.00, 1360.00, 1399.00, 37.00, 2.00);
-INSERT INTO `productDistinction` VALUES (30, 10006, NULL, 25, NULL, NULL, NULL, NULL, NULL, 1499.00, 1360.00, 1399.00, 995.00, 100.00);
-INSERT INTO `productDistinction` VALUES (31, 10007, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1569.00, 2899.00, 1576.00, 4.00, 11.00);
-INSERT INTO `productDistinction` VALUES (32, 10008, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3500.00, 1585.00, 1558.00, 14.00, 10.00);
-INSERT INTO `productDistinction` VALUES (33, 10009, NULL, 26, NULL, NULL, NULL, NULL, NULL, 47699.00, 45666.00, 3688.00, 971.00, 7.00);
-INSERT INTO `productDistinction` VALUES (34, 10009, NULL, 27, NULL, NULL, NULL, NULL, NULL, 37799.00, 35666.00, 3688.00, 847.00, 6.00);
-INSERT INTO `productDistinction` VALUES (35, 10009, NULL, 28, NULL, NULL, NULL, NULL, NULL, 37699.00, 35666.00, 3688.00, 999.00, 8.00);
-INSERT INTO `productDistinction` VALUES (36, 10009, NULL, 29, NULL, NULL, NULL, NULL, NULL, 37699.00, 35666.00, 3688.00, 28.00, 5.00);
-INSERT INTO `productDistinction` VALUES (37, 10009, NULL, 30, NULL, NULL, NULL, NULL, NULL, 47699.00, 45466.00, 4688.00, 998.00, 6.00);
-INSERT INTO `productDistinction` VALUES (38, 10009, NULL, 31, NULL, NULL, NULL, NULL, NULL, 46666.00, 44866.00, 4688.00, 98.00, 852.00);
-INSERT INTO `productDistinction` VALUES (39, 10009, NULL, 32, NULL, NULL, NULL, NULL, NULL, 47699.00, 45666.00, 4688.00, 86.00, 520.00);
-INSERT INTO `productDistinction` VALUES (40, 10009, NULL, 33, NULL, NULL, NULL, NULL, NULL, 57699.00, 55666.00, 4688.00, 843.00, 8.00);
-INSERT INTO `productDistinction` VALUES (41, 10009, NULL, 34, NULL, NULL, NULL, NULL, NULL, 67699.00, 55666.00, 5688.00, 562.00, 8.00);
-INSERT INTO `productDistinction` VALUES (42, 10010, NULL, 35, NULL, NULL, NULL, NULL, NULL, 3596.00, 2523.00, 2563.00, 45.00, 2.00);
-INSERT INTO `productDistinction` VALUES (43, 10010, NULL, 36, NULL, NULL, NULL, NULL, NULL, 3586.00, 2523.00, 2563.00, 1000.00, 100.00);
-INSERT INTO `productDistinction` VALUES (44, 10010, NULL, 37, NULL, NULL, NULL, NULL, NULL, 3576.00, 2523.00, 2563.00, 10.00, 11.00);
-INSERT INTO `productDistinction` VALUES (45, 10010, NULL, 38, NULL, NULL, NULL, NULL, NULL, 3646.00, 2523.00, 2563.00, 19.00, 10.00);
-INSERT INTO `productDistinction` VALUES (46, 10010, NULL, 39, NULL, NULL, NULL, NULL, NULL, 3496.00, 2523.00, 2563.00, 1000.00, 7.00);
-INSERT INTO `productDistinction` VALUES (47, 10010, NULL, 40, NULL, NULL, NULL, NULL, NULL, 3333.00, 2523.00, 2563.00, 848.00, 6.00);
-INSERT INTO `productDistinction` VALUES (48, 10011, NULL, 41, NULL, NULL, NULL, NULL, 43, 10398.00, 9999.00, 19888.00, 1.00, 11.00);
-INSERT INTO `productDistinction` VALUES (49, 10011, NULL, 41, NULL, NULL, NULL, NULL, 44, 9999.00, 9500.00, 9888.00, 16.00, 10.00);
-INSERT INTO `productDistinction` VALUES (50, 10011, NULL, 42, NULL, NULL, NULL, NULL, 43, 10398.00, 9999.00, 19888.00, 999.00, 7.00);
-INSERT INTO `productDistinction` VALUES (51, 10011, NULL, 42, NULL, NULL, NULL, NULL, 44, 9999.00, 9500.00, 9888.00, 845.00, 6.00);
-INSERT INTO `productDistinction` VALUES (52, 10012, NULL, 45, NULL, NULL, NULL, NULL, 46, 4999.00, 4760.00, 4888.00, 843.00, 8.00);
-INSERT INTO `productDistinction` VALUES (53, 10012, NULL, 45, NULL, NULL, NULL, NULL, 47, 4555.00, 4360.00, 4333.00, 562.00, 8.00);
-INSERT INTO `productDistinction` VALUES (54, 10012, NULL, 45, NULL, NULL, NULL, NULL, 48, 3888.00, 3777.00, 3666.00, 44.00, 2.00);
-INSERT INTO `productDistinction` VALUES (55, 10013, NULL, NULL, NULL, 49, NULL, NULL, NULL, 11999.00, 10888.00, 10289.00, 40.00, 2.00);
-INSERT INTO `productDistinction` VALUES (56, 10013, NULL, NULL, NULL, 50, NULL, NULL, NULL, 12999.00, 10288.00, 18999.00, 999.00, 100.00);
-INSERT INTO `productDistinction` VALUES (57, 10013, NULL, NULL, NULL, 51, NULL, NULL, NULL, 10999.00, 9999.00, 10888.00, 8.00, 11.00);
-INSERT INTO `productDistinction` VALUES (58, 10013, NULL, NULL, NULL, 52, NULL, NULL, NULL, 11888.00, 10001.00, 11065.00, 19.00, 10.00);
-INSERT INTO `productDistinction` VALUES (59, 10014, NULL, 53, NULL, NULL, NULL, NULL, NULL, 2898.00, 2541.00, 2584.00, 9994.00, 99999.00);
-INSERT INTO `productDistinction` VALUES (60, 10014, NULL, 54, NULL, NULL, NULL, NULL, NULL, 3298.00, 2888.00, 2890.00, 5819.00, 4152.00);
-INSERT INTO `productDistinction` VALUES (61, 10015, NULL, NULL, NULL, NULL, 55, NULL, NULL, 20.00, 8.80, 10.00, 9998.00, 70000.00);
-INSERT INTO `productDistinction` VALUES (62, 10015, NULL, NULL, NULL, NULL, 56, NULL, NULL, 20.00, 8.80, 10.00, 50004.00, 85635.00);
-INSERT INTO `productDistinction` VALUES (63, 10015, NULL, NULL, NULL, NULL, 57, NULL, NULL, 20.00, 8.80, 10.00, 78563.00, 85263.00);
-INSERT INTO `productDistinction` VALUES (64, 10015, NULL, NULL, NULL, NULL, 58, NULL, NULL, 20.00, 8.80, 10.00, 102555.00, 11551.00);
-INSERT INTO `productDistinction` VALUES (65, 10015, NULL, NULL, NULL, NULL, 59, NULL, NULL, 20.00, 8.80, 10.00, 4151211.00, 255111.00);
-INSERT INTO `productDistinction` VALUES (66, 10016, NULL, 60, NULL, NULL, NULL, NULL, NULL, 5399.00, 4988.00, 4999.00, 19.00, 10.00);
-INSERT INTO `productDistinction` VALUES (67, 10016, NULL, 61, NULL, NULL, NULL, NULL, NULL, 5399.00, 4988.00, 4999.00, 1000.00, 7.00);
-INSERT INTO `productDistinction` VALUES (68, 10016, NULL, 62, NULL, NULL, NULL, NULL, NULL, 5499.00, 4988.00, 4999.00, 848.00, 6.00);
-INSERT INTO `productDistinction` VALUES (69, 10016, NULL, 63, NULL, NULL, NULL, NULL, NULL, 5499.00, 4988.00, 4999.00, 10.00, 11.00);
-INSERT INTO `productDistinction` VALUES (70, 10017, NULL, 64, NULL, 70, NULL, NULL, 67, 3199.00, 3012.00, 2999.00, 1000.00, 7.00);
-INSERT INTO `productDistinction` VALUES (71, 10017, NULL, 64, NULL, 70, NULL, NULL, 68, 3189.00, 3012.00, 2999.00, 10000.00, 70000.00);
-INSERT INTO `productDistinction` VALUES (72, 10017, NULL, 64, NULL, 70, NULL, NULL, 69, 3199.00, 3012.00, 2999.00, 50004.00, 85635.00);
-INSERT INTO `productDistinction` VALUES (73, 10017, NULL, 64, NULL, 71, NULL, NULL, 67, 3399.00, 3012.00, 2999.00, 78563.00, 85263.00);
-INSERT INTO `productDistinction` VALUES (74, 10017, NULL, 64, NULL, 71, NULL, NULL, 68, 3399.00, 3012.00, 2999.00, 102555.00, 11551.00);
-INSERT INTO `productDistinction` VALUES (75, 10017, NULL, 64, NULL, 71, NULL, NULL, 69, 3399.00, 3012.00, 2999.00, 4151214.00, 255111.00);
-INSERT INTO `productDistinction` VALUES (76, 10017, NULL, 65, NULL, 70, NULL, NULL, 67, 3199.00, 3012.00, 2999.00, 19.00, 10.00);
-INSERT INTO `productDistinction` VALUES (77, 10017, NULL, 65, NULL, 70, NULL, NULL, 68, 3199.00, 3012.00, 2999.00, 1000.00, 7.00);
-INSERT INTO `productDistinction` VALUES (78, 10017, NULL, 65, NULL, 70, NULL, NULL, 69, 3199.00, 3012.00, 2999.00, 848.00, 6.00);
-INSERT INTO `productDistinction` VALUES (79, 10017, NULL, 65, NULL, 71, NULL, NULL, 67, 3399.00, 3012.00, 2999.00, 10.00, 11.00);
-INSERT INTO `productDistinction` VALUES (80, 10017, NULL, 65, NULL, 71, NULL, NULL, 68, 3399.00, 3012.00, 2999.00, 10000.00, 70000.00);
-INSERT INTO `productDistinction` VALUES (81, 10017, NULL, 65, NULL, 71, NULL, NULL, 69, 3399.00, 3012.00, 2999.00, 50004.00, 85635.00);
-INSERT INTO `productDistinction` VALUES (82, 10017, NULL, 66, NULL, 70, NULL, NULL, 67, 3199.00, 3012.00, 2999.00, 78563.00, 85263.00);
-INSERT INTO `productDistinction` VALUES (83, 10017, NULL, 66, NULL, 70, NULL, NULL, 68, 3199.00, 3012.00, 2999.00, 102555.00, 11551.00);
-INSERT INTO `productDistinction` VALUES (84, 10017, NULL, 66, NULL, 70, NULL, NULL, 69, 3199.00, 3012.00, 2999.00, 4151214.00, 255111.00);
-INSERT INTO `productDistinction` VALUES (85, 10017, NULL, 66, NULL, 71, NULL, NULL, 67, 3399.00, 3012.00, 2999.00, 19.00, 10.00);
-INSERT INTO `productDistinction` VALUES (86, 10017, NULL, 66, NULL, 71, NULL, NULL, 68, 3399.00, 3012.00, 2999.00, 1000.00, 7.00);
-INSERT INTO `productDistinction` VALUES (87, 10017, NULL, 66, NULL, 71, NULL, NULL, 69, 3399.00, 3012.00, 2999.00, 848.00, 6.00);
-INSERT INTO `productDistinction` VALUES (88, 10018, NULL, 72, NULL, NULL, NULL, NULL, NULL, 328.00, 312.00, 299.00, 999.00, 7.00);
-INSERT INTO `productDistinction` VALUES (89, 10018, NULL, 73, NULL, NULL, NULL, NULL, NULL, 328.00, 312.00, 299.00, 848.00, 6.00);
-INSERT INTO `productDistinction` VALUES (90, 10018, NULL, 74, NULL, NULL, NULL, NULL, NULL, 328.00, 312.00, 299.00, 10.00, 11.00);
-INSERT INTO `productDistinction` VALUES (91, 10018, NULL, 75, NULL, NULL, NULL, NULL, NULL, 328.00, 312.00, 299.00, 9999.00, 70000.00);
-INSERT INTO `productDistinction` VALUES (92, 10018, NULL, 76, NULL, NULL, NULL, NULL, NULL, 328.00, 312.00, 299.00, 50004.00, 85635.00);
-INSERT INTO `productDistinction` VALUES (93, 10018, NULL, 77, NULL, NULL, NULL, NULL, NULL, 328.00, 312.00, 299.00, 78563.00, 85263.00);
-INSERT INTO `productDistinction` VALUES (94, 10018, NULL, 78, NULL, NULL, NULL, NULL, NULL, 588.00, 566.00, 566.00, 4151214.00, 255111.00);
-INSERT INTO `productDistinction` VALUES (95, 10018, NULL, 79, NULL, NULL, NULL, NULL, NULL, 588.00, 566.00, 566.00, 19.00, 10.00);
-INSERT INTO `productDistinction` VALUES (96, 10018, NULL, 80, NULL, NULL, NULL, NULL, NULL, 588.00, 566.00, 566.00, 998.00, 7.00);
-INSERT INTO `productDistinction` VALUES (97, 10018, NULL, 81, NULL, NULL, NULL, NULL, NULL, 988.00, 966.00, 974.00, 135.00, 11103.00);
-INSERT INTO `productDistinction` VALUES (98, 10018, NULL, 82, NULL, NULL, NULL, NULL, NULL, 588.00, 566.00, 568.00, 1033.00, 5547.00);
-INSERT INTO `productDistinction` VALUES (99, 10018, NULL, 83, NULL, NULL, NULL, NULL, NULL, 1140.00, 999.00, 1111.00, 18.00, 10.00);
-INSERT INTO `productDistinction` VALUES (100, 10019, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 260000.00, 259999.00, 259999.00, 49.00, 5.00);
-INSERT INTO `productDistinction` VALUES (101, 10020, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5199.00, 4855.00, 4999.00, 135.00, 11103.00);
-INSERT INTO `productDistinction` VALUES (102, 10021, NULL, NULL, 84, NULL, NULL, NULL, NULL, 18599.00, 1599.00, 1855.00, 1032.00, 5547.00);
-INSERT INTO `productDistinction` VALUES (103, 10021, NULL, NULL, 85, NULL, NULL, NULL, NULL, 19599.00, 1699.00, 1755.00, 125167.00, 1284.00);
-INSERT INTO `productDistinction` VALUES (104, 10021, NULL, NULL, 86, NULL, NULL, NULL, NULL, 19599.00, 1699.00, 1855.00, 48939.00, 89498.00);
-INSERT INTO `productDistinction` VALUES (105, 10022, NULL, 87, NULL, NULL, NULL, NULL, NULL, 1289.00, 1126.00, 1206.00, 5848.00, 856.00);
-INSERT INTO `productDistinction` VALUES (106, 10022, NULL, 88, NULL, NULL, NULL, NULL, NULL, 1289.00, 1126.00, 1206.00, 45520.00, 45.00);
-INSERT INTO `productDistinction` VALUES (107, 10022, NULL, 89, NULL, NULL, NULL, NULL, NULL, 1289.00, 1126.00, 1206.00, 5261.00, 56.00);
-INSERT INTO `productDistinction` VALUES (108, 10022, NULL, 90, NULL, NULL, NULL, NULL, NULL, 1289.00, 1126.00, 1206.00, 82.00, 11.00);
-INSERT INTO `productDistinction` VALUES (109, 10022, NULL, 91, NULL, NULL, NULL, NULL, NULL, 1289.00, 1126.00, 1206.00, 71.00, 2845.00);
-INSERT INTO `productDistinction` VALUES (110, 10022, NULL, 92, NULL, NULL, NULL, NULL, NULL, 1289.00, 1126.00, 1206.00, 961.00, 8787.00);
-INSERT INTO `productDistinction` VALUES (111, 10023, 96, 93, NULL, NULL, NULL, NULL, NULL, 1299.00, 1258.00, 1152.00, 0.00, 88.00);
-INSERT INTO `productDistinction` VALUES (112, 10023, 96, 94, NULL, NULL, NULL, NULL, NULL, 1299.00, 1258.00, 1152.00, 76.00, 76.00);
-INSERT INTO `productDistinction` VALUES (113, 10023, 96, 95, NULL, NULL, NULL, NULL, NULL, 1299.00, 1258.00, 1152.00, 74.00, 76.00);
-INSERT INTO `productDistinction` VALUES (114, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 97, 2188.00, 1999.00, 2088.00, 5250.00, 56.00);
-INSERT INTO `productDistinction` VALUES (115, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 98, 2088.00, 1888.00, 1999.00, 85.00, 11.00);
-INSERT INTO `productDistinction` VALUES (116, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 99, 2388.00, 2199.00, 2088.00, 74.00, 2845.00);
-INSERT INTO `productDistinction` VALUES (117, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 100, 2288.00, 2188.00, 1999.00, 137.00, 11103.00);
-INSERT INTO `productDistinction` VALUES (118, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 101, 2388.00, 2199.00, 2088.00, 1036.00, 5547.00);
-INSERT INTO `productDistinction` VALUES (119, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 102, 2288.00, 2188.00, 1999.00, 136.00, 11103.00);
-INSERT INTO `productDistinction` VALUES (120, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 103, 2388.00, 2199.00, 2088.00, 1036.00, 5547.00);
-INSERT INTO `productDistinction` VALUES (121, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 104, 2288.00, 2188.00, 1999.00, 868.00, 869.00);
-INSERT INTO `productDistinction` VALUES (122, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 105, 2488.00, 2388.00, 2268.00, 8498.00, 869.00);
-INSERT INTO `productDistinction` VALUES (123, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 106, 2488.00, 2688.00, 2288.00, 82.00, 66.00);
-INSERT INTO `productDistinction` VALUES (124, 10025, NULL, NULL, 107, NULL, NULL, NULL, 71, 59.90, 66.00, 66.00, 922.00, 974.00);
-INSERT INTO `productDistinction` VALUES (125, 10025, NULL, NULL, 108, NULL, NULL, NULL, 99, 74.90, 66.00, 66.00, 546.00, 568.00);
-INSERT INTO `productDistinction` VALUES (126, 10026, 109, NULL, NULL, NULL, NULL, NULL, NULL, 799.00, 599.00, 620.00, 80.00, 66.00);
-INSERT INTO `productDistinction` VALUES (127, 10026, 110, NULL, NULL, NULL, NULL, NULL, NULL, 799.00, 599.00, 620.00, 933.00, 974.00);
-INSERT INTO `productDistinction` VALUES (128, 10026, 111, NULL, NULL, NULL, NULL, NULL, NULL, 799.00, 599.00, 620.00, 5262.00, 56.00);
-INSERT INTO `productDistinction` VALUES (129, 10026, 112, NULL, NULL, NULL, NULL, NULL, NULL, 799.00, 599.00, 620.00, 85.00, 11.00);
-INSERT INTO `productDistinction` VALUES (130, 10027, NULL, 113, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 26.00, 67.00);
-INSERT INTO `productDistinction` VALUES (131, 10027, NULL, 114, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 66.00, 67.00);
-INSERT INTO `productDistinction` VALUES (132, 10027, NULL, 115, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 66.00, 67.00);
-INSERT INTO `productDistinction` VALUES (133, 10027, NULL, 116, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 744.00, 745.00);
-INSERT INTO `productDistinction` VALUES (134, 10027, NULL, 117, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 745.00, 745.00);
-INSERT INTO `productDistinction` VALUES (135, 10027, NULL, 118, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 744.00, 745.00);
-INSERT INTO `productDistinction` VALUES (136, 10027, NULL, 119, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 745.00, 745.00);
-INSERT INTO `productDistinction` VALUES (137, 10027, NULL, 120, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 745.00, 869.00);
-INSERT INTO `productDistinction` VALUES (138, 10027, NULL, 121, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 745.00, 66.00);
-INSERT INTO `productDistinction` VALUES (139, 10027, NULL, 122, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 66.00, 974.00);
-INSERT INTO `productDistinction` VALUES (140, 10027, NULL, 123, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 65.00, 568.00);
-INSERT INTO `productDistinction` VALUES (141, 10027, NULL, 124, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 6853.00, 66.00);
-INSERT INTO `productDistinction` VALUES (142, 10027, NULL, 125, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 66.00, 6855.00);
-INSERT INTO `productDistinction` VALUES (143, 10027, NULL, 126, NULL, NULL, NULL, NULL, NULL, 873.00, 689.00, 666.00, 596.00, 6855.00);
-INSERT INTO `productDistinction` VALUES (144, 10027, NULL, 127, NULL, NULL, NULL, NULL, NULL, 873.00, 689.00, 666.00, 591.00, 745.00);
-INSERT INTO `productDistinction` VALUES (145, 10027, NULL, 128, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 56.00, 745.00);
-INSERT INTO `productDistinction` VALUES (146, 10027, NULL, 129, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 58.90, 869.00);
-INSERT INTO `productDistinction` VALUES (147, 10027, NULL, 130, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 67.90, 66.00);
-INSERT INTO `productDistinction` VALUES (148, 10027, NULL, 131, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 790.00, 974.00);
-INSERT INTO `productDistinction` VALUES (149, 10027, NULL, 132, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 60.00, 67.00);
-INSERT INTO `productDistinction` VALUES (150, 10028, NULL, 133, NULL, NULL, NULL, NULL, 136, 325.09, 218.00, 222.00, 744.00, 745.00);
-INSERT INTO `productDistinction` VALUES (151, 10028, NULL, 133, NULL, NULL, NULL, NULL, 137, 265.09, 218.00, 222.00, 744.00, 869.00);
-INSERT INTO `productDistinction` VALUES (152, 10028, NULL, 134, NULL, NULL, NULL, NULL, 136, 325.09, 299.00, 298.00, 745.00, 66.00);
-INSERT INTO `productDistinction` VALUES (153, 10028, NULL, 134, NULL, NULL, NULL, NULL, 137, 265.09, 218.00, 222.00, 66.00, 974.00);
-INSERT INTO `productDistinction` VALUES (154, 10028, NULL, 135, NULL, NULL, NULL, NULL, 136, 325.09, 299.00, 298.00, 74.90, 66.00);
-INSERT INTO `productDistinction` VALUES (155, 10028, NULL, 135, NULL, NULL, NULL, NULL, 137, 265.09, 218.00, 222.00, 598.00, 6855.00);
-INSERT INTO `productDistinction` VALUES (156, 10029, 141, 138, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 734.00, 66.00);
-INSERT INTO `productDistinction` VALUES (157, 10029, 141, 139, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 60.00, 974.00);
-INSERT INTO `productDistinction` VALUES (158, 10029, 141, 140, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 73.90, 66.00);
-INSERT INTO `productDistinction` VALUES (159, 10029, 142, 138, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 689.00, 666.00);
-INSERT INTO `productDistinction` VALUES (160, 10029, 142, 139, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 21298.00, 165138.00);
-INSERT INTO `productDistinction` VALUES (161, 10029, 142, 140, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 773.00, 689.00);
-INSERT INTO `productDistinction` VALUES (162, 10029, 143, 138, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 773.00, 689.00);
-INSERT INTO `productDistinction` VALUES (163, 10029, 143, 139, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 218.00, 222.00);
-INSERT INTO `productDistinction` VALUES (164, 10029, 143, 140, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 218.00, 222.00);
-INSERT INTO `productDistinction` VALUES (165, 10030, 147, 144, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 770.00, 689.00);
-INSERT INTO `productDistinction` VALUES (166, 10030, 147, 145, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 60.00, 99.00);
-INSERT INTO `productDistinction` VALUES (167, 10030, 147, 146, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 64.00, 99.00);
-INSERT INTO `productDistinction` VALUES (168, 10030, 148, 144, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 773.00, 689.00);
-INSERT INTO `productDistinction` VALUES (169, 10030, 148, 145, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 869.00, 298.00);
-INSERT INTO `productDistinction` VALUES (170, 10030, 148, 146, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 66.00, 222.00);
-INSERT INTO `productDistinction` VALUES (171, 10030, 149, 144, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 974.00, 2888.00);
-INSERT INTO `productDistinction` VALUES (172, 10030, 149, 145, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 66.00, 666.00);
-INSERT INTO `productDistinction` VALUES (173, 10030, 149, 146, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 6855.00, 165138.00);
+INSERT INTO `productDistinction` VALUES (1, 10001, NULL, 1, NULL, 6, NULL, NULL, 3, 5899.00, 4888.00, 4999.00, 0.00, 1.00, 1);
+INSERT INTO `productDistinction` VALUES (2, 10001, NULL, 1, NULL, 6, NULL, NULL, 4, 6900.00, 4888.00, 4999.00, 0.00, 2.00, 1);
+INSERT INTO `productDistinction` VALUES (3, 10001, NULL, 1, NULL, 5, NULL, NULL, 3, 5741.00, 4888.00, 4999.00, 0.00, 3.00, 1);
+INSERT INTO `productDistinction` VALUES (4, 10001, NULL, 1, NULL, 5, NULL, NULL, 4, 5845.00, 4888.00, 4999.00, 0.00, 4.00, 1);
+INSERT INTO `productDistinction` VALUES (5, 10001, NULL, 2, NULL, 6, NULL, NULL, 3, 5854.00, 4888.00, 4999.00, 0.00, 5.00, 1);
+INSERT INTO `productDistinction` VALUES (6, 10001, NULL, 2, NULL, 6, NULL, NULL, 4, 1525.00, 4888.00, 4999.00, 0.00, 6.00, 1);
+INSERT INTO `productDistinction` VALUES (7, 10001, NULL, 2, NULL, 5, NULL, NULL, 3, 5899.00, 4888.00, 4999.00, 0.00, 1.00, 1);
+INSERT INTO `productDistinction` VALUES (8, 10001, NULL, 2, NULL, 5, NULL, NULL, 4, 6900.00, 4888.00, 4999.00, 0.00, 2.00, 1);
+INSERT INTO `productDistinction` VALUES (13, 10002, NULL, 7, 8, NULL, NULL, NULL, NULL, 1899.00, 1799.00, 1699.00, 995.00, 100.00, 0);
+INSERT INTO `productDistinction` VALUES (14, 10002, NULL, 7, 9, NULL, NULL, NULL, NULL, 1899.00, 1799.00, 1699.00, 45.00, 52.00, 0);
+INSERT INTO `productDistinction` VALUES (15, 10003, NULL, NULL, NULL, NULL, NULL, 10, NULL, 888.00, 877.00, 888.00, 119.00, 8.00, 0);
+INSERT INTO `productDistinction` VALUES (16, 10003, NULL, NULL, NULL, NULL, NULL, 11, NULL, 758.00, 768.00, 738.00, 1000.00, 7.00, 0);
+INSERT INTO `productDistinction` VALUES (17, 10003, NULL, NULL, NULL, NULL, NULL, 12, NULL, 685.00, 585.00, 565.00, 848.00, 6.00, 0);
+INSERT INTO `productDistinction` VALUES (18, 10003, NULL, NULL, NULL, NULL, NULL, 13, NULL, 566.00, 466.00, 463.00, 1000.00, 8.00, 0);
+INSERT INTO `productDistinction` VALUES (19, 10003, NULL, NULL, NULL, NULL, NULL, 14, NULL, 433.00, 333.00, 362.00, 29.00, 5.00, 1);
+INSERT INTO `productDistinction` VALUES (20, 10003, NULL, NULL, NULL, NULL, NULL, 15, NULL, 366.00, 266.00, 285.00, 1000.00, 6.00, 1);
+INSERT INTO `productDistinction` VALUES (21, 10004, NULL, 16, NULL, NULL, NULL, NULL, NULL, 30576.00, 28999.00, 29999.00, 89.00, 852.00, 0);
+INSERT INTO `productDistinction` VALUES (22, 10004, NULL, 17, NULL, NULL, NULL, NULL, NULL, 31676.00, 29999.00, 29999.00, 77.00, 520.00, 0);
+INSERT INTO `productDistinction` VALUES (23, 10005, NULL, NULL, NULL, NULL, NULL, NULL, 18, 7890.00, 4585.00, 5388.00, 830.00, 8.00, 0);
+INSERT INTO `productDistinction` VALUES (24, 10005, NULL, NULL, NULL, NULL, NULL, NULL, 19, 7890.00, 4585.00, 5888.00, 562.00, 8.00, 0);
+INSERT INTO `productDistinction` VALUES (25, 10005, NULL, NULL, NULL, NULL, NULL, NULL, 20, 7830.00, 4585.00, 5878.00, 34.00, 1.00, 0);
+INSERT INTO `productDistinction` VALUES (26, 10005, NULL, NULL, NULL, NULL, NULL, NULL, 21, 7690.00, 4585.00, 5488.00, 43.00, 2.00, 0);
+INSERT INTO `productDistinction` VALUES (27, 10005, NULL, NULL, NULL, NULL, NULL, NULL, 22, 7890.00, 4995.00, 4888.00, 998.00, 8.00, 0);
+INSERT INTO `productDistinction` VALUES (28, 10005, NULL, NULL, NULL, NULL, NULL, NULL, 23, 7490.00, 4584.00, 4888.00, 26.00, 5.00, 0);
+INSERT INTO `productDistinction` VALUES (29, 10006, NULL, 24, NULL, NULL, NULL, NULL, NULL, 1499.00, 1360.00, 1399.00, 35.00, 2.00, 0);
+INSERT INTO `productDistinction` VALUES (30, 10006, NULL, 25, NULL, NULL, NULL, NULL, NULL, 1499.00, 1360.00, 1399.00, 995.00, 100.00, 0);
+INSERT INTO `productDistinction` VALUES (31, 10007, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1569.00, 2899.00, 1576.00, 4.00, 11.00, 0);
+INSERT INTO `productDistinction` VALUES (32, 10008, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3500.00, 1585.00, 1558.00, 14.00, 10.00, 0);
+INSERT INTO `productDistinction` VALUES (33, 10009, NULL, 26, NULL, NULL, NULL, NULL, NULL, 47699.00, 45666.00, 3688.00, 970.00, 7.00, 0);
+INSERT INTO `productDistinction` VALUES (34, 10009, NULL, 27, NULL, NULL, NULL, NULL, NULL, 37799.00, 35666.00, 3688.00, 847.00, 6.00, 0);
+INSERT INTO `productDistinction` VALUES (35, 10009, NULL, 28, NULL, NULL, NULL, NULL, NULL, 37699.00, 35666.00, 3688.00, 999.00, 8.00, 0);
+INSERT INTO `productDistinction` VALUES (36, 10009, NULL, 29, NULL, NULL, NULL, NULL, NULL, 37699.00, 35666.00, 3688.00, 28.00, 5.00, 0);
+INSERT INTO `productDistinction` VALUES (37, 10009, NULL, 30, NULL, NULL, NULL, NULL, NULL, 47699.00, 45466.00, 4688.00, 998.00, 6.00, 0);
+INSERT INTO `productDistinction` VALUES (38, 10009, NULL, 31, NULL, NULL, NULL, NULL, NULL, 46666.00, 44866.00, 4688.00, 98.00, 852.00, 0);
+INSERT INTO `productDistinction` VALUES (39, 10009, NULL, 32, NULL, NULL, NULL, NULL, NULL, 47699.00, 45666.00, 4688.00, 86.00, 520.00, 0);
+INSERT INTO `productDistinction` VALUES (40, 10009, NULL, 33, NULL, NULL, NULL, NULL, NULL, 57699.00, 55666.00, 4688.00, 843.00, 8.00, 0);
+INSERT INTO `productDistinction` VALUES (41, 10009, NULL, 34, NULL, NULL, NULL, NULL, NULL, 67699.00, 55666.00, 5688.00, 562.00, 8.00, 0);
+INSERT INTO `productDistinction` VALUES (42, 10010, NULL, 35, NULL, NULL, NULL, NULL, NULL, 3596.00, 2523.00, 2563.00, 45.00, 2.00, 0);
+INSERT INTO `productDistinction` VALUES (43, 10010, NULL, 36, NULL, NULL, NULL, NULL, NULL, 3586.00, 2523.00, 2563.00, 1000.00, 100.00, 0);
+INSERT INTO `productDistinction` VALUES (44, 10010, NULL, 37, NULL, NULL, NULL, NULL, NULL, 3576.00, 2523.00, 2563.00, 10.00, 11.00, 0);
+INSERT INTO `productDistinction` VALUES (45, 10010, NULL, 38, NULL, NULL, NULL, NULL, NULL, 3646.00, 2523.00, 2563.00, 19.00, 10.00, 0);
+INSERT INTO `productDistinction` VALUES (46, 10010, NULL, 39, NULL, NULL, NULL, NULL, NULL, 3496.00, 2523.00, 2563.00, 1000.00, 7.00, 0);
+INSERT INTO `productDistinction` VALUES (47, 10010, NULL, 40, NULL, NULL, NULL, NULL, NULL, 3333.00, 2523.00, 2563.00, 848.00, 6.00, 0);
+INSERT INTO `productDistinction` VALUES (48, 10011, NULL, 41, NULL, NULL, NULL, NULL, 43, 10398.00, 9999.00, 19888.00, 0.00, 11.00, 1);
+INSERT INTO `productDistinction` VALUES (49, 10011, NULL, 41, NULL, NULL, NULL, NULL, 44, 9999.00, 9500.00, 9888.00, 16.00, 10.00, 0);
+INSERT INTO `productDistinction` VALUES (50, 10011, NULL, 42, NULL, NULL, NULL, NULL, 43, 10398.00, 9999.00, 19888.00, 964.00, 7.00, 0);
+INSERT INTO `productDistinction` VALUES (51, 10011, NULL, 42, NULL, NULL, NULL, NULL, 44, 9999.00, 9500.00, 9888.00, 845.00, 6.00, 0);
+INSERT INTO `productDistinction` VALUES (52, 10012, NULL, 45, NULL, NULL, NULL, NULL, 46, 4999.00, 4760.00, 4888.00, 843.00, 8.00, 0);
+INSERT INTO `productDistinction` VALUES (53, 10012, NULL, 45, NULL, NULL, NULL, NULL, 47, 4555.00, 4360.00, 4333.00, 562.00, 8.00, 0);
+INSERT INTO `productDistinction` VALUES (54, 10012, NULL, 45, NULL, NULL, NULL, NULL, 48, 3888.00, 3777.00, 3666.00, 44.00, 2.00, 0);
+INSERT INTO `productDistinction` VALUES (55, 10013, NULL, NULL, NULL, 49, NULL, NULL, NULL, 11999.00, 10888.00, 10289.00, 36.00, 2.00, 1);
+INSERT INTO `productDistinction` VALUES (56, 10013, NULL, NULL, NULL, 50, NULL, NULL, NULL, 12999.00, 10288.00, 18999.00, 999.00, 100.00, 1);
+INSERT INTO `productDistinction` VALUES (57, 10013, NULL, NULL, NULL, 51, NULL, NULL, NULL, 10999.00, 9999.00, 10888.00, 8.00, 11.00, 1);
+INSERT INTO `productDistinction` VALUES (58, 10013, NULL, NULL, NULL, 52, NULL, NULL, NULL, 11888.00, 10001.00, 11065.00, 19.00, 10.00, 1);
+INSERT INTO `productDistinction` VALUES (59, 10014, NULL, 53, NULL, NULL, NULL, NULL, NULL, 2898.00, 2541.00, 2584.00, 9994.00, 99999.00, 0);
+INSERT INTO `productDistinction` VALUES (60, 10014, NULL, 54, NULL, NULL, NULL, NULL, NULL, 3298.00, 2888.00, 2890.00, 5819.00, 4152.00, 0);
+INSERT INTO `productDistinction` VALUES (61, 10015, NULL, NULL, NULL, NULL, 55, NULL, NULL, 20.00, 8.80, 10.00, 9998.00, 70000.00, 0);
+INSERT INTO `productDistinction` VALUES (62, 10015, NULL, NULL, NULL, NULL, 56, NULL, NULL, 20.00, 8.80, 10.00, 50004.00, 85635.00, 0);
+INSERT INTO `productDistinction` VALUES (63, 10015, NULL, NULL, NULL, NULL, 57, NULL, NULL, 20.00, 8.80, 10.00, 78563.00, 85263.00, 0);
+INSERT INTO `productDistinction` VALUES (64, 10015, NULL, NULL, NULL, NULL, 58, NULL, NULL, 20.00, 8.80, 10.00, 102555.00, 11551.00, 0);
+INSERT INTO `productDistinction` VALUES (65, 10015, NULL, NULL, NULL, NULL, 59, NULL, NULL, 20.00, 8.80, 10.00, 4151211.00, 255111.00, 0);
+INSERT INTO `productDistinction` VALUES (66, 10016, NULL, 60, NULL, NULL, NULL, NULL, NULL, 5399.00, 4988.00, 4999.00, 17.00, 10.00, 0);
+INSERT INTO `productDistinction` VALUES (67, 10016, NULL, 61, NULL, NULL, NULL, NULL, NULL, 5399.00, 4988.00, 4999.00, 1000.00, 7.00, 0);
+INSERT INTO `productDistinction` VALUES (68, 10016, NULL, 62, NULL, NULL, NULL, NULL, NULL, 5499.00, 4988.00, 4999.00, 848.00, 6.00, 0);
+INSERT INTO `productDistinction` VALUES (69, 10016, NULL, 63, NULL, NULL, NULL, NULL, NULL, 5499.00, 4988.00, 4999.00, 10.00, 11.00, 0);
+INSERT INTO `productDistinction` VALUES (70, 10017, NULL, 64, NULL, 70, NULL, NULL, 67, 3199.00, 3012.00, 2999.00, 1000.00, 7.00, 0);
+INSERT INTO `productDistinction` VALUES (71, 10017, NULL, 64, NULL, 70, NULL, NULL, 68, 3189.00, 3012.00, 2999.00, 10000.00, 70000.00, 0);
+INSERT INTO `productDistinction` VALUES (72, 10017, NULL, 64, NULL, 70, NULL, NULL, 69, 3199.00, 3012.00, 2999.00, 50004.00, 85635.00, 0);
+INSERT INTO `productDistinction` VALUES (73, 10017, NULL, 64, NULL, 71, NULL, NULL, 67, 3399.00, 3012.00, 2999.00, 78563.00, 85263.00, 0);
+INSERT INTO `productDistinction` VALUES (74, 10017, NULL, 64, NULL, 71, NULL, NULL, 68, 3399.00, 3012.00, 2999.00, 102555.00, 11551.00, 0);
+INSERT INTO `productDistinction` VALUES (75, 10017, NULL, 64, NULL, 71, NULL, NULL, 69, 3399.00, 3012.00, 2999.00, 4151214.00, 255111.00, 0);
+INSERT INTO `productDistinction` VALUES (76, 10017, NULL, 65, NULL, 70, NULL, NULL, 67, 3199.00, 3012.00, 2999.00, 19.00, 10.00, 0);
+INSERT INTO `productDistinction` VALUES (77, 10017, NULL, 65, NULL, 70, NULL, NULL, 68, 3199.00, 3012.00, 2999.00, 1000.00, 7.00, 0);
+INSERT INTO `productDistinction` VALUES (78, 10017, NULL, 65, NULL, 70, NULL, NULL, 69, 3199.00, 3012.00, 2999.00, 848.00, 6.00, 0);
+INSERT INTO `productDistinction` VALUES (79, 10017, NULL, 65, NULL, 71, NULL, NULL, 67, 3399.00, 3012.00, 2999.00, 10.00, 11.00, 0);
+INSERT INTO `productDistinction` VALUES (80, 10017, NULL, 65, NULL, 71, NULL, NULL, 68, 3399.00, 3012.00, 2999.00, 10000.00, 70000.00, 0);
+INSERT INTO `productDistinction` VALUES (81, 10017, NULL, 65, NULL, 71, NULL, NULL, 69, 3399.00, 3012.00, 2999.00, 50004.00, 85635.00, 0);
+INSERT INTO `productDistinction` VALUES (82, 10017, NULL, 66, NULL, 70, NULL, NULL, 67, 3199.00, 3012.00, 2999.00, 78563.00, 85263.00, 0);
+INSERT INTO `productDistinction` VALUES (83, 10017, NULL, 66, NULL, 70, NULL, NULL, 68, 3199.00, 3012.00, 2999.00, 102555.00, 11551.00, 0);
+INSERT INTO `productDistinction` VALUES (84, 10017, NULL, 66, NULL, 70, NULL, NULL, 69, 3199.00, 3012.00, 2999.00, 4151214.00, 255111.00, 0);
+INSERT INTO `productDistinction` VALUES (85, 10017, NULL, 66, NULL, 71, NULL, NULL, 67, 3399.00, 3012.00, 2999.00, 19.00, 10.00, 0);
+INSERT INTO `productDistinction` VALUES (86, 10017, NULL, 66, NULL, 71, NULL, NULL, 68, 3399.00, 3012.00, 2999.00, 1000.00, 7.00, 0);
+INSERT INTO `productDistinction` VALUES (87, 10017, NULL, 66, NULL, 71, NULL, NULL, 69, 3399.00, 3012.00, 2999.00, 848.00, 6.00, 0);
+INSERT INTO `productDistinction` VALUES (88, 10018, NULL, 72, NULL, NULL, NULL, NULL, NULL, 328.00, 312.00, 299.00, 999.00, 7.00, 0);
+INSERT INTO `productDistinction` VALUES (89, 10018, NULL, 73, NULL, NULL, NULL, NULL, NULL, 328.00, 312.00, 299.00, 848.00, 6.00, 0);
+INSERT INTO `productDistinction` VALUES (90, 10018, NULL, 74, NULL, NULL, NULL, NULL, NULL, 328.00, 312.00, 299.00, 10.00, 11.00, 0);
+INSERT INTO `productDistinction` VALUES (91, 10018, NULL, 75, NULL, NULL, NULL, NULL, NULL, 328.00, 312.00, 299.00, 9999.00, 70000.00, 0);
+INSERT INTO `productDistinction` VALUES (92, 10018, NULL, 76, NULL, NULL, NULL, NULL, NULL, 328.00, 312.00, 299.00, 50004.00, 85635.00, 0);
+INSERT INTO `productDistinction` VALUES (93, 10018, NULL, 77, NULL, NULL, NULL, NULL, NULL, 328.00, 312.00, 299.00, 78563.00, 85263.00, 0);
+INSERT INTO `productDistinction` VALUES (94, 10018, NULL, 78, NULL, NULL, NULL, NULL, NULL, 588.00, 566.00, 566.00, 4151214.00, 255111.00, 0);
+INSERT INTO `productDistinction` VALUES (95, 10018, NULL, 79, NULL, NULL, NULL, NULL, NULL, 588.00, 566.00, 566.00, 19.00, 10.00, 0);
+INSERT INTO `productDistinction` VALUES (96, 10018, NULL, 80, NULL, NULL, NULL, NULL, NULL, 588.00, 566.00, 566.00, 998.00, 7.00, 0);
+INSERT INTO `productDistinction` VALUES (97, 10018, NULL, 81, NULL, NULL, NULL, NULL, NULL, 988.00, 966.00, 974.00, 135.00, 11103.00, 0);
+INSERT INTO `productDistinction` VALUES (98, 10018, NULL, 82, NULL, NULL, NULL, NULL, NULL, 588.00, 566.00, 568.00, 1033.00, 5547.00, 0);
+INSERT INTO `productDistinction` VALUES (99, 10018, NULL, 83, NULL, NULL, NULL, NULL, NULL, 1140.00, 999.00, 1111.00, 18.00, 10.00, 0);
+INSERT INTO `productDistinction` VALUES (100, 10019, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 260000.00, 259999.00, 259999.00, 49.00, 5.00, 0);
+INSERT INTO `productDistinction` VALUES (101, 10020, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5199.00, 4855.00, 4999.00, 135.00, 11103.00, 0);
+INSERT INTO `productDistinction` VALUES (102, 10021, NULL, NULL, 84, NULL, NULL, NULL, NULL, 18599.00, 1599.00, 1855.00, 1032.00, 5547.00, 0);
+INSERT INTO `productDistinction` VALUES (103, 10021, NULL, NULL, 85, NULL, NULL, NULL, NULL, 19599.00, 1699.00, 1755.00, 125167.00, 1284.00, 0);
+INSERT INTO `productDistinction` VALUES (104, 10021, NULL, NULL, 86, NULL, NULL, NULL, NULL, 19599.00, 1699.00, 1855.00, 48939.00, 89498.00, 0);
+INSERT INTO `productDistinction` VALUES (105, 10022, NULL, 87, NULL, NULL, NULL, NULL, NULL, 1289.00, 1126.00, 1206.00, 5848.00, 856.00, 0);
+INSERT INTO `productDistinction` VALUES (106, 10022, NULL, 88, NULL, NULL, NULL, NULL, NULL, 1289.00, 1126.00, 1206.00, 45520.00, 45.00, 0);
+INSERT INTO `productDistinction` VALUES (107, 10022, NULL, 89, NULL, NULL, NULL, NULL, NULL, 1289.00, 1126.00, 1206.00, 5261.00, 56.00, 0);
+INSERT INTO `productDistinction` VALUES (108, 10022, NULL, 90, NULL, NULL, NULL, NULL, NULL, 1289.00, 1126.00, 1206.00, 82.00, 11.00, 0);
+INSERT INTO `productDistinction` VALUES (109, 10022, NULL, 91, NULL, NULL, NULL, NULL, NULL, 1289.00, 1126.00, 1206.00, 71.00, 2845.00, 0);
+INSERT INTO `productDistinction` VALUES (110, 10022, NULL, 92, NULL, NULL, NULL, NULL, NULL, 1289.00, 1126.00, 1206.00, 961.00, 8787.00, 0);
+INSERT INTO `productDistinction` VALUES (111, 10023, 96, 93, NULL, NULL, NULL, NULL, NULL, 1299.00, 1258.00, 1152.00, 0.00, 88.00, 0);
+INSERT INTO `productDistinction` VALUES (112, 10023, 96, 94, NULL, NULL, NULL, NULL, NULL, 1299.00, 1258.00, 1152.00, 76.00, 76.00, 0);
+INSERT INTO `productDistinction` VALUES (113, 10023, 96, 95, NULL, NULL, NULL, NULL, NULL, 1299.00, 1258.00, 1152.00, 74.00, 76.00, 0);
+INSERT INTO `productDistinction` VALUES (114, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 97, 2188.00, 1999.00, 2088.00, 5250.00, 56.00, 0);
+INSERT INTO `productDistinction` VALUES (115, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 98, 2088.00, 1888.00, 1999.00, 85.00, 11.00, 0);
+INSERT INTO `productDistinction` VALUES (116, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 99, 2388.00, 2199.00, 2088.00, 74.00, 2845.00, 0);
+INSERT INTO `productDistinction` VALUES (117, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 100, 2288.00, 2188.00, 1999.00, 137.00, 11103.00, 0);
+INSERT INTO `productDistinction` VALUES (118, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 101, 2388.00, 2199.00, 2088.00, 1036.00, 5547.00, 0);
+INSERT INTO `productDistinction` VALUES (119, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 102, 2288.00, 2188.00, 1999.00, 136.00, 11103.00, 0);
+INSERT INTO `productDistinction` VALUES (120, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 103, 2388.00, 2199.00, 2088.00, 1036.00, 5547.00, 0);
+INSERT INTO `productDistinction` VALUES (121, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 104, 2288.00, 2188.00, 1999.00, 868.00, 869.00, 0);
+INSERT INTO `productDistinction` VALUES (122, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 105, 2488.00, 2388.00, 2268.00, 8498.00, 869.00, 0);
+INSERT INTO `productDistinction` VALUES (123, 10024, NULL, NULL, NULL, NULL, NULL, NULL, 106, 2488.00, 2688.00, 2288.00, 82.00, 66.00, 0);
+INSERT INTO `productDistinction` VALUES (124, 10025, NULL, NULL, 107, NULL, NULL, NULL, 71, 59.90, 66.00, 66.00, 922.00, 974.00, 0);
+INSERT INTO `productDistinction` VALUES (125, 10025, NULL, NULL, 108, NULL, NULL, NULL, 99, 74.90, 66.00, 66.00, 546.00, 568.00, 0);
+INSERT INTO `productDistinction` VALUES (126, 10026, 109, NULL, NULL, NULL, NULL, NULL, NULL, 799.00, 599.00, 620.00, 80.00, 66.00, 0);
+INSERT INTO `productDistinction` VALUES (127, 10026, 110, NULL, NULL, NULL, NULL, NULL, NULL, 799.00, 599.00, 620.00, 933.00, 974.00, 0);
+INSERT INTO `productDistinction` VALUES (128, 10026, 111, NULL, NULL, NULL, NULL, NULL, NULL, 799.00, 599.00, 620.00, 5262.00, 56.00, 0);
+INSERT INTO `productDistinction` VALUES (129, 10026, 112, NULL, NULL, NULL, NULL, NULL, NULL, 799.00, 599.00, 620.00, 85.00, 11.00, 0);
+INSERT INTO `productDistinction` VALUES (130, 10027, NULL, 113, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 26.00, 67.00, 0);
+INSERT INTO `productDistinction` VALUES (131, 10027, NULL, 114, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 66.00, 67.00, 0);
+INSERT INTO `productDistinction` VALUES (132, 10027, NULL, 115, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 66.00, 67.00, 0);
+INSERT INTO `productDistinction` VALUES (133, 10027, NULL, 116, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 744.00, 745.00, 0);
+INSERT INTO `productDistinction` VALUES (134, 10027, NULL, 117, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 745.00, 745.00, 0);
+INSERT INTO `productDistinction` VALUES (135, 10027, NULL, 118, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 744.00, 745.00, 0);
+INSERT INTO `productDistinction` VALUES (136, 10027, NULL, 119, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 745.00, 745.00, 0);
+INSERT INTO `productDistinction` VALUES (137, 10027, NULL, 120, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 745.00, 869.00, 0);
+INSERT INTO `productDistinction` VALUES (138, 10027, NULL, 121, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 745.00, 66.00, 0);
+INSERT INTO `productDistinction` VALUES (139, 10027, NULL, 122, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 66.00, 974.00, 0);
+INSERT INTO `productDistinction` VALUES (140, 10027, NULL, 123, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 65.00, 568.00, 0);
+INSERT INTO `productDistinction` VALUES (141, 10027, NULL, 124, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 6853.00, 66.00, 0);
+INSERT INTO `productDistinction` VALUES (142, 10027, NULL, 125, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 66.00, 6855.00, 0);
+INSERT INTO `productDistinction` VALUES (143, 10027, NULL, 126, NULL, NULL, NULL, NULL, NULL, 873.00, 689.00, 666.00, 596.00, 6855.00, 0);
+INSERT INTO `productDistinction` VALUES (144, 10027, NULL, 127, NULL, NULL, NULL, NULL, NULL, 873.00, 689.00, 666.00, 591.00, 745.00, 0);
+INSERT INTO `productDistinction` VALUES (145, 10027, NULL, 128, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 56.00, 745.00, 0);
+INSERT INTO `productDistinction` VALUES (146, 10027, NULL, 129, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 58.90, 869.00, 0);
+INSERT INTO `productDistinction` VALUES (147, 10027, NULL, 130, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 67.90, 66.00, 0);
+INSERT INTO `productDistinction` VALUES (148, 10027, NULL, 131, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 790.00, 974.00, 0);
+INSERT INTO `productDistinction` VALUES (149, 10027, NULL, 132, NULL, NULL, NULL, NULL, NULL, 773.00, 689.00, 666.00, 60.00, 67.00, 0);
+INSERT INTO `productDistinction` VALUES (150, 10028, NULL, 133, NULL, NULL, NULL, NULL, 136, 325.09, 218.00, 222.00, 744.00, 745.00, 0);
+INSERT INTO `productDistinction` VALUES (151, 10028, NULL, 133, NULL, NULL, NULL, NULL, 137, 265.09, 218.00, 222.00, 744.00, 869.00, 0);
+INSERT INTO `productDistinction` VALUES (152, 10028, NULL, 134, NULL, NULL, NULL, NULL, 136, 325.09, 299.00, 298.00, 745.00, 66.00, 0);
+INSERT INTO `productDistinction` VALUES (153, 10028, NULL, 134, NULL, NULL, NULL, NULL, 137, 265.09, 218.00, 222.00, 66.00, 974.00, 0);
+INSERT INTO `productDistinction` VALUES (154, 10028, NULL, 135, NULL, NULL, NULL, NULL, 136, 325.09, 299.00, 298.00, 74.90, 66.00, 0);
+INSERT INTO `productDistinction` VALUES (155, 10028, NULL, 135, NULL, NULL, NULL, NULL, 137, 265.09, 218.00, 222.00, 598.00, 6855.00, 0);
+INSERT INTO `productDistinction` VALUES (156, 10029, 141, 138, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 734.00, 66.00, 0);
+INSERT INTO `productDistinction` VALUES (157, 10029, 141, 139, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 60.00, 974.00, 0);
+INSERT INTO `productDistinction` VALUES (158, 10029, 141, 140, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 73.90, 66.00, 0);
+INSERT INTO `productDistinction` VALUES (159, 10029, 142, 138, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 689.00, 666.00, 0);
+INSERT INTO `productDistinction` VALUES (160, 10029, 142, 139, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 21298.00, 165138.00, 0);
+INSERT INTO `productDistinction` VALUES (161, 10029, 142, 140, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 773.00, 689.00, 0);
+INSERT INTO `productDistinction` VALUES (162, 10029, 143, 138, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 773.00, 689.00, 0);
+INSERT INTO `productDistinction` VALUES (163, 10029, 143, 139, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 218.00, 222.00, 0);
+INSERT INTO `productDistinction` VALUES (164, 10029, 143, 140, NULL, NULL, NULL, NULL, NULL, 2920.01, 2890.00, 2888.00, 218.00, 222.00, 0);
+INSERT INTO `productDistinction` VALUES (165, 10030, 147, 144, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 770.00, 689.00, 1);
+INSERT INTO `productDistinction` VALUES (166, 10030, 147, 145, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 60.00, 99.00, 1);
+INSERT INTO `productDistinction` VALUES (167, 10030, 147, 146, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 64.00, 99.00, 1);
+INSERT INTO `productDistinction` VALUES (168, 10030, 148, 144, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 773.00, 689.00, 1);
+INSERT INTO `productDistinction` VALUES (169, 10030, 148, 145, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 869.00, 298.00, 1);
+INSERT INTO `productDistinction` VALUES (170, 10030, 148, 146, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 66.00, 222.00, 1);
+INSERT INTO `productDistinction` VALUES (171, 10030, 149, 144, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 974.00, 2888.00, 1);
+INSERT INTO `productDistinction` VALUES (172, 10030, 149, 145, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 66.00, 666.00, 1);
+INSERT INTO `productDistinction` VALUES (173, 10030, 149, 146, NULL, NULL, NULL, NULL, NULL, 128.00, 119.00, 118.00, 6855.00, 165138.00, 1);
+INSERT INTO `productDistinction` VALUES (1360, 10001, NULL, 1, NULL, 5, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1361, 10001, NULL, 1, NULL, 5, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1362, 10001, NULL, 1, NULL, 6, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1363, 10001, NULL, 1, NULL, 6, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1364, 10001, NULL, 2, NULL, 5, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1365, 10001, NULL, 2, NULL, 5, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1366, 10001, NULL, 2, NULL, 6, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1367, 10001, NULL, 2, NULL, 6, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1368, 10001, NULL, 613, NULL, 5, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1369, 10001, NULL, 613, NULL, 5, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1370, 10001, NULL, 613, NULL, 6, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1371, 10001, NULL, 613, NULL, 6, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1372, 10001, NULL, 1, NULL, 5, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1373, 10001, NULL, 1, NULL, 5, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1374, 10001, NULL, 1, NULL, 6, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1375, 10001, NULL, 1, NULL, 6, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1376, 10001, NULL, 2, NULL, 5, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1377, 10001, NULL, 2, NULL, 5, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1378, 10001, NULL, 2, NULL, 6, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1379, 10001, NULL, 2, NULL, 6, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1380, 10001, NULL, 613, NULL, 5, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1381, 10001, NULL, 613, NULL, 5, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1382, 10001, NULL, 613, NULL, 6, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1383, 10001, NULL, 613, NULL, 6, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1384, 10001, NULL, 614, NULL, 5, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1385, 10001, NULL, 614, NULL, 5, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1386, 10001, NULL, 614, NULL, 6, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1387, 10001, NULL, 614, NULL, 6, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 1);
+INSERT INTO `productDistinction` VALUES (1388, 10001, NULL, 1, NULL, 5, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1389, 10001, NULL, 1, NULL, 5, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1390, 10001, NULL, 1, NULL, 6, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1391, 10001, NULL, 1, NULL, 6, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1392, 10001, NULL, 2, NULL, 5, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1393, 10001, NULL, 2, NULL, 5, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1394, 10001, NULL, 2, NULL, 6, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1395, 10001, NULL, 2, NULL, 6, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1396, 10001, NULL, 613, NULL, 5, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1397, 10001, NULL, 613, NULL, 5, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1398, 10001, NULL, 613, NULL, 6, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1399, 10001, NULL, 613, NULL, 6, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1400, 10001, NULL, 614, NULL, 5, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1401, 10001, NULL, 614, NULL, 5, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1402, 10001, NULL, 614, NULL, 6, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1403, 10001, NULL, 614, NULL, 6, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1404, 10001, NULL, 615, NULL, 5, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1405, 10001, NULL, 615, NULL, 5, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1406, 10001, NULL, 615, NULL, 6, NULL, NULL, 3, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1407, 10001, NULL, 615, NULL, 6, NULL, NULL, 4, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1408, 10013, NULL, NULL, NULL, 49, NULL, NULL, NULL, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1409, 10013, NULL, NULL, NULL, 50, NULL, NULL, NULL, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1410, 10013, NULL, NULL, NULL, 51, NULL, NULL, NULL, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1411, 10013, NULL, NULL, NULL, 52, NULL, NULL, NULL, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1412, 10013, NULL, NULL, NULL, 616, NULL, NULL, NULL, 0.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1413, 10030, 147, 144, 617, NULL, NULL, NULL, NULL, 10.00, NULL, NULL, 1.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1414, 10030, 147, 144, 618, NULL, NULL, NULL, NULL, 10.00, NULL, NULL, 2.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1415, 10030, 147, 145, 617, NULL, NULL, NULL, NULL, 10.00, NULL, NULL, 3.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1416, 10030, 147, 145, 618, NULL, NULL, NULL, NULL, 10.00, NULL, NULL, 4.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1417, 10030, 147, 146, 617, NULL, NULL, NULL, NULL, 10.00, NULL, NULL, 5.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1418, 10030, 147, 146, 618, NULL, NULL, NULL, NULL, 10.00, NULL, NULL, 6.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1419, 10030, 148, 144, 617, NULL, NULL, NULL, NULL, 10.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1420, 10030, 148, 144, 618, NULL, NULL, NULL, NULL, 10.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1421, 10030, 148, 145, 617, NULL, NULL, NULL, NULL, 10.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1422, 10030, 148, 145, 618, NULL, NULL, NULL, NULL, 10.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1423, 10030, 148, 146, 617, NULL, NULL, NULL, NULL, 23.00, NULL, NULL, 123.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1424, 10030, 148, 146, 618, NULL, NULL, NULL, NULL, 323.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1425, 10030, 149, 144, 617, NULL, NULL, NULL, NULL, 323.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1426, 10030, 149, 144, 618, NULL, NULL, NULL, NULL, 23.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1427, 10030, 149, 145, 617, NULL, NULL, NULL, NULL, 321.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1428, 10030, 149, 145, 618, NULL, NULL, NULL, NULL, 32.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1429, 10030, 149, 146, 617, NULL, NULL, NULL, NULL, 32.00, NULL, NULL, 0.00, 0.00, 0);
+INSERT INTO `productDistinction` VALUES (1430, 10030, 149, 146, 618, NULL, NULL, NULL, NULL, 32.00, NULL, NULL, 0.00, 0.00, 0);
 
 -- ----------------------------
 -- Table structure for product_final_category
@@ -1965,7 +2063,7 @@ CREATE TABLE `product_pageviews`  (
   `user_id` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `browse_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 456 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 486 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product_pageviews
@@ -2366,6 +2464,36 @@ INSERT INTO `product_pageviews` VALUES (452, 10016, '175.8.61.199', NULL, '2020-
 INSERT INTO `product_pageviews` VALUES (453, 10007, '175.8.61.199', NULL, '2020-06-16 02:58:53');
 INSERT INTO `product_pageviews` VALUES (454, 10024, '175.8.61.199', NULL, '2020-06-16 03:00:04');
 INSERT INTO `product_pageviews` VALUES (455, 10022, '119.39.248.77', 'f92b9f8f372e445fb6564cdd57aa3c3e', '2020-06-16 09:17:47');
+INSERT INTO `product_pageviews` VALUES (456, 10013, '175.8.61.32', NULL, '2020-06-18 09:41:25');
+INSERT INTO `product_pageviews` VALUES (457, 10004, '175.8.61.32', NULL, '2020-06-18 09:41:39');
+INSERT INTO `product_pageviews` VALUES (458, 10011, '175.8.61.32', NULL, '2020-06-18 09:42:00');
+INSERT INTO `product_pageviews` VALUES (459, 10001, '175.8.61.32', NULL, '2020-06-18 09:49:46');
+INSERT INTO `product_pageviews` VALUES (460, 10019, '127.0.0.1', NULL, '2020-06-19 10:45:11');
+INSERT INTO `product_pageviews` VALUES (461, 10095, '127.0.0.1', NULL, '2020-06-19 10:45:16');
+INSERT INTO `product_pageviews` VALUES (462, 10104, '127.0.0.1', NULL, '2020-06-19 10:46:08');
+INSERT INTO `product_pageviews` VALUES (463, 10002, '127.0.0.1', NULL, '2020-06-19 18:46:55');
+INSERT INTO `product_pageviews` VALUES (464, 10107, '127.0.0.1', NULL, '2020-06-19 18:47:04');
+INSERT INTO `product_pageviews` VALUES (465, 10001, '127.0.0.1', NULL, '2020-06-20 16:14:07');
+INSERT INTO `product_pageviews` VALUES (466, 10069, '127.0.0.1', NULL, '2020-06-20 16:14:16');
+INSERT INTO `product_pageviews` VALUES (467, 10011, '127.0.0.1', NULL, '2020-06-20 16:23:45');
+INSERT INTO `product_pageviews` VALUES (468, 10013, '127.0.0.1', 'f92b9f8f372e445fb6564cdd57aa3c3e', '2020-06-20 16:28:52');
+INSERT INTO `product_pageviews` VALUES (469, 10006, '43.250.200.30', 'f92b9f8f372e445fb6564cdd57aa3c3e', '2020-06-21 04:21:21');
+INSERT INTO `product_pageviews` VALUES (470, 10007, '43.250.200.30', NULL, '2020-06-21 04:30:11');
+INSERT INTO `product_pageviews` VALUES (471, 10022, '43.250.200.30', NULL, '2020-06-21 04:30:18');
+INSERT INTO `product_pageviews` VALUES (472, 10026, '43.250.200.30', NULL, '2020-06-21 04:30:22');
+INSERT INTO `product_pageviews` VALUES (473, 10013, '43.250.200.30', NULL, '2020-06-21 04:30:28');
+INSERT INTO `product_pageviews` VALUES (474, 10006, '43.250.201.17', 'f92b9f8f372e445fb6564cdd57aa3c3e', '2020-06-21 06:18:15');
+INSERT INTO `product_pageviews` VALUES (475, 10016, '43.250.201.17', 'f92b9f8f372e445fb6564cdd57aa3c3e', '2020-06-21 06:19:34');
+INSERT INTO `product_pageviews` VALUES (476, 10013, '43.250.201.17', 'f92b9f8f372e445fb6564cdd57aa3c3e', '2020-06-21 06:20:47');
+INSERT INTO `product_pageviews` VALUES (477, 10030, '43.250.201.17', NULL, '2020-06-21 06:55:34');
+INSERT INTO `product_pageviews` VALUES (478, 10003, '43.250.201.17', 'f92b9f8f372e445fb6564cdd57aa3c3e', '2020-06-21 08:46:22');
+INSERT INTO `product_pageviews` VALUES (479, 10002, '43.250.201.17', 'f92b9f8f372e445fb6564cdd57aa3c3e', '2020-06-21 08:47:06');
+INSERT INTO `product_pageviews` VALUES (480, 10005, '43.250.201.17', NULL, '2020-06-21 09:02:09');
+INSERT INTO `product_pageviews` VALUES (481, 10009, '43.250.201.17', 'f92b9f8f372e445fb6564cdd57aa3c3e', '2020-06-21 09:02:47');
+INSERT INTO `product_pageviews` VALUES (482, 10007, '43.250.201.17', 'f92b9f8f372e445fb6564cdd57aa3c3e', '2020-06-21 09:56:55');
+INSERT INTO `product_pageviews` VALUES (483, 10001, '43.250.201.17', 'f92b9f8f372e445fb6564cdd57aa3c3e', '2020-06-21 09:57:01');
+INSERT INTO `product_pageviews` VALUES (484, 10001, '175.8.62.247', 'fd2d5eb2dd124f23802f163cd3998741', '2020-06-21 12:36:19');
+INSERT INTO `product_pageviews` VALUES (485, 10002, '175.8.62.247', 'fd2d5eb2dd124f23802f163cd3998741', '2020-06-21 12:36:23');
 
 -- ----------------------------
 -- Table structure for product_primary_category
@@ -2562,7 +2690,7 @@ CREATE TABLE `shoppingCart`  (
   `productPrice` double NULL DEFAULT NULL,
   `distinctionId` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`shoppingCartId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3574 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3575 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of shoppingCart
@@ -2570,8 +2698,7 @@ CREATE TABLE `shoppingCart`  (
 INSERT INTO `shoppingCart` VALUES (3453, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '红色 豪华版 256G+8G\r\n ', 2, 6900, 2);
 INSERT INTO `shoppingCart` VALUES (3455, '7c9fdfa3177042a08766aed29e7de6cd', 10001, '红色 豪华版 128G+2G ', 1, 5845, 4);
 INSERT INTO `shoppingCart` VALUES (3530, 'fd2d5eb2dd124f23802f163cd3998741', 10001, '红色 标准版 128G+2G ', 1, 5741, 3);
-INSERT INTO `shoppingCart` VALUES (3569, 'fd2d5eb2dd124f23802f163cd3998741', 10011, '银色 128G+2G ', 1, 10398, 48);
-INSERT INTO `shoppingCart` VALUES (3570, 'fd2d5eb2dd124f23802f163cd3998741', 10011, '暗夜绿色 128G+2G ', 17, 10398, 50);
+INSERT INTO `shoppingCart` VALUES (3574, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, '华硕PRIME X299-A主板+  ', 10, 11999, 55);
 
 -- ----------------------------
 -- Table structure for slideshow
@@ -2702,7 +2829,7 @@ CREATE TABLE `userConsumptionRecords`  (
   `paymentTime` datetime(0) NULL DEFAULT NULL,
   `paymentAmount` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`consumptiomId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3921 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3923 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userConsumptionRecords
@@ -2922,6 +3049,8 @@ INSERT INTO `userConsumptionRecords` VALUES (3917, '1591697678854100001', '3e7cb
 INSERT INTO `userConsumptionRecords` VALUES (3918, '1591699783753100005', 'fd2d5eb2dd124f23802f163cd3998741', 1, NULL, 3, '2020-06-09 10:50:02', '7890.00');
 INSERT INTO `userConsumptionRecords` VALUES (3919, '1592198179386100001', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-06-15 05:16:46', '15380.00');
 INSERT INTO `userConsumptionRecords` VALUES (3920, '1592201143597100002', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-06-15 06:06:04', '2898.00');
+INSERT INTO `userConsumptionRecords` VALUES (3921, '1592720376237100004', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-06-21 06:21:56', '5399.00');
+INSERT INTO `userConsumptionRecords` VALUES (3922, '1592733331815100011', 'f92b9f8f372e445fb6564cdd57aa3c3e', 1, NULL, 3, '2020-06-21 09:56:06', '7490.00');
 
 -- ----------------------------
 -- Table structure for userEvaluation
@@ -2952,7 +3081,7 @@ CREATE TABLE `userFootprint`  (
   `productId` int(11) NULL DEFAULT NULL,
   `footprintTime` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`footprintId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 628 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 640 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userFootprint
@@ -3012,6 +3141,18 @@ INSERT INTO `userFootprint` VALUES (624, 'f92b9f8f372e445fb6564cdd57aa3c3e', 100
 INSERT INTO `userFootprint` VALUES (625, '3e7cb3ada38c49a58d57a7c3446ec932', 10015, '2020-06-15 06:59:05');
 INSERT INTO `userFootprint` VALUES (626, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10026, '2020-06-15 09:07:33');
 INSERT INTO `userFootprint` VALUES (627, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10022, '2020-06-16 09:17:47');
+INSERT INTO `userFootprint` VALUES (628, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, '2020-06-20 16:28:52');
+INSERT INTO `userFootprint` VALUES (629, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10006, '2020-06-21 06:18:15');
+INSERT INTO `userFootprint` VALUES (630, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10016, '2020-06-21 09:57:17');
+INSERT INTO `userFootprint` VALUES (631, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10013, '2020-06-21 09:47:28');
+INSERT INTO `userFootprint` VALUES (632, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10003, '2020-06-21 08:46:22');
+INSERT INTO `userFootprint` VALUES (633, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10002, '2020-06-21 08:47:07');
+INSERT INTO `userFootprint` VALUES (634, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10009, '2020-06-21 09:02:48');
+INSERT INTO `userFootprint` VALUES (635, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10005, '2020-06-21 09:55:27');
+INSERT INTO `userFootprint` VALUES (636, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10007, '2020-06-21 09:56:55');
+INSERT INTO `userFootprint` VALUES (637, 'f92b9f8f372e445fb6564cdd57aa3c3e', 10001, '2020-06-21 09:57:01');
+INSERT INTO `userFootprint` VALUES (638, 'fd2d5eb2dd124f23802f163cd3998741', 10001, '2020-06-21 12:36:19');
+INSERT INTO `userFootprint` VALUES (639, 'fd2d5eb2dd124f23802f163cd3998741', 10002, '2020-06-21 12:36:23');
 
 -- ----------------------------
 -- Table structure for userMembe
@@ -3066,7 +3207,7 @@ CREATE TABLE `userOrder`  (
   `isDelete` int(11) NULL DEFAULT 0,
   `sign` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1250 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1262 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userOrder
@@ -3169,6 +3310,18 @@ INSERT INTO `userOrder` VALUES (1246, 'f92b9f8f372e445fb6564cdd57aa3c3e', '15921
 INSERT INTO `userOrder` VALUES (1247, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592201143597100002', 1, 1, '2020-06-15 06:05:43', '2020-06-18 06:05:42', '2020-06-15 06:06:04', NULL, '', '2898.0', 2, 0, 0, 0);
 INSERT INTO `userOrder` VALUES (1248, '3e7cb3ada38c49a58d57a7c3446ec932', '1592203784754100003', NULL, NULL, '2020-06-15 06:49:45', NULL, NULL, NULL, NULL, '60.00', 1, 0, 0, 0);
 INSERT INTO `userOrder` VALUES (1249, '3e7cb3ada38c49a58d57a7c3446ec932', '1592204359482100004', NULL, NULL, '2020-06-15 06:59:19', NULL, NULL, NULL, NULL, '20.00', 1, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (1250, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592713282803100001', 2, 1, '2020-06-21 04:21:23', '2020-06-24 04:21:22', NULL, NULL, '', '1499.0', 1, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (1251, 'fd2d5eb2dd124f23802f163cd3998741', '1592713565109100002', NULL, NULL, '2020-06-21 04:26:05', NULL, NULL, NULL, NULL, '374328.00', 1, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (1252, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592720296500100003', 2, 1, '2020-06-21 06:18:16', '2020-06-24 06:18:54', NULL, NULL, '', '1499.0', 1, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (1253, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592720376237100004', 1, 1, '2020-06-21 06:19:36', '2020-06-24 06:20:02', '2020-06-21 06:21:56', NULL, '', '5399.0', 2, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (1254, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592720450436100005', 2, 1, '2020-06-21 06:20:50', '2020-06-24 06:20:49', NULL, NULL, '', '11999.0', 1, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (1255, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592720594896100006', 2, 1, '2020-06-21 06:23:15', '2020-06-24 06:23:14', NULL, NULL, '', '11999.0', 1, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (1256, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592730170372100007', 2, 1, '2020-06-21 09:02:50', '2020-06-24 09:02:49', NULL, NULL, '', '47699.0', 1, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (1257, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592730540160100008', 2, 1, '2020-06-21 09:09:00', '2020-06-24 09:08:59', NULL, NULL, '', '11999.0', 1, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (1258, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592730653251100009', 2, 1, '2020-06-21 09:10:53', '2020-06-24 09:11:13', NULL, NULL, '', '7890.0', 1, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (1259, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592732849879100010', 2, 1, '2020-06-21 09:47:30', '2020-06-24 09:47:29', NULL, NULL, '', '11999.0', 1, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (1260, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592733331815100011', 1, 1, '2020-06-21 09:55:32', '2020-06-24 09:55:30', '2020-06-21 09:56:06', NULL, '', '7490.0', 2, 0, 0, 0);
+INSERT INTO `userOrder` VALUES (1261, 'f92b9f8f372e445fb6564cdd57aa3c3e', '1592733438424100012', 2, 1, '2020-06-21 09:57:18', '2020-06-24 09:57:17', NULL, NULL, '', '5399.0', 1, 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for userPassword

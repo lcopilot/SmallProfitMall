@@ -46,7 +46,7 @@ export default {
   },
   setProductPagination(current,pageSize){
     const pagination={
-      current:current,
+      currentPage:current,
       pageSize:pageSize,
     }
     store.set(PRODUCT_CURRENT_PAGE,pagination)

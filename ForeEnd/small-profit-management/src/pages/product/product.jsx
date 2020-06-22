@@ -22,9 +22,10 @@ import storageUtils from "../../utils/storageUtils";
 import DownOutlined from "@ant-design/icons/lib/icons/DownOutlined";
 import * as ActionCreators from "../../store/actionCreators";
 import {connect} from "react-redux";
+import {ExclamationCircleOutlined} from "@ant-design/icons";
 
 const {Search} = Input;
-
+const {confirm} = Modal;
 const Product = (props) => {
   let {setProductAttributes} = props
   const history= useHistory();
@@ -70,6 +71,11 @@ const Product = (props) => {
               <img src={img[0]} className="product-table-img" />
         )
       },
+    }, {
+      title: '状态',
+      dataIndex: 'productState',
+      render: (productState) =>productState?'已上架':'已下架',
+      width:90,
     },
     {
       title: '操作',
@@ -96,12 +102,21 @@ const Product = (props) => {
                 <a onClick={() => {
                   history.push({pathname:`/products/product/addProduct`,state:{productDetail:product}})
                 }}>
-                  下架
+                  {product.productState?'下架':'上架'}
                 </a>
               </Menu.Item>
               <Menu.Item>
                 <a onClick={() => {
-                  history.push({pathname:`/products/product/addProduct`,state:{productDetail:product}})
+                  confirm({
+                    title: '删除商品',
+                    icon: <ExclamationCircleOutlined/>,
+                    content: '你确定删除商品吗?',
+                    cancelText: '取消',
+                    okText: '确定',
+                    onOk() {
+
+                    },
+                  });
                 }}>
                   删除
                 </a>
@@ -130,7 +145,7 @@ const Product = (props) => {
   //获取商品
   const getProductList=(currentPage,pageSize)=>{
     const pagination=storageUtils.getProductPagination()
-    currentPage=pagination?pagination.current:PAGINATION.defaultCurrent
+    currentPage=pagination?pagination.currentPage:PAGINATION.defaultCurrent
     pageSize=pagination?pagination.pageSize:PAGINATION.defaultPageSize
     setProductPagination({
       currentPage:currentPage,
