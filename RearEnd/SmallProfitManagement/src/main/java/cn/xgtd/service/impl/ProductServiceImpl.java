@@ -180,6 +180,13 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public Integer updateDetails(List<ProductDistinction> productDistinctions) {
+        for (int i = 0; i <productDistinctions.size() ; i++) {
+            Double productPrice = productDistinctions.get(i).getProductPrice();
+            if (productPrice<0.01){
+                productDao.updateShelves(productDistinctions.get(i).getProductId());
+                break;
+            }
+        }
         Integer result = productDao.updateDetails(productDistinctions);
         return result;
     }

@@ -20,6 +20,7 @@
         <result property="productDescription" column="productDescription"></result>
         <result property="productAfterSale" column="productAfterSale"></result>
         <result property="productParameter" column="productParameter"></result>
+        <result property="shelves" column="shelves"></result>
 
         <association property="productClassify" javaType="cn.xgtd.domain.product.ProductClassify" resultMap="productClassifyMap">
         </association>
@@ -127,7 +128,8 @@
             psc.product_secondary_id,
             psc.secondary_content,
             pfc.product_final_id,
-            pfc.final_content
+            pfc.final_content,
+            pb.shelves
         FROM
             ProductBasis pb
             LEFT JOIN ProductPrice pp ON pb.ProductId = pp.ProductId
@@ -386,6 +388,11 @@
          UPDATE ProductBasis SET sign = 1  WHERE ProductId = #{productId};
          UPDATE ProductBasis SET productState = 0 WHERE ProductId = #{productId}
       </update>
+
+      <!--修改商品为不可上架-->
+      <update id="updateShelves">
+         UPDATE ProductBasis SET shelves = 0  WHERE ProductId = #{productId};
+       </update>
 
 
 </mapper>

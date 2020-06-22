@@ -177,4 +177,12 @@ public interface ProductDao {
      * @return
      */
     public Integer deleteProduct(Integer productIde);
+
+
+    /**
+     * 修改商品为不可上架
+     * @param productId
+     * @return
+     */
+    public Integer updateShelves(Integer productId);
 }
