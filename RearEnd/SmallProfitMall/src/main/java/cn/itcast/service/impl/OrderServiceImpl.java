@@ -607,13 +607,24 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * 付款成功订单通知
+     * 同步回调成功
      * @param order 订单对象
      * @return
      * @throws Exception
      */
     @Override
     public Integer updateOrders(Order order) throws Exception {
+        return 1;
+    }
+
+
+    /**
+     * 异步回调成功
+     * @param order
+     * @return
+     */
+    @Override
+    public void updateOrderType(Order order) throws Exception {
         //修改所以商品状态为待发货 1为待发货 2为待收货 3为已收货待评论 4为维修 5为追评论 6为已追评论
         orderDao.updateProductState(order.getOrderId(),2,null);
         //设置支付状态为已支付待发货状态（2）(3)已发货状态
@@ -631,11 +642,9 @@ public class OrderServiceImpl implements OrderService {
         //order 订单 total订单总计
         //订单消息中间件推送消息
         notificationUser(order,total);
-
-        //直接推送消息
-        //push(order);
-        return 1;
     }
+
+
     /**
      * 支付成功用于发送邮件
      * @param userId
@@ -700,7 +709,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     /**
-     * 技术用户余额是否充足
+     * 用户余额是否充足
      * @param userId 用户id
      * @param orderId 订单id
      * @return 充足返回true 不足返回false

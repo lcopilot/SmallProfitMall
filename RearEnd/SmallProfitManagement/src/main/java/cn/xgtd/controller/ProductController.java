@@ -122,5 +122,33 @@ public class ProductController {
         return new ResultContent(CommonCode.FAIL,null);
     }
 
+    /**
+     * 商品上架下架
+     * @param productId
+     * @param state
+     * @return
+     */
+    @RequestMapping(value = "updateProductState" , method = RequestMethod.POST)
+    public ResultContent updateProductState(Integer productId, Boolean state){
+        Integer result = productService.updateProductState(productId,state);
+        if (result>0){
+            return new ResultContent(CommonCode.SUCCESS,null);
+        }
+        return new ResultContent(CommonCode.FAIL,null);
+    }
+
+    /**
+     * 删除商品
+     * @param productId
+     * @return
+     */
+    @RequestMapping(value = "deleteProduct" , method = RequestMethod.DELETE)
+    public ResultContent deleteProduct(Integer productId){
+        Integer result = productService.deleteProduct(productId);
+        if (result>0){
+            return new ResultContent(CommonCode.SUCCESS,null);
+        }
+        return new ResultContent(CommonCode.FAIL,null);
+    }
 
 }

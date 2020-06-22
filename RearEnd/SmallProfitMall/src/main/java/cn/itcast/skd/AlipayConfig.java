@@ -18,10 +18,10 @@ public class AlipayConfig {
     public static String alipay_public_key ="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAomtbaCXaxnj7MqSclzwNLQ9z4TjdjkFkC5EzahVuV1wU0l/THvvT1O7V38bu9NxDvsdZbkppBMjb3e6V6eUQM46/nDYMHDrTPOfXrpTgW1v6vp+SCm9dR/PELx4URRx7KfuR46oGCoOD3Mn9FC3A9uHYMeQxvS2vmxv3lpwmMSyFYQFYeveuVaY57OeQgv4Ik3XtJc20YZC1at5llCi0nqB9yac82DK4NuiIsFiJTVzuNxNHYAYiWRFBI9P9fbSKyZWDCxgZ1tq1sckccfyeESKJtG4mHXuwCxuwz5H+lweL9TffUh+GY+NKGd4QgZUs/e8tM70anT3OeTIzudS82wIDAQAB" ;
 
     // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String notify_url = "https://www.smallprofit.fhxasdsada.xyz/apiUrl/PayController/payNotify";
+    public static String notify_url = "https://www.smallprofit.fhxasdsada.xyz/apiUrl/PayController/payNotift";
 
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String return_url = "https://www.smallprofit.fhxasdsada.xyz/apiUrl/PayController/payNotify";
+    public static String return_url = "https://www.smallprofit.fhxasdsada.xyz/apiUrl/PayController/payReturn";
 
     // 签名方式
     public static String sign_type = "RSA2";

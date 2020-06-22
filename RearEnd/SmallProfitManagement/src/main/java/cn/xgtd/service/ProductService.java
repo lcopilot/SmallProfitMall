@@ -68,4 +68,20 @@ public interface ProductService {
      */
     public void updateProductContexts(Integer productId ,List<ProductContext>  productDetails);
 
+    /**
+     * 商品上架下级
+     * @param productId 商品id
+     * @param state 上架或下级
+     * @return
+     */
+    public Integer updateProductState(Integer productId , Boolean state);
+
+
+    /**
+     * 删除商品
+     * @param productId 商品id
+     * @return
+     */
+    public Integer deleteProduct(Integer productId);
+
 }

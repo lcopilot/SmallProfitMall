@@ -163,5 +163,18 @@ public interface ProductDao {
      */
     public Integer updateImageSige(Integer id);
 
+    /**
+     * 修改商品上架下架
+     * @param productId 商品id
+     * @param state true 上架 false 下架
+     * @return
+     */
+    public Integer updateProductState(@Param("productId") Integer productId,@Param("state") Boolean state);
 
+    /**
+     * 删除商品
+     * @param productIde 商品id
+     * @return
+     */
+    public Integer deleteProduct(Integer productIde);
 }

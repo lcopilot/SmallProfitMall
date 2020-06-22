@@ -138,7 +138,7 @@
             LEFT JOIN product_secondary_category psc ON pb.productSecondaryCategory = psc.product_secondary_id
             LEFT JOIN product_final_category pfc ON pb.productFinalCategory = pfc.product_final_id
         WHERE
-            pb.ProductId IN ( SELECT productId FROM ( SELECT productId FROM ProductBasis LIMIT #{start}, #{pageSize} ) AS productId )
+            pb.ProductId IN ( SELECT productId FROM ( SELECT productId FROM ProductBasis WHERE  sign <![CDATA[!= ]]> 1 LIMIT #{start}, #{pageSize} ) AS productId )
     </select>
 
     <!--查询商品属性 销量 库存 不同-->
@@ -376,8 +376,16 @@
         UPDATE ProductImage SET sign = 1  WHERE id = #{id}
       </update>
 
+      <!--修改商品上架下架-->
+      <update id="updateProductState">
+         UPDATE ProductBasis SET productState = #{state}  WHERE ProductId = #{productId}
+      </update>
 
-
+        <!--删除商品-->
+      <update id="deleteProduct">
+         UPDATE ProductBasis SET sign = 1  WHERE ProductId = #{productId};
+         UPDATE ProductBasis SET productState = 0 WHERE ProductId = #{productId}
+      </update>
 
 
 </mapper>

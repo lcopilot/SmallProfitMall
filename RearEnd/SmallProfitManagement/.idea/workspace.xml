@@ -8,8 +8,15 @@
   <component name="ChangeListManager">
     <list default="true" id="f5b2d03f-bf2b-4795-a9c5-70ed651f908b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/controller/PayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/controller/PayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/service/OrderService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/service/impl/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/skd/AlipayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/skd/AlipayConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/dao/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/service/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ProductDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ProductDao.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +68,7 @@
   <component name="ProjectId" id="1dTCAhoxSM2TUTBSnX8uVfNKnyR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="MyBatisLogPluginindexNum" value="371" />
+    <property name="MyBatisLogPluginindexNum" value="9" />
     <property name="MyBatisLogPluginparameters" value="Parameters:" />
     <property name="MyBatisLogPluginpreparing" value="Preparing:" />
     <property name="MyBatisLogPluginrunning" value="true" />
@@ -227,6 +234,12 @@
       <workItem from="1592644735552" duration="5293000" />
       <workItem from="1592700216451" duration="8210000" />
       <workItem from="1592721453497" duration="6439000" />
+      <workItem from="1592729606449" duration="893000" />
+      <workItem from="1592730618043" duration="447000" />
+      <workItem from="1592731327352" duration="747000" />
+      <workItem from="1592732146429" duration="571000" />
+      <workItem from="1592792993673" duration="73000" />
+      <workItem from="1592793073375" duration="1740000" />
     </task>
     <task id="LOCAL-00001" summary="添加商品信息">
       <created>1592447861744</created>
@@ -368,7 +381,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592729149111</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="修复编辑商品价格不修改问题">
+      <created>1592729744640</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1592729744640</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -409,7 +429,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>456</line>
+          <line>469</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -419,7 +439,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>333</line>
+          <line>345</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -429,28 +449,41 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>223</line>
+          <line>232</line>
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>212</line>
+          <line>221</line>
           <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>238</line>
+          <line>247</line>
           <option name="timeStamp" value="87" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>275</line>
+          <line>284</line>
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>52</line>
-          <option name="timeStamp" value="89" />
+          <line>207</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/controller/ProductController.java</url>
+          <line>38</line>
+          <properties class="cn.xgtd.controller.ProductController" method="findDetails">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="92" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
