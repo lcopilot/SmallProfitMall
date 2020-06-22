@@ -103,8 +103,8 @@ public class ShoppingCartController {
      * @param distinctionId 配置id
      * @return
      */
-    @RequestMapping(value = "/addArrivalNotice/{userId}/{productId}",method = RequestMethod.POST)
-    public QueryResponseResult addArrivalNotice(@PathVariable("userId")String userId,@PathVariable("productId") Integer productId ,Integer distinctionId){
+    @RequestMapping(value = "/addArrivalNotice/{userId}/{productId}/{distinctionId}",method = RequestMethod.POST)
+    public QueryResponseResult addArrivalNotice(@PathVariable("userId")String userId,@PathVariable("productId") Integer productId ,@PathVariable("distinctionId") Integer distinctionId){
         if (userId ==null && productId ==0){
             //传入参数为空
             return new QueryResponseResult(CommonCode.FAIL, null);
