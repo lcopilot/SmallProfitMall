@@ -681,12 +681,13 @@ public class ProductServiceImpl implements ProductService {
                 Boolean signs = true;
                 for (int j = 0; j < productContextList.size(); j++) {
                     //判断是否是新属性
-                    int productContextsType = Integer.parseInt(productContexts.get(i).getAttributeType());
-                    int productContextListType = productContextList.get(j).getTitleId();
-                    Boolean addType = productContextsType == productContextListType;
+                    String productContextsType = productContexts.get(i).getAttributeType();
+                    String productContextListType =String.valueOf(productContextList.get(j).getTitleId()) ;
+                    Boolean addType = productContextsType.equals(productContextListType);
                     if (addType) {
                         flag = false;
                     }
+
                     Boolean sign = productContexts.get(i).getAttributeContent().equals(productContextList.get(j).getAttributeContent()) && addType;
                     if (sign) {
                         signs = false;

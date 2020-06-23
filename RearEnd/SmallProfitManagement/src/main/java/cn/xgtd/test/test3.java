@@ -8,12 +8,10 @@ public class test3 {
     public static void main(String[] args) {
         String image = "http:productdata.isdfmk.xyz0a2dn62WqaCdmqiL4K2doafhoaOhnqeZpKc.mp4";
 
-        String str = null;
-        try {
-            str = image.substring(0, image.indexOf("/"));
-        } catch (Exception e) {
-            System.out.println(str);
-        }
+        String s = "'sds gdasda" + "\n" + "edaeafd'";
+        System.out.println("转换前："+s);
+        s = s.replaceAll("\r", "");
+        System.out.println("转换后："+s);
 
     }
 }
