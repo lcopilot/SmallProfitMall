@@ -78,7 +78,7 @@ const EditableCell = ({
               },
             ]}
         >
-          <InputNumber  ref={inputRef} min={0} max={99999} precision={2}
+          <InputNumber  ref={inputRef} min={0} max={99999} precision={dataIndex==='productInventory'?0:2}
                        onPressEnter={save} onBlur={save}/>
         </Form.Item>
     ) : (
@@ -167,7 +167,6 @@ const ProductAttributes = () => {
     if (!col.editable) {
       return col;
     }
-
     return {
       ...col,
       onCell: record => ({

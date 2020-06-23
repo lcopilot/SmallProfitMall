@@ -260,7 +260,8 @@ const AddUpProduct = (props) => {
     }
     form.validateFields().then(values => {
       const productAttList = []
-      if (values.productAttributes.length!==0) {
+      if (typeof (values.productAttributes) !== "undefined"
+          && values.productAttributes.length !== 0) {
         values.productAttributes.map((item) => {
           productAttributesList.some((att) => {
             if (att.value === item.name) {
@@ -293,26 +294,30 @@ const AddUpProduct = (props) => {
         isAtt: proFromBtn.isAtt,
         load: true,
       });
-      if (productDetail){
-        product.productId=productDetail.productId
-        product.video=product.video===productDetail.video?null:product.video
-        product.productName=product.productName===productDetail.productName?null:product.productName
-        product.productPrice=product.productPrice===productDetail.productPrice.toString()?null:product.productPrice
-        product.weight=product.weight===productDetail.weight.trim()?null:product.weight
-        indexAPI.editProductBasic(product).then(res=>{
-          if (res.success){
-            if(res.results.data.productDistinctions.length!==0){
+      if (productDetail) {
+        product.productId = productDetail.productId
+        product.video = product.video === productDetail.video ? null
+            : product.video
+        product.productName = product.productName === productDetail.productName
+            ? null : product.productName
+        product.productPrice = product.productPrice
+        === productDetail.productPrice.toString() ? null : product.productPrice
+        product.weight = product.weight === productDetail.weight.trim() ? null
+            : product.weight
+        indexAPI.editProductBasic(product).then(res => {
+          if (res.success) {
+            if (res.results.data.productDistinctions.length !== 0) {
               history.push({
                 pathname: '/products/product/productAttributes',
                 state: {isSteps, productDetail: res.results.data}
               })
-            }else {
+            } else {
               message.success("修改成功!")
               history.push('/products/product')
             }
           }
         })
-      }else {
+      } else {
         indexAPI.addProductBasic(product).then(res => {
           if (res.success) {
             if (proFromBtn.isAtt) {
@@ -414,7 +419,8 @@ const AddUpProduct = (props) => {
   //商品分类搜索
   const filterCategory = (inputValue, path) => {
     return path.some(
-        option => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1);
+        option => option.label.toLowerCase().indexOf(inputValue.toLowerCase())
+            > -1);
   }
   //文件上传之前
   const beforeUpload = (file, isVideo) => {

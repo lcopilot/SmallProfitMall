@@ -1,5 +1,6 @@
 import http from '../public';
 import sysConfig from '../sysConfig'
+import querystring from "querystring";
 const apiUrl=sysConfig.smApiUrlPre;
 
 /**
@@ -82,6 +83,16 @@ export const editProductBasic=(data)=>{
 //修改商品配置库存
 export const editProductAttributes=(data)=>{
   return http.requestPut(apiUrl+`/ProductController/updateProductContext`,data)
+}
+//商品上下架
+export const putProduct=(params)=>{
+  let queryString = querystring.stringify(params);
+  return http.requestPut(apiUrl+`/ProductController/updateProductState?${queryString}`)
+}
+//商品删除
+export const removeProduct=(params)=>{
+  let queryString = querystring.stringify(params);
+  return http.requestDelete(apiUrl+`/ProductController/deleteProduct?${queryString}`)
 }
 
 /**
