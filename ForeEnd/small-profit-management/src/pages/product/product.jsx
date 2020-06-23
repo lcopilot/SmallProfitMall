@@ -186,6 +186,7 @@ const Product = (props) => {
   }
   //删除商品
   const removeProduct = (product) => {
+
     confirm({
       title: '删除商品',
       icon: <ExclamationCircleOutlined/>,
