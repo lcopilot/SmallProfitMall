@@ -95,7 +95,7 @@
 
     <!--查询商品总数量-->
     <select id="findFavoriteQuantity" resultType="java.lang.Integer">
-        SELECT count(productId) FROM ProductBasis WHERE sing = 0
+        SELECT count(productId) FROM ProductBasis WHERE sign = 0
     </select>
 
     <!--查询商品详细信息-->
