@@ -177,7 +177,7 @@ const Product = (props) => {
     }
     indexAPI.putProduct(data).then(res => {
       if (res.success) {
-        message.warn(`商品已${productState?'下架':'上架'}`)
+        message.success(`商品已${productState?'下架':'上架'}`)
         const productLists =JSON.parse(JSON.stringify(productList))
         productLists.list[index].productState = !productState
         setProductList(productLists)
@@ -186,7 +186,6 @@ const Product = (props) => {
   }
   //删除商品
   const removeProduct = (product) => {
-
     confirm({
       title: '删除商品',
       icon: <ExclamationCircleOutlined/>,
