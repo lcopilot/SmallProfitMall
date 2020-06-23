@@ -119,7 +119,6 @@ public class ProductServiceImpl implements ProductService {
             String videoUrl = uploadingVideo(videoFileName);
             productDetails.setVideo(videoUrl);
         }
-
         //转种类集合为对象
         ProductClassify productClassify = updateProductClassify(productDetails.getProductClassifyList());
         productDetails.setProductClassify(productClassify);
@@ -136,7 +135,6 @@ public class ProductServiceImpl implements ProductService {
                 productDao.addProductImage(prodnuctList);
             }
         }
-
         //添加商品配置
         List<ProductContext> productContexts = productDetails.getProductContexts();
         for (int i = 0; i < productContexts.size(); i++) {
@@ -687,7 +685,6 @@ public class ProductServiceImpl implements ProductService {
                     if (addType) {
                         flag = false;
                     }
-
                     Boolean sign = productContexts.get(i).getAttributeContent().equals(productContextList.get(j).getAttributeContent()) && addType;
                     if (sign) {
                         signs = false;

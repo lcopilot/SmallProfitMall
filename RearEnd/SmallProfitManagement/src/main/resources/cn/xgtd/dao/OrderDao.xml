@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.xgtd.dao.OrderDao">
+
+    <!--订单-->
+    <resultMap id="allOrderMap" type="cn.xgtd.domain.order.Order">
+        <id property="id" column="id"></id>
+        <result property="sign" column="sign"></result>
+        <result property="userId" column="userId"></result>
+        <result property="orderId" column="orderId"></result>
+        <result property="paymentWay" column="paymentWay"></result>
+        <result property="deliveryWay" column="deliveryWay"></result>
+        <result property="orderTime" column="orderTime"></result>
+        <result property="submitTime" column="submitTime"></result>
+        <result property="deliveryTime" column="deliveryTime"></result>
+        <result property="paymentTime" column="paymentTime"></result>
+        <result property="orderNote" column="orderNote"></result>
+        <result property="orderTotal" column="orderTotal"></result>
+        <result property="orderState" column="orderState"></result>
+        <result property="changeQuantity" column="changeQuantity"></result>
+
+        <association property="orderAddress" resultMap="orderAddressMap" javaType="cn.xgtd.domain.order.OrderAddress">
+        </association>
+
+        <collection  property="productContents" resultMap="productContents">
+        </collection>
+
+    </resultMap>
+
+     <!-- 配置商品集合的映射 -->
+    <resultMap id="productContents" type="cn.xgtd.domain.order.ProductContent">
+       <id property="purchaseId" column="purchaseId"></id>
+        <result property="productId" column="ProductId"></result>
+        <result property="productName" column="productName"></result>
+        <result property="productImage" column="productImage"></result>
+        <result property="productPrice" column="productPrice"></result>
+        <result property="productConfiguration" column="productConfiguration"></result>
+        <result property="productQuantity" column="productQuantity"></result>
+        <result property="productWeight" column="productWeight"></result>
+        <result property="evaluate" column="evaluate"></result>
+    </resultMap>
+
+     <!--配置地址映射-->
+    <resultMap id="orderAddressMap" type="cn.xgtd.domain.order.OrderAddress">
+            <id property="orderId" column="orderId"></id>
+            <result property="name" column="name"></result>
+            <result property="phone" column="phone"></result>
+            <result property="email" column="email"></result>
+            <result property="areas" column="areas"></result>
+            <result property="alias" column="alias"></result>
+            <result property="detailedAddress" column="detailedAddress"></result>
+    </resultMap>
+
+    <!--查询所有订单-->
+    <select id="findAllOrder" parameterType="java.lang.Integer" resultMap="allOrderMap">
+        SELECT
+            uo.*,
+            o.productName,
+            o.purchaseId,
+            o.productImage,
+            o.ProductId,
+            o.productPrice,
+            o.productConfiguration,
+            o.productQuantity,
+            o.productWeight,
+            o.evaluate,
+            oa.orderId AS orderIds,
+            oa.NAME,
+            oa.areas,
+            oa.detailedAddress,
+            oa.phone,
+            oa.email,
+            oa.alias
+        FROM
+            userOrder uo
+            LEFT JOIN orders o ON uo.orderId = o.orderId,
+            orderAddress oa
+        WHERE
+            o.orderId = oa.orderId
+        AND uo.orderId in (SELECT orderId FROM(SELECT orderId FROM userOrder userOrder limit #{start} , #{pageSize}) AS orders)
+    </select>
+
+     <!--查询订单数量-->
+    <select id="fendOrderQuantity" resultType="java.lang.Integer">
+        SELECT count(*) FROM userOrder WHERE isDelete=0
+    </select>
+
+</mapper>
