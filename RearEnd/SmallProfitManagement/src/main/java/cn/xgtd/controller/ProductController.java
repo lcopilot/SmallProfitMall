@@ -128,7 +128,7 @@ public class ProductController {
      * @param state
      * @return
      */
-    @RequestMapping(value = "updateProductState" , method = RequestMethod.POST)
+    @RequestMapping(value = "updateProductState" , method = RequestMethod.PUT)
     public ResultContent updateProductState(Integer productId, Boolean state){
         Integer result = productService.updateProductState(productId,state);
         if (result>0){

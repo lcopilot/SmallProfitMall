@@ -108,8 +108,8 @@ public class UserController {
 	/**
 	 * 搜索用户
 	 * @param content 查询内容
-	 * @param laterTime 之后
-	 * @param beforeTime 之前
+	 * @param laterTime 日期之后
+	 * @param beforeTime 日期之前
 	 * @return
 	 */
 	@RequestMapping(value = "/findUserSearch",method = RequestMethod.GET)

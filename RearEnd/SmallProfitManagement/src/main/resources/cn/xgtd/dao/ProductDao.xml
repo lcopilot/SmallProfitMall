@@ -21,6 +21,7 @@
         <result property="productAfterSale" column="productAfterSale"></result>
         <result property="productParameter" column="productParameter"></result>
         <result property="shelves" column="shelves"></result>
+        <result property="productState" column="productState"></result>
 
         <association property="productClassify" javaType="cn.xgtd.domain.product.ProductClassify" resultMap="productClassifyMap">
         </association>
@@ -113,6 +114,7 @@
             pb.productAfterSale,
             pb.productParameter,
             pb.productState,
+            pb.shelves,
             pp.ProductPrice,
             pp.SpikePrice,
             pp.SalesPrice,
@@ -128,8 +130,7 @@
             psc.product_secondary_id,
             psc.secondary_content,
             pfc.product_final_id,
-            pfc.final_content,
-            pb.shelves
+            pfc.final_content
         FROM
             ProductBasis pb
             LEFT JOIN ProductPrice pp ON pb.ProductId = pp.ProductId
