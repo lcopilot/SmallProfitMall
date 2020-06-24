@@ -279,7 +279,7 @@
       </foreach>
        </insert>
 
-          <!--添加配置-->
+          <!--修改配置-->
        <update id="updateDetails" parameterType="java.util.List">
            <foreach collection="list" item="item" index="index" separator=";">
                 UPDATE  productDistinction
@@ -391,6 +391,12 @@
       <update id="updateShelves">
          UPDATE ProductBasis SET shelves = 0  WHERE ProductId = #{productId};
        </update>
+
+
+       <!--查询商品配置库存-->
+       <select id="findDistinctionInventory" resultType="java.lang.Integer">
+            SELECT distinctionId FROM productDistinction WHERE productId = #{productId} AND ProductInventory &gt; 0 AND sign = 0
+       </select>
 
 
 </mapper>

@@ -111,7 +111,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             int productId=shoppingCartss.get(i).getProductId();
             //用户是否有到货通知
             List<String> strings = shoppingCartDao.findArrivalNotice(userId,productId);
-            if (strings == null||strings.size()==0) {
+            if (strings == null | strings.size()==0) {
                 //查询没有到货通知设置为false
                 shoppingCartss.get(i).setNotice(false);
             }else {

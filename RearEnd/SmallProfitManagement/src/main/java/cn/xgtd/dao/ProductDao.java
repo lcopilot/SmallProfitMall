@@ -185,4 +185,13 @@ public interface ProductDao {
      * @return
      */
     public Integer updateShelves(Integer productId);
+
+    /**
+     * 查询配置库存
+     * @param productId 商品id
+     * @return
+     */
+    public List<Integer> findDistinctionInventory(@Param("productId") Integer productId);
+
+
 }

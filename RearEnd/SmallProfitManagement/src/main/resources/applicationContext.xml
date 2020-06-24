@@ -16,10 +16,18 @@
     <!--开启注解的扫描，希望处理service和dao，controller不需要Spring框架去处理-->
     <context:component-scan base-package="cn.xgtd" >
         <!--配置哪些注解不扫描-->
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-    </context:component-scan>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" /></context:component-scan>
     <!-- 引入jdbc.properties属性文件 -->
     <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
+
+
+
+    <!--导入MQ配置文件-->
+    <import resource="classpath:messageQueue.xml"/>
+
+    <context:property-placeholder location="classpath*:rabbitMq.properties"
+                                  ignore-unresolvable="true"/>
+
     <!--Spring整合MyBatis框架-->
     <!-- 阿里 druid 数据库连接池 配置  -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">

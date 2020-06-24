@@ -43,7 +43,11 @@ public class OrderPushNews{
      */
     public void orderPushNews(JSONObject orderJson) throws IOException {
         Order orders = JSONObject.toJavaObject(orderJson, Order.class);
-        orderService.push(orders);
+        try {
+            orderService.push(orders);
+        } catch (IOException e) {
+
+        }
     }
 
     /**
@@ -52,6 +56,9 @@ public class OrderPushNews{
      * @throws IOException
      */
     public void pushNewsQuantity(String userId) throws IOException {
-        userService.pushNews(userId);
+        try {
+            userService.pushNews(userId);
+        } catch (IOException e) {
+        }
     }
 }

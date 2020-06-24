@@ -1,7 +1,10 @@
 package cn.xgtd.service.impl;
 
+import cn.xgtd.dao.ArrivalNoticeDao;
 import cn.xgtd.dao.ProductDao;
+import cn.xgtd.domain.arrivalNotice.ArrivalNotice;
 import cn.xgtd.domain.product.*;
+import cn.xgtd.messageQueue.producer.arrivalNotice.ArrivalNoticeMq;
 import cn.xgtd.service.ProductService;
 import cn.xgtd.util.img.UploadFileUtil;
 import cn.xgtd.util.redis.RedisUtil;
@@ -30,6 +33,13 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductDao productDao;
 
+    /**到货通知**/
+    @Autowired
+    private ArrivalNoticeDao arrivalNoticeDao;
+
+    /**到货通知消息中间件发送**/
+    @Autowired
+    public ArrivalNoticeMq arrivalNoticeMq;
     /**
      * 缓存工具类
      **/
@@ -177,15 +187,35 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public Integer updateDetails(List<ProductDistinction> productDistinctions) {
+    public Integer updateDetails(List<ProductDistinction> productDistinctions ) {
+        Integer productId =0;
+        if (productDistinctions!=null && productDistinctions.size()>0){
+            productId = productDistinctions.get(0).getProductId();
+        }
+
         for (int i = 0; i <productDistinctions.size() ; i++) {
             Double productPrice = productDistinctions.get(i).getProductPrice();
-            if (productPrice<0.01){
+            if (productPrice == 0.00){
                 productDao.updateShelves(productDistinctions.get(i).getProductId());
                 break;
             }
         }
         Integer result = productDao.updateDetails(productDistinctions);
+
+        //查询不同配置库存
+        List<Integer> productDistinction = productDao.findDistinctionInventory(productId);
+        if (productDistinction!=null & productDistinction.size()>0){
+            List<ArrivalNotice> arrivalNotices = arrivalNoticeDao.findArrivalNotice(productDistinction);
+            for (int i = 0; i <arrivalNotices.size() ; i++) {
+                String[] smg = new String[2];
+                smg[0]=arrivalNotices.get(i).userEmail;
+                smg[1]="尊敬的微利会员 ：您关注的商品"+arrivalNotices.get(i).getProductName()+"已经有货了";
+                arrivalNoticeMq.sendShoppingInformation("arrival",smg);
+            }
+
+        }
+
+
         return result;
     }
 

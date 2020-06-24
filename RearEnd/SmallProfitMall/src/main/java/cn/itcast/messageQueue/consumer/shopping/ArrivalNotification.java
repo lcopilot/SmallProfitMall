@@ -13,6 +13,10 @@ public class ArrivalNotification {
         String sendEmail = "liliu_muge@163.com";
         String userEmail=strings[0];
         String content = strings[1];
-        sendEmailUtil.sendEmailUtil(theme,sendEmail,userEmail,content);
+        try {
+            sendEmailUtil.sendEmailUtil(theme,sendEmail,userEmail,content);
+        } catch (Exception e) {
+
+        }
     }
 }

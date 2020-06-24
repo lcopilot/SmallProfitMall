@@ -101,7 +101,7 @@
 
     <!--查询到货通知-->
     <select id="findArrivalNotice" resultType="java.lang.String">
-        select id
+        select arrivalNoticeId
         from
             arrivalNotice
         WHERE

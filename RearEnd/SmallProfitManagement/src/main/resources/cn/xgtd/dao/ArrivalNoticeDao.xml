@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.xgtd.dao.ArrivalNoticeDao">
+
+    <!--到货通知-->
+    <resultMap id="ArrivalNoticeMap" type="cn.xgtd.domain.arrivalNotice.ArrivalNotice">
+        <result column="email" property="userEmail"></result>
+        <result column="ProductName" property="productName"></result>
+    </resultMap>
+
+       <!--查询到货通知-->
+       <select id="findArrivalNotice" resultMap="ArrivalNoticeMap">
+           SELECT
+                u.email,
+                pb.ProductName
+            FROM
+                arrivalNotice an
+                LEFT JOIN `user` u ON an.userId = u.uid
+                LEFT JOIN ProductBasis pb ON  an.productId = pb.ProductId
+            WHERE
+               an.distinctionId in(
+            <foreach collection="list" item="item" index="index" separator=",">
+                #{item.value}
+            </foreach>
+            )
+       </select>
+</mapper>

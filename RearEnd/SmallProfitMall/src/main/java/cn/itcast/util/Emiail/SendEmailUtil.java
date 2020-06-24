@@ -1,5 +1,6 @@
 package cn.itcast.util.Emiail;
 
+import cn.itcast.util.encryption.AesEncryptUtil;
 import cn.itcast.util.rabbitMq.MQSendMsgUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -20,6 +21,7 @@ public class SendEmailUtil {
     @Autowired
     private JavaMailSender javaMailSender;//在spring中配置的邮件发送的bean
 
+
     /**
      *
      * @param theme         邮件的主题
@@ -36,11 +38,13 @@ public class SendEmailUtil {
         try {
             mMessageHelper=new MimeMessageHelper(mMessage,true);
             mMessageHelper.setFrom (new InternetAddress(sendEmail, "微利团队", "UTF-8"));
-            mMessageHelper.setTo(userEmail);
+            mMessageHelper.setTo(AesEncryptUtil.desEncrypt(userEmail));
             mMessageHelper.setSubject(theme);
             mMessageHelper.setText(content,true);//true表示文本以html格式打开
             javaMailSender.send(mMessage);//发送邮件
         } catch (MessagingException | UnsupportedEncodingException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return verification;
     }

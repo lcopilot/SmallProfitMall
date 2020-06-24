@@ -109,7 +109,7 @@ public class ShoppingCartController {
             //传入参数为空
             return new QueryResponseResult(CommonCode.FAIL, null);
         }
-        int redis = shoppingCartService.addArrivalNotice(userId,productId , distinctionId);
+        int redis = shoppingCartService.addArrivalNotice(userId,productId,distinctionId);
         QueryResult queryResult = new QueryResult();
         if (redis==1){
             return  new QueryResponseResult(CommonCode.SUCCESS, queryResult);

@@ -62,12 +62,12 @@
             LEFT JOIN productAttribute pa ON pb.ProductId = pa.ProductId
             LEFT JOIN attributeType pat ON pa.attributeType = pat.attributeTypeId
         WHERE
-            pb.ProductId =#{productId};
+            pb.ProductId =#{productId}
     </select>
 
     <!--查询商品属性 销量 库存 不同-->
     <select id="findProductDistinction" resultType="cn.itcast.domain.ProductDatails.ProductDistinction">
-        SELECT * from productDistinction WHERE productId = #{productId}
+        SELECT * from productDistinction WHERE productId = #{productId} AND sign = 0
     </select>
 
 

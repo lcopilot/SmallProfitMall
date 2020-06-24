@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/rabbit
+	http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+  <!--生产者者配置如下：-->
+  <!-- 定义RabbitMQ的连接工厂 -->
+  <rabbit:connection-factory id="connectionFactory"
+                             host="${rabbitmq.host}" port="${rabbitmq.port}" username="${rabbitmq.username}"
+                             password="${rabbitmq.password}" virtual-host="${rabbitmq.vhost}"/>
+  <!-- 到货通知队列 -->
+  <rabbit:admin connection-factory="connectionFactory"/>
+
+  <!--定义到货通知交换机自动声明-->
+  <rabbit:direct-exchange name="ARRIVAL-NOTICE-EXCHANGE" auto-declare="true" durable="true"/>
+  <!--到货通知队列消息模板 -->
+  <rabbit:template id="shoppingTemplate"
+                   connection-factory="connectionFactory" exchange="ARRIVAL-NOTICE-QUEUE"/>
+
+
+</beans>

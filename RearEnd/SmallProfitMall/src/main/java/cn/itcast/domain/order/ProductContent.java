@@ -3,6 +3,7 @@ package cn.itcast.domain.order;
 import java.io.Serializable;
 
 /**
+ * 商品信息
  * @author Kite
  * @date 2020/4/3
  */

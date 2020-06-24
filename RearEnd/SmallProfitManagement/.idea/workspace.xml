@@ -6,10 +6,30 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="879b72ac-976e-4173-ba43-333a675b7b0e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/order.less" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/order.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/orderDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/orderDetail.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/product/productAttributes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/product/productAttributes.jsx" afterDir="false" />
+=======
+    <list default="true" id="f5b2d03f-bf2b-4795-a9c5-70ed651f908b" name="Default Changelist" comment="修改商品价格为0不可上架">
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/dao/ArrivalNoticeDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/domain/arrivalNotice/ArrivalNotice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/messageQueue/producer/arrivalNotice/ArrivalNoticeMq.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ArrivalNoticeDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/messageQueue.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/rabbitMq.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/domain/order/ProductContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/domain/order/ProductContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/messageQueue/consumer/shopping/ArrivalNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/messageQueue/consumer/shopping/ArrivalNotification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/util/Emiail/SendEmailUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/util/Emiail/SendEmailUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/resources/cn/itcast/dao/OrderDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/resources/cn/itcast/dao/OrderDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/dao/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ProductDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ProductDao.xml" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +92,11 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+<<<<<<< Updated upstream
     <property name="MyBatisLogPluginindexNum" value="629" />
+=======
+    <property name="MyBatisLogPluginindexNum" value="27" />
+>>>>>>> Stashed changes
     <property name="MyBatisLogPluginparameters" value="Parameters:" />
     <property name="MyBatisLogPluginpreparing" value="Preparing:" />
     <property name="MyBatisLogPluginrunning" value="true" />
@@ -98,8 +122,8 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\SmallProfitMall\RearEnd\SmallProfitManagement\src\main\resources\cn\xgtd\dao" />
-      <recent name="D:\SmallProfitMall\RearEnd\SmallProfitManagement\src\main\java\cn\xgtd\domain\order" />
       <recent name="D:\SmallProfitMall\RearEnd\SmallProfitManagement\src\main\resources" />
+      <recent name="D:\SmallProfitMall\RearEnd\SmallProfitManagement\src\main\java\cn\xgtd\domain\order" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.22">
@@ -307,8 +331,23 @@
       <workItem from="1592808102116" duration="264000" />
       <workItem from="1592909099663" duration="1238000" />
       <workItem from="1592928931964" duration="4231000" />
+<<<<<<< Updated upstream
       <workItem from="1592960057731" duration="602000" />
       <workItem from="1592981414252" duration="689000" />
+=======
+      <workItem from="1592960057731" duration="976000" />
+      <workItem from="1592962474007" duration="643000" />
+      <workItem from="1592963119382" duration="7000" />
+      <workItem from="1592963599973" duration="1256000" />
+      <workItem from="1592969818616" duration="2590000" />
+      <workItem from="1592975697701" duration="6322000" />
+      <workItem from="1592985640898" duration="2029000" />
+      <workItem from="1592987898596" duration="500000" />
+      <workItem from="1592988770660" duration="116000" />
+      <workItem from="1592989066696" duration="44000" />
+      <workItem from="1592989182657" duration="357000" />
+      <workItem from="1592989547964" duration="670000" />
+>>>>>>> Stashed changes
     </task>
     <task id="LOCAL-00001" summary="添加商品信息">
       <created>1592447861744</created>
@@ -478,7 +517,21 @@
       <option name="project" value="LOCAL" />
       <updated>1592933152909</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="修改订单请求方式 新增订单用户名">
+      <created>1592960695970</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1592960695970</updated>
+    </task>
+    <task id="LOCAL-00026" summary="订单倒叙查询">
+      <created>1592962998050</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1592962998051</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -515,7 +568,9 @@
     <MESSAGE value="商品分页数据不正确问题" />
     <MESSAGE value="数据分页信息不正确问题" />
     <MESSAGE value="查询所有订单信息" />
-    <option name="LAST_COMMIT_MESSAGE" value="查询所有订单信息" />
+    <MESSAGE value="修改订单请求方式 新增订单用户名" />
+    <MESSAGE value="订单倒叙查询" />
+    <option name="LAST_COMMIT_MESSAGE" value="订单倒叙查询" />
   </component>
   <component name="WindowStateProjectService">
     <state x="449" y="20" key="#Tomcat_9.0.17" timestamp="1592960763522">
@@ -590,18 +645,41 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>696</line>
+          <line>726</line>
           <option name="timeStamp" value="100" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
-          <line>681</line>
+          <line>711</line>
           <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/OrderServiceImpl.java</url>
           <line>29</line>
           <option name="timeStamp" value="103" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
+          <line>205</line>
+          <option name="timeStamp" value="109" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
+          <line>211</line>
+          <option name="timeStamp" value="111" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/ProductServiceImpl.java</url>
+          <line>207</line>
+          <option name="timeStamp" value="112" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/messageQueue/producer/arrivalNotice/ArrivalNoticeMq.java</url>
+          <line>25</line>
+          <properties class="cn.xgtd.messageQueue.producer.arrivalNotice.ArrivalNoticeMq" method="sendShoppingInformation">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="107" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

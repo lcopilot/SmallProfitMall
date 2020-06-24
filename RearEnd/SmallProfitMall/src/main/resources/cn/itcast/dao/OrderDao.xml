@@ -189,7 +189,7 @@
         uo.orderTime DESC
     </select>
 
-    <!--查询订单详细-->
+    <!--查询订单信息 商品信息-->
     <select id="findDetailedOrder" resultMap="allOrderMap">
         SELECT
             uo.*,o.productName,
@@ -293,7 +293,7 @@
     <!--查询订单总计-->
     <select id="fenOrderTotal" resultType="java.lang.String" parameterType="java.lang.String">
         SELECT orderTotal FROM userOrder WHERE userId=#{userId} AND orderId=#{orderId}
-</select>
+    </select>
 
     <!--查询订单数量-->
     <select id="fendOrderQuantity" resultType="java.lang.Integer">
