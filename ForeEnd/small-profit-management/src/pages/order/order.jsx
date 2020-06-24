@@ -44,12 +44,13 @@ const Order = () => {
     }, {
       title: '创建时间',
       dataIndex: 'orderTime',
-      render: (orderTime) => <><FieldTimeOutlined/> {moment(orderTime).format(TIME_FORMAT)}</>
+      render: (orderTime) => <><FieldTimeOutlined/> {moment(orderTime).format(
+          TIME_FORMAT)}</>
     }, {
       title: '地址',
       width: 250,
       render: (order, record, index) => {
-        const {name, phone, areas, detailedAddress,email} = order.orderAddress
+        const {name, phone, areas, detailedAddress, email} = order.orderAddress
         const title =
             (
                 <>
@@ -61,9 +62,12 @@ const Order = () => {
             )
         return (
             <Tooltip placement="top" title={title}>
-              <Paragraph ellipsis className="order-address">姓名: {name}</Paragraph>
-              <Paragraph ellipsis className="order-address">电话: {phone}</Paragraph>
-              <Paragraph ellipsis className="order-address">地址: {areas + detailedAddress}</Paragraph>
+              <Paragraph ellipsis
+                         className="order-address">姓名: {name}</Paragraph>
+              <Paragraph ellipsis
+                         className="order-address">电话: {phone}</Paragraph>
+              <Paragraph ellipsis className="order-address">地址: {areas
+              + detailedAddress}</Paragraph>
             </Tooltip>
         )
       }
@@ -89,7 +93,7 @@ const Order = () => {
               <Menu.Item>
                 <a onClick={() => {
                   history.push({
-                    pathname: `/products/product/addUpProduct`,
+                    pathname: `/order/orderDetail`,
                     state: {orderDetail: order}
                   })
                 }}>
@@ -133,15 +137,16 @@ const Order = () => {
       currentPage: currentPage,
       pageSize: pageSize,
     })
-    indexAPI.getOrderList(pagination ? pagination : orderPagination).then(res => {
-      if (res.success) {
-        setOrderList(res.pagination)
-        setSkeletonLoad(false)
-      }
-    })
+    indexAPI.getOrderList(pagination ? pagination : orderPagination).then(
+        res => {
+          if (res.success) {
+            setOrderList(res.pagination)
+            setSkeletonLoad(false)
+          }
+        })
   }
   //订单数据导出
-  const exportExcel=()=>{
+  const exportExcel = () => {
     const initColumn = [{
       title: '订单号',
       dataIndex: 'orderId',
@@ -151,7 +156,7 @@ const Order = () => {
       title: '创建时间',
       dataIndex: 'orderTime',
       key: 'orderTime',
-    },{
+    }, {
       title: '支付时间',
       dataIndex: 'paymentTime',
       key: 'paymentTime',
@@ -169,19 +174,21 @@ const Order = () => {
       key: 'address',
     }];
     let attendanceInfoList = [];
-    orderList.list.map(item=>{
-      const {name, phone, areas, detailedAddress,email} = item.orderAddress
-      let detail={
+    orderList.list.map(item => {
+      const {name, phone, areas, detailedAddress, email} = item.orderAddress
+      let detail = {
         orderId: item.orderId,
         orderTime: moment(item.orderTime).format(TIME_FORMAT),
-        paymentTime:moment(item.paymentTime).format(TIME_FORMAT),
-        orderTotal: item.orderTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','),
-        userName:item.userName,
-        address:`姓名:${name}\n电话:${phone}\n地址:${areas+detailedAddress}\n邮件:${email}`
+        paymentTime: moment(item.paymentTime).format(TIME_FORMAT),
+        orderTotal: item.orderTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
+            ','),
+        userName: item.userName,
+        address: `姓名:${name}\n电话:${phone}\n地址:${areas
+        + detailedAddress}\n邮件:${email}`
       }
-      attendanceInfoList=[...attendanceInfoList,detail]
+      attendanceInfoList = [...attendanceInfoList, detail]
     })
-    Utils.exportExcel(initColumn,attendanceInfoList)
+    Utils.exportExcel(initColumn, attendanceInfoList)
   }
 
   useEffect(() => {
@@ -214,31 +221,29 @@ const Order = () => {
 
   return (
       <>
-        <Card title={title}>
-          <Skeleton active loading={skeletonLoad}>
-            <Table
-                bordered
-                rowKey={(item) => item.orderId}
-                dataSource={orderList.list}
-                columns={columns}
-                pagination={{
-                  onShowSizeChange: (page, pageSize) => {
-                    storageUtils.setOrderPagination(page, pageSize);
-                    setSkeletonLoad(true)
-                    getOrderList(page, pageSize)
-                  },
-                  onChange: (current, size) => {
-                    storageUtils.setOrderPagination(current, size);
-                    setSkeletonLoad(true)
-                    getOrderList(current, size)
-                  },
-                  current: orderPagination.currentPage,
-                  pageSize: orderPagination.pageSize,
-                  total: orderList.totalCount,
-                  ...PAGINATION
-                }}
-            />
-          </Skeleton>
+        <Card title={title} loading={skeletonLoad}>
+          <Table
+              bordered
+              rowKey={(item) => item.orderId}
+              dataSource={orderList.list}
+              columns={columns}
+              pagination={{
+                onShowSizeChange: (page, pageSize) => {
+                  storageUtils.setOrderPagination(page, pageSize);
+                  setSkeletonLoad(true)
+                  getOrderList(page, pageSize)
+                },
+                onChange: (current, size) => {
+                  storageUtils.setOrderPagination(current, size);
+                  setSkeletonLoad(true)
+                  getOrderList(current, size)
+                },
+                current: orderPagination.currentPage,
+                pageSize: orderPagination.pageSize,
+                total: orderList.totalCount,
+                ...PAGINATION
+              }}
+          />
         </Card>
       </>
   )

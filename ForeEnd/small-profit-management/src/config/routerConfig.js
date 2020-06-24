@@ -9,6 +9,7 @@ import Monitor from "../pages/dashboard/monitor";
 import Order from "../pages/order/order";
 import React from "react";
 import ProductAttributes from "../pages/product/productAttributes";
+import OrderDetail from "../pages/order/orderDetail";
 
 const routerList = [
   {
@@ -42,7 +43,11 @@ const routerList = [
     component: <Monitor/>,
   }, {
     path: '/order',
+    exact:true,
     component: <Order/>,
+  }, {
+    path: '/order/orderDetail',
+    component: <OrderDetail/>,
   },
 ]
 export default routerList
