@@ -7,7 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="879b72ac-976e-4173-ba43-333a675b7b0e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/order.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/order.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/order.less" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/order.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/orderDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/orderDetail.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/product/productAttributes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/product/productAttributes.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,11 +56,23 @@
         <option name="userSettingsFile" value="D:\apache-maven-3.5.2-bin\apache-maven-3.5.2\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
   </component>
   <component name="ProjectId" id="1dTCAhoxSM2TUTBSnX8uVfNKnyR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="abbreviatePackageNames" value="true" />
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="MyBatisLogPluginindexNum" value="545" />
+    <property name="MyBatisLogPluginindexNum" value="629" />
     <property name="MyBatisLogPluginparameters" value="Parameters:" />
     <property name="MyBatisLogPluginpreparing" value="Preparing:" />
     <property name="MyBatisLogPluginrunning" value="true" />
@@ -236,11 +250,6 @@
                 <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
                 <item name="Running" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
             </expand>
             <select />
           </treeState>
@@ -253,7 +262,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f5b2d03f-bf2b-4795-a9c5-70ed651f908b" name="Default Changelist" comment="" />
+      <changelist id="879b72ac-976e-4173-ba43-333a675b7b0e" name="Default Changelist" comment="" />
       <created>1592439553859</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -299,6 +308,7 @@
       <workItem from="1592909099663" duration="1238000" />
       <workItem from="1592928931964" duration="4231000" />
       <workItem from="1592960057731" duration="602000" />
+      <workItem from="1592981414252" duration="689000" />
     </task>
     <task id="LOCAL-00001" summary="添加商品信息">
       <created>1592447861744</created>

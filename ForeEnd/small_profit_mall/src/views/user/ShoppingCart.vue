@@ -17,7 +17,6 @@
                   ref="cartTable"
                   :data="cartList"
                   tooltip-effect="dark"
-
                   style="width: 100%"
                   @select="select"
                   @select-all="select_all">
@@ -120,7 +119,7 @@
                         </el-link>
                       </div>
                       <div v-if="product.row.productInventory<=0 && !product.row.notice">
-                        <el-link :underline="false" @click="arrivalNotice(product.row.productId)"
+                        <el-link :underline="false" @click="arrivalNotice(product.row.distinctionId)"
                                  style="font-size: 13px">
                           到货通知
                         </el-link>
@@ -324,8 +323,8 @@
         }
       },
       //到货通知
-      arrivalNotice(productId) {
-        productApi.arrivalNotice(sessionStorage.getItem("uId"), productId).then(res => {
+      arrivalNotice(distinctionId) {
+        productApi.arrivalNotice(sessionStorage.getItem("uId"), distinctionId).then(res => {
           if (res.success) {
             this.$message({
               message: "已添加到货通知,商品已经在快马加鞭赶来的路上~",

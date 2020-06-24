@@ -20,8 +20,8 @@ export const removeCart=cartIdList=>{
   return http.requestDelete(apiUrl+'/ShoppingCartController/deleteCart/'+cartIdList)
 };
 //到货通知
-export const arrivalNotice=(userId,productId)=>{
-  return http.requestPost(apiUrl+'/ShoppingCartController/addArrivalNotice/'+userId+'/'+productId)
+export const arrivalNotice=(userId,distinctionId)=>{
+  return http.requestPost(apiUrl+'/ShoppingCartController/addArrivalNotice/'+userId+'/'+distinctionId)
 };
 //修改购物车商品数量
 export const modifyProductNumber=(productNumber,cartId)=>{

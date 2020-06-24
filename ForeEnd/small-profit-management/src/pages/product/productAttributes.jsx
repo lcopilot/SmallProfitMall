@@ -273,7 +273,6 @@ const ProductAttributes = () => {
           </Row>) : null
           }
           <Table
-
               rowKey={(item) => item.distinctionId}
               components={components}
               rowClassName={() => 'editable-row'}
