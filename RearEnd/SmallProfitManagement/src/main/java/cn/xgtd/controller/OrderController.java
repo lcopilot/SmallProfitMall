@@ -30,7 +30,7 @@ public class OrderController {
      * @param pageSize
      * @return
      */
-    @RequestMapping(value = "/findAllOrder",method = RequestMethod.POST)
+    @RequestMapping(value = "/findAllOrder",method = RequestMethod.GET)
     public ResponsePagination findAllOrder(Integer currentPage , Integer pageSize){
         //判断传入开始页是否为空 为空则默认为第一页
         if (currentPage==null | pageSize ==0){

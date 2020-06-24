@@ -21,6 +21,7 @@
         <result property="orderTotal" column="orderTotal"></result>
         <result property="orderState" column="orderState"></result>
         <result property="changeQuantity" column="changeQuantity"></result>
+        <result property="userName" column="userName"></result>
 
         <association property="orderAddress" resultMap="orderAddressMap" javaType="cn.xgtd.domain.order.OrderAddress">
         </association>
@@ -73,10 +74,13 @@
             oa.detailedAddress,
             oa.phone,
             oa.email,
-            oa.alias
+            oa.alias,
+            u.name AS userName
         FROM
             userOrder uo
-            LEFT JOIN orders o ON uo.orderId = o.orderId,
+            LEFT JOIN orders o ON uo.orderId = o.orderId
+            LEFT JOIN user u ON uo.userId = u.uid
+            ,
             orderAddress oa
         WHERE
             o.orderId = oa.orderId

@@ -16,6 +16,8 @@ public class Order implements Serializable {
     private int  id;
     /**用户id**/
     private String userId;
+    /**用户名**/
+    private String userName;
     /**订单id**/
     private String orderId;
     /**支付方式**/
@@ -45,6 +47,14 @@ public class Order implements Serializable {
 
     //是否可删订单
     private Integer sign;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public Integer getSign() {
         return sign;
