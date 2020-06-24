@@ -84,7 +84,7 @@
             orderAddress oa
         WHERE
             o.orderId = oa.orderId
-        AND uo.orderId in (SELECT orderId FROM(SELECT orderId FROM userOrder userOrder limit #{start} , #{pageSize}) AS orders)
+        AND uo.orderId in (SELECT orderId FROM(SELECT orderId FROM userOrder userOrder  order by orderTime desc limit #{start} , #{pageSize}) AS orders)
     </select>
 
      <!--查询订单数量-->
