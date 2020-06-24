@@ -7,9 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="879b72ac-976e-4173-ba43-333a675b7b0e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/order.less" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/order.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/orderDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/orderDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/product/productAttributes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/product/productAttributes.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +70,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="MyBatisLogPluginindexNum" value="629" />
+    <property name="MyBatisLogPluginindexNum" value="637" />
     <property name="MyBatisLogPluginparameters" value="Parameters:" />
     <property name="MyBatisLogPluginpreparing" value="Preparing:" />
     <property name="MyBatisLogPluginrunning" value="true" />
@@ -308,7 +306,7 @@
       <workItem from="1592909099663" duration="1238000" />
       <workItem from="1592928931964" duration="4231000" />
       <workItem from="1592960057731" duration="602000" />
-      <workItem from="1592981414252" duration="689000" />
+      <workItem from="1592981414252" duration="2140000" />
     </task>
     <task id="LOCAL-00001" summary="添加商品信息">
       <created>1592447861744</created>
