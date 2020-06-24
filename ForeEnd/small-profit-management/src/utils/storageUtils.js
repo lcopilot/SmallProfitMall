@@ -3,10 +3,9 @@ import moment from "moment";
 
 const USER_KEY = 'USER_KEY'
 const WEATHER_KEY = 'WEATHER_KEY'
-const LOGIN_EXPIRED='LOGIN_EXPIRED'
-const PRODUCT_CURRENT_PAGE='PRODUCT_CURRENT_PAGE'
-const ORDER_CURRENT_PAGE='ORDER_CURRENT_PAGE'
-
+const LOGIN_EXPIRED = 'LOGIN_EXPIRED'
+const PRODUCT_CURRENT_PAGE = 'PRODUCT_CURRENT_PAGE'
+const ORDER_CURRENT_PAGE = 'ORDER_CURRENT_PAGE'
 
 export default {
 
@@ -18,14 +17,14 @@ export default {
   },
   saveUser(user) {
     //过期时间 1天后
-    user.expirationTime=moment(new Date()).add(1, 'days').format(
+    user.expirationTime = moment(new Date()).add(1, 'days').format(
         'YYYY-MM-DD HH:mm:ss SSS');
-    store.set(USER_KEY,user)
+    store.set(USER_KEY, user)
   },
   getUser() {
-    const user=store.get(USER_KEY) || {role:{menus:[]}}
-    if(moment(user.expirationTime)<moment(new Date())){
-      sessionStorage.setItem(LOGIN_EXPIRED,JSON.stringify(true));
+    const user = store.get(USER_KEY) || {role: {menus: []}}
+    if (moment(user.expirationTime) < moment(new Date())) {
+      sessionStorage.setItem(LOGIN_EXPIRED, JSON.stringify(true));
       window.location.replace('/login');
       this.removeUser();
       return {}
@@ -37,32 +36,32 @@ export default {
     // store.clearAll();
   },
 
-  getLoginExpired(){
+  getLoginExpired() {
     if (sessionStorage.getItem(LOGIN_EXPIRED)) {
       sessionStorage.removeItem(LOGIN_EXPIRED)
       return true
     }
     return false
   },
-  setProductPagination(current,pageSize){
-    const pagination={
-      currentPage:current,
-      pageSize:pageSize,
+  setProductPagination(current, pageSize) {
+    const pagination = {
+      currentPage: current,
+      pageSize: pageSize,
     }
-    store.set(PRODUCT_CURRENT_PAGE,pagination)
+    store.set(PRODUCT_CURRENT_PAGE, pagination)
   },
 
-  getProductPagination(){
+  getProductPagination() {
     return store.get(PRODUCT_CURRENT_PAGE)
   },
-  setOrderPagination(current,pageSize){
-    const pagination={
-      current:current,
-      pageSize:pageSize,
+  setOrderPagination(current, pageSize) {
+    const pagination = {
+      currentPage: current,
+      pageSize: pageSize,
     }
-    store.set(ORDER_CURRENT_PAGE,pagination)
+    store.set(ORDER_CURRENT_PAGE, pagination)
   },
-  getOrderPagination(){
+  getOrderPagination() {
     return store.get(ORDER_CURRENT_PAGE)
   },
 }

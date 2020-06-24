@@ -1,5 +1,7 @@
 //时间格式化
 export const TIME_FORMAT='YYYY-MM-DD HH:mm:ss'
+//订单导出文件名格式
+export const EXPORT_EXCEL_NAME='YYYYMMDD-HH-mm-ss'
 //分页相关参数
 export const PAGINATION={
   defaultCurrent:1,

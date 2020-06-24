@@ -6,15 +6,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5b2d03f-bf2b-4795-a9c5-70ed651f908b" name="Default Changelist" comment="修改商品价格为0不可上架">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/domain/order/ProductContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/java/cn/itcast/domain/order/ProductContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmallProfitMall/src/main/resources/cn/itcast/dao/OrderDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmallProfitMall/src/main/resources/cn/itcast/dao/OrderDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xgtd/domain/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xgtd/domain/order/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/OrderDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/OrderDao.xml" afterDir="false" />
+    <list default="true" id="879b72ac-976e-4173-ba43-333a675b7b0e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/order.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/api/page/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/api/page/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/config/sysConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/config/sysConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/order.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/order.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/utils/storageUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/utils/storageUtils.js" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,7 +62,7 @@
   <component name="ProjectId" id="1dTCAhoxSM2TUTBSnX8uVfNKnyR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="MyBatisLogPluginindexNum" value="16" />
+    <property name="MyBatisLogPluginindexNum" value="188" />
     <property name="MyBatisLogPluginparameters" value="Parameters:" />
     <property name="MyBatisLogPluginpreparing" value="Preparing:" />
     <property name="MyBatisLogPluginrunning" value="true" />
@@ -84,6 +82,9 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\SmallProfitMall\RearEnd\SmallProfitManagement\src\main\resources\cn\xgtd\dao" />
@@ -91,19 +92,7 @@
       <recent name="D:\SmallProfitMall\RearEnd\SmallProfitManagement\src\main\resources" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.17">
+  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.22">
     <configuration name="test3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="cn.xgtd.test.test3" />
       <module name="SmallProfit" />
@@ -117,7 +106,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tomcat 9.0.17" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.17" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+    <configuration name="Tomcat 9.0.22" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.22" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER" value="false" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
@@ -140,6 +129,9 @@
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="57934" />
       </RunnerSettings>
+      <RunnerSettings RunnerId="JRebel Debug">
+        <option name="DEBUG_PORT" value="5705" />
+      </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
@@ -156,6 +148,36 @@
         </SHUTDOWN>
       </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Executor">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
@@ -192,11 +214,38 @@
         </option>
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.test3" />
+      <item itemvalue="Tomcat Server.Tomcat 9.0.22" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.test3" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <option name="contentProportion" value="0.1318306" />
+          <treeState>
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Running" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+            </expand>
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -457,6 +506,64 @@
     <MESSAGE value="查询所有订单信息" />
     <option name="LAST_COMMIT_MESSAGE" value="查询所有订单信息" />
   </component>
+  <component name="WindowStateProjectService">
+    <state x="449" y="20" key="#Tomcat_9.0.17" timestamp="1592960763522">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="449" y="20" key="#Tomcat_9.0.17/0.0.1536.824@0.0.1536.824" timestamp="1592960763522" />
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592960773540">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1592960773540" />
+    <state width="1270" height="256" key="GridCell.Tab.0.bottom" timestamp="1592963067900">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1270" height="256" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592963067900" />
+    <state width="1270" height="256" key="GridCell.Tab.0.center" timestamp="1592963067900">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1270" height="256" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592963067900" />
+    <state width="1270" height="256" key="GridCell.Tab.0.left" timestamp="1592963067900">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1270" height="256" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592963067900" />
+    <state width="1270" height="256" key="GridCell.Tab.0.right" timestamp="1592963067900">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1270" height="256" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592963067900" />
+    <state width="1270" height="256" key="GridCell.Tab.1.bottom" timestamp="1592963067659">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1270" height="256" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592963067659" />
+    <state width="1270" height="256" key="GridCell.Tab.1.center" timestamp="1592963067659">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1270" height="256" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1592963067659" />
+    <state width="1270" height="256" key="GridCell.Tab.1.left" timestamp="1592963067659">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1270" height="256" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1592963067659" />
+    <state width="1270" height="256" key="GridCell.Tab.1.right" timestamp="1592963067659">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1270" height="256" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1592963067659" />
+    <state width="1270" height="256" key="GridCell.Tab.2.bottom" timestamp="1592963067660">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1270" height="256" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592963067660" />
+    <state width="1270" height="256" key="GridCell.Tab.2.center" timestamp="1592963067660">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1270" height="256" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1592963067660" />
+    <state width="1270" height="256" key="GridCell.Tab.2.left" timestamp="1592963067660">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1270" height="256" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1592963067660" />
+    <state width="1270" height="256" key="GridCell.Tab.2.right" timestamp="1592963067660">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1270" height="256" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1592963067660" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -481,16 +588,54 @@
           <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/controller/OrderController.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="102" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/xgtd/service/impl/OrderServiceImpl.java</url>
           <line>29</line>
           <option name="timeStamp" value="103" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="ideajad">
+    <property name="annotate" value="false" />
+    <property name="annotateFully" value="false" />
+    <property name="braces" value="false" />
+    <property name="clear" value="false" />
+    <property name="confirmNavigationTriggeredDecompile" value="true" />
+    <property name="dead" value="true" />
+    <property name="defaultInitializers" value="false" />
+    <property name="dissassemblerOnly" value="false" />
+    <property name="fieldsFirst" value="true" />
+    <property name="fileExtension" value="java" />
+    <property name="fullyQualifiedNames" value="false" />
+    <property name="indentation" value="4" />
+    <property name="intRadix" value="10" />
+    <property name="lineNumbersAsComments" value="true" />
+    <property name="longRadix" value="10" />
+    <property name="maxStringLength" value="64" />
+    <property name="nocast" value="false" />
+    <property name="noclass" value="false" />
+    <property name="nocode" value="false" />
+    <property name="noconv" value="false" />
+    <property name="noctor" value="false" />
+    <property name="nodos" value="false" />
+    <property name="nofd" value="false" />
+    <property name="noinner" value="false" />
+    <property name="nolvt" value="false" />
+    <property name="nonlb" value="false" />
+    <property name="outputDirectory" value="" />
+    <property name="packFields" value="3" />
+    <property name="packImports" value="7" />
+    <property name="prefixNumericalClasses" value="_cls" />
+    <property name="prefixNumericalFields" value="_fld" />
+    <property name="prefixNumericalLocals" value="_lcl" />
+    <property name="prefixNumericalMethods" value="_mth" />
+    <property name="prefixNumericalParameters" value="_prm" />
+    <property name="prefixUnusedExceptions" value="_ex" />
+    <property name="readonly" value="false" />
+    <property name="safe" value="false" />
+    <property name="sort" value="false" />
+    <property name="spaceAfterKeyword" value="false" />
+    <property name="splitStringsAtNewline" value="false" />
+    <property name="useTabs" value="false" />
   </component>
 </project>

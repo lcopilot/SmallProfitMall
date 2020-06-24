@@ -1,6 +1,8 @@
 import * as indexApi from "../api/page";
 import SparkMD5 from 'spark-md5/spark-md5'
 import XLSX from 'xlsx';
+import moment from "moment";
+import {EXPORT_EXCEL_NAME} from "../config/sysConfig";
 
 const SLICE_QUANTITY = 5;
 
@@ -136,7 +138,7 @@ const Md5 = async (file) => {
  * @param fileName 文件名
  * @param suffix 文件后缀
  */
-export const exportExcel = (headers, data, fileName = new Date().getTime(),
+export const exportExcel = (headers, data, fileName = moment().format(EXPORT_EXCEL_NAME),
     suffix = '.xlsx') => {
   /*
 const initColumn = [{

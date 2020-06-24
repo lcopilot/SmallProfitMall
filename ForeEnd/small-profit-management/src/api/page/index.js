@@ -110,3 +110,10 @@ export const uploadFiles=(data,uploadProgress)=>{
 export const fileMerge=(data)=>{
   return http.requestPostFormUr(apiUrl+`/filesController/compositeFile`,data)
 }
+
+/**
+ * 订单
+ */
+export const getOrderList=(data)=>{
+  return http.requestGetFormUr(apiUrl+`/OrderController/findAllOrder`,data)
+}
