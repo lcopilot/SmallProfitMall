@@ -74,11 +74,11 @@ const OrderDetail = () => {
                 renderItem={item => (
                     <div className="order-detail-product">
                       <Row>
-                        <Col span={4}>
+                        <Col span={6}>
                           <img className="order-detail-product-img"
                                alt={item.productName} src={item.productImage}/>
                         </Col>
-                        <Col span={18}>
+                        <Col span={17}>
                           <Link  href={`https://www.smallprofit.fhxasdsada.xyz/product?productId=${item.productId}`}><Paragraph ellipsis><Text type="secondary">商品名:</Text><Text strong>{item.productName}</Text></Paragraph></Link >
                           <Paragraph ellipsis><Text type="secondary">商品配置:</Text> <Text underline strong>{item.productConfiguration}</Text></Paragraph>
                           <Space size="middle">
@@ -95,7 +95,6 @@ const OrderDetail = () => {
         </Card>
       </>
   )
-
 }
 
 export default OrderDetail

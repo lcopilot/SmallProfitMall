@@ -8,8 +8,8 @@
   <component name="ChangeListManager">
 <<<<<<< Updated upstream
     <list default="true" id="879b72ac-976e-4173-ba43-333a675b7b0e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/order.less" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/order.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/orderDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/order/orderDetail.jsx" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/product/productAttributes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../ForeEnd/small-profit-management/src/pages/product/productAttributes.jsx" afterDir="false" />
 =======
     <list default="true" id="f5b2d03f-bf2b-4795-a9c5-70ed651f908b" name="Default Changelist" comment="修改商品价格为0不可上架">
@@ -30,6 +30,8 @@
       <change beforePath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ProductDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cn/xgtd/dao/ProductDao.xml" afterDir="false" />
 >>>>>>> Stashed changes
+=======
+>>>>>>> origin/master
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,11 +94,15 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     <property name="MyBatisLogPluginindexNum" value="629" />
 =======
     <property name="MyBatisLogPluginindexNum" value="27" />
 >>>>>>> Stashed changes
+=======
+    <property name="MyBatisLogPluginindexNum" value="637" />
+>>>>>>> origin/master
     <property name="MyBatisLogPluginparameters" value="Parameters:" />
     <property name="MyBatisLogPluginpreparing" value="Preparing:" />
     <property name="MyBatisLogPluginrunning" value="true" />
@@ -333,6 +339,7 @@
       <workItem from="1592928931964" duration="4231000" />
 <<<<<<< Updated upstream
       <workItem from="1592960057731" duration="602000" />
+<<<<<<< HEAD
       <workItem from="1592981414252" duration="689000" />
 =======
       <workItem from="1592960057731" duration="976000" />
@@ -348,6 +355,9 @@
       <workItem from="1592989182657" duration="357000" />
       <workItem from="1592989547964" duration="670000" />
 >>>>>>> Stashed changes
+=======
+      <workItem from="1592981414252" duration="2140000" />
+>>>>>>> origin/master
     </task>
     <task id="LOCAL-00001" summary="添加商品信息">
       <created>1592447861744</created>
