@@ -210,6 +210,7 @@ public class ProductServiceImpl implements ProductService {
                 String[] smg = new String[2];
                 smg[0]=arrivalNotices.get(i).userEmail;
                 smg[1]="尊敬的微利会员 ：您关注的商品"+arrivalNotices.get(i).getProductName()+"已经有货了";
+                //消息中间件
                 arrivalNoticeMq.sendShoppingInformation("arrival",smg);
             }
 

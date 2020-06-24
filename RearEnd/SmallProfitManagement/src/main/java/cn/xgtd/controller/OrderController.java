@@ -26,8 +26,8 @@ public class OrderController {
     OrderService orderService;
     /**
      * 查询所有订单
-     * @param currentPage
-     * @param pageSize
+     * @param currentPage 当前页
+     * @param pageSize 每页数量
      * @return
      */
     @RequestMapping(value = "/findAllOrder",method = RequestMethod.GET)

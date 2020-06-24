@@ -79,8 +79,7 @@
         FROM
             userOrder uo
             LEFT JOIN orders o ON uo.orderId = o.orderId
-            LEFT JOIN user u ON uo.userId = u.uid
-            ,
+            LEFT JOIN user u ON uo.userId = u.uid ,
             orderAddress oa
         WHERE
             o.orderId = oa.orderId
