@@ -1,17 +1,13 @@
 import {useHistory, useLocation} from "react-router-dom";
 import {
-  Avatar,
   Card,
   Col,
   Descriptions, List,
   PageHeader,
   Row, Space,
-  Steps,
-  Table, Tooltip,
   Typography
 } from "antd";
 import React from "react";
-import FieldTimeOutlined from "@ant-design/icons/lib/icons/FieldTimeOutlined";
 import moment from "moment";
 import {TIME_FORMAT} from "../../config/sysConfig";
 import './order.less'
