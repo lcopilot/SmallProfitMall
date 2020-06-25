@@ -75,17 +75,32 @@ const OrderDetail = () => {
                     <div className="order-detail-product">
                       <Row>
                         <Col span={6}>
-                          <img className="order-detail-product-img"
-                               alt={item.productName} src={item.productImage}/>
+                          <img className="order-detail-product-img" title={item.productName} src={item.productImage}/>
                         </Col>
                         <Col span={17}>
-                          <Link  href={`https://www.smallprofit.fhxasdsada.xyz/product?productId=${item.productId}`}><Paragraph ellipsis><Text type="secondary">商品名:</Text><Text strong>{item.productName}</Text></Paragraph></Link >
-                          <Paragraph ellipsis><Text type="secondary">商品配置:</Text> <Text underline strong>{item.productConfiguration}</Text></Paragraph>
+                          <Link title={item.productName} href={`https://www.smallprofit.fhxasdsada.xyz/product?productId=${item.productId}`}>
+                            <Paragraph ellipsis>
+                              <Text type="secondary">商品名:</Text>
+                              <Text strong className="order-detail-product-name-link">{item.productName}</Text>
+                            </Paragraph>
+                          </Link >
+                          <Paragraph title={item.productConfiguration} ellipsis>
+                            <Text type="secondary">商品配置:</Text>
+                            <Text underline strong>{item.productConfiguration}</Text>
+                          </Paragraph>
                           <Space size="middle">
-                            <span><Text type="secondary">单价:</Text> <Text mark strong>{`￥ ${item.productPrice.toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g,
-                              ',')}</Text></span>
-                            <span><Text type="secondary">数量:</Text><Text strong> {item.productQuantity}</Text></span>
-                            <span><Text type="secondary">重量:</Text><Text strong> {item.productWeight}</Text></span>
+                            <span>
+                              <Text type="secondary">单价:</Text>
+                              <Text mark strong>{`￥ ${item.productPrice.toFixed(2)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</Text>
+                            </span>
+                            <span>
+                              <Text type="secondary">数量:</Text>
+                              <Text strong> {item.productQuantity}</Text>
+                            </span>
+                            <span>
+                              <Text type="secondary">重量:</Text>
+                              <Text strong> {item.productWeight}</Text>
+                            </span>
                           </Space>
                         </Col>
                       </Row>
