@@ -67,9 +67,6 @@ const EditableCell = ({
   if (editable) {
     childNode = editing ? (
         <Form.Item
-            style={{
-              margin: 0,
-            }}
             name={dataIndex}
             rules={[
               {
@@ -84,9 +81,6 @@ const EditableCell = ({
     ) : (
         <div
             className="editable-cell-value-wrap"
-            style={{
-              paddingRight: 24,
-            }}
             onClick={toggleEdit}
         >
           {children}
@@ -126,6 +120,7 @@ const ProductAttributes = () => {
       dataIndex: 'comboContent'
     }, {
       title: '价格',
+      width:180,
       dataIndex: 'productPrice',
       editable: true,
       render: (price) => {
@@ -135,6 +130,7 @@ const ProductAttributes = () => {
       }
     }, {
       title: '库存',
+      width:180,
       dataIndex: 'productInventory',
       editable: true,
       render: (productInventory) => {
@@ -262,7 +258,7 @@ const ProductAttributes = () => {
             onBack={() => history.push('/products/product')}
             title="商品属性价格库存"
         />
-        <Card title={title}>
+        <Card title={title} className='product-attributes'>
           {isSteps ? (<Row justify="center" gutter={[0, 30]}>
             <Col xs={24} sm={24} md={14} lg={14} xl={14}>
               <Steps className="add-product-steps" current={1} size="small">

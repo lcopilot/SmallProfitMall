@@ -203,12 +203,9 @@ const AddUpProduct = (props) => {
 
   //渲染商品属性列表
   const getProductAttOption = () => {
-    const roleOption = []
-    productAttributesList.map(item => {
-      roleOption.push((<Option key={item.value}
-                               disabled={optionDisabled[item.value]}>{item.title}</Option>));
+    return productAttributesList.map(item => {
+     return (<Option key={item.value} disabled={optionDisabled[item.value]}>{item.title}</Option>);
     })
-    return roleOption
   }
 
   //商品属性列表变化
@@ -229,8 +226,7 @@ const AddUpProduct = (props) => {
     setOptionDisabled(att)
   }
   //动态添加表单项
-  const addFromItem = (add = () => {
-  }) => {
+  const addFromItem = (add = () => {}) => {
     const attList = form.getFieldValue(
         'productAttributes')
     if (attList instanceof Array) {
@@ -347,13 +343,15 @@ const AddUpProduct = (props) => {
     if (!productDetail) {
       return null
     }
+
     const productAttList = [];
+    //*回显商品属性
     Object.keys(productDetail).some((item) => {
+      //*匹配商品属性的值
       productAttributesList.some((att) => {
         if (att.value === item && productDetail[item].length > 0) {
-          const attConList = []
-          productDetail[item].map((attributes) => {
-            attConList.push(attributes.attributeContent)
+          const attConList=productDetail[item].map((attributes) => {
+            return attributes.attributeContent
           })
           const Att = {
             name: item,
@@ -397,6 +395,8 @@ const AddUpProduct = (props) => {
       productPrice: productDetail.productPrice.toString(),
       productWeight: productDetail.weights.toString(),
     })
+    //*调用一次商品属性列表 进行初始化禁用
+    onProductAttChange();
   }
   //上传图片改变
   const onChangeImg = ({fileList: newFileList}) => {

@@ -17,7 +17,7 @@ const {Text,Paragraph,Link } = Typography;
 const OrderDetail = () => {
   const history = useHistory()
   let {orderDetail} = useLocation().state
-  console.log(orderDetail)
+
   const {paymentWay,orderTime,orderId, deliveryTime, paymentTime, orderTotal,orderNote, userName, userId, productContents} = orderDetail
   const {name, phone, areas, detailedAddress, email} = orderDetail.orderAddress
   return (
