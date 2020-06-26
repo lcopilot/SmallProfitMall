@@ -690,15 +690,22 @@ public class ProductServiceImpl implements ProductService {
     public void updateProductContexts(Integer productId, List<ProductContext> productDetails) {
         //商品配置修改
         List<ProductContext> productContexts = productDetails;
-        Integer size = 0;
-        List<ProductContext> productContextList = productDao.findProductContext(productId);
-        size = productContextList.size();
         //已存在的配置
         List<ProductContext> productContextExist = new ArrayList<>();
         //不存在的配置
         List<ProductContext> inexistence = new ArrayList<>();
+
+
+
+        Integer size = 0;
+        //数据库中配置
+        List<ProductContext> productContextList =  productDao.findProductContext(productId);
+
+        size = productContextList.size();
+
         //需要删除的配置
-        List<ProductContext> deleteContext = productContextList;
+        List<ProductContext> deleteContext = new ArrayList<>(productContextList);
+
 
         //是否删除了全部
         Boolean delete = false;
@@ -708,7 +715,7 @@ public class ProductServiceImpl implements ProductService {
                 Boolean flag = true;
                 //是否为新属性
                 Boolean signs = true;
-                for (int j = 0; j < productContextList.size(); j++) {
+                    for (int j = 0; j < productContextList.size(); j++) {
                     //判断是否是新属性
                     String productContextsType = productContexts.get(i).getAttributeType();
                     String productContextListType =String.valueOf(productContextList.get(j).getTitleId()) ;
@@ -720,14 +727,18 @@ public class ProductServiceImpl implements ProductService {
                     if (sign) {
                         signs = false;
                         productContextExist.add(productContextList.get(j));
-                        deleteContext.remove(j);
+                        for (int k = 0; k < deleteContext.size(); k++) {
+                            if (deleteContext.get(k).getAttributeContent().equals(productContextList.get(j).getAttributeContent())){
+                                deleteContext.remove(k);
+                            }
+
+                        }
+
                     }
 
                 }
                 //出现新属性 删除所有配置 组合
                 if (flag) {
-                    //删除组合
-                    productDao.deleteDistinction(null, productId);
                     delete = true;
                 }
                 //无匹配的值
@@ -735,6 +746,10 @@ public class ProductServiceImpl implements ProductService {
                     inexistence.add(productContexts.get(i));
                 }
             }
+        }
+        if (delete){
+            //删除组合
+            productDao.deleteDistinction(null, productId);
         }
 
         //删除无匹配的的配置
