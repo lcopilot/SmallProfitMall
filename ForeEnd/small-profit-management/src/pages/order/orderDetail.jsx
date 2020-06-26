@@ -20,6 +20,19 @@ const OrderDetail = () => {
 
   const {paymentWay,orderTime,orderId, deliveryTime, paymentTime, orderTotal,orderNote, userName, userId, productContents} = orderDetail
   const {name, phone, areas, detailedAddress, email} = orderDetail.orderAddress
+
+  //商品状态
+  const productState=(status)=>{
+      switch (status) {
+        case 1:
+          return '待发货'
+        case 2:
+          return '待收货'
+        case 3:
+          return '已收货'
+      }
+  }
+
   return (
       <>
         <PageHeader
@@ -96,6 +109,10 @@ const OrderDetail = () => {
                             <span>
                               <Text type="secondary">重量:</Text>
                               <Text strong> {item.productWeight}</Text>
+                            </span>
+                            <span>
+                              <Text type="secondary">状态:</Text>
+                              <Text underline strong> {productState(item.productState)}</Text>
                             </span>
                           </Space>
                         </Col>
