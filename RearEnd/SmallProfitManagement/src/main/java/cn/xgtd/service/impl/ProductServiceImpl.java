@@ -261,6 +261,9 @@ public class ProductServiceImpl implements ProductService {
         List<String> images = new ArrayList<>();
         for (int i = 0; i < imageList.size(); i++) {
             String image = imageList.get(i);
+            image = image.trim();
+            image = image.replaceAll("\n", "");
+            image = image.replaceAll("\r", "");
             String str = null;
             try {
                 str = image.substring(0, image.indexOf("/"));
