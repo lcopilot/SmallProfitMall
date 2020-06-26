@@ -188,19 +188,20 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public Integer updateDetails(List<ProductDistinction> productDistinctions ) {
-        Integer productId =0;
-        if (productDistinctions!=null && productDistinctions.size()>0){
-            productId = productDistinctions.get(0).getProductId();
-        }
 
+        Integer result = 0 ;
         for (int i = 0; i <productDistinctions.size() ; i++) {
             Double productPrice = productDistinctions.get(i).getProductPrice();
             if (productPrice == 0.00){
-                productDao.updateShelves(productDistinctions.get(i).getProductId());
-                break;
+                return result;
             }
         }
-        Integer result = productDao.updateDetails(productDistinctions);
+        Integer productId =0;
+        if (productDistinctions!=null && productDistinctions.size()>0){
+            productDao.updateShelves(productDistinctions.get(0).getProductId() , 1);
+        }
+
+        result = productDao.updateDetails(productDistinctions);
 
         //查询不同配置库存
         List<Integer> productDistinction = productDao.findDistinctionInventory(productId);
@@ -750,6 +751,7 @@ public class ProductServiceImpl implements ProductService {
         if (delete){
             //删除组合
             productDao.deleteDistinction(null, productId);
+
         }
 
         //删除无匹配的的配置
@@ -762,7 +764,12 @@ public class ProductServiceImpl implements ProductService {
             }
         }
 
+        //有新增的配置
         if (inexistence != null && inexistence.size() > 0) {
+            //不可上架商品
+            productDao.updateShelves(productId , 0);
+            //商品下架
+            updateProductState(productId,false);
             //添加商品配置
             for (int i = 0; i < inexistence.size(); i++) {
                 inexistence.get(i).setProductId(productId);

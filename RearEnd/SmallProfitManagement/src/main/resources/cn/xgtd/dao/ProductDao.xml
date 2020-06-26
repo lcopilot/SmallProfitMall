@@ -389,7 +389,7 @@
 
       <!--修改商品为不可上架-->
       <update id="updateShelves">
-         UPDATE ProductBasis SET shelves = 0  WHERE ProductId = #{productId};
+         UPDATE ProductBasis SET shelves = #{shelves}  WHERE ProductId = #{productId};
        </update>
 
 

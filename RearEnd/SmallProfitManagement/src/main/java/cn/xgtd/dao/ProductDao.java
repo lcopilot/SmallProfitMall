@@ -180,11 +180,12 @@ public interface ProductDao {
 
 
     /**
-     * 修改商品为不可上架
-     * @param productId
+     * 修改商品上下架
+     * @param productId 商品id
+     * @param shelves 上架下架
      * @return
      */
-    public Integer updateShelves(Integer productId);
+    public Integer updateShelves(@Param("productId") Integer productId,@Param("shelves")Integer shelves);
 
     /**
      * 查询配置库存
