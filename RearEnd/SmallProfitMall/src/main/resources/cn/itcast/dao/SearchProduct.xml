@@ -69,4 +69,50 @@
             ProductBasis WHERE ProductName LIKE concat ( '%',  #{productName}, '%' ) ) AS a )
         </if>
     </select>
+
+    <!--新增商品关键词-->
+    <insert id="addProductKeyWords">
+        INSERT INTO product_key_words (key_words,user_id,search_date) VALUES (#{keyWords},#{userId},#{searchDate} )
+    </insert>
+
+    <!--查询关键词是否存在-->
+    <select id="findKeyWords" resultType="java.lang.Integer">
+        SELECT  key_words_id FROM  key_words WHERE key_words_name = #{keyWordsMame}
+    </select>
+     <!--新增商品关键词-->
+    <insert id="addKeyWords">
+        INSERT INTO key_words (key_words_name) VALUES (#{keyWordsMame})
+    </insert>
+
+    <!--新增关键词搜索次数-->
+    <update id="updateKeyWords">
+        UPDATE key_words SET frequency = frequency+1 WHERE key_words_id = #{keyWordsId}
+    </update>
+
+    <!--查询三小时内是否查询过-->
+    <select id="findProductKeyWords" resultType="java.lang.Integer">
+            SELECT
+            count(*)
+        FROM
+            product_key_words
+        WHERE
+            user_id = #{userId}
+        AND
+            key_words = #{keyWords}
+        AND
+          #{date}   &lt;  search_date
+    </select>
+
+  <!--查询一天内搜索次数-->
+    <select id="findTodayProductKeyWords" resultType="java.lang.Integer">
+     SELECT
+        count(*)
+    FROM
+        product_key_words
+    WHERE
+        user_id = #{userId} AND key_words = #{keyWords}  AND to_days(search_date) = to_days(now())
+    </select>
+
+
+
 </mapper>

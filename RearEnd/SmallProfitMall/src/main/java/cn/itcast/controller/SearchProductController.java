@@ -46,7 +46,7 @@ public class SearchProductController {
             pageSize=8;
         }
         Pagination pagination = new Pagination();
-        Map primaryProductMap = searchProductService.findPrimaryProduct(PrimaryContent,currentPage,pageSize);
+        Map primaryProductMap = searchProductService.findPrimaryProduct(PrimaryContent," http://img.isdfmk.xyz/f92b9f8f372e445fb6564cdd57aa3c3e?t=1590307098",currentPage,pageSize);
 
         //查询的商品信息
         List<SearchProduct> primaryProduct = (List<SearchProduct>) primaryProductMap.get("searchProducts");

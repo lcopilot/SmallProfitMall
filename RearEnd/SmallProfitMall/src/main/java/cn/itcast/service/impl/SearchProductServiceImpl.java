@@ -6,10 +6,7 @@ import cn.itcast.service.SearchProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 搜索商品业务层
@@ -30,7 +27,28 @@ public class SearchProductServiceImpl implements SearchProductService {
      * @return
      */
     @Override
-    public Map findPrimaryProduct(String productName,Integer currentPage, Integer pageSize) {
+    public Map findPrimaryProduct(String productName,String userId,Integer currentPage, Integer pageSize) {
+
+        //新增搜索商品关键词
+        //查询三小时内是否查询过
+        //获取4小时前时间
+        Calendar  dar=Calendar.getInstance();
+        dar.add(java.util.Calendar.HOUR_OF_DAY, -4);
+        Date date  = dar.getTime();
+        Integer result1 = searchProductDao.findProductKeyWords(date,userId,productName);
+        Integer result2 = searchProductDao.findTodayProductKeyWords(userId,productName);
+        if (result1<1 && result2<4){
+            //查询关键词是否存在
+            Integer keyWords_Id = searchProductDao.findKeyWords(productName);
+            if (keyWords_Id!=null){
+                //存在关键词表+1
+                searchProductDao.updateKeyWords(keyWords_Id);
+            }else {
+                //不存在 新增关键词
+                searchProductDao.addKeyWords(productName);
+            }
+            searchProductDao.addProductKeyWords(productName,userId,new Date());
+        }
         Map result = new HashMap();
         Integer gradePrimary = 0;
         //开始页
@@ -51,6 +69,8 @@ public class SearchProductServiceImpl implements SearchProductService {
         }
         result.put("searchProducts",searchProducts);
         result.put("gradePrimary",gradePrimary);
+
+
         return result;
     }
 

@@ -19,7 +19,7 @@ public interface SearchProductService {
      * @param pageSize 每页查询数量
      * @return
      */
-    public Map findPrimaryProduct(String productName, Integer currentPage, Integer pageSize);
+    public Map findPrimaryProduct(String productName, String userId ,Integer currentPage, Integer pageSize);
 
     /**
      * 查询查询出来的商品数量以及计算出多少页数

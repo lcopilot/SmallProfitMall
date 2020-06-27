@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.ws.rs.Path;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,4 +42,46 @@ public interface SearchProductDao {
      * @return
      */
     public Integer findPrimaryProductQuantity(@Param("productName") String productName,@Param("gradePrimary") Integer gradePrimary);
+
+    /**
+     * 新增商品关键词
+     * @param keyWords 关键词
+     * @param userId 用户id
+     * @return
+     */
+    public Integer addProductKeyWords(@Param("keyWords") String keyWords ,@Param("userId")  String userId,@Param("searchDate") Date searchDate);
+
+    /**
+     * 新增关键字
+     * @param keyWords 关键字
+     * @return
+     */
+    public Integer addKeyWords(String keyWords);
+
+    /**
+     * 查询关键词是否存在
+     * @param keyWords 关键词
+     * @return
+     */
+    public Integer findKeyWords(String keyWords);
+    /**
+     * 新增搜索次数
+     * @param keyWordsId 关键词id
+     * @return
+     */
+    public Integer updateKeyWords(Integer keyWordsId);
+    /**
+     * 查询用户三小时是否搜索过
+     * @param date 当前时间
+     * @param userId 用户id
+     * @return 是否访问
+     */
+    public Integer findProductKeyWords(@Param("date") Date date,@Param("userId") String userId,@Param("keyWords") String keyWords);
+
+    /**
+     * 查询用户当天是否搜索过
+     * @param userId 用户id
+     * @return
+     */
+    public Integer findTodayProductKeyWords(@Param("userId") String userId ,@Param("keyWords") String keyWords);
 }
