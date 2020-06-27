@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.CommentDao">
 
-    <!--评论映射-->
+    <!--评论映射 -->
     <resultMap id="commentMap" type="cn.itcast.domain.ProductDatails.ProductComment">
         <id property="commentId" column="commentId"></id>
         <result property="userId" column="userId"></result>
