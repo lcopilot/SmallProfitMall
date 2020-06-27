@@ -127,7 +127,7 @@ const Product = (props) => {
         return (
             <>
               <Dropdown overlay={menu} placement="bottomLeft">
-                <Button>编辑<DownOutlined/></Button>
+                <Button>操作<DownOutlined/></Button>
               </Dropdown>
             </>
         )
@@ -169,7 +169,7 @@ const Product = (props) => {
   const putProduct = (product, index) => {
     const {productId, shelves, productState} = product
     if (!productState && !shelves) {
-      return message.warn("请先设置商品属性价格,不能为0!")
+      return message.warn("请先设置商品配置价格,商品配置价格不能为 0 哦~")
     }
     const data={
       productId,

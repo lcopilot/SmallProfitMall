@@ -64,21 +64,21 @@
                     <div
                         style="padding-top: 30%;height:78px;background-color:white;border-left: 1px solid #dcdfe6">
                       <el-button type="text" size="mini"
-                                 v-if="order.orderState==2 && product.productState==1">提醒发货
+                                 v-if="order.orderState==2 && product.productState===1">提醒发货
                       </el-button>
                       <el-button type="text" size="mini"
-                                 v-if="order.orderState==2 && product.productState==2"
+                                 v-if="order.orderState==2 && product.productState===2"
                                  @click="confirmReceipt(product.purchaseId,order.orderId)">确认收货
                       </el-button>
                       <el-button type="text" size="mini"
-                                 v-if="order.orderState==3 && product.productState==3">申请售后
+                                 v-if="order.orderState==3 && product.productState===3">申请售后
                       </el-button>
                       <el-button type="text" size="mini"
-                                 v-if="order.orderState==3 && product.productState==3"
+                                 v-if="order.orderState==3 && product.productState===3"
                                  @click="comment(product.purchaseId,product.productId)">评价晒单
                       </el-button>
                       <el-button type="text" size="mini"
-                                 v-if="order.orderState==3 && product.productState==5"
+                                 v-if="order.orderState==3 && product.productState===5"
                                  @click="comment(product.purchaseId,0,true)">追评
                       </el-button>
                     </div>
