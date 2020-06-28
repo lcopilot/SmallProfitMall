@@ -1,5 +1,5 @@
-import {Radio , Card, Col, Row, Table} from "antd";
-import React, {useState} from "react";
+import {Radio, Card, Col, Row, Table, Skeleton} from "antd";
+import React, {useEffect, useState} from "react";
 import './salesChart.less'
 import {
   CaretDownOutlined,
@@ -18,97 +18,75 @@ import {
 } from "bizcharts";
 import DataSet from "@antv/data-set";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
+import *as indexAPi from '../../api/page/index'
+import storageUtils from "../../utils/storageUtils";
+import {PAGINATION} from "../../config/sysConfig";
+
 const SalesChart = () => {
 
+  const [searchList, setSearchList] = useState([])
+  const [searchPagination, setSearchPagination] = useState({
+    currentPage: PAGINATION.defaultCurrent,
+    pageSize: 4,
+  })
+  const [skeletonLoad, setSkeletonLoad] = useState({
+    searchRankingLoad:true,
+  })
 
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      chinese: 98,
-      math: 60,
-      english: 70,
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      chinese: 98,
-      math: 66,
-      english: 89,
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      chinese: 98,
-      math: 90,
-      english: 70,
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      chinese: 88,
-      math: 99,
-      english: 89,
-    },
-  ];
 
   const columns = [
     {
       title: '排名',
-      dataIndex: 'name',
-      width:80,
+      dataIndex: 'ranking',
+      width: 80,
     },
     {
       title: '搜索关键词',
-      dataIndex: 'chinese',
+      dataIndex: 'keyWordsName',
     },
     {
       title: '用户数',
-      dataIndex: 'math',
-      sorter: {
-        compare: (a, b) => a.math - b.math,
-        multiple: 2,
-      },
+      dataIndex: 'userFrequency',
+      sorter: (a, b) => a.userFrequency - b.userFrequency
     },
     {
       title: '周涨幅',
-      dataIndex: 'english',
-      sorter: {
-        compare: (a, b) => a.english - b.english,
-        multiple: 1,
-      },
+      dataIndex: 'weekRise',
+      sorter: (a, b) => a.weekRise - b.weekRise,
+      render: (weekRise) => `${weekRise}%`,
     },
   ];
+
   function onChange(e) {
     console.log(`radio checked:${e.target.value}`);
   }
 
-  const { DataView } = DataSet;
+  const {DataView} = DataSet;
   const data1 = [
     {
       item: "事例一",
       count: 40,
-      sun:50,
+      sun: 50,
     },
     {
       item: "事例二",
       count: 21,
-      sun:50,
+      sun: 50,
     },
     {
       item: "事例三",
       count: 17,
-      sun:50,
+      sun: 50,
     },
     {
       item: "事例四",
       count: 13,
-      sun:50,
+      sun: 50,
     },
     {
       item: "事例五",
       count: 9,
-      sun:50,
+      sun: 50,
     }
   ];
   const dv = new DataView();
@@ -231,7 +209,7 @@ const SalesChart = () => {
   const scale = {
     value: {
       alias: "The Share Price in Dollars",
-      formatter: function(val) {
+      formatter: function (val) {
         return "$" + val;
       }
     },
@@ -239,7 +217,36 @@ const SalesChart = () => {
       range: [0, 1]
     }
   };
-  const proportionRa=(<Radio.Group onChange={onChange} defaultValue="a">
+
+  const getSearchRanking = (currentPage, pageSize) => {
+    let load=JSON.parse(JSON.stringify(skeletonLoad))
+    load.searchRankingLoad=true
+    setSkeletonLoad(load)
+    setSearchPagination({
+      currentPage: currentPage ? currentPage : PAGINATION.defaultCurrent,
+      pageSize: pageSize ? pageSize : searchPagination.pageSize,
+    })
+    const params={
+      currentPage: currentPage ? currentPage : PAGINATION.defaultCurrent,
+      pageSize: pageSize ? pageSize : searchPagination.pageSize,
+    }
+    indexAPi.getSearchRanking(params).then(res => {
+      if (res.success){
+        setSearchList(res.pagination)
+        let load=JSON.parse(JSON.stringify(skeletonLoad))
+        load.searchRankingLoad=false
+        setSkeletonLoad(load)
+      }
+    })
+  }
+
+  useEffect(() => {
+    getSearchRanking()
+    return () => {
+    }
+  }, [])
+
+  const proportionRa = (<Radio.Group onChange={onChange} defaultValue="a">
     <Radio.Button value="a">全部渠道</Radio.Button>
     <Radio.Button value="b">Shanghai</Radio.Button>
   </Radio.Group>)
@@ -248,59 +255,63 @@ const SalesChart = () => {
       <div className="sales-chart">
         <Row gutter={20}>
           <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-            <Card title="线上热门搜索" className="sales-chart-search" extra={<EllipsisOutlined />}>
-              <Row gutter={[68,0]}>
-                <Col xs={24} sm={12} md={12} lg={12} xl={12} className="sales-chart-search-user">
-                    <div>
-                        <div className="sales-chart-search-user-title">
+            <Card title="线上热门搜索" className="sales-chart-search"
+                  extra={<EllipsisOutlined/>}>
+              <Row gutter={[68, 0]}>
+                <Col xs={24} sm={12} md={12} lg={12} xl={12}
+                     className="sales-chart-search-user">
+                  <div>
+                    <div className="sales-chart-search-user-title">
                           <span>
                             搜索用户数
                           </span>
-                          <InfoCircleOutlined />
-                        </div>
-                        <div className="sales-chart-search-user-count">
+                      <InfoCircleOutlined/>
+                    </div>
+                    <div className="sales-chart-search-user-count">
                           <span>
                             1234
                           </span>
-                          <span>
+                      <span>
                              12
                           </span>
-                          {React.createElement(
-                              true ? CaretUpOutlined : CaretDownOutlined)}
-                        </div>
+                      {React.createElement(
+                          true ? CaretUpOutlined : CaretDownOutlined)}
                     </div>
-                    <Chart
-                        data={dv2}
-                        padding={"auto"}
-                        scale={scale}
-                        height={70}  forceFit={true}
-                    >
+                  </div>
+                  <Chart
+                      data={dv2}
+                      padding={"auto"}
+                      scale={scale}
+                      height={70} forceFit={true}
+                  >
 
-                      <Tooltip showTitle={false}
-                               itemTpl='<li data-index={index}>
+                    <Tooltip showTitle={false}
+                             itemTpl='<li data-index={index}>
                   <span style="background-color:{color};width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px;"></span>
                   <span style="padding-right: 1rem;">{title}</span>{value}</li>'
-                               crosshairs={{
-                                 type: 'rect' || 'x' || 'y' || 'cross'
-                               }} />
+                             crosshairs={{
+                               type: 'rect' || 'x' || 'y' || 'cross'
+                             }}/>
 
-                      <Geom type="area" position="year*value" color="type" shape="smooth"/>
-                      <Geom
-                          type="line"
-                          position="year*value"
-                          color="type"
-                          shape="smooth"
-                          size={2}
-                      />
-                    </Chart>
+                    <Geom type="area" position="year*value" color="type"
+                          shape="smooth"/>
+                    <Geom
+                        type="line"
+                        position="year*value"
+                        color="type"
+                        shape="smooth"
+                        size={2}
+                    />
+                  </Chart>
                 </Col>
-                <Col xs={24} sm={12} md={12} lg={12} xl={12} className="sales-chart-search-user">
+                <Col xs={24} sm={12} md={12} lg={12} xl={12}
+                     className="sales-chart-search-user">
                   <div>
                     <div className="sales-chart-search-user-title">
                           <span>
                             人均搜索次数
                           </span>
-                      <InfoCircleOutlined />
+                      <InfoCircleOutlined/>
                     </div>
                     <div className="sales-chart-search-user-count">
                           <span>
@@ -317,7 +328,7 @@ const SalesChart = () => {
                       data={dv2}
                       padding={"auto"}
                       scale={scale}
-                      height={70}  forceFit={true}
+                      height={70} forceFit={true}
                   >
 
                     <Tooltip showTitle={false}
@@ -326,9 +337,10 @@ const SalesChart = () => {
                   <span style="padding-right: 1rem;">{title}</span>{value}</li>'
                              crosshairs={{
                                type: 'rect' || 'x' || 'y' || 'cross'
-                             }} />
+                             }}/>
 
-                    <Geom type="area" position="year*value" color="type" shape="smooth"/>
+                    <Geom type="area" position="year*value" color="type"
+                          shape="smooth"/>
                     <Geom
                         type="line"
                         position="year*value"
@@ -340,12 +352,25 @@ const SalesChart = () => {
                 </Col>
               </Row>
               <div>
-                <Table columns={columns} dataSource={data}  size="middle" />
+                <Skeleton active loading={skeletonLoad.searchRankingLoad}>
+                <Table  columns={columns}  rowKey={(item) => item.ranking} dataSource={searchList.list} pagination={{
+                  onShowSizeChange: (page, pageSize) => {
+                    getSearchRanking(page, pageSize)
+                  },
+                  onChange: (current, size) => {
+                    getSearchRanking(current, size)
+                  },
+                  current: searchPagination.currentPage,
+                  pageSize: searchPagination.pageSize,
+                  total: searchList.totalCount,
+                  ...PAGINATION
+                }} size="middle"/></Skeleton>
               </div>
             </Card>
           </Col>
           <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-            <Card title='销售额类别占比' className="sales-chart-proportion" extra={proportionRa}>
+            <Card title='销售额类别占比' className="sales-chart-proportion"
+                  extra={proportionRa}>
               <div>
                 <Chart
                     data={dv}
@@ -353,8 +378,8 @@ const SalesChart = () => {
                     height={500} forceFit={true}
                     padding={"auto"}
                 >
-                  <Coord  type={"theta"} radius={0.75} innerRadius={0.68} />
-                  <Axis name="percent" />
+                  <Coord type={"theta"} radius={0.75} innerRadius={0.68}/>
+                  <Axis name="percent"/>
                   <Legend
                       itemTpl={'<li class="g2-legend-list-item item-{index} {checked}" data-color="{originColor}" data-value="{originValue}" style="cursor: pointer;font-size: 14px;">'
                       + '<i class="g2-legend-marker" style="width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:10px;background-color: {color};"></i>'
@@ -367,13 +392,13 @@ const SalesChart = () => {
                       itemTpl="<li><span style=&quot;background-color:{color};&quot; class=&quot;g2-tooltip-marker&quot;></span>{name}: {value}</li>"
                   />
                   <Guide>
-                  <Guide.Text
-                      top
-                      position={['50%', '50%']}
-                      content='总销量200'
-                      style={{ textAlign: 'center', fontSize: 24 }}
-                  />
-                </Guide>
+                    <Guide.Text
+                        top
+                        position={['50%', '50%']}
+                        content='总销量200'
+                        style={{textAlign: 'center', fontSize: 24}}
+                    />
+                  </Guide>
                   <Geom
                       type="intervalStack"
                       position="percent"

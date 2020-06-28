@@ -4,12 +4,21 @@ import {
   CaretUpOutlined,
   CaretDownOutlined,
 } from "@ant-design/icons";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './statistics.less'
 import DataSet from "@antv/data-set";
 import {Tooltip as BTooltip, Chart, Geom, Legend, Axis} from "bizcharts";
+import *as indexApi from '../../api/page/index'
 
 const Statistics = () => {
+
+  const [totalSale,setTotalSale]=useState({})
+  const [skeletonLoad, setSkeletonLoad] = useState({
+    saleLoad:true,
+    viewsLoad:true,
+    paymentAmountLoad:true,
+    totalUser:true,
+  })
   const data = [
     {
       year: "1986",
@@ -101,7 +110,6 @@ const Statistics = () => {
     {
       year: "2005",
       ACME: 184,
-
     }
   ];
   const viewsFig = new DataSet.View().source(data);
@@ -227,11 +235,25 @@ const Statistics = () => {
     }
   };
 
+  const getTotalSale=()=>{
+    indexApi.getTotalSale().then(res=>{
+      if (res.success){
+        setTotalSale(res.results.data)
+        let load=JSON.parse(JSON.stringify(skeletonLoad))
+        load.saleLoad=false
+        setSkeletonLoad(load)
+      }
+    })
+  }
+  useEffect(()=>{
+    getTotalSale();
+    return ()=>{}
+  },[])
+
   return (
       <Row gutter={20}>
         <Col xs={24} sm={24} md={12} lg={12} xl={6}>
-          <Card className="home-yesterday">
-            <Skeleton active loading={false}>
+          <Card className="home-yesterday" loading={skeletonLoad.saleLoad}>
               <div className="home-yesterday-title-span">
                 <span>总销售额</span>
                 <span className="hint">
@@ -240,27 +262,25 @@ const Statistics = () => {
                 </Tooltip>
               </span>
               </div>
-              <Statistic value={112893} prefix="￥"/>
+              <Statistic value={totalSale.totalSales} prefix="￥"/>
               <div className="home-yesterday-graphics">
                 <Row>
                   <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                    周同比 12% {React.createElement(
-                      true ? CaretUpOutlined : CaretDownOutlined)}</Col>
+                    周同比 {totalSale.weekYoY}% {React.createElement(
+                      totalSale.weekYoYSign ? CaretUpOutlined : CaretDownOutlined)}</Col>
                   <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                    日同比 12% {React.createElement(
-                      false ? CaretUpOutlined : CaretDownOutlined)}</Col>
+                    日同比 {totalSale.dayYoY}% {React.createElement(
+                      totalSale.dayYoYSign ? CaretUpOutlined : CaretDownOutlined)}</Col>
                 </Row>
               </div>
               <Divider/>
               <div>
-                日销售额 ￥<span>12,423</span>
+                日销售额 ￥<span>{totalSale.todaySales}</span>
               </div>
-            </Skeleton>
           </Card>
         </Col>
         <Col xs={24} sm={24} md={12} lg={12} xl={6}>
           <Card className="home-yesterday">
-            <Skeleton active loading={false}>
               <div className="home-yesterday-title-span">
                 <span>30天访问量</span>
                 <span className="hint">
@@ -294,7 +314,6 @@ const Statistics = () => {
               <div>
                 日访问量 <span>12,423</span>
               </div>
-            </Skeleton>
           </Card>
         </Col>
         <Col xs={24} sm={24} md={12} lg={12} xl={6}>

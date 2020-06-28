@@ -117,3 +117,15 @@ export const fileMerge=(data)=>{
 export const getOrderList=(data)=>{
   return http.requestGetFormUr(apiUrl+`/OrderController/findAllOrder`,data)
 }
+
+/**
+ * 首页部分
+ */
+//获取搜索排行
+export const getSearchRanking=(params)=>{
+  return http.requestGetFormUr(apiUrl+'/KeyWordController/findKeyWord',params)
+}
+//获取总销售额
+export const getTotalSale=()=>{
+  return http.requestGet(apiUrl+'/SalesController/findSales')
+}

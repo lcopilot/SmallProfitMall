@@ -6,7 +6,7 @@ export const EXPORT_EXCEL_NAME='YYYYMMDD-HH-mm-ss'
 export const PAGINATION={
   defaultCurrent:1,
   defaultPageSize:6,
-  pageSizeOptions:['6', '10', '15', '30'],
+  pageSizeOptions:['4','6', '10', '15', '30'],
   showTotal:(total)=>{
     return `共 ${total} 条 `
   },
