@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.xgtd.dao.KeyWordDao">
+    <!--查询本周搜查次数-->
+    <select id="findWeekFrequency" resultType="java.lang.Integer">
+        SELECT
+            count(*)
+        FROM
+            product_key_words
+        WHERE
+            DATE_SUB( CURDATE(), INTERVAL 7 DAY ) <![CDATA[<= ]]> date( search_date )
+            AND key_words = #{keyword}
+    </select>
+
+    <!--查询上周搜索次数-->
+    <select id="findLastWeekFrequency" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            product_key_words
+        WHERE
+            YEARWEEK(
+                date_format( search_date, '%Y-%m-%d' )) = YEARWEEK(
+            now())- 2
+         AND  key_words = #{keyword}
+    </select>
+
+    <!--查询关键词排行-->
+    <select id="findWeekRanking" resultType="cn.xgtd.domain.homePage.KeyWord">
+         SELECT
+        key_words_name,
+        frequency AS userFrequency
+        FROM
+            key_words
+        ORDER BY
+            frequency
+        DESC
+        LIMIT 0,#{quantity}
+    </select>
+</mapper>

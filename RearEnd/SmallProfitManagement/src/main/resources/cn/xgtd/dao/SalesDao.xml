@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.xgtd.dao.SalesDao">
+
+    <!--查询总销售额-->
+    <select id="findTotalSales" resultType="java.lang.Double">
+    SELECT TRUNCATE
+        ( SUM(orderTotal ), 2 )
+    FROM
+        userOrder
+     WHERE  orderState = 2
+    </select>
+
+    <!--查询本周销售额-->
+    <select id="findWeekSales" resultType="java.lang.Double">
+        SELECT TRUNCATE
+            ( SUM(orderTotal ), 2 )
+        FROM
+            userOrder
+        WHERE
+            DATE_SUB( CURDATE(), INTERVAL 7 DAY ) <![CDATA[<= ]]> date( paymentTime )
+
+    </select>
+
+     <!--查询上周销售额-->
+    <select id="findLastWeekSales" resultType="java.lang.Double">
+        SELECT TRUNCATE
+            ( SUM(orderTotal ), 2 )
+        FROM
+            userOrder
+        WHERE
+            YEARWEEK(
+                date_format( paymentTime , '%Y-%m-%d' )) = YEARWEEK(
+            now())- 2
+    </select>
+
+    <!--查询指定天销售额-->
+    <select id="findTodaySales" resultType="java.lang.Double">
+        SELECT TRUNCATE ( SUM(orderTotal ), 2 )  FROM userOrder WHERE DATEDIFF(now(),paymentTime) = #{date}
+    </select>
+</mapper>
