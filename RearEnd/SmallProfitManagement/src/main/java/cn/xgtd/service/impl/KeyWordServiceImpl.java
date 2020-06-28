@@ -44,12 +44,8 @@ public class KeyWordServiceImpl implements KeyWordService {
                 if (quantityWeek!=0 && quantityLastWeek!=0 ){
                     DecimalFormat df=new DecimalFormat("0.00");
                     Double weekRise = new Double(df.format((float)quantityWeek/quantityLastWeek));
-                    if (quantityWeek<quantityLastWeek){
-                        keyWordList.get(i).setWeekRise(-weekRise*100);
-                    }else {
-                        keyWordList.get(i).setWeekRise(weekRise*100);
-                    }
-
+                    weekRise =new Double(df.format((float)(weekRise-1)*100));
+                    keyWordList.get(i).setWeekRise(weekRise);
                 }
                 if (quantityWeek==0 && quantityLastWeek==0){
                     keyWordList.get(i).setWeekRise(0.00);
