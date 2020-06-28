@@ -6,6 +6,8 @@ package cn.xgtd.domain.homePage;
  * @date 2020/6/28
  */
 public class KeyWord {
+    /**排名**/
+    private  Integer ranking;
     /**关键词**/
     private  String keyWordsName;
     /**用户数量**/
@@ -35,5 +37,13 @@ public class KeyWord {
 
     public void setWeekRise(Double weekRise) {
         this.weekRise = weekRise;
+    }
+
+    public Integer getRanking() {
+        return ranking;
+    }
+
+    public void setRanking(Integer ranking) {
+        this.ranking = ranking;
     }
 }

@@ -38,6 +38,11 @@
         ORDER BY
             frequency
         DESC
-        LIMIT 0,#{quantity}
+        LIMIT #{start},#{pageSize}
+    </select>
+
+    <!--查询关键词数量-->
+    <select id="findKeyWordQuantity" resultType="java.lang.Integer">
+         SELECT count(*) FROM key_words
     </select>
 </mapper>

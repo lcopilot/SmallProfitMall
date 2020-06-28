@@ -27,10 +27,14 @@ public class KeyWordServiceImpl implements KeyWordService {
      * @return
      */
     @Override
-    public List<KeyWord> findKeyWord(Integer quantity) {
-        List<KeyWord> keyWordList = keyWordDao.findWeekRanking(quantity);
+    public List<KeyWord> findKeyWord(Integer currentPage, Integer pageSize) {
+
+        Integer start = (currentPage - 1) * pageSize;
+        List<KeyWord> keyWordList = keyWordDao.findWeekRanking(start,pageSize);
         if (keyWordList != null) {
             for (int i = 0; i < keyWordList.size(); i++) {
+
+                keyWordList.get(i).setRanking(start+1+i);
                 //关键词
                 String KeyWordsName = keyWordList.get(i).getKeyWordsName();
                 //查询关键词本周搜索次数
@@ -59,6 +63,21 @@ public class KeyWordServiceImpl implements KeyWordService {
             }
         }
         return keyWordList;
+    }
+
+    /**
+     * 查询
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public Integer[] fendTotalPage(Integer pageSize) {
+        Integer[] TotalPage = new Integer[2];
+        Integer quantity = keyWordDao.findKeyWordQuantity();
+        int totalPage = (quantity % pageSize) == 0 ? quantity / pageSize : (quantity / pageSize) + 1;
+        TotalPage[0] = quantity;
+        TotalPage[1] = totalPage;
+        return TotalPage;
     }
 
 
