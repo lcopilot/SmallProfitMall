@@ -166,7 +166,8 @@
         const params={
           PrimaryContent:this.searchContent,
           currentPage:this.searchParams.currentPage,
-          pageSize:this.searchParams.pageSize
+          pageSize:this.searchParams.pageSize,
+          userId:sessionStorage.getItem("uId")?sessionStorage.getItem("uId"):null
         };
         homeApi.search(params).then(res=>{
           if (res.success){
@@ -187,8 +188,6 @@
       }
       if (!this.searchContent) {
         this.getProductsFeatured();
-      }else {
-
       }
     }
   }
