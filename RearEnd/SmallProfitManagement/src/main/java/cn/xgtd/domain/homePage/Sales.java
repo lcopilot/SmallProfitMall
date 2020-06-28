@@ -14,6 +14,10 @@ public class Sales {
     private Double dayYoY;
     /**日销售额**/
     private Double todaySales;
+    /**周同比上升下降标志位**/
+    private Boolean weekYoYSign;
+    /**日同比上升下降标志位**/
+    private Boolean dayYoYSign;
 
     public Double getTotalSales() {
         return totalSales;
@@ -45,5 +49,21 @@ public class Sales {
 
     public void setTodaySales(Double todaySales) {
         this.todaySales = todaySales;
+    }
+
+    public Boolean getDayYoYSign() {
+        return dayYoYSign;
+    }
+
+    public void setDayYoYSign(Boolean dayYoYSign) {
+        this.dayYoYSign = dayYoYSign;
+    }
+
+    public Boolean getWeekYoYSign() {
+        return weekYoYSign;
+    }
+
+    public void setWeekYoYSign(Boolean weekYoYSign) {
+        this.weekYoYSign = weekYoYSign;
     }
 }

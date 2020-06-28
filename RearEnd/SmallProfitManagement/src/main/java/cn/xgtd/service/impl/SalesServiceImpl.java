@@ -59,10 +59,14 @@ public class SalesServiceImpl implements SalesService {
             Double weekRise = bd1.divide(bd2, 2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
             weekRise = new Double(df.format((float)(weekRise-1)*100));
+            if (weekRise<0){
+                weekRise = weekRise*-1;
+            }
             sales.setWeekYoY(weekRise);
         }
         if (weekSales==null && lastWeekSales==null){
             sales.setWeekYoY(0.00);
+            sales.setDayYoYSign(false);
         }
         if (weekSales==null && lastWeekSales!=null){
             sales.setWeekYoY(-lastWeekSales);
@@ -70,22 +74,31 @@ public class SalesServiceImpl implements SalesService {
         if (weekSales!=null && lastWeekSales==null){
             sales.setWeekYoY(lastWeekSales);
         }
-
+        //昨日销售额
         BigDecimal bd1 = new BigDecimal(Double.toString(yesterdaySales));
+        //前日销售额
         BigDecimal bd2 = null;
         if (BeforeSales!=null){
             bd2 = new BigDecimal(Double.toString(BeforeSales));
         }
-        BigDecimal bd3 = new BigDecimal(Double.toString(100.00));        //设置日同比
+
+        //设置日同比
+        BigDecimal bd3 = new BigDecimal(Double.toString(100.00));
         if (yesterdaySales!=null && BeforeSales!=null ){
-            Double weekRise = bd1.divide(bd2, 2, BigDecimal.ROUND_HALF_UP).doubleValue();
-            BigDecimal bd4 = new BigDecimal(Double.toString(weekRise));
+            Double dayYoY = bd1.divide(bd2, 2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            BigDecimal bd4 = new BigDecimal(Double.toString(dayYoY));
             Double weekRises = bd4.multiply(bd3).doubleValue();
             weekRises = new Double(df.format((float)(weekRises-1)*100));
+
+            if (dayYoY<0){
+                sales.setDayYoYSign(false);
+                weekRises=weekRises*-1;
+            }
             sales.setDayYoY(weekRises);
         }
         if (yesterdaySales==null && BeforeSales==null){
             sales.setDayYoY(0.00);
+            sales.setDayYoYSign(false);
         }
         if (yesterdaySales==null && BeforeSales!=null){
             Double dayYoY = -bd1.multiply(bd3).doubleValue();
@@ -94,6 +107,23 @@ public class SalesServiceImpl implements SalesService {
         if (yesterdaySales!=null && BeforeSales==null){
             Double dayYoY = bd1.multiply(bd3).doubleValue();
             sales.setDayYoY(dayYoY);
+        }
+
+        if (sales.getDayYoY()<0 && sales.getDayYoY()!=0  ){
+            Double dayYoY =  sales.getDayYoY();
+            dayYoY = dayYoY*-1;
+            sales.setDayYoY(dayYoY);
+            sales.setDayYoYSign(false);
+        }else {
+            sales.setDayYoYSign(true);
+        }
+        if (sales.getWeekYoY()<0 && sales.getWeekYoY()!=0  ){
+            Double weekYoY =  sales.getWeekYoY();
+            weekYoY = weekYoY*-1;
+            sales.setWeekYoY(weekYoY);
+            sales.setWeekYoYSign(false);
+        }else {
+            sales.setWeekYoYSign(true);
         }
 
         return sales;
