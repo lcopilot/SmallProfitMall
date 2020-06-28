@@ -23,19 +23,19 @@
 
 
   <!--监听购买成功邮件队列-->
-  <rabbit:listener-container connection-factory="connectionFactory">
-    <rabbit:listener ref="orderPayment" method="orderPayment" queue-names="SHOPPING-NOTIFICATION-QUEUE"/>
-  </rabbit:listener-container>
+<!--  <rabbit:listener-container connection-factory="connectionFactory">-->
+<!--    <rabbit:listener ref="orderPayment" method="orderPayment" queue-names="SHOPPING-NOTIFICATION-QUEUE"/>-->
+<!--  </rabbit:listener-container>-->
 
-  <!--监听购买成功消息推送队列-->
-  <rabbit:listener-container connection-factory="connectionFactory">
-    <rabbit:listener ref="orderPushNews" method="orderPushNews" queue-names="SHOPPING-NEWS-QUEUE"/>
-  </rabbit:listener-container>
+<!--  &lt;!&ndash;监听购买成功消息推送队列&ndash;&gt;-->
+<!--  <rabbit:listener-container connection-factory="connectionFactory">-->
+<!--    <rabbit:listener ref="orderPushNews" method="orderPushNews" queue-names="SHOPPING-NEWS-QUEUE"/>-->
+<!--  </rabbit:listener-container>-->
 
-  <!--监听登录推送消息数量队列-->
-  <rabbit:listener-container connection-factory="connectionFactory">
-    <rabbit:listener ref="pushNewsQuantity" method="pushNewsQuantity" queue-names="SHOPPING-NEWS_QUANTITY-QUEUE"/>
-  </rabbit:listener-container>
+<!--  &lt;!&ndash;监听登录推送消息数量队列&ndash;&gt;-->
+<!--  <rabbit:listener-container connection-factory="connectionFactory">-->
+<!--    <rabbit:listener ref="pushNewsQuantity" method="pushNewsQuantity" queue-names="SHOPPING-NEWS_QUANTITY-QUEUE"/>-->
+<!--  </rabbit:listener-container>-->
 
   <!--监听到货通知队列-->
   <rabbit:listener-container connection-factory="connectionFactory">
