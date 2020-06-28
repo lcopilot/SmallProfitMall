@@ -42,6 +42,7 @@ public class SalesServiceImpl implements SalesService {
         //查询前日销售额
         Double BeforeSales = salesDao.findTodaySales(2);
 
+        DecimalFormat df=new DecimalFormat("0.00");
         //设置总销售额
         sales.setTotalSales(totalSales);
         //设置日销售额
@@ -56,6 +57,8 @@ public class SalesServiceImpl implements SalesService {
             BigDecimal bd1 = new BigDecimal(Double.toString(weekSales));
             BigDecimal bd2 = new BigDecimal(Double.toString(lastWeekSales));
             Double weekRise = bd1.divide(bd2, 2, BigDecimal.ROUND_HALF_UP).doubleValue();
+
+            weekRise = new Double(df.format((float)(weekRise-1)*100));
             sales.setWeekYoY(weekRise);
         }
         if (weekSales==null && lastWeekSales==null){
@@ -78,6 +81,7 @@ public class SalesServiceImpl implements SalesService {
             Double weekRise = bd1.divide(bd2, 2, BigDecimal.ROUND_HALF_UP).doubleValue();
             BigDecimal bd4 = new BigDecimal(Double.toString(weekRise));
             Double weekRises = bd4.multiply(bd3).doubleValue();
+            weekRises = new Double(df.format((float)(weekRises-1)*100));
             sales.setDayYoY(weekRises);
         }
         if (yesterdaySales==null && BeforeSales==null){
