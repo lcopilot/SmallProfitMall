@@ -36,7 +36,7 @@ public class SearchProductController {
      * @return
      */
     @RequestMapping(value = "/fendPrimaryProduct" ,method = RequestMethod.GET)
-    public ResponsePagination fendPrimaryProduct(String  PrimaryContent, Integer currentPage , Integer pageSize){
+    public ResponsePagination fendPrimaryProduct(String  PrimaryContent,String userId, Integer currentPage , Integer pageSize){
         //判断传入开始页是否为空 为空则默认为第一页
         if (currentPage==null){
             currentPage=1;
@@ -46,7 +46,7 @@ public class SearchProductController {
             pageSize=8;
         }
         Pagination pagination = new Pagination();
-        Map primaryProductMap = searchProductService.findPrimaryProduct(PrimaryContent," http://img.isdfmk.xyz/f92b9f8f372e445fb6564cdd57aa3c3e?t=1590307098",currentPage,pageSize);
+        Map primaryProductMap = searchProductService.findPrimaryProduct(PrimaryContent,userId,currentPage,pageSize);
 
         //查询的商品信息
         List<SearchProduct> primaryProduct = (List<SearchProduct>) primaryProductMap.get("searchProducts");
