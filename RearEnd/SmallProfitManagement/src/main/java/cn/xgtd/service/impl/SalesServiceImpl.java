@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 
 import static com.sun.tools.doclint.Entity.divide;
 import static com.sun.tools.doclint.Entity.nu;
+import static jdk.nashorn.internal.objects.NativeMath.round;
 
 /**
  * 销售额业务层
@@ -67,21 +68,28 @@ public class SalesServiceImpl implements SalesService {
             sales.setWeekYoY(lastWeekSales);
         }
 
-        //设置日同比
+        BigDecimal bd1 = new BigDecimal(Double.toString(yesterdaySales));
+        BigDecimal bd2 = null;
+        if (BeforeSales!=null){
+            bd2 = new BigDecimal(Double.toString(BeforeSales));
+        }
+        BigDecimal bd3 = new BigDecimal(Double.toString(100.00));        //设置日同比
         if (yesterdaySales!=null && BeforeSales!=null ){
-            BigDecimal bd1 = new BigDecimal(Double.toString(yesterdaySales));
-            BigDecimal bd2 = new BigDecimal(Double.toString(BeforeSales));
             Double weekRise = bd1.divide(bd2, 2, BigDecimal.ROUND_HALF_UP).doubleValue();
-            sales.setDayYoY(weekRise);
+            BigDecimal bd4 = new BigDecimal(Double.toString(weekRise));
+            Double weekRises = bd4.multiply(bd3).doubleValue();
+            sales.setDayYoY(weekRises);
         }
         if (yesterdaySales==null && BeforeSales==null){
             sales.setDayYoY(0.00);
         }
         if (yesterdaySales==null && BeforeSales!=null){
-            sales.setDayYoY(-yesterdaySales);
+            Double dayYoY = -bd1.multiply(bd3).doubleValue();
+            sales.setDayYoY(dayYoY);
         }
         if (yesterdaySales!=null && BeforeSales==null){
-            sales.setDayYoY(yesterdaySales);
+            Double dayYoY = bd1.multiply(bd3).doubleValue();
+            sales.setDayYoY(dayYoY);
         }
 
         return sales;

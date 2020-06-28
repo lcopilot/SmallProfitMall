@@ -37,8 +37,8 @@ public class KeyWordController {
      * @param pageSize 每页数量
      * @return
      */
-    @RequestMapping(value = "/findKeyWord/{currentPage}/{pageSize}",method = RequestMethod.GET)
-    public ResponsePagination findKeyWord(@PathVariable("currentPage") Integer currentPage, @PathVariable("pageSize") Integer pageSize){
+    @RequestMapping(value = "/findKeyWord",method = RequestMethod.GET)
+    public ResponsePagination findKeyWord( Integer currentPage,  Integer pageSize){
         if (currentPage==null || currentPage==0){
             currentPage=1;
         }
