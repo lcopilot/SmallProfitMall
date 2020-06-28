@@ -239,7 +239,6 @@ const SalesChart = () => {
       }
     })
   }
-
   useEffect(() => {
     getSearchRanking()
     return () => {
