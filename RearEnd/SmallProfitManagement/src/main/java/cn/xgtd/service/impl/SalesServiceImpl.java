@@ -141,15 +141,11 @@ public class SalesServiceImpl implements SalesService {
      */
     @Override
     public List<SalesRanking> findSalesRanking(Integer quantity) {
-        List<String> salesRanking = salesDao.findSalesRanking(quantity);
-        List<SalesRanking> salesRankingList = new ArrayList<>();
+        List<SalesRanking> salesRanking = salesDao.findSalesRanking(quantity);
         for (int i = 0; i <salesRanking.size() ; i++) {
-            SalesRanking salesRanking1 = new SalesRanking();
-            salesRanking1.setRanking(i+1);
-            salesRanking1.setProductName(salesRanking.get(i));
-            salesRankingList.add(salesRanking1);
+            salesRanking.get(i).setRanking(i+1);
         }
-        return salesRankingList;
+        return salesRanking;
     }
 
     /**

@@ -11,6 +11,17 @@ public class SalesRanking implements Serializable {
     private  Integer ranking;
     /**商品名称**/
     private String productName;
+    /**商品id**/
+    private Integer productId;
+
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
 
     public Integer getRanking() {
         return ranking;

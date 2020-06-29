@@ -82,13 +82,18 @@ public class PageViewServiceImpl implements PageViewService {
             for (int i = 0; i <total ; i++) {
                 List dateLists = (List) dateList.get(i);
                 List dataLists = (List) dataList.get(i);
-                String[] dateDataArray = new String[1];
-                dateDataArray[0]=dateLists.get(0)+","+dataLists.get(0);
+                List dateDataArray = new ArrayList();
+                String datas = dateLists.get(0).toString();
+                String dates = dataLists.get(0).toString();
+                dateDataArray.add(datas);
+                if ("--".equals(dates)){
+                    dates = "0";
+                }
+                dateDataArray.add(dates);
                 dateDataList.add(dateDataArray);
             }
             //总访问量数据
             List sum = (List) items.get("sum");
-
             List sums = (List) sum.get(0);
             String pvs =sums.get(0).toString();
             Integer pv =0;
@@ -99,7 +104,7 @@ public class PageViewServiceImpl implements PageViewService {
             pageView.setDataDate(dateDataList);
 
         }
-        redisUtil.set(key,pageView,600000);
+        redisUtil.set(key,pageView,60000);
         return pageView;
     }
 }

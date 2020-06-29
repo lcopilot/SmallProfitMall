@@ -2,6 +2,7 @@ package cn.xgtd.dao;
 
 import cn.xgtd.domain.homePage.PayRecord;
 import cn.xgtd.domain.homePage.Sales;
+import cn.xgtd.domain.homePage.SalesRanking;
 
 import java.util.List;
 
@@ -43,7 +44,7 @@ public interface SalesDao {
      * @param quantity
      * @return
      */
-    public List<String> findSalesRanking(Integer quantity );
+    public List<SalesRanking> findSalesRanking(Integer quantity );
 
     /**
      * 查询支付记录
