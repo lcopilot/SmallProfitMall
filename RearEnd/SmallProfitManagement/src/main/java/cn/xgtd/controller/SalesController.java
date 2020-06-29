@@ -85,7 +85,7 @@ public class SalesController {
      */
     @RequestMapping(value = "/findSalesCategoryTotal",method = RequestMethod.GET)
     public ResultContent findSalesCategoryTotal(){
-        SalesCategoryTotal salesRankingList =  salesService.findSalesCategoryTotal();
+        List<SalesCategory> salesRankingList =  salesService.findSalesCategoryTotal();
         Results results = new Results();
         results.setData(salesRankingList);
         return new ResultContent(CommonCode.SUCCESS,results);

@@ -10,8 +10,18 @@ public class SalesCategory {
     private Integer productPrimaryId;
     /**分类名称**/
     private String categoryContent;
-    /**销售总额**/
+    /**当前种类总额**/
     private Double salesTotal;
+    /**总销售额**/
+    private Double total;
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
 
     public Integer getProductPrimaryId() {
         return productPrimaryId;

@@ -43,5 +43,5 @@ public interface SalesService {
      * 查询不同销售额
      * @return
      */
-    public SalesCategoryTotal findSalesCategoryTotal();
+    public  List<SalesCategory> findSalesCategoryTotal();
 }

@@ -242,9 +242,11 @@ public class SalesServiceImpl implements SalesService {
      * @return
      */
     @Override
-    public SalesCategoryTotal findSalesCategoryTotal() {
+    public  List<SalesCategory> findSalesCategoryTotal() {
 
         List<SalesCategory> salesCategories =  salesDao.findAllCategory();
+        //总销售额
+        Double total = salesDao.findTotalSales();
         for (int i = 0; i < salesCategories.size() ; i++) {
            Integer productPrimaryId = salesCategories.get(i).getProductPrimaryId();
            Double CategoryTotal = salesDao.findSalesCategoryTotal(productPrimaryId);
@@ -252,13 +254,9 @@ public class SalesServiceImpl implements SalesService {
                CategoryTotal = 0.00;
            }
            salesCategories.get(i).setSalesTotal(CategoryTotal);
+           salesCategories.get(i).setTotal(total);
         }
-        //总销售额
-        Double total = salesDao.findTotalSales();
-        SalesCategoryTotal salesCategoryTotal = new SalesCategoryTotal();
-        salesCategoryTotal.setSalesCategories(salesCategories);
-        salesCategoryTotal.setTotal(total);
-        return salesCategoryTotal;
+        return  salesCategories;
     }
 
     /**
