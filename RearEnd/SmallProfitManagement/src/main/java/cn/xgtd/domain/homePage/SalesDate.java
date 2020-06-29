@@ -12,13 +12,14 @@ public class SalesDate {
     private String hour;
     /**数据内容**/
     private Integer count;
-    /**日期访问量数据**/
-    private DataDate dataDate;
-
     /**时间段**/
     private Date date;
     /**今日金额**/
     private Double daySale;
+
+    /**日期访问量数据**/
+    private DataDate dataDate;
+
 
     public Date getDate() {
         return date;

@@ -172,9 +172,9 @@
     FROM
         product_data
     WHERE
-        date <![CDATA[<= ]]> #{startDate}
+        date  <![CDATA[>= ]]> #{startDate}
             AND
-        date  <![CDATA[>= ]]>#{endDate}
+        date <![CDATA[<= ]]> #{endDate}
     </select>
 
 </mapper>

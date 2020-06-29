@@ -192,19 +192,26 @@ public class SalesServiceImpl implements SalesService {
            }
            return salesDates;
        }else {
+           List<SalesDate> salesDateList = new ArrayList<>();
+
            List<SalesDate> salesDates = salesDao.findMonth(startDate,endDate);
            for (int i = 0; i <salesDates.size() ; i++) {
                DataDate dataDate = new DataDate();
-               Double DaySale = salesDates.get(i).getDaySale();
+
+               Double daySale = salesDates.get(i).getDaySale();
                Date date = salesDates.get(i).getDate();
                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+               SalesDate salesDate = new SalesDate();
                //获取String类型的时间
                String createdate = sdf.format(date);
                dataDate.setDate(createdate);
-               dataDate.setData(DaySale+"");
-               salesDates.get(i).setDataDate(dataDate);
+               dataDate.setData(daySale+"");
+               salesDate.setDataDate(dataDate);
+
+               salesDateList.add(salesDate);
            }
-           return salesDates;
+           return salesDateList;
        }
 
     }
