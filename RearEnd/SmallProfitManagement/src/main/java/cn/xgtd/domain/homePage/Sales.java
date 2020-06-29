@@ -1,11 +1,13 @@
 package cn.xgtd.domain.homePage;
 
+import java.io.Serializable;
+
 /**
  * 销售额
  * @author Kite
  * @date 2020/6/27
  */
-public class Sales {
+public class Sales implements Serializable {
     /**总销售额**/
     private Double totalSales;
     /**周同比*/

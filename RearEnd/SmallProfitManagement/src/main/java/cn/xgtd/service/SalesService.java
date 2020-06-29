@@ -1,6 +1,10 @@
 package cn.xgtd.service;
 
+import cn.xgtd.domain.homePage.PayRecord;
 import cn.xgtd.domain.homePage.Sales;
+import cn.xgtd.domain.homePage.SalesRanking;
+
+import java.util.List;
 
 /**
  * @author Kite
@@ -13,4 +17,17 @@ public interface SalesService {
      * @return
      */
     public Sales findSales();
+
+    /**
+     *  查询商品销量排行榜
+     * @param quantity 查询数量
+     * @return
+     */
+    public List<SalesRanking> findSalesRanking(Integer quantity);
+
+    /**
+     * 查询商品支付记录
+     * @return
+     */
+    public PayRecord findPayRecord();
 }

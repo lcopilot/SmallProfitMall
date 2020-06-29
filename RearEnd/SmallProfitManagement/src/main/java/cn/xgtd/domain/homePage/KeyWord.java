@@ -1,11 +1,13 @@
 package cn.xgtd.domain.homePage;
 
+import java.io.Serializable;
+
 /**
  * 关键词
  * @author Kite
  * @date 2020/6/28
  */
-public class KeyWord {
+public class KeyWord implements Serializable {
     /**排名**/
     private  Integer ranking;
     /**关键词**/

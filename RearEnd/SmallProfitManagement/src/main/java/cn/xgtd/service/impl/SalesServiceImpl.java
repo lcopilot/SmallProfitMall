@@ -1,13 +1,19 @@
 package cn.xgtd.service.impl;
 
 import cn.xgtd.dao.SalesDao;
+import cn.xgtd.domain.homePage.PayRecord;
 import cn.xgtd.domain.homePage.Sales;
+import cn.xgtd.domain.homePage.SalesRanking;
 import cn.xgtd.service.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import static com.sun.tools.doclint.Entity.divide;
 import static com.sun.tools.doclint.Entity.nu;
@@ -128,4 +134,46 @@ public class SalesServiceImpl implements SalesService {
 
         return sales;
     }
+
+    /**
+     * 查询商品销量
+     * @return
+     */
+    @Override
+    public List<SalesRanking> findSalesRanking(Integer quantity) {
+        List<String> salesRanking = salesDao.findSalesRanking(quantity);
+        List<SalesRanking> salesRankingList = new ArrayList<>();
+        for (int i = 0; i <salesRanking.size() ; i++) {
+            SalesRanking salesRanking1 = new SalesRanking();
+            salesRanking1.setRanking(i+1);
+            salesRanking1.setProductName(salesRanking.get(i));
+            salesRankingList.add(salesRanking1);
+        }
+        return salesRankingList;
+    }
+
+    /**
+     * 查询商品支付记录
+     * @return
+     */
+    @Override
+    public PayRecord findPayRecord() {
+        List<PayRecord> payRecords = salesDao.findPayRecord();
+        List list = new ArrayList();
+        for (int i = 0; i <payRecords.size(); i++) {
+            Date date = payRecords.get(i).getDate();
+            Integer dayPayQuantity = payRecords.get(i).getDayPayQuantity();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+            String dateString = formatter.format(date);
+            String[] dataDate = new String[1];
+            dataDate[0]=dateString+","+dayPayQuantity.toString();
+            list.add(dataDate);
+        }
+        PayRecord payRecord = new PayRecord();
+        payRecord.setDayPayQuantity(payRecords.get(list.size()-1).getDayPayQuantity());
+        payRecord.setDataDate(list);
+        return payRecord;
+    }
+
+
 }

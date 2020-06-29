@@ -41,4 +41,26 @@
     <select id="findTodaySales" resultType="java.lang.Double">
         SELECT TRUNCATE ( SUM(orderTotal ), 2 )  FROM userOrder WHERE DATEDIFF(now(),paymentTime) = #{date}
     </select>
+    <!--查询商品销量排行-->
+    <select id="findSalesRanking" resultType="java.lang.String">
+        SELECT
+            pb.ProductName
+        FROM
+            ProductBasis pb
+        LEFT JOIN
+            ProductPrice pp
+                ON pb.ProductId=pp.ProductId
+        order by
+            pp.ProductSales desc LIMIT 0 , #{quantity}
+
+    </select>
+
+
+    <!--查询总销售额-->
+    <select id="findPayRecord" resultType="cn.xgtd.domain.homePage.PayRecord">
+        SELECT
+           day_pay_quantity,date
+        FROM
+            product_data
+    </select>
 </mapper>
