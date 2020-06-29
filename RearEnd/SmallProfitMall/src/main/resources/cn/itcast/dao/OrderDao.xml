@@ -410,6 +410,23 @@
         </where>
     </update>
 
+    <!--查询今日总计-->
+    <select id="findDayTotal" resultType="java.lang.Double">
+        SELECT TRUNCATE
+            ( SUM( orderTotal ), 2 )
+        FROM
+            userOrder
+        WHERE
+            orderState >= 2
+        AND DATE_FORMAT( paymentTime, '%Y%m%d' ) = #{date}
+    </select>
+
+    <!--修改今日总计-->
+    <update id="updateDayTotal">
+        UPDATE product_data SET daySale=#{daySale} , day_pay_quantity = day_pay_quantity+1 WHERE date = DATE_FORMAT( #{date}, '%Y-%m-%d %H:00:00' )
+
+     </update>
+
 
 <!--    &lt;!&ndash;修改商品状态&ndash;&gt;-->
 <!--    <update id="updateEvaluate">-->

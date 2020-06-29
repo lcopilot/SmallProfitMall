@@ -201,4 +201,18 @@ public interface OrderDao {
      * @return
      */
     public Integer findOrderTakeQuantity(@Param("orderId")String orderId);
+
+    /**
+     * 查询今日总计
+     * @return
+     */
+    public Double findDayTotal(String date);
+
+    /**
+     * 修改今日销售总额
+     * @param daySale 今日销售额
+     * @param date 当前时间
+     * @return
+     */
+    public Integer updateDayTotal(@Param("daySale") Double daySale,@Param("date")String date);
 }

@@ -35,6 +35,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.Array;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static com.alipay.api.AlipayConstants.SIGN_TYPE;
@@ -608,7 +609,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     /**
-     * 异步回调成功
+     * 支付成功
      * @param order
      * @return
      */
@@ -629,6 +630,20 @@ public class OrderServiceImpl implements OrderService {
         //转换订单总计类型
         String  total =  order.getOrderTotal().setScale(2, BigDecimal.ROUND_HALF_UP).toString();
         //order 订单 total订单总计
+        Date date = new Date();
+        String strDateFormat = "yyyyMMdd";
+        String strDateFormats = "yyyy-MM-dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(strDateFormat);
+        String dates =sdf.format(date);
+
+        //更新今日总销量
+        Double totas = orderDao.findDayTotal(dates);
+
+        SimpleDateFormat sdfs = new SimpleDateFormat(strDateFormats);
+        String dates1 =sdfs.format(date);
+        //修改订单
+        orderDao.updateDayTotal(totas,dates1+" "+"00:00:00");
+
         //订单消息中间件推送消息
         notificationUser(order,total);
     }
@@ -668,6 +683,7 @@ public class OrderServiceImpl implements OrderService {
     public Integer notificationUser(Order order,String totals) throws Exception {
         String orderJson = JSONObject.toJSONString(order);
         JSONObject  jsonObject =JSONObject.parseObject(orderJson);
+
         //推送购买信息
         shoppingProducer.sendShoppingInformation("news",jsonObject);
         return 1;
