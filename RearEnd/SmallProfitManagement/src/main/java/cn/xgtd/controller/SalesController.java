@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
+ * 销售额
  * @author Kite
  * @date 2020/6/28
  */
