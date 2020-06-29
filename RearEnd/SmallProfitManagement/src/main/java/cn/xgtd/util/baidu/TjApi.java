@@ -55,7 +55,7 @@ public class TjApi {
     }
 
     public static void main(String[] args) {
-        String a =  TjApi("month","20200501","20200605");
+        String a =  TjApi("","20200629","20200629");
         System.out.println(a);
     }
 

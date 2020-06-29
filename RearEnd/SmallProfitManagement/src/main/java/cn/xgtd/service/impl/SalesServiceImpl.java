@@ -1,10 +1,7 @@
 package cn.xgtd.service.impl;
 
 import cn.xgtd.dao.SalesDao;
-import cn.xgtd.domain.homePage.PayRecord;
-import cn.xgtd.domain.homePage.Sales;
-import cn.xgtd.domain.homePage.SalesDate;
-import cn.xgtd.domain.homePage.SalesRanking;
+import cn.xgtd.domain.homePage.*;
 import cn.xgtd.service.SalesService;
 import lombok.Data;
 import lombok.SneakyThrows;
@@ -163,7 +160,6 @@ public class SalesServiceImpl implements SalesService {
     public List<SalesDate> findSalesDate(String day) {
         List<SalesDate> salesDates = salesDao.findSalesDate(day);
         for (int i = 0; i <salesDates.size() ; i++) {
-
              String hour = salesDates.get(i).getHour();
                 Date datas = new Date();
                 String str = day+" "+hour+":00:00";
@@ -181,8 +177,10 @@ public class SalesServiceImpl implements SalesService {
                 if (i<10){
                     str = day+" "+"0"+hour+":00:00";
                 }
-                list.add(str);
-                list.add(dayTotal);
+                DataDate dataDate = new DataDate();
+                dataDate.setData(dayTotal.toString());
+                dataDate.setDate(str);
+                list.add(dataDate);
                 salesDates.get(i).setDataDate(list);
                 salesDates.get(i).setHour(null);
         }
