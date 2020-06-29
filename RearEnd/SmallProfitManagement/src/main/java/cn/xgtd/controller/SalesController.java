@@ -7,7 +7,6 @@ import cn.xgtd.response.Return.Results;
 import cn.xgtd.service.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -75,6 +74,18 @@ public class SalesController {
     @RequestMapping(value = "/findPayRecord",method = RequestMethod.GET)
     public ResultContent findPayRecord(){
         PayRecord salesRankingList =  salesService.findPayRecord();
+        Results results = new Results();
+        results.setData(salesRankingList);
+        return new ResultContent(CommonCode.SUCCESS,results);
+    }
+
+    /**
+     * 查询销售额
+     * @return
+     */
+    @RequestMapping(value = "/findSalesCategoryTotal",method = RequestMethod.GET)
+    public ResultContent findSalesCategoryTotal(){
+        SalesCategoryTotal salesRankingList =  salesService.findSalesCategoryTotal();
         Results results = new Results();
         results.setData(salesRankingList);
         return new ResultContent(CommonCode.SUCCESS,results);

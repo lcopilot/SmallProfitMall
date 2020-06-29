@@ -37,4 +37,11 @@ public interface SalesService {
      * @return
      */
     public PayRecord findPayRecord();
+
+
+    /**
+     * 查询不同销售额
+     * @return
+     */
+    public SalesCategoryTotal findSalesCategoryTotal();
 }

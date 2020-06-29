@@ -1,11 +1,7 @@
 package cn.xgtd.dao;
 
-import cn.xgtd.domain.homePage.PayRecord;
-import cn.xgtd.domain.homePage.Sales;
-import cn.xgtd.domain.homePage.SalesDate;
-import cn.xgtd.domain.homePage.SalesRanking;
+import cn.xgtd.domain.homePage.*;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
 import java.util.List;
@@ -83,5 +79,19 @@ public interface SalesDao {
      * @return
      */
     public List<SalesDate> findMonth(@Param("startDate") String startDate ,@Param("endDate") String endDate );
+
+    /**
+     * 查询种类销售总额和
+     * @param CategoryId 种类id
+     * @return
+     */
+    public Double findSalesCategoryTotal(Integer CategoryId);
+
+    /**
+     * 查询所有分类销售额
+     * @return
+     */
+    public List<SalesCategory> findAllCategory();
+
 
 }

@@ -4,24 +4,17 @@ import cn.xgtd.dao.SalesDao;
 import cn.xgtd.domain.homePage.*;
 import cn.xgtd.service.SalesService;
 import cn.xgtd.util.baidu.CycleUtil;
-import lombok.Data;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.sql.Time;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Timer;
-
-import static com.sun.tools.doclint.Entity.divide;
-import static com.sun.tools.doclint.Entity.nu;
-import static jdk.nashorn.internal.objects.NativeMath.round;
 
 /**
  * 销售额业务层
@@ -244,7 +237,36 @@ public class SalesServiceImpl implements SalesService {
         return payRecord;
     }
 
+    /**
+     * 查询销售额
+     * @return
+     */
+    @Override
+    public SalesCategoryTotal findSalesCategoryTotal() {
 
+        List<SalesCategory> salesCategories =  salesDao.findAllCategory();
+        for (int i = 0; i < salesCategories.size() ; i++) {
+           Integer productPrimaryId = salesCategories.get(i).getProductPrimaryId();
+           Double CategoryTotal = salesDao.findSalesCategoryTotal(productPrimaryId);
+           if (CategoryTotal==null){
+               CategoryTotal = 0.00;
+           }
+           salesCategories.get(i).setSalesTotal(CategoryTotal);
+        }
+        //总销售额
+        Double total = salesDao.findTotalSales();
+        SalesCategoryTotal salesCategoryTotal = new SalesCategoryTotal();
+        salesCategoryTotal.setSalesCategories(salesCategories);
+        salesCategoryTotal.setTotal(total);
+        return salesCategoryTotal;
+    }
+
+    /**
+     * 判断日期查是否是 同天/周/月/年
+     * @param startDate
+     * @param endDate
+     * @return
+     */
     public String istryGrans(String startDate , String endDate ){
         String grans = null;
         try{

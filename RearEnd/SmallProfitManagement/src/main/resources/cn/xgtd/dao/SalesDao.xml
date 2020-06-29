@@ -178,6 +178,21 @@
     </select>
 
 
-    <select id="findSales"></select>
+    <select id="findSalesCategoryTotal" resultType="java.lang.Double">
+        SELECT TRUNCATE
+            ( SUM( uo.orderTotal ), 2 ) AS kindTotal
+        FROM
+            product_primary_category ppc
+            LEFT JOIN ProductBasis pb ON ppc.product_primary_id = pb.prodcutPrimaryCategory
+            LEFT JOIN orders os ON pb.ProductId = os.ProductId
+            LEFT JOIN userOrder uo ON os.orderId = uo.orderId
+        WHERE
+            ppc.product_primary_id = #{CategoryId}
+    </select>
+
+    <!--查询所有种类商品销售额-->
+    <select id="findAllCategory" resultType="cn.xgtd.domain.homePage.SalesCategory">
+        SELECT product_primary_id,category_content FROM product_primary_category
+    </select>
 
 </mapper>
