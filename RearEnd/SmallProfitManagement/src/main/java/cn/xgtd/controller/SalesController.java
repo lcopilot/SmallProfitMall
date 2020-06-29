@@ -62,7 +62,7 @@ public class SalesController {
      */
     @RequestMapping(value = "/findSalesDate",method = RequestMethod.GET)
     public ResultContent findSalesDate(String gran, String startDate , String endDate ){
-        List<SalesDate> salesRankingList =  salesService.findSalesDate(gran,startDate,endDate);
+        List<DataDate> salesRankingList =  salesService.findSalesDate(gran,startDate,endDate);
         Results results = new Results();
         results.setData(salesRankingList);
         return new ResultContent(CommonCode.SUCCESS,results);

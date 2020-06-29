@@ -161,8 +161,10 @@ public class SalesServiceImpl implements SalesService {
      */
     @SneakyThrows
     @Override
-    public List<SalesDate> findSalesDate(String gran, String startDate , String endDate ) {
+    public List<DataDate> findSalesDate(String gran, String startDate , String endDate ) {
        String grans = istryGrans(startDate,endDate);
+
+       List<DataDate> dataDates = new ArrayList<>();
        //按天
        if ("hour".equals(grans)){
            List<SalesDate> salesDates = salesDao.findSalesDate(startDate);
@@ -189,10 +191,11 @@ public class SalesServiceImpl implements SalesService {
 
                salesDates.get(i).setDataDate(dataDate);
                salesDates.get(i).setHour(null);
+               dataDates.add(dataDate);
            }
-           return salesDates;
+
        }else {
-           List<SalesDate> salesDateList = new ArrayList<>();
+
 
            List<SalesDate> salesDates = salesDao.findMonth(startDate,endDate);
            for (int i = 0; i <salesDates.size() ; i++) {
@@ -208,11 +211,10 @@ public class SalesServiceImpl implements SalesService {
                dataDate.setDate(createdate);
                dataDate.setData(daySale+"");
                salesDate.setDataDate(dataDate);
-
-               salesDateList.add(salesDate);
+               dataDates.add(dataDate);
            }
-           return salesDateList;
        }
+       return dataDates;
 
     }
 

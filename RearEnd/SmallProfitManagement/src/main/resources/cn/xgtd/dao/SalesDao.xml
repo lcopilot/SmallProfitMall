@@ -177,4 +177,7 @@
         date <![CDATA[<= ]]> #{endDate}
     </select>
 
+
+    <select id="findSales"></select>
+
 </mapper>

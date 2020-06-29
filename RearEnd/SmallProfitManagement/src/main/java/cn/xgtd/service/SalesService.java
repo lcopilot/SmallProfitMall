@@ -1,9 +1,6 @@
 package cn.xgtd.service;
 
-import cn.xgtd.domain.homePage.PayRecord;
-import cn.xgtd.domain.homePage.Sales;
-import cn.xgtd.domain.homePage.SalesDate;
-import cn.xgtd.domain.homePage.SalesRanking;
+import cn.xgtd.domain.homePage.*;
 
 import java.util.List;
 
@@ -33,7 +30,7 @@ public interface SalesService {
      * @param endDate
      * @return
      */
-    public List<SalesDate> findSalesDate(String gran, String startDate , String endDate );
+    public List<DataDate> findSalesDate(String gran, String startDate , String endDate );
 
     /**
      * 查询商品支付记录
