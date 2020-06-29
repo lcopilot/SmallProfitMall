@@ -56,7 +56,7 @@
     </select>
 
 
-    <!--查询总销售额-->
+    <!--查询支付数 日期-->
     <select id="findPayRecord" resultType="cn.xgtd.domain.homePage.PayRecord">
         SELECT
            day_pay_quantity,date

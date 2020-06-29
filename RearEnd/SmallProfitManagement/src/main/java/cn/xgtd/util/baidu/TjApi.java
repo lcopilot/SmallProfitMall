@@ -2,6 +2,8 @@ package cn.xgtd.util.baidu;
 
 import com.alibaba.fastjson.JSONObject;
 
+import java.util.Date;
+
 public class TjApi {
 
 
@@ -46,7 +48,10 @@ public class TjApi {
     }
 
     public static void main(String[] args) {
-        String a = TjApi("month","2020/06/29","2020/06/29");
-        System.out.println(a);
+//        Date a = new Date();
+//        if ()
+//
+//        String a = TjApi("month","2020/06/29","2020/06/29");
+//        System.out.println(a);
     }
 }

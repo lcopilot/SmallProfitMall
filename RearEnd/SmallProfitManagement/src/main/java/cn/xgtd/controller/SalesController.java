@@ -44,8 +44,11 @@ public class SalesController {
      * @param quantity 排行榜商品数量
      * @return
      */
-    @RequestMapping(value = "/findSalesRanking/{quantity}",method = RequestMethod.GET)
-    public ResultContent findSalesRanking(@PathVariable("quantity")Integer quantity){
+    @RequestMapping(value = "/findSalesRanking",method = RequestMethod.GET)
+    public ResultContent findSalesRanking(Integer quantity){
+        if (quantity==null){
+            quantity=7;
+        }
         List<SalesRanking> salesRankingList =  salesService.findSalesRanking(quantity);
         Results results = new Results();
         results.setData(salesRankingList);
