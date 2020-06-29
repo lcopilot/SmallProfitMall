@@ -57,7 +57,7 @@ public interface RoleDao {
      * @param uId 用户id
      * @return
      */
-    public List<Role> findRoleList(@Param("uId") Integer uId);
+    public List<Role> findRoleList(@Param("uId") Integer uId ,@Param("rId") String[] rId);
 
 
     /**

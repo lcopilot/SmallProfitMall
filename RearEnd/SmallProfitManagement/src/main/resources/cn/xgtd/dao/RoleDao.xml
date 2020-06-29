@@ -67,6 +67,11 @@
             u_id IN ( SELECT descendant_id FROM management_role_relationship WHERE FIND_IN_SET( descendant_id, GET_CHILD_NODE ( #{uId} ) ) )
             )
         )
+        <if test="rId!=null ">
+                <foreach collection="rId" item="item" index="index" >
+            AND r_id!=#{item}
+                </foreach>
+        </if>
           ORDER BY
         mr.last_time DESC
     </select>

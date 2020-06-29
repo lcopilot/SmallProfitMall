@@ -66,7 +66,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public List<Role> findRoleList(Integer uId) {
-       List<Role> roles =  roleDao.findRoleList(uId);
+       List<Role> roles =  roleDao.findRoleList(uId,null);
         roles = updateRoleFormat(roles);
         return roles;
     }
@@ -150,7 +150,7 @@ public class RoleServiceImpl implements RoleService {
         }
 
 
-        List<Role> roles = roleDao.findRoleList(uId);
+        List<Role> roles = roleDao.findRoleList(uId,result);
         roles = updateRoleFormat(roles);
 
         basicRole = updateRoleFormat(basicRole);
