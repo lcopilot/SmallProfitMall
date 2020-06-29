@@ -94,10 +94,10 @@
     topojson-client "^3.0.0"
     wolfy87-eventemitter "^5.1.0"
 
-"@antv/g2@3.5.13":
-  version "3.5.13"
-  resolved "https://registry.npm.taobao.org/@antv/g2/download/@antv/g2-3.5.13.tgz?cache=0&sync_timestamp=1587089841344&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40antv%2Fg2%2Fdownload%2F%40antv%2Fg2-3.5.13.tgz#2b0365406e89855e6af34cd374bcb307a0edad42"
-  integrity sha1-KwNlQG6JhV5q80zTdLyzB6DtrUI=
+"@antv/g2@3.5.15":
+  version "3.5.15"
+  resolved "https://registry.npm.taobao.org/@antv/g2/download/@antv/g2-3.5.15.tgz?cache=0&sync_timestamp=1592984972735&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40antv%2Fg2%2Fdownload%2F%40antv%2Fg2-3.5.15.tgz#5951808f88210f4a45ca1acb38fb25a743b4a578"
+  integrity sha1-WVGAj4ghD0pFyhrLOPslp0O0pXg=
   dependencies:
     "@antv/adjust" "~0.1.0"
     "@antv/attr" "~0.1.2"
@@ -2133,7 +2133,7 @@ antd-img-crop@^3.4.0:
 
 antd@^4.3.5:
   version "4.3.5"
-  resolved "https://registry.npm.taobao.org/antd/download/antd-4.3.5.tgz?cache=0&sync_timestamp=1592726824105&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fantd%2Fdownload%2Fantd-4.3.5.tgz#1bafbc2920a1b5266bcd46496532578b2fd0f98e"
+  resolved "https://registry.npm.taobao.org/antd/download/antd-4.3.5.tgz?cache=0&sync_timestamp=1593430412913&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fantd%2Fdownload%2Fantd-4.3.5.tgz#1bafbc2920a1b5266bcd46496532578b2fd0f98e"
   integrity sha1-G6+8KSChtSZrzUZJZTJXiy/Q+Y4=
   dependencies:
     "@ant-design/css-animation" "^1.7.2"
@@ -2653,12 +2653,12 @@ bindings@^1.5.0:
   dependencies:
     file-uri-to-path "1.0.0"
 
-bizcharts@^3.5.8:
-  version "3.5.8"
-  resolved "https://registry.npm.taobao.org/bizcharts/download/bizcharts-3.5.8.tgz?cache=0&sync_timestamp=1587438711701&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbizcharts%2Fdownload%2Fbizcharts-3.5.8.tgz#50abcb4960891aada6ca35318af791dd68d85825"
-  integrity sha1-UKvLSWCJGq2myjUxiveR3WjYWCU=
+bizcharts@^3.5.9:
+  version "3.5.9"
+  resolved "https://registry.npm.taobao.org/bizcharts/download/bizcharts-3.5.9.tgz?cache=0&sync_timestamp=1592840415702&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbizcharts%2Fdownload%2Fbizcharts-3.5.9.tgz#b4c56c8bc5e8567f65748aeb3916902c4e9c98c0"
+  integrity sha1-tMVsi8XoVn9ldIrrORaQLE6cmMA=
   dependencies:
-    "@antv/g2" "3.5.13"
+    "@antv/g2" "3.5.15"
     "@babel/runtime" "^7.7.6"
     invariant "^2.2.2"
     lodash.debounce "^4.0.8"

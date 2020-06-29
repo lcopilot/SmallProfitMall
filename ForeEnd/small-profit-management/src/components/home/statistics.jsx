@@ -9,116 +9,28 @@ import './statistics.less'
 import DataSet from "@antv/data-set";
 import {Tooltip as BTooltip, Chart, Geom, Legend, Axis} from "bizcharts";
 import *as indexApi from '../../api/page/index'
+import moment from "moment";
+import {TIME_VIEWS} from "../../config/sysConfig";
 
 const Statistics = () => {
 
-  const [totalSale,setTotalSale]=useState({})
-  const [skeletonLoad, setSkeletonLoad] = useState({
-    saleLoad:true,
-    viewsLoad:true,
-    paymentAmountLoad:true,
-    totalUser:true,
-  })
-  const data = [
-    {
-      year: "1986",
-      ACME: 162,
-    },
-    {
-      year: "1987",
-      ACME: 134,
-
-    },
-    {
-      year: "1988",
-      ACME: 116,
-
-    },
-    {
-      year: "1989",
-      ACME: 122,
-
-    },
-    {
-      year: "1990",
-      ACME: 178,
-
-    },
-    {
-      year: "1991",
-      ACME: 144,
-
-    },
-    {
-      year: "1992",
-      ACME: 125,
-
-    },
-    {
-      year: "1993",
-      ACME: 176,
-
-    },
-    {
-      year: "1994",
-      ACME: 156
-    },
-    {
-      year: "1995",
-      ACME: 195
-    },
-    {
-      year: "1996",
-      ACME: 215
-    },
-    {
-      year: "1997",
-      ACME: 176,
-
-    },
-    {
-      year: "1998",
-      ACME: 167,
-
-    },
-    {
-      year: "1999",
-      ACME: 142
-    },
-    {
-      year: "2000",
-      ACME: 117
-    },
-    {
-      year: "2001",
-      ACME: 113,
-    },
-    {
-      year: "2002",
-      ACME: 132
-    },
-    {
-      year: "2003",
-      ACME: 146,
-
-    },
-    {
-      year: "2004",
-      ACME: 169,
-
-    },
-    {
-      year: "2005",
-      ACME: 184,
-    }
-  ];
-  const viewsFig = new DataSet.View().source(data);
+  const [totalSale, setTotalSale] = useState({})
+  const [saleLoad, setSaleLoad] = useState(true)
+  const [viewsLoad, setViewsLoad] = useState(true)
+  const [paymentAmountLoad, setPaymentAmountLoad] = useState(true)
+  const [totalUser, setTotalUser] = useState(true)
+  const [viewsData, setViewsData] = useState(
+      {dataDate: [{time: null, views: 0}]})
+  const viewsFig = new DataSet.View().source(viewsData.dataDate);
   viewsFig.transform({
     type: "fold",
-    fields: ["ACME"],
+    fields: ["views"],
     key: "type",
     value: "value"
   });
+
+  const [payFigData, setPayFigData] = useState({dataDate: [{time: null, payFig: 0}]})
+
   const scale = {
     value: {
       formatter: function (val) {
@@ -126,53 +38,8 @@ const Statistics = () => {
       }
     },
   };
-  const data1 = [
-    {
-      year: "1951 年",
-      sales: 38
-    },
-    {
-      year: "1952 年",
-      sales: 52
-    },
-    {
-      year: "1956 年",
-      sales: 61
-    },
-    {
-      year: "1957 年",
-      sales: 145
-    },
-    {
-      year: "1968 年",
-      sales: 48
-    },
-    {
-      year: "1988 年",
-      sales: 48
-    },
-    {
-      year: "1958 年",
-      sales: 48
-    },
-    {
-      year: "1951 年",
-      sales: 48
-    },
-    {
-      year: "1999 年",
-      sales: 31
-    },
-    {
-      year: "1460 年",
-      sales: 442
-    },
-    {
-      year: "1962 年",
-      sales: 38
-    }
-  ];
-  const payFig = new DataSet.View().source(data1);
+
+  const payFig = new DataSet.View().source(payFigData.dataDate);
   const cols = {
     sales: {
       tickInterval: 20
@@ -235,90 +102,132 @@ const Statistics = () => {
     }
   };
 
-  const getTotalSale=()=>{
-    indexApi.getTotalSale().then(res=>{
-      if (res.success){
-        setTotalSale(res.results.data)
-        let load=JSON.parse(JSON.stringify(skeletonLoad))
-        load.saleLoad=false
-        setSkeletonLoad(load)
+  //获取访问量
+  const getViews = () => {
+    const params = {
+      gran: 'day',
+      startDate: moment().subtract(30, 'days').format(TIME_VIEWS),
+      endDate: moment(new Date()).format(TIME_VIEWS),
+    }
+    indexApi.getViews(params).then(res => {
+      if (res.success) {
+        res.results.data.dataDate = res.results.data.dataDate.map(item => {
+          return {
+            time: item[0],
+            views: Number(item[1]),
+          }
+        })
+        setViewsData(res.results.data)
+        setViewsLoad(false)
       }
     })
   }
-  useEffect(()=>{
+
+  //获取总销售额
+  const getTotalSale = () => {
+    indexApi.getTotalSale().then(res => {
+      if (res.success) {
+        setTotalSale(res.results.data)
+        setSaleLoad(false)
+      }
+    })
+  }
+
+  //获取近30天支付数
+  const getPayRecord=()=>{
+    indexApi.getPayRecord().then(res=>{
+      if (res.success){
+        res.results.data.dataDate = res.results.data.dataDate.map(item => {
+          return {
+            time: item.data,
+            payFig: Number(item.date),
+          }
+        })
+        setPayFigData(res.results.data);
+        setPaymentAmountLoad(false);
+      }
+    })
+  }
+
+  useEffect(() => {
     getTotalSale();
-    return ()=>{}
-  },[])
+    getViews();
+    getPayRecord()
+    return () => {
+    }
+  }, [])
 
   return (
       <Row gutter={20}>
         <Col xs={24} sm={24} md={12} lg={12} xl={6}>
-          <Card className="home-yesterday" loading={skeletonLoad.saleLoad}>
-              <div className="home-yesterday-title-span">
-                <span>总销售额</span>
-                <span className="hint">
+          <Card className="home-yesterday" loading={saleLoad}>
+            <div className="home-yesterday-title-span">
+              <span>总销售额</span>
+              <span className="hint">
                 <Tooltip placement="top" title={<>总销售额</>}>
                   <ExclamationCircleOutlined/>
                 </Tooltip>
               </span>
-              </div>
-              <Statistic value={totalSale.totalSales} prefix="￥"/>
-              <div className="home-yesterday-graphics">
-                <Row>
-                  <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                    周同比 {totalSale.weekYoY}% {React.createElement(
-                      totalSale.weekYoYSign ? CaretUpOutlined : CaretDownOutlined)}</Col>
-                  <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                    日同比 {totalSale.dayYoY}% {React.createElement(
-                      totalSale.dayYoYSign ? CaretUpOutlined : CaretDownOutlined)}</Col>
-                </Row>
-              </div>
-              <Divider/>
-              <div>
-                日销售额 ￥<span>{totalSale.todaySales}</span>
-              </div>
+            </div>
+            <Statistic value={totalSale.totalSales} prefix="￥"/>
+            <div className="home-yesterday-graphics">
+              <Row>
+                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+                  周同比 {totalSale.weekYoY}% {React.createElement(
+                    totalSale.weekYoYSign ? CaretUpOutlined
+                        : CaretDownOutlined)}</Col>
+                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+                  日同比 {totalSale.dayYoY}% {React.createElement(
+                    totalSale.dayYoYSign ? CaretUpOutlined
+                        : CaretDownOutlined)}</Col>
+              </Row>
+            </div>
+            <Divider/>
+            <div>
+              日销售额 ￥<span>{totalSale.todaySales}</span>
+            </div>
           </Card>
         </Col>
         <Col xs={24} sm={24} md={12} lg={12} xl={6}>
-          <Card className="home-yesterday">
-              <div className="home-yesterday-title-span">
-                <span>30天访问量</span>
-                <span className="hint">
+          <Card className="home-yesterday" loading={viewsLoad}>
+            <div className="home-yesterday-title-span">
+              <span>30天访问量</span>
+              <span className="hint">
                 <Tooltip placement="top"
                          title={<>近30天平台访问量<br/>图表为近30天每日访问量</>}>
                   <ExclamationCircleOutlined/>
                 </Tooltip>
               </span>
-              </div>
-              <Statistic value={20190415}/>
-              <div>
-                <Chart
-                    height={46}
-                    data={viewsFig}
-                    forceFit={true}
-                    padding={"auto"}
-                    scale={scale}
-                >
-                  <BTooltip showTitle={false}
-                            itemTpl='<li data-index={index}>
+            </div>
+            <Statistic value={viewsData.pv}/>
+            <div>
+              <Chart
+                  height={46}
+                  data={viewsFig}
+                  forceFit={true}
+                  padding={"auto"}
+                  scale={scale}
+              >
+                <BTooltip showTitle={false}
+                          itemTpl='<li data-index={index}>
                   <span style="background-color:{color};width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px;"></span>
                   <span style="padding-right: 1rem;">{title}</span>{value}</li>'
-                            crosshairs={{
-                              type: 'rect' || 'x' || 'y' || 'cross'
-                            }}/>
-                  <Geom type="area" position="year*value" color="type"
-                        shape="smooth"/>
-                </Chart>
-              </div>
-              <Divider/>
-              <div>
-                日访问量 <span>12,423</span>
-              </div>
+                          crosshairs={{
+                            type: 'rect' || 'x' || 'y' || 'cross'
+                          }}/>
+                <Geom type="area" position="time*value" color="type"
+                      shape="smooth"/>
+              </Chart>
+            </div>
+            <Divider/>
+            <div>
+              日均访问量 <span>{Math.ceil(
+                viewsData.pv / viewsData.dataDate.length)}</span>
+            </div>
           </Card>
         </Col>
         <Col xs={24} sm={24} md={12} lg={12} xl={6}>
-          <Card className="home-yesterday">
-            <Skeleton active loading={false}>
+          <Card className="home-yesterday" loading={paymentAmountLoad}>
               <div className="home-yesterday-title-span">
                 <span>支付笔数</span>
                 <span className="hint">
@@ -327,7 +236,7 @@ const Statistics = () => {
                 </Tooltip>
               </span>
               </div>
-              <Statistic value={112893}/>
+              <Statistic value={payFigData.dayPayQuantity}/>
               <div>
                 <Chart height={46} forceFit={true}
                        padding={"auto"} data={payFig} scale={cols}>
@@ -339,14 +248,13 @@ const Statistics = () => {
                               type: 'rect' || 'x' || 'y' || 'cross'
                             }}
                   />
-                  <Geom type="interval" position="year*sales"/>
+                  <Geom type="interval" position="time*payFig"/>
                 </Chart>
               </div>
               <Divider/>
               <div>
-                日支付数 <span>12,423</span>
+                日均支付数 <span>{Math.ceil(payFigData.dayPayQuantity/payFigData.dataDate.length)}</span>
               </div>
-            </Skeleton>
           </Card>
         </Col>
         <Col xs={24} sm={24} md={12} lg={12} xl={6}>
