@@ -3,6 +3,7 @@ package cn.xgtd.service.impl;
 import cn.xgtd.dao.SalesDao;
 import cn.xgtd.domain.homePage.PayRecord;
 import cn.xgtd.domain.homePage.Sales;
+import cn.xgtd.domain.homePage.SalesDate;
 import cn.xgtd.domain.homePage.SalesRanking;
 import cn.xgtd.service.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,6 +147,25 @@ public class SalesServiceImpl implements SalesService {
             salesRanking.get(i).setRanking(i+1);
         }
         return salesRanking;
+    }
+
+    /**
+     * 查询销售数据分析
+     * @param day 当天时间
+     * @return
+     */
+    @Override
+    public List<SalesDate> findSalesDate(String day) {
+        List<SalesDate> salesDates = salesDao.findSalesDate(day);
+        List<String> a = new ArrayList<>();
+        for (int i = 0; i <salesDates.size() ; i++) {
+
+            Integer count = salesDates.get(i).getCount();
+            if (count>0){
+                salesDates.get(i).getTotalSales();
+            }
+        }
+        return null;
     }
 
     /**

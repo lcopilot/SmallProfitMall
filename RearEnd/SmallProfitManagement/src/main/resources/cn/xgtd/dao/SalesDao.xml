@@ -65,4 +65,78 @@
         FROM
             product_data
     </select>
+
+
+    <!--查询天销售额-->
+    <select id="findSalesDate" resultType="cn.xgtd.domain.homePage.SalesDate">
+        SELECT
+        timetable.HOUR HOUR,
+        ifnull( sumtable.count, 0 ) Count
+        FROM
+            (
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:00:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:01:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:02:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:03:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:04:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:05:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:06:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:07:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:08:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:09:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:10:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:11:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:12:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:13:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:14:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:15:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:16:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:17:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:18:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:18:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:20:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:21:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:22:00' ) HOUR UNION ALL
+            SELECT
+                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:23:00' ) HOUR
+            ) timetable
+            LEFT JOIN (
+            SELECT HOUR
+                (paymentTime) HOUR,
+                count(*) count
+            FROM
+                userOrder
+            WHERE
+
+                DATE_FORMAT(paymentTime,'%Y%m%d')  = #{day}
+            GROUP BY
+                date_format(paymentTime, '%Y%m%d-%H' ),
+                HOUR
+            ) sumtable ON timetable.HOUR = sumtable.HOUR
+        ORDER BY
+            HOUR
+</select>
 </mapper>

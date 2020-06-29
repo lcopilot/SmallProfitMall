@@ -24,43 +24,40 @@ import java.util.List;
 @Service
 public class PageViewServiceImpl implements PageViewService {
 
-
-    @Autowired
-    RedisUtil redisUtil;
     /**
      * 查询访问量
+     * @param gran 是否指定
      * @param startDate 开始时间
      * @param endDate 结束时间
      * @return
      */
     @Override
-    public PageView findPageView(String startDate , String endDate) {
+    public PageView findPageView(String gran ,String startDate , String endDate) {
         //判断是天/周/月/年
-        String gran = null;
-        try {
-            Date date1 = new SimpleDateFormat("yyyyMMdd").parse(startDate);
-            Date date2 = new SimpleDateFormat("yyyyMMdd").parse(endDate);
-            if (CycleUtil.isSameDate(date1,date2)){
-                gran = "hour";
-            }else if (CycleUtil.isSameWeek(date1,date2)){
-                gran = "week";
-            }else if (CycleUtil.isSameMonth(date1,date2)){
-                gran = "day";
-            }else if (CycleUtil.isSameYear(date1,date2)){
-                gran = "month";
-            }else {
-                gran = "month";
+        String grans = null;
+        if (gran!=null){
+            grans = gran;
+        }else {
+            try {
+                Date date1 = new SimpleDateFormat("yyyyMMdd").parse(startDate);
+                Date date2 = new SimpleDateFormat("yyyyMMdd").parse(endDate);
+                if (CycleUtil.isSameDate(date1,date2)){
+                    grans = "hour";
+                }else if (CycleUtil.isSameWeek(date1,date2)){
+                    grans = "week";
+                }else if (CycleUtil.isSameMonth(date1,date2)){
+                    grans = "day";
+                }else if (CycleUtil.isSameYear(date1,date2)){
+                    grans = "month";
+                }else {
+                    grans = "month";
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
 
-         String key = gran+"pv"+startDate+endDate;
-        PageView pageViewRedis = (PageView) redisUtil.get(key);
-        if (pageViewRedis!=null){
-            return pageViewRedis;
-         }
-        String result = TjApi.TjApi(gran,startDate,endDate);
+        String result = TjApi.TjApi(grans,startDate,endDate);
 
         PageView pageView = new PageView();
         JSONObject jsonObject1 =JSONObject.parseObject(result);
@@ -104,7 +101,6 @@ public class PageViewServiceImpl implements PageViewService {
             pageView.setDataDate(dateDataList);
 
         }
-        redisUtil.set(key,pageView,60000);
         return pageView;
     }
 }

@@ -24,10 +24,17 @@ public class PageViewController {
     @Autowired
     PageViewService pageViewService;
 
+    /**
+     * 查询访问量
+     * @param gran 是否指定日期
+     * @param startDate 开始时间
+     * @param endDate 结束时间
+     * @return
+     */
     @RequestMapping(value = "/findPageView",method = RequestMethod.GET)
-    public ResultContent findPageView(String startDate , String endDate){
+    public ResultContent findPageView(String gran, String startDate , String endDate){
         Results results = new Results();
-        PageView pageView = pageViewService.findPageView(startDate,endDate);
+        PageView pageView = pageViewService.findPageView(gran,startDate,endDate);
         results.setData(pageView);
         return new ResultContent(CommonCode.SUCCESS,results);
     }

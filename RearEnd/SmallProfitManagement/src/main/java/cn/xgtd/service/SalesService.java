@@ -2,6 +2,7 @@ package cn.xgtd.service;
 
 import cn.xgtd.domain.homePage.PayRecord;
 import cn.xgtd.domain.homePage.Sales;
+import cn.xgtd.domain.homePage.SalesDate;
 import cn.xgtd.domain.homePage.SalesRanking;
 
 import java.util.List;
@@ -24,6 +25,13 @@ public interface SalesService {
      * @return
      */
     public List<SalesRanking> findSalesRanking(Integer quantity);
+
+    /**
+     * 查询当天的销售分析
+     * @param day 当天时间
+     * @return
+     */
+    public List<SalesDate> findSalesDate(String day);
 
     /**
      * 查询商品支付记录

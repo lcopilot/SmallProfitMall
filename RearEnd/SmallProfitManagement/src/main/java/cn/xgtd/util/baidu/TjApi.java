@@ -1,5 +1,6 @@
 package cn.xgtd.util.baidu;
 
+import cn.xgtd.domain.homePage.Sales;
 import com.alibaba.fastjson.JSONObject;
 
 import java.text.DateFormat;
@@ -51,6 +52,11 @@ public class TjApi {
 
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        String a =  TjApi("month","20200501","20200605");
+        System.out.println(a);
     }
 
 

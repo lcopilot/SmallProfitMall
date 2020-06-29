@@ -2,6 +2,7 @@ package cn.xgtd.dao;
 
 import cn.xgtd.domain.homePage.PayRecord;
 import cn.xgtd.domain.homePage.Sales;
+import cn.xgtd.domain.homePage.SalesDate;
 import cn.xgtd.domain.homePage.SalesRanking;
 
 import java.util.List;
@@ -51,4 +52,13 @@ public interface SalesDao {
      * @return
      */
     public List<PayRecord> findPayRecord();
+
+    /**
+     * 当天销售数据
+     * @param day
+     * @return
+     */
+    public List<SalesDate>  findSalesDate(String day);
+
+//    public Double
 }
