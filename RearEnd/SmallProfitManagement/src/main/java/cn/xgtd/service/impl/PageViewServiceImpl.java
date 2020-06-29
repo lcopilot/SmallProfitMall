@@ -2,14 +2,18 @@ package cn.xgtd.service.impl;
 
 import cn.xgtd.domain.homePage.PageView;
 import cn.xgtd.service.PageViewService;
+import cn.xgtd.util.baidu.CycleUtil;
 import cn.xgtd.util.baidu.TjApi;
 import cn.xgtd.util.redis.RedisUtil;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,18 +29,37 @@ public class PageViewServiceImpl implements PageViewService {
     RedisUtil redisUtil;
     /**
      * 查询访问量
-     * @param  gran 按小时 按天 按月 按年
      * @param startDate 开始时间
      * @param endDate 结束时间
      * @return
      */
     @Override
-    public PageView findPageView(String gran,String startDate , String endDate) {
-     String key = gran+"pv"+startDate+endDate;
+    public PageView findPageView(String startDate , String endDate) {
+        //判断是天/周/月/年
+        String gran = null;
+        try {
+            Date date1 = new SimpleDateFormat("yyyyMMdd").parse(startDate);
+            Date date2 = new SimpleDateFormat("yyyyMMdd").parse(endDate);
+            if (CycleUtil.isSameDate(date1,date2)){
+                gran = "hour";
+            }else if (CycleUtil.isSameWeek(date1,date2)){
+                gran = "week";
+            }else if (CycleUtil.isSameMonth(date1,date2)){
+                gran = "day";
+            }else if (CycleUtil.isSameYear(date1,date2)){
+                gran = "month";
+            }else {
+                gran = "month";
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+         String key = gran+"pv"+startDate+endDate;
         PageView pageViewRedis = (PageView) redisUtil.get(key);
         if (pageViewRedis!=null){
             return pageViewRedis;
-     }
+         }
         String result = TjApi.TjApi(gran,startDate,endDate);
 
         PageView pageView = new PageView();

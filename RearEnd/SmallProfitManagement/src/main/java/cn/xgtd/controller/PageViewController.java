@@ -25,9 +25,9 @@ public class PageViewController {
     PageViewService pageViewService;
 
     @RequestMapping(value = "/findPageView",method = RequestMethod.GET)
-    public ResultContent findPageView(String gran,String startDate , String endDate){
+    public ResultContent findPageView(String startDate , String endDate){
         Results results = new Results();
-        PageView pageView = pageViewService.findPageView(gran,startDate,endDate);
+        PageView pageView = pageViewService.findPageView(startDate,endDate);
         results.setData(pageView);
         return new ResultContent(CommonCode.SUCCESS,results);
     }

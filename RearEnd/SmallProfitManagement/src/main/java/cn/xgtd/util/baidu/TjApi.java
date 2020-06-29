@@ -2,6 +2,10 @@ package cn.xgtd.util.baidu;
 
 import com.alibaba.fastjson.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class TjApi {
@@ -17,6 +21,7 @@ public class TjApi {
     public static String TjApi(String gran,String startDate , String endDate) {
         // TODO Auto-generated method stub
         try {
+
             JSONObject header = new JSONObject();
             header.put("username", "橘子味雪糕");//用户名
             header.put("password", "Qwerty2");//用户密码
@@ -30,6 +35,7 @@ public class TjApi {
             body.put("metrics", "visitor_count");
             body.put("method", "trend/time/a");
             body.put("gran", gran);
+
 
             String urlStr = "https://api.baidu.com/json/tongji/v1/ReportService/getData";
             String charset = "utf-8";
@@ -47,11 +53,7 @@ public class TjApi {
         return null;
     }
 
-    public static void main(String[] args) {
-//        Date a = new Date();
-//        if ()
-//
-//        String a = TjApi("month","2020/06/29","2020/06/29");
-//        System.out.println(a);
-    }
+
 }
+
+
