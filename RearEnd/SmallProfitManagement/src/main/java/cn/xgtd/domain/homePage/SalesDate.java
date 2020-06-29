@@ -17,18 +17,7 @@ public class SalesDate {
     private Integer count;
 
     /**日期访问量数据**/
-    private List dataDate;
-
-
-    public List getDataDate() {
-        return dataDate;
-    }
-
-    public void setDataDate(List dataDate) {
-        this.dataDate = dataDate;
-    }
-
-
+    private DataDate dataDate;
 
     public String getHour() {
         return hour;
@@ -44,5 +33,13 @@ public class SalesDate {
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    public DataDate getDataDate() {
+        return dataDate;
+    }
+
+    public void setDataDate(DataDate dataDate) {
+        this.dataDate = dataDate;
     }
 }

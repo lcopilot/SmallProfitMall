@@ -27,11 +27,13 @@ public interface SalesService {
     public List<SalesRanking> findSalesRanking(Integer quantity);
 
     /**
-     * 查询当天的销售分析
-     * @param day 当天时间
+     * 查询当前销售分析
+     * @param gran 类型
+     * @param startDate
+     * @param endDate
      * @return
      */
-    public List<SalesDate> findSalesDate(String day);
+    public List<SalesDate> findSalesDate(String gran, String startDate , String endDate );
 
     /**
      * 查询商品支付记录

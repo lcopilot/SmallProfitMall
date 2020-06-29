@@ -3,6 +3,7 @@ package cn.xgtd.service.impl;
 import cn.xgtd.dao.SalesDao;
 import cn.xgtd.domain.homePage.*;
 import cn.xgtd.service.SalesService;
+import cn.xgtd.util.baidu.CycleUtil;
 import lombok.Data;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.sql.Time;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -152,40 +154,45 @@ public class SalesServiceImpl implements SalesService {
 
     /**
      * 查询销售数据分析
-     * @param day 当天时间
+     * @param gran 类型
+     * @param startDate 开始时间
+     * @param endDate 结束时间
      * @return
      */
     @SneakyThrows
     @Override
-    public List<SalesDate> findSalesDate(String day) {
-        List<SalesDate> salesDates = salesDao.findSalesDate(day);
-        for (int i = 0; i <salesDates.size() ; i++) {
-             String hour = salesDates.get(i).getHour();
-                Date datas = new Date();
-                String str = day+" "+hour+":00:00";
-                datas = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(str);
+    public List<SalesDate> findSalesDate(String gran, String startDate , String endDate ) {
+       String grans = istryGrans(startDate,endDate);
+       if ("hour".equals(grans)){
+           List<SalesDate> salesDates = salesDao.findSalesDate(startDate);
+           for (int i = 0; i <salesDates.size() ; i++) {
+               String hour = salesDates.get(i).getHour();
+               Date datas = new Date();
+               String str = startDate+" "+hour+":00:00";
+               datas = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(str);
 
-                 Double dayTotal = null;
-                 Integer count = salesDates.get(i).getCount();
-                if (count>0){
-                    dayTotal = salesDao.findHourTotal(datas);
-                }else {
-                    dayTotal = 0.00;
-                }
+               Double dayTotal = null;
+               Integer count = salesDates.get(i).getCount();
+               if (count>0){
+                   dayTotal = salesDao.findHourTotal(datas);
+               }else {
+                   dayTotal = 0.00;
+               }
 
-                List list = new ArrayList();
-                if (i<10){
-                    str = day+" "+"0"+hour+":00:00";
-                }
-                DataDate dataDate = new DataDate();
-                dataDate.setData(dayTotal.toString());
-                dataDate.setDate(str);
-                list.add(dataDate);
-                salesDates.get(i).setDataDate(list);
-                salesDates.get(i).setHour(null);
-        }
+               if (i<10){
+                   str = startDate+" "+"0"+hour+":00:00";
+               }
+               DataDate dataDate = new DataDate();
+               dataDate.setData(dayTotal+"");
+               dataDate.setDate(str);
 
-        return salesDates;
+               salesDates.get(i).setDataDate(dataDate);
+               salesDates.get(i).setHour(null);
+           }
+           return salesDates;
+       }
+        return null;
+
     }
 
     /**
@@ -212,4 +219,26 @@ public class SalesServiceImpl implements SalesService {
     }
 
 
+    public String istryGrans(String startDate , String endDate ){
+        String grans = null;
+        try{
+            Date date1 = new SimpleDateFormat("yyyyMMdd").parse(startDate);
+            Date date2 = new SimpleDateFormat("yyyyMMdd").parse(endDate);
+            if (CycleUtil.isSameDate(date1,date2)){
+                grans = "hour";
+            }else if (CycleUtil.isSameWeek(date1,date2)){
+                grans = "week";
+            }else if (CycleUtil.isSameMonth(date1,date2)){
+                grans = "day";
+            }else if (CycleUtil.isSameYear(date1,date2)){
+                grans = "month";
+            }else {
+                grans = "month";
+            }
+        } catch (
+                ParseException e) {
+            e.printStackTrace();
+        }
+        return grans;
+    }
 }
