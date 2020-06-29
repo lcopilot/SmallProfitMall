@@ -1,9 +1,6 @@
 package cn.xgtd.controller;
 
-import cn.xgtd.domain.homePage.KeyWord;
-import cn.xgtd.domain.homePage.PayRecord;
-import cn.xgtd.domain.homePage.Sales;
-import cn.xgtd.domain.homePage.SalesRanking;
+import cn.xgtd.domain.homePage.*;
 import cn.xgtd.response.CommonCode;
 import cn.xgtd.response.Return.ResultContent;
 import cn.xgtd.response.Return.Results;
@@ -50,6 +47,21 @@ public class SalesController {
             quantity=7;
         }
         List<SalesRanking> salesRankingList =  salesService.findSalesRanking(quantity);
+        Results results = new Results();
+        results.setData(salesRankingList);
+        return new ResultContent(CommonCode.SUCCESS,results);
+    }
+
+    /**
+     * 查询销售额
+     * @param gran 查询类型
+     * @param startDate 开始时间
+     * @param endDate 结束时间
+     * @return
+     */
+    @RequestMapping(value = "/findSalesDate",method = RequestMethod.GET)
+    public ResultContent findSalesDate(String gran, String startDate , String endDate ){
+        List<SalesDate> salesRankingList =  salesService.findSalesDate(startDate);
         Results results = new Results();
         results.setData(salesRankingList);
         return new ResultContent(CommonCode.SUCCESS,results);

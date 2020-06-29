@@ -70,58 +70,58 @@
     <!--查询天销售额-->
     <select id="findSalesDate" resultType="cn.xgtd.domain.homePage.SalesDate">
         SELECT
-        timetable.HOUR HOUR,
-        ifnull( sumtable.count, 0 ) Count
+        timetable.HOUR AS hour,
+        ifnull( sumtable.count, 0 ) AS count
         FROM
             (
+          SELECT
+                00 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:00:00' ) HOUR UNION ALL
+                01 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:01:00' ) HOUR UNION ALL
+                02 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:02:00' ) HOUR UNION ALL
+                03 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:03:00' ) HOUR UNION ALL
+                04 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:04:00' ) HOUR UNION ALL
+                05 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:05:00' ) HOUR UNION ALL
+                06 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:06:00' ) HOUR UNION ALL
+                07 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:07:00' ) HOUR UNION ALL
+                08 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:08:00' ) HOUR UNION ALL
+                09 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:09:00' ) HOUR UNION ALL
+                10 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:10:00' ) HOUR UNION ALL
+                11 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:11:00' ) HOUR UNION ALL
+                12 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:12:00' ) HOUR UNION ALL
+                13 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:13:00' ) HOUR UNION ALL
+                14 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:14:00' ) HOUR UNION ALL
+                15 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:15:00' ) HOUR UNION ALL
+                16 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:16:00' ) HOUR UNION ALL
+                17 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:17:00' ) HOUR UNION ALL
+                18 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:18:00' ) HOUR UNION ALL
+                19 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:18:00' ) HOUR UNION ALL
+                20 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:20:00' ) HOUR UNION ALL
+                21 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:21:00' ) HOUR UNION ALL
+                22 HOUR UNION ALL
             SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:22:00' ) HOUR UNION ALL
-            SELECT
-                DATE_FORMAT( CURRENT_DATE, '%Y-%m-%d %H:23:00' ) HOUR
+                23 HOUR
             ) timetable
             LEFT JOIN (
             SELECT HOUR
@@ -131,7 +131,7 @@
                 userOrder
             WHERE
 
-                DATE_FORMAT(paymentTime,'%Y%m%d')  = #{day}
+                DATE_FORMAT(paymentTime,'%Y-%m-%d')  = #{day}
             GROUP BY
                 date_format(paymentTime, '%Y%m%d-%H' ),
                 HOUR
@@ -139,4 +139,17 @@
         ORDER BY
             HOUR
 </select>
+
+    <!--查询一天的数据-->
+    <select id="findHourTotal" resultType="java.lang.Double">
+        SELECT TRUNCATE
+            ( SUM( orderTotal ), 2 )
+        FROM
+            userOrder
+        WHERE
+            orderState >= 2
+            AND paymentTime <![CDATA[<= ]]> date_add( #{date}, INTERVAL 1 HOUR )
+
+
+    </select>
 </mapper>

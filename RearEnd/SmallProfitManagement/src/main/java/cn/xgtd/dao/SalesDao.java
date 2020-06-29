@@ -5,6 +5,7 @@ import cn.xgtd.domain.homePage.Sales;
 import cn.xgtd.domain.homePage.SalesDate;
 import cn.xgtd.domain.homePage.SalesRanking;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -60,5 +61,10 @@ public interface SalesDao {
      */
     public List<SalesDate>  findSalesDate(String day);
 
-//    public Double
+    /**
+     * 查询某个小时
+     * @param date
+     * @return
+     */
+    public Double findHourTotal(Date date);
 }

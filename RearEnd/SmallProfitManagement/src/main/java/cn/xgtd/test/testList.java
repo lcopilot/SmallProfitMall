@@ -1,6 +1,11 @@
 package cn.xgtd.test;
 
+import lombok.Data;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,8 +37,13 @@ public class testList {
       System.out.println(list3);
     }
 
-    public static void main(String[] args) {
-        testList testList = new testList();
-        testList.test();
-    }
+    public static void main(String[] args) throws ParseException {
+
+
+   }
+
+
+
+
+
 }

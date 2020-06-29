@@ -80,7 +80,12 @@ public class PageViewServiceImpl implements PageViewService {
                 List dateLists = (List) dateList.get(i);
                 List dataLists = (List) dataList.get(i);
                 List dateDataArray = new ArrayList();
-                String datas = dateLists.get(0).toString();
+                String datas = null;
+                if ("day".equals(grans)){
+                    datas = dateLists.get(0).toString()+"-";
+                }else {
+                    datas = dateLists.get(0).toString();
+                }
                 String dates = dataLists.get(0).toString();
                 dateDataArray.add(datas);
                 if ("--".equals(dates)){
