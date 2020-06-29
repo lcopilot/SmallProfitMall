@@ -191,8 +191,21 @@ public class SalesServiceImpl implements SalesService {
                salesDates.get(i).setHour(null);
            }
            return salesDates;
+       }else {
+           List<SalesDate> salesDates = salesDao.findMonth(startDate,endDate);
+           for (int i = 0; i <salesDates.size() ; i++) {
+               DataDate dataDate = new DataDate();
+               Double DaySale = salesDates.get(i).getDaySale();
+               Date date = salesDates.get(i).getDate();
+               SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+               //获取String类型的时间
+               String createdate = sdf.format(date);
+               dataDate.setDate(createdate);
+               dataDate.setData(DaySale+"");
+               salesDates.get(i).setDataDate(dataDate);
+           }
+           return salesDates;
        }
-        return null;
 
     }
 
@@ -226,8 +239,8 @@ public class SalesServiceImpl implements SalesService {
     public String istryGrans(String startDate , String endDate ){
         String grans = null;
         try{
-            Date date1 = new SimpleDateFormat("yyyyMMdd").parse(startDate);
-            Date date2 = new SimpleDateFormat("yyyyMMdd").parse(endDate);
+            Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+            Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
             if (CycleUtil.isSameDate(date1,date2)){
                 grans = "hour";
             }else if (CycleUtil.isSameWeek(date1,date2)){

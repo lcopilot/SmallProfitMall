@@ -1,10 +1,7 @@
 package cn.xgtd.domain.homePage;
 
-import javax.xml.crypto.Data;
-import java.sql.Time;
 import java.util.Date;
-import java.util.List;
-import java.util.Timer;
+
 
 /**
  * @author Kite
@@ -15,9 +12,21 @@ public class SalesDate {
     private String hour;
     /**数据内容**/
     private Integer count;
-
     /**日期访问量数据**/
     private DataDate dataDate;
+
+    /**时间段**/
+    private Date date;
+    /**今日金额**/
+    private Double daySale;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public String getHour() {
         return hour;
@@ -33,6 +42,14 @@ public class SalesDate {
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    public Double getDaySale() {
+        return daySale;
+    }
+
+    public void setDaySale(Double daySale) {
+        this.daySale = daySale;
     }
 
     public DataDate getDataDate() {

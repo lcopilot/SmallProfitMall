@@ -4,6 +4,8 @@ import cn.xgtd.domain.homePage.PayRecord;
 import cn.xgtd.domain.homePage.Sales;
 import cn.xgtd.domain.homePage.SalesDate;
 import cn.xgtd.domain.homePage.SalesRanking;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
 import java.util.List;
@@ -65,7 +67,7 @@ public interface SalesDao {
      * @param day
      * @return
      */
-    public List<SalesDate> findSalesDate(String day);
+    public  List<SalesDate> findSalesDate(String day);
 
     /**
      * 查询某个小时
@@ -73,4 +75,13 @@ public interface SalesDao {
      * @return
      */
     public Double findHourTotal(Date date);
+
+    /**
+     * 按范围查询数据
+     * @param startDate 开始时间
+     * @param endDate 结束时间
+     * @return
+     */
+    public List<SalesDate> findMonth(@Param("startDate") String startDate ,@Param("endDate") String endDate );
+
 }

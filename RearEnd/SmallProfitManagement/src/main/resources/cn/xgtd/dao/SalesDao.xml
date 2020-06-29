@@ -54,7 +54,6 @@
                 ON pb.ProductId=pp.ProductId
         order by
             pp.ProductSales desc LIMIT 0 , #{quantity}
-
     </select>
 
 
@@ -163,7 +162,19 @@
         WHERE
             orderState >= 2
         AND DATE_FORMAT( paymentTime, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+    </select>
 
+    <!--按时间销售数据查询-->
+    <select id="findMonth" resultType="cn.xgtd.domain.homePage.SalesDate">
+    SELECT
+        daySale,
+        date
+    FROM
+        product_data
+    WHERE
+        date <![CDATA[<= ]]> #{startDate}
+            AND
+        date  <![CDATA[>= ]]>#{endDate}
     </select>
 
 </mapper>
