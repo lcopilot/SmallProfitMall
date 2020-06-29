@@ -1,28 +1,56 @@
 .detailed-chart {
   .ant-card {
     width: 100%;
-    .ant-btn-dashed{
+
+    .ant-btn-dashed {
       border: none;
     }
   }
-  .detailed-chart-columnar{
+
+  .detailed-chart-columnar {
     padding: 0 0 3.2rem 3.2rem;
-    h4{
+
+    h4 {
       margin-bottom: 2.08rem;
     }
   }
-  .detailed-list{
+
+  .detailed-list {
     padding: 0 3.2rem 3.2rem 7.2rem;
-    .ant-list-item{
+
+    .ant-list-item {
+      justify-content: left;
       border: none;
       padding: 1.28rem 0 0 0;
     }
-    .ant-list-items{
-      margin:1.6rem 0 0
+
+    .ant-list-items {
+      margin: 1.6rem 0 0;
+      //  前3的子元素
+      :nth-of-type(n+4) {
+        .ant-scroll-number {
+          background-color: transparent;
+          color: #314659
+        }
+      }
+      .ant-scroll-number {
+        background-color: #314659;
+        color: #ffffff;
+      }
+
     }
-    .ant-list-header{
+
+    .ant-list-header {
       padding: 0 0 .8rem 0;
       border: none;
+    }
+    .detailed-list-productName-link{
+      text-align: left;
+      margin-left: 1rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #595959;
     }
   }
 }

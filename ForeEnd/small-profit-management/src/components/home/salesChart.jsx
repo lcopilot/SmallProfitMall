@@ -29,10 +29,9 @@ const SalesChart = () => {
     currentPage: PAGINATION.defaultCurrent,
     pageSize: 4,
   })
-  const [skeletonLoad, setSkeletonLoad] = useState({
-    searchRankingLoad:true,
-  })
-
+  const [searchRankingLoad, setSearchRankingLoad] = useState(true)
+  const [salesCategoryLoad, setSalesCategoryLoad] = useState(true)
+  const [salesCategoryData, setSalesCategoryData] = useState([])
 
   const columns = [
     {
@@ -89,17 +88,17 @@ const SalesChart = () => {
       sun: 50,
     }
   ];
-  const dv = new DataView();
-  dv.source(data1).transform({
+  const salesData = new DataView();
+  salesData.source(salesCategoryData).transform({
     type: "percent",
-    field: "count",
-    dimension: "item",
+    field: "salesTotal",
+    dimension: "categoryContent",
     as: "percent"
   });
   const cols = {
     percent: {
       formatter: val => {
-        val = val * 100 + "%";
+        val = (val * 100).toFixed(2) + "%";
         return val;
       }
     }
@@ -218,37 +217,42 @@ const SalesChart = () => {
     }
   };
 
+  //获取搜索排行
   const getSearchRanking = (currentPage, pageSize) => {
-    let load=JSON.parse(JSON.stringify(skeletonLoad))
-    load.searchRankingLoad=true
-    setSkeletonLoad(load)
+    setSearchRankingLoad(true)
     setSearchPagination({
       currentPage: currentPage ? currentPage : PAGINATION.defaultCurrent,
       pageSize: pageSize ? pageSize : searchPagination.pageSize,
     })
-    const params={
+    const params = {
       currentPage: currentPage ? currentPage : PAGINATION.defaultCurrent,
       pageSize: pageSize ? pageSize : searchPagination.pageSize,
     }
     indexAPi.getSearchRanking(params).then(res => {
-      if (res.success){
+      if (res.success) {
         setSearchList(res.pagination)
-        let load=JSON.parse(JSON.stringify(skeletonLoad))
-        load.searchRankingLoad=false
-        setSkeletonLoad(load)
+        setSearchRankingLoad(false)
       }
     })
   }
+
+  //获取销售额类占比
+  const getSalesCategory = () => {
+    indexAPi.getSalesCategory().then(res => {
+      if (res.success){
+        setSalesCategoryData(res.results.data)
+        setSalesCategoryLoad(false)
+      }
+    })
+  }
+
   useEffect(() => {
     getSearchRanking()
+    getSalesCategory()
     return () => {
     }
   }, [])
 
-  const proportionRa = (<Radio.Group onChange={onChange} defaultValue="a">
-    <Radio.Button value="a">全部渠道</Radio.Button>
-    <Radio.Button value="b">Shanghai</Radio.Button>
-  </Radio.Group>)
 
   return (
       <div className="sales-chart">
@@ -351,33 +355,34 @@ const SalesChart = () => {
                 </Col>
               </Row>
               <div>
-                <Skeleton active loading={skeletonLoad.searchRankingLoad}>
-                <Table  columns={columns}  rowKey={(item) => item.ranking} dataSource={searchList.list} pagination={{
-                  onShowSizeChange: (page, pageSize) => {
-                    getSearchRanking(page, pageSize)
-                  },
-                  onChange: (current, size) => {
-                    getSearchRanking(current, size)
-                  },
-                  current: searchPagination.currentPage,
-                  pageSize: searchPagination.pageSize,
-                  total: searchList.totalCount,
-                  ...PAGINATION
-                }} size="middle"/></Skeleton>
+                <Skeleton active loading={searchRankingLoad}>
+                  <Table columns={columns} rowKey={(item) => item.ranking}
+                         dataSource={searchList.list} pagination={{
+                    onShowSizeChange: (page, pageSize) => {
+                      getSearchRanking(page, pageSize)
+                    },
+                    onChange: (current, size) => {
+                      getSearchRanking(current, size)
+                    },
+                    current: searchPagination.currentPage,
+                    pageSize: searchPagination.pageSize,
+                    total: searchList.totalCount,
+                    ...PAGINATION
+                  }} size="middle"/></Skeleton>
               </div>
             </Card>
           </Col>
           <Col xs={24} sm={24} md={24} lg={12} xl={12}>
             <Card title='销售额类别占比' className="sales-chart-proportion"
-                  extra={proportionRa}>
+                  loading={salesCategoryLoad}>
               <div>
                 <Chart
-                    data={dv}
+                    data={salesData}
                     scale={cols}
-                    height={500} forceFit={true}
+                    height={478} forceFit={true}
                     padding={"auto"}
                 >
-                  <Coord type={"theta"} radius={0.75} innerRadius={0.68}/>
+                  <Coord type="theta" radius={0.75} innerRadius={0.68}/>
                   <Axis name="percent"/>
                   <Legend
                       itemTpl={'<li class="g2-legend-list-item item-{index} {checked}" data-color="{originColor}" data-value="{originValue}" style="cursor: pointer;font-size: 14px;">'
@@ -390,22 +395,14 @@ const SalesChart = () => {
                       showTitle={false}
                       itemTpl="<li><span style=&quot;background-color:{color};&quot; class=&quot;g2-tooltip-marker&quot;></span>{name}: {value}</li>"
                   />
-                  <Guide>
-                    <Guide.Text
-                        top
-                        position={['50%', '50%']}
-                        content='总销量200'
-                        style={{textAlign: 'center', fontSize: 24}}
-                    />
-                  </Guide>
                   <Geom
                       type="intervalStack"
                       position="percent"
-                      color="item"
+                      color="categoryContent"
                       tooltip={[
-                        "item*percent",
+                        "categoryContent*percent",
                         (item, percent) => {
-                          percent = percent * 100 + "%";
+                          percent = (percent * 100).toFixed(2)+ "%";
                           return {
                             name: item,
                             value: percent
@@ -420,7 +417,7 @@ const SalesChart = () => {
                     <Label
                         content="percent"
                         formatter={(val, item) => {
-                          return item.point.item + ": " + val;
+                          return item.point.categoryContent + ": " + val;
                         }}
                     />
                   </Geom>

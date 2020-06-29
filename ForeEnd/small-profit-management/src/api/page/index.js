@@ -129,3 +129,23 @@ export const getSearchRanking=(params)=>{
 export const getTotalSale=()=>{
   return http.requestGet(apiUrl+'/SalesController/findSales')
 }
+//商品销量排行
+export const getProductRanking=(params)=>{
+  return http.requestGetFormUr(apiUrl+'/SalesController/findSalesRanking',params)
+}
+//获取访问量
+export const getViews=(params)=>{
+  return http.requestGetFormUr(apiUrl+'/PageViewController/findPageView',params)
+}
+//获取销售额
+export const getSale=(params)=>{
+  return http.requestGetFormUr(apiUrl+'/SalesController/findSalesDate',params)
+}
+//获取支付数
+export const getPayRecord=()=>{
+  return http.requestGet(apiUrl+'/SalesController/findPayRecord')
+}
+//获取销售额类占比
+export const getSalesCategory=()=>{
+  return http.requestGet(apiUrl+'/SalesController/findSalesCategoryTotal')
+}
