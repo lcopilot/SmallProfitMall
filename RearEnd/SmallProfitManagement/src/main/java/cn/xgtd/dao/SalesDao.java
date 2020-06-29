@@ -55,11 +55,17 @@ public interface SalesDao {
     public List<PayRecord> findPayRecord();
 
     /**
+     * 查询支付数量
+     * @return
+     */
+    public Integer findPayQuantity();
+
+    /**
      * 当天销售数据
      * @param day
      * @return
      */
-    public List<SalesDate>  findSalesDate(String day);
+    public List<SalesDate> findSalesDate(String day);
 
     /**
      * 查询某个小时

@@ -163,6 +163,7 @@ public class SalesServiceImpl implements SalesService {
     @Override
     public List<SalesDate> findSalesDate(String gran, String startDate , String endDate ) {
        String grans = istryGrans(startDate,endDate);
+       //按天
        if ("hour".equals(grans)){
            List<SalesDate> salesDates = salesDao.findSalesDate(startDate);
            for (int i = 0; i <salesDates.size() ; i++) {
@@ -206,14 +207,17 @@ public class SalesServiceImpl implements SalesService {
         for (int i = 0; i <payRecords.size(); i++) {
             Date date = payRecords.get(i).getDate();
             Integer dayPayQuantity = payRecords.get(i).getDayPayQuantity();
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String dateString = formatter.format(date);
-            String[] dataDate = new String[1];
-            dataDate[0]=dateString+","+dayPayQuantity.toString();
+
+            DataDate dataDate = new DataDate();
+            dataDate.setData(dateString+"");
+            dataDate.setDate(dayPayQuantity+"");
             list.add(dataDate);
         }
         PayRecord payRecord = new PayRecord();
-        payRecord.setDayPayQuantity(payRecords.get(list.size()-1).getDayPayQuantity());
+        Integer payQuantity = salesDao.findPayQuantity();
+        payRecord.setDayPayQuantity(payQuantity);
         payRecord.setDataDate(list);
         return payRecord;
     }

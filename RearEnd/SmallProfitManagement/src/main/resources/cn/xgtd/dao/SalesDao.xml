@@ -64,6 +64,7 @@
            day_pay_quantity,date
         FROM
             product_data
+         WHERE  DATE_FORMAT( date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
     </select>
 
 
@@ -152,4 +153,17 @@
 
 
     </select>
+
+    <!--查询支付数量-->
+    <select id="findPayQuantity" resultType="java.lang.Integer">
+     SELECT
+        count(*)
+        FROM
+            userOrder
+        WHERE
+            orderState >= 2
+        AND DATE_FORMAT( paymentTime, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+
+    </select>
+
 </mapper>
