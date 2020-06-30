@@ -909,6 +909,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Integer updateProductState(Integer productId, Boolean state) {
         Integer result = productDao.updateProductState(productId, state);
+        redisUtil.del("recommend");
         return result;
     }
 
