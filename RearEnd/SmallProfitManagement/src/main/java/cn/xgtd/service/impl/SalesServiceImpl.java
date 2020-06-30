@@ -77,6 +77,9 @@ public class SalesServiceImpl implements SalesService {
         if (weekSales!=null && lastWeekSales==null){
             sales.setWeekYoY(lastWeekSales);
         }
+        if (yesterdaySales == null){
+            yesterdaySales = 0.00;
+        }
         //昨日销售额
         BigDecimal bd1 = new BigDecimal(Double.toString(yesterdaySales));
         //前日销售额
