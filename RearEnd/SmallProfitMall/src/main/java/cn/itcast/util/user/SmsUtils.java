@@ -24,13 +24,13 @@ import java.util.Date;
 public class SmsUtils {
 
     // 产品名称:云通信短信API产品,开发者无需替换
-    static final String product = "Dysmsapi";
+    static final String product = "xxx";
     // 产品域名,开发者无需替换
-    static final String domain = "dysmsapi.aliyuncs.com";
+    static final String domain = "xxx";
 
     // 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)，非常重要。不要泄露给其他人
-    static final String accessKeyId = "LTAI4FukgEjff3TXrQcLg56o";
-    static final String accessKeySecret = "ZAJtjljcEhwX9vPjenyJRA1C9148xC";
+    static final String accessKeyId = "xxx";
+    static final String accessKeySecret = "xxx";
 
 
     public static boolean sendRegistSms(String phone, String code) throws ClientException {
@@ -85,7 +85,7 @@ public class SmsUtils {
     }
 
     public static void main(String[] args) throws ClientException {
-       Boolean b = sendLoginSms("18598814121","7845");
+       Boolean b = sendLoginSms("xxx","xxx");
     }
 
     /**

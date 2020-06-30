@@ -9,9 +9,9 @@ package cn.xgtd.util.qiNiuYun;
 public class AccountMgr {
 
     //AK
-    public static final String ACCESS_KEY = "fofgfa3eYCJZod3TyGbyJPzA1nndXR4ZO0MzICAV";
+    public static final String ACCESS_KEY = "xxx";
     //SK
-    public static final String SECRET_KEY = "Z262ykEym0rqbrW7FfyyYkHqvqNmmU2d9UjwNDcp";
+    public static final String SECRET_KEY = "xxx";
 
 
 }
