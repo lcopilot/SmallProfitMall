@@ -118,7 +118,7 @@ public class CommentServiceImpl implements CommentService {
         for (int i = 0; i <footprints.size() ; i++) {
             Boolean fign = footprints.get(i).getAnonymity();
             if (fign){
-                footprints.get(i).setUserImage("http://img.fhxasdsada.xyz/iduyadfgjdekldjhf.png");
+                footprints.get(i).setUserImage("http://img.isdfmk.xyz/iduyadfgjdekldjhf.png");
                 footprints.get(i).setUserName("匿名用户");
             }
         }
