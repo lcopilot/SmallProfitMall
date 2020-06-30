@@ -287,7 +287,7 @@
       login(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            const tencentCode = new TencentCaptcha('2093846053', function (result) {
+            const tencentCode = new TencentCaptcha('xxx', function (result) {
               if (result.ret === 0) {
                 this.loginForm.ticket = result.ticket;
                 this.loginForm.randStr = result.randstr;

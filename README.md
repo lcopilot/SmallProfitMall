@@ -7,32 +7,43 @@
 
 
 
+#### 项目目录
+
+```
+|-- ForeEnd 前端
+|   |-- small-profit-management 前端后台
+|   `-- small_profit_mall  前端前台
+|-- README.md
+|-- RearEnd  后端
+|   |-- SmallProfitMall 后端前台
+|   `-- SmallProfitManagement 后端后台
+`-- SmallProfitMall.sql 数据库文件
+```
+
+
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+```
+npm i 或者 yarn
+small_profit_mall    		npm run serve
+small-profit-management		npm start	
+```
 
 
-#### 码云特技
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5.  码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+#### 项目预览
+
+![image-20200630151517453](http://ww3.sinaimg.cn/large/006djwNZgy1ggac88a5v0j31hc0p2npf.jpg)
+
+![image-20200630151542334](http://ww3.sinaimg.cn/large/006djwNZgy1ggac88pb3lj31hc0p24f2.jpg)
+
+![image-20200630151553697](http://ww3.sinaimg.cn/large/006djwNZgy1ggac894v1rj31hc0p2tk8.jpg)
+
+![image-20200630151606893](http://ww3.sinaimg.cn/large/006djwNZgy1ggac8a1lnnj31hc0p242y.jpg)
+
+![img](file:///E:\QQLive\SysData\聊天记录\2353383370\Image\C2C\DE`H[HAQ]P`DGJ3SBGNYI]N.png)
+
+![img](file:///E:\QQLive\SysData\聊天记录\2353383370\Image\C2C\R7A`26}7MOX70{CN_ZQ324H.png)
+
+![55555](http://ww3.sinaimg.cn/large/006djwNZgy1ggac8adiuyj31ha0p9jvv.jpg)
