@@ -1,5 +1,5 @@
-import {Radio, Card, Col, Row, Table, Skeleton} from "antd";
-import React, {useEffect, useState} from "react";
+import { Radio, Card, Col, Row, Table, Skeleton } from "antd";
+import React, { useEffect, useState } from "react";
 import './salesChart.less'
 import {
   CaretDownOutlined,
@@ -20,7 +20,7 @@ import DataSet from "@antv/data-set";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 import *as indexAPi from '../../api/page/index'
 import storageUtils from "../../utils/storageUtils";
-import {PAGINATION} from "../../config/sysConfig";
+import { PAGINATION } from "../../config/sysConfig";
 
 const SalesChart = () => {
 
@@ -56,38 +56,9 @@ const SalesChart = () => {
     },
   ];
 
-  function onChange(e) {
-    console.log(`radio checked:${e.target.value}`);
-  }
 
-  const {DataView} = DataSet;
-  const data1 = [
-    {
-      item: "事例一",
-      count: 40,
-      sun: 50,
-    },
-    {
-      item: "事例二",
-      count: 21,
-      sun: 50,
-    },
-    {
-      item: "事例三",
-      count: 17,
-      sun: 50,
-    },
-    {
-      item: "事例四",
-      count: 13,
-      sun: 50,
-    },
-    {
-      item: "事例五",
-      count: 9,
-      sun: 50,
-    }
-  ];
+  const { DataView } = DataSet;
+
   const salesData = new DataView();
   salesData.source(salesCategoryData).transform({
     type: "percent",
@@ -239,7 +210,7 @@ const SalesChart = () => {
   //获取销售额类占比
   const getSalesCategory = () => {
     indexAPi.getSalesCategory().then(res => {
-      if (res.success){
+      if (res.success) {
         setSalesCategoryData(res.results.data)
         setSalesCategoryLoad(false)
       }
@@ -255,109 +226,109 @@ const SalesChart = () => {
 
 
   return (
-      <div className="sales-chart">
-        <Row gutter={20}>
-          <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-            <Card title="线上热门搜索" className="sales-chart-search"
-                  extra={<EllipsisOutlined/>}>
-              <Row gutter={[68, 0]}>
-                <Col xs={24} sm={12} md={12} lg={12} xl={12}
-                     className="sales-chart-search-user">
-                  <div>
-                    <div className="sales-chart-search-user-title">
-                          <span>
-                            搜索用户数
+    <div className="sales-chart">
+      <Row gutter={20}>
+        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+          <Card title="线上热门搜索" className="sales-chart-search"
+            extra={<EllipsisOutlined />}>
+            <Row gutter={[68, 0]}>
+              <Col xs={24} sm={12} md={12} lg={12} xl={12}
+                className="sales-chart-search-user">
+                <div>
+                  <div className="sales-chart-search-user-title">
+                    <span>
+                      搜索用户数
                           </span>
-                      <InfoCircleOutlined/>
-                    </div>
-                    <div className="sales-chart-search-user-count">
-                          <span>
-                            1234
-                          </span>
-                      <span>
-                             12
-                          </span>
-                      {React.createElement(
-                          true ? CaretUpOutlined : CaretDownOutlined)}
-                    </div>
+                    <InfoCircleOutlined />
                   </div>
-                  <Chart
-                      data={dv2}
-                      padding={"auto"}
-                      scale={scale}
-                      height={70} forceFit={true}
-                  >
+                  <div className="sales-chart-search-user-count">
+                    <span>
+                      1234
+                          </span>
+                    <span>
+                      12
+                          </span>
+                    {React.createElement(
+                      true ? CaretUpOutlined : CaretDownOutlined)}
+                  </div>
+                </div>
+                <Chart
+                  data={dv2}
+                  padding={"auto"}
+                  scale={scale}
+                  height={70} forceFit={true}
+                >
 
-                    <Tooltip showTitle={false}
-                             itemTpl='<li data-index={index}>
+                  <Tooltip showTitle={false}
+                    itemTpl='<li data-index={index}>
                   <span style="background-color:{color};width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px;"></span>
                   <span style="padding-right: 1rem;">{title}</span>{value}</li>'
-                             crosshairs={{
-                               type: 'rect' || 'x' || 'y' || 'cross'
-                             }}/>
+                    crosshairs={{
+                      type: 'rect' || 'x' || 'y' || 'cross'
+                    }} />
 
-                    <Geom type="area" position="year*value" color="type"
-                          shape="smooth"/>
-                    <Geom
-                        type="line"
-                        position="year*value"
-                        color="type"
-                        shape="smooth"
-                        size={2}
-                    />
-                  </Chart>
-                </Col>
-                <Col xs={24} sm={12} md={12} lg={12} xl={12}
-                     className="sales-chart-search-user">
-                  <div>
-                    <div className="sales-chart-search-user-title">
-                          <span>
-                            人均搜索次数
+                  <Geom type="area" position="year*value" color="type"
+                    shape="smooth" />
+                  <Geom
+                    type="line"
+                    position="year*value"
+                    color="type"
+                    shape="smooth"
+                    size={2}
+                  />
+                </Chart>
+              </Col>
+              <Col xs={24} sm={12} md={12} lg={12} xl={12}
+                className="sales-chart-search-user">
+                <div>
+                  <div className="sales-chart-search-user-title">
+                    <span>
+                      人均搜索次数
                           </span>
-                      <InfoCircleOutlined/>
-                    </div>
-                    <div className="sales-chart-search-user-count">
-                          <span>
-                            2.7
-                          </span>
-                      <span>
-                             26.2
-                          </span>
-                      {React.createElement(
-                          true ? CaretUpOutlined : CaretDownOutlined)}
-                    </div>
+                    <InfoCircleOutlined />
                   </div>
-                  <Chart
-                      data={dv2}
-                      padding={"auto"}
-                      scale={scale}
-                      height={70} forceFit={true}
-                  >
+                  <div className="sales-chart-search-user-count">
+                    <span>
+                      2.7
+                          </span>
+                    <span>
+                      26.2
+                          </span>
+                    {React.createElement(
+                      true ? CaretUpOutlined : CaretDownOutlined)}
+                  </div>
+                </div>
+                <Chart
+                  data={dv2}
+                  padding={"auto"}
+                  scale={scale}
+                  height={70} forceFit={true}
+                >
 
-                    <Tooltip showTitle={false}
-                             itemTpl='<li data-index={index}>
+                  <Tooltip showTitle={false}
+                    itemTpl='<li data-index={index}>
                   <span style="background-color:{color};width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px;"></span>
                   <span style="padding-right: 1rem;">{title}</span>{value}</li>'
-                             crosshairs={{
-                               type: 'rect' || 'x' || 'y' || 'cross'
-                             }}/>
+                    crosshairs={{
+                      type: 'rect' || 'x' || 'y' || 'cross'
+                    }} />
 
-                    <Geom type="area" position="year*value" color="type"
-                          shape="smooth"/>
-                    <Geom
-                        type="line"
-                        position="year*value"
-                        color="type"
-                        shape="smooth"
-                        size={2}
-                    />
-                  </Chart>
-                </Col>
-              </Row>
-              <div>
-                <Skeleton active loading={searchRankingLoad}>
-                  <Table columns={columns} rowKey={(item) => item.ranking}
-                         dataSource={searchList.list} pagination={{
+                  <Geom type="area" position="year*value" color="type"
+                    shape="smooth" />
+                  <Geom
+                    type="line"
+                    position="year*value"
+                    color="type"
+                    shape="smooth"
+                    size={2}
+                  />
+                </Chart>
+              </Col>
+            </Row>
+            <div>
+              <Skeleton active loading={searchRankingLoad}>
+                <Table columns={columns} rowKey={(item) => item.ranking}
+                  dataSource={searchList.list} pagination={{
                     onShowSizeChange: (page, pageSize) => {
                       getSearchRanking(page, pageSize)
                     },
@@ -368,65 +339,65 @@ const SalesChart = () => {
                     pageSize: searchPagination.pageSize,
                     total: searchList.totalCount,
                     ...PAGINATION
-                  }} size="middle"/></Skeleton>
-              </div>
-            </Card>
-          </Col>
-          <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-            <Card title='销售额类别占比' className="sales-chart-proportion"
-                  loading={salesCategoryLoad}>
-              <div>
-                <Chart
-                    data={salesData}
-                    scale={cols}
-                    height={478} forceFit={true}
-                    padding={"auto"}
+                  }} size="middle" /></Skeleton>
+            </div>
+          </Card>
+        </Col>
+        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+          <Card title='销售额类别占比' className="sales-chart-proportion"
+            loading={salesCategoryLoad}>
+            <div>
+              <Chart
+                data={salesData}
+                scale={cols}
+                height={478} forceFit={true}
+                padding={"auto"}
+              >
+                <Coord type="theta" radius={0.75} innerRadius={0.68} />
+                <Axis name="percent" />
+                <Legend
+                  itemTpl={'<li class="g2-legend-list-item item-{index} {checked}" data-color="{originColor}" data-value="{originValue}" style="cursor: pointer;font-size: 14px;">'
+                    + '<i class="g2-legend-marker" style="width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:10px;background-color: {color};"></i>'
+                    + '<span class="g2-legend-text">{value}</span>'
+                    + '</li>'}
+                  position="right"
+                />
+                <Tooltip
+                  showTitle={false}
+                  itemTpl="<li><span style=&quot;background-color:{color};&quot; class=&quot;g2-tooltip-marker&quot;></span>{name}: {value}</li>"
+                />
+                <Geom
+                  type="intervalStack"
+                  position="percent"
+                  color="categoryContent"
+                  tooltip={[
+                    "categoryContent*percent",
+                    (item, percent) => {
+                      percent = (percent * 100).toFixed(2) + "%";
+                      return {
+                        name: item,
+                        value: percent
+                      };
+                    }
+                  ]}
+                  style={{
+                    lineWidth: 1,
+                    stroke: "#fff"
+                  }}
                 >
-                  <Coord type="theta" radius={0.75} innerRadius={0.68}/>
-                  <Axis name="percent"/>
-                  <Legend
-                      itemTpl={'<li class="g2-legend-list-item item-{index} {checked}" data-color="{originColor}" data-value="{originValue}" style="cursor: pointer;font-size: 14px;">'
-                      + '<i class="g2-legend-marker" style="width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:10px;background-color: {color};"></i>'
-                      + '<span class="g2-legend-text">{value}</span>'
-                      + '</li>'}
-                      position="right"
+                  <Label
+                    content="percent"
+                    formatter={(val, item) => {
+                      return item.point.categoryContent + ": " + val;
+                    }}
                   />
-                  <Tooltip
-                      showTitle={false}
-                      itemTpl="<li><span style=&quot;background-color:{color};&quot; class=&quot;g2-tooltip-marker&quot;></span>{name}: {value}</li>"
-                  />
-                  <Geom
-                      type="intervalStack"
-                      position="percent"
-                      color="categoryContent"
-                      tooltip={[
-                        "categoryContent*percent",
-                        (item, percent) => {
-                          percent = (percent * 100).toFixed(2)+ "%";
-                          return {
-                            name: item,
-                            value: percent
-                          };
-                        }
-                      ]}
-                      style={{
-                        lineWidth: 1,
-                        stroke: "#fff"
-                      }}
-                  >
-                    <Label
-                        content="percent"
-                        formatter={(val, item) => {
-                          return item.point.categoryContent + ": " + val;
-                        }}
-                    />
-                  </Geom>
-                </Chart>
-              </div>
-            </Card>
-          </Col>
-        </Row>
-      </div>
+                </Geom>
+              </Chart>
+            </div>
+          </Card>
+        </Col>
+      </Row>
+    </div>
   )
 }
 
