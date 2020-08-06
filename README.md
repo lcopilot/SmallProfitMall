@@ -1,7 +1,7 @@
 # SmallProfitMall
 
 #### 简介
-本项目为商城项目
+基于 ssm 的商城项目
 前台使用 vue+element ui +ssm
 后台使用 React+Ant +ssm
 
