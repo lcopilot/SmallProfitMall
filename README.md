@@ -31,8 +31,11 @@ small-profit-management		npm start
 ```
 
 #### 接口文档
-链接：https://easydoc.xyz/s/23171936   上部分
-链接：https://easydoc.xyz/s/23171936   下部分  
+接口文档共2部分
+
+接口文档1  链接：https://easydoc.xyz/s/23171936   
+
+接口文档2  链接：https://easydoc.xyz/s/23171936   
 
 #### 项目预览
 
